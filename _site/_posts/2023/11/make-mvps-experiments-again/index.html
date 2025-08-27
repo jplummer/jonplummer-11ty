@@ -1,0 +1,221 @@
+<h2>Background</h2>
+<p>There seems to be broad agreement within engineering leadership that MVP is (or should be) a <strong>philosophy of experimentation and hypothesis testing</strong>. An MVP should seek to validate a hypothesis. Literature discusses a Minimum Viable Product as the cheapest and fastest possible experiment that can answer a business question.</p>
+<p>Yet our cross-functional teams seem often to be treating MVP as meaning “the first release” or, worse, “the first kind of quick get-it-out-there release” of a feature, improvement, or change. Some passion projects make it to general availability without cross-functional attention. Still other items wind up in the product with a “beta” flag and are not revisited. And rarely is data collected from these to determine if they are successful. We console ourselves with the idea that these are experimental but we often don’t behave as if we are actually experimenting. So we aren’t in these cases fulfilling the idea that an MVP is intended to collect validated learning about customers with minimal effort. What’s worse, we infrequently return to these releases to improve them, withdraw them, or build upon them.</p>
+<h2>Problem</h2>
+<p>The ultimate effect of the above is that there are items we call experiments, half-baked, scattered around the platform, and we have little understanding of their fitness to task for our customers and users. As a result</p>
+<ul>
+<li>
+<p>Things that should be either deprecated or improved lead to an incoherent and unusable experience for our users, making demos (sales) more difficult and depressing user satisfaction (which can contribute to churn)</p>
+</li>
+<li>
+<p>The product has inconsistent interaction paradigms, styling, labeling, and messaging, which enhance the <em>perception</em> of poor usability even when things are sufficiently usable</p>
+</li>
+</ul>
+<p>We say we are &quot;shipping to learn&quot; but we are not doing the work needed to <em>actually</em> learn.</p>
+<h2>Goals</h2>
+<ul>
+<li>
+<p>Improve the effectiveness of our live software experiments</p>
+</li>
+<li>
+<p>Raise the level of quality visible to users</p>
+</li>
+<li>
+<p>Manage downward the overall level of technical and interactive debt visible to users</p>
+</li>
+<li>
+<p>Improve teamwork in part by firming up our working definitions of important terms such as MVP, alpha, beta, etc.</p>
+</li>
+<li>
+<p>Consider not using the term MVP – it has become so distorted in its use that it lacks useful meaning in practice</p>
+</li>
+</ul>
+<h2>Proposed Intervention</h2>
+<p>Make experiments experiments again by:</p>
+<ul>
+<li>
+<p>Carefully selecting projects for live experimentation according to</p>
+<ul>
+<li>
+<p>Limited scope</p>
+</li>
+<li>
+<p>Clearly-articulated hypothesis</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Pre-determine the success metrics and decision date for any experiment</p>
+</li>
+<li>
+<p>Expose a limited set of customers to an experimental release, producing a basis for comparison (limited release customers vs the rest of the population)</p>
+</li>
+<li>
+<p>At the appointed time, on the basis of the agreed-upon metrics, decide to do one of</p>
+<ul>
+<li>
+<p>Withdraw the experiment</p>
+</li>
+<li>
+<p>Iterate on the experiment</p>
+</li>
+<li>
+<p>Prepare for general availability/transition to regular feature development process</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2>Cost/Benefit</h2>
+<p><strong>Costs</strong></p>
+<ul>
+<li>
+<p>Slight additional effort to plan experiments and evaluate the results</p>
+</li>
+<li>
+<p>Additional cost to instrument MVPs so they can be evaluated</p>
+</li>
+<li>
+<p>Cost in technically and interactively hardening experiments that succeed (should happen, doesn’t always at the moment)</p>
+</li>
+<li>
+<p>Slight additional effort to withdraw experiments that fail</p>
+</li>
+</ul>
+<p><strong>Benefits</strong></p>
+<ul>
+<li>
+<p>Reduced technical and interactive debt due to each experiment having an end date and being either withdrawn or hardened</p>
+</li>
+<li>
+<p>Reduced waste releasing fully baked or hardened projects that don't meet customer needs</p>
+</li>
+<li>
+<p>Improved interactive quality of items that make it to general availability may lead indirectly to less churn, greater CSAT, improved quality visible to users</p>
+</li>
+</ul>
+<h2>Next Steps</h2>
+<ul>
+<li>
+<p>For new ideas</p>
+<ul>
+<li>
+<p>Gain broad agreement on the definition of an experiment</p>
+</li>
+<li>
+<p>Offer guidelines for when to run a software experiment live or to choose other means of experimentation</p>
+</li>
+<li>
+<p>Offer guidelines for running an experiment</p>
+</li>
+<li>
+<p>Pilot by</p>
+<ul>
+<li>
+<p>Selecting a hypothesis and means of testing it</p>
+</li>
+<li>
+<p>Setting date and criteria for evaluation</p>
+</li>
+<li>
+<p>Instrumenting, launching experiment, and collecting data</p>
+</li>
+<li>
+<p>Evaluating the results at the appointed time and making the withdraw/iterate/prepare decision, creating a new project if needed</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Review feedback and results from pilot</p>
+</li>
+<li>
+<p>Share best practices/expectations with department</p>
+</li>
+<li>
+<p>Profit!</p>
+</li>
+</ul>
+</li>
+<li>
+<p>For old ideas (fits with our objective to deprecate crufty and unused things)</p>
+<ul>
+<li>
+<p>Offer items to address – what features seem to be experiments that were not evaluated, that are suspect?</p>
+</li>
+<li>
+<p>How do we know if this is doing what it should?</p>
+<ul>
+<li>
+<p>We know what result it should produce – measure that</p>
+<ul>
+<li>
+<p>It’s doing well – are we happy with the quality?</p>
+<ul>
+<li>
+<p>Yes – yahtzee</p>
+</li>
+<li>
+<p>No – remedial “prepare for general availability”</p>
+</li>
+</ul>
+</li>
+<li>
+<p>It’s doing OK – iterate on the experiment</p>
+</li>
+<li>
+<p>It’s not doing well</p>
+<ul>
+<li>Is that strategically relevant?
+<ul>
+<li>
+<p>Yes – iterate on the experiment</p>
+</li>
+<li>
+<p>No – candidate for withdrawal</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>We’re not sure what result it should produce</p>
+<ul>
+<li>Is it being used?
+<ul>
+<li>
+<p>Yes – how and why</p>
+<ul>
+<li>…</li>
+</ul>
+</li>
+<li>
+<p>No – candidate for withdrawal</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Things we need to teach/encourage/expect/insist on</p>
+<ul>
+<li>
+<p>Working from hypotheses and measures</p>
+</li>
+<li>
+<p>Feed the innovation pipeline with clarity on customer problems we are interested in solving</p>
+</li>
+<li>
+<p>Consider examples at various sizes/complexities to break down into experiments</p>
+</li>
+<li>
+<p>Need a company-wide framework to help us consider ideas for experimentation, from the customer problem/jtbd/benefit</p>
+</li>
+<li>
+<p>Raise the level of direct product use knowledge/experience among engineers and designers – better have operated the thing you are working on</p>
+</li>
+</ul>

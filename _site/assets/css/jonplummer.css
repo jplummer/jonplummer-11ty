@@ -1,0 +1,292 @@
+/* TODO
+-[x] font sizes and header sizes https://ithy.com/article/typography-font-size-spacing-lc0m3kwv
+-[x] skip link behavior
+- fix margins and page color
+- menu behavior wide
+- menu behavior narrow
+- inline links vs incidental links
+- copyright styling
+- page color vs content background color
+
+## Later
+- baseline grid https://edgdesign.co/blog/baseline-grids-in-css
+- alternate color schemes
+  https://www.presentandcorrect.com/blogs/blog/rams-palette
+  https://www.color-hex.com/color-palettes/popular.php 
+  https://mcochris.com
+  
+*/
+
+/* CSS CUSTOM PROPERTIES */
+:root {
+  --gutter: 2rem;
+  --max-width: 66rem;
+  --max-width-narrow: 54rem;
+  --gap: 2rem;
+
+  --font-family: -apple-system, system-ui, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, Adwaita Sans, Cantarell, Ubuntu, roboto, noto, helvetica, arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --text-size: 16px;
+  --line-height: 1.5;
+
+  --main-text-color: #404040;
+  --main-background-color: #dadccf;
+  --content-background-color: #fff;
+  --main-link-color: #bf1b1b;
+  --main-link-hover-color: #ed3f1c;
+  --main-link-visited-color: #736b1e;
+  --main-link-active-color: #ed8008;
+}
+/* Dieter Rams 01          #af2e1b, #cc6324, #3b4b59, #bfa07a, #d9c3b0
+   Dieter Rams 02          #aab7bf, #736356, #bfb1a8, #ad1d1d, #261201
+   Dieter Rams 03          #ed8008, #ed3f1c, #bf1b1b, #736b1e, #d9d2c6
+   Dieter Rams 03 adjusted #ed8008, #ed3f1c, #bf1b1b, #736b1e, #dadccf
+   Dieter Rams 04          #bf7c2a, #c09c6f, #5f503e, #9c9c9c, #e1e4e1 */
+
+/* RESETS */
+
+/* Box sizing rules */
+*, *::before, 
+*::after {
+  box-sizing: border-box;
+}
+
+/* Prevent font size inflation */
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+/* Remove default margin in favour of better control in authored CSS */
+body, h1, h2, h3, h4, p,
+figure, blockquote, dl, dd {
+  margin-block-end: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'], ol[role='list'] {
+  list-style: none;
+}
+
+/* Take up the entire height of the viewport */
+body {
+  min-height: 100vh;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+  color: currentColor;
+}
+
+/* Make images easier to work with */
+img, picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input, button, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Make sure textareas without a rows attribute are not tiny */
+textarea:not([rows]) {
+  min-height: 10em;
+}
+
+/* Anything that has been anchored to should have extra scroll margin */
+:target {
+  scroll-margin-block: 5ex;
+}
+
+/* LAYOUT
+html
+  head
+  body
+    header
+      a.skip-link
+      hgroup
+        h1
+          a
+        p
+      nav
+        button
+        ul
+          li
+            a
+    main
+      article
+        header
+          h2
+            a
+        section
+          (content)
+        footer
+          p
+            time
+            a.author
+      article…
+      article…
+      article…
+      article…
+    footer
+*/
+
+body {
+  margin: 0; padding: 0;
+}
+
+body>header, body>main, body>footer {
+	margin: 0;
+  padding-bottom: 2rem;
+	max-width: var(--max-width);
+}
+
+article {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	grid-template-areas: 
+		"a a"
+		"b c";
+	gap: var(--gutter);
+	margin: 0;
+  padding-bottom: 2rem;
+}
+
+@media all and (max-width: 54rem) {
+	article {
+		grid-template-columns: 1fr;
+		grid-template-areas: 
+			"a"
+			"b"
+			"c";
+	}
+}
+
+article header {
+	grid-area: a;
+}
+
+article section {
+	grid-area: c;
+}
+
+article footer {
+	grid-area: b;
+}
+
+header h1 + p {
+	margin-top: 0rem;
+}
+
+.sr-only {
+  position: absolute;
+  left: -10000rem;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+header a.skip {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    }
+     
+header a.skip:focus {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: auto;
+    height:auto;
+    background-color: var(--content-background-color);
+    padding: 1rem;
+    z-index: 100;
+}
+
+/* TYPOGRAPHY */
+
+body {
+  font-size: var(--text-size);
+  line-height: var(--line-height);
+}
+h1, h2, h3, h4 {
+  margin: 1.25rem 0 0.5rem 0;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+h1 {
+  font-size: 4rem;
+  font-weight: 100;
+  letter-spacing: -0.025em;
+}
+h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+h5 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+h6 {
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: normal;
+}
+p {
+  margin: 2rem 0;
+  letter-spacing: normal;
+}
+
+button, input, label {
+  line-height: 1.1;
+}
+
+
+/* COLOR */
+
+body {
+  font-family: var(--font-family);
+  color: var(--main-text-color);
+  background-color: var(--main-background-color);
+}
+
+header, main, footer {
+  background-color: var(--content-background-color);
+}
+
+a {
+  color: var(--main-link-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: var(--main-link-hover-color);
+}
+a:visited {
+  color: var(--main-link-visited-color);
+}
+a:active {
+  color: var(--main-link-active-color);
+}
+a:focus {
+  color: var(--main-link-hover-color);
+}

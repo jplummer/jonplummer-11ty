@@ -1,0 +1,26 @@
+---
+title: "Linksys app revitalization"
+date: 2020-03-01
+---
+
+At one point the Linksys app, meant to offer people setup, control, and monitoring of their Linksys networks at home, was rated below three stars on the iTunes Store and had a lifetime rating of 3.3 on the Google Play Store. A new information architecture, a fresh coat of paint, and many performance and interactivity improvements brought it to 4.5 stars on iTunes and a 4.1 lifetime on Google, helped by a judicious amount of review solicitation.
+
+![](images/DashboardOnline-269x1024.png)
+
+![](images/DeviceDetail@2x-345x1024.png)
+
+![](images/DeviceList-576x1024.png)
+
+![](images/deviceprioritizationdelete-576x1024.png)
+
+![](images/DevicePrioritizationHome@2x-576x1024.png)
+
+![](images/SaveaRule@2x-576x1024.png)
+
+![](images/SelectaDeviceCopy@2x-576x1024.png)
+
+![](images/XboxCopy@2x-576x1024.png)
+
+My role: Product owner, leader of the design team and cajoler of the software and firmware engineering teams. Substitute product manager for a somewhat neglected area. Part-time scrum master for design and blended design/development teams.
+
+Lessons learned: The performance characteristics of the framework you choose to develop with need to align closely with the performance needs of your product. The framework is meant to make life easier for developers but needs to do so in a way that explicitly conveniences users. Said another way, the negative performance characteristics of the framework you choose better not matter to your users or you've magnified pain of development rather than reduced it. Asking otherwise happy people to review your app, infrequently, increases the recommendability of your product. A fresh coat of paint is not enough, but failing to give a fresh coat of paint once in a while enhances feelings of neglect, deserved or not.
