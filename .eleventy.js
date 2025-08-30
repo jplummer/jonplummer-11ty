@@ -12,7 +12,7 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addPlugin(require("@11ty/eleventy-plugin-syntaxhighlight"));
     
     // Ignore the '_notes' and "_posts/_drafts" folders
-    eleventyConfig.ignores.add("_notes/");
+    eleventyConfig.ignores.add("_misc/");
     eleventyConfig.ignores.add("_posts/_drafts/");
 
     return {

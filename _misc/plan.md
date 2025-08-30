@@ -19,7 +19,7 @@
   - RSS feed template
 
 - **Configure URL Structure**
-  - Set up permalinks to match WordPress: `/YYYY/MM/DD/post-slug/`
+  -[x] Set up permalinks to match WordPress: `/YYYY/MM/DD/post-slug/`
   - Configure pagination for archives
   - Set up tag/category routing
 
@@ -37,10 +37,11 @@
   - Transform WordPress posts to Markdown with YAML front matter
   - Preserve metadata (dates, tags, categories, author)
   - Clean up HTML artifacts
+  - Categorize portfolio posts
 
 - **Organize Content Files**
-  - Create `_posts/` directory with dated subdirectories
-  - Example structure: `_posts/2024/11/02/what-went-right-in-october.md`
+  -[x] Create `_posts/` directory with dated subdirectories
+  -[x] Example structure: `_posts/2024/11/02/what-went-right-in-october.md`
 
 ---
 
@@ -58,8 +59,20 @@
 
 - **Index Template (`index.njk`)**
   - Blog listing with pagination
+  - Skip "portfolio" category
   - Post excerpts
   - Navigation controls
+
+- **Portfolio Template (`portfolio.njk`)**
+  - Grid listing
+  - Only "portfolio" category
+  - Post excerpts
+  - Navigation controls
+
+- **Portfolio post Template (`_includes/post.njk`)**
+  - Article structure matching current HTML
+  - Date formatting
+  - Tag/category display
 
 ---
 
