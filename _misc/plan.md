@@ -8,7 +8,9 @@
 -[x] **Create `package.json` with 11ty dependencies**
 - **Set up `.eleventy.js` configuration**
   -[x] Configure input/output directories
-  - ? Set up custom collections if needed
+  - Set up custom collections if needed
+    - tag portfolio pieces
+    - tag posts
 - **Create directory structure**
   -[x] Templates, content, and data folders
 
@@ -20,7 +22,7 @@
 
 - **Configure URL Structure**
   -[x] Set up permalinks to match WordPress: `/YYYY/MM/DD/post-slug/`
-  - Configure pagination for archives
+  - Configure pagination for archives (/page/2/ etc.)
   - Set up tag/category routing
 
 ---
@@ -83,7 +85,7 @@
   - Date-based archives
   - Search functionality
 
-- **Performance Optimization**
+- **Performance Optimization** meh
   - CSS/JS minification
   - Image optimization
   - Caching strategies
@@ -91,8 +93,8 @@
 - **SEO & Social**
   - Meta tags
   - Open Graph
-  - Twitter Cards
-  - Sitemap generation
+  - Twitter Cards (look into bsky and mastodon over Xitter)
+  - Sitemap generation (for accessibility and indexing, not footer)
 
 ## Phase 5: Site Generation and Upload Automation
 
@@ -130,3 +132,8 @@
 - Configure custom domain and SSL
 - Set up CDN for global performance
 - Implement caching strategies
+
+## Phase 6: Fancy shit
+- CMS https://www.11ty.dev/docs/cms/
+- "remaindered links' feature ala Kottke (using 11ty collections?)
+- consider POSSE (more tags for different types of entries?)
