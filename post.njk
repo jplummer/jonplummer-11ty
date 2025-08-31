@@ -1,0 +1,20 @@
+---
+layout: base.njk
+purpose: individual post page
+---
+
+{% include "post.njk" %}
+
+<nav class="post-navigation">
+    {% if collections.posts | getPreviousCollectionItem(page) %}
+    <a href="{{ collections.posts | getPreviousCollectionItem(page).url }}" class="prev">← Previous post: {{ getPreviousCollectionItem(page).title }}</a>
+    {% endif %}
+    
+    {% if collections.posts | getNextCollectionItem(page) %}
+    <a href="{{ collections.posts | getNextCollectionItem(page).url }}" class="next">Next post: {{ getNextCollectionItem(title).url }} →</a>
+    {% endif %}
+</nav>
+
+<footer>
+    {% include "nav.njk" %}
+</footer>

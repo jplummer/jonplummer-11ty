@@ -52,14 +52,7 @@ consider POSSE
         <h1><a href="/" rel="home">Jon Plummer</a></h1>
         <p>Today I Learned</p>
     </hgroup>
-    <nav>
-        <button>Menu</button>
-        <ul>
-            <li><a href="/about/">About me</a></li>
-            <li><a href="/now/">Now</a></li>
-            <li><a href="/portfolio/">Portfolio</a></li>
-        </ul>
-    </nav>
+    {% include "nav.njk" %}
 </header>
 
 <main id="main">
@@ -67,7 +60,7 @@ consider POSSE
 </main>
 
 <footer>
-    <p>Copyright 2025 Jon Plummer</p>
+    {% include "copyright.njk" %}
 </footer>
 </body>
 </html>

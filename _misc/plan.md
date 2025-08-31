@@ -29,11 +29,11 @@
 
 ## Phase 2: Content Migration
 
-- **Export WordPress Content**
+-[x] **Export WordPress Content**
   -[x] Use WordPress export tool (`Tools → Export`)
   -[x] Extract posts, pages, and metadata
   -[x] Parse XML to get clean content
-  - re-get all the images somehow
+  -[x] re-get all the images somehow
 
 - **Convert to Markdown/Front Matter**
   - Transform WordPress posts to Markdown with YAML front matter

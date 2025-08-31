@@ -1,44 +1,14 @@
 ---
-purpose: individual blog post
+purpose: full blog post content component
 ---
-<!-- TODO
-Article header with title, date, author
-Content area
-Tags and categories display
-Navigation (previous/next post)
-Social sharing buttons
-Comments section placeholder
--->
-
-<article id="post-826">
+<article id="post-{{ post.id | default('unknown') }}">
     <header>
-        <h2><a href="/2024/11/02/what-went-right-in-october/" rel="bookmark">What went right in October?</a></h2>
+        <h2><a href="{{ post.url}}" rel="bookmark">{{ post.data.title }}</a></h2>
     </header>
     <section>
-        <p>So many things, in retrospect:</p>
-        <ul>
-            <li>Home progress!
-                <ul>
-                    <li>Landscaping is done, trees are in</li>
-                    <li>Storm drains are cleaned</li>
-                    <li>The network is regularly providing 1200Mbps, after modernizing a bit (paid for by selling the slightly older equipment)</li>
-                </ul>
-            </li>
-            <li>Work progress!
-                <ul>
-                    <li>The concept sprint I led was a resounding success – the execs wish they could sell our plan now, but they recognize they need to wait until they fund it and we build it – and there&#8217;s talk of more</li>
-                    <li>The pendulum is swinging back toward being more customer-centric</li>
-                </ul>
-            </li>
-            <li> Life progress!
-                <ul>
-                    <li>I pulled 410 last week by doing the plate math wrong, and it was no problem at all</li>
-                    <li>At my last appointment my PT said &#8220;good job;&#8221; I bet PTs don&#8217;t say that often</li>
-                </ul>
-            </li>
-        </ul>
+        {{ post.templateContent | safe }}
     </section>
     <footer>
-        <p><span class="posted-on"><a href="/2024/11/02/what-went-right-in-october/" rel="bookmark"><time datetime="2024-11-02T20:19:36-07:00">November 2, 2024</time></a></span> by <span class="byline"><a href="/author/jonplummer_kssjnf/" rel="author me">Jon Plummer</a></span></p>
+        <p class="posted-on"><time datetime="{{ post.date | dateIso }}">{{ post.date | dateReadable }}</time></p>
     </footer>
 </article>

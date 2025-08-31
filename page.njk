@@ -1,7 +1,6 @@
 ---
 layout: base.njk
-title: "Jon Plummer – Today I Learned"
-purpose: static pages
+purpose: static page
 ---
 <article id="{{ postId }}">
     <header>
@@ -14,10 +13,5 @@ purpose: static pages
         <p><span class="posted-on"><a href="{{ permalink }}" rel="bookmark"><time datetime="{{ date }}">{{ date }}</time></a></span> by <span class="byline"><a href="/author/jonplummer_kssjnf/" rel="author me">{{ author }}</a></span></p>
     </footer>
 </article>
-        
-<nav class="navigation posts-navigation" aria-label="Posts">
-    <h2 class="screen-reader-text">Posts navigation</h2>
-    <div class="nav-links">
-        <div class="nav-previous"><a href="/page/2/">Older posts</a></div>
-    </div>
-</nav>
+
+{% include "nav.njk" %}
