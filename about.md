@@ -1,13 +1,14 @@
 ---
 title: "About me"
-date: 2022-12-09
+date: 2025-08-01
 ---
+(updated {{ post.date | dateReadable }})
 
 I lead product design teams for web and mobile apps, edtech, smart home, wi-fi, consumer electronics, medical devices, and more.
 
 ## Currently
 
-- Director of User Experience at [Invoca](https://invoca.com/), making customer conversation intelligence software for marketing and sales folks
+- Director of User Experience at [Invoca](https://invoca.com/), making conversation intelligence software for marketing and sales folks
 
 - Mentor at [ADPList.org](https://adplist.org) and [Designed.org](https://designed.org/), here to help designers think well about their work, consider the leap to management, and to help new managers wrestle with their new responsibilities
 
@@ -29,7 +30,7 @@ I lead product design teams for web and mobile apps, edtech, smart home, wi-fi, 
 
 - Volunteer at [The Great LA River Cleanup](https://folar.org/cleanup/)
 
-I love to develop and lead designers and researchers, and I love to help folks marry hardware, software, and services to produce pleasant, fulfilling product experiences that solve real-world problems. I have a [portfolio](https://jonplummer.io/) that's not super-duper up-to-date, and a [scratchpad of thoughts and notes](https://jonplummer.com/) about design and design leadership and making. It's just getting started but you're welcome to have a look. I also have a handful of [patents](https://patents.google.com/?inventor=Jon+Plummer&num=100) in IoT, software, and medical device technology.
+I love to develop and lead designers and researchers, and I love to help folks marry hardware, software, and services to produce pleasant, fulfilling product experiences that solve real-world problems. I have a [portfolio](https://jonplummer.io/) that's not super-duper up-to-date, and a [scratchpad of thoughts and notes](https://jonplummer.com/) about design and design leadership and making. I also have a handful of [patents](https://patents.google.com/?inventor=Jon+Plummer&num=100) in IoT, software, and medical device technology.
 
 * * *
 
@@ -93,4 +94,4 @@ Jon is an extremely thoughtful and caring leader who is always willing to suppor
 
 * * *
 
-See more via [my LinkedIn profile](https://linkedin.com/in/jplummer), and message me there if you have something to say. Or email [me@jonplummer.com](mailto:me@jonplummercom?Subject=Mail%20from%20jonplummer.name). I don't really use [Mastodon](https://mas.to/@jplummer) yet.
+See more via [my LinkedIn profile](https://linkedin.com/in/jplummer), and message me there if you have something to say. Or email [me@jonplummer.com](mailto:me@jonplummercom?Subject=Mail%20from%20jonplummer.name).

@@ -8,21 +8,25 @@
 -[x] **Create `package.json` with 11ty dependencies**
 - **Set up `.eleventy.js` configuration**
   -[x] Configure input/output directories
-  - Set up custom collections if needed
-    - tag portfolio pieces
-    - tag posts
+  -[x] Set up custom collections if needed
+    -[x] tag portfolio pieces
+    -[x] tag posts
 - **Create directory structure**
   -[x] Templates, content, and data folders
 
 - **Create Template Structure**
   -[x] Base layout template
-  - Post template (single post view)
+  -[x] Post template (single post view)
   - Archive/tag templates
   - RSS feed template
+    - XML structure
+    - Post metadata
+    - Content excerpts (no, do full content. It's polite)
 
 - **Configure URL Structure**
   -[x] Set up permalinks to match WordPress: `/YYYY/MM/DD/post-slug/`
   - Configure pagination for archives (/page/2/ etc.)
+  - Configure pagination for individual posts (prev/next)
   - Set up tag/category routing
 
 ---
@@ -35,15 +39,14 @@
   -[x] Parse XML to get clean content
   -[x] re-get all the images somehow
 
+- **Organize Content Files**
+  -[x] Create `_posts/` directory with dated subdirectories. Example structure: `_posts/2024/11/02/what-went-right-in-october.md`
+
 - **Convert to Markdown/Front Matter**
-  - Transform WordPress posts to Markdown with YAML front matter
+  -[x] Transform WordPress posts to Markdown with YAML front matter
   - Preserve metadata (dates, tags, categories, author)
   - Clean up HTML artifacts
-  - Categorize portfolio posts
-
-- **Organize Content Files**
-  -[x] Create `_posts/` directory with dated subdirectories
-  -[x] Example structure: `_posts/2024/11/02/what-went-right-in-october.md`
+  -[x] Categorize portfolio posts
 
 ---
 
@@ -58,23 +61,27 @@
   - Article structure matching current HTML
   - Date formatting
   - Tag/category display
+  - Main navigation at bottom
 
 - **Index Template (`index.njk`)**
   - Blog listing with pagination
   - Skip "portfolio" category
   - Post excerpts
   - Navigation controls
+  - Main navigation at top
 
 - **Portfolio Template (`portfolio.njk`)**
   - Grid listing
   - Only "portfolio" category
   - Post excerpts
   - Navigation controls
+  - Main navigation at top
 
 - **Portfolio post Template (`_includes/post.njk`)**
   - Article structure matching current HTML
   - Date formatting
   - Tag/category display
+  - Main navigation at bottom
 
 ---
 
@@ -95,6 +102,14 @@
   - Open Graph
   - Twitter Cards (look into bsky and mastodon over Xitter)
   - Sitemap generation (for accessibility and indexing, not footer)
+  - add meta description to index
+  - add slug to post frontmatter
+  - add title to post frontmatter
+  - add meta description to post frontmatter
+  - add ogImage default
+  - add ogImage to frontmatter on posts and pages that need it
+
+---
 
 ## Phase 5: Site Generation and Upload Automation
 
@@ -136,4 +151,5 @@
 ## Phase 6: Fancy shit
 - CMS https://www.11ty.dev/docs/cms/
 - "remaindered links' feature ala Kottke (using 11ty collections?)
+- consider SERPs (https://schema.org)
 - consider POSSE (more tags for different types of entries?)

@@ -1,19 +1,14 @@
 ---
 title: "Now"
-date: 2025-07-13
+date: 2025-08-31
 layout: base.njk
 permalink: "/now/"
 ---
+(updated {{ post.date | dateReadable }})
 
-(updated 2025-07-13)
+## Home and family
 
-## Home
-
-It's hot out, and cool in, thanks in part to our happy landscaping, our new curtains and blinds, and renewed interest in closing up the house before the cool inside is wasted.
-
-## Family
-
-Full house! While the girl is off in another state, the ADU is now occupied and everyone seems to be settling in nicely.
+The girl starts at the local university shortly. Otherwise there's little news on the home front. The ADU is occupied and concerns about water quality have been handled; now to deal with a little water creeping out under the shower door. For some reason my nice skate wheel desk chair wheels are drawing on the hardwood floor. They should not be doing that.
 
 ## Work
 
@@ -21,4 +16,4 @@ Invoca always needs something different, but always needs the same thing – a c
 
 ## Body
 
-After a bunch of minor setbacks (back pain, a groin pull, shoulder and elbow tendinitis) I'm still pulling a 400lb deadlift every week. Not going backwards, not really progressing. But I'm being gentle with myself and will crack 410 again soon. The yoga is helping.
+Driving for a couple of hours to and from a camping trip leaves me stiff and gimpy for a moment until I've hobbled around a bit and things loosen up. But lifting, hiking, calesthenics, exercise in general is dandy. Getting old is…weird.
