@@ -1,8 +1,7 @@
 ---
 title: "WeMo smart home accessories and app"
 date: 2018-12-11
-categories: 
-  - "portfolio"
+tags: portfolio
 coverImage: "devices_withhand.png"
 ---
 

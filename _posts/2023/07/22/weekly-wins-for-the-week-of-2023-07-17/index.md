@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 07 17"
 date: 2023-07-22
+tags: post
 ---
 
 The week was dominated by a health scare that continues. Even so,

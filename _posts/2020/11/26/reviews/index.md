@@ -1,6 +1,7 @@
 ---
 title: "Reviews"
 date: 2020-11-26
+tags: post
 ---
 
 At work we are soon to reconsider how we do annual reviews. But we lack a shared sense of why we do them, and they are performed with different levels of seriousness in different parts of this small company.

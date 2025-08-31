@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 03 06"
 date: 2023-03-11
+tags: post
 ---
 
 I'm light on wins this week. The most challenging part of posting wins each week is being conscious of them!

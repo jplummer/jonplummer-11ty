@@ -1,8 +1,7 @@
 ---
 title: "MiniMed watch concepts"
 date: 2014-09-11
-categories: 
-  - "portfolio"
+tags: portfolio
 coverImage: "001.1_idle_-_interrupted_signal.jpg"
 ---
 

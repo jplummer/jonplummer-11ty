@@ -1,6 +1,7 @@
 ---
 title: "PT asks: \"how do I convince leadership to care about UX research?\""
 date: 2023-09-16
+tags: post
 ---
 
 A new mentee opened the session with (paraphrased)

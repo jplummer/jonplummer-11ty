@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2022 11 27"
 date: 2022-11-27
+tags: post
 ---
 
 It's been American Thanksgiving this week, and we hosted due to local family either having smaller places or being in the midst of a remodel.

@@ -1,6 +1,7 @@
 ---
 title: "Apropos of…nothing (bitcoin)"
 date: 2024-08-01
+tags: post
 ---
 
 A strategic reserve in (of?) a commodity implies that it’s in the U.S. strategic interest to invest to be protected from price shocks or supply restrictions due to the importance of the commodity to the economy or military readiness.

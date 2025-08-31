@@ -1,6 +1,7 @@
 ---
 title: "Daniel Abrahams asks: \"If a task takes six hours to complete in the office, but that same employee finishes out in four working from home, who should get the saved two hours?\""
 date: 2022-01-09
+tags: post
 ---
 
 ![If a task takes six hours to complete in the office, but that same employee finishes out in four working from home, who should get the saved two hours? The company ('back to work!') or the employee ('free time')?](images/dabrahams_question-1024x826.png)

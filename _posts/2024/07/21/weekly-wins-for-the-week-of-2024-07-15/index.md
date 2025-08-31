@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2024 07 15"
 date: 2024-07-21
+tags: post
 ---
 
 - Vacations are winding down and people are starting to come back to work. The team is filling out again.

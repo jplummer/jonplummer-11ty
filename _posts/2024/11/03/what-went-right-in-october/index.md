@@ -1,6 +1,7 @@
 ---
 title: "What went right in October?"
 date: 2024-11-03
+tags: post
 ---
 
 So many things, in retrospect:

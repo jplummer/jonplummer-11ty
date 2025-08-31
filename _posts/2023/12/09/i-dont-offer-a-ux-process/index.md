@@ -1,6 +1,7 @@
 ---
 title: "I don't offer a \"UX process\""
 date: 2023-12-09
+tags: post
 ---
 
 My current employer is much like others in that it has a product management process, an engineering process, a design process, a customer onboarding process, a customer support process, etc.

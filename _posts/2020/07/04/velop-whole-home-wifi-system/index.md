@@ -1,8 +1,7 @@
 ---
 title: "Velop whole-home WiFi system"
 date: 2020-07-04
-categories: 
-  - "portfolio"
+tags: portfolio
 coverImage: "SET_103.jpg"
 ---
 

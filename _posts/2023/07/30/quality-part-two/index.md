@@ -1,6 +1,7 @@
 ---
 title: "Quality, part two"
 date: 2023-07-30
+tags: post
 ---
 
 It seems like we have a pretty good grasp of what quality should be when it comes to infrastructure – what technical soundness is, how much load we should handle, what kind of logging, etc. but we are less mature regarding other dimensions of quality.

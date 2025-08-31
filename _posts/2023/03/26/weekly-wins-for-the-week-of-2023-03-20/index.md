@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 03 20"
 date: 2023-03-26
+tags: post
 ---
 
 It's spring break, that awkward nearly month-long period when employees with kids start disappearing for a week at a time. Every year the challenge is to make sure that people have prepared their teams for their absence; that enough is done and questions answered (and backup help secured) that whoever remains can proceed without much trouble, and especially that the person's absence doesn't come as a surprise.

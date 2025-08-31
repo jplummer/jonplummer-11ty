@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2022 11 07"
 date: 2022-11-13
+tags: post
 ---
 
 - My practice of doing at least one thing each day for the three topics of network cultivation, opportunities (warm and cold applications, reviewing job boards, targeted networking), and evidence (resume, portfolio, profile, articles) is keeping me moving forward and busy without frazzle.

@@ -1,6 +1,7 @@
 ---
 title: "A quick link re the Slackquisition"
 date: 2020-12-03
+tags: post
 ---
 
 M.C.Seigler has a [somewhat inspirational take on the Salesforce acquisition of Slack](https://500ish.com/the-way-of-the-future-679697c35f79), namely that

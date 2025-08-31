@@ -1,8 +1,7 @@
 ---
 title: "CareLink Pro main interface"
 date: 2013-12-08
-categories: 
-  - "portfolio"
+tags: portfolio
 coverImage: "reports2.png"
 ---
 

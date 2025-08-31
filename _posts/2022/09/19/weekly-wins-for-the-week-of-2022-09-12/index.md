@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2022 09 12"
 date: 2022-09-19
+tags: post
 ---
 
 - While the team is sad at the departure of a great employee, they are holding together.

@@ -1,6 +1,7 @@
 ---
 title: "Still more on expectations of quality"
 date: 2023-03-03
+tags: post
 ---
 
 The general idea is that **scope should scale but quality should not**. [All of these](https://jonplummer.local/2023/02/02/quality-expectations/) are achievable in small scopes and if we care about quality are not “extra” costs.

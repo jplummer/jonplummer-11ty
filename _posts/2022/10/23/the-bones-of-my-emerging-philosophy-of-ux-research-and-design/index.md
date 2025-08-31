@@ -1,6 +1,7 @@
 ---
 title: "The bones of my emerging philosophy of UX research and design"
 date: 2022-10-23
+tags: post
 ---
 
 ## Two basic activities

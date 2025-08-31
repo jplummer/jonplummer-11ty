@@ -1,6 +1,7 @@
 ---
 title: "My expectations as a design leader and manager of people"
 date: 2021-04-24
+tags: post
 ---
 
 ## Expectations of myself

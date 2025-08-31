@@ -1,6 +1,7 @@
 ---
 title: "Key points of my recent performance review"
 date: 2023-09-02
+tags: post
 ---
 
 (Quotations are my words, all else are the words of my manager.)

@@ -1,6 +1,7 @@
 ---
 title: "Thomas W. writes…"
 date: 2023-11-30
+tags: post
 ---
 
 In [his LinkedIn post on November 29](https://www.linkedin.com/posts/thomasianwilson_next-time-someone-questions-you-as-a-researcher-activity-7136002995019780096-z-0W/), Thomas W. laid out a handful of arguments a designer or research could use to object to demands that UX "prove its value." It feels good to read the list, but I don't recommend following his advice. I've used arguments like this before and heard the objections. In most cases the arguments are too high-level to meet the business where it is trying to operate, i.e. the points are a bit askew for a company hoping to change its business results in the near-term.

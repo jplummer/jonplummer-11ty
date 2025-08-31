@@ -1,6 +1,7 @@
 ---
 title: "Bryanne asks"
 date: 2023-10-28
+tags: post
 ---
 
 > I'm trying to coach some designers along the path of feeling comfortable adjusting and evolving approaches that have been learned in school (vs believing that there is a single "right" way and that design quality is aligned to how closely they execute against that "textbook" approach). I'd like to be able to share something with them that demonstrates that the higher one's design maturity, the more comfortable/ confident one is with adjusting approaches and trying new things based on context and experience... and that this is a good thing.

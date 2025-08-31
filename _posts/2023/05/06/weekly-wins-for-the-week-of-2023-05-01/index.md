@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 05 01"
 date: 2023-05-06
+tags: post
 ---
 
 It's time for quarterly coaching, meant to be frequent and light but meaningful. And…

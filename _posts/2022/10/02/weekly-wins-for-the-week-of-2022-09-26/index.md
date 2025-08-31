@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2022 09 26"
 date: 2022-10-02
+tags: post
 ---
 
 - I blasted through a workout centered on lunges this weekend. This would have been unthinkable a year ago, or even six months ago.

@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2022 07 11"
 date: 2022-07-16
+tags: post
 ---
 
 Past Belkin colleague [Ryan Peterson](https://www.linkedin.com/in/peterson-d-ryan/) recently began posting his "weekly wins" on LinkedIn. My impression is that he did this in part to steel his resolve during is (successful!) job search, and in part to begin a practice of positive self-talk. As he put it,

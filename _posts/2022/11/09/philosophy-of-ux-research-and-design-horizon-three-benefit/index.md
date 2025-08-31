@@ -1,6 +1,7 @@
 ---
 title: "Philosophy of UX research and design: Horizon three (benefit)"
 date: 2022-11-09
+tags: post
 ---
 
 I mentioned earlier that I think of UX research and design practice in three horizons:

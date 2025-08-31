@@ -1,8 +1,7 @@
 ---
 title: "Belkin router out-of-box"
 date: 2016-03-22
-categories: 
-  - "portfolio"
+tags: portfolio
 coverImage: "Screenshot2017-06-0321.17.37.png"
 ---
 

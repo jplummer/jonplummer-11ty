@@ -1,6 +1,7 @@
 ---
 title: "How to explain a new job on LinkedIn?"
 date: 2021-10-02
+tags: post
 ---
 
 As of nine weeks ago I have a new job at Cayuse. But how do I explain my accomplishments on LinkedIn when I'm so new?

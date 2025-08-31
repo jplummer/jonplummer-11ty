@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 04 11"
 date: 2023-04-17
+tags: post
 ---
 
 I' need'll start to keep track of wins as they happen; trying to remember all that happened last week is not easy.

@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2022 07 25"
 date: 2022-07-31
+tags: post
 ---
 
 Three wins for this week:

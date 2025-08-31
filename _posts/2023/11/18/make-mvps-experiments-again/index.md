@@ -1,6 +1,7 @@
 ---
 title: "Make MVPs experiments again"
 date: 2023-11-18
+tags: post
 ---
 
 ## Background

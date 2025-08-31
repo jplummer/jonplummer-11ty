@@ -1,8 +1,7 @@
 ---
 title: "Cayuse \"quick yearly accomplishments\" presentation"
 date: 2022-10-11
-categories: 
-  - "portfolio"
+tags: portfolio
 coverImage: "Screenshot2022-11-10at11.00.16AM.png"
 ---
 

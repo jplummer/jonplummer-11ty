@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 06 26"
 date: 2023-07-01
+tags: post
 ---
 
 Scattered wins this week:

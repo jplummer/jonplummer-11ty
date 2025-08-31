@@ -1,6 +1,7 @@
 ---
 title: "Single diamond, the basic form of the creative process"
 date: 2022-11-10
+tags: post
 ---
 
 If you search the web for "[double diamond](https://www.google.com/search?q=double+diamond)" you'll find a great many articles describing a design or product management or product development process in which you

@@ -1,6 +1,7 @@
 ---
 title: "Revamping my design leadership portfolio: goals"
 date: 2021-02-23
+tags: post
 ---
 
 I'm not in a big hurry to leave my job (hi, folks!). But every once in a while a really nice opportunity comes along, and I'd like to be prepared for it. And of late I've felt that I'm not prepared. I think my portfolio doesn't reflect my value as a design leader; it's only a little bit past a designer portfolio, and a hastily thrown-together one at that. Sure, it was sufficient to get my current gig, but I fell into the lap of this company at JUST the right moment; a lot of this last transition is down to good luck.

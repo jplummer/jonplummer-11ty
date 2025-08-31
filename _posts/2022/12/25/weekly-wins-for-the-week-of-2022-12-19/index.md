@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2022 12 19"
 date: 2022-12-25
+tags: post
 ---
 
 Things are quieting down at work as people prepare for the holidays and tack a little more break onto the company's end-of-year break next week. Even so

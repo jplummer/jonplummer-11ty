@@ -1,6 +1,7 @@
 ---
 title: "Ask questions to learn, not to receive an answer"
 date: 2022-09-19
+tags: post
 ---
 
 I don't find it useful to ask users directly for the answer to a question of detail. For example, I hope I'd never ask a user what they think the order of columns in a table should be, or even if a table was appropriate for the data at hand.  

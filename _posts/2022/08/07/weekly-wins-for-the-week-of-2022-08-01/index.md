@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2022 08 01"
 date: 2022-08-07
+tags: post
 ---
 
 Five(!) wins for this week. It pays to think about what good is happening:

@@ -1,6 +1,7 @@
 ---
 title: "I was asked \"what kind of leader are you?\""
 date: 2022-11-27
+tags: post
 ---
 
 During my recent (and successful) series of interviews one interviewer asked me "what kind of leader are you?" I blurted out "supportive," not having really quite prepared for that sort of question, and while it's true, I didn't find that answer satisfying – support is not all that I provide, though I find it important. So I resolved to do better in alter interviews. This topic came up as a prompt for a final presentation to a panel of interviewers, so I chose four adjectives and presented those. (Any one of these topics could be an article unto itself.) A slightly cleaned-up version of what I had to say appears here:

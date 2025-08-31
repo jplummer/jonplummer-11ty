@@ -1,6 +1,7 @@
 ---
 title: "My note to by Humankind offering plastic reduction ideas"
 date: 2020-11-26
+tags: post
 ---
 
 Dear _by Humankind_ folks:

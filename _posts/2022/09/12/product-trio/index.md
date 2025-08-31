@@ -1,8 +1,7 @@
 ---
 title: "Product trio"
 date: 2022-09-12
-categories: 
-  - "portfolio"
+tags: portfolio
 coverImage: "ProductTrio.png"
 ---
 

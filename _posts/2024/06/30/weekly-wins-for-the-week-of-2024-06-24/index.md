@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2024 06 24"
 date: 2024-06-30
+tags: post
 ---
 
 Work was…fine…this week. Lots of folks are out or about to be out and while there's a moment to try to wrestle projects and processes into shape there are not a lot of people to do that with; preparing projects to to bowl along while they are out is more pressing. But with the girl and the lady out of the house I was productive with home projects. In the last week I've

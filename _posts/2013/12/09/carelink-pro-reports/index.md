@@ -1,8 +1,7 @@
 ---
 title: "CareLink Pro reports"
 date: 2013-12-09
-categories: 
-  - "portfolio"
+tags: portfolio
 coverImage: "sensor.png"
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 10 23"
 date: 2023-10-28
+tags: post
 ---
 
 A decidedly ☯️ week, with each ⬇️ paired with an ⬆️:

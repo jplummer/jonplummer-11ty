@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2022 10 24"
 date: 2022-10-27
+tags: post
 ---
 
 I got laid off today. That's not a win, surely. But it set off a few:

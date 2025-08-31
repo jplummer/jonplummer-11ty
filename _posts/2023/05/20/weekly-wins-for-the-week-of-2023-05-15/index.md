@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 05 15"
 date: 2023-05-20
+tags: post
 ---
 
 - Quarterly coaching is done. I might be the first to complete it among the managers.

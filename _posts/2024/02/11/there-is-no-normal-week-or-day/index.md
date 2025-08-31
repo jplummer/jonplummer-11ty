@@ -1,6 +1,7 @@
 ---
 title: "There is no \"normal\" week or day"
 date: 2024-02-11
+tags: post
 ---
 
 At seventeen I joined the staff of a Boy Scout camp, and as an activity area leader I had a role to play in leadership, instruction, and the interactive programming that occurred each week. Each day had something special happening that made the schedule differ from one day to the next, making preparation, instruction, and even rest difficult. With scouts in camp for just a week at a time the strategy to engage them was clearly to make sure there was always a competition, series of skits, cookout, campfire show, ceremony, or recreational extremity (optional, happily: run off the end of the high pier! race to the far rock and back in an overloaded canoe! swim two miles in frigid water!) to draw attention and raise the available hype.

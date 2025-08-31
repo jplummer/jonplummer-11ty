@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 05 08"
 date: 2023-05-13
+tags: post
 ---
 
 Last week was tricky motivation-wise; there's an onsite meeting coming up in two weeks that is very important and I'm nervous about the outcome. That's typically a recipe for procrastination. So

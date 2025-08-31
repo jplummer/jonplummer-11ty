@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 10 30"
 date: 2023-11-04
+tags: post
 ---
 
 Things are a bit of a mess at work – a couple of key people have resigned, the 4th quarter roadmap is in turmoil, revenue is going up but there's still plenty of ground to make up, and a recent launch and post-mortem has _raised a lot of feelings_ and inspired a lot of _should_ing among the leadership. (Folks should know not to _should_ on themselves or others.) Even so,

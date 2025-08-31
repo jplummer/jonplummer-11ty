@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 04 17"
 date: 2023-04-22
+tags: post
 ---
 
 - Every Thursday I do a ladder of deadlifts – a couple light warmup sets, a handful of medium-heavy work sets, a heavyish couple/few reps, and a couple of legitimately heavy (for me) ones. I go double-overhand as long as I can, switching to a mixed grip once the bar starts to slip out of my hands. That used to happen around the end of the work sets; this week I got all the way to the final "legitimately heavy" set before having to switch grips. Getting better!

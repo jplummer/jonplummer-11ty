@@ -1,6 +1,7 @@
 ---
 title: "How might the UX team contribute to speed of value delivery?"
 date: 2023-05-20
+tags: post
 ---
 
 It's common for non-design folks to assume that research and design rigor will slow the overall process down. (I've heard epithets such as "constipate" – unpleasant and rude.) How might the UX team contribute to speed of value delivery?

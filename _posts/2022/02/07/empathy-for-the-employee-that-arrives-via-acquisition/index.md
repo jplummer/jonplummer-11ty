@@ -1,6 +1,7 @@
 ---
 title: "Empathy for the employee that arrives via acquisition"
 date: 2022-02-07
+tags: post
 ---
 
 An employee who comes to your team via an acquisition

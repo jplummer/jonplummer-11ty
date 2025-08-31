@@ -1,6 +1,7 @@
 ---
 title: "Recent wins as of 2024 06 02"
 date: 2024-06-02
+tags: post
 ---
 
 It's been a bit since I did a "weekly wins" post, mostly because of…lassitude…but with the convenient excuse that we've been finishing the house project and moving and setting up and shepherding the girl through the last bits of high school. So some wins have occurred since the last post, the highest of which have been

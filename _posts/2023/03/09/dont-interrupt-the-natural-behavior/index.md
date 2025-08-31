@@ -1,6 +1,7 @@
 ---
 title: "Don't interrupt the natural behavior"
 date: 2023-03-09
+tags: post
 ---
 
 Don't interrupt the user's natural behavior. Enhance or extend the natural behavior, but remain compatible with it.  

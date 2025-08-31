@@ -1,6 +1,7 @@
 ---
 title: "Taking time off? Here's what I expect as your manager."
 date: 2022-04-28
+tags: post
 ---
 
 You can file for time off in the relevant system and I'll approve it. It is important to give your product team at least as much warning so that you can help them adapt to your absence.  

@@ -1,6 +1,7 @@
 ---
 title: "Concept selection in Horizon 2: Concept"
 date: 2023-03-08
+tags: post
 ---
 
 Michael asks:

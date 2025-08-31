@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2022 11 28"
 date: 2022-12-04
+tags: post
 ---
 
 - I accepted the offer and will start December 12. Startup paperwork was mostly easy, save for finding the exact dates of move in/out and start/stop for my address and work histories. Getting a local notary to do my I-9 right took a couple of tries, but it is done, supposedly.

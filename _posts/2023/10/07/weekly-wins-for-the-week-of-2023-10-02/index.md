@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 10 02"
 date: 2023-10-07
+tags: post
 ---
 
 I got to the end of the week feeling like I worked hard but didn't accomplish much. Lots of managing, a lot less doing, and the things I said I would do by the end of the quarter are now hanging over my head a bit. But

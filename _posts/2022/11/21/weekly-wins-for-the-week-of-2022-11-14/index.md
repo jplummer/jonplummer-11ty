@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2022 11 14"
 date: 2022-11-21
+tags: post
 ---
 
 "Cold" applications to Director or VP of UX Design/Product Design jobs are going nowhere. Not a one has resulted in so much as a conversation with a recruiter. I'm zero for sixteen on these. Perhaps worse; I haven't kept careful count. BUT!

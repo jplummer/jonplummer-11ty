@@ -1,6 +1,7 @@
 ---
 title: "My review this quarter"
 date: 2023-05-26
+tags: post
 ---
 
 I've shared this verbatim with my team and pointed out how it will affect our work in the coming quarter.

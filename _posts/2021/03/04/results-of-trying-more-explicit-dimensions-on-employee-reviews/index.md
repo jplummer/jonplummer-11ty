@@ -1,6 +1,7 @@
 ---
 title: "Results of trying more explicit dimensions on employee reviews"
 date: 2021-03-04
+tags: post
 ---
 
 A little while ago I resolved to use explicit dimensions to solicit peer feedback and to organize my feedback on employees I needed to review. I also said that I'd let you know how it goes.

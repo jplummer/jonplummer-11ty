@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 08 18"
 date: 2023-08-19
+tags: post
 ---
 
 - Quarterly coaching was straightforward and is nearly done. Only one person has not yet submitted their self-eval, and they have a good excuse.

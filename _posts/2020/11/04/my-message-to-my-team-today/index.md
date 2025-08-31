@@ -1,6 +1,7 @@
 ---
 title: "My message to my team today"
 date: 2020-11-04
+tags: post
 ---
 
 Gentle people,

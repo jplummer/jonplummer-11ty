@@ -1,6 +1,7 @@
 ---
 title: "Sara Bermúdez asked about important mindsets for the future of work"
 date: 2021-09-09
+tags: post
 ---
 
 In the [Design Thinking group on LinkedIn](https://www.linkedin.com/groups/37821/), Sara Bermúdez [asked](https://www.linkedin.com/feed/update/urn%3Ali%3Aactivity%3A6841731698523291648/):

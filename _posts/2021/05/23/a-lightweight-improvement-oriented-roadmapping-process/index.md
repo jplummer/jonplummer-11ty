@@ -1,6 +1,7 @@
 ---
 title: "A lightweight, improvement-oriented roadmapping process"
 date: 2021-05-23
+tags: post
 ---
 
 There are lots of great articles about developing a roadmap for a product or service. But sometimes these processes can seem too heavy, too slow, or too strategic (is there such a thing?) for the task at hand. A lightweight process, aimed at selecting and ordering improvements rather than expressing an ideal and working toward it, can work when certain conditions are met.

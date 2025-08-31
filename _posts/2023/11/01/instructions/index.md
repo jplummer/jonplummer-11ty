@@ -1,6 +1,7 @@
 ---
 title: "Instructions"
 date: 2023-11-01
+tags: post
 ---
 
 The first time I rode a motorcycle I was on the back, clinging to my college roommate. He happened to have a second helmet, it fit well enough, and I was eager to get to the other side of campus.  

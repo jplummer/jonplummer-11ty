@@ -1,6 +1,7 @@
 ---
 title: "Toward coordinated experience"
 date: 2025-07-27
+tags: post
 ---
 
 ## Background

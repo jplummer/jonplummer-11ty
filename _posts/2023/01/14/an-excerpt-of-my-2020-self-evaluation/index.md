@@ -1,6 +1,7 @@
 ---
 title: "An excerpt of my 2020 self-evaluation"
 date: 2023-01-14
+tags: post
 ---
 
 **Do you have any suggestions for the management team?**

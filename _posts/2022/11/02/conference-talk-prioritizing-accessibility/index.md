@@ -1,6 +1,7 @@
 ---
 title: "Conference talk: prioritizing accessibility"
 date: 2022-11-02
+tags: post
 ---
 
 Here's a recent talk I've given regarding why we pay attention to accessibility, and how the accessibility-related practices at Cayuse have changed in the past year.

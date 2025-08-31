@@ -1,6 +1,7 @@
 ---
 title: "ChatGPT is going to tempt me to be more skeptical of your work"
 date: 2023-03-17
+tags: post
 ---
 
 Lately I've been seeing a lot of posts on LinkedIn and elsewhere crowing about how [ChatGPT](https://openai.com/blog/chatgpt) could be used to perform UX tasks. Examples:

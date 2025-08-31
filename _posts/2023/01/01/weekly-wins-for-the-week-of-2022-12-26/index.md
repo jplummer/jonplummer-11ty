@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2022 12 26"
 date: 2023-01-01
+tags: post
 ---
 
 Weekly wins seems to do its job, reminding me to remember what good is happening. Sometimes it is quiet.

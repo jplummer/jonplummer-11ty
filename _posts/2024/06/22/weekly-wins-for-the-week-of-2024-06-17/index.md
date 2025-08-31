@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2024 06 17"
 date: 2024-06-22
+tags: post
 ---
 
 Juneteenth National Independence Day was this last Wednesday. It was odd to have a holiday mid-week but

@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2022 09 19"
 date: 2022-09-25
+tags: post
 ---
 
 - I involved the team in figuring out how we would rearrange ourselves now that we have new product priorities, and they came up with what I expect is a good solution without any teeth-gnashing at all.

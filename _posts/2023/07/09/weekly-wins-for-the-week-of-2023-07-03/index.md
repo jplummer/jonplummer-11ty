@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 07 03"
 date: 2023-07-09
+tags: post
 ---
 
 It was a short week, and that brings danger that people will try to cram five weeks of meetings and activity into three. This happened, alas. Even so,

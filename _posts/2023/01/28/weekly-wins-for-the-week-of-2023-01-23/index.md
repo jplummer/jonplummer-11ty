@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 01 23"
 date: 2023-01-28
+tags: post
 ---
 
 - I installed a bluteotth kit behind the factory car stereo in the 2006 Matrix and

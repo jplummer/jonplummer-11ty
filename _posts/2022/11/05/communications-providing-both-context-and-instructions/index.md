@@ -1,6 +1,7 @@
 ---
 title: "Communications: providing both context and instructions"
 date: 2022-11-05
+tags: post
 ---
 
 ## Bottom line

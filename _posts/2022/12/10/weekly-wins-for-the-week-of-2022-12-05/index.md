@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2022 12 05"
 date: 2022-12-10
+tags: post
 ---
 
 Pro leisure circuit is almost over; the new job begins on Monday.

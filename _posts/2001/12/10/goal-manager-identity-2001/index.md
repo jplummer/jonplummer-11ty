@@ -1,8 +1,7 @@
 ---
 title: "Goal Manager identity (2001)"
 date: 2001-12-10
-categories: 
-  - "portfolio"
+tags: portfolio
 coverImage: "goalmanager_logo.png"
 ---
 

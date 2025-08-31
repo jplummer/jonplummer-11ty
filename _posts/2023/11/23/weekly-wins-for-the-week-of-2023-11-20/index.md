@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 11 20"
 date: 2023-11-23
+tags: post
 ---
 
 - A short work week is a beautiful thing. Having your entire department out for a day so you can catch up on administrative tasks is also nice, if a tad lonely.

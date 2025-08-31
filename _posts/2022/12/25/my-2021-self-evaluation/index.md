@@ -1,6 +1,7 @@
 ---
 title: "My 2021 self-evaluation"
 date: 2022-12-25
+tags: post
 ---
 
 The twists and turns of my prior role are relevant to my new role. My self-eval of 2021 contains lessons for me now, though the stated goals of my new role will be related but different. (Edited to anonymize.)

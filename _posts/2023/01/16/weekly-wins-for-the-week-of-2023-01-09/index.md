@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 01 09"
 date: 2023-01-16
+tags: post
 ---
 
 This was meant to be a week in Santa Barbara for work and a little play. A climate-change-strengthened "atmospheric river" made it a week of travel difficulties, muddy torrents, and missed connections. Even so…

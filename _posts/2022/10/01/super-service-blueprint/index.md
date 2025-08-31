@@ -1,8 +1,7 @@
 ---
 title: "\"Super\" service blueprint"
 date: 2022-10-01
-categories: 
-  - "portfolio"
+tags: portfolio
 coverImage: "Screenshot2022-11-11at2.56.37PM.png"
 ---
 

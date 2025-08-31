@@ -1,6 +1,7 @@
 ---
 title: "Who \"owns\" accessibility?"
 date: 2021-11-08
+tags: post
 ---
 
 Heather asked me yesterday "who owns accessibility?" That's a fun question. I replied:

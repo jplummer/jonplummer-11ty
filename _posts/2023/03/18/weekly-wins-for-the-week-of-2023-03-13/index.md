@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 03 13"
 date: 2023-03-18
+tags: post
 ---
 
 Last week was all about an off-site meeting involving the product and engineering groups.

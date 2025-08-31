@@ -1,6 +1,7 @@
 ---
 title: "Conference talk: UX philosophy"
 date: 2022-11-02
+tags: post
 ---
 
 Here's a recent talk I've given regarding how, under my leadership, the UX design team approaches its work.

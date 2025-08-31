@@ -1,6 +1,7 @@
 ---
 title: "Someone mentions \"specialized enterprise users\" in re accessibility"
 date: 2023-06-16
+tags: post
 ---
 
 During a discussion of accessibility and the level of attention a company ought to pay to it, someone said

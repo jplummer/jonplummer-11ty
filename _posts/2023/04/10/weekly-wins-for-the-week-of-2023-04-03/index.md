@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 04 03"
 date: 2023-04-10
+tags: post
 ---
 
 - Good Friday Spring Holiday – this day off caught many at work by pleasant surprise.

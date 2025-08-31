@@ -1,6 +1,7 @@
 ---
 title: "A quick note about presenting design work in a meeting with engineering"
 date: 2022-01-07
+tags: post
 ---
 
 There are a few ways these meetings might be organized depending on where we are in the design-development process.

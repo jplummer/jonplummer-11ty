@@ -1,6 +1,7 @@
 ---
 title: "I wrote a screed. Here's the interesting part"
 date: 2023-08-27
+tags: post
 ---
 
 [This article is worth a read as-is](https://getmatter.com/email/29711227/?token=29711227%3A6VAqDDvgDkVW6ill7qMdL_XynzM). But once you’ve done that, consider that our users are also suffering a form of the paper cut tax since they need to (and due to the tax are told to) see their CSMs about every little thing they want to change on the platform. Poor usability is a brake on their productivity and, in turn, a brake on their esteem for our company.

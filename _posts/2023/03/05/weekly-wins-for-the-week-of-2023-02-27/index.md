@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 02 27"
 date: 2023-03-05
+tags: post
 ---
 
 - For the first time in several weeks I did not type "weekly winds."

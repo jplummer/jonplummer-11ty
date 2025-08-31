@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2022 10 17"
 date: 2022-10-22
+tags: post
 ---
 
 - I'm using a process initiative at work to demonstrate to the company, especially to folks not on the product team, a basic UX research and design process. The main idea is to short-circuit the all-too-common impulse to leap from an identified problem or need to one seemingly obvious solution. Executives are famous for this, but it's common in other parts of the company as well. Executives are also famous for mixing generation and evaluation, which should be held apart for a while.

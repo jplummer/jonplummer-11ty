@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 02 20"
 date: 2023-02-26
+tags: post
 ---
 
 - The taxes are done. Never mind that the American tax system is needlessly difficult for the vast majority of taxpayers due in part to the political intervention of companies that make money off of this difficulty; the taxes are done.

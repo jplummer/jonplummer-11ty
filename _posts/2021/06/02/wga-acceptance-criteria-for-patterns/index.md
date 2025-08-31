@@ -1,8 +1,7 @@
 ---
 title: "WGA \"acceptance criteria for patterns\""
 date: 2021-06-02
-categories: 
-  - "portfolio"
+tags: portfolio
 coverImage: "Screenshot2022-11-11at3.30.55PM.png"
 ---
 

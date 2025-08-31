@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 05 22"
 date: 2023-05-28
+tags: post
 ---
 
 Much of the week was spent on-site, meeting with my R&D leadership peers (and the thin layer of execs above us) to figure out what behavior should to change to change our results. Strangely enough, this group not met since well before I started, and much of the contact I've had with these people has been in 1:1s, small meetings, or in some cases not at all.

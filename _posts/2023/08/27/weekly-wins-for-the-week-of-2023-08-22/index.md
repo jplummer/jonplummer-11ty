@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 08 22"
 date: 2023-08-27
+tags: post
 ---
 
 - Quarterly coaching is done! Yay. There were no surprises, as expected. People offered and acknowledged their areas of grown, which is a good sign.

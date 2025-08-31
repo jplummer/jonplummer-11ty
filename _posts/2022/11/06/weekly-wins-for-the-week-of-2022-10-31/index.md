@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2022 10 31"
 date: 2022-11-06
+tags: post
 ---
 
 Last week I pointed out that

@@ -1,6 +1,7 @@
 ---
 title: "Authenticity and intellectual posture"
 date: 2023-05-30
+tags: post
 ---
 
 I was talking with a mentee today when the topic of authenticity came up – if we are thinking so much about how we should behave, how do we know what is authentic? It seems like authenticity should be effortless – why is it so hard? (The below comments are only lightly specific to the mentee's situation.)

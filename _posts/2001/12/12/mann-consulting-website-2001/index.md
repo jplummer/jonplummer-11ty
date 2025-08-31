@@ -1,8 +1,7 @@
 ---
 title: "Mann Consulting website (2001)"
 date: 2001-12-12
-categories: 
-  - "portfolio"
+tags: portfolio
 coverImage: "mcr0a.gif"
 ---
 

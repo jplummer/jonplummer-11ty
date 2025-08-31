@@ -1,8 +1,7 @@
 ---
 title: "Belkin values"
 date: 2015-08-01
-categories: 
-  - "portfolio"
+tags: portfolio
 coverImage: "BelkinValues.jpeg"
 ---
 

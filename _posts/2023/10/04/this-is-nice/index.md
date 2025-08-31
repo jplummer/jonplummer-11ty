@@ -1,6 +1,7 @@
 ---
 title: "This is nice."
 date: 2023-10-04
+tags: post
 ---
 
 ![](images/Certification-of-Recognition-September-136-860x1024.png)

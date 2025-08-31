@@ -1,6 +1,7 @@
 ---
 title: "Pro tip: online chat support"
 date: 2022-10-16
+tags: post
 ---
 
 Here's a quick one that has saved me time and helped me mask my frustration:

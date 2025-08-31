@@ -1,6 +1,7 @@
 ---
 title: "My changing relationship to a former employer"
 date: 2022-08-13
+tags: post
 ---
 
 Or, _a **corporation** becomes **people** in six acts:_

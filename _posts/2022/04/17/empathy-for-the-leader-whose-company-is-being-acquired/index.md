@@ -1,6 +1,7 @@
 ---
 title: "Empathy for the leader whose company is being acquired"
 date: 2022-04-17
+tags: post
 ---
 
 To be a leader planning for one's firm to be acquired is to be in conflict with oneself: one must both

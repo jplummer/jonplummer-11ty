@@ -1,6 +1,7 @@
 ---
 title: "Our position on AI tools"
 date: 2025-07-13
+tags: post
 ---
 
 (This is a work in progress, but a pretty good start)

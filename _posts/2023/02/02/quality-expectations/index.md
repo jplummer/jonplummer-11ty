@@ -1,6 +1,7 @@
 ---
 title: "Quality expectations"
 date: 2023-02-02
+tags: post
 ---
 
 Be it version three or an MVP, the experience we deliver should

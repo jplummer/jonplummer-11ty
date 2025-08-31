@@ -1,6 +1,7 @@
 ---
 title: "Revamping my design leadership portfolio: setting up initial research with recruiters"
 date: 2021-04-16
+tags: post
 ---
 
 Recruiters I've recently spoken to about passive opportunities (where the recruiter reached out to me before I was aware of the position) are more accessible to me than hiring managers, so my research will have to start there. In a previous article I said

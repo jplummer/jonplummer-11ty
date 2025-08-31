@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 06 05"
 date: 2023-06-10
+tags: post
 ---
 
 We heroically snuck up to Seattle by car late at night and then back the following night, thoroughly wearing ourselves out in the process. The traveling was exhausting and not fun, but…

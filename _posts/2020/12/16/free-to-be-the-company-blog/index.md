@@ -1,6 +1,7 @@
 ---
 title: "Free to be the company blog"
 date: 2020-12-16
+tags: post
 ---
 
 You'd be forgiven for thinking my employer doesn't have a blog. It (and the website it's a part of) haven't been updated in a while, and while the content is interesting, it's a little wooden and sparsely published, to the tune of an article or two per year in past years, and none this year.

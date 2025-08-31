@@ -1,6 +1,7 @@
 ---
 title: "A quick note to the design team about meeting invitations"
 date: 2021-06-12
+tags: post
 ---
 
 Gentle people,  

@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 04 28"
 date: 2023-04-29
+tags: post
 ---
 
 - An oft-rescheduled and contentious meeting resulted in a resolution to work together more often and more closely, which is the right answer.

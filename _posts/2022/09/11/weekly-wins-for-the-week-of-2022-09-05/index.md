@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2022 09 05"
 date: 2022-09-11
+tags: post
 ---
 
 I skipped a couple of these since I was on vacation. One win of that period, though, is that the vacation was amazing, despite some RV plumbing mishaps (nothing gross). Here are some wins since then:

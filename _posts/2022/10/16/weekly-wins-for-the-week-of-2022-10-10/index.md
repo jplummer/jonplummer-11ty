@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2022 10 10"
 date: 2022-10-16
+tags: post
 ---
 
 - My two conference talks went fine. It's not easy to gauge audience response when using some of these online conference platforms, so I'll reserve further judgement until the survey results come in.

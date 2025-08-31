@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins…of late"
 date: 2024-06-15
+tags: post
 ---
 
 I fell off the weekly wins wagon _hard_ in November, then wrote just one earlier this month. Time to get back on.

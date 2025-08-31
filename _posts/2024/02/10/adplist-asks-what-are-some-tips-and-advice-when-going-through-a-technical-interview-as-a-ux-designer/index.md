@@ -1,6 +1,7 @@
 ---
 title: "ADPList asks: What are some tips and advice when going through a technical interview as a UX Designer?"
 date: 2024-02-10
+tags: post
 ---
 
 For me the centerpiece of a design exercise is seeking knowledge and adapting your design ideas to that knowledge. You create and adapt and discard ideas readily and easily if they don't fit the emerging situation. So it is essential to ask questions during the exercise to understand as much as you possibly can about the people, environment, stakeholders, goals, and constraints so that you can demonstrate this process.  

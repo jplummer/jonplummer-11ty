@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 07 24"
 date: 2023-07-30
+tags: post
 ---
 
 The health scare has passed. That alone would be enough, _dayenu_. A little bit of this week was taken up by dealing with not having a good memory of what transpired the prior week. Even so,

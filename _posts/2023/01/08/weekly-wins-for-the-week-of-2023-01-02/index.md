@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 01 02"
 date: 2023-01-08
+tags: post
 ---
 
 Back to work! Back to school!

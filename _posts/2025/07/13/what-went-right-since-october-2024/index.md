@@ -1,6 +1,7 @@
 ---
 title: "What went right since October 2024?"
 date: 2025-07-13
+tags: post
 ---
 
 So many things!

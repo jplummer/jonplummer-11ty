@@ -1,6 +1,7 @@
 ---
 title: "What would you recommend to someone who is interested in starting with coding/designing/managing, but doesn't know exactly where to start?"
 date: 2022-05-02
+tags: post
 ---
 
 _How do I get experience doing a thing without a job doing the thing_? By doing the thing anyway.

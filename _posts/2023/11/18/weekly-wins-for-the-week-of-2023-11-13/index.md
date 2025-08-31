@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 11 13"
 date: 2023-11-18
+tags: post
 ---
 
 In spite of the organization's urges to snap back to old ways (ways that got us to where we are, so are not sufficient on their own to change our results):

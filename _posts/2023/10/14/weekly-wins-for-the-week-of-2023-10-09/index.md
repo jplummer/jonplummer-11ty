@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 10 09"
 date: 2023-10-14
+tags: post
 ---
 
 The month of October signals the end of the third quarter in our funny misaligned fiscal year. That's useful, in part because I promised some things by the end of the quarter, and a little push is a good thing. So,

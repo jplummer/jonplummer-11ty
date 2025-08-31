@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 07 31"
 date: 2023-08-07
+tags: post
 ---
 
 - It's amazing what even one day away, far from the home and the projects and the email, can do. We had planned a two-day trip but the first night fell through. No matter – a night and a day exploring northern Oregon and the coast is time well-spent.

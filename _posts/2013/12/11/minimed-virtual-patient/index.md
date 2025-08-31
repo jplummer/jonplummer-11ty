@@ -1,8 +1,7 @@
 ---
 title: "MiniMed virtual patient"
 date: 2013-12-11
-categories: 
-  - "portfolio"
+tags: portfolio
 coverImage: "be_hcp.png"
 ---
 

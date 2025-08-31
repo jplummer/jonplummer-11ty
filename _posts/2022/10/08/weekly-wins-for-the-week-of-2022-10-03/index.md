@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2022 10 03"
 date: 2022-10-08
+tags: post
 ---
 
 - My eight minute talk wherein I tried to explain/demo the accomplishments of my department over the prior year seemed to go fine. Folks in my department liked it, anyhow.

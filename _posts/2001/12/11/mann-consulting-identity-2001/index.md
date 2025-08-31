@@ -1,8 +1,7 @@
 ---
 title: "Mann Consulting identity (2001)"
 date: 2001-12-11
-categories: 
-  - "portfolio"
+tags: portfolio
 coverImage: "1477187196364852.gif"
 ---
 

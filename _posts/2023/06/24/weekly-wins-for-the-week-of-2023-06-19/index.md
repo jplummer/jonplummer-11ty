@@ -1,6 +1,7 @@
 ---
 title: "Weekly wins for the week of 2023 06 19"
 date: 2023-06-24
+tags: post
 ---
 
 The lady is out of town, but
