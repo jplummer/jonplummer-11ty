@@ -18,10 +18,10 @@
   -[x] Base layout template
   -[x] Post template (single post view)
   - Archive/tag templates
-  - RSS feed template
-    - XML structure
-    - Post metadata
-    - Content excerpts (no, do full content. It's polite)
+  -[x] RSS feed template
+    -[x] XML structure
+    -[x] Post metadata
+    -[x] Content excerpts (no, do full content. It's polite)
 
 - **Configure URL Structure**
   -[x] Set up permalinks to match WordPress: `/YYYY/MM/DD/post-slug/`
@@ -40,7 +40,7 @@
   -[x] re-get all the images somehow
 
 - **Organize Content Files**
-  -[x] Create `_posts/` directory with dated subdirectories. Example structure: `_posts/2024/11/02/what-went-right-in-october.md`
+  -[x] Create `_posts/` directory with dated subdirectories. Example structure: `_posts/2024/11/02/what-went-right-in-october/index.md`
 
 - **Convert to Markdown/Front Matter**
   -[x] Transform WordPress posts to Markdown with YAML front matter
@@ -54,13 +54,13 @@
 
 - **Base Layout (`_includes/base.njk`)**
   - Header, navigation, footer
-  - Integrate existing CSS structure
-  - Add meta tags and SEO elements
+  -[x] Integrate existing CSS structure
+  -[x] Add meta tags and SEO elements
 
 - **Post Template (`_includes/post.njk`)**
-  - Article structure matching current HTML
-  - Date formatting
-  - Tag/category display
+  -[x] Article structure matching current HTML
+  -[x] Date formatting
+  -[-] Tag/category display
   - Main navigation at bottom
 
 - **Index Template (`index.njk`)**

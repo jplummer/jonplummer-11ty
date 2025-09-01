@@ -22,19 +22,18 @@
   --gutter: 2rem;
   --max-width: 66rem;
   --max-width-narrow: 54rem;
-  --gap: 2rem;
 
   --font-family: -apple-system, system-ui, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, Adwaita Sans, Cantarell, Ubuntu, roboto, noto, helvetica, arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --text-size: 16px;
   --line-height: 1.5;
 
-  --main-text-color: #404040;
-  --main-background-color: #dadccf;
+  --text-color: #404040;
+  --background-color: #dadccf;
   --content-background-color: #fff;
-  --main-link-color: #bf1b1b;
-  --main-link-hover-color: #ed3f1c;
-  --main-link-visited-color: #736b1e;
-  --main-link-active-color: #ed8008;
+  --link-color: #bf1b1b;
+  --link-hover-color: #ed3f1c;
+  --link-visited-color: #736b1e;
+  --link-active-color: #ed8008;
 }
 /* Dieter Rams 01          #af2e1b, #cc6324, #3b4b59, #bfa07a, #d9c3b0
    Dieter Rams 02          #aab7bf, #736356, #bfb1a8, #ad1d1d, #261201
@@ -139,8 +138,8 @@ body {
 }
 
 body>header, body>main, body>footer {
-	margin: 0;
-  padding-bottom: 2rem;
+	margin: 0 var(--gutter);
+  padding-bottom: var(--gutter);
 	max-width: var(--max-width);
 }
 
@@ -265,8 +264,8 @@ button, input, label {
 
 body {
   font-family: var(--font-family);
-  color: var(--main-text-color);
-  background-color: var(--main-background-color);
+  color: var(--text-color);
+  background-color: var(--background-color);
 }
 
 header, main, footer {
@@ -274,19 +273,19 @@ header, main, footer {
 }
 
 a {
-  color: var(--main-link-color);
+  color: var(--link-color);
   text-decoration: none;
   transition: color 0.3s ease;
 }
 a:hover {
-  color: var(--main-link-hover-color);
+  color: var(--link-hover-color);
 }
 a:visited {
-  color: var(--main-link-visited-color);
+  color: var(--link-visited-color);
 }
 a:active {
-  color: var(--main-link-active-color);
+  color: var(--link-active-color);
 }
 a:focus {
-  color: var(--main-link-hover-color);
+  color: var(--link-hover-color);
 }

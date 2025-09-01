@@ -4,7 +4,7 @@ date: 2025-08-31
 layout: base.njk
 permalink: "/now/"
 ---
-(updated {{ post.date | dateReadable }})
+(updated {{ post.date }})
 
 ## Home and family
 

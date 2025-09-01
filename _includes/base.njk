@@ -1,3 +1,4 @@
+{# This teamplate is the basis of all templates #}
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -7,19 +8,36 @@
 
     <meta name="robots" content="max-image-preview:large" />
 
+    <link rel="profile" href="http://gmpg.org/xfn/11">
     <a rel="me" href="https://mas.to/@jplummer"></a>
     <a rel="me" href="https://bsky.app/profile/jonplummer.com"></a>
 
     <link rel="canonical" href="https://jonplummer.com/{{ slug }}" />
-    <meta property:"og:url" content="https://jonplummer.com/{{ slug }}" />
 
     <title>{{ title | default('Jon Plummer – Today I Learned') }}</title>
-    <meta property="og:title" content="{{ title | default('Jon Plummer – Today I Learned') }}" />
+
+    <link rel="icon" href="/assets/images/2021/02/jp_round-48x48.jpg" sizes="32x32">
+    <link rel="icon" href="/assets/images/2021/02/jp_round.jpg" sizes="192x192">
+    <link rel="apple-touch-icon" href="/assets/images/2021/02/jp_round-180x180.jpg">
+    <meta name="msapplication-TileImage" content="/assets/images/2021/02/jp_round.jpg">
 
     <meta name="description" content="{{ description }}" />
-    <meta name="og:description" content="{{ description }}" />
+    <meta name="generator" content="11ty">
 
-    <meta property="og:image" content="{{ ogImage | default('') }}" />
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="Jon Plummer">
+    <meta property="og:title" content="{{ title | default('Jon Plummer – Today I Learned') }}" />
+    <meta property:"og:url" content="https://jonplummer.com/{{ slug }}" />
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="{{ description}}">
+    <meta property="og:image" content="/assets/images/2021/05/og-image.png">
+    <meta property="og:image:url" content="/assets/images/2021/05/og-image.png">
+    <meta property="og:image:secure_url" content="/assets/images/2021/05/og-image.png">
+    <meta name="twitter:title" content="{{ title | default('Jon Plummer – Today I Learned') }}">
+    <meta name="twitter:url" content="https://jonplummer.com/{{ slug }}">
+    <meta name="twitter:description" content="{{ description }}">
+    <meta name="twitter:image" content="/assets/images/2021/05/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
 
 </head>
 

@@ -6,12 +6,14 @@ purpose: individual post page
 {% include "post.njk" %}
 
 <nav class="post-navigation">
-    {% if collections.posts | getPreviousCollectionItem(page) %}
-    <a href="{{ collections.posts | getPreviousCollectionItem(page).url }}" class="prev">← Previous post: {{ getPreviousCollectionItem(page).title }}</a>
+    {% set previousPost = collections.posts | getPreviousCollectionItem(page) %}
+    {% set nextPost = collections.posts | getNextCollectionItem(page) %}
+    {% if previousPost %}
+    <a href="{{ previousPost.url }}" class="prev">← Previous post: {{ previousPost.data.title }}</a>
     {% endif %}
     
-    {% if collections.posts | getNextCollectionItem(page) %}
-    <a href="{{ collections.posts | getNextCollectionItem(page).url }}" class="next">Next post: {{ getNextCollectionItem(title).url }} →</a>
+    {% if nextPost %}
+    <a href="{{ nextPost.url }}" class="next">Next post: {{ nextPost.data.title }} →</a>
     {% endif %}
 </nav>
 

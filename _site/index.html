@@ -1,47 +1,43 @@
+
 <!DOCTYPE html>
-
-<!-- # TODO
-(purpose: master template that all other templates extend)
-add prev/next navigation to index
-
-add meta description to index
-add slug to post frontmatter
-add title to post frontmatter
-add meta description to post frontmatter
-add ogImage default
-add ogImage to frontmatter on posts and pages that need it
-
-## Styling
-header with navigation wide
-header with navgation narrow
-footer copyright info
-
-## Later
-consider SERPs (https://schema.org)
-consider POSSE
--->
-
 <html lang="en-US">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link media="screen" rel="stylesheet" type="text/css" href="assets/css/jonplummer.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link media="screen" rel="stylesheet" type="text/css" href="assets/css/jonplummer.css" />
 
-<meta name="robots" content="max-image-preview:large" />
+    <meta name="robots" content="max-image-preview:large" />
 
-<a rel="me" href="https://mas.to/@jplummer"></a>
-<a rel="me" href="https://bsky.app/profile/jonplummer.com"></a>
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <a rel="me" href="https://mas.to/@jplummer"></a>
+    <a rel="me" href="https://bsky.app/profile/jonplummer.com"></a>
 
-<link rel="canonical" href="https://jonplummer.com/" />
-<meta property:"og:url" content="https://jonplummer.com/" />
+    <link rel="canonical" href="https://jonplummer.com/" />
 
-<title>Jon Plummer – Today I Learned</title>
-<meta property="og:title" content="Jon Plummer – Today I Learned" />
+    <title>Jon Plummer – Today I Learned</title>
 
-<meta name="description" content="" />
-<meta name="og:description" content="" />
+    <link rel="icon" href="/assets/images/2021/02/jp_round-48x48.jpg" sizes="32x32">
+    <link rel="icon" href="/assets/images/2021/02/jp_round.jpg" sizes="192x192">
+    <link rel="apple-touch-icon" href="/assets/images/2021/02/jp_round-180x180.jpg">
+    <meta name="msapplication-TileImage" content="/assets/images/2021/02/jp_round.jpg">
 
-<meta property="og:image" content="" />
+    <meta name="description" content="" />
+    <meta name="generator" content="11ty">
+
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="Jon Plummer">
+    <meta property="og:title" content="Jon Plummer – Today I Learned" />
+    <meta property:"og:url" content="https://jonplummer.com/" />
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="/assets/images/2021/05/og-image.png">
+    <meta property="og:image:url" content="/assets/images/2021/05/og-image.png">
+    <meta property="og:image:secure_url" content="/assets/images/2021/05/og-image.png">
+    <meta name="twitter:title" content="Jon Plummer – Today I Learned">
+    <meta name="twitter:url" content="https://jonplummer.com/">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image" content="/assets/images/2021/05/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
 
 </head>
 
@@ -52,119 +48,402 @@ consider POSSE
         <h1><a href="/" rel="home">Jon Plummer</a></h1>
         <p>Today I Learned</p>
     </hgroup>
-    <nav>
-        <button>Menu</button>
-        <ul>
-            <li><a href="/about/">About me</a></li>
-            <li><a href="/now/">Now</a></li>
-            <li><a href="/portfolio/">Portfolio</a></li>
-        </ul>
-    </nav>
+    ---
+purpose: site navigation
+---
+<nav>
+    <ul>
+        <li><a href="/about/">About me</a></li>
+        <li><a href="/now/">Now</a></li>
+        <li><a href="/portfolio/">Portfolio</a></li>
+    </ul>
+</nav>
 </header>
 
 <main id="main">
-    <article id="post-826">
+    
+
+    ---
+purpose: full blog post content component
+---
+<article id="post-unknown">
     <header>
-        <h2><a href="/2024/11/02/what-went-right-in-october/" rel="bookmark">What went right in October?</a></h2>
+        <h2><a href="/_posts/2025/07/27/toward-coordinated-experience/" rel="bookmark">Toward coordinated experience</a></h2>
+    </header>
+    <section>
+        <h2>Background</h2>
+<p>I realized the other day that we (UX and others) make workflow diagrams but don’t distinguish in them between “system advances you to the next step&quot; or &quot;offers you a link to a relevant thing” versus “user has to know to go somewhere else to do a necessary thing.” These are not at all equivalent; the arrows look the same, but those that denote “user has to know to go somewhere else to do a thing” should be maybe painfully ugly or broken or perhaps not exist at all to point out that a barrier exists.</p>
+<p>We should be anticipating and lowering those barriers, and we often are not. As we make new things, we’re tempted to squeeze scope down tight enough that we can launch quickly, but end up erecting these barriers in the process.</p>
+<p>UX folks are interested in producing what I'll call <em>coordinated experiences</em>, but have learned (to my chagrin) that it's hard to convince other folks in product development to participate, so they give up after a while. Since it is natural for engineering to look at the platform from the data model outward and assume that the appropriate interfaces match the data model in structure, and since there should otherwise be sufficient demand to produce coordinated experiences rather than the uncoordinated ones we usually make, my hypothesis is that there's some incentive/pressure/habit that is leading us in product development to scope projects such that we're not spending the effort required to produce coordinated experiences.</p>
+<p>Here's the rub: coordinated experience comes at an incremental cost. Or it seems to; that increment is <em>economically smart</em> to spend as it trades a bit more team effort for avoidance of a large amount of repeated customer, CSM, onboarding, and support effort.</p>
+<p>It’s normal to want to make sure our initial attempts at a feature or improvement are small and manageable to deliver quickly, learn from the result, and reduce risk. It’s natural to want to get a small bit of software out into the world to see if customers find it valuable so that it will rightly draw further investment or not. But if the initial experience, however slim, includes barriers that hamper its use, those barriers confound the adoption or task success metrics we take as evidence that the feature is valuable. If we descope to the point that barriers are present we are at cross-purposes with ourselves.</p>
+<p>So the challenge is to make small scopes that nonetheless deliver an end-to-end experience.</p>
+<p>Example: Uber’s MVP was a web form that offered to book a car to arrive in the very near future. There was no map, no phone app, no scheduling, no ratings, no service options, none of the larger experience that we associate with ride sharing services today. But the core experience worked without assistance, off-system work visible to the user, or delay: you could request a car to appear at a particular location and it would. There was no barrier between the desire for a ride and a ride other than filling out the form, which you could do on your own. It was a slender experience but a complete, coordinated one.</p>
+<h2>Coordinated experience defined</h2>
+<p>A coordinated experience is one in which</p>
+<ul>
+<li>
+<p>it's clear to the user where to go to achieve their goal</p>
+</li>
+<li>
+<p>once there, the correct controls are intelligible and fall to hand as needed</p>
+</li>
+<li>
+<p>users are helped by sensible defaults and/or canned possibilities they can try, and that suggest how the system is best used, rather than being faced with just a blank form</p>
+</li>
+<li>
+<p>capabilities needed to accomplish the goal are available without having to go find them or know in advance where to get them</p>
+</li>
+<li>
+<p>these capabilities behave in predictable ways learned from elsewhere in our platform and from other software</p>
+</li>
+<li>
+<p>The system supports user confidence that they have achieved the correct result</p>
+<ul>
+<li>
+<p>the result of their work is clear</p>
+</li>
+<li>
+<p>the right performance of the system is visible</p>
+</li>
+<li>
+<p>it's clear how to make changes</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>In short, the arrangement of capabilities and interfaces is governed by the use cases being supported, not necessarily the modularity of the back end.</p>
+<p>(Yes, this is a basic UX concept, but it is forgotten so often that it needs a name outside of UX jargon.)</p>
+<h2>Coordinated experience tactics</h2>
+<p>We won’t need all of these tactics all the time for everything; it’s a set of possibilities. Some of these methods might be useful depending on the use cases we intend to support. Some will be overkill.</p>
+<ul>
+<li>
+<p>Sensible defaults</p>
+</li>
+<li>
+<p>Galleries of canned options, useful at least as starting points</p>
+</li>
+<li>
+<p>Cross-linking to dependent or involved system objects that are managed elsewhere</p>
+</li>
+<li>
+<p>Reusing a capability (or presenting an otherwise stand-alone capability) as a module within a workflow where it is also needed</p>
+</li>
+<li>
+<p>Selectors that offer a choice of the existing examples of the required object type and a convenient way to create a new one</p>
+</li>
+<li>
+<p>Inspectors that explain a referenced system object without leaving the current context</p>
+</li>
+<li>
+<p>Traceability (explain how a result was arrived at)</p>
+</li>
+<li>
+<p>Simple versioning (accrue versions automatically as changes are made, allow an old one to be inspected and made current)</p>
+</li>
+<li>
+<p>Hierarchies revealed in list views</p>
+</li>
+<li>
+<p>(of course there are more; these are the ones that leap to mind at the moment)</p>
+</li>
+</ul>
+<p>As we build up a library of coordinated experience patterns, such as object inspectors, galleries, simple versioning methods, etc. it should become easier and easier to create coordinated experiences over time. But the core method is making sure that small scopes result in complete, coordinated workflows rather than fragmented ones.</p>
+<h2>Coordinated experience in the age of agents</h2>
+<p>It’s common to hear that agentic AI will make traditional interfaces obsolete, that if you can just ask the computer to do a thing you won’t also need a manual workflow to do that thing. This suggests an exciting future when software can focus on doing what users want (or at least ask for) rather than providing tools for users to do what users want.</p>
+<p>We do aspire to a near future where systems handle more tasks, and chain tasks together to produce better results more quickly than a person would, simplifying interaction by speeding the user along toward the results they seek.</p>
+<p>However, users will still need to</p>
+<ul>
+<li>
+<p>Verify performance of the system – monitor the actions of the system and understand its effect on their business</p>
+</li>
+<li>
+<p>Verify agent recommendations – see that the agent’s recommendations or plans are sensible and well-founded in data, fostering confidence in the system and agent</p>
+</li>
+<li>
+<p>Verify performance and results of agent tasks – confirm that the agent has done things correctly, and understand the effect of these actions</p>
+</li>
+<li>
+<p>Understand the capabilities of the system – learn about what the system can do and how it is best used</p>
+</li>
+<li>
+<p>Make adjustments – correct errors in their own work and that of agents, try tweaks, follow hunches</p>
+</li>
+</ul>
+<p>This likely means that there’s plenty of interface! The emphasis shifts from the user directly manipulating the system toward the user being offered analyses and outcomes, but given the above needs users will continue to require systems that are</p>
+<ul>
+<li>
+<p>self-explanatory</p>
+</li>
+<li>
+<p>transparent in their operations</p>
+</li>
+<li>
+<p>allow for direct inquiry into objects, and</p>
+</li>
+<li>
+<p>enable direct manipulation.</p>
+</li>
+</ul>
+<p>The advent of agentic workflows, by reducing direct user operation of the system, will <em>intensify</em> the need for interfaces and workflows that are simple, coordinated and re-learnable rather than interfaces that depend on training, consultation, or practice for user success.</p>
+
+    </section>
+    <footer>
+        <p class="posted-on"><time datetime="Sat Jul 26 2025 17:00:00 GMT-0700 (Pacific Daylight Time)">Sat Jul 26 2025 17:00:00 GMT-0700 (Pacific Daylight Time)</time></p>
+    </footer>
+</article>
+
+    ---
+purpose: full blog post content component
+---
+<article id="post-unknown">
+    <header>
+        <h2><a href="/_posts/2025/07/13/what-went-right-since-october-2024/" rel="bookmark">What went right since October 2024?</a></h2>
+    </header>
+    <section>
+        <p>So many things!</p>
+<ul>
+<li>
+<p>Work</p>
+<ul>
+<li>
+<p>I promoted someone</p>
+</li>
+<li>
+<p>I failed to promote someone, but learned a lot and it was the right decision</p>
+</li>
+<li>
+<p>We've had a couple of leadership offsites and they have been both pleasant and valuable</p>
+</li>
+<li>
+<p>I've guided my team from AI-skeptic or AI-agnostic to AI-curious, and written a quick position paper to explain our approach to both using AI tools and designing for AI-powered experiences</p>
+</li>
+<li>
+<p>UX people are strong participants in product trios, at long last</p>
+</li>
+<li>
+<p>We're hiring!</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Home</p>
+<ul>
+<li>
+<p>We've caught up on a handful of long-overdue home projects, just in time for the summer heat. Curtains, blinds, gym flooring, patch and paint, more curtains… there's more to do, always, but good progress after a bit of a stall</p>
+</li>
+<li>
+<p>The ADU is now occupied</p>
+</li>
+<li>
+<p>The girl is enjoying her six-week ballet intensive in a far-off state</p>
+</li>
+<li>
+<p>I got my GMRS license. Say hello to WSIX524</p>
+</li>
+<li>
+<p>Mr. Fixit has branched out into a little light metal work including repairing a watering can and making a house key easier for a blind person to use</p>
+</li>
+</ul>
+</li>
+</ul>
+
+    </section>
+    <footer>
+        <p class="posted-on"><time datetime="Sat Jul 12 2025 17:00:00 GMT-0700 (Pacific Daylight Time)">Sat Jul 12 2025 17:00:00 GMT-0700 (Pacific Daylight Time)</time></p>
+    </footer>
+</article>
+
+    ---
+purpose: full blog post content component
+---
+<article id="post-unknown">
+    <header>
+        <h2><a href="/_posts/2025/07/13/our-position-on-ai-tools/" rel="bookmark">Our position on AI tools</a></h2>
+    </header>
+    <section>
+        <p>(This is a work in progress, but a pretty good start)</p>
+<h2>Designing AI-powered product experiences</h2>
+<h3>User needs and customer problem first</h3>
+<p><strong>Solving a valuable customer problem is paramount</strong>. Before selecting any technological solution, including AI, we prioritize understanding user needs and clearly defining the problem we aim to solve. Any AI application must serve a genuine, identified user need, rather than being a solution in search of a problem.</p>
+<h3>Transparency, explainability, and trust</h3>
+<p>We recognize that users may be curious, or even apprehensive, about how AI-powered features operate. While full algorithmic explainability may not always be feasible or necessary, we commit to being <strong>transparent about the inputs and context</strong> that drive AI outputs. We hope to empower users with a <strong>sense of control</strong>, offering opportunities to <strong>validate choices, preview actions</strong>, and interact with AI as an assistant before letting it run as an autonomous agent. Maintaining an <strong>audit trail of AI actions</strong> also supports accountability and trust.</p>
+<h3>Handling errors and edge cases</h3>
+<p>We acknowledge that AI-powered features will sometimes produce wrong or unexpected outputs. Our design approach for these scenarios focuses on <strong>graceful error handling</strong> and keeping the <strong>human in the loop</strong>. This means</p>
+<ul>
+<li>
+<p><strong>Anticipating and mitigating</strong> potential issues through careful AI setup and training</p>
+</li>
+<li>
+<p>Designing interfaces that offer <strong>previews, recommendations, and clear actions</strong> rather than proceeding blindly</p>
+</li>
+<li>
+<p>Ensuring mechanisms for users to easily <strong>correct, override, or provide feedback</strong> on AI outputs</p>
+</li>
+<li>
+<p>Maintaining a design philosophy where the <strong>AI recommends and assists</strong>, allowing users to retain ultimate control until they explicitly release the system to act.</p>
+</li>
+</ul>
+<h3>Ethical design and bias mitigation</h3>
+<p>We strive to <strong>reduce bias</strong> in AI-powered features by</p>
+<ul>
+<li>
+<p>Grounding our understanding in <strong>real customer knowledge</strong> rather than internal assumptions.</p>
+</li>
+<li>
+<p>Working with and analyzing <strong>customer data responsibly</strong>, without alteration, and ensuring its privacy and security</p>
+</li>
+<li>
+<p>Establishing processes for <strong>monitoring the output of our features</strong> for unintended biases that may emerge</p>
+</li>
+</ul>
+<h3>Iteration and learning through metrics</h3>
+<ul>
+<li>
+<p><strong>Clear project goals</strong> define success.</p>
+</li>
+<li>
+<p><strong>Success metrics</strong> (e.g., accuracy, recall, task completion rates) and <strong>experiential metrics</strong> (e.g., user satisfaction, perceived control, trust) are established upfront.</p>
+</li>
+<li>
+<p>Continuous <strong>monitoring and analysis of these metrics</strong> drive iterative improvement, allowing us to refine the AI's performance and the user experience over time.</p>
+</li>
+</ul>
+<h2>Using AI tools in day-to-day UX work</h2>
+<p>Our UX team embraces the strategic and responsible integration of AI tools into our daily workflows to enhance our capabilities and deliver more valuable experiences.</p>
+<h3>Strategic tool adoption and augmentation</h3>
+<p>We are actively <strong>experimenting with AI tools</strong> like Figma Make, ChatGPT, and Gemini to understand their potential. Our focus is not merely on speed, but on how these tools can <strong>enhance our ability to deliver valuable and usable experiences</strong>. We view AI primarily as an augmentation to our existing skills, particularly for</p>
+<ul>
+<li>
+<p><strong>Inspiration and ideation</strong>: Generating diverse concepts, content variations, or design alternatives.</p>
+</li>
+<li>
+<p><strong>Early-stage prototyping</strong>: Quickly sketching out ideas.</p>
+</li>
+<li>
+<p><strong>Analyzing research data</strong>: Identifying patterns or themes in qualitative data (with careful oversight).</p>
+</li>
+</ul>
+<h3>Maintaining UX quality through human oversight</h3>
+<p>The ultimate <strong>responsibility for UX quality remains with the human designer</strong> and the members of the team with which they work. When using AI tools, each designer is accountable for the quality and accuracy of the output on their projects, regardless of AI assistance. We commit to <strong>human oversight and critical evaluation</strong> of any AI-generated content or insights. AI is a tool to assist, not replace, the designer's judgment, expertise, and empathy. All AI-assisted work undergoes the same <strong>review and validation processes</strong> as any UX work.</p>
+<h3>Continuous learning and cross-pollination</h3>
+<p>We encourage designers to</p>
+<ul>
+<li>
+<p>Actively <strong>experiment with new AI tools and techniques</strong></p>
+</li>
+<li>
+<p><strong>Share their learnings and best practices</strong> with the wider UX team and their project teams</p>
+</li>
+<li>
+<p>Replicate and build upon the successful experiments of others</p>
+</li>
+<li>
+<p>Embrace a <strong>fluidity in job boundaries</strong>, recognizing that AI tools may enable designers to contribute to areas traditionally outside core UX, fostering greater cross-functional collaboration</p>
+</li>
+</ul>
+<h3>Ethical use of AI tools and intellectual property</h3>
+<p>Our ethical considerations for designing AI-powered products extend to our use of AI tools. We commit to</p>
+<ul>
+<li>
+<p><strong>Transparency</strong>: Clearly acknowledging when AI tools have been used in our work, internally and externally where relevant. We will never misrepresent AI-assisted work as purely human-created</p>
+</li>
+<li>
+<p><strong>Data privacy and IP</strong>: Exercising caution regarding proprietary or sensitive customer data when interacting with external AI models. We will ensure we adhere to company policies and legal guidelines regarding data input into AI tools and the intellectual property of generated outputs</p>
+</li>
+<li>
+<p><strong>Maintaining control</strong>: Never ceding our understanding or control of customer knowledge, the design process, or design work to AI tools. The human designer remains the expert and ultimate decision-maker, responsible for the integrity of their work and the insights and design artifacts they share</p>
+</li>
+</ul>
+
+    </section>
+    <footer>
+        <p class="posted-on"><time datetime="Sat Jul 12 2025 17:00:00 GMT-0700 (Pacific Daylight Time)">Sat Jul 12 2025 17:00:00 GMT-0700 (Pacific Daylight Time)</time></p>
+    </footer>
+</article>
+
+    ---
+purpose: full blog post content component
+---
+<article id="post-unknown">
+    <header>
+        <h2><a href="/_posts/2024/11/03/what-went-right-in-october/" rel="bookmark">What went right in October?</a></h2>
     </header>
     <section>
         <p>So many things, in retrospect:</p>
-        <ul>
-            <li>Home progress!
-                <ul>
-                    <li>Landscaping is done, trees are in</li>
-                    <li>Storm drains are cleaned</li>
-                    <li>The network is regularly providing 1200Mbps, after modernizing a bit (paid for by selling the slightly older equipment)</li>
-                </ul>
-            </li>
-            <li>Work progress!
-                <ul>
-                    <li>The concept sprint I led was a resounding success – the execs wish they could sell our plan now, but they recognize they need to wait until they fund it and we build it – and there&#8217;s talk of more</li>
-                    <li>The pendulum is swinging back toward being more customer-centric</li>
-                </ul>
-            </li>
-            <li> Life progress!
-                <ul>
-                    <li>I pulled 410 last week by doing the plate math wrong, and it was no problem at all</li>
-                    <li>At my last appointment my PT said &#8220;good job;&#8221; I bet PTs don&#8217;t say that often</li>
-                </ul>
-            </li>
-        </ul>
+<ul>
+<li>
+<p>Home progress!</p>
+<ul>
+<li>
+<p>Landscaping is done, trees are in</p>
+</li>
+<li>
+<p>Storm drains are cleaned</p>
+</li>
+<li>
+<p>The network is regularly providing 1200Mbps, after modernizing a bit (paid for by selling the slightly older equipment)</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Work progress!</p>
+<ul>
+<li>
+<p>The concept sprint I led was a resounding success – the execs wish they could sell our plan now, but they recognize they need to wait until they fund it and we build it – and there's talk of more</p>
+</li>
+<li>
+<p>The pendulum is swinging back toward being more customer-centric</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Life progress!</p>
+<ul>
+<li>
+<p>I pulled 410 last week by doing the plate math wrong, and it was no problem at all</p>
+</li>
+<li>
+<p>At my last appointment my PT said &quot;good job;&quot; I bet PTs don't say that often</p>
+</li>
+</ul>
+</li>
+</ul>
+
     </section>
     <footer>
-        <p><span class="posted-on"><a href="/2024/11/02/what-went-right-in-october/" rel="bookmark"><time datetime="2024-11-02T20:19:36-07:00">November 2, 2024</time></a></span> by <span class="byline"><a href="/author/jonplummer_kssjnf/" rel="author me">Jon Plummer</a></span></p>
+        <p class="posted-on"><time datetime="Sat Nov 02 2024 17:00:00 GMT-0700 (Pacific Daylight Time)">Sat Nov 02 2024 17:00:00 GMT-0700 (Pacific Daylight Time)</time></p>
     </footer>
 </article>
-<article id="post-808">
+
+    ---
+purpose: full blog post content component
+---
+<article id="post-unknown">
     <header>
-        <h2><a href="/2024/08/01/apropos-ofnothing-bitcoin/" rel="bookmark">Apropos of…nothing (bitcoin)</a></h2>				
+        <h2><a href="/_posts/2024/08/01/apropos-ofnothing-bitcoin/" rel="bookmark">Apropos of…nothing (bitcoin)</a></h2>
     </header>
     <section>
         <p>A strategic reserve in (of?) a commodity implies that it’s in the U.S. strategic interest to invest to be protected from price shocks or supply restrictions due to the importance of the commodity to the economy or military readiness.</p>
-        <p>The best way to protect from bitcoin price shock is to not buy any. The best way to protect from a bitcoin supply restriction is to not use any.</p>
-        <p>Both of these are free.</p>
+<p>The best way to protect from bitcoin price shock is to not buy any. The best way to protect from a bitcoin supply restriction is to not use any.</p>
+<p>Both of these are free.</p>
+
     </section>
     <footer>
-        <p><span class="posted-on"><a href="/2024/08/01/apropos-ofnothing-bitcoin/" rel="bookmark"><time datetime="2024-08-01T08:50:00-07:00">August 1, 2024</time></a></span> by <span class="byline"><a href="/author/jonplummer_kssjnf/" rel=""author me">Jon Plummer</a></span></p>
+        <p class="posted-on"><time datetime="Wed Jul 31 2024 17:00:00 GMT-0700 (Pacific Daylight Time)">Wed Jul 31 2024 17:00:00 GMT-0700 (Pacific Daylight Time)</time></p>
     </footer>
 </article>
-<article id="post-806">
-    <header>
-        <h2><a href="/2024/07/31/a-quick-word-about-taking-feedback/" rel="bookmark">A quick word about taking feedback</a></h2>				
-    </header>
-    <section>
-        <p>When receiving feedback on a design or other work the important thing is to see the <em>intent</em> behind the feedback and address that, rather than take the <em>specific</em> advice or try to <em>appease</em> the feedback-giver.</p>
-        <p>Only by addressing the intent behind the feedback can the work be improved. yes, this might mean taking the specific advice, but it might not. The specific advice may not be the right answer.</p>
-        <p>Appeasement is waste.</p>
-    </section>
-    <footer>
-        <p><span class="posted-on"><a href="/2024/07/31/a-quick-word-about-taking-feedback/" rel="bookmark"><time datetime="2024-07-31T20:35:25-07:00">July 31, 2024</time></a></span> by <span class="byline"><a href="/author/jonplummer_kssjnf/" rel=""author me">Jon Plummer</a></span></p>
-    </footer>
-</article>
-<article id="post-804">
-    <header>
-        <h2><a href="/2024/07/21/weekly-wins-for-the-week-of-2024-07-15/" rel="bookmark">Weekly wins for the week of 2024 07 15</a></h2>				
-    </header>
-    <section>
-        <ul>
-            <li>Vacations are winding down and people are starting to come back to work. The team is filling out again.</li>	
-            <li>I convinced the SVP of Product to be quizzed about our product strategy – we&#8217;ll put a script and some visuals together for our annual Company Connect and hopefully address longstanding complaints that people aren&#8217;t sure how their work contributes to our strategy. This has raised other interesting topics that might also become topics, like how we really make money and where it goes, how our pricing and packaging works, etc. A lot of the things I was hoping to accomplish this year have been deprioritized (rightly) due to some technical pickles we find ourselves in, so this represents an opportunity to be influential beyond the usual process and product stuff we do on the reg; fingers crossed.</li>
-            <li>The ladies are back and the house is no longer empty. This also means my diet will improve – bachelor-mode Jon is (far) less disciplined than husband-mode Jon.</li>
-        </ul>		
-    </section>
-    <footer>
-        <p><span class="posted-on"><a href="/2024/07/21/weekly-wins-for-the-week-of-2024-07-15/" rel="bookmark"><time datetime="2024-07-21T16:29:24-07:00">July 21, 2024</time></a></span> by <span class="byline"><a href="/author/jonplummer_kssjnf/" rel=""author me">Jon Plummer</a></span></p>
-    </footer>
-</article>
-<article id="post-801">
-    <header>
-        <h2><a href="/2024/07/14/weekly-wins-for-the-weeks-of-2024-07-01-and-08/" rel="bookmark">Weekly wins for the weeks of 2024 07 01 and 08</a></h2>				
-    </header>
-    <section>
-        <p>Small quality-of-life adjustments can have an amazing effect. Sure, the fact that you need to push on the door a little bit to lock its deadbolt is not a huge deal; it hardly slows you down, takes little effort, and there&#8217;s nearly no additional wear-and-tear as a result. Not a huge deal <em>once</em>, that is. Eight times a day every day as people come and go, sometimes with full hands or in a hurry, adds up to thousands of exactly-repeated minor annoyances per year with a single cause that is readily fixed. So the value of that fix is quite high, even if each incident is barely noticeable.</p>
-        <ul>
-            <li>I adjusted the strike plates on our exterior doors as mentioned above. It&#8217;s fab!  (Ordinarily this would have been done by the contractor, but I put in the strikes so it fell to me.) Therese were not the strikes with the tab with the screwdriver hole, either.</li>
-            <li>I also some moved boxes and furniture out of the garage, and rearranged some things, so that we can now park one car in the garage. Halfway there!</li>
-            <li>During that process I started a tool donation box. There are some things that I&#8217;ve bought two or three times, and some things I have that I hope never to use again, and these can go to the tool library. Fish tape, transfer pump, redundant pipe wrench? Sayonara.</li>
-            <li>Adapting to people being out for summer trips (and to the recent upheaval in priorities) has not been as difficult as I expected, and it has been fun to dive into a little bit of design work to keep things moving for a team who has both designers out.</li>
-            <li>I had a delightful coffee with a former coworker who is looking for work. We&#8217;ve resolved to meet quarterly.</li>
-        </ul>
-    </section>
-    <footer>
-        <p><span class="posted-on"><a href="/2024/07/14/weekly-wins-for-the-weeks-of-2024-07-01-and-08/" rel="bookmark"><time datetime="2024-07-14T15:09:40-07:00">July 14, 2024</time></a></span> by <span class="byline"><a href="/author/jonplummer_kssjnf/" rel=""author me">Jon Plummer</a></span></p>
-    </footer>
-</article>
-        
-<nav class="navigation posts-navigation" aria-label="Posts">
-    <h2 class="screen-reader-text">Posts navigation</h2>
-    <div class="nav-links">
-        <div class="nav-previous"><a href="/page/2/">Older posts</a></div>
-    </div>
+
+
+<nav class="pagination" aria-label="Pagination">
 </nav>
 </main>
 
 <footer>
-    <p>Copyright 2025 Jon Plummer</p>
+    ---
+purpose: license (copyright) statement
+---
+<p class="license">Copyright 2025 Jon Plummer</p>
 </footer>
 </body>
 </html>

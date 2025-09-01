@@ -2,7 +2,7 @@
 title: "About me"
 date: 2025-08-01
 ---
-(updated {{ post.date | dateReadable }})
+(updated {{ post.date }})
 
 I lead product design teams for web and mobile apps, edtech, smart home, wi-fi, consumer electronics, medical devices, and more.
 

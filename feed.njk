@@ -1,6 +1,31 @@
-<!-- TODO
-(purpose: RSS feed)
-XML structure
-Post metadata
-Content excerpts
--->
+{# RSS feed template - full content #}
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>Jon Plummer</title>
+        <link>https://jonplummer.com</link>
+        <description>Today I Learned - Personal blog about work, life, and learning</description>
+        <language>en-US</language>
+        <lastBuildDate>{{ collections.posts | first }} GMT</lastBuildDate>
+        
+        {% for post in collections.posts | reverse %}
+        <item>
+            <title>{{ post.data.title | safe }}</title>
+            <link>{{ post.url | absoluteUrl }}</link>
+            <guid>{{ post.url | absoluteUrl }}</guid>
+            <pubDate>{{ post.date }} GMT</pubDate>
+            
+            {# Full post content #}
+            <content:encoded><![CDATA[{{ post.templateContent | safe }}]]></content:encoded>
+            
+            {# Post excerpt for compatibility #}
+            <description><![CDATA[{{ post.data.excerpt | default(post.templateContent | truncate(300)) | safe }}]]></description>
+            
+            {# Categories/tags if you have them #}
+            {% if post.data.tags %}
+            <category>{{ post.data.tags | join(', ') }}</category>
+            {% endif %}
+        </item>
+        {% endfor %}
+    </channel>
+</rss>
