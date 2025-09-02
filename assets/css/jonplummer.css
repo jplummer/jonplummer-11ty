@@ -138,8 +138,8 @@ body {
 }
 
 body>header, body>main, body>footer {
-	margin: 0 var(--gutter);
-  padding-bottom: var(--gutter);
+	margin: 0 auto;
+  padding: var(--gutter);
 	max-width: var(--max-width);
 }
 
@@ -220,9 +220,14 @@ h1, h2, h3, h4 {
   line-height: 1.1;
   text-wrap: balance;
 }
-h1 {
+hgroup h1 {
   font-size: 4rem;
   font-weight: 100;
+  letter-spacing: -0.025em;
+}
+h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
   letter-spacing: -0.025em;
 }
 h2 {

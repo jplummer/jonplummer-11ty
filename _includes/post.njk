@@ -3,7 +3,7 @@ purpose: full blog post content component
 ---
 <article id="post-{{ post.id | default('unknown') }}">
     <header>
-        <h2><a href="{{ post.url }}" rel="bookmark">{{ post.data.title }}</a></h2>
+        <h1><a href="{{ post.url }}" rel="bookmark">{{ post.data.title }}</a></h1>
     </header>
     <section>
         {{ post.templateContent | safe }}
