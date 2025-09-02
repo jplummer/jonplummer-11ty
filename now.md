@@ -2,9 +2,11 @@
 title: "Now – Jon Plummer"
 date: 2025-08-31
 layout: base.njk
+tag: page
+bodyId: now
 permalink: "/now/"
 ---
-(updated {{ post.date }})
+(updated 2025-08-31)
 
 ## Home and family
 

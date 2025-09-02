@@ -2,9 +2,11 @@
 title: "About me – Jon Plummer"
 date: 2025-08-01
 layout: base.njk
+tag: page
+bodyId: about
 permalink: "/about/"
 ---
-(updated {{ post.date }})
+(updated 2025-08-01)
 
 I lead product design teams for web and mobile apps, edtech, smart home, wi-fi, consumer electronics, medical devices, and more.
 

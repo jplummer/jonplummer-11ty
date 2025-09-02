@@ -10,11 +10,6 @@ module.exports = function(eleventyConfig) {
     
     // Syntax highlighting
     eleventyConfig.addPlugin(require("@11ty/eleventy-plugin-syntaxhighlight"));
-
-    // Create a posts collection from markdown files in _posts directory
-//    eleventyConfig.addCollection("posts", function(collectionApi) {
-//        return collectionApi.getFilteredByGlob("_posts/**/*.md");
-//    });
     
     // Add custom Nunjucks filter: limit
     eleventyConfig.addFilter("limit", function(array, limit) {
