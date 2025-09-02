@@ -5,7 +5,7 @@ bodyId: index
 purpose: blog homepage
 ---
 {# Display current page of posts #}
-{% for post in collections.posts | reverse | limit(5) %}
+{% for post in collections.post | reverse | limit(5) %}
     {% include "post.njk" %}
 {% endfor %}
 

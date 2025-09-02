@@ -1,7 +1,7 @@
 ---
 title: "Linksys app revitalization"
 date: 2020-03-01
-tags: post
+tags: portfolio
 ---
 
 At one point the Linksys app, meant to offer people setup, control, and monitoring of their Linksys networks at home, was rated below three stars on the iTunes Store and had a lifetime rating of 3.3 on the Google Play Store. A new information architecture, a fresh coat of paint, and many performance and interactivity improvements brought it to 4.5 stars on iTunes and a 4.1 lifetime on Google, helped by a judicious amount of review solicitation.

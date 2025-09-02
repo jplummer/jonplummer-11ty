@@ -1,0 +1,11 @@
+<article id="post-{{ post.id | default('unknown') }}">
+    <header>
+        <h2><a href="{{ post.url }}" rel="bookmark">{{ post.data.title }}</a></h2>
+    </header>
+    <section>
+        {{ post.templateContent | safe }}
+    </section>
+    <footer>
+        <p class="posted-on"><time datetime="{{ post.date }}">{{ post.date }}</time></p>
+    </footer>
+</article>

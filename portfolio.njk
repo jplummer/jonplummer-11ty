@@ -1,0 +1,15 @@
+---
+layout: base.njk
+title: "Portfolio – Jon Plummer"
+permalink: "/portfolio/"
+bodyId: portfolio
+purpose: portfolio index page
+---
+{# Display portfolio items #}
+<ul>
+{% for post in collections.portfolio | reverse %}
+    <li>
+        {% include "portfolio_list_item.njk" %}
+    </li>
+{% endfor %}
+</ul>

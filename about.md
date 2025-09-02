@@ -1,6 +1,8 @@
 ---
-title: "About me"
+title: "About me – Jon Plummer"
 date: 2025-08-01
+layout: base.njk
+permalink: "/about/"
 ---
 (updated {{ post.date }})
 

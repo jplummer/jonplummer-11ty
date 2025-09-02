@@ -1,5 +1,5 @@
 ---
-title: "Now"
+title: "Now – Jon Plummer"
 date: 2025-08-31
 layout: base.njk
 permalink: "/now/"

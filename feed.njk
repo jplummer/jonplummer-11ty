@@ -6,9 +6,9 @@
         <link>https://jonplummer.com</link>
         <description>Today I Learned - Personal blog about work, life, and learning</description>
         <language>en-US</language>
-        <lastBuildDate>{{ collections.posts | first }} GMT</lastBuildDate>
+        <lastBuildDate>{{ collections.post | first }} GMT</lastBuildDate>
         
-        {% for post in collections.posts | reverse %}
+        {% for post in collections.post | reverse | limit(20) %}
         <item>
             <title>{{ post.data.title | safe }}</title>
             <link>{{ post.url | absoluteUrl }}</link>

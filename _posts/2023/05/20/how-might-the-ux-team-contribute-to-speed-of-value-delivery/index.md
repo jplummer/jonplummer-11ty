@@ -20,4 +20,4 @@ It's common for non-design folks to assume that research and design rigor will s
 
 - Continuously improving the design system so interfaces can be built faster and with greater consistency, and to steadily improve the usability, familiarity, and accessibility of capabilities delivered on the front-end.
 
-And everyone should practice [active self-management within the project](https://jonplummer.local/2023/05/20/active-project-self-management/).
+And everyone should practice [active self-management within the project](/2023/05/20/active-project-self-management/).
