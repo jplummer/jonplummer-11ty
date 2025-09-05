@@ -17,6 +17,9 @@ module.exports = function(eleventyConfig) {
         return array.slice(0, limit);
     });
     
+    // Add custom Nunjucks shortcode: year
+    eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
+    
     // Ignore the '_notes' and "_posts/_drafts" folders
     eleventyConfig.ignores.add("_misc/");
     eleventyConfig.ignores.add("_posts/_drafts/");

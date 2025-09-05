@@ -6,7 +6,7 @@ tag: page
 bodyId: now
 permalink: "/now/"
 ---
-(updated 2025-08-31)
+(updated {{ date }})
 
 ## Home and family
 

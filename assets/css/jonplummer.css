@@ -180,7 +180,7 @@ header h1 + p {
 	margin-top: 0rem;
 }
 
-.sr-only {
+.sr-only, header a.skip {
   position: absolute;
   left: -10000rem;
   top: auto;
@@ -189,15 +189,6 @@ header h1 + p {
   overflow: hidden;
 }
 
-header a.skip {
-    position: absolute;
-    left: -10000px;
-    top: auto;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    }
-     
 header a.skip:focus {
     position: fixed;
     left: 0;
