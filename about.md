@@ -6,7 +6,7 @@ tag: page
 bodyId: about
 permalink: "/about/"
 ---
-(updated {{ date }})
+(updated {{ date | postDate }})
 
 I lead product design teams for web and mobile apps, edtech, smart home, wi-fi, consumer electronics, medical devices, and more.
 

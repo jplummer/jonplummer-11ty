@@ -6,6 +6,6 @@
         {{ post.templateContent | safe }}
     </section>
     <footer>
-        <p class="posted-on"><time datetime="{{ post.date }}">{{ post.date }}</time></p>
+        <p class="posted-on"><time datetime="{{ post.date }}">{{ post.date | postDate }}</time></p>
     </footer>
 </article>

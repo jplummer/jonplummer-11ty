@@ -1,3 +1,5 @@
+const { DateTime } = require("luxon");
+
 module.exports = function(eleventyConfig) {
     // Copy static assets
     eleventyConfig.addPassthroughCopy("assets");
@@ -10,13 +12,21 @@ module.exports = function(eleventyConfig) {
     
     // Syntax highlighting
     eleventyConfig.addPlugin(require("@11ty/eleventy-plugin-syntaxhighlight"));
-    
+
+    // Date formatting via Luxon
+    eleventyConfig.addPlugin(require("eleventy-plugin-date"));
+
     // Add custom Nunjucks filter: limit
     eleventyConfig.addFilter("limit", function(array, limit) {
         if (!Array.isArray(array)) return array;
         return array.slice(0, limit);
     });
-    
+
+    // add postDate filter
+    eleventyConfig.addFilter("postDate", (dateObj) => {
+      return DateTime.fromJSDate(dateObj).toLocaleString(DateTime.DATE_MED);
+    });
+
     // Add custom Nunjucks shortcode: year
     eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
     

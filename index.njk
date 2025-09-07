@@ -3,11 +3,26 @@ layout: base.njk
 title: Jon Plummer – Today I Learned
 bodyId: index
 purpose: blog homepage
+pagination:
+    data: collections.post
+    reverse: true
+    size: 5
+permalink: "{% if pagination.pageNumber == 0 %}/{% else %}/page/{{ pagination.pageNumber }}/{% endif %}"
 ---
+
 {# Display current page of posts #}
-{% for post in collections.post | reverse | limit(5) %}
+{% for post in pagination.items %}
     {% include "post.njk" %}
 {% endfor %}
 
-<nav class="pagination" aria-label="Pagination">
+<nav class="pagination">
+    {% if pagination.href.previous %}
+        <a href="{{ pagination.href.previous }}">← Previous</a>
+    {% endif %}
+    
+    <span>Page {{ pagination.pageNumber | plus: 1 }} of {{ pagination.pageCount }}</span>
+    
+    {% if pagination.href.next %}
+        <a href="{{ pagination.href.next }}">Next →</a>
+    {% endif %}
 </nav>

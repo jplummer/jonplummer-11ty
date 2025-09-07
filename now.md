@@ -6,7 +6,7 @@ tag: page
 bodyId: now
 permalink: "/now/"
 ---
-(updated {{ date }})
+(updated {{ date | postDate }})
 
 ## Home and family
 

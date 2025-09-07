@@ -1,29 +1,10 @@
-/* TODO
--[x] font sizes and header sizes https://ithy.com/article/typography-font-size-spacing-lc0m3kwv
--[x] skip link behavior
-- fix margins and page color
-- menu behavior wide
-- menu behavior narrow
-- inline links vs incidental links
-- copyright styling
-- page color vs content background color
-
-## Later
-- baseline grid https://edgdesign.co/blog/baseline-grids-in-css
-- alternate color schemes
-  https://www.presentandcorrect.com/blogs/blog/rams-palette
-  https://www.color-hex.com/color-palettes/popular.php 
-  https://mcochris.com
-  
-*/
-
 /* CSS CUSTOM PROPERTIES */
 :root {
   --gutter: 2rem;
   --max-width: 66rem;
   --max-width-narrow: 54rem;
 
-  --font-family: -apple-system, system-ui, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, Adwaita Sans, Cantarell, Ubuntu, roboto, noto, helvetica, arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-family: system-ui, sans-serif;
   --text-size: 16px;
   --line-height: 1.5;
 
@@ -35,11 +16,6 @@
   --link-visited-color: #736b1e;
   --link-active-color: #ed8008;
 }
-/* Dieter Rams 01          #af2e1b, #cc6324, #3b4b59, #bfa07a, #d9c3b0
-   Dieter Rams 02          #aab7bf, #736356, #bfb1a8, #ad1d1d, #261201
-   Dieter Rams 03          #ed8008, #ed3f1c, #bf1b1b, #736b1e, #d9d2c6
-   Dieter Rams 03 adjusted #ed8008, #ed3f1c, #bf1b1b, #736b1e, #dadccf
-   Dieter Rams 04          #bf7c2a, #c09c6f, #5f503e, #9c9c9c, #e1e4e1 */
 
 /* RESETS */
 

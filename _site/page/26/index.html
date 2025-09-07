@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link media="screen" rel="stylesheet" type="text/css" href="/assets/css/jonplummer.css" />
+
+    <meta name="robots" content="max-image-preview:large" />
+
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <a rel="me" href="https://mas.to/@jplummer"></a>
+    <a rel="me" href="https://bsky.app/profile/jonplummer.com"></a>
+
+    <link rel="canonical" href="https://jonplummer.com/" />
+
+    <title>Jon Plummer – Today I Learned</title>
+
+    <link rel="icon" href="/assets/images/2021/02/jp_round-48x48.jpg" sizes="32x32">
+    <link rel="icon" href="/assets/images/2021/02/jp_round.jpg" sizes="192x192">
+    <link rel="apple-touch-icon" href="/assets/images/2021/02/jp_round-180x180.jpg">
+    <meta name="msapplication-TileImage" content="/assets/images/2021/02/jp_round.jpg">
+
+    <meta name="description" content="" />
+    <meta name="generator" content="11ty">
+
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="Jon Plummer">
+    <meta property="og:title" content="Jon Plummer – Today I Learned" />
+    <meta property:"og:url" content="https://jonplummer.com/" />
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="/assets/images/2021/05/og-image.png">
+    <meta property="og:image:url" content="/assets/images/2021/05/og-image.png">
+    <meta property="og:image:secure_url" content="/assets/images/2021/05/og-image.png">
+    <meta name="twitter:title" content="Jon Plummer – Today I Learned">
+    <meta name="twitter:url" content="https://jonplummer.com/">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image" content="/assets/images/2021/05/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+</head>
+
+<body class="index">
+<header>
+    <a class="skip" href="#main">Skip to content</a>
+    <hgroup>
+        <h1><a href="/" rel="home">Jon Plummer</a></h1>
+        <p>Today I Learned</p>
+    </hgroup>
+    
+<nav>
+    <ul>
+        <li><a href="/about/">About me</a></li>
+        <li><a href="/now/">Now</a></li>
+        <li><a href="/portfolio/">Portfolio</a></li>
+    </ul>
+</nav>
+</header>
+
+<main id="main">
+    
+
+
+    
+<article id="post-unknown">
+    <header>
+        <h1><a href="/_posts/2022/02/01/what-i-learned-from-my-big-mistake/" rel="bookmark">What I learned from my big mistake</a></h1>
+    </header>
+    <section>
+        <p>On Friday last week I deleted a chunk of the wiki. All of the product management pages, in fact. The work of a team of fifteen, organizing and guiding the work of a hundred people, gone. I've managed to avoid being fired, so far. People have been very nice about this, so far. But I don't expect their good will to last: as they trip over the lack of things that were once in place they will learn the painful extent of my big mistake.</p>
+<p>There were many failures involved in this big mistake, but the biggest failure belongs to me.</p>
+<h2>What happened</h2>
+<p>The design team, which I lead, had been putting our recent work on the design system, user research, interaction guidelines, etc. in the product management space for quite a while now, but there was a disused old space that contained similar but outdated content, penned by past designers, that cluttered up search results and created confusion among the design and product teams. I was working through the contents of this area, moving some pages to the product management space and marking them as old work, archiving other pages, and deleting &quot;stubs&quot; (pages devoid of content) outright. So I was working in two spaces at once.</p>
+<p>At some point the disused old space was effectively empty, so I thought I'd delete it. From the homepage of the disused space I went to space administration, and chose to delete the space. And since I had just done a lot of work there to clear it out, and thought of that work as now safe in the product management space, I didn't pay super-close attention to the confirmation message that warned that the deletion was not reversible. But that confirmation was attempting to warn me that I was deleting the product management space. I blithely confirmed the deletion, then a progress bar appeared, and grew, and was not cancelable.</p>
+<p>As the progress bar grew I realized what I had done and panic rose in my chest. I quickly opened a new window and quickly did an export of the product management space, which was in the process of being deleted. I got 22MB of data, so not nothing, but that export is likely partial; I have no idea how large a full export would have been.</p>
+<p>Expecting that I had just caused my imminent firing, I immediately Slacked someone in IT for help, my VP of Product to tell her what I had done, and the product team as a whole to apologize and point out that I would do my best to find a solution. As I said, people have been very nice about this, so far. I hope I can act in such a way that preserves at least some of that good will.</p>
+<p>I hope they reduce my rights on the system significantly.</p>
+<h2>Lessons for me</h2>
+<p>I was working in two spaces at once, so the likelihood of &quot;pedal error,&quot; choosing the wrong action believing it is the right one, was high.</p>
+<p>I'll probably never know if it was pedal error or a bug that caused the wrong space to be offered to me for deletion. I believed I had selected the correct space for deletion. But sure of myself in that moment I skimmed over the confirmation step. Others have had this same complaint, if the support site is to be believed, that they selected one space for deletion and were offered a different one. Even so, I should have:</p>
+<ul>
+<li><strong>Read and heeded confirmation messages</strong>. Failing to do this was the core of my big mistake.</li>
+<li><strong>Taken a moment before doing anything momentous</strong> or destructive. A bit of time can be room for your brain to catch up to your hands.</li>
+<li><strong>Taken my own steps to make destructive acts recoverable</strong>. I could have done a full export of both spaces before deleting anything. Had I bothered to actually read the confirmation message I may have thought to do so. Had I paused I may have thought to do so. It would take only a few minutes and be free insurance against catastrophe.</li>
+<li><strong>Made use of archival or &quot;logical delete&quot; rather than destructive processes</strong>. When available, archiving a page or a space or other record is inherently more recoverable than deleting. It's not clear if this was an option in my case, but it's a good idea. If you find you never visit these archived items, you can choose to delete them later.</li>
+</ul>
+<p>I'm happy that I had already learned these lessons:</p>
+<ul>
+<li><strong>Hang a lantern on your problem</strong>. Had I not started communicating immediately, I'm sure things would be much worse for me. Worse, had I said nothing, I would eventually have been found out and fired not for the mistake but for the cover-up. In my panic it did take a half a beat to recall this lesson.</li>
+<li><strong>Form a plan with multiple paths to success</strong>. It's not safe to rely on a single path to disaster recovery. How many paths to success can you think of? Can you pursue all of them? How can you maximize your chance of success? If you have just one plan, and it fails, then what?</li>
+</ul>
+<h2>Lessons for interfaces and systems</h2>
+<p>If you would like your system to be kind to me and other normal folks, you'll want to arrange things so mistakes are harder to make, or easier to recover from, or both. There are a lot of things you can do, roughly in order from least to most difficult:</p>
+<ul>
+<li><strong>Offer recovery preparation activities alongside the destructive action</strong>. It's straightforward to add a reminder to make an export or backup to your confirmation message. Would it have helped me? Who can say.</li>
+<li><strong>Offer recovery preparation activities alongside the confirmation message</strong>. It's a little less straightforward to offer an export at the point of confirmation. But it's not that hard, and that reminder will catch some folks before they make a mistake.</li>
+<li><strong>Make confirmation of destructive acts require reading to complete</strong>. You've seen this in Figma and other places, where you are asked to type something to confirm the action. The best of these ask you to think a little bit; &quot;Type the name of the space to confirm that you want to delete it&quot; is better than &quot;type DELETE to confirm that you want to delete this space&quot; as it requires a bit more attention. In this case, a little cognitive load is your friend.</li>
+<li><strong>Make lengthy or multi-step destructive acts cancelable</strong>. Even if part of the information is saved it is better than watching the system slowly put your mistake into practice with no recourse. In my case, deleting a space involves several transactions – making each page a hidden page, removing the association of the space with its home or overview page, deleting each page, then deleting the now empty space. Stopping at any point in that chain of events would have spared some fraction of the data.</li>
+<li><strong>Offer archival or logical delete in addition to outright deletion</strong>. Users are more likely to mishandle their data if alternatives to deletion are not available.</li>
+<li><strong>Offer archival or logical delete <em>instead of</em> outright deletion</strong>. Users can't delete if they can't delete This increases data storage costs, and signs you up to write more interfaces to browse and change the status of archived records, but major mistakes become minor ones.</li>
+<li><strong>Automatically perform recovery preparation activities</strong>. An automatic export prior to deletion adds time and storage cost to the process, but can save someone's day by giving them the tools needed to undo a mistake.</li>
+<li><strong>Make destructive acts easily recoverable</strong>. This is the most expensive yet most <em>polite</em> way to handle user data. Let any act be undoable. It's not easy to architect, much less to implement, but the level of comfort it offers to users is extreme. Mistakes in word processors used to be costly and painful, but today they are trivialities. And the effort it takes away from users is likely worth the design and engineering costs.</li>
+</ul>
+<h2>Lessons for organizations</h2>
+<p>A prior IT regime read about the backup practices of our vendor and felt that they were sufficient protection. They read that the vendor makes nightly backups and retains them for thirty days. But there they stopped reading, not noticing that these backups are not offered to clients and are only for vendor-level disaster recovery. So while a backup technically exists, it is no protection from client-caused mishaps. There are several lessons in this one fact:</p>
+<ul>
+<li><strong>Do not expect your users not to make mistakes</strong>. See &quot;lessons for me&quot; above to learn of typical mistakes.</li>
+<li><strong>Read the whole contract</strong>.</li>
+<li><strong>Do not leave backup solely up to your vendor</strong>, even if their backup plan sounds adequate. if you aren't in control of your data, you aren't in control of your data.</li>
+<li><strong>Do not believe you have a working backup unless you've practiced recovering</strong> via that backup. What does it take to recover from a disaster? How do you know? Are you really ready to accomplish this? One way to find out.</li>
+<li><strong>Do not believe you have a working backup unless you've verified its contents</strong>. Ah, you have a backup. Your'e covered! Unless…drat, the backup is corrupted, or incomplete, or old because the job has been failing for a while, or a thousand other problems.</li>
+</ul>
+<p>There's also the small matter of roles and privileges:</p>
+<ul>
+<li><strong>The less safe the data is, the fewer people should be allowed to harm it</strong>. No backup? Restrict deletion privileges to relatively inaccessible people, not day-to-day editors. Yes, they'll grumble. But it is for their own good.</li>
+</ul>
+<h2>My plan, and what I've done so far</h2>
+<p>I've got a partial export, a backup locked up at the vendor that I allegedly do not have access to, an unknown level of inconvenience caused to coworkers, and an unknown amount of time and effort between now and whatever level of recovery I am able to effect. Above I mentioned having and putting into practice multiple paths to success. The possible paths to success seem to be</p>
+<ul>
+<li>restoring the export and finding out what is in it, in hopes that it meaningfully reduces the loss</li>
+<li>appealing to the vendor to have access to their backup, which should be complete</li>
+<li>scouring the existing IT infrastructure for any possible existing export or backup we might have</li>
+</ul>
+<p>I am pursuing all of these in parallel. In the meantime I have</p>
+<ul>
+<li>communicated this plan with my supervisor, with my employees, and with my peers and others on the product team</li>
+<li>apologized to the design and product teams and individually to select people, especially those who had recently contributed or shared work via the wiki</li>
+<li>shared my plan with the current IT regime so that we can help each other</li>
+<li>opened a temporary space for the teams to use to avoid namespace pollution or any untoward effects of a possible full, partial, or botched restore</li>
+</ul>
+<p>I am also communicating the emerging status with team members daily.</p>
+<p>I know that with all of this, the likelihood of a full recovery is slim. And I know that at a certain point, some organizations will fire an employee for the effect of their mistakes regardless of the circumstances. If that comes to pass I will understand. But I will pursue multiple paths to success until that happens.</p>
+<h2>Update</h2>
+<p>The product management area of the wiki is back. My export was not usable, but the vendor agreed to help by rolling the wiki back to the moment prior to deletion, allowing us to export the data for the product management space, rolling it forward again, and allowing us to re-import the exported data. Thanks be to the IT person who convinced the vendor to help and who worked on the problem after-hours so that on the morning of day six we had the data back in place.</p>
+<p>A side-effect of this is that every inbound link to pages in this area is broken. But so far this seems surmountable. Another side effect is that we now have a backup strategy that we are in charge of, and will not have to appeal to the vendor for further help if additional mistakes are made. I expect a security/privileges audit will come soon.</p>
+
+    </section>
+    <footer>
+        <p class="posted-on"><time datetime="Mon Jan 31 2022 16:00:00 GMT-0800 (Pacific Standard Time)">Jan 31, 2022</time></p>
+    </footer>
+</article>
+
+    
+<article id="post-unknown">
+    <header>
+        <h1><a href="/_posts/2022/01/09/daniel-abrahams-asks-if-a-task-takes-six-hours-to-complete-in-the-office-but-that-same-employee-finishes-out-in-four-working-from-home-who-should-get-the-saved-two-hours/" rel="bookmark">Daniel Abrahams asks: &quot;If a task takes six hours to complete in the office, but that same employee finishes out in four working from home, who should get the saved two hours?&quot;</a></h1>
+    </header>
+    <section>
+        <p><img src="images/dabrahams_question-1024x826.png" alt="If a task takes six hours to complete in the office, but that same employee finishes out in four working from home, who should get the saved two hours? The company ('back to work!') or the employee ('free time')?"></p>
+<p>I don't like either of these options. Of course, the employee in me wants to be rewarded for producing efficiently, and the manager in me wants to take advantage of that efficiency to improve the business overall; this is the simple conflict that the question hinges on. But Daniel's question and its two options miss the mark entirely because they assume that the employee is being paid either for their time, i.e. selling hours, or by the task or piece, i.e. selling some number of completions of a well-defined task.</p>
+<p>This is not how I want to arrange my work or the work of the people I support. I am not paying them for their time, and I am not paying them by the piece. And I can't really; as knowledge workers</p>
+<ul>
+<li>our work is not so well-defined as to be sensibly thought of as piecework, and</li>
+<li>our time is not a good unto itself, rather it is the way we apply that time that produces results that are valuable.</li>
+</ul>
+<p>Knowledge workers negotiate and accept anticipated results they are to participate in producing, and then act largely as they see fit to do so. They are paid a salary and evaluated based on their contribution to these results. It's hard to do a good job without some amount of continuous improvement, as we are learning as we go, and a valued contributor will find ways to do a little better than last time.</p>
+<p>That improvement has a few rewards:</p>
+<ul>
+<li>it produces a sense of accomplishment,</li>
+<li>it creates success for the team and organization, and</li>
+<li>it makes the job easier over time,</li>
+<li>it frees up some effort to work on more interesting things,</li>
+<li>it makes space for the employee to make decisions about balancing their ambition and their need for rest.</li>
+</ul>
+<p>In the ideal case, all five of these rewards are produced.</p>
+
+    </section>
+    <footer>
+        <p class="posted-on"><time datetime="Sat Jan 08 2022 16:00:00 GMT-0800 (Pacific Standard Time)">Jan 8, 2022</time></p>
+    </footer>
+</article>
+
+    
+<article id="post-unknown">
+    <header>
+        <h1><a href="/_posts/2022/01/07/a-quick-note-about-presenting-design-work-in-a-meeting-with-engineering/" rel="bookmark">A quick note about presenting design work in a meeting with engineering</a></h1>
+    </header>
+    <section>
+        <p>There are a few ways these meetings might be organized depending on where we are in the design-development process.</p>
+<ul>
+<li><strong>early concept</strong>: help me think about the problem</li>
+<li><strong>late concept</strong>: help me choose among these ideas and develop one</li>
+<li><strong>early detail</strong>: this is where we are going, what caveats remain?</li>
+<li><strong>late detail</strong>: here's a the detail, what questions do I need to address?</li>
+</ul>
+<p>These depend on the thought that there are a few phases/horizons to product design work, namely</p>
+<ol>
+<li>Problem Framing (aka Research or Horizon 3), in which we learn about the challenges and needs of users to understand and select a problem to go after with concepts,</li>
+<li>Concept (or Horizon 2), in which we develop concepts and select among them with the help of users and engineering, and</li>
+<li>Detail (or Horizon 1), in which we develop the selected concept and test the fitness of our more detailed work with users as we go.</li>
+</ol>
+<p>It's a common anti-pattern that engineering gets involved only when we are in detail, but we'd like to pull them into the other phases to be informed about the available problems and to help us develop and select among concepts.</p>
+<p>Some Agile purists will decry this phasing as anti-agile, but that requires a blinkered view of what Agile means, which often comes about when one confuses Scrum for Agile. (The dirty little secret of Scrum is that there's a lot of hand-waving about the large quantity of work that needs to happen outside of sprints to make Scrum possible.)</p>
+
+    </section>
+    <footer>
+        <p class="posted-on"><time datetime="Thu Jan 06 2022 16:00:00 GMT-0800 (Pacific Standard Time)">Jan 6, 2022</time></p>
+    </footer>
+</article>
+
+    
+<article id="post-unknown">
+    <header>
+        <h1><a href="/_posts/2021/12/27/do-you-have-some-key-metrics-that-you-are-measuring-your-team-on-number-of-items-added-to-the-pattern-library-number-of-customer-interviews-etc/" rel="bookmark">Do you have some key metrics that you are measuring your team on (number of items added to the pattern library, number of customer interviews, etc)?</a></h1>
+    </header>
+    <section>
+        <p>I tend not to be in favor of output metrics like these; they've been shown to be counterproductive for developers (lines of code, commits, bugs crushed, etc.), for example. But I am thinking about how best to apply the process maturity scorecard to the work of the individual designers to try to coach them on their projects. If a designer is helping to improve the process maturity of their product team(s), that's a good sign.</p>
+<p>On the other hand, some anti-metrics (trouble indicators) are pretty obvious – if there's a lot of rework coming back to a designer, if deliverables are sloppy, if product managers and engineers are dissatisfied or under-involved, then we can tell there is a problem. But the opposite of these are not great metrics for individual performance, as a certain amount of rework will be technically driven, we don't want to create an inspection-heavy situation where each deliverable is scrutinized for lack of sloppiness, etc.</p>
+<p>I do have expectations that designers will bring work to and contribute to critique, seek my counsel on design challenges, press for collaboration, etc. But do I want to count these behaviors? Probably not.<br>
+The ideal thing would be to peg team performance to the product metrics we hope to install. The metrics we really care about are user success metrics in a product, and these are team metrics, not individual performance metrics.</p>
+<p>So when it comes time to evaluate a designer, I like to use four Cs – customer, collaboration, culture, and content.</p>
+<ol>
+<li><strong>Customer</strong> – is the work produced by the designer informed by the customer, appropriate to the customer, accepted by the customer?
+<ol>
+<li><em>Informed</em> a leading indicator, evidenced by their participation in research and testing. They are or are not doing this. Exactly how much is situational, nonnumeric.</li>
+<li><em>Appropriate</em> is somewhat evident in testing, and ultimately evident in adoption, a lagging indicator (and highly dependent on product and engineering decisions, the appropriateness of the feature idea in the first place, etc.).</li>
+<li><em>Accepted</em> is essentially adoption. The same caveats apply.</li>
+</ol>
+</li>
+<li><strong>Collaboration</strong> – is the designer an effective collaborator on their project teams? Do they work well with their peers and their project teams?</li>
+<li><strong>Culture</strong> – what is the designer's contribution to the culture? Are they intellectually and emotionally engaged in a way that improves their teams and the org, is neutral, or detracts from their teams and the org? Are they improving and helping the culture improve?</li>
+<li><strong>Content</strong> – is the designer's work organized, communicative, complete, insightful, timely? Are their skills and attention to detail usefully on display in their work?</li>
+</ol>
+<p>The best articles out there about measuring designer performance are a) not very good and b) old, such as <a href="https://uxcellence.com/2016/measuring-designer-performance">Measuring Designer Performance</a>, or <a href="https://www.quora.com/How-do-I-create-KPIs-for-my-design-team">How do I create KPIs for my design team</a>. So I've been content to use those four Cs, which are similar in concept to how <a href="https://ideo.com">IDEO</a> evaluates their creative and engineering staff.</p>
+
+    </section>
+    <footer>
+        <p class="posted-on"><time datetime="Sun Dec 26 2021 16:00:00 GMT-0800 (Pacific Standard Time)">Dec 26, 2021</time></p>
+    </footer>
+</article>
+
+    
+<article id="post-unknown">
+    <header>
+        <h1><a href="/_posts/2021/12/07/confusing-terms-globalization-internationalization-translation-and-localization/" rel="bookmark">Confusing terms: globalization, internationalization, translation, and localization</a></h1>
+    </header>
+    <section>
+        <p>At work there's been a move afoot to tag items in our roadmapping tool as &quot;globalization,&quot; &quot;internationalization,&quot; &quot;localization,&quot; or &quot;translation.&quot;</p>
+<p>The executive level thinking here is that we are not offering our products globally, and need to be. So what do you do about that? You globalize!</p>
+<p>To my thinking, though, there are universal requirements, things that the underlying product should do everywhere, and requirements borne of local data formats, terms of art, regulatory environments, etc. Universal versus local. Then there's the work of offering interfaces and commendation in a newly-supported language, and the things you must do technologically to make your application able to deliver these universal and local requirements and serve interfaces and documentation in the correct languages.</p>
+<p>To my thinking, a universal requirement is just a requirement. The special ones, therefore interesting to tag, are</p>
+<ul>
+<li><strong>localization</strong>: things that need to be done differently due to a locale's needs – preferred data formats, regulatory environment, terms of art, etc.</li>
+<li><strong>translation</strong>: the actual translation of interfaces and documentation into a newly-supported language or English variant</li>
+<li><strong>internationalization</strong>: things that must be done technologically to enable us to address either of the above</li>
+</ul>
+<p>A tag that would be applied to all or almost all of the items seems like it might not be that useful. Globalization is the goal, not a specific type of work. It probably doesn't make sense to separately call out universal requirements, as these should be numerous. Most work should be universal.</p>
+<p>Meanwhile, globalization also includes marketing and sales and support and other things. Trying these terms on wrt marketing: we want to globalize our marketing, so we consider the universal messages we want prospective customers to understand (which should not be a special effort), then we look at how these might need to be localized (made locally specific/applicable) and translated (in the right language), and what processes we need to internationalize (tech/process/people to enable the above) to make conveying these messages possible.</p>
+<p>I might be thinking about this wrongly, but this is my current understanding.</p>
+
+    </section>
+    <footer>
+        <p class="posted-on"><time datetime="Mon Dec 06 2021 16:00:00 GMT-0800 (Pacific Standard Time)">Dec 6, 2021</time></p>
+    </footer>
+</article>
+
+
+<nav class="pagination">
+    
+        <a href="/page/25/">← Newer posts</a>
+    
+    
+    
+        <a href="/page/27/">Older posts →</a>
+    
+</nav>
+</main>
+
+<footer>
+    
+<p class="license">Copyright 2025 Jon Plummer</p>
+</footer>
+</body>
+</html>
