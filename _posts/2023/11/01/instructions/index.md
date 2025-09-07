@@ -1,5 +1,6 @@
 ---
 title: "Instructions"
+layout: single_post.njk
 date: 2023-11-01
 tags: post
 ---

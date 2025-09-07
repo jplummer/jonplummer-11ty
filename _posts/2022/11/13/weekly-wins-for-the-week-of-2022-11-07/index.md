@@ -1,5 +1,6 @@
 ---
 title: "Weekly wins for the week of 2022 11 07"
+layout: single_post.njk
 date: 2022-11-13
 tags: post
 ---

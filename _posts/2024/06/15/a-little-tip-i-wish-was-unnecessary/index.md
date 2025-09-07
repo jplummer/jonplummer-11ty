@@ -1,5 +1,6 @@
 ---
 title: "A little tip I wish was unnecessary"
+layout: single_post.njk
 date: 2024-06-15
 tags: post
 ---

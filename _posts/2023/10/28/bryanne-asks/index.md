@@ -1,5 +1,6 @@
 ---
 title: "Bryanne asks"
+layout: single_post.njk
 date: 2023-10-28
 tags: post
 ---

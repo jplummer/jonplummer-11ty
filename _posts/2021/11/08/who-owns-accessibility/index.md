@@ -1,5 +1,6 @@
 ---
 title: "Who \"owns\" accessibility?"
+layout: single_post.njk
 date: 2021-11-08
 tags: post
 ---

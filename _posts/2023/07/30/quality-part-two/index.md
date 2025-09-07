@@ -1,5 +1,6 @@
 ---
 title: "Quality, part two"
+layout: single_post.njk
 date: 2023-07-30
 tags: post
 ---

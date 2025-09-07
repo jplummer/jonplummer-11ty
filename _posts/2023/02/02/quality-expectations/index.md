@@ -1,5 +1,6 @@
 ---
 title: "Quality expectations"
+layout: single_post.njk
 date: 2023-02-02
 tags: post
 ---

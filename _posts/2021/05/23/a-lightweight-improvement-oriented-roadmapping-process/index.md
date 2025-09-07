@@ -1,5 +1,6 @@
 ---
 title: "A lightweight, improvement-oriented roadmapping process"
+layout: single_post.njk
 date: 2021-05-23
 tags: post
 ---

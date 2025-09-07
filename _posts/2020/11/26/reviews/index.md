@@ -1,5 +1,6 @@
 ---
 title: "Reviews"
+layout: single_post.njk
 date: 2020-11-26
 tags: post
 ---

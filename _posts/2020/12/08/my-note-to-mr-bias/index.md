@@ -1,5 +1,6 @@
 ---
 title: "My note to Mr. Bias"
+layout: single_post.njk
 date: 2020-12-08
 tags: post
 ---

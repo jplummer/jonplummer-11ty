@@ -1,5 +1,6 @@
 ---
 title: "MiniMed virtual patient"
+layout: single_post.njk
 date: 2013-12-11
 tags: portfolio
 coverImage: "be_hcp.png"

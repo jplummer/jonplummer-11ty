@@ -1,9 +1,20 @@
 ---
 layout: base.njk
 purpose: individual post page
+bodyId: post
+bodyClass: inside
 ---
 
-{% include "post.njk" %}
+{% set post = {
+    'url': page.url,
+    'date': date,
+    'data': {
+        'title': title
+    },
+    'templateContent': content,
+    'id': title | slug
+} %}
+{% include "post_content.njk" %}
 
 <nav class="post-navigation">
     {% set previousPost = collections.post | getPreviousCollectionItem(page) %}

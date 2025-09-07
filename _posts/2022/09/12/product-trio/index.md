@@ -1,5 +1,6 @@
 ---
 title: "Product trio"
+layout: single_post.njk
 date: 2022-09-12
 tags: portfolio
 coverImage: "ProductTrio.png"

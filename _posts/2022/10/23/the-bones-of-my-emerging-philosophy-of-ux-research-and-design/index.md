@@ -1,5 +1,6 @@
 ---
 title: "The bones of my emerging philosophy of UX research and design"
+layout: single_post.njk
 date: 2022-10-23
 tags: post
 ---

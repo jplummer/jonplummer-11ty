@@ -1,5 +1,6 @@
 ---
 title: "PT asks: \"how do I convince leadership to care about UX research?\""
+layout: single_post.njk
 date: 2023-09-16
 tags: post
 ---

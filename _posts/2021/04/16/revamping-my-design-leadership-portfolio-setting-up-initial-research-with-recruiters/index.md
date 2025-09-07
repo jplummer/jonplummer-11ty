@@ -1,5 +1,6 @@
 ---
 title: "Revamping my design leadership portfolio: setting up initial research with recruiters"
+layout: single_post.njk
 date: 2021-04-16
 tags: post
 ---

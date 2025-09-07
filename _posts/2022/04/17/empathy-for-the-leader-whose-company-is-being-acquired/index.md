@@ -1,5 +1,6 @@
 ---
 title: "Empathy for the leader whose company is being acquired"
+layout: single_post.njk
 date: 2022-04-17
 tags: post
 ---

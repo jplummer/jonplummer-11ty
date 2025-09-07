@@ -1,5 +1,6 @@
 ---
 title: "WeMo smart home accessories and app"
+layout: single_post.njk
 date: 2018-12-11
 tags: portfolio
 coverImage: "devices_withhand.png"

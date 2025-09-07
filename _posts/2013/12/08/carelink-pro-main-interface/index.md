@@ -1,5 +1,6 @@
 ---
 title: "CareLink Pro main interface"
+layout: single_post.njk
 date: 2013-12-08
 tags: portfolio
 coverImage: "reports2.png"

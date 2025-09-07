@@ -1,5 +1,6 @@
 ---
 title: "A quick note about presenting design work in a meeting with engineering"
+layout: single_post.njk
 date: 2022-01-07
 tags: post
 ---

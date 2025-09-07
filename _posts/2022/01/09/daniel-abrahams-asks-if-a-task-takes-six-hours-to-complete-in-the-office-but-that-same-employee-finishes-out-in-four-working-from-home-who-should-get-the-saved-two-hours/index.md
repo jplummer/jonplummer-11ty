@@ -1,5 +1,6 @@
 ---
 title: "Daniel Abrahams asks: \"If a task takes six hours to complete in the office, but that same employee finishes out in four working from home, who should get the saved two hours?\""
+layout: single_post.njk
 date: 2022-01-09
 tags: post
 ---

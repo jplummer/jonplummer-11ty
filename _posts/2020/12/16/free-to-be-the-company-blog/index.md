@@ -1,5 +1,6 @@
 ---
 title: "Free to be the company blog"
+layout: single_post.njk
 date: 2020-12-16
 tags: post
 ---

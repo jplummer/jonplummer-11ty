@@ -1,5 +1,6 @@
 ---
 title: "Quick advice for the individual contributor starting a new job"
+layout: single_post.njk
 date: 2022-12-05
 tags: post
 ---

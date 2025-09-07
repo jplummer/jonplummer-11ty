@@ -1,5 +1,6 @@
 ---
 title: "Our position on AI tools"
+layout: single_post.njk
 date: 2025-07-13
 tags: post
 ---

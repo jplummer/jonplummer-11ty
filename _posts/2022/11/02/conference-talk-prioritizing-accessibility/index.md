@@ -1,5 +1,6 @@
 ---
 title: "Conference talk: prioritizing accessibility"
+layout: single_post.njk
 date: 2022-11-02
 tags: post
 ---

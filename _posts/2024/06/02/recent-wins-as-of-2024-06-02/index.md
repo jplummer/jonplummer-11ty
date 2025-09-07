@@ -1,5 +1,6 @@
 ---
 title: "Recent wins as of 2024 06 02"
+layout: single_post.njk
 date: 2024-06-02
 tags: post
 ---

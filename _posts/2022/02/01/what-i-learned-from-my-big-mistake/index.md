@@ -1,5 +1,6 @@
 ---
 title: "What I learned from my big mistake"
+layout: single_post.njk
 date: 2022-02-01
 tags: post
 ---

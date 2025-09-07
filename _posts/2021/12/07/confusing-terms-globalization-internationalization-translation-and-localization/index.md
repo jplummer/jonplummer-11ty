@@ -1,5 +1,6 @@
 ---
 title: "Confusing terms: globalization, internationalization, translation, and localization"
+layout: single_post.njk
 date: 2021-12-07
 tags: post
 ---

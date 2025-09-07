@@ -1,5 +1,6 @@
 ---
 title: "Beta is not a release type"
+layout: single_post.njk
 date: 2024-02-19
 tags: post
 ---

@@ -1,5 +1,6 @@
 ---
 title: "What is a business case?"
+layout: single_post.njk
 date: 2021-01-23
 tags: post
 ---

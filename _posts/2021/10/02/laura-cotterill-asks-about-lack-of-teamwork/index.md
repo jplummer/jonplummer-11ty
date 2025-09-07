@@ -1,5 +1,6 @@
 ---
 title: "Laura Cotterill asks about lack of teamwork"
+layout: single_post.njk
 date: 2021-10-02
 tags: post
 ---

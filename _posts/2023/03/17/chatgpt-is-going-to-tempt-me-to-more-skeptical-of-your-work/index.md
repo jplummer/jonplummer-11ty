@@ -1,5 +1,6 @@
 ---
 title: "ChatGPT is going to tempt me to be more skeptical of your work"
+layout: single_post.njk
 date: 2023-03-17
 tags: post
 ---

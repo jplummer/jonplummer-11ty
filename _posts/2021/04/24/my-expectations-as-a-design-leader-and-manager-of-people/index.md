@@ -1,5 +1,6 @@
 ---
 title: "My expectations as a design leader and manager of people"
+layout: single_post.njk
 date: 2021-04-24
 tags: post
 ---

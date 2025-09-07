@@ -1,5 +1,6 @@
 ---
 title: "Belkin values"
+layout: single_post.njk
 date: 2015-08-01
 tags: portfolio
 coverImage: "BelkinValues.jpeg"

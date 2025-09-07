@@ -1,5 +1,6 @@
 ---
 title: "A quick word about taking feedback"
+layout: single_post.njk
 date: 2024-08-01
 tags: post
 ---

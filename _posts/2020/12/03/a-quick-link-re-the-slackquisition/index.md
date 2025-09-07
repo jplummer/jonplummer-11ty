@@ -1,5 +1,6 @@
 ---
 title: "A quick link re the Slackquisition"
+layout: single_post.njk
 date: 2020-12-03
 tags: post
 ---

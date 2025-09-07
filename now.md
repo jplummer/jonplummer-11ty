@@ -4,6 +4,7 @@ date: 2025-08-31
 layout: base.njk
 tag: page
 bodyId: now
+bodyClass: outside
 permalink: "/now/"
 ---
 (updated {{ date | postDate }})

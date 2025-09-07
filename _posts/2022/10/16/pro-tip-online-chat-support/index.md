@@ -1,5 +1,6 @@
 ---
 title: "Pro tip: online chat support"
+layout: single_post.njk
 date: 2022-10-16
 tags: post
 ---

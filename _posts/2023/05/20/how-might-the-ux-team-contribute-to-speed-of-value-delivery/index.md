@@ -1,4 +1,5 @@
 ---
+layout: single_post.njk
 title: "How might the UX team contribute to speed of value delivery?"
 date: 2023-05-20
 tags: post

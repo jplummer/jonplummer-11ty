@@ -1,5 +1,6 @@
 ---
 title: "Toward coordinated experience"
+layout: single_post.njk
 date: 2025-07-27
 tags: post
 ---

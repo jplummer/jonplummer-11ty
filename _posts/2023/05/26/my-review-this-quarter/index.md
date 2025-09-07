@@ -1,5 +1,6 @@
 ---
 title: "My review this quarter"
+layout: single_post.njk
 date: 2023-05-26
 tags: post
 ---

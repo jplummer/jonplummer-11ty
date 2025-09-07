@@ -1,5 +1,6 @@
 ---
 title: "Goal Manager identity (2001)"
+layout: single_post.njk
 date: 2001-12-10
 tags: portfolio
 coverImage: "goalmanager_logo.png"

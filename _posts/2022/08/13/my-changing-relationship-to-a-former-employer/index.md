@@ -1,5 +1,6 @@
 ---
 title: "My changing relationship to a former employer"
+layout: single_post.njk
 date: 2022-08-13
 tags: post
 ---

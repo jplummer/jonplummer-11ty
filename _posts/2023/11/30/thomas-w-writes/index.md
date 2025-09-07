@@ -1,5 +1,6 @@
 ---
 title: "Thomas W. writes…"
+layout: single_post.njk
 date: 2023-11-30
 tags: post
 ---

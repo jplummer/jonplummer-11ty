@@ -1,5 +1,6 @@
 ---
 title: "Mathilda asks: Can you all share how you distinguish product designers from user experience designers?"
+layout: single_post.njk
 date: 2022-06-23
 tags: post
 ---

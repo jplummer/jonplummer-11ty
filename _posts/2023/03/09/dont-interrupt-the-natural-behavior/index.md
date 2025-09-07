@@ -1,5 +1,6 @@
 ---
 title: "Don't interrupt the natural behavior"
+layout: single_post.njk
 date: 2023-03-09
 tags: post
 ---

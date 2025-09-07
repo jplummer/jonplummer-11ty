@@ -1,5 +1,6 @@
 ---
 title: "\"Super\" service blueprint"
+layout: single_post.njk
 date: 2022-10-01
 tags: portfolio
 coverImage: "Screenshot2022-11-11at2.56.37PM.png"

@@ -1,5 +1,6 @@
 ---
 title: "What went right in October?"
+layout: single_post.njk
 date: 2024-11-03
 tags: post
 ---

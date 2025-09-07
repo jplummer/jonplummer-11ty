@@ -65,6 +65,7 @@
   -[x] page color vs content background color
   - general typographical niceties such as
     -[x] font sizes and header sizes https://ithy.com/article/typography-font-size-spacing-lc0m3kwv
+    - pagination styles
     - good rhythm for bullets (audit how bullets are converted from .md to .html)
     - fix margins and page color
     - menu behavior wide
@@ -72,7 +73,7 @@
     - inline links vs incidental links
     - copyright styling
 
-- **Post Template (`_includes/post.njk`)**
+- **Post Content Template (`_includes/post_content.njk`)**
   -[x] Article structure matching current HTML
   -[x] Date formatting
   -[-] Tag/category display (don't need it)
@@ -94,7 +95,7 @@
   - Main navigation at top
   - Image size/position/styling
 
-- **Portfolio post Template (`_includes/post.njk`)**
+- **Portfolio Post Content Template (`_includes/portfolio_post_content.njk`)**
   - Article structure matching current HTML
   - Date formatting
   - Tag/category display

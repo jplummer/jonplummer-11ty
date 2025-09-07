@@ -1,5 +1,6 @@
 ---
 title: "A quick structure for piloting a change"
+layout: single_post.njk
 date: 2022-06-30
 tags: post
 ---

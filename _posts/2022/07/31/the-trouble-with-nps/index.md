@@ -1,5 +1,6 @@
 ---
 title: "The trouble with NPS"
+layout: single_post.njk
 date: 2022-07-31
 tags: post
 ---

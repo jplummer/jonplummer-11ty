@@ -1,5 +1,6 @@
 ---
 title: "Nice has no place in business"
+layout: single_post.njk
 date: 2023-08-19
 tags: post
 ---

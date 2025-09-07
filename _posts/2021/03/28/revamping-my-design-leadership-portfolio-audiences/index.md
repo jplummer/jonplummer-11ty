@@ -1,5 +1,6 @@
 ---
 title: "Revamping my design leadership portfolio: audiences"
+layout: single_post.njk
 date: 2021-03-28
 tags: post
 ---

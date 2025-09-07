@@ -1,5 +1,6 @@
 ---
 title: "Revamping my design leadership portfolio: research results"
+layout: single_post.njk
 date: 2021-05-16
 tags: post
 ---

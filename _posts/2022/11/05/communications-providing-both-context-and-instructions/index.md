@@ -1,5 +1,6 @@
 ---
 title: "Communications: providing both context and instructions"
+layout: single_post.njk
 date: 2022-11-05
 tags: post
 ---

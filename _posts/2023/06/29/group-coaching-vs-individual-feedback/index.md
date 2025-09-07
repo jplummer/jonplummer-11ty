@@ -1,5 +1,6 @@
 ---
 title: "Group coaching vs individual feedback"
+layout: single_post.njk
 date: 2023-06-29
 tags: post
 ---

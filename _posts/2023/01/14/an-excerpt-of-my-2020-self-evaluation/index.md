@@ -1,5 +1,6 @@
 ---
 title: "An excerpt of my 2020 self-evaluation"
+layout: single_post.njk
 date: 2023-01-14
 tags: post
 ---

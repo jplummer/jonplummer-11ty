@@ -1,5 +1,6 @@
 ---
 title: "Key points of my recent performance review"
+layout: single_post.njk
 date: 2023-09-02
 tags: post
 ---

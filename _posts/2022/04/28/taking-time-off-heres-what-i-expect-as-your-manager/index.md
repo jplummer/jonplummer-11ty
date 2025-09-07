@@ -1,5 +1,6 @@
 ---
 title: "Taking time off? Here's what I expect as your manager."
+layout: single_post.njk
 date: 2022-04-28
 tags: post
 ---

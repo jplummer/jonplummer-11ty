@@ -1,5 +1,6 @@
 ---
 title: "Cayuse \"quick yearly accomplishments\" presentation"
+layout: single_post.njk
 date: 2022-10-11
 tags: portfolio
 coverImage: "Screenshot2022-11-10at11.00.16AM.png"

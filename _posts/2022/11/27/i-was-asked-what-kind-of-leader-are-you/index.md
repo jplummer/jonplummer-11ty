@@ -1,5 +1,6 @@
 ---
 title: "I was asked \"what kind of leader are you?\""
+layout: single_post.njk
 date: 2022-11-27
 tags: post
 ---

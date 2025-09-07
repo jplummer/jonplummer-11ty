@@ -1,5 +1,6 @@
 ---
 title: "Still more on expectations of quality"
+layout: single_post.njk
 date: 2023-03-03
 tags: post
 ---

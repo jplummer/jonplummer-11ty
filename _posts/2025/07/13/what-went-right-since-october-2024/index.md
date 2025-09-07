@@ -1,5 +1,6 @@
 ---
 title: "What went right since October 2024?"
+layout: single_post.njk
 date: 2025-07-13
 tags: post
 ---

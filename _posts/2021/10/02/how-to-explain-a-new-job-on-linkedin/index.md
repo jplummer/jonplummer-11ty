@@ -1,5 +1,6 @@
 ---
 title: "How to explain a new job on LinkedIn?"
+layout: single_post.njk
 date: 2021-10-02
 tags: post
 ---

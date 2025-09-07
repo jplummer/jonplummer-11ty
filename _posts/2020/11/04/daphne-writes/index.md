@@ -1,5 +1,6 @@
 ---
 title: "Daphne writes:"
+layout: single_post.njk
 date: 2020-11-04
 tags: post
 ---

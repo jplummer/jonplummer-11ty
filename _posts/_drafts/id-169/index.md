@@ -1,5 +1,6 @@
 ---
 title: "A common problem with goal-based annual evaluations"
+layout: single_post.njk
 draft: true
 tags: post
 ---

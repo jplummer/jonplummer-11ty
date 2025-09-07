@@ -1,5 +1,6 @@
 ---
 title: "Ask questions to learn, not to receive an answer"
+layout: single_post.njk
 date: 2022-09-19
 tags: post
 ---

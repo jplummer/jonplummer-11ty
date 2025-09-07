@@ -1,5 +1,6 @@
 ---
 title: "Someone mentions \"specialized enterprise users\" in re accessibility"
+layout: single_post.njk
 date: 2023-06-16
 tags: post
 ---

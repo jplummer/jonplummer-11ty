@@ -1,5 +1,6 @@
 ---
 title: "This is nice."
+layout: single_post.njk
 date: 2023-10-04
 tags: post
 ---

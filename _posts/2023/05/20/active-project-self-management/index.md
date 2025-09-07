@@ -1,5 +1,6 @@
 ---
 title: "Active project self-management"
+layout: single_post.njk
 date: 2023-05-20
 tags: post
 ---

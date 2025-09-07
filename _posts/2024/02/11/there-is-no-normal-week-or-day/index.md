@@ -1,5 +1,6 @@
 ---
 title: "There is no \"normal\" week or day"
+layout: single_post.njk
 date: 2024-02-11
 tags: post
 ---

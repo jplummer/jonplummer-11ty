@@ -1,5 +1,6 @@
 ---
 title: "Linksys app revitalization"
+layout: single_post.njk
 date: 2020-03-01
 tags: portfolio
 ---

@@ -1,5 +1,6 @@
 ---
 title: "Do you have some key metrics that you are measuring your team on (number of items added to the pattern library, number of customer interviews, etc)?"
+layout: single_post.njk
 date: 2021-12-27
 tags: post
 ---

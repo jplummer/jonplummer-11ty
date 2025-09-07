@@ -1,5 +1,6 @@
 ---
 title: "Baxter BioScience web apps and email templates"
+layout: single_post.njk
 date: 2013-12-06
 tags: portfolio
 coverImage: "advoy_flags.png"

@@ -1,5 +1,6 @@
 ---
 title: "Authenticity and intellectual posture"
+layout: single_post.njk
 date: 2023-05-30
 tags: post
 ---

@@ -1,5 +1,6 @@
 ---
 title: "I wrote a screed. Here's the interesting part"
+layout: single_post.njk
 date: 2023-08-27
 tags: post
 ---

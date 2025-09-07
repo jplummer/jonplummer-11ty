@@ -1,5 +1,6 @@
 ---
 title: "I don't offer a \"UX process\""
+layout: single_post.njk
 date: 2023-12-09
 tags: post
 ---

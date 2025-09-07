@@ -1,5 +1,6 @@
 ---
 title: "What would you recommend to someone who is interested in starting with coding/designing/managing, but doesn't know exactly where to start?"
+layout: single_post.njk
 date: 2022-05-02
 tags: post
 ---

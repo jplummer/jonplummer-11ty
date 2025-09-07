@@ -1,5 +1,6 @@
 ---
 title: "CareLink Pro reports"
+layout: single_post.njk
 date: 2013-12-09
 tags: portfolio
 coverImage: "sensor.png"

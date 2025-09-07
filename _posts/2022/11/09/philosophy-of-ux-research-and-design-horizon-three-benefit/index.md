@@ -1,5 +1,6 @@
 ---
 title: "Philosophy of UX research and design: Horizon three (benefit)"
+layout: single_post.njk
 date: 2022-11-09
 tags: post
 ---

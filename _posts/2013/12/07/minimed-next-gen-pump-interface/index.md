@@ -1,5 +1,6 @@
 ---
 title: "MiniMed next-gen pump interface"
+layout: single_post.njk
 date: 2013-12-07
 tags: portfolio
 ---

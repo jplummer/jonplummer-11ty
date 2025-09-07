@@ -1,5 +1,6 @@
 ---
 title: "Weekly wins for the week of 2023 05 29"
+layout: single_post.njk
 date: 2023-06-03
 tags: post
 ---

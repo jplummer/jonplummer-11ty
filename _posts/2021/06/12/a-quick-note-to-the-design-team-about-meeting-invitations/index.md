@@ -1,5 +1,6 @@
 ---
 title: "A quick note to the design team about meeting invitations"
+layout: single_post.njk
 date: 2021-06-12
 tags: post
 ---

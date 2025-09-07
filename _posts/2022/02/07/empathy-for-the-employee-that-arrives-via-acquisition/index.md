@@ -1,5 +1,6 @@
 ---
 title: "Empathy for the employee that arrives via acquisition"
+layout: single_post.njk
 date: 2022-02-07
 tags: post
 ---

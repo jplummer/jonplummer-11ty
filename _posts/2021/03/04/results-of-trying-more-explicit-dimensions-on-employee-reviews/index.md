@@ -1,5 +1,6 @@
 ---
 title: "Results of trying more explicit dimensions on employee reviews"
+layout: single_post.njk
 date: 2021-03-04
 tags: post
 ---

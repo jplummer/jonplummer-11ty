@@ -1,5 +1,6 @@
 ---
 title: "How to be strategic"
+layout: single_post.njk
 date: 2021-01-30
 tags: post
 ---

@@ -1,5 +1,6 @@
 ---
 title: "Make MVPs experiments again"
+layout: single_post.njk
 date: 2023-11-18
 tags: post
 ---

@@ -1,5 +1,6 @@
 ---
 title: "Apropos of…nothing (bitcoin)"
+layout: single_post.njk
 date: 2024-08-01
 tags: post
 ---

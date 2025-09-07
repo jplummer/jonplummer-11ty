@@ -1,5 +1,6 @@
 ---
 title: "My 2021 self-evaluation"
+layout: single_post.njk
 date: 2022-12-25
 tags: post
 ---

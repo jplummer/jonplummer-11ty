@@ -1,5 +1,6 @@
 ---
 title: "Weekly wins…of late"
+layout: single_post.njk
 date: 2024-06-15
 tags: post
 ---

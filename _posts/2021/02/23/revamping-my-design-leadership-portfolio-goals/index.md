@@ -1,5 +1,6 @@
 ---
 title: "Revamping my design leadership portfolio: goals"
+layout: single_post.njk
 date: 2021-02-23
 tags: post
 ---
