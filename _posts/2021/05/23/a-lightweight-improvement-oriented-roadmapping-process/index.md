@@ -19,13 +19,11 @@ These conditions assume that the strategy is good, and that the stakeholders' at
 ## Goals
 
 To successfully produce a roadmap and manage the political situation among the stakeholders we must accomplish a few things:
-
 1. Uncover and arrange opportunities for improving the product.
 2. Group and sequence the opportunities.
 3. Plan the work for the first step on the roadmap.
 
 Along the way we must be careful to:
-
 - Make good use of any work the stakeholders have done to date.
 - Demonstrate to stakeholders that we understand the current situation.
 - involve the stakeholders in determining the value and feasibility of addressing each opportunity.
@@ -35,12 +33,11 @@ Stakeholders appear in each of the four points above. We must bring them though 
 
 ## The process
 
-![](images/Roadmap-generation-process-Copy-of-Roadmap-generation-process-2-1024x805.png)
+![](/assets/images/2021/05/Roadmap-generation-process-Copy-of-Roadmap-generation-process-2-1024x805.png)
 
 ### 1\. Investigation
 
 The first few steps of the investigation phase will occur together, and as you learn more you may find yourself returning to stakeholders for clarification, more information, or scope adjustment. The investigation phase typically takes the longest of the three.
-
 1. Stakeholder research to establish goals and wishes, and collect their ideas.
 2. Primary user and stakeholder research to understand existing needs and processes and learn of opportunities
 3. Review secondary research (research done by others).
@@ -56,7 +53,6 @@ At this point you'll have be ready to show the stakeholders your understanding o
 ### 2\. Synthesis
 
 You've produced the raw material necessary for the stakeholders to help arrange opportunities into a rough sequence. Depending on scope the entire synthesis phase could be done in one workshop, or it might require two with some thinking and preparation in between.
-
 1. Have a workshop with stakeholders to score opportunities by value and feasibility.
 2. Examine the high-value, high-feasibility opportunities for common themes, then sequence all opportunities within these themes according to value and feasibility. More doable and higher-value items come first, and valuable low-feasibility items come last.
 3. Have a workshop with stakeholders to arrange these themes in sequence according to feasibility and value.
@@ -76,7 +72,6 @@ You could stop here, but it is likely that the stakeholders aren't done yet.
 ### 3\. Negotiation
 
 Now that you have a sequence of themes, and within those a sequence of improvements, you have a roadmap. But it puts some lower-feasibility items ahead of others just because of the themes they appear in. It also may offer a sequence that is awkward to accomplish, or doesn't begin addressing top organizational goals early enough. Time for negotiation.
-
 1. In a workshop with stakeholders, negotiate tradeoffs in improvement sequencing to better meet organizational goals.
 2. Once that negotiation is complete, in that same workshop select one or a few items earliest in the sequence to make up the initial project.
 3. Then go away and plan and estimate the cost in time and treasure to effect that project.
@@ -88,7 +83,6 @@ After the tradeoffs are done, look to the items at the early end of the roadmap 
 ## Why not define an ideal?
 
 You'll note that this process does not define an ideal end state nor attempt to arrange a roadmap to produce that end state. End-state-based design is interesting (and there's a very nice process called Ideality that depends on an understanding of the ideal), but I've elected not to make use of it here. There are several reasons for this.
-
 - Producing an expression of an ideal end state, when there are lots of potential improvements, is expensive.
 - The sequence of roadmap items aimed at an end state is likely to be different than a value- and feasibility-weighted roadmap which leads to high value improvements more quickly.
 - Understanding and acceptance of an ideal end state tends to decay rapidly as business conditions change and new information and technology becomes available.

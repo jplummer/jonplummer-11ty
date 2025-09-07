@@ -16,9 +16,7 @@ This position is entirely understandable, and I suspect that most designers work
 ## "not the general public"
 
 Note that
-
 - _many_ of the impairments that make poor attention to accessibility a problem are _not_h less prevalent in enterprises than in the general population, and
-
 - where there are differences in prevalence (for example, there are far fewer blind people in knowledge work jobs than in the general population) it’s due in part to lack of attention to accessibility in the tools used or the jobs themselves, making it hard for those people to take jobs that rely on those tools.
 
 In essence, companies discriminate against their employees and potential employees by not providing accessible tools, and companies that provide such tools but ignore accessibility are complicit, perhaps even participatory, in that harmful practice.

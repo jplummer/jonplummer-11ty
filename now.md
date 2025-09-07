@@ -2,7 +2,7 @@
 title: "Now – Jon Plummer"
 date: 2025-08-31
 layout: base.njk
-tag: page
+tags: page
 bodyId: now
 bodyClass: outside
 permalink: "/now/"

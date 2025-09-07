@@ -12,7 +12,6 @@ The executive level thinking here is that we are not offering our products globa
 To my thinking, though, there are universal requirements, things that the underlying product should do everywhere, and requirements borne of local data formats, terms of art, regulatory environments, etc. Universal versus local. Then there's the work of offering interfaces and commendation in a newly-supported language, and the things you must do technologically to make your application able to deliver these universal and local requirements and serve interfaces and documentation in the correct languages.
 
 To my thinking, a universal requirement is just a requirement. The special ones, therefore interesting to tag, are
-
 - **localization**: things that need to be done differently due to a locale's needs – preferred data formats, regulatory environment, terms of art, etc.
 - **translation**: the actual translation of interfaces and documentation into a newly-supported language or English variant
 - **internationalization**: things that must be done technologically to enable us to address either of the above

@@ -12,5 +12,4 @@ Jaemi asks:
 Off the cuff, I have just two things:
 
 1. Now is the time when you learn about the business. Talk to everyone, ask people who you should talk to next, write notes, ask question, ask especially about the goal of or the intended effect on metrics of a thing that has been chosen for the team to work on.
-
 3. They chose _you_ to make an offer to rather than other applicants, so there's something they like about _you_, something they are excited or hopeful about – what is it? If you can find out what it is it should be straightforward to prove them right in their choice of you.

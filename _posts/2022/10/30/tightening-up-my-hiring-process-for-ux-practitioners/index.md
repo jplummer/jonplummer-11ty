@@ -8,7 +8,6 @@ tags: post
 I used to have a hiring process that carefully ensured every team member had a role in questioning, evaluating, and discussing each candidate. My employees loved it, but candidates suffered through it and it made us very slow to make decisions. I worked on tightening up the process (and especially its planning and logistics) so we could get through all of the various meetings in a half-day or so. That helped a little bit. Then I tackled improving how we made the yea/nay decision on a candidate, aiming to make a decision the evening of the interview day. We picked up the pace a bit more, but still chewed through a lot of candidates looking for one that would get a thumbs-up from enough people. We were still slow, rejecting too many fine folks that could have helped us. And we wasted a lot of employee time doing so, within each individual candidate's process as well as across candidates.
 
 There were some nice points to this process, namely that we
-
 - became a lot clearer on the criteria we used to score candidate portfolios
 - carefully divided interview responsibilities to reduce duplication of questions and topics
 - became a lot clearer on the few criteria we used

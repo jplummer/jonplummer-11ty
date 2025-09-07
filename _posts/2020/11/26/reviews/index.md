@@ -20,14 +20,12 @@ I'd much rather reviews be separate from compensation, since de-fanging them in 
 The peer feedback is also solicited in a vague way, with essentially two questions: do you have constructive feedback for the reviewee, and do you have any other feedback for the reviewee? I suspect these are not specific enough for any but the most committed peers to do a good job of addressing.
 
 If I recall correctly, IDEO likes to evaluate their employees along four dimensions
-
 - **Content** – what is the quality of a person's delivery
 - **Commerce** – what is their contribution to the success of their clients and the firm
 - **Collaboration** – what is their manner for working with the teams they are on
 - **Culture** – what is their contribution to the culture of IDEO
 
 I think we can adapt this notion – the commerce piece in particular is a little more distant for many of our people. But we could bend it a bit toward
-
 - **Quality** – HMT (how might they) contribute to better results for the users of the product/project
 - **Content** – HMT improve the delivery of their own work
 - **Collaboration** – HMT foster greater collaboration among the team

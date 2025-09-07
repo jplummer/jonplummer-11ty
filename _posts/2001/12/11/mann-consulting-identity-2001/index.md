@@ -6,7 +6,7 @@ tags: portfolio
 coverImage: "1477187196364852.gif"
 ---
 
-![](images/1477187196364852.gif)
+![](/assets/images/2022/12/1477187196364852.gif)
 
 Identity package for Mann Consulting, a small IT consultancy in San Francisco focused on advertising and graphic design firms. Many venues were explored, but I kept coming back to the cube. Nearly two decades on they are still quite happy with it.
 
@@ -14,22 +14,22 @@ My role: ideation and development of the mark and logotype, application to busin
 
 Exploratory work:
 
-![](images/1045052202745056.gif)
+![](/assets/images/2022/12/1045052202745056.gif)
 
-![](images/1058061297735050.gif)
+![](/assets/images/2022/12/1058061297735050.gif)
 
-![](images/1179294144834859.gif)
+![](/assets/images/2022/12/1179294144834859.gif)
 
-![](images/1348224751355251.gif)
+![](/assets/images/2022/12/1348224751355251.gif)
 
-![](images/1358024051385451.gif)
+![](/assets/images/2022/12/1358024051385451.gif)
 
-![](images/1369064622764958.gif)
+![](/assets/images/2022/12/1369064622764958.gif)
 
-![](images/1455452602675456.gif)
+![](/assets/images/2022/12/1455452602675456.gif)
 
-![](images/1458482922704953.gif)
+![](/assets/images/2022/12/1458482922704953.gif)
 
-![](images/1461064399475355.gif)
+![](/assets/images/2022/12/1461064399475355.gif)
 
-![](images/1658524951755451.gif)
+![](/assets/images/2022/12/1658524951755451.gif)

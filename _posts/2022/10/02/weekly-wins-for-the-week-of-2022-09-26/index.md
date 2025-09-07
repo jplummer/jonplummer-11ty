@@ -4,7 +4,6 @@ layout: single_post.njk
 date: 2022-10-02
 tags: post
 ---
-
 - I blasted through a workout centered on lunges this weekend. This would have been unthinkable a year ago, or even six months ago.
 - In an attempt to be a little more social I had coffee with local friend Joey. It was very nice.
 - I'm out of the woods far enough on my coming presentations that my stress level has gone down. Now to practice, polish, and cut.

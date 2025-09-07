@@ -7,21 +7,21 @@ tags: portfolio
 
 At one point the Linksys app, meant to offer people setup, control, and monitoring of their Linksys networks at home, was rated below three stars on the iTunes Store and had a lifetime rating of 3.3 on the Google Play Store. A new information architecture, a fresh coat of paint, and many performance and interactivity improvements brought it to 4.5 stars on iTunes and a 4.1 lifetime on Google, helped by a judicious amount of review solicitation.
 
-![](images/DashboardOnline-269x1024.png)
+![](/assets/images/2022/12/DashboardOnline-269x1024.png)
 
-![](images/DeviceDetail@2x-345x1024.png)
+![](/assets/images/2022/12/DeviceDetail@2x-345x1024.png)
 
-![](images/DeviceList-576x1024.png)
+![](/assets/images/2022/12/DeviceList-576x1024.png)
 
-![](images/deviceprioritizationdelete-576x1024.png)
+![](/assets/images/2022/12/deviceprioritizationdelete-576x1024.png)
 
-![](images/DevicePrioritizationHome@2x-576x1024.png)
+![](/assets/images/2022/12/DevicePrioritizationHome@2x-576x1024.png)
 
-![](images/SaveaRule@2x-576x1024.png)
+![](/assets/images/2022/12/SaveaRule@2x-576x1024.png)
 
-![](images/SelectaDeviceCopy@2x-576x1024.png)
+![](/assets/images/2022/12/SelectaDeviceCopy@2x-576x1024.png)
 
-![](images/XboxCopy@2x-576x1024.png)
+![](/assets/images/2022/12/XboxCopy@2x-576x1024.png)
 
 My role: Product owner, leader of the design team and cajoler of the software and firmware engineering teams. Substitute product manager for a somewhat neglected area. Part-time scrum master for design and blended design/development teams.
 

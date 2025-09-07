@@ -4,7 +4,6 @@ layout: single_post.njk
 date: 2022-10-08
 tags: post
 ---
-
 - My eight minute talk wherein I tried to explain/demo the accomplishments of my department over the prior year seemed to go fine. Folks in my department liked it, anyhow.
 - The gym was closed on Tuesday. No matter – I went for a run. And it was somewhat enjoyable.
 - A former coworker sent me a very nice message. It made my week!

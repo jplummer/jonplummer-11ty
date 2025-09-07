@@ -14,14 +14,12 @@ Mathilda asks:
 It IS foggy, and as usual, I think the term "product designer" was coined to clarify but failed to do so (and introduced conflict with industrial designers among others). I think it mainly comes from poor mutual understanding of the term "UX" and what all a UX designer does or might do in different settings. This varies WIDELY by organization; in general, the larger the org the narrower the role of an individual contributor UX designer and the more the job(s) of working on a specific experience are distributed over multiple people. This narrowing of the role of a UX designer in large organizations has led to folks who do more than "Edward wifreframe-makin'-hands" to adopt the "Product Designer" term.
 
 Here's what I see as a rough breakdown:
-
 - **Graphic**: the visual design of things, especially print pieces, marketing collateral, informational websites
 - **UI**: the visual and microinteractive design of web applications, mobile applications, and desktop applications
 - **UX**: the interaction design of web applications, mobile applications, desktop applications, and _occasionally_ embedded or physical interfaces, with an emphasis on arranging the larger requirements and workflows to meet business goals and user needs together, and the research required to do a good job of this (sometimes some of this UX role is split off into a separate Researcher role)
 - **Product**: UX + UI
 
 But companies don't necessarily follow this, and these terms mean different things to different people, and so it's always useful to
-
 - when looking for a job
     - be open to multiple titles in your job search
     - look for clues in the job descriptions you are considering

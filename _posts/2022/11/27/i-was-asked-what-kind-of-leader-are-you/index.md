@@ -18,13 +18,9 @@ One way this occurs is by having weekly design critique, prefaced by my giving t
 ## Adaptive
 
 In order **to improve our results we need to change our behavior**. "Try harder" is not typically an effective strategy. There are a great many ways we might need to adapt:
-
 - We might need to add capabilities by bringing in people who have these capabilities, or through training.
-
 - We might need to encourage existing behaviors through process changes, internal metrics, or incentives.
-
 - We might need to change which people work together when.
-
 - We might need to address specific interpersonal issues.
 
 When **something isn't going quite right my first questions are not about who, but what is our goal** and what activities are contributing to that goal or detracting from it. When I arrived at Cayuse, several product managers largely gathered feedback from customer advisory boards, and many on those customer advisory boards were not frequent users. Some weren't users at all. And the designers basically punched out UI based on very specifically-written stories with little or no user contact. Both designers and PMs needed to be pushed toward alternate research methods, especially user interviews, so I pointed out what sorts of activities went with what parts of the Cayuse process, and gave trainings on interviewing intended to lower the barriers to actually doing interviews. Here’s how to plan, here’s how to schedule, here’s what to do in awkward situations, etc. And it worked! In the Risk Management, Inventions, and Animal Procurement teams that were only doing CABs, they started doing interviews to investigate specific capabilities they were working on, leading to more meaningful debate and decisions that could actually be explained to upper management.

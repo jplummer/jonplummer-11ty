@@ -16,13 +16,9 @@ What do you notice? That's right – each discipline group has a separate proces
 We're trying to ship a problem-solving, efficient, coherent, usable, pleasant, and effective piece of software. So our process, the design of our organization, needs to be arranged such that this is what the machine produces. We're not trying to ship a little bit of engineering, a little bit of design, a little bit of support, and a little bit of product management all shaken up in a bag.
 
 So I don't offer a UX process. I talk about what the product development team needs to do informationally to get from the customer need to the satisfaction of that need. You've heard this before from me:
-
 - **Benefit**: What benefit do our customers need? What problem are we solving?
-
 - **Concept**: What concepts can we come up with to deliver that benefit? Which concept should we deliver? How should it work?
-
 - **Detail**: How should it work specifically? As we work on this are we maintaining or improving usability, intelligibility, functionality, appeal?
-
 - **In Use**: Are users successful in using it? How might we help them be more successful?
 
 You'll note that "In Use" folds right back into "Benefit" and the cycle continues.

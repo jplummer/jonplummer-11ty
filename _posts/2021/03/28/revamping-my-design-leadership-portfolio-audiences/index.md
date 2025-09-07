@@ -14,7 +14,6 @@ In a previous post I said
 I'd like my portfolio to represent me well for advertised positions that I apply to, and for positions where a recruiter comes to me as a passive candidate. These two avenues probably have different processes and slightly different audiences. I'm a little bit more interested in the passive opportunities, since recently these have been the more interesting ones (iRobot, Neato, Kohler), but I suspect that there will be goals enough in common that I can do a good job for each audience with one portfolio. (For now I'm going to leave [my resume](https://misc.jonplummer.com/JonPlummer.pdf) out of the analysis and research, though I am sure I will learn things that are useful to improving it along the way.)
 
 Since I have some experience recruiting designers and managers in small and large companies, I understand that the key variables and audiences break down like so:
-
 - When applying to an advertised position, one's profile is screened
     - first by a recruiter, then passed to a hiring manager for further review, OR
     - first by a hiring manager who _is_ a "product person" (knowledgeable about experience design or product management), OR
@@ -32,11 +31,9 @@ The third is for my profile and the assessment of the recruiter to work together
 I'm going to have to make some more assumptions here, but my strategy should not be informed solely by assumptions.
 
 **Assumption**: **a recruiter** is going to try to match my profile to the "spec" they are given, either a job description or something more specific about the signals the hiring manager is looking for. So a recruiter will be looking for these signals in my resume, and possibly in my portfolio. They are not likely to be expert in experience design, so the recruiter will be watching for general quality of portfolio items and that the right topics are mentioned or otherwise evident. **I'd like to test this assumption, learn if it is correct and how I might address it.**
-
 **Assumption**: **a hiring manager who _is not_ a product person** will be seeking to add or improve the design function in their organization by hiring a seasoned leader who can evaluate current staff and processes, develop staff, hire, improve processes, improve integration of the design function with the rest of the business, bring new capabilities to the design function, and deliver results in doing so that clearly further the aims of the business. **I'd like to test this assumption.**
 
 **Assumption**: **a hiring manager who _is_ a product person** will have goals for the improvement of the design function, but will not be able to accomplish it on their own, due to too many people and/or product lines to support, rapid growth, expertise or interest gaps, or other structural challenges. They _may_ have a strong sense of the signals they are looking for, but regardless of that will be helped by clarity that I can tick all the boxes as a design leader. **I'd like to test this assumption.**
-
 **Assumption**: **whether a recruiter is the first hurdle or not**, the needs of the different types of hiring manager will be the same. This assumption feels pretty safe, if the above hypotheses hold.
 
 So, how might I test my assumptions for each of the three audiences? What might my research plan be for these three audiences?

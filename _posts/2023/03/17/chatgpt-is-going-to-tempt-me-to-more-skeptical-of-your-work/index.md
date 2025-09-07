@@ -6,11 +6,8 @@ tags: post
 ---
 
 Lately I've been seeing a lot of posts on LinkedIn and elsewhere crowing about how [ChatGPT](https://openai.com/blog/chatgpt) could be used to perform UX tasks. Examples:
-
 - [How do I use ChatGPT for UX Design](https://www.linkedin.com/posts/prasadneurgaonkar_ux-spring-activity-7029496857881976832-0qkn/?utm_source=share&utm_medium=member_desktop)
-
 - [How to use chatGPT for UI/UX design: 25 examples](https://blog.prototypr.io/how-to-use-chatgpt-for-ui-ux-design-25-examples-f7772bea3e70)
-
 - [138 ChatGPT Prompts: UX Research](https://www.linkedin.com/search/results/content/?keywords=CHatGPT%20UX&sid=HvB&update=urn%3Ali%3Afs_updateV2%3A\(urn%3Ali%3Aactivity%3A7025825091179462656%2CBLENDED_SEARCH_FEED%2CEMPTY%2CDEFAULT%2Cfalse\))
 
 The enthusiasm is great but this level of shortcutting worries me. It's okay to ask ChatGPT to find things to read about a topic if you're fine with some of the results not being appropriate or even not existing. But I _don't_ think it is fine to ask it how to do something or to perform research on your behalf. ChatGPT's emphasis is on delivering something that _looks_ sensible, nothing more.

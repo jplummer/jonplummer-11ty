@@ -7,19 +7,19 @@ tags: portfolio
 
 Medtronic engaged IDEO to help design a next-generation pump to succeed the MiniMed 522, which combined insulin delivery with wireless continuous glucose measurement. IDEO proposed a more capable LCD screen and more buttons, among other things. Before the project was shelved in favor of a patch-pump concept I took over interaction design from IDEO.
 
-![](images/1_status.gif)
+![](/assets/images/2022/12/1_status.gif)
 
-![](images/2_main.gif)
+![](/assets/images/2022/12/2_main.gif)
 
-![](images/3_changing_settings_3.gif)
+![](/assets/images/2022/12/3_changing_settings_3.gif)
 
-![](images/3hr.gif)
+![](/assets/images/2022/12/3hr.gif)
 
-![](images/4_setting_bolus.gif)
+![](/assets/images/2022/12/4_setting_bolus.gif)
 
-![](images/5_delivering_bolus.gif)
+![](/assets/images/2022/12/5_delivering_bolus.gif)
 
-![](images/6_alarm.gif)
+![](/assets/images/2022/12/6_alarm.gif)
 
 My role: ideation, workflows, on-screen and physical mockups, usability testing, demonstrating enhanced usability to executives and the firmware and pump hardware teams
 

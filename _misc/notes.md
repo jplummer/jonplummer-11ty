@@ -1,11 +1,12 @@
-# 📚 Common Front Matter Variables
+# 📚 Front Matter Variables
 * layout: Which template to use
 * title: Page title
 * date: Publication date
-* tags: Array of tags
+* tags: Array of tags for collections (post, portfolio)
 * permalink: Custom URL structure
 * draft: Whether to publish or not
 * eleventyExcludeFromCollections: Exclude from collections
+* 
 
 # Commands
 * npm run dev - Start development server with live reload

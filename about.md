@@ -2,7 +2,7 @@
 title: "About me – Jon Plummer"
 date: 2025-08-01
 layout: base.njk
-tag: page
+tags: page
 bodyId: about
 permalink: "/about/"
 ---
@@ -11,27 +11,17 @@ permalink: "/about/"
 I lead product design teams for web and mobile apps, edtech, smart home, wi-fi, consumer electronics, medical devices, and more.
 
 ## Currently
-
 - Director of User Experience at [Invoca](https://invoca.com/), making conversation intelligence software for marketing and sales folks
-
 - Mentor at [ADPList.org](https://adplist.org) and [Designed.org](https://designed.org/), here to help designers think well about their work, consider the leap to management, and to help new managers wrestle with their new responsibilities
-
 - Mentor at [tupu.io](https://tupu.io/), same deal
-
 - Husband, father, tinkerer, maker, just handy enough to be trouble
 
 ## Before that
-
 - Director of User Experience at [Cayuse](https://cayuse.com/), a research management SaaS provider
-
 - Director of User Experience at [Concentric Sky](https://concentricsky.com/) for numerous ed-tech and post-secondary educational clients and the [Badgr](https://www.instructure.com/products/canvas/canvas-credentials-digital-badges/badgr-pathways) microcredential platform (which is now part of Instructure)
-
 - Senior Director of Product Experience Design at [Belkin](https://belkin.com/), especially for [Wemo](https://wemo.com/) and [Linksys](https://linksys.com/)
-
 - UX Manager at [Medtronic MiniMed](https://www.medtronicdiabetes.com/)
-
 - Volunteer at [The Compton Initiative](https://justdogood.org/)
-
 - Volunteer at [The Great LA River Cleanup](https://folar.org/cleanup/)
 
 I love to develop and lead designers and researchers, and I love to help folks marry hardware, software, and services to produce pleasant, fulfilling product experiences that solve real-world problems. I have a [portfolio](https://jonplummer.io/) that's not super-duper up-to-date, and a [scratchpad of thoughts and notes](https://jonplummer.com/) about design and design leadership and making. I also have a handful of [patents](https://patents.google.com/?inventor=Jon+Plummer&num=100) in IoT, software, and medical device technology.
@@ -63,39 +53,25 @@ Jon is an extremely thoughtful and caring leader who is always willing to suppor
 (There are more recommendations on [my LinkedIn profile](https://www.linkedin.com/in/jplummer/details/recommendations/).)
 
 ## Awards
-
 - **International Design Excellence Awards, Finalist** Issued by Industrial Designers Society of America (IDSA), Aug 2013, for WeMo iOS app
-
 - **User Experience Award: Silver** for Best Consumer Device Issued by User Experience Awards, May 2013, for WeMo by Belkin
-
 - **International Design Excellence Awards, Silver** Issued by Industrial Designers Society of America (IDSA), Sep 2012, for Belkin Next Generation Router Family
 
 ## Patents
 
 - [Self-healing networking device systems and related methods](https://www.google.com/patents/US8499072)
-
 - [Control of video camera with privacy feedback](https://www.google.com/patents/US9179105)
-
 - [Virtual patient software system for educating and treating individuals with diabetes](https://www.google.com/patents/US20060272652)
-
 - [Therapy management system](https://google.com/patents/US20070033074A1)
-
 - [Grouping of networking devices](https://google.com/patents/US20160043962A1)
-
 - [Light switch controlling light source via wireless transmission](https://google.com/patents/US20150382436A1)
-
 - [Controlling settings and attributes related to operation of devices in a network](https://google.com/patents/US20150319046A1)
-
 - [Video camera with privacy](https://google.com/patents/US20160105598A1)
-
 - [Networking connection systems and related methods](https://google.com/patents/US20110026205A1)
-
 - [Systems and methods for interaction with an IoT device](https://google.com/patents/US20160226732A1)
-
 - [Crowd-sourced location determination](https://google.com/patents/US20160165570A1)
 
 …and more patents pending in networking and IoT.
-
 * * *
 
 See more via [my LinkedIn profile](https://linkedin.com/in/jplummer), and message me there if you have something to say. Or email [me@jonplummer.com](mailto:me@jonplummercom?Subject=Mail%20from%20jonplummer.name).

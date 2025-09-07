@@ -4,7 +4,6 @@ layout: single_post.njk
 date: 2022-09-25
 tags: post
 ---
-
 - I involved the team in figuring out how we would rearrange ourselves now that we have new product priorities, and they came up with what I expect is a good solution without any teeth-gnashing at all.
 - Conference talk #1 is nearly done, #2 is well-in-hand, and the participatory design exercises are coming along nicely.
 - I've graduated to weighted pushups, "wearing" a 45lb plate.

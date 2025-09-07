@@ -6,32 +6,25 @@ tags: post
 ---
 
 If you search the web for "[double diamond](https://www.google.com/search?q=double+diamond)" you'll find a great many articles describing a design or product management or product development process in which you
-
 - choose what to build
     - discover – gather insight into the problem area(s)
-    
     - define – express the area to focus on as a distinct selected problem
-
 - then build it well
     - develop – generate potential solutions
-    
     - deliver – make and ship a potential solution
 
 Some people call this "build the right thing" and "build the thing right." "Discover" and "develop" are meant to be generative, expansive processes, and "define" and "deliver" are meant to be specifying/selecting/contracting processes. This puts an expansion and a contraction in each of two phases, hence the diamond shapes. There are two phases, hence "double diamond."
 
-![As we discover we expand. As we define we contract. Develop expands again, and deliver contracts.](images/Double-diamond.png)
+![As we discover we expand. As we define we contract. Develop expands again, and deliver contracts.](/assets/images/2022/11/Double-diamond.png)
 
 One of the reasons that the double diamond fails to satisfy is that it expresses each activity as either an expansion, a generation of ideas, or a contraction, a selection among those ideas. Generation and selection are important, and the way a team needs to think while generating is different than while selecting, but there's much more to do than just generation and selection. The dirty little secrets of the double diamond are that it
-
 - misses the relatively linear work of actually producing a solution, even as a test,
-
 - expresses the informative first phase, the research inherent to "discover," as an expansion, which it might only accidentally contain,
-
 - skips a step where you select among the available solutions in an informed way to get to where you can actually work on and ship one of them.
 
 I happen to think of a UX process in [three horizons](https://jonplummer.com/2022/10/22/the-bones-of-my-emerging-philosophy-of-ux-research-and-design/) or phases. (Already we are off the double diamond.) Each of these contains some learning and some making. The learning might inform us (not necessarily expansion) or it might help us select (contraction). The making might be generative (expansion) or it might be adding specificity (contraction). So in each phase there's some expansion and contraction going on, each pair making a _single_ diamond.
 
-![The single expansion of "generate" and contraction of "select" is preceded by an "inform" phase.](images/Single-diamond.png)
+![The single expansion of "generate" and contraction of "select" is preceded by an "inform" phase.](/assets/images/2022/11/Single-diamond.png)
 
 (This three-phase approach actually maps somewhat closely to the [Ideo Human Centered Design Process](https://www.designkit.org/human-centered-design), consisting of inspiration, ideation, and implementation.)
 

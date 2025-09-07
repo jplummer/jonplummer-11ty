@@ -3,6 +3,7 @@ title: "A common problem with goal-based annual evaluations"
 layout: single_post.njk
 draft: true
 tags: post
+date: 0000-00-00
 ---
 
 It's common that, once annual review time comes around, you'll be asked to propose some goals for yourself for the coming year and to help the people you support come up with their annual goals. These goals will be used to monitor your and their performance during the year and to evaluate it at the end of the year. It seems to be a bit of managerial and HR orthodoxy about how we evaluate people and how we plan for that evaluation.

@@ -6,7 +6,7 @@ tags: portfolio
 coverImage: "Screenshot2022-11-10at11.00.16AM.png"
 ---
 
-![](images/Screenshot2022-11-10at11.00.16AM-1024x575.png)
+![](/assets/images/2022/12/Screenshot2022-11-10at11.00.16AM-1024x575.png)
 
 In early October I was asked to give an [eight-to-ten-minute presentation](https://misc.jonplummer.com/portfolio/Quick%20UX%20accomplishments%202022%2010%2005.pptx) summing up the year for UX. A tall order, but I embraced blazing through the content to alight briefly on things I though the general company audience should know about UX and how we were trying to help.
 

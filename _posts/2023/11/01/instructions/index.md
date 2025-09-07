@@ -8,9 +8,7 @@ tags: post
 The first time I rode a motorcycle I was on the back, clinging to my college roommate. He happened to have a second helmet, it fit well enough, and I was eager to get to the other side of campus.  
   
 He gave me two instructions:
-
 - "Keep your feet on the pegs."
-
 - "I am not a steering wheel."
 
 Can you guess which instruction he complained about at the end of the ride?
