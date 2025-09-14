@@ -1,0 +1,74 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {# Homepage #}
+  <url>
+    <loc>https://jonplummer.com/</loc>
+    <lastmod>{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  {# About page #}
+  <url>
+    <loc>https://jonplummer.com/about/</loc>
+    <lastmod>{{ collections.page | getNewestCollectionItemDate | dateToRfc3339 }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  {# Now page #}
+  <url>
+    <loc>https://jonplummer.com/now/</loc>
+    <lastmod>{{ collections.page | getNewestCollectionItemDate | dateToRfc3339 }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  {# Portfolio page #}
+  <url>
+    <loc>https://jonplummer.com/portfolio/</loc>
+    <lastmod>{{ collections.portfolio | getNewestCollectionItemDate | dateToRfc3339 }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  {# All blog posts #}
+  {% for post in collections.post %}
+  <url>
+    <loc>https://jonplummer.com{{ post.url }}</loc>
+    <lastmod>{{ post.date | dateToRfc3339 }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  {% endfor %}
+
+  {# All portfolio items #}
+  {% for item in collections.portfolio %}
+  <url>
+    <loc>https://jonplummer.com{{ item.url }}</loc>
+    <lastmod>{{ item.date | dateToRfc3339 }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  {% endfor %}
+
+  {# Pagination pages #}
+  {% for page in collections.all %}
+    {% if page.data.pagination %}
+      {% for pageNum in (1..page.data.pagination.pages) %}
+        {% if pageNum > 1 %}
+  <url>
+    <loc>https://jonplummer.com/page/{{ pageNum }}/</loc>
+    <lastmod>{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+</urlset>

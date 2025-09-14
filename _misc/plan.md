@@ -119,7 +119,7 @@
   - Meta tags
   - Open Graph
   - Twitter Cards (look into bsky and mastodon over Xitter)
-  - Sitemap generation (for accessibility and indexing, not footer)
+  - [x] Sitemap generation (for accessibility and indexing, not footer)
   - add meta description to index
   - add slug to post frontmatter
   - add title to post frontmatter
