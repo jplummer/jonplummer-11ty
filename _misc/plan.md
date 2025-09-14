@@ -88,7 +88,7 @@
 
 - **404 Page Template (`404.njk`)**
 
-- **Portfolio Template (`portfolio.njk`)**
+- **Portfolio Template (`portfolio.njk` and `_includes/portfolio_list_item.njk`)**
   - Grid listing
   - Only "portfolio" category
   - [-] Post excerpts (nay!)
@@ -96,7 +96,7 @@
   - Main navigation at top
   - Image size/position/styling
 
-- **Portfolio Post Content Template (`_includes/portfolio_post_content.njk`)**
+- **Portfolio Post Content Template (`_includes/portfolio_detail.njk`)**
   - Article structure matching current HTML
   - Date formatting
   - Tag/category display
@@ -147,7 +147,7 @@
 - [-] **GitHub Actions** (recommended): (This is not how I'm using GitHub just yet)
   - [-] Automatic builds on push to main branch
   - [-] Run 11ty build process
-  - [-] Validate generated HTML (installed npm html-validate)
+  - [-] Validate generated HTML (using custom validation scripts)
   - [-] Upload to hosting provider
 
 - [x] **Alternative: Local deployment scripts**:

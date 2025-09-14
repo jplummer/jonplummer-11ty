@@ -18,8 +18,8 @@ module.exports = function(eleventyConfig) {
 
     // Add custom Nunjucks filter: limit
     eleventyConfig.addFilter("limit", function(array, limit) {
-        if (!Array.isArray(array)) return array;
-        return array.slice(0, limit);
+      if (!Array.isArray(array)) return array;
+      return array.slice(0, limit);
     });
 
     // add postDate filter
