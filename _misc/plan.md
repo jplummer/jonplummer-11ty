@@ -86,8 +86,6 @@
   - [x] Navigation controls
   - [x] Main navigation at top
 
-<< WE ARE HERE >>
-
 - **404 Page Template (`404.njk`)**
 
 - **Portfolio Template (`portfolio.njk`)**
@@ -141,37 +139,21 @@
 ### Build Process Automation
 - [x] Set up npm scripts for development and production builds
 - [x] Configure environment-specific build settings
-- Implement build validation and testing
+- [x] Implement build validation and testing
+- Check each test script to make sure it is useful
+- Go through results of each test script to fix issues
 
 ### Deployment Pipeline
-- **GitHub Actions** (recommended):
-  - Automatic builds on push to main branch
-  - Run 11ty build process
-  - Validate generated HTML (installed npm html-validate)
-  - Upload to hosting provider
+- [-] **GitHub Actions** (recommended): (This is not how I'm using GitHub just yet)
+  - [-] Automatic builds on push to main branch
+  - [-] Run 11ty build process
+  - [-] Validate generated HTML (installed npm html-validate)
+  - [-] Upload to hosting provider
 
 - [x] **Alternative: Local deployment scripts**:
   - [-] Build and upload via rsync/scp
   - [x] SFTP deployment automation
   - [-] Cloud storage sync (AWS S3, Netlify, etc.)
-
-### Continuous Integration
-- Automated testing of generated site
-- Link validation
-- Image optimization checks
-- Performance monitoring
-
-### Monitoring & Maintenance
-- Set up build notifications
-- Monitor deployment success/failure
-- Implement rollback procedures
-- Regular backup of generated site
-
-### Hosting Considerations
-- Choose static hosting provider (Netlify, Vercel, GitHub Pages)
-- Configure custom domain and SSL
-- Set up CDN for global performance
-- Implement caching strategies
 
 ## Phase 6: Truly fancy shit
 - CMS https://www.11ty.dev/docs/cms/
@@ -179,3 +161,24 @@
 - consider SERPs (https://schema.org)
 - consider POSSE (more tags for different types of entries?)
 - date-based color styles
+
+## Phase 7: build automation fønciness
+
+### Continuous Integration?
+- Automated testing of generated site
+- Link validation
+- Image optimization checks
+- Performance monitoring
+
+### Monitoring & Maintenance?
+- Set up build notifications
+- Monitor deployment success/failure
+- Implement rollback procedures
+- Regular backup of generated site
+
+### Hosting Considerations?
+- Choose static hosting provider (Netlify, Vercel, GitHub Pages)
+- Configure custom domain and SSL
+- Set up CDN for global performance
+- Implement caching strategies
+

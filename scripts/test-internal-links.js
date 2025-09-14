@@ -2,8 +2,9 @@
 
 const fs = require('fs');
 const path = require('path');
+const { getChangedHtmlFiles, shouldRunFullScan, setCurrentBuildTimestamp } = require('./changed-files-util');
 
-// Find all HTML files in _site
+// Find all HTML files in _site (for full scan)
 function findHtmlFiles(dir) {
   const files = [];
   const items = fs.readdirSync(dir);
@@ -100,13 +101,33 @@ async function validateInternalLinks() {
   console.log('🔗 Starting internal link validation...\n');
   
   const siteRoot = './_site';
-  const htmlFiles = findHtmlFiles(siteRoot);
+  let htmlFiles;
+  let scanType;
+  
+  if (shouldRunFullScan()) {
+    console.log('📋 Running full scan (no previous build or --full flag specified)');
+    htmlFiles = findHtmlFiles(siteRoot);
+    scanType = 'full';
+  } else {
+    console.log('📋 Running incremental scan (checking only changed files)');
+    htmlFiles = getChangedHtmlFiles();
+    scanType = 'incremental';
+  }
+  
+  if (htmlFiles.length === 0) {
+    console.log('✅ No files to check. All internal links are up to date!');
+    return;
+  }
+  
+  console.log(`Found ${htmlFiles.length} HTML files to check\n`);
+  
   const allLinks = [];
   const results = {
     total: 0,
     internal: { total: 0, broken: 0, working: 0 },
     anchors: { total: 0, broken: 0, working: 0 },
-    other: { total: 0 }
+    other: { total: 0 },
+    scanType: scanType
   };
   
   // Collect all internal links
@@ -168,6 +189,7 @@ async function validateInternalLinks() {
   
   // Summary
   console.log('\n📊 Internal Link Validation Summary:');
+  console.log(`   Scan type: ${results.scanType}`);
   console.log(`   Total internal links: ${results.total}`);
   console.log(`   ✅ Internal file links: ${results.internal.working}/${results.internal.total} working`);
   console.log(`   ✅ Anchor links: ${results.anchors.working}/${results.anchors.total} working`);
@@ -184,6 +206,9 @@ async function validateInternalLinks() {
   } else {
     console.log('\n🎉 All internal links are working correctly!');
   }
+  
+  // Update build timestamp for next incremental scan
+  setCurrentBuildTimestamp();
 }
 
 // Run validation

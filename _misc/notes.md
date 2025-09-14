@@ -9,31 +9,35 @@
 
 # Commands
 ## Development
-* npm run dev                   # Start development server with live reload
-* npm run build                 # Build production site
-* npm run start                 # Start development server
-* npm run clean                 # Clean build directory
+* npm run dev                          # Start development server with live reload
+* npm run build                        # Build production site
+* npm run start                        # Start development server
+* npm run clean                        # Clean build directory
 ## Repair migration issues
-npm run fix-internal-links      # Clean up .local links
-npm run fix-date-mismatches     # Clean up folder vs frontmatter issues
+npm run fix-internal-links             # Clean up .local links
+npm run fix-date-mismatches            # Clean up folder vs frontmatter issues
 ## Validate generated site
-npm run validate                # Check HTML validity
-npm run validate-comprehensive  # Check HTML validity plus plus
-npm run test-internal-links     # Test only internal links (critical)
-npm run test-external-links     # Test only external links (informational)
-npm run test-links              # Test all links
-npm run test-content            # Test content structure
-npm run test-performance        # Analyze performance
-npm run test-seo                # Test SEO and meta tags
-npm run test-accessibility      # Test accessibility
-npm run test-consistency        # Test build consistency
-npm run test-rss                # Test RSS feeds
-npm run test-all                # Run all tests in sequence
+npm run validate                       # Check HTML validity
+npm run validate-comprehensive         # Check HTML validity plus plus
+### Link checking
+npm run test-internal-links            # Test only internal links (critical)
+npm run test-external-links            # Test only external links (informational)
+npm run test-links                     # Test all links
+npm run test-internal-links -- --full  # Full scan (all files)
+npm run test-external-links -- --full  # Full scan (all files)
+npm run test-links -- --full           # Full scan (all files)
+## Other content checks
+npm run test-content                   # Test content structure
+npm run test-performance               # Analyze performance
+npm run test-seo                       # Test SEO and meta tags
+npm run test-accessibility             # Test accessibility
+npm run test-rss                       # Test RSS feeds
+npm run test-all                       # Run all tests in sequence
 ## Deploy site to host
-npm run test-deployment         # Test deployment (environment variables, local build check, 
-                                # dependencies, SSH, remote directory, rsync dry-run)
-npm run deploy                  # Full deployment from /_site (clobbers all)
-npm run deploy-changes          # Deploy only new or changed items from /_site
+npm run test-deployment                # Test deployment (environment, local build check, 
+                                       # dependencies, SSH, remote directory, rsync dry-run)
+npm run deploy                         # Full deployment from /_site (clobbers all)
+npm run deploy-changes                 # Deploy only new or changed items from /_site
 
 # Color ideas
 

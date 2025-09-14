@@ -5,8 +5,9 @@ const path = require('path');
 const https = require('https');
 const http = require('http');
 const { URL } = require('url');
+const { getChangedHtmlFiles, shouldRunFullScan, setCurrentBuildTimestamp } = require('./changed-files-util');
 
-// Find all HTML files in _site
+// Find all HTML files in _site (for full scan)
 function findHtmlFiles(dir) {
   const files = [];
   const items = fs.readdirSync(dir);
@@ -207,14 +208,34 @@ async function validateLinks() {
   }
   
   const siteRoot = './_site';
-  const htmlFiles = findHtmlFiles(siteRoot);
+  let htmlFiles;
+  let scanType;
+  
+  if (shouldRunFullScan()) {
+    console.log('📋 Running full scan (no previous build or --full flag specified)');
+    htmlFiles = findHtmlFiles(siteRoot);
+    scanType = 'full';
+  } else {
+    console.log('📋 Running incremental scan (checking only changed files)');
+    htmlFiles = getChangedHtmlFiles();
+    scanType = 'incremental';
+  }
+  
+  if (htmlFiles.length === 0) {
+    console.log('✅ No files to check. All links are up to date!');
+    return;
+  }
+  
+  console.log(`Found ${htmlFiles.length} HTML files to check\n`);
+  
   const allLinks = [];
   const results = {
     total: 0,
     internal: { total: 0, broken: 0, working: 0 },
     external: { total: 0, broken: 0, working: 0, timeout: 0, assumed: 0 },
     anchors: { total: 0, broken: 0, working: 0 },
-    other: { total: 0 }
+    other: { total: 0 },
+    scanType: scanType
   };
   
   // Collect all links
@@ -305,6 +326,7 @@ async function validateLinks() {
   
   // Summary
   console.log('\n📊 Link Validation Summary:');
+  console.log(`   Scan type: ${results.scanType}`);
   console.log(`   Total links: ${results.total}`);
   console.log(`   ✅ Internal links: ${results.internal.working}/${results.internal.total} working`);
   console.log(`   ✅ External links: ${results.external.working}/${results.external.total} working`);
@@ -333,6 +355,9 @@ async function validateLinks() {
   } else {
     console.log('\n🎉 All links are working correctly!');
   }
+  
+  // Update build timestamp for next incremental scan
+  setCurrentBuildTimestamp();
 }
 
 // Run validation
