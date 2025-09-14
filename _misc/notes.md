@@ -1,11 +1,3 @@
-# 📚 Front Matter Variables
-* layout: Which template to use
-* title: Page title
-* date: Publication date
-* tags: Array of tags for collections (post, portfolio)
-* permalink: Custom URL structure
-* draft: Whether to publish or not
-* eleventyExcludeFromCollections: Exclude from collections
 
 # Commands
 ## Development
@@ -13,10 +5,8 @@
 * npm run build                        # Build production site
 * npm run start                        # Start development server
 * npm run clean                        # Clean build directory
-## Repair migration issues
-npm run fix-internal-links             # Clean up .local links
-npm run fix-date-mismatches            # Clean up folder vs frontmatter issues
-## Validate generated site
+## Test generated site
+### HTML validation
 npm run validate                       # Check HTML validity
 npm run validate-comprehensive         # Check HTML validity plus plus
 ### Link checking
@@ -36,8 +26,8 @@ npm run test-all                       # Run all tests in sequence
 ## Deploy site to host
 npm run test-deployment                # Test deployment (environment, local build check, 
                                        # dependencies, SSH, remote directory, rsync dry-run)
-npm run deploy                         # Full deployment from /_site (clobbers all)
-npm run deploy-changes                 # Deploy only new or changed items from /_site
+npm run deploy                         # Full deployment from /_site (clobbers all) using rsync
+npm run deploy-changes                 # Deploy only new or changed items from /_site using rsync
 
 # Color ideas
 
@@ -52,3 +42,11 @@ https://www.color-hex.com/color-palettes/popular.php
 
 https://mcochris.com
 
+# 📚 Front Matter Variables
+* layout: Which template to use
+* title: Page title
+* date: Publication date
+* tags: Array of tags for collections (post, portfolio)
+* permalink: Custom URL structure
+* draft: Whether to publish or not
+* eleventyExcludeFromCollections: Exclude from collections
