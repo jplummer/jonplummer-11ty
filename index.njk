@@ -13,7 +13,6 @@ permalink: "{% if pagination.pageNumber == 0 %}/{% else %}/page/{{ pagination.pa
     {% include "post_content.njk" %}
 {% endfor %}
 
-
 <nav class="pagination">
     {% if pagination.href.previous %}
         <a class="prev" href="{{ pagination.href.previous }}">← Newer posts</a>

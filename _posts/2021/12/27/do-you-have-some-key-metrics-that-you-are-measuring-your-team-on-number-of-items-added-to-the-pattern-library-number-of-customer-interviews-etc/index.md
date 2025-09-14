@@ -9,7 +9,7 @@ I tend not to be in favor of output metrics like these; they've been shown to be
 
 On the other hand, some anti-metrics (trouble indicators) are pretty obvious – if there's a lot of rework coming back to a designer, if deliverables are sloppy, if product managers and engineers are dissatisfied or under-involved, then we can tell there is a problem. But the opposite of these are not great metrics for individual performance, as a certain amount of rework will be technically driven, we don't want to create an inspection-heavy situation where each deliverable is scrutinized for lack of sloppiness, etc.
 
-I do have expectations that designers will bring work to and contribute to critique, seek my counsel on design challenges, press for collaboration, etc. But do I want to count these behaviors? Probably not.  
+I do have expectations that designers will bring work to and contribute to critique, seek my counsel on design challenges, press for collaboration, etc. But do I want to count these behaviors? Probably not.
 The ideal thing would be to peg team performance to the product metrics we hope to install. The metrics we really care about are user success metrics in a product, and these are team metrics, not individual performance metrics.
 
 So when it comes time to evaluate a designer, I like to use four Cs – customer, collaboration, culture, and content.

@@ -88,6 +88,8 @@
 
 << WE ARE HERE >>
 
+- **404 Page Template (`404.njk`)**
+
 - **Portfolio Template (`portfolio.njk`)**
   - Grid listing
   - Only "portfolio" category
@@ -116,10 +118,10 @@
   - [-] Caching strategies (not sure I need this)
 
 - **SEO & Social**
+  - [x] Sitemap generation (for accessibility and indexing, not footer)
   - Meta tags
   - Open Graph
   - Twitter Cards (look into bsky and mastodon over Xitter)
-  - [x] Sitemap generation (for accessibility and indexing, not footer)
   - add meta description to index
   - add slug to post frontmatter
   - add title to post frontmatter
@@ -137,8 +139,8 @@
 ## Phase 5: Site Generation and Upload Automation
 
 ### Build Process Automation
-- Set up npm scripts for development and production builds
-- Configure environment-specific build settings
+- [x] Set up npm scripts for development and production builds
+- [x] Configure environment-specific build settings
 - Implement build validation and testing
 
 ### Deployment Pipeline

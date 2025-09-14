@@ -5,7 +5,7 @@ date: 2021-06-12
 tags: post
 ---
 
-Gentle people,  
+Gentle people,
 I recently complained to the directors and project managers about meeting invitations
 - without agendas, or
 - without a clear goal, or

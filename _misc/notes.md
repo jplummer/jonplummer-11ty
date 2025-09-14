@@ -6,13 +6,21 @@
 * permalink: Custom URL structure
 * draft: Whether to publish or not
 * eleventyExcludeFromCollections: Exclude from collections
-* 
 
 # Commands
-* npm run dev - Start development server with live reload
-* npm run build - Build production site
-* npm run start - Start development server
-* npm run clean - Clean build directory
+## Development
+* npm run dev                   # Start development server with live reload
+* npm run build                 # Build production site
+* npm run start                 # Start development server
+* npm run clean                 # Clean build directory
+## Validate generated site
+npm run validate                # Check HTML validity
+npm run validate-comprehensive  # Check HTML validity plus plus
+## Deploy site to host
+npm run test-deployment         # test deployment (environment variables, local build check, 
+                                # dependencies, SSH, remote directory, rsync dry-run)
+npm run deploy                  # Full deployment from /_site (clobbers all)
+npm run deploy-changes          # Deploy only new or changed items from /_site
 
 # Color ideas
 

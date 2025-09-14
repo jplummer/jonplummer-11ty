@@ -7,10 +7,15 @@
     "build": "eleventy",
     "start": "eleventy --serve",
     "dev": "eleventy --serve --watch",
-    "clean": "rm -rf _site"
+    "clean": "rm -rf _site",
+    "validate": "node scripts/validate-html.js",
+    "validate-comprehensive": "node scripts/comprehensive-validate.js",
+    "test-deployment": "node scripts/test-deployment.js",
+    "deploy": "node scripts/deploy.js",
+    "deploy-changes": "node scripts/deploy-changes.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jon Plummer",
   "license": "ISC",
   "description": "",
   "devDependencies": {
@@ -20,6 +25,8 @@
     "html-validate": "^10.0.0"
   },
   "dependencies": {
-    "eleventy-plugin-date": "^1.0.0"
+    "dotenv": "^17.2.2",
+    "eleventy-plugin-date": "^1.0.0",
+    "ssh2-sftp-client": "^12.0.1"
   }
 }

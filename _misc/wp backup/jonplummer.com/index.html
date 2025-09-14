@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="/xmlrpc.php">
+
+<title>Jon Plummer &ndash; Today I Learned</title>
+<meta name="robots" content="max-image-preview:large">
+	<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="alternate" type="application/rss+xml" title="Jon Plummer &raquo; Feed" href="/feed/">
+<link rel="alternate" type="application/rss+xml" title="Jon Plummer &raquo; Comments Feed" href="/comments/feed/">
+<script type="text/javascript">
+/* <![CDATA[ */
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16.0.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16.0.1\/svg\/","svgExt":".svg","source":{"concatemoji":"\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.8.2"}};
+/*! This file is auto-generated */
+!function(s,n){var o,i,e;function c(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function p(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data),a=(e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0),new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data));return t.every(function(e,t){return e===a[t]})}function u(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);for(var n=e.getImageData(16,16,1,1),a=0;a<n.data.length;a++)if(0!==n.data[a])return!1;return!0}function f(e,t,n,a){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!a(e,"\ud83e\udedf")}return!1}function g(e,t,n,a){var r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):s.createElement("canvas"),o=r.getContext("2d",{willReadFrequently:!0}),i=(o.textBaseline="top",o.font="600 32px Arial",{});return e.forEach(function(e){i[e]=t(o,e,n,a)}),i}function t(e){var t=s.createElement("script");t.src=e,t.defer=!0,s.head.appendChild(t)}"undefined"!=typeof Promise&&(o="wpEmojiSettingsSupports",i=["flag","emoji"],n.supports={everything:!0,everythingExceptFlag:!0},e=new Promise(function(e){s.addEventListener("DOMContentLoaded",e,{once:!0})}),new Promise(function(t){var n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+g.toString()+"("+[JSON.stringify(i),f.toString(),p.toString(),u.toString()].join(",")+"));",a=new Blob([e],{type:"text/javascript"}),r=new Worker(URL.createObjectURL(a),{name:"wpTestEmojiSupports"});return void(r.onmessage=function(e){c(n=e.data),r.terminate(),t(n)})}catch(e){}c(n=g(i,f,p,u))}t(n)}).then(function(e){for(var t in e)n.supports[t]=e[t],n.supports.everything=n.supports.everything&&n.supports[t],"flag"!==t&&(n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&n.supports[t]);n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&!n.supports.flag,n.DOMReady=!1,n.readyCallback=function(){n.DOMReady=!0}}).then(function(){return e}).then(function(){var e;n.supports.everything||(n.readyCallback(),(e=n.source||{}).concatemoji?t(e.concatemoji):e.wpemoji&&e.twemoji&&(t(e.twemoji),t(e.wpemoji)))}))}((window,document),window._wpemojiSettings);
+/* ]]> */
+</script>
+<style id="wp-emoji-styles-inline-css" type="text/css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+</style>
+<link rel="stylesheet" id="wp-block-library-css" href="/wp-includes/css/dist/block-library/style.min.css?ver=6.8.2" type="text/css" media="all">
+<style id="classic-theme-styles-inline-css" type="text/css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id="global-styles-inline-css" type="text/css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+:root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel="stylesheet" id="libre-style-css" href="/wp-content/themes/libre/style.css?ver=6.8.2" type="text/css" media="all">
+<link rel="stylesheet" id="libre-libre-css" href="https://fonts.googleapis.com/css?family=Libre+Baskerville%3A400%2C400italic%2C700&amp;subset=latin%2Clatin-ext" type="text/css" media="all">
+<script type="text/javascript" src="/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js"></script>
+<script type="text/javascript" src="/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js"></script>
+<link rel="https://api.w.org/" href="/wp-json/"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd">
+<meta name="generator" content="WordPress 6.8.2">
+		<style type="text/css">
+						ol.footnotes>li {list-style-type:decimal;}
+						ol.footnotes { color:#666666; }
+ol.footnotes li { font-size:80%; }
+		</style>
+		<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>	<style type="text/css">
+			.site-title a,
+		.site-description {
+			color: #bf1b1b;
+		}
+		</style>
+	<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #dadccf; }
+</style>
+	<link rel="icon" href="/wp-content/uploads/2021/02/jp_round-48x48.jpg" sizes="32x32">
+<link rel="icon" href="/wp-content/uploads/2021/02/jp_round.jpg" sizes="192x192">
+<link rel="apple-touch-icon" href="/wp-content/uploads/2021/02/jp_round-180x180.jpg">
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2021/02/jp_round.jpg">
+		<style type="text/css" id="wp-custom-css">
+			blockquote { font-size: 1rem; }
+.entry-content a:link { color: #bf1b1b; }
+.entry-content a:visited { color: #736b1e; }
+.entry-content a:hover { color: #ed3f1c; }
+.entry-content a:active { color: #ed8008; }		</style>
+		
+<!-- START - Open Graph and Twitter Card Tags 3.3.5 -->
+ <!-- Facebook Open Graph -->
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="Jon Plummer">
+  <meta property="og:title" content="Jon Plummer">
+  <meta property="og:url" content="/">
+  <meta property="og:type" content="website">
+  <meta property="og:description" content="Today I Learned">
+  <meta property="og:image" content="/wp-content/uploads/2021/05/og-image.png">
+  <meta property="og:image:url" content="/wp-content/uploads/2021/05/og-image.png">
+  <meta property="og:image:secure_url" content="/wp-content/uploads/2021/05/og-image.png">
+ <!-- Google+ / Schema.org -->
+ <!-- Twitter Cards -->
+  <meta name="twitter:title" content="Jon Plummer">
+  <meta name="twitter:url" content="/">
+  <meta name="twitter:description" content="Today I Learned">
+  <meta name="twitter:image" content="/wp-content/uploads/2021/05/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+ <!-- SEO -->
+ <!-- Misc. tags -->
+ <!-- is_front_page -->
+<!-- END - Open Graph and Twitter Card Tags 3.3.5 -->
+	
+</head>
+
+<body class="home blog custom-background wp-theme-libre">
+<div id="page" class="hfeed site">
+	<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+		<header id="masthead" class="site-header" role="banner">
+		<div class="site-branding">
+										<h1 class="site-title"><a href="/" rel="home">Jon Plummer</a></h1>
+								<p class="site-description">Today I Learned</p>
+					</div><!-- .site-branding -->
+
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">Menu</button>
+			<div id="primary-menu" class="menu"><ul>
+<li class="page_item page-item-325"><a href="/about/">About me</a></li>
+<li class="page_item page-item-775"><a href="/now/">Now</a></li>
+<li class="page_item page-item-497"><a href="/portfolio/">Portfolio</a></li>
+</ul></div>
+		</nav><!-- #site-navigation -->
+
+	</header><!-- #masthead -->
+
+	<div id="content" class="site-content">
+
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+
+		
+						
+				
+<article id="post-844" class="post-844 post type-post status-publish format-standard hentry category-uncategorized">
+	<header class="entry-header">
+		
+					<h2 class="entry-title"><a href="/2025/07/27/toward-coordinated-experience/" rel="bookmark">Toward coordinated experience</a></h2>				
+				<div class="entry-meta">
+			<span class="posted-on"><a href="/2025/07/27/toward-coordinated-experience/" rel="bookmark"><time class="entry-date published" datetime="2025-07-27T12:59:20-07:00">July 27, 2025</time><time class="updated" datetime="2025-07-27T13:03:16-07:00">July 27, 2025</time></a></span><span class="byline"> <span class="author vcard"><a class="url fn n" href="/author/jonplummer_kssjnf/">Jon Plummer</a></span></span>		</div><!-- .entry-meta -->
+			</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		
+<h2 class="wp-block-heading">Background</h2>
+
+
+
+<p>I realized the other day that we (UX and others) make workflow diagrams but don&rsquo;t distinguish in them between &ldquo;system advances you to the next step&rdquo; or &ldquo;offers you a link to a relevant thing&rdquo; versus &ldquo;user has to know to go somewhere else to do a necessary thing.&rdquo; These are not at all equivalent; the arrows look the same, but those that denote &ldquo;user has to know to go somewhere else to do a thing&rdquo; should be maybe painfully ugly or broken or perhaps not exist at all to point out that a barrier exists.<br><br>We should be anticipating and lowering those barriers, and we often are not. As we make new things, we&rsquo;re tempted to squeeze scope down tight enough that we can launch quickly, but end up erecting these barriers in the process.</p>
+
+
+
+<p>UX folks are interested in producing what I&rsquo;ll call <em>coordinated experiences</em>, but have learned (to my chagrin) that it&rsquo;s hard to convince other folks in product development to participate, so they give up after a while. Since it is natural for engineering to look at the platform from the data model outward and assume that the appropriate interfaces match the data model in structure, and since there should otherwise be sufficient demand to produce coordinated experiences rather than the uncoordinated ones we usually make, my hypothesis is that there&rsquo;s some incentive/pressure/habit that is leading us in product development to scope projects such that we&rsquo;re not spending the effort required to produce coordinated experiences.</p>
+
+
+
+<p>Here&rsquo;s the rub: coordinated experience comes at an incremental cost. Or it seems to; that increment is <em>economically smart</em> to spend as it trades a bit more team effort for avoidance of a large amount of repeated customer, CSM, onboarding, and support effort.</p>
+
+
+
+<p>It&rsquo;s normal to want to make sure our initial attempts at a feature or improvement are small and manageable to deliver quickly, learn from the result, and reduce risk. It&rsquo;s natural to want to get a small bit of software out into the world to see if customers find it valuable so that it will rightly draw further investment or not. But if the initial experience, however slim, includes barriers that hamper its use, those barriers confound the adoption or task success metrics we take as evidence that the feature is valuable. If we descope to the point that barriers are present we are at cross-purposes with ourselves.</p>
+
+
+
+<p>So the challenge is to make small scopes that nonetheless deliver an end-to-end experience.</p>
+
+
+
+<p>Example: Uber&rsquo;s MVP was a web form that offered to book a car to arrive in the very near future. There was no map, no phone app, no scheduling, no ratings, no service options, none of the larger experience that we associate with ride sharing services today. But the core experience worked without assistance, off-system work visible to the user, or delay: you could request a car to appear at a particular location and it would. There was no barrier between the desire for a ride and a ride other than filling out the form, which you could do on your own. It was a slender experience but a complete, coordinated one.</p>
+
+
+
+<h2 class="wp-block-heading">Coordinated experience defined</h2>
+
+
+
+<p>A coordinated experience is one in which</p>
+
+
+
+<ul class="wp-block-list">
+<li>it&rsquo;s clear to the user where to go to achieve their goal</li>
+
+
+
+<li>once there, the correct controls are intelligible and fall to hand as needed</li>
+
+
+
+<li>users are helped by sensible defaults and/or canned possibilities they can try, and that suggest how the system is best used, rather than being faced with just a blank form</li>
+
+
+
+<li>capabilities needed to accomplish the goal are available without having to go find them or know in advance where to get them</li>
+
+
+
+<li>these capabilities behave in predictable ways learned from elsewhere in our platform and from other software</li>
+
+
+
+<li>The system supports user confidence that they have achieved the correct result
+<ul class="wp-block-list">
+<li>the result of their work is clear</li>
+
+
+
+<li>the right performance of the system is visible</li>
+
+
+
+<li>it&rsquo;s clear how to make changes</li>
+</ul>
+</li>
+</ul>
+
+
+
+<p>In short, the arrangement of capabilities and interfaces is governed by the use cases being supported, not necessarily the modularity of the back end.</p>
+
+
+
+<p>(Yes, this is a basic UX concept, but it is forgotten so often that it needs a name outside of UX jargon.)</p>
+
+
+
+<h2 class="wp-block-heading">Coordinated experience tactics</h2>
+
+
+
+<p>We won&rsquo;t need all of these tactics all the time for everything; it&rsquo;s a set of possibilities. Some of these methods might be useful depending on the use cases we intend to support. Some will be overkill.</p>
+
+
+
+<ul class="wp-block-list">
+<li>Sensible defaults</li>
+
+
+
+<li>Galleries of canned options, useful at least as starting points</li>
+
+
+
+<li>Cross-linking to dependent or involved system objects that are managed elsewhere</li>
+
+
+
+<li>Reusing a capability (or presenting an otherwise stand-alone capability) as a module within a workflow where it is also needed</li>
+
+
+
+<li>Selectors that offer a choice of the existing examples of the required object type and a convenient way to create a new one</li>
+
+
+
+<li>Inspectors that explain a referenced system object without leaving the current context</li>
+
+
+
+<li>Traceability (explain how a result was arrived at)</li>
+
+
+
+<li>Simple versioning (accrue versions automatically as changes are made, allow an old one to be inspected and made current)</li>
+
+
+
+<li>Hierarchies revealed in list views</li>
+
+
+
+<li>(of course there are more; these are the ones that leap to mind at the moment)</li>
+</ul>
+
+
+
+<p>As we build up a library of coordinated experience patterns, such as object inspectors, galleries, simple versioning methods, etc. it should become easier and easier to create coordinated experiences over time. But the core method is making sure that small scopes result in complete, coordinated workflows rather than fragmented ones.</p>
+
+
+
+<h2 class="wp-block-heading">Coordinated experience in the age of agents</h2>
+
+
+
+<p>It&rsquo;s common to hear that agentic AI will make traditional interfaces obsolete, that if you can just ask the computer to do a thing you won&rsquo;t also need a manual workflow to do that thing. This suggests an exciting future when software can focus on doing what users want (or at least ask for) rather than providing tools for users to do what users want.</p>
+
+
+
+<p>We do aspire to a near future where systems handle more tasks, and chain tasks together to produce better results more quickly than a person would, simplifying interaction by speeding the user along toward the results they seek.</p>
+
+
+
+<p>However, users will still need to</p>
+
+
+
+<ul class="wp-block-list">
+<li>Verify performance of the system &ndash; monitor the actions of the system and understand its effect on their business</li>
+
+
+
+<li>Verify agent recommendations &ndash; see that the agent&rsquo;s recommendations or plans are sensible and well-founded in data, fostering confidence in the system and agent</li>
+
+
+
+<li>Verify performance and results of agent tasks &ndash; confirm that the agent has done things correctly, and understand the effect of these actions</li>
+
+
+
+<li>Understand the capabilities of the system &ndash; learn about what the system can do and how it is best used</li>
+
+
+
+<li>Make adjustments &ndash; correct errors in their own work and that of agents, try tweaks, follow hunches</li>
+</ul>
+
+
+
+<p>This likely means that there&rsquo;s plenty of interface! The emphasis shifts from the user directly manipulating the system toward the user being offered analyses and outcomes, but given the above needs users will continue to require systems that are&nbsp;</p>
+
+
+
+<ul class="wp-block-list">
+<li>self-explanatory</li>
+
+
+
+<li>transparent in their operations</li>
+
+
+
+<li>allow for direct inquiry into objects, and</li>
+
+
+
+<li>enable direct manipulation.</li>
+</ul>
+
+
+
+<p>The advent of agentic workflows, by reducing direct user operation of the system, will <em>intensify</em> the need for interfaces and workflows that are simple, coordinated and re-learnable rather than interfaces that depend on training, consultation, or practice for user success.</p>
+
+			</div><!-- .entry-content -->
+</article><!-- #post-## -->
+
+			
+				
+<article id="post-840" class="post-840 post type-post status-publish format-standard hentry category-uncategorized">
+	<header class="entry-header">
+		
+					<h2 class="entry-title"><a href="/2025/07/13/our-position-on-ai-tools/" rel="bookmark">Our position on AI tools</a></h2>				
+				<div class="entry-meta">
+			<span class="posted-on"><a href="/2025/07/13/our-position-on-ai-tools/" rel="bookmark"><time class="entry-date published updated" datetime="2025-07-13T16:57:46-07:00">July 13, 2025</time></a></span><span class="byline"> <span class="author vcard"><a class="url fn n" href="/author/jonplummer_kssjnf/">Jon Plummer</a></span></span>		</div><!-- .entry-meta -->
+			</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		
+<p>(This is a work in progress, but a pretty good start)</p>
+
+
+
+<h2 class="wp-block-heading">Designing AI-powered product experiences</h2>
+
+
+
+<h3 class="wp-block-heading">User needs and customer problem first</h3>
+
+
+
+<p><strong>Solving a valuable customer problem is paramount</strong>. Before selecting any technological solution, including AI, we prioritize understanding user needs and clearly defining the problem we aim to solve. Any AI application must serve a genuine, identified user need, rather than being a solution in search of a problem.</p>
+
+
+
+<h3 class="wp-block-heading">Transparency, explainability, and trust</h3>
+
+
+
+<p>We recognize that users may be curious, or even apprehensive, about how AI-powered features operate. While full algorithmic explainability may not always be feasible or necessary, we commit to being&nbsp;<strong>transparent about the inputs and context</strong>&nbsp;that drive AI outputs. We hope to empower users with a&nbsp;<strong>sense of control</strong>, offering opportunities to&nbsp;<strong>validate choices, preview actions</strong>, and interact with AI as an assistant before letting it run as an autonomous agent. Maintaining an&nbsp;<strong>audit trail of AI actions</strong>&nbsp;also supports accountability and trust.</p>
+
+
+
+<h3 class="wp-block-heading">Handling errors and edge cases</h3>
+
+
+
+<p>We acknowledge that AI-powered features will sometimes produce wrong or unexpected outputs. Our design approach for these scenarios focuses on&nbsp;<strong>graceful error handling</strong>&nbsp;and keeping the&nbsp;<strong>human in the loop</strong>. This means</p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>Anticipating and mitigating</strong>&nbsp;potential issues through careful AI setup and training</li>
+
+
+
+<li>Designing interfaces that offer&nbsp;<strong>previews, recommendations, and clear actions</strong>&nbsp;rather than proceeding blindly</li>
+
+
+
+<li>Ensuring mechanisms for users to easily&nbsp;<strong>correct, override, or provide feedback</strong>&nbsp;on AI outputs</li>
+
+
+
+<li>Maintaining a design philosophy where the&nbsp;<strong>AI recommends and assists</strong>, allowing users to retain ultimate control until they explicitly release the system to act.</li>
+</ul>
+
+
+
+<h3 class="wp-block-heading">Ethical design and bias mitigation</h3>
+
+
+
+<p>We strive to&nbsp;<strong>reduce bias</strong>&nbsp;in AI-powered features by</p>
+
+
+
+<ul class="wp-block-list">
+<li>Grounding our understanding in&nbsp;<strong>real customer knowledge</strong>&nbsp;rather than internal assumptions.</li>
+
+
+
+<li>Working with and analyzing&nbsp;<strong>customer data responsibly</strong>, without alteration, and ensuring its privacy and security</li>
+
+
+
+<li>Establishing processes for&nbsp;<strong>monitoring the output of our features</strong>&nbsp;for unintended biases that may emerge</li>
+</ul>
+
+
+
+<h3 class="wp-block-heading">Iteration and learning through metrics</h3>
+
+
+
+<ul class="wp-block-list">
+<li><strong>Clear project goals</strong>&nbsp;define success.</li>
+
+
+
+<li><strong>Success metrics</strong>&nbsp;(e.g., accuracy, recall, task completion rates) and&nbsp;<strong>experiential metrics</strong>&nbsp;(e.g., user satisfaction, perceived control, trust) are established upfront.</li>
+
+
+
+<li>Continuous&nbsp;<strong>monitoring and analysis of these metrics</strong>&nbsp;drive iterative improvement, allowing us to refine the AI&rsquo;s performance and the user experience over time.</li>
+</ul>
+
+
+
+<h2 class="wp-block-heading">Using AI tools in day-to-day UX work</h2>
+
+
+
+<p>Our UX team embraces the strategic and responsible integration of AI tools into our daily workflows to enhance our capabilities and deliver more valuable experiences.</p>
+
+
+
+<h3 class="wp-block-heading">Strategic tool adoption and augmentation</h3>
+
+
+
+<p>We are actively&nbsp;<strong>experimenting with AI tools</strong>&nbsp;like Figma Make, ChatGPT, and Gemini to understand their potential. Our focus is not merely on speed, but on how these tools can&nbsp;<strong>enhance our ability to deliver valuable and usable experiences</strong>. We view AI primarily as an augmentation to our existing skills, particularly for</p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>Inspiration and ideation</strong>: Generating diverse concepts, content variations, or design alternatives.</li>
+
+
+
+<li><strong>Early-stage prototyping</strong>: Quickly sketching out ideas.</li>
+
+
+
+<li><strong>Analyzing research data</strong>: Identifying patterns or themes in qualitative data (with careful oversight).</li>
+</ul>
+
+
+
+<h3 class="wp-block-heading">Maintaining UX quality through human oversight</h3>
+
+
+
+<p>The ultimate&nbsp;<strong>responsibility for UX quality remains with the human designer</strong>&nbsp;and the members of the team with which they work. When using AI tools, each designer is accountable for the quality and accuracy of the output on their projects, regardless of AI assistance. We commit to&nbsp;<strong>human oversight and critical evaluation</strong>&nbsp;of any AI-generated content or insights. AI is a tool to assist, not replace, the designer&rsquo;s judgment, expertise, and empathy. All AI-assisted work undergoes the same&nbsp;<strong>review and validation processes</strong>&nbsp;as any UX work.</p>
+
+
+
+<h3 class="wp-block-heading">Continuous learning and cross-pollination</h3>
+
+
+
+<p>We encourage designers to</p>
+
+
+
+<ul class="wp-block-list">
+<li>Actively&nbsp;<strong>experiment with new AI tools and techniques</strong></li>
+
+
+
+<li><strong>Share their learnings and best practices</strong>&nbsp;with the wider UX team and their project teams</li>
+
+
+
+<li>Replicate and build upon the successful experiments of others</li>
+
+
+
+<li>Embrace a&nbsp;<strong>fluidity in job boundaries</strong>, recognizing that AI tools may enable designers to contribute to areas traditionally outside core UX, fostering greater cross-functional collaboration</li>
+</ul>
+
+
+
+<h3 class="wp-block-heading">Ethical use of AI tools and intellectual property</h3>
+
+
+
+<p>Our ethical considerations for designing AI-powered products extend to our use of AI tools. We commit to</p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>Transparency</strong>: Clearly acknowledging when AI tools have been used in our work, internally and externally where relevant. We will never misrepresent AI-assisted work as purely human-created</li>
+
+
+
+<li><strong>Data privacy and IP</strong>: Exercising caution regarding proprietary or sensitive customer data when interacting with external AI models. We will ensure we adhere to company policies and legal guidelines regarding data input into AI tools and the intellectual property of generated outputs</li>
+
+
+
+<li><strong>Maintaining control</strong>: Never ceding our understanding or control of customer knowledge, the design process, or design work to AI tools. The human designer remains the expert and ultimate decision-maker, responsible for the integrity of their work and the insights and design artifacts they share</li>
+</ul>
+
+			</div><!-- .entry-content -->
+</article><!-- #post-## -->
+
+			
+				
+<article id="post-834" class="post-834 post type-post status-publish format-standard hentry category-uncategorized">
+	<header class="entry-header">
+		
+					<h2 class="entry-title"><a href="/2025/07/13/what-went-right-since-october-2024/" rel="bookmark">What went right since October 2024?</a></h2>				
+				<div class="entry-meta">
+			<span class="posted-on"><a href="/2025/07/13/what-went-right-since-october-2024/" rel="bookmark"><time class="entry-date published updated" datetime="2025-07-13T16:47:41-07:00">July 13, 2025</time></a></span><span class="byline"> <span class="author vcard"><a class="url fn n" href="/author/jonplummer_kssjnf/">Jon Plummer</a></span></span>		</div><!-- .entry-meta -->
+			</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		
+<p>So many things!</p>
+
+
+
+<ul class="wp-block-list">
+<li>Work
+<ul class="wp-block-list">
+<li>I promoted someone</li>
+
+
+
+<li>I failed to promote someone, but learned a lot and it was the right decision</li>
+
+
+
+<li>We&rsquo;ve had a couple of leadership offsites and they have been both pleasant and valuable</li>
+
+
+
+<li>I&rsquo;ve guided my team from AI-skeptic or AI-agnostic to AI-curious, and written a quick position paper to explain our approach to both using AI tools and designing for AI-powered experiences</li>
+
+
+
+<li>UX people are strong participants in product trios, at long last</li>
+
+
+
+<li>We&rsquo;re hiring!</li>
+</ul>
+</li>
+
+
+
+<li>Home
+<ul class="wp-block-list">
+<li>We&rsquo;ve caught up on a handful of long-overdue home projects, just in time for the summer heat. Curtains, blinds, gym flooring, patch and paint, more curtains&hellip; there&rsquo;s more to do, always, but good progress after a bit of a stall</li>
+
+
+
+<li>The ADU is now occupied</li>
+
+
+
+<li>The girl is enjoying her six-week ballet intensive in a far-off state</li>
+
+
+
+<li>I got my GMRS license. Say hello to WSIX524</li>
+
+
+
+<li>Mr. Fixit has branched out into a little light metal work including repairing a watering can and making a house key easier for a blind person to use</li>
+</ul>
+</li>
+</ul>
+
+			</div><!-- .entry-content -->
+</article><!-- #post-## -->
+
+			
+				
+<article id="post-826" class="post-826 post type-post status-publish format-standard hentry category-uncategorized">
+	<header class="entry-header">
+		
+					<h2 class="entry-title"><a href="/2024/11/02/what-went-right-in-october/" rel="bookmark">What went right in October?</a></h2>				
+				<div class="entry-meta">
+			<span class="posted-on"><a href="/2024/11/02/what-went-right-in-october/" rel="bookmark"><time class="entry-date published" datetime="2024-11-02T20:19:36-07:00">November 2, 2024</time><time class="updated" datetime="2025-07-13T17:02:38-07:00">July 13, 2025</time></a></span><span class="byline"> <span class="author vcard"><a class="url fn n" href="/author/jonplummer_kssjnf/">Jon Plummer</a></span></span>		</div><!-- .entry-meta -->
+			</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		
+<p>So many things, in retrospect:</p>
+
+
+
+<ul class="wp-block-list">
+<li>Home progress!
+<ul class="wp-block-list">
+<li>Landscaping is done, trees are in</li>
+
+
+
+<li>Storm drains are cleaned</li>
+
+
+
+<li>The network is regularly providing 1200Mbps, after modernizing a bit (paid for by selling the slightly older equipment)</li>
+</ul>
+</li>
+
+
+
+<li>Work progress!
+<ul class="wp-block-list">
+<li>The concept sprint I led was a resounding success &ndash; the execs wish they could sell our plan now, but they recognize they need to wait until they fund it and we build it &ndash; and there&rsquo;s talk of more</li>
+
+
+
+<li>The pendulum is swinging back toward being more customer-centric</li>
+</ul>
+</li>
+
+
+
+<li> Life progress!
+<ul class="wp-block-list">
+<li>I pulled 410 last week by doing the plate math wrong, and it was no problem at all</li>
+
+
+
+<li>At my last appointment my PT said &ldquo;good job;&rdquo; I bet PTs don&rsquo;t say that often</li>
+</ul>
+</li>
+</ul>
+
+			</div><!-- .entry-content -->
+</article><!-- #post-## -->
+
+			
+				
+<article id="post-808" class="post-808 post type-post status-publish format-standard hentry category-uncategorized">
+	<header class="entry-header">
+		
+					<h2 class="entry-title"><a href="/2024/08/01/apropos-ofnothing-bitcoin/" rel="bookmark">Apropos of&hellip;nothing (bitcoin)</a></h2>				
+				<div class="entry-meta">
+			<span class="posted-on"><a href="/2024/08/01/apropos-ofnothing-bitcoin/" rel="bookmark"><time class="entry-date published" datetime="2024-08-01T08:50:00-07:00">August 1, 2024</time><time class="updated" datetime="2024-07-31T20:52:28-07:00">July 31, 2024</time></a></span><span class="byline"> <span class="author vcard"><a class="url fn n" href="/author/jonplummer_kssjnf/">Jon Plummer</a></span></span>		</div><!-- .entry-meta -->
+			</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		
+<p>A strategic reserve in (of?) a commodity implies that it&rsquo;s in the U.S. strategic interest to invest to be protected from price shocks or supply restrictions due to the importance of the commodity to the economy or military readiness.</p>
+
+
+
+<p>The best way to protect from bitcoin price shock is to not buy any. The best way to protect from a bitcoin supply restriction is to not use any.</p>
+
+
+
+<p>Both of these are free.</p>
+
+			</div><!-- .entry-content -->
+</article><!-- #post-## -->
+
+			
+				
+<article id="post-806" class="post-806 post type-post status-publish format-standard hentry category-uncategorized">
+	<header class="entry-header">
+		
+					<h2 class="entry-title"><a href="/2024/07/31/a-quick-word-about-taking-feedback/" rel="bookmark">A quick word about taking feedback</a></h2>				
+				<div class="entry-meta">
+			<span class="posted-on"><a href="/2024/07/31/a-quick-word-about-taking-feedback/" rel="bookmark"><time class="entry-date published updated" datetime="2024-07-31T20:35:25-07:00">July 31, 2024</time></a></span><span class="byline"> <span class="author vcard"><a class="url fn n" href="/author/jonplummer_kssjnf/">Jon Plummer</a></span></span>		</div><!-- .entry-meta -->
+			</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		
+<p>When receiving feedback on a design or other work the important thing is to see the&nbsp;<em>intent</em>&nbsp;behind the feedback and address that, rather than take the&nbsp;<em>specific</em>&nbsp;advice or try to&nbsp;<em>appease</em>&nbsp;the feedback-giver.</p>
+
+
+
+<p>Only by addressing the intent behind the feedback can the work be improved. yes, this might mean taking the specific advice, but it might not. The specific advice may not be the right answer.</p>
+
+
+
+<p>Appeasement is waste.</p>
+
+			</div><!-- .entry-content -->
+</article><!-- #post-## -->
+
+			
+				
+<article id="post-804" class="post-804 post type-post status-publish format-standard hentry category-uncategorized">
+	<header class="entry-header">
+		
+					<h2 class="entry-title"><a href="/2024/07/21/weekly-wins-for-the-week-of-2024-07-15/" rel="bookmark">Weekly wins for the week of 2024 07 15</a></h2>				
+				<div class="entry-meta">
+			<span class="posted-on"><a href="/2024/07/21/weekly-wins-for-the-week-of-2024-07-15/" rel="bookmark"><time class="entry-date published updated" datetime="2024-07-21T16:29:24-07:00">July 21, 2024</time></a></span><span class="byline"> <span class="author vcard"><a class="url fn n" href="/author/jonplummer_kssjnf/">Jon Plummer</a></span></span>		</div><!-- .entry-meta -->
+			</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		
+<ul class="wp-block-list">
+<li>Vacations are winding down and people are starting to come back to work. The team is filling out again.</li>
+
+
+
+<li>I convinced the SVP of Product to be quizzed about our product strategy &ndash; we&rsquo;ll put a script and some visuals together for our annual Company Connect and hopefully address longstanding complaints that people aren&rsquo;t sure how their work contributes to our strategy. This has raised other interesting topics that might also become topics, like how we really make money and where it goes, how our pricing and packaging works, etc. A lot of the things I was hoping to accomplish this year have been deprioritized (rightly) due to some technical pickles we find ourselves in, so this represents an opportunity to be influential beyond the usual process sand product stuff we do on the reg; fingers crossed.</li>
+
+
+
+<li>The ladies are back and the house is no longer empty. This also means my diet will improve &ndash; bachelor-mode Jon is (far) less disciplined than husband-mode Jon.</li>
+</ul>
+
+			</div><!-- .entry-content -->
+</article><!-- #post-## -->
+
+			
+				
+<article id="post-801" class="post-801 post type-post status-publish format-standard hentry category-uncategorized">
+	<header class="entry-header">
+		
+					<h2 class="entry-title"><a href="/2024/07/14/weekly-wins-for-the-weeks-of-2024-07-01-and-08/" rel="bookmark">Weekly wins for the weeks of 2024 07 01 and 08</a></h2>				
+				<div class="entry-meta">
+			<span class="posted-on"><a href="/2024/07/14/weekly-wins-for-the-weeks-of-2024-07-01-and-08/" rel="bookmark"><time class="entry-date published updated" datetime="2024-07-14T15:09:40-07:00">July 14, 2024</time></a></span><span class="byline"> <span class="author vcard"><a class="url fn n" href="/author/jonplummer_kssjnf/">Jon Plummer</a></span></span>		</div><!-- .entry-meta -->
+			</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		
+<p>Small quality-of-life adjustments can have an amazing effect. Sure, the fact that you need to push on the door a little bit to lock its deadbolt is not a huge deal; it hardly slows you down, takes little effort, and there&rsquo;s nearly no additional wear-and-tear as a result. Not a huge deal <em>once</em>, that is. Eight times a day every day as people come and go, sometimes with full hands or in a hurry, adds up to thousands of exactly-repeated minor annoyances per year with a single cause that is readily fixed. So the value of that fix is quite high, even if each incident is barely noticeable.</p>
+
+
+
+<ul class="wp-block-list">
+<li>I adjusted the strike plates on our exterior doors as mentioned above. It&rsquo;s fab!  (Ordinarily this would have been done by the contractor, but I put in the strikes so it fell to me.) Therese were not the strikes with the tab with the screwdriver hole, either.</li>
+
+
+
+<li>I also some moved boxes and furniture out of the garage, and rearranged some things, so that we can now park one car in the garage. Halfway there!</li>
+
+
+
+<li>During that process I started a tool donation box. There are some things that I&rsquo;ve bought two or three times, and some things I have that I hope never to use again, and these can go to the tool library. Fish tape, transfer pump, redundant pipe wrench? Sayonara.</li>
+
+
+
+<li>Adapting to people being out for summer trips (and to the recent upheaval in priorities) has not been as difficult as I expected, and it has been fun to dive into a little bit of design work to keep things moving for a team who has both designers out.</li>
+
+
+
+<li>I had a delightful coffee with a former coworker who is looking for work. We&rsquo;ve resolved to meet quarterly.</li>
+</ul>
+
+			</div><!-- .entry-content -->
+</article><!-- #post-## -->
+
+			
+				
+<article id="post-795" class="post-795 post type-post status-publish format-standard hentry category-uncategorized">
+	<header class="entry-header">
+		
+					<h2 class="entry-title"><a href="/2024/06/30/weekly-wins-for-the-week-of-2024-06-24/" rel="bookmark">Weekly wins for the week of 2024 06 24</a></h2>				
+				<div class="entry-meta">
+			<span class="posted-on"><a href="/2024/06/30/weekly-wins-for-the-week-of-2024-06-24/" rel="bookmark"><time class="entry-date published updated" datetime="2024-06-30T16:44:01-07:00">June 30, 2024</time></a></span><span class="byline"> <span class="author vcard"><a class="url fn n" href="/author/jonplummer_kssjnf/">Jon Plummer</a></span></span>		</div><!-- .entry-meta -->
+			</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		
+<p>Work was&hellip;fine&hellip;this week. Lots of folks are out or about to be out and while there&rsquo;s a moment to try to wrestle projects and processes into shape there are not a lot of people to do that with; preparing projects to to bowl along while they are out is more pressing. But with the girl and the lady out of the house I was productive with home projects. In the last week I&rsquo;ve</p>
+
+
+
+<ul class="wp-block-list">
+<li>sent a care package</li>
+
+
+
+<li>taken care of a library fine by finding and returning the book</li>
+
+
+
+<li>bought a copy of that same book, as a gift</li>
+
+
+
+<li>set up garage shelves and populated them</li>
+
+
+
+<li>moved the last of the boxes and tools from the neighbors&rsquo; garage</li>
+
+
+
+<li>set up a greenhouse (shh, it&rsquo;s a surprise)</li>
+
+
+
+<li>reconnected with an old friend</li>
+
+
+
+<li>thrilled a nephew with birthday gifts</li>
+
+
+
+<li>installed missing trim on a piece of furniture</li>
+
+
+
+<li>installed a door stop on the door to the cat litter box area</li>
+
+
+
+<li>went to a baseball game</li>
+
+
+
+<li>had the tires replaced on a car that sorely needed it</li>
+
+
+
+<li>replaced wipers on that same car</li>
+
+
+
+<li>replaced antenna garnish on that same car</li>
+
+
+
+<li>washed a different car</li>
+
+
+
+<li>given myself a haircut</li>
+
+
+
+<li>put a hook on the back of the closet door</li>
+
+
+
+<li>built a credible trashcan of an unusual size for a specific installation</li>
+
+
+
+<li>found and replaced a furnace filter</li>
+
+
+
+<li>epoxied together the house numbers and their holding shape</li>
+
+
+
+<li>done some emergency laundry</li>
+
+
+
+<li>kept all the plants and cats alive</li>
+</ul>
+
+			</div><!-- .entry-content -->
+</article><!-- #post-## -->
+
+			
+				
+<article id="post-790" class="post-790 post type-post status-publish format-standard hentry category-uncategorized">
+	<header class="entry-header">
+		
+					<h2 class="entry-title"><a href="/2024/06/22/weekly-wins-for-the-week-of-2024-06-17/" rel="bookmark">Weekly wins for the week of 2024 06 17</a></h2>				
+				<div class="entry-meta">
+			<span class="posted-on"><a href="/2024/06/22/weekly-wins-for-the-week-of-2024-06-17/" rel="bookmark"><time class="entry-date published" datetime="2024-06-22T15:00:20-07:00">June 22, 2024</time><time class="updated" datetime="2024-06-22T15:00:21-07:00">June 22, 2024</time></a></span><span class="byline"> <span class="author vcard"><a class="url fn n" href="/author/jonplummer_kssjnf/">Jon Plummer</a></span></span>		</div><!-- .entry-meta -->
+			</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		
+<p>Juneteenth National Independence Day was this last Wednesday. It was odd to have a holiday mid-week but</p>
+
+
+
+<ul class="wp-block-list">
+<li>Juneteenth is worth celebrating, worth remembering, worth considering in this political moment.</li>
+
+
+
+<li>I forgot that most of our walls are backed by plywood, so a towel bar installation I had put off was unexpectedly quick and dust-free.</li>
+
+
+
+<li>The newish head of engineering thanked me for my attention and care to our common (and coming) process fixes.</li>
+
+
+
+<li>The notion that we should (and that it makes economic sense to) focus on the things we can do that will help a lot of (and a lot of new) customers is starting to sink in among influential people. The notion that we should (and that it makes economic sense to) work a little harder so that our customers don&rsquo;t have to is taking a little more time, but I think we&rsquo;ll get there.</li>
+</ul>
+
+			</div><!-- .entry-content -->
+</article><!-- #post-## -->
+
+			
+			
+	<nav class="navigation posts-navigation" aria-label="Posts">
+		<h2 class="screen-reader-text">Posts navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="/page/2/">Older posts</a></div></div>
+	</nav>
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+
+	</div><!-- #content -->
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+		
+		<div class="site-info">
+			<a href="http://wordpress.org/">Proudly powered by WordPress</a>
+			<span class="sep"> | </span>
+			Theme: Libre by <a href="http://wordpress.com/themes/" rel="designer">Automattic</a>.		</div><!-- .site-info -->
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"\/*"},{"not":{"href_matches":["\/wp-*.php","\/wp-admin\/*","\/wp-content\/uploads\/*","\/wp-content\/*","\/wp-content\/plugins\/*","\/wp-content\/themes\/libre\/*","\/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<script type="text/javascript" id="libre-script-js-extra">
+/* <![CDATA[ */
+var libreadminbar = [""];
+/* ]]> */
+</script>
+<script type="text/javascript" src="/wp-content/themes/libre/js/libre.js?ver=20150623" id="libre-script-js"></script>
+<script type="text/javascript" src="/wp-content/themes/libre/js/navigation.js?ver=20120206" id="libre-navigation-js"></script>
+<script type="text/javascript" src="/wp-content/themes/libre/js/skip-link-focus-fix.js?ver=20130115" id="libre-skip-link-focus-fix-js"></script>
+
+<a rel="me" href="https://mas.to/@jplummer"></a>
+</body>
+</html>

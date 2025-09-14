@@ -71,6 +71,7 @@ Jon is an extremely thoughtful and caring leader who is always willing to suppor
 - [Crowd-sourced location determination](https://google.com/patents/US20160165570A1)
 
 …and more patents pending in networking and IoT.
+
 * * *
 
 See more via [my LinkedIn profile](https://linkedin.com/in/jplummer), and message me there if you have something to say. Or email [me@jonplummer.com](mailto:me@jonplummercom?Subject=Mail%20from%20jonplummer.name).
