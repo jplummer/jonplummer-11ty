@@ -1,13 +1,50 @@
 /* CSS CUSTOM PROPERTIES */
 :root {
+  /* Layout */
   --gutter: 2rem;
   --max-width: 66rem;
-  --max-width-narrow: 54rem;
+  --breakpoint-mobile: 54rem; /* custom properties don't work in a media query, alas */
 
+  /* Typography */
   --font-family: system-ui, sans-serif;
   --text-size: 16px;
-  --line-height: 1.5;
+  --line-height: 1.6;
+  --line-height-tight: 1.1;
 
+  /* Font sizes */
+  --font-size-xxs: 0.875rem;
+  --font-size-xs: 1rem;
+  --font-size-sm: 1.125rem;
+  --font-size-md: 1.25rem;
+  --font-size-lg: 1.5rem;
+  --font-size-xl: 1.75rem;
+  --font-size-2xl: 2.25rem;
+  --font-size-3xl: 4rem;
+
+  /* Font weights */
+  --font-weight-thin: 100;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+
+  /* Letter spacing */
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: normal;
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.25rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 2.25rem;
+  --spacing-ex: 5ex;
+
+  /* Z-index */
+  --z-index-skip-link: 100;
+
+  /* Accessibility */
+  --sr-only-offset: -9999rem;
+
+  /* Colors */
   --text-color: #404040;
   --background-color: #dadccf;
   --content-background-color: #fff;
@@ -34,7 +71,7 @@ html {
 
 /* Remove default margin in favour of better control in authored CSS */
 body, h1, h2, h3, h4, p,
-figure, blockquote, dl, dd {
+figure, blockquote, dl, dd, section {
   margin-block-end: 0;
 }
 
@@ -73,7 +110,7 @@ textarea:not([rows]) {
 
 /* Anything that has been anchored to should have extra scroll margin */
 :target {
-  scroll-margin-block: 5ex;
+  scroll-margin-block: var(--spacing-ex);
 }
 
 /* LAYOUT
@@ -119,15 +156,19 @@ body>header, body>main, body>footer {
 	max-width: var(--max-width);
 }
 
+body>footer {
+  padding-top: 0;
+}
+
 article {
 	display: grid;
 	grid-template-columns: 1fr 2fr;
 	grid-template-areas: 
 		"a a"
 		"b c";
-	gap: var(--gutter);
+	gap: 0 var(--gutter);
 	margin: 0;
-  padding-bottom: 2rem;
+  padding-bottom: var(--spacing-lg);
 }
 
 @media all and (max-width: 54rem) {
@@ -138,6 +179,65 @@ article {
 			"b"
 			"c";
 	}
+	
+	/* Stack header elements vertically on mobile */
+	header {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}
+
+/* Navigation layout */
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+nav li {
+  margin: 0;
+}
+
+/* Post navigation layout */
+nav.post-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Pagination layout */
+nav.pagination {
+  display: flex;
+  align-items: center;
+}
+
+/* Always position "prev" on the left */
+nav.pagination a.prev {
+  margin-right: auto;
+}
+
+/* Always position "next" on the right */
+nav.pagination a.next {
+  margin-left: auto;
+}
+
+/* Post navigation layout - same as pagination */
+nav.post-navigation {
+  display: flex;
+  align-items: center;
+}
+
+/* Always position "prev" on the left */
+nav.post-navigation a.prev {
+  margin-right: auto;
+}
+
+/* Always position "next" on the right */
+nav.post-navigation a.next {
+  margin-left: auto;
 }
 
 article header {
@@ -176,66 +276,157 @@ header a.skip:focus {
     z-index: 100;
 }
 
+hgroup {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+
 /* TYPOGRAPHY */
 
+/* Base typography */
 body {
+  font-family: var(--font-family);
   font-size: var(--text-size);
   line-height: var(--line-height);
 }
+
+/* Text size adjustment prevention */
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+/* Headings */
 h1, h2, h3, h4 {
-  margin: 1.25rem 0 0.5rem 0;
-  line-height: 1.1;
+  margin: var(--spacing-md) 0 0.25rem 0;
+  line-height: var(--line-height-tight);
   text-wrap: balance;
 }
-hgroup h1 {
-  font-size: 4rem;
-  font-weight: 100;
-  letter-spacing: -0.025em;
-}
+
 h1 {
-  font-size: 2.25rem;
-  font-weight: 700;
-  letter-spacing: -0.025em;
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
 }
+
 h2 {
-  font-size: 1.75rem;
-  font-weight: 700;
-  letter-spacing: -0.025em;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
 }
+
 h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  letter-spacing: -0.025em;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
 }
+
 h4 {
-  font-size: 1.25rem;
-  font-weight: 700;
-  letter-spacing: -0.025em;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
 }
+
 h5 {
-  font-size: 1.125rem;
-  font-weight: 700;
-  letter-spacing: -0.025em;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
 }
+
 h6 {
-  font-size: 1rem;
-  font-weight: 900;
-  letter-spacing: normal;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-black);
+  letter-spacing: var(--letter-spacing-normal);
 }
+
+/* Header layout with hgroup and navigation */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+/* Hgroup layout and typography */
+hgroup {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+hgroup h1 {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-thin);
+  letter-spacing: var(--letter-spacing-tight);
+  margin: 0;
+}
+
+hgroup p {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  font-style: italic;
+}
+
+/* Article headings */
+article h1 {
+  margin: 0;
+}
+
+/* Paragraphs */
 p {
-  margin: 2rem 0;
-  letter-spacing: normal;
+  margin: var(--spacing-sm) 0;
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+/* Form elements */
+input, button, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
 }
 
 button, input, label {
-  line-height: 1.1;
+  line-height: var(--line-height-tight);
+}
+
+/* Links */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Navigation typography */
+nav a {
+  font-size: var(--font-size-xxs);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+/* License typography */
+.license,
+footer p {
+  font-size: var(--font-size-xxs);
+}
+
+.license {
+  text-align: right;
+  font-style: italic;
+  margin: 0;
+  font-weight: 300;
 }
 
 
 /* COLOR */
 
 body {
-  font-family: var(--font-family);
   color: var(--text-color);
   background-color: var(--background-color);
 }
@@ -246,11 +437,11 @@ header, main, footer {
 
 a {
   color: var(--link-color);
-  text-decoration: none;
   transition: color 0.3s ease;
 }
 a:hover {
   color: var(--link-hover-color);
+  text-decoration: underline;
 }
 a:visited {
   color: var(--link-visited-color);
@@ -260,4 +451,53 @@ a:active {
 }
 a:focus {
   color: var(--link-hover-color);
+  text-decoration: underline;
 }
+
+a:not([class]) {
+  color: currentColor;
+}
+
+/* Article links always underlined except h1 */
+article a {
+  text-decoration: underline;
+}
+
+article h1 a {
+  text-decoration: none;
+}
+
+article h1 a:hover {
+  text-decoration: underline;
+}
+
+hgroup h1 a:visited,
+hgroup p {
+  color: var(--link-color); /* Keep hgroup as link-color even when visited */
+}
+
+/* Navigation colors */
+nav a {
+  color: var(--link-color);
+}
+nav a:hover {
+  color: var(--link-hover-color) !important;
+}
+nav a:visited {
+  color: var(--link-visited-color);
+}
+nav a:active {
+  color: var(--link-active-color);
+}
+
+/* License information colors */
+.license,
+footer p {
+  color: var(--link-visited-color);
+}
+
+/* Skip link colors */
+header a.skip:focus {
+  background-color: var(--content-background-color);
+}
+

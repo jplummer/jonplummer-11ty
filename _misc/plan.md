@@ -62,29 +62,29 @@
   - [x] Add meta tags and SEO elements
   - [x] skip link behavior
   - [x] page color vs content background color
-  - general typographical niceties such as
+  - [x] general typographical niceties such as
     - [x] font sizes and header sizes https://ithy.com/article/typography-font-size-spacing-lc0m3kwv
-    - pagination styles
-    - good rhythm for bullets (audit how bullets are converted from .md to .html)
-    - fix margins and page color
-    - menu behavior wide
-    - menu behavior narrow
-    - inline links vs incidental links
-    - copyright styling
+    - [x] pagination styles
+    - [x] fix margins and page color
+    - [x] menu behavior wide
+    - [x] menu behavior narrow
+    - [x] inline links vs incidental links
+    - [x] copyright styling
+    - [-] good rhythm for bullets (audit how bullets are converted from .md to .html)
 
-- **Post Content Template (`_includes/post_content.njk`)**
+- [x] **Post Content Template (`_includes/post_content.njk`)**
   - [x] Article structure matching current HTML
   - [x] Date formatting
-  - [ ] Tag/category display (don't need it)
-  - Main navigation at bottom
-    - Implement bodyClass in frontmatter to move the nav up and down
+  - [-] Tag/category display (don't need it)
+  - [-] Main navigation at bottom (decided not to do it)
+    - [-] Implement bodyClass in frontmatter to move the nav up and down (decided not to do it)
 
 - **Index Template (`index.njk`)**
-  - Blog listing with pagination
-  - Skip "portfolio" category (use only posts collection)
+  - [x] Blog listing with pagination
+  - [x] Skip "portfolio" category (use only posts collection)
   - [-] Post excerpts (nay!)
-  - Navigation controls
-  - Main navigation at top
+  - [x] Navigation controls
+  - [x] Main navigation at top
 
 - **Portfolio Template (`portfolio.njk`)**
   - Grid listing

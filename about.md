@@ -3,7 +3,6 @@ title: "About me – Jon Plummer"
 date: 2025-08-01
 layout: base.njk
 tags: page
-bodyId: about
 permalink: "/about/"
 ---
 (updated {{ date | postDate }})

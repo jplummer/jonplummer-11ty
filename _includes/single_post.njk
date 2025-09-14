@@ -1,8 +1,6 @@
 ---
 layout: base.njk
 purpose: individual post page
-bodyId: post
-bodyClass: inside
 ---
 
 {% set post = {
@@ -27,7 +25,3 @@ bodyClass: inside
     <a href="{{ nextPost.url }}" class="next">Next post: {{ nextPost.data.title }} →</a>
     {% endif %}
 </nav>
-
-<footer>
-    {% include "nav.njk" %}
-</footer>

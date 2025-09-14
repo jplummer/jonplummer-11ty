@@ -41,7 +41,7 @@
 
 </head>
 
-<body id="{{ bodyId | default('index') }}" class="{{ bodyClass | default('outside') }}">
+<body>
 <header>
     <a class="skip" href="#main">Skip to content</a>
     <hgroup>
@@ -56,7 +56,6 @@
 </main>
 
 <footer>
-    {% include "nav.njk" %}
     {% include "license.njk" %}
 </footer>
 </body>
