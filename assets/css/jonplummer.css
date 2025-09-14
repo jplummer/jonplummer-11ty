@@ -54,6 +54,20 @@
   --link-active-color: #ed8008;
 }
 
+/* Redefine colors for dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-color: #e0e0e0;
+    --background-color: #1a1a1a;
+    --content-background-color: #2d2d2d;
+    --link-color: #ff6b6b;
+    --link-hover-color: #ff8e8e;
+    --link-visited-color: #c4a484;
+    --link-active-color: #ffa500;
+  }
+}
+
+
 /* RESETS */
 
 /* Box sizing rules */
