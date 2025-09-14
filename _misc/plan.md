@@ -27,7 +27,7 @@
   - [x] get dates and date formatting working in all templates and includes
   - [-] Archive/tag templates (no, go straight to pagination)
 
-- **Configure URL Structure**
+- [x] **Configure URL Structure**
   - [x] Set up permalinks to match WordPress: `/YYYY/MM/DD/post-slug/`
   - [x] Configure pagination for archives (/page/2/ etc.)
     - [x] Set up pagination for blog posts with /page/2 URL scheme
@@ -44,10 +44,10 @@
   - [x] Parse XML to get clean content
   - [x] re-get all the images somehow
 
-- **Organize Content Files**
+- [x] **Organize Content Files**
   - [x] Create `_posts/` directory with dated subdirectories. Example structure: `_posts/2024/11/02/what-went-right-in-october/index.md`
 
-- **Convert to Markdown/Front Matter**
+- [x] **Convert to Markdown/Front Matter**
   - [x] Transform WordPress posts to Markdown with YAML front matter
   - [x] Categorize portfolio posts
   - [x] Preserve/check and repair metadata (dates, tags, categories, author)
@@ -56,7 +56,7 @@
 
 ## Phase 3: Template Development
 
-- **Base Layout (`_includes/base.njk`)**
+- [x] **Base Layout (`_includes/base.njk`)**
   - Header, navigation, footer
   - [x] Integrate existing CSS structure
   - [x] Add meta tags and SEO elements
@@ -70,7 +70,7 @@
     - [x] menu behavior narrow
     - [x] inline links vs incidental links
     - [x] copyright styling
-    - [-] good rhythm for bullets (audit how bullets are converted from .md to .html)
+    - [-] good rhythm for bullets (these are fine for now)
 
 - [x] **Post Content Template (`_includes/post_content.njk`)**
   - [x] Article structure matching current HTML
@@ -85,6 +85,8 @@
   - [-] Post excerpts (nay!)
   - [x] Navigation controls
   - [x] Main navigation at top
+
+<< WE ARE HERE >>
 
 - **Portfolio Template (`portfolio.njk`)**
   - Grid listing
@@ -104,9 +106,9 @@
 ## Phase 4: Advanced Features
 
 - **Search & Filtering**
-  - Tag-based filtering (not sure I need this)
-  - Date-based archives (not sure I need this)
-  - Search functionality (not sure I need this)
+  - [-] Tag-based filtering (not sure I need this)
+  - [-] Date-based archives (not sure I need this)
+  - [-] Search functionality (not sure I need this)
 
 - **Performance Optimization** meh
   - [-] CSS/JS minification (not sure I need this)
@@ -127,7 +129,7 @@
 
 - **Basic polish**
   - [x] quickest possible solid type scheme and stack
-  - double-dog check centering, margins, padding, breakpoints
+  - [x] double-dog check centering, margins, padding, breakpoints
   - vertical rhythm https://edgdesign.co/blog/baseline-grids-in-css
   - highlight the current page in the nav per https://11ty.rocks/tips/essential-navigation-snippet/
   - aria-current page per https://www.11ty.dev/docs/collections/#use-an-aria-current-attribute-on-the-current-page
@@ -143,7 +145,7 @@
 - **GitHub Actions** (recommended):
   - Automatic builds on push to main branch
   - Run 11ty build process
-  - Validate generated HTML
+  - Validate generated HTML (installed npm html-validate)
   - Upload to hosting provider
 
 - **Alternative: Local deployment scripts**:

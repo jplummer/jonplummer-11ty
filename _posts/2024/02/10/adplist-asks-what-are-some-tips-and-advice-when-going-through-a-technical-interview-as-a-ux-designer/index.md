@@ -1,5 +1,5 @@
 ---
-title: "ADPList asks: What are some tips and advice when going through a technical interview as a UX Designer?"
+title: "Tips for UX Designer Technical Interviews"
 layout: single_post.njk
 date: 2024-02-10
 tags: post
