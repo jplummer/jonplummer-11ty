@@ -25,9 +25,10 @@ npm run test-rss                       # Test RSS feeds
 npm run test-all                       # Run all tests in sequence
 ## Deploy site to host
 npm run test-deployment                # Test deployment (environment, local build check, 
-                                       # dependencies, SSH, remote directory, rsync dry-run)
-npm run deploy                         # Full deployment from /_site (clobbers all) using rsync
+                                       #   dependencies, SSH, remote directory, rsync dry-run)
+npm run preview-deploy-changes         # See what would be done by deploy-changes
 npm run deploy-changes                 # Deploy only new or changed items from /_site using rsync
+npm run deploy                         # Full deployment from /_site (clobbers all) using rsync
 
 # Color ideas
 

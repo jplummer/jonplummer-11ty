@@ -13,6 +13,7 @@
     "test-deployment": "node scripts/test-deployment.js",
     "deploy": "node scripts/deploy.js",
     "deploy-changes": "node scripts/deploy-changes.js",
+    "preview-deploy-changes": "node scripts/preview-deploy-changes.js",
     "test-links": "node scripts/test-links.js",
     "test-internal-links": "node scripts/test-internal-links.js",
     "test-external-links": "node scripts/test-external-links.js",

@@ -14,10 +14,10 @@ permalink: "{% if pagination.pageNumber == 0 %}/{% else %}/page/{{ pagination.pa
 {% endfor %}
 
 <nav class="pagination">
-    {% if pagination.href.previous %}
-        <a class="prev" href="{{ pagination.href.previous }}">← Newer posts</a>
-    {% endif %}
     {% if pagination.href.next %}
-        <a class="next" href="{{ pagination.href.next }}">Older posts →</a>
+        <a class="prev" href="{{ pagination.href.next }}">← Older posts</a>
+    {% endif %}
+    {% if pagination.href.previous %}
+        <a class="next" href="{{ pagination.href.previous }}">Newer posts →</a>
     {% endif %}
 </nav>

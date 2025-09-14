@@ -73,6 +73,48 @@ function checkSshpass() {
   }
 }
 
+// Parse rsync output for warnings and important messages
+function parseRsyncWarnings(output) {
+  const warnings = [];
+  const lines = output.split('\n');
+  
+  for (const line of lines) {
+    const trimmed = line.trim();
+    
+    // Directory deletion errors
+    if (trimmed.includes('cannot delete non-empty directory:')) {
+      const match = trimmed.match(/cannot delete non-empty directory: (.+)/);
+      if (match) {
+        warnings.push(`⚠️  Cannot delete non-empty directory: ${match[1]}`);
+        warnings.push(`   This directory may contain files not in your local build.`);
+        warnings.push(`   Consider manually cleaning it up on the server if needed.`);
+      }
+    }
+    
+    // Permission errors
+    else if (trimmed.includes('Permission denied') || trimmed.includes('permission denied')) {
+      warnings.push(`🔒 Permission denied: ${trimmed}`);
+    }
+    
+    // File not found errors
+    else if (trimmed.includes('No such file or directory')) {
+      warnings.push(`📁 File not found: ${trimmed}`);
+    }
+    
+    // Other rsync warnings
+    else if (trimmed.startsWith('rsync warning:') || trimmed.startsWith('rsync: warning:')) {
+      warnings.push(`⚠️  ${trimmed}`);
+    }
+    
+    // Connection issues
+    else if (trimmed.includes('Connection refused') || trimmed.includes('connection refused')) {
+      warnings.push(`🔌 Connection refused: ${trimmed}`);
+    }
+  }
+  
+  return warnings;
+}
+
 function deployChanges() {
   try {
     // Check prerequisites
@@ -168,15 +210,44 @@ function deployChanges() {
       : rsyncCommand.join(' ');
     console.log(`   ${displayCommand}\n`);
 
-    // Execute rsync
-    const result = execSync(rsyncCommand.join(' '), { 
-      stdio: 'inherit',
-      encoding: 'utf8'
-    });
+    // Execute rsync and capture output
+    let rsyncOutput = '';
+    let exitCode = 0;
+    
+    try {
+      rsyncOutput = execSync(rsyncCommand.join(' '), { 
+        stdio: 'pipe',
+        encoding: 'utf8'
+      });
+    } catch (error) {
+      rsyncOutput = error.stdout || '';
+      exitCode = error.status || 1;
+    }
 
-    console.log('\n✅ Deployment completed successfully!');
-    console.log(`🌐 Your updated site should be live at: https://${config.host}`);
-    console.log('\n📊 rsync automatically uploaded only new and changed files.');
+    // Parse rsync output for warnings and errors
+    const warnings = parseRsyncWarnings(rsyncOutput);
+    
+    // Display warnings if any
+    if (warnings.length > 0) {
+      console.log('\n⚠️  DEPLOYMENT WARNINGS:');
+      console.log('─'.repeat(40));
+      warnings.forEach(warning => {
+        console.log(`   ${warning}`);
+      });
+      console.log('─'.repeat(40));
+    }
+
+    if (exitCode === 0) {
+      console.log('\n✅ Deployment completed successfully!');
+      console.log(`🌐 Your updated site should be live at: https://${config.host}`);
+      console.log('\n📊 rsync automatically uploaded only new and changed files.');
+      
+      if (warnings.length > 0) {
+        console.log('\n💡 Note: Some warnings occurred during deployment. Check the details above.');
+      }
+    } else {
+      throw new Error(`rsync failed with exit code ${exitCode}`);
+    }
 
   } catch (error) {
     console.error('\n❌ Deployment failed:');
