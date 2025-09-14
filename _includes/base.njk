@@ -51,11 +51,11 @@
     {% include "nav.njk" %}
 </header>
 
-<main id="main">
+<main id="main" aria-label="Main content">
     {{ content | safe }}
 </main>
 
-<footer>
+<footer aria-label="Site footer">
     {% include "license.njk" %}
 </footer>
 </body>
