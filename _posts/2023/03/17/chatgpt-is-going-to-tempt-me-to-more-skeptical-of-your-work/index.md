@@ -1,10 +1,9 @@
 ---
-title: "ChatGPT is going to tempt me to be more skeptical of your work"
+title: ChatGPT is going to tempt me to be more skeptical of your work
 layout: single_post.njk
-date: 2023-03-17
+date: "2023-03-16T12:00:00-08:00"
 tags: post
 ---
-
 Lately I've been seeing a lot of posts on LinkedIn and elsewhere crowing about how [ChatGPT](https://openai.com/blog/chatgpt) could be used to perform UX tasks. Examples:
 - [How do I use ChatGPT for UX Design](https://www.linkedin.com/posts/prasadneurgaonkar_ux-spring-activity-7029496857881976832-0qkn/?utm_source=share&utm_medium=member_desktop)
 - [How to use chatGPT for UI/UX design: 25 examples](https://blog.prototypr.io/how-to-use-chatgpt-for-ui-ux-design-25-examples-f7772bea3e70)

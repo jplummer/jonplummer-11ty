@@ -1,10 +1,9 @@
 ---
-title: "Weekly wins for the week of 2023 05 08"
+title: Weekly wins for the week of 2023 05 08
 layout: single_post.njk
-date: 2023-05-13
+date: "2023-05-12T12:00:00-08:00"
 tags: post
 ---
-
 Last week was tricky motivation-wise; there's an onsite meeting coming up in two weeks that is very important and I'm nervous about the outcome. That's typically a recipe for procrastination. So
 - I got four of five quarterly coaching sessions done ([structured procrastination](https://structuredprocrastination.com) for the win).
 - We started a pilot to recruit prospective research participants; if this works we'll have significantly lowered one of our key barriers to user research. And if not, we can pivot and use the work that went into this pilot in other channels rather than having to start over. Planning your experiments in advance is good.

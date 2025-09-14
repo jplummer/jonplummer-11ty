@@ -1,10 +1,9 @@
 ---
-title: "Don't interrupt the natural behavior"
+title: Don't interrupt the natural behavior
 layout: single_post.njk
-date: 2023-03-09
+date: "2023-03-08T12:00:00-08:00"
 tags: post
 ---
-
 Don't interrupt the user's natural behavior. Enhance or extend the natural behavior, but remain compatible with it.  
   
 While I worked for Belkin we made a remote-controllable plug-in switch module. You would plug this thing in to the wall and then plug a lamp or something into it, and it allowed you to control the lamp with your phone, turn it on or off, set a timer, etc. It was great, it sold pretty well, it was totally DIY-able, and pretty understandable. But folks who used it were ultimately lukewarm about it – they didn't love it. It interrupted the natural behavior of turning on and off the lamp. Instead of going to the stem of the lamp you had to either use your phone or push a button on the unit, which was at outlet-level on the wall. If someone turned the lamp off the old-fashioned way you could not use the unit to turn it back on without ALSO turning the lamp on the old way, blunting its usefulness.  

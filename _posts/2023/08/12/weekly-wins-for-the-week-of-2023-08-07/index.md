@@ -1,7 +1,7 @@
 ---
-title: "Weekly wins for the week of 2023 08 07"
+title: Weekly wins for the week of 2023 08 07
 layout: single_post.njk
-date: 2023-08-12
+date: "2023-08-11T12:00:00-08:00"
 tags: post
 ---
 - My brother and his family visited the state. The drive to see them all and spend the night was mercifully easy, and a great time was had by all.

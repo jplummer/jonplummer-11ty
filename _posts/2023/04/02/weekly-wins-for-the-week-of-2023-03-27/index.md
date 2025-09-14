@@ -1,7 +1,7 @@
 ---
-title: "Weekly wins for the week of 2023 03 27"
+title: Weekly wins for the week of 2023 03 27
 layout: single_post.njk
-date: 2023-04-02
+date: "2023-04-01T12:00:00-08:00"
 tags: post
 ---
 - It wasn't COVID-19, just a sinus infection that dripped into crevices and alarmed passers-by. I'm nearly 100% now.

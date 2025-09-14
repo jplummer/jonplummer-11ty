@@ -14,13 +14,15 @@
     "deploy": "node scripts/deploy.js",
     "deploy-changes": "node scripts/deploy-changes.js",
     "test-links": "node scripts/test-links.js",
+    "test-internal-links": "node scripts/test-internal-links.js",
+    "test-external-links": "node scripts/test-external-links.js",
     "test-content": "node scripts/test-content-structure.js",
     "test-performance": "node scripts/test-performance.js",
     "test-seo": "node scripts/test-seo-meta.js",
     "test-accessibility": "node scripts/test-accessibility.js",
     "test-consistency": "node scripts/test-build-consistency.js",
     "test-rss": "node scripts/test-rss-feed.js",
-    "test-all": "npm run test-links && npm run test-content && npm run test-performance && npm run test-seo && npm run test-accessibility && npm run test-consistency && npm run test-rss"
+    "test-all": "npm run test-internal-links && npm run test-content && npm run test-performance && npm run test-seo && npm run test-accessibility && npm run test-consistency && npm run test-rss"
   },
   "keywords": [],
   "author": "Jon Plummer",

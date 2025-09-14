@@ -1,10 +1,9 @@
 ---
-title: "Empathy for the leader whose company is being acquired"
+title: Empathy for the leader whose company is being acquired
 layout: single_post.njk
-date: 2022-04-17
+date: "2022-04-16T12:00:00-08:00"
 tags: post
 ---
-
 To be a leader planning for one's firm to be acquired is to be in conflict with oneself: one must both
 - proceed as if nothing will change, as there's no deal until the deal is complete, and
 - plan the future in which everything will change, rendering the rod that went into "proceed as if nothing will change" entirely moot.

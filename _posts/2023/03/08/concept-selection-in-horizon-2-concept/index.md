@@ -1,10 +1,9 @@
 ---
 title: "Concept selection in Horizon 2: Concept"
 layout: single_post.njk
-date: 2023-03-08
+date: "2023-03-07T12:00:00-08:00"
 tags: post
 ---
-
 Michael asks:
 
 > Once you have a variety of potential solutions/designs how do you know which one(s) to choose to iterate on and which ones to discard?

@@ -1,10 +1,9 @@
 ---
-title: "Weekly wins for the week of 2022 07 25"
+title: Weekly wins for the week of 2022 07 25
 layout: single_post.njk
-date: 2022-07-31
+date: "2022-07-30T12:00:00-08:00"
 tags: post
 ---
-
 Three wins for this week:
 
 1. It was less tricky than I feared to come up with four reasonable UX-led programs for the [Connect Conference](https://cayuse.com/connect2022/) this October. I'm feeling more optimistic about my (and our) responsibilities for this conference than before.

@@ -1,10 +1,9 @@
 ---
-title: "Weekly wins for the week of 2023 06 12"
+title: Weekly wins for the week of 2023 06 12
 layout: single_post.njk
-date: 2023-06-17
+date: "2023-06-16T12:00:00-08:00"
 tags: post
 ---
-
 I had a medical…thing…to do on Monday so this was another shortish week, the sort where all the meetings get slid atop one another to occupy available space so you can pretend that it was not a short week. Even so,
 - The medical thing went fine. I remember nothing.
 - Friday was meeting-light so I got a little bit of non-meeting work done.

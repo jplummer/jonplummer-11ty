@@ -1,10 +1,9 @@
 ---
-title: "My note to Mr. Bias"
+title: My note to Mr. Bias
 layout: single_post.njk
-date: 2020-12-08
+date: "2020-12-07T12:00:00-08:00"
 tags: post
 ---
-
 Mr. Bias wanted folks to look over his new portfolio, and I was happy to help. He's a new UX/UI Designer and what little appears on [his site](https://www.tbias.design/) is promising. Here's what I had to say:
 
 > Hey there.

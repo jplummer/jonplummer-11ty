@@ -1,7 +1,7 @@
 ---
-title: "Weekly wins for the week of 2022 09 19"
+title: Weekly wins for the week of 2022 09 19
 layout: single_post.njk
-date: 2022-09-25
+date: "2022-09-24T12:00:00-08:00"
 tags: post
 ---
 - I involved the team in figuring out how we would rearrange ourselves now that we have new product priorities, and they came up with what I expect is a good solution without any teeth-gnashing at all.

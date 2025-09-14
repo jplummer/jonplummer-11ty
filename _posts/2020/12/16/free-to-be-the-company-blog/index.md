@@ -1,10 +1,9 @@
 ---
-title: "Free to be the company blog"
+title: Free to be the company blog
 layout: single_post.njk
-date: 2020-12-16
+date: "2020-12-15T12:00:00-08:00"
 tags: post
 ---
-
 You'd be forgiven for thinking my employer doesn't have a blog. It (and the website it's a part of) haven't been updated in a while, and while the content is interesting, it's a little wooden and sparsely published, to the tune of an article or two per year in past years, and none this year.
 
 "Thought leadership" is a line item on every director's or VP's job description, and we're told it is important. The suggested ways to demonstrate thought leadership are by the blog, giving conference talks, and by participating in standards committees (useful for our edtech products and clientele). A very few people are in position to participate in the standards committees, and the rest of us are not holding up our end.

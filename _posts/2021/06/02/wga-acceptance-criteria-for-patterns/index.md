@@ -1,11 +1,10 @@
 ---
-title: "WGA \"acceptance criteria for patterns\""
+title: WGA "acceptance criteria for patterns"
 layout: single_post.njk
-date: 2021-06-02
+date: "2021-06-01T12:00:00-08:00"
 tags: portfolio
-coverImage: "Screenshot2022-11-11at3.30.55PM.png"
+coverImage: Screenshot2022-11-11at3.30.55PM.png
 ---
-
 At Concentric Sky we delivered some form of design system or pattern library to every client depending on their needs and the maturity of the digital property we were working on. For Western Governors University we were working on a new internal tool to manage rich skill descriptors (RSDs), but worked on a complete pattern library up front to speed our own development of the first version of the tool and enable rapid improvements in subsequent projects.
 
 Central to this effort was the [Acceptance Criteria for Patterns](https://misc.jonplummer.com/portfolio/WGU%20acceptance%20criteria%20for%20patterns.pdf) document pictured here. The document included a block diagram of a typical page, followed by descriptions of the form and expected behavior of each pattern, and which smaller patterns each larger pattern incorporates. Each pattern also links the corresponding part of the design system.

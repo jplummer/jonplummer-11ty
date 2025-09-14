@@ -1,10 +1,9 @@
 ---
-title: "Active project self-management"
+title: Active project self-management
 layout: single_post.njk
-date: 2023-05-20
+date: "2023-05-20T12:00:00-08:00"
 tags: post
 ---
-
 I was fielding complaints about slowness in the UX team's contribution to projects until I started talking to the people I support about this concept. Turns out it is good for anyone who works on a team, anyone who works with others.
 
 When starting on or working on a project, I expect everyone to:

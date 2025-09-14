@@ -1,10 +1,9 @@
 ---
-title: "Who \"owns\" accessibility?"
+title: Who "owns" accessibility?
 layout: single_post.njk
-date: 2021-11-08
+date: "2021-11-07T12:00:00-08:00"
 tags: post
 ---
-
 Heather asked me yesterday "who owns accessibility?" That's a fun question. I replied:
 
 > Accessibility is not owned. Who owns quality? It's a team responsibility. To the extent that accessibility compliance, or release date, or the P&L is a "feature" of a piece of software it is owned by the PM, but each function has its responsibilities in accomplishing accessibility. Making these responsibilities explicit is necessary.  

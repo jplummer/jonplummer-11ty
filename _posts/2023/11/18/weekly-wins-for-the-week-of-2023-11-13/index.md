@@ -1,10 +1,9 @@
 ---
-title: "Weekly wins for the week of 2023 11 13"
+title: Weekly wins for the week of 2023 11 13
 layout: single_post.njk
-date: 2023-11-18
+date: "2023-11-17T12:00:00-08:00"
 tags: post
 ---
-
 In spite of the organization's urges to snap back to old ways (ways that got us to where we are, so are not sufficient on their own to change our results):
 - My people are not overreacting to the politics…
 - …assisted by their work in making us more customer-centric being shouted-out in public forums by the CEO…

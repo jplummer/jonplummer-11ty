@@ -1,10 +1,9 @@
 ---
-title: "Weekly wins for the week of 2022 08 01"
+title: Weekly wins for the week of 2022 08 01
 layout: single_post.njk
-date: 2022-08-07
+date: "2022-08-06T12:00:00-08:00"
 tags: post
 ---
-
 Five(!) wins for this week. It pays to think about what good is happening:
 
 1. After buying some cheap running shoes ($70, about as cheap as they had that felt good) I went for a run again. I hated it, but only a little bit, mainly at first, and much less that I would have had I not been wearing proper shoes. I'm four runs in and can see this as a possible "thing I do." Between lifting three times a week, walking sevenish times a week, and running threeish times a week I'm getting a fair amount of exercise now.

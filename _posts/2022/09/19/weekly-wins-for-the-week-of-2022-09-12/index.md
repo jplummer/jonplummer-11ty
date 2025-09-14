@@ -1,7 +1,7 @@
 ---
-title: "Weekly wins for the week of 2022 09 12"
+title: Weekly wins for the week of 2022 09 12
 layout: single_post.njk
-date: 2022-09-19
+date: "2022-09-18T12:00:00-08:00"
 tags: post
 ---
 - While the team is sad at the departure of a great employee, they are holding together.

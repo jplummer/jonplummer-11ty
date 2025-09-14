@@ -1,10 +1,9 @@
 ---
 title: "Revamping my design leadership portfolio: setting up initial research with recruiters"
 layout: single_post.njk
-date: 2021-04-16
+date: "2021-04-15T12:00:00-08:00"
 tags: post
 ---
-
 Recruiters I've recently spoken to about passive opportunities (where the recruiter reached out to me before I was aware of the position) are more accessible to me than hiring managers, so my research will have to start there. In a previous article I said
 
 > The first step in capturing passive opportunities is clearly to get my profile in front of relevant recruiters. LinkedIn seems pretty good for this. While my LinkedIn profile is also not a subject of this research, I'm sure I'll learn things relevant to it along the was as well.
@@ -13,7 +12,7 @@ Recruiters I've recently spoken to about passive opportunities (where the recrui
 > 
 > The third is for my profile and the assessment of the recruiter to work together to encourage the hiring manager to grant me an interview. My impression is that my portfolio is not effective in this third step.
 > 
-> [Revamping my design portfolio: audiences](https://jonplummer.local/2021/03/27/revamping-my-design-leadership-portfolio-audiences/)
+> [Revamping my design portfolio: audiences](/2021/03/27/revamping-my-design-leadership-portfolio-audiences/)
 
 The questions raised here include
 - Is LinkedIn a good way to get my profile in front of recruiters?

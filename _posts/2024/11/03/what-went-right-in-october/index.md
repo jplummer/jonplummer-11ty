@@ -1,10 +1,9 @@
 ---
-title: "What went right in October?"
+title: What went right in October?
 layout: single_post.njk
-date: 2024-11-03
+date: "2024-11-02T12:00:00-08:00"
 tags: post
 ---
-
 So many things, in retrospect:
 - Home progress!
     - Landscaping is done, trees are in

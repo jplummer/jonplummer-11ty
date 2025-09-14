@@ -1,7 +1,7 @@
 ---
-title: "Weekly wins for the week of 2023 05 15"
+title: Weekly wins for the week of 2023 05 15
 layout: single_post.njk
-date: 2023-05-20
+date: "2023-05-20T12:00:00-08:00"
 tags: post
 ---
 - Quarterly coaching is done. I might be the first to complete it among the managers.

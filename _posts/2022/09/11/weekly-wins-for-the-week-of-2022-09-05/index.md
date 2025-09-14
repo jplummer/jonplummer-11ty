@@ -1,10 +1,9 @@
 ---
-title: "Weekly wins for the week of 2022 09 05"
+title: Weekly wins for the week of 2022 09 05
 layout: single_post.njk
-date: 2022-09-11
+date: "2022-09-10T12:00:00-08:00"
 tags: post
 ---
-
 I skipped a couple of these since I was on vacation. One win of that period, though, is that the vacation was amazing, despite some RV plumbing mishaps (nothing gross). Here are some wins since then:
 
 1. I disappeared for two weeks and my team at work continued to ably make progress without my help. Nothing caught on fire, no one got stuck, no one complained. It was heartening to read the scroll back in the team Slack channel and see them tackling issues, supporting each other, making good decisions. :feelsgoodman:

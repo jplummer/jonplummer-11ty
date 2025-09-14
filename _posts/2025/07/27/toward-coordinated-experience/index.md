@@ -1,10 +1,9 @@
 ---
-title: "Toward coordinated experience"
+title: Toward coordinated experience
 layout: single_post.njk
-date: 2025-07-27
+date: "2025-07-27T12:00:00-08:00"
 tags: post
 ---
-
 ## Background
 
 I realized the other day that we (UX and others) make workflow diagrams but don’t distinguish in them between “system advances you to the next step" or "offers you a link to a relevant thing” versus “user has to know to go somewhere else to do a necessary thing.” These are not at all equivalent; the arrows look the same, but those that denote “user has to know to go somewhere else to do a thing” should be maybe painfully ugly or broken or perhaps not exist at all to point out that a barrier exists.  

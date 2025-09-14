@@ -1,10 +1,9 @@
 ---
-title: "Weekly wins…of late"
+title: Weekly wins…of late
 layout: single_post.njk
-date: 2024-06-15
+date: "2024-06-14T12:00:00-08:00"
 tags: post
 ---
-
 I fell off the weekly wins wagon _hard_ in November, then wrote just one earlier this month. Time to get back on.
 - Social win – I saw a friend and past coworker who lives in town and it was lovely. I should reach out to more folks.
 - Social win – the parents and mother-in-law were in town for the girl's graduation, and brought their attendant challenges, but everything went just fine.

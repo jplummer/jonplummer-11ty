@@ -1,10 +1,9 @@
 ---
-title: "A quick note to the design team about meeting invitations"
+title: A quick note to the design team about meeting invitations
 layout: single_post.njk
-date: 2021-06-12
+date: "2021-06-11T12:00:00-08:00"
 tags: post
 ---
-
 Gentle people,
 I recently complained to the directors and project managers about meeting invitations
 - without agendas, or

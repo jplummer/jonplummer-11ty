@@ -1,10 +1,9 @@
 ---
-title: "Recent wins as of 2024 06 02"
+title: Recent wins as of 2024 06 02
 layout: single_post.njk
-date: 2024-06-02
+date: "2024-06-01T12:00:00-08:00"
 tags: post
 ---
-
 It's been a bit since I did a "weekly wins" post, mostly because of…lassitude…but with the convenient excuse that we've been finishing the house project and moving and setting up and shepherding the girl through the last bits of high school. So some wins have occurred since the last post, the highest of which have been
 - High school is done, with great results. Good grades, an IB diploma, grandparents visiting, relief and happiness and the bittersweet knowledge that for some friendships this might be the last hurrah all in one.
 - We're in the house and it is great.

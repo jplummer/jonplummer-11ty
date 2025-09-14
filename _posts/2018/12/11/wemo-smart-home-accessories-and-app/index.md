@@ -1,11 +1,10 @@
 ---
-title: "WeMo smart home accessories and app"
+title: WeMo smart home accessories and app
 layout: single_post.njk
-date: 2018-12-11
+date: "2018-12-10T12:00:00-08:00"
 tags: portfolio
-coverImage: "devices_withhand.png"
+coverImage: devices_withhand.png
 ---
-
 _2013 IDEA Finalist, 2013 Silver UX Award_
 
 Wemo is a family of intelligent products for the home that allow you to control and see the status of switches, lights, and other devices, via your phone, from anywhere. We started with a plug-in switch module and a motion sensor, then quickly expanded to a power-measuring switch (Wemo Insight), a light switch, various LED lighting products, a heater, humidifier, and slow-cooker, and recently a dimmer. A smaller version of the original switch module, dubbed Wemo Mini, launched at the beginning of 2017.

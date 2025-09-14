@@ -13,10 +13,14 @@
 * npm run build                 # Build production site
 * npm run start                 # Start development server
 * npm run clean                 # Clean build directory
+## Repair migration issues
+npm run fix-internal-links      # Clean up .local links
+npm run fix-date-mismatches     # Clean up folder vs frontmatter issues
 ## Validate generated site
 npm run validate                # Check HTML validity
 npm run validate-comprehensive  # Check HTML validity plus plus
-## More tests
+npm run test-internal-links     # Test only internal links (critical)
+npm run test-external-links     # Test only external links (informational)
 npm run test-links              # Test all links
 npm run test-content            # Test content structure
 npm run test-performance        # Analyze performance

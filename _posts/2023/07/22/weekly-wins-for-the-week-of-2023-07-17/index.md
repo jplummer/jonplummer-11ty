@@ -1,10 +1,9 @@
 ---
-title: "Weekly wins for the week of 2023 07 17"
+title: Weekly wins for the week of 2023 07 17
 layout: single_post.njk
-date: 2023-07-22
+date: "2023-07-21T12:00:00-08:00"
 tags: post
 ---
-
 The week was dominated by a health scare that continues. Even so,
 - My spirits are fairly light.
 - No one (yet) is feeding me their crackpot health advice.

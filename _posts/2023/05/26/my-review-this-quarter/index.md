@@ -1,10 +1,9 @@
 ---
-title: "My review this quarter"
+title: My review this quarter
 layout: single_post.njk
-date: 2023-05-26
+date: "2023-05-25T12:00:00-08:00"
 tags: post
 ---
-
 I've shared this verbatim with my team and pointed out how it will affect our work in the coming quarter.
 
 > Jon has done a great job ramping up on all things Invoca and focusing on building out the UX discipline and helping push us to be more customer centric.

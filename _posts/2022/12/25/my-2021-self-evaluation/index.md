@@ -1,10 +1,9 @@
 ---
-title: "My 2021 self-evaluation"
+title: My 2021 self-evaluation
 layout: single_post.njk
-date: 2022-12-25
+date: "2022-12-24T12:00:00-08:00"
 tags: post
 ---
-
 The twists and turns of my prior role are relevant to my new role. My self-eval of 2021 contains lessons for me now, though the stated goals of my new role will be related but different. (Edited to anonymize.)
 
 * * *

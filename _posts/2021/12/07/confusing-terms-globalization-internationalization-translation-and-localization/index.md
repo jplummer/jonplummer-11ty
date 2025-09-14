@@ -1,10 +1,9 @@
 ---
 title: "Confusing terms: globalization, internationalization, translation, and localization"
 layout: single_post.njk
-date: 2021-12-07
+date: "2021-12-06T12:00:00-08:00"
 tags: post
 ---
-
 At work there's been a move afoot to tag items in our roadmapping tool as "globalization," "internationalization," "localization," or "translation."
 
 The executive level thinking here is that we are not offering our products globally, and need to be. So what do you do about that? You globalize!

@@ -1,10 +1,9 @@
 ---
 title: "Mathilda asks: Can you all share how you distinguish product designers from user experience designers?"
 layout: single_post.njk
-date: 2022-06-23
+date: "2022-06-22T12:00:00-08:00"
 tags: post
 ---
-
 Mathilda asks:
 
 > Can you all share how you distinguish product designers from user experience designers? I’ve been trying to determine the differentiation with other UX friends, but it still seems a bit foggy. Some have explained it to me as user experience designers focus on users and usability, and product designers focus on “everything”, i.e. the product and the business. Many of the user experience books and resources I read (Lean UX, Build Better Products, UX Strategy, NNgroup) though seem to frequently connect business outcomes with UX. I’ve also heard the difference explained as product designers having greater visual design specialization, but I’ve seen that in UX designer roles as well. Also, why not hire a visual designer in that situation?

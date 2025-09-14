@@ -1,10 +1,9 @@
 ---
-title: "Weekly wins for the week of 2023 06 26"
+title: Weekly wins for the week of 2023 06 26
 layout: single_post.njk
-date: 2023-07-01
+date: "2023-06-30T12:00:00-08:00"
 tags: post
 ---
-
 Scattered wins this week:
 - After three tries (all administrative or preparation missteps of one sort or another) the girl now has a learner's permit; a small but crucial step toward learning a few adult skills.
 - Disconcert between two teams is giving way to eagerness and collaboration. Three things I often talk about are helping us along:

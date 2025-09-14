@@ -1,10 +1,9 @@
 ---
 title: "Daphne writes:"
 layout: single_post.njk
-date: 2020-11-04
+date: "2020-11-03T12:00:00-08:00"
 tags: post
 ---
-
 > I have near two year experience doing oversea marketing from a leading international NAS company called Synology. My role was devising marketing strategy and implementing it in our New Zealand and Australia market. (These two markets earn Synology over 1 billion revenue annually) I was the only marketing person who looks after these two area, so I have to run user/market research, devise product and content strategies, build campaign website with development, hold offline trade shows, perform copywriting, release product PR/ writeups and strategically distribute all the marketing materials to various channel outlets (including enterprise and consumer channels).
 > 
 > I came across UX in a marketing campaign where I design the website from scratch and attracted millions of impressions within two months. I realized that I’m interested in how experience shapes user behaviors, as well how they make decisions. By looking into users in both qualitative and quantitative lens, I hope I can play a more product-oriented role in a firm. That’s why I decided to pivot my career.

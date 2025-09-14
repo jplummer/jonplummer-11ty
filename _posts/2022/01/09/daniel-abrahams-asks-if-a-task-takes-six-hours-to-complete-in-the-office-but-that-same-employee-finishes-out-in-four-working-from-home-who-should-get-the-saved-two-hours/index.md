@@ -1,10 +1,9 @@
 ---
 title: "Daniel Abrahams asks: \"If a task takes six hours to complete in the office, but that same employee finishes out in four working from home, who should get the saved two hours?\""
 layout: single_post.njk
-date: 2022-01-09
+date: "2022-01-08T12:00:00-08:00"
 tags: post
 ---
-
 ![If a task takes six hours to complete in the office, but that same employee finishes out in four working from home, who should get the saved two hours? The company ('back to work!') or the employee ('free time')?](/assets/images/2022/01/dabrahams_question-1024x826.png)
 
 I don't like either of these options. Of course, the employee in me wants to be rewarded for producing efficiently, and the manager in me wants to take advantage of that efficiency to improve the business overall; this is the simple conflict that the question hinges on. But Daniel's question and its two options miss the mark entirely because they assume that the employee is being paid either for their time, i.e. selling hours, or by the task or piece, i.e. selling some number of completions of a well-defined task.

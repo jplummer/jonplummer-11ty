@@ -1,10 +1,9 @@
 ---
-title: "I wrote a screed. Here's the interesting part"
+title: I wrote a screed. Here's the interesting part
 layout: single_post.njk
-date: 2023-08-27
+date: "2023-08-26T12:00:00-08:00"
 tags: post
 ---
-
 [This article is worth a read as-is](https://getmatter.com/email/29711227/?token=29711227%3A6VAqDDvgDkVW6ill7qMdL_XynzM). But once you’ve done that, consider that our users are also suffering a form of the paper cut tax since they need to (and due to the tax are told to) see their CSMs about every little thing they want to change on the platform. Poor usability is a brake on their productivity and, in turn, a brake on their esteem for our company.
 
 The story I am told regularly is that usability in existing interfaces hasn’t been addressed because it is hard to relate to ROI. That’s true. That also does not make it less important. As we do with other types of issues, I think we should devote a percentage of our collective effort to chipping away at the large experience debt we have in the platform.

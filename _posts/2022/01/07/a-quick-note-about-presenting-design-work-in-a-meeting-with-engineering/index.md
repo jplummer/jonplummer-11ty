@@ -1,10 +1,9 @@
 ---
-title: "A quick note about presenting design work in a meeting with engineering"
+title: A quick note about presenting design work in a meeting with engineering
 layout: single_post.njk
-date: 2022-01-07
+date: "2022-01-06T12:00:00-08:00"
 tags: post
 ---
-
 There are a few ways these meetings might be organized depending on where we are in the design-development process.
 - **early concept**: help me think about the problem
 - **late concept**: help me choose among these ideas and develop one

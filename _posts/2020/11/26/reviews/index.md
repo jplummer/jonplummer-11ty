@@ -1,19 +1,18 @@
 ---
-title: "Reviews"
+title: Reviews
 layout: single_post.njk
-date: 2020-11-26
+date: "2020-11-26T12:00:00-08:00"
 tags: post
 ---
+At work we will soon reconsider how we do annual reviews. But we lack a shared sense of why we do them, and they are performed with different levels of seriousness in different parts of this small company.
 
-At work we are soon to reconsider how we do annual reviews. But we lack a shared sense of why we do them, and they are performed with different levels of seriousness in different parts of this small company.
-
-Unfortunately, signals from leadership are (likely inadvertently) mixed: reviews are important, feedback and development are important, but with raises "sort of on hold" due to the pandemic, reviews are as well. Reviews aren't all about money, but they are suddenly seemingly unimportant and all about money since the money is at issue.
+Unfortunately, signals from leadership are (likely inadvertently) mixed: reviews are important, feedback and development are important, but with raises "sort of on hold" due to the pandemic, reviews are as well. Reviews aren't all about money, but they are suddenly seemingly both unimportant and all about money since the money is at issue.
 
 I don't say this to be critical of our leadership; the situation has been come by honestly over a long history. But it's confusing to folks who have not grown up in this particular work culture. This is one of those all-too-frequent situations where a little more professionalism goes a long way.
 
 In the meantime, I have people on my team who want to have their reviews, and I want to give them. And I just had my one-year anniversary, and want to have my own review. So we're going to do them unofficially, with the slightly reluctant blessing of the leadership team, separate entirely from thoughts of compensation.
 
-There are nice parts of these reviews: they involve an extensive self-appraisal, they involve peer feedback, they aren't forced into a ranking or a five-point scale. But there are troubles as well. There's little guidance to managers regarding performing these reviews. There's scant relationship between the reviews and the mission or values of the company. And the reviews all end with an overview and compensation discussion with the very busy company president. So the connection between feedback and compensation is starkly underscored.
+There are nice parts of these reviews: they involve an extensive self-appraisal, they involve peer feedback, they aren't forced into a ranking or a five-point scale. But there are troubles as well. There's little guidance to managers regarding performing these reviews. There's scant relationship between the reviews and the mission or values of the company. And the reviews all end with an overview and compensation discussion with the very busy company president. So the connection between feedback and compensation is strongly emphasized.
 
 I'd much rather reviews be separate from compensation, since de-fanging them in this way allows them to lean more fully toward constructive feedback and the future rather than proving that past behavior was worthy of money. And now I have the chance to tilt the few reviews I'll be a part of in this more helpful direction.
 

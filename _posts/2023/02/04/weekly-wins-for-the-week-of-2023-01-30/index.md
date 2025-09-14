@@ -1,7 +1,7 @@
 ---
-title: "Weekly wins for the week of 2023 01 30"
+title: Weekly wins for the week of 2023 01 30
 layout: single_post.njk
-date: 2023-02-04
+date: "2023-02-03T12:00:00-08:00"
 tags: post
 ---
 - This is the first week in quite a while that I fulfilled all of my at-work weekly objectives. Sometimes lowering your sights slightly can pay off. Yet I also feel I accomplished more than recent weeks. It's probably a combination of smaller, more accomplishable (therefore likely better-defined) objectives and actual progress on a thing that's been lingering for a while. We'll see if this is a trick or a technique.

@@ -1,10 +1,9 @@
 ---
-title: "My note to by Humankind offering plastic reduction ideas"
+title: My note to by Humankind offering plastic reduction ideas
 layout: single_post.njk
-date: 2020-11-26
+date: "2020-11-26T12:00:00-08:00"
 tags: post
 ---
-
 Dear _by Humankind_ folks:
 
 I love what you are doing and have progressively bought more [by Humankind](https://byhumankind.com/) products over time (and tried to turn friends on to them). It’s inspired me to find ways to reduce plastic and packaging elsewhere in my life. And it’s also inspired me to consider how things might be redesigned to reduce their throwaway parts. So, if you’re willing, I have some ideas about your deodorant refills and dispenser.

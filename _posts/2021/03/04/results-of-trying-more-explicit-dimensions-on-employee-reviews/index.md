@@ -1,10 +1,9 @@
 ---
-title: "Results of trying more explicit dimensions on employee reviews"
+title: Results of trying more explicit dimensions on employee reviews
 layout: single_post.njk
-date: 2021-03-04
+date: "2021-03-03T12:00:00-08:00"
 tags: post
 ---
-
 A little while ago I resolved to use explicit dimensions to solicit peer feedback and to organize my feedback on employees I needed to review. I also said that I'd let you know how it goes.
 
 > **Quality** – HMT (how might they) contribute to better results for the users of the product/project
@@ -17,7 +16,7 @@ A little while ago I resolved to use explicit dimensions to solicit peer feedbac
 > 
 > **Improvement** – where have we noticed improvement in the review period
 > 
-> My previous post: [Reviews](https://jonplummer.local/2020/11/26/reviews/)
+> My previous post: [Reviews](/2020/11/26/reviews/)
 
 I've done two such reviews this way so far, incorporating these dimensions into the existing structure.
 

@@ -1,10 +1,9 @@
 ---
-title: "Weekly wins for the week of 2022 07 18"
+title: Weekly wins for the week of 2022 07 18
 layout: single_post.njk
-date: 2022-07-23
+date: "2022-07-22T12:00:00-08:00"
 tags: post
 ---
-
 Three wins for this week:
 
 1. Never mind my thoughts about NPS, which I have not written up here but should (edit: See "[The trouble with NPS](https://jonplummer.com/2022/07/31/the-trouble-with-nps/)"). Our company Employee Net Promoter Score (eNPS) is **five**. Five is not terrible as it's above zero, but it's not something to crow about either. That of my team is **eighty**. If you're curious about eNPS, [Qualtrics has an okay writeup](https://www.qualtrics.com/blog/employee-net-promoter-score-enps-good-measure-engagement/). Our engagement scores reflect a similar difference, albeit a bit less grand.

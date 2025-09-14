@@ -1,11 +1,10 @@
 ---
-title: "Baxter BioScience web apps and email templates"
+title: Baxter BioScience web apps and email templates
 layout: single_post.njk
-date: 2013-12-06
+date: "2013-12-05T12:00:00-08:00"
 tags: portfolio
-coverImage: "advoy_flags.png"
+coverImage: advoy_flags.png
 ---
-
 ![](/assets/images/2022/12/advoy_flags.png)
 
 ![](/assets/images/2022/12/advoy_bilingual.png)

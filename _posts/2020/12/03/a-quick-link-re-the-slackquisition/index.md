@@ -1,10 +1,9 @@
 ---
-title: "A quick link re the Slackquisition"
+title: A quick link re the Slackquisition
 layout: single_post.njk
-date: 2020-12-03
+date: "2020-12-02T12:00:00-08:00"
 tags: post
 ---
-
 M.C.Seigler has a [somewhat inspirational take on the Salesforce acquisition of Slack](https://500ish.com/the-way-of-the-future-679697c35f79), namely that
 
 > I believe that much like with Apple 20-some years ago, the timing will be right for the experience of using something to matter to the point where it changes the equation not just of a market, but of the entire world.

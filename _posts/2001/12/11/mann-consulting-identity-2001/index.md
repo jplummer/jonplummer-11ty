@@ -1,11 +1,10 @@
 ---
-title: "Mann Consulting identity (2001)"
+title: Mann Consulting identity (2001)
 layout: single_post.njk
-date: 2001-12-11
+date: "2001-12-10T12:00:00-08:00"
 tags: portfolio
-coverImage: "1477187196364852.gif"
+coverImage: 1477187196364852.gif
 ---
-
 ![](/assets/images/2022/12/1477187196364852.gif)
 
 Identity package for Mann Consulting, a small IT consultancy in San Francisco focused on advertising and graphic design firms. Many venues were explored, but I kept coming back to the cube. Nearly two decades on they are still quite happy with it.

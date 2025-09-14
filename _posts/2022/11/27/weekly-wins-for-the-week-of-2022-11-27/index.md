@@ -1,10 +1,9 @@
 ---
-title: "Weekly wins for the week of 2022 11 27"
+title: Weekly wins for the week of 2022 11 27
 layout: single_post.njk
-date: 2022-11-27
+date: "2022-11-26T12:00:00-08:00"
 tags: post
 ---
-
 It's been American Thanksgiving this week, and we hosted due to local family either having smaller places or being in the midst of a remodel.
 - We managed to get nine around our table, in our small dining area, responsibly comfortably. The choice to roast smaller chickens rather than a big turkey, worked well. Everything was good, and the leftovers are good, and any anxieties I had about hosting and making were unfounded.
 - I received a job offer just before the holiday and it set my mind at ease.

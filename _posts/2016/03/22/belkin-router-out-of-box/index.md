@@ -1,11 +1,10 @@
 ---
-title: "Belkin router out-of-box"
+title: Belkin router out-of-box
 layout: single_post.njk
-date: 2016-03-22
+date: "2016-03-21T12:00:00-08:00"
 tags: portfolio
-coverImage: "Screenshot2017-06-0321.17.37.png"
+coverImage: Screenshot2017-06-0321.17.37.png
 ---
-
 An in-home study requiring participants to replace their existing router with one of three Belkin routers showed us that we had a lot of work to do. People surprised us at every turn, losing instructions, getting turned around in instructions, not understanding which cable was which, plugging things into the wrong places, etc. One nice lady even plugged the power supply cable into the headphone jack on her computer, because it sort of looked like it belonged there and she had missed the step where she was to give power to the new router.
 
 Removing opportunities for mistakes became the order of the day. An order-tolerant setup process, pre-connected cables, and instructions directly on the parts in question scored very well when tested in the lab and among the public when sold. Setup-related support calls were reduced significantly and an entire class of wiring-related calls went nearly to zero.

@@ -1,7 +1,7 @@
 ---
-title: "Weekly wins for the week of 2023 02 06"
+title: Weekly wins for the week of 2023 02 06
 layout: single_post.njk
-date: 2023-02-12
+date: "2023-02-11T12:00:00-08:00"
 tags: post
 ---
 - My six phase benefit/concept/detail process is going to be piloted in our growth product.

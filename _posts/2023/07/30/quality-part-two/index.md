@@ -1,10 +1,9 @@
 ---
-title: "Quality, part two"
+title: Quality, part two
 layout: single_post.njk
-date: 2023-07-30
+date: "2023-07-29T12:00:00-08:00"
 tags: post
 ---
-
 It seems like we have a pretty good grasp of what quality should be when it comes to infrastructure – what technical soundness is, how much load we should handle, what kind of logging, etc. but we are less mature regarding other dimensions of quality.
 
 An interactive item in general availability, operated by customer users, should

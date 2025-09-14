@@ -1,10 +1,9 @@
 ---
-title: "Still more on expectations of quality"
+title: Still more on expectations of quality
 layout: single_post.njk
-date: 2023-03-03
+date: "2023-03-02T12:00:00-08:00"
 tags: post
 ---
-
 The general idea is that **scope should scale but quality should not**. [All of these](/2023/02/02/quality-expectations/) are achievable in small scopes and if we care about quality are not “extra” costs.
 - If it is not usable we will not learn what we hope to learn from an alpha or beta – our learning will be confounded by usability issues.
 - If it is unpleasant to use, its uptake will be blunted.

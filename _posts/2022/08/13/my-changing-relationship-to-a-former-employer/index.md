@@ -1,10 +1,9 @@
 ---
-title: "My changing relationship to a former employer"
+title: My changing relationship to a former employer
 layout: single_post.njk
-date: 2022-08-13
+date: "2022-08-12T12:00:00-08:00"
 tags: post
 ---
-
 Or, _a **corporation** becomes **people** in six acts:_
 
 Fed up with Job A and planning to move away, I looked for work in the new locale. And I found something. Something a little disappointing in terms of scale and compensation, but it was in the right place, nice people, showed some potential, and in a smaller market with much less of a tech scene what could I expect in compensation, really? Okay, let's do this.

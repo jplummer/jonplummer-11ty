@@ -1,10 +1,9 @@
 ---
-title: "My expectations as a design leader and manager of people"
+title: My expectations as a design leader and manager of people
 layout: single_post.njk
-date: 2021-04-24
+date: "2021-04-23T12:00:00-08:00"
 tags: post
 ---
-
 ## Expectations of myself
 - Foster an ethos of continuous improvement
 - Repeatedly return to user needs and goals to create alignment

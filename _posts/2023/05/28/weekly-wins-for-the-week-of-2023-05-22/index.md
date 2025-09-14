@@ -1,10 +1,9 @@
 ---
-title: "Weekly wins for the week of 2023 05 22"
+title: Weekly wins for the week of 2023 05 22
 layout: single_post.njk
-date: 2023-05-28
+date: "2023-05-27T12:00:00-08:00"
 tags: post
 ---
-
 Much of the week was spent on-site, meeting with my R&D leadership peers (and the thin layer of execs above us) to figure out what behavior should to change to change our results. Strangely enough, this group not met since well before I started, and much of the contact I've had with these people has been in 1:1s, small meetings, or in some cases not at all.
 - Naturally this was the first time at this job I've had that "[first team](https://www.michaelvizdos.com/resources/first-team)" feeling, which has been long overdue. It's great that we were able to get from a little icy to working together openly in less than a day, the first day.
 - Since the agenda was less agenda-like that I typically feel comfortable with, my main goals were to represent myself and my team well and to genuinely engage with the topics as a knowledgeable and connected member of the team. I think I did that, and so do several people I've checked with.

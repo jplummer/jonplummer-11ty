@@ -1,10 +1,9 @@
 ---
-title: "Gov.uk recommends NOT using alt text. It's actually a good idea"
+title: Gov.uk recommends NOT using alt text. It's actually a good idea
 layout: single_post.njk
-date: 2023-09-09
+date: "2023-09-08T12:00:00-08:00"
 tags: post
 ---
-
 \[name redacted\] writes:
 
 > UK Gov websites dropping support for alt text fields and giving odd advice about what screen reader users want is making the rounds on Linkedin [https://insidegovuk.blog.gov.uk/2023/08/10/making-it-easier-to-add-images-on-gov-uk/](https://insidegovuk.blog.gov.uk/2023/08/10/making-it-easier-to-add-images-on-gov-uk/)

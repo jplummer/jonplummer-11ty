@@ -1,7 +1,7 @@
 ---
-title: "Weekly wins for the week of 2023 08 28"
+title: Weekly wins for the week of 2023 08 28
 layout: single_post.njk
-date: 2023-09-02
+date: "2023-09-01T12:00:00-08:00"
 tags: post
 ---
 - Driving lessons with the girl seem to be going well, especially since we've borrowed an automatic so we can learn to drive before we learn to drive stick. It has opened things up considerably.

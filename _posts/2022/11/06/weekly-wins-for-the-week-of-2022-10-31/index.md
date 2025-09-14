@@ -1,10 +1,9 @@
 ---
-title: "Weekly wins for the week of 2022 10 31"
+title: Weekly wins for the week of 2022 10 31
 layout: single_post.njk
-date: 2022-11-06
+date: "2022-11-05T12:00:00-08:00"
 tags: post
 ---
-
 Last week I pointed out that
 
 > The moment I announced I am #openToWork on LinkedIn there was an inrush of good wishes and referrals and recommendations.

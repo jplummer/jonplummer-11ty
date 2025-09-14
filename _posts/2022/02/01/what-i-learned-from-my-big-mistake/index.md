@@ -1,10 +1,9 @@
 ---
-title: "What I learned from my big mistake"
+title: What I learned from my big mistake
 layout: single_post.njk
-date: 2022-02-01
+date: "2022-01-31T12:00:00-08:00"
 tags: post
 ---
-
 On Friday last week I deleted a chunk of the wiki. All of the product management pages, in fact. The work of a team of fifteen, organizing and guiding the work of a hundred people, gone. I've managed to avoid being fired, so far. People have been very nice about this, so far. But I don't expect their good will to last: as they trip over the lack of things that were once in place they will learn the painful extent of my big mistake.
 
 There were many failures involved in this big mistake, but the biggest failure belongs to me.

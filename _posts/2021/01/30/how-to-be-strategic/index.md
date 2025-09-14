@@ -1,10 +1,9 @@
 ---
-title: "How to be strategic"
+title: How to be strategic
 layout: single_post.njk
-date: 2021-01-30
+date: "2021-01-29T12:00:00-08:00"
 tags: post
 ---
-
 I'm not a fan of [LessWrong](https://www.lesswrong.com) – while I like the idea of being more rational, and strive to acknowledge and feel my emotions but not let them impede my thinking needlessly, there's a strong whiff of holier-than-thou coming off of many in the rationalist community, including the otherwise very interesting [Scott Alexander](https://slatestarcodex.com/2021/01/21/introducing-astral-codex-ten/), whose writings on mental health care I admire. A little humility goes a long way but it is sometimes in short supply.
 
 Nonetheless I was happy to read [Anna Salamon](https://futureoflife.org/ai-researcher-anna-salamon/)’s article [Humans are not automatically strategic](https://www.lesswrong.com/posts/PBRWb2Em5SNeWYwwB/humans-are-not-automatically-strategic). Though the article makes heavy use of the trope of calling the less-rational populace "humans," as if rationalists are somehow better than _mere humans_, the core of the piece lays out an eight step process to develop and pursue goals that is very much like the method I came to the hard way over many years, and try to coach the people I support into using.

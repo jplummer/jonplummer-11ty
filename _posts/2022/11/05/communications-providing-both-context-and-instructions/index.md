@@ -1,10 +1,9 @@
 ---
 title: "Communications: providing both context and instructions"
 layout: single_post.njk
-date: 2022-11-05
+date: "2022-11-04T12:00:00-08:00"
 tags: post
 ---
-
 ## Bottom line
 
 A small incident today reminds me of the importance of explaining not just _what_ action you'd like taken but _why_. I have found this to be true so often that it's become part of how I usually communicate with coworkers, supervisors, even my own family.

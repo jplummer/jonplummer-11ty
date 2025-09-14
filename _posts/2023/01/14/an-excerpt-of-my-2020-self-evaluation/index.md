@@ -1,10 +1,9 @@
 ---
-title: "An excerpt of my 2020 self-evaluation"
+title: An excerpt of my 2020 self-evaluation
 layout: single_post.njk
-date: 2023-01-14
+date: "2023-01-13T12:00:00-08:00"
 tags: post
 ---
-
 **Do you have any suggestions for the management team?**
 
 1) If you make a decision, tell us. Better yet, tell us right away and tell us why, _especially_ if that decision reverses a prior decision.

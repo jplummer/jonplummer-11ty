@@ -1,10 +1,9 @@
 ---
-title: "The bones of my emerging philosophy of UX research and design"
+title: The bones of my emerging philosophy of UX research and design
 layout: single_post.njk
-date: 2022-10-23
+date: "2022-10-22T12:00:00-08:00"
 tags: post
 ---
-
 ## Two basic activities
 
 There are two basic activities in UX.

@@ -1,10 +1,9 @@
 ---
-title: "Do you have some key metrics that you are measuring your team on (number of items added to the pattern library, number of customer interviews, etc)?"
+title: Do you have some key metrics that you are measuring your team on (number of items added to the pattern library, number of customer interviews, etc)?
 layout: single_post.njk
-date: 2021-12-27
+date: "2021-12-26T12:00:00-08:00"
 tags: post
 ---
-
 I tend not to be in favor of output metrics like these; they've been shown to be counterproductive for developers (lines of code, commits, bugs crushed, etc.), for example. But I am thinking about how best to apply the process maturity scorecard to the work of the individual designers to try to coach them on their projects. If a designer is helping to improve the process maturity of their product team(s), that's a good sign.
 
 On the other hand, some anti-metrics (trouble indicators) are pretty obvious – if there's a lot of rework coming back to a designer, if deliverables are sloppy, if product managers and engineers are dissatisfied or under-involved, then we can tell there is a problem. But the opposite of these are not great metrics for individual performance, as a certain amount of rework will be technically driven, we don't want to create an inspection-heavy situation where each deliverable is scrutinized for lack of sloppiness, etc.

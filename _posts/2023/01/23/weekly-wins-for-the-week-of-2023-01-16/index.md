@@ -1,7 +1,7 @@
 ---
-title: "Weekly wins for the week of 2023 01 16"
+title: Weekly wins for the week of 2023 01 16
 layout: single_post.njk
-date: 2023-01-23
+date: "2023-01-22T12:00:00-08:00"
 tags: post
 ---
 - It's downright _refreshing_ to work for a company that doesn't reflexively look to "try harder" as the answer to its problems. It's nice to hear the CEO say that he doesn't think our problem is not stretching enough. (His assertion is that it's alignment we don't have enough of, and that's generally true also.)

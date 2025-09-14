@@ -1,10 +1,9 @@
 ---
 title: "Conference talk: prioritizing accessibility"
 layout: single_post.njk
-date: 2022-11-02
+date: "2022-11-01T12:00:00-08:00"
 tags: post
 ---
-
 Here's a recent talk I've given regarding why we pay attention to accessibility, and how the accessibility-related practices at Cayuse have changed in the past year.
 
 https://www.youtube.com/watch?v=rucBlvKpSUo

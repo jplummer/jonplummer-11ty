@@ -1,10 +1,9 @@
 ---
-title: "Make MVPs experiments again"
+title: Make MVPs experiments again
 layout: single_post.njk
-date: 2023-11-18
+date: "2023-11-17T12:00:00-08:00"
 tags: post
 ---
-
 ## Background
 
 There seems to be broad agreement within engineering leadership that MVP is (or should be) a **philosophy of experimentation and hypothesis testing**. An MVP should seek to validate a hypothesis. Literature discusses a Minimum Viable Product as the cheapest and fastest possible experiment that can answer a business question.

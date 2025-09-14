@@ -1,10 +1,9 @@
 ---
-title: "Empathy for the employee that arrives via acquisition"
+title: Empathy for the employee that arrives via acquisition
 layout: single_post.njk
-date: 2022-02-07
+date: "2022-02-06T12:00:00-08:00"
 tags: post
 ---
-
 An employee who comes to your team via an acquisition
 - was likely in the dark until the acquisition was announced
 - didn't apply to be part of your company, your team, or for their new job

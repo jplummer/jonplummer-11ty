@@ -1,10 +1,9 @@
 ---
-title: "Weekly wins for the week of 2023 01 02"
+title: Weekly wins for the week of 2023 01 02
 layout: single_post.njk
-date: 2023-01-08
+date: "2023-01-07T12:00:00-08:00"
 tags: post
 ---
-
 Back to work! Back to school!
 - I had good workouts this week. I'm going heavy, pushing the intensity, and I can tell the day after, but it's not coming with the little injuries and issues that it once did. I'm adapting.
 - I let my diet go a bit (a bit?) during the holiday break and have not been that quick to come back to plan, but things are fine. I could do better at getting enough protein, and my discipline with sugar is a bit off, but nothing terrible. I've noticed that unless I need to report my diet to someone it's a lot harder to keep up with logging, and thus staying on plan. It doesn't make rational sense, but it makes emotional sense. Renting accountability is a thing.

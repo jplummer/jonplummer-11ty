@@ -1,10 +1,9 @@
 ---
 title: "PT asks: \"how do I convince leadership to care about UX research?\""
 layout: single_post.njk
-date: 2023-09-16
+date: "2023-09-15T12:00:00-08:00"
 tags: post
 ---
-
 A new mentee opened the session with (paraphrased)
 
 > How do I convince leadership to care about UX research?

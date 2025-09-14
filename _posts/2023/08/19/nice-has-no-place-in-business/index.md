@@ -1,10 +1,9 @@
 ---
-title: "Nice has no place in business"
+title: Nice has no place in business
 layout: single_post.njk
-date: 2023-08-19
+date: "2023-08-18T12:00:00-08:00"
 tags: post
 ---
-
 [Merlin Mann](http://www.merlinmann.com) is fond of saying "you don't have to be nice, but you should be kind." In this statement "nice" refers to being agreeable, and "kind" to being friendly. These are not the same.
 
 Men who prey on women depend on a woman's social conditioning to be nice, to be agreeable, AND to be kind, to be friendly, and in doing so put their target's desire for self-protection in conflict with their desire, often unconscious, to satisfy that conditioning. This is an extreme example but it illustrates the problem well; _nice_ all-too-often becomes _self-negation_.

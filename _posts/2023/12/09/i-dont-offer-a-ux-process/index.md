@@ -1,10 +1,9 @@
 ---
-title: "I don't offer a \"UX process\""
+title: I don't offer a "UX process"
 layout: single_post.njk
-date: 2023-12-09
+date: "2023-12-08T12:00:00-08:00"
 tags: post
 ---
-
 My current employer is much like others in that it has a product management process, an engineering process, a design process, a customer onboarding process, a customer support process, etc.
 
 What do you notice? That's right – each discipline group has a separate process. But what is it we are trying to ship?

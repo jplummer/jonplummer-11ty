@@ -1,10 +1,9 @@
 ---
-title: "Someone mentions \"specialized enterprise users\" in re accessibility"
+title: Someone mentions "specialized enterprise users" in re accessibility
 layout: single_post.njk
-date: 2023-06-16
+date: "2023-06-15T12:00:00-08:00"
 tags: post
 ---
-
 During a discussion of accessibility and the level of attention a company ought to pay to it, someone said
 
 > I have always worked in complex enterprise software where the user is a specialized individual and not the general public so accessibility has never been stressed or pushed beyond considering the impact of colors and contrast.
