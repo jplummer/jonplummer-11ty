@@ -16,8 +16,17 @@
 ## Validate generated site
 npm run validate                # Check HTML validity
 npm run validate-comprehensive  # Check HTML validity plus plus
+## More tests
+npm run test-links              # Test all links
+npm run test-content            # Test content structure
+npm run test-performance        # Analyze performance
+npm run test-seo                # Test SEO and meta tags
+npm run test-accessibility      # Test accessibility
+npm run test-consistency        # Test build consistency
+npm run test-rss                # Test RSS feeds
+npm run test-all                # Run all tests in sequence
 ## Deploy site to host
-npm run test-deployment         # test deployment (environment variables, local build check, 
+npm run test-deployment         # Test deployment (environment variables, local build check, 
                                 # dependencies, SSH, remote directory, rsync dry-run)
 npm run deploy                  # Full deployment from /_site (clobbers all)
 npm run deploy-changes          # Deploy only new or changed items from /_site

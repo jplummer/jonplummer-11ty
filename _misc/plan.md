@@ -150,10 +150,10 @@
   - Validate generated HTML (installed npm html-validate)
   - Upload to hosting provider
 
-- **Alternative: Local deployment scripts**:
-  - Build and upload via rsync/scp
-  - FTP deployment automation
-  - Cloud storage sync (AWS S3, Netlify, etc.)
+- [x] **Alternative: Local deployment scripts**:
+  - [-] Build and upload via rsync/scp
+  - [x] SFTP deployment automation
+  - [-] Cloud storage sync (AWS S3, Netlify, etc.)
 
 ### Continuous Integration
 - Automated testing of generated site
