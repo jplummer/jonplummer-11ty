@@ -1,6 +1,6 @@
-# Migration Plan: WordPress → 11ty
+# Migration and Development Plan: WordPress → 11ty
 
-## Phase 1: Set Up 11ty Infrastructure
+## 🟥 Phase 1: Set Up 11ty Infrastructure
 
 - [x] **Initialize 11ty Project**
   - [x] Create a new project directory
@@ -36,7 +36,7 @@
   - [-] Set up tag/category routing (not needed)
   - [x] Configure pagination for individual posts (prev/next)
 
-## Phase 2: Content Migration
+## 🟧 Phase 2: Content Migration
 
 - [x] **Export WordPress Content**
   - [x] Use WordPress export tool (`Tools → Export`)
@@ -54,7 +54,7 @@
   - [x] Clean up HTML artifacts
   - [x] Go through ALL of the images and make sure they work
 
-## Phase 3: Template Development
+## 🟨 Phase 3: Template Development
 
 - [x] **Base Layout (`_includes/base.njk`)**
   - Header, navigation, footer
@@ -103,9 +103,9 @@
   - Main navigation at bottom? top?
   - Image size/position/styling
 
-## Phase 4: Advanced Features
+## 🟩 Phase 4: Advanced Features
 
-- **Search & Filtering**
+- **Search & Filtering** meh
   - [-] Tag-based filtering (not sure I need this)
   - [-] Date-based archives (not sure I need this)
   - [-] Search functionality (not sure I need this)
@@ -134,7 +134,7 @@
   - highlight the current page in the nav per https://11ty.rocks/tips/essential-navigation-snippet/
   - aria-current page per https://www.11ty.dev/docs/collections/#use-an-aria-current-attribute-on-the-current-page
 
-## Phase 5: Site Generation and Upload Automation
+## 🟦 Phase 5: Site Generation and Upload Automation
 
 ### Build Process Automation
 - [x] Set up npm scripts for development and production builds
@@ -149,7 +149,7 @@
   - [-] SFTP deployment automation
   - [-] Cloud storage sync (AWS S3, Netlify, etc.)
 
-## Phase 6: Truly fancy shit
+## 🟪 Phase 6: Truly fancy shit
 - [x] Redefine colors for dark mode
 - CMS https://www.11ty.dev/docs/cms/
 - "remaindered links' feature ala Kottke (using 11ty collections?)
@@ -157,7 +157,7 @@
 - consider POSSE (more tags for different types of entries?)
 - date-based color styles? or a color style that rotates site-wide on deploy?
 
-## Phase 7: build automation fønciness
+## 🟫 Phase 7: build automation fønciness
 
 ### Continuous Integration?
 - Automated testing of generated site
@@ -183,3 +183,16 @@
 - Set up CDN for global performance
 - Implement caching strategies
 
+
+# 🎨 Color ideas
+
+https://www.presentandcorrect.com/blogs/blog/rams-palette
+Dieter Rams 01          #af2e1b, #cc6324, #3b4b59, #bfa07a, #d9c3b0
+Dieter Rams 02          #aab7bf, #736356, #bfb1a8, #ad1d1d, #261201
+Dieter Rams 03          #ed8008, #ed3f1c, #bf1b1b, #736b1e, #d9d2c6
+Dieter Rams 03 adjusted #ed8008, #ed3f1c, #bf1b1b, #736b1e, #dadccf
+Dieter Rams 04          #bf7c2a, #c09c6f, #5f503e, #9c9c9c, #e1e4e1
+
+https://www.color-hex.com/color-palettes/popular.php 
+
+https://mcochris.com
