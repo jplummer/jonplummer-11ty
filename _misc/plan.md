@@ -129,7 +129,7 @@
 
 - **Basic polish**
   - [x] quickest possible solid type scheme and stack
-  - [x] double-dog check centering, margins, padding, breakpoints
+  - [x] double-check centering, margins, padding, breakpoints
   - vertical rhythm https://edgdesign.co/blog/baseline-grids-in-css
   - highlight the current page in the nav per https://11ty.rocks/tips/essential-navigation-snippet/
   - aria-current page per https://www.11ty.dev/docs/collections/#use-an-aria-current-attribute-on-the-current-page
@@ -144,23 +144,18 @@
 - Go through results of each test script to fix issues
 
 ### Deployment Pipeline
-- [-] **GitHub Actions** (recommended): (This is not how I'm using GitHub just yet)
-  - [-] Automatic builds on push to main branch
-  - [-] Run 11ty build process
-  - [-] Validate generated HTML (using custom validation scripts)
-  - [-] Upload to hosting provider
-
-- [x] **Alternative: Local deployment scripts**:
-  - [-] Build and upload via rsync/scp
-  - [x] SFTP deployment automation
+- [x] **Local deployment scripts**:
+  - [x] Build and upload via rsync/scp
+  - [-] SFTP deployment automation
   - [-] Cloud storage sync (AWS S3, Netlify, etc.)
 
 ## Phase 6: Truly fancy shit
+- [x] Redefine colors for dark mode
 - CMS https://www.11ty.dev/docs/cms/
 - "remaindered links' feature ala Kottke (using 11ty collections?)
 - consider SERPs (https://schema.org)
 - consider POSSE (more tags for different types of entries?)
-- date-based color styles
+- date-based color styles? or a color style that rotates site-wide on deploy?
 
 ## Phase 7: build automation fønciness
 
@@ -169,6 +164,12 @@
 - Link validation
 - Image optimization checks
 - Performance monitoring
+
+- **GitHub Actions** (recommended): (This is not how I'm using GitHub just yet)
+  - Automatic builds on push to main branch
+  - Run 11ty build process
+  - Validate generated HTML (using custom validation scripts)
+  - Upload to hosting provider
 
 ### Monitoring & Maintenance?
 - Set up build notifications
