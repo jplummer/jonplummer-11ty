@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Redirecting...</title>
+    <meta http-equiv="refresh" content="0; url={{ redirectUrl }}">
+    <link rel="canonical" href="{{ redirectUrl }}">
+    <script>
+        window.location.href = "{{ redirectUrl }}";
+    </script>
+</head>
+<body>
+    <p>Redirecting to <a href="{{ redirectUrl }}">{{ redirectUrl }}</a>...</p>
+</body>
+</html>

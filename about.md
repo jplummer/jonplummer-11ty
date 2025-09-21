@@ -1,5 +1,6 @@
 ---
 title: "About me – Jon Plummer"
+description: "Jon Plummer is a UX design leader and mentor with experience at Invoca, Cayuse, Belkin, and Medtronic. Learn about his design leadership philosophy and career."
 date: 2025-08-01
 layout: base.njk
 tags: page

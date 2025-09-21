@@ -1,5 +1,5 @@
 {# purpose: portfolio list item component #}
 <article id="">
-    <img src="/assets/images/{{ post.coverImage }}" alt="">
+    <img src="/assets/images/{{ post.data.coverImage }}" alt="{{ post.data.title | default('Portfolio item') }}">
     <p><a href="{{ post.url }}" rel="bookmark">{{ post.data.title }}</a></p>
 </article>

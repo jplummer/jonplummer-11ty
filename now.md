@@ -1,5 +1,6 @@
 ---
 title: "Now – Jon Plummer"
+description: "What Jon Plummer is up to now - current work at Invoca, family updates, and personal projects. Updated regularly with current status."
 date: 2025-08-31
 layout: base.njk
 tags: page

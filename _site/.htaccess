@@ -1,6 +1,9 @@
 # Basic .htaccess for JonPlummer.com
 # Simplified version to avoid 500 errors
 
+# Disable directory listings
+Options -Indexes
+
 # Block access to sensitive files
 <Files "*.env">
     Require all denied
