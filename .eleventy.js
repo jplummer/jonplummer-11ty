@@ -4,6 +4,9 @@ module.exports = function(eleventyConfig) {
     // Copy static assets
     eleventyConfig.addPassthroughCopy("assets");
     
+    // Copy .htaccess file for security
+    eleventyConfig.addPassthroughCopy(".htaccess");
+    
     // Watch for changes in assets
     eleventyConfig.addWatchTarget("assets");
     

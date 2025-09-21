@@ -1,0 +1,220 @@
+# Security: Block access to sensitive files
+# This .htaccess file blocks access to common sensitive files that hackers scan for
+
+# Disable directory browsing
+Options -Indexes
+
+# Block access to environment files
+<Files ".env*">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Block access to configuration files
+<Files "*.config">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "*.conf">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Block access to backup files
+<Files "*.bak">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "*.backup">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "*.old">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Block access to temporary files
+<Files "*.tmp">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "*.temp">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Block access to log files
+<Files "*.log">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Block access to database files
+<Files "*.db">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "*.sqlite">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "*.sqlite3">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Block access to version control files
+<Files ".git*">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files ".svn*">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files ".hg*">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Block access to IDE and editor files
+<Files ".vscode*">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files ".idea*">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "*.swp">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "*.swo">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "*~">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Block access to package manager files
+<Files "package-lock.json">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "yarn.lock">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "composer.lock">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Block access to sensitive directories
+<DirectoryMatch "\.(git|svn|hg)">
+    Order allow,deny
+    Deny from all
+</DirectoryMatch>
+
+# Block access to common sensitive file patterns
+<FilesMatch "\.(env|example|local|development|production|staging|test)\.(env|ini|conf|config|json|yaml|yml|xml)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Block access to common sensitive filenames
+<FilesMatch "^(\.htaccess|\.htpasswd|\.DS_Store|Thumbs\.db|web\.config|robots\.txt|sitemap\.xml)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Block access to PHP files that might contain sensitive information
+<FilesMatch "^(config|database|settings|secrets|credentials)\.php$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Block access to common development files
+<FilesMatch "^(README|CHANGELOG|LICENSE|CONTRIBUTING|TODO|FIXME)\.(md|txt)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Block access to test files
+<FilesMatch "\.(test|spec)\.(js|ts|php|py|rb|go|java)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Block access to source maps
+<Files "*.map">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Block access to node_modules directory
+<Directory "node_modules">
+    Order allow,deny
+    Deny from all
+</Directory>
+
+# Block access to vendor directory (common in PHP projects)
+<Directory "vendor">
+    Order allow,deny
+    Deny from all
+</Directory>
+
+# Block access to .git directory
+<Directory ".git">
+    Order allow,deny
+    Deny from all
+</Directory>
+
+# Block access to common sensitive file extensions
+<FilesMatch "\.(key|pem|crt|cert|p12|pfx|jks|keystore)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Block access to archive files that might contain sensitive data
+<FilesMatch "\.(zip|tar|gz|rar|7z|bz2)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Additional security headers (optional but recommended)
+<IfModule mod_headers.c>
+    # Prevent MIME type sniffing
+    Header always set X-Content-Type-Options nosniff
+    
+    # Enable XSS protection
+    Header always set X-XSS-Protection "1; mode=block"
+    
+    # Prevent clickjacking
+    Header always set X-Frame-Options DENY
+    
+    # Referrer policy
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Hide server information
+ServerTokens Prod
+ServerSignature Off
