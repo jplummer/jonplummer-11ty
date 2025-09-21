@@ -4,6 +4,9 @@
 # Disable directory browsing
 Options -Indexes
 
+# Redirect /feed/ to /feed.xml for RSS feed
+RedirectMatch 301 ^/feed/?$ /feed.xml
+
 # Block access to environment files
 <Files ".env*">
     Order allow,deny
