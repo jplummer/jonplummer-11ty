@@ -3,7 +3,7 @@ title: "\"Super\" service blueprint"
 layout: single_post.njk
 date: "2022-09-30T12:00:00-08:00"
 tags: portfolio
-coverImage: Screenshot2022-11-11at2.56.37PM.png
+coverImage: 2022/12/Screenshot2022-11-11at2.56.37PM.png
 ---
 ![](/assets/images/2022/12/Screenshot2022-11-11at2.56.37PM-1024x497.png)
 

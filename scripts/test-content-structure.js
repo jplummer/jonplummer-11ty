@@ -122,12 +122,22 @@ function validateRequiredFields(frontMatter, filePath) {
   const issues = [];
   const warnings = [];
   
-  // Required fields
-  const requiredFields = ['title', 'date', 'slug'];
+  // Extract slug from directory path if not in front matter
+  const fileNameCheck = validateFileName(filePath);
+  const hasSlugInPath = fileNameCheck.valid && fileNameCheck.expectedSlug;
+  const hasSlugInFrontMatter = frontMatter.slug;
+  
+  // Required fields - slug is only required if not provided by directory structure
+  const requiredFields = ['title', 'date'];
   for (const field of requiredFields) {
     if (!frontMatter[field]) {
       issues.push(`Missing required field: ${field}`);
     }
+  }
+  
+  // Check slug - only require if not provided by directory structure
+  if (!hasSlugInPath && !hasSlugInFrontMatter) {
+    issues.push(`Missing required field: slug`);
   }
   
   // Validate individual fields
@@ -145,10 +155,17 @@ function validateRequiredFields(frontMatter, filePath) {
     }
   }
   
-  if (frontMatter.slug) {
+  // Validate slug - check both front matter and directory path
+  if (hasSlugInFrontMatter) {
     const slugCheck = validateSlug(frontMatter.slug);
     if (!slugCheck.valid) {
       issues.push(`Slug: ${slugCheck.error}`);
+    }
+  } else if (hasSlugInPath) {
+    // Validate slug from directory path
+    const slugCheck = validateSlug(fileNameCheck.expectedSlug);
+    if (!slugCheck.valid) {
+      issues.push(`Slug (from path): ${slugCheck.error}`);
     }
   }
   
@@ -177,7 +194,7 @@ function validateFileName(filePath) {
   const dirName = path.dirname(filePath);
   
   // Check if file is in expected directory structure
-  const expectedPattern = /_posts\/\d{4}\/\d{2}\/\d{2}\/[^\/]+\/index\.md$/;
+  const expectedPattern = /^\d{4}\/\d{2}\/\d{2}\/[^\/]+\/index\.md$/;
   const relativePath = path.relative('./_posts', filePath);
   
   if (!expectedPattern.test(relativePath)) {
@@ -255,15 +272,18 @@ function validateContentStructure() {
       results.warnings += fieldValidation.warnings.length;
     }
     
-    // Track slugs for duplicate checking
-    if (frontMatter.slug) {
-      if (results.slugMap.has(frontMatter.slug)) {
+    // Track slugs for duplicate checking - use front matter slug if available, otherwise use directory slug
+    const fileNameCheckForSlug = validateFileName(file);
+    const slugToTrack = frontMatter.slug || (fileNameCheckForSlug.valid ? fileNameCheckForSlug.expectedSlug : null);
+    
+    if (slugToTrack) {
+      if (results.slugMap.has(slugToTrack)) {
         results.duplicateSlugs.push({
-          slug: frontMatter.slug,
-          files: [results.slugMap.get(frontMatter.slug), relativePath]
+          slug: slugToTrack,
+          files: [results.slugMap.get(slugToTrack), relativePath]
         });
       } else {
-        results.slugMap.set(frontMatter.slug, relativePath);
+        results.slugMap.set(slugToTrack, relativePath);
       }
     }
     

@@ -3,7 +3,7 @@ title: Mann Consulting identity (2001)
 layout: single_post.njk
 date: "2001-12-10T12:00:00-08:00"
 tags: portfolio
-coverImage: 1477187196364852.gif
+coverImage: 2022/12/1477187196364852.gif
 ---
 ![](/assets/images/2022/12/1477187196364852.gif)
 

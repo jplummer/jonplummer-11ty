@@ -3,7 +3,7 @@ title: Cayuse "quick yearly accomplishments" presentation
 layout: single_post.njk
 date: "2022-10-10T12:00:00-08:00"
 tags: portfolio
-coverImage: Screenshot2022-11-10at11.00.16AM.png
+coverImage: 2022/12/Screenshot2022-11-10at11.00.16AM.png
 ---
 ![](/assets/images/2022/12/Screenshot2022-11-10at11.00.16AM-1024x575.png)
 

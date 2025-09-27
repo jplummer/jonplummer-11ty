@@ -3,7 +3,7 @@ title: Mann Consulting website (2001)
 layout: single_post.njk
 date: "2001-12-11T12:00:00-08:00"
 tags: portfolio
-coverImage: mcr0a.gif
+coverImage: 2022/12/mcr0a.gif
 ---
 While working on the identity and without any experience marketing a business, I proposed and was given the greenlight to redesign the Mann Consulting website. A relatively clean and sparse site was the result, with a handful of randomly selected "single-sell" main graphics, a proto-blog, and a small number of tightly-focused pages, all aimed at explaining the benefit and encouraging a phone call.
 

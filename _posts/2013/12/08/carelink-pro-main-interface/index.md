@@ -3,7 +3,7 @@ title: CareLink Pro main interface
 layout: single_post.njk
 date: "2013-12-07T12:00:00-08:00"
 tags: portfolio
-coverImage: reports2.png
+coverImage: 2022/12/reports2.png
 ---
 ![](/assets/images/2022/12/reports2.png)
 

@@ -3,7 +3,7 @@ title: Product trio
 layout: single_post.njk
 date: "2022-09-11T12:00:00-08:00"
 tags: portfolio
-coverImage: ProductTrio.png
+coverImage: 2022/12/ProductTrio.png
 ---
 ![](/assets/images/2022/12/ProductTrio.png)
 

@@ -3,7 +3,7 @@ title: WeMo smart home accessories and app
 layout: single_post.njk
 date: "2018-12-10T12:00:00-08:00"
 tags: portfolio
-coverImage: devices_withhand.png
+coverImage: 2022/12/devices_withhand.png
 ---
 _2013 IDEA Finalist, 2013 Silver UX Award_
 

@@ -3,7 +3,7 @@ title: WGA "acceptance criteria for patterns"
 layout: single_post.njk
 date: "2021-06-01T12:00:00-08:00"
 tags: portfolio
-coverImage: Screenshot2022-11-11at3.30.55PM.png
+coverImage: 2022/12/Screenshot2022-11-11at3.30.55PM.png
 ---
 At Concentric Sky we delivered some form of design system or pattern library to every client depending on their needs and the maturity of the digital property we were working on. For Western Governors University we were working on a new internal tool to manage rich skill descriptors (RSDs), but worked on a complete pattern library up front to speed our own development of the first version of the tool and enable rapid improvements in subsequent projects.
 
