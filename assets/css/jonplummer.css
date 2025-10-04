@@ -500,8 +500,8 @@ nav a:hover {
 nav a:visited {
   color: var(--link-visited-color);
 }
-nav a:active {
-  color: var(--link-active-color);
+nav a.active {
+  color: var(--link-color);
 }
 
 /* License information colors */
