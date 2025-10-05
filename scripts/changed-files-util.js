@@ -2,76 +2,12 @@
 
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
-
-// File to track the last build timestamp
-const LAST_BUILD_FILE = './.last-build-timestamp';
 
 /**
- * Get the timestamp of the last build
- */
-function getLastBuildTimestamp() {
-  try {
-    if (fs.existsSync(LAST_BUILD_FILE)) {
-      const timestamp = fs.readFileSync(LAST_BUILD_FILE, 'utf8').trim();
-      return new Date(timestamp);
-    }
-  } catch (error) {
-    console.log('Could not read last build timestamp, checking all files');
-  }
-  return null;
-}
-
-/**
- * Set the current build timestamp
- */
-function setCurrentBuildTimestamp() {
-  const timestamp = new Date().toISOString();
-  fs.writeFileSync(LAST_BUILD_FILE, timestamp);
-}
-
-/**
- * Get all .md files in the _posts directory that have been modified since last build
+ * Get all .md files in the _posts directory
  */
 function getChangedMarkdownFiles() {
-  const lastBuild = getLastBuildTimestamp();
-  const changedFiles = [];
-  
-  if (!lastBuild) {
-    console.log('No previous build found, checking all markdown files');
-    return getAllMarkdownFiles();
-  }
-  
-  try {
-    // Use git to find changed files since last build
-    const gitCommand = `git log --since="${lastBuild.toISOString()}" --name-only --pretty=format: | grep '\\.md$' | sort | uniq`;
-    const gitOutput = execSync(gitCommand, { encoding: 'utf8', stdio: 'pipe' });
-    const gitFiles = gitOutput.split('\n').filter(file => file.trim() && file.endsWith('.md'));
-    
-    // Also check for files modified in the filesystem since last build
-    const allMdFiles = getAllMarkdownFiles();
-    const fsChangedFiles = allMdFiles.filter(file => {
-      try {
-        const stats = fs.statSync(file);
-        return stats.mtime > lastBuild;
-      } catch (error) {
-        return false;
-      }
-    });
-    
-    // Combine and deduplicate
-    const allChangedFiles = [...new Set([...gitFiles, ...fsChangedFiles])];
-    
-    // Filter to only include files in _posts directory
-    const postsChangedFiles = allChangedFiles.filter(file => 
-      file.includes('_posts/') || file.startsWith('_posts/')
-    );
-    
-    return postsChangedFiles;
-  } catch (error) {
-    console.log('Git command failed, falling back to filesystem check');
-    return getAllMarkdownFiles();
-  }
+  return getAllMarkdownFiles();
 }
 
 /**
@@ -132,11 +68,10 @@ function getChangedHtmlFiles() {
 }
 
 /**
- * Check if we should run full scan (no previous build or --full flag)
+ * Check if we should run full scan (always true now)
  */
 function shouldRunFullScan() {
-  const args = process.argv.slice(2);
-  return args.includes('--full') || !fs.existsSync(LAST_BUILD_FILE);
+  return true;
 }
 
 module.exports = {
@@ -144,6 +79,5 @@ module.exports = {
   getChangedHtmlFiles,
   getAllMarkdownFiles,
   getHtmlFileForMarkdown,
-  setCurrentBuildTimestamp,
   shouldRunFullScan
 };

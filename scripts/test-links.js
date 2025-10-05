@@ -5,7 +5,7 @@ const path = require('path');
 const https = require('https');
 const http = require('http');
 const { URL } = require('url');
-const { getChangedHtmlFiles, shouldRunFullScan, setCurrentBuildTimestamp } = require('./changed-files-util');
+const { getChangedHtmlFiles, shouldRunFullScan } = require('./changed-files-util');
 
 // Find all HTML files in _site (for full scan)
 function findHtmlFiles(dir) {
@@ -357,7 +357,6 @@ async function validateLinks() {
   }
   
   // Update build timestamp for next incremental scan
-  setCurrentBuildTimestamp();
 }
 
 // Run validation

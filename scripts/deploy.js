@@ -73,16 +73,24 @@ function checkSshpass() {
   }
 }
 
-// Parse rsync output for warnings and important messages
-function parseRsyncWarnings(output) {
+// Parse rsync output for file transfers and warnings
+function parseRsyncOutput(output) {
   const warnings = [];
+  const transferredFiles = [];
   const lines = output.split('\n');
   
   for (const line of lines) {
     const trimmed = line.trim();
     
+    // File transfer lines (verbose output)
+    if (trimmed.match(/^[<>ch][fdL][-+?][-+?][-+?]\s+\d+\s+\d{4}\/\d{2}\/\d{2}\s+\d{2}:\d{2}:\d{2}\s+(.+)$/)) {
+      const match = trimmed.match(/^[<>ch][fdL][-+?][-+?][-+?]\s+\d+\s+\d{4}\/\d{2}\/\d{2}\s+\d{2}:\d{2}:\d{2}\s+(.+)$/);
+      if (match) {
+        transferredFiles.push(match[1]);
+      }
+    }
     // Directory deletion errors
-    if (trimmed.includes('cannot delete non-empty directory:')) {
+    else if (trimmed.includes('cannot delete non-empty directory:')) {
       const match = trimmed.match(/cannot delete non-empty directory: (.+)/);
       if (match) {
         warnings.push(`⚠️  Cannot delete non-empty directory: ${match[1]}`);
@@ -90,29 +98,25 @@ function parseRsyncWarnings(output) {
         warnings.push(`   Consider manually cleaning it up on the server if needed.`);
       }
     }
-    
     // Permission errors
     else if (trimmed.includes('Permission denied') || trimmed.includes('permission denied')) {
       warnings.push(`🔒 Permission denied: ${trimmed}`);
     }
-    
     // File not found errors
     else if (trimmed.includes('No such file or directory')) {
       warnings.push(`📁 File not found: ${trimmed}`);
     }
-    
     // Other rsync warnings
     else if (trimmed.startsWith('rsync warning:') || trimmed.startsWith('rsync: warning:')) {
       warnings.push(`⚠️  ${trimmed}`);
     }
-    
     // Connection issues
     else if (trimmed.includes('Connection refused') || trimmed.includes('connection refused')) {
       warnings.push(`🔌 Connection refused: ${trimmed}`);
     }
   }
   
-  return warnings;
+  return { warnings, transferredFiles };
 }
 
 function deploy() {
@@ -161,7 +165,7 @@ function deploy() {
       // Use SSH key authentication
       rsyncCommand = [
         'rsync',
-        '-az', // Archive mode, compress (removed verbose)
+        '-azv', // Archive mode, compress, verbose
         '--delete', // Delete files on remote that don't exist locally
         '--exclude=.DS_Store', // Exclude macOS metadata files
         '--exclude=Thumbs.db', // Exclude Windows thumbnail files
@@ -177,7 +181,7 @@ function deploy() {
         'sshpass',
         '-p', config.password,
         'rsync',
-        '-az', // Archive mode, compress (removed verbose)
+        '-azv', // Archive mode, compress, verbose
         '--delete', // Delete files on remote that don't exist locally
         '--exclude=.DS_Store', // Exclude macOS metadata files
         '--exclude=Thumbs.db', // Exclude Windows thumbnail files
@@ -191,7 +195,7 @@ function deploy() {
       // Use password prompt (will ask for password interactively)
       rsyncCommand = [
         'rsync',
-        '-az', // Archive mode, compress (removed verbose)
+        '-azv', // Archive mode, compress, verbose
         '--delete', // Delete files on remote that don't exist locally
         '--exclude=.DS_Store', // Exclude macOS metadata files
         '--exclude=Thumbs.db', // Exclude Windows thumbnail files
@@ -224,8 +228,19 @@ function deploy() {
       exitCode = error.status || 1;
     }
 
-    // Parse rsync output for warnings and errors
-    const warnings = parseRsyncWarnings(rsyncOutput);
+    // Parse rsync output for file transfers and warnings
+    const { warnings, transferredFiles } = parseRsyncOutput(rsyncOutput);
+    
+    // Display transferred files
+    if (transferredFiles.length > 0) {
+      console.log('\n📁 Files being uploaded:');
+      console.log('─'.repeat(40));
+      transferredFiles.forEach(file => {
+        console.log(`   📄 ${file}`);
+      });
+      console.log(`\n   Total files: ${transferredFiles.length}`);
+      console.log('─'.repeat(40));
+    }
     
     // Display warnings if any
     if (warnings.length > 0) {

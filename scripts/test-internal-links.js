@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { getChangedHtmlFiles, shouldRunFullScan, setCurrentBuildTimestamp } = require('./changed-files-util');
+const { getChangedHtmlFiles, shouldRunFullScan } = require('./changed-files-util');
 
 // Find all HTML files in _site (for full scan)
 function findHtmlFiles(dir) {
@@ -208,7 +208,6 @@ async function validateInternalLinks() {
   }
   
   // Update build timestamp for next incremental scan
-  setCurrentBuildTimestamp();
 }
 
 // Run validation
