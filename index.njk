@@ -9,9 +9,15 @@ pagination:
     size: 5
 permalink: "{% if pagination.pageNumber == 0 %}/{% else %}/page/{{ pagination.pageNumber }}/{% endif %}"
 ---
-{# Display current page of posts #}
-{% for post in pagination.items %}
-    {% include "post_content.njk" %}
+{# Display current page of posts and links #}
+{% for item in pagination.items | mergePostsAndLinks(links) %}
+    {% if item.type == 'post' %}
+        {% set post = item.data %}
+        {% include "post_content.njk" %}
+    {% elif item.type == 'link' %}
+        {% set link = item.data %}
+        {% include "link_item.njk" %}
+    {% endif %}
 {% endfor %}
 
 <nav class="pagination">

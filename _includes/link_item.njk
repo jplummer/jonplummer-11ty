@@ -1,0 +1,11 @@
+{# purpose: render a single remaindered link #}
+<article class="link-item">
+    <section>
+        <p>
+            <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">{{ link.title }}</a>
+            {% if link.description %}
+                <span class="link-description"> - {{ link.description }}</span>
+            {% endif %}
+        </p>
+    </section>
+</article>

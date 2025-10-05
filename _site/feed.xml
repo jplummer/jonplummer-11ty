@@ -9,13 +9,98 @@
 
         
         <item>
-            <title>Toward coordinated experience</title>
-            <link>/2025/07/27/toward-coordinated-experience/</link>
-            <guid>/2025/07/27/toward-coordinated-experience/</guid>
-            <pubDate>Sun Jul 27 2025 13:00:00 GMT-0700 (Pacific Daylight Time) GMT</pubDate>
-
             
-            <content:encoded><![CDATA[<h2>Background</h2>
+                <title>Quick links on SaaS UI trends</title>
+                <link>/2025/10/05/quick-saas-ui-links/</link>
+                <guid>/2025/10/05/quick-saas-ui-links/</guid>
+                <pubDate>Sun Oct 05 2025 13:00:00 GMT-0700 (Pacific Daylight Time) GMT</pubDate>
+
+                
+                <content:encoded><![CDATA[<p>Some collected examples of SaaS UI trends:</p>
+<ul>
+<li><a href="https://www.saasui.design">SaaS UI Design</a></li>
+<li><a href="https://saasinterface.com">SaaS Interface</a></li>
+<li><a href="https://uxplanet.org/ux-design-for-saas-interfaces-in-2025-whats-the-difference-de918a00cc5c">UX Design for SaaS Interfaces in 2025: What's the Difference?</a></li>
+<li><a href="https://brisktechsol.com/saas-software-ui/">SaaS Software UI – BriskTech Solutions</a></li>
+<li><a href="https://brights.io/blog/saas-ui-ux-best-practices">SaaS UI/UX Best Practices – Brights</a></li>
+</ul>
+]]></content:encoded>
+
+                
+                <description><![CDATA[<p>Some collected examples of SaaS UI trends:</p>
+<ul>
+<li><a href="https://www.saasui.design">SaaS UI Design</a></li>
+<li><a href="https://saasinterface.com">SaaS Interface</a></li>
+<li><a href="https://uxplanet.org/ux-design-for-saas-interfaces-in-2025-whats-the-difference-de918a00cc5c">UX Design...]]></description>
+
+                
+                
+                <category>post</category>
+                
+            
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+                <title>Toward coordinated experience</title>
+                <link>/2025/07/27/toward-coordinated-experience/</link>
+                <guid>/2025/07/27/toward-coordinated-experience/</guid>
+                <pubDate>Sun Jul 27 2025 13:00:00 GMT-0700 (Pacific Daylight Time) GMT</pubDate>
+
+                
+                <content:encoded><![CDATA[<h2>Background</h2>
 <p>I realized the other day that we (UX and others) make workflow diagrams but don’t distinguish in them between “system advances you to the next step&quot; or &quot;offers you a link to a relevant thing” versus “user has to know to go somewhere else to do a necessary thing.” These are not at all equivalent; the arrows look the same, but those that denote “user has to know to go somewhere else to do a thing” should be maybe painfully ugly or broken or perhaps not exist at all to point out that a barrier exists.</p>
 <p>We should be anticipating and lowering those barriers, and we often are not. As we make new things, we’re tempted to squeeze scope down tight enough that we can launch quickly, but end up erecting these barriers in the process.</p>
 <p>UX folks are interested in producing what I'll call <em>coordinated experiences</em>, but have learned (to my chagrin) that it's hard to convince other folks in product development to participate, so they give up after a while. Since it is natural for engineering to look at the platform from the data model outward and assume that the appropriate interfaces match the data model in structure, and since there should otherwise be sufficient demand to produce coordinated experiences rather than the uncoordinated ones we usually make, my hypothesis is that there's some incentive/pressure/habit that is leading us in product development to scope projects such that we're not spending the effort required to produce coordinated experiences.</p>
@@ -77,24 +162,102 @@
 <p>The advent of agentic workflows, by reducing direct user operation of the system, will <em>intensify</em> the need for interfaces and workflows that are simple, coordinated and re-learnable rather than interfaces that depend on training, consultation, or practice for user success.</p>
 ]]></content:encoded>
 
-            
-            <description><![CDATA[<h2>Background</h2>
+                
+                <description><![CDATA[<h2>Background</h2>
 <p>I realized the other day that we (UX and others) make workflow diagrams but don’t distinguish in them between “system advances you to the next step&quot; or &quot;offers you a link to a relevant thing” versus “user has to know to go somewhere else to do a necessary thing.”...]]></description>
 
-            
-            
-            <category>post</category>
+                
+                
+                <category>post</category>
+                
             
         </item>
         
         <item>
-            <title>What went right since October 2024?</title>
-            <link>/2025/07/12/what-went-right-since-october-2024/</link>
-            <guid>/2025/07/12/what-went-right-since-october-2024/</guid>
-            <pubDate>Sat Jul 12 2025 13:00:00 GMT-0700 (Pacific Daylight Time) GMT</pubDate>
-
             
-            <content:encoded><![CDATA[<p>So many things!</p>
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+        </item>
+        
+        <item>
+            
+                <title>What went right since October 2024?</title>
+                <link>/2025/07/12/what-went-right-since-october-2024/</link>
+                <guid>/2025/07/12/what-went-right-since-october-2024/</guid>
+                <pubDate>Sat Jul 12 2025 13:00:00 GMT-0700 (Pacific Daylight Time) GMT</pubDate>
+
+                
+                <content:encoded><![CDATA[<p>So many things!</p>
 <ul>
 <li>Work
 <ul>
@@ -118,8 +281,8 @@
 </ul>
 ]]></content:encoded>
 
-            
-            <description><![CDATA[<p>So many things!</p>
+                
+                <description><![CDATA[<p>So many things!</p>
 <ul>
 <li>Work
 <ul>
@@ -128,20 +291,22 @@
 <li>We've had a couple of leadership offsites and they have been both pleasant and valuable</li>
 <li>I've guided my team from AI-skeptic or...]]></description>
 
-            
-            
-            <category>post</category>
+                
+                
+                <category>post</category>
+                
             
         </item>
         
         <item>
-            <title>Our position on AI tools</title>
-            <link>/2025/07/12/our-position-on-ai-tools/</link>
-            <guid>/2025/07/12/our-position-on-ai-tools/</guid>
-            <pubDate>Sat Jul 12 2025 13:00:00 GMT-0700 (Pacific Daylight Time) GMT</pubDate>
-
             
-            <content:encoded><![CDATA[<p>(This is a work in progress, but a pretty good start)</p>
+                <title>Our position on AI tools</title>
+                <link>/2025/07/12/our-position-on-ai-tools/</link>
+                <guid>/2025/07/12/our-position-on-ai-tools/</guid>
+                <pubDate>Sat Jul 12 2025 13:00:00 GMT-0700 (Pacific Daylight Time) GMT</pubDate>
+
+                
+                <content:encoded><![CDATA[<p>(This is a work in progress, but a pretty good start)</p>
 <h2>Designing AI-powered product experiences</h2>
 <h3>User needs and customer problem first</h3>
 <p><strong>Solving a valuable customer problem is paramount</strong>. Before selecting any technological solution, including AI, we prioritize understanding user needs and clearly defining the problem we aim to solve. Any AI application must serve a genuine, identified user need, rather than being a solution in search of a problem.</p>
@@ -196,26 +361,32 @@
 </ul>
 ]]></content:encoded>
 
-            
-            <description><![CDATA[<p>(This is a work in progress, but a pretty good start)</p>
+                
+                <description><![CDATA[<p>(This is a work in progress, but a pretty good start)</p>
 <h2>Designing AI-powered product experiences</h2>
 <h3>User needs and customer problem first</h3>
 <p><strong>Solving a valuable customer problem is paramount</strong>. Before selecting any technological solution, including AI, we prioritize...]]></description>
 
-            
-            
-            <category>post</category>
+                
+                
+                <category>post</category>
+                
             
         </item>
         
         <item>
-            <title>What went right in October?</title>
-            <link>/2024/11/02/what-went-right-in-october/</link>
-            <guid>/2024/11/02/what-went-right-in-october/</guid>
-            <pubDate>Sat Nov 02 2024 13:00:00 GMT-0700 (Pacific Daylight Time) GMT</pubDate>
-
             
-            <content:encoded><![CDATA[<p>So many things, in retrospect:</p>
+        </item>
+        
+        <item>
+            
+                <title>What went right in October?</title>
+                <link>/2024/11/02/what-went-right-in-october/</link>
+                <guid>/2024/11/02/what-went-right-in-october/</guid>
+                <pubDate>Sat Nov 02 2024 13:00:00 GMT-0700 (Pacific Daylight Time) GMT</pubDate>
+
+                
+                <content:encoded><![CDATA[<p>So many things, in retrospect:</p>
 <ul>
 <li>Home progress!
 <ul>
@@ -239,8 +410,8 @@
 </ul>
 ]]></content:encoded>
 
-            
-            <description><![CDATA[<p>So many things, in retrospect:</p>
+                
+                <description><![CDATA[<p>So many things, in retrospect:</p>
 <ul>
 <li>Home progress!
 <ul>
@@ -251,89 +422,97 @@
 </li>
 <li>Work...]]></description>
 
-            
-            
-            <category>post</category>
+                
+                
+                <category>post</category>
+                
             
         </item>
         
         <item>
-            <title>Apropos of…nothing (bitcoin)</title>
-            <link>/2024/07/31/apropos-ofnothing-bitcoin/</link>
-            <guid>/2024/07/31/apropos-ofnothing-bitcoin/</guid>
-            <pubDate>Wed Jul 31 2024 13:00:00 GMT-0700 (Pacific Daylight Time) GMT</pubDate>
-
             
-            <content:encoded><![CDATA[<p>A strategic reserve in (of?) a commodity implies that it’s in the U.S. strategic interest to invest to be protected from price shocks or supply restrictions due to the importance of the commodity to the economy or military readiness.</p>
+                <title>Apropos of…nothing (bitcoin)</title>
+                <link>/2024/07/31/apropos-ofnothing-bitcoin/</link>
+                <guid>/2024/07/31/apropos-ofnothing-bitcoin/</guid>
+                <pubDate>Wed Jul 31 2024 13:00:00 GMT-0700 (Pacific Daylight Time) GMT</pubDate>
+
+                
+                <content:encoded><![CDATA[<p>A strategic reserve in (of?) a commodity implies that it’s in the U.S. strategic interest to invest to be protected from price shocks or supply restrictions due to the importance of the commodity to the economy or military readiness.</p>
 <p>The best way to protect from bitcoin price shock is to not buy any. The best way to protect from a bitcoin supply restriction is to not use any.</p>
 <p>Both of these are free.</p>
 ]]></content:encoded>
 
-            
-            <description><![CDATA[<p>A strategic reserve in (of?) a commodity implies that it’s in the U.S. strategic interest to invest to be protected from price shocks or supply restrictions due to the importance of the commodity to the economy or military readiness.</p>
+                
+                <description><![CDATA[<p>A strategic reserve in (of?) a commodity implies that it’s in the U.S. strategic interest to invest to be protected from price shocks or supply restrictions due to the importance of the commodity to the economy or military readiness.</p>
 <p>The best way to protect from bitcoin price shock is to...]]></description>
 
-            
-            
-            <category>post</category>
+                
+                
+                <category>post</category>
+                
             
         </item>
         
         <item>
-            <title>A quick word about taking feedback</title>
-            <link>/2024/07/31/a-quick-word-about-taking-feedback/</link>
-            <guid>/2024/07/31/a-quick-word-about-taking-feedback/</guid>
-            <pubDate>Wed Jul 31 2024 13:00:00 GMT-0700 (Pacific Daylight Time) GMT</pubDate>
-
             
-            <content:encoded><![CDATA[<p>When receiving feedback on a design or other work the important thing is to see the <em>intent</em> behind the feedback and address that, rather than take the <em>specific</em> advice or try to <em>appease</em> the feedback-giver.</p>
+                <title>A quick word about taking feedback</title>
+                <link>/2024/07/31/a-quick-word-about-taking-feedback/</link>
+                <guid>/2024/07/31/a-quick-word-about-taking-feedback/</guid>
+                <pubDate>Wed Jul 31 2024 13:00:00 GMT-0700 (Pacific Daylight Time) GMT</pubDate>
+
+                
+                <content:encoded><![CDATA[<p>When receiving feedback on a design or other work the important thing is to see the <em>intent</em> behind the feedback and address that, rather than take the <em>specific</em> advice or try to <em>appease</em> the feedback-giver.</p>
 <p>Only by addressing the intent behind the feedback can the work be improved. yes, this might mean taking the specific advice, but it might not. The specific advice may not be the right answer.</p>
 <p>Appeasement is waste.</p>
 ]]></content:encoded>
 
-            
-            <description><![CDATA[<p>When receiving feedback on a design or other work the important thing is to see the <em>intent</em> behind the feedback and address that, rather than take the <em>specific</em> advice or try to <em>appease</em> the feedback-giver.</p>
+                
+                <description><![CDATA[<p>When receiving feedback on a design or other work the important thing is to see the <em>intent</em> behind the feedback and address that, rather than take the <em>specific</em> advice or try to <em>appease</em> the feedback-giver.</p>
 <p>Only by addressing the intent behind the feedback can the...]]></description>
 
-            
-            
-            <category>post</category>
+                
+                
+                <category>post</category>
+                
             
         </item>
         
         <item>
-            <title>Weekly wins for the week of 2024 07 15</title>
-            <link>/2024/07/20/weekly-wins-for-the-week-of-2024-07-15/</link>
-            <guid>/2024/07/20/weekly-wins-for-the-week-of-2024-07-15/</guid>
-            <pubDate>Sat Jul 20 2024 13:00:00 GMT-0700 (Pacific Daylight Time) GMT</pubDate>
-
             
-            <content:encoded><![CDATA[<ul>
+                <title>Weekly wins for the week of 2024 07 15</title>
+                <link>/2024/07/20/weekly-wins-for-the-week-of-2024-07-15/</link>
+                <guid>/2024/07/20/weekly-wins-for-the-week-of-2024-07-15/</guid>
+                <pubDate>Sat Jul 20 2024 13:00:00 GMT-0700 (Pacific Daylight Time) GMT</pubDate>
+
+                
+                <content:encoded><![CDATA[<ul>
 <li>Vacations are winding down and people are starting to come back to work. The team is filling out again.</li>
 <li>I convinced the SVP of Product to be quizzed about our product strategy – we'll put a script and some visuals together for our annual Company Connect and hopefully address longstanding complaints that people aren't sure how their work contributes to our strategy. This has raised other interesting topics that might also become topics, like how we really make money and where it goes, how our pricing and packaging works, etc. A lot of the things I was hoping to accomplish this year have been deprioritized (rightly) due to some technical pickles we find ourselves in, so this represents an opportunity to be influential beyond the usual process sand product stuff we do on the reg; fingers crossed.</li>
 <li>The ladies are back and the house is no longer empty. This also means my diet will improve – bachelor-mode Jon is (far) less disciplined than husband-mode Jon.</li>
 </ul>
 ]]></content:encoded>
 
-            
-            <description><![CDATA[<ul>
+                
+                <description><![CDATA[<ul>
 <li>Vacations are winding down and people are starting to come back to work. The team is filling out again.</li>
 <li>I convinced the SVP of Product to be quizzed about our product strategy – we'll put a script and some visuals together for our annual Company Connect and hopefully address...]]></description>
 
-            
-            
-            <category>post</category>
+                
+                
+                <category>post</category>
+                
             
         </item>
         
         <item>
-            <title>Weekly wins for the weeks of 2024 07 01 and 08</title>
-            <link>/2024/07/13/and-08/</link>
-            <guid>/2024/07/13/and-08/</guid>
-            <pubDate>Sat Jul 13 2024 13:00:00 GMT-0700 (Pacific Daylight Time) GMT</pubDate>
-
             
-            <content:encoded><![CDATA[<p>Small quality-of-life adjustments can have an amazing effect. Sure, the fact that you need to push on the door a little bit to lock its deadbolt is not a huge deal; it hardly slows you down, takes little effort, and there's nearly no additional wear-and-tear as a result. Not a huge deal <em>once</em>, that is. Eight times a day every day as people come and go, sometimes with full hands or in a hurry, adds up to thousands of exactly-repeated minor annoyances per year with a single cause that is readily fixed. So the value of that fix is quite high, even if each incident is barely noticeable.</p>
+                <title>Weekly wins for the weeks of 2024 07 01 and 08</title>
+                <link>/2024/07/13/and-08/</link>
+                <guid>/2024/07/13/and-08/</guid>
+                <pubDate>Sat Jul 13 2024 13:00:00 GMT-0700 (Pacific Daylight Time) GMT</pubDate>
+
+                
+                <content:encoded><![CDATA[<p>Small quality-of-life adjustments can have an amazing effect. Sure, the fact that you need to push on the door a little bit to lock its deadbolt is not a huge deal; it hardly slows you down, takes little effort, and there's nearly no additional wear-and-tear as a result. Not a huge deal <em>once</em>, that is. Eight times a day every day as people come and go, sometimes with full hands or in a hurry, adds up to thousands of exactly-repeated minor annoyances per year with a single cause that is readily fixed. So the value of that fix is quite high, even if each incident is barely noticeable.</p>
 <ul>
 <li>I adjusted the strike plates on our exterior doors as mentioned above. It's fab! (Ordinarily this would have been done by the contractor, but I put in the strikes so it fell to me.) Therese were not the strikes with the tab with the screwdriver hole, either.</li>
 <li>I also some moved boxes and furniture out of the garage, and rearranged some things, so that we can now park one car in the garage. Halfway there!</li>
@@ -343,23 +522,25 @@
 </ul>
 ]]></content:encoded>
 
-            
-            <description><![CDATA[<p>Small quality-of-life adjustments can have an amazing effect. Sure, the fact that you need to push on the door a little bit to lock its deadbolt is not a huge deal; it hardly slows you down, takes little effort, and there's nearly no additional wear-and-tear as a result. Not a huge deal...]]></description>
+                
+                <description><![CDATA[<p>Small quality-of-life adjustments can have an amazing effect. Sure, the fact that you need to push on the door a little bit to lock its deadbolt is not a huge deal; it hardly slows you down, takes little effort, and there's nearly no additional wear-and-tear as a result. Not a huge deal...]]></description>
 
-            
-            
-            <category>post</category>
+                
+                
+                <category>post</category>
+                
             
         </item>
         
         <item>
-            <title>Weekly wins for the week of 2024 06 24</title>
-            <link>/2024/06/29/weekly-wins-for-the-week-of-2024-06-24/</link>
-            <guid>/2024/06/29/weekly-wins-for-the-week-of-2024-06-24/</guid>
-            <pubDate>Sat Jun 29 2024 13:00:00 GMT-0700 (Pacific Daylight Time) GMT</pubDate>
-
             
-            <content:encoded><![CDATA[<p>Work was…fine…this week. Lots of folks are out or about to be out and while there's a moment to try to wrestle projects and processes into shape there are not a lot of people to do that with; preparing projects to to bowl along while they are out is more pressing. But with the girl and the lady out of the house I was productive with home projects. In the last week I've</p>
+                <title>Weekly wins for the week of 2024 06 24</title>
+                <link>/2024/06/29/weekly-wins-for-the-week-of-2024-06-24/</link>
+                <guid>/2024/06/29/weekly-wins-for-the-week-of-2024-06-24/</guid>
+                <pubDate>Sat Jun 29 2024 13:00:00 GMT-0700 (Pacific Daylight Time) GMT</pubDate>
+
+                
+                <content:encoded><![CDATA[<p>Work was…fine…this week. Lots of folks are out or about to be out and while there's a moment to try to wrestle projects and processes into shape there are not a lot of people to do that with; preparing projects to to bowl along while they are out is more pressing. But with the girl and the lady out of the house I was productive with home projects. In the last week I've</p>
 <ul>
 <li>sent a care package</li>
 <li>taken care of a library fine by finding and returning the book</li>
@@ -386,23 +567,25 @@
 </ul>
 ]]></content:encoded>
 
-            
-            <description><![CDATA[<p>Work was…fine…this week. Lots of folks are out or about to be out and while there's a moment to try to wrestle projects and processes into shape there are not a lot of people to do that with; preparing projects to to bowl along while they are out is more pressing. But with the girl and the lady...]]></description>
+                
+                <description><![CDATA[<p>Work was…fine…this week. Lots of folks are out or about to be out and while there's a moment to try to wrestle projects and processes into shape there are not a lot of people to do that with; preparing projects to to bowl along while they are out is more pressing. But with the girl and the lady...]]></description>
 
-            
-            
-            <category>post</category>
+                
+                
+                <category>post</category>
+                
             
         </item>
         
         <item>
-            <title>Weekly wins for the week of 2024 06 17</title>
-            <link>/2024/06/21/weekly-wins-for-the-week-of-2024-06-17/</link>
-            <guid>/2024/06/21/weekly-wins-for-the-week-of-2024-06-17/</guid>
-            <pubDate>Fri Jun 21 2024 13:00:00 GMT-0700 (Pacific Daylight Time) GMT</pubDate>
-
             
-            <content:encoded><![CDATA[<p>Juneteenth National Independence Day was this last Wednesday. It was odd to have a holiday mid-week but</p>
+                <title>Weekly wins for the week of 2024 06 17</title>
+                <link>/2024/06/21/weekly-wins-for-the-week-of-2024-06-17/</link>
+                <guid>/2024/06/21/weekly-wins-for-the-week-of-2024-06-17/</guid>
+                <pubDate>Fri Jun 21 2024 13:00:00 GMT-0700 (Pacific Daylight Time) GMT</pubDate>
+
+                
+                <content:encoded><![CDATA[<p>Juneteenth National Independence Day was this last Wednesday. It was odd to have a holiday mid-week but</p>
 <ul>
 <li>Juneteenth is worth celebrating, worth remembering, worth considering in this political moment.</li>
 <li>I forgot that most of our walls are backed by plywood, so a towel bar installation I had put off was unexpectedly quick and dust-free.</li>
@@ -411,26 +594,28 @@
 </ul>
 ]]></content:encoded>
 
-            
-            <description><![CDATA[<p>Juneteenth National Independence Day was this last Wednesday. It was odd to have a holiday mid-week but</p>
+                
+                <description><![CDATA[<p>Juneteenth National Independence Day was this last Wednesday. It was odd to have a holiday mid-week but</p>
 <ul>
 <li>Juneteenth is worth celebrating, worth remembering, worth considering in this political moment.</li>
 <li>I forgot that most of our walls are backed by plywood, so a towel bar...]]></description>
 
-            
-            
-            <category>post</category>
+                
+                
+                <category>post</category>
+                
             
         </item>
         
         <item>
-            <title>Weekly wins…of late</title>
-            <link>/2024/06/14/weekly-winsof-late/</link>
-            <guid>/2024/06/14/weekly-winsof-late/</guid>
-            <pubDate>Fri Jun 14 2024 13:00:00 GMT-0700 (Pacific Daylight Time) GMT</pubDate>
-
             
-            <content:encoded><![CDATA[<p>I fell off the weekly wins wagon <em>hard</em> in November, then wrote just one earlier this month. Time to get back on.</p>
+                <title>Weekly wins…of late</title>
+                <link>/2024/06/14/weekly-winsof-late/</link>
+                <guid>/2024/06/14/weekly-winsof-late/</guid>
+                <pubDate>Fri Jun 14 2024 13:00:00 GMT-0700 (Pacific Daylight Time) GMT</pubDate>
+
+                
+                <content:encoded><![CDATA[<p>I fell off the weekly wins wagon <em>hard</em> in November, then wrote just one earlier this month. Time to get back on.</p>
 <ul>
 <li>Social win – I saw a friend and past coworker who lives in town and it was lovely. I should reach out to more folks.</li>
 <li>Social win – the parents and mother-in-law were in town for the girl's graduation, and brought their attendant challenges, but everything went just fine.</li>
@@ -440,46 +625,50 @@
 </ul>
 ]]></content:encoded>
 
-            
-            <description><![CDATA[<p>I fell off the weekly wins wagon <em>hard</em> in November, then wrote just one earlier this month. Time to get back on.</p>
+                
+                <description><![CDATA[<p>I fell off the weekly wins wagon <em>hard</em> in November, then wrote just one earlier this month. Time to get back on.</p>
 <ul>
 <li>Social win – I saw a friend and past coworker who lives in town and it was lovely. I should reach out to more folks.</li>
 <li>Social win – the parents and...]]></description>
 
-            
-            
-            <category>post</category>
+                
+                
+                <category>post</category>
+                
             
         </item>
         
         <item>
-            <title>A little tip I wish was unnecessary</title>
-            <link>/2024/06/14/a-little-tip-i-wish-was-unnecessary/</link>
-            <guid>/2024/06/14/a-little-tip-i-wish-was-unnecessary/</guid>
-            <pubDate>Fri Jun 14 2024 13:00:00 GMT-0700 (Pacific Daylight Time) GMT</pubDate>
-
             
-            <content:encoded><![CDATA[<p>Whenever you are on an online or text chat with tech support of any kind, keep a copy of everything you write in a text file. That way you can repeat yourself (as you inevitably will) with minimal effort. As you think of better ways to explain yourself you can update the note.</p>
+                <title>A little tip I wish was unnecessary</title>
+                <link>/2024/06/14/a-little-tip-i-wish-was-unnecessary/</link>
+                <guid>/2024/06/14/a-little-tip-i-wish-was-unnecessary/</guid>
+                <pubDate>Fri Jun 14 2024 13:00:00 GMT-0700 (Pacific Daylight Time) GMT</pubDate>
+
+                
+                <content:encoded><![CDATA[<p>Whenever you are on an online or text chat with tech support of any kind, keep a copy of everything you write in a text file. That way you can repeat yourself (as you inevitably will) with minimal effort. As you think of better ways to explain yourself you can update the note.</p>
 ]]></content:encoded>
 
-            
-            <description><![CDATA[<p>Whenever you are on an online or text chat with tech support of any kind, keep a copy of everything you write in a text file. That way you can repeat yourself (as you inevitably will) with minimal effort. As you think of better ways to explain yourself you can update the note.</p>
+                
+                <description><![CDATA[<p>Whenever you are on an online or text chat with tech support of any kind, keep a copy of everything you write in a text file. That way you can repeat yourself (as you inevitably will) with minimal effort. As you think of better ways to explain yourself you can update the note.</p>
 ]]></description>
 
-            
-            
-            <category>post</category>
+                
+                
+                <category>post</category>
+                
             
         </item>
         
         <item>
-            <title>Recent wins as of 2024 06 02</title>
-            <link>/2024/06/01/recent-wins-as-of-2024-06-02/</link>
-            <guid>/2024/06/01/recent-wins-as-of-2024-06-02/</guid>
-            <pubDate>Sat Jun 01 2024 13:00:00 GMT-0700 (Pacific Daylight Time) GMT</pubDate>
-
             
-            <content:encoded><![CDATA[<p>It's been a bit since I did a &quot;weekly wins&quot; post, mostly because of…lassitude…but with the convenient excuse that we've been finishing the house project and moving and setting up and shepherding the girl through the last bits of high school. So some wins have occurred since the last post, the highest of which have been</p>
+                <title>Recent wins as of 2024 06 02</title>
+                <link>/2024/06/01/recent-wins-as-of-2024-06-02/</link>
+                <guid>/2024/06/01/recent-wins-as-of-2024-06-02/</guid>
+                <pubDate>Sat Jun 01 2024 13:00:00 GMT-0700 (Pacific Daylight Time) GMT</pubDate>
+
+                
+                <content:encoded><![CDATA[<p>It's been a bit since I did a &quot;weekly wins&quot; post, mostly because of…lassitude…but with the convenient excuse that we've been finishing the house project and moving and setting up and shepherding the girl through the last bits of high school. So some wins have occurred since the last post, the highest of which have been</p>
 <ul>
 <li>High school is done, with great results. Good grades, an IB diploma, grandparents visiting, relief and happiness and the bittersweet knowledge that for some friendships this might be the last hurrah all in one.</li>
 <li>We're in the house and it is great.</li>
@@ -488,23 +677,25 @@
 </ul>
 ]]></content:encoded>
 
-            
-            <description><![CDATA[<p>It's been a bit since I did a &quot;weekly wins&quot; post, mostly because of…lassitude…but with the convenient excuse that we've been finishing the house project and moving and setting up and shepherding the girl through the last bits of high school. So some wins have occurred since the last...]]></description>
+                
+                <description><![CDATA[<p>It's been a bit since I did a &quot;weekly wins&quot; post, mostly because of…lassitude…but with the convenient excuse that we've been finishing the house project and moving and setting up and shepherding the girl through the last bits of high school. So some wins have occurred since the last...]]></description>
 
-            
-            
-            <category>post</category>
+                
+                
+                <category>post</category>
+                
             
         </item>
         
         <item>
-            <title>Beta is not a release type</title>
-            <link>/2024/02/18/beta-is-not-a-release-type/</link>
-            <guid>/2024/02/18/beta-is-not-a-release-type/</guid>
-            <pubDate>Sun Feb 18 2024 12:00:00 GMT-0800 (Pacific Standard Time) GMT</pubDate>
-
             
-            <content:encoded><![CDATA[<p>Beta is not a release type. Thinking of beta as a release type, essentially a quality level, leads teams to take something not ready for prime time, ship it to everyone, and call it &quot;beta&quot; to excuse its deficiencies. If you are making excuses for the deficiencies of your product you are probably doing it wrong, and it certainly doesn't feel good to do so.</p>
+                <title>Beta is not a release type</title>
+                <link>/2024/02/18/beta-is-not-a-release-type/</link>
+                <guid>/2024/02/18/beta-is-not-a-release-type/</guid>
+                <pubDate>Sun Feb 18 2024 12:00:00 GMT-0800 (Pacific Standard Time) GMT</pubDate>
+
+                
+                <content:encoded><![CDATA[<p>Beta is not a release type. Thinking of beta as a release type, essentially a quality level, leads teams to take something not ready for prime time, ship it to everyone, and call it &quot;beta&quot; to excuse its deficiencies. If you are making excuses for the deficiencies of your product you are probably doing it wrong, and it certainly doesn't feel good to do so.</p>
 <p>Beta is a testing period. The purpose of beta testing is to take a product that you suspect might be ready for release and expose it to real users that will break it in ways you didn't think to test for. That implies a few things:</p>
 <ul>
 <li>These users are testing the product, so you have things you would like them to do to make sure they are exercising the product fully. Therefore you have a testing plan.</li>
@@ -514,68 +705,74 @@
 <p>In short, since beta is testing, you have a plan, participants, success criteria, and a decision point. If not, you're just trying to hide the fact that you don't care about quality as much as your users will.</p>
 ]]></content:encoded>
 
-            
-            <description><![CDATA[<p>Beta is not a release type. Thinking of beta as a release type, essentially a quality level, leads teams to take something not ready for prime time, ship it to everyone, and call it &quot;beta&quot; to excuse its deficiencies. If you are making excuses for the deficiencies of your product you are...]]></description>
+                
+                <description><![CDATA[<p>Beta is not a release type. Thinking of beta as a release type, essentially a quality level, leads teams to take something not ready for prime time, ship it to everyone, and call it &quot;beta&quot; to excuse its deficiencies. If you are making excuses for the deficiencies of your product you are...]]></description>
 
-            
-            
-            <category>post</category>
+                
+                
+                <category>post</category>
+                
             
         </item>
         
         <item>
-            <title>There is no "normal" week or day</title>
-            <link>/2024/02/10/there-is-no-normal-week-or-day/</link>
-            <guid>/2024/02/10/there-is-no-normal-week-or-day/</guid>
-            <pubDate>Sat Feb 10 2024 12:00:00 GMT-0800 (Pacific Standard Time) GMT</pubDate>
-
             
-            <content:encoded><![CDATA[<p>At seventeen I joined the staff of a Boy Scout camp, and as an activity area leader I had a role to play in leadership, instruction, and the interactive programming that occurred each week. Each day had something special happening that made the schedule differ from one day to the next, making preparation, instruction, and even rest difficult. With scouts in camp for just a week at a time the strategy to engage them was clearly to make sure there was always a competition, series of skits, cookout, campfire show, ceremony, or recreational extremity (optional, happily: run off the end of the high pier! race to the far rock and back in an overloaded canoe! swim two miles in frigid water!) to draw attention and raise the available hype.</p>
+                <title>There is no "normal" week or day</title>
+                <link>/2024/02/10/there-is-no-normal-week-or-day/</link>
+                <guid>/2024/02/10/there-is-no-normal-week-or-day/</guid>
+                <pubDate>Sat Feb 10 2024 12:00:00 GMT-0800 (Pacific Standard Time) GMT</pubDate>
+
+                
+                <content:encoded><![CDATA[<p>At seventeen I joined the staff of a Boy Scout camp, and as an activity area leader I had a role to play in leadership, instruction, and the interactive programming that occurred each week. Each day had something special happening that made the schedule differ from one day to the next, making preparation, instruction, and even rest difficult. With scouts in camp for just a week at a time the strategy to engage them was clearly to make sure there was always a competition, series of skits, cookout, campfire show, ceremony, or recreational extremity (optional, happily: run off the end of the high pier! race to the far rock and back in an overloaded canoe! swim two miles in frigid water!) to draw attention and raise the available hype.</p>
 <p>No one day was &quot;normal.&quot; There was no opportunity to settle into a routine, so there was lots of opportunity for scouts, generally between 11 and 16 years of age, to wind up in the wrong place, unsure of where they were supposed to be and how that matched up with what they wanted to be doing, swimming in options and unable to settle into a helpful routine.</p>
 <p>It seems the same is true for knowledge workers – above a certain flavor of entry-level position, it's difficult to settle into a daily or weekly routine that would foster comfort in one's competence. It only gets worse as you enter into management or become a senior leader; you are constantly adapting, adjusting, re-focusing, trying and abandoning directions.</p>
 <p>I've learned not to lament the lack of routine. This is the job. But I do try to create it for the people I support who need it.</p>
 ]]></content:encoded>
 
-            
-            <description><![CDATA[<p>At seventeen I joined the staff of a Boy Scout camp, and as an activity area leader I had a role to play in leadership, instruction, and the interactive programming that occurred each week. Each day had something special happening that made the schedule differ from one day to the next, making...]]></description>
+                
+                <description><![CDATA[<p>At seventeen I joined the staff of a Boy Scout camp, and as an activity area leader I had a role to play in leadership, instruction, and the interactive programming that occurred each week. Each day had something special happening that made the schedule differ from one day to the next, making...]]></description>
 
-            
-            
-            <category>post</category>
+                
+                
+                <category>post</category>
+                
             
         </item>
         
         <item>
-            <title>Tips for UX Designer Technical Interviews</title>
-            <link>/2024/02/09/adplist-asks-what-are-some-tips-and-advice-when-going-through-a-technical-interview-as-a-ux-designer/</link>
-            <guid>/2024/02/09/adplist-asks-what-are-some-tips-and-advice-when-going-through-a-technical-interview-as-a-ux-designer/</guid>
-            <pubDate>Fri Feb 09 2024 12:00:00 GMT-0800 (Pacific Standard Time) GMT</pubDate>
-
             
-            <content:encoded><![CDATA[<p>For me the centerpiece of a design exercise is seeking knowledge and adapting your design ideas to that knowledge. You create and adapt and discard ideas readily and easily if they don't fit the emerging situation. So it is essential to ask questions during the exercise to understand as much as you possibly can about the people, environment, stakeholders, goals, and constraints so that you can demonstrate this process.</p>
+                <title>Tips for UX Designer Technical Interviews</title>
+                <link>/2024/02/09/adplist-asks-what-are-some-tips-and-advice-when-going-through-a-technical-interview-as-a-ux-designer/</link>
+                <guid>/2024/02/09/adplist-asks-what-are-some-tips-and-advice-when-going-through-a-technical-interview-as-a-ux-designer/</guid>
+                <pubDate>Fri Feb 09 2024 12:00:00 GMT-0800 (Pacific Standard Time) GMT</pubDate>
+
+                
+                <content:encoded><![CDATA[<p>For me the centerpiece of a design exercise is seeking knowledge and adapting your design ideas to that knowledge. You create and adapt and discard ideas readily and easily if they don't fit the emerging situation. So it is essential to ask questions during the exercise to understand as much as you possibly can about the people, environment, stakeholders, goals, and constraints so that you can demonstrate this process.</p>
 <p>You don't want the entire exercise to be taken up with this &quot;research&quot; activity – you do need to design something. So consider offering a very rough concept and then asking questions that will lead you either deeper into or away from that concept.</p>
 <p>Example – imagine Home Depot had a magical way of printing and delivering orange aprons to new employees, and employee apron customization/self-expression is culturally important. What ideas does this spark? What do you want to know to confirm or discard some of these ideas?</p>
 <p>My thoughts immediately go to a part of the new employee offer process that leads people to a website where they can customize an apron at their leisure. But these are hourly employees – the store manager is not going to want ANY work activity to be done outside of the store or in off hours. So the kernel of that idea needs to come in-store. Come to find out that they'd also like to offer this capability to existing employees. What is the technical environment in-store? How much time is the store manager willing to have an employee spend on this while on the clock? What are the required elements of apron customization and what are the optional ones? Etc. Understanding these you can sketch out a process that quickly gets the basics taken care of (perhaps in ONE or ZERO steps) and offers any options easily and quickly.</p>
 <p>In a design exercise you'd do this all narratively – talk about the core idea, check it against their answers to your questions, change the core idea, sketch a little, ask more questions, adapt to the answers, etc.</p>
 ]]></content:encoded>
 
-            
-            <description><![CDATA[<p>For me the centerpiece of a design exercise is seeking knowledge and adapting your design ideas to that knowledge. You create and adapt and discard ideas readily and easily if they don't fit the emerging situation. So it is essential to ask questions during the exercise to understand as much as...]]></description>
+                
+                <description><![CDATA[<p>For me the centerpiece of a design exercise is seeking knowledge and adapting your design ideas to that knowledge. You create and adapt and discard ideas readily and easily if they don't fit the emerging situation. So it is essential to ask questions during the exercise to understand as much as...]]></description>
 
-            
-            
-            <category>post</category>
+                
+                
+                <category>post</category>
+                
             
         </item>
         
         <item>
-            <title>I don't offer a "UX process"</title>
-            <link>/2023/12/08/i-dont-offer-a-ux-process/</link>
-            <guid>/2023/12/08/i-dont-offer-a-ux-process/</guid>
-            <pubDate>Fri Dec 08 2023 12:00:00 GMT-0800 (Pacific Standard Time) GMT</pubDate>
-
             
-            <content:encoded><![CDATA[<p>My current employer is much like others in that it has a product management process, an engineering process, a design process, a customer onboarding process, a customer support process, etc.</p>
+                <title>I don't offer a "UX process"</title>
+                <link>/2023/12/08/i-dont-offer-a-ux-process/</link>
+                <guid>/2023/12/08/i-dont-offer-a-ux-process/</guid>
+                <pubDate>Fri Dec 08 2023 12:00:00 GMT-0800 (Pacific Standard Time) GMT</pubDate>
+
+                
+                <content:encoded><![CDATA[<p>My current employer is much like others in that it has a product management process, an engineering process, a design process, a customer onboarding process, a customer support process, etc.</p>
 <p>What do you notice? That's right – each discipline group has a separate process. But what is it we are trying to ship?</p>
 <blockquote>
 <p>If you turn on a machine, and hammers come out, it's a machine designed to make hammers.</p>
@@ -593,24 +790,26 @@
 <p>The specifics of each informational phase might be organization-specific, but you'll need to harness all of the faculties of the product development organization, including (but not limited to) product management, design, engineering, customers, and users to do a good job in each phase. So this should be a single, integrated process.</p>
 ]]></content:encoded>
 
-            
-            <description><![CDATA[<p>My current employer is much like others in that it has a product management process, an engineering process, a design process, a customer onboarding process, a customer support process, etc.</p>
+                
+                <description><![CDATA[<p>My current employer is much like others in that it has a product management process, an engineering process, a design process, a customer onboarding process, a customer support process, etc.</p>
 <p>What do you notice? That's right – each discipline group has a separate process. But what is it we...]]></description>
 
-            
-            
-            <category>post</category>
+                
+                
+                <category>post</category>
+                
             
         </item>
         
         <item>
-            <title>Thomas W. writes…</title>
-            <link>/2023/11/29/thomas-w-writes/</link>
-            <guid>/2023/11/29/thomas-w-writes/</guid>
-            <pubDate>Wed Nov 29 2023 12:00:00 GMT-0800 (Pacific Standard Time) GMT</pubDate>
-
             
-            <content:encoded><![CDATA[<p>In <a href="https://www.linkedin.com/posts/thomasianwilson_next-time-someone-questions-you-as-a-researcher-activity-7136002995019780096-z-0W/">his LinkedIn post on November 29</a>, Thomas W. laid out a handful of arguments a designer or research could use to object to demands that UX &quot;prove its value.&quot; It feels good to read the list, but I don't recommend following his advice. I've used arguments like this before and heard the objections. In most cases the arguments are too high-level to meet the business where it is trying to operate, i.e. the points are a bit askew for a company hoping to change its business results in the near-term.</p>
+                <title>Thomas W. writes…</title>
+                <link>/2023/11/29/thomas-w-writes/</link>
+                <guid>/2023/11/29/thomas-w-writes/</guid>
+                <pubDate>Wed Nov 29 2023 12:00:00 GMT-0800 (Pacific Standard Time) GMT</pubDate>
+
+                
+                <content:encoded><![CDATA[<p>In <a href="https://www.linkedin.com/posts/thomasianwilson_next-time-someone-questions-you-as-a-researcher-activity-7136002995019780096-z-0W/">his LinkedIn post on November 29</a>, Thomas W. laid out a handful of arguments a designer or research could use to object to demands that UX &quot;prove its value.&quot; It feels good to read the list, but I don't recommend following his advice. I've used arguments like this before and heard the objections. In most cases the arguments are too high-level to meet the business where it is trying to operate, i.e. the points are a bit askew for a company hoping to change its business results in the near-term.</p>
 <p>He lists these points. For each I mention the typical objection:</p>
 <ul>
 <li>&quot;<em>72% of businesses claim that improving customer experience (CX) is their #1 priority today.</em>&quot; – irrelevant</li>
@@ -636,70 +835,40 @@
 <p>Instead, how do we express our success in terms of user and customer behavior? How do we choose to learn about those behaviors? How do we choose to run experiments and make interventions that change those behaviors in measurable ways? That is where attention to experience should come from. it's common for organizations to be immature in this area, and we can lead them in the right direction.</p>
 ]]></content:encoded>
 
-            
-            <description><![CDATA[<p>In <a href="https://www.linkedin.com/posts/thomasianwilson_next-time-someone-questions-you-as-a-researcher-activity-7136002995019780096-z-0W/">his LinkedIn post on November 29</a>, Thomas W. laid out a handful of arguments a designer or research could use to object to demands that UX &quot;prove...]]></description>
+                
+                <description><![CDATA[<p>In <a href="https://www.linkedin.com/posts/thomasianwilson_next-time-someone-questions-you-as-a-researcher-activity-7136002995019780096-z-0W/">his LinkedIn post on November 29</a>, Thomas W. laid out a handful of arguments a designer or research could use to object to demands that UX &quot;prove...]]></description>
 
-            
-            
-            <category>post</category>
+                
+                
+                <category>post</category>
+                
             
         </item>
         
         <item>
-            <title>Weekly wins for the week of 2023 11 20</title>
-            <link>/2023/11/22/weekly-wins-for-the-week-of-2023-11-20/</link>
-            <guid>/2023/11/22/weekly-wins-for-the-week-of-2023-11-20/</guid>
-            <pubDate>Wed Nov 22 2023 12:00:00 GMT-0800 (Pacific Standard Time) GMT</pubDate>
-
             
-            <content:encoded><![CDATA[<ul>
+                <title>Weekly wins for the week of 2023 11 20</title>
+                <link>/2023/11/22/weekly-wins-for-the-week-of-2023-11-20/</link>
+                <guid>/2023/11/22/weekly-wins-for-the-week-of-2023-11-20/</guid>
+                <pubDate>Wed Nov 22 2023 12:00:00 GMT-0800 (Pacific Standard Time) GMT</pubDate>
+
+                
+                <content:encoded><![CDATA[<ul>
 <li>A short work week is a beautiful thing. Having your entire department out for a day so you can catch up on administrative tasks is also nice, if a tad lonely.</li>
 <li>The dreaded &quot;calibration meeting&quot; where you explain your people's reviews to your peer managers (our first at this company, so likely to be a bit fraught) went just fine. No drama.</li>
 <li>Although my three vaccines set my night (and the following day) on fire, folks were understanding and I recovered quickly.</li>
 </ul>
 ]]></content:encoded>
 
-            
-            <description><![CDATA[<ul>
+                
+                <description><![CDATA[<ul>
 <li>A short work week is a beautiful thing. Having your entire department out for a day so you can catch up on administrative tasks is also nice, if a tad lonely.</li>
 <li>The dreaded &quot;calibration meeting&quot; where you explain your people's reviews to your peer managers (our first at...]]></description>
 
-            
-            
-            <category>post</category>
-            
-        </item>
-        
-        <item>
-            <title>Weekly wins for the week of 2023 11 13</title>
-            <link>/2023/11/17/weekly-wins-for-the-week-of-2023-11-13/</link>
-            <guid>/2023/11/17/weekly-wins-for-the-week-of-2023-11-13/</guid>
-            <pubDate>Fri Nov 17 2023 12:00:00 GMT-0800 (Pacific Standard Time) GMT</pubDate>
-
-            
-            <content:encoded><![CDATA[<p>In spite of the organization's urges to snap back to old ways (ways that got us to where we are, so are not sufficient on their own to change our results):</p>
-<ul>
-<li>My people are not overreacting to the politics…</li>
-<li>…assisted by their work in making us more customer-centric being shouted-out in public forums by the CEO…</li>
-<li>…who is also publicly mentioning themes that have been part of my mission at the company since I was hired.</li>
-</ul>
-<p>This all is setting me up perfectly to talk about quality and how the product needs to change (i.e. what we need to organize ourselves to produce) at the offsite after Thanksgiving.</p>
-<p>Also,</p>
-<ul>
-<li>I'm in the interview panel for the new product leader for a key product.</li>
-</ul>
-<p>Interesting times!</p>
-]]></content:encoded>
-
-            
-            <description><![CDATA[<p>In spite of the organization's urges to snap back to old ways (ways that got us to where we are, so are not sufficient on their own to change our results):</p>
-<ul>
-<li>My people are not overreacting to the politics…</li>
-<li>…assisted by their work in making us more customer-centric being...]]></description>
-
-            
-            
-            <category>post</category>
+                
+                
+                <category>post</category>
+                
             
         </item>
         

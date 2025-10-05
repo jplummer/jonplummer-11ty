@@ -11,22 +11,34 @@ eleventyExcludeFromCollections: true
         <language>en-US</language>
         <lastBuildDate>{{ collections.post | first }} GMT</lastBuildDate>
 
-        {% for post in collections.post | reverse | limit(20) %}
+        {% for item in collections.post | reverse | limit(20) | mergePostsAndLinks(links) %}
         <item>
-            <title>{{ post.data.title | safe }}</title>
-            <link>{{ post.url | absoluteUrl }}</link>
-            <guid>{{ post.url | absoluteUrl }}</guid>
-            <pubDate>{{ post.date }} GMT</pubDate>
+            {% if item.type == 'post' %}
+                <title>{{ item.data.data.title | safe }}</title>
+                <link>{{ item.data.url | absoluteUrl }}</link>
+                <guid>{{ item.data.url | absoluteUrl }}</guid>
+                <pubDate>{{ item.data.date }} GMT</pubDate>
 
-            {# Full post content #}
-            <content:encoded><![CDATA[{{ post.templateContent | safe }}]]></content:encoded>
+                {# Full post content #}
+                <content:encoded><![CDATA[{{ item.data.templateContent | safe }}]]></content:encoded>
 
-            {# Post excerpt for compatibility #}
-            <description><![CDATA[{{ post.data.excerpt | default(post.templateContent | truncate(300)) | safe }}]]></description>
+                {# Post excerpt for compatibility #}
+                <description><![CDATA[{{ item.data.data.excerpt | default(item.data.templateContent | truncate(300)) | safe }}]]></description>
 
-            {# Categories/tags if you have them #}
-            {% if post.data.tags %}
-            <category>{{ post.data.tags | join(', ') }}</category>
+                {# Categories/tags if you have them #}
+                {% if item.data.data.tags %}
+                <category>{{ item.data.data.tags | join(', ') }}</category>
+                {% endif %}
+            {% elif item.type == 'links' %}
+                <title>Remaindered Links</title>
+                <link>{{ page.url | absoluteUrl }}</link>
+                <guid>{{ page.url | absoluteUrl }}#links-{{ item.date | dateToRfc3339 }}</guid>
+                <pubDate>{{ item.date }} GMT</pubDate>
+
+                {# Links content #}
+                <content:encoded><![CDATA[<ul>{% for link in item.data %}<li><a href="{{ link.url }}">{{ link.title }}</a>{% if link.description %} - {{ link.description }}{% endif %}</li>{% endfor %}</ul>]]></content:encoded>
+
+                <description><![CDATA[<ul>{% for link in item.data %}<li><a href="{{ link.url }}">{{ link.title }}</a>{% if link.description %} - {{ link.description }}{% endif %}</li>{% endfor %}</ul>]]></description>
             {% endif %}
         </item>
         {% endfor %}

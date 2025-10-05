@@ -33,6 +33,40 @@ module.exports = function(eleventyConfig) {
     // Add custom Nunjucks shortcode: year
     eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
     
+    // Add custom filter to merge posts and links chronologically
+    eleventyConfig.addFilter("mergePostsAndLinks", function(posts, links) {
+      if (!posts) return [];
+      if (!links) return posts;
+      
+      // Get the date range for the current page
+      const pageDates = posts.map(post => new Date(post.data.date)).sort((a, b) => b - a);
+      const newestDate = pageDates[0];
+      const oldestDate = pageDates[pageDates.length - 1];
+      
+      // Start with posts
+      const items = [...posts.map(post => ({ type: 'post', data: post, date: new Date(post.data.date) }))];
+      
+      // Add links that fall within the page's date range
+      for (const [date, linkList] of Object.entries(links)) {
+        const linkDate = new Date(date);
+        if (linkDate <= newestDate && linkDate > oldestDate) {
+          for (let i = 0; i < linkList.length; i++) {
+            const link = linkList[i];
+            const isLastInGroup = i === linkList.length - 1;
+            items.push({ 
+              type: 'link', 
+              data: { ...link, isLastInGroup }, 
+              date: linkDate 
+            });
+          }
+        }
+      }
+      
+      // Sort chronologically (newest first)
+      return items.sort((a, b) => b.date - a.date);
+    });
+
+    
     // Ignore the '_notes' and "_posts/_drafts" folders
     eleventyConfig.ignores.add("_misc/");
     eleventyConfig.ignores.add("_posts/_drafts/");

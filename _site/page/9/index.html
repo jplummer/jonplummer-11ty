@@ -13,7 +13,8 @@
     <link rel="me" href="https://bsky.app/profile/jonplummer.com">
     
     <link rel="canonical" href="https://jonplummer.com/page/9/">
-    <link rel="alternate" type="application/rss+xml" title="Jon Plummer: Today I Learned" href="/feed.xml">
+    <link rel="alternate" type="application/rss+xml" title="Jon Plummer: Today I Learned: Posts" href="/feed.xml">
+    <link rel="alternate" type="application/rss+xml" title="Jon Plummer: Today I Learned: Links" href="/links-feed.xml">
 
     <title>Jon Plummer – Today I Learned</title>
 
@@ -63,6 +64,71 @@
     
 
     
+        
+        
+<article>
+    <header>
+        <h1><a href="/2023/07/29/quality-part-two/" rel="bookmark">Quality, part two</a></h1>
+    </header>
+    <section>
+        <p>It seems like we have a pretty good grasp of what quality should be when it comes to infrastructure – what technical soundness is, how much load we should handle, what kind of logging, etc. but we are less mature regarding other dimensions of quality.</p>
+<p>An interactive item in general availability, operated by customer users, should</p>
+<ul>
+<li>be valuable to specific users
+<ul>
+<li>deliver value in results and conveniences</li>
+<li>minimize toil</li>
+<li>and this should be verifiable by experiment and by monitoring success metrics/adoption rate/etc.</li>
+</ul>
+</li>
+<li>be usable by those users
+<ul>
+<li>intelligible
+<ul>
+<li>and this should be made more likely via concept testing, and somewhat verifiable by experiment and by monitoring success metrics/adoption rate/etc.</li>
+</ul>
+</li>
+<li>obvious in expected actions and right action (design guideline)</li>
+<li>makes success obvious (design guideline)</li>
+<li>makes good use of familiar controls and interaction paradigms where possible (design guideline)</li>
+<li>and this should be made more likely through user testing, and monitorable via success rate/time on task/error rate/etc.</li>
+</ul>
+</li>
+<li>be complete in its states, messages, and errors (design guideline)</li>
+<li>be instrumented so we can witness users’ successes and difficulties</li>
+</ul>
+<p>There’s some disagreement about how important interactive quality might be for infrequently-operated configuration tasks in the platform. The irony is that an infrequently-operated item is not practiced frequently enough by a user to be well-learned, so it must be <em>more</em> obvious in its operation than something they do every day. So to the above there’s pressure to add</p>
+<ul>
+<li>be self-explanatory, relying on recognition rather than training and recall</li>
+</ul>
+<p>For products in a growth phase, where catering to new users and bringing them to intermediate proficiency is arguably more important than catering to existing power users, “be self-explanatory, relying on recognition rather than training and recall” is also important for the most critical, central workflows.</p>
+<p>Some attention to interactive quality is important even in experiments, since poor interactive quality can confound our measurements. For example,</p>
+<ul>
+<li>If it is not usable we may not learn what we hope to learn from an experiment or a beta – since actual use will be hampered.</li>
+<li>If it is unpleasant to use, its uptake will be blunted unless the value strongly outweighs the problems.</li>
+<li>If it is not visually credible, confidence in its function will be blunted.</li>
+<li>If it contains needless toil it will be unpleasant, time on task will be high, error rate may be high.</li>
+</ul>
+<p>Some confounding factors inhere more strongly to “complete” features rather than experiments:</p>
+<ul>
+<li>If it is incomplete in the intended use cases it will seem broken.</li>
+<li>If it is incomplete in its states, messages, and errors for the covered use cases it will seem broken.</li>
+<li>If it is not obvious it is not usable. This is just a facet of usability that we should strive for in every delivery to live users.</li>
+<li>If it is not self-explanatory it has poor usability and increases the cost of training, which is backward from what we plan to do.</li>
+<li>If it is poorly-labeled it is not usable. This is just a facet of usability that we should strive for in every delivery to live users.</li>
+</ul>
+<p>The general idea is that scope should scale but quality should not. All of these are achievable in small scopes and if we care about quality are not “extra” costs.</p>
+
+    </section>
+    <footer>
+        <p class="posted-on"><time datetime="Sat Jul 29 2023 13:00:00 GMT-0700 (Pacific Daylight Time)">Jul 29, 2023</time></p>
+    </footer>
+</article>
+    
+
+    
+        
+        
 <article>
     <header>
         <h1><a href="/2023/07/21/weekly-wins-for-the-week-of-2023-07-17/" rel="bookmark">Weekly wins for the week of 2023 07 17</a></h1>
@@ -83,8 +149,11 @@
         <p class="posted-on"><time datetime="Fri Jul 21 2023 13:00:00 GMT-0700 (Pacific Daylight Time)">Jul 21, 2023</time></p>
     </footer>
 </article>
+    
 
     
+        
+        
 <article>
     <header>
         <h1><a href="/2023/07/14/weekly-wins-for-the-week-of-2023-07-10/" rel="bookmark">Weekly wins for the week of 2023 07 10</a></h1>
@@ -102,8 +171,11 @@
         <p class="posted-on"><time datetime="Fri Jul 14 2023 13:00:00 GMT-0700 (Pacific Daylight Time)">Jul 14, 2023</time></p>
     </footer>
 </article>
+    
 
     
+        
+        
 <article>
     <header>
         <h1><a href="/2023/07/08/weekly-wins-for-the-week-of-2023-07-03/" rel="bookmark">Weekly wins for the week of 2023 07 03</a></h1>
@@ -121,8 +193,11 @@
         <p class="posted-on"><time datetime="Sat Jul 08 2023 13:00:00 GMT-0700 (Pacific Daylight Time)">Jul 8, 2023</time></p>
     </footer>
 </article>
+    
 
     
+        
+        
 <article>
     <header>
         <h1><a href="/2023/06/30/weekly-wins-for-the-week-of-2023-06-26/" rel="bookmark">Weekly wins for the week of 2023 06 26</a></h1>
@@ -147,24 +222,7 @@
         <p class="posted-on"><time datetime="Fri Jun 30 2023 13:00:00 GMT-0700 (Pacific Daylight Time)">Jun 30, 2023</time></p>
     </footer>
 </article>
-
     
-<article>
-    <header>
-        <h1><a href="/2023/06/28/group-coaching-vs-individual-feedback/" rel="bookmark">Group coaching vs individual feedback</a></h1>
-    </header>
-    <section>
-        <p>Group coaching is valuable when the message is positive (&quot;I invite you to do this&quot;) and useful to all and there's no need to single someone out, or when singling someone out would be more pointed than the situation warrants. It allows the saving of face. Small issues such as not having the correct email signature, failing to make a fresh pot of coffee when taking the last cup, etc.</p>
-<p>I used group coaching today when I pointed out to my team that, yes, the time slots in our weekly critique are short and it is hard to go deep, but I invite them to pursue feedback in other ways as well (and listed some ways). There were two people who needed that message the most, but it was relevant to all of them.</p>
-<p>It's not the same thing as complaining to someone about problematic behavior, or escalating this complaint to their supervisor, which are more inherently pointed or even confronting.</p>
-<p>We all wish that people would come directly to us individually for their wishes and corrections, but sometimes they are not sure they should, or don't want to confront, or are nervous about their skills in such an interaction, or don't want to make a big deal of it, or mention it in passing in more established relationships, or…myriad options.</p>
-<p>(If you spend too much effort parsing the behavior of others you are likely to do the same for your own behavior, or vice versa, which will make it harder to relax and act in the moment. When I find myself stressed about how someone else's complaint came to me I try to set aside the manner and just focus on the content. Often there's at least a little something right in the complaint.)</p>
-
-    </section>
-    <footer>
-        <p class="posted-on"><time datetime="Wed Jun 28 2023 13:00:00 GMT-0700 (Pacific Daylight Time)">Jun 28, 2023</time></p>
-    </footer>
-</article>
 
 
 <nav class="pagination">

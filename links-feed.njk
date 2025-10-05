@@ -1,0 +1,30 @@
+---
+permalink: /links-feed.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>Jon Plummer - Remaindered Links</title>
+        <link>https://jonplummer.com</link>
+        <description>Remaindered links from Jon Plummer's blog</description>
+        <language>en-US</language>
+        <lastBuildDate>{{ collections.post | first }} GMT</lastBuildDate>
+
+        {% for item in collections.post | reverse | limit(20) | mergePostsAndLinks(links) %}
+            {% if item.type == 'links' %}
+            <item>
+                <title>Remaindered Links</title>
+                <link>{{ page.url | absoluteUrl }}</link>
+                <guid>{{ page.url | absoluteUrl }}#links-{{ item.date | dateToRfc3339 }}</guid>
+                <pubDate>{{ item.date }} GMT</pubDate>
+
+                {# Links content #}
+                <content:encoded><![CDATA[<ul>{% for link in item.data %}<li><a href="{{ link.url }}">{{ link.title }}</a>{% if link.description %} - {{ link.description }}{% endif %}</li>{% endfor %}</ul>]]></content:encoded>
+
+                <description><![CDATA[<ul>{% for link in item.data %}<li><a href="{{ link.url }}">{{ link.title }}</a>{% if link.description %} - {{ link.description }}{% endif %}</li>{% endfor %}</ul>]]></description>
+            </item>
+            {% endif %}
+        {% endfor %}
+    </channel>
+</rss>

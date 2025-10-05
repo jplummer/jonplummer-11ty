@@ -1,0 +1,183 @@
+{
+  "2025-10-05": [
+    {
+      "url": "https://archive.is/6Rd2i",
+      "title": "Building trust in opaque systems – why the better AI gets at conversation, the worse we get at questioning it – Fabrizia Ausiello",
+      "description": "\"How do we know when to trust what someone tells us? In person conversations give us many subtle cues we might pick up on, but when they happen with AI system designed to sound perfectly human, we lose any sort of frame of reference we may have.\""
+    },
+    {
+        "url": "https://www.uxforai.com/p/escape-from-the-figma-titanic-part-2-uxer-s-guide-to-magic-rag",
+        "title": "Escape from the Figma Titanic: Part 2 – UXer's guide to magic RAG – Greg Nudelman",
+        "description": "Part of a series on pivoiting UX into designing context and evals, interesting perspective: \"RAG (Retrieval-Augmented Generation) is a method for providing just-in-time content, enabling LLMs and AI Agents to answer users' questions and perform autonomous tasks. Recent advances in RAG make it a perfect magic carpet for ambitious user-centered UXers seeking to escape the sinking ship of pixel-pushing irrelevance.\""
+    },
+    {
+        "url": "https://www.youtube.com/shorts/tlclfNRFaIo",
+        "title": "Video: 3D-printed soap filament – Andrew Sink",
+        "description": "Apropos of a discussion of 3d printing with odd materials such as cheese or peanut butter"
+    }
+  ],
+  "2025-10-03": [
+    {
+      "url": "https://daverupert.com/2025/10/why-i-hate-the-mvp-car/",
+      "title": "Why I hate the MVP car – Dave Rupert", 
+      "description": "One can easily learn the wrong lessons from this popular software development meme that was not supposed to be a meme"
+    },
+    {
+        "url": "https://maven.com/christine-perfetti/reimagine-uxresearch",
+        "title": "Reimagining UX research in the AI age – Maven", 
+        "description": "Potentially interesting course on how AI is changing UX research. Maven has several interesting courses"
+    },
+    {
+        "url": "https://standardbeagle.com/ai-assisted-design-workflows/#what-ai-actually-does-in-ux-workflows",
+        "title": "AI-assisted design workflows: How UX teams move faster without sacrificing quality: What AI actually does in UX workflows – Cindy Brummer", 
+        "description": "Quick rundown of some AI-assisted UX practice use cases, in the midst of a helpfully elementary article about AI-assisted UX practice"
+    }
+  ],
+  "2025-10-02": [
+    {
+      "url": "https://drive.google.com/file/d/1iNSqpryo37-gndq6hNS2laHG1hUrJhfK/view?_bhlid=0a9364e61fcfe7ba1305d4c99f1cd610a9ebd18f&pli=1",
+      "title": "Snowball vibe coding guide – Greg Nudelman",
+      "description": "It's not that hard to get started vibe coding; this guide steps you into it without much pain and with a useful reminder to focus on the customer and data rather than the code or initial design"
+    },
+    {
+      "url": "https://growth.design/case-studies/too-good-to-go-onboarding",
+      "title": "3 UX tips to make \"aha moments\" click: Too Good To Go onboarding – Growth.Design",
+      "description": "I dig these little UX interventions. They don't always directly apply to our domain but there's almost always something to learn or be reminded of"
+    },
+    {
+        "url": "https://modelcontextexperience.com",
+        "title": "The best way to learn AI for UX and product professionals – Model Context Experience",
+        "description": "Potentially interesting training by the inimitable Peter Van Dijck"
+    }
+  ],
+  "2025-09-29": [
+    {
+        "url": "https://www.uxforai.com/p/need-storyboard-ai-project-draw",
+        "title": "Storyboarding for AI-driven products – Greg Nudelman",
+        "description": "I've long been a proponent of storyboarding, wireflows, and other methods that look at a process (or better, a network of processes) rather than focusing on single-screen mockups, especially when getting started putting an experience together. And this is becoming more important as we shift focus toward providing ai-powered capabilities to our customers. Here's a little very light reading on storyboarding that might be useful. (It's one article worth of content in a series of four posts, alas.)"
+    },
+    {
+        "url": "https://www.latent.space/p/gpt-5-review",
+        "title": "GPT-5 hands-on: welcome to the stone age – Latent.Space",
+        "description": "\"OpenAI's long awaited GPT-5 is here and swyx + ben have been testing with OpenAI for a while now. tldr; we think it's a significant leap towards AGI\""
+    },
+    {
+        "url": "https://www.mynameisjehad.com/emerging-patterns-in-designing-for-ai/",
+        "title": "Emerging patterns in designing for AI – My Name Is Jehad",
+        "description": "There are a few emerging patterns in designing for AI-first experiences. Here are a few"
+    }
+  ],
+  "2025-09-25": [
+    {
+        "url": "https://github.com/cxli233/FriendsDontLetFriends",
+        "title": "Friends don't let friends make bad graphs – Chenxin Li, Ph.D.",
+        "description": "An opinionated essay about good and bad practices in dataviz with examples"
+    }
+  ],
+  "2025-07-25": [
+    {
+        "url": "https://www.shapeof.ai/",
+        "title": "Shape of AI: UX patterns for artificial Intelligence design",
+        "description": "Exploring how user experience will evolve with the growth of artificial intelligence; the rise of AI has caused a paradigm shift in how people interact with technology. Our interfaces may evolve, but the foundations of great design are more relevant than ever"
+    },
+    {
+        "url": "https://uxdesign.cc/ai-visual-language-how-to-help-users-spot-ai-powered-features-3272a1f77d44",
+        "title": "AI visual language: How to help users spot AI-powered features – Tia Sydorenko",
+        "description": "While sparkles have effectively monopolized the identification of AI, concerns about accessibility and intuitive communication have risen"
+    },
+    {
+        "url": "https://www.whitespectre.com/ideas/emerging-ui-ux-patterns-in-generative-ai/",
+        "title": "Emerging Ui/UX patterns in generative AI: a visual guide – Whitespectre",
+        "description": "From iconography, color, animation, labeling and more this guide delves into the key trends to consider when integrating Generative AI into your user experience"
+    }
+  ],
+  "2025-07-17": [
+    {
+        "url": "https://wh0.github.io/2020/01/02/scissors.html",
+        "title": "Which emoji scissors close – wh0",
+        "description": "Fun!"
+    },
+    {
+        "url": "https://www.linkedin.com/posts/andreas-b-b06711117_ux-spring-activity-7032104605807056896-H8Uc",
+        "title": "How Apple fooled users with fake infinite scroll – Elvis Hsiao",
+        "description": "A chat between designers and engineers can result in sleight-of-hand that seems nicer/fancier than the constraints would suggest"
+    },
+    {
+        "url": "https://www.smashingmagazine.com/2025/08/beyond-hype-what-ai-can-do-product-design/",
+        "title": "Beyond the hype: what AI can really do for product design – Nikita Samutin",
+        "description": "AI tools are improving fast, but it's still not clear how they fit into a real product design workflow. Nikita Samutin walks through four core stages — from analytics and ideation to prototyping and visual design — to show where AI fits and where it doesn't, illustrated with real-world examples"
+    },
+    {
+        "url": "https://www.youtube.com/watch?v=bBtTu-QfW2Q",
+        "title": "Video: How to master Cursor Chat to build features with control – Ian Nuttall",
+        "description": "Chat with an LLM right in the sidebar, with one click apply of code changes, or running terminal commands"
+    },
+    {
+        "url": "https://www.madewithvibe.com/tools",
+        "title": "Tools for vibe coding – MadeWithVibe",
+        "description": "A curated list of the best tools to boost your vibe coding workflow"
+    },
+    {
+        "url": "https://www.behaviormodel.org",
+        "title": "Fogg behavior model – BJ Fogg, Ph.D.",
+        "description": "The Fogg Behavior Model shows that three elements must converge at the same moment for a behavior to occur: motivation, ability, and a prompt"
+    },
+    {
+        "url": "https://rosenverse.rosenfeldmedia.com/videos/research-in-the-face-of-complexity-new-sensibility-for-new-situations",
+        "title": "Video: Research in the face of complexity: new sensibility for new situations – Dave Hora",
+        "description": "How we design and deliver products is changing; how research plays is following suit. Our environment is complex, and evolving. AI's role in design, product, research, and engineering is accelerating. New practices are shifting the boundaries between our functions"
+    },
+    {
+        "url": "https://www.getstark.co/blog/wcag-vs-eaa/",
+        "title": "WCAG vs EAA: understanding where WCAG stops and the EAA starts – Team Stark",
+        "description": "Many teams believe that meeting WCAG standards means their digital products are compliant with the European Accessibility Act (EAA). Using a clear comparison grounded in EN 301 549 and EN 17161, we extensively detail what’s in and out of scope—and why organizations need to operationalize accessibility like they do privacy and security"
+    },
+    {
+        "url": "https://webinars.zeroheight.com/register/zeroheight-ds-live-tj-pitre-context-based-design-systems-preparing-for-an-ai-driven-future",
+        "title": "Video: DS live: context-based design systems: preparing for an AI-driven future – TJ Pitre",
+        "description": "Design systems aren't just about consistency anymore, they're becoming the connective tissue between people, tools, and intelligent agents"
+    },
+    {
+        "url": "https://www.browserstack.com/accessibility-design-toolkit",
+        "title": "BrowserStack accessibility design toolkit",
+        "description": "Adhere to WCAG by building an accessible component library, auto-detecting issues for web & mobile interfaces, and streamlining dev handoff"
+    },
+    {
+        "url": "https://ux.stackexchange.com/questions/67542/what-keyboard-input-makes-sense-for-tabbing-out-of-a-rich-text-field?newreg=27436c074a664c9186eb842a6ae9e14f",
+        "title": "What keyboard input makes sense for tabbing out of a rich text field? – UX Stack Exchange",
+        "description": "Focus management for accessibility matters, and is complicated by modal dialogs and rich text editors"
+    },
+    {
+        "url": "https://www.w3.org/International/questions/qa-personal-names",
+        "title": "Personal names around the world – W3C Internationalization Committee",
+        "description": "How do people's names differ around the world, and what are the implications of those differences on the design of forms, databases, ontologies, etc. for the Web?"
+    },
+    {
+        "url": "https://www.kalzumeus.com/2010/06/17/falsehoods-programmers-believe-about-names/",
+        "title": "Falsehoods programmers believe about names – Patrick McKenzie",
+        "description": "…so, as a public service, I'm going to list assumptions your systems probably make about names.  All of these assumptions are wrong.  Try to make less of them next time you write a system which touches names"
+    },
+    {
+        "url": "https://www.youtube.com/watch?v=ysPbXH0LpIEz",
+        "title": "Video: Prompting 101 | Code w/ Claude – Anthropic",
+        "description": "This session demonstrates best practices using a real-world car accident claim scenario"
+    },
+    {
+        "url": "https://rosenverse.rosenfeldmedia.com/videos/the-pygmalion-effect-in-which-a-vibe-coding-experiment-becomes-a-million-lines",
+        "title": "Video: the Pygmalion effect: in which a vibe-coding experiment becomes a million lines – Christian Crumlish",
+        "description": "What started as intuitive \"vibe coding\" with AI assistants quickly revealed why UX professionals need systematic Information Architecture approaches more than ever"
+    },
+    {
+        "url": "https://bsky.app/profile/spavel.bsky.social/post/3llh3wy5les2y",
+        "title": "BSky: You CAN but you WON'T – @spavel.bsky.social",
+        "description": "…and this is a great lesson in User Experience Design: you CAN but you WON'T, because of how the software is designed"
+    }
+  ],
+  "2025-06-29": [
+    {
+        "url": "https://linear.app/now/why-is-quality-so-rare",
+        "title": "Why is quality so rare? – Karri Saarinen",
+        "description": "The modern world has made huge advances in knowledge, technology, and skill. We can build faster than ever. We know more than ever. Yet quality still feels so rare. So many things feel unfinished, broken, or forgettable. Why?"
+    }
+  ]
+}
