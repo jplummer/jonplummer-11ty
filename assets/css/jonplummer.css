@@ -495,7 +495,7 @@ nav a {
   color: var(--link-color);
 }
 nav a:hover {
-  color: var(--link-hover-color) !important;
+  color: var(--link-hover-color);
 }
 nav a:visited {
   color: var(--link-visited-color);

@@ -6,12 +6,13 @@ layout: base.njk
 tags: page
 permalink: "/about/"
 ---
+# /about
 (updated {{ date | postDate }})
 
 I lead product design teams for web and mobile apps, edtech, smart home, wi-fi, consumer electronics, medical devices, and more.
 
 ## Currently
-- Director of User Experience at [Invoca](https://invoca.com/), making conversation intelligence software for marketing and sales folks
+- Director of User Experience at [Invoca](https://invoca.com/), making AI-assisted conversation intelligence software for marketing and sales folks
 - Mentor at [ADPList.org](https://adplist.org) and [Designed.org](https://designed.org/), here to help designers think well about their work, consider the leap to management, and to help new managers wrestle with their new responsibilities
 - Mentor at [tupu.io](https://tupu.io/), same deal
 - Husband, father, tinkerer, maker, just handy enough to be trouble

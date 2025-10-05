@@ -1,21 +1,30 @@
 ---
 title: "Now – Jon Plummer"
 description: "What Jon Plummer is up to now - current work at Invoca, family updates, and personal projects. Updated regularly with current status."
-date: 2025-08-31
+date: 2025-10-04
 layout: base.njk
 tags: page
 permalink: "/now/"
 ---
+# /now
 (updated {{ date | postDate }})
 
-## Home and family
+I'm currently experimenting with
 
-The girl starts at the local university shortly. Otherwise there's little news on the home front. The ADU is occupied and concerns about water quality have been handled; now to deal with a little water creeping out under the shower door. For some reason my nice skate wheel desk chair wheels are drawing on the hardwood floor. They should not be doing that.
+* AI-powered design tools
+* bringing AI "workflow agent" ideas to the platform
+* what's the least effective dose of rebranding/reskinning
+* Cursor use as a lapsed coder (I've not really worked with code since the echo of the first dot-com boom, so there's a lot to catch up on)
 
-## Work
+I'm currently pushing on
 
-Invoca always needs something different, but always needs the same thing – a clear and mutually-understood view of the customer goal we hope to address and the user needs that intersect it. Coordinated AI-powered experiences are new for this team, and it's up to me to set the guidelines and guardrails.
+* shared goals and goal maintenance
+* multi-concept workflow
+* the purpose of different kinds of releases
+* what's "complete" for each type
+* what's "quality" for each type
+* getting all trio members into some regular contact with customers
 
-## Body
+Y'know, the basics…
 
-Driving for a couple of hours to and from a camping trip leaves me stiff and gimpy for a moment until I've hobbled around a bit and things loosen up. But lifting, hiking, calesthenics, exercise in general is dandy. Getting old is…weird.
+And I'm deadlifting 435 for two. Not bad!
