@@ -12,11 +12,11 @@ eleventyExcludeFromCollections: true
         <lastBuildDate>{{ collections.post | first }} GMT</lastBuildDate>
 
         {% for item in collections.post | reverse | limit(20) | mergePostsAndLinks(links) %}
-            {% if item.type == 'links' %}
+            {% if item.type == 'link' %}
             <item>
                 <title>Remaindered Links</title>
-                <link>{{ page.url | absoluteUrl }}</link>
-                <guid>{{ page.url | absoluteUrl }}#links-{{ item.date | dateToRfc3339 }}</guid>
+                <link>{{ page.url | absoluteUrl("https://jonplummer.com") }}</link>
+                <guid>{{ page.url | absoluteUrl("https://jonplummer.com") }}#links-{{ item.date | dateToRfc3339 }}-{{ loop.index }}</guid>
                 <pubDate>{{ item.date }} GMT</pubDate>
 
                 {# Links content #}

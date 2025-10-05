@@ -131,7 +131,7 @@
   - [x] quickest possible solid type scheme and stack
   - [x] double-check centering, margins, padding, breakpoints
   - vertical rhythm https://edgdesign.co/blog/baseline-grids-in-css
-  - highlight the current page in the nav per https://11ty.rocks/tips/essential-navigation-snippet/
+  - [x] highlight the current page in the nav per https://11ty.rocks/tips/essential-navigation-snippet/
   - aria-current page per https://www.11ty.dev/docs/collections/#use-an-aria-current-attribute-on-the-current-page
 
 ## 🟦 Phase 5: Site Generation and Upload Automation
@@ -151,8 +151,8 @@
 
 ## 🟪 Phase 6: Truly fancy shit
 - [x] Redefine colors for dark mode
+- [x] "remaindered links' feature ala Kottke (using 11ty collections?)
 - CMS https://www.11ty.dev/docs/cms/
-- "remaindered links' feature ala Kottke (using 11ty collections?)
 - consider SERPs (https://schema.org)
 - consider POSSE (more tags for different types of entries?)
 - date-based color styles? or a color style that rotates site-wide on deploy?

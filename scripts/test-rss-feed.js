@@ -15,7 +15,7 @@ function findRssFiles(dir) {
     
     if (stat.isDirectory()) {
       files.push(...findRssFiles(fullPath));
-    } else if (item.endsWith('.xml') || item.endsWith('.rss')) {
+    } else if ((item.endsWith('.xml') || item.endsWith('.rss')) && !item.includes('sitemap')) {
       files.push(fullPath);
     }
   }
