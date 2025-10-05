@@ -29,6 +29,7 @@
   /* Letter spacing */
   --letter-spacing-tight: -0.025em;
   --letter-spacing-normal: normal;
+  --letter-spacing-loose: 0.025em;
 
   /* Spacing */
   --spacing-xs: 0.5rem;
@@ -395,7 +396,7 @@ article h1 {
 /* Paragraphs */
 p {
   margin: var(--spacing-sm) 0;
-  letter-spacing: var(--letter-spacing-normal);
+  letter-spacing: var(--letter-spacing-loose);
 }
 
 /* Form elements */
