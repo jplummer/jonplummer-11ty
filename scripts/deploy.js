@@ -79,12 +79,40 @@ function parseRsyncOutput(output) {
   const transferredFiles = [];
   const lines = output.split('\n');
   
+  // Debug: log the raw output for troubleshooting
+  if (process.env.DEBUG_DEPLOY) {
+    console.log('\n🔍 DEBUG - Raw rsync output:');
+    console.log('─'.repeat(40));
+    lines.forEach((line, i) => {
+      console.log(`${i.toString().padStart(3, ' ')}: ${line}`);
+    });
+    console.log('─'.repeat(40));
+  }
+  
   for (const line of lines) {
     const trimmed = line.trim();
     
-    // File transfer lines (verbose output)
+    // Skip empty lines
+    if (!trimmed) continue;
+    
+    // File transfer lines (verbose output) - more flexible pattern matching
+    // Pattern: [<>ch][fdL][-+?][-+?][-+?] size date time filename
     if (trimmed.match(/^[<>ch][fdL][-+?][-+?][-+?]\s+\d+\s+\d{4}\/\d{2}\/\d{2}\s+\d{2}:\d{2}:\d{2}\s+(.+)$/)) {
       const match = trimmed.match(/^[<>ch][fdL][-+?][-+?][-+?]\s+\d+\s+\d{4}\/\d{2}\/\d{2}\s+\d{2}:\d{2}:\d{2}\s+(.+)$/);
+      if (match) {
+        transferredFiles.push(match[1]);
+      }
+    }
+    // Alternative pattern for files without timestamps
+    else if (trimmed.match(/^[<>ch][fdL][-+?][-+?][-+?]\s+\d+\s+(.+)$/)) {
+      const match = trimmed.match(/^[<>ch][fdL][-+?][-+?][-+?]\s+\d+\s+(.+)$/);
+      if (match) {
+        transferredFiles.push(match[1]);
+      }
+    }
+    // Simple file listing pattern (just filename after status)
+    else if (trimmed.match(/^[<>ch][fdL][-+?][-+?][-+?]\s+(.+)$/)) {
+      const match = trimmed.match(/^[<>ch][fdL][-+?][-+?][-+?]\s+(.+)$/);
       if (match) {
         transferredFiles.push(match[1]);
       }
@@ -157,6 +185,73 @@ function deploy() {
     console.log('📤 Syncing all files with rsync...');
     console.log(`   Local: ${config.localPath}`);
     console.log(`   Remote: ${config.username}@${config.host}:${config.remotePath}`);
+    
+    // First, run a dry-run to show what would be transferred
+    console.log('\n🔍 Checking what files would be transferred...');
+    let dryRunCommand;
+    
+    if (hasSSHKey) {
+      dryRunCommand = [
+        'rsync',
+        '-azv', // Archive mode, compress, verbose
+        '--dry-run', // Don't actually transfer
+        '--delete', // Delete files on remote that don't exist locally
+        '--exclude=.DS_Store', // Exclude macOS metadata files
+        '--exclude=Thumbs.db', // Exclude Windows thumbnail files
+        '--exclude=*.tmp', // Exclude temporary files
+        `${config.localPath}`, // Source directory (with trailing slash)
+        `${config.username}@${config.host}:${config.remotePath}` // Destination
+      ];
+    } else if (hasSshpass && hasPassword) {
+      dryRunCommand = [
+        'sshpass',
+        '-p', config.password,
+        'rsync',
+        '-azv', // Archive mode, compress, verbose
+        '--dry-run', // Don't actually transfer
+        '--delete', // Delete files on remote that don't exist locally
+        '--exclude=.DS_Store', // Exclude macOS metadata files
+        '--exclude=Thumbs.db', // Exclude Windows thumbnail files
+        '--exclude=*.tmp', // Exclude temporary files
+        `${config.localPath}`, // Source directory (with trailing slash)
+        `${config.username}@${config.host}:${config.remotePath}` // Destination
+      ];
+    } else {
+      dryRunCommand = [
+        'rsync',
+        '-azv', // Archive mode, compress, verbose
+        '--dry-run', // Don't actually transfer
+        '--delete', // Delete files on remote that don't exist locally
+        '--exclude=.DS_Store', // Exclude macOS metadata files
+        '--exclude=Thumbs.db', // Exclude Windows thumbnail files
+        '--exclude=*.tmp', // Exclude temporary files
+        `${config.localPath}`, // Source directory (with trailing slash)
+        `${config.username}@${config.host}:${config.remotePath}` // Destination
+      ];
+    }
+    
+    try {
+      const dryRunOutput = execSync(dryRunCommand.join(' '), { 
+        stdio: 'pipe',
+        encoding: 'utf8'
+      });
+      
+      const { transferredFiles: dryRunFiles } = parseRsyncOutput(dryRunOutput);
+      
+      if (dryRunFiles.length > 0) {
+        console.log('\n📁 Files that will be transferred:');
+        console.log('─'.repeat(40));
+        dryRunFiles.forEach(file => {
+          console.log(`   📄 ${file}`);
+        });
+        console.log(`\n   Total files to transfer: ${dryRunFiles.length}`);
+        console.log('─'.repeat(40));
+      } else {
+        console.log('✅ No files need to be transferred - everything is up to date!');
+      }
+    } catch (error) {
+      console.log('⚠️  Could not run dry-run check, proceeding with deployment...');
+    }
 
     // Build rsync command with appropriate authentication
     let rsyncCommand;
@@ -226,6 +321,14 @@ function deploy() {
     } catch (error) {
       rsyncOutput = error.stdout || '';
       exitCode = error.status || 1;
+      
+      // Debug: show stderr for connection issues
+      if (process.env.DEBUG_DEPLOY && error.stderr) {
+        console.log('\n🔍 DEBUG - rsync stderr:');
+        console.log('─'.repeat(40));
+        console.log(error.stderr);
+        console.log('─'.repeat(40));
+      }
     }
 
     // Parse rsync output for file transfers and warnings
@@ -240,6 +343,23 @@ function deploy() {
       });
       console.log(`\n   Total files: ${transferredFiles.length}`);
       console.log('─'.repeat(40));
+    } else {
+      // No files transferred - check if this is because everything is up to date
+      const statsMatch = rsyncOutput.match(/Number of files transferred: (\d+)/);
+      const totalFilesMatch = rsyncOutput.match(/Number of files: (\d+)/);
+      
+      if (statsMatch && totalFilesMatch) {
+        const transferred = parseInt(statsMatch[1]);
+        const total = parseInt(totalFilesMatch[1]);
+        
+        if (transferred === 0 && total > 0) {
+          console.log('\n✅ All files are already up to date on the server!');
+          console.log(`📊 Total files checked: ${total}`);
+          console.log('   No files needed to be transferred.');
+        } else if (transferred > 0) {
+          console.log(`\n📊 Files transferred: ${transferred} of ${total} total files`);
+        }
+      }
     }
     
     // Display warnings if any
