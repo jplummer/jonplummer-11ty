@@ -27,7 +27,9 @@ module.exports = function(eleventyConfig) {
 
     // add postDate filter
     eleventyConfig.addFilter("postDate", (dateObj) => {
-      return DateTime.fromJSDate(dateObj).toLocaleString(DateTime.DATE_MED);
+      // Handle both Date objects and date strings
+      const date = dateObj instanceof Date ? dateObj : new Date(dateObj);
+      return DateTime.fromJSDate(date).toLocaleString(DateTime.DATE_MED);
     });
 
     // Add custom Nunjucks shortcode: year
