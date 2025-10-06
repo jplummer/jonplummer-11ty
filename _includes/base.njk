@@ -52,7 +52,7 @@
     {% include "nav.njk" %}
 </header>
 
-<main id="main" aria-label="Main content">
+<main id="main" aria-label="Main content"{% if tags %} data-tags="{{ tags | join(' ') }}"{% endif %}>
     {{ content | safe }}
 </main>
 

@@ -87,13 +87,13 @@
   - [x] Main navigation at top
 
 - **404 Page Template (`404.njk`)**
+  - …and make 404 work!
 
 - **Portfolio Template (`portfolio.njk` and `_includes/portfolio_list_item.njk`)**
   - Grid listing
   - Only "portfolio" category
   - [-] Post excerpts (nay!)
   - Navigation controls
-  - Main navigation at top
   - Image size/position/styling
 
 - **Portfolio Post Content Template (`_includes/portfolio_detail.njk`)**
@@ -127,12 +127,12 @@
   - add ogImage default
   - add ogImage to frontmatter on posts and pages that need it
 
-- **Basic polish**
+- [x] **Basic polish**
   - [x] quickest possible solid type scheme and stack
-  - [x] double-check centering, margins, padding, breakpoints
-  - vertical rhythm https://edgdesign.co/blog/baseline-grids-in-css
+  - [x] double-check basic centering, margins, padding, breakpoints
   - [x] highlight the current page in the nav per https://11ty.rocks/tips/essential-navigation-snippet/
-  - aria-current page per https://www.11ty.dev/docs/collections/#use-an-aria-current-attribute-on-the-current-page
+  - [x] vertical rhythm in fonts https://www.daybreak.studio/writing/adaline-typography
+  - [x] aria-current page per https://www.11ty.dev/docs/collections/#use-an-aria-current-attribute-on-the-current-page
 
 ## 🟦 Phase 5: Site Generation and Upload Automation
 
@@ -140,8 +140,8 @@
 - [x] Set up npm scripts for development and production builds
 - [x] Configure environment-specific build settings
 - [x] Implement build validation and testing
-- Check each test script to make sure it is useful
-- Go through results of each test script to fix issues
+- [x] Check each test script to make sure it is useful
+- [x] Go through results of each test script to fix issues
 
 ### Deployment Pipeline
 - [x] **Local deployment scripts**:
@@ -153,6 +153,7 @@
 - [x] Redefine colors for dark mode
 - [x] "remaindered links' feature ala Kottke (using 11ty collections?)
 - [x] simplify /_posts folder structure
+- vertical rhythm in spacings https://edgdesign.co/blog/baseline-grids-in-css
 - CMS https://www.11ty.dev/docs/cms/
 - consider SERPs (https://schema.org)
 - consider POSSE (more tags for different types of entries?)

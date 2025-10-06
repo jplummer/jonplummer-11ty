@@ -7,21 +7,20 @@
   --max-width: 66rem;
   --breakpoint-mobile: 54rem; /* custom properties don't work in a media query, alas */
 
-  /* Typography */
-  --font-family: system-ui, sans-serif;
-  --text-size: 16px;
-  --line-height: 1.6;
-  --line-height-tight: 1.1;
+ /* Typography */
+ --font-family: system-ui, sans-serif;
+ --text-size: 16px;
+ --line-height: 1.5;
+ --font-size-xxs: 0.875rem;  --line-height-xxs: 1.715;
+ --font-size-xs: 1rem; --line-height-xs: 1.5;
+ --font-size-sm: 1.125rem; --line-height-sm: 1.3334;
+ --font-size-md: 1.25rem; --line-height-md: 1.2;
+ --font-size-lg: 1.5rem; --line-height-lg: 1;
+ --font-size-xl: 2rem; --line-height-xl: 1;
+ --font-size-2xl: 2.5rem; --line-height-2xl: 1.2;
+ --font-size-3xl: 4rem; --line-height-3xl: 1;
+ --line-height-tight: 1.1;
 
-  /* Font sizes */
-  --font-size-xxs: 0.875rem;
-  --font-size-xs: 1rem;
-  --font-size-sm: 1.125rem;
-  --font-size-md: 1.25rem;
-  --font-size-lg: 1.5rem;
-  --font-size-xl: 1.75rem;
-  --font-size-2xl: 2.25rem;
-  --font-size-3xl: 4rem;
 
   /* Font weights */
   --font-weight-thin: 100;
@@ -261,7 +260,6 @@ nav.pagination a.next {
 /* Headings */
 h1, h2, h3, h4 {
   margin: var(--spacing-md) 0 0.25rem 0;
-  line-height: var(--line-height-tight);
   text-wrap: balance;
 }
 
@@ -272,31 +270,37 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   font-size: var(--font-size-2xl);
+  line-height: var(--line-height-2xl);
   font-weight: var(--font-weight-bold);
 }
 
 h2 {
   font-size: var(--font-size-xl);
+  line-height: var(--line-height-xl);
   font-weight: var(--font-weight-bold);
 }
 
 h3 {
   font-size: var(--font-size-lg);
+  line-height: var(--line-height-lg);
   font-weight: var(--font-weight-bold);
 }
 
 h4 {
   font-size: var(--font-size-md);
+  line-height: var(--line-height-md);
   font-weight: var(--font-weight-bold);
 }
 
 h5 {
   font-size: var(--font-size-sm);
+  line-height: var(--line-height-sm);
   font-weight: var(--font-weight-bold);
 }
 
 h6 {
   font-size: var(--font-size-xs);
+  line-height: var(--line-height-xs);
   font-weight: var(--font-weight-black);
 }
 
@@ -310,6 +314,7 @@ hgroup {
 
 hgroup h1 {
   font-size: var(--font-size-3xl);
+  line-height: var(--line-height-3xl);
   font-weight: var(--font-weight-thin);
   margin: 0;
 }
@@ -317,6 +322,7 @@ hgroup h1 {
 hgroup p {
   margin: 0;
   font-size: var(--font-size-xs);
+  line-height: var(--line-height-xs);
   font-style: italic;
 }
 
@@ -326,6 +332,11 @@ header h1 + p {
 
 /* Article headings */
 article h1 {
+  margin: 0;
+}
+
+/* Main content headings */
+main > h1 {
   margin: 0;
 }
 
@@ -342,6 +353,7 @@ button, input, label {
 /* Navigation typography */
 nav a {
   font-size: var(--font-size-xxs);
+  line-height: var(--line-height-xxs);
   text-decoration: none;
   transition: color 0.3s ease;
 }
@@ -350,6 +362,7 @@ nav a {
 .license,
 footer p {
   font-size: var(--font-size-xxs);
+  line-height: var(--line-height-xxs);
 }
 
 .license {
@@ -423,7 +436,7 @@ nav a:visited {
   color: var(--link-visited-color);
 }
 
-nav a.active {
+nav a[aria-current="page"] {
   color: var(--link-color);
 }
 
@@ -458,7 +471,8 @@ article section a:hover {
 }
 
 /* End-of-post square */
-article:not(.link-item) section::after {
+article:not(.link-item) section::after,
+main[data-tags*="page"]::after {
   content: "";
   display: block;
   width: 0.5rem;
