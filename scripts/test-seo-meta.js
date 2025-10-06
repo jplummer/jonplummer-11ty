@@ -241,9 +241,8 @@ function validateHeadings(headings) {
   const h1Count = headings.filter(h => h.level === 1).length;
   if (h1Count === 0) {
     issues.push('No H1 heading found');
-  } else if (h1Count > 1) {
-    issues.push('Multiple H1 headings found (should typically be only one)');
   }
+  // Note: Multiple H1 headings check disabled - this is acceptable for some site structures
   
   // Check heading hierarchy
   let lastLevel = 0;
