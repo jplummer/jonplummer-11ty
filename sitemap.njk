@@ -12,6 +12,14 @@ eleventyExcludeFromCollections: true
     <priority>1.0</priority>
   </url>
 
+  {# Main index.html #}
+  <url>
+    <loc>https://jonplummer.com/index.html</loc>
+    <lastmod>{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   {# About page #}
   <url>
     <loc>https://jonplummer.com/about/</loc>
@@ -57,18 +65,15 @@ eleventyExcludeFromCollections: true
   {% endfor %}
 
   {# Pagination pages #}
-  {% for page in collections.all %}
-    {% if page.data.pagination %}
-      {% for pageNum in (1..page.data.pagination.pages) %}
-        {% if pageNum > 1 %}
+  {% set totalPosts = collections.post | length %}
+  {% set postsPerPage = 5 %}
+  {% set totalPages = (totalPosts + postsPerPage - 1) // postsPerPage %}
+  {% for pageNum in range(2, totalPages + 1) %}
   <url>
     <loc>https://jonplummer.com/page/{{ pageNum }}/</loc>
     <lastmod>{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
-        {% endif %}
-      {% endfor %}
-    {% endif %}
   {% endfor %}
 </urlset>
