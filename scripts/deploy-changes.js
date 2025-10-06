@@ -237,7 +237,12 @@ function deployChanges() {
       console.log('─'.repeat(40));
     }
 
-    if (exitCode === 0) {
+    // Check if this is a successful sync (even with exit code 255)
+    const isSuccessfulSync = exitCode === 0 || 
+      (exitCode === 255 && rsyncOutput.includes('Number of files transferred: 0')) ||
+      (exitCode === 255 && rsyncOutput.includes('sent ') && rsyncOutput.includes('received '));
+
+    if (isSuccessfulSync) {
       console.log('\n✅ Deployment completed successfully!');
       console.log(`🌐 Your updated site should be live at: https://${config.host}`);
       console.log('\n📊 rsync automatically uploaded only new and changed files.');

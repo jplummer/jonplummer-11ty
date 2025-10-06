@@ -149,9 +149,10 @@
   - [-] SFTP deployment automation
   - [-] Cloud storage sync (AWS S3, Netlify, etc.)
 
-## 🟪 Phase 6: Truly fancy shit
+## 🟪 Phase 6: Truly fancy schniazz
 - [x] Redefine colors for dark mode
 - [x] "remaindered links' feature ala Kottke (using 11ty collections?)
+- [x] simplify /_posts folder structure
 - CMS https://www.11ty.dev/docs/cms/
 - consider SERPs (https://schema.org)
 - consider POSSE (more tags for different types of entries?)

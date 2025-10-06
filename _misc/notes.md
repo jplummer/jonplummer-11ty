@@ -1,15 +1,15 @@
 
 # 🔨 NPM Commands
 
-## ⌨️ Development
+## 💻 Development
     * npm run dev                          # Start development server with live reload
     * npm run build                        # Build production site
     * npm run start                        # Start development server
     * npm run clean                        # Clean build directory
 
-## Test generated site
+## 🔍 Test generated site
 
-### ☑️ HTML validation
+### 📋 HTML validation
     * npm run validate                       # Check HTML validity
     * npm run validate-comprehensive         # Check HTML validity plus plus
 

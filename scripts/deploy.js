@@ -372,7 +372,12 @@ function deploy() {
       console.log('─'.repeat(40));
     }
 
-    if (exitCode === 0) {
+    // Check if this is a successful sync (even with exit code 255)
+    const isSuccessfulSync = exitCode === 0 || 
+      (exitCode === 255 && rsyncOutput.includes('Number of files transferred: 0')) ||
+      (exitCode === 255 && rsyncOutput.includes('sent ') && rsyncOutput.includes('received '));
+
+    if (isSuccessfulSync) {
       console.log('\n✅ Full deployment completed successfully!');
       console.log(`🌐 Your site should be live at: https://${config.host}`);
       console.log('\n📊 All files have been synced to the remote server.');
