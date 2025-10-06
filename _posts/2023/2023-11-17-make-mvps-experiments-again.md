@@ -62,7 +62,7 @@ Make experiments experiments again by:
         - Selecting a hypothesis and means of testing it
         - Setting date and criteria for evaluation
         - Instrumenting, launching experiment, and collecting data
-        - Evaluating the results at the appointed time and making the withdraw/iterate/prepare decision, creating a new project if needed 
+        - Evaluating the results at the appointed time and making the withdraw/iterate/prepare decision, creating a new project if needed
     - Review feedback and results from pilot
     - Share best practices/expectations with department
     - Profit!

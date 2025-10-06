@@ -461,8 +461,8 @@ article section a:hover {
 article:not(.link-item) section::after {
   content: "";
   display: block;
-  width: 8px;
-  height: 8px;
+  width: 0.5rem;
+  height: 0.5rem;
   background-color: var(--text-color-light);
   margin: var(--spacing-sm) 0 0 0;
 }

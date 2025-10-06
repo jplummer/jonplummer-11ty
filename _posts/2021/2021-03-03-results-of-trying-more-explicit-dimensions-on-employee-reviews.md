@@ -7,15 +7,15 @@ tags: post
 A little while ago I resolved to use explicit dimensions to solicit peer feedback and to organize my feedback on employees I needed to review. I also said that I'd let you know how it goes.
 
 > **Quality** – HMT (how might they) contribute to better results for the users of the product/project
-> 
+>
 > **Content** – HMT improve the delivery of their own work
-> 
+>
 > **Collaboration** – HMT foster greater collaboration among the team
-> 
+>
 > **Client** – HMT better serve the needs of the client
-> 
+>
 > **Improvement** – where have we noticed improvement in the review period
-> 
+>
 > My previous post: [Reviews](/2020/11/26/reviews/)
 
 I've done two such reviews this way so far, incorporating these dimensions into the existing structure.

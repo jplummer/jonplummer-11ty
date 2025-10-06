@@ -9,6 +9,27 @@
 
         
         <item>
+            <title>New on the blog</title>
+            <link>https://jonplummer.com/2025/10/06/new-on-the-blog/</link>
+            <guid>https://jonplummer.com/2025/10/06/new-on-the-blog/</guid>
+            <pubDate>2025-10-06T20:00:00Z</pubDate>
+
+            
+            <content:encoded><![CDATA[<p>I've taken some belated inspiration from <a href="https://kottke.org/">Jason Kottke</a> and introduced a feature that's new to me: short link posts between &quot;normal&quot; posts. (His look much like normal posts but I didn't want to work that hard.) I now have a way to add short links of interest to the blog; they'll appear in aggregate between the normal posts. Normal posts now end with an end-of-post token borrowed from magazines: a square.</p>
+<p>There are a lot of links recently; I hope to keep it to a dull roar but the design world is changing so quickly that there's a lot to learn about.</p>
+<p>Posts appear in an RSS feed, found as before at <a href="https://jonplummer.com/feed.xml">https://jonplummer.com/feed.xml</a>, and links now appear in their own feed at <a href="https://jonplummer.com/links-feed.xml">https://jonplummer.com/links-feed.xml</a>. Enjoy!</p>
+]]></content:encoded>
+
+            
+            <description><![CDATA[<p>I've taken some belated inspiration from <a href="https://kottke.org/">Jason Kottke</a> and introduced a feature that's new to me: short link posts between &quot;normal&quot; posts. (His look much like normal posts but I didn't want to work that hard.) I now have a way to add short links of...]]></description>
+
+            
+            
+            <category>post</category>
+            
+        </item>
+        
+        <item>
             <title>Quick links on SaaS UI trends</title>
             <link>https://jonplummer.com/2025/10/05/quick-saas-ui-links/</link>
             <guid>https://jonplummer.com/2025/10/05/quick-saas-ui-links/</guid>
@@ -668,31 +689,6 @@
 
             
             <description><![CDATA[<p>In <a href="https://www.linkedin.com/posts/thomasianwilson_next-time-someone-questions-you-as-a-researcher-activity-7136002995019780096-z-0W/">his LinkedIn post on November 29</a>, Thomas W. laid out a handful of arguments a designer or research could use to object to demands that UX &quot;prove...]]></description>
-
-            
-            
-            <category>post</category>
-            
-        </item>
-        
-        <item>
-            <title>Weekly wins for the week of 2023 11 20</title>
-            <link>https://jonplummer.com/2023/11/22/weekly-wins-for-the-week-of-2023-11-20/</link>
-            <guid>https://jonplummer.com/2023/11/22/weekly-wins-for-the-week-of-2023-11-20/</guid>
-            <pubDate>2023-11-22T20:00:00Z</pubDate>
-
-            
-            <content:encoded><![CDATA[<ul>
-<li>A short work week is a beautiful thing. Having your entire department out for a day so you can catch up on administrative tasks is also nice, if a tad lonely.</li>
-<li>The dreaded &quot;calibration meeting&quot; where you explain your people's reviews to your peer managers (our first at this company, so likely to be a bit fraught) went just fine. No drama.</li>
-<li>Although my three vaccines set my night (and the following day) on fire, folks were understanding and I recovered quickly.</li>
-</ul>
-]]></content:encoded>
-
-            
-            <description><![CDATA[<ul>
-<li>A short work week is a beautiful thing. Having your entire department out for a day so you can catch up on administrative tasks is also nice, if a tad lonely.</li>
-<li>The dreaded &quot;calibration meeting&quot; where you explain your people's reviews to your peer managers (our first at...]]></description>
 
             
             

@@ -3,7 +3,7 @@
   
   <url>
     <loc>https://jonplummer.com/</loc>
-    <lastmod>2025-10-05T20:00:00Z</lastmod>
+    <lastmod>2025-10-06T20:00:00Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -1133,6 +1133,13 @@
     <priority>0.6</priority>
   </url>
   
+  <url>
+    <loc>https://jonplummer.com/2025/10/06/new-on-the-blog/</loc>
+    <lastmod>2025-10-06T20:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 
   
   
@@ -1621,6 +1628,8 @@
   
     
       
+    
+  
     
   
     

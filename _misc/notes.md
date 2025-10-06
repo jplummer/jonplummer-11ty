@@ -30,7 +30,7 @@
     * npm run test-all                       # Run all tests in sequence
 
 ## 🚢 Deploy site to host
-    * npm run test-deployment                # Test deployment (environment, local build check, 
+    * npm run test-deployment                # Test deployment (environment, local build check,
                                              # dependencies, SSH, remote directory, rsync dry-run)
     * npm run preview-deploy-changes         # See what would be done by deploy-changes
     * npm run deploy-changes                 # Deploy only new/changed items via rsync

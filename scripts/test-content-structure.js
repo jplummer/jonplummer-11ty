@@ -193,17 +193,18 @@ function validateFileName(filePath) {
   const fileName = path.basename(filePath);
   const dirName = path.dirname(filePath);
   
-  // Check if file is in expected directory structure
-  const expectedPattern = /^\d{4}\/\d{2}\/\d{2}\/[^\/]+\/index\.md$/;
+  // Check if file is in expected directory structure (YYYY/YYYY-MM-DD-slug.md)
+  const expectedPattern = /^\d{4}\/\d{4}-\d{2}-\d{2}-[^\/]+\.md$/;
   const relativePath = path.relative('./_posts', filePath);
   
   if (!expectedPattern.test(relativePath)) {
-    return { valid: false, error: 'File not in expected directory structure (YYYY/MM/DD/slug/index.md)' };
+    return { valid: false, error: 'File not in expected directory structure (YYYY/YYYY-MM-DD-slug.md)' };
   }
   
-  // Extract expected slug from path
-  const pathParts = relativePath.split('/');
-  const expectedSlug = pathParts[3];
+  // Extract expected slug from filename (remove .md extension)
+  const fileNameWithoutExt = fileName.replace('.md', '');
+  const slugMatch = fileNameWithoutExt.match(/^\d{4}-\d{2}-\d{2}-(.+)$/);
+  const expectedSlug = slugMatch ? slugMatch[1] : null;
   
   return { valid: true, expectedSlug };
 }

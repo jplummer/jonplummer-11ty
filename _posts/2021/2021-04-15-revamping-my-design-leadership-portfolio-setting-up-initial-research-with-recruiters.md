@@ -7,11 +7,11 @@ tags: post
 Recruiters I've recently spoken to about passive opportunities (where the recruiter reached out to me before I was aware of the position) are more accessible to me than hiring managers, so my research will have to start there. In a previous article I said
 
 > The first step in capturing passive opportunities is clearly to get my profile in front of relevant recruiters. LinkedIn seems pretty good for this. While my LinkedIn profile is also not a subject of this research, I'm sure I'll learn things relevant to it along the was as well.
-> 
+>
 > The second is to get that recruiter to invite me to an interview so I can get them to pass me to the hiring manager if the position seems to be a fit. My impression is that my resume does an okay job here, and my portfolio could do better. I don't know how many good opportunities have not com my way due to insufficiency of my portfolio, and I'm not sure I have a way of finding out.
-> 
+>
 > The third is for my profile and the assessment of the recruiter to work together to encourage the hiring manager to grant me an interview. My impression is that my portfolio is not effective in this third step.
-> 
+>
 > [Revamping my design portfolio: audiences](/2021/03/27/revamping-my-design-leadership-portfolio-audiences/)
 
 The questions raised here include

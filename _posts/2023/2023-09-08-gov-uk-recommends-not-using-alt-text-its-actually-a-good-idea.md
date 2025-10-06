@@ -11,13 +11,13 @@ tags: post
 Naturally this has been met with many hot takes, including
 
 > bizarre, especially given that i have often heard the uk gov is a good example of taking accessibility seriously
-> 
+>
 > \[name redacted 2\]
 
 and
 
 > I wonder if they consulted any screen reader users before they went with this somewhat condescending metaphor: "Another way to make sure you are describing the image properly is to imagine that you're reading out the content of the page on a telephone. When you get to the image, what would you say to help the listener understand the point the page is making?"
-> 
+>
 > \[name redacted 3\]
 
 …as well as complaints that Gov.uk is "canceling the alt tag" and other alarmist conclusions.

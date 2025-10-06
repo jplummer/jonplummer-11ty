@@ -9,7 +9,7 @@ My current employer is much like others in that it has a product management proc
 What do you notice? That's right – each discipline group has a separate process. But what is it we are trying to ship?
 
 > If you turn on a machine, and hammers come out, it's a machine designed to make hammers.
-> 
+>
 > Geoffrey Canada, Harlem Children's Zone (paraphrased from memory)
 
 We're trying to ship a problem-solving, efficient, coherent, usable, pleasant, and effective piece of software. So our process, the design of our organization, needs to be arranged such that this is what the machine produces. We're not trying to ship a little bit of engineering, a little bit of design, a little bit of support, and a little bit of product management all shaken up in a bag.

@@ -6,7 +6,7 @@ tags: post
 ---
 The twists and turns of my prior role are relevant to my new role. My self-eval of 2021 contains lessons for me now, though the stated goals of my new role will be related but different. (Edited to anonymize.)
 
-* * *
+<hr />
 
 ## **What are the top three accomplishments you want to celebrate this review cycle? (Please include specifics: dates, outcomes, team members, metrics/data)**
 

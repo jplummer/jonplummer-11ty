@@ -7,7 +7,7 @@ tags: post
 I'm not in a big hurry to leave my job (hi, folks!). But every once in a while a really nice opportunity comes along, and I'd like to be prepared for it. And of late I've felt that I'm not prepared. I think my portfolio doesn't reflect my value as a design leader; it's only a little bit past a designer portfolio, and a hastily thrown-together one at that. Sure, it was sufficient to get my current gig, but I fell into the lap of this company at JUST the right moment; a lot of this last transition is down to good luck.
 
 > This is a good reminder that you should be looking for your next job before you want your next job.
-> 
+>
 > Roy Rapoport, Director of Corporate Engineering at Netflix
 
 Recently we've started to revamp the company site, which has gone untouched for half a decade. In doing so we've selected two audiences we want to impress based on our business goals, done research on each, and penned some aims and a mission for the site based on that research and some hopefully reasonable assumptions when research didn't suffice.

@@ -7,7 +7,7 @@ tags: post
 During a discussion of accessibility and the level of attention a company ought to pay to it, someone said
 
 > I have always worked in complex enterprise software where the user is a specialized individual and not the general public so accessibility has never been stressed or pushed beyond considering the impact of colors and contrast.
-> 
+>
 > I seek only to take down what they said, so I'll not name them here.
 
 This position is entirely understandable, and I suspect that most designers working in a B2B environment receive this excuse from their organizations when asking about those organizations' lack of attention to accessibility. Though it is understandable is also wrong-headed; a close reading reveals where.

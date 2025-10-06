@@ -7,7 +7,7 @@ tags: post
 In a previous post I said
 
 > **My highest-level goal** is to be an impressive candidate design leader to firms that are looking for experience design leadership. They needn’t work hard to qualify themselves; I’ll assess these companies myself for culture, personal growth opportunity, financial opportunity, and interesting work to do.
-> 
+>
 > [Revamping my design leadership portfolio: goals](/2021/02/22/revamping-my-design-leadership-portfolio-goals/)
 
 I'd like my portfolio to represent me well for advertised positions that I apply to, and for positions where a recruiter comes to me as a passive candidate. These two avenues probably have different processes and slightly different audiences. I'm a little bit more interested in the passive opportunities, since recently these have been the more interesting ones (iRobot, Neato, Kohler), but I suspect that there will be goals enough in common that I can do a good job for each audience with one portfolio. (For now I'm going to leave [my resume](https://misc.jonplummer.com/JonPlummer.pdf) out of the analysis and research, though I am sure I will learn things that are useful to improving it along the way.)

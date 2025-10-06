@@ -17,9 +17,9 @@ So this business about benefit, time, cost, etc. is correct, and really about ex
 I wrote a little memory jogger to help build these. It's not much to look at; I'll bet you can fill it out pretty easily as you think about a problem you are trying to solve. A simple proposal, not too expensive or time consuming, can be just this in an email. A fancy proposal will need more flesh, but the anatomy is the same:
 
 > We have (problem) It costs us this (in treasure, pain, missed opportunities)
-> 
+>
 > A way forward is (solution) It will cost us (how much) to get started (in treasure, people, space, equipment, etc.) In the first (timeframe) it will yield (result), based on (the similar experience of others) Ideal for us is if it ramps to producing (result) Other opportunities it might create include (stretch)
-> 
+>
 > There’s also (alternative solution) It’s better than the other (because) It’s worse than the other (because) It will cost us (how much) to get started (in treasure, people, space, equipment, etc.) In the first (timeframe) it will yield (result), based on (the similar experience of others) Ideal for us is if it ramps to producing (result) Other opportunities it might create include (stretch) Etc.
 
 Any part of this you can’t answer can be answered with the help of folks in your organization, folks you know or learn about via working the network, or can be left asked but unanswered. You'll need to talk to these people anyhow to gather support for your proposal, so you might as well include them early—involving people in creating the future that they will be part of is really the only good way to create buy-in.
@@ -27,25 +27,25 @@ Any part of this you can’t answer can be answered with the help of folks in yo
 Recently I've started to knock this sort of thing together into a little proposal format. It doesn't match the above exactly, but you'll recognize the themes.
 
 > **A specific and action-oriented name for the initiative**
-> 
+>
 > **Background**
-> 
+>
 > Explain the situation that gives rise to the problem and any useful facts about the situation that will be good to know as people read through the proposal.
-> 
+>
 > **Problem**
-> 
+>
 > Express the specific problem you’d like to go after, more plainly and directly than suggested in Background.
-> 
+>
 > **Our Aim**
-> 
+>
 > State the desired benefit. For example, _Elevate the average employee’s awareness of inclusive work culture and behavior, and equip them to participate in small local interventions when necessary._
-> 
+>
 > **Proposed Intervention**
-> 
+>
 > Explain the concrete steps you plan to take to achieve the benefit.
-> 
+>
 > **Cost and timeframe**
-> 
+>
 > Talk about what it would cost, and how long it would take, to do those steps. Consider initial costs, recurring costs, whether we're "done” at some point. Bonus points if the costs and time line up exactly with the activities in the proposed intervention.
 
 That should be enough to get most ideas out of your head and into active discussion in your company, club, homeowners association, etc.

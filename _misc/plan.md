@@ -194,6 +194,6 @@ Dieter Rams 03          #ed8008, #ed3f1c, #bf1b1b, #736b1e, #d9d2c6
 Dieter Rams 03 adjusted #ed8008, #ed3f1c, #bf1b1b, #736b1e, #dadccf
 Dieter Rams 04          #bf7c2a, #c09c6f, #5f503e, #9c9c9c, #e1e4e1
 
-https://www.color-hex.com/color-palettes/popular.php 
+https://www.color-hex.com/color-palettes/popular.php
 
 https://mcochris.com

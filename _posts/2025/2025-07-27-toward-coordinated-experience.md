@@ -6,8 +6,8 @@ tags: post
 ---
 ## Background
 
-I realized the other day that we (UX and others) make workflow diagrams but don’t distinguish in them between “system advances you to the next step" or "offers you a link to a relevant thing” versus “user has to know to go somewhere else to do a necessary thing.” These are not at all equivalent; the arrows look the same, but those that denote “user has to know to go somewhere else to do a thing” should be maybe painfully ugly or broken or perhaps not exist at all to point out that a barrier exists.  
-  
+I realized the other day that we (UX and others) make workflow diagrams but don’t distinguish in them between “system advances you to the next step" or "offers you a link to a relevant thing” versus “user has to know to go somewhere else to do a necessary thing.” These are not at all equivalent; the arrows look the same, but those that denote “user has to know to go somewhere else to do a thing” should be maybe painfully ugly or broken or perhaps not exist at all to point out that a barrier exists.
+
 We should be anticipating and lowering those barriers, and we often are not. As we make new things, we’re tempted to squeeze scope down tight enough that we can launch quickly, but end up erecting these barriers in the process.
 
 UX folks are interested in producing what I'll call _coordinated experiences_, but have learned (to my chagrin) that it's hard to convince other folks in product development to participate, so they give up after a while. Since it is natural for engineering to look at the platform from the data model outward and assume that the appropriate interfaces match the data model in structure, and since there should otherwise be sufficient demand to produce coordinated experiences rather than the uncoordinated ones we usually make, my hypothesis is that there's some incentive/pressure/habit that is leading us in product development to scope projects such that we're not spending the effort required to produce coordinated experiences.
@@ -66,7 +66,7 @@ However, users will still need to
 - Understand the capabilities of the system – learn about what the system can do and how it is best used
 - Make adjustments – correct errors in their own work and that of agents, try tweaks, follow hunches
 
-This likely means that there’s plenty of interface! The emphasis shifts from the user directly manipulating the system toward the user being offered analyses and outcomes, but given the above needs users will continue to require systems that are 
+This likely means that there’s plenty of interface! The emphasis shifts from the user directly manipulating the system toward the user being offered analyses and outcomes, but given the above needs users will continue to require systems that are
 
 - self-explanatory
 - transparent in their operations
