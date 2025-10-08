@@ -32,9 +32,10 @@
 ## 🚢 Deploy site to host
     * npm run test-deployment                # Test deployment (environment, local build check,
                                              # dependencies, SSH, remote directory, rsync dry-run)
-    * npm run preview-deploy-changes         # See what would be done by deploy-changes
-    * npm run deploy-changes                 # Deploy only new/changed items via rsync
-    * npm run deploy                         # Full deployment via rsync
+    * npm run deploy                         # Deploy site via rsync (simplified script)
+    
+    # Note: Complex deployment scripts moved to scripts/deploy/backup/
+    # Current script shows rsync's native output and handles errors simply
 
 
 # 📚 Front Matter Variables
