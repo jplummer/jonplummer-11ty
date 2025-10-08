@@ -2,25 +2,8 @@
 
 const fs = require('fs');
 const path = require('path');
+const { findHtmlFiles } = require('../utils/file-utils');
 
-// Find all HTML files in _site
-function findHtmlFiles(dir) {
-  const files = [];
-  const items = fs.readdirSync(dir);
-  
-  for (const item of items) {
-    const fullPath = path.join(dir, item);
-    const stat = fs.statSync(fullPath);
-    
-    if (stat.isDirectory()) {
-      files.push(...findHtmlFiles(fullPath));
-    } else if (item.endsWith('.html')) {
-      files.push(fullPath);
-    }
-  }
-  
-  return files;
-}
 
 // Extract images from HTML
 function extractImages(htmlContent) {

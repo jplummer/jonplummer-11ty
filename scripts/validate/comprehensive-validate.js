@@ -3,25 +3,8 @@
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
+const { findHtmlFiles } = require('../utils/file-utils');
 
-// Find all HTML files
-function findHtmlFiles(dir) {
-  const files = [];
-  const items = fs.readdirSync(dir);
-  
-  for (const item of items) {
-    const fullPath = path.join(dir, item);
-    const stat = fs.statSync(fullPath);
-    
-    if (stat.isDirectory()) {
-      files.push(...findHtmlFiles(fullPath));
-    } else if (item.endsWith('.html')) {
-      files.push(fullPath);
-    }
-  }
-  
-  return files;
-}
 
 // Comprehensive HTML validation
 function validateHtml(filePath) {

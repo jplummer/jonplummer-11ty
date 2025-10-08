@@ -3,25 +3,8 @@
 const fs = require('fs');
 const path = require('path');
 const { getChangedHtmlFiles, shouldRunFullScan } = require('../utils/changed-files-util');
+const { findHtmlFiles } = require('../utils/file-utils');
 
-// Find all HTML files in _site (for full scan)
-function findHtmlFiles(dir) {
-  const files = [];
-  const items = fs.readdirSync(dir);
-  
-  for (const item of items) {
-    const fullPath = path.join(dir, item);
-    const stat = fs.statSync(fullPath);
-    
-    if (stat.isDirectory()) {
-      files.push(...findHtmlFiles(fullPath));
-    } else if (item.endsWith('.html')) {
-      files.push(fullPath);
-    }
-  }
-  
-  return files;
-}
 
 // Extract all internal links from HTML content
 function extractInternalLinks(htmlContent, basePath) {

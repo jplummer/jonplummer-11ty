@@ -6,25 +6,8 @@ const https = require('https');
 const http = require('http');
 const { URL } = require('url');
 const { getChangedHtmlFiles, shouldRunFullScan } = require('../utils/changed-files-util');
+const { findHtmlFiles } = require('../utils/file-utils');
 
-// Find all HTML files in _site (for full scan)
-function findHtmlFiles(dir) {
-  const files = [];
-  const items = fs.readdirSync(dir);
-  
-  for (const item of items) {
-    const fullPath = path.join(dir, item);
-    const stat = fs.statSync(fullPath);
-    
-    if (stat.isDirectory()) {
-      files.push(...findHtmlFiles(fullPath));
-    } else if (item.endsWith('.html')) {
-      files.push(fullPath);
-    }
-  }
-  
-  return files;
-}
 
 // Extract all external links from HTML content
 function extractExternalLinks(htmlContent, basePath) {
