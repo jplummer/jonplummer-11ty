@@ -5,7 +5,7 @@ const path = require('path');
 const https = require('https');
 const http = require('http');
 const { URL } = require('url');
-const { getChangedHtmlFiles, shouldRunFullScan } = require('./changed-files-util');
+const { getChangedHtmlFiles, shouldRunFullScan } = require('../utils/changed-files-util');
 
 // Find all HTML files in _site (for full scan)
 function findHtmlFiles(dir) {

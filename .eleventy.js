@@ -1,6 +1,13 @@
 const { DateTime } = require("luxon");
+const markdownIt = require("markdown-it");
 
 module.exports = function(eleventyConfig) {
+    // Initialize markdown-it
+    const md = markdownIt({
+        html: true, // Allow HTML in markdown
+        breaks: true, // Convert line breaks to <br>
+        linkify: true // Auto-convert URLs to links
+    });
     // Copy static assets
     eleventyConfig.addPassthroughCopy("assets");
     
@@ -30,6 +37,11 @@ module.exports = function(eleventyConfig) {
       // Handle both Date objects and date strings
       const date = dateObj instanceof Date ? dateObj : new Date(dateObj);
       return DateTime.fromJSDate(date).toLocaleString(DateTime.DATE_MED);
+    });
+
+    // Add markdown filter
+    eleventyConfig.addFilter("markdown", function(content) {
+      return md.render(content);
     });
 
     // Add custom Nunjucks shortcode: year

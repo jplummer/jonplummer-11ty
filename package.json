@@ -8,20 +8,20 @@
     "start": "eleventy --serve",
     "dev": "eleventy --serve --watch",
     "clean": "rm -rf _site",
-    "validate": "node scripts/validate-html.js",
-    "validate-comprehensive": "node scripts/comprehensive-validate.js",
-    "test-deployment": "node scripts/test-deployment.js",
-    "deploy": "node scripts/deploy.js",
-    "deploy-changes": "node scripts/deploy-changes.js",
-    "preview-deploy-changes": "node scripts/preview-deploy-changes.js",
-    "test-links": "node scripts/test-links.js",
-    "test-internal-links": "node scripts/test-internal-links.js",
-    "test-external-links": "node scripts/test-external-links.js",
-    "test-content": "node scripts/test-content-structure.js",
-    "test-performance": "node scripts/test-performance.js",
-    "test-seo": "node scripts/test-seo-meta.js",
-    "test-accessibility": "node scripts/test-accessibility.js",
-    "test-rss": "node scripts/test-rss-feed.js",
+    "validate": "node scripts/validate/validate-html.js",
+    "validate-comprehensive": "node scripts/validate/comprehensive-validate.js",
+    "test-deployment": "node scripts/test/test-deployment.js",
+    "deploy": "node scripts/deploy/deploy.js",
+    "deploy-changes": "node scripts/deploy/deploy-changes.js",
+    "preview-deploy-changes": "node scripts/deploy/preview-deploy-changes.js",
+    "test-links": "node scripts/test/test-links.js",
+    "test-internal-links": "node scripts/test/test-internal-links.js",
+    "test-external-links": "node scripts/test/test-external-links.js",
+    "test-content": "node scripts/test/test-content-structure.js",
+    "test-performance": "node scripts/test/test-performance.js",
+    "test-seo": "node scripts/test/test-seo-meta.js",
+    "test-accessibility": "node scripts/test/test-accessibility.js",
+    "test-rss": "node scripts/test/test-rss-feed.js",
     "test-all": "npm run test-internal-links && npm run test-content && npm run test-performance && npm run test-seo && npm run test-accessibility && npm run test-rss"
   },
   "keywords": [],
@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "dotenv": "^17.2.2",
-    "eleventy-plugin-date": "^1.0.0"
+    "eleventy-plugin-date": "^1.0.0",
+    "markdown-it": "^14.1.0"
   }
 }

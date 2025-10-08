@@ -1,6 +1,4 @@
-/* ========================================
-   CSS CUSTOM PROPERTIES
-   ======================================== */
+/* === CSS CUSTOM PROPERTIES ===*/
 :root {
   /* Layout */
   --gutter: 2rem;
@@ -71,9 +69,7 @@
   }
 }
 
-/* ========================================
-   RESETS & BASE STYLES
-   ======================================== */
+/* === RESETS & BASE STYLES === */
 
 /* Box sizing rules */
 *, *::before, *::after {
@@ -139,9 +135,7 @@ textarea:not([rows]) {
   scroll-margin-block: var(--spacing-ex);
 }
 
-/* ========================================
-   LAYOUT & STRUCTURE
-   ======================================== */
+/* === LAYOUT & STRUCTURE === */
 
 /* Main layout containers */
 body>header, body>main, body>footer {
@@ -253,9 +247,7 @@ nav.pagination a.next {
   margin-left: auto;
 }
 
-/* ========================================
-   TYPOGRAPHY
-   ======================================== */
+/* === TYPOGRAPHY === */
 
 /* Headings */
 h1, h2, h3, h4 {
@@ -372,9 +364,7 @@ footer p {
   font-weight: 300;
 }
 
-/* ========================================
-   COLORS & VISUAL DESIGN
-   ======================================== */
+/* === COLORS & VISUAL DESIGN === */
 
 /* Links */
 a {
@@ -446,9 +436,7 @@ footer p {
   color: var(--link-visited-color);
 }
 
-/* ========================================
-   COMPONENTS
-   ======================================== */
+/* === COMPONENTS === */
 
 /* Link items */
 article.link-item {
@@ -481,9 +469,7 @@ main[data-tags*="page"]::after {
   margin: var(--spacing-sm) 0 0 0;
 }
 
-/* ========================================
-   UTILITIES
-   ======================================== */
+/* === UTILITIES === */
 
 /* Screen reader only */
 .sr-only, header a.skip {

@@ -154,7 +154,7 @@
 - [x] "remaindered links' feature ala Kottke (using 11ty collections?)
 - [x] simplify /_posts folder structure
 - vertical rhythm in spacings https://edgdesign.co/blog/baseline-grids-in-css
-- CMS https://www.11ty.dev/docs/cms/
+- consider a headless CMS https://www.11ty.dev/docs/cms/
 - consider SERPs (https://schema.org)
 - consider POSSE (more tags for different types of entries?)
 - date-based color styles? or a color style that rotates site-wide on deploy?
@@ -162,6 +162,7 @@
 ## 🟫 Phase 7: build automation fønciness
 
 ### Continuous Integration?
+- consider ISR a la https://noahpenza.com/blog/this-site-is-very-quick-it-uses-ssg-and-isr/
 - Automated testing of generated site
 - Link validation
 - Image optimization checks

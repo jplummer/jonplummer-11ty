@@ -74,7 +74,7 @@ function checkSshpass() {
 }
 
 // Parse rsync output for file transfers and warnings
-function parseRsyncOutput(output) {
+function parseRsyncOutput(output, isDryRun = false) {
   const warnings = [];
   const transferredFiles = [];
   const lines = output.split('\n');
@@ -95,30 +95,52 @@ function parseRsyncOutput(output) {
     // Skip empty lines
     if (!trimmed) continue;
     
-    // File transfer lines (verbose output) - more flexible pattern matching
-    // Pattern: [<>ch][fdL][-+?][-+?][-+?] size date time filename
-    if (trimmed.match(/^[<>ch][fdL][-+?][-+?][-+?]\s+\d+\s+\d{4}\/\d{2}\/\d{2}\s+\d{2}:\d{2}:\d{2}\s+(.+)$/)) {
-      const match = trimmed.match(/^[<>ch][fdL][-+?][-+?][-+?]\s+\d+\s+\d{4}\/\d{2}\/\d{2}\s+\d{2}:\d{2}:\d{2}\s+(.+)$/);
-      if (match) {
-        transferredFiles.push(match[1]);
+    if (isDryRun) {
+      // Dry-run output parsing with --itemize-changes
+      // Pattern: [<>ch][fdL][-+?][-+?][-+?] filename
+      // The --itemize-changes flag shows a more structured output
+      if (trimmed.match(/^[<>ch][fdL][-+?][-+?][-+?]\s+/) && !trimmed.includes('total size') && !trimmed.includes('bytes')) {
+        // Extract filename - it's everything after the status flags
+        const match = trimmed.match(/^[<>ch][fdL][-+?][-+?][-+?]\s+(.+)$/);
+        if (match) {
+          const filename = match[1].trim();
+          if (filename && !filename.includes('total size') && !filename.includes('bytes')) {
+            transferredFiles.push(filename);
+          }
+        }
+      }
+      // Fallback for verbose output without --itemize-changes
+      else if (trimmed.match(/^[<>ch][fdL][-+?][-+?][-+?]\s+\d+\s+/) && !trimmed.includes('total size')) {
+        // Extract filename from the end of the line
+        const parts = trimmed.split(/\s+/);
+        if (parts.length >= 4) {
+          // Skip the status flags and size, get the filename
+          const filename = parts.slice(3).join(' ');
+          if (filename && !filename.includes('total size') && !filename.includes('bytes')) {
+            transferredFiles.push(filename);
+          }
+        }
+      }
+    } else {
+      // Actual transfer output parsing
+      // Pattern: [<>ch][fdL][-+?][-+?][-+?] size date time filename
+      if (trimmed.match(/^[<>ch][fdL][-+?][-+?][-+?]\s+\d+\s+\d{4}\/\d{2}\/\d{2}\s+\d{2}:\d{2}:\d{2}\s+(.+)$/)) {
+        const match = trimmed.match(/^[<>ch][fdL][-+?][-+?][-+?]\s+\d+\s+\d{4}\/\d{2}\/\d{2}\s+\d{2}:\d{2}:\d{2}\s+(.+)$/);
+        if (match) {
+          transferredFiles.push(match[1]);
+        }
+      }
+      // Alternative pattern for files without timestamps
+      else if (trimmed.match(/^[<>ch][fdL][-+?][-+?][-+?]\s+\d+\s+(.+)$/) && !trimmed.includes('total size')) {
+        const match = trimmed.match(/^[<>ch][fdL][-+?][-+?][-+?]\s+\d+\s+(.+)$/);
+        if (match) {
+          transferredFiles.push(match[1]);
+        }
       }
     }
-    // Alternative pattern for files without timestamps
-    else if (trimmed.match(/^[<>ch][fdL][-+?][-+?][-+?]\s+\d+\s+(.+)$/)) {
-      const match = trimmed.match(/^[<>ch][fdL][-+?][-+?][-+?]\s+\d+\s+(.+)$/);
-      if (match) {
-        transferredFiles.push(match[1]);
-      }
-    }
-    // Simple file listing pattern (just filename after status)
-    else if (trimmed.match(/^[<>ch][fdL][-+?][-+?][-+?]\s+(.+)$/)) {
-      const match = trimmed.match(/^[<>ch][fdL][-+?][-+?][-+?]\s+(.+)$/);
-      if (match) {
-        transferredFiles.push(match[1]);
-      }
-    }
-    // Directory deletion errors
-    else if (trimmed.includes('cannot delete non-empty directory:')) {
+    
+    // Common warning patterns (for both dry-run and actual)
+    if (trimmed.includes('cannot delete non-empty directory:')) {
       const match = trimmed.match(/cannot delete non-empty directory: (.+)/);
       if (match) {
         warnings.push(`⚠️  Cannot delete non-empty directory: ${match[1]}`);
@@ -195,6 +217,7 @@ function deploy() {
         'rsync',
         '-azv', // Archive mode, compress, verbose
         '--dry-run', // Don't actually transfer
+        '--itemize-changes', // Show detailed change information
         '--delete', // Delete files on remote that don't exist locally
         '--exclude=.DS_Store', // Exclude macOS metadata files
         '--exclude=Thumbs.db', // Exclude Windows thumbnail files
@@ -209,6 +232,7 @@ function deploy() {
         'rsync',
         '-azv', // Archive mode, compress, verbose
         '--dry-run', // Don't actually transfer
+        '--itemize-changes', // Show detailed change information
         '--delete', // Delete files on remote that don't exist locally
         '--exclude=.DS_Store', // Exclude macOS metadata files
         '--exclude=Thumbs.db', // Exclude Windows thumbnail files
@@ -221,6 +245,7 @@ function deploy() {
         'rsync',
         '-azv', // Archive mode, compress, verbose
         '--dry-run', // Don't actually transfer
+        '--itemize-changes', // Show detailed change information
         '--delete', // Delete files on remote that don't exist locally
         '--exclude=.DS_Store', // Exclude macOS metadata files
         '--exclude=Thumbs.db', // Exclude Windows thumbnail files
@@ -236,7 +261,7 @@ function deploy() {
         encoding: 'utf8'
       });
       
-      const { transferredFiles: dryRunFiles } = parseRsyncOutput(dryRunOutput);
+      const { transferredFiles: dryRunFiles } = parseRsyncOutput(dryRunOutput, true);
       
       if (dryRunFiles.length > 0) {
         console.log('\n📁 Files that will be transferred:');
@@ -332,7 +357,7 @@ function deploy() {
     }
 
     // Parse rsync output for file transfers and warnings
-    const { warnings, transferredFiles } = parseRsyncOutput(rsyncOutput);
+    const { warnings, transferredFiles } = parseRsyncOutput(rsyncOutput, false);
     
     // Display transferred files
     if (transferredFiles.length > 0) {
