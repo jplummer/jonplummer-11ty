@@ -79,7 +79,7 @@
   - [-] Main navigation at bottom (decided not to do it)
     - [-] Implement bodyClass in frontmatter to move the nav up and down (decided not to do it)
 
-- **Index Template (`index.njk`)**
+- [x] **Index Template (`index.njk`)**
   - [x] Blog listing with pagination
   - [x] Skip "portfolio" category (use only posts collection)
   - [-] Post excerpts (nay!)
@@ -110,10 +110,15 @@
   - [-] Date-based archives (not sure I need this)
   - [-] Search functionality (not sure I need this)
 
-- **Performance Optimization** meh
+- [-] **Performance Optimization** meh
   - [-] CSS/JS minification (not sure I need this)
   - [-] Image optimization (not sure I need this)
   - [-] Caching strategies (not sure I need this)
+
+- **Security and scan results mitigation**
+  - https://help.dreamhost.com/hc/en-us/articles/216499537-How-to-configure-passwordless-login-in-Mac-OS-X-and-Linux
+  - Cloudflare Radar "security headers not set" https://radar.cloudflare.com/scan/fd4597b9-3260-499d-9407-9783804293e7/summary https://owasp.org/www-project-secure-headers/index.html#div-bestpractices
+  - https://app.ahrefs.com/site-audit/5163664/issues?current=12-10-2025T072858
 
 - **SEO & Social**
   - [x] Sitemap generation (for accessibility and indexing, not footer)
@@ -153,8 +158,8 @@
 - [x] Redefine colors for dark mode
 - [x] "remaindered links' feature ala Kottke (using 11ty collections?)
 - [x] simplify /_posts folder structure
+- [ ] consider a headless CMS https://www.11ty.dev/docs/cms/ (Chose Decap CMS https://decapcms.org)
 - vertical rhythm in spacings https://edgdesign.co/blog/baseline-grids-in-css
-- consider a headless CMS https://www.11ty.dev/docs/cms/
 - consider SERPs (https://schema.org)
 - consider POSSE (more tags for different types of entries?)
 - date-based color styles? or a color style that rotates site-wide on deploy?
