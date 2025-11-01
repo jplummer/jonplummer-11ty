@@ -1,8 +1,11 @@
 ---
 layout: base.njk
+permalink: /500.html
 title: Server error – Jon Plummer – Today I Learned
+description: "Server error. Something went wrong on our end."
 purpose: 500
 ---
+<h1>/500</h1>
 
 <p>Oops! Something went wrong on our end. We're working to fix this issue.</p>
 
@@ -10,17 +13,11 @@ purpose: 500
 <ul>
     <li><a href="/">Go back to the homepage</a></li>
     <li><a href="/about/">Learn more about this site</a></li>
-    <li><a href="/portfolio/">Check out my portfolio</a></li>
 </ul>
 
 <h2>Recent posts</h2>
 <ul>
-    <li>
-    </li>
-</ul>
-
-<h2>Most popular</h2>
-<ul>
-    <li>
-    </li>
+    {% for post in collections.post | limit(5) %}
+    <li><a href="{{ post.url }}">{{ post.data.title }}</a></li>
+    {% endfor %}
 </ul>
