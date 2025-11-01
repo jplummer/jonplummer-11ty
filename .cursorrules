@@ -62,7 +62,7 @@
 1. First understand what’s already working - do not change or delete or break existing functionality
 2. Look for the simplest possible fix
 3. Avoid introducing unnecessary complexity. Don’t introduce new technologies without asking.
-4. Understand what the existing structure and libraries support. Seek documentation if neede dto understand these. Don't reimplement any capability that's already provided.
+4. Understand what the existing structure and libraries support. Seek documentation if needed to understand these. Don't reimplement any capability that's already provided.
 5. Respect existing patterns and code structure
 6. Do not edit or delete comments. Just don't. Ever.
 
@@ -72,6 +72,7 @@
 - Include required front matter: title, date, layout
 - Use ISO date format: "YYYY-MM-DDTHH:mm:ss-HH:mm"
 - Include alt text for all images
+- **Eleventy documentation**: Full Eleventy documentation is available in `_misc/eleventy-docs/docs/`. Reference these docs when implementing 11ty features, especially for data files, filters, collections, pagination, and configuration. When working with 11ty-specific functionality, search the documentation first before guessing or assuming behavior.
 
 ### JavaScript/Node.js
 - Use CommonJS (require/module.exports) for scripts

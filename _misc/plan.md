@@ -158,7 +158,7 @@
 - [x] Redefine colors for dark mode
 - [x] "remaindered links' feature ala Kottke (using 11ty collections?)
 - [x] simplify /_posts folder structure
-- [ ] consider a headless CMS https://www.11ty.dev/docs/cms/ (Chose Decap CMS https://decapcms.org)
+- [ ] consider a headless CMS https://www.11ty.dev/docs/cms/
 - vertical rhythm in spacings https://edgdesign.co/blog/baseline-grids-in-css
 - consider SERPs (https://schema.org)
 - consider POSSE (more tags for different types of entries?)
@@ -190,6 +190,9 @@
 - Configure custom domain and SSL
 - Set up CDN for global performance
 - Implement caching strategies
+
+### Documentation Maintenance?
+- [ ] Figure out a good way to pull latest changes to 11ty docs from `_misc/eleventy-docs` (currently a git clone of 11ty/11ty-website)
 
 
 # 🎨 Color ideas

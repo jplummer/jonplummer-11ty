@@ -1,0 +1,8 @@
+# Ignore large non-code directories that aren't needed for context
+_misc/wp_backup/
+_site/
+node_modules/
+
+# Keep these for context:
+# _misc/eleventy-docs/ - Eleventy documentation for reference
+# _misc/plan.md, _misc/notes.md - Project documentation
