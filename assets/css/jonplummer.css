@@ -337,6 +337,14 @@ p {
   margin: var(--spacing-sm) 0;
 }
 
+/* Horizontal rules */
+hr {
+  border: 0;
+  border-top: 1px solid var(--text-color-light);
+  margin: var(--spacing-lg) 0;
+  opacity: 0.5;
+}
+
 /* Form elements typography */
 button, input, label {
   line-height: var(--line-height-tight);
