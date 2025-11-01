@@ -1,7 +1,11 @@
 const { DateTime } = require("luxon");
 const markdownIt = require("markdown-it");
+const yaml = require("js-yaml");
 
 module.exports = function(eleventyConfig) {
+    // Add YAML data extension support
+    eleventyConfig.addDataExtension("yaml", (contents) => yaml.load(contents));
+    eleventyConfig.addDataExtension("yml", (contents) => yaml.load(contents));
     // Initialize markdown-it
     const md = markdownIt({
         html: true, // Allow HTML in markdown
@@ -42,6 +46,11 @@ module.exports = function(eleventyConfig) {
     // Add markdown filter
     eleventyConfig.addFilter("markdown", function(content) {
       return md.render(content);
+    });
+
+    // Add inline markdown filter (no block-level elements like <p>)
+    eleventyConfig.addFilter("markdownInline", function(content) {
+      return md.renderInline(content);
     });
 
     // Add custom Nunjucks shortcode: year

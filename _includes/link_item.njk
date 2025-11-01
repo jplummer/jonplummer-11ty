@@ -4,7 +4,7 @@
         <p>
             <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">{{ link.title }}</a>
             {% if link.description %}
-                <span class="link-description"> - {{ link.description | markdown | safe }}</span>
+                <span class="link-description"> - {{ link.description | markdownInline | safe }}</span>
             {% endif %}
         </p>
     </section>
