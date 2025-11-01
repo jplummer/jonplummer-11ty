@@ -14,7 +14,7 @@ purpose: individual post page
 } %}
 {% include "post_content.njk" %}
 
-<nav class="post-navigation">
+<nav class="post-navigation" aria-label="Post navigation">
     {% set previousPost = collections.post | getPreviousCollectionItem(page) %}
     {% set nextPost = collections.post | getNextCollectionItem(page) %}
     {% if previousPost %}

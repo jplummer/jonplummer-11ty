@@ -31,7 +31,7 @@ permalink: "{% if pagination.pageNumber == 0 %}/{% else %}/page/{{ pagination.pa
     {% endif %}
 {% endfor %}
 
-<nav class="pagination">
+<nav class="pagination" aria-label="Post pagination">
     {% if pagination.href.next %}
         <a class="prev" href="{{ pagination.href.next }}">← Older posts</a>
     {% endif %}
