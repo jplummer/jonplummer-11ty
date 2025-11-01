@@ -209,9 +209,61 @@ function validateFileName(filePath) {
   return { valid: true, expectedSlug };
 }
 
+// Validate YAML data files
+function validateYamlDataFiles() {
+  const dataDir = './_data';
+  if (!fs.existsSync(dataDir)) {
+    return { valid: true, issues: 0, files: 0 };
+  }
+  
+  const yamlFiles = fs.readdirSync(dataDir)
+    .filter(file => file.endsWith('.yaml') || file.endsWith('.yml'))
+    .map(file => path.join(dataDir, file));
+  
+  if (yamlFiles.length === 0) {
+    return { valid: true, issues: 0, files: 0 };
+  }
+  
+  console.log('📋 Validating YAML data files...\n');
+  
+  let totalIssues = 0;
+  
+  for (const file of yamlFiles) {
+    const fileName = path.basename(file);
+    const content = fs.readFileSync(file, 'utf8');
+    
+    try {
+      yaml.load(content);
+      console.log(`   ✅ ${fileName}`);
+    } catch (error) {
+      console.log(`   ❌ ${fileName}`);
+      console.log(`      Error: ${error.message}`);
+      totalIssues++;
+    }
+  }
+  
+  console.log('');
+  
+  if (totalIssues > 0) {
+    console.log(`❌ Found ${totalIssues} YAML syntax error(s) in data files.`);
+    return { valid: false, issues: totalIssues, files: yamlFiles.length };
+  } else {
+    console.log(`✅ All ${yamlFiles.length} YAML data file(s) are valid.`);
+    return { valid: true, issues: 0, files: yamlFiles.length };
+  }
+}
+
 // Main validation function
 function validateContentStructure() {
-  console.log('📝 Starting content structure validation...\n');
+  // Validate YAML data files first
+  const yamlValidation = validateYamlDataFiles();
+  
+  if (!yamlValidation.valid) {
+    console.log('\n❌ YAML data file validation failed.');
+    process.exit(1);
+  }
+  
+  console.log('\n📝 Starting content structure validation...\n');
   
   const postsDir = './_posts';
   if (!fs.existsSync(postsDir)) {
