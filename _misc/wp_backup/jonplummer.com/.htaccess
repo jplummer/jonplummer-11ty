@@ -1,8 +1,0 @@
-# experimental .htaccess to see if I can make it work 2022-12-18 19:28
-
-# prefer https
-RewriteCond %{HTTPS} !=on
-RewriteRule ^(.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-# restrict indexes
-Options -Indexes
