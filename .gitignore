@@ -104,6 +104,9 @@ dist
 .temp
 .cache
 
+# 11ty build output
+_site/
+
 # vitepress build output
 **/.vitepress/dist
 
@@ -142,3 +145,5 @@ dist
 .Trashes
 .DS_Store
 .DS_Store
+
+node_modules
