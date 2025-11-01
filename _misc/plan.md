@@ -117,8 +117,8 @@
 
 - **Security and scan results mitigation**
   - https://help.dreamhost.com/hc/en-us/articles/216499537-How-to-configure-passwordless-login-in-Mac-OS-X-and-Linux
-  - Cloudflare Radar "security headers not set" https://radar.cloudflare.com/scan/fd4597b9-3260-499d-9407-9783804293e7/summary https://owasp.org/www-project-secure-headers/index.html#div-bestpractices
-  - https://app.ahrefs.com/site-audit/5163664/issues?current=12-10-2025T072858
+  - [x] Cloudflare Radar "security headers not set" https://radar.cloudflare.com/scan/fd4597b9-3260-499d-9407-9783804293e7/summary https://owasp.org/www-project-secure-headers/index.html#div-bestpractices
+  - [x] https://app.ahrefs.com/site-audit/5163664/issues?current=12-10-2025T072858
 
 - **SEO & Social**
   - [x] Sitemap generation (for accessibility and indexing, not footer)

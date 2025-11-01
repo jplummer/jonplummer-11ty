@@ -25,10 +25,25 @@ Options -Indexes
     Require all denied
 </Files>
 
-# Basic security headers (if mod_headers is available)
+# Security headers (if mod_headers is available)
 <IfModule mod_headers.c>
-    Header always set X-Content-Type-Options nosniff
-    Header always set X-Frame-Options DENY
+    # Prevent MIME type sniffing
+    Header always set X-Content-Type-Options "nosniff"
+    
+    # Prevent clickjacking attacks
+    Header always set X-Frame-Options "DENY"
+    
+    # Enable HSTS (only on HTTPS connections)
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=HTTPS
+    
+    # Referrer policy - send full URL for same-origin, origin only for cross-origin
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Permissions policy - restrict certain browser features
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    
+    # Content Security Policy - allow same-origin resources and common CDNs
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none';"
 </IfModule>
 
 # Enable compression (if mod_deflate is available)
