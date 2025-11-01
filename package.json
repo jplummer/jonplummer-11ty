@@ -16,7 +16,6 @@
     "preview-deploy-changes": "node scripts/deploy/preview-deploy-changes.js",
     "test-links": "node scripts/test/test-links.js",
     "test-internal-links": "node scripts/test/test-internal-links.js",
-    "test-external-links": "node scripts/test/test-external-links.js",
     "test-content": "node scripts/test/test-content-structure.js",
     "test-performance": "node scripts/test/test-performance.js",
     "test-seo": "node scripts/test/test-seo-meta.js",
@@ -30,9 +29,12 @@
   "description": "",
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
+    "@11ty/eleventy-fetch": "^5.1.0",
     "@11ty/eleventy-plugin-rss": "^2.0.4",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
+    "axe-core": "^4.11.0",
     "js-yaml": "^4.1.0",
+    "puppeteer": "^24.27.0",
     "xmldom": "^0.6.0"
   },
   "dependencies": {

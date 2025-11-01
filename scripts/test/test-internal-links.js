@@ -2,7 +2,6 @@
 
 const fs = require('fs');
 const path = require('path');
-const { getChangedHtmlFiles, shouldRunFullScan } = require('../utils/changed-files-util');
 const { findHtmlFiles } = require('../utils/file-utils');
 
 
@@ -84,18 +83,9 @@ async function validateInternalLinks() {
   console.log('🔗 Starting internal link validation...\n');
   
   const siteRoot = './_site';
-  let htmlFiles;
-  let scanType;
-  
-  if (shouldRunFullScan()) {
-    console.log('📋 Running full scan (no previous build or --full flag specified)');
-    htmlFiles = findHtmlFiles(siteRoot);
-    scanType = 'full';
-  } else {
-    console.log('📋 Running incremental scan (checking only changed files)');
-    htmlFiles = getChangedHtmlFiles();
-    scanType = 'incremental';
-  }
+  console.log('📋 Running full site scan');
+  const htmlFiles = findHtmlFiles(siteRoot);
+  const scanType = 'full';
   
   if (htmlFiles.length === 0) {
     console.log('✅ No files to check. All internal links are up to date!');
