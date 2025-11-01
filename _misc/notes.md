@@ -25,7 +25,7 @@ Available test types:
 - `seo` - Test SEO and meta tags
 - `accessibility` - Test accessibility using axe-core
 - `rss` - Test RSS feeds
-- `deployment` - Test deployment (environment, local build check, dependencies, SSH, remote directory, rsync dry-run)
+- `deploy` - Test deployment (environment, local build check, dependencies, SSH, remote directory, rsync dry-run)
 
 ## 🚢 Deploy site to host
 

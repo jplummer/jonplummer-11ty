@@ -147,6 +147,11 @@
 - [x] Implement build validation and testing
 - [x] Check each test script to make sure it is useful
 - [x] Go through results of each test script to fix issues
+- [ ] **Optional: Enable incremental builds for faster development** (`--incremental` flag)
+  - Only rebuilds changed files instead of full site rebuilds
+  - Particularly useful given large number of posts (2001-2025)
+  - Can speed up `npm run dev` rebuilds when editing individual posts or templates
+  - Change `"dev": "eleventy --serve --watch --incremental"` in package.json
 
 ### Deployment Pipeline
 - [x] **Local deployment scripts**:

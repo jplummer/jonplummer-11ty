@@ -9,9 +9,7 @@
     "dev": "eleventy --serve --watch",
     "clean": "rm -rf _site",
     "validate": "node scripts/test-runner.js html",
-    "deploy": "node scripts/deploy/deploy.js",
-    "deploy-changes": "node scripts/deploy/deploy-changes.js",
-    "preview-deploy-changes": "node scripts/deploy/preview-deploy-changes.js"
+    "deploy": "node scripts/deploy/deploy.js"
   },
   "keywords": [],
   "author": "Jon Plummer",

@@ -46,7 +46,7 @@
 - New code does not always go at the very bottom of a file. Consider context when choosing code placement
 - When asked to generate code to implement a stub, DO NOT delete docstrings
 - When proposing sweeping changes to code, instead of proposing the whole thing at once and leaving "to implement" blocks, work through the proposed changes incrementally in cooperation with me
-- IMPORTANT: If you ever respond with any code from any file, please make sure you respond with the FULL code in the file, not just a partial
+- IMPORTANT: If you ever respond with any code from any file, please make sure you respond with the FULL code in the file, not just an excerpt
 
 ### When writing web front-end code:
 
@@ -62,9 +62,9 @@
 1. First understand what’s already working - do not change or delete or break existing functionality
 2. Look for the simplest possible fix
 3. Avoid introducing unnecessary complexity. Don’t introduce new technologies without asking.
-4. Understand what the existing structure and libraries support. Seek documentation if needed to understand these. Don't reimplement any capability that's already provided.
+4. Understand what the existing structure and libraries support. Seek documentation 9expecialy Eleventy documentaton mentioned below) if needed to understand these. Don't reimplement any capability that's already provided.
 5. Respect existing patterns and code structure
-6. Do not edit or delete comments. Just don't. Ever.
+6. Preserve all comments. We're going for maximum human readability here.
 
 ### 11ty-specific
 - Use Nunjucks (.njk) for templates

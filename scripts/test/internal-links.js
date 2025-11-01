@@ -85,7 +85,6 @@ async function validateInternalLinks() {
   const siteRoot = './_site';
   console.log('📋 Running full site scan');
   const htmlFiles = findHtmlFiles(siteRoot);
-  const scanType = 'full';
   
   if (htmlFiles.length === 0) {
     console.log('✅ No files to check. All internal links are up to date!');
@@ -99,8 +98,7 @@ async function validateInternalLinks() {
     total: 0,
     internal: { total: 0, broken: 0, working: 0 },
     anchors: { total: 0, broken: 0, working: 0 },
-    other: { total: 0 },
-    scanType: scanType
+    other: { total: 0 }
   };
   
   // Collect all internal links
@@ -162,7 +160,6 @@ async function validateInternalLinks() {
   
   // Summary
   console.log('\n📊 Internal Link Validation Summary:');
-  console.log(`   Scan type: ${results.scanType}`);
   console.log(`   Total internal links: ${results.total}`);
   console.log(`   ✅ Internal file links: ${results.internal.working}/${results.internal.total} working`);
   console.log(`   ✅ Anchor links: ${results.anchors.working}/${results.anchors.total} working`);
@@ -179,8 +176,6 @@ async function validateInternalLinks() {
   } else {
     console.log('\n🎉 All internal links are working correctly!');
   }
-  
-  // Update build timestamp for next incremental scan
 }
 
 // Run validation

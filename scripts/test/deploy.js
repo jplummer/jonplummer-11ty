@@ -288,13 +288,12 @@ function testRsyncUpload() {
 
 if (!testRsyncUpload()) {
   console.log('   rsync test failed, but deployment may still work');
-  console.log('   Try running "npm run deploy-changes" to test actual deployment');
+  console.log('   Try running "npm run deploy" to test actual deployment');
 }
 
 // All tests passed
 console.log('\n🎉 All rsync deployment tests passed!');
 console.log('✅ Your deployment setup is ready to use.');
 console.log('\nNext steps:');
-console.log('  - Run "npm run deploy" for full deployment');
-console.log('  - Run "npm run deploy-changes" for incremental deployment');
+console.log('  - Run "npm run deploy" for deployment');
 console.log('  - Check your site at: https://' + config.host);

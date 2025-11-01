@@ -13,7 +13,7 @@ const testTypes = {
   'seo': 'seo-meta.js',
   'accessibility': 'accessibility.js',
   'rss': 'rss-feed.js',
-  'deployment': 'deployment.js'
+  'deploy': 'deploy.js'
 };
 
 // Tests to run for "test all" (matching previous test-all behavior)
