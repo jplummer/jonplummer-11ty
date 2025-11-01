@@ -48,30 +48,81 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
     
     // Add custom filter to merge posts and links chronologically
-    eleventyConfig.addFilter("mergePostsAndLinks", function(posts, links) {
+    eleventyConfig.addFilter("mergePostsAndLinks", function(posts, links, pageNumber, nextPageOldestDate) {
       if (!posts) return [];
-      if (!links) return posts;
+      if (!links) {
+        return posts.map(post => ({ type: 'post', data: post, date: new Date(post.data.date) }));
+      }
       
-      // Get the date range for the current page
-      const pageDates = posts.map(post => new Date(post.data.date)).sort((a, b) => b - a);
-      const newestDate = pageDates[0];
-      const oldestDate = pageDates[pageDates.length - 1];
+      const isPage1 = pageNumber !== undefined && pageNumber === 0;
+      const items = [];
       
-      // Start with posts
-      const items = [...posts.map(post => ({ type: 'post', data: post, date: new Date(post.data.date) }))];
+      // Sort posts by date (newest first)
+      const sortedPosts = [...posts].map(post => ({ 
+        type: 'post', 
+        data: post, 
+        date: new Date(post.data.date) 
+      })).sort((a, b) => b.date - a.date);
       
-      // Add links that fall within the page's date range
-      for (const [date, linkList] of Object.entries(links)) {
-        const linkDate = new Date(date);
-        if (linkDate <= newestDate && linkDate > oldestDate) {
-          for (let i = 0; i < linkList.length; i++) {
-            const link = linkList[i];
-            const isLastInGroup = i === linkList.length - 1;
-            items.push({ 
-              type: 'link', 
-              data: { ...link, isLastInGroup }, 
-              date: linkDate 
-            });
+      const newestPostDate = sortedPosts[0].date;
+      const oldestPostDate = sortedPosts[sortedPosts.length - 1].date;
+      
+      // On page 1 only: Add links newer than the newest post first
+      if (isPage1) {
+        for (const [date, linkList] of Object.entries(links)) {
+          const linkDate = new Date(date);
+          if (linkDate > newestPostDate) {
+            for (let i = 0; i < linkList.length; i++) {
+              const link = linkList[i];
+              const isLastInGroup = i === linkList.length - 1;
+              items.push({ 
+                type: 'link', 
+                data: { ...link, isLastInGroup }, 
+                date: linkDate 
+              });
+            }
+          }
+        }
+      }
+      
+      // For each post, add it and then add links between this post and the next post
+      for (let i = 0; i < sortedPosts.length; i++) {
+        const post = sortedPosts[i];
+        const postDate = post.date;
+        
+        // Add the post
+        items.push(post);
+        
+        // Determine the next post's date
+        // If there's another post on this page, use its date
+        // If this is the last post on the page, use next page's oldest post date
+        // If this is the last post on the last page, include all older links
+        let nextPostDate = null;
+        if (i < sortedPosts.length - 1) {
+          // There's another post on this page
+          nextPostDate = sortedPosts[i + 1].date;
+        } else if (nextPageOldestDate !== null && nextPageOldestDate !== undefined) {
+          // This is the last post on the page, use next page's oldest post date
+          nextPostDate = new Date(nextPageOldestDate);
+        }
+        // If nextPostDate is still null, this is the last post on the last page
+        
+        // Add links: linkDate <= postDate && linkDate > nextPostDate
+        // If nextPostDate is null (last page), include all links where linkDate <= postDate
+        for (const [date, linkList] of Object.entries(links)) {
+          const linkDate = new Date(date);
+          const isInRange = linkDate <= postDate && (nextPostDate === null || linkDate > nextPostDate);
+          
+          if (isInRange) {
+            for (let j = 0; j < linkList.length; j++) {
+              const link = linkList[j];
+              const isLastInGroup = j === linkList.length - 1;
+              items.push({ 
+                type: 'link', 
+                data: { ...link, isLastInGroup }, 
+                date: linkDate 
+              });
+            }
           }
         }
       }

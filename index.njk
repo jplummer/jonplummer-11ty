@@ -9,8 +9,19 @@ pagination:
     size: 5
 permalink: "{% if pagination.pageNumber == 0 %}/{% else %}/page/{{ pagination.pageNumber }}/{% endif %}"
 ---
+{# Calculate next page's oldest post date if there's a next page #}
+{% set nextPageOldestDate = null %}
+{% if pagination.href.next %}
+    {% set nextPageLastPostIndex = (pagination.pageNumber + 1) * 5 - 1 %}
+    {% set allPostsSorted = collections.post | reverse %}
+    {% if nextPageLastPostIndex < allPostsSorted.length %}
+        {% set nextPageLastPost = allPostsSorted[nextPageLastPostIndex] %}
+        {% set nextPageOldestDate = nextPageLastPost.data.date %}
+    {% endif %}
+{% endif %}
+
 {# Display current page of posts and links #}
-{% for item in pagination.items | mergePostsAndLinks(links) %}
+{% for item in pagination.items | mergePostsAndLinks(links, pagination.pageNumber, nextPageOldestDate) %}
     {% if item.type == 'post' %}
         {% set post = item.data %}
         {% include "post_content.njk" %}
