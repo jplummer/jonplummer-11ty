@@ -1,4 +1,12 @@
-# Technologies and Dependencies
+---
+title: "Technologies – Jon Plummer"
+description: "The technologies and dependencies that go into developing jonplummer.com are listed here. This list os geenrated by Cursor, but it's pretty good at figuriung out what is actually in use."
+date: 2025-11-15
+layout: base.njk
+tags: page
+permalink: "/technologies/"
+---
+# Technologies and dependencies
 
 - **Eleventy (11ty)**
   - Static site generator using Node.js
@@ -43,4 +51,3 @@
   - **HTML**: Output format for all generated pages
   - **RSS/XML**: RSS feed generation for blog posts and links
   - **CSS**: Styling (vanilla CSS with custom properties)
-
