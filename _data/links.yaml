@@ -1,3 +1,21 @@
+2025-11-15:
+  - url: https://lukew.com/ff/entry.asp?2133
+    title: "How Design Teams Are Reacting to 10x Developer Productivity from AI – Luke Wroblewski"
+    description: '"At this point it''s pretty obvious that AI coding agents can massively accelerate the time it takes to build software. But when software development teams experience huge productivity booms, how do design teams respond?"'
+2025-11-08:
+  - url: https://frederickvanbrabant.com/blog/2025-10-31-architectural-debt-is-not-just-technical-debt/
+    title: "Architectural debt is not just technical debt – Frederick Vanbrabant"
+    description: '"These days, I''m less concerned with how the software itself works. That''s just not feasible when your organization has hundreds of applications. My main concerns are more about how these applications interact with the rest of the landscape. How the data flows, where data lives, whether there are bottlenecks, who''s going to maintain it, and what role will this application have in the future."'
+  - url: https://www.youtube.com/watch?v=1jWA3mE5o9Y
+    title: "Video: How I Broke My Drinking Habit w/ Edith Zimmerman"
+    description: "Cartoonist Edith Zimmerman discusses that to occupy herself after quitting drinking (and, in essence, to replace the drinking habit) she had to explore and rediscover old interests rather than find new ones." 
+  - url: https://hvpandya.com/leading-with-craft
+    title: "Mobile to Models and Leading Design with Craft – Hardik Pandya"
+    description: "Hardik Pandya explains how AI-powered features challenge the place of traditional design craft, and discusses where craft should now be applied." 
+  - url: https://uxdesign.cc/designing-with-claude-code-and-codex-cli-building-ai-driven-workflows-powered-by-code-connect-ui-f10c136ec11f
+    title: "Building AI-driven workflows powered by Claude Coe and other tools – Iasonas Georgiadis"
+    description: '"I set out to explore how designers can use agentic CLI tools like Claude Code and Codex CLI to build AI-driven workflows that turn rough wireframes into production-ready prototypes reflecting a real codebase, not generic mockups. After testing both tools, the results revealed that a product designer can truly prototype with real code and the help of Figma MCP."' 
+
 2025-11-01:
   - url: https://noahpenza.com/blog/this-site-is-very-quick-it-uses-ssg-and-isr/
     title: This site is very quick, it uses SSG and ISR – Noah Penza
