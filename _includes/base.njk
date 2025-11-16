@@ -40,6 +40,40 @@
     <meta name="twitter:image" content="https://jonplummer.com/assets/images/2021/05/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
 
+    {# Schema.org structured data #}
+    {% if page.url == "/about/" %}
+      {% include "schema/person.njk" %}
+    {% elif page.url == "/" or page.url == "/index.html" %}
+      {% include "schema/website.njk" %}
+    {% elif tags and "post" in tags and date and title and page.url != "/" %}
+      {# BlogPosting schema for individual post pages #}
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": {{ title | json | safe }},
+        "datePublished": "{{ date | dateToRfc3339Safe }}",
+        "dateModified": "{{ date | dateToRfc3339Safe }}",
+        "author": {
+          "@type": "Person",
+          "name": "Jon Plummer",
+          "url": "https://jonplummer.com/about/"
+        },
+        "publisher": {
+          "@type": "Person",
+          "name": "Jon Plummer",
+          "url": "https://jonplummer.com"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://jonplummer.com{{ page.url }}"
+        },
+        "url": "https://jonplummer.com{{ page.url }}",
+        "description": {{ description | default(title) | json | safe }}
+      }
+      </script>
+    {% endif %}
+
 </head>
 
 <body>

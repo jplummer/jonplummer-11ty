@@ -105,7 +105,7 @@
 
 ## 🟩 Phase 4: Advanced Features
 
-- **Search & Filtering** meh
+- [-] **Search & Filtering** meh
   - [-] Tag-based filtering (not sure I need this)
   - [-] Date-based archives (not sure I need this)
   - [-] Search functionality (not sure I need this)
@@ -115,12 +115,12 @@
   - [-] Image optimization (not sure I need this)
   - [-] Caching strategies (not sure I need this)
 
-- **Security and scan results mitigation**
+- [ ] **Security and scan results mitigation**
   - https://help.dreamhost.com/hc/en-us/articles/216499537-How-to-configure-passwordless-login-in-Mac-OS-X-and-Linux
   - [x] Cloudflare Radar "security headers not set" https://radar.cloudflare.com/scan/fd4597b9-3260-499d-9407-9783804293e7/summary https://owasp.org/www-project-secure-headers/index.html#div-bestpractices
   - [x] https://app.ahrefs.com/site-audit/5163664/issues?current=12-10-2025T072858
 
-- **SEO & Social**
+- [ ] **SEO & Social**
   - [x] Sitemap generation (for accessibility and indexing, not footer)
   - Meta tags
   - Open Graph
@@ -163,20 +163,20 @@
 - [x] Redefine colors for dark mode
 - [x] "remaindered links' feature ala Kottke (using 11ty collections?)
 - [x] simplify /_posts folder structure
-- [ ] consider a headless CMS https://www.11ty.dev/docs/cms/
+- [-] consider a headless CMS https://www.11ty.dev/docs/cms/ (this proved to be difficult, but it's still interesting)
+- [x] consider SERPs (https://schema.org)
+- [-] date-based color styles? or a color style that rotates site-wide on deploy? (toyed with this but I don't want a color shift on every page load, might just occasionally tweak the color scheme)
 - vertical rhythm in spacings https://edgdesign.co/blog/baseline-grids-in-css
-- consider SERPs (https://schema.org)
 - consider POSSE (more tags for different types of entries?)
-- date-based color styles? or a color style that rotates site-wide on deploy?
 
 ## 🟫 Phase 7: build automation fønciness
 
 ### Continuous Integration?
-- consider ISR a la https://noahpenza.com/blog/this-site-is-very-quick-it-uses-ssg-and-isr/
-- Automated testing of generated site
-- Link validation
-- Image optimization checks
-- Performance monitoring
+- [-] consider ISR a la https://noahpenza.com/blog/this-site-is-very-quick-it-uses-ssg-and-isr/ (I use SSG and don't need ISR yet)
+- [x] Automated testing of generated site (I have test scripts!)
+- [x] Link validation (I have test scripts!)
+- [-] Image optimization checks (I don't care that much)
+- [-] Performance monitoring (I don't need it yet, as everything is static)
 
 - **GitHub Actions** (recommended): (This is not how I'm using GitHub just yet)
   - Automatic builds on push to main branch

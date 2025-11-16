@@ -1,6 +1,7 @@
 const { DateTime } = require("luxon");
 const markdownIt = require("markdown-it");
 const yaml = require("js-yaml");
+const pluginRss = require("@11ty/eleventy-plugin-rss");
 
 module.exports = function(eleventyConfig) {
     // Add YAML data extension support
@@ -43,6 +44,12 @@ module.exports = function(eleventyConfig) {
       return DateTime.fromJSDate(date).toLocaleString(DateTime.DATE_MED);
     });
 
+    // Wrap dateToRfc3339 to handle both Date objects and date strings
+    eleventyConfig.addFilter("dateToRfc3339Safe", (dateObj) => {
+      const date = dateObj instanceof Date ? dateObj : new Date(dateObj);
+      return pluginRss.dateToRfc3339(date);
+    });
+
     // Add markdown filter
     eleventyConfig.addFilter("markdown", function(content) {
       return md.render(content);
@@ -51,6 +58,11 @@ module.exports = function(eleventyConfig) {
     // Add inline markdown filter (no block-level elements like <p>)
     eleventyConfig.addFilter("markdownInline", function(content) {
       return md.renderInline(content);
+    });
+
+    // Add JSON filter for escaping strings in JSON-LD
+    eleventyConfig.addFilter("json", function(value) {
+      return JSON.stringify(value);
     });
 
     // Add custom Nunjucks shortcode: year

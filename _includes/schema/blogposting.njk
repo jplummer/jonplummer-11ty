@@ -1,0 +1,26 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ post.data.title | safe }}",
+  "datePublished": "{{ post.date | dateToRfc3339 }}",
+  "dateModified": "{{ post.date | dateToRfc3339 }}",
+  "author": {
+    "@type": "Person",
+    "name": "Jon Plummer",
+    "url": "https://jonplummer.com/about/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Jon Plummer",
+    "url": "https://jonplummer.com"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://jonplummer.com{{ post.url }}"
+  },
+  "url": "https://jonplummer.com{{ post.url }}",
+  "description": "{{ description | default(post.data.title) | safe }}"
+}
+</script>
+
