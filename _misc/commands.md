@@ -83,4 +83,4 @@ Run this periodically to keep the cached docs up to date with the latest 11ty fe
 
 The changelog is automatically generated from the git commit history, organized by date (newest first). It includes all commits from the beginning of the project and follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format.
 
-Run this command whenever you want to regenerate the changelog after making commits.
+The changelog is automatically regenerated before each deployment. You can also run this command manually whenever you want to update it.

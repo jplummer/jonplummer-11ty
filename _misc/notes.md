@@ -2,11 +2,13 @@
 
 - `layout` - Which template to use
 - `title` - Page title
-- `date` - Publication date
+- `date` - Publication date (ISO format: "YYYY-MM-DDTHH:mm:ss-HH:mm")
 - `tags` - Array of tags for collections (post, portfolio)
+- `description` - Meta description for SEO (50-160 characters recommended)
 - `permalink` - Custom URL structure
-- `draft` - Whether to publish or not
 - `eleventyExcludeFromCollections` - Exclude from collections
+
+**Note:** Drafts are handled by placing files in `_posts/_drafts/` folder, not via a `draft` variable.
 
 # 🔀 Redirects
 

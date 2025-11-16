@@ -41,6 +41,16 @@ if (!fs.existsSync('./_site')) {
   process.exit(1);
 }
 
+// Regenerate changelog before deployment
+console.log('📋 Regenerating CHANGELOG.md...');
+try {
+  execSync('node scripts/content/generate-changelog.js', { stdio: 'pipe' });
+  console.log('   ✓ Changelog updated\n');
+} catch (error) {
+  console.warn('   ⚠️  Warning: Could not regenerate changelog (continuing anyway)');
+  console.warn(`      ${error.message}\n`);
+}
+
 // Check if rsync is available
 function checkRsync() {
   try {
