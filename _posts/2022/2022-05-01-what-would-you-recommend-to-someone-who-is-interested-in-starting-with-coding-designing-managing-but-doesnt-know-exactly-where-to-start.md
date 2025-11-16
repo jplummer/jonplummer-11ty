@@ -3,6 +3,7 @@ title: What would you recommend to someone who is interested in starting with co
 layout: single_post.njk
 date: "2022-05-01T12:00:00-08:00"
 tags: post
+description: "How do I get experience doing a thing without a job doing the thing? By doing the thing anyway. For design or coding there are two good places to start, and"
 ---
 _How do I get experience doing a thing without a job doing the thing_? By doing the thing anyway.
 

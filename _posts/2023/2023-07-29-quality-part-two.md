@@ -3,6 +3,7 @@ title: Quality, part two
 layout: single_post.njk
 date: "2023-07-29T12:00:00-08:00"
 tags: post
+description: "It seems like we have a pretty good grasp of what quality should be when it comes to infrastructure – what technical soundness is, how much load we should"
 ---
 It seems like we have a pretty good grasp of what quality should be when it comes to infrastructure – what technical soundness is, how much load we should handle, what kind of logging, etc. but we are less mature regarding other dimensions of quality.
 

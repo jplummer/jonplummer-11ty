@@ -3,6 +3,7 @@ title: What is a business case?
 layout: single_post.njk
 date: "2021-01-22T12:00:00-08:00"
 tags: post
+description: "To me, someone who didn't go to business school, the all-too-common admonition to “make the business case\" for something was often a showstopper. What is a"
 ---
 To me, someone who didn't go to business school, the all-too-common admonition to “make the business case" for something was often a showstopper. What is a business case, what does it include, how do I make one, and what hard questions need be answered when making it? I had no idea where to start. And even my best bosses were no real help, handwaving vaguely about time and costs and benefits and whatnot.
 

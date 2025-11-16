@@ -3,6 +3,7 @@ title: The bones of my emerging philosophy of UX research and design
 layout: single_post.njk
 date: "2022-10-22T12:00:00-08:00"
 tags: post
+description: "There are two basic activities in UX. Learn Make You might call these \"understand\" and \"design,\" or \"investigate\" and \"generate,\" or whatever. It's the same."
 ---
 ## Two basic activities
 

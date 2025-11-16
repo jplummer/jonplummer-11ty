@@ -3,6 +3,7 @@ title: Make MVPs experiments again
 layout: single_post.njk
 date: "2023-11-17T12:00:00-08:00"
 tags: post
+description: "There seems to be broad agreement within engineering leadership that MVP is (or should be) a philosophy of experimentation and hypothesis testing. An MVP"
 ---
 ## Background
 

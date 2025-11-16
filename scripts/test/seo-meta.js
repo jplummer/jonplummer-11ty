@@ -40,19 +40,6 @@ function extractMetaTags(htmlContent) {
   }
   metaTags.og = ogTags;
   
-  // Twitter Card tags
-  const twitterTags = {};
-  const twitterMatches = htmlContent.match(/<meta[^>]*name=["']twitter:([^"']+)["'][^>]*content=["']([^"']*)["']/gi);
-  if (twitterMatches) {
-    twitterMatches.forEach(match => {
-      const propMatch = match.match(/name=["']twitter:([^"']+)["'][^>]*content=["']([^"']*)["']/i);
-      if (propMatch) {
-        twitterTags[propMatch[1]] = propMatch[2].trim();
-      }
-    });
-  }
-  metaTags.twitter = twitterTags;
-  
   // Canonical URL
   const canonicalMatch = htmlContent.match(/<link[^>]*rel=["']canonical["'][^>]*href=["']([^"']*)["']/i);
   if (canonicalMatch) {
@@ -182,35 +169,6 @@ function validateOpenGraph(ogTags) {
   return issues;
 }
 
-// Validate Twitter Card tags
-function validateTwitterCards(twitterTags) {
-  const issues = [];
-  
-  if (Object.keys(twitterTags).length === 0) {
-    issues.push('No Twitter Card tags found');
-    return issues;
-  }
-  
-  // Check for card type
-  if (!twitterTags.card) {
-    issues.push('Missing Twitter Card type');
-  } else if (!['summary', 'summary_large_image', 'app', 'player'].includes(twitterTags.card)) {
-    issues.push('Invalid Twitter Card type');
-  }
-  
-  // Check for required tags based on card type
-  if (twitterTags.card === 'summary' || twitterTags.card === 'summary_large_image') {
-    const required = ['title', 'description'];
-    for (const tag of required) {
-      if (!twitterTags[tag]) {
-        issues.push(`Missing required Twitter Card tag: twitter:${tag}`);
-      }
-    }
-  }
-  
-  return issues;
-}
-
 // Validate heading structure
 function validateHeadings(headings) {
   const issues = [];
@@ -332,13 +290,6 @@ function validateSEO() {
     if (ogIssues.length > 0) {
       console.log(`   ⚠️  Open Graph: ${ogIssues.join(', ')}`);
       fileWarnings += ogIssues.length;
-    }
-    
-    // Validate Twitter Cards
-    const twitterIssues = validateTwitterCards(metaTags.twitter);
-    if (twitterIssues.length > 0) {
-      console.log(`   ⚠️  Twitter Cards: ${twitterIssues.join(', ')}`);
-      fileWarnings += twitterIssues.length;
     }
     
     // Validate headings

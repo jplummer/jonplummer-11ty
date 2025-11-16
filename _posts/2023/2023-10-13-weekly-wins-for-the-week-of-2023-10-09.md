@@ -3,6 +3,7 @@ title: Weekly wins for the week of 2023 10 09
 layout: single_post.njk
 date: "2023-10-13T12:00:00-08:00"
 tags: post
+description: "The month of October signals the end of the third quarter in our funny misaligned fiscal year. That's useful, in part because I promised some things by the end"
 ---
 The month of October signals the end of the third quarter in our funny misaligned fiscal year. That's useful, in part because I promised some things by the end of the quarter, and a little push is a good thing. So,
 - That little push helped me make progress with revamping a set of moribund customer profiles, and the latest increment of that work is now out for review. Thanks, October!

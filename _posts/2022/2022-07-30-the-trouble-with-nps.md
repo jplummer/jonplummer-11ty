@@ -3,6 +3,7 @@ title: The trouble with NPS
 layout: single_post.njk
 date: "2022-07-30T12:00:00-08:00"
 tags: post
+description: "Net Promoter Score (NPS) is a popular and fashionable customer experience metric meant to express the loyalty of a company's customers. It's simple to"
 ---
 [Net Promoter Score](https://www.qualtrics.com/experience-management/customer/net-promoter-score/) (NPS) is a popular and fashionable customer experience metric meant to express the loyalty of a company's customers. It's simple to administer, and since it's in widespread use a company can compare their results to others fairly easily.
 

@@ -3,6 +3,7 @@ title: "Daphne writes:"
 layout: single_post.njk
 date: "2020-11-03T12:00:00-08:00"
 tags: post
+description: "> I have near two year experience doing oversea marketing from a leading international NAS company called Synology. My role was devising marketing strategy and"
 ---
 > I have near two year experience doing oversea marketing from a leading international NAS company called Synology. My role was devising marketing strategy and implementing it in our New Zealand and Australia market. (These two markets earn Synology over 1 billion revenue annually) I was the only marketing person who looks after these two area, so I have to run user/market research, devise product and content strategies, build campaign website with development, hold offline trade shows, perform copywriting, release product PR/ writeups and strategically distribute all the marketing materials to various channel outlets (including enterprise and consumer channels).
 >

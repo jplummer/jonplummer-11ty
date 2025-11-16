@@ -3,6 +3,7 @@ title: Group coaching vs individual feedback
 layout: single_post.njk
 date: "2023-06-28T12:00:00-08:00"
 tags: post
+description: "Group coaching is valuable when the message is positive (\"I invite you to do this\") and useful to all and there's no need to single someone out, or when"
 ---
 Group coaching is valuable when the message is positive ("I invite you to do this") and useful to all and there's no need to single someone out, or when singling someone out would be more pointed than the situation warrants. It allows the saving of face. Small issues such as not having the correct email signature, failing to make a fresh pot of coffee when taking the last cup, etc.
 

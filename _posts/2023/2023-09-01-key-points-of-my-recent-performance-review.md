@@ -3,6 +3,7 @@ title: Key points of my recent performance review
 layout: single_post.njk
 date: "2023-09-01T12:00:00-08:00"
 tags: post
+description: "(Quotations are my words, all else are the words of my manager.) Revision to goals for the quarter > Step into responsiveness via the design system – propose"
 ---
 (Quotations are my words, all else are the words of my manager.)
 

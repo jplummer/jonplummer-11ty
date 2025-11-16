@@ -3,6 +3,7 @@ title: "Conference talk: UX philosophy"
 layout: single_post.njk
 date: "2022-11-01T12:00:00-08:00"
 tags: post
+description: "Here's a recent talk I've given regarding how, under my leadership, the UX design team approaches its work. https://youtu.be/IPSQ1lrooCc > The design and"
 ---
 Here's a recent talk I've given regarding how, under my leadership, the UX design team approaches its work.
 

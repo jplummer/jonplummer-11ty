@@ -3,8 +3,8 @@ title: Being an ally means actually physically helping
 layout: single_post.njk
 date: "2025-11-09T12:00:00-08:00"
 tags: post
+description: "I realized something a little while ago: for me, being an ally means actually physically helping. I had long thought about allyship in terms of support,"
 ---
-
 I realized something a little while ago: for me, being an ally means actually physically helping.
 
 I had long thought about allyship in terms of support, advocacy, speaking up, and sharing privilege – practically a checklist of things we are reminded to do in being an ally. But I never really felt that I was effective in doing these things. How exactly does one share privilege?

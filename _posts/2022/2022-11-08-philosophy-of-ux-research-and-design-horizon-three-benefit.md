@@ -3,6 +3,7 @@ title: "Philosophy of UX research and design: Horizon three (benefit)"
 layout: single_post.njk
 date: "2022-11-08T12:00:00-08:00"
 tags: post
+description: "I mentioned earlier that I think of UX research and design practice in three horizons: Horizon one, detail: creating detailed designs, testing those designs,"
 ---
 I mentioned earlier that I think of UX research and design practice in three horizons:
 - **Horizon one, detail**: creating detailed designs, testing those designs, preparing for shipping, supporting development, instrumentation

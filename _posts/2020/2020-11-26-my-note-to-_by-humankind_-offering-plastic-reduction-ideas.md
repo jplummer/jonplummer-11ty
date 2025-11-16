@@ -3,6 +3,7 @@ title: My note to by Humankind offering plastic reduction ideas
 layout: single_post.njk
 date: "2020-11-26T12:00:00-08:00"
 tags: post
+description: "Dear by Humankind folks: I love what you are doing and have progressively bought more by Humankind products over time (and tried to turn friends on to them)."
 ---
 Dear _by Humankind_ folks:
 

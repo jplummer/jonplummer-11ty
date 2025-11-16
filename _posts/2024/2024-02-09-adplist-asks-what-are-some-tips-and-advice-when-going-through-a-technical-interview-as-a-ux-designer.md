@@ -3,6 +3,7 @@ title: Tips for UX Designer Technical Interviews
 layout: single_post.njk
 date: "2024-02-09T12:00:00-08:00"
 tags: post
+description: "For me the centerpiece of a design exercise is seeking knowledge and adapting your design ideas to that knowledge. You create and adapt and discard ideas"
 ---
 For me the centerpiece of a design exercise is seeking knowledge and adapting your design ideas to that knowledge. You create and adapt and discard ideas readily and easily if they don't fit the emerging situation. So it is essential to ask questions during the exercise to understand as much as you possibly can about the people, environment, stakeholders, goals, and constraints so that you can demonstrate this process.
 

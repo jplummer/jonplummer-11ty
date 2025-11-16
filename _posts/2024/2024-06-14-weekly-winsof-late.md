@@ -3,6 +3,7 @@ title: Weekly wins…of late
 layout: single_post.njk
 date: "2024-06-14T12:00:00-08:00"
 tags: post
+description: "I fell off the weekly wins wagon hard in November, then wrote just one earlier this month. Time to get back on. Social win – I saw a friend and past coworker"
 ---
 I fell off the weekly wins wagon _hard_ in November, then wrote just one earlier this month. Time to get back on.
 - Social win – I saw a friend and past coworker who lives in town and it was lovely. I should reach out to more folks.

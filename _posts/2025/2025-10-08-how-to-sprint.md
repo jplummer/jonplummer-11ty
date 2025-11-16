@@ -3,6 +3,7 @@ title: How to sprint
 layout: single_post.njk
 date: "2025-10-08T12:00:00-08:00"
 tags: post
+description: "(Copied from a lengthy Slack message and edited for this medium) A thought came up in a team retro at our offsite meeting, and I think it is relevant to PM and"
 ---
 (Copied from a lengthy Slack message and edited for this medium)
 

@@ -1,5 +1,13 @@
 # Migration and Development Plan: WordPress → 11ty
 
+## What's up next
+- [ ] portfolio
+- [ ] ogImage generation
+- [ ] passwordless SSH login for deployment
+- [ ] pull changes to 11ty docs
+- [ ] POSSE
+- [ ] CMS
+
 ## 🟥 Phase 1: Set Up 11ty Infrastructure
 
 - [x] **Initialize 11ty Project**
@@ -122,15 +130,15 @@
 
 - [ ] **SEO & Social**
   - [x] Sitemap generation (for accessibility and indexing, not footer)
+  - [x] Open Graph
+  - [x] Twitter Cards (removed - using Open Graph for bsky and mastodon)
   - Meta tags
-  - Open Graph
-  - Twitter Cards (look into bsky and mastodon over Xitter)
-  - add meta description to index
-  - add slug to post frontmatter
-  - add title to post frontmatter
-  - add meta description to post frontmatter
-  - add ogImage default
-  - add ogImage to frontmatter on posts and pages that need it
+    - [x] add meta description to index
+    - [-] add slug to post frontmatter (not necessary)
+    - [x] add title to post frontmatter
+    - [x] add ogImage default
+    - [x] add meta description to post frontmatter
+    - add ogImage to frontmatter on posts and pages that need it
 
 - [x] **Basic polish**
   - [x] quickest possible solid type scheme and stack
@@ -166,7 +174,8 @@
 - [-] consider a headless CMS https://www.11ty.dev/docs/cms/ (this proved to be difficult, but it's still interesting)
 - [x] consider SERPs (https://schema.org)
 - [-] date-based color styles? or a color style that rotates site-wide on deploy? (toyed with this but I don't want a color shift on every page load, might just occasionally tweak the color scheme)
-- vertical rhythm in spacings https://edgdesign.co/blog/baseline-grids-in-css
+- ogImage generation per post
+- vertical rhythm in spacing https://edgdesign.co/blog/baseline-grids-in-css
 - consider POSSE (more tags for different types of entries?)
 
 ## 🟫 Phase 7: build automation fønciness
@@ -190,11 +199,11 @@
 - Implement rollback procedures
 - Regular backup of generated site
 
-### Hosting Considerations?
-- Choose static hosting provider (Netlify, Vercel, GitHub Pages)
-- Configure custom domain and SSL
-- Set up CDN for global performance
-- Implement caching strategies
+### Hosting considerations
+- [x] Choose static hosting provider (Netlify, Vercel, GitHub Pages) (Dreamhost is fine for now)
+- [x] Configure custom domain and SSL (already done)
+- [-] Set up CDN for global performance (not needed at this time)
+- [-] Implement caching strategies (not needed at this time)
 
-### Context (11ty Documentation) Maintenance?
+### Context (11ty documentation) maintenance?
 - [ ] Figure out a good way to pull latest changes to 11ty docs from `_misc/eleventy-docs` (currently a git clone of 11ty/11ty-website)

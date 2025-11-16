@@ -3,6 +3,7 @@ title: "Daniel Abrahams asks: \"If a task takes six hours to complete in the off
 layout: single_post.njk
 date: "2022-01-08T12:00:00-08:00"
 tags: post
+description: "!If a task takes six hours to complete in the office, but that same employee finishes out in four working from home, who should get the saved two hours? The"
 ---
 ![If a task takes six hours to complete in the office, but that same employee finishes out in four working from home, who should get the saved two hours? The company ('back to work!') or the employee ('free time')?](/assets/images/2022/01/dabrahams_question-1024x826.png)
 

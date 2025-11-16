@@ -3,6 +3,7 @@ title: How to be strategic
 layout: single_post.njk
 date: "2021-01-29T12:00:00-08:00"
 tags: post
+description: "I'm not a fan of LessWrong – while I like the idea of being more rational, and strive to acknowledge and feel my emotions but not let them impede my thinking"
 ---
 I'm not a fan of [LessWrong](https://www.lesswrong.com) – while I like the idea of being more rational, and strive to acknowledge and feel my emotions but not let them impede my thinking needlessly, there's a strong whiff of holier-than-thou coming off of many in the rationalist community, including the otherwise very interesting [Scott Alexander](https://slatestarcodex.com/2021/01/21/introducing-astral-codex-ten/), whose writings on mental health care I admire. A little humility goes a long way but it is sometimes in short supply.
 

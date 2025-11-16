@@ -3,6 +3,7 @@ title: What went right in October?
 layout: single_post.njk
 date: "2024-11-02T12:00:00-08:00"
 tags: post
+description: "So many things, in retrospect: Home progress! Landscaping is done, trees are in Storm drains are cleaned The network is regularly providing 1200Mbps, after"
 ---
 So many things, in retrospect:
 - Home progress!

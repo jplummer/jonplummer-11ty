@@ -3,6 +3,7 @@ title: Weekly wins for the week of 2023 10 16
 layout: single_post.njk
 date: "2023-10-20T12:00:00-08:00"
 tags: post
+description: "A grab bag: An end-to-end demo of a hard-fought project went pretty well. We're functionally close, but far from where we need to be in terms of a"
 ---
 A grab bag:
 - An end-to-end demo of a hard-fought project went pretty well. We're functionally close, but far from where we need to be in terms of a professional-looking and -acting feature.

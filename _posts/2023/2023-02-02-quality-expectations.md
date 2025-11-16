@@ -3,6 +3,7 @@ title: Quality expectations
 layout: single_post.njk
 date: "2023-02-02T12:00:00-08:00"
 tags: post
+description: "Be it version three or an MVP, the experience we deliver should be valuable to specific users be usable by those users conform to or enhance the user's"
 ---
 Be it version three or an MVP, the experience we deliver should
 - be valuable to specific users

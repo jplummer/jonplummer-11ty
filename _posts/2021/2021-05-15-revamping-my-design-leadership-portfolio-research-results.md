@@ -3,6 +3,7 @@ title: "Revamping my design leadership portfolio: research results"
 layout: single_post.njk
 date: "2021-05-15T12:00:00-08:00"
 tags: post
+description: "I contacted seven recruiters I had recently communicated with by whatever means we had spoken before. Most of them wanted to take the discussion to phone or a"
 ---
 I contacted seven recruiters I had recently communicated with by whatever means we had spoken before. Most of them wanted to take the discussion to phone or a video chat, but for scheduling reasons I had to steer the discussion to email. Two were confused, one didn't respond, and four said things that were helpful.
 

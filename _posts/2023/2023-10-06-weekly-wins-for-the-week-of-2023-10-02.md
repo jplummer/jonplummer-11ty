@@ -3,6 +3,7 @@ title: Weekly wins for the week of 2023 10 02
 layout: single_post.njk
 date: "2023-10-06T12:00:00-08:00"
 tags: post
+description: "I got to the end of the week feeling like I worked hard but didn't accomplish much. Lots of managing, a lot less doing, and the things I said I would do by the"
 ---
 I got to the end of the week feeling like I worked hard but didn't accomplish much. Lots of managing, a lot less doing, and the things I said I would do by the end of the quarter are now hanging over my head a bit. But
 - I have a solid plan for the number one item on that list, and the one thing that can truly block me from enacting that plan produces its own plan.

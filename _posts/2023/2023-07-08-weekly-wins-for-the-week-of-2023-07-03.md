@@ -3,6 +3,7 @@ title: Weekly wins for the week of 2023 07 03
 layout: single_post.njk
 date: "2023-07-08T12:00:00-08:00"
 tags: post
+description: "It was a short week, and that brings danger that people will try to cram five weeks of meetings and activity into three. This happened, alas. Even so, Giving"
 ---
 It was a short week, and that brings danger that people will try to cram five weeks of meetings and activity into three. This happened, alas. Even so,
 - Giving people the (exceptional) option to skip critique or 1:1 for this short week provided a little relief to folks chasing urgent projects, even though few took advantage. (Schedule relief for those who did, psychological relief for those who did not.)

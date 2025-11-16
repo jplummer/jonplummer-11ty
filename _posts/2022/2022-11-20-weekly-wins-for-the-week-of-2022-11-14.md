@@ -3,6 +3,7 @@ title: Weekly wins for the week of 2022 11 14
 layout: single_post.njk
 date: "2022-11-20T12:00:00-08:00"
 tags: post
+description: "\"Cold\" applications to Director or VP of UX Design/Product Design jobs are going nowhere. Not a one has resulted in so much as a conversation with a recruiter."
 ---
 "Cold" applications to Director or VP of UX Design/Product Design jobs are going nowhere. Not a one has resulted in so much as a conversation with a recruiter. I'm zero for sixteen on these. Perhaps worse; I haven't kept careful count. BUT!
 - "Warm" applications, where I've been referred by someone I already know or otherwise managed to network my way into discussing an opportunity, have resulted in initial conversations or informational interviews about a third of the time.

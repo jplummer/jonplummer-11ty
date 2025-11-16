@@ -3,6 +3,7 @@ title: Weekly wins for the week of 2023 02 06
 layout: single_post.njk
 date: "2023-02-11T12:00:00-08:00"
 tags: post
+description: "My six phase benefit/concept/detail process is going to be piloted in our growth product. A work relationship that started with a little contention has become"
 ---
 - My six phase benefit/concept/detail process is going to be piloted in our growth product.
 - A work relationship that started with a little contention has become a cordial, iron-sharpens-iron collaboration. Tough but fair, I love it.

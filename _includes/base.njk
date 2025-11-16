@@ -34,11 +34,6 @@
     <meta property="og:image" content="https://jonplummer.com/assets/images/2021/05/og-image.png">
     <meta property="og:image:url" content="https://jonplummer.com/assets/images/2021/05/og-image.png">
     <meta property="og:image:secure_url" content="https://jonplummer.com/assets/images/2021/05/og-image.png">
-    <meta name="twitter:title" content="{{ title | default('Jon Plummer – Today I Learned') }}">
-    <meta name="twitter:url" content="https://jonplummer.com{{ page.url }}">
-    <meta name="twitter:description" content="{% if pagination and pagination.pageNumber > 0 %}Page {{ pagination.pageNumber }} of Jon Plummer's UX design blog. Insights on design leadership, product development, and team management.{% else %}{{ description | default('Jon Plummer is a UX design leader and mentor. Read his thoughts on design, leadership, and product development.') }}{% endif %}">
-    <meta name="twitter:image" content="https://jonplummer.com/assets/images/2021/05/og-image.png">
-    <meta name="twitter:card" content="summary_large_image">
 
     {# Schema.org structured data #}
     {% if page.url == "/about/" %}
