@@ -7,6 +7,7 @@ const path = require('path');
 const testTypes = {
   'html': 'html.js',
   'links': 'links.js',
+  'links-yaml': 'links-yaml.js',
   'internal-links': 'internal-links.js',
   'content': 'content-structure.js',
   'performance': 'performance.js',

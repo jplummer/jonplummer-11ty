@@ -7,9 +7,7 @@
 - `npm run start` - Start development server
 - `npm run clean` - Clean build directory
 
-## 🔍 Test generated site
-
-### 🧪 Tests
+## 🧪 Testing
 
 - `npm run test` - List available test types
 - `npm run test [type]` - Run a specific test type
@@ -19,6 +17,7 @@
 Available test types:
 - `html` - Check HTML validity (structure, syntax, deprecated elements)
 - `links` - Test all links (internal and external)
+- `links-yaml` - Validate links.yaml structure and format
 - `internal-links` - Test only internal links (critical)
 - `content` - Test content structure
 - `performance` - Analyze performance
@@ -27,11 +26,25 @@ Available test types:
 - `rss` - Test RSS feeds
 - `deploy` - Test deployment (environment, local build check, dependencies, SSH, remote directory, rsync dry-run)
 
+### 📋 links.yaml validation
+
+The `links-yaml` test validates the structure and format of `_data/links.yaml`:
+
+- Validates YAML syntax
+- Checks date keys are in YYYY-MM-DD format and are valid dates
+- Ensures each date entry contains an array of link objects
+- Validates each link has required fields (`url`, `title`)
+- Validates URL format (http/https)
+- Validates description field if present
+- Checks for unexpected fields in link objects
+
+This is faster than running the full `content` test since it only validates the links.yaml file structure, not the entire site content.
+
 ## 🚢 Deploy site to host
 
 - `npm run deploy` - Deploy site via rsync (simplified script)
 
-  Note: Complex deployment scripts moved to scripts/deploy/backup/. Current script shows rsync's native output and handles errors simply.
+Prior complex deployment scripts were moved to scripts/deploy/backup/. Current script shows rsync's native output and handles errors simply.
 
 # 📚 Front Matter Variables
 
@@ -84,15 +97,18 @@ Use redirects when:
 - Migrating from an old URL structure
 - Any other permanent URL change that needs to preserve old links
 
-# 🎨 Color ideas
+# 🎨 Color ideas inspired by https://www.presentandcorrect.com/blogs/blog/rams-palette and https://mcochris.com:
+* DR01: #aab7bf, #736356, #bfb1a8, #ad1d1d, #261201
+* DR02: #84754a, #3a3124, #96937d, #b9ada4, #0d0000
+* DR03: #bf7c2a, #c09c6f, #5f503e, #9c9c9c, #e1e4e1
+* DR04: #84764b, #b7b183, #372e2d, #bcb3a6, #dbd7d3
+* DR05: #af2e1b, #cc6324, #3b4b59, #bfa07a, #d9c3b0
+* DR06: #ed8008, #ed3f1c, #bf1b1b, #736b1e, #d9d2c6
+* DR07: #ae2f25, #e15e3e, #315b7b, #292a2e, #50474c
+* DR08: #a43f14, #bd7033, #d8a367, #bebab0, #9a9a9a
+* DR09: #c5441f, #f07032, #40341f, #8b8178, #d9cab8
+* DR10: #0d703f, #f1b73a, #e6423a, #5b4a3b, #d3d8d2
 
-https://www.presentandcorrect.com/blogs/blog/rams-palette
-Dieter Rams 01          #af2e1b, #cc6324, #3b4b59, #bfa07a, #d9c3b0
-Dieter Rams 02          #aab7bf, #736356, #bfb1a8, #ad1d1d, #261201
-Dieter Rams 03          #ed8008, #ed3f1c, #bf1b1b, #736b1e, #d9d2c6
-Dieter Rams 03 adjusted #ed8008, #ed3f1c, #bf1b1b, #736b1e, #dadccf
-Dieter Rams 04          #bf7c2a, #c09c6f, #5f503e, #9c9c9c, #e1e4e1
-
-https://www.color-hex.com/color-palettes/popular.php
-
-https://mcochris.com
+Adjusted for contrast (WCAG AA)
+* DR06a: #ed8008, #ed3f1c, #bf1b1b, #736b1e, #dadccf
+* ✔ DR10a: #0d703f, #d97706, #e6423a, #5b4a3b, #d3d8d2, text: #2a2a2a

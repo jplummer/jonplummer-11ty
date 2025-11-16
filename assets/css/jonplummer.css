@@ -3,7 +3,7 @@
   /* Layout */
   --gutter: 2rem;
   --max-width: 66rem;
-  --breakpoint-mobile: 54rem; /* custom properties don't work in a media query, alas */
+  --breakpoint-single-column: 54rem; /* custom properties don't work in a media query, alas */
 
  /* Typography */
  --font-family: system-ui, sans-serif;
@@ -22,6 +22,7 @@
 
   /* Font weights */
   --font-weight-thin: 100;
+  --font-weight-semibold: 600;
   --font-weight-bold: 700;
   --font-weight-black: 900;
 
@@ -44,28 +45,28 @@
   /* Accessibility */
   --sr-only-offset: -9999rem;
 
-  /* Colors */
-  --text-color: #404040;
-  --text-color-light: #707070;
-  --background-color: #dadccf;
+  /* Colors - based on DR10 palette, adjusted for WCAG AA contrast */
+  --text-color: #2a2a2a; /* darker for contrast on #d3d8d2 background */
+  --text-color-light: #5a5a5a;
+  --background-color: #d3d8d2;
   --content-background-color: #fff;
-  --link-color: #bf1b1b;
-  --link-hover-color: #ed3f1c;
-  --link-visited-color: #736b1e;
-  --link-active-color: #ed8008;
+  --link-color: #e6423a;
+  --link-hover-color: #d97706; /* darker orange for contrast on white */
+  --link-visited-color: #5b4a3b;
+  --link-active-color: #0d703f;
 }
 
-/* Redefine colors for dark mode */
+/* Redefine colors for dark mode - based on DR10 palette */
 @media (prefers-color-scheme: dark) {
   :root {
     --text-color: #e0e0e0;
     --text-color-light: #b0b0b0;
     --background-color: #1a1a1a;
     --content-background-color: #2d2d2d;
-    --link-color: #ff6b6b;
-    --link-hover-color: #ff8e8e;
-    --link-visited-color: #c4a484;
-    --link-active-color: #ffa500;
+    --link-color: #ff6b6b; /* lighter version of DR10 red #e6423a */
+    --link-hover-color: #f1b73a; /* DR10 yellow-orange */
+    --link-visited-color: #8b7a6b; /* lighter version of DR10 dark brown #5b4a3b */
+    --link-active-color: #2db366; /* lighter version of DR10 green #0d703f */
   }
 }
 
@@ -161,7 +162,8 @@ article {
   padding-bottom: var(--spacing-lg);
 }
 
-/* Mobile responsive layout */
+/* Single column responsive layout */
+/* Note: Cannot use var(--breakpoint-single-column) in media query, so value is hardcoded here */
 @media all and (max-width: 54rem) {
   article {
     grid-template-columns: 1fr;
@@ -325,6 +327,7 @@ header h1 + p {
 /* Article headings */
 article h1 {
   margin: 0;
+  font-weight: var(--font-weight-semibold);
 }
 
 /* Main content headings */
