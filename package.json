@@ -5,11 +5,12 @@
   "scripts": {
     "test": "node scripts/test-runner.js",
     "build": "eleventy",
-    "start": "eleventy --serve",
     "dev": "eleventy --serve --watch",
     "clean": "rm -rf _site",
     "validate": "node scripts/test-runner.js html",
-    "deploy": "node scripts/deploy/deploy.js"
+    "deploy": "node scripts/deploy/deploy.js",
+    "update-docs": "node scripts/content/update-eleventy-docs.js",
+    "changelog": "node scripts/content/generate-changelog.js"
   },
   "keywords": [],
   "author": "Jon Plummer",

@@ -1,6 +1,6 @@
 # Migration and Development Plan: WordPress → 11ty
 
-## What's up next
+## ‼️ What's up next
 - [ ] portfolio
 - [ ] ogImage generation
 - [ ] passwordless SSH login for deployment
@@ -138,7 +138,7 @@
     - [x] add title to post frontmatter
     - [x] add ogImage default
     - [x] add meta description to post frontmatter
-    - add ogImage to frontmatter on posts and pages that need it
+    - add ogImage to frontmatter on posts and pages that need it (generate them?)
 
 - [x] **Basic polish**
   - [x] quickest possible solid type scheme and stack
@@ -205,5 +205,7 @@
 - [-] Set up CDN for global performance (not needed at this time)
 - [-] Implement caching strategies (not needed at this time)
 
-### Context (11ty documentation) maintenance?
-- [ ] Figure out a good way to pull latest changes to 11ty docs from `_misc/eleventy-docs` (currently a git clone of 11ty/11ty-website)
+### Context (11ty documentation) maintenance
+- [x] Figure out a good way to pull latest changes to 11ty docs from `_misc/eleventy-docs` (currently a git clone of 11ty/11ty-website)
+  - [x] Created `scripts/content/update-eleventy-docs.js` script
+  - [x] Added `npm run update-docs` command to package.json
