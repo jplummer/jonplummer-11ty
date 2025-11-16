@@ -16,6 +16,16 @@ const CHANGELOG_PATH = path.join(__dirname, '../../CHANGELOG.md');
 console.log('📝 Generating changelog from git history...\n');
 
 try {
+  // Preserve frontmatter if it exists
+  let frontmatter = '';
+  if (fs.existsSync(CHANGELOG_PATH)) {
+    const existingContent = fs.readFileSync(CHANGELOG_PATH, 'utf-8');
+    const frontmatterMatch = existingContent.match(/^---\n([\s\S]*?)\n---\n/);
+    if (frontmatterMatch) {
+      frontmatter = frontmatterMatch[0]; // Include the --- markers
+    }
+  }
+
   // Get all commits with date and message
   const commits = execSync('git log --format="%ai|%s" --all --reverse', {
     encoding: 'utf-8',
@@ -40,21 +50,14 @@ try {
   const sortedDates = Object.keys(commitsByDate).sort().reverse();
 
   // Generate changelog content
-  let changelog = '# Changelog\n\n';
+  let changelog = frontmatter; // Start with frontmatter if it exists
+  changelog += '# Changelog\n\n';
   changelog += 'All notable changes to this project are documented in this file.\n\n';
   changelog += 'The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),\n';
   changelog += 'and this project adheres to chronological ordering (newest first).\n\n';
 
   for (const date of sortedDates) {
-    // Format date nicely (e.g., "2025-11-15" -> "November 15, 2025")
-    const dateObj = new Date(date + 'T00:00:00');
-    const formattedDate = dateObj.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-
-    changelog += `## [${date}] - ${formattedDate}\n\n`;
+    changelog += `## ${date}\n\n`;
 
     // Add each commit message as a bullet point
     for (const message of commitsByDate[date]) {

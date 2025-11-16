@@ -1,211 +1,56 @@
 # Migration and Development Plan: WordPress → 11ty
 
-## ‼️ What's up next
-- [ ] portfolio
-- [ ] ogImage generation
-- [ ] passwordless SSH login for deployment
-- [ ] pull changes to 11ty docs
-- [ ] POSSE
-- [ ] CMS
+## 🎯 Active Work
 
-## 🟥 Phase 1: Set Up 11ty Infrastructure
-
-- [x] **Initialize 11ty Project**
-  - [x] Create a new project directory
-  - [x] Run `npm init` and install 11ty as a dev dependency
-
-- [x] **Create `package.json` with 11ty dependencies**
-
-- [x] **Set up `.eleventy.js` configuration**
-  - [x] Configure input/output directories
-  - [x] Set up custom collections if needed
-    - [x] tag portfolio pieces
-    - [x] tag posts
-
-- [x] **Create directory structure**
-  - [x] Templates, content, and data folders
-
-- [x] **Create Template Structure**
-  - [x] Base layout template
-  - [x] Post template (single post view)
-  - [x] RSS feed template
-    - [x] XML structure
-    - [x] Post metadata
-    - [x] Content excerpts (no, do full content. It's polite)
-  - [x] get dates and date formatting working in all templates and includes
-  - [-] Archive/tag templates (no, go straight to pagination)
-
-- [x] **Configure URL Structure**
-  - [x] Set up permalinks to match WordPress: `/YYYY/MM/DD/post-slug/`
-  - [x] Configure pagination for archives (/page/2/ etc.)
-    - [x] Set up pagination for blog posts with /page/2 URL scheme
-    - [x] Add pagination navigation component with page numbers
-    - [x] Test pagination URLs and navigation functionality
-  - [-] Set up tag/category routing (not needed)
-  - [x] Configure pagination for individual posts (prev/next)
-
-## 🟧 Phase 2: Content Migration
-
-- [x] **Export WordPress Content**
-  - [x] Use WordPress export tool (`Tools → Export`)
-  - [x] Extract posts, pages, and metadata
-  - [x] Parse XML to get clean content
-  - [x] re-get all the images somehow
-
-- [x] **Organize Content Files**
-  - [x] Create `_posts/` directory with dated subdirectories. Example structure: `_posts/2024/11/02/what-went-right-in-october/index.md`
-
-- [x] **Convert to Markdown/Front Matter**
-  - [x] Transform WordPress posts to Markdown with YAML front matter
-  - [x] Categorize portfolio posts
-  - [x] Preserve/check and repair metadata (dates, tags, categories, author)
-  - [x] Clean up HTML artifacts
-  - [x] Go through ALL of the images and make sure they work
-
-## 🟨 Phase 3: Template Development
-
-- [x] **Base Layout (`_includes/base.njk`)**
-  - Header, navigation, footer
-  - [x] Integrate existing CSS structure
-  - [x] Add meta tags and SEO elements
-  - [x] skip link behavior
-  - [x] page color vs content background color
-  - [x] general typographical niceties such as
-    - [x] font sizes and header sizes https://ithy.com/article/typography-font-size-spacing-lc0m3kwv
-    - [x] pagination styles
-    - [x] fix margins and page color
-    - [x] menu behavior wide
-    - [x] menu behavior narrow
-    - [x] inline links vs incidental links
-    - [x] copyright styling
-    - [-] good rhythm for bullets (these are fine for now)
-
-- [x] **Post Content Template (`_includes/post_content.njk`)**
-  - [x] Article structure matching current HTML
-  - [x] Date formatting
-  - [-] Tag/category display (don't need it)
-  - [-] Main navigation at bottom (decided not to do it)
-    - [-] Implement bodyClass in frontmatter to move the nav up and down (decided not to do it)
-
-- [x] **Index Template (`index.njk`)**
-  - [x] Blog listing with pagination
-  - [x] Skip "portfolio" category (use only posts collection)
-  - [-] Post excerpts (nay!)
-  - [x] Navigation controls
-  - [x] Main navigation at top
-
-- [x] **404 Page Template (`404.njk`)**
-  - [x] …and make 404 work!
-
-- **Portfolio Template (`portfolio.njk` and `_includes/portfolio_list_item.njk`)**
+### Portfolio Templates
+- [ ] **Portfolio Template (`portfolio.njk` and `_includes/portfolio_list_item.njk`)**
   - Grid listing
   - Only "portfolio" category
-  - [-] Post excerpts (nay!)
   - Navigation controls
   - Image size/position/styling
 
-- **Portfolio Post Content Template (`_includes/portfolio_detail.njk`)**
+- [ ] **Portfolio Post Content Template (`_includes/portfolio_detail.njk`)**
   - Article structure matching current HTML
   - Date formatting
   - Tag/category display
   - Main navigation at bottom? top?
   - Image size/position/styling
 
-## 🟩 Phase 4: Advanced Features
-
-- [-] **Search & Filtering** meh
-  - [-] Tag-based filtering (not sure I need this)
-  - [-] Date-based archives (not sure I need this)
-  - [-] Search functionality (not sure I need this)
-
-- [-] **Performance Optimization** meh
-  - [-] CSS/JS minification (not sure I need this)
-  - [-] Image optimization (not sure I need this)
-  - [-] Caching strategies (not sure I need this)
-
-- [ ] **Security and scan results mitigation**
-  - https://help.dreamhost.com/hc/en-us/articles/216499537-How-to-configure-passwordless-login-in-Mac-OS-X-and-Linux
-  - [x] Cloudflare Radar "security headers not set" https://radar.cloudflare.com/scan/fd4597b9-3260-499d-9407-9783804293e7/summary https://owasp.org/www-project-secure-headers/index.html#div-bestpractices
-  - [x] https://app.ahrefs.com/site-audit/5163664/issues?current=12-10-2025T072858
-
+### SEO & Social
 - [ ] **SEO & Social**
   - [x] Sitemap generation (for accessibility and indexing, not footer)
   - [x] Open Graph
   - [x] Twitter Cards (removed - using Open Graph for bsky and mastodon)
   - Meta tags
     - [x] add meta description to index
-    - [-] add slug to post frontmatter (not necessary)
     - [x] add title to post frontmatter
     - [x] add ogImage default
     - [x] add meta description to post frontmatter
-    - add ogImage to frontmatter on posts and pages that need it (generate them?)
+    - [ ] add ogImage to frontmatter on posts and pages that need it (generate them?)
+  - [ ] ogImage generation per post
 
-- [x] **Basic polish**
-  - [x] quickest possible solid type scheme and stack
-  - [x] double-check basic centering, margins, padding, breakpoints
-  - [x] highlight the current page in the nav per https://11ty.rocks/tips/essential-navigation-snippet/
-  - [x] vertical rhythm in fonts https://www.daybreak.studio/writing/adaline-typography
-  - [x] aria-current page per https://www.11ty.dev/docs/collections/#use-an-aria-current-attribute-on-the-current-page
+### Security & Deployment
+- [ ] **Security and scan results mitigation**
+  - [ ] passwordless SSH login for deployment: https://help.dreamhost.com/hc/en-us/articles/216499537-How-to-configure-passwordless-login-in-Mac-OS-X-and-Linux
+  - [x] Cloudflare Radar "security headers not set" https://radar.cloudflare.com/scan/fd4597b9-3260-499d-9407-9783804293e7/summary https://owasp.org/www-project-secure-headers/index.html#div-bestpractices
+  - [x] https://app.ahrefs.com/site-audit/5163664/issues?current=12-10-2025T072858
 
-## 🟦 Phase 5: Site Generation and Upload Automation
+### Design & Polish
+- [ ] vertical rhythm in spacing https://edgdesign.co/blog/baseline-grids-in-css
 
-### Build Process Automation
-- [x] Set up npm scripts for development and production builds
-- [x] Configure environment-specific build settings
-- [x] Implement build validation and testing
-- [x] Check each test script to make sure it is useful
-- [x] Go through results of each test script to fix issues
-- [ ] **Optional: Enable incremental builds for faster development** (`--incremental` flag)
-  - Only rebuilds changed files instead of full site rebuilds
-  - Particularly useful given large number of posts (2001-2025)
-  - Can speed up `npm run dev` rebuilds when editing individual posts or templates
-  - Change `"dev": "eleventy --serve --watch --incremental"` in package.json
+### Future Enhancements
+- [ ] consider POSSE (more tags for different types of entries?)
+- [ ] CMS (headless CMS consideration)
 
-### Deployment Pipeline
-- [x] **Local deployment scripts**:
-  - [x] Build and upload via rsync/scp
-  - [-] SFTP deployment automation
-  - [-] Cloud storage sync (AWS S3, Netlify, etc.)
-
-## 🟪 Phase 6: Truly fancy schniazz
-- [x] Redefine colors for dark mode
-- [x] "remaindered links' feature ala Kottke (using 11ty collections?)
-- [x] simplify /_posts folder structure
-- [-] consider a headless CMS https://www.11ty.dev/docs/cms/ (this proved to be difficult, but it's still interesting)
-- [x] consider SERPs (https://schema.org)
-- [-] date-based color styles? or a color style that rotates site-wide on deploy? (toyed with this but I don't want a color shift on every page load, might just occasionally tweak the color scheme)
-- ogImage generation per post
-- vertical rhythm in spacing https://edgdesign.co/blog/baseline-grids-in-css
-- consider POSSE (more tags for different types of entries?)
-
-## 🟫 Phase 7: build automation fønciness
-
-### Continuous Integration?
-- [-] consider ISR a la https://noahpenza.com/blog/this-site-is-very-quick-it-uses-ssg-and-isr/ (I use SSG and don't need ISR yet)
-- [x] Automated testing of generated site (I have test scripts!)
-- [x] Link validation (I have test scripts!)
-- [-] Image optimization checks (I don't care that much)
-- [-] Performance monitoring (I don't need it yet, as everything is static)
-
-- **GitHub Actions** (recommended): (This is not how I'm using GitHub just yet)
+### Optional / Future Consideration
+- **GitHub Actions** (This is not how I'm using GitHub just yet)
   - Automatic builds on push to main branch
   - Run 11ty build process
   - Validate generated HTML (using custom validation scripts)
   - Upload to hosting provider
 
-### Monitoring & Maintenance?
-- Set up build notifications
-- Monitor deployment success/failure
-- Implement rollback procedures
-- Regular backup of generated site
-
-### Hosting considerations
-- [x] Choose static hosting provider (Netlify, Vercel, GitHub Pages) (Dreamhost is fine for now)
-- [x] Configure custom domain and SSL (already done)
-- [-] Set up CDN for global performance (not needed at this time)
-- [-] Implement caching strategies (not needed at this time)
-
-### Context (11ty documentation) maintenance
-- [x] Figure out a good way to pull latest changes to 11ty docs from `_misc/eleventy-docs` (currently a git clone of 11ty/11ty-website)
-  - [x] Created `scripts/content/update-eleventy-docs.js` script
-  - [x] Added `npm run update-docs` command to package.json
+- **Monitoring & Maintenance**
+  - Set up build notifications
+  - Monitor deployment success/failure
+  - Implement rollback procedures
+  - Regular backup of generated site
