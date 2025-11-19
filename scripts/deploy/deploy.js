@@ -51,6 +51,16 @@ try {
   console.warn(`      ${error.message}\n`);
 }
 
+// Rebuild the site to include the new changelog
+console.log('🏗️  Rebuilding site...');
+try {
+  execSync('npm run build', { stdio: 'inherit' });
+  console.log('   ✓ Build completed\n');
+} catch (error) {
+  console.error('❌ Build failed. Aborting deployment.');
+  process.exit(1);
+}
+
 // Check if rsync is available
 function checkRsync() {
   try {
@@ -100,7 +110,7 @@ function deploy() {
 
     // Build rsync command
     let rsyncCommand;
-    
+
     if (hasSshpass && hasPassword) {
       rsyncCommand = [
         'sshpass',
@@ -136,13 +146,13 @@ function deploy() {
 
     // Execute rsync with native output
     try {
-      execSync(rsyncCommand.join(' '), { 
+      execSync(rsyncCommand.join(' '), {
         stdio: 'inherit' // Show rsync's native output
       });
-      
+
       console.log('\n✅ Deployment completed successfully!');
       console.log(`🌐 Your site should be live at: https://${config.host}`);
-      
+
     } catch (error) {
       console.error('\n❌ Deployment failed:');
       console.error(`   Exit code: ${error.status}`);

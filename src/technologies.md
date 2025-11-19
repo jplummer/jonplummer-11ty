@@ -40,6 +40,7 @@ permalink: "/technologies/"
 - **Testing & Validation**
   - **puppeteer**: Headless browser automation for accessibility testing (launches Chromium to test HTML files)
   - **axe-core**: Accessibility testing engine used by test-accessibility.js (analyzes HTML for WCAG compliance violations)
+  - **html-validate**: Offline HTML5 validator used by test-html.js (validates HTML syntax, nesting, and attributes)
   - **xmldom**: XML DOM parser for RSS feed validation in test scripts
 
 - **Deployment**

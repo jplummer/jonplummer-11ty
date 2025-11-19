@@ -1,17 +1,13 @@
----
-title: "Changelog – Jon Plummer"
-description: "All notable changes to this project are documented here. The format is based on Keep a Changelog, and this project adheres to chronological ordering (newest first)."
-date: 2025-11-15
-layout: base.njk
-tags: page
-permalink: "/changelog/"
----
 # Changelog
 
 All notable changes to this project are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to chronological ordering (newest first).
+
+## 2025-11-16
+
+- Add new post about AI-assisted coding and move technologies.md to root
 
 ## 2025-11-15
 
