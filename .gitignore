@@ -143,7 +143,5 @@ _site/
 .DS_Store?
 .Spotlight-V100
 .Trashes
-.DS_Store
-.DS_Store
 
 node_modules
