@@ -482,21 +482,21 @@ main[data-tags*="page"]::after {
 
 /* Portfolio Detail Styles */
 article.portfolio-detail section {
-    /* Break out of grid area 'c' to span full width */
+    /* Span full width of the parent grid, taking over areas b and c */
     grid-column: 1 / -1;
     
-    /* Establish a new grid for content matching the parent layout */
+    /* Re-establish the parent's grid inside this section */
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 0 var(--gutter);
 }
 
 article.portfolio-detail section > * {
-    /* Default content goes to right column (2fr), matching standard article layout */
+    /* All standard content (text, lists, etc.) goes to the right column */
     grid-column: 2;
 }
 
-/* Images break out to full width */
+/* Images (and their wrapper paragraphs) span the full width */
 article.portfolio-detail section > p:has(> img:only-child),
 article.portfolio-detail section > figure,
 article.portfolio-detail section > img {
