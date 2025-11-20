@@ -160,8 +160,8 @@ module.exports = function (eleventyConfig) {
   });
 
 
-  // Ignore the '_notes' and "_posts/_drafts" folders
-  eleventyConfig.ignores.add("_misc/");
+  // Ignore the 'docs' and "_posts/_drafts" folders
+  eleventyConfig.ignores.add("docs/");
   eleventyConfig.ignores.add("_posts/_drafts/");
 
   return {
