@@ -67,10 +67,10 @@ Prior complex deployment scripts were moved to `scripts/deploy/backup/`. The cur
 
 - `npm run update-docs` - Pull latest 11ty documentation from official repo
 
-The Eleventy documentation is cached in `_misc/eleventy-docs/` to provide context to Cursor and prevent confusion about what 11ty naturally provides. This script:
+The Eleventy documentation is cached in `docs/reference/eleventy/` to provide context to Cursor and prevent confusion about what 11ty naturally provides. This script:
 
 1. Clones the `11ty/11ty-website` repository to a temporary directory (shallow clone)
-2. Copies the `docs` directory to `_misc/eleventy-docs/docs`
+2. Copies the `docs` directory to `docs/reference/eleventy/docs`
 3. Cleans up temporary files
 
 The script outputs a summary showing the commit hash and file count changes (added/removed/unchanged) to help track what was updated.

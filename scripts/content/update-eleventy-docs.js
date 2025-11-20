@@ -4,11 +4,11 @@
  * Update Eleventy Documentation
  * 
  * Pulls the latest 11ty documentation from the official 11ty-website repository
- * and updates the cached docs in _misc/eleventy-docs.
+ * and updates the cached docs in docs/reference/eleventy.
  * 
  * This script:
  * 1. Clones the 11ty/11ty-website repo to a temporary directory
- * 2. Copies the docs directory to _misc/eleventy-docs
+ * 2. Copies the docs directory to docs/reference/eleventy/docs
  * 3. Cleans up the temporary clone
  */
 
@@ -40,7 +40,7 @@ function countFiles(dir) {
 const ELEVENTY_REPO = 'https://github.com/11ty/11ty-website.git';
 const TEMP_DIR = path.join(__dirname, '../../.temp-eleventy-clone');
 const DOCS_SOURCE = path.join(TEMP_DIR, 'src', 'docs');
-const DOCS_TARGET = path.join(__dirname, '../../_misc/eleventy-docs/docs');
+const DOCS_TARGET = path.join(__dirname, '../../docs/reference/eleventy/docs');
 
 console.log('📚 Updating Eleventy documentation...\n');
 
@@ -84,7 +84,7 @@ try {
   }
 
   // Copy docs directory
-  console.log('Copying docs to _misc/eleventy-docs/docs...');
+  console.log('Copying docs to docs/reference/eleventy/docs...');
   fs.cpSync(DOCS_SOURCE, DOCS_TARGET, { recursive: true });
 
   // Count files after update
