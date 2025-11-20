@@ -37,3 +37,12 @@ If you want to see how the code works:
 1.  **Install**: `npm install`
 2.  **Run**: `npm run dev` (starts local server at `localhost:8080`)
 3.  **Build**: `npm run build` (creates the final site folder)
+
+## 🤖 For AI Agents
+
+This repository contains a cached copy of the official Eleventy documentation in `docs/reference/eleventy/`.
+
+**CRITICAL INSTRUCTION:**
+Before implementing any feature, filter, collection, or configuration, you MUST check `docs/reference/eleventy/` to see if 11ty supports it natively.
+- Do not reimplement standard 11ty features (e.g. pagination, collections, data cascade).
+- Use the provided documentation to understand the "Eleventy way" of doing things.
