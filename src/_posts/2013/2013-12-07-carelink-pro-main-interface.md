@@ -6,25 +6,31 @@ tags: portfolio
 coverImage: 2022/12/reports2.png
 ---
 <figure>
-![](/assets/images/2022/12/reports2.png)
+  <img src="/assets/images/2022/12/reports2.png" alt="">
+  <figcaption></figcaption>
 </figure>
 
 <figure>
-![](/assets/images/2022/12/reports1.png)
+  <img src="/assets/images/2022/12/reports1.png" alt="">
+  <figcaption></figcaption>
 </figure>
 
 <figure>
-![](/assets/images/2022/12/devices.png)
+  <img src="/assets/images/2022/12/devices.png" alt="">
+  <figcaption></figcaption>
 </figure>
 
 <figure>
-![](/assets/images/2022/12/profile.png)
+  <img src="/assets/images/2022/12/profile.png" alt="">
+  <figcaption></figcaption>
 </figure>
 
 <figure>
-![](/assets/images/2022/12/pick_a_door-1024x794.png)
+  <img src="/assets/images/2022/12/pick_a_door-1024x794.png" alt="">
+  <figcaption></figcaption>
 </figure>
 
 <figure>
-![](/assets/images/2022/12/reports3.png)
+  <img src="/assets/images/2022/12/reports3.png" alt="">
+  <figcaption></figcaption>
 </figure>

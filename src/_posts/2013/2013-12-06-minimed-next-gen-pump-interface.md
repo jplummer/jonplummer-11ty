@@ -13,27 +13,33 @@ Medtronic engaged IDEO to help design a next-generation pump to succeed the Mini
 </figure>
 
 <figure>
-![](/assets/images/2022/12/2_main.gif)
+  <img src="/assets/images/2022/12/2_main.gif" alt="">
+  <figcaption></figcaption>
 </figure>
 
 <figure>
-![](/assets/images/2022/12/3_changing_settings_3.gif)
+  <img src="/assets/images/2022/12/3_changing_settings_3.gif" alt="">
+  <figcaption></figcaption>
 </figure>
 
 <figure>
-![](/assets/images/2022/12/3hr.gif)
+  <img src="/assets/images/2022/12/3hr.gif" alt="">
+  <figcaption></figcaption>
 </figure>
 
 <figure>
-![](/assets/images/2022/12/4_setting_bolus.gif)
+  <img src="/assets/images/2022/12/4_setting_bolus.gif" alt="">
+  <figcaption></figcaption>
 </figure>
 
 <figure>
-![](/assets/images/2022/12/5_delivering_bolus.gif)
+  <img src="/assets/images/2022/12/5_delivering_bolus.gif" alt="">
+  <figcaption></figcaption>
 </figure>
 
 <figure>
-![](/assets/images/2022/12/6_alarm.gif)
+  <img src="/assets/images/2022/12/6_alarm.gif" alt="">
+  <figcaption></figcaption>
 </figure>
 
 My role: ideation, workflows, on-screen and physical mockups, usability testing, demonstrating enhanced usability to executives and the firmware and pump hardware teams

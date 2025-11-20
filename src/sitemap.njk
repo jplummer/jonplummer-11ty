@@ -20,21 +20,15 @@ eleventyExcludeFromCollections: true
     <priority>0.9</priority>
   </url>
 
-  {# About page #}
+  {# Static pages #}
+  {% for page in collections.page %}
   <url>
-    <loc>https://jonplummer.com/about/</loc>
-    <lastmod>{{ collections.page | getNewestCollectionItemDate | dateToRfc3339 }}</lastmod>
+    <loc>https://jonplummer.com{{ page.url }}</loc>
+    <lastmod>{{ page.date | dateToRfc3339 }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  {# Now page #}
-  <url>
-    <loc>https://jonplummer.com/now/</loc>
-    <lastmod>{{ collections.page | getNewestCollectionItemDate | dateToRfc3339 }}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
+  {% endfor %}
 
   {# Portfolio page #}
   <url>

@@ -10,7 +10,8 @@ An in-home study requiring participants to replace their existing router with on
 Removing opportunities for mistakes became the order of the day. An order-tolerant setup process, pre-connected cables, and instructions directly on the parts in question scored very well when tested in the lab and among the public when sold. Setup-related support calls were reduced significantly and an entire class of wiring-related calls went nearly to zero.
 
 <figure>
-![](/assets/images/2022/12/Screenshot2017-06-0321.17.37-1024x477.png)
+  <img src="/assets/images/2022/12/Screenshot2017-06-0321.17.37-1024x477.png" alt="">
+  <figcaption></figcaption>
 </figure>
 
 In addition, we removed several opportunities for mistakes or confusion by shipping the router pre-secured, with a network name and password printed on a card. This could be changed by users at any time or during setup, and included blanks on the back to write their new settings if desired. Later routers included a slot on the foot for the card to be stored. This card significantly reduced the volume of "what's my network password" support calls.

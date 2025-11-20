@@ -10,7 +10,8 @@ While working on the identity and without any experience marketing a business, I
 The winning design and identity:
 
 <figure>
-![](/assets/images/2022/12/mcr0a.gif)
+  <img src="/assets/images/2022/12/mcr0a.gif" alt="">
+  <figcaption></figcaption>
 </figure>
 
 My role: pitch, concepts, visual design, HTML and graphics production
@@ -18,29 +19,36 @@ My role: pitch, concepts, visual design, HTML and graphics production
 Some other possibilities, with a provisional identity:
 
 <figure>
-![](/assets/images/2022/12/1259491721675154.gif)
+  <img src="/assets/images/2022/12/1259491721675154.gif" alt="">
+  <figcaption></figcaption>
 </figure>
 
 <figure>
-![](/assets/images/2022/12/1345052502415656.gif)
+  <img src="/assets/images/2022/12/1345052502415656.gif" alt="">
+  <figcaption></figcaption>
 </figure>
 
 <figure>
-![](/assets/images/2022/12/1355752802454956.gif)
+  <img src="/assets/images/2022/12/1355752802454956.gif" alt="">
+  <figcaption></figcaption>
 </figure>
 
 <figure>
-![](/assets/images/2022/12/1568561297195050.gif)
+  <img src="/assets/images/2022/12/1568561297195050.gif" alt="">
+  <figcaption></figcaption>
 </figure>
 
 <figure>
-![](/assets/images/2022/12/1679464222944858.gif)
+  <img src="/assets/images/2022/12/1679464222944858.gif" alt="">
+  <figcaption></figcaption>
 </figure>
 
 <figure>
-![](/assets/images/2022/12/1787887096275652.gif)
+  <img src="/assets/images/2022/12/1787887096275652.gif" alt="">
+  <figcaption></figcaption>
 </figure>
 
 <figure>
-![](/assets/images/2022/12/1958161897105550-1.gif)
+  <img src="/assets/images/2022/12/1958161897105550-1.gif" alt="">
+  <figcaption></figcaption>
 </figure>

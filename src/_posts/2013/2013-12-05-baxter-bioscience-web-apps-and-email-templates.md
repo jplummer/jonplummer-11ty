@@ -6,29 +6,36 @@ tags: portfolio
 coverImage: 2022/12/advoy_flags.png
 ---
 <figure>
-![](/assets/images/2022/12/advoy_flags.png)
+  <img src="/assets/images/2022/12/advoy_flags.png" alt="">
+  <figcaption></figcaption>
 </figure>
 
 <figure>
-![](/assets/images/2022/12/advoy_bilingual.png)
+  <img src="/assets/images/2022/12/advoy_bilingual.png" alt="">
+  <figcaption></figcaption>
 </figure>
 
 <figure>
-![](/assets/images/2022/12/dashboard1.png)
+  <img src="/assets/images/2022/12/dashboard1.png" alt="">
+  <figcaption></figcaption>
 </figure>
 
 <figure>
-![](/assets/images/2022/12/dashboard2.png)
+  <img src="/assets/images/2022/12/dashboard2.png" alt="">
+  <figcaption></figcaption>
 </figure>
 
 <figure>
-![](/assets/images/2022/12/dashboard3.png)
+  <img src="/assets/images/2022/12/dashboard3.png" alt="">
+  <figcaption></figcaption>
 </figure>
 
 <figure>
-![](/assets/images/2022/12/advate_clean.png)
+  <img src="/assets/images/2022/12/advate_clean.png" alt="">
+  <figcaption></figcaption>
 </figure>
 
 <figure>
-![](/assets/images/2022/12/advate_fancy.png)
+  <img src="/assets/images/2022/12/advate_fancy.png" alt="">
+  <figcaption></figcaption>
 </figure>
