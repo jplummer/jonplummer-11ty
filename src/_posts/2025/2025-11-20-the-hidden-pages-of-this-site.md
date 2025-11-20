@@ -5,9 +5,9 @@ date: 2025-11-20T12:00:00-08:00
 tags: post
 description: "A tour of the utility pages of this site—RSS feeds, documentation, sitemaps, and more—and how they are generated."
 ---
-This site has a handful of "hidden" pages. They aren't secret but they don't live in the main navigation. They serve utility functions rather than human browsing habits. But making them public and giving them URLs is a nod to the "view source" ethos of the web; everything is here, everything is inspectable, and everything is open.
+This site has a handful of "hidden" pages. They aren't secret but they don't live in the main navigation; they serve utility functions rather than human browsing habits. Making them public and giving them URLs is a nod to the "view source" ethos of the web. Everything is here, everything is inspectable, and everything is open.
 
-### 1. The RSS Feed
+### 1. The main RSS feed
 [/feed.xml](/feed.xml)
 
 This is the lifeblood for those of us who still believe in the open web and subscribing to and reading periodic content on our own terms. It contains all the blog posts from the site.
@@ -18,7 +18,7 @@ It's built using a Nunjucks template (`feed.njk`) that iterates over the `collec
 #### Why you might care
 If you use a feed reader (like NetNewsWire, Feedly, or Readwise Reader), this is how you get my updates without checking the site manually. It's the "subscribe" button of the decentralized web.
 
-### 2. The Links Feed
+### 2. The links feed
 [/links-feed.xml](/links-feed.xml)
 
 A specialized feed for the "found links"—the interesting articles, tools, and videos I find around the web that don't warrant a full blog post but are worth sharing.
@@ -29,7 +29,7 @@ Similar to the main feed, this uses a Nunjucks template (`links-feed.njk`). Howe
 #### Why you might care
 If you only want the curated list of cool stuff I find and not my long-form rambling, or if you want to pipe these links into a different tool, this is the direct line.
 
-### 3. The Readme
+### 3. The readme
 [/readme/](/readme/)
 
 This is the "About This Site" page's technical cousin. It renders the actual `README.md` file from the project's root directory. I produced it because GitHub expects one, and the source code for this site is on GitHub.
@@ -47,7 +47,7 @@ eleventyConfig.addFilter("readFile", (filePath) => {
 #### Why you might care
 It ensures that the documentation in the code repository and the "about this project" page on the live site are always perfectly in sync. No copy-pasta required. If you want to know how to build or run this site locally, this is where to begin.
 
-### 4. The Changelog
+### 4. The changelog
 [/changelog/](/changelog/)
 
 A chronological list of changes, fixes, and updates to the site's codebase and content.
@@ -58,7 +58,7 @@ Identical to the readme strategy, the `src/changelog.md` file includes the root 
 #### Why you might care
 If you're wondering when a specific feature was added or if I've fixed a bug you noticed, this is the record. It's also a good accountability tool for me to see how often (or how rarely) I'm shipping updates.
 
-### 5. The Technologies List
+### 5. The technologies list
 [/technologies/](/technologies/)
 
 A detailed breakdown of the building blocks: Eleventy, Node.js, specific plugins, and testing tools.
@@ -69,7 +69,7 @@ This one is currently a static Markdown file (`src/technologies.md`). While I co
 #### Why you might care
 If you're a developer looking to build a similar site, these are my ingredients. It breaks down not just the "what" but the specific libraries handling things like RSS, dates, and accessibility testing.
 
-### 6. The Sitemap
+### 6. The sitemap
 [/sitemap.xml](/sitemap.xml)
 
 A map of the site for search engines.
@@ -78,4 +78,4 @@ A map of the site for search engines.
 A Nunjucks template (`sitemap.njk`) iterates through all the collections (`post`, `portfolio`, `page`) and outputs an XML file that follows the sitemap protocol. It includes last-modified dates so crawlers know when to come back.
 
 #### Why you might care
-You probably don't, unless you are a robot. But if you're building a site, you need one of these to ensure Baudu, Yandex, Yippy, Ecosia, et al can find all your pages efficiently.
+You probably don't, unless you are a robot. But if you're building a site, you need one of these to ensure Baudu, Yandex, Yippy, Ecosia, Bing, Kagi, Ask, et al can find all your pages efficiently.
