@@ -1,11 +1,25 @@
-<article>
+---
+layout: base.njk
+purpose: individual portfolio page
+---
+
+<article class="portfolio-detail">
     <header>
-        <h2><a href="{{ post.url }}" rel="bookmark">{{ post.data.title }}</a></h2>
+        <h1>{{ title }}</h1>
     </header>
     <section>
-        {{ post.templateContent | safe }}
+        {{ content | safe }}
     </section>
-    <footer>
-        <p class="posted-on"><time datetime="{{ post.date }}">{{ post.date | postDate }}</time></p>
-    </footer>
 </article>
+
+<nav class="post-navigation" aria-label="Portfolio navigation">
+    {% set previousPost = collections.portfolio | getPreviousCollectionItem(page) %}
+    {% set nextPost = collections.portfolio | getNextCollectionItem(page) %}
+    {% if previousPost %}
+    <a href="{{ previousPost.url }}" class="prev">← Previous project: {{ previousPost.data.title }}</a>
+    {% endif %}
+
+    {% if nextPost %}
+    <a href="{{ nextPost.url }}" class="next">Next project: {{ nextPost.data.title }} →</a>
+    {% endif %}
+</nav>
