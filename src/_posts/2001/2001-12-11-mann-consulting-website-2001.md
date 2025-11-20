@@ -9,22 +9,38 @@ While working on the identity and without any experience marketing a business, I
 
 The winning design and identity:
 
+<figure>
 ![](/assets/images/2022/12/mcr0a.gif)
+</figure>
 
 My role: pitch, concepts, visual design, HTML and graphics production
 
 Some other possibilities, with a provisional identity:
 
+<figure>
 ![](/assets/images/2022/12/1259491721675154.gif)
+</figure>
 
+<figure>
 ![](/assets/images/2022/12/1345052502415656.gif)
+</figure>
 
+<figure>
 ![](/assets/images/2022/12/1355752802454956.gif)
+</figure>
 
+<figure>
 ![](/assets/images/2022/12/1568561297195050.gif)
+</figure>
 
+<figure>
 ![](/assets/images/2022/12/1679464222944858.gif)
+</figure>
 
+<figure>
 ![](/assets/images/2022/12/1787887096275652.gif)
+</figure>
 
+<figure>
 ![](/assets/images/2022/12/1958161897105550-1.gif)
+</figure>

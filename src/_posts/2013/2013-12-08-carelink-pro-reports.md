@@ -7,17 +7,29 @@ coverImage: 2022/12/sensor.png
 ---
 A patient with an insulin pump and a glucose monitor has health data positively streaming off of them, yet endocrinologists typically struggled with the reports they were given, often relying on cruder measures to make behavioral recommendations and rough adjustments to pump settings between quarterly visits. Direct research with five endocrinology offices, which later became a lead user program with two doctors in one office, helped us create a new set of reports aimed squarely at answering key clinical questions and showing patient behavior and results together.
 
+<figure>
 ![](/assets/images/2022/12/daily.png)
+</figure>
 
+<figure>
 ![](/assets/images/2022/12/overview.png)
+</figure>
 
+<figure>
 ![](/assets/images/2022/12/sensor.png)
+</figure>
 
+<figure>
 ![](/assets/images/2022/12/logbook.png)
+</figure>
 
+<figure>
 ![](/assets/images/2022/12/adherence.png)
+</figure>
 
+<figure>
 ![](/assets/images/2022/12/pump_settings.png)
+</figure>
 
 Central to these reports is the idea that as a patient takes more fingersticks the analysis should begin to approach that which is possible with a sensor; with a sensor a detailed train of behavior and results should be made clear and scannable.
 

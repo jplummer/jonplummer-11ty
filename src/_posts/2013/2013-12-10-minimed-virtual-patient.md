@@ -7,21 +7,37 @@ coverImage: 2022/12/be_hcp.png
 ---
 As a demonstration and educational tool, and to preview to executives anticipated sensor data analysis capabilities, we made a Windows application that simulated three typical insulin-dependent diabetic patients. One could elect to be the physician, reviewing three days of the patient's recent history and making adjustments  to insulin pump settings to improve their care, or choose to be the patient, selecting meals and insulin dosages over a two day period and seeing how your blood glucose responded to your choices.
 
+<figure>
 ![](/assets/images/2022/12/choose_patient_hcp_options.png)
+</figure>
 
+<figure>
 ![](/assets/images/2022/12/be_hcp_overlay.png)
+</figure>
 
+<figure>
 ![](/assets/images/2022/12/be_hcp.png)
+</figure>
 
+<figure>
 ![](/assets/images/2022/12/be_patient.png)
+</figure>
 
+<figure>
 ![](/assets/images/2022/12/choose_patient_patient.png)
+</figure>
 
+<figure>
 ![](/assets/images/2022/12/lab_report.png)
+</figure>
 
+<figure>
 ![](/assets/images/2022/12/bolus_wizard.png)
+</figure>
 
+<figure>
 ![](/assets/images/2022/12/choose_language.png)
+</figure>
 
 My role: concept, interaction and visual design, patient selection and operationalization, and numerous demonstrations to executives, visiting endocrinologists, and community groups
 
