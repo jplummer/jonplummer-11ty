@@ -481,18 +481,43 @@ main[data-tags*="page"]::after {
 }
 
 /* Portfolio Detail Styles */
-article.portfolio-detail {
-    display: block; /* Override grid layout for full width */
+article.portfolio-detail section {
+    /* Break out of grid area 'c' to span full width */
+    grid-column: 1 / -1;
+    
+    /* Establish a new grid for content matching the parent layout */
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0 var(--gutter);
 }
 
-article.portfolio-detail header {
-    margin-bottom: var(--spacing-lg);
+article.portfolio-detail section > * {
+    /* Default content goes to right column (2fr), matching standard article layout */
+    grid-column: 2;
 }
 
-article.portfolio-detail section img {
+/* Images break out to full width */
+article.portfolio-detail section > p:has(> img:only-child),
+article.portfolio-detail section > figure,
+article.portfolio-detail section > img {
+    grid-column: 1 / -1;
+    margin: var(--spacing-lg) 0;
+}
+
+article.portfolio-detail section > p:has(> img:only-child) img {
     width: 100%;
     height: auto;
-    margin: var(--spacing-lg) 0;
+}
+
+/* Mobile adjustments for portfolio detail */
+@media all and (max-width: 54rem) {
+    article.portfolio-detail section {
+        grid-template-columns: 1fr;
+    }
+    
+    article.portfolio-detail section > * {
+        grid-column: 1;
+    }
 }
 
 /* === UTILITIES === */
