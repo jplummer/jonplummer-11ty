@@ -521,6 +521,49 @@ article.portfolio-detail section > figure figcaption {
     padding-left: calc((100% / 3) + var(--gutter)); 
 }
 
+/* Portfolio Grid */
+ul.portfolio-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gutter);
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 40rem) {
+  ul.portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 60rem) {
+  ul.portfolio-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Portfolio Item Override */
+article.portfolio-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  padding-bottom: 0;
+}
+
+article.portfolio-item img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9; /* Optional: Keeps images uniform */
+  object-fit: cover;
+}
+
+article.portfolio-item p {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-sm);
+  margin: 0;
+}
+
 /* Mobile adjustments for portfolio detail */
 @media all and (max-width: 54rem) {
     article.portfolio-detail section {

@@ -3,18 +3,18 @@
 ## 🎯 Active Work
 
 ### Portfolio Templates
-- [ ] **Portfolio Template (`portfolio.njk` and `_includes/portfolio_list_item.njk`)**
-  - Grid listing
-  - Only "portfolio" category
-  - Navigation controls
-  - Image size/position/styling
+- [x] **Portfolio Template (`portfolio.njk` and `_includes/portfolio_list_item.njk`)**
+  - [x] Grid listing (3 columns desktop, 2 tablet, 1 mobile)
+  - [x] Only "portfolio" category
+  - [x] Navigation controls (unhidden in nav)
+  - [x] Image size/position/styling
 
 - [ ] **Portfolio Post Content Template (`_includes/portfolio_detail.njk`)**
-  - Article structure matching current HTML
-  - Date formatting
-  - Tag/category display
-  - Main navigation at bottom? top?
-  - Image size/position/styling
+  - [x] Article structure matching current HTML (implemented basics)
+  - [ ] Date formatting
+  - [ ] Tag/category display
+  - [ ] Main navigation at bottom? top? (currently at bottom)
+  - [ ] Image size/position/styling polish
 
 ### SEO & Social
 - [ ] **SEO & Social**

@@ -6,7 +6,7 @@ permalink: "/portfolio/"
 purpose: portfolio index page
 ---
 {# Display portfolio items #}
-<ul>
+<ul class="portfolio-grid">
 {% for post in collections.portfolio | reverse %}
     <li>
         {% include "portfolio_list_item.njk" %}
