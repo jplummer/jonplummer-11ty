@@ -504,9 +504,21 @@ article.portfolio-detail section > img {
     margin: var(--spacing-lg) 0;
 }
 
-article.portfolio-detail section > p:has(> img:only-child) img {
+article.portfolio-detail section > p:has(> img:only-child) img,
+article.portfolio-detail section > figure img {
     width: 100%;
     height: auto;
+}
+
+/* Captions align with the text column */
+article.portfolio-detail section > figure figcaption {
+    margin-top: var(--spacing-xs);
+    font-size: var(--font-size-xs);
+    line-height: var(--line-height-xs);
+    color: var(--text-color-light);
+    font-style: italic;
+    /* This makes the caption align with the text column (2fr) */
+    padding-left: calc((100% / 3) + var(--gutter)); 
 }
 
 /* Mobile adjustments for portfolio detail */
@@ -517,6 +529,10 @@ article.portfolio-detail section > p:has(> img:only-child) img {
     
     article.portfolio-detail section > * {
         grid-column: 1;
+    }
+    
+    article.portfolio-detail section > figure figcaption {
+        padding-left: 0;
     }
 }
 
