@@ -1,6 +1,6 @@
 ---
 title: Belkin values
-layout: single_post.njk
+layout: portfolio_detail.njk
 date: "2015-07-31T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/12/BelkinValues.jpeg

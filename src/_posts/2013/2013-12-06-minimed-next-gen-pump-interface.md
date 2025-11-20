@@ -3,13 +3,13 @@ title: MiniMed next-gen pump interface
 layout: portfolio_detail.njk
 date: "2013-12-06T12:00:00-08:00"
 tags: portfolio
-coverImage: 2022/12/pump_settings.png
+coverImage: 2022/12/1_status.gif
 ---
 Medtronic engaged IDEO to help design a next-generation pump to succeed the MiniMed 522, which combined insulin delivery with wireless continuous glucose measurement. IDEO proposed a more capable LCD screen and more buttons, among other things. Before the project was shelved in favor of a patch-pump concept I took over interaction design from IDEO.
 
 <figure>
   <img src="/assets/images/2022/12/1_status.gif" alt="MiniMed pump status screen showing glucose levels and active insulin">
-  <figcaption>The main status screen showing glucose trend graph and current active insulin levels.</figcaption>
+  <figcaption>A bolus (one-time insulin dose) status screen showing the last dose of insulin and approximately how much has been metabolized, along with the basal infusion rate. Such a view did not exist on pumps of the day, and patients longed for a way to know how much of the meal-related or correction bolus they had taken was still available in their bloodstream to continue lowering their blood sugar.</figcaption>
 </figure>
 
 ![](/assets/images/2022/12/2_main.gif)

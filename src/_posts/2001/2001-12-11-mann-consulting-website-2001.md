@@ -1,6 +1,6 @@
 ---
 title: Mann Consulting website (2001)
-layout: single_post.njk
+layout: portfolio_detail.njk
 date: "2001-12-11T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/12/mcr0a.gif
