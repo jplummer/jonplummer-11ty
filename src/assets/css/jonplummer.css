@@ -564,6 +564,42 @@ article.portfolio-item p {
   margin: 0;
 }
 
+/* Portrait Grid Container */
+article.portfolio-detail section > .portrait-grid {
+    grid-column: 1 / -1; /* Span full width of the article */
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); /* Mobile: 1 col */
+    gap: var(--gutter);
+    margin: var(--spacing-lg) 0;
+}
+
+@media (min-width: 40rem) {
+    article.portfolio-detail section > .portrait-grid {
+        grid-template-columns: repeat(2, 1fr); /* Tablet: 2 cols */
+    }
+}
+
+@media (min-width: 60rem) {
+    article.portfolio-detail section > .portrait-grid {
+        grid-template-columns: repeat(3, 1fr); /* Desktop: 3 cols */
+    }
+}
+
+/* Ensure figures inside the grid behave */
+article.portfolio-detail section > .portrait-grid figure {
+    margin: 0;
+    grid-column: auto; /* Reset grid-column from the generic figure rule */
+}
+
+article.portfolio-detail section > .portrait-grid figure img {
+    width: 100%;
+    height: auto;
+}
+
+article.portfolio-detail section > .portrait-grid figure figcaption {
+    padding-left: 0; /* Reset padding since these are in narrow columns */
+}
+
 /* Mobile adjustments for portfolio detail */
 @media all and (max-width: 54rem) {
     article.portfolio-detail section {
