@@ -9,12 +9,27 @@
   - [x] Navigation controls (unhidden in nav)
   - [x] Image size/position/styling
 
-- [ ] **Portfolio Post Content Template (`_includes/portfolio_detail.njk`)**
-  - [x] Article structure matching current HTML (implemented basics)
-  - [ ] Date formatting
-  - [ ] Tag/category display
-  - [ ] Main navigation at bottom? top? (currently at bottom)
-  - [ ] Image size/position/styling polish
+- [x] **Portfolio Post Content Template (`_includes/portfolio_detail.njk`)**
+  - [x] Article structure matching current HTML
+  - [x] No date display (intentional design decision)
+  - [x] Portfolio-only navigation (previous/next within portfolio collection)
+  - [x] Full-width images for landscape orientation
+  - [x] Portrait-grid utility for portrait images (3/2/1 columns responsive)
+  - [x] Caption styling aligned with text column
+  - [x] All images standardized to HTML `<figure>` syntax
+  - [ ] Write captions and alt text for portfolio item images
+
+- [ ] **QA portfolio layouts**
+  - [ ] Test portfolio listing page across devices
+  - [ ] Test portfolio detail pages across devices
+  - [ ] Verify image display and responsiveness
+  - [ ] Check navigation between portfolio items
+
+- [ ] **Additional portfolio content**
+  - [ ] Add Invoca interview presentation as portfolio piece
+  - [ ] Expand Cayuse accomplishments portfolio piece
+  - [ ] MAYBE: Write descriptions on the main portfolio page
+  - [ ] MAYBE: Add links to key articles on the portfolio page (since it is a leader's portfolio)
 
 ### SEO & Social
 - [ ] **SEO & Social**
@@ -36,13 +51,13 @@
   - [x] https://app.ahrefs.com/site-audit/5163664/issues?current=12-10-2025T072858
 
 ### Design & Polish
-- [ ] vertical rhythm in spacing https://edgdesign.co/blog/baseline-grids-in-css
+- [ ] vertical rhythm in typographic spacing https://edgdesign.co/blog/baseline-grids-in-css
 
-### Future Enhancements
+## Future Enhancements
 - [ ] consider POSSE (more tags for different types of entries?)
 - [ ] CMS (headless CMS consideration)
 
-### Optional / Future Consideration
+## Optional / Future Consideration
 - **GitHub Actions** (This is not how I'm using GitHub just yet)
   - Automatic builds on push to main branch
   - Run 11ty build process
