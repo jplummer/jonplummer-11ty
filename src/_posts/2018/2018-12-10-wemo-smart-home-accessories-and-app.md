@@ -14,6 +14,7 @@ Wemo is a family of intelligent products for the home that allow you to control 
   <figcaption></figcaption>
 </figure>
 
+<div class="portrait-grid">
 <figure>
   <img src="/assets/images/2022/12/ios7_devicelist03_iphone5-577x1024.png" alt="">
   <figcaption></figcaption>
@@ -45,12 +46,13 @@ Wemo is a family of intelligent products for the home that allow you to control 
 </figure>
 
 <figure>
-  <img src="/assets/images/2022/12/rules.png" alt="">
+  <img src="/assets/images/2022/12/Screenshot2017-06-0321.50.19-727x1024.png" alt="">
   <figcaption></figcaption>
 </figure>
+</div>
 
 <figure>
-  <img src="/assets/images/2022/12/Screenshot2017-06-0321.50.19-727x1024.png" alt="">
+  <img src="/assets/images/2022/12/rules.png" alt="">
   <figcaption></figcaption>
 </figure>
 

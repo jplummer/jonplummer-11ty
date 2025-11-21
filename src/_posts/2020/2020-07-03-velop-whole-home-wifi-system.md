@@ -7,6 +7,7 @@ coverImage: 2022/12/SET_103.jpg
 ---
 The Velop Whole-Home Wi-Fi System is a collection of identical routers that work together to behave as a single virtual device, blanketing your home in fast and strong Wi-Fi coverage without the usual degradation in speed provided by traditional range extenders. They connect to each other wirelessly over dedicated channels, or can be connected via wire, distributing Wi-Fi radios and Ethernet ports around your home where you need them.
 
+<div class="portrait-grid">
 <figure>
   <img src="/assets/images/2022/12/SET_101-576x1024.png" alt="">
   <figcaption></figcaption>
@@ -19,16 +20,6 @@ The Velop Whole-Home Wi-Fi System is a collection of identical routers that work
 
 <figure>
   <img src="/assets/images/2022/12/SET_105-576x1024.png" alt="">
-  <figcaption></figcaption>
-</figure>
-
-<figure>
-  <img src="/assets/images/2022/12/SET_110.png" alt="">
-  <figcaption></figcaption>
-</figure>
-
-<figure>
-  <img src="/assets/images/2022/12/SET_121.png" alt="">
   <figcaption></figcaption>
 </figure>
 
@@ -54,6 +45,17 @@ The Velop Whole-Home Wi-Fi System is a collection of identical routers that work
 
 <figure>
   <img src="/assets/images/2022/12/SET_260-576x1024.png" alt="">
+  <figcaption></figcaption>
+</figure>
+</div>
+
+<figure>
+  <img src="/assets/images/2022/12/SET_110.png" alt="">
+  <figcaption></figcaption>
+</figure>
+
+<figure>
+  <img src="/assets/images/2022/12/SET_121.png" alt="">
   <figcaption></figcaption>
 </figure>
 
