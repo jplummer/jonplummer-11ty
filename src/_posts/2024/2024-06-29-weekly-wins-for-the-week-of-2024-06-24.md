@@ -5,7 +5,8 @@ date: "2024-06-29T12:00:00-08:00"
 tags: post
 description: "Work was…fine…this week. Lots of folks are out or about to be out and while there's a moment to try to wrestle projects and processes into shape there are not"
 ---
-Work was…fine…this week. Lots of folks are out or about to be out and while there's a moment to try to wrestle projects and processes into shape there are not a lot of people to do that with; preparing projects to to bowl along while they are out is more pressing. But with the girl and the lady out of the house I was productive with home projects. In the last week I've
+Work was…fine…this week. Lots of folks are out or about to be out and while there's a moment to try to wrestle projects and processes into shape there are not a lot of people to do that with; preparing projects to to bowl along while they are out is more pressing. But with the girl and the lady out of the house I was productive with home projects. In the last week I've:
+
 - sent a care package
 - taken care of a library fine by finding and returning the book
 - bought a copy of that same book, as a gift

@@ -8,21 +8,23 @@ description: "It seems like we have a pretty good grasp of what quality should b
 It seems like we have a pretty good grasp of what quality should be when it comes to infrastructure – what technical soundness is, how much load we should handle, what kind of logging, etc. but we are less mature regarding other dimensions of quality.
 
 An interactive item in general availability, operated by customer users, should
-- be valuable to specific users
-    - deliver value in results and conveniences
-    - minimize toil
-    - and this should be verifiable by experiment and by monitoring success metrics/adoption rate/etc.
-- be usable by those users
-    - intelligible
-        - and this should be made more likely via concept testing, and somewhat verifiable by experiment and by monitoring success metrics/adoption rate/etc.
-    - obvious in expected actions and right action (design guideline)
-    - makes success obvious (design guideline)
-    - makes good use of familiar controls and interaction paradigms where possible (design guideline)
-    - and this should be made more likely through user testing, and monitorable via success rate/time on task/error rate/etc.
-- be complete in its states, messages, and errors (design guideline)
-- be instrumented so we can witness users’ successes and difficulties
 
-There’s some disagreement about how important interactive quality might be for infrequently-operated configuration tasks in the platform. The irony is that an infrequently-operated item is not practiced frequently enough by a user to be well-learned, so it must be _more_ obvious in its operation than something they do every day. So to the above there’s pressure to add
+- be valuable to specific users
+  - deliver value in results and conveniences
+  - minimize toil
+  - and this should be verifiable by experiment and by monitoring success metrics/adoption rate/etc.
+- be usable by those users
+  - intelligible
+    - and this should be made more likely via concept testing, and somewhat verifiable by experiment and by monitoring success metrics/adoption rate/etc.
+  - obvious in expected actions and right action (design guideline)
+  - makes success obvious (design guideline)
+  - makes good use of familiar controls and interaction paradigms where possible (design guideline)
+  - and this should be made more likely through user testing, and monitorable via success rate/time on task/error rate/etc.
+- be complete in its states, messages, and errors (design guideline)
+- be instrumented so we can witness users' successes and difficulties
+
+There's some disagreement about how important interactive quality might be for infrequently-operated configuration tasks in the platform. The irony is that an infrequently-operated item is not practiced frequently enough by a user to be well-learned, so it must be _more_ obvious in its operation than something they do every day. So to the above there's pressure to add
+
 - be self-explanatory, relying on recognition rather than training and recall
 
 For products in a growth phase, where catering to new users and bringing them to intermediate proficiency is arguably more important than catering to existing power users, “be self-explanatory, relying on recognition rather than training and recall” is also important for the most critical, central workflows.

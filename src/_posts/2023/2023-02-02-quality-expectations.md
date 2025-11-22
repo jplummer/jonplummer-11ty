@@ -6,6 +6,7 @@ tags: post
 description: "Be it version three or an MVP, the experience we deliver should be valuable to specific users be usable by those users conform to or enhance the user's"
 ---
 Be it version three or an MVP, the experience we deliver should
+
 - be valuable to specific users
 - be usable by those users
 - conform to or enhance the user's understanding of the subject area

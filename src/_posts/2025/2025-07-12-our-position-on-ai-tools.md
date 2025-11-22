@@ -19,16 +19,18 @@ We recognize that users may be curious, or even apprehensive, about how AI-power
 
 ### Handling errors and edge cases
 
-We acknowledge that AI-powered features will sometimes produce wrong or unexpected outputs. Our design approach for these scenarios focuses on **graceful error handling** and keeping the **human in the loop**. This means
-- **Anticipating and mitigating** potential issues through careful AI setup and training
+We acknowledge that AI-powered features will sometimes produce wrong or unexpected outputs. Our design approach for these scenarios focuses on **graceful error handling** and keeping the **human in the loop**. This means:
+
+- **Anticipating and mitigating** potential issues through careful AI setup and training
 - Designing interfaces that offer **previews, recommendations, and clear actions** rather than proceeding blindly
 - Ensuring mechanisms for users to easily **correct, override, or provide feedback** on AI outputs
 - Maintaining a design philosophy where the **AI recommends and assists**, allowing users to retain ultimate control until they explicitly release the system to act.
 
 ### Ethical design and bias mitigation
 
-We strive to **reduce bias** in AI-powered features by
-- Grounding our understanding in **real customer knowledge** rather than internal assumptions.
+We strive to **reduce bias** in AI-powered features by:
+
+- Grounding our understanding in **real customer knowledge** rather than internal assumptions.
 - Working with and analyzing **customer data responsibly**, without alteration, and ensuring its privacy and security
 - Establishing processes for **monitoring the output of our features** for unintended biases that may emerge
 
@@ -44,7 +46,8 @@ Our UX team embraces the strategic and responsible integration of AI tools into 
 
 ### Strategic tool adoption and augmentation
 
-We are actively **experimenting with AI tools** like Figma Make, ChatGPT, and Gemini to understand their potential. Our focus is not merely on speed, but on how these tools can **enhance our ability to deliver valuable and usable experiences**. We view AI primarily as an augmentation to our existing skills, particularly for
+We are actively **experimenting with AI tools** like Figma Make, ChatGPT, and Gemini to understand their potential. Our focus is not merely on speed, but on how these tools can **enhance our ability to deliver valuable and usable experiences**. We view AI primarily as an augmentation to our existing skills, particularly for:
+
 - **Inspiration and ideation**: Generating diverse concepts, content variations, or design alternatives.
 - **Early-stage prototyping**: Quickly sketching out ideas.
 - **Analyzing research data**: Identifying patterns or themes in qualitative data (with careful oversight).
@@ -55,16 +58,16 @@ The ultimate **responsibility for UX quality remains with the human designer**�
 
 ### Continuous learning and cross-pollination
 
-We encourage designers to
+We encourage designers to:
 
-- Actively **experiment with new AI tools and techniques**
+- Actively **experiment with new AI tools and techniques**
 - **Share their learnings and best practices** with the wider UX team and their project teams
 - Replicate and build upon the successful experiments of others
 - Embrace a **fluidity in job boundaries**, recognizing that AI tools may enable designers to contribute to areas traditionally outside core UX, fostering greater cross-functional collaboration
 
 ### Ethical use of AI tools and intellectual property
 
-Our ethical considerations for designing AI-powered products extend to our use of AI tools. We commit to
+Our ethical considerations for designing AI-powered products extend to our use of AI tools. We commit to:
 
 - **Transparency**: Clearly acknowledging when AI tools have been used in our work, internally and externally where relevant. We will never misrepresent AI-assisted work as purely human-created
 - **Data privacy and IP**: Exercising caution regarding proprietary or sensitive customer data when interacting with external AI models. We will ensure we adhere to company policies and legal guidelines regarding data input into AI tools and the intellectual property of generated outputs

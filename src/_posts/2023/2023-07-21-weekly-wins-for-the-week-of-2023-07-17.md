@@ -3,9 +3,10 @@ title: Weekly wins for the week of 2023 07 17
 layout: single_post.njk
 date: "2023-07-21T12:00:00-08:00"
 tags: post
-description: "The week was dominated by a health scare that continues. Even so, My spirits are fairly light. No one (yet) is feeding me their crackpot health advice. It's"
+description: "The week was dominated by a health scare that continues. Even so, My spirits are fairly light. No one (yet) is feeding me their crackpot health advice."
 ---
-The week was dominated by a health scare that continues. Even so,
+The week was dominated by a health scare that continues. Even so:
+
 - My spirits are fairly light.
 - No one (yet) is feeding me their crackpot health advice.
 - It's really two issues that can be managed separately, and only one is a significant concern, so I'm free to focus on it.

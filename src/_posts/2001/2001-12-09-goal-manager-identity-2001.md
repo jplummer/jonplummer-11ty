@@ -6,8 +6,8 @@ tags: portfolio
 coverImage: 2022/12/goalmanager_logo.png
 ---
 <figure>
-  <img src="/assets/images/2022/12/goalmanager_logo.png" alt="">
-  <figcaption></figcaption>
+  <img src="/assets/images/2022/12/goalmanager_logo.png" alt="Goal Manager logo and identity design">
+  <figcaption>Goal Manager identity design for an informational portal about non-cash incentives, created during the first dot-com bubble era.</figcaption>
 </figure>
 
 Goal Manager was a short-lived project by the ClickTime guys during the first dot-com bubble to create an informational portal about non-cash incentives.

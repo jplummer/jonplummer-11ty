@@ -6,6 +6,7 @@ tags: post
 description: "This was meant to be a week in Santa Barbara for work and a little play. A climate-change-strengthened \"atmospheric river\" made it a week of travel"
 ---
 This was meant to be a week in Santa Barbara for work and a little play. A climate-change-strengthened "atmospheric river" made it a week of travel difficulties, muddy torrents, and missed connections. Even so…
+
 - One-on-one meetings in person, with folks I've only recently met and met only online, went fine. Well, even.
 - Though we were only able to accomplish about half of our agenda, that half was a good half.
 - Santa Barbara has good food.

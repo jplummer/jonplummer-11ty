@@ -9,43 +9,43 @@ At one point the Linksys app, meant to offer people setup, control, and monitori
 
 <div class="portrait-grid">
 <figure>
-  <img src="/assets/images/2022/12/DashboardOnline-269x1024.png" alt="">
-  <figcaption></figcaption>
+  <img src="/assets/images/2022/12/DashboardOnline-269x1024.png" alt="Linksys app dashboard showing network online status">
+  <figcaption>Main dashboard view showing network status, connected devices, and overall network health at a glance.</figcaption>
 </figure>
 
 <figure>
-  <img src="/assets/images/2022/12/DeviceDetail@2x-345x1024.png" alt="">
-  <figcaption></figcaption>
+  <img src="/assets/images/2022/12/DeviceDetail@2x-345x1024.png" alt="Linksys app device detail screen showing individual device information">
+  <figcaption>Detailed view of a single connected device, showing connection status, bandwidth usage, and device-specific controls.</figcaption>
 </figure>
 
 <figure>
-  <img src="/assets/images/2022/12/DeviceList-576x1024.png" alt="">
-  <figcaption></figcaption>
+  <img src="/assets/images/2022/12/DeviceList-576x1024.png" alt="Linksys app device list showing all connected devices">
+  <figcaption>Complete list of all devices connected to the network, with status indicators and quick access to device details.</figcaption>
 </figure>
 
 <figure>
-  <img src="/assets/images/2022/12/deviceprioritizationdelete-576x1024.png" alt="">
-  <figcaption></figcaption>
+  <img src="/assets/images/2022/12/deviceprioritizationdelete-576x1024.png" alt="Linksys app device prioritization delete confirmation screen">
+  <figcaption>Confirmation screen for removing device prioritization, allowing users to cancel or confirm the action.</figcaption>
 </figure>
 
 <figure>
-  <img src="/assets/images/2022/12/DevicePrioritizationHome@2x-576x1024.png" alt="">
-  <figcaption></figcaption>
+  <img src="/assets/images/2022/12/DevicePrioritizationHome@2x-576x1024.png" alt="Linksys app device prioritization main screen">
+  <figcaption>Device prioritization feature allowing users to give specific devices higher bandwidth priority for gaming, streaming, or work.</figcaption>
 </figure>
 
 <figure>
-  <img src="/assets/images/2022/12/SaveaRule@2x-576x1024.png" alt="">
-  <figcaption></figcaption>
+  <img src="/assets/images/2022/12/SaveaRule@2x-576x1024.png" alt="Linksys app save rule screen for network rules">
+  <figcaption>Creating and saving a network rule, such as scheduling device access or setting up parental controls.</figcaption>
 </figure>
 
 <figure>
-  <img src="/assets/images/2022/12/SelectaDeviceCopy@2x-576x1024.png" alt="">
-  <figcaption></figcaption>
+  <img src="/assets/images/2022/12/SelectaDeviceCopy@2x-576x1024.png" alt="Linksys app device selection screen">
+  <figcaption>Selecting a device from the network to apply rules, prioritization, or other network management features.</figcaption>
 </figure>
 
 <figure>
-  <img src="/assets/images/2022/12/XboxCopy@2x-576x1024.png" alt="">
-  <figcaption></figcaption>
+  <img src="/assets/images/2022/12/XboxCopy@2x-576x1024.png" alt="Linksys app Xbox device management screen">
+  <figcaption>Xbox-specific device management screen showing gaming-optimized network settings and prioritization options.</figcaption>
 </figure>
 </div>
 

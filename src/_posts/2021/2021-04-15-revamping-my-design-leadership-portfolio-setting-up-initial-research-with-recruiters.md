@@ -16,11 +16,13 @@ Recruiters I've recently spoken to about passive opportunities (where the recrui
 > [Revamping my design portfolio: audiences](/2021/03/27/revamping-my-design-leadership-portfolio-audiences/)
 
 The questions raised here include
+
 - Is LinkedIn a good way to get my profile in front of recruiters?
 - Does my resume do a good job of getting the recruiter to pass my profile on to the hiring manager?
 - Does my portfolio do a good job of getting the recruiter to pass my profile on to the hiring manager?
 
 But of course these are not the sorts of questions I can usefully ask directly; the likely answers (yes or no) wouldn't improve my understanding much or help me make changes. Instead, I should ask questions that will help me gauge the effectiveness of what I have, provide details that may lead me toward changes, and identify what is already working. These questions will look more like
+
 - Which of my assumptions are off base? (with a list of these assumptions)
 - For the position in question, did you have any misgivings about my profile, other than location?
 - What seemed most relevant about my profile?

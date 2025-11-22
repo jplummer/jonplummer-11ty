@@ -7,6 +7,7 @@ description: "Gentle people, I recently complained to the directors and project 
 ---
 Gentle people,
 I recently complained to the directors and project managers about meeting invitations
+
 - without agendas, or
 - without a clear goal, or
 - without a sense of what a person might be expected to do in a meeting, or

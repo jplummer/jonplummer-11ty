@@ -6,8 +6,8 @@ tags: portfolio
 coverImage: 2022/12/Screenshot2022-11-11at2.56.37PM.png
 ---
 <figure>
-  <img src="/assets/images/2022/12/Screenshot2022-11-11at2.56.37PM-1024x497.png" alt="">
-  <figcaption></figcaption>
+  <img src="/assets/images/2022/12/Screenshot2022-11-11at2.56.37PM-1024x497.png" alt="Super service blueprint diagram showing multiple user types and their interactions">
+  <figcaption>Super service blueprint mapping multiple interacting players in the vivarium operations process, showing their collective workflows, touchpoints, and coordination needs to identify product opportunities.</figcaption>
 </figure>
 
 A service blueprint is typically a design deliverable, showing a user’s journey, the touch points they interact with in whatever channels (web site, application, retail store, call center, etc.), and the behind-the-scenes activities that need coordinating to make that journey a smooth one.

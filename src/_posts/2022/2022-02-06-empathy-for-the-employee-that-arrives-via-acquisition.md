@@ -6,6 +6,7 @@ tags: post
 description: "An employee who comes to your team via an acquisition was likely in the dark until the acquisition was announced didn't apply to be part of your company, your"
 ---
 An employee who comes to your team via an acquisition
+
 - was likely in the dark until the acquisition was announced
 - didn't apply to be part of your company, your team, or for their new job
 - is accustomed to working on different things, with different people, toward different goals

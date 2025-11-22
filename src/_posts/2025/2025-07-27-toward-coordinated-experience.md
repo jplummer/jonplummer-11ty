@@ -23,16 +23,17 @@ Example: Uber’s MVP was a web form that offered to book a car to arrive in the
 
 ## Coordinated experience defined
 
-A coordinated experience is one in which
+A coordinated experience is one in which:
+
 - it's clear to the user where to go to achieve their goal
 - once there, the correct controls are intelligible and fall to hand as needed
 - users are helped by sensible defaults and/or canned possibilities they can try, and that suggest how the system is best used, rather than being faced with just a blank form
 - capabilities needed to accomplish the goal are available without having to go find them or know in advance where to get them
 - these capabilities behave in predictable ways learned from elsewhere in our platform and from other software
 - The system supports user confidence that they have achieved the correct result
-    - the result of their work is clear
-    - the right performance of the system is visible
-    - it's clear how to make changes
+  - the result of their work is clear
+  - the right performance of the system is visible
+  - it's clear how to make changes
 
 In short, the arrangement of capabilities and interfaces is governed by the use cases being supported, not necessarily the modularity of the back end.
 
@@ -40,7 +41,8 @@ In short, the arrangement of capabilities and interfaces is governed by the use 
 
 ## Coordinated experience tactics
 
-We won’t need all of these tactics all the time for everything; it’s a set of possibilities. Some of these methods might be useful depending on the use cases we intend to support. Some will be overkill.
+We won't need all of these tactics all the time for everything; it's a set of possibilities. Some of these methods might be useful depending on the use cases we intend to support. Some will be overkill.
+
 - Sensible defaults
 - Galleries of canned options, useful at least as starting points
 - Cross-linking to dependent or involved system objects that are managed elsewhere
@@ -60,14 +62,15 @@ It’s common to hear that agentic AI will make traditional interfaces obsolete,
 
 We do aspire to a near future where systems handle more tasks, and chain tasks together to produce better results more quickly than a person would, simplifying interaction by speeding the user along toward the results they seek.
 
-However, users will still need to
+However, users will still need to:
+
 - Verify performance of the system – monitor the actions of the system and understand its effect on their business
 - Verify agent recommendations – see that the agent’s recommendations or plans are sensible and well-founded in data, fostering confidence in the system and agent
 - Verify performance and results of agent tasks – confirm that the agent has done things correctly, and understand the effect of these actions
 - Understand the capabilities of the system – learn about what the system can do and how it is best used
 - Make adjustments – correct errors in their own work and that of agents, try tweaks, follow hunches
 
-This likely means that there’s plenty of interface! The emphasis shifts from the user directly manipulating the system toward the user being offered analyses and outcomes, but given the above needs users will continue to require systems that are
+This likely means that there's plenty of interface! The emphasis shifts from the user directly manipulating the system toward the user being offered analyses and outcomes, but given the above needs users will continue to require systems that are:
 
 - self-explanatory
 - transparent in their operations

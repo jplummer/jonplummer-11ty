@@ -26,18 +26,21 @@ I hope they reduce my rights on the system significantly.
 I was working in two spaces at once, so the likelihood of "pedal error," choosing the wrong action believing it is the right one, was high.
 
 I'll probably never know if it was pedal error or a bug that caused the wrong space to be offered to me for deletion. I believed I had selected the correct space for deletion. But sure of myself in that moment I skimmed over the confirmation step. Others have had this same complaint, if the support site is to be believed, that they selected one space for deletion and were offered a different one. Even so, I should have:
+
 - **Read and heeded confirmation messages**. Failing to do this was the core of my big mistake.
 - **Taken a moment before doing anything momentous** or destructive. A bit of time can be room for your brain to catch up to your hands.
 - **Taken my own steps to make destructive acts recoverable**. I could have done a full export of both spaces before deleting anything. Had I bothered to actually read the confirmation message I may have thought to do so. Had I paused I may have thought to do so. It would take only a few minutes and be free insurance against catastrophe.
 - **Made use of archival or "logical delete" rather than destructive processes**. When available, archiving a page or a space or other record is inherently more recoverable than deleting. It's not clear if this was an option in my case, but it's a good idea. If you find you never visit these archived items, you can choose to delete them later.
 
 I'm happy that I had already learned these lessons:
+
 - **Hang a lantern on your problem**. Had I not started communicating immediately, I'm sure things would be much worse for me. Worse, had I said nothing, I would eventually have been found out and fired not for the mistake but for the cover-up. In my panic it did take a half a beat to recall this lesson.
 - **Form a plan with multiple paths to success**. It's not safe to rely on a single path to disaster recovery. How many paths to success can you think of? Can you pursue all of them? How can you maximize your chance of success? If you have just one plan, and it fails, then what?
 
 ## Lessons for interfaces and systems
 
 If you would like your system to be kind to me and other normal folks, you'll want to arrange things so mistakes are harder to make, or easier to recover from, or both. There are a lot of things you can do, roughly in order from least to most difficult:
+
 - **Offer recovery preparation activities alongside the destructive action**. It's straightforward to add a reminder to make an export or backup to your confirmation message. Would it have helped me? Who can say.
 - **Offer recovery preparation activities alongside the confirmation message**. It's a little less straightforward to offer an export at the point of confirmation. But it's not that hard, and that reminder will catch some folks before they make a mistake.
 - **Make confirmation of destructive acts require reading to complete**. You've seen this in Figma and other places, where you are asked to type something to confirm the action. The best of these ask you to think a little bit; "Type the name of the space to confirm that you want to delete it" is better than "type DELETE to confirm that you want to delete this space" as it requires a bit more attention. In this case, a little cognitive load is your friend.
@@ -50,6 +53,7 @@ If you would like your system to be kind to me and other normal folks, you'll wa
 ## Lessons for organizations
 
 A prior IT regime read about the backup practices of our vendor and felt that they were sufficient protection. They read that the vendor makes nightly backups and retains them for thirty days. But there they stopped reading, not noticing that these backups are not offered to clients and are only for vendor-level disaster recovery. So while a backup technically exists, it is no protection from client-caused mishaps. There are several lessons in this one fact:
+
 - **Do not expect your users not to make mistakes**. See "lessons for me" above to learn of typical mistakes.
 - **Read the whole contract**.
 - **Do not leave backup solely up to your vendor**, even if their backup plan sounds adequate. if you aren't in control of your data, you aren't in control of your data.
@@ -57,6 +61,7 @@ A prior IT regime read about the backup practices of our vendor and felt that th
 - **Do not believe you have a working backup unless you've verified its contents**. Ah, you have a backup. Your'e covered! Unless…drat, the backup is corrupted, or incomplete, or old because the job has been failing for a while, or a thousand other problems.
 
 There's also the small matter of roles and privileges:
+
 - **The less safe the data is, the fewer people should be allowed to harm it**. No backup? Restrict deletion privileges to relatively inaccessible people, not day-to-day editors. Yes, they'll grumble. But it is for their own good.
 
 ## My plan, and what I've done so far
@@ -68,6 +73,7 @@ I've got a partial export, a backup locked up at the vendor that I allegedly do 
 - scouring the existing IT infrastructure for any possible existing export or backup we might have
 
 I am pursuing all of these in parallel. In the meantime I have
+
 - communicated this plan with my supervisor, with my employees, and with my peers and others on the product team
 - apologized to the design and product teams and individually to select people, especially those who had recently contributed or shared work via the wiki
 - shared my plan with the current IT regime so that we can help each other

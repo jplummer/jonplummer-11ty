@@ -6,6 +6,7 @@ tags: post
 description: "Foster an ethos of continuous improvement Repeatedly return to user needs and goals to create alignment Frame design goals as the marriage of user goals and"
 ---
 ## Expectations of myself
+
 - Foster an ethos of continuous improvement
 - Repeatedly return to user needs and goals to create alignment
 - Frame design goals as the marriage of user goals and business wishes
@@ -15,6 +16,7 @@ description: "Foster an ethos of continuous improvement Repeatedly return to use
 - Address what's needed wherever it appears
 
 ## Expectations of designers
+
 - Scenario-based, goal-oriented
 - Use storyboards to start understanding a scenario
 - Freely move between storyboard, workflow, wires, prototype as needed to tackle problems
@@ -23,6 +25,7 @@ description: "Foster an ethos of continuous improvement Repeatedly return to use
 - Organize "done" work into bite-size chunks, set apart from exploratory work
 
 ## Expectations of all workers
+
 - Work to make the job of the next person easier
 - Work in public, out in the open
 - Go and see

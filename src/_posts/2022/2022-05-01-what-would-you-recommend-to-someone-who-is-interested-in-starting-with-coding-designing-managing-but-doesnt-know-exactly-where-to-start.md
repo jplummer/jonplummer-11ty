@@ -15,5 +15,6 @@ For design or coding there are two good places to start, and you probably should
 In re point 2 above, my daughter mentioned to me that she might be interested in filmmaking. I told her, "you have a phone, start making some films!" Getting started can be that easy. Your work might not be won't be very good at first. That's fine. Keep going unless you find you don't like the process. Competence will come later.
 
 Starting in management is a little different, but again I see two straightforward paths and it might be worthwhile to pursue both:
+
 1. Offer to help/take ownership of small moments in your job where coordination is needed, process change is needed, or a problem needs to be sorted out. This will give you experience talking to others to learn about a situation, proposing possible approaches, marshaling the effort of others, and delivering a result. This is managing! Managing in small ways leads to success managing in small ways, which leads to larger opportunities. The reward for good work is more work.
 2. Volunteer with charitable or vocational organizations and offer to help in ways that are more like 1 above over time.

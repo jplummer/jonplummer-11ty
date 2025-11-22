@@ -13,33 +13,33 @@ Medtronic engaged IDEO to help design a next-generation pump to succeed the Mini
 </figure>
 
 <figure>
-  <img src="/assets/images/2022/12/2_main.gif" alt="">
-  <figcaption></figcaption>
+  <img src="/assets/images/2022/12/2_main.gif" alt="MiniMed pump main screen showing glucose levels and pump status">
+  <figcaption>The main home screen displaying current glucose reading, trend graph, and active pump status.</figcaption>
 </figure>
 
 <figure>
-  <img src="/assets/images/2022/12/3_changing_settings_3.gif" alt="">
-  <figcaption></figcaption>
+  <img src="/assets/images/2022/12/3_changing_settings_3.gif" alt="MiniMed pump settings screen for adjusting pump parameters">
+  <figcaption>Navigating through pump settings to adjust basal rates, maximum bolus, and other pump parameters.</figcaption>
 </figure>
 
 <figure>
-  <img src="/assets/images/2022/12/3hr.gif" alt="">
-  <figcaption></figcaption>
+  <img src="/assets/images/2022/12/3hr.gif" alt="MiniMed pump 3-hour view showing glucose trends">
+  <figcaption>A 3-hour glucose trend view showing recent readings and patterns over a shorter time window.</figcaption>
 </figure>
 
 <figure>
-  <img src="/assets/images/2022/12/4_setting_bolus.gif" alt="">
-  <figcaption></figcaption>
+  <img src="/assets/images/2022/12/4_setting_bolus.gif" alt="MiniMed pump bolus calculator screen">
+  <figcaption>Setting up a bolus dose using the pump's bolus calculator, which helps determine insulin needed for meals or corrections.</figcaption>
 </figure>
 
 <figure>
-  <img src="/assets/images/2022/12/5_delivering_bolus.gif" alt="">
-  <figcaption></figcaption>
+  <img src="/assets/images/2022/12/5_delivering_bolus.gif" alt="MiniMed pump actively delivering insulin bolus">
+  <figcaption>The pump actively delivering a bolus dose, showing progress and remaining time until completion.</figcaption>
 </figure>
 
 <figure>
-  <img src="/assets/images/2022/12/6_alarm.gif" alt="">
-  <figcaption></figcaption>
+  <img src="/assets/images/2022/12/6_alarm.gif" alt="MiniMed pump alarm screen alerting user">
+  <figcaption>An alarm screen alerting the user to a condition requiring attention, such as low glucose, pump malfunction, or maintenance reminder.</figcaption>
 </figure>
 
 My role: ideation, workflows, on-screen and physical mockups, usability testing, demonstrating enhanced usability to executives and the firmware and pump hardware teams

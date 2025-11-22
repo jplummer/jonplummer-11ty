@@ -5,7 +5,8 @@ date: "2023-06-16T12:00:00-08:00"
 tags: post
 description: "I had a medical…thing…to do on Monday so this was another shortish week, the sort where all the meetings get slid atop one another to occupy available space so"
 ---
-I had a medical…thing…to do on Monday so this was another shortish week, the sort where all the meetings get slid atop one another to occupy available space so you can pretend that it was not a short week. Even so,
+I had a medical…thing…to do on Monday so this was another shortish week, the sort where all the meetings get slid atop one another to occupy available space so you can pretend that it was not a short week. Even so:
+
 - The medical thing went fine. I remember nothing.
 - Friday was meeting-light so I got a little bit of non-meeting work done.
 - I realized that for a handful of the initiatives I'm on I needn't toil in obscurity but would do better to send async questions to a handful of people, so I did.

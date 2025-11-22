@@ -6,6 +6,7 @@ tags: post
 description: "It's common for non-design folks to assume that research and design rigor will slow the overall process down. (I've heard epithets such as \"constipate\" –"
 ---
 It's common for non-design folks to assume that research and design rigor will slow the overall process down. (I've heard epithets such as "constipate" – unpleasant and rude.) How might the UX team contribute to speed of value delivery?
+
 - Improving our understanding of our customers (and especially of our users) so that we can make better decisions about direction, scope, interactive details, etc. and especially things _not_ to build. The fastest feature is one you don't build.
 - Ensuring that every design intervention is a response to a user or customer problem or a benefit that we are sure our customers will value. This is a subset of the above, but deserves special mention because a cool idea is _not actually cool_ unless the person we hope to serve will appreciate the benefit it delivers enough to pay for it.
 - Answering business questions through small doses (in pharmacology the [minimum effective dose](https://en.wikipedia.org/wiki/Effective_dose_\(pharmacology\))) of research, concept evaluation, and usability testing.

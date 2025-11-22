@@ -6,6 +6,7 @@ tags: post
 description: "There are a few ways these meetings might be organized depending on where we are in the design-development process. early concept: help me think about the"
 ---
 There are a few ways these meetings might be organized depending on where we are in the design-development process.
+
 - **early concept**: help me think about the problem
 - **late concept**: help me choose among these ideas and develop one
 - **early detail**: this is where we are going, what caveats remain?

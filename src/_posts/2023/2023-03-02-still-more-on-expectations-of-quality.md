@@ -6,6 +6,7 @@ tags: post
 description: "The general idea is that scope should scale but quality should not. All of these are achievable in small scopes and if we care about quality are not “extra”"
 ---
 The general idea is that **scope should scale but quality should not**. [All of these](/2023/02/02/quality-expectations/) are achievable in small scopes and if we care about quality are not “extra” costs.
+
 - If it is not usable we will not learn what we hope to learn from an alpha or beta – our learning will be confounded by usability issues.
 - If it is unpleasant to use, its uptake will be blunted.
 - If it is not visually credible, confidence in its function will be blunted.

@@ -6,6 +6,7 @@ tags: post
 description: "Some collected examples of SaaS UI trends: SaaS UI Design SaaS Interface UX Design for SaaS Interfaces in 2025: What's the Difference? SaaS Software UI –"
 ---
 Some collected examples of SaaS UI trends:
+
 - [SaaS UI Design](https://www.saasui.design)
 - [SaaS Interface](https://saasinterface.com)
 - [UX Design for SaaS Interfaces in 2025: What's the Difference?](https://uxplanet.org/ux-design-for-saas-interfaces-in-2025-whats-the-difference-de918a00cc5c)

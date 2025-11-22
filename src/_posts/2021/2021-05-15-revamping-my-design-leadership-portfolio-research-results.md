@@ -22,6 +22,7 @@ To be fair, all recruiters will try to qualify you, will try to make sure you ar
 ## My assumptions
 
 My respondents also agreed with some of my assumptions:
+
 - I assumed that a hiring manager who is not a product person will be seeking to add or improve the design function in their organization by hiring a seasoned leader who can evaluate current staff and processes, develop staff, hire, improve processes, improve integration of the design function with the rest of the business, bring new capabilities to the design function, and deliver results in doing so that clearly further the aims of the business.
 
 This was unanimously supported.
@@ -31,6 +32,7 @@ This was unanimously supported.
 This was unanimously supported.
 
 My respondents were not in unanimous agreement about other assumptions:
+
 - I assumed that a recruiter is going to try to match my profile to the “spec” they are given, either a job description or something more specific about the signals the hiring manager is looking for. So a recruiter will be looking for these signals in my resume, and possibly in my portfolio. They are not likely to be expert in experience design, so the recruiter will be watching for general quality of portfolio items and that the right topics are mentioned or otherwise evident.
 
 I learned that successful retained search recruiters will have more expertise in the role of the target, and some in-house recruiters, especially for large firms, also specialize. These people will evaluate portfolios with a critical eye and set aside candidates that don't seem to have relevant experience, much as a hiring manager doing their own recruiting would. In addition, retained and in-house recruiters will also be looking for credibility in the treatment of topics such as design thinking, design systems, and process. Portfolios that demonstrate these are seen as more valuable even if the general quality of work is less-well understood by an individual recruiter.
@@ -42,6 +44,7 @@ In smaller organizations the hiring manager may do their own recruiting, and wil
 ## For me
 
 I also asked these recruiters about my own profile. They found the following items important:
+
 - Experience with hardware and software
 - Experience managing cross-functional teams
 - Evidence of design thinking

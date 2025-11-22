@@ -18,6 +18,7 @@ One way this occurs is by having weekly design critique, prefaced by my giving t
 ## Adaptive
 
 In order **to improve our results we need to change our behavior**. "Try harder" is not typically an effective strategy. There are a great many ways we might need to adapt:
+
 - We might need to add capabilities by bringing in people who have these capabilities, or through training.
 - We might need to encourage existing behaviors through process changes, internal metrics, or incentives.
 - We might need to change which people work together when.

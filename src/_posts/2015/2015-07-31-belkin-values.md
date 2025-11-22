@@ -8,8 +8,8 @@ coverImage: 2022/12/BelkinValues.jpeg
 I served on the Belkin Values committee with the CEO, VP of Design, VP of Human Resources, and another designer, with the guidance of the Emotive Brand agency from San Francisco. We aimed to overturn Belkin's prior very pedestrian brand and values statements in favor of discovered values, in-place already, that we felt represented strengths worth emphasizing. It was a grueling process but these values are in use every day and form a meaningful portion of employee evaluations.
 
 <figure>
-  <img src="/assets/images/2022/12/BelkinValues-640x1024.jpeg" alt="">
-  <figcaption></figcaption>
+  <img src="/assets/images/2022/12/BelkinValues-640x1024.jpeg" alt="Belkin company values document">
+  <figcaption>Belkin Values document showing the discovered and articulated company values that replaced previous pedestrian brand statements, now used daily in employee evaluations.</figcaption>
 </figure>
 
 My favorite is "pursue the ideal," which acknowledges that the ideal is out of reach, and does not ask for optimization of your small area of the business but instead for you to stretch with others to identify and get ever closer to a shared ideal.
