@@ -5,20 +5,19 @@
   --max-width: 66rem;
   --breakpoint-single-column: 54rem; /* custom properties don't work in a media query, alas */
 
- /* Typography */
- --font-family: system-ui, sans-serif;
- --text-size: 16px;
- --line-height: 1.5;
- --font-size-xxs: 0.875rem;  --line-height-xxs: 1.715;
- --font-size-xs: 1rem; --line-height-xs: 1.5;
- --font-size-sm: 1.125rem; --line-height-sm: 1.3334;
- --font-size-md: 1.25rem; --line-height-md: 1.2;
- --font-size-lg: 1.5rem; --line-height-lg: 1;
- --font-size-xl: 2rem; --line-height-xl: 1;
- --font-size-2xl: 2.5rem; --line-height-2xl: 1.2;
- --font-size-3xl: 4rem; --line-height-3xl: 1;
- --line-height-tight: 1.1;
-
+  /* Typography */
+  --font-family: system-ui, sans-serif;
+  --text-size: 16px;
+  --line-height: 1.5;
+  --font-size-xxs: 0.875rem;  --line-height-xxs: 1.715;
+  --font-size-xs: 1rem; --line-height-xs: 1.5;
+  --font-size-sm: 1.125rem; --line-height-sm: 1.3334;
+  --font-size-md: 1.25rem; --line-height-md: 1.2;
+  --font-size-lg: 1.5rem; --line-height-lg: 1;
+  --font-size-xl: 2rem; --line-height-xl: 1;
+  --font-size-2xl: 2.5rem; --line-height-2xl: 1.2;
+  --font-size-3xl: 4rem; --line-height-3xl: 1;
+  --line-height-tight: 1.1;
 
   /* Font weights */
   --font-weight-thin: 100;
@@ -65,7 +64,7 @@
     --content-background-color: #2d2d2d;
     --link-color: #ff6b6b; /* lighter version of DR10 red #e6423a */
     --link-hover-color: #f1b73a; /* DR10 yellow-orange */
-    --link-visited-color: #8b7a6b; /* lighter version of DR10 dark brown #5b4a3b */
+    --link-visited-color: #a89585; /* lighter version of DR10 dark brown #5b4a3b, adjusted for WCAG AA contrast */
     --link-active-color: #2db366; /* lighter version of DR10 green #0d703f */
   }
 }
@@ -108,12 +107,6 @@ body {
   background-color: var(--background-color);
 }
 
-/* A elements that don't have a class get default styles */
-a:not([class]) {
-  text-decoration-skip-ink: auto;
-  color: currentColor;
-}
-
 /* Make images easier to work with */
 img, picture {
   max-width: 100%;
@@ -150,6 +143,15 @@ body>footer {
   padding-top: 0;
 }
 
+/* Header layout with hgroup and navigation */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
 /* Article grid layout */
 article {
   display: grid;
@@ -160,6 +162,19 @@ article {
   gap: 0 var(--gutter);
   margin: 0;
   padding-bottom: var(--spacing-lg);
+}
+
+/* Article grid areas */
+article header {
+  grid-area: a;
+}
+
+article section {
+  grid-area: c;
+}
+
+article footer {
+  grid-area: b;
 }
 
 /* Single column responsive layout */
@@ -180,27 +195,7 @@ article {
   }
 }
 
-/* Article grid areas */
-article header {
-  grid-area: a;
-}
-
-article section {
-  grid-area: c;
-}
-
-article footer {
-  grid-area: b;
-}
-
-/* Header layout with hgroup and navigation */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: var(--spacing-sm);
-}
+/* === NAVIGATION === */
 
 /* Navigation layout */
 nav ul {
@@ -216,21 +211,32 @@ nav li {
   margin: 0;
 }
 
+/* Navigation typography and colors */
+nav a {
+  font-size: var(--font-size-xxs);
+  line-height: var(--line-height-xxs);
+  text-decoration: none;
+  color: var(--link-color);
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: var(--link-hover-color);
+}
+
+nav a:visited {
+  color: var(--link-visited-color);
+}
+
+nav a[aria-current="page"] {
+  color: var(--link-color);
+}
+
 /* Post navigation layout */
 nav.post-navigation {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-/* Always position "prev" on the left */
-nav.post-navigation a.prev {
-  margin-right: auto;
-}
-
-/* Always position "next" on the right */
-nav.post-navigation a.next {
-  margin-left: auto;
 }
 
 /* Pagination layout */
@@ -239,12 +245,13 @@ nav.pagination {
   align-items: center;
 }
 
-/* Always position "prev" on the left */
+/* Navigation prev/next positioning */
+nav.post-navigation a.prev,
 nav.pagination a.prev {
   margin-right: auto;
 }
 
-/* Always position "next" on the right */
+nav.post-navigation a.next,
 nav.pagination a.next {
   margin-left: auto;
 }
@@ -353,19 +360,12 @@ button, input, label {
   line-height: var(--line-height-tight);
 }
 
-/* Navigation typography */
-nav a {
-  font-size: var(--font-size-xxs);
-  line-height: var(--line-height-xxs);
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-/* License typography */
+/* License typography and colors */
 .license,
 footer p {
   font-size: var(--font-size-xxs);
   line-height: var(--line-height-xxs);
+  color: var(--link-visited-color);
 }
 
 .license {
@@ -375,16 +375,34 @@ footer p {
   font-weight: 300;
 }
 
-/* === COLORS & VISUAL DESIGN === */
+/* Code blocks */
+code, pre {
+  font-size: var(--font-size-xxs);
+  line-height: var(--line-height-xs);
+}
 
-/* Links */
+pre {
+  overflow-x: auto;
+  padding: var(--spacing-sm);
+  background-color: var(--background-color);
+  border-radius: 0.25rem;
+}
+
+pre code {
+  font-size: inherit;
+}
+
+/* === LINKS === */
+
+/* Base link styles */
 a {
   text-decoration: none;
   color: var(--link-color);
   transition: color 0.3s ease;
 }
 
-a:hover {
+a:hover,
+a:focus {
   color: var(--link-hover-color);
   text-decoration: underline;
 }
@@ -397,12 +415,9 @@ a:active {
   color: var(--link-active-color);
 }
 
-a:focus {
-  color: var(--link-hover-color);
-  text-decoration: underline;
-}
-
+/* Unclassed links use current color */
 a:not([class]) {
+  text-decoration-skip-ink: auto;
   color: currentColor;
 }
 
@@ -419,32 +434,15 @@ article h1 a:hover {
   text-decoration: underline;
 }
 
-hgroup h1 a:visited,
-hgroup p {
-  color: var(--link-color); /* Keep hgroup as link-color even when visited */
-}
-
-/* Navigation colors */
-nav a {
-  color: var(--link-color);
-}
-
-nav a:hover {
+/* Links in article sections */
+article section a:hover {
   color: var(--link-hover-color);
 }
 
-nav a:visited {
-  color: var(--link-visited-color);
-}
-
-nav a[aria-current="page"] {
+/* Hgroup links keep link-color even when visited */
+hgroup h1 a:visited,
+hgroup p {
   color: var(--link-color);
-}
-
-/* License information colors */
-.license,
-footer p {
-  color: var(--link-visited-color);
 }
 
 /* === COMPONENTS === */
@@ -464,11 +462,6 @@ article.link-item p {
   margin: 0;
 }
 
-/* Links in article sections hover red */
-article section a:hover {
-  color: var(--link-hover-color);
-}
-
 /* End-of-post square */
 article:not(.link-item):not(.portfolio-detail) section::after,
 main[data-tags*="page"]::after {
@@ -482,32 +475,32 @@ main[data-tags*="page"]::after {
 
 /* Portfolio Detail Styles */
 article.portfolio-detail section {
-    /* Span full width of the parent grid, taking over areas b and c */
-    grid-column: 1 / -1;
-    
-    /* Re-establish the parent's grid inside this section */
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 0 var(--gutter);
+  /* Span full width of the parent grid, taking over areas b and c */
+  grid-column: 1 / -1;
+  
+  /* Re-establish the parent's grid inside this section */
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 0 var(--gutter);
 }
 
 article.portfolio-detail section > * {
-    /* All standard content (text, lists, etc.) goes to the right column */
-    grid-column: 2;
+  /* All standard content (text, lists, etc.) goes to the right column */
+  grid-column: 2;
 }
 
 /* Images (and their wrapper paragraphs) span the full width */
 article.portfolio-detail section > p:has(> img:only-child),
 article.portfolio-detail section > figure,
 article.portfolio-detail section > img {
-    grid-column: 1 / -1;
-    margin: var(--spacing-lg) 0;
+  grid-column: 1 / -1;
+  margin: var(--spacing-lg) 0;
 }
 
 article.portfolio-detail section > p:has(> img:only-child) img,
 article.portfolio-detail section > figure img {
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
 }
 
 /* Captions align with the text column */
@@ -518,7 +511,24 @@ article.portfolio-detail section > figure figcaption {
     color: var(--text-color-light);
     font-style: italic;
     /* This makes the caption align with the text column (2fr) */
-    padding-left: calc((100% / 3) + var(--gutter)); 
+    /* Figure spans full width (3fr + gap), text column starts at (1fr + gap) */
+    /* So padding = (1fr / (3fr + gap)) * 100% + gap = ((100% - gap) / 3) + gap */
+    padding-left: calc(((100% - var(--gutter)) / 3) + var(--gutter)); 
+}
+
+/* Mobile adjustments for portfolio detail */
+@media all and (max-width: 54rem) {
+  article.portfolio-detail section {
+    grid-template-columns: 1fr;
+  }
+  
+  article.portfolio-detail section > * {
+    grid-column: 1;
+  }
+  
+  article.portfolio-detail section > figure figcaption {
+    padding-left: 0;
+  }
 }
 
 /* Portfolio Grid */
@@ -566,53 +576,38 @@ article.portfolio-item p {
 
 /* Portrait Grid Container */
 article.portfolio-detail section > .portrait-grid {
-    grid-column: 1 / -1; /* Span full width of the article */
-    display: grid;
-    grid-template-columns: repeat(1, 1fr); /* Mobile: 1 col */
-    gap: var(--gutter);
-    margin: var(--spacing-lg) 0;
+  grid-column: 1 / -1; /* Span full width of the article */
+  display: grid;
+  grid-template-columns: repeat(1, 1fr); /* Mobile: 1 col */
+  gap: var(--gutter);
+  margin: var(--spacing-lg) 0;
 }
 
 @media (min-width: 40rem) {
-    article.portfolio-detail section > .portrait-grid {
-        grid-template-columns: repeat(2, 1fr); /* Tablet: 2 cols */
-    }
+  article.portfolio-detail section > .portrait-grid {
+    grid-template-columns: repeat(2, 1fr); /* Tablet: 2 cols */
+  }
 }
 
 @media (min-width: 60rem) {
-    article.portfolio-detail section > .portrait-grid {
-        grid-template-columns: repeat(3, 1fr); /* Desktop: 3 cols */
-    }
+  article.portfolio-detail section > .portrait-grid {
+    grid-template-columns: repeat(3, 1fr); /* Desktop: 3 cols */
+  }
 }
 
 /* Ensure figures inside the grid behave */
 article.portfolio-detail section > .portrait-grid figure {
-    margin: 0;
-    grid-column: auto; /* Reset grid-column from the generic figure rule */
+  margin: 0;
+  grid-column: auto; /* Reset grid-column from the generic figure rule */
 }
 
 article.portfolio-detail section > .portrait-grid figure img {
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
 }
 
 article.portfolio-detail section > .portrait-grid figure figcaption {
-    padding-left: 0; /* Reset padding since these are in narrow columns */
-}
-
-/* Mobile adjustments for portfolio detail */
-@media all and (max-width: 54rem) {
-    article.portfolio-detail section {
-        grid-template-columns: 1fr;
-    }
-    
-    article.portfolio-detail section > * {
-        grid-column: 1;
-    }
-    
-    article.portfolio-detail section > figure figcaption {
-        padding-left: 0;
-    }
+  padding-left: 0; /* Reset padding since these are in narrow columns */
 }
 
 /* === UTILITIES === */

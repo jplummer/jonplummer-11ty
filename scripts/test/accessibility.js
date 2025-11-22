@@ -32,10 +32,21 @@ function formatViolations(violations) {
 }
 
 // Test a single HTML file with axe-core
-async function testFileWithAxe(browser, filePath) {
+async function testFileWithAxe(browser, filePath, colorScheme = 'light', rulesOnly = null) {
   const page = await browser.newPage();
   
   try {
+    // Emulate color scheme preference
+    if (colorScheme === 'dark') {
+      await page.emulateMediaFeatures([
+        { name: 'prefers-color-scheme', value: 'dark' }
+      ]);
+    } else {
+      await page.emulateMediaFeatures([
+        { name: 'prefers-color-scheme', value: 'light' }
+      ]);
+    }
+    
     // Load the HTML file
     const fileUrl = `file://${path.resolve(filePath)}`;
     await page.goto(fileUrl, { waitUntil: 'networkidle0' });
@@ -44,9 +55,21 @@ async function testFileWithAxe(browser, filePath) {
     await page.addScriptTag({ content: axeCore.source });
     
     // Run axe-core analysis
-    const results = await page.evaluate(() => {
-      return axe.run();
-    });
+    const results = await page.evaluate((rulesConfig) => {
+      if (rulesConfig && rulesConfig.length > 0) {
+        // Run only specified rules using runOnly option
+        const config = {
+          runOnly: {
+            type: 'rule',
+            values: rulesConfig
+          }
+        };
+        return axe.run(config);
+      } else {
+        // Run all rules
+        return axe.run();
+      }
+    }, rulesOnly);
     
     await page.close();
     
@@ -60,6 +83,9 @@ async function testFileWithAxe(browser, filePath) {
 // Main accessibility validation using axe-core
 async function validateAccessibility() {
   console.log('♿ Starting accessibility validation with axe-core...\n');
+  console.log('Testing approach:');
+  console.log('  ☀️  Light mode: All accessibility rules');
+  console.log('  🌙 Dark mode: Color contrast only\n');
   
   const siteDir = './_site';
   if (!fs.existsSync(siteDir)) {
@@ -81,7 +107,17 @@ async function validateAccessibility() {
     totalIncomplete: 0,
     filesWithViolations: 0,
     filesWithIncomplete: 0,
-    passes: 0
+    passes: 0,
+    lightMode: {
+      violations: 0,
+      incomplete: 0,
+      filesWithViolations: 0
+    },
+    darkMode: {
+      violations: 0,
+      incomplete: 0,
+      filesWithViolations: 0
+    }
   };
   
   // Launch browser
@@ -108,11 +144,19 @@ async function validateAccessibility() {
       }
       
       try {
-        const axeResults = await testFileWithAxe(browser, file);
+        // Test in light mode (all rules)
+        const lightResults = await testFileWithAxe(browser, file, 'light');
+        const lightViolations = lightResults.violations || [];
+        const lightIncomplete = lightResults.incomplete || [];
         
-        const violations = axeResults.violations || [];
-        const incomplete = axeResults.incomplete || [];
-        const hasIssues = violations.length > 0 || incomplete.length > 0;
+        // Test in dark mode (contrast only)
+        const darkResults = await testFileWithAxe(browser, file, 'dark', ['color-contrast']);
+        const darkViolations = darkResults.violations || [];
+        const darkIncomplete = darkResults.incomplete || [];
+        
+        const hasLightIssues = lightViolations.length > 0 || lightIncomplete.length > 0;
+        const hasDarkIssues = darkViolations.length > 0 || darkIncomplete.length > 0;
+        const hasIssues = hasLightIssues || hasDarkIssues;
         
         // Show progress for all files, with status indicator
         if (hasIssues) {
@@ -122,35 +166,83 @@ async function validateAccessibility() {
           console.log(`📄 [${fileNumber}/${htmlFiles.length}] ${relativePath}: ✅`);
         }
         
-        if (violations.length > 0) {
-          const formattedIssues = formatViolations(violations);
+        // Light mode results
+        if (hasLightIssues) {
+          console.log(`   ☀️  Light mode:`);
           
-          formattedIssues.forEach(issue => {
-            console.log(`   ❌ ${issue.help} (${issue.impact} impact)`);
-            if (issue.nodes.length > 0) {
-              issue.nodes.slice(0, 3).forEach(node => {
-                console.log(`      - ${node}`);
-              });
-              if (issue.nodes.length > 3) {
-                console.log(`      ... and ${issue.nodes.length - 3} more`);
+          if (lightViolations.length > 0) {
+            const formattedIssues = formatViolations(lightViolations);
+            
+            formattedIssues.forEach(issue => {
+              console.log(`      ❌ ${issue.help} (${issue.impact} impact)`);
+              if (issue.nodes.length > 0) {
+                issue.nodes.slice(0, 3).forEach(node => {
+                  console.log(`         - ${node}`);
+                });
+                if (issue.nodes.length > 3) {
+                  console.log(`         ... and ${issue.nodes.length - 3} more`);
+                }
               }
-            }
-            if (issue.helpUrl) {
-              console.log(`      Learn more: ${issue.helpUrl}`);
-            }
-          });
+              if (issue.helpUrl) {
+                console.log(`         Learn more: ${issue.helpUrl}`);
+              }
+            });
+            
+            results.totalViolations += lightViolations.length;
+            results.lightMode.violations += lightViolations.length;
+            results.lightMode.filesWithViolations++;
+            results.filesWithViolations++;
+          }
           
-          results.totalViolations += violations.length;
-          results.filesWithViolations++;
+          if (lightIncomplete.length > 0) {
+            console.log(`      ⚠️  ${lightIncomplete.length} incomplete check(s) (manual review needed)`);
+            results.totalIncomplete += lightIncomplete.length;
+            results.lightMode.incomplete += lightIncomplete.length;
+            results.filesWithIncomplete++;
+          }
         }
         
-        if (incomplete.length > 0) {
-          console.log(`   ⚠️  ${incomplete.length} incomplete check(s) (manual review needed)`);
-          results.totalIncomplete += incomplete.length;
-          results.filesWithIncomplete++;
+        // Dark mode results (contrast only)
+        if (hasDarkIssues) {
+          console.log(`   🌙 Dark mode (contrast only):`);
+          
+          if (darkViolations.length > 0) {
+            const formattedIssues = formatViolations(darkViolations);
+            
+            formattedIssues.forEach(issue => {
+              console.log(`      ❌ ${issue.help} (${issue.impact} impact)`);
+              if (issue.nodes.length > 0) {
+                issue.nodes.slice(0, 3).forEach(node => {
+                  console.log(`         - ${node}`);
+                });
+                if (issue.nodes.length > 3) {
+                  console.log(`         ... and ${issue.nodes.length - 3} more`);
+                }
+              }
+              if (issue.helpUrl) {
+                console.log(`         Learn more: ${issue.helpUrl}`);
+              }
+            });
+            
+            results.totalViolations += darkViolations.length;
+            results.darkMode.violations += darkViolations.length;
+            results.darkMode.filesWithViolations++;
+            if (!hasLightIssues) {
+              results.filesWithViolations++;
+            }
+          }
+          
+          if (darkIncomplete.length > 0) {
+            console.log(`      ⚠️  ${darkIncomplete.length} incomplete check(s) (manual review needed)`);
+            results.totalIncomplete += darkIncomplete.length;
+            results.darkMode.incomplete += darkIncomplete.length;
+            if (!hasLightIssues) {
+              results.filesWithIncomplete++;
+            }
+          }
         }
         
-        if (violations.length === 0 && incomplete.length === 0) {
+        if (!hasIssues) {
           results.passes++;
         }
         
@@ -180,6 +272,15 @@ async function validateAccessibility() {
   console.log(`   Total incomplete checks: ${results.totalIncomplete}`);
   console.log(`   Files with incomplete checks: ${results.filesWithIncomplete}`);
   console.log(`   Files passing all checks: ${results.passes}`);
+  console.log('');
+  console.log('   ☀️  Light mode:');
+  console.log(`      Violations: ${results.lightMode.violations}`);
+  console.log(`      Files with violations: ${results.lightMode.filesWithViolations}`);
+  console.log(`      Incomplete checks: ${results.lightMode.incomplete}`);
+  console.log('   🌙 Dark mode (contrast only):');
+  console.log(`      Violations: ${results.darkMode.violations}`);
+  console.log(`      Files with violations: ${results.darkMode.filesWithViolations}`);
+  console.log(`      Incomplete checks: ${results.darkMode.incomplete}`);
   
   if (results.totalViolations > 0) {
     console.log('\n❌ Accessibility violations found that need attention.');
