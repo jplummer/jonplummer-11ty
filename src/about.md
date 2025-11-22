@@ -1,23 +1,24 @@
 ---
-title: "About me – Jon Plummer"
+title: "/about"
 description: "Jon Plummer is a UX design leader and mentor with experience at Invoca, Cayuse, Belkin, and Medtronic. Learn about his design leadership philosophy and career."
 date: 2025-08-01
 layout: base.njk
 tags: page
 permalink: "/about/"
 ---
-# /about
 (updated {{ date | postDate }})
 
 I lead product design teams for web and mobile apps, edtech, smart home, wi-fi, consumer electronics, medical devices, and more.
 
 ## Currently
+
 - Director of User Experience at [Invoca](https://invoca.com/), making AI-assisted conversation intelligence software for marketing and sales folks
 - Mentor at [ADPList.org](https://adplist.org) and [Designed.org](https://designed.org/), here to help designers think well about their work, consider the leap to management, and to help new managers wrestle with their new responsibilities
 - Mentor at [tupu.io](https://tupu.io/), same deal
 - Husband, father, tinkerer, maker, just handy enough to be trouble
 
 ## Before that
+
 - Director of User Experience at [Cayuse](https://cayuse.com/), a research management SaaS provider
 - Director of User Experience at [Concentric Sky](https://concentricsky.com/) for numerous ed-tech and post-secondary educational clients and the [Badgr](https://www.instructure.com/products/canvas/canvas-credentials-digital-badges/badgr-pathways) microcredential platform (which is now part of Instructure)
 - Senior Director of Product Experience Design at [Belkin](https://belkin.com/), especially for [Wemo](https://wemo.com/) and [Linksys](https://linksys.com/)
@@ -33,9 +34,9 @@ I love to develop and lead designers and researchers, and I love to help folks m
 
 ### **Suzanne Hopkins**, Director of Product Management, Cayuse
 
-Upon joining our team, Jon immediately made significant improvements to our team by building the framework for a design library. His logical thinking and pragmatic approach to process improvements and design were foundational in building a scalable framework for our team of Product Managers and UX designers. 
+Upon joining our team, Jon immediately made significant improvements to our team by building the framework for a design library. His logical thinking and pragmatic approach to process improvements and design were foundational in building a scalable framework for our team of Product Managers and UX designers.
 
-Jon also puts inclusion and team happiness at the core of building his team. He could always be counted on to provide a non-biased, inclusive view to our leadership conversations. 
+Jon also puts inclusion and team happiness at the core of building his team. He could always be counted on to provide a non-biased, inclusive view to our leadership conversations.
 
 In short, Jon is a strong, compassionate leader who is an asset to any leadership team. I welcome any opportunity to work with Jon in the future.
 
@@ -54,6 +55,7 @@ Jon is an extremely thoughtful and caring leader who is always willing to suppor
 (There are more recommendations on [my LinkedIn profile](https://www.linkedin.com/in/jplummer/details/recommendations/).)
 
 ## Awards
+
 - **International Design Excellence Awards, Finalist** Issued by Industrial Designers Society of America (IDSA), Aug 2013, for WeMo iOS app
 - **User Experience Award: Silver** for Best Consumer Device Issued by User Experience Awards, May 2013, for WeMo by Belkin
 - **International Design Excellence Awards, Silver** Issued by Industrial Designers Society of America (IDSA), Sep 2012, for Belkin Next Generation Router Family

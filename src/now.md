@@ -1,12 +1,11 @@
 ---
-title: "Now – Jon Plummer"
+title: "/now"
 description: "What Jon Plummer is up to now - current work at Invoca, family updates, and personal projects. Updated regularly with current status."
 date: 2025-11-01
 layout: base.njk
 tags: page
 permalink: "/now/"
 ---
-# /now
 (Updated {{ date | postDate }}. This is a [now](https://nownownow.com/about) page, and if you have your own site [you might consider making one](https://nownownow.com/about), too.)
 
 I'm currently experimenting with

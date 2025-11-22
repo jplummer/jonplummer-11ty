@@ -82,6 +82,9 @@
 </header>
 
 <main id="main" aria-label="Main content"{% if tags %} data-tags="{{ tags | join(' ') }}"{% endif %}>
+    {% if tags and "page" in tags and title %}
+    <h1>{{ title }}</h1>
+    {% endif %}
     {{ content | safe }}
 </main>
 
