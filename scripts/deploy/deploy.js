@@ -61,6 +61,35 @@ try {
   process.exit(1);
 }
 
+// Pre-deploy validation checks
+const skipChecks = process.argv.includes('--skip-checks');
+
+if (!skipChecks) {
+  console.log('🔍 Running pre-deploy validation...\n');
+  
+  try {
+    // Pre-build test (doesn't require _site/)
+    console.log('   Running markdown validation...');
+    execSync('npm run test markdown', { stdio: 'inherit' });
+    
+    // Post-build test (requires _site/, validates YAML + post structure)
+    if (fs.existsSync('./_site')) {
+      console.log('\n   Running content structure validation...');
+      execSync('npm run test content', { stdio: 'inherit' });
+    } else {
+      console.log('   ⚠️  Skipping content test (requires _site/ directory)');
+    }
+    
+    console.log('\n✅ All pre-deploy checks passed\n');
+  } catch (error) {
+    console.error('\n❌ Pre-deploy validation failed. Fix errors before deploying.');
+    console.error('   To skip checks (not recommended): npm run deploy --skip-checks\n');
+    process.exit(1);
+  }
+} else {
+  console.log('⚠️  Skipping pre-deploy validation (--skip-checks flag used)\n');
+}
+
 // Check if rsync is available
 function checkRsync() {
   try {

@@ -24,6 +24,7 @@
     "axe-core": "^4.11.0",
     "html-validate": "^10.4.0",
     "js-yaml": "^4.1.0",
+    "markdownlint-cli2": "^0.19.0",
     "puppeteer": "^24.27.0",
     "xmldom": "^0.6.0"
   },

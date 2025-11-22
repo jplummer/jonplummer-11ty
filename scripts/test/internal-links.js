@@ -83,6 +83,11 @@ async function validateInternalLinks() {
   console.log('🔗 Starting internal link validation...\n');
   
   const siteRoot = './_site';
+  if (!fs.existsSync(siteRoot)) {
+    console.log('❌ _site directory not found. Run "npm run build" first.');
+    process.exit(1);
+  }
+  
   console.log('📋 Running full site scan');
   const htmlFiles = findHtmlFiles(siteRoot);
   

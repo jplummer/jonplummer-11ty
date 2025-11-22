@@ -1,0 +1,20 @@
+{
+  "default": true,
+  "MD001": true,
+  "MD003": {
+    "style": "atx"
+  },
+  "MD009": {
+    "br_spaces": 2
+  },
+  "MD010": true,
+  "MD012": {
+    "maximum": 2
+  },
+  "MD022": true,
+  "MD025": true,
+  "MD013": false,
+  "MD033": false,
+  "MD034": false
+}
+

@@ -37,6 +37,7 @@
 - `links-yaml` - Validate links.yaml structure and format
 - `internal-links` - Test only internal links (critical)
 - `content` - Test content structure
+- `markdown` - Validate markdown syntax and structure
 - `performance` - Analyze performance
 - `seo` - Test SEO and meta tags
 - `accessibility` - Test accessibility using axe-core
@@ -56,6 +57,22 @@ The `links-yaml` test validates the structure and format of `_data/links.yaml`:
 - Checks for unexpected fields in link objects
 
 This is faster than running the full `content` test since it only validates the links.yaml file structure, not the entire site content.
+
+#### Markdown Validation
+
+The `markdown` test validates markdown syntax and structure for all markdown files that are rendered on the live site:
+
+- Validates markdown syntax using markdownlint-cli2
+- Checks for unclosed parentheses in markdown links (e.g., `[text](url` without closing `)`)
+- Detects incorrect heading hierarchy (e.g., h2 → h4 skipping h3)
+- Warns about H1 headings in markdown content (templates add H1 from front matter `title`)
+- Validates spacing, formatting, and other markdown best practices
+
+The test checks all `.md` files in `src/` directory, excluding:
+- `_posts/_drafts/` (draft posts not published)
+- `docs/` (documentation not part of live site)
+
+Configuration is in `.markdownlint.json`. The test reports errors (which fail the build) and warnings (which don't fail but should be addressed).
 
 ### 🚢 Deployment
 
