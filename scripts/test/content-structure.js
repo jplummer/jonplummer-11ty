@@ -171,8 +171,8 @@ function validateRequiredFields(frontMatter, filePath) {
   }
 
   // Optional but recommended fields
-  if (frontMatter.metaDescription) {
-    const descCheck = validateMetaDescription(frontMatter.metaDescription);
+  if (frontMatter.description) {
+    const descCheck = validateMetaDescription(frontMatter.description);
     if (!descCheck.valid) {
       warnings.push(`Meta description: ${descCheck.error}`);
     }

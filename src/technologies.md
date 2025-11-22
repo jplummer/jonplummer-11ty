@@ -14,7 +14,7 @@ permalink: "/technologies/"
     - **[Nunjucks (.njk)](https://mozilla.github.io/nunjucks/)**: Primary templating language with template inheritance, filters, and shortcodes
     - **[Markdown (.md)](https://www.markdownguide.org/)**: Content format for blog posts and pages
       - **[markdown-it](https://github.com/markdown-it/markdown-it)**: Markdown parser used by Eleventy for processing .md files (configured with HTML support, line breaks, and auto-linkification)
-    - **HTML**: Supported template format
+    - **HTML**: Of course
   - Data formats:
     - **[YAML (.yaml, .yml)](https://yaml.org/)**: Used for data files in `_data/` directory (e.g., `links.yaml`)
       - **[js-yaml](https://github.com/nodeca/js-yaml)**: YAML parser for processing .yaml and .yml data files

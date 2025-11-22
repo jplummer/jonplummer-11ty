@@ -421,11 +421,13 @@ a:not([class]) {
   color: currentColor;
 }
 
-/* Article links always underlined except h1 */
-article a {
+/* Content links always underlined (articles and full-width pages) */
+article a,
+main[data-tags*="page"] a {
   text-decoration: underline;
 }
 
+/* Article h1 links exception */
 article h1 a {
   text-decoration: none;
 }
