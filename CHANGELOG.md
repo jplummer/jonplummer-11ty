@@ -5,6 +5,33 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to chronological ordering (newest first).
 
+## 2025-11-20
+
+- feat: add portrait-grid utility for multi-column image layouts in portfolio details
+- style: apply portrait-grid to portfolio posts with portrait images
+- docs: update plan.md to reflect completed portfolio template work
+
+## 2025-11-19
+
+- Refactor project structure and improve documentation
+- chore: deduplicate .gitignore entries
+- refactor: move _misc to structured docs/ folder
+- docs: add AI agent instructions to README
+- fix: move .htaccess to src/ so it gets copied to build
+- fix: ignore docs/ folder instead of deprecated _misc/
+- docs: add links to technologies in technologies.md
+- feat: implement dedicated portfolio detail layout with full-width images and siloed nav
+- style: refine portfolio layout - text aligns with article column, images full width
+- fix: ensure portfolio detail images span full grid while text stays in column
+- feat: implement image captions for portfolio items
+- refactor: update all portfolio items to use portfolio_detail layout
+- style: wrap all portfolio images in <figure> tags for consistent layout
+- feat: implement responsive portfolio grid layout
+- Add blog post about hidden site pages
+- General site updates and content cleanup
+- feat: add humans.txt and AI-blocking robots.txt
+- refactor: standardize all portfolio images to use HTML <figure> syntax
+
 ## 2025-11-16
 
 - Add new post about AI-assisted coding and move technologies.md to root
