@@ -4,6 +4,7 @@ layout: portfolio_detail.njk
 date: "2018-12-10T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/12/devices_withhand.png
+description: "WeMo family of smart home products and mobile app for controlling switches, lights, and devices remotely, featuring natural language commands and automation rules."
 ---
 2013 IDEA Finalist, 2013 Silver UX Award
 

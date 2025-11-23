@@ -4,6 +4,7 @@ layout: portfolio_detail.njk
 date: "2016-03-21T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/12/Screenshot2017-06-0321.17.37.png
+description: "Redesign of Belkin router setup process based on in-home studies, reducing setup errors through order-tolerant processes and instructions on components."
 ---
 An in-home study requiring participants to replace their existing router with one of three Belkin routers showed us that we had a lot of work to do. People surprised us at every turn, losing instructions, getting turned around in instructions, not understanding which cable was which, plugging things into the wrong places, etc. One nice lady even plugged the power supply cable into the headphone jack on her computer, because it sort of looked like it belonged there and she had missed the step where she was to give power to the new router.
 

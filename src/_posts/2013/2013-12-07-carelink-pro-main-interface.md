@@ -4,6 +4,7 @@ layout: portfolio_detail.njk
 date: "2013-12-07T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/12/reports2.png
+description: "Main interface design for CareLink Pro, a diabetes management software for physicians featuring reports, device management, and patient profiles."
 ---
 <figure>
   <img src="/assets/images/2022/12/reports2.png" alt="CareLink Pro reports interface showing patient data visualization">
