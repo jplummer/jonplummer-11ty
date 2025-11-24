@@ -1,5 +1,5 @@
 ---
-title: How to sprint
+title: "How to Sprint: Goals Over Rigid Planning"
 layout: single_post.njk
 date: "2025-10-08T12:00:00-08:00"
 tags: post

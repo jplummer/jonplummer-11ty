@@ -1,5 +1,5 @@
 ---
-title: Quality, part two
+title: "Quality Expectations Part Two: Design Completeness"
 layout: single_post.njk
 date: "2023-07-29T12:00:00-08:00"
 tags: post

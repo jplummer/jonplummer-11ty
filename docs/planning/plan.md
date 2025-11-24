@@ -17,7 +17,7 @@
   - [x] Portrait-grid utility for portrait images (3/2/1 columns responsive)
   - [x] Caption styling aligned with text column
   - [x] All images standardized to HTML `<figure>` syntax
-  - [ ] Edit captions and alt text for portfolio item images
+  - [ ] Edit captions and alt text for portfolio item images ⬅
 
 - [ ] **QA portfolio layouts**
   - [ ] Test portfolio listing page across devices

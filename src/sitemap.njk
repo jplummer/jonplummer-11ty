@@ -12,22 +12,16 @@ eleventyExcludeFromCollections: true
     <priority>1.0</priority>
   </url>
 
-  {# Main index.html #}
-  <url>
-    <loc>https://jonplummer.com/index.html</loc>
-    <lastmod>{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  {# Static pages #}
+  {# Static pages (exclude error pages) #}
   {% for page in collections.page %}
+  {% if page.data.purpose != "404" and page.data.purpose != "500" %}
   <url>
     <loc>https://jonplummer.com{{ page.url }}</loc>
     <lastmod>{{ page.date | dateToRfc3339 }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  {% endif %}
   {% endfor %}
 
   {# Portfolio page #}

@@ -1,5 +1,5 @@
 ---
-title: Our position on AI tools
+title: "Our Position on AI Tools: Design Team Guidelines"
 layout: single_post.njk
 date: "2025-07-12T12:00:00-08:00"
 tags: post

@@ -1,5 +1,5 @@
 ---
-title: The trouble with NPS
+title: "Misunderstanding Net Promoter Score"
 layout: single_post.njk
 date: "2022-07-30T12:00:00-08:00"
 tags: post

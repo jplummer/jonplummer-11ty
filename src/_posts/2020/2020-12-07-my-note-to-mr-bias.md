@@ -1,5 +1,5 @@
 ---
-title: My note to Mr. Bias
+title: "My note to Mr. Bias: What Hiring Managers Look For in UX Portfolios"
 layout: single_post.njk
 date: "2020-12-07T12:00:00-08:00"
 tags: post

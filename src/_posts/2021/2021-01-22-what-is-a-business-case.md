@@ -1,5 +1,5 @@
 ---
-title: What is a business case?
+title: "Understanding Business Cases for Product Teams (or Anyone)"
 layout: single_post.njk
 date: "2021-01-22T12:00:00-08:00"
 tags: post

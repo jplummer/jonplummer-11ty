@@ -1,5 +1,5 @@
 ---
-title: Product trio
+title: "Product Trio Framework for Collaborative Planning"
 layout: portfolio_detail.njk
 date: "2022-09-11T12:00:00-08:00"
 tags: portfolio

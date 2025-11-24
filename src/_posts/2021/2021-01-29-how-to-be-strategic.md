@@ -1,5 +1,5 @@
 ---
-title: How to be strategic
+title: "Being Strategic: A Framework for Goal Achievement"
 layout: single_post.njk
 date: "2021-01-29T12:00:00-08:00"
 tags: post

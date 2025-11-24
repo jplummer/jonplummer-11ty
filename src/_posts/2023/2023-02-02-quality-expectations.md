@@ -1,5 +1,5 @@
 ---
-title: Quality expectations
+title: "Design Quality Expectations for Product Teams"
 layout: single_post.njk
 date: "2023-02-02T12:00:00-08:00"
 tags: post

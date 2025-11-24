@@ -1,5 +1,5 @@
 ---
-title: Belkin values
+title: "Belkin Company Values Discovery and Implementation"
 layout: portfolio_detail.njk
 date: "2015-07-31T12:00:00-08:00"
 tags: portfolio

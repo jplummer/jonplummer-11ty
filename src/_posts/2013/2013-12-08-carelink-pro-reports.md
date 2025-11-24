@@ -1,5 +1,5 @@
 ---
-title: CareLink Pro reports
+title: "CareLink Pro Medical Reports Interface Design"
 layout: portfolio_detail.njk
 date: "2013-12-08T12:00:00-08:00"
 tags: portfolio

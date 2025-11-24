@@ -1,5 +1,5 @@
 ---
-title: Weekly wins…of late
+title: "Weekly Wins of Late: Team Accomplishments"
 layout: single_post.njk
 date: "2024-06-14T12:00:00-08:00"
 tags: post
