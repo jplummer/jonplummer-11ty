@@ -5,6 +5,10 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to chronological ordering (newest first).
 
+## 2025-11-23
+
+- Update content and fix markdown lint issues
+
 ## 2025-11-22
 
 - feat: add pre-deploy validation to prevent authoring mistakes
