@@ -1,5 +1,5 @@
 ---
-title: "Thomas W. writes: Why Generic UX Value Arguments Don't Work"
+title: "Thomas W. writes: Why generic UX value arguments don't work"
 layout: single_post.njk
 date: "2023-11-29T12:00:00-08:00"
 tags: post

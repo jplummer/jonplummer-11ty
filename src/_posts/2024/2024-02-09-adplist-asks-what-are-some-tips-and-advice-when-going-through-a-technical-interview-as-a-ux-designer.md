@@ -1,5 +1,5 @@
 ---
-title: Tips for UX Designer Technical Interviews
+title: Tips for UX designer technical interviews
 layout: single_post.njk
 date: "2024-02-09T12:00:00-08:00"
 tags: post

@@ -1,5 +1,5 @@
 ---
-title: "Belkin Router Out-of-Box Experience Redesign"
+title: "Belkin router out-of-box experience redesign"
 layout: portfolio_detail.njk
 date: "2016-03-21T12:00:00-08:00"
 tags: portfolio

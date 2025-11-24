@@ -1,5 +1,5 @@
 ---
-title: ADPList Recognition for Design Mentorship
+title: ADPList recognition for design mentorship
 layout: single_post.njk
 date: "2023-10-03T12:00:00-08:00"
 tags: post

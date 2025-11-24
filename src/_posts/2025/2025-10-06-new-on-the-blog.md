@@ -1,5 +1,5 @@
 ---
-title: What's New on the Blog This Month
+title: What's new on the blog this month
 layout: single_post.njk
 date: "2025-10-06T12:00:00-08:00"
 tags: post

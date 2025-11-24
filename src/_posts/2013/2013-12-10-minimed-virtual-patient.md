@@ -1,5 +1,5 @@
 ---
-title: "Virtual Patient Software for Diabetes Education"
+title: "Virtual patient software for diabetes education"
 layout: portfolio_detail.njk
 date: "2013-12-10T12:00:00-08:00"
 tags: portfolio

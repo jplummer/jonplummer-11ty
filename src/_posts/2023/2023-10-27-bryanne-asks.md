@@ -1,5 +1,5 @@
 ---
-title: "Bryanne Asks: Design Maturity and Method Flexibility"
+title: "Bryanne asks: Design maturity and method flexibility"
 layout: single_post.njk
 date: "2023-10-27T12:00:00-08:00"
 tags: post

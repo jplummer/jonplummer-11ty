@@ -1,5 +1,5 @@
 ---
-title: What went right since October 2024?
+title: What went right since october 2024?
 layout: single_post.njk
 date: "2025-07-12T12:00:00-08:00"
 tags: post

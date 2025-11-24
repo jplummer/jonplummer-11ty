@@ -1,5 +1,5 @@
 ---
-title: "MiniMed Watch Interface Design Concepts"
+title: "MiniMed watch interface design concepts"
 layout: portfolio_detail.njk
 date: "2014-09-10T12:00:00-08:00"
 tags: portfolio

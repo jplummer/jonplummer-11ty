@@ -1,5 +1,5 @@
 ---
-title: Quarterly Performance Review Reflection
+title: Quarterly performance review reflection
 layout: single_post.njk
 date: "2023-05-25T12:00:00-08:00"
 tags: post

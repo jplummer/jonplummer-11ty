@@ -1,5 +1,5 @@
 ---
-title: "Daphne Asks: Transitioning from Marketing to UX"
+title: "Daphne asks: Transitioning from marketing to UX"
 layout: single_post.njk
 date: "2020-11-03T12:00:00-08:00"
 tags: post

@@ -1,5 +1,5 @@
 ---
-title: Write Instructions That People Can Follow
+title: Write instructions that people can follow
 layout: single_post.njk
 date: "2023-10-31T12:00:00-08:00"
 tags: post
