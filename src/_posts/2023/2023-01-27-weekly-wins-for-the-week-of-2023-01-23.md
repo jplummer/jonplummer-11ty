@@ -3,7 +3,8 @@ title: Weekly wins for the week of 2023 01 23
 layout: single_post.njk
 date: "2023-01-27T12:00:00-08:00"
 tags: post
-description: "I installed a bluteotth kit behind the factory car stereo in the 2006 Matrix and it worked on the first try, it sounds great, pairing was easy and the"
+description: I installed a bluteotth kit behind the factory car stereo in the 2006 Matrix and it worked on the first try, it sounds great, pairing was easy and the
+ogImage: /assets/images/og/2023-01-27-weekly-wins-for-the-week-of-2023-01-23.png
 ---
 - I installed a bluteotth kit behind the factory car stereo in the 2006 Matrix and
   - it worked on the first try,

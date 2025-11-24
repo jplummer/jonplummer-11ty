@@ -3,7 +3,8 @@ title: Weekly wins for the week of 2022 12 12
 layout: single_post.njk
 date: "2022-12-18T12:00:00-08:00"
 tags: post
-description: "I started my new job on Monday. It's nice to see good people working hard on not too many products, with a leadership team working to further narrow their"
+description: I started my new job on Monday. It's nice to see good people working hard on not too many products, with a leadership team working to further narrow their
+ogImage: /assets/images/og/2022-12-18-weekly-wins-for-the-week-of-2022-12-12.png
 ---
 I started my new job on Monday. It's nice to see good people working hard on _not too many_ products, with a leadership team working to further narrow their focus and transmit that focus throughout the organization. It's a refreshing difference from every job I've had in the past. Yes, leaders will tell you that this is important, that they _want_ to do this, that as a manager _you should_ do this, yet so often it does not get done.
 

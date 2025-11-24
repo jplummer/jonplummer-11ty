@@ -3,7 +3,8 @@ title: Weekly wins for the week of 2023 01 02
 layout: single_post.njk
 date: "2023-01-07T12:00:00-08:00"
 tags: post
-description: "Back to work! Back to school! I had good workouts this week. I'm going heavy, pushing the intensity, and I can tell the day after, but it's not coming with the"
+description: Back to work! Back to school! I had good workouts this week. I'm going heavy, pushing the intensity, and I can tell the day after, but it's not coming with the
+ogImage: /assets/images/og/2023-01-07-weekly-wins-for-the-week-of-2023-01-02.png
 ---
 Back to work! Back to school!
 

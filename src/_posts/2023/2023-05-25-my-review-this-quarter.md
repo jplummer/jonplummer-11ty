@@ -1,9 +1,10 @@
 ---
-title: "Quarterly Performance Review Reflection"
+title: Quarterly Performance Review Reflection
 layout: single_post.njk
 date: "2023-05-25T12:00:00-08:00"
 tags: post
-description: "I've shared this verbatim with my team and pointed out how it will affect our work in the coming quarter. > Jon has done a great job ramping up on all things"
+description: I've shared this verbatim with my team and pointed out how it will affect our work in the coming quarter. > Jon has done a great job ramping up on all things
+ogImage: /assets/images/og/2023-05-25-my-review-this-quarter.png
 ---
 I've shared this verbatim with my team and pointed out how it will affect our work in the coming quarter.
 

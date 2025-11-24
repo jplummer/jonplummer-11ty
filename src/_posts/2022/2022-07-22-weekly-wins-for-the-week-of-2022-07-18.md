@@ -4,6 +4,7 @@ layout: single_post.njk
 date: "2022-07-22T12:00:00-08:00"
 tags: post
 description: "Three wins for this week: Never mind my thoughts about NPS, which I have not written up here but should (edit: See \"The trouble with NPS\"). Our company"
+ogImage: /assets/images/og/2022-07-22-weekly-wins-for-the-week-of-2022-07-18.png
 ---
 Three wins for this week:
 

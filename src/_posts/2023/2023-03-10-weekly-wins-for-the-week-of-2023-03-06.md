@@ -3,7 +3,8 @@ title: Weekly wins for the week of 2023 03 06
 layout: single_post.njk
 date: "2023-03-10T12:00:00-08:00"
 tags: post
-description: "I'm light on wins this week. The most challenging part of posting wins each week is being conscious of them! I wrote two blog posts this week, and without"
+description: I'm light on wins this week. The most challenging part of posting wins each week is being conscious of them! I wrote two blog posts this week, and without
+ogImage: /assets/images/og/2023-03-10-weekly-wins-for-the-week-of-2023-03-06.png
 ---
 I'm light on wins this week. The most challenging part of posting wins each week is being conscious of them!
 

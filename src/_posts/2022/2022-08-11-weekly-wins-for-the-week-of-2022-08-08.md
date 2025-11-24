@@ -4,6 +4,7 @@ layout: single_post.njk
 date: "2022-08-11T12:00:00-08:00"
 tags: post
 description: "Three wins: While a respected and very productive design contractor gave notice, she had a lot of nice things to say about the team, company, and my management"
+ogImage: /assets/images/og/2022-08-11-weekly-wins-for-the-week-of-2022-08-08.png
 ---
 Three wins:
 

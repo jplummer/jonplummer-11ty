@@ -23,6 +23,7 @@
 
 - `npm run update-docs` - Update cached Eleventy documentation
 - `npm run changelog` - Generate CHANGELOG.md from git history
+- `npm run generate-og-images` - Generate Open Graph images for posts and pages
 
 ---
 
@@ -101,3 +102,59 @@ Run this periodically to keep the cached docs up to date with the latest 11ty fe
 The changelog is automatically generated from the git commit history, organized by date (newest first). It includes all commits from the beginning of the project and follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format.
 
 The changelog is automatically regenerated before each deployment. You can also run this command manually whenever you want to update it.
+
+### 🖼️ Open Graph Image Generation
+
+- `npm run generate-og-images` - Generate Open Graph images for posts and pages
+
+This script automatically generates OG images (1200×630px) for all posts and pages using Puppeteer to render HTML templates with your site's styling. The images are saved to `src/assets/images/og/` and the `ogImage` field is automatically added to each file's frontmatter.
+
+#### How It Works
+
+1. **Scans** all posts in `src/_posts/` and pages in `src/` (excluding portfolio items)
+2. **Renders** each page's title, description, and date (if a post) using the `og-image.njk` template
+3. **Generates** PNG images using Puppeteer (headless browser)
+4. **Updates** frontmatter with the `ogImage` path
+5. **Skips** regeneration if the image already exists and source data hasn't changed (incremental generation)
+
+#### Image Template
+
+The OG images use the `src/_includes/og-image.njk` template which includes:
+- "Jon Plummer" branding
+- Page title
+- Description (if available)
+- Date (for blog posts)
+- Light mode styling using your site's CSS custom properties
+
+#### Usage
+
+**Automatic Generation**: OG images are now automatically generated:
+- **During development**: When you save a post or page file, the image is automatically generated (via `eleventy.beforeWatch`)
+- **Before deployment**: The deploy script automatically checks and generates any missing/outdated images
+
+**Manual Generation**: You can also run the script manually:
+
+```bash
+npm run generate-og-images
+```
+
+The script will:
+- Generate images for posts and pages that don't have them
+- Regenerate images if the source file (title, description, date) has changed
+- Skip images that are up to date (incremental generation - typically <1 second if all up-to-date)
+- Skip portfolio items (individual portfolio pieces don't need OG images)
+- Skip files with manually set `ogImage` values
+
+#### Previewing Images
+
+You can preview generated images in several ways:
+
+1. **Finder**: Browse `src/assets/images/og/` directly
+2. **Dev Server**: Run `npm run dev` and visit:
+   - Individual images: `http://localhost:8080/assets/images/og/[filename].png`
+   - Preview page: `http://localhost:8080/og-images-preview/`
+3. **Build Output**: Images are copied to `_site/assets/images/og/` during build
+
+#### Customization
+
+To customize the OG image design, edit `src/_includes/og-image.njk`. The template uses your site's CSS custom properties, so changes to colors, typography, and spacing will automatically be reflected in the generated images.

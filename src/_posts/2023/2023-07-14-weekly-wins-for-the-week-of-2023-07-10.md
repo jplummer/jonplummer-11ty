@@ -4,6 +4,7 @@ layout: single_post.njk
 date: "2023-07-14T12:00:00-08:00"
 tags: post
 description: "This was not an easy week. Several things went at least a little sideways: Tuesday's workout wrung me out; Saturday's was cut short by a whopper of a headache;"
+ogImage: /assets/images/og/2023-07-14-weekly-wins-for-the-week-of-2023-07-10.png
 ---
 This was not an easy week. Several things went at least a little sideways: Tuesday's workout wrung me out; Saturday's was cut short by a whopper of a headache; I recognized that I've taken on too many projects; several people were out and despite all of our preparation that did cause some disconcert in projects; I procrastinated on a thing I really care about and made no progress on it all week. And yet there is gold among the sand:
 

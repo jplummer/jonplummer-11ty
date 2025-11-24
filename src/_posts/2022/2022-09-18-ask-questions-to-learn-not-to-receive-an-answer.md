@@ -3,7 +3,8 @@ title: Ask questions to learn, not to receive an answer
 layout: single_post.njk
 date: "2022-09-18T12:00:00-08:00"
 tags: post
-description: "I don't find it useful to ask users directly for the answer to a question of detail. For example, I hope I'd never ask a user what they think the order of"
+description: I don't find it useful to ask users directly for the answer to a question of detail. For example, I hope I'd never ask a user what they think the order of
+ogImage: /assets/images/og/2022-09-18-ask-questions-to-learn-not-to-receive-an-answer.png
 ---
 I don't find it useful to ask users directly for the answer to a question of detail. For example, I hope I'd never ask a user what they think the order of columns in a table should be, or even if a table was appropriate for the data at hand.
 

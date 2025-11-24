@@ -3,7 +3,8 @@ title: Weekly wins for the week of 2023 01 30
 layout: single_post.njk
 date: "2023-02-03T12:00:00-08:00"
 tags: post
-description: "This is the first week in quite a while that I fulfilled all of my at-work weekly objectives. Sometimes lowering your sights slightly can pay off. Yet I also"
+description: This is the first week in quite a while that I fulfilled all of my at-work weekly objectives. Sometimes lowering your sights slightly can pay off. Yet I also
+ogImage: /assets/images/og/2023-02-03-weekly-wins-for-the-week-of-2023-01-30.png
 ---
 - This is the first week in quite a while that I fulfilled all of my at-work weekly objectives. Sometimes lowering your sights slightly can pay off. Yet I also feel I accomplished more than recent weeks. It's probably a combination of smaller, more accomplishable (therefore likely better-defined) objectives and actual progress on a thing that's been lingering for a while. We'll see if this is a trick or a technique.
 - Having to explain my thoughts about product research/design/development to folks I work with, and having them ask me to operationalize parts of it they don't fully understand, has led me to explaining some of the concepts from new angles. This is challenging my thinking and helping me to firm it up.

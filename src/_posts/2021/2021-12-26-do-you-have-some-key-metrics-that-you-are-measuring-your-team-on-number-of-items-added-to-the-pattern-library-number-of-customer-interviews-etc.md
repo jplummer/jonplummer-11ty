@@ -3,7 +3,8 @@ title: Do you have some key metrics that you are measuring your team on (number 
 layout: single_post.njk
 date: "2021-12-26T12:00:00-08:00"
 tags: post
-description: "I tend not to be in favor of output metrics like these; they've been shown to be counterproductive for developers (lines of code, commits, bugs crushed, etc.),"
+description: I tend not to be in favor of output metrics like these; they've been shown to be counterproductive for developers (lines of code, commits, bugs crushed, etc.),
+ogImage: /assets/images/og/2021-12-26-do-you-have-some-key-metrics-that-you-are-measuring-your-team-on-number-of-items-added-to-the-pattern-library-number-of-customer-interviews-etc.png
 ---
 I tend not to be in favor of output metrics like these; they've been shown to be counterproductive for developers (lines of code, commits, bugs crushed, etc.), for example. But I am thinking about how best to apply the process maturity scorecard to the work of the individual designers to try to coach them on their projects. If a designer is helping to improve the process maturity of their product team(s), that's a good sign.
 

@@ -90,6 +90,18 @@ if (!skipChecks) {
   console.log('⚠️  Skipping pre-deploy validation (--skip-checks flag used)\n');
 }
 
+// Generate OG images before deploy (incremental - only generates what's needed)
+if (!process.argv.includes('--skip-checks')) {
+  try {
+    console.log('🖼️  Checking OG images...');
+    execSync('npm run generate-og-images', { stdio: 'inherit' });
+    console.log('');
+  } catch (error) {
+    console.error('\n❌ OG image generation failed. Fix errors before deploying.\n');
+    process.exit(1);
+  }
+}
+
 // Check if rsync is available
 function checkRsync() {
   try {

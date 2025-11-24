@@ -3,7 +3,8 @@ title: Don't interrupt the natural behavior
 layout: single_post.njk
 date: "2023-03-08T12:00:00-08:00"
 tags: post
-description: "Don't interrupt the user's natural behavior. Enhance or extend the natural behavior, but remain compatible with it. While I worked for Belkin we made a"
+description: Don't interrupt the user's natural behavior. Enhance or extend the natural behavior, but remain compatible with it. While I worked for Belkin we made a
+ogImage: /assets/images/og/2023-03-08-dont-interrupt-the-natural-behavior.png
 ---
 Don't interrupt the user's natural behavior. Enhance or extend the natural behavior, but remain compatible with it.
 

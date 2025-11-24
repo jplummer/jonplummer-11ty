@@ -3,8 +3,9 @@
 - `layout` - Which template to use
 - `title` - Page title
 - `date` - Publication date (ISO format: "YYYY-MM-DDTHH:mm:ss-HH:mm")
-- `tags` - Array of tags for collections (post, portfolio)
+- `tags` - Array of tags for collections (post, portfolio). For posts, additional tags beyond `post` are used as `article:tag` meta tags for SEO.
 - `description` - Meta description for SEO (50-160 characters recommended)
+- `ogImage` - Path to Open Graph image. For posts, can be set to `auto` or omitted to auto-generate. Generated images are saved to `/assets/images/og/` with format `YYYY-MM-DD-post-slug.png`.
 - `permalink` - Custom URL structure
 - `eleventyExcludeFromCollections` - Exclude from collections
 

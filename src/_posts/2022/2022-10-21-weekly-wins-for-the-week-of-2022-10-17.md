@@ -3,7 +3,8 @@ title: Weekly wins for the week of 2022 10 17
 layout: single_post.njk
 date: "2022-10-21T12:00:00-08:00"
 tags: post
-description: "I'm using a process initiative at work to demonstrate to the company, especially to folks not on the product team, a basic UX research and design process. The"
+description: I'm using a process initiative at work to demonstrate to the company, especially to folks not on the product team, a basic UX research and design process. The
+ogImage: /assets/images/og/2022-10-21-weekly-wins-for-the-week-of-2022-10-17.png
 ---
 - I'm using a process initiative at work to demonstrate to the company, especially to folks not on the product team, a basic UX research and design process. The main idea is to short-circuit the all-too-common impulse to leap from an identified problem or need to one seemingly obvious solution. Executives are famous for this, but it's common in other parts of the company as well. Executives are also famous for mixing generation and evaluation, which should be held apart for a while.
 - Going hard at the gym has started (at long last) to result in _less_ or even _no_ knee pain at night, leading to better sleep. Hallelujah.

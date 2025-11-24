@@ -4,6 +4,7 @@ layout: single_post.njk
 date: "2022-10-15T12:00:00-08:00"
 tags: post
 description: "Here's a quick one that has saved me time and helped me mask my frustration: When dealing with a support agent via online chat, keep a copy of everything you"
+ogImage: /assets/images/og/2022-10-15-pro-tip-online-chat-support.png
 ---
 Here's a quick one that has saved me time and helped me mask my frustration:
 

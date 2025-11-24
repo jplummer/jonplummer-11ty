@@ -4,6 +4,7 @@ layout: single_post.njk
 date: "2025-11-09T12:00:00-08:00"
 tags: post
 description: "I realized something a little while ago: for me, being an ally means actually physically helping. I had long thought about allyship in terms of support…"
+ogImage: /assets/images/og/2025-11-09-being-an-ally-means-actually-physically-helping.png
 ---
 I realized something a little while ago: for me, being an ally means actually physically helping.
 

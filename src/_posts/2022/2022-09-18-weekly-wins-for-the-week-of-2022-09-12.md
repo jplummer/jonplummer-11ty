@@ -3,7 +3,8 @@ title: Weekly wins for the week of 2022 09 12
 layout: single_post.njk
 date: "2022-09-18T12:00:00-08:00"
 tags: post
-description: "While the team is sad at the departure of a great employee, they are holding together. I made less progress than I had hoped on my conference presentation"
+description: While the team is sad at the departure of a great employee, they are holding together. I made less progress than I had hoped on my conference presentation
+ogImage: /assets/images/og/2022-09-18-weekly-wins-for-the-week-of-2022-09-12.png
 ---
 - While the team is sad at the departure of a great employee, they are holding together.
 - I made less progress than I had hoped on my conference presentation scripts, but more than I was in danger of making, and I'll take that as a win.

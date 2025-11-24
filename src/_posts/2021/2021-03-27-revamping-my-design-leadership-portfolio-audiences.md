@@ -3,7 +3,8 @@ title: "Revamping my design leadership portfolio: audiences"
 layout: single_post.njk
 date: "2021-03-27T12:00:00-08:00"
 tags: post
-description: "In a previous post I said > My highest-level goal is to be an impressive candidate design leader to firms that are looking for experience design leadership."
+description: In a previous post I said > My highest-level goal is to be an impressive candidate design leader to firms that are looking for experience design leadership.
+ogImage: /assets/images/og/2021-03-27-revamping-my-design-leadership-portfolio-audiences.png
 ---
 In a previous post I said
 

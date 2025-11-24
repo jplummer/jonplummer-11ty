@@ -20,11 +20,24 @@ I chose simple, reliable tools that require little maintenance.
 ## Features
 
 - **Dark Mode**: Automatically adjusts to your screen's brightness settings.
-- **RSS Feeds**: Allows readers to subscribe to updates without visiting the site.
-- **Automated Checks**: I can run a single command to check for:
-  - Broken links
-  - Accessibility errors
-  - Valid code structure
+- **RSS Feeds**: Separate feeds for blog posts and links, allowing readers to subscribe to updates.
+- **SEO & Social Sharing**: 
+  - Open Graph meta tags for social media sharing
+  - Article-specific meta tags for blog posts
+  - Schema.org structured data (BlogPosting, Person, WebSite)
+  - Auto-generated Open Graph images (1200×630px) for all posts and pages
+  - Sitemap generation for search engines
+- **Automated Testing**: Comprehensive test suite that checks:
+  - HTML validity and structure
+  - Broken links (internal and external)
+  - Accessibility (WCAG compliance via axe-core)
+  - SEO meta tags
+  - RSS feed validity
+  - Markdown syntax and structure
+  - Content structure validation
+  - Performance metrics
+- **Automated OG Image Generation**: Open Graph images are automatically generated using Puppeteer, pulling design tokens from the main stylesheet for consistency.
+- **Pre-deploy Validation**: Automatic checks before deployment to prevent authoring mistakes from going live.
 
 ## Run It Yourself
 

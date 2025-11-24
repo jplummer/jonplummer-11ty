@@ -3,7 +3,8 @@ title: Weekly wins for the week of 2023 05 08
 layout: single_post.njk
 date: "2023-05-12T12:00:00-08:00"
 tags: post
-description: "Last week was tricky motivation-wise; there's an onsite meeting coming up in two weeks that is very important and I'm nervous about the outcome. That's"
+description: Last week was tricky motivation-wise; there's an onsite meeting coming up in two weeks that is very important and I'm nervous about the outcome. That's
+ogImage: /assets/images/og/2023-05-12-weekly-wins-for-the-week-of-2023-05-08.png
 ---
 Last week was tricky motivation-wise; there's an onsite meeting coming up in two weeks that is very important and I'm nervous about the outcome. That's typically a recipe for procrastination. So
 

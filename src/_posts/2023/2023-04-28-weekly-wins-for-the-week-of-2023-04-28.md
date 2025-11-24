@@ -3,7 +3,8 @@ title: Weekly wins for the week of 2023 04 28
 layout: single_post.njk
 date: "2023-04-28T12:00:00-08:00"
 tags: post
-description: "An oft-rescheduled and contentious meeting resulted in a resolution to work together more often and more closely, which is the right answer. I made progress on"
+description: An oft-rescheduled and contentious meeting resulted in a resolution to work together more often and more closely, which is the right answer. I made progress on
+ogImage: /assets/images/og/2023-04-28-weekly-wins-for-the-week-of-2023-04-28.png
 ---
 - An oft-rescheduled and contentious meeting resulted in a resolution to work together more often and more closely, which is the right answer.
 - I made progress on (many of) the things this week!

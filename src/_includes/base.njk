@@ -29,11 +29,27 @@
     <meta property="og:site_name" content="Jon Plummer">
     <meta property="og:title" content="{{ title | default('Jon Plummer – Today I Learned') }}">
     <meta property="og:url" content="https://jonplummer.com{{ page.url }}">
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="{% if tags and 'post' in tags %}article{% else %}website{% endif %}">
     <meta property="og:description" content="{% if pagination and pagination.pageNumber > 0 %}Page {{ pagination.pageNumber }} of Jon Plummer's UX design blog. Insights on design leadership, product development, and team management.{% else %}{{ description | default('Jon Plummer is a UX design leader and mentor. Read his thoughts on design, leadership, and product development.') }}{% endif %}">
-    <meta property="og:image" content="https://jonplummer.com/assets/images/2021/05/og-image.png">
-    <meta property="og:image:url" content="https://jonplummer.com/assets/images/2021/05/og-image.png">
-    <meta property="og:image:secure_url" content="https://jonplummer.com/assets/images/2021/05/og-image.png">
+    {% set ogImageUrl = ogImage | default('/assets/images/2021/05/og-image.png') %}
+    <meta property="og:image" content="https://jonplummer.com{{ ogImageUrl }}">
+    <meta property="og:image:url" content="https://jonplummer.com{{ ogImageUrl }}">
+    <meta property="og:image:secure_url" content="https://jonplummer.com{{ ogImageUrl }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="{% if pagination and pagination.pageNumber > 0 %}Page {{ pagination.pageNumber }} of Jon Plummer's UX design blog{% else %}{{ title | default('Jon Plummer – Today I Learned') }}{% if description %} - {{ description }}{% endif %}{% endif %}">
+    {% if tags and 'post' in tags and date %}
+      <meta property="article:published_time" content="{{ date | dateToRfc3339Safe }}">
+      <meta property="article:author" content="Jon Plummer">
+      <meta property="article:section" content="Blog">
+      {% if tags %}
+        {% for tag in tags %}
+          {% if tag != 'post' %}
+            <meta property="article:tag" content="{{ tag }}">
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endif %}
 
     {# Schema.org structured data #}
     {% if page.url == "/about/" %}
@@ -64,7 +80,8 @@
           "@id": "https://jonplummer.com{{ page.url }}"
         },
         "url": "https://jonplummer.com{{ page.url }}",
-        "description": {{ description | default(title) | json | safe }}
+        "description": {{ description | default(title) | json | safe }},
+        "image": "https://jonplummer.com{{ ogImageUrl }}"
       }
       </script>
     {% endif %}

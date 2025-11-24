@@ -1,9 +1,10 @@
 ---
 title: The "hidden" pages of jonplummer.com
 layout: single_post.njk
-date: 2025-11-20T12:00:00-08:00
+date: 2025-11-20T20:00:00.000Z
 tags: post
-description: "A tour of the utility pages of this site—RSS feeds, documentation, sitemaps, and more—and how they are generated."
+description: A tour of the utility pages of this site—RSS feeds, documentation, sitemaps, and more—and how they are generated.
+ogImage: /assets/images/og/2025-11-20-the-hidden-pages-of-this-site.png
 ---
 This site has a handful of "hidden" pages. They aren't secret but they don't live in the main navigation; they serve utility functions rather than human browsing habits. Making them public and giving them URLs is a nod to the "view source" ethos of the web. Everything is here, everything is inspectable, and everything is open.
 
@@ -97,3 +98,6 @@ A Nunjucks template (`sitemap.njk`) iterates through all the collections (`post`
 ### Why a sitemap
 
 You probably don't, unless you are a robot. But if you're building a site, you need one of these to ensure Baudu, Yandex, Yippy, Ecosia, Bing, Kagi, Ask, et al can find all your pages efficiently.
+
+
+ogImage: /assets/images/og/2025-11-20-the-hidden-pages-of-this-site.png

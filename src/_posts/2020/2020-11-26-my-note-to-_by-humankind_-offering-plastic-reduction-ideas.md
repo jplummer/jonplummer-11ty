@@ -4,6 +4,7 @@ layout: single_post.njk
 date: "2020-11-26T12:00:00-08:00"
 tags: post
 description: "Dear by Humankind folks: I love what you are doing and have progressively bought more by Humankind products over time (and tried to turn friends on to them)."
+ogImage: /assets/images/og/2020-11-26-my-note-to-_by-humankind_-offering-plastic-reduction-ideas.png
 ---
 Dear _by Humankind_ folks:
 

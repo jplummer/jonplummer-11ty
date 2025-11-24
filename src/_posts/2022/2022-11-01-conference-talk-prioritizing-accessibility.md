@@ -3,7 +3,8 @@ title: "Conference talk: prioritizing accessibility"
 layout: single_post.njk
 date: "2022-11-01T12:00:00-08:00"
 tags: post
-description: "Here's a recent talk I've given regarding why we pay attention to accessibility, and how the accessibility-related practices at Cayuse have changed in the past"
+description: Here's a recent talk I've given regarding why we pay attention to accessibility, and how the accessibility-related practices at Cayuse have changed in the past
+ogImage: /assets/images/og/2022-11-01-conference-talk-prioritizing-accessibility.png
 ---
 Here's a recent talk I've given regarding why we pay attention to accessibility, and how the accessibility-related practices at Cayuse have changed in the past year.
 

@@ -4,6 +4,7 @@ layout: single_post.njk
 date: "2024-11-02T12:00:00-08:00"
 tags: post
 description: "So many things, in retrospect: Home progress! Landscaping is done, trees are in Storm drains are cleaned The network is regularly providing 1200Mbps, after"
+ogImage: /assets/images/og/2024-11-02-what-went-right-in-october.png
 ---
 So many things, in retrospect:
 

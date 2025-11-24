@@ -4,6 +4,7 @@ layout: single_post.njk
 date: "2022-04-16T12:00:00-08:00"
 tags: post
 description: "To be a leader planning for one's firm to be acquired is to be in conflict with oneself: one must both proceed as if nothing will change, as there's no deal"
+ogImage: /assets/images/og/2022-04-16-empathy-for-the-leader-whose-company-is-being-acquired.png
 ---
 To be a leader planning for one's firm to be acquired is to be in conflict with oneself: one must both
 

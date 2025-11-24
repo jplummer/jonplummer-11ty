@@ -4,6 +4,7 @@ layout: single_post.njk
 date: "2022-11-08T12:00:00-08:00"
 tags: post
 description: "I mentioned earlier that I think of UX research and design practice in three horizons: Horizon one, detail: creating detailed designs, testing those designs,"
+ogImage: /assets/images/og/2022-11-08-philosophy-of-ux-research-and-design-horizon-three-benefit.png
 ---
 I mentioned earlier that I think of UX research and design practice in three horizons:
 

@@ -10,7 +10,8 @@
     "validate": "node scripts/test-runner.js html",
     "deploy": "node scripts/deploy/deploy.js",
     "update-docs": "node scripts/content/update-eleventy-docs.js",
-    "changelog": "node scripts/content/generate-changelog.js"
+    "changelog": "node scripts/content/generate-changelog.js",
+    "generate-og-images": "node scripts/content/generate-og-images.js"
   },
   "keywords": [],
   "author": "Jon Plummer",

@@ -3,7 +3,8 @@ title: Weekly wins for the week of 2023 03 13
 layout: single_post.njk
 date: "2023-03-17T12:00:00-08:00"
 tags: post
-description: "Last week was all about an off-site meeting involving the product and engineering groups. (What does off-site mean in today's remote-first environment? Never"
+description: Last week was all about an off-site meeting involving the product and engineering groups. (What does off-site mean in today's remote-first environment? Never
+ogImage: /assets/images/og/2023-03-17-weekly-wins-for-the-week-of-2023-03-13.png
 ---
 Last week was all about an off-site meeting involving the product and engineering groups. (What does off-site mean in today's remote-first environment? Never mind.)
 

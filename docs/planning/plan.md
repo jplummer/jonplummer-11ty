@@ -28,21 +28,8 @@
 - [ ] **Additional portfolio content**
   - [ ] Add Invoca interview presentation as portfolio piece
   - [ ] Expand Cayuse accomplishments portfolio piece
-  - [ ] MAYBE: Write descriptions on the main portfolio page
+  - [ ] MAYBE: Put descriptions on the main portfolio page (from item frontmatter)
   - [ ] MAYBE: Add links to key articles on the portfolio page (since it is a leader's portfolio)
-
-### SEO & Social
-- [ ] **SEO & Social**
-  - [x] Sitemap generation (for accessibility and indexing, not footer)
-  - [x] Open Graph
-  - [x] Twitter Cards (removed - using Open Graph for bsky and mastodon)
-  - Meta tags
-    - [x] add meta description to index
-    - [x] add title to post frontmatter
-    - [x] add ogImage default
-    - [x] add meta description to post frontmatter
-    - [ ] add ogImage to frontmatter on posts and pages that need it (generate them?)
-  - [ ] ogImage generation per post
 
 ### Security & Deployment
 - [ ] **Security and scan results mitigation**

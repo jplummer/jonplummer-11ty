@@ -3,7 +3,8 @@ title: "My 2021 Self-Evaluation: Annual Reflection"
 layout: single_post.njk
 date: "2022-12-24T12:00:00-08:00"
 tags: post
-description: "The twists and turns of my prior role are relevant to my new role. My self-eval of 2021 contains lessons for me now, though the stated goals of my new role"
+description: The twists and turns of my prior role are relevant to my new role. My self-eval of 2021 contains lessons for me now, though the stated goals of my new role
+ogImage: /assets/images/og/2022-12-24-my-2021-self-evaluation.png
 ---
 The twists and turns of my prior role are relevant to my new role. My self-eval of 2021 contains lessons for me now, though the stated goals of my new role will be related but different. (Edited to anonymize.)
 
