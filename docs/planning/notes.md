@@ -71,7 +71,7 @@ Adjusted for contrast (WCAG AA)
 
 ## Light Mode Colors (WCAG AA Compliant)
 
-Based on DR10 palette, adjusted for light mode contrast:
+Based on DR10a palette, adjusted for light mode contrast:
 - Background: #d3d8d2 (DR10 light gray)
 - Content background: #fff
 - Text: #2a2a2a (darker for contrast on #d3d8d2 background)
@@ -83,7 +83,7 @@ Based on DR10 palette, adjusted for light mode contrast:
 
 ## Dark Mode Colors (WCAG AA Compliant)
 
-Based on DR10 palette, adjusted for dark mode contrast:
+Based on DR10a palette, adjusted for dark mode contrast:
 - Background: #1a1a1a
 - Content background: #2d2d2d
 - Text: #e0e0e0

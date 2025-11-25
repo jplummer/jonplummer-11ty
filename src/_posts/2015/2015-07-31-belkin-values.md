@@ -10,7 +10,7 @@ I served on the Belkin Values committee with the CEO, VP of Design, VP of Human 
 
 <figure>
   <img src="/assets/images/2022/12/BelkinValues-640x1024.jpeg" alt="Belkin company values document">
-  <figcaption>Belkin Values document showing the discovered and articulated company values that replaced previous pedestrian brand statements, now used daily in employee evaluations.</figcaption>
+  <figcaption>Belkin Values document showing the discovered and articulated company values that replaced previous "undistinguished and undiscovered" remedial values, now used daily in employee evaluations.</figcaption>
 </figure>
 
 My favorite is "pursue the ideal," which acknowledges that the ideal is out of reach, and does not ask for optimization of your small area of the business but instead for you to stretch with others to identify and get ever closer to a shared ideal.

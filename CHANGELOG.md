@@ -5,9 +5,16 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to chronological ordering (newest first).
 
+## 2025-11-24
+
+- Convert post titles from Title Case to sentence case
+- Fix portfolio figure caption styling and update alt texts
+
 ## 2025-11-23
 
 - Update content and fix markdown lint issues
+- feat: implement comprehensive SEO and OG image generation
+- docs: reorganize planning docs into subprojects directory
 
 ## 2025-11-22
 

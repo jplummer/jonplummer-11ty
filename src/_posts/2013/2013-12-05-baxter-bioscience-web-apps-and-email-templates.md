@@ -23,17 +23,17 @@ description: "Web applications and email templates for Baxter BioScience, includ
 
 <figure>
   <img src="/assets/images/2022/12/dashboard2.png" alt="Baxter BioScience web application alternative dashboard layout">
-  <figcaption>Alternative dashboard layout showing different information architecture and data presentation options for the web application.</figcaption>
+  <figcaption>Detailed report layout showing different information architecture and data presentation options for the web application.</figcaption>
 </figure>
 
 <figure>
   <img src="/assets/images/2022/12/dashboard3.png" alt="Baxter BioScience web application dashboard with data visualization">
-  <figcaption>Dashboard view incorporating data visualizations and charts to help users understand trends and key metrics at a glance.</figcaption>
+  <figcaption>Alternative tabular report to help users understand trends and key metrics at a glance.</figcaption>
 </figure>
 
 <figure>
   <img src="/assets/images/2022/12/advate_clean.png" alt="Baxter BioScience Advate email template clean design">
-  <figcaption>Clean, minimal email template design for Advate communications, emphasizing clarity and readability.</figcaption>
+  <figcaption>Clean, minimal email template design for Advate-branded communications, emphasizing clarity and readability.</figcaption>
 </figure>
 
 <figure>

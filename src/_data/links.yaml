@@ -1,3 +1,10 @@
+2025-11-24:
+  - url: https://primer.style/accessibility/toasts/
+    title: "Accessibility/Toasts – Primer"
+    description: '"GitHub no longer uses toasts because of their accessibility and usability issues."'
+  - url: https://blog.modelcontextprotocol.io/posts/2025-11-21-mcp-apps/
+    title: "MCP Apps: Extending servers with interactive user interfaces – Anton Pidkuiko et al"
+    description: '"MCP Apps Extension introduces a standardized pattern for declaring UI resources, linking them to tools, and enabling bidirectional communication between embedded interfaces and the host application."'
 2025-11-21:
   - url: https://www.chrbutler.com/the-fundamentals-problem
     title: "The Fundamentals Problem – Christopher Butler"

@@ -18,7 +18,7 @@ Wemo is a family of intelligent products for the home that allow you to control 
 <div class="portrait-grid">
 <figure>
   <img src="/assets/images/2022/12/ios7_devicelist03_iphone5-577x1024.png" alt="WeMo app device list screen showing all connected WeMo devices">
-  <figcaption>ain WeMo app interface showing device status and controls, redesigned for iOS 7 with a cleaner, flatter aesthetic.<</figcaption>
+  <figcaption>Main WeMo app interface showing device status and controls, redesigned for iOS 7 with a cleaner, flatter aesthetic.</figcaption>
 </figure>
 
 <figure>

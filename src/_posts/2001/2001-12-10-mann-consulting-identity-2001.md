@@ -44,25 +44,25 @@ Exploratory work:
 
 <figure>
   <img src="/assets/images/2022/12/1369064622764958.gif" alt="Mann Consulting identity exploration concept 6">
-  <figcaption>Another exploration of the cube concept with variations in form and application.</figcaption>
+  <figcaption>Exploration of the letter M. Someone liked Accenture, which is irrelevant.</figcaption>
 </figure>
 
 <figure>
   <img src="/assets/images/2022/12/1455452602675456.gif" alt="Mann Consulting identity exploration concept 7">
-  <figcaption>Identity exploration showing cube variations and different logotype treatments.</figcaption>
+  <figcaption>Exploration of cube arrangements.</figcaption>
 </figure>
 
 <figure>
   <img src="/assets/images/2022/12/1458482922704953.gif" alt="Mann Consulting identity exploration concept 8">
-  <figcaption>Design exploration with alternative approaches to the cube mark and typography.</figcaption>
+  <figcaption>Some old logos combined letters into a single cshape, which is tricky when you have an M.</figcaption>
 </figure>
 
 <figure>
   <img src="/assets/images/2022/12/1461064399475355.gif" alt="Mann Consulting identity exploration concept 9">
-  <figcaption>Another identity concept exploring different visual treatments and mark variations.</figcaption>
+  <figcaption>What if two cubes?</figcaption>
 </figure>
 
 <figure>
   <img src="/assets/images/2022/12/1658524951755451.gif" alt="Mann Consulting identity exploration concept 10">
-  <figcaption>Final exploration showing yet another approach to the identity design before selecting the cube concept.</figcaption>
+  <figcaption>Pixel M exploration led back to the cube concept.</figcaption>
 </figure>

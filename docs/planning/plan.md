@@ -2,32 +2,11 @@
 
 ## 🎯 Active Work
 
-### Portfolio Templates
-- [x] **Portfolio Template (`portfolio.njk` and `_includes/portfolio_list_item.njk`)**
-  - [x] Grid listing (3 columns desktop, 2 tablet, 1 mobile)
-  - [x] Only "portfolio" category
-  - [x] Navigation controls (unhidden in nav)
-  - [x] Image size/position/styling
-
-- [x] **Portfolio Post Content Template (`_includes/portfolio_detail.njk`)**
-  - [x] Article structure matching current HTML
-  - [x] No date display (intentional design decision)
-  - [x] Portfolio-only navigation (previous/next within portfolio collection)
-  - [x] Full-width images for landscape orientation
-  - [x] Portrait-grid utility for portrait images (3/2/1 columns responsive)
-  - [x] Caption styling aligned with text column
-  - [x] All images standardized to HTML `<figure>` syntax
-  - [ ] Edit captions and alt text for portfolio item images ⬅
-
-- [ ] **QA portfolio layouts**
-  - [ ] Test portfolio listing page across devices
-  - [ ] Test portfolio detail pages across devices
-  - [ ] Verify image display and responsiveness
-  - [ ] Check navigation between portfolio items
-
-- [ ] **Additional portfolio content**
+### Portfolio
+- [ ] **Additional portfolio content** ⬅
   - [ ] Add Invoca interview presentation as portfolio piece
   - [ ] Expand Cayuse accomplishments portfolio piece
+  - [ ] Expand product trio portfolio piece
   - [ ] MAYBE: Put descriptions on the main portfolio page (from item frontmatter)
   - [ ] MAYBE: Add links to key articles on the portfolio page (since it is a leader's portfolio)
 

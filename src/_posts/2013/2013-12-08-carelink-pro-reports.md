@@ -10,17 +10,17 @@ A patient with an insulin pump and a glucose monitor has health data positively 
 
 <figure>
   <img src="/assets/images/2022/12/daily.png" alt="CareLink Pro daily report showing glucose patterns throughout the day">
-  <figcaption>Daily report view showing glucose readings, insulin doses, and meal markers throughout a single day, helping identify patterns and timing issues.</figcaption>
+  <figcaption>Daily detail report showing glucose readings, insulin doses, and meal markers throughout a single day, helping identify patterns and dosage/timing issues.</figcaption>
 </figure>
 
 <figure>
   <img src="/assets/images/2022/12/overview.png" alt="CareLink Pro overview report with summary statistics">
-  <figcaption>Overview report providing summary statistics and key metrics across the selected time period, giving physicians a quick assessment of patient control.</figcaption>
+  <figcaption>Overview report providing summary statistics and key metrics across the selected time period, giving physicians a quick assessment of patient control. Meal analysis, wherein meals are aligned in time for modal analysis, was a key innovation at the time.</figcaption>
 </figure>
 
 <figure>
   <img src="/assets/images/2022/12/sensor.png" alt="CareLink Pro sensor data report with continuous glucose monitoring">
-  <figcaption>Sensor data report displaying continuous glucose monitoring (CGM) data with detailed trend analysis and time-in-range metrics.</figcaption>
+  <figcaption>Sensor data report displaying continuous glucose monitoring (CGM) data with detailed trend analysis and time-in-range metrics. Meal and overnight analyses are sensor-enabled enhancements to the prior report.</figcaption>
 </figure>
 
 <figure>

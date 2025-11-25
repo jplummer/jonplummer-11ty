@@ -26,17 +26,17 @@ Some other possibilities, with a provisional identity:
 
 <figure>
   <img src="/assets/images/2022/12/1345052502415656.gif" alt="Mann Consulting website design alternative concept 2">
-  <figcaption>Another alternative design concept with different typography, color scheme, and information architecture.</figcaption>
+  <figcaption>Another alternative design concept with different typography..</figcaption>
 </figure>
 
 <figure>
   <img src="/assets/images/2022/12/1355752802454956.gif" alt="Mann Consulting website design alternative concept 3">
-  <figcaption>Alternative concept exploring a more structured, grid-based layout approach for the website.</figcaption>
+  <figcaption>Alternative concept exploring a more columnar layout.</figcaption>
 </figure>
 
 <figure>
   <img src="/assets/images/2022/12/1568561297195050.gif" alt="Mann Consulting website design alternative concept 4">
-  <figcaption>Design alternative with different visual treatment and navigation structure.</figcaption>
+  <figcaption>Design alternative with different visual treatment.</figcaption>
 </figure>
 
 <figure>
@@ -51,5 +51,5 @@ Some other possibilities, with a provisional identity:
 
 <figure>
   <img src="/assets/images/2022/12/1958161897105550-1.gif" alt="Mann Consulting website design alternative concept 7">
-  <figcaption>Final alternative concept showing yet another approach to the website's visual design and user experience.</figcaption>
+  <figcaption>The idea of rotating "single sell" graphics for a focused but continuously-refreshed appearance won the day.</figcaption>
 </figure>

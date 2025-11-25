@@ -12,7 +12,7 @@ Removing opportunities for mistakes became the order of the day. An order-tolera
 
 <figure>
   <img src="/assets/images/2022/12/Screenshot2017-06-0321.17.37-1024x477.png" alt="Belkin router setup instructions with labels directly on components">
-  <figcaption>Improved router setup instructions with labels directly on the physical components, reducing confusion and wiring errors during installation.</figcaption>
+  <figcaption>Improved router setup instructions with labels directly on the physical components, reducing confusion and wiring errors during installation. Pre-installed cables were effective in preventing physical connection errors.</figcaption>
 </figure>
 
 In addition, we removed several opportunities for mistakes or confusion by shipping the router pre-secured, with a network name and password printed on a card. This could be changed by users at any time or during setup, and included blanks on the back to write their new settings if desired. Later routers included a slot on the foot for the card to be stored. This card significantly reduced the volume of "what's my network password" support calls.
