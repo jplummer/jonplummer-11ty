@@ -14,18 +14,18 @@ Medtronic engaged IDEO to help design a next-generation pump to succeed the Mini
 </figure>
 
 <figure>
-  <img src="/assets/images/2022/12/2_main.gif" alt="MiniMed pump main screen showing glucose levels and pump status">
-  <figcaption>The main home screen displaying current glucose reading, trend graph, and active pump status.</figcaption>
+  <img src="/assets/images/2022/12/2_main.gif" alt="MiniMed pump main menu with status icons and soft labels">
+  <figcaption>The main menu with status icons and "soft labels" for the A and B buttons. the design laguage was an extension of the pre-existing segmented displays prevalent at the time.</figcaption>
 </figure>
 
 <figure>
   <img src="/assets/images/2022/12/3_changing_settings_3.gif" alt="MiniMed pump settings screen for adjusting pump parameters">
-  <figcaption>Navigating through pump settings to adjust basal rates, maximum bolus, and other pump parameters.</figcaption>
+  <figcaption>Navigating through pump settings to adjust audio feedback, basal rates, maximum bolus, and other pump parameters.</figcaption>
 </figure>
 
 <figure>
   <img src="/assets/images/2022/12/3hr.gif" alt="MiniMed pump 3-hour view showing glucose trends">
-  <figcaption>A 3-hour glucose trend view showing recent readings and patterns over a shorter time window.</figcaption>
+  <figcaption>A 3-hour glucose trend view showing recent readings and patterns over a shorter time window. The higher-resolution display allowed us to show more detail and relevant events and thresholds.</figcaption>
 </figure>
 
 <figure>
@@ -40,7 +40,7 @@ Medtronic engaged IDEO to help design a next-generation pump to succeed the Mini
 
 <figure>
   <img src="/assets/images/2022/12/6_alarm.gif" alt="MiniMed pump alarm screen alerting user">
-  <figcaption>An alarm screen alerting the user to a condition requiring attention, such as low glucose, pump malfunction, or maintenance reminder.</figcaption>
+  <figcaption>An alarm screen alerting the user to a condition requiring attention, such as low battery, low glucose, pump malfunction, or maintenance reminder.</figcaption>
 </figure>
 
 My role: ideation, workflows, on-screen and physical mockups, usability testing, demonstrating enhanced usability to executives and the firmware and pump hardware teams

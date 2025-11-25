@@ -25,8 +25,8 @@ At one point the Linksys app, meant to offer people setup, control, and monitori
 </figure>
 
 <figure>
-  <img src="/assets/images/2022/12/deviceprioritizationdelete-576x1024.png" alt="Linksys app device prioritization delete confirmation screen">
-  <figcaption>Confirmation screen for removing device prioritization, allowing users to cancel or confirm the action.</figcaption>
+  <img src="/assets/images/2022/12/deviceprioritizationdelete-576x1024.png" alt="Linksys app swipe actions pattern for device management">
+  <figcaption>Swipe actions are a useful mobile pattern.</figcaption>
 </figure>
 
 <figure>
@@ -45,8 +45,8 @@ At one point the Linksys app, meant to offer people setup, control, and monitori
 </figure>
 
 <figure>
-  <img src="/assets/images/2022/12/XboxCopy@2x-576x1024.png" alt="Linksys app Xbox device management screen">
-  <figcaption>Xbox-specific device management screen showing gaming-optimized network settings and prioritization options.</figcaption>
+  <img src="/assets/images/2022/12/XboxCopy@2x-576x1024.png" alt="Linksys app confirmation screen for removing device prioritization">
+  <figcaption>Confirmation screen for removing device prioritization, allowing users to cancel or confirm the action.</figcaption>
 </figure>
 </div>
 

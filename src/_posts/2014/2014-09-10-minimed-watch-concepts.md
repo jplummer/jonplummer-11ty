@@ -24,13 +24,13 @@ A skunkworks project to make a wearable remote for an insulin pump and glucose s
 </figure>
 
 <figure>
-  <img src="/assets/images/2022/12/001.1_idle_-_interrupted_signal.jpg" alt="MiniMed watch idle screen with interrupted signal indicator">
-  <figcaption>Idle watch face showing time display with an interrupted signal indicator when communication with the pump is lost.</figcaption>
+  <img src="/assets/images/2022/12/001.1_idle_-_interrupted_signal.jpg" alt="MiniMed watch crown control for accessing settings">
+  <figcaption>Just as you pull the crown of an analog watch to set the time, we could pull the crown of this hybrid watch to access various settings.</figcaption>
 </figure>
 
 <figure>
   <img src="/assets/images/2022/12/001.2_alarm_review_-_off.jpg" alt="MiniMed watch alarm review screen">
-  <figcaption>Alarm review screen allowing users to see and dismiss alerts, with the alarm indicator turned off.</figcaption>
+  <figcaption>Just as you pull the crown of an analog watch to set the time, we could pull the crown of this hybrid watch to access various settings. use the button to find the proper mode, pull the crown to enter the setting mode, rotate the crown to adjust, push the button to toggle, push crown back in to save.</figcaption>
 </figure>
 
 In 2006 this was a fairly radical thought, especially the digital crown and repurposing existing analog watch behaviors for everyday control.

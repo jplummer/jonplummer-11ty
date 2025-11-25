@@ -11,14 +11,14 @@ description: "WeMo smart home products and app for remote control of switches, l
 Wemo is a family of intelligent products for the home that allow you to control and see the status of switches, lights, and other devices, via your phone, from anywhere. We started with a plug-in switch module and a motion sensor, then quickly expanded to a power-measuring switch (Wemo Insight), a light switch, various LED lighting products, a heater, humidifier, and slow-cooker, and recently a dimmer. A smaller version of the original switch module, dubbed Wemo Mini, launched at the beginning of 2017.
 
 <figure>
-  <img src="/assets/images/2022/12/devices_withhand-1024x761.png" alt="WeMo smart home devices including switches and sensors held in hand">
-  <figcaption>Product photography showing the WeMo family of smart home devices, including plug-in switches, motion sensors, and other connected accessories.</figcaption>
+  <img src="/assets/images/2022/12/devices_withhand-1024x761.png" alt="WeMo app main device list screen with all connected devices">
+  <figcaption>Main device list screen displaying all connected WeMo devices with their current on/off status and quick controls.</figcaption>
 </figure>
 
 <div class="portrait-grid">
 <figure>
   <img src="/assets/images/2022/12/ios7_devicelist03_iphone5-577x1024.png" alt="WeMo app device list screen showing all connected WeMo devices">
-  <figcaption>Main device list screen displaying all connected WeMo devices with their current on/off status and quick controls.</figcaption>
+  <figcaption>ain WeMo app interface showing device status and controls, redesigned for iOS 7 with a cleaner, flatter aesthetic.<</figcaption>
 </figure>
 
 <figure>
@@ -28,7 +28,7 @@ Wemo is a family of intelligent products for the home that allow you to control 
 
 <figure>
   <img src="/assets/images/2022/12/ios7_iwant2_iphone5-577x1024.png" alt="WeMo app I Want feature expanded view with more options">
-  <figcaption>Expanded view of the I Want feature showing additional command options and device groupings.</figcaption>
+  <figcaption>Expanded view of the I Want feature showing time and sunrise/set settings.</figcaption>
 </figure>
 
 <figure>
@@ -42,13 +42,13 @@ Wemo is a family of intelligent products for the home that allow you to control 
 </figure>
 
 <figure>
-  <img src="/assets/images/2022/12/ios7_wemo_iphone5_080613-577x1024.png" alt="WeMo app main screen with device controls">
-  <figcaption>Main WeMo app interface showing device status and controls, redesigned for iOS 7 with a cleaner, flatter aesthetic.</figcaption>
+  <img src="/assets/images/2022/12/ios7_wemo_iphone5_080613-577x1024.png" alt="WeMo app single-device detail showing power consumption statistics">
+  <figcaption>Single-device detail, showing power consumption statistics.</figcaption>
 </figure>
 
 <figure>
   <img src="/assets/images/2022/12/Screenshot2017-06-0321.50.19-727x1024.png" alt="WeMo app updated interface from 2017">
-  <figcaption>Updated WeMo app interface from 2017 showing continued evolution of the design and feature set.</figcaption>
+  <figcaption>The initial physical device offering included a switch module with power sensing and a motion detector.</figcaption>
 </figure>
 </div>
 

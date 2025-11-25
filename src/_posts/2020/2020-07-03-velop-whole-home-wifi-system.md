@@ -10,55 +10,55 @@ The Velop Whole-Home Wi-Fi System is a collection of identical routers that work
 
 <div class="portrait-grid">
 <figure>
-  <img src="/assets/images/2022/12/SET_101-576x1024.png" alt="Velop app initial setup screen">
+  <img src="/assets/images/2022/12/SET_103-576x1024.jpg" alt="Velop app initial setup screen welcoming users">
   <figcaption>Initial setup screen welcoming users to the Velop system and beginning the setup process.</figcaption>
 </figure>
 
 <figure>
-  <img src="/assets/images/2022/12/SET_103-576x1024.jpg" alt="Velop app node detection screen">
-  <figcaption>App detecting available Velop nodes on the network and presenting them for setup.</figcaption>
+  <img src="/assets/images/2022/12/SET_101-576x1024.png" alt="Velop app account creation screen for cloud service setup">
+  <figcaption>Creating an account means we can use the cloud service to associate your new system with your prior settings, if any, connect more easily to certain ISPs, collect diagnostics for support, and use a variety of connections to perfect the setup of a mesh network.</figcaption>
 </figure>
 
 <figure>
-  <img src="/assets/images/2022/12/SET_105-576x1024.png" alt="Velop app wiring instructions screen">
-  <figcaption>Clear visual instructions showing minimal wiring required, with labels directly on the physical components.</figcaption>
+  <img src="/assets/images/2022/12/SET_121.png" alt="Velop app asking user about their network configuration">
+  <figcaption>Asking the user abotu their particular network makes it possible to give them just the right instructions.</figcaption>
 </figure>
 
 <figure>
-  <img src="/assets/images/2022/12/SET_123-576x1024.png" alt="Velop app internet connection detection screen">
+  <img src="/assets/images/2022/12/SET_105-576x1024.png" alt="Velop app focusing attention on parts needed from the bundle">
+  <figcaption>Depending on the bundle there might be a lot in the box, so let's focus user attention on just the parts they need for this step.</figcaption>
+</figure>
+
+<figure>
+  <img src="/assets/images/2022/12/SET_123-576x1024.png" alt="Velop app wiring instructions for dismantling old network">
+  <figcaption>Wiring the new network involvees dismantling the old. But not too much!</figcaption>
+</figure>
+
+<figure>
+  <img src="/assets/images/2022/12/SET_124-576x1024.png" alt="Velop app detecting and configuring new node automatically">
+  <figcaption>Once the new node is powered we can detect it, offer it to the user, and configure it automatically.</figcaption>
+</figure>
+
+<figure>
+  <img src="/assets/images/2022/12/SET_127-576x1024.png" alt="Velop app detecting and configuring internet connection settings">
   <figcaption>Automatically detecting and configuring internet connection settings from the existing router.</figcaption>
 </figure>
 
 <figure>
-  <img src="/assets/images/2022/12/SET_124-576x1024.png" alt="Velop app node placement guidance screen">
-  <figcaption>Guiding users on optimal placement of Velop nodes throughout their home for best coverage.</figcaption>
+  <img src="/assets/images/2022/12/SET_133-576x1024.png" alt="Velop app celebrating network growth success">
+  <figcaption>It's important to celebrate success as your network grows.</figcaption>
 </figure>
 
 <figure>
-  <img src="/assets/images/2022/12/SET_127-576x1024.png" alt="Velop app network growth visualization">
-  <figcaption>Visualizing the network as it grows, showing each successfully configured node and expanding coverage area.</figcaption>
+  <img src="/assets/images/2022/12/SET_110.png" alt="Velop app setting up additional nodes from bundle">
+  <figcaption>The bundle may have more nodes; now is the time to set up the next one.</figcaption>
 </figure>
 
 <figure>
-  <img src="/assets/images/2022/12/SET_133-576x1024.png" alt="Velop app setup completion screen">
-  <figcaption>Setup completion screen confirming all nodes are connected and the mesh network is operational.</figcaption>
-</figure>
-
-<figure>
-  <img src="/assets/images/2022/12/SET_260-576x1024.png" alt="Velop app network management dashboard">
-  <figcaption>Main network management dashboard showing all nodes, connected devices, and network performance metrics.</figcaption>
+  <img src="/assets/images/2022/12/SET_260-576x1024.png" alt="Velop app placement guidance for additional nodes">
+  <figcaption>Placement of additional nodes was a key challenge in early product testing. A little guidance goes a long way.</figcaption>
 </figure>
 </div>
-
-<figure>
-  <img src="/assets/images/2022/12/SET_110.png" alt="Velop router product photo or additional setup screen">
-  <figcaption>Additional Velop setup screen or product photography showing the router's design and form factor.</figcaption>
-</figure>
-
-<figure>
-  <img src="/assets/images/2022/12/SET_121.png" alt="Velop router product photo or network visualization">
-  <figcaption>Velop product image or network visualization showing the mesh system's coverage and connectivity.</figcaption>
-</figure>
 
 One Velop node is a very nice Wi-Fi router, and two or three will provide excellent range and speed for larger homes. To make setting up this multi-unit system as straightforward as possible we devised an app-based routine that detects available nodes and offers them to the user, walks them through the minimal wiring tasks necessary, detects their Internet settings, assists with the placement of nodes, and shows their network growing as they succeed in setting up each node in turn.
 

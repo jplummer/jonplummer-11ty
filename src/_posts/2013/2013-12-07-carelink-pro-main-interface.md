@@ -6,14 +6,20 @@ tags: portfolio
 coverImage: 2022/12/reports2.png
 description: "Main interface design for CareLink Pro, a diabetes management software for physicians featuring reports, device management, and patient profiles."
 ---
-<figure>
-  <img src="/assets/images/2022/12/reports2.png" alt="CareLink Pro reports interface showing patient data visualization">
-  <figcaption>Main reports interface displaying various report types available for viewing patient diabetes management data.</figcaption>
-</figure>
 
 <figure>
   <img src="/assets/images/2022/12/reports1.png" alt="CareLink Pro report selection screen">
-  <figcaption>Report selection screen allowing physicians to choose from different report types based on their clinical questions.</figcaption>
+  <figcaption>Report setup screen allowing physicians to choose date range and device data to investigate.</figcaption>
+</figure>
+
+<figure>
+  <img src="/assets/images/2022/12/reports2.png" alt="CareLink Pro reports interface showing patient data visualization">
+  <figcaption>Reporting options allowed meal periods to be set for detailed analyses.</figcaption>
+</figure>
+
+<figure>
+  <img src="/assets/images/2022/12/reports3.png" alt="CareLink Pro additional report view">
+  <figcaption>Report selection interface allowing reports to be delievered as a set for comprehensive patient review.</figcaption>
 </figure>
 
 <figure>
@@ -27,11 +33,7 @@ description: "Main interface design for CareLink Pro, a diabetes management soft
 </figure>
 
 <figure>
-  <img src="/assets/images/2022/12/pick_a_door-1024x794.png" alt="CareLink Pro navigation interface with multiple options">
-  <figcaption>Navigation interface presenting multiple pathways through the application, allowing users to choose their preferred workflow.</figcaption>
+  <img src="/assets/images/2022/12/pick_a_door-1024x794.png" alt="CareLink Pro pick a door interface for patient selection">
+  <figcaption>Classic "pick a door" interface for patient selection. (I would not do it this way today.)</figcaption>
 </figure>
 
-<figure>
-  <img src="/assets/images/2022/12/reports3.png" alt="CareLink Pro additional report view">
-  <figcaption>Alternative report view showing additional data visualizations and analysis options for comprehensive patient review.</figcaption>
-</figure>

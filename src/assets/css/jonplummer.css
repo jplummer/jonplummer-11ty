@@ -609,6 +609,11 @@ article.portfolio-detail section > .portrait-grid figure img {
 }
 
 article.portfolio-detail section > .portrait-grid figure figcaption {
+  margin-top: var(--spacing-xs);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-xs);
+  color: var(--text-color-light);
+  font-style: italic;
   padding-left: 0; /* Reset padding since these are in narrow columns */
 }
 
