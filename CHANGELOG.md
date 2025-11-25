@@ -9,6 +9,7 @@ and this project adheres to chronological ordering (newest first).
 
 - Convert post titles from Title Case to sentence case
 - Fix portfolio figure caption styling and update alt texts
+- Fix corrupted WeMo figcaption and update portfolio content
 
 ## 2025-11-23
 
