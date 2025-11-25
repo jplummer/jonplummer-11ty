@@ -21,6 +21,7 @@
   - [x] Supports `--skip-checks` flag for emergencies
 
 ### Design & Polish
+- [x] improve generated ogImage styling
 - [ ] vertical rhythm in typographic spacing https://edgdesign.co/blog/baseline-grids-in-css
 
 ## Future Enhancements

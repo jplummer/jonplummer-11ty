@@ -1,4 +1,15 @@
-# 📚 Front Matter Variables
+# 📋 Notes
+
+## What's here
+
+- 📋 Front Matter Variables
+- 🎨 Open Graph Images
+- ➡️ Redirects
+- 🌈 Color Ideas
+
+---
+
+# 📋 Front Matter Variables
 
 - `layout` - Which template to use
 - `title` - Page title
@@ -11,7 +22,62 @@
 
 **Note:** Drafts are handled by placing files in `_posts/_drafts/` folder, not via a `draft` variable.
 
-# 🔀 Redirects
+# 🎨 Open Graph Images
+
+Open Graph images are automatically generated for posts and pages using the `og-image.njk` template. The template is rendered into 1200x630px PNG images using Puppeteer.
+
+## Previewing OG Images
+
+**Preview the template at: `http://localhost:8080/og-image-preview/`**
+
+This preview page shows:
+- Live examples of the OG image template with sample data
+- A gallery of all generated OG images
+
+The preview page is excluded from deployment.
+
+## How OG Images Work
+
+1. **Template**: `src/_includes/og-image.njk` contains the HTML/CSS template
+   - Uses CSS custom properties from the main stylesheet
+   - Forces light theme colors for consistency
+   - Fixed 1200x630px dimensions (Open Graph standard)
+   - Includes author name, "Today I Learned" tagline, post title, description, and date
+
+2. **Generation**: `scripts/content/generate-og-images.js` uses Puppeteer to:
+   - Read the `og-image.njk` template
+   - Extract CSS custom properties from the main stylesheet
+   - Render the template with post data
+   - Generate PNG images saved to `src/assets/images/og/`
+
+3. **Auto-generation**: Posts with `ogImage: auto` or no `ogImage` field will have images generated automatically
+   - Images are generated during `npm run generate-og-images`
+   - Images are also generated incrementally during `npm run dev` when posts change
+   - Manual `ogImage` values are preserved (won't be overwritten)
+
+4. **Styling**: The template matches site styling:
+   - Title uses article `h1` styling (semibold, 3.5rem)
+   - Author name and tagline use link color (red)
+   - Light theme colors are forced (consistent appearance)
+   - 4rem padding around content
+   - Light gray background bars at top/bottom
+
+## Regenerating OG Images
+
+To regenerate all OG images (e.g., after styling changes):
+
+```bash
+npm run generate-og-images
+```
+
+To force regeneration of images that have manual `ogImage` values, delete the `src/assets/images/og` directory first:
+
+```bash
+rm -rf src/assets/images/og
+npm run generate-og-images
+```
+
+# ➡️ Redirects
 
 Redirects are used to handle URL changes, for example when post dates are corrected. They create an HTML page that redirects users to the correct URL. The need of a redirect is often visible in 404/4XX logs.
 
@@ -53,7 +119,9 @@ Use redirects when:
 - Any other permanent URL change that needs to preserve old links
 - You find lots of people getting a 404 page for a resource that exists elsewhere and you want to help them
 
-# 🎨 Color ideas inspired by https://www.presentandcorrect.com/blogs/blog/rams-palette and found at https://mcochris.com:
+# 🌈 Color Ideas
+
+Color ideas inspired by https://www.presentandcorrect.com/blogs/blog/rams-palette and found at https://mcochris.com:
 - DR01: #aab7bf, #736356, #bfb1a8, #ad1d1d, #261201
 - DR02: #84754a, #3a3124, #96937d, #b9ada4, #0d0000
 - DR03: #bf7c2a, #c09c6f, #5f503e, #9c9c9c, #e1e4e1

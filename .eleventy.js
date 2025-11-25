@@ -38,6 +38,10 @@ module.exports = function (eleventyConfig) {
   // Date formatting via Luxon
   eleventyConfig.addPlugin(require("eleventy-plugin-date"));
 
+  // Render plugin for rendering templates
+  const { RenderPlugin } = require("@11ty/eleventy");
+  eleventyConfig.addPlugin(RenderPlugin);
+
   // Add custom Nunjucks filter: limit
   eleventyConfig.addFilter("limit", function (array, limit) {
     if (!Array.isArray(array)) return array;
@@ -70,6 +74,145 @@ module.exports = function (eleventyConfig) {
   // Add JSON filter for escaping strings in JSON-LD
   eleventyConfig.addFilter("json", function (value) {
     return JSON.stringify(value);
+  });
+
+  // Extract CSS custom properties from main stylesheet (for OG image preview)
+  eleventyConfig.addFilter("extractCssCustomProperties", function () {
+    const path = require('path');
+    const cssPath = path.join(process.cwd(), 'src', 'assets', 'css', 'jonplummer.css');
+    const cssContent = fs.readFileSync(cssPath, 'utf8');
+    
+    // Extract :root block - match from :root to closing brace
+    const rootStart = cssContent.indexOf(':root');
+    if (rootStart === -1) {
+      throw new Error('Could not find :root block in CSS file');
+    }
+    
+    // Find the opening brace after :root
+    let braceStart = cssContent.indexOf('{', rootStart);
+    if (braceStart === -1) {
+      throw new Error('Could not find opening brace for :root block');
+    }
+    
+    // Find matching closing brace by counting braces
+    let braceCount = 0;
+    let braceEnd = braceStart;
+    for (let i = braceStart; i < cssContent.length; i++) {
+      if (cssContent[i] === '{') {
+        braceCount++;
+      } else if (cssContent[i] === '}') {
+        braceCount--;
+        if (braceCount === 0) {
+          braceEnd = i;
+          break;
+        }
+      }
+    }
+    
+    if (braceCount !== 0) {
+      throw new Error('Could not find matching closing brace for :root block');
+    }
+    
+    // Extract the :root block including the selector and braces
+    return cssContent.substring(rootStart, braceEnd + 1);
+  });
+
+  // Shortcode to render og-image template and extract body content
+  eleventyConfig.addAsyncShortcode("renderOgImage", async function(title, description, date) {
+    const path = require('path');
+    const nunjucks = require('nunjucks');
+    const { DateTime } = require("luxon");
+    
+    // Configure Nunjucks environment
+    const nunjucksEnv = new nunjucks.Environment(
+      new nunjucks.FileSystemLoader([
+        path.join(process.cwd(), 'src', '_includes'),
+        path.join(process.cwd(), 'src')
+      ])
+    );
+    
+    // Add filters
+    nunjucksEnv.addFilter('postDate', (dateObj) => {
+      const date = dateObj instanceof Date ? dateObj : new Date(dateObj);
+      return DateTime.fromJSDate(date).toLocaleString(DateTime.DATE_MED);
+    });
+    
+    nunjucksEnv.addFilter('extractCssCustomProperties', () => {
+      const cssPath = path.join(process.cwd(), 'src', 'assets', 'css', 'jonplummer.css');
+      const cssContent = fs.readFileSync(cssPath, 'utf8');
+      const rootStart = cssContent.indexOf(':root');
+      let braceStart = cssContent.indexOf('{', rootStart);
+      let braceCount = 0;
+      let braceEnd = braceStart;
+      for (let i = braceStart; i < cssContent.length; i++) {
+        if (cssContent[i] === '{') {
+          braceCount++;
+        } else if (cssContent[i] === '}') {
+          braceCount--;
+          if (braceCount === 0) {
+            braceEnd = i;
+            break;
+          }
+        }
+      }
+      return cssContent.substring(rootStart, braceEnd + 1);
+    });
+    
+    // Render the template
+    const templatePath = path.join(process.cwd(), 'src', '_includes', 'og-image.njk');
+    const template = fs.readFileSync(templatePath, 'utf8');
+    
+    const dateObj = date ? (date instanceof Date ? date : new Date(date)) : null;
+    
+    // Extract CSS custom properties
+    const cssPath = path.join(process.cwd(), 'src', 'assets', 'css', 'jonplummer.css');
+    const cssContent = fs.readFileSync(cssPath, 'utf8');
+    const rootStart = cssContent.indexOf(':root');
+    let braceStart = cssContent.indexOf('{', rootStart);
+    let braceCount = 0;
+    let braceEnd = braceStart;
+    for (let i = braceStart; i < cssContent.length; i++) {
+      if (cssContent[i] === '{') {
+        braceCount++;
+      } else if (cssContent[i] === '}') {
+        braceCount--;
+        if (braceCount === 0) {
+          braceEnd = i;
+          break;
+        }
+      }
+    }
+    const cssCustomProperties = cssContent.substring(rootStart, braceEnd + 1);
+    
+    const html = nunjucksEnv.renderString(template, {
+      title: title,
+      description: description || null,
+      date: dateObj,
+      cssCustomProperties: cssCustomProperties
+    });
+    
+    // Extract body content and styles separately
+    const headMatch = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
+    const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+    
+    if (headMatch && bodyMatch) {
+      // Extract the style tag content
+      const styleMatch = headMatch[1].match(/<style[^>]*>([\s\S]*?)<\/style>/i);
+      if (styleMatch) {
+        // Scope styles to .og-image-rendered container
+        // Replace :root with .og-image-rendered to scope the light theme override
+        // Replace body with .og-image-rendered
+        let scopedStyles = styleMatch[1]
+          .replace(/:root\s*\{/g, '.og-image-rendered {')
+          .replace(/body\s*\{/g, '.og-image-rendered {')
+          .replace(/body\s+/g, '.og-image-rendered ');
+        
+        // Return body content wrapped in a div with scoped styles
+        return `<div class="og-image-rendered"><style>${scopedStyles}</style>${bodyMatch[1]}</div>`;
+      }
+      return bodyMatch[1];
+    }
+    return html;
   });
 
   // Add custom Nunjucks shortcode: year
@@ -163,6 +306,9 @@ module.exports = function (eleventyConfig) {
   // Ignore the 'docs' and "_posts/_drafts" folders
   eleventyConfig.ignores.add("docs/");
   eleventyConfig.ignores.add("_posts/_drafts/");
+  
+  // Note: og-image-preview.njk is excluded from collections via front matter
+  // but should still be built for local preview during development
 
   // Incremental OG image generation on file changes during dev
   eleventyConfig.on("eleventy.beforeWatch", async (changedFiles) => {

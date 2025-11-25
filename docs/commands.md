@@ -147,13 +147,19 @@ The script will:
 
 #### Previewing Images
 
-You can preview generated images in several ways:
+**Preview the template at: `http://localhost:8080/og-image-preview/`**
+
+This preview page shows:
+- Live examples of the OG image template with sample data
+- A gallery of all generated OG images
+
+You can also preview generated images in other ways:
 
 1. **Finder**: Browse `src/assets/images/og/` directly
-2. **Dev Server**: Run `npm run dev` and visit:
-   - Individual images: `http://localhost:8080/assets/images/og/[filename].png`
-   - Preview page: `http://localhost:8080/og-images-preview/`
+2. **Dev Server**: Run `npm run dev` and visit individual images: `http://localhost:8080/assets/images/og/[filename].png`
 3. **Build Output**: Images are copied to `_site/assets/images/og/` during build
+
+**Note**: The preview page is excluded from deployment (it's for authoring only).
 
 #### Customization
 

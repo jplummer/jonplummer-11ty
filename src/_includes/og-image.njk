@@ -1,3 +1,30 @@
+{#-
+  Open Graph Image Template
+  
+  This template generates HTML that is rendered into PNG images for Open Graph
+  social media previews. The HTML is processed by Puppeteer in generate-og-images.js
+  to create 1200x630px images.
+  
+  The template uses CSS custom properties from the main stylesheet (injected via
+  cssCustomProperties) but overrides color variables to force light theme, ensuring
+  consistent appearance across all OG images regardless of system preferences.
+  
+  Preview this template at: http://localhost:8080/og-image-preview/
+  
+  Structure:
+  - body: Fixed 1200x630px container with light gray background
+  - .og-content: White content area with 4rem padding
+  - .og-hgroup: Author name and "Today I Learned" tagline (both in link color)
+  - .og-title: Post title (matches article h1 styling)
+  - .og-description: Optional post description
+  - .og-date: Optional formatted post date
+  
+  Variables:
+  - title: Post title (required)
+  - description: Post description (optional)
+  - date: Post date in ISO format (optional)
+  - cssCustomProperties: Extracted :root CSS from main stylesheet
+-#}
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -7,77 +34,113 @@
     /* CSS custom properties from main stylesheet */
     {{ cssCustomProperties | safe }}
     
+    /* Force light theme for OG images - ensures consistent appearance */
+    :root {
+      --text-color: #2a2a2a;
+      --text-color-light: #5a5a5a;
+      --background-color: #d3d8d2;
+      --content-background-color: #fff;
+      --link-color: #e6423a;
+      --link-hover-color: #d97706;
+      --link-visited-color: #5b4a3b;
+      --link-active-color: #0d703f;
+    }
+    
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
     
+    /* Reset all link styles to prevent browser defaults */
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    
+    /* Fixed dimensions for Open Graph image standard (1200x630px) */
     body {
       width: 1200px;
       height: 630px;
-      margin: 0;
-      padding: 0;
       font-family: var(--font-family);
-      font-size: var(--text-size);
+      font-size: 1.5rem;
       line-height: var(--line-height);
       letter-spacing: var(--letter-spacing-loose);
       color: var(--text-color);
-      background-color: var(--content-background-color);
+      background-color: var(--background-color); /* Light gray bars at top/bottom */
       display: flex;
-      flex-direction: column;
       justify-content: center;
-      align-items: flex-start;
-      padding: var(--spacing-xl);
-      box-sizing: border-box;
+      align-items: center;
     }
     
-    .og-container {
+    /* White content area with padding */
+    .og-content {
+      width: 100%;
+      background-color: var(--content-background-color);
+      padding: 4rem;
       display: flex;
       flex-direction: column;
-      gap: var(--spacing-md);
-      max-width: 100%;
+      gap: var(--spacing-sm);
     }
     
-    .og-author {
-      font-size: var(--font-size-sm);
-      line-height: var(--line-height-sm);
-      color: var(--link-color);
-      font-weight: var(--font-weight-semibold);
-      letter-spacing: var(--letter-spacing-normal);
-      margin-bottom: var(--spacing-xs);
+    /* Author name and tagline grouping */
+    .og-hgroup {
+      display: flex;
+      align-items: baseline;
+      gap: var(--spacing-sm);
+      flex-wrap: wrap;
     }
     
-    .og-title {
-      font-size: var(--font-size-3xl);
+    /* Author name styling (matches site header) */
+    .og-hgroup h1 {
+      font-size: 6rem;
       line-height: var(--line-height-3xl);
       font-weight: var(--font-weight-thin);
       letter-spacing: var(--letter-spacing-tight);
-      color: var(--text-color);
-      margin: 0;
+      color: var(--link-color);
+    }
+    
+    .og-hgroup h1 a {
+      color: var(--link-color) !important;
+      text-decoration: none;
+    }
+    
+    /* "Today I Learned" tagline */
+    .og-hgroup p {
+      font-size: 1.5rem;
+      line-height: var(--line-height-xs);
+      font-style: italic;
+      color: var(--link-color);
+    }
+    
+    /* Post title (matches article h1 styling) */
+    .og-title {
+      font-size: 3.5rem;
+      line-height: var(--line-height-2xl);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--letter-spacing-tight);
       text-wrap: balance;
     }
     
+    /* Post description */
     .og-description {
-      font-size: var(--font-size-md);
-      line-height: var(--line-height-md);
-      color: var(--text-color-light);
-      margin-top: var(--spacing-sm);
+      font-size: 1.75rem;
       max-width: 90%;
     }
     
+    /* Post date */
     .og-date {
-      font-size: var(--font-size-xs);
-      line-height: var(--line-height-xs);
-      color: var(--text-color-light);
+      font-size: 1.5rem;
       font-style: italic;
-      margin-top: var(--spacing-sm);
     }
   </style>
 </head>
 <body>
-  <div class="og-container">
-    <div class="og-author">Jon Plummer</div>
+  <div class="og-content">
+    <hgroup class="og-hgroup">
+      <h1><a href="/">Jon Plummer</a></h1>
+      <p>Today I Learned</p>
+    </hgroup>
     <h1 class="og-title">{{ title }}</h1>
     {% if description %}
     <p class="og-description">{{ description }}</p>

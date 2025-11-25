@@ -233,11 +233,6 @@ async function processFile(filePath) {
     return { updated: false, skipped: true, reason: 'Portfolio item (skipping)' };
   }
   
-  // Skip if manually set ogImage exists and we're not forcing regeneration
-  if (frontMatter.ogImage && frontMatter.ogImage !== 'auto') {
-    return { updated: false, skipped: true, reason: 'Manual ogImage set' };
-  }
-  
   // Determine if this is a post or page
   const isPost = frontMatter.tags && frontMatter.tags.includes('post');
   const isPage = frontMatter.tags && frontMatter.tags.includes('page');
@@ -254,12 +249,17 @@ async function processFile(filePath) {
   const ogImagePath = path.join(ogImageDir, ogImageFilename);
   const ogImageUrl = `/assets/images/og/${ogImageFilename}`;
   
+  // Skip if manually set ogImage exists and image file exists (allow regeneration if file is missing)
+  if (frontMatter.ogImage && frontMatter.ogImage !== 'auto' && fs.existsSync(ogImagePath)) {
+    return { updated: false, skipped: true, reason: 'Manual ogImage set' };
+  }
+  
   // Ensure og directory exists
   if (!fs.existsSync(ogImageDir)) {
     fs.mkdirSync(ogImageDir, { recursive: true });
   }
   
-  // Check if regeneration is needed
+  // Check if regeneration is needed (force if image doesn't exist)
   if (!needsRegeneration(ogImagePath, frontMatter, filePath) && fs.existsSync(ogImagePath)) {
     // Still update frontmatter if ogImage is missing
     if (!frontMatter.ogImage) {

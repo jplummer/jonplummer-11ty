@@ -1,0 +1,171 @@
+---
+layout: base.njk
+title: OG Image Preview
+permalink: /og-image-preview/
+eleventyExcludeFromCollections: true
+---
+<style>
+  .preview-container {
+    max-width: var(--max-width);
+    margin: var(--spacing-lg) auto;
+    padding: 0 var(--gutter);
+  }
+  
+  .preview-info {
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background: var(--content-background-color);
+    border: 1px solid var(--text-color-light);
+  }
+  
+  .preview-section {
+    margin: var(--spacing-lg) 0;
+  }
+  
+  .preview-section h2 {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-md);
+    color: var(--text-color);
+  }
+  
+  .og-preview-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    margin: var(--spacing-lg) 0;
+  }
+  
+  .og-preview-item {
+    border: 1px solid var(--text-color-light);
+    padding: var(--spacing-md);
+    background: var(--content-background-color);
+  }
+  
+  .og-preview-item h3 {
+    font-size: var(--font-size-md);
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-color);
+  }
+  
+  /* Scale down the 1200x630 OG image to fit in browser */
+  .og-preview-scaled {
+    transform: scale(0.5);
+    transform-origin: top left;
+    width: 1200px;
+    height: 630px;
+  }
+  
+  .og-preview-container {
+    width: 600px;
+    height: 315px;
+    overflow: hidden;
+    border: 1px solid var(--text-color-light);
+    background: white;
+  }
+  
+  .og-preview-content {
+    width: 1200px;
+    height: 630px;
+  }
+  
+  .og-images-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: var(--spacing-lg) 0;
+  }
+  
+  .og-images-grid-item {
+    border: 1px solid var(--text-color-light);
+    padding: 1rem;
+    background: var(--content-background-color);
+  }
+  
+  .og-images-grid-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .og-images-grid-item code {
+    font-size: var(--font-size-xxs);
+    word-break: break-all;
+  }
+</style>
+
+<div class="preview-container">
+  <h1>OG Image Preview</h1>
+  
+  <div class="preview-info">
+    <p>This page previews the <code>og-image.njk</code> template and shows all generated Open Graph images. Edit <code>src/_includes/og-image.njk</code> to change the styling, then refresh this page to see your changes.</p>
+  </div>
+  
+  <div class="preview-section">
+    <h2>Template Examples</h2>
+    <p>These examples show how the template renders with different content:</p>
+    
+    <div class="og-preview-wrapper">
+      <div class="og-preview-item">
+        <h3>Example: Blog Post with Description and Date</h3>
+        <div class="og-preview-container">
+          <div class="og-preview-scaled">
+            <div class="og-preview-content">
+              {% renderOgImage "How to Build Better Products", "A comprehensive guide to product development that covers everything from ideation to launch.", "2025-01-15" %}
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="og-preview-item">
+        <h3>Example: Page with Description (No Date)</h3>
+        <div class="og-preview-container">
+          <div class="og-preview-scaled">
+            <div class="og-preview-content">
+              {% renderOgImage "About This Site", "Learn more about the purpose and philosophy behind this website.", null %}
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="og-preview-item">
+        <h3>Example: Short Title Only</h3>
+        <div class="og-preview-container">
+          <div class="og-preview-scaled">
+            <div class="og-preview-content">
+              {% renderOgImage "Contact", null, null %}
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="og-preview-item">
+        <h3>Example: Long Title</h3>
+        <div class="og-preview-container">
+          <div class="og-preview-scaled">
+            <div class="og-preview-content">
+              {% renderOgImage "The Complete Guide to Understanding Complex Systems and Making Better Decisions", "This is a longer description that might wrap to multiple lines and test how the template handles extended content.", "2025-01-20" %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  {% if ogImages %}
+  <div class="preview-section">
+    <h2>Generated Images</h2>
+    <p>All generated Open Graph images:</p>
+    
+    <div class="og-images-grid">
+      {% for image in ogImages %}
+      <div class="og-images-grid-item">
+        <img src="{{ image.url }}" alt="{{ image.filename }}" loading="lazy">
+        <code>{{ image.filename }}</code>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</div>
+
