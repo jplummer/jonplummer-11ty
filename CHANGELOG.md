@@ -1,5 +1,13 @@
 All notable changes to this project are documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to chronological ordering (newest first).
 
+## 2025-11-26
+
+- Add SITE_DOMAIN environment variable for centralized domain configuration
+- Security audit improvements and deployment fixes
+- Add security-audit-report.md to .gitignore
+- Reduce security audit scope for static site
+- docs: consolidate documentation and reduce redundancy
+
 ## 2025-11-25
 
 - Security improvements: passwordless SSH, CSP hardening, dependency fixes
@@ -50,12 +58,12 @@ All notable changes to this project are documented in this file. The format is b
 - fix: ensure portfolio detail images span full grid while text stays in column
 - feat: implement image captions for portfolio items
 - refactor: update all portfolio items to use portfolio_detail layout
-- style: wrap all portfolio images in <figure> tags for consistent layout
+- style: wrap all portfolio images in &lt;figure&gt; tags for consistent layout
 - feat: implement responsive portfolio grid layout
 - Add blog post about hidden site pages
 - General site updates and content cleanup
 - feat: add humans.txt and AI-blocking robots.txt
-- refactor: standardize all portfolio images to use HTML <figure> syntax
+- refactor: standardize all portfolio images to use HTML &lt;figure&gt; syntax
 
 ## 2025-11-16
 
@@ -153,7 +161,7 @@ All notable changes to this project are documented in this file. The format is b
 - Tests
 - Link checking refinements
 - Improved link checking
-- SFTP –> rsync
+- SFTP –&gt; rsync
 - Documentation cleanup
 - Paging fixes
 - Cleanup unnecessary files

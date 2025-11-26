@@ -13,6 +13,17 @@ const path = require('path');
 
 const CHANGELOG_PATH = path.join(__dirname, '../../CHANGELOG.md');
 
+/**
+ * Escape HTML characters in commit messages to prevent them from being
+ * interpreted as HTML tags when the changelog is rendered.
+ */
+function escapeHtml(text) {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
 console.log('📝 Generating changelog from git history...\n');
 
 try {
@@ -49,8 +60,9 @@ try {
     changelog += `## ${date}\n\n`;
 
     // Add each commit message as a bullet point
+    // Escape HTML to prevent tags from being interpreted as HTML
     for (const message of commitsByDate[date]) {
-      changelog += `- ${message}\n`;
+      changelog += `- ${escapeHtml(message)}\n`;
     }
 
     changelog += '\n';
