@@ -107,6 +107,9 @@ dist
 # 11ty build output
 _site/
 
+# Security audit report (generated)
+security-audit-report.md
+
 # vitepress build output
 **/.vitepress/dist
 
