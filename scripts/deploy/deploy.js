@@ -9,13 +9,13 @@
  * Requirements:
  * - rsync must be installed
  * - SSH access to remote server (passwordless SSH key authentication)
- * - .env file with DREAMHOST_HOST, DREAMHOST_USERNAME, DREAMHOST_REMOTE_PATH
+ * - .env file with DEPLOY_HOST, DEPLOY_USERNAME, DEPLOY_REMOTE_PATH
  */
 
 const { execSync } = require('child_process');
 const fs = require('fs');
 
-console.log('🚀 Deploying to Dreamhost via rsync...\n');
+console.log('🚀 Deploying via rsync...\n');
 
 // Configuration
 const config = {
@@ -28,10 +28,13 @@ const config = {
 // Load .env configuration
 if (fs.existsSync('.env')) {
   require('dotenv').config();
-  config.host = process.env.DREAMHOST_HOST || config.host;
-  config.username = process.env.DREAMHOST_USERNAME || config.username;
-  config.remotePath = process.env.DREAMHOST_REMOTE_PATH || config.remotePath;
+  config.host = process.env.DEPLOY_HOST || config.host;
+  config.username = process.env.DEPLOY_USERNAME || config.username;
+  config.remotePath = process.env.DEPLOY_REMOTE_PATH || config.remotePath;
 }
+
+// Get public site domain for final message (not SSH hostname)
+let siteDomain = process.env.SITE_DOMAIN || 'jonplummer.com';
 
 // Check if _site directory exists
 if (!fs.existsSync('./_site')) {
@@ -149,7 +152,7 @@ function deploy() {
       });
 
       console.log('\n✅ Deployment completed successfully!');
-      console.log(`🌐 Your site should be live at: https://${config.host}`);
+      console.log(`🌐 Your site should be live at: https://${siteDomain}`);
 
     } catch (error) {
       console.error('\n❌ Deployment failed:');

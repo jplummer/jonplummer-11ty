@@ -13,7 +13,7 @@ The web should be fast, accessible, and resilient. This site is built with those
 I chose simple, reliable tools that require little maintenance.
 
 - **[Eleventy](https://www.11ty.dev/)**: A tool that turns my text files into web pages.
-- **CSS**: I write my own styling code without using any large libraries or frameworks.
+- **CSS**: I write my own styling code without using any libraries or frameworks.
 - **Nunjucks**: A simple way to organize page layouts.
 - **Git**: Keeps a history of every change I make.
 
@@ -38,6 +38,7 @@ I chose simple, reliable tools that require little maintenance.
   - Performance metrics
 - **Automated OG Image Generation**: Open Graph images are automatically generated using Puppeteer, pulling design tokens from the main stylesheet for consistency.
 - **Pre-deploy Validation**: Automatic checks before deployment to prevent authoring mistakes from going live.
+- **Security Audit**: Automated security checks for dependencies, configuration, and live site security (headers, TLS, DNS).
 
 ## Run It Yourself
 

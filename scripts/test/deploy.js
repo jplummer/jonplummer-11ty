@@ -13,7 +13,7 @@
  * Requirements:
  * - rsync must be installed on your system
  * - SSH access to your remote server
- * - .env file with DREAMHOST_HOST, DREAMHOST_USERNAME, and DREAMHOST_REMOTE_PATH
+ * - .env file with DEPLOY_HOST, DEPLOY_USERNAME, and DEPLOY_REMOTE_PATH
  */
 
 const { execSync } = require('child_process');
@@ -33,16 +33,16 @@ if (fs.existsSync('.env')) {
 
 // Configuration from environment variables
 const config = {
-  host: process.env.DREAMHOST_HOST,
-  username: process.env.DREAMHOST_USERNAME,
-  password: process.env.DREAMHOST_PASSWORD || null,
-  remotePath: process.env.DREAMHOST_REMOTE_PATH,
+  host: process.env.DEPLOY_HOST,
+  username: process.env.DEPLOY_USERNAME,
+  password: process.env.DEPLOY_PASSWORD || null,
+  remotePath: process.env.DEPLOY_REMOTE_PATH,
   localPath: './_site/'
 };
 
 // Test 1: Validate environment variables
 console.log('\n📋 Testing environment variables...');
-const requiredVars = ['DREAMHOST_HOST', 'DREAMHOST_USERNAME', 'DREAMHOST_REMOTE_PATH'];
+const requiredVars = ['DEPLOY_HOST', 'DEPLOY_USERNAME', 'DEPLOY_REMOTE_PATH'];
 let missingVars = [];
 
 requiredVars.forEach(varName => {
@@ -61,9 +61,9 @@ if (missingVars.length > 0) {
 
 // Check if password is provided
 if (config.password) {
-  console.log('✅ DREAMHOST_PASSWORD: *** (masked)');
+  console.log('✅ DEPLOY_PASSWORD: *** (masked)');
 } else {
-  console.log('ℹ️  DREAMHOST_PASSWORD: not set (will use SSH key or prompt for password)');
+  console.log('ℹ️  DEPLOY_PASSWORD: not set (will use SSH key or prompt for password)');
 }
 
 // Test 2: Check if _site directory exists

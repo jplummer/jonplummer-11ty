@@ -20,7 +20,8 @@
  *   DEPLOY_HOST is used for deployment (SSH), SITE_DOMAIN is for live site checks.
  * 
  * The script:
- * - Automates checks where possible (npm audit, outdated packages, etc.)
+ * - Automates checks where possible (npm audit, outdated packages, security headers, etc.)
+ * - Generates a markdown security report (saved to security-audit-report.md)
  * - Provides a checklist of manual tasks that require human review
  * - Exits with code 0 if all automated checks pass, 1 if issues found
  * 
@@ -30,35 +31,35 @@
  * - npm audit: Check for vulnerabilities (automated)
  * - npm outdated: Review outdated packages (automated)
  * - npm update: Update dependencies (manual - test after updating)
- * - Review dependency licenses: Ensure compatibility with your license (manual)
- * - Check for deprecated packages: npm deprecate or package changelogs (manual)
- * - Node.js version: Keep Node.js LTS current (manual)
+ * - Review dependency licenses: Ensure compatibility with your license (automated)
+ * - Check for deprecated packages: npm deprecate or package changelogs (automated)
+ * - Node.js version: Keep Node.js LTS current (automated)
  * 
  * === Code & Configuration Security ===
- * - Secrets audit: Scan for exposed API keys, passwords, tokens in code/history (manual)
- * - Environment variables: Verify .env isn't committed and .env.example is safe (automated check)
- * - Deployment scripts: Review scripts/deploy/ for security issues (manual)
- * - File permissions: Ensure sensitive files aren't world-readable (manual)
- * - Git history: Check for accidentally committed secrets (manual - use git-secrets or similar)
+ * - Secrets audit: Scan for exposed API keys, passwords, tokens in code/history (automated)
+ * - Environment variables: Verify .env isn't committed and .env.example is safe (automated)
+ * - Deployment scripts: Review scripts/deploy/ for security issues (automated)
+ * - File permissions: Ensure sensitive files aren't world-readable (automated)
+ * - Git history: Check for accidentally committed secrets (automated)
  * 
  * === Build & Deployment Security ===
- * - Security headers verification: Test headers on live site (manual - use securityheaders.com)
- * - CSP review: Verify Content Security Policy is effective and not too permissive (manual)
- * - HTTPS/TLS: Verify certificates are valid and not expiring soon (manual)
+ * - Security headers verification: Test headers on live site (automated)
+ * - CSP review: Verify Content Security Policy is effective and not too permissive (automated)
+ * - HTTPS/TLS: Verify certificates are valid and not expiring soon (automated)
  * - Deployment credentials: Rotate SSH keys periodically (manual)
- * - Build output audit: Ensure no sensitive data in _site/ (manual)
+ * - Build output audit: Ensure no sensitive data in _site/ (automated)
  * 
  * === Content & Links Security ===
  * - External link validation: Check for broken/malicious links (automated via test suite)
- * - Third-party resources: Audit external scripts, fonts, images for security (manual)
+ * - Third-party resources: Audit external scripts, fonts, images for security (automated)
  * - User-generated content: If any, review for XSS/injection risks (manual - N/A for static site)
- * - Redirect security: Verify redirects aren't open redirects (manual)
+ * - Redirect security: Verify redirects aren't open redirects (automated)
  * 
  * === Infrastructure & Monitoring ===
  * - Hosting provider security: Review provider security notices/updates (manual)
  * - Backup verification: Test restore process (manual)
  * - Access logs review: Check for suspicious activity (manual)
- * - Domain/DNS security: Verify DNS records, check for unauthorized changes (manual)
+ * - Domain/DNS security: Verify DNS records, check for unauthorized changes (automated)
  * 
  * === Testing & Validation ===
  * - Run full test suite: Ensure all tests pass (manual - use npm run test all)

@@ -9,7 +9,7 @@
  * Requirements:
  * - rsync must be installed on your system
  * - SSH access to your remote server (preferably with SSH key authentication)
- * - .env file with DREAMHOST_HOST, DREAMHOST_USERNAME, and DREAMHOST_REMOTE_PATH
+ * - .env file with DEPLOY_HOST, DEPLOY_USERNAME, and DEPLOY_REMOTE_PATH
  * 
  * Installation:
  * - macOS: brew install rsync
@@ -35,10 +35,10 @@ const config = {
 // Check if .env file exists for configuration
 if (fs.existsSync('.env')) {
   require('dotenv').config();
-  config.host = process.env.DREAMHOST_HOST || config.host;
-  config.username = process.env.DREAMHOST_USERNAME || config.username;
-  config.password = process.env.DREAMHOST_PASSWORD || null;
-  config.remotePath = process.env.DREAMHOST_REMOTE_PATH || config.remotePath;
+  config.host = process.env.DEPLOY_HOST || config.host;
+  config.username = process.env.DEPLOY_USERNAME || config.username;
+  config.password = process.env.DEPLOY_PASSWORD || null;
+  config.remotePath = process.env.DEPLOY_REMOTE_PATH || config.remotePath;
 }
 
 // Check if _site directory exists
@@ -136,8 +136,8 @@ function deployChanges() {
       console.error('❌ No authentication method available.');
       console.error('   Please either:');
       console.error('   1. Set up SSH key authentication (recommended)');
-      console.error('   2. Install sshpass and set DREAMHOST_PASSWORD in .env');
-      console.error('   3. Set DREAMHOST_PASSWORD in .env (will prompt for password)');
+      console.error('   2. Install sshpass and set DEPLOY_PASSWORD in .env');
+      console.error('   3. Set DEPLOY_PASSWORD in .env (will prompt for password)');
       process.exit(1);
     }
 
