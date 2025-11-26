@@ -9,19 +9,13 @@ ogImage: /assets/images/og/YYYY-MM-DD-post-slug.png
 
 Post content starts here.
 
-## Front Matter Fields
+## Front Matter Reference
 
-### Required Fields
+For detailed information about front matter variables, see the [Authoring Guide](../authoring.md#front-matter-variables).
 
-- **`title`** - Post title (used in page title, Open Graph, and schema markup)
-- **`layout`** - Template to use (typically `single_post.njk`)
-- **`date`** - Publication date in ISO format: `"YYYY-MM-DDTHH:mm:ss-HH:mm"`
-- **`tags`** - Array of tags. Must include `post` for the post collection. Additional tags (beyond `post`) will be used as `article:tag` meta tags for SEO.
-
-### Optional Fields
-
-- **`description`** - Meta description for SEO (50-160 characters recommended). Used in meta description, Open Graph description, and schema markup. If omitted, defaults to the title.
-- **`ogImage`** - Path to Open Graph image. If set to `auto` or omitted, an OG image will be auto-generated at build time using the post title, description, and date. Generated images are saved to `/assets/images/og/` with the filename format `YYYY-MM-DD-post-slug.png`. You can manually set this to use a custom image.
+**Quick reference:**
+- **Required**: `title`, `layout`, `date`, `tags` (must include `post`)
+- **Optional**: `description`, `ogImage` (use `auto` or omit for auto-generation), `permalink`, `eleventyExcludeFromCollections`
 
 ## Automatic SEO Features
 

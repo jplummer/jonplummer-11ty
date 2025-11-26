@@ -108,6 +108,8 @@ The changelog is automatically regenerated before each deployment. You can also 
 
 - `npm run generate-og-images` - Generate Open Graph images for posts and pages
 
+**For authoring usage** (how to use `ogImage` in front matter, auto vs manual), see [authoring.md](authoring.md#open-graph-images).
+
 This script automatically generates OG images (1200×630px) for all posts and pages using Puppeteer to render HTML templates with your site's styling. The images are saved to `src/assets/images/og/` and the `ogImage` field is automatically added to each file's frontmatter.
 
 #### How It Works
