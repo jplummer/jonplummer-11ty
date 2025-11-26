@@ -6,7 +6,7 @@ eleventyExcludeFromCollections: true
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
         <title>Jon Plummer - Remaindered Links</title>
-        <link>https://jonplummer.com</link>
+        <link>{{ site.url }}</link>
         <description>Found links from Jon Plummer's blog</description>
         <language>en-US</language>
         <lastBuildDate>{{ collections.post | first }} GMT</lastBuildDate>
@@ -15,8 +15,8 @@ eleventyExcludeFromCollections: true
             {% if item.type == 'link' %}
             <item>
                 <title>Remaindered Links</title>
-                <link>{{ page.url | absoluteUrl("https://jonplummer.com") }}</link>
-                <guid>{{ page.url | absoluteUrl("https://jonplummer.com") }}#links-{{ item.date | dateToRfc3339 }}-{{ loop.index }}</guid>
+                <link>{{ page.url | absoluteUrl(site.url) }}</link>
+                <guid>{{ page.url | absoluteUrl(site.url) }}#links-{{ item.date | dateToRfc3339 }}-{{ loop.index }}</guid>
                 <pubDate>{{ item.date }} GMT</pubDate>
 
                 {# Links content #}

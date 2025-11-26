@@ -6,7 +6,7 @@ eleventyExcludeFromCollections: true
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
         <title>Jon Plummer</title>
-        <link>https://jonplummer.com</link>
+        <link>{{ site.url }}</link>
         <description>Today I Learned - Personal blog about work, life, and learning</description>
         <language>en-US</language>
         <lastBuildDate>{{ collections.post | first }} GMT</lastBuildDate>
@@ -14,8 +14,8 @@ eleventyExcludeFromCollections: true
         {% for item in collections.post | reverse | limit(20) %}
         <item>
             <title>{{ item.data.title | safe }}</title>
-            <link>{{ item.url | absoluteUrl("https://jonplummer.com") }}</link>
-            <guid>{{ item.url | absoluteUrl("https://jonplummer.com") }}</guid>
+            <link>{{ item.url | absoluteUrl(site.url) }}</link>
+            <guid>{{ item.url | absoluteUrl(site.url) }}</guid>
             <pubDate>{{ item.date | dateToRfc3339 }}</pubDate>
 
             {# Full post content #}

@@ -172,25 +172,46 @@ To customize the OG image design, edit `src/_includes/og-image.njk`. The templat
 
 The security audit script performs periodic security and maintenance checks for the site. It automates checks where possible and provides a checklist of manual tasks.
 
+#### Configuration
+
+The script requires a `SITE_DOMAIN` environment variable for live site security checks (security headers, TLS certificate, DNS records). Add to your `.env` file:
+
+```
+SITE_DOMAIN=jonplummer.com
+```
+
+**Note**: `SITE_DOMAIN` is the public-facing domain name, not the SSH hostname. `DEPLOY_HOST` is used for deployment (SSH access), while `SITE_DOMAIN` is used for checking the live website. If `SITE_DOMAIN` is not set, the script defaults to `jonplummer.com`.
+
 #### Automated Checks
 
 The script automatically checks:
 - **npm audit**: Scans for known vulnerabilities in dependencies
 - **npm outdated**: Identifies packages that need updates
-- **Node.js version**: Verifies you're using an LTS version
+- **Node.js version**: Verifies you're using an LTS version (even-numbered versions: 18, 20, 22, etc.)
+- **Deprecated packages**: Checks for deprecated npm packages
 - **Environment variables**: Ensures `.env` is properly ignored by git
 - **Package.json**: Validates configuration
 - **Build output**: Scans `_site/` for sensitive files that shouldn't be deployed
+- **File permissions**: Checks that sensitive files have appropriate permissions
+- **Git history**: Verifies `.env` was never committed
+- **Content Security Policy**: Validates CSP headers in `.htaccess`
+- **Dependency licenses**: Reviews package licenses for compatibility
+- **Secret scanning**: Scans code for exposed secrets (API keys, passwords, tokens)
+- **Deployment scripts**: Checks for hardcoded credentials
+- **Redirect security**: Verifies redirects aren't open redirects
+- **Third-party resources**: Identifies external scripts and stylesheets
+- **Security headers**: Checks live site for required security headers (requires `SITE_DOMAIN`)
+- **TLS certificate**: Verifies certificate expiration (requires `SITE_DOMAIN`)
+- **DNS records**: Validates DNS A records (requires `SITE_DOMAIN`)
 
 #### Manual Tasks Checklist
 
-The script also provides a comprehensive checklist of manual security tasks including:
-- Dependency license reviews
-- Secrets auditing (scanning for exposed API keys, passwords, tokens)
-- Security headers verification on live site
-- HTTPS/TLS certificate validation
-- Third-party resource audits
-- Infrastructure monitoring
+The script also provides a comprehensive checklist of manual security tasks that cannot be automated, including:
+- Updating dependencies (requires testing after updates)
+- SSH key rotation
+- Hosting provider security notices review
+- Backup restore testing
+- Access log review
 - Full test suite execution
 - Documentation updates
 

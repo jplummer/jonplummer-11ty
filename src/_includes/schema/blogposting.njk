@@ -8,18 +8,18 @@
   "author": {
     "@type": "Person",
     "name": "Jon Plummer",
-    "url": "https://jonplummer.com/about/"
+    "url": "{{ site.url }}/about/"
   },
   "publisher": {
     "@type": "Person",
     "name": "Jon Plummer",
-    "url": "https://jonplummer.com"
+    "url": "{{ site.url }}"
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://jonplummer.com{{ post.url }}"
+    "@id": "{{ site.url }}{{ post.url }}"
   },
-  "url": "https://jonplummer.com{{ post.url }}",
+  "url": "{{ site.url }}{{ post.url }}",
   "description": "{{ description | default(post.data.title) | safe }}"
 }
 </script>

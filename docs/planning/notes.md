@@ -6,6 +6,7 @@
 - 🎨 Open Graph Images
 - ➡️ Redirects
 - 🌈 Color Ideas
+- 🔒 Security Audit
 
 ---
 
@@ -160,3 +161,59 @@ Based on DR10a palette, adjusted for dark mode contrast:
 - Link hover: #f1b73a (DR10 yellow-orange)
 - Link visited: #a89585 (lighter version of DR10 dark brown #5b4a3b, adjusted for WCAG AA)
 - Link active: #2db366 (lighter version of DR10 green #0d703f)
+
+# 🔒 Security Audit
+
+The security audit script (`scripts/security/security-audit.js`) performs periodic security and maintenance checks for the site. It automates checks where possible and provides a checklist of manual tasks that require human review.
+
+## Configuration
+
+The script requires a `SITE_DOMAIN` environment variable for live site security checks. Add to your `.env` file:
+
+```
+SITE_DOMAIN=jonplummer.com
+```
+
+**Important**: `SITE_DOMAIN` is the public-facing domain name (e.g., `jonplummer.com`), not the SSH hostname. `DEPLOY_HOST` is used for deployment (SSH access), while `SITE_DOMAIN` is used for checking the live website. If `SITE_DOMAIN` is not set, the script defaults to `jonplummer.com`.
+
+## Running the Security Audit
+
+```bash
+npm run security-audit
+```
+
+## What It Checks
+
+The script performs automated checks for:
+
+### Dependency & Package Security
+- npm audit vulnerabilities
+- Outdated packages
+- Node.js LTS version (even-numbered: 18, 20, 22, etc.)
+- Deprecated packages
+- Dependency licenses
+
+### Code & Configuration Security
+- Environment variable handling (`.env` in `.gitignore`)
+- Package.json configuration
+- File permissions on sensitive files
+- Git history for accidentally committed secrets
+- Secret scanning (API keys, passwords, tokens in code)
+- Deployment scripts for hardcoded credentials
+
+### Build & Deployment Security
+- Sensitive files in build output
+- Content Security Policy configuration
+
+### Content & Links Security
+- Redirect security (open redirect vulnerabilities)
+- Third-party resources (external scripts/stylesheets)
+
+### Live Site Security (requires `SITE_DOMAIN`)
+- Security headers on live site
+- TLS certificate expiration
+- DNS records
+
+It also provides a comprehensive checklist of manual tasks that cannot be automated, including dependency updates (with testing), SSH key rotation, hosting provider notices, backup testing, and documentation updates.
+
+See the script's header comments for the complete list of security and maintenance tasks.

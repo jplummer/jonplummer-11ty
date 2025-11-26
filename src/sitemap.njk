@@ -6,7 +6,7 @@ eleventyExcludeFromCollections: true
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   {# Homepage #}
   <url>
-    <loc>https://jonplummer.com/</loc>
+    <loc>{{ site.url }}/</loc>
     <lastmod>{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -16,7 +16,7 @@ eleventyExcludeFromCollections: true
   {% for page in collections.page %}
   {% if page.data.purpose != "404" and page.data.purpose != "500" %}
   <url>
-    <loc>https://jonplummer.com{{ page.url }}</loc>
+    <loc>{{ site.url }}{{ page.url }}</loc>
     <lastmod>{{ page.date | dateToRfc3339 }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -26,7 +26,7 @@ eleventyExcludeFromCollections: true
 
   {# Portfolio page #}
   <url>
-    <loc>https://jonplummer.com/portfolio/</loc>
+    <loc>{{ site.url }}/portfolio/</loc>
     <lastmod>{{ collections.portfolio | getNewestCollectionItemDate | dateToRfc3339 }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -35,7 +35,7 @@ eleventyExcludeFromCollections: true
   {# All blog posts #}
   {% for post in collections.post %}
   <url>
-    <loc>https://jonplummer.com{{ post.url }}</loc>
+    <loc>{{ site.url }}{{ post.url }}</loc>
     <lastmod>{{ post.date | dateToRfc3339 }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -45,7 +45,7 @@ eleventyExcludeFromCollections: true
   {# All portfolio items #}
   {% for item in collections.portfolio %}
   <url>
-    <loc>https://jonplummer.com{{ item.url }}</loc>
+    <loc>{{ site.url }}{{ item.url }}</loc>
     <lastmod>{{ item.date | dateToRfc3339 }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -58,7 +58,7 @@ eleventyExcludeFromCollections: true
   {% set totalPages = (totalPosts + postsPerPage - 1) // postsPerPage %}
   {% for pageNum in range(2, totalPages + 1) %}
   <url>
-    <loc>https://jonplummer.com/page/{{ pageNum }}/</loc>
+    <loc>{{ site.url }}/page/{{ pageNum }}/</loc>
     <lastmod>{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
