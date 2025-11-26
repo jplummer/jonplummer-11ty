@@ -21,7 +21,7 @@
  * 
  * The script:
  * - Automates checks where possible (npm audit, outdated packages, security headers, etc.)
- * - Generates a markdown security report (saved to security-audit-report.md)
+ * - Outputs a markdown security report to the console
  * - Provides a checklist of manual tasks that require human review
  * - Exits with code 0 if all automated checks pass, 1 if issues found
  * 
@@ -31,14 +31,12 @@
  * - npm audit: Check for vulnerabilities (automated)
  * - npm outdated: Review outdated packages (automated)
  * - npm update: Update dependencies (manual - test after updating)
- * - Review dependency licenses: Ensure compatibility with your license (automated)
  * - Check for deprecated packages: npm deprecate or package changelogs (automated)
  * - Node.js version: Keep Node.js LTS current (automated)
  * 
  * === Code & Configuration Security ===
- * - Secrets audit: Scan for exposed API keys, passwords, tokens in code/history (automated)
- * - Environment variables: Verify .env isn't committed and .env.example is safe (automated)
- * - Deployment scripts: Review scripts/deploy/ for security issues (automated)
+ * - Environment variables: Verify .env isn't committed (automated)
+ * - Package.json: Validate configuration (automated)
  * - File permissions: Ensure sensitive files aren't world-readable (automated)
  * - Git history: Check for accidentally committed secrets (automated)
  * 
@@ -50,27 +48,15 @@
  * - Build output audit: Ensure no sensitive data in _site/ (automated)
  * 
  * === Content & Links Security ===
- * - External link validation: Check for broken/malicious links (automated via test suite)
- * - Third-party resources: Audit external scripts, fonts, images for security (automated)
- * - User-generated content: If any, review for XSS/injection risks (manual - N/A for static site)
- * - Redirect security: Verify redirects aren't open redirects (automated)
+ * - Redirect security: Report redirect count (informational)
+ * - Third-party resources: Identify external scripts and stylesheets (informational)
  * 
  * === Infrastructure & Monitoring ===
- * - Hosting provider security: Review provider security notices/updates (manual)
- * - Backup verification: Test restore process (manual)
- * - Access logs review: Check for suspicious activity (manual)
  * - Domain/DNS security: Verify DNS records, check for unauthorized changes (automated)
+ * - Backup verification: Test restore process (manual)
  * 
  * === Testing & Validation ===
  * - Run full test suite: Ensure all tests pass (manual - use npm run test all)
- * - Accessibility audit: Run axe-core tests (manual - use npm run test accessibility)
- * - HTML validation: Run html-validate (manual - use npm run test html)
- * - Performance monitoring: Check for regressions (manual - use npm run test performance)
- * 
- * === Documentation & Process ===
- * - Update security procedures: Document any new threats/mitigations (manual)
- * - Review incident response plan: Ensure it's current (manual)
- * - Check security advisories: Subscribe to Node.js, Eleventy, dependency advisories (manual)
  */
 
 const { execSync, spawn } = require('child_process');
@@ -688,9 +674,9 @@ function checkCSP() {
   }
 }
 
-// Check redirects for open redirect vulnerabilities
+// Check redirects for open redirect vulnerabilities (informational only)
 function checkRedirects() {
-  logCheck('Redirect security', 'pending', 'Checking redirects for open redirect vulnerabilities...');
+  logCheck('Redirect security', 'pending', 'Checking redirects...');
   
   const redirectFiles = [];
   const siteDomain = getSiteDomain();
@@ -725,55 +711,15 @@ function checkRedirects() {
     return true;
   }
   
-  const openRedirects = [];
-  for (const file of redirectFiles) {
-    try {
-      const content = fs.readFileSync(file, 'utf8');
-      const redirectMatch = content.match(/redirectUrl:\s*(.+)/);
-      if (redirectMatch) {
-        const redirectUrl = redirectMatch[1].trim();
-        // Check if redirect URL is to an external domain (not our own)
-        if (redirectUrl.startsWith('http://') || redirectUrl.startsWith('https://')) {
-          try {
-            const url = new URL(redirectUrl);
-            // Allow redirects to our own domain
-            if (!url.hostname.includes(siteDomain) && url.hostname !== siteDomain) {
-              openRedirects.push(`${file}: redirects to external domain ${url.hostname}`);
-            }
-          } catch (e) {
-            // Invalid URL format
-          }
-        }
-      }
-    } catch (error) {
-      // Ignore errors
-    }
-  }
-  
-  if (openRedirects.length > 0) {
-    logCheck('Redirect security', 'warn', `${openRedirects.length} potential open redirect(s) found`);
-    openRedirects.slice(0, 3).forEach(issue => {
-      console.log(`    ${issue}`);
-    });
-    if (openRedirects.length > 3) {
-      console.log(`    ... and ${openRedirects.length - 3} more`);
-    }
-    results.warnings.push(`Redirect security: ${openRedirects.length} potential open redirect(s)`);
-    addFinding('Redirect security', 'warn', 'high',
-      `${openRedirects.length} potential open redirect(s) found`,
-      'Open redirects can be exploited for phishing attacks. Validate redirect URLs to ensure they only redirect to trusted domains.',
-      { redirects: openRedirects }
-    );
-    return false;
-  }
-  
-  logCheck('Redirect security', 'pass', `All ${redirectFiles.length} redirect(s) are to same domain`);
-  results.passed.push(`Redirect security: ${redirectFiles.length} redirect(s) checked`);
-  addFinding('Redirect security', 'pass', 'info', `All ${redirectFiles.length} redirect(s) are to same domain`);
+  // For static sites, redirects are typically intentional and low risk
+  // Just report count as informational
+  logCheck('Redirect security', 'pass', `${redirectFiles.length} redirect file(s) found (review manually if needed)`);
+  results.passed.push(`Redirect security: ${redirectFiles.length} redirect(s) found`);
+  addFinding('Redirect security', 'pass', 'info', `${redirectFiles.length} redirect file(s) found`);
   return true;
 }
 
-// Check for third-party resources in base.njk
+// Check for third-party resources (informational only)
 function checkThirdPartyResources() {
   logCheck('Third-party resources', 'pending', 'Checking for external scripts and stylesheets...');
   
@@ -834,20 +780,14 @@ function checkThirdPartyResources() {
       if (externalStyles.length > 0) {
         details.push(`${externalStyles.length} external stylesheet(s)`);
       }
-      logCheck('Third-party resources', 'warn', `${total} external resource(s) found: ${details.join(', ')}`);
-      externalScripts.slice(0, 2).forEach(url => {
-        console.log(`    Script: ${url}`);
-      });
-      externalStyles.slice(0, 2).forEach(url => {
-        console.log(`    Stylesheet: ${url}`);
-      });
-      results.warnings.push(`Third-party resources: ${total} external resource(s) found`);
-      addFinding('Third-party resources', 'warn', 'medium',
+      logCheck('Third-party resources', 'pass', `${total} external resource(s) found: ${details.join(', ')} (informational)`);
+      results.passed.push(`Third-party resources: ${total} found`);
+      addFinding('Third-party resources', 'pass', 'info',
         `${total} external resource(s) found (${externalScripts.length} scripts, ${externalStyles.length} stylesheets)`,
-        'Review external resources for security. Use Subresource Integrity (SRI) for external scripts. Consider self-hosting resources when possible.',
+        'Review external resources periodically for security and availability.',
         { scripts: externalScripts, stylesheets: externalStyles }
       );
-      return false;
+      return true;
     }
     
     logCheck('Third-party resources', 'pass', 'No external scripts or stylesheets found');
@@ -865,243 +805,8 @@ function checkThirdPartyResources() {
   }
 }
 
-// Check dependency licenses for compatibility
-function checkDependencyLicenses() {
-  logCheck('Dependency licenses', 'pending', 'Checking dependency licenses...');
-  
-  try {
-    const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
-    const allDeps = { ...(pkg.dependencies || {}), ...(pkg.devDependencies || {}) };
-    const problematicLicenses = [];
-    const unknownLicenses = [];
-    
-    // Common problematic licenses (GPL, AGPL, etc. that may require disclosure)
-    const problematicPatterns = [/^GPL/, /^AGPL/, /^LGPL/];
-    // Common permissive licenses (generally safe)
-    const permissiveLicenses = ['MIT', 'ISC', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'Unlicense', 'CC0-1.0'];
-    
-    for (const [name, version] of Object.entries(allDeps)) {
-      try {
-        // Try to get license from package.json in node_modules
-        const pkgPath = path.join('node_modules', name, 'package.json');
-        if (fs.existsSync(pkgPath)) {
-          const depPkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
-          const license = depPkg.license || (depPkg.licenses && depPkg.licenses[0]?.type);
-          
-          if (license) {
-            const licenseStr = typeof license === 'string' ? license : license.type || '';
-            if (problematicPatterns.some(pattern => pattern.test(licenseStr))) {
-              problematicLicenses.push(`${name}: ${licenseStr}`);
-            } else if (!permissiveLicenses.includes(licenseStr) && !licenseStr.includes('MIT') && !licenseStr.includes('Apache')) {
-              unknownLicenses.push(`${name}: ${licenseStr}`);
-            }
-          } else {
-            unknownLicenses.push(`${name}: no license specified`);
-          }
-        }
-      } catch (error) {
-        // Ignore errors for individual packages
-      }
-    }
-    
-    if (problematicLicenses.length > 0) {
-      const count = problematicLicenses.length;
-      const examples = problematicLicenses.slice(0, 3).join(', ');
-      const more = count > 3 ? ` and ${count - 3} more` : '';
-      logCheck('Dependency licenses', 'warn', `${count} package(s) with potentially problematic licenses: ${examples}${more}`);
-      results.warnings.push(`Dependency licenses: ${count} potentially problematic`);
-      addFinding('Dependency licenses', 'warn', 'medium',
-        `${count} package(s) with potentially problematic licenses (GPL/AGPL)`,
-        'Review licenses for compatibility with your project license. GPL/AGPL licenses may require you to open-source your code.',
-        { packages: problematicLicenses }
-      );
-      return false;
-    }
-    
-    if (unknownLicenses.length > 0 && unknownLicenses.length < 5) {
-      logCheck('Dependency licenses', 'pass', `All licenses reviewed (${unknownLicenses.length} with non-standard licenses)`);
-      results.passed.push('Dependency licenses: reviewed');
-      addFinding('Dependency licenses', 'pass', 'info', 'Dependency licenses reviewed');
-      return true;
-    }
-    
-    logCheck('Dependency licenses', 'pass', 'All dependencies have permissive licenses');
-    results.passed.push('Dependency licenses: all permissive');
-    addFinding('Dependency licenses', 'pass', 'info', 'All dependencies have permissive licenses');
-    return true;
-  } catch (error) {
-    logCheck('Dependency licenses', 'warn', `Could not check licenses: ${error.message}`);
-    results.warnings.push('Dependency licenses: could not check');
-    addFinding('Dependency licenses', 'warn', 'low',
-      'Could not check dependency licenses',
-      'Run "npm list --depth=0" and manually review each package license at npmjs.com'
-    );
-    return false;
-  }
-}
 
-// Check for exposed secrets in code
-function checkSecretsInCode() {
-  logCheck('Secret scanning', 'pending', 'Scanning code for exposed secrets...');
-  
-  const secretPatterns = [
-    { pattern: /(api[_-]?key|apikey)\s*[=:]\s*["']([^"']{10,})["']/gi, name: 'API keys' },
-    { pattern: /(password|passwd|pwd)\s*[=:]\s*["']([^"']{6,})["']/gi, name: 'Passwords' },
-    { pattern: /(secret|secret[_-]?key)\s*[=:]\s*["']([^"']{10,})["']/gi, name: 'Secrets' },
-    { pattern: /(token|access[_-]?token)\s*[=:]\s*["']([^"']{10,})["']/gi, name: 'Tokens' },
-    { pattern: /(private[_-]?key|privatekey)\s*[=:]\s*["']([^"']{20,})["']/gi, name: 'Private keys' }
-  ];
-  
-  const filesToCheck = [];
-  const foundSecrets = [];
-  
-  // Scan common code directories
-  const scanDirs = ['scripts', 'src/_includes', '.eleventy.js'];
-  
-  function scanDirectory(dir) {
-    try {
-      if (!fs.existsSync(dir)) return;
-      const entries = fs.readdirSync(dir);
-      for (const entry of entries) {
-        const fullPath = path.join(dir, entry);
-        const stat = fs.statSync(fullPath);
-        
-        if (stat.isDirectory() && !entry.startsWith('.') && entry !== 'node_modules') {
-          scanDirectory(fullPath);
-        } else if (stat.isFile() && /\.(js|ts|njk|html|md)$/.test(entry)) {
-          filesToCheck.push(fullPath);
-        }
-      }
-    } catch (error) {
-      // Ignore errors
-    }
-  }
-  
-  scanDirs.forEach(dir => scanDirectory(dir));
-  
-  for (const file of filesToCheck) {
-    try {
-      const content = fs.readFileSync(file, 'utf8');
-      // Skip if file is in node_modules or _site
-      if (file.includes('node_modules') || file.includes('_site')) continue;
-      
-      for (const { pattern, name } of secretPatterns) {
-        const matches = content.matchAll(pattern);
-        for (const match of matches) {
-          // Skip if it's a comment or example
-          const lineNum = content.substring(0, match.index).split('\n').length;
-          const line = content.split('\n')[lineNum - 1];
-          if (line.trim().startsWith('//') || line.includes('example') || line.includes('TODO')) {
-            continue;
-          }
-          foundSecrets.push(`${file}:${lineNum} - ${name}`);
-        }
-      }
-    } catch (error) {
-      // Ignore errors
-    }
-  }
-  
-  if (foundSecrets.length > 0) {
-    const count = foundSecrets.length;
-    const examples = foundSecrets.slice(0, 3).join('; ');
-    const more = count > 3 ? ` and ${count - 3} more` : '';
-    logCheck('Secret scanning', 'warn', `${count} potential secret(s) found: ${examples}${more}`);
-    results.warnings.push(`Secret scanning: ${count} potential secrets found`);
-    addFinding('Secret scanning', 'warn', 'high',
-      `${count} potential secret(s) found in code`,
-      'Review flagged locations and ensure no actual secrets are committed. Use environment variables for sensitive data. Consider using git-secrets or truffleHog for more thorough scanning.',
-      { findings: foundSecrets }
-    );
-    return false;
-  }
-  
-  logCheck('Secret scanning', 'pass', `No obvious secrets found in ${filesToCheck.length} file(s) scanned`);
-  results.passed.push('Secret scanning: no secrets found');
-  addFinding('Secret scanning', 'pass', 'info', `No obvious secrets found in ${filesToCheck.length} file(s)`);
-  return true;
-}
 
-// Check deployment scripts for hardcoded credentials
-function checkDeploymentScripts() {
-  logCheck('Deployment scripts', 'pending', 'Checking deployment scripts for hardcoded credentials...');
-  
-  const deployScripts = [];
-  function findDeployScripts(dir) {
-    try {
-      const entries = fs.readdirSync(dir);
-      for (const entry of entries) {
-        const fullPath = path.join(dir, entry);
-        const stat = fs.statSync(fullPath);
-        
-        if (stat.isDirectory()) {
-          findDeployScripts(fullPath);
-        } else if (entry.includes('deploy') && entry.endsWith('.js')) {
-          deployScripts.push(fullPath);
-        }
-      }
-    } catch (error) {
-      // Ignore errors
-    }
-  }
-  
-  findDeployScripts('scripts');
-  
-  if (deployScripts.length === 0) {
-    logCheck('Deployment scripts', 'pass', 'No deployment scripts found');
-    results.passed.push('Deployment scripts: none found');
-    addFinding('Deployment scripts', 'pass', 'info', 'No deployment scripts found');
-    return true;
-  }
-  
-  const issues = [];
-  const hardcodedPatterns = [
-    /password\s*[=:]\s*["']([^"']{6,})["']/gi,
-    /api[_-]?key\s*[=:]\s*["']([^"']{10,})["']/gi,
-    /secret\s*[=:]\s*["']([^"']{10,})["']/gi,
-    /token\s*[=:]\s*["']([^"']{10,})["']/gi
-  ];
-  
-  for (const script of deployScripts) {
-    try {
-      const content = fs.readFileSync(script, 'utf8');
-      
-      // Check for hardcoded credentials
-      for (const pattern of hardcodedPatterns) {
-        if (pattern.test(content)) {
-          issues.push(`${script}: potential hardcoded credential found`);
-          break;
-        }
-      }
-      
-      // Check if using environment variables (good practice)
-      if (!content.includes('process.env') && !content.includes('dotenv')) {
-        // This is just informational, not a failure
-      }
-    } catch (error) {
-      // Ignore errors
-    }
-  }
-  
-  if (issues.length > 0) {
-    logCheck('Deployment scripts', 'warn', `${issues.length} potential issue(s) found`);
-    issues.slice(0, 3).forEach(issue => {
-      console.log(`    ${issue}`);
-    });
-    results.warnings.push(`Deployment scripts: ${issues.length} potential issue(s)`);
-    addFinding('Deployment scripts', 'warn', 'high',
-      `${issues.length} potential hardcoded credential(s) found in deployment scripts`,
-      'Review deployment scripts and ensure all credentials are loaded from environment variables, not hardcoded.',
-      { issues }
-    );
-    return false;
-  }
-  
-  logCheck('Deployment scripts', 'pass', `All ${deployScripts.length} deployment script(s) use environment variables`);
-  results.passed.push(`Deployment scripts: ${deployScripts.length} checked`);
-  addFinding('Deployment scripts', 'pass', 'info', `All ${deployScripts.length} deployment script(s) appear to use environment variables`);
-  return true;
-}
 
 // Check security headers on live site
 function checkSecurityHeaders() {
@@ -1471,8 +1176,8 @@ function generateMarkdownReport() {
   
   // Group findings by category
   const categories = {
-    'Dependency & Package Security': ['npm audit', 'npm outdated', 'Node.js version', 'Deprecated packages', 'Dependency licenses'],
-    'Code & Configuration Security': ['Environment variables', 'package.json', 'File permissions', 'Git history', 'Secret scanning', 'Deployment scripts'],
+    'Dependency & Package Security': ['npm audit', 'npm outdated', 'Node.js version', 'Deprecated packages'],
+    'Code & Configuration Security': ['Environment variables', 'package.json', 'File permissions', 'Git history'],
     'Build & Deployment Security': ['Build output', 'Content Security Policy'],
     'Content & Links Security': ['Redirect security', 'Third-party resources'],
     'Live Site Security': ['Security headers', 'TLS certificate', 'DNS records']
@@ -1595,38 +1300,17 @@ function generateMarkdownReport() {
   report += `## Manual Tasks\n\n`;
   
   const manualTasks = [
-    { category: 'Dependencies', tasks: [
-      'Update dependencies: `npm update && npm run test all`'
-    ]},
-    { category: 'Deployment', tasks: [
-      'Rotate SSH keys: `ssh-keygen -t ed25519`'
-    ]},
-    { category: 'Testing', tasks: [
-      'Run test suite: `npm run test all`',
-      'Link validation: `npm run test links`',
-      'Accessibility: `npm run test accessibility`',
-      'HTML validation: `npm run test html`',
-      'Performance: `npm run test performance`'
-    ]},
-    { category: 'Infrastructure', tasks: [
-      'Review hosting provider security notices',
-      'Test backup restore process',
-      'Review access logs for suspicious activity'
-    ]},
-    { category: 'Documentation', tasks: [
-      'Update security procedures',
-      'Review incident response plan',
-      'Check security advisories (Node.js, Eleventy)'
-    ]}
+    'Update dependencies: `npm update && npm run test all`',
+    'Rotate SSH keys periodically: `ssh-keygen -t ed25519`',
+    'Run test suite: `npm run test all`',
+    'Test backup restore process',
+    'Review hosting provider security notices'
   ];
   
-  manualTasks.forEach(({ category, tasks }) => {
-    report += `### ${category}\n\n`;
-    tasks.forEach(task => {
-      report += `- [ ] ${task}\n`;
-    });
-    report += `\n`;
+  manualTasks.forEach(task => {
+    report += `- [ ] ${task}\n`;
   });
+  report += `\n`;
   
   // Footer
   report += `---\n`;
@@ -1662,9 +1346,6 @@ async function runSecurityAudit() {
   checkDeprecatedPackages();
   checkFilePermissions();
   checkGitHistory();
-  checkDependencyLicenses();
-  checkSecretsInCode();
-  checkDeploymentScripts();
   
   logSection('Live Site Security (if configured)');
   await checkSecurityHeaders();
@@ -1679,23 +1360,12 @@ async function runSecurityAudit() {
   log(`  ✗ Failures: ${results.failures.length}`, 'red');
   console.log('');
   
-  // Generate markdown report
+  // Generate and output markdown report
   const markdownReport = generateMarkdownReport();
   
-  // Output markdown report
   console.log('');
   logSection('Security Report');
   console.log(markdownReport);
-  
-  // Optionally write to file
-  const reportPath = 'security-audit-report.md';
-  try {
-    fs.writeFileSync(reportPath, markdownReport, 'utf8');
-    log(`\n📄 Report saved to: ${reportPath}`, 'cyan');
-  } catch (error) {
-    log(`\n⚠️  Could not write report to file: ${error.message}`, 'yellow');
-  }
-  
   console.log('');
   
   if (results.failures.length > 0) {

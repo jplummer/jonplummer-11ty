@@ -191,29 +191,26 @@ The script performs automated checks for:
 - Outdated packages
 - Node.js LTS version (even-numbered: 18, 20, 22, etc.)
 - Deprecated packages
-- Dependency licenses
 
 ### Code & Configuration Security
 - Environment variable handling (`.env` in `.gitignore`)
 - Package.json configuration
 - File permissions on sensitive files
 - Git history for accidentally committed secrets
-- Secret scanning (API keys, passwords, tokens in code)
-- Deployment scripts for hardcoded credentials
 
 ### Build & Deployment Security
 - Sensitive files in build output
 - Content Security Policy configuration
 
 ### Content & Links Security
-- Redirect security (open redirect vulnerabilities)
-- Third-party resources (external scripts/stylesheets)
+- Redirect security (informational)
+- Third-party resources (informational)
 
 ### Live Site Security (requires `SITE_DOMAIN`)
 - Security headers on live site
 - TLS certificate expiration
 - DNS records
 
-It also provides a comprehensive checklist of manual tasks that cannot be automated, including dependency updates (with testing), SSH key rotation, hosting provider notices, backup testing, and documentation updates.
+It also provides a focused checklist of manual tasks relevant to static sites, including dependency updates (with testing), SSH key rotation, hosting provider notices, and backup testing.
 
 See the script's header comments for the complete list of security and maintenance tasks.

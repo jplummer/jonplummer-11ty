@@ -195,25 +195,20 @@ The script automatically checks:
 - **File permissions**: Checks that sensitive files have appropriate permissions
 - **Git history**: Verifies `.env` was never committed
 - **Content Security Policy**: Validates CSP headers in `.htaccess`
-- **Dependency licenses**: Reviews package licenses for compatibility
-- **Secret scanning**: Scans code for exposed secrets (API keys, passwords, tokens)
-- **Deployment scripts**: Checks for hardcoded credentials
-- **Redirect security**: Verifies redirects aren't open redirects
-- **Third-party resources**: Identifies external scripts and stylesheets
+- **Redirect security**: Reports redirect count (informational)
+- **Third-party resources**: Identifies external scripts and stylesheets (informational)
 - **Security headers**: Checks live site for required security headers (requires `SITE_DOMAIN`)
 - **TLS certificate**: Verifies certificate expiration (requires `SITE_DOMAIN`)
 - **DNS records**: Validates DNS A records (requires `SITE_DOMAIN`)
 
 #### Manual Tasks Checklist
 
-The script also provides a comprehensive checklist of manual security tasks that cannot be automated, including:
+The script also provides a focused checklist of manual security tasks relevant to static sites:
 - Updating dependencies (requires testing after updates)
 - SSH key rotation
-- Hosting provider security notices review
 - Backup restore testing
-- Access log review
+- Hosting provider security notices review
 - Full test suite execution
-- Documentation updates
 
 #### Usage
 
