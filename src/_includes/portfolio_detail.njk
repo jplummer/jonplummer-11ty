@@ -5,7 +5,7 @@ purpose: individual portfolio page
 
 <article class="portfolio-detail">
     <header>
-        <h1>{{ title }}</h1>
+        <h1>{{ title | smartquotes | safe }}</h1>
     </header>
     <section>
         {{ content | safe }}
@@ -16,10 +16,10 @@ purpose: individual portfolio page
     {% set previousPost = collections.portfolio | getPreviousCollectionItem(page) %}
     {% set nextPost = collections.portfolio | getNextCollectionItem(page) %}
     {% if previousPost %}
-    <a href="{{ previousPost.url }}" class="prev">← Previous project: {{ previousPost.data.title }}</a>
+    <a href="{{ previousPost.url }}" class="prev">← Previous project: {{ previousPost.data.title | smartquotes | safe }}</a>
     {% endif %}
 
     {% if nextPost %}
-    <a href="{{ nextPost.url }}" class="next">Next project: {{ nextPost.data.title }} →</a>
+    <a href="{{ nextPost.url }}" class="next">Next project: {{ nextPost.data.title | smartquotes | safe }} →</a>
     {% endif %}
 </nav>

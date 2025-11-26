@@ -1,7 +1,7 @@
 {# purpose: full blog post content component #}
 <article>
     <header>
-        <h1><a href="{{ post.url }}" rel="bookmark">{{ post.data.title }}</a></h1>
+        <h1><a href="{{ post.url }}" rel="bookmark">{{ post.data.title | smartquotes | safe }}</a></h1>
     </header>
     <section>
         {{ post.templateContent | safe }}

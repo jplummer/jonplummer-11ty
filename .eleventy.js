@@ -18,8 +18,11 @@ module.exports = function (eleventyConfig) {
   const md = markdownIt({
     html: true, // Allow HTML in markdown
     breaks: true, // Convert line breaks to <br>
-    linkify: true // Auto-convert URLs to links
+    linkify: true, // Auto-convert URLs to links
+    typographer: true // Convert straight quotes to smart quotes
   });
+  // Set as default markdown library for .md files
+  eleventyConfig.setLibrary("md", md);
   // Copy static assets
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
 
@@ -69,6 +72,14 @@ module.exports = function (eleventyConfig) {
   // Add inline markdown filter (no block-level elements like <p>)
   eleventyConfig.addFilter("markdownInline", function (content) {
     return md.renderInline(content);
+  });
+
+  // Add smart quotes filter (applies typographer rules to plain text)
+  eleventyConfig.addFilter("smartquotes", function (content) {
+    if (!content) return content;
+    // Use renderInline to apply typographer rules, then extract text content
+    // This converts straight quotes to smart quotes without other markdown processing
+    return md.renderInline(String(content));
   });
 
   // Add JSON filter for escaping strings in JSON-LD

@@ -3,5 +3,5 @@
     <a href="{{ post.url }}" aria-hidden="true" tabindex="-1">
         <img src="/assets/images/{{ post.data.coverImage }}" alt="{{ post.data.title | default('Portfolio item') }}">
     </a>
-    <p><a href="{{ post.url }}" rel="bookmark">{{ post.data.title }}</a></p>
+    <p><a href="{{ post.url }}" rel="bookmark">{{ post.data.title | smartquotes | safe }}</a></p>
 </article>
