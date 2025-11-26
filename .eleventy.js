@@ -82,6 +82,14 @@ module.exports = function (eleventyConfig) {
     return md.renderInline(String(content));
   });
 
+  // Add filter to strip HTML from titles (for use in anchor tags)
+  // Prevents nested anchors when titles contain domain names that get auto-linked
+  eleventyConfig.addFilter("stripHtml", function (content) {
+    if (!content) return content;
+    // Remove HTML tags but preserve text content
+    return String(content).replace(/<[^>]*>/g, '');
+  });
+
   // Add JSON filter for escaping strings in JSON-LD
   eleventyConfig.addFilter("json", function (value) {
     return JSON.stringify(value);

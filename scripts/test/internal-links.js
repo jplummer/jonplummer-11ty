@@ -2,44 +2,8 @@
 
 const fs = require('fs');
 const path = require('path');
-const { findHtmlFiles } = require('../utils/file-utils');
-
-
-// Extract all internal links from HTML content
-function extractInternalLinks(htmlContent, basePath) {
-  const links = [];
-  const linkRegex = /<a[^>]+href=["']([^"']+)["'][^>]*>/gi;
-  let match;
-  
-  while ((match = linkRegex.exec(htmlContent)) !== null) {
-    const href = match[1];
-    const link = {
-      href: href,
-      type: classifyInternalLink(href),
-      line: htmlContent.substring(0, match.index).split('\n').length
-    };
-    links.push(link);
-  }
-  
-  return links;
-}
-
-// Classify internal link type
-function classifyInternalLink(href) {
-  if (href.startsWith('http://') || href.startsWith('https://')) {
-    return 'external'; // Skip external links
-  } else if (href.startsWith('mailto:')) {
-    return 'email';
-  } else if (href.startsWith('tel:')) {
-    return 'phone';
-  } else if (href.startsWith('#')) {
-    return 'anchor';
-  } else if (href.startsWith('/')) {
-    return 'internal-absolute';
-  } else {
-    return 'internal-relative';
-  }
-}
+const { extractLinks, checkAnchorLink, classifyLink } = require('./utils/html-utils');
+const { checkSiteDirectory, getHtmlFiles, getRelativePath, readFile } = require('./utils/test-base');
 
 // Check if internal file exists
 function checkInternalLink(href, basePath, siteRoot) {
@@ -69,27 +33,21 @@ function checkInternalLink(href, basePath, siteRoot) {
   return { exists: false, checkedPath: targetPath };
 }
 
-// Check anchor links within the same page
-function checkAnchorLink(href, htmlContent) {
+// Check anchor links within the same page (using html-utils)
+function checkAnchor(href, htmlContent) {
   const anchorId = href.substring(1);
-  const idRegex = new RegExp(`id=["']${anchorId}["']`, 'i');
-  const nameRegex = new RegExp(`name=["']${anchorId}["']`, 'i');
-  
-  return idRegex.test(htmlContent) || nameRegex.test(htmlContent);
+  return checkAnchorLink(htmlContent, anchorId);
 }
 
 // Main validation function
 async function validateInternalLinks() {
   console.log('🔗 Starting internal link validation...\n');
   
+  checkSiteDirectory();
   const siteRoot = './_site';
-  if (!fs.existsSync(siteRoot)) {
-    console.log('❌ _site directory not found. Run "npm run build" first.');
-    process.exit(1);
-  }
   
   console.log('📋 Running full site scan');
-  const htmlFiles = findHtmlFiles(siteRoot);
+  const htmlFiles = getHtmlFiles();
   
   if (htmlFiles.length === 0) {
     console.log('✅ No files to check. All internal links are up to date!');
@@ -108,17 +66,20 @@ async function validateInternalLinks() {
   
   // Collect all internal links
   for (const file of htmlFiles) {
-    const content = fs.readFileSync(file, 'utf8');
-    const relativePath = path.relative(siteRoot, file);
-    const links = extractInternalLinks(content, path.dirname(file));
+    const content = readFile(file);
+    const relativePath = getRelativePath(file);
+    const links = extractLinks(content, path.dirname(file));
     
     for (const link of links) {
-      // Only process internal links
-      if (link.type === 'internal-absolute' || link.type === 'internal-relative' || link.type === 'anchor') {
+      // Only process internal links (filter out external, email, phone)
+      const linkType = classifyLink(link.href);
+      if (linkType === 'internal-absolute' || linkType === 'internal-relative' || linkType === 'anchor') {
         allLinks.push({
-          ...link,
+          href: link.href,
+          type: linkType,
           file: relativePath,
-          basePath: path.dirname(file)
+          basePath: path.dirname(file),
+          line: link.line
         });
       }
     }
@@ -147,8 +108,8 @@ async function validateInternalLinks() {
         
       case 'anchor':
         results.anchors.total++;
-        const fileContent = fs.readFileSync(path.join(siteRoot, file), 'utf8');
-        if (checkAnchorLink(href, fileContent)) {
+        const fileContent = readFile(path.join(siteRoot, file));
+        if (checkAnchor(href, fileContent)) {
           results.anchors.working++;
           // Don't log successful anchor links
         } else {

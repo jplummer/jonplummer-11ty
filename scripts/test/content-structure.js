@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
+const { validateDate, validateSlug, validateTitle, validateMetaDescription } = require('./utils/validation-utils');
 
 // Find all markdown files in _posts
 function findMarkdownFiles(dir) {
@@ -41,82 +42,9 @@ function parseFrontMatter(content) {
   }
 }
 
-// Validate date format
-function validateDate(dateString) {
-  if (!dateString) return { valid: false, error: 'Missing date' };
-
-  const date = new Date(dateString);
-  if (isNaN(date.getTime())) {
-    return { valid: false, error: 'Invalid date format' };
-  }
-
-  // Check if date is reasonable (not too far in future/past)
-  const now = new Date();
-  const year = date.getFullYear();
-  const currentYear = now.getFullYear();
-
-  if (year < 2000 || year > currentYear + 1) {
-    return { valid: false, error: 'Date seems unreasonable' };
-  }
-
-  return { valid: true, date: date };
-}
-
-// Validate slug format
-function validateSlug(slug) {
-  if (!slug) return { valid: false, error: 'Missing slug' };
-
-  // Check for valid slug characters (lowercase, hyphens, numbers, underscores)
-  const slugRegex = /^[a-z0-9-_]+$/;
-  if (!slugRegex.test(slug)) {
-    return { valid: false, error: 'Invalid slug format (should be lowercase with hyphens or underscores)' };
-  }
-
-  // Check length
-  if (slug.length < 3) {
-    return { valid: false, error: 'Slug too short' };
-  }
-
-  if (slug.length > 250) {
-    return { valid: false, error: 'Slug too long' };
-  }
-
-  return { valid: true };
-}
-
-// Validate title
-function validateTitle(title) {
-  if (!title) return { valid: false, error: 'Missing title' };
-
-  if (title.trim().length === 0) {
-    return { valid: false, error: 'Empty title' };
-  }
-
-  if (title.length > 200) {
-    return { valid: false, error: 'Title too long' };
-  }
-
-  return { valid: true };
-}
-
-// Validate meta description
-function validateMetaDescription(description) {
-  if (!description) return { valid: false, error: 'Missing meta description' };
-
-  if (description.trim().length === 0) {
-    return { valid: false, error: 'Empty meta description' };
-  }
-
-  if (description.length > 160) {
-    return { valid: false, error: 'Meta description too long (should be ≤160 chars)' };
-  }
-
-  if (description.length < 50) {
-    return { valid: false, error: 'Meta description too short (should be ≥50 chars)' };
-  }
-
-  return { valid: true };
-}
+// Validation functions now use shared validation-utils
+// Note: content-structure.js uses different validation rules (e.g., title max 200, description 50-160)
+// So we adapt the shared validators with appropriate parameters
 
 // Check for required fields
 function validateRequiredFields(frontMatter, filePath) {
@@ -143,7 +71,8 @@ function validateRequiredFields(frontMatter, filePath) {
 
   // Validate individual fields
   if (frontMatter.title) {
-    const titleCheck = validateTitle(frontMatter.title);
+    // Content structure allows longer titles (up to 200 chars)
+    const titleCheck = validateTitle(frontMatter.title, 1, 200);
     if (!titleCheck.valid) {
       issues.push(`Title: ${titleCheck.error}`);
     }
@@ -172,7 +101,8 @@ function validateRequiredFields(frontMatter, filePath) {
 
   // Optional but recommended fields
   if (frontMatter.description) {
-    const descCheck = validateMetaDescription(frontMatter.description);
+    // Content structure uses 50-160 char range for descriptions
+    const descCheck = validateMetaDescription(frontMatter.description, 50, 160);
     if (!descCheck.valid) {
       warnings.push(`Meta description: ${descCheck.error}`);
     }

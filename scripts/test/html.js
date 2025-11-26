@@ -1,21 +1,15 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
 const path = require('path');
 const { HtmlValidate, FileSystemConfigLoader } = require('html-validate');
-const { findHtmlFiles } = require('../utils/file-utils');
+const { checkSiteDirectory, getHtmlFiles, getRelativePath, readFile } = require('./utils/test-base');
 
 async function validate() {
   // Main validation
   console.log('🔍 Starting HTML validity validation (html-validate)...\n');
 
-  const siteDir = './_site';
-  if (!fs.existsSync(siteDir)) {
-    console.log('❌ _site directory not found. Run "npm run build" first.');
-    process.exit(1);
-  }
-
-  const htmlFiles = findHtmlFiles(siteDir);
+  checkSiteDirectory();
+  const htmlFiles = getHtmlFiles();
   console.log(`Found ${htmlFiles.length} HTML files\n`);
 
   const loader = new FileSystemConfigLoader();
@@ -25,8 +19,8 @@ async function validate() {
   let filesWithIssues = 0;
 
   for (const file of htmlFiles) {
-    const relativePath = path.relative('./_site', file);
-    const content = fs.readFileSync(file, 'utf8');
+    const relativePath = getRelativePath(file);
+    const content = readFile(file);
 
     const report = await htmlvalidate.validateString(content, file);
 

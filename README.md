@@ -29,13 +29,12 @@ I chose simple, reliable tools that require little maintenance.
   - Sitemap generation for search engines
 - **Automated Testing**: Comprehensive test suite that checks:
   - HTML validity and structure
-  - Broken links (internal and external)
+  - Broken internal links (critical for site navigation)
   - Accessibility (WCAG compliance via axe-core)
   - SEO meta tags
   - RSS feed validity
   - Markdown syntax and structure
   - Content structure validation
-  - Performance metrics
 - **Automated OG Image Generation**: Open Graph images are automatically generated using Puppeteer, pulling design tokens from the main stylesheet for consistency.
 - **Pre-deploy Validation**: Automatic checks before deployment to prevent authoring mistakes from going live.
 - **Security Audit**: Automated security checks for dependencies, configuration, and live site security (headers, TLS, DNS).

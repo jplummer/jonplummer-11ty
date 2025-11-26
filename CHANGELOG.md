@@ -6,7 +6,11 @@ All notable changes to this project are documented in this file. The format is b
 - Security audit improvements and deployment fixes
 - Add security-audit-report.md to .gitignore
 - Reduce security audit scope for static site
+- fix: resolve HTML validation errors in changelog and code blocks
+- Enable smart quotes in markdown and titles
 - docs: consolidate documentation and reduce redundancy
+- chore: downgrade dotenv from v17 to v16
+- fix: correct typo in now page
 
 ## 2025-11-25
 
@@ -30,13 +34,11 @@ All notable changes to this project are documented in this file. The format is b
 
 - feat: add pre-deploy validation to prevent authoring mistakes
 - refactor: move h1 elements from content to template
-- docs: add planning documentation for testing strategy
 - feat: add new links to links feed
-- fix: fix markdown lint errors in post files
-- docs: add planning documentation for testing strategy
-- docs: update changelog for recent refactoring work
 - Convert error pages to Markdown and unify link underlining
 - Fix meta description validation and add missing descriptions
+- Documentation updates: 3 commits
+- fix: fix markdown lint errors in post files
 
 ## 2025-11-20
 
@@ -47,12 +49,7 @@ All notable changes to this project are documented in this file. The format is b
 ## 2025-11-19
 
 - Refactor project structure and improve documentation
-- chore: deduplicate .gitignore entries
 - refactor: move _misc to structured docs/ folder
-- docs: add AI agent instructions to README
-- fix: move .htaccess to src/ so it gets copied to build
-- fix: ignore docs/ folder instead of deprecated _misc/
-- docs: add links to technologies in technologies.md
 - feat: implement dedicated portfolio detail layout with full-width images and siloed nav
 - style: refine portfolio layout - text aligns with article column, images full width
 - fix: ensure portfolio detail images span full grid while text stays in column
@@ -64,6 +61,11 @@ All notable changes to this project are documented in this file. The format is b
 - General site updates and content cleanup
 - feat: add humans.txt and AI-blocking robots.txt
 - refactor: standardize all portfolio images to use HTML &lt;figure&gt; syntax
+- chore: deduplicate .gitignore entries
+- docs: add AI agent instructions to README
+- docs: add links to technologies in technologies.md
+- fix: move .htaccess to src/ so it gets copied to build
+- fix: ignore docs/ folder instead of deprecated _misc/
 
 ## 2025-11-16
 

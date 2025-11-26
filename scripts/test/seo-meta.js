@@ -1,77 +1,11 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
 const path = require('path');
-const { findHtmlFiles } = require('../utils/file-utils');
+const { extractMetaTags, extractHeadings } = require('./utils/html-utils');
+const { validateTitle: validateTitleUtil, validateMetaDescription: validateMetaDescriptionUtil } = require('./utils/validation-utils');
+const { checkSiteDirectory, getHtmlFiles, getRelativePath, readFile } = require('./utils/test-base');
 
-
-// Extract meta tags from HTML
-function extractMetaTags(htmlContent) {
-  const metaTags = {};
-  
-  // Title tag
-  const titleMatch = htmlContent.match(/<title>(.*?)<\/title>/i);
-  if (titleMatch) {
-    metaTags.title = titleMatch[1].trim();
-  }
-  
-  // Meta description
-  const descMatch = htmlContent.match(/<meta[^>]*name=["']description["'][^>]*content=["']([^"']*)["']/i);
-  if (descMatch) {
-    metaTags.description = descMatch[1].trim();
-  }
-  
-  // Meta keywords
-  const keywordsMatch = htmlContent.match(/<meta[^>]*name=["']keywords["'][^>]*content=["']([^"']*)["']/i);
-  if (keywordsMatch) {
-    metaTags.keywords = keywordsMatch[1].trim();
-  }
-  
-  // Open Graph tags
-  const ogTags = {};
-  const ogMatches = htmlContent.match(/<meta[^>]*property=["']og:([^"']+)["'][^>]*content=["']([^"']*)["']/gi);
-  if (ogMatches) {
-    ogMatches.forEach(match => {
-      const propMatch = match.match(/property=["']og:([^"']+)["'][^>]*content=["']([^"']*)["']/i);
-      if (propMatch) {
-        ogTags[propMatch[1]] = propMatch[2].trim();
-      }
-    });
-  }
-  metaTags.og = ogTags;
-  
-  // Canonical URL
-  const canonicalMatch = htmlContent.match(/<link[^>]*rel=["']canonical["'][^>]*href=["']([^"']*)["']/i);
-  if (canonicalMatch) {
-    metaTags.canonical = canonicalMatch[1].trim();
-  }
-  
-  // Language
-  const langMatch = htmlContent.match(/<html[^>]*lang=["']([^"']+)["']/i);
-  if (langMatch) {
-    metaTags.lang = langMatch[1].trim();
-  }
-  
-  return metaTags;
-}
-
-// Extract headings from HTML
-function extractHeadings(htmlContent) {
-  const headings = [];
-  const headingRegex = /<h([1-6])[^>]*>(.*?)<\/h[1-6]>/gi;
-  let match;
-  
-  while ((match = headingRegex.exec(htmlContent)) !== null) {
-    headings.push({
-      level: parseInt(match[1]),
-      text: match[2].replace(/<[^>]*>/g, '').trim() // Remove HTML tags
-    });
-  }
-  
-  return headings;
-}
-
-// Validate title
+// Validate title (adapts validation-utils format to array of issues)
 function validateTitle(title) {
   const issues = [];
   
@@ -80,19 +14,12 @@ function validateTitle(title) {
     return issues;
   }
   
-  if (title.length === 0) {
-    issues.push('Empty title tag');
-    return issues;
+  const result = validateTitleUtil(title, 30, 60);
+  if (!result.valid) {
+    issues.push(result.error);
   }
   
-  if (title.length < 30) {
-    issues.push('Title too short (should be 30-60 characters)');
-  }
-  
-  if (title.length > 60) {
-    issues.push('Title too long (should be 30-60 characters)');
-  }
-  
+  // Additional check for separators
   if (title.includes('|') && title.split('|').length > 3) {
     issues.push('Title has too many separators (|)');
   }
@@ -100,7 +27,7 @@ function validateTitle(title) {
   return issues;
 }
 
-// Validate meta description
+// Validate meta description (adapts validation-utils format to array of issues)
 function validateMetaDescription(description) {
   const issues = [];
   
@@ -109,19 +36,12 @@ function validateMetaDescription(description) {
     return issues;
   }
   
-  if (description.length === 0) {
-    issues.push('Empty meta description');
-    return issues;
+  const result = validateMetaDescriptionUtil(description, 120, 160);
+  if (!result.valid) {
+    issues.push(result.error);
   }
   
-  if (description.length < 120) {
-    issues.push('Meta description too short (should be 120-160 characters)');
-  }
-  
-  if (description.length > 160) {
-    issues.push('Meta description too long (should be 120-160 characters)');
-  }
-  
+  // Additional check for unescaped quotes
   if (description.includes('"') && !description.includes('&quot;')) {
     issues.push('Meta description contains unescaped quotes');
   }
@@ -209,17 +129,17 @@ function checkDuplicateTitles(files) {
   const duplicates = [];
   
   for (const file of files) {
-    const content = fs.readFileSync(file, 'utf8');
+    const content = readFile(file);
     const metaTags = extractMetaTags(content);
     
     if (metaTags.title) {
       if (titleMap.has(metaTags.title)) {
         duplicates.push({
           title: metaTags.title,
-          files: [titleMap.get(metaTags.title), path.relative('./_site', file)]
+          files: [titleMap.get(metaTags.title), getRelativePath(file)]
         });
       } else {
-        titleMap.set(metaTags.title, path.relative('./_site', file));
+        titleMap.set(metaTags.title, getRelativePath(file));
       }
     }
   }
@@ -231,13 +151,8 @@ function checkDuplicateTitles(files) {
 function validateSEO() {
   console.log('🔍 Starting SEO and meta validation...\n');
   
-  const siteDir = './_site';
-  if (!fs.existsSync(siteDir)) {
-    console.log('❌ _site directory not found. Run "npm run build" first.');
-    process.exit(1);
-  }
-  
-  const htmlFiles = findHtmlFiles(siteDir);
+  checkSiteDirectory();
+  const htmlFiles = getHtmlFiles();
   console.log(`Found ${htmlFiles.length} HTML files\n`);
   
   const results = {
@@ -261,8 +176,8 @@ function validateSEO() {
   
   // Validate each file
   for (const file of htmlFiles) {
-    const relativePath = path.relative('./_site', file);
-    const content = fs.readFileSync(file, 'utf8');
+    const relativePath = getRelativePath(file);
+    const content = readFile(file);
     const metaTags = extractMetaTags(content);
     const headings = extractHeadings(content);
     

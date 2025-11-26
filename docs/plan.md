@@ -12,17 +12,23 @@
 
 ### Security & Deployment
 - [ ] **Periodic security audit**
-  - [ ] Run `npm run security-audit` monthly or before major deployments
+  - [ ] Run `npm run security-audit` occasionally or before major deployments
   - [ ] Review and address automated check results
   - [ ] Complete manual tasks checklist
 
 ### Design & Polish
 - [x] improve generated ogImage styling
-- [ ] vertical rhythm in typographic spacing https://edgdesign.co/blog/baseline-grids-in-css
-
+- [ ] typographical improvements
+  - [x] curly quotes
+  - [ ] general legibility (leading, size, etc.)
+  - [ ] refine type scale https://webtypography.net/3.1.1
+  - [ ] vertical rhythm in typographic spacing https://edgdesign.co/blog/baseline-grids-in-css https://webtypography.net/toc#2.2
+- [ ] https://www.inkwell.ie/typography/recommendations.html
+  - [ ] other items from https://webtypography.net/?
+  
 ## Future Enhancements
 - [ ] consider POSSE (more tags for different types of entries?)
-- [ ] CMS (headless CMS consideration)
+- [ ] CMS (woudl a healdess CMS help with authoring, etc.?)
 - [ ] alternate color schemes and a way to trigger them
 
 ## Optional / Future Consideration
@@ -38,10 +44,3 @@
   - Implement rollback procedures
   - Regular backup of generated site
 
-- **Incremental Testing for Slow Tests**
-  - Implement incremental testing for slow tests (`links`, `accessibility`, `performance`)
-  - Only test files that have changed since last test run
-  - Track test results/state to determine what needs re-testing
-  - Reduce test time for large sites by avoiding full re-scans
-  - Consider caching mechanisms for external link checks
-  - Browser-based tests (accessibility) could test only changed pages

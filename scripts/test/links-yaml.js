@@ -3,69 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
-
-// Validate date format (YYYY-MM-DD)
-function validateDate(dateString) {
-  const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
-  if (!dateRegex.test(dateString)) {
-    return { valid: false, error: 'Date must be in YYYY-MM-DD format' };
-  }
-
-  // Parse components directly to avoid timezone issues
-  const [year, month, day] = dateString.split('-').map(Number);
-
-  // Validate ranges
-  if (year < 2000 || year > 2100) {
-    return { valid: false, error: 'Year must be between 2000 and 2100' };
-  }
-  if (month < 1 || month > 12) {
-    return { valid: false, error: 'Month must be between 1 and 12' };
-  }
-  if (day < 1 || day > 31) {
-    return { valid: false, error: 'Day must be between 1 and 31' };
-  }
-
-  // Create date using local time to check validity
-  const date = new Date(year, month - 1, day);
-  if (date.getFullYear() !== year ||
-    date.getMonth() + 1 !== month ||
-    date.getDate() !== day) {
-    return { valid: false, error: 'Invalid date (e.g., 2025-02-30)' };
-  }
-
-  return { valid: true };
-}
-
-// Validate URL format
-function validateUrl(url) {
-  if (!url || typeof url !== 'string') {
-    return { valid: false, error: 'URL must be a non-empty string' };
-  }
-
-  try {
-    const urlObj = new URL(url);
-    // Basic validation - must have http or https protocol
-    if (!['http:', 'https:'].includes(urlObj.protocol)) {
-      return { valid: false, error: 'URL must use http or https protocol' };
-    }
-    return { valid: true };
-  } catch (error) {
-    return { valid: false, error: 'Invalid URL format' };
-  }
-}
-
-// Validate title
-function validateTitle(title) {
-  if (!title || typeof title !== 'string') {
-    return { valid: false, error: 'Title must be a non-empty string' };
-  }
-
-  if (title.trim().length === 0) {
-    return { valid: false, error: 'Title cannot be empty' };
-  }
-
-  return { valid: true };
-}
+const { validateDate, validateUrl, validateTitle } = require('./utils/validation-utils');
 
 // Validate description (optional but should be valid if present)
 function validateDescription(description) {

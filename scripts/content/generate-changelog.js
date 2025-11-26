@@ -24,6 +24,69 @@ function escapeHtml(text) {
     .replace(/>/g, '&gt;');
 }
 
+/**
+ * Extract commit prefix (feat:, fix:, docs:, etc.) from commit message
+ */
+function getCommitPrefix(message) {
+  const match = message.match(/^([a-z]+):\s*/i);
+  return match ? match[1].toLowerCase() : null;
+}
+
+/**
+ * Check if commit message is significant enough to keep separate
+ * (not just a simple fix or chore)
+ */
+function isSignificantCommit(message) {
+  const prefix = getCommitPrefix(message);
+  const significantPrefixes = ['feat', 'refactor', 'perf', 'breaking'];
+  return significantPrefixes.includes(prefix) || 
+         message.length > 60 || // Long messages are usually more descriptive
+         !prefix; // Commits without prefixes are often important
+}
+
+/**
+ * Combine similar commits on the same day
+ * Groups commits by prefix and combines if 3+ with same prefix
+ */
+function combineSimilarCommits(commits) {
+  const grouped = {};
+  const significant = [];
+  
+  // Separate significant commits from routine ones
+  for (const commit of commits) {
+    if (isSignificantCommit(commit)) {
+      significant.push(commit);
+    } else {
+      const prefix = getCommitPrefix(commit) || 'other';
+      if (!grouped[prefix]) {
+        grouped[prefix] = [];
+      }
+      grouped[prefix].push(commit);
+    }
+  }
+  
+  const result = [...significant];
+  
+  // Combine groups with 3+ commits
+  for (const [prefix, commitList] of Object.entries(grouped)) {
+    if (commitList.length >= 3) {
+      // Combine into a single entry
+      const prefixLabel = prefix === 'other' ? 'Updates' : 
+                         prefix === 'fix' ? 'Fixes' :
+                         prefix === 'docs' ? 'Documentation updates' :
+                         prefix === 'style' ? 'Style updates' :
+                         prefix === 'chore' ? 'Maintenance' :
+                         `${prefix.charAt(0).toUpperCase() + prefix.slice(1)} updates`;
+      result.push(`${prefixLabel}: ${commitList.length} commits`);
+    } else {
+      // Keep individual commits if fewer than 3
+      result.push(...commitList);
+    }
+  }
+  
+  return result;
+}
+
 console.log('📝 Generating changelog from git history...\n');
 
 try {
@@ -59,9 +122,12 @@ try {
   for (const date of sortedDates) {
     changelog += `## ${date}\n\n`;
 
+    // Combine similar commits on the same day
+    const combinedCommits = combineSimilarCommits(commitsByDate[date]);
+
     // Add each commit message as a bullet point
     // Escape HTML to prevent tags from being interpreted as HTML
-    for (const message of commitsByDate[date]) {
+    for (const message of combinedCommits) {
       changelog += `- ${escapeHtml(message)}\n`;
     }
 

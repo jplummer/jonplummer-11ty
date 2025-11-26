@@ -19,10 +19,10 @@ purpose: individual post page
     {% set previousPost = collections.post | getPreviousCollectionItem(page) %}
     {% set nextPost = collections.post | getNextCollectionItem(page) %}
     {% if previousPost %}
-    <a href="{{ previousPost.url }}" class="prev">← Previous post: {{ previousPost.data.title | smartquotes | safe }}</a>
+    <a href="{{ previousPost.url }}" class="prev">← Previous post: {{ previousPost.data.title | smartquotes | stripHtml }}</a>
     {% endif %}
 
     {% if nextPost %}
-    <a href="{{ nextPost.url }}" class="next">Next post: {{ nextPost.data.title | smartquotes | safe }} →</a>
+    <a href="{{ nextPost.url }}" class="next">Next post: {{ nextPost.data.title | smartquotes | stripHtml }} →</a>
     {% endif %}
 </nav>

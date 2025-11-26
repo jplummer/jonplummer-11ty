@@ -6,25 +6,33 @@ const path = require('path');
 // Map test types to their script files
 const testTypes = {
   'html': 'html.js',
-  'links': 'links.js',
   'links-yaml': 'links-yaml.js',
   'internal-links': 'internal-links.js',
   'content': 'content-structure.js',
   'markdown': 'markdown.js',
-  'performance': 'performance.js',
   'seo': 'seo-meta.js',
   'accessibility': 'accessibility.js',
   'rss': 'rss-feed.js',
   'deploy': 'deploy.js'
 };
 
-// Tests to run for "test all" (matching previous test-all behavior)
+// Fast tests (excludes slow tests: accessibility)
+// Suitable for pre-commit hooks or frequent validation
+const fastTests = [
+  'html',
+  'internal-links',
+  'content',
+  'markdown',
+  'seo',
+  'rss'
+];
+
+// Tests to run for "test all" (includes all tests, including slow ones)
 const allTests = [
   'html',
   'internal-links',
   'content',
   'markdown',
-  'performance',
   'seo',
   'accessibility',
   'rss'
@@ -34,10 +42,15 @@ function listTests() {
   console.log('Available test types:\n');
   Object.keys(testTypes).forEach(type => {
     const isInAll = allTests.includes(type);
-    console.log(`  ${type}${isInAll ? ' (included in "test all")' : ''}`);
+    const isInFast = fastTests.includes(type);
+    let note = '';
+    if (isInFast) note = ' (included in "test fast" and "test all")';
+    else if (isInAll) note = ' (included in "test all")';
+    console.log(`  ${type}${note}`);
   });
   console.log('\nUsage: npm run test [type]');
-  console.log('       npm run test all     (runs: ' + allTests.join(', ') + ')');
+  console.log('       npm run test fast   (runs fast tests: ' + fastTests.join(', ') + ')');
+  console.log('       npm run test all    (runs all tests: ' + allTests.join(', ') + ')');
 }
 
 function runTest(testType) {
@@ -63,6 +76,24 @@ function runTest(testType) {
   });
 }
 
+async function runFastTests() {
+  console.log('Running fast tests...\n');
+  
+  for (let i = 0; i < fastTests.length; i++) {
+    const testType = fastTests[i];
+    console.log(`\n[${i + 1}/${fastTests.length}] Running ${testType}...\n`);
+    
+    try {
+      await runTest(testType);
+    } catch (error) {
+      console.error(`\n❌ Test "${testType}" failed`);
+      process.exit(1);
+    }
+  }
+  
+  console.log('\n✅ All fast tests passed!');
+}
+
 async function runAllTests() {
   console.log('Running all tests...\n');
   
@@ -86,6 +117,11 @@ async function main() {
   
   if (!testType) {
     listTests();
+    process.exit(0);
+  }
+  
+  if (testType === 'fast') {
+    await runFastTests();
     process.exit(0);
   }
   

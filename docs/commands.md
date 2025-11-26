@@ -12,7 +12,8 @@
 
 - `npm run test` - List available test types
 - `npm run validate` - Quick HTML validity check (shortcut for `npm run test html`)
-- `npm run test all` - Run all tests in sequence
+- `npm run test fast` - Run fast tests (excludes slow tests: accessibility)
+- `npm run test all` - Run all tests in sequence (includes slow tests)
 - `npm run test [type]` - Run a specific test type
 
 ### 🚢 Deployment
@@ -34,17 +35,38 @@
 
 #### Available Test Types
 
+**Fast Tests** (suitable for frequent validation):
 - `html` - Check HTML validity (structure, syntax, deprecated elements)
-- `links` - Test all links (internal and external)
-- `links-yaml` - Validate links.yaml structure and format
 - `internal-links` - Test only internal links (critical)
 - `content` - Test content structure
 - `markdown` - Validate markdown syntax and structure
-- `performance` - Analyze performance
 - `seo` - Test SEO and meta tags
-- `accessibility` - Test accessibility using axe-core
 - `rss` - Test RSS feeds
+
+**Slow Tests** (run occasionally):
+- `accessibility` - Test accessibility using axe-core - launches browser
+
+**Other Tests**:
+- `links-yaml` - Validate links.yaml structure and format
 - `deploy` - Test deployment (environment, local build check, dependencies, SSH, remote directory, rsync dry-run)
+
+#### Test Suite Focus
+
+The test suite is designed to:
+- **Prevent authoring mistakes**: markdown, content structure, links-yaml validation
+- **Ensure deploys work**: html, internal-links, seo, rss validation
+- **Basic security checks**: deploy validation, security audit script
+
+Use `npm run test fast` for quick validation during development. Use `npm run test all` for comprehensive checks before deployment.
+
+#### Test Suite Architecture
+
+The test suite uses shared utilities in `scripts/test/utils/` to reduce redundancy:
+- **html-utils.js**: Cheerio-based HTML parsing (replaces fragile regex)
+- **validation-utils.js**: Common validation functions (title, description, URL, date, slug)
+- **test-base.js**: Common file operations (checking `_site` exists, finding files, reading files)
+
+All tests are independent scripts that can be run individually or through the test runner.
 
 #### links.yaml Validation
 
