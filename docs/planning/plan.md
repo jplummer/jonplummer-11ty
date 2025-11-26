@@ -11,14 +11,18 @@
   - [ ] MAYBE: Add links to key articles on the portfolio page (since it is a leader's portfolio)
 
 ### Security & Deployment
-- [ ] **Security and scan results mitigation**
-  - [ ] passwordless SSH login for deployment: https://help.dreamhost.com/hc/en-us/articles/216499537-How-to-configure-passwordless-login-in-Mac-OS-X-and-Linux
+- [x] **Security and scan results mitigation**
+  - [x] passwordless SSH login for deployment: https://help.dreamhost.com/hc/en-us/articles/216499537-How-to-configure-passwordless-login-in-Mac-OS-X-and-Linux
   - [x] Cloudflare Radar "security headers not set" https://radar.cloudflare.com/scan/fd4597b9-3260-499d-9407-9783804293e7/summary https://owasp.org/www-project-secure-headers/index.html#div-bestpractices
   - [x] https://app.ahrefs.com/site-audit/5163664/issues?current=12-10-2025T072858
 - [x] **Pre-deploy validation**
   - [x] Added validation checks to deploy script (markdown, content structure)
   - [x] Prevents authoring mistakes (malformed YAML, markdown syntax errors, hierarchy issues) from going live
   - [x] Supports `--skip-checks` flag for emergencies
+- [ ] **Periodic security audit**
+  - [ ] Run `npm run security-audit` monthly or before major deployments
+  - [ ] Review and address automated check results
+  - [ ] Complete manual tasks checklist
 
 ### Design & Polish
 - [x] improve generated ogImage styling

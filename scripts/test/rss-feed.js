@@ -2,7 +2,8 @@
 
 const fs = require('fs');
 const path = require('path');
-const { DOMParser } = require('xmldom');
+// Use Node's built-in DOMParser (available in Node 20+)
+const { DOMParser } = require('@xmldom/xmldom');
 
 // Find RSS/XML files in _site
 function findRssFiles(dir) {

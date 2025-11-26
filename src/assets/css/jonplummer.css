@@ -640,3 +640,227 @@ header a.skip:focus {
   padding: 1rem;
   z-index: 100;
 }
+
+/* === OG IMAGE PREVIEW PAGE === */
+/* Styles for the OG image preview page (dev tool) */
+
+.preview-container {
+  max-width: var(--max-width);
+  margin: var(--spacing-lg) auto;
+  padding: 0 var(--gutter);
+}
+
+.preview-info {
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background: var(--content-background-color);
+  border: 1px solid var(--text-color-light);
+}
+
+.preview-section {
+  margin: var(--spacing-lg) 0;
+}
+
+.preview-section h2 {
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-md);
+  color: var(--text-color);
+}
+
+.og-preview-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  margin: var(--spacing-lg) 0;
+}
+
+.og-preview-item {
+  border: 1px solid var(--text-color-light);
+  padding: var(--spacing-md);
+  background: var(--content-background-color);
+}
+
+.og-preview-item h3 {
+  font-size: var(--font-size-md);
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-color);
+}
+
+/* Scale down the 1200x630 OG image to fit in browser */
+.og-preview-scaled {
+  transform: scale(0.5);
+  transform-origin: top left;
+  width: 1200px;
+  height: 630px;
+}
+
+.og-preview-container {
+  width: 600px;
+  height: 315px;
+  overflow: hidden;
+  border: 1px solid var(--text-color-light);
+  background: white;
+}
+
+.og-preview-content {
+  width: 1200px;
+  height: 630px;
+}
+
+.og-images-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: var(--spacing-lg) 0;
+}
+
+.og-images-grid-item {
+  border: 1px solid var(--text-color-light);
+  padding: 1rem;
+  background: var(--content-background-color);
+}
+
+.og-images-grid-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.og-images-grid-item code {
+  font-size: var(--font-size-xxs);
+  word-break: break-all;
+}
+
+/* === OG IMAGE RENDERED STYLES === */
+/* Styles for OG images rendered via renderOgImage shortcode (scoped to .og-image-rendered) */
+
+.og-image-rendered {
+  /* CSS custom properties from main stylesheet (scoped) */
+  --gutter: 2rem;
+  --max-width: 66rem;
+  --breakpoint-single-column: 54rem;
+  --font-family: system-ui, sans-serif;
+  --text-size: 16px;
+  --line-height: 1.5;
+  --font-size-xxs: 0.875rem;
+  --line-height-xxs: 1.715;
+  --font-size-xs: 1rem;
+  --line-height-xs: 1.5;
+  --font-size-sm: 1.125rem;
+  --line-height-sm: 1.3334;
+  --font-size-md: 1.25rem;
+  --line-height-md: 1.2;
+  --font-size-lg: 1.5rem;
+  --line-height-lg: 1;
+  --font-size-xl: 2rem;
+  --line-height-xl: 1;
+  --font-size-2xl: 2.5rem;
+  --line-height-2xl: 1.2;
+  --font-size-3xl: 4rem;
+  --line-height-3xl: 1;
+  --line-height-tight: 1.1;
+  --font-weight-thin: 100;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: normal;
+  --letter-spacing-loose: 0.025em;
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.25rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 2.25rem;
+  --spacing-ex: 5ex;
+  
+  /* Force light theme for OG images */
+  --text-color: #2a2a2a;
+  --text-color-light: #5a5a5a;
+  --background-color: #d3d8d2;
+  --content-background-color: #fff;
+  --link-color: #e6423a;
+  --link-hover-color: #d97706;
+  --link-visited-color: #5b4a3b;
+  --link-active-color: #0d703f;
+  
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  width: 1200px;
+  height: 630px;
+  font-family: var(--font-family);
+  font-size: 1.5rem;
+  line-height: var(--line-height);
+  letter-spacing: var(--letter-spacing-loose);
+  color: var(--text-color);
+  background-color: var(--background-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.og-image-rendered * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.og-image-rendered a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.og-image-rendered .og-content {
+  width: 100%;
+  background-color: var(--content-background-color);
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.og-image-rendered .og-hgroup {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.og-image-rendered .og-hgroup h1 {
+  font-size: 6rem;
+  line-height: var(--line-height-3xl);
+  font-weight: var(--font-weight-thin);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--link-color);
+}
+
+.og-image-rendered .og-hgroup h1 a {
+  color: var(--link-color) !important;
+  text-decoration: none;
+}
+
+.og-image-rendered .og-hgroup p {
+  font-size: 1.5rem;
+  line-height: var(--line-height-xs);
+  font-style: italic;
+  color: var(--link-color);
+}
+
+.og-image-rendered .og-title {
+  font-size: 3.5rem;
+  line-height: var(--line-height-2xl);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-tight);
+  text-wrap: balance;
+}
+
+.og-image-rendered .og-description {
+  font-size: 1.75rem;
+  max-width: 90%;
+}
+
+.og-image-rendered .og-date {
+  font-size: 1.5rem;
+  font-style: italic;
+}

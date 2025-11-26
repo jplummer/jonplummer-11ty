@@ -24,6 +24,7 @@
 - `npm run update-docs` - Update cached Eleventy documentation
 - `npm run changelog` - Generate CHANGELOG.md from git history
 - `npm run generate-og-images` - Generate Open Graph images for posts and pages
+- `npm run security-audit` - Run security audit and maintenance checks
 
 ---
 
@@ -164,3 +165,45 @@ You can also preview generated images in other ways:
 #### Customization
 
 To customize the OG image design, edit `src/_includes/og-image.njk`. The template uses your site's CSS custom properties, so changes to colors, typography, and spacing will automatically be reflected in the generated images.
+
+### 🔒 Security Audit
+
+- `npm run security-audit` - Run security audit and maintenance checks
+
+The security audit script performs periodic security and maintenance checks for the site. It automates checks where possible and provides a checklist of manual tasks.
+
+#### Automated Checks
+
+The script automatically checks:
+- **npm audit**: Scans for known vulnerabilities in dependencies
+- **npm outdated**: Identifies packages that need updates
+- **Node.js version**: Verifies you're using an LTS version
+- **Environment variables**: Ensures `.env` is properly ignored by git
+- **Package.json**: Validates configuration
+- **Build output**: Scans `_site/` for sensitive files that shouldn't be deployed
+
+#### Manual Tasks Checklist
+
+The script also provides a comprehensive checklist of manual security tasks including:
+- Dependency license reviews
+- Secrets auditing (scanning for exposed API keys, passwords, tokens)
+- Security headers verification on live site
+- HTTPS/TLS certificate validation
+- Third-party resource audits
+- Infrastructure monitoring
+- Full test suite execution
+- Documentation updates
+
+#### Usage
+
+Run the audit periodically (e.g., monthly or before major deployments):
+
+```bash
+npm run security-audit
+```
+
+The script exits with:
+- **Code 0**: All automated checks passed (warnings may still be present)
+- **Code 1**: Failures found that need attention
+
+See `scripts/security/security-audit.js` header comments for the complete list of security and maintenance tasks.

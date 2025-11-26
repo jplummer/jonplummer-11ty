@@ -8,8 +8,8 @@
  * 
  * Requirements:
  * - rsync must be installed
- * - SSH access to remote server
- * - .env file with DREAMHOST_HOST, DREAMHOST_USERNAME, DREAMHOST_PASSWORD, DREAMHOST_REMOTE_PATH
+ * - SSH access to remote server (passwordless SSH key authentication)
+ * - .env file with DREAMHOST_HOST, DREAMHOST_USERNAME, DREAMHOST_REMOTE_PATH
  */
 
 const { execSync } = require('child_process');
@@ -21,7 +21,6 @@ console.log('🚀 Deploying to Dreamhost via rsync...\n');
 const config = {
   host: 'your-domain.com',
   username: 'your-username',
-  password: null,
   remotePath: '/home/your-username/your-domain.com/',
   localPath: './_site/'
 };
@@ -31,7 +30,6 @@ if (fs.existsSync('.env')) {
   require('dotenv').config();
   config.host = process.env.DREAMHOST_HOST || config.host;
   config.username = process.env.DREAMHOST_USERNAME || config.username;
-  config.password = process.env.DREAMHOST_PASSWORD || null;
   config.remotePath = process.env.DREAMHOST_REMOTE_PATH || config.remotePath;
 }
 
@@ -112,16 +110,6 @@ function checkRsync() {
   }
 }
 
-// Check if sshpass is available for password authentication
-function checkSshpass() {
-  try {
-    execSync('which sshpass', { stdio: 'pipe' });
-    return true;
-  } catch (error) {
-    return false;
-  }
-}
-
 function deploy() {
   try {
     // Check prerequisites
@@ -134,58 +122,27 @@ function deploy() {
       process.exit(1);
     }
 
-    const hasSshpass = checkSshpass();
-    const hasPassword = config.password !== null;
-
-    if (!hasSshpass && !hasPassword) {
-      console.error('❌ No authentication method available.');
-      console.error('   Please either:');
-      console.error('   1. Install sshpass and set DREAMHOST_PASSWORD in .env');
-      console.error('   2. Set DREAMHOST_PASSWORD in .env (will prompt for password)');
-      process.exit(1);
-    }
-
     console.log('📤 Syncing files with rsync...');
     console.log(`   Local: ${config.localPath}`);
     console.log(`   Remote: ${config.username}@${config.host}:${config.remotePath}`);
 
-    // Build rsync command
-    let rsyncCommand;
-
-    if (hasSshpass && hasPassword) {
-      rsyncCommand = [
-        'sshpass',
-        '-p', config.password,
-        'rsync',
-        '-az', // Archive mode, compress
-        '--delete', // Delete files on remote that don't exist locally
-        '--exclude=.DS_Store', // Exclude macOS metadata files
-        '--exclude=Thumbs.db', // Exclude Windows thumbnail files
-        '--exclude=*.tmp', // Exclude temporary files
-        '--progress', // Show progress
-        '--stats', // Show transfer statistics
-        `${config.localPath}`, // Source directory
-        `${config.username}@${config.host}:${config.remotePath}` // Destination
-      ];
-    } else {
-      // Use password prompt
-      rsyncCommand = [
-        'rsync',
-        '-az', // Archive mode, compress
-        '--delete', // Delete files on remote that don't exist locally
-        '--exclude=.DS_Store', // Exclude macOS metadata files
-        '--exclude=Thumbs.db', // Exclude Windows thumbnail files
-        '--exclude=*.tmp', // Exclude temporary files
-        '--progress', // Show progress
-        '--stats', // Show transfer statistics
-        `${config.localPath}`, // Source directory
-        `${config.username}@${config.host}:${config.remotePath}` // Destination
-      ];
-    }
+    // Build rsync command (SSH key authentication is automatic)
+    const rsyncCommand = [
+      'rsync',
+      '-az', // Archive mode, compress
+      '--delete', // Delete files on remote that don't exist locally
+      '--exclude=.DS_Store', // Exclude macOS metadata files
+      '--exclude=Thumbs.db', // Exclude Windows thumbnail files
+      '--exclude=*.tmp', // Exclude temporary files
+      '--progress', // Show progress
+      '--stats', // Show transfer statistics
+      `${config.localPath}`, // Source directory
+      `${config.username}@${config.host}:${config.remotePath}` // Destination
+    ];
 
     console.log('\n🔄 Running rsync...\n');
 
-    // Execute rsync with native output
+    // Execute rsync with native output (SSH key authentication is automatic)
     try {
       execSync(rsyncCommand.join(' '), {
         stdio: 'inherit' // Show rsync's native output

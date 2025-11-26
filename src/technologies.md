@@ -40,7 +40,7 @@ ogImage: /assets/images/og/technologies.png
     - Open Graph image generation (renders HTML templates to PNG images)
   - **[axe-core](https://github.com/dequelabs/axe-core)**: Accessibility testing engine used by test-accessibility.js (analyzes HTML for WCAG compliance violations)
   - **[html-validate](https://html-validate.org/)**: Offline HTML5 validator used by test-html.js (validates HTML syntax, nesting, and attributes)
-  - **[xmldom](https://github.com/xmldom/xmldom)**: XML DOM parser for RSS feed validation in test scripts
+  - **[@xmldom/xmldom](https://github.com/xmldom/xmldom)**: XML DOM parser for RSS feed validation in test scripts
 - **Deployment**
   - **[dotenv](https://github.com/motdotla/dotenv)**: Loads environment variables from .env file for deployment scripts
   - **[rsync](https://rsync.samba.org/)**: File synchronization for deployment (must be installed on system)

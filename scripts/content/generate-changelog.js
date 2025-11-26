@@ -40,9 +40,9 @@ try {
   const sortedDates = Object.keys(commitsByDate).sort().reverse();
 
   // Generate changelog content
-  let changelog = '# Changelog\n\n';
-  changelog += 'All notable changes to this project are documented in this file.\n\n';
-  changelog += 'The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),\n';
+  // Note: No h1 heading here - the frontmatter title in changelog.md provides it
+  let changelog = 'All notable changes to this project are documented in this file. ';
+  changelog += 'The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), ';
   changelog += 'and this project adheres to chronological ordering (newest first).\n\n';
 
   for (const date of sortedDates) {

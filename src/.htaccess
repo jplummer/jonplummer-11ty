@@ -42,8 +42,8 @@ Options -Indexes
     # Permissions policy - restrict certain browser features
     Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
     
-    # Content Security Policy - allow same-origin resources and common CDNs
-    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none';"
+    # Content Security Policy - strict policy without unsafe-inline
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none';"
 </IfModule>
 
 # Enable compression (if mod_deflate is available)

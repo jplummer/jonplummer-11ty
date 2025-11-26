@@ -1,5 +1,3 @@
-# Changelog
-
 All notable changes to this project are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
@@ -11,6 +9,7 @@ and this project adheres to chronological ordering (newest first).
 - Fix portfolio figure caption styling and update alt texts
 - Fix corrupted WeMo figcaption and update portfolio content
 - Update now page with corrected dates
+- Improve OG image styling and fix color issues
 
 ## 2025-11-23
 

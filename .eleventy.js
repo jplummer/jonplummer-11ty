@@ -191,26 +191,12 @@ module.exports = function (eleventyConfig) {
       cssCustomProperties: cssCustomProperties
     });
     
-    // Extract body content and styles separately
-    const headMatch = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
+    // Extract body content (styles are now in external CSS file)
     const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
     
-    if (headMatch && bodyMatch) {
-      // Extract the style tag content
-      const styleMatch = headMatch[1].match(/<style[^>]*>([\s\S]*?)<\/style>/i);
-      if (styleMatch) {
-        // Scope styles to .og-image-rendered container
-        // Replace :root with .og-image-rendered to scope the light theme override
-        // Replace body with .og-image-rendered
-        let scopedStyles = styleMatch[1]
-          .replace(/:root\s*\{/g, '.og-image-rendered {')
-          .replace(/body\s*\{/g, '.og-image-rendered {')
-          .replace(/body\s+/g, '.og-image-rendered ');
-        
-        // Return body content wrapped in a div with scoped styles
-        return `<div class="og-image-rendered"><style>${scopedStyles}</style>${bodyMatch[1]}</div>`;
-      }
-      return bodyMatch[1];
+    if (bodyMatch) {
+      // Return body content wrapped in a div (styles are in external CSS scoped to .og-image-rendered)
+      return `<div class="og-image-rendered">${bodyMatch[1]}</div>`;
     }
     return html;
   });

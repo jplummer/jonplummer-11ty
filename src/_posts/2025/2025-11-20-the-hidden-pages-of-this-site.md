@@ -98,6 +98,3 @@ A Nunjucks template (`sitemap.njk`) iterates through all the collections (`post`
 ### Why a sitemap
 
 You probably don't, unless you are a robot. But if you're building a site, you need one of these to ensure Baudu, Yandex, Yippy, Ecosia, Bing, Kagi, Ask, et al can find all your pages efficiently.
-
-
-ogImage: /assets/images/og/2025-11-20-the-hidden-pages-of-this-site.png
