@@ -15,14 +15,8 @@ purpose: individual post page
 
 {% include "post_content.njk" %}
 
-<nav class="post-navigation" aria-label="Post navigation">
-    {% set previousPost = collections.post | getPreviousCollectionItem(page) %}
-    {% set nextPost = collections.post | getNextCollectionItem(page) %}
-    {% if previousPost %}
-    <a href="{{ previousPost.url }}" class="prev">← Previous post: {{ previousPost.data.title | smartquotes | stripHtml }}</a>
-    {% endif %}
-
-    {% if nextPost %}
-    <a href="{{ nextPost.url }}" class="next">Next post: {{ nextPost.data.title | smartquotes | stripHtml }} →</a>
-    {% endif %}
-</nav>
+{% set collection = collections.post %}
+{% set currentPage = page %}
+{% set itemLabel = "post" %}
+{% set navLabel = "Post navigation" %}
+{% include "collection_navigation.njk" %}

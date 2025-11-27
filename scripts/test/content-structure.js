@@ -4,43 +4,10 @@ const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
 const { validateDate, validateSlug, validateTitle, validateMetaDescription } = require('./utils/validation-utils');
+const { getMarkdownFiles, readFile } = require('./utils/test-base');
+const { parseFrontMatter } = require('../utils/frontmatter-utils');
 
-// Find all markdown files in _posts
-function findMarkdownFiles(dir) {
-  const files = [];
-  const items = fs.readdirSync(dir);
-
-  for (const item of items) {
-    const fullPath = path.join(dir, item);
-    const stat = fs.statSync(fullPath);
-
-    if (stat.isDirectory()) {
-      if (item === '_drafts') continue;
-      files.push(...findMarkdownFiles(fullPath));
-    } else if (item.endsWith('.md')) {
-      files.push(fullPath);
-    }
-  }
-
-  return files;
-}
-
-// Parse front matter from markdown file
-function parseFrontMatter(content) {
-  const frontMatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
-  const match = content.match(frontMatterRegex);
-
-  if (!match) {
-    return { frontMatter: null, content: content };
-  }
-
-  try {
-    const frontMatter = yaml.load(match[1]);
-    return { frontMatter, content: match[2] };
-  } catch (error) {
-    return { frontMatter: null, content: content, error: error.message };
-  }
-}
+// Front matter parsing and file finding now use shared utilities
 
 // Validation functions now use shared validation-utils
 // Note: content-structure.js uses different validation rules (e.g., title max 200, description 50-160)
@@ -79,7 +46,20 @@ function validateRequiredFields(frontMatter, filePath) {
   }
 
   if (frontMatter.date) {
-    const dateCheck = validateDate(frontMatter.date);
+    // Extract YYYY-MM-DD from ISO date strings (e.g., "2025-11-20T20:00:00.000Z" -> "2025-11-20")
+    // Also handle Date objects by converting to string first
+    let dateToValidate = frontMatter.date;
+    if (dateToValidate instanceof Date) {
+      dateToValidate = dateToValidate.toISOString().split('T')[0];
+    } else if (typeof dateToValidate === 'string') {
+      if (dateToValidate.includes('T')) {
+        dateToValidate = dateToValidate.split('T')[0];
+      }
+    } else {
+      issues.push(`Date: Date must be a string or Date object`);
+      return { issues, warnings };
+    }
+    const dateCheck = validateDate(dateToValidate);
     if (!dateCheck.valid) {
       issues.push(`Date: ${dateCheck.error}`);
     }
@@ -202,7 +182,9 @@ function validateContentStructure() {
     process.exit(1);
   }
 
-  const markdownFiles = findMarkdownFiles(postsDir);
+  // Get markdown files and exclude drafts (preserving original behavior)
+  const allMarkdownFiles = getMarkdownFiles(postsDir);
+  const markdownFiles = allMarkdownFiles.filter(file => !file.includes('/_drafts/'));
   console.log(`Found ${markdownFiles.length} markdown files\n`);
 
   const results = {
@@ -217,7 +199,7 @@ function validateContentStructure() {
   // First pass: validate individual files
   for (const file of markdownFiles) {
     const relativePath = path.relative('./src/_posts', file);
-    const content = fs.readFileSync(file, 'utf8');
+    const content = readFile(file);
     const { frontMatter, error } = parseFrontMatter(content);
 
     console.log(`📄 ${relativePath}:`);

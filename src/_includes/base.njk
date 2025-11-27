@@ -75,10 +75,6 @@
           "name": "Jon Plummer",
           "url": "{{ site.url }}"
         },
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "{{ site.url }}{{ page.url }}"
-        },
         "url": "{{ site.url }}{{ page.url }}",
         "description": {{ description | default(title) | json | safe }},
         "image": "{{ site.url }}{{ ogImageUrl }}"

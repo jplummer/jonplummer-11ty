@@ -3,10 +3,10 @@
 const fs = require('fs');
 const path = require('path');
 const puppeteer = require('puppeteer');
-const yaml = require('js-yaml');
 const nunjucks = require('nunjucks');
 const { DateTime } = require('luxon');
 const { findMarkdownFiles } = require('../utils/file-utils');
+const { parseFrontMatter, reconstructFile } = require('../utils/frontmatter-utils');
 
 // Configure Nunjucks environment
 const nunjucksEnv = new nunjucks.Environment(
@@ -63,33 +63,7 @@ function extractCssCustomProperties() {
   return cssContent.substring(rootStart, braceEnd + 1);
 }
 
-// Parse frontmatter from markdown file
-function parseFrontMatter(content) {
-  const frontMatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
-  const match = content.match(frontMatterRegex);
-  
-  if (!match) {
-    return { frontMatter: null, content: content };
-  }
-  
-  try {
-    const frontMatter = yaml.load(match[1]);
-    return { frontMatter, content: match[2] };
-  } catch (error) {
-    return { frontMatter: null, content: content, error: error.message };
-  }
-}
-
-// Reconstruct file with updated frontmatter
-function reconstructFile(originalContent, frontMatter, body) {
-  const yamlContent = yaml.dump(frontMatter, {
-    lineWidth: -1,
-    noRefs: true,
-    quotingType: '"'
-  });
-  
-  return `---\n${yamlContent}---\n${body}`;
-}
+// Front matter parsing and reconstruction now use shared utilities
 
 // Generate filename for OG image based on page URL or slug
 function generateOgImageFilename(pageData, filePath) {

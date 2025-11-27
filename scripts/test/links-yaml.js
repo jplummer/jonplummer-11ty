@@ -35,7 +35,9 @@ function validateLink(link, linkIndex, dateKey) {
   if (!link.title) {
     issues.push(`Link ${linkIndex + 1}: Missing required field 'title'`);
   } else {
-    const titleCheck = validateTitle(link.title);
+    // Link titles have no length constraints (unlike SEO meta titles)
+    // Just validate that it's a non-empty string
+    const titleCheck = validateTitle(link.title, 1, 1000);
     if (!titleCheck.valid) {
       issues.push(`Link ${linkIndex + 1}: Title - ${titleCheck.error}`);
     }

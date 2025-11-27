@@ -2,63 +2,10 @@
 
 const fs = require('fs');
 const path = require('path');
-const yaml = require('js-yaml');
 const { findMarkdownFiles } = require('../utils/file-utils');
+const { parseFrontMatter, reconstructFile } = require('../utils/frontmatter-utils');
 
-// Parse frontmatter from markdown file
-function parseFrontMatter(content) {
-  const frontMatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
-  const match = content.match(frontMatterRegex);
-  
-  if (!match) {
-    return { frontMatter: null, content: content };
-  }
-  
-  try {
-    const frontMatter = yaml.load(match[1]);
-    return { frontMatter, content: match[2] };
-  } catch (error) {
-    return { frontMatter: null, content: content, error: error.message };
-  }
-}
-
-// Reconstruct file with quoted description
-function reconstructFile(originalContent, frontMatter, body) {
-  const frontMatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
-  const match = originalContent.match(frontMatterRegex);
-  
-  if (!match) {
-    return originalContent;
-  }
-  
-  // Dump YAML
-  let yamlContent = yaml.dump(frontMatter, {
-    lineWidth: -1,
-    noRefs: true,
-    quotingType: '"'
-  });
-  
-  // Post-process to ensure description is always quoted
-  const lines = yamlContent.split('\n');
-  const fixedLines = lines.map(line => {
-    if (line.startsWith('description:')) {
-      const match = line.match(/^description:\s*(.+)$/);
-      if (match) {
-        let value = match[1];
-        // If not already quoted, quote it and escape internal quotes
-        if (!value.startsWith('"') && !value.startsWith("'")) {
-          // Escape any double quotes and backslashes in the value
-          const escaped = value.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
-          return `description: "${escaped}"`;
-        }
-      }
-    }
-    return line;
-  });
-  yamlContent = fixedLines.join('\n');
-  
-  return `---\n${yamlContent}---\n${body}`;
-}
+// Front matter parsing and reconstruction now use shared utilities
 
 // Check if description needs quoting
 function needsQuoting(description) {
@@ -102,7 +49,7 @@ function processPostFile(filePath) {
   }
   
   // Reconstruct file with quoted description
-  const newContent = reconstructFile(content, frontMatter, body);
+  const newContent = reconstructFile(content, frontMatter, body, { quoteDescription: true });
   
   // Only update if content changed
   if (newContent === content) {

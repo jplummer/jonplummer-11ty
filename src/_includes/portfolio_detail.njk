@@ -12,14 +12,8 @@ purpose: individual portfolio page
     </section>
 </article>
 
-<nav class="post-navigation" aria-label="Portfolio navigation">
-    {% set previousPost = collections.portfolio | getPreviousCollectionItem(page) %}
-    {% set nextPost = collections.portfolio | getNextCollectionItem(page) %}
-    {% if previousPost %}
-    <a href="{{ previousPost.url }}" class="prev">← Previous project: {{ previousPost.data.title | smartquotes | stripHtml }}</a>
-    {% endif %}
-
-    {% if nextPost %}
-    <a href="{{ nextPost.url }}" class="next">Next project: {{ nextPost.data.title | smartquotes | stripHtml }} →</a>
-    {% endif %}
-</nav>
+{% set collection = collections.portfolio %}
+{% set currentPage = page %}
+{% set itemLabel = "project" %}
+{% set navLabel = "Portfolio navigation" %}
+{% include "collection_navigation.njk" %}

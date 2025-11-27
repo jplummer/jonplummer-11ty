@@ -8,6 +8,7 @@ All notable changes to this project are documented in this file. The format is b
 - Reduce security audit scope for static site
 - fix: resolve HTML validation errors in changelog and code blocks
 - Enable smart quotes in markdown and titles
+- Refactor test suite and fix nested anchor issue
 - docs: consolidate documentation and reduce redundancy
 - chore: downgrade dotenv from v17 to v16
 - fix: correct typo in now page
