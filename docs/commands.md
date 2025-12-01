@@ -247,3 +247,20 @@ The script exits with:
 - **Code 1**: Failures found that need attention
 
 See `scripts/security/security-audit.js` header comments for the complete list of security and maintenance tasks.
+
+---
+
+## 🔄 Periodic Maintenance
+
+These tasks should be performed regularly, not as one-time work items.
+
+### Security Audit
+
+- **Frequency**: Monthly or before major deployments
+- **Command**: `npm run security-audit`
+- **Tasks**:
+  - Run the security audit script
+  - Review and address automated check results
+  - Complete manual tasks checklist (dependency updates, SSH key rotation, backup restore testing, etc.)
+
+See [Security Audit](#-security-audit) section above for detailed information about what the audit checks.

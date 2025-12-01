@@ -10,12 +10,6 @@
   - [ ] MAYBE: Put descriptions on the main portfolio page (from item frontmatter)
   - [ ] MAYBE: Add links to key articles on the portfolio page (since it is a leader's portfolio)
 
-### Security & Deployment
-- [ ] **Periodic security audit**
-  - [ ] Run `npm run security-audit` occasionally or before major deployments
-  - [ ] Review and address automated check results
-  - [ ] Complete manual tasks checklist
-
 ### Design & Polish
 - [x] improve generated ogImage styling
 - [ ] typographical improvements
