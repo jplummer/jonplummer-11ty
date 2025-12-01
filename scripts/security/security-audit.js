@@ -239,10 +239,42 @@ function checkOutdatedPackages() {
     addFinding('npm outdated', 'pass', 'info', 'All packages are up to date');
     return true;
   } catch (error) {
-    // npm outdated exits with non-zero if packages are outdated
+    // npm outdated exits with non-zero if packages are outdated OR if there's an error
+    // Try to parse JSON from stdout or stderr first
+    let output = '';
+    if (error.stdout) {
+      output = error.stdout.toString();
+    } else if (error.stderr) {
+      output = error.stderr.toString();
+    } else if (error.message) {
+      output = error.message;
+    }
+    
+    // Try to parse as JSON (npm outdated --json outputs JSON even on error)
     try {
-      const output = error.stdout || error.message;
-      if (output.includes('Wanted') || output.includes('Current')) {
+      const outdated = JSON.parse(output);
+      if (Object.keys(outdated).length > 0) {
+        const count = Object.keys(outdated).length;
+        const packages = Object.keys(outdated).slice(0, 5).join(', ');
+        const more = count > 5 ? ` and ${count - 5} more` : '';
+        logCheck('npm outdated', 'warn', `${count} package(s) outdated: ${packages}${more}`);
+        results.warnings.push(`npm outdated: ${count} packages need updates`);
+        addFinding('npm outdated', 'warn', 'medium',
+          `${count} package(s) are outdated`,
+          'Run "npm outdated" to see details, then "npm update" to update packages. Test thoroughly after updating.',
+          { count, packages: Object.keys(outdated) }
+        );
+        return false;
+      } else {
+        // Empty JSON object means no outdated packages (success case)
+        logCheck('npm outdated', 'pass', 'All packages up to date');
+        results.passed.push('npm outdated');
+        addFinding('npm outdated', 'pass', 'info', 'All packages are up to date');
+        return true;
+      }
+    } catch (parseError) {
+      // Not JSON, check for text output indicating outdated packages
+      if (output.includes('Wanted') || output.includes('Current') || output.includes('Package')) {
         logCheck('npm outdated', 'warn', 'Some packages are outdated (run "npm outdated" for details)');
         results.warnings.push('npm outdated: packages need updates');
         addFinding('npm outdated', 'warn', 'medium',
@@ -251,14 +283,22 @@ function checkOutdatedPackages() {
         );
         return false;
       }
-    } catch (e) {
-      // Ignore parse errors
     }
-    logCheck('npm outdated', 'warn', 'Could not check outdated packages');
+    
+    // If we get here, it's a real error (not just outdated packages)
+    const errorMsg = error.code === 'ENOENT' 
+      ? 'npm command not found' 
+      : error.code 
+        ? `Error code: ${error.code}` 
+        : error.message || 'Unknown error';
+    
+    logCheck('npm outdated', 'warn', `Could not check outdated packages: ${errorMsg}`);
     results.warnings.push('npm outdated: could not check');
     addFinding('npm outdated', 'warn', 'low',
-      'Could not check for outdated packages',
-      'Verify npm is working correctly and try again.'
+      `Could not check for outdated packages: ${errorMsg}`,
+      error.code === 'ENOENT' 
+        ? 'Verify npm is installed and in your PATH. Run "which npm" to check.'
+        : 'Verify npm is working correctly and try running "npm outdated" manually.'
     );
     return false;
   }
