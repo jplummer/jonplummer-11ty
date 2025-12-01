@@ -56,6 +56,8 @@ eleventyExcludeFromCollections: true
   {% set totalPosts = collections.post | length %}
   {% set postsPerPage = 5 %}
   {% set totalPages = (totalPosts + postsPerPage - 1) // postsPerPage %}
+  {# totalPages includes page 0, so last numbered page is (totalPages - 1) #}
+  {# range() excludes upper bound, so use totalPages to generate 1 to (totalPages - 1) #}
   {% for pageNum in range(1, totalPages) %}
   <url>
     <loc>{{ site.url }}/page/{{ pageNum }}/</loc>

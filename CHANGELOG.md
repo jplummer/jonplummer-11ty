@@ -9,6 +9,7 @@ All notable changes to this project are documented in this file. The format is b
 - fix: resolve HTML validation errors in changelog and code blocks
 - Enable smart quotes in markdown and titles
 - Refactor test suite and fix nested anchor issue
+- Refactor: Consolidate templates and utilities, fix test issues
 - docs: consolidate documentation and reduce redundancy
 - chore: downgrade dotenv from v17 to v16
 - fix: correct typo in now page

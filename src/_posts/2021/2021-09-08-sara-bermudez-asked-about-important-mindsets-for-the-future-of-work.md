@@ -1,5 +1,5 @@
 ---
-title: Sara Bermúdez asked about important mindsets for the future of work
+title: Sara Bermúdez asked about mindsets for the future of work
 layout: single_post.njk
 date: "2021-09-08T12:00:00-08:00"
 tags: post

@@ -3,12 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Redirecting...</title>
+    <title>{{ title | default('Redirecting...') }}</title>
+    <meta name="description" content="{{ description | default('This page has moved. You are being redirected.') }}">
     <meta http-equiv="refresh" content="0; url={{ redirectUrl }}">
     <link rel="canonical" href="{{ redirectUrl }}">
+    <meta property="og:title" content="{{ title | default('Redirecting...') }}">
+    <meta property="og:description" content="{{ description | default('This page has moved. You are being redirected.') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="og:image" content="{{ site.url }}/assets/images/2021/05/og-image.png">
     <script src="/assets/js/redirect.js"></script>
 </head>
 <body data-redirect-url="{{ redirectUrl }}">
+    <h1>{{ title | default('Redirecting...') }}</h1>
     <p>Redirecting to <a href="{{ redirectUrl }}">{{ redirectUrl }}</a>...</p>
 </body>
 </html>

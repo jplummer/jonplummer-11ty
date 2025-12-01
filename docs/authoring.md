@@ -11,7 +11,7 @@
 
 ### Optional
 
-- **`description`** - Meta description (50-160 chars). Defaults to title if omitted.
+- **`description`** - Meta description (120-160 chars). Defaults to title if omitted.
 - **`ogImage`** - OG image path. Use `auto` or omit to auto-generate. Format: `/assets/images/og/YYYY-MM-DD-post-slug.png`
 - **`permalink`** - Custom URL structure
 - **`eleventyExcludeFromCollections`** - Set to `true` to exclude

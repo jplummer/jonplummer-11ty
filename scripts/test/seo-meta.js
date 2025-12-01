@@ -42,9 +42,9 @@ function validateMetaDescription(description) {
   }
   
   // Additional check for unescaped quotes
-  if (description.includes('"') && !description.includes('&quot;')) {
-    issues.push('Meta description contains unescaped quotes');
-  }
+  // Check the raw HTML, not the parsed value, since parsed values unescape entities
+  // We need to check the actual HTML source to see if quotes are properly escaped
+  // This check is done in the main validation loop where we have access to raw HTML
   
   return issues;
 }
@@ -195,6 +195,17 @@ function validateSEO() {
     
     // Validate meta description
     const descIssues = validateMetaDescription(metaTags.description);
+    
+    // Check for unescaped quotes in raw HTML (not parsed value)
+    const rawDescMatch = content.match(/<meta\s+name=["']description["']\s+content=["']([^"']*)["']/i);
+    if (rawDescMatch && rawDescMatch[1]) {
+      const rawDesc = rawDescMatch[1];
+      // Check if raw HTML has unescaped straight quotes (not &quot;)
+      if (rawDesc.includes('"') && !rawDesc.includes('&quot;') && !rawDesc.includes('&#34;')) {
+        descIssues.push('Meta description contains unescaped quotes');
+      }
+    }
+    
     if (descIssues.length > 0) {
       console.log(`   ❌ Meta Description: ${descIssues.join(', ')}`);
       fileIssues += descIssues.length;

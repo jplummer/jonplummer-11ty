@@ -1,5 +1,5 @@
 ---
-title: A quick note about presenting design work in a meeting with engineering
+title: A quick note about presenting design work with engineering
 layout: single_post.njk
 date: "2022-01-06T12:00:00-08:00"
 tags: post

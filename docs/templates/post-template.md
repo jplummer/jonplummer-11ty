@@ -3,7 +3,7 @@ title: Post title here
 layout: single_post.njk
 date: "YYYY-MM-DDTHH:mm:ss-HH:mm"
 tags: post
-description: "Meta description for SEO (50-160 characters recommended)"
+description: "Meta description for SEO (120-160 characters recommended)"
 ogImage: /assets/images/og/YYYY-MM-DD-post-slug.png
 ---
 

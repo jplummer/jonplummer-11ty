@@ -1,5 +1,5 @@
 ---
-title: "Revamping my design leadership portfolio: setting up initial research with recruiters"
+title: "Revamping my design leadership portfolio: setting up initial research"
 layout: single_post.njk
 date: "2021-04-15T12:00:00-08:00"
 tags: post

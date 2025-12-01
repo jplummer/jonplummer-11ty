@@ -1,5 +1,5 @@
 ---
-title: "Confusing terms: globalization, internationalization, translation, and localization"
+title: "Confusing terms: globalization, internationalization, translation, localization"
 layout: single_post.njk
 date: "2021-12-06T12:00:00-08:00"
 tags: post
