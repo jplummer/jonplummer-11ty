@@ -1,9 +1,28 @@
 #!/usr/bin/env node
 
 const path = require('path');
-const { extractMetaTags, extractHeadings } = require('./utils/html-utils');
+const { extractMetaTags, extractHeadings, parseHtml } = require('./utils/html-utils');
 const { validateTitle: validateTitleUtil, validateMetaDescription: validateMetaDescriptionUtil } = require('./utils/validation-utils');
 const { checkSiteDirectory, getHtmlFiles, getRelativePath, readFile } = require('./utils/test-base');
+
+// Check if HTML content is a redirect page
+function isRedirectPage(htmlContent) {
+  const $ = parseHtml(htmlContent);
+  // Check for data-redirect-url attribute on body tag (primary indicator)
+  const body = $('body');
+  if (body.length > 0 && body.attr('data-redirect-url')) {
+    return true;
+  }
+  // Fallback: check for meta refresh with redirect pattern
+  const metaRefresh = $('meta[http-equiv="refresh"]');
+  if (metaRefresh.length > 0) {
+    const content = metaRefresh.attr('content');
+    if (content && content.includes('url=')) {
+      return true;
+    }
+  }
+  return false;
+}
 
 // Validate title (adapts validation-utils format to array of issues)
 function validateTitle(title) {
@@ -130,6 +149,11 @@ function checkDuplicateTitles(files) {
   
   for (const file of files) {
     const content = readFile(file);
+    // Skip redirect pages from duplicate title checking
+    if (isRedirectPage(content)) {
+      continue;
+    }
+    
     const metaTags = extractMetaTags(content);
     
     if (metaTags.title) {
@@ -180,58 +204,75 @@ function validateSEO() {
     const content = readFile(file);
     const metaTags = extractMetaTags(content);
     const headings = extractHeadings(content);
+    const isRedirect = isRedirectPage(content);
     
     console.log(`📄 ${relativePath}:`);
+    
+    if (isRedirect) {
+      console.log(`   ⏩ Redirect page - skipping SEO requirements`);
+    }
     
     let fileIssues = 0;
     let fileWarnings = 0;
     
-    // Validate title
-    const titleIssues = validateTitle(metaTags.title);
-    if (titleIssues.length > 0) {
-      console.log(`   ❌ Title: ${titleIssues.join(', ')}`);
-      fileIssues += titleIssues.length;
-    }
-    
-    // Validate meta description
-    const descIssues = validateMetaDescription(metaTags.description);
-    
-    // Check for unescaped quotes in raw HTML (not parsed value)
-    const rawDescMatch = content.match(/<meta\s+name=["']description["']\s+content=["']([^"']*)["']/i);
-    if (rawDescMatch && rawDescMatch[1]) {
-      const rawDesc = rawDescMatch[1];
-      // Check if raw HTML has unescaped straight quotes (not &quot;)
-      if (rawDesc.includes('"') && !rawDesc.includes('&quot;') && !rawDesc.includes('&#34;')) {
-        descIssues.push('Meta description contains unescaped quotes');
+    // Basic title check (always required, but length validation skipped for redirects)
+    if (!metaTags.title) {
+      console.log(`   ❌ Title: Missing title tag`);
+      fileIssues++;
+    } else if (!isRedirect) {
+      // Full title validation only for non-redirect pages
+      const titleIssues = validateTitle(metaTags.title);
+      if (titleIssues.length > 0) {
+        console.log(`   ❌ Title: ${titleIssues.join(', ')}`);
+        fileIssues += titleIssues.length;
       }
     }
     
-    if (descIssues.length > 0) {
-      console.log(`   ❌ Meta Description: ${descIssues.join(', ')}`);
-      fileIssues += descIssues.length;
+    // Meta description validation (skipped for redirects)
+    if (!isRedirect) {
+      const descIssues = validateMetaDescription(metaTags.description);
+      
+      // Check for unescaped quotes in raw HTML (not parsed value)
+      const rawDescMatch = content.match(/<meta\s+name=["']description["']\s+content=["']([^"']*)["']/i);
+      if (rawDescMatch && rawDescMatch[1]) {
+        const rawDesc = rawDescMatch[1];
+        // Check if raw HTML has unescaped straight quotes (not &quot;)
+        if (rawDesc.includes('"') && !rawDesc.includes('&quot;') && !rawDesc.includes('&#34;')) {
+          descIssues.push('Meta description contains unescaped quotes');
+        }
+      }
+      
+      if (descIssues.length > 0) {
+        console.log(`   ❌ Meta Description: ${descIssues.join(', ')}`);
+        fileIssues += descIssues.length;
+      }
     }
     
-    // Validate Open Graph
-    const ogIssues = validateOpenGraph(metaTags.og);
-    if (ogIssues.length > 0) {
-      console.log(`   ⚠️  Open Graph: ${ogIssues.join(', ')}`);
-      fileWarnings += ogIssues.length;
+    // Open Graph validation (skipped for redirects)
+    if (!isRedirect) {
+      const ogIssues = validateOpenGraph(metaTags.og);
+      if (ogIssues.length > 0) {
+        console.log(`   ⚠️  Open Graph: ${ogIssues.join(', ')}`);
+        fileWarnings += ogIssues.length;
+      }
     }
     
-    // Validate headings
-    const headingIssues = validateHeadings(headings);
-    if (headingIssues.length > 0) {
-      console.log(`   ❌ Headings: ${headingIssues.join(', ')}`);
-      fileIssues += headingIssues.length;
+    // Heading validation (skipped for redirects)
+    if (!isRedirect) {
+      const headingIssues = validateHeadings(headings);
+      if (headingIssues.length > 0) {
+        console.log(`   ❌ Headings: ${headingIssues.join(', ')}`);
+        fileIssues += headingIssues.length;
+      }
     }
     
-    // Check for missing canonical URL
+    // Check for missing canonical URL (always checked)
     if (!metaTags.canonical) {
       console.log(`   ⚠️  Missing canonical URL`);
       fileWarnings++;
     }
     
-    // Check for missing language attribute
+    // Check for missing language attribute (always checked)
     if (!metaTags.lang) {
       console.log(`   ⚠️  Missing language attribute on <html> tag`);
       fileWarnings++;
