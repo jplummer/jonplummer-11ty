@@ -56,7 +56,7 @@ eleventyExcludeFromCollections: true
   {% set totalPosts = collections.post | length %}
   {% set postsPerPage = 5 %}
   {% set totalPages = (totalPosts + postsPerPage - 1) // postsPerPage %}
-  {% for pageNum in range(2, totalPages + 1) %}
+  {% for pageNum in range(1, totalPages) %}
   <url>
     <loc>{{ site.url }}/page/{{ pageNum }}/</loc>
     <lastmod>{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}</lastmod>
