@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
 const path = require('path');
-const { extractMetaTags, extractHeadings, parseHtml } = require('./utils/html-utils');
-const { validateTitle: validateTitleUtil, validateMetaDescription: validateMetaDescriptionUtil } = require('./utils/validation-utils');
-const { checkSiteDirectory, getHtmlFiles, getRelativePath, readFile } = require('./utils/test-base');
+const { extractMetaTags, extractHeadings, parseHtml } = require('../utils/html-utils');
+const { validateTitle: validateTitleUtil, validateMetaDescription: validateMetaDescriptionUtil } = require('../utils/validation-utils');
+const { checkSiteDirectory, getHtmlFiles, getRelativePath, readFile } = require('../utils/test-base');
+const { printSummary, exitWithResults, getTestEmoji } = require('../utils/reporting-utils');
 
 // Check if HTML content is a redirect page
 function isRedirectPage(htmlContent) {
@@ -288,20 +289,19 @@ function validateSEO() {
   }
   
   // Summary
-  console.log('📊 SEO Validation Summary:');
-  console.log(`   Total files: ${results.total}`);
-  console.log(`   Issues: ${results.issues}`);
-  console.log(`   Warnings: ${results.warnings}`);
-  console.log(`   Duplicate titles: ${results.duplicateTitles.length}`);
+  printSummary('SEO Validation', getTestEmoji('seo-meta'), [
+    { label: 'Total files', value: results.total },
+    { label: 'Issues', value: results.issues },
+    { label: 'Warnings', value: results.warnings },
+    { label: 'Duplicate titles', value: results.duplicateTitles.length }
+  ]);
   
-  if (results.issues > 0 || results.duplicateTitles.length > 0) {
-    console.log('\n❌ SEO issues found that need attention.');
-    process.exit(1);
-  } else if (results.warnings > 0) {
-    console.log('\n⚠️  No critical issues, but consider addressing warnings.');
-  } else {
-    console.log('\n🎉 All SEO validation passed!');
-  }
+  // Custom exit logic: duplicate titles count as issues
+  const totalIssues = results.issues + results.duplicateTitles.length;
+  exitWithResults(totalIssues, results.warnings, {
+    testType: 'SEO validation',
+    successMessage: '\n🎉 All SEO validation passed!'
+  });
 }
 
 // Run validation

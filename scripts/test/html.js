@@ -2,7 +2,8 @@
 
 const path = require('path');
 const { HtmlValidate, FileSystemConfigLoader } = require('html-validate');
-const { checkSiteDirectory, getHtmlFiles, getRelativePath, readFile } = require('./utils/test-base');
+const { checkSiteDirectory, getHtmlFiles, getRelativePath, readFile } = require('../utils/test-base');
+const { printSummary, exitWithResults, getTestEmoji } = require('../utils/reporting-utils');
 
 async function validate() {
   // Main validation
@@ -47,24 +48,19 @@ async function validate() {
     }
   }
 
-  console.log(`\n📊 Summary:`);
-  console.log(`   Files checked: ${htmlFiles.length}`);
-  console.log(`   Files with issues: ${filesWithIssues}`);
-  console.log(`   Total Errors: ${totalIssues}`);
-  console.log(`   Total Warnings: ${totalWarnings}`);
+  printSummary('HTML Validation', getTestEmoji('html'), [
+    { label: 'Files checked', value: htmlFiles.length },
+    { label: 'Files with issues', value: filesWithIssues },
+    { label: 'Total Errors', value: totalIssues },
+    { label: 'Total Warnings', value: totalWarnings }
+  ]);
 
-  if (totalIssues === 0) {
-    if (totalWarnings > 0) {
-      console.log('\n✅ No critical issues found, but there are warnings.');
-      process.exit(0);
-    } else {
-      console.log('\n🎉 All HTML files passed validation!');
-      process.exit(0);
-    }
-  } else {
-    console.log('\n❌ Critical issues found that should be addressed.');
-    process.exit(1);
-  }
+  exitWithResults(totalIssues, totalWarnings, {
+    testType: 'HTML validation',
+    warningMessage: '\n✅ No critical issues found, but there are warnings.',
+    successMessage: '\n🎉 All HTML files passed validation!',
+    issueMessage: '\n❌ Critical issues found that should be addressed.'
+  });
 }
 
 validate().catch(err => {

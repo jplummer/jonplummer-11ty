@@ -15,7 +15,7 @@
     <link rel="alternate" type="application/rss+xml" title="Jon Plummer: Today I Learned: Posts" href="/feed.xml">
     <link rel="alternate" type="application/rss+xml" title="Jon Plummer: Today I Learned: Links" href="/links-feed.xml">
 
-    <title>{{ title | default('Jon Plummer – Today I Learned') }}</title>
+    <title>{% if computedTitle %}{{ computedTitle }}{% else %}{{ title | default('Jon Plummer – Today I Learned') }}{% endif %}</title>
 
     <link rel="icon" href="/assets/images/2021/02/jp_round-48x48.jpg" sizes="32x32">
     <link rel="icon" href="/assets/images/2021/02/jp_round.jpg" sizes="192x192">
@@ -27,7 +27,7 @@
 
     <meta property="og:locale" content="en_US">
     <meta property="og:site_name" content="Jon Plummer">
-    <meta property="og:title" content="{{ title | default('Jon Plummer – Today I Learned') }}">
+    <meta property="og:title" content="{% if computedTitle %}{{ computedTitle }}{% else %}{{ title | default('Jon Plummer – Today I Learned') }}{% endif %}">
     <meta property="og:url" content="{{ site.url }}{{ page.url }}">
     <meta property="og:type" content="{% if tags and 'post' in tags %}article{% else %}website{% endif %}">
     <meta property="og:description" content="{% if pagination and pagination.pageNumber > 0 %}Page {{ pagination.pageNumber }} of Jon Plummer's UX design blog. Insights on design leadership, product development, and team management.{% else %}{{ description | default('Jon Plummer is a UX design leader and mentor. Read his thoughts on design, leadership, and product development.') }}{% endif %}">

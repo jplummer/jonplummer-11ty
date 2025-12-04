@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2023 11 06
 layout: single_post.njk
 date: "2023-11-10T12:00:00-08:00"
 tags: post
-description: I forgot that this week ended with Veterans Day. It's awesome to have an unexpected day off, which is really a day to get a handful of other things done. And I
+description: "I forgot that this week ended with Veterans Day. It's awesome to have an unexpected day off, which is really a day to get a handful of other things done. And I"
 ogImage: /assets/images/og/2023-11-10-weekly-wins-for-the-week-of-2023-11-06.png
 ---
 I forgot that this week ended with Veterans Day. It's awesome to have an unexpected day off, which is really a day to get a handful of other things done. And I did – I closed the to-do list for the day and most of tomorrow, had a lovely lunch with family, and the weekend is just beginning.

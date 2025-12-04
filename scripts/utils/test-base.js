@@ -8,7 +8,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { findHtmlFiles, findMarkdownFiles } = require('../../utils/file-utils');
+const { findHtmlFiles, findMarkdownFiles } = require('./file-utils');
 
 /**
  * Check if _site directory exists

@@ -3,7 +3,8 @@
 const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
-const { validateDate, validateUrl, validateTitle } = require('./utils/validation-utils');
+const { validateDate, validateUrl, validateTitle } = require('../utils/validation-utils');
+const { printSummary, exitWithResults, getTestEmoji } = require('../utils/reporting-utils');
 
 // Validate description (optional but should be valid if present)
 function validateDescription(description) {
@@ -132,23 +133,28 @@ function validateLinksYaml() {
   }
 
   // Report results
+  const totalLinks = dateKeys.reduce((sum, key) => {
+    const links = data[key];
+    return sum + (Array.isArray(links) ? links.length : 0);
+  }, 0);
+
   if (allIssues.length > 0) {
     console.log('❌ Validation issues found:\n');
     allIssues.forEach(issue => {
       console.log(`   ${issue}`);
     });
-    console.log(`\n❌ Found ${allIssues.length} issue(s) in links.yaml`);
-    process.exit(1);
-  } else {
-    const totalLinks = dateKeys.reduce((sum, key) => {
-      const links = data[key];
-      return sum + (Array.isArray(links) ? links.length : 0);
-    }, 0);
-    console.log(`✅ links.yaml is valid`);
-    console.log(`   ${dateKeys.length} date entry/entries`);
-    console.log(`   ${totalLinks} link/links total`);
-    process.exit(0);
   }
+
+  printSummary('Links YAML Validation', getTestEmoji('links-yaml'), [
+    { label: 'Date entries', value: dateKeys.length },
+    { label: 'Total links', value: totalLinks },
+    { label: 'Issues', value: allIssues.length }
+  ]);
+
+  exitWithResults(allIssues.length, 0, {
+    testType: 'links.yaml validation',
+    successMessage: '\n✅ links.yaml is valid!'
+  });
 }
 
 // Run validation

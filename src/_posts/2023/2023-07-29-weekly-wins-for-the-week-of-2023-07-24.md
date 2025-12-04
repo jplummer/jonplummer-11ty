@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2023 07 24
 layout: single_post.njk
 date: "2023-07-29T12:00:00-08:00"
 tags: post
-description: The health scare has passed. That alone would be enough, dayenu.
+description: "The health scare has passed. That alone would be enough, dayenu."
 ogImage: /assets/images/og/2023-07-29-weekly-wins-for-the-week-of-2023-07-24.png
 ---
 The health scare has passed. That alone would be enough, _dayenu_. A little bit of this week was taken up by dealing with not having a good memory of what transpired the prior week. Even so:

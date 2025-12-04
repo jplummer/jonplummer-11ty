@@ -3,7 +3,7 @@ title: Beta is not a release type
 layout: single_post.njk
 date: "2024-02-18T12:00:00-08:00"
 tags: post
-description: Beta is not a release type. Thinking of beta as a release type, essentially a quality level, leads teams to take something not ready for prime time, ship it to
+description: "Beta is not a release type. Thinking of beta as a release type, essentially a quality level, leads teams to take something not ready for prime time, ship it to"
 ogImage: /assets/images/og/2024-02-18-beta-is-not-a-release-type.png
 ---
 Beta is not a release type. Thinking of beta as a release type, essentially a quality level, leads teams to take something not ready for prime time, ship it to everyone, and call it "beta" to excuse its deficiencies. If you are making excuses for the deficiencies of your product you are probably doing it wrong, and it certainly doesn't feel good to do so.

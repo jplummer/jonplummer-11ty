@@ -3,7 +3,7 @@ title: Someone mentions "specialized enterprise users" in re accessibility
 layout: single_post.njk
 date: "2023-06-15T12:00:00-08:00"
 tags: post
-description: During a discussion of accessibility and the level of attention a company ought to pay to it, someone said > I have always worked in complex enterprise
+description: "During a discussion of accessibility and the level of attention a company ought to pay to it, someone said > I have always worked in complex enterprise"
 ogImage: /assets/images/og/2023-06-15-someone-mentions-specialized-enterprise-users-in-re-accessibility.png
 ---
 During a discussion of accessibility and the level of attention a company ought to pay to it, someone said

@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2023 06 05
 layout: single_post.njk
 date: "2023-06-09T12:00:00-08:00"
 tags: post
-description: We heroically snuck up to Seattle by car late at night and then back the following night, thoroughly wearing ourselves out in the process. The traveling was
+description: "We heroically snuck up to Seattle by car late at night and then back the following night, thoroughly wearing ourselves out in the process. The traveling was"
 ogImage: /assets/images/og/2023-06-09-weekly-wins-for-the-week-of-2023-06-05.png
 ---
 We heroically snuck up to Seattle by car late at night and then back the following night, thoroughly wearing ourselves out in the process. The traveling was exhausting and not fun, but…

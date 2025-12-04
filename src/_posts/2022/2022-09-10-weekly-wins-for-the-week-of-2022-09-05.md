@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2022 09 05
 layout: single_post.njk
 date: "2022-09-10T12:00:00-08:00"
 tags: post
-description: I skipped a couple of these since I was on vacation. One win of that period, though, is that the vacation was amazing, despite some RV plumbing mishaps
+description: "I skipped a couple of these since I was on vacation. One win of that period, though, is that the vacation was amazing, despite some RV plumbing mishaps"
 ogImage: /assets/images/og/2022-09-10-weekly-wins-for-the-week-of-2022-09-05.png
 ---
 I skipped a couple of these since I was on vacation. One win of that period, though, is that the vacation was amazing, despite some RV plumbing mishaps (nothing gross). Here are some wins since then:

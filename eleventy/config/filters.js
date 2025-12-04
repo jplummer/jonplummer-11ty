@@ -1,6 +1,6 @@
 const fs = require("fs");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
-const { normalizeDate, formatPostDate } = require("../utils/date-utils");
+const { normalizeDate, formatPostDate, formatDateRange } = require("../utils/date-utils");
 const { extractCssCustomProperties } = require("../utils/css-utils");
 const mergePostsAndLinks = require("../filters/merge-posts-and-links");
 
@@ -24,6 +24,9 @@ function configureFilters(eleventyConfig, md) {
 
   // add postDate filter
   eleventyConfig.addFilter("postDate", formatPostDate);
+  
+  // add dateRange filter
+  eleventyConfig.addFilter("dateRange", formatDateRange);
 
   // Wrap dateToRfc3339 to handle both Date objects and date strings
   eleventyConfig.addFilter("dateToRfc3339Safe", (dateObj) => {

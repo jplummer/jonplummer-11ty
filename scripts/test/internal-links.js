@@ -2,8 +2,9 @@
 
 const fs = require('fs');
 const path = require('path');
-const { extractLinks, checkAnchorLink, classifyLink } = require('./utils/html-utils');
-const { checkSiteDirectory, getHtmlFiles, getRelativePath, readFile } = require('./utils/test-base');
+const { extractLinks, checkAnchorLink, classifyLink } = require('../utils/html-utils');
+const { checkSiteDirectory, getHtmlFiles, getRelativePath, readFile } = require('../utils/test-base');
+const { printSummary, exitWithResults, getTestEmoji } = require('../utils/reporting-utils');
 
 // Check if internal file exists
 function checkInternalLink(href, basePath, siteRoot) {
@@ -125,11 +126,12 @@ async function validateInternalLinks() {
   }
   
   // Summary
-  console.log('\n📊 Internal Link Validation Summary:');
-  console.log(`   Total internal links: ${results.total}`);
-  console.log(`   ✅ Internal file links: ${results.internal.working}/${results.internal.total} working`);
-  console.log(`   ✅ Anchor links: ${results.anchors.working}/${results.anchors.total} working`);
-  console.log(`   ℹ️  Other links: ${results.other.total}`);
+  printSummary('Internal Link Validation', getTestEmoji('internal-links'), [
+    { label: 'Total internal links', value: results.total },
+    { label: 'Internal file links', value: `${results.internal.working}/${results.internal.total} working` },
+    { label: 'Anchor links', value: `${results.anchors.working}/${results.anchors.total} working` },
+    { label: 'Other links', value: results.other.total }
+  ]);
   
   // Show broken links summary
   const totalBroken = results.internal.broken + results.anchors.broken;
@@ -137,11 +139,13 @@ async function validateInternalLinks() {
     console.log(`\n❌ Broken internal links found:`);
     if (results.internal.broken > 0) console.log(`   - Internal file links: ${results.internal.broken}`);
     if (results.anchors.broken > 0) console.log(`   - Anchor links: ${results.anchors.broken}`);
-    console.log('\n❌ Internal links need attention - these are under your control.');
-    process.exit(1);
-  } else {
-    console.log('\n🎉 All internal links are working correctly!');
   }
+  
+  exitWithResults(totalBroken, 0, {
+    testType: 'internal link validation',
+    issueMessage: '\n❌ Internal links need attention - these are under your control.',
+    successMessage: '\n🎉 All internal links are working correctly!'
+  });
 }
 
 // Run validation

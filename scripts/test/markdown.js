@@ -5,6 +5,7 @@ const path = require('path');
 const { execSync } = require('child_process');
 const { findMarkdownFiles } = require('../utils/file-utils');
 const { parseFrontMatter } = require('../utils/frontmatter-utils');
+const { printSummary, exitWithResults, getTestEmoji } = require('../utils/reporting-utils');
 
 // Find all markdown files in src/ directory, excluding drafts and docs/
 function findSourceMarkdownFiles() {
@@ -250,19 +251,16 @@ function validateMarkdown() {
   }
 
   // Summary
-  console.log('📊 Markdown Validation Summary:');
-  console.log(`   Files checked: ${markdownFiles.length}`);
-  console.log(`   Errors: ${totalErrors}`);
-  console.log(`   Warnings: ${totalWarnings}`);
+  printSummary('Markdown Validation', getTestEmoji('markdown'), [
+    { label: 'Files checked', value: markdownFiles.length },
+    { label: 'Errors', value: totalErrors },
+    { label: 'Warnings', value: totalWarnings }
+  ]);
 
-  if (totalErrors > 0) {
-    console.log('\n❌ Markdown validation found errors that need attention.');
-    process.exit(1);
-  } else if (totalWarnings > 0) {
-    console.log('\n⚠️  No critical errors, but consider addressing warnings.');
-  } else {
-    console.log('\n✅ All markdown files are valid!');
-  }
+  exitWithResults(totalErrors, totalWarnings, {
+    testType: 'markdown validation',
+    successMessage: '\n✅ All markdown files are valid!'
+  });
 }
 
 // Run validation

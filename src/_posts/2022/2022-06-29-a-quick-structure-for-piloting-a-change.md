@@ -3,7 +3,7 @@ title: A quick structure for piloting a change
 layout: single_post.njk
 date: "2022-06-29T12:00:00-08:00"
 tags: post
-description: A recent correspondent asked how to move his team from "thoughts and fears about plans" to action, and I suggestion making their next intervention a pilot.
+description: "A recent correspondent asked how to move his team from \"thoughts and fears about plans\" to action, and I suggestion making their next intervention a pilot."
 ogImage: /assets/images/og/2022-06-29-a-quick-structure-for-piloting-a-change.png
 ---
 A recent correspondent asked how to move his team from "thoughts and fears about plans" to action, and I suggestion making their next intervention a _pilot_. That way an intervention is an _experiment_, and can be evaluated, then continued, tweaked, or ended.

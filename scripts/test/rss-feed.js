@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 // Use Node's built-in DOMParser (available in Node 20+)
 const { DOMParser } = require('@xmldom/xmldom');
+const { printSummary, exitWithResults, getTestEmoji } = require('../utils/reporting-utils');
 
 // Find RSS/XML files in _site
 function findRssFiles(dir) {
@@ -305,17 +306,16 @@ function validateRSS() {
   }
   
   // Summary
-  console.log('📊 RSS Feed Validation Summary:');
-  console.log(`   Total feeds: ${results.total}`);
-  console.log(`   Valid feeds: ${results.valid}`);
-  console.log(`   Issues: ${results.issues}`);
+  printSummary('RSS Feed Validation', getTestEmoji('rss-feed'), [
+    { label: 'Total feeds', value: results.total },
+    { label: 'Valid feeds', value: results.valid },
+    { label: 'Issues', value: results.issues }
+  ]);
   
-  if (results.issues > 0) {
-    console.log('\n❌ RSS feed issues found that need attention.');
-    process.exit(1);
-  } else {
-    console.log('\n🎉 All RSS feeds are valid!');
-  }
+  exitWithResults(results.issues, 0, {
+    testType: 'RSS feed validation',
+    successMessage: '\n🎉 All RSS feeds are valid!'
+  });
 }
 
 // Run validation

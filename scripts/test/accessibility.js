@@ -5,6 +5,7 @@ const path = require('path');
 const puppeteer = require('puppeteer');
 const axeCore = require('axe-core');
 const { findHtmlFiles } = require('../utils/file-utils');
+const { printSummary, exitWithResults, getTestEmoji } = require('../utils/reporting-utils');
 
 // Format axe-core violations for display
 function formatViolations(violations) {
@@ -265,29 +266,38 @@ async function validateAccessibility() {
   }
   
   // Summary
-  console.log('📊 Accessibility Validation Summary:');
-  console.log(`   Total files: ${results.total}`);
-  console.log(`   Total violations: ${results.totalViolations}`);
-  console.log(`   Files with violations: ${results.filesWithViolations}`);
-  console.log(`   Total incomplete checks: ${results.totalIncomplete}`);
-  console.log(`   Files with incomplete checks: ${results.filesWithIncomplete}`);
-  console.log(`   Files passing all checks: ${results.passes}`);
-  console.log('');
-  console.log('   ☀️  Light mode:');
-  console.log(`      Violations: ${results.lightMode.violations}`);
-  console.log(`      Files with violations: ${results.lightMode.filesWithViolations}`);
-  console.log(`      Incomplete checks: ${results.lightMode.incomplete}`);
-  console.log('   🌙 Dark mode (contrast only):');
-  console.log(`      Violations: ${results.darkMode.violations}`);
-  console.log(`      Files with violations: ${results.darkMode.filesWithViolations}`);
-  console.log(`      Incomplete checks: ${results.darkMode.incomplete}`);
+  printSummary('Accessibility Validation', getTestEmoji('accessibility'), [
+    { label: 'Total files', value: results.total },
+    { label: 'Total violations', value: results.totalViolations },
+    { label: 'Files with violations', value: results.filesWithViolations },
+    { label: 'Total incomplete checks', value: results.totalIncomplete },
+    { label: 'Files with incomplete checks', value: results.filesWithIncomplete },
+    { label: 'Files passing all checks', value: results.passes }
+  ], {
+    customSections: [
+      {
+        title: '☀️  Light mode',
+        lines: [
+          `Violations: ${results.lightMode.violations}`,
+          `Files with violations: ${results.lightMode.filesWithViolations}`,
+          `Incomplete checks: ${results.lightMode.incomplete}`
+        ]
+      },
+      {
+        title: '🌙 Dark mode (contrast only)',
+        lines: [
+          `Violations: ${results.darkMode.violations}`,
+          `Files with violations: ${results.darkMode.filesWithViolations}`,
+          `Incomplete checks: ${results.darkMode.incomplete}`
+        ]
+      }
+    ]
+  });
   
-  if (results.totalViolations > 0) {
-    console.log('\n❌ Accessibility violations found that need attention.');
-    process.exit(1);
-  } else {
-    console.log('\n🎉 All accessibility validation passed!');
-  }
+  exitWithResults(results.totalViolations, 0, {
+    testType: 'accessibility validation',
+    successMessage: '\n🎉 All accessibility validation passed!'
+  });
 }
 
 // Run validation

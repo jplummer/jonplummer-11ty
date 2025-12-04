@@ -29,8 +29,40 @@ function formatPostDate(dateObj) {
   return DateTime.fromJSDate(date).toLocaleString(DateTime.DATE_MED);
 }
 
+/**
+ * Formats a date range minimally (e.g., "Jan 1 - Jan 15, 2024" or "Jan 15, 2024").
+ * If both dates are the same, returns just the single date.
+ * 
+ * @param {Date|string} startDate - Start date
+ * @param {Date|string} endDate - End date
+ * @returns {string} Formatted date range string
+ */
+function formatDateRange(startDate, endDate) {
+  const start = normalizeDate(startDate);
+  const end = normalizeDate(endDate);
+  
+  if (!start || !end) {
+    return '';
+  }
+  
+  const startDt = DateTime.fromJSDate(start);
+  const endDt = DateTime.fromJSDate(end);
+  
+  // If same date, return single date
+  if (startDt.hasSame(endDt, 'day')) {
+    return startDt.toLocaleString(DateTime.DATE_MED);
+  }
+  
+  // Format: "Jan 1 - Jan 15, 2024"
+  const startFormatted = startDt.toFormat('LLL d');
+  const endFormatted = endDt.toLocaleString(DateTime.DATE_MED);
+  
+  return `${startFormatted} - ${endFormatted}`;
+}
+
 module.exports = {
   normalizeDate,
-  formatPostDate
+  formatPostDate,
+  formatDateRange
 };
 

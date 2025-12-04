@@ -9,8 +9,9 @@
 
 const fs = require('fs');
 const path = require('path');
-const yaml = require('js-yaml');
 const { parseFrontMatter, reconstructFile } = require('../utils/frontmatter-utils');
+const { getPostsDirectory, isPost, isPortfolio, processFiles } = require('../utils/content-utils');
+const { printSummary, exitWithResults } = require('../utils/reporting-utils');
 
 function escapeQuotes(text) {
   if (!text || typeof text !== 'string') return text;
@@ -33,7 +34,7 @@ function processPostFile(filePath) {
     }
     
     // Skip if not a post or portfolio item
-    if (!frontMatter.tags || (!frontMatter.tags.includes('post') && !frontMatter.tags.includes('portfolio'))) {
+    if (!isPost(frontMatter) && !isPortfolio(frontMatter)) {
       return { updated: false, skipped: true, reason: 'Not a post or portfolio item' };
     }
     
@@ -81,54 +82,43 @@ function processPostFile(filePath) {
 function main() {
   console.log('🔧 Fixing unescaped quotes in post titles and descriptions...\n');
   
-  const postsDir = path.join(process.cwd(), 'src', '_posts');
+  const postsDir = getPostsDirectory();
   
   if (!fs.existsSync(postsDir)) {
     console.error(`❌ Posts directory not found: ${postsDir}`);
     process.exit(1);
   }
   
-  const results = {
-    updated: [],
-    skipped: [],
-    errors: []
-  };
+  const { findMarkdownFiles } = require('../utils/file-utils');
+  const postFiles = findMarkdownFiles(postsDir);
   
-  function processDirectory(dir) {
-    const entries = fs.readdirSync(dir, { withFileTypes: true });
-    
-    for (const entry of entries) {
-      const fullPath = path.join(dir, entry.name);
+  const results = processFiles(postFiles, processPostFile, {
+    onResult: (file, result) => {
+      const relativePath = path.relative(postsDir, file);
       
-      if (entry.isDirectory()) {
-        processDirectory(fullPath);
-      } else if (entry.isFile() && entry.name.endsWith('.md')) {
-        const relativePath = path.relative(postsDir, fullPath);
-        const result = processPostFile(fullPath);
-        
-        if (result.updated) {
-          results.updated.push({ path: relativePath, ...result });
-          const changes = [];
-          if (result.title) changes.push('title');
-          if (result.description) changes.push('description');
-          console.log(`  ✅ ${relativePath} (fixed ${changes.join(', ')})`);
-        } else if (result.error) {
-          results.errors.push({ path: relativePath, error: result.error });
-          console.log(`  ❌ ${relativePath}: ${result.error}`);
+      if (result.updated) {
+        const changes = [];
+        if (result.title) changes.push('title');
+        if (result.description) changes.push('description');
+        console.log(`  ✅ ${relativePath} (fixed ${changes.join(', ')})`);
+      } else if (result.skipped) {
+        if (result.reason) {
+          console.log(`  ⏭️  ${relativePath}: ${result.reason}`);
+        } else {
+          console.log(`  ⏭️  ${relativePath}: Skipped`);
         }
+      } else if (result.error) {
+        console.log(`  ❌ ${relativePath}: ${result.error}`);
       }
     }
-  }
+  });
   
-  processDirectory(postsDir);
-  
-  console.log(`\n📊 Summary:`);
-  console.log(`   Updated: ${results.updated.length} files`);
-  console.log(`   Errors: ${results.errors.length} files`);
-  
-  if (results.errors.length > 0) {
-    process.exit(1);
-  }
+  printSummary('Fix Unescaped Quotes', '📊', results);
+  exitWithResults(results, 0, {
+    testType: 'Fix Unescaped Quotes',
+    issueMessage: '\n❌ Errors occurred during processing.',
+    successMessage: '\n✅ Processing completed successfully.'
+  });
 }
 
 if (require.main === module) {

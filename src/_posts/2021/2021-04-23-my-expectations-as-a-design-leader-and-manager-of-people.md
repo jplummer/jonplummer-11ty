@@ -3,7 +3,7 @@ title: My expectations as a design leader and manager of people
 layout: single_post.njk
 date: "2021-04-23T12:00:00-08:00"
 tags: post
-description: Foster an ethos of continuous improvement Repeatedly return to user needs and goals to create alignment Frame design goals as the marriage of user goals and
+description: "Foster an ethos of continuous improvement Repeatedly return to user needs and goals to create alignment Frame design goals as the marriage of user goals and"
 ogImage: /assets/images/og/2021-04-23-my-expectations-as-a-design-leader-and-manager-of-people.png
 ---
 ## Expectations of myself

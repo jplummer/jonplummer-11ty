@@ -3,9 +3,10 @@
 const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
-const { validateDate, validateSlug, validateTitle, validateMetaDescription } = require('./utils/validation-utils');
-const { getMarkdownFiles, readFile } = require('./utils/test-base');
+const { validateDate, validateSlug, validateTitle, validateMetaDescription } = require('../utils/validation-utils');
+const { getMarkdownFiles, readFile } = require('../utils/test-base');
 const { parseFrontMatter } = require('../utils/frontmatter-utils');
+const { printSummary, exitWithResults, getTestEmoji } = require('../utils/reporting-utils');
 
 // Front matter parsing and file finding now use shared utilities
 
@@ -277,21 +278,20 @@ function validateContentStructure() {
   }
 
   // Summary
-  console.log('📊 Content Structure Summary:');
-  console.log(`   Total files: ${results.total}`);
-  console.log(`   Valid files: ${results.valid}`);
-  console.log(`   Issues: ${results.issues}`);
-  console.log(`   Warnings: ${results.warnings}`);
-  console.log(`   Duplicate slugs: ${results.duplicateSlugs.length}`);
+  printSummary('Content Structure', getTestEmoji('content-structure'), [
+    { label: 'Total files', value: results.total },
+    { label: 'Valid files', value: results.valid },
+    { label: 'Issues', value: results.issues },
+    { label: 'Warnings', value: results.warnings },
+    { label: 'Duplicate slugs', value: results.duplicateSlugs.length }
+  ]);
 
-  if (results.issues > 0 || results.duplicateSlugs.length > 0) {
-    console.log('\n❌ Content structure issues found that need attention.');
-    process.exit(1);
-  } else if (results.warnings > 0) {
-    console.log('\n⚠️  No critical issues, but consider addressing warnings.');
-  } else {
-    console.log('\n🎉 All content structure validation passed!');
-  }
+  // Custom exit logic: duplicate slugs count as issues
+  const totalIssues = results.issues + results.duplicateSlugs.length;
+  exitWithResults(totalIssues, results.warnings, {
+    testType: 'content structure validation',
+    successMessage: '\n🎉 All content structure validation passed!'
+  });
 }
 
 // Run validation

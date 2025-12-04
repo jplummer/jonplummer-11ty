@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { getPostFiles } = require('../utils/content-utils');
 
 // Known proper nouns and acronyms that should stay capitalized
 const PROPER_NOUNS = new Set([
@@ -216,28 +217,15 @@ function processPostFile(filePath) {
 }
 
 function main() {
-  const postsDir = path.join(__dirname, '../../src/_posts');
+  const postFiles = getPostFiles();
   const results = [];
   
-  function walkDir(dir) {
-    const files = fs.readdirSync(dir);
-    
-    for (const file of files) {
-      const filePath = path.join(dir, file);
-      const stat = fs.statSync(filePath);
-      
-      if (stat.isDirectory()) {
-        walkDir(filePath);
-      } else if (file.endsWith('.md')) {
-        const result = processPostFile(filePath);
-        if (result) {
-          results.push(result);
-        }
-      }
+  for (const filePath of postFiles) {
+    const result = processPostFile(filePath);
+    if (result) {
+      results.push(result);
     }
   }
-  
-  walkDir(postsDir);
   
   if (results.length === 0) {
     console.log('No Title Case titles found.');

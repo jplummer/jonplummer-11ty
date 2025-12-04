@@ -2,9 +2,10 @@
 
 const fs = require('fs');
 const path = require('path');
-const { findMarkdownFiles } = require('../utils/file-utils');
 const { parseFrontMatter, reconstructFile } = require('../utils/frontmatter-utils');
 const { extractDescription } = require('./add-post-descriptions');
+const { getPostFiles, isPost, processFiles } = require('../utils/content-utils');
+const { printSummary, exitWithResults } = require('../utils/reporting-utils');
 
 // Front matter parsing and reconstruction now use shared utilities
 
@@ -41,7 +42,7 @@ function processPostFile(filePath) {
   }
   
   // Skip if not a post
-  if (!frontMatter.tags || !frontMatter.tags.includes('post')) {
+  if (!isPost(frontMatter)) {
     return { updated: false, skipped: true, reason: 'Not a post' };
   }
   
@@ -75,45 +76,33 @@ function processPostFile(filePath) {
 function main() {
   console.log('🔧 Fixing post descriptions with heading issues...\n');
   
-  const postsDir = path.join(process.cwd(), '_posts');
-  const postFiles = findMarkdownFiles(postsDir);
-  
+  const postFiles = getPostFiles();
   console.log(`Found ${postFiles.length} markdown files\n`);
   
-  const results = {
-    updated: 0,
-    skipped: 0,
-    errors: 0
-  };
-  
-  for (const file of postFiles) {
-    const relativePath = path.relative(process.cwd(), file);
-    console.log(`Processing: ${relativePath}`);
-    
-    const result = processPostFile(file);
-    
-    if (result.updated) {
-      console.log(`  ✅ Fixed description:`);
-      console.log(`     Old: "${result.oldDescription.substring(0, 80)}..."`);
-      console.log(`     New: "${result.newDescription.substring(0, 80)}..."`);
-      results.updated++;
-    } else if (result.skipped) {
-      console.log(`  ⏭️  Skipped: ${result.reason}`);
-      results.skipped++;
-    } else if (result.error) {
-      console.error(`  ❌ Error: ${result.error}`);
-      results.errors++;
+  const results = processFiles(postFiles, processPostFile, {
+    onFileStart: (file) => {
+      const relativePath = path.relative(process.cwd(), file);
+      console.log(`Processing: ${relativePath}`);
+    },
+    onResult: (file, result) => {
+      if (result.updated) {
+        console.log(`  ✅ Fixed description:`);
+        console.log(`     Old: "${result.oldDescription.substring(0, 80)}..."`);
+        console.log(`     New: "${result.newDescription.substring(0, 80)}..."`);
+      } else if (result.skipped) {
+        console.log(`  ⏭️  Skipped: ${result.reason}`);
+      } else if (result.error) {
+        console.error(`  ❌ Error: ${result.error}`);
+      }
     }
-  }
+  });
   
-  console.log('\n📊 Summary:');
-  console.log(`   Updated: ${results.updated}`);
-  console.log(`   Skipped: ${results.skipped}`);
-  console.log(`   Errors: ${results.errors}`);
-  
-  if (results.errors > 0) {
-    process.exit(1);
-  }
+  printSummary('Fix Post Descriptions', '📊', results);
+  exitWithResults(results, 0, {
+    testType: 'Fix Post Descriptions',
+    issueMessage: '\n❌ Errors occurred during processing.',
+    successMessage: '\n✅ Processing completed successfully.'
+  });
 }
 
 // Run if called directly

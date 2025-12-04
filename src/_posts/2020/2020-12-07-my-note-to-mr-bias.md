@@ -1,9 +1,9 @@
 ---
-title: "What hiring managers look for in UX portfolios"
+title: What hiring managers look for in UX portfolios
 layout: single_post.njk
 date: "2020-12-07T12:00:00-08:00"
 tags: post
-description: Mr. Bias wanted folks to look over his new portfolio, and I was happy to help. He's a new UX/UI Designer and what little appears on his site is promising.
+description: "Mr. Bias wanted folks to look over his new portfolio, and I was happy to help. He's a new UX/UI Designer and what little appears on his site is promising."
 ogImage: /assets/images/og/2020-12-07-my-note-to-mr-bias.png
 ---
 Mr. Bias wanted folks to look over his new portfolio, and I was happy to help. He's a new UX/UI Designer and what little appears on [his site](https://www.tbias.design/) is promising. Here's what I had to say:

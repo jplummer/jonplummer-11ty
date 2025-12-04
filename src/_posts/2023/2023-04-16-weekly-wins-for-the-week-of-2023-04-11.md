@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2023 04 11
 layout: single_post.njk
 date: "2023-04-16T12:00:00-08:00"
 tags: post
-description: I' need'll start to keep track of wins as they happen; trying to remember all that happened last week is not easy. My "plan" has been reviewed by my team and
+description: "I' need'll start to keep track of wins as they happen; trying to remember all that happened last week is not easy. My \"plan\" has been reviewed by my team and"
 ogImage: /assets/images/og/2023-04-16-weekly-wins-for-the-week-of-2023-04-11.png
 ---
 I' need'll start to keep track of wins as they happen; trying to remember all that happened last week is not easy.

@@ -2,6 +2,7 @@
 
 const { spawn } = require('child_process');
 const path = require('path');
+const { printOverallSummary, getTestEmoji } = require('./utils/reporting-utils');
 
 // Map test types to their script files
 const testTypes = {
@@ -64,14 +65,14 @@ function runTest(testType) {
     
     child.on('close', (code) => {
       if (code === 0) {
-        resolve(code);
+        resolve({ testType, passed: true });
       } else {
-        reject(new Error(`Test failed with exit code ${code}`));
+        resolve({ testType, passed: false });
       }
     });
     
     child.on('error', (error) => {
-      reject(error);
+      resolve({ testType, passed: false, error: error.message });
     });
   });
 }
@@ -79,37 +80,37 @@ function runTest(testType) {
 async function runFastTests() {
   console.log('Running fast tests...\n');
   
+  const results = [];
+  
   for (let i = 0; i < fastTests.length; i++) {
     const testType = fastTests[i];
     console.log(`\n[${i + 1}/${fastTests.length}] Running ${testType}...\n`);
     
-    try {
-      await runTest(testType);
-    } catch (error) {
-      console.error(`\n❌ Test "${testType}" failed`);
-      process.exit(1);
-    }
+    const result = await runTest(testType);
+    result.emoji = getTestEmoji(testType);
+    results.push(result);
   }
   
-  console.log('\n✅ All fast tests passed!');
+  const allPassed = printOverallSummary(results);
+  process.exit(allPassed ? 0 : 1);
 }
 
 async function runAllTests() {
   console.log('Running all tests...\n');
   
+  const results = [];
+  
   for (let i = 0; i < allTests.length; i++) {
     const testType = allTests[i];
     console.log(`\n[${i + 1}/${allTests.length}] Running ${testType}...\n`);
     
-    try {
-      await runTest(testType);
-    } catch (error) {
-      console.error(`\n❌ Test "${testType}" failed`);
-      process.exit(1);
-    }
+    const result = await runTest(testType);
+    result.emoji = getTestEmoji(testType);
+    results.push(result);
   }
   
-  console.log('\n✅ All tests passed!');
+  const allPassed = printOverallSummary(results);
+  process.exit(allPassed ? 0 : 1);
 }
 
 async function main() {
@@ -122,12 +123,14 @@ async function main() {
   
   if (testType === 'fast') {
     await runFastTests();
-    process.exit(0);
+    // runFastTests handles its own exit
+    return;
   }
   
   if (testType === 'all') {
     await runAllTests();
-    process.exit(0);
+    // runAllTests handles its own exit
+    return;
   }
   
   if (!testTypes[testType]) {
@@ -136,11 +139,8 @@ async function main() {
     process.exit(1);
   }
   
-  try {
-    await runTest(testType);
-  } catch (error) {
-    process.exit(1);
-  }
+  const result = await runTest(testType);
+  process.exit(result.passed ? 0 : 1);
 }
 
 main().catch(error => {
