@@ -20,20 +20,8 @@ permalink: "{% if pagination.pageNumber == 0 %}/{% else %}/page/{{ pagination.pa
     {% endif %}
 {% endif %}
 
-{# Get merged items for date range calculation #}
-{% set mergedItems = pagination.items | mergePostsAndLinks(links, pagination.pageNumber, nextPageOldestDate) %}
-
-{# Calculate date range for paginated pages (not homepage) #}
-{% set computedTitle = null %}
-{% if pagination.pageNumber > 0 and mergedItems.length > 0 %}
-    {% set newestDate = mergedItems[0].date %}
-    {% set oldestDate = mergedItems[mergedItems.length - 1].date %}
-    {% set dateRange = oldestDate | dateRange(newestDate) %}
-    {% set computedTitle = dateRange + " – Jon Plummer – Today I Learned" %}
-{% endif %}
-
 {# Display current page of posts and links #}
-{% for item in mergedItems %}
+{% for item in pagination.items | mergePostsAndLinks(links, pagination.pageNumber, nextPageOldestDate) %}
     {% if item.type == 'post' %}
         {% set post = item.data %}
         {% include "post_content.njk" %}

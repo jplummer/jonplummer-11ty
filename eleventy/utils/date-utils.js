@@ -30,8 +30,9 @@ function formatPostDate(dateObj) {
 }
 
 /**
- * Formats a date range minimally (e.g., "Jan 1 - Jan 15, 2024" or "Jan 15, 2024").
+ * Formats a date range minimally (e.g., "Jan 1–Jan 15, 2024" or "Jan 15, 2024").
  * If both dates are the same, returns just the single date.
+ * Uses en dash with no spaces when numbers are adjacent to the dash.
  * 
  * @param {Date|string} startDate - Start date
  * @param {Date|string} endDate - End date
@@ -53,11 +54,12 @@ function formatDateRange(startDate, endDate) {
     return startDt.toLocaleString(DateTime.DATE_MED);
   }
   
-  // Format: "Jan 1 - Jan 15, 2024"
+  // Format: "Jan 1–Jan 15, 2024" (en dash, no spaces)
   const startFormatted = startDt.toFormat('LLL d');
   const endFormatted = endDt.toLocaleString(DateTime.DATE_MED);
   
-  return `${startFormatted} - ${endFormatted}`;
+  // Use en dash (U+2013) with no spaces
+  return `${startFormatted}–${endFormatted}`;
 }
 
 module.exports = {
