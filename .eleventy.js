@@ -307,10 +307,15 @@ module.exports = function (eleventyConfig) {
     return items.sort((a, b) => b.date - a.date);
   });
 
+  // Draft posts: exclude from production builds, allow in dev mode
+  eleventyConfig.addPreprocessor("drafts", "*", (data, content) => {
+    if(data.draft && process.env.ELEVENTY_RUN_MODE === "build") {
+      return false;
+    }
+  });
 
-  // Ignore the 'docs' and "_posts/_drafts" folders
+  // Ignore the 'docs' folder
   eleventyConfig.ignores.add("docs/");
-  eleventyConfig.ignores.add("_posts/_drafts/");
   
   // Note: og-image-preview.njk is excluded from collections via front matter
   // but should still be built for local preview during development

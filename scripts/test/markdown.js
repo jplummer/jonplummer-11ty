@@ -4,8 +4,9 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 const { findMarkdownFiles } = require('../utils/file-utils');
+const { parseFrontMatter } = require('../utils/frontmatter-utils');
 
-// Find all markdown files in src/ directory, excluding _drafts and docs/
+// Find all markdown files in src/ directory, excluding drafts and docs/
 function findSourceMarkdownFiles() {
   const srcDir = './src';
   if (!fs.existsSync(srcDir)) {
@@ -14,15 +15,17 @@ function findSourceMarkdownFiles() {
 
   const allFiles = findMarkdownFiles(srcDir);
   
-  // Filter out _drafts and docs/ directories
+  // Filter out drafts (check frontmatter for draft: true) and docs/ directory
   return allFiles.filter(file => {
     const relativePath = path.relative('./src', file);
-    // Exclude _drafts directory
-    if (relativePath.includes('_drafts/')) {
-      return false;
-    }
     // Exclude docs/ directory (though it shouldn't be in src/, but just in case)
     if (relativePath.startsWith('docs/')) {
+      return false;
+    }
+    // Exclude files with draft: true in frontmatter
+    const content = fs.readFileSync(file, 'utf8');
+    const { frontMatter } = parseFrontMatter(content);
+    if (frontMatter && frontMatter.draft === true) {
       return false;
     }
     return true;

@@ -182,9 +182,14 @@ function validateContentStructure() {
     process.exit(1);
   }
 
-  // Get markdown files and exclude drafts (preserving original behavior)
+  // Get markdown files and exclude drafts (check frontmatter for draft: true)
   const allMarkdownFiles = getMarkdownFiles(postsDir);
-  const markdownFiles = allMarkdownFiles.filter(file => !file.includes('/_drafts/'));
+  const markdownFiles = allMarkdownFiles.filter(file => {
+    const content = readFile(file);
+    const { frontMatter } = parseFrontMatter(content);
+    // Exclude files with draft: true in frontmatter
+    return !(frontMatter && frontMatter.draft === true);
+  });
   console.log(`Found ${markdownFiles.length} markdown files\n`);
 
   const results = {

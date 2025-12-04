@@ -15,7 +15,7 @@ For detailed information about front matter variables, see the [Authoring Guide]
 
 **Quick reference:**
 - **Required**: `title`, `layout`, `date`, `tags` (must include `post`)
-- **Optional**: `description`, `ogImage` (use `auto` or omit for auto-generation), `permalink`, `eleventyExcludeFromCollections`
+- **Optional**: `description`, `ogImage` (use `auto` or omit for auto-generation), `permalink`, `eleventyExcludeFromCollections`, `draft` (set to `true` to exclude from production builds)
 
 ## Automatic SEO Features
 

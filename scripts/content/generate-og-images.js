@@ -266,17 +266,28 @@ async function main() {
   const srcDir = path.join(process.cwd(), 'src');
   const postsDir = path.join(srcDir, '_posts');
   
-  // Find all markdown files in posts directory
-  const postFiles = findMarkdownFiles(postsDir);
+  // Find all markdown files in posts directory, excluding drafts
+  const allPostFiles = findMarkdownFiles(postsDir);
+  const postFiles = allPostFiles.filter(f => {
+    const content = fs.readFileSync(f, 'utf8');
+    const { frontMatter } = parseFrontMatter(content);
+    // Exclude files with draft: true in frontmatter
+    return !(frontMatter && frontMatter.draft === true);
+  });
   
-  // Find markdown and njk files in src root (excluding _posts and _drafts)
-  const rootFiles = findMarkdownFiles(srcDir).filter(f => 
+  // Find markdown and njk files in src root (excluding _posts, _includes, _data, assets, and drafts)
+  const allRootFiles = findMarkdownFiles(srcDir).filter(f => 
     !f.includes('_posts') && 
-    !f.includes('_drafts') &&
     !f.includes('_includes') &&
     !f.includes('_data') &&
     !f.includes('assets')
   );
+  const rootFiles = allRootFiles.filter(f => {
+    const content = fs.readFileSync(f, 'utf8');
+    const { frontMatter } = parseFrontMatter(content);
+    // Exclude files with draft: true in frontmatter
+    return !(frontMatter && frontMatter.draft === true);
+  });
   
   // Also find .njk files in src root
   const njkFiles = fs.readdirSync(srcDir)

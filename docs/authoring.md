@@ -15,8 +15,7 @@
 - **`ogImage`** - OG image path. Use `auto` or omit to auto-generate. Format: `/assets/images/og/YYYY-MM-DD-post-slug.png`
 - **`permalink`** - Custom URL structure
 - **`eleventyExcludeFromCollections`** - Set to `true` to exclude
-
-**Note:** Drafts go in `_posts/_drafts/`, not via a `draft` variable.
+- **`draft`** - Set to `true` to mark as draft. Drafts are excluded from production builds but visible in dev mode.
 
 ## Open Graph Images
 

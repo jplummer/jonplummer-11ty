@@ -93,7 +93,7 @@ The `markdown` test validates markdown syntax and structure for all markdown fil
 - Validates spacing, formatting, and other markdown best practices
 
 The test checks all `.md` files in `src/` directory, excluding:
-- `_posts/_drafts/` (draft posts not published)
+- Files with `draft: true` in frontmatter (draft posts not published)
 - `docs/` (documentation not part of live site)
 
 Configuration is in `.markdownlint.json`. The test reports errors (which fail the build) and warnings (which don't fail but should be addressed).
