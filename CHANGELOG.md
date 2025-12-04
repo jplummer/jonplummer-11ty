@@ -1,5 +1,14 @@
 All notable changes to this project are documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to chronological ordering (newest first).
 
+## 2025-11-30
+
+- Fix sitemap pagination to only include existing pages
+- Fix sitemap pagination, improve titles, and fix unescaped quotes
+- fix: upgrade dotenv and fix security audit npm outdated check
+- test: improve SEO validation for redirect pages and unescaped quotes
+- content: update redirect template and post content
+- docs: add periodic maintenance section and update plan
+
 ## 2025-11-26
 
 - Add SITE_DOMAIN environment variable for centralized domain configuration

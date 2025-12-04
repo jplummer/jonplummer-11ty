@@ -1,11 +1,11 @@
 ---
 title: /now
 description: What Jon Plummer is up to now - current work at Invoca, family updates, and personal projects. Updated regularly with current status.
-date: 2025-11-24T00:00:00.000Z
+date: 2025-12-03
 layout: base.njk
 tags: page
 permalink: /now/
-ogImage: /assets/images/og/now.png
+ogImage: /assets/images/og/now.pngs
 ---
 (Updated {{ date | postDate }}. This is a [now](https://nownownow.com/about) page, and if you have your own site [you might consider making one](https://nownownow.com/about), too.)
 
@@ -15,6 +15,8 @@ Both of these hobbies are attractive because they bring design, already a fun ch
 
 I've got an idea for an eInk display that fetches the front page of today's paper every morning. If I can find a display and a way to drive it this is now a project I can accomplish on my own, as a rank amateur. Interesting and exciting times.
 
+Meanwhile, every little household project becomes at least a medium household project. This week's fun: installing hammer stops on the laundry supply valves. the valves are about two years old but one of them does not want to turn, and they are in an awkward spot. I'd rather not move the laundry machine, accidentally break the valve trim box, or have to replace a valve, but things are trending in that direction – something doddlingly easy is in danger of becoming real work.
+
 At work I'm also experimenting:
 
 * AI-powered design tools and working with our existing design system. It's a fragmented space and changing daily, so this is a bit of "surfing the chaos," a posture I don't generally favor
@@ -22,4 +24,4 @@ At work I'm also experimenting:
 * theming React pages
 * some information and data architecture challenges that deserve attention as we move from a technology-led to a more customer-centered product approach
 
-I'm also currently trying to create clarity for new OKRs the UX team will be involved in. We've been happy to be indirectly involved in OKRs to this point as it took pressure off, but I see now that doing so also squandered opportunities to be influential. The pendulum has swung the other way and we'll be working on three of them.
+The team is doing well and the holidays are nearly upon us. May your winter be ICE-free.

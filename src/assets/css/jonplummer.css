@@ -171,6 +171,7 @@ article header {
 
 article section {
   grid-area: c;
+  min-width: 0;
 }
 
 article footer {
@@ -383,6 +384,8 @@ code, pre {
 
 pre {
   overflow-x: auto;
+  max-width: 100%;
+  min-width: 0;
   padding: var(--spacing-sm);
   background-color: var(--background-color);
   border-radius: 0.25rem;

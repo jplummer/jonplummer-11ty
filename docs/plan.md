@@ -22,7 +22,7 @@
   
 ## Future Enhancements
 - [ ] consider POSSE (more tags for different types of entries?)
-- [ ] CMS (woudl a healdess CMS help with authoring, etc.?)
+- [ ] CMS (would a headless CMS help with authoring, etc.?)
 - [ ] alternate color schemes and a way to trigger them
 
 ## Optional / Future Consideration
