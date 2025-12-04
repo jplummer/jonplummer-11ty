@@ -1,5 +1,11 @@
 All notable changes to this project are documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to chronological ordering (newest first).
 
+## 2025-12-03
+
+- Fix horizontal scrollbar on narrow viewports for articles with code blocks
+- Switch drafts from folder-based to frontmatter-based
+- refactor: modularize .eleventy.js configuration
+
 ## 2025-11-30
 
 - Fix sitemap pagination to only include existing pages

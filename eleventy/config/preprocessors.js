@@ -1,0 +1,22 @@
+/**
+ * Configures Eleventy preprocessors and ignores.
+ * 
+ * @param {object} eleventyConfig - Eleventy configuration object
+ */
+function configurePreprocessors(eleventyConfig) {
+  // Draft posts: exclude from production builds, allow in dev mode
+  eleventyConfig.addPreprocessor("drafts", "*", (data, content) => {
+    if(data.draft && process.env.ELEVENTY_RUN_MODE === "build") {
+      return false;
+    }
+  });
+
+  // Ignore the 'docs' folder
+  eleventyConfig.ignores.add("docs/");
+  
+  // Note: og-image-preview.njk is excluded from collections via front matter
+  // but should still be built for local preview during development
+}
+
+module.exports = configurePreprocessors;
+

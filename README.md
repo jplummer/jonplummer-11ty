@@ -17,6 +17,16 @@ I chose simple, reliable tools that require little maintenance.
 - **Nunjucks**: A simple way to organize page layouts.
 - **Git**: Keeps a history of every change I make.
 
+### Project Structure
+
+The Eleventy configuration is organized into modules for maintainability:
+
+- **`.eleventy.js`**: Main configuration file (orchestrates all modules)
+- **`eleventy/utils/`**: Utilities (CSS extraction, date formatting, markdown rendering)
+- **`eleventy/filters/`**: Filter functions
+- **`eleventy/shortcodes/`**: Shortcode functions
+- **`eleventy/config/`**: Configuration modules (plugins, filters, shortcodes, passthrough, events, preprocessors)
+
 ## Features
 
 - **Dark Mode**: Automatically adjusts to your screen's brightness settings.
@@ -27,6 +37,7 @@ I chose simple, reliable tools that require little maintenance.
   - Schema.org structured data (BlogPosting, Person, WebSite)
   - Auto-generated Open Graph images (1200×630px) for all posts and pages
   - Sitemap generation for search engines
+  - No specific attention for garbage platforms like Facebook and Xitter, open standards only
 - **Automated Testing**: Comprehensive test suite that checks:
   - HTML validity and structure
   - Broken internal links (critical for site navigation)

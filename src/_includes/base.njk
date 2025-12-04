@@ -23,7 +23,7 @@
     <meta name="msapplication-TileImage" content="/assets/images/2021/02/jp_round.jpg">
 
     <meta name="description" content="{% if pagination and pagination.pageNumber > 0 %}Page {{ pagination.pageNumber }} of Jon Plummer's UX design blog. Insights on design leadership, product development, and team management.{% else %}{{ description | default('Jon Plummer is a UX design leader and mentor. Read his thoughts on design, leadership, and product development.') }}{% endif %}">
-    <meta name="generator" content="11ty">
+    <meta name="generator" content="{{ eleventy.generator }}">
 
     <meta property="og:locale" content="en_US">
     <meta property="og:site_name" content="Jon Plummer">

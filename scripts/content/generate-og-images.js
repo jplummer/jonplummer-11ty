@@ -289,10 +289,16 @@ async function main() {
     return !(frontMatter && frontMatter.draft === true);
   });
   
-  // Also find .njk files in src root
-  const njkFiles = fs.readdirSync(srcDir)
+  // Also find .njk files in src root, excluding drafts
+  const allNjkFiles = fs.readdirSync(srcDir)
     .filter(f => f.endsWith('.njk'))
     .map(f => path.join(srcDir, f));
+  const njkFiles = allNjkFiles.filter(f => {
+    const content = fs.readFileSync(f, 'utf8');
+    const { frontMatter } = parseFrontMatter(content);
+    // Exclude files with draft: true in frontmatter
+    return !(frontMatter && frontMatter.draft === true);
+  });
   
   const markdownFiles = [...postFiles, ...rootFiles, ...njkFiles];
   
