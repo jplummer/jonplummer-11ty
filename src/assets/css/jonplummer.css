@@ -468,7 +468,7 @@ article.link-item p {
 }
 
 /* End-of-post square */
-article:not(.link-item):not(.portfolio-detail) section::after,
+article:not(.link-item) section::after,
 main[data-tags*="page"]::after {
   content: "";
   display: block;
@@ -476,6 +476,11 @@ main[data-tags*="page"]::after {
   height: 0.5rem;
   background-color: var(--text-color-light);
   margin: var(--spacing-sm) 0 0 0;
+}
+
+/* Position square in right column for portfolio detail pages */
+article.portfolio-detail section::after {
+  grid-column: 2;
 }
 
 /* Portfolio Detail Styles */

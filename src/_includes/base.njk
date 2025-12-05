@@ -2,6 +2,38 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
+    {# Computed variables for HEAD section - single source of truth #}
+    {% if computedTitle %}
+        {% set computedTitleValue = computedTitle %}
+    {% elif title %}
+        {% set computedTitleValue = title %}
+    {% else %}
+        {% set computedTitleValue = 'Jon Plummer – Today I Learned' %}
+    {% endif %}
+    
+    {% set isPaginatedPage = pagination and pagination.pageNumber > 0 %}
+    {% if isPaginatedPage %}
+        {% set computedDescriptionValue = "Page " + pagination.pageNumber + " of Jon Plummer's UX leadership blog. Insights on design leadership, product development, and team management." %}
+        {% set ogImageAltValue = "Page " + pagination.pageNumber + " of Jon Plummer's UX design blog" %}
+    {% else %}
+        {% if description %}
+            {% set computedDescriptionValue = description %}
+        {% else %}
+            {% set computedDescriptionValue = 'Jon Plummer is a UX design leader and mentor. Read his thoughts on design, leadership, and product development.' %}
+        {% endif %}
+        {% if description %}
+            {% set ogImageAltValue = computedTitleValue + " - " + description %}
+        {% else %}
+            {% set ogImageAltValue = computedTitleValue %}
+        {% endif %}
+    {% endif %}
+    
+    {% if ogImage %}
+        {% set ogImageUrl = ogImage %}
+    {% else %}
+        {% set ogImageUrl = '/assets/images/og/index.png' %}
+    {% endif %}
+    
     {% include "head/meta_basic.njk" %}
     {% include "head/links.njk" %}
     {% include "head/title.njk" %}
@@ -22,7 +54,7 @@
 </header>
 
 <main id="main" aria-label="Main content"{% if tags %} data-tags="{{ tags | join(' ') }}"{% endif %}>
-    {% if tags and "page" in tags and title %}
+    {% if tags and "page" in tags and title and page.url != "/" and not (pagination and pagination.pageNumber > 0) %}
     <h1>{{ title | smartquotes | safe }}</h1>
     {% endif %}
     {{ content | safe }}

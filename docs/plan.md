@@ -12,6 +12,7 @@
 
 ### Design & Polish
 - [x] improve generated ogImage styling
+- [ ] improve ogImage index.png, which currently has redundant stuff in it
 - [ ] typographical improvements
   - [x] curly quotes
   - [ ] general legibility (leading, size, etc.)

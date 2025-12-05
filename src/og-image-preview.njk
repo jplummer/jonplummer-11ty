@@ -9,7 +9,7 @@ eleventyExcludeFromCollections: true
   <h1>OG Image Preview</h1>
   
   <div class="preview-info">
-    <p>This page previews the <code>og-image.njk</code> template and shows all generated Open Graph images. Edit <code>src/_includes/og-image.njk</code> to change the styling, then refresh this page to see your changes.</p>
+    <p>This page previews the <code>og-image.njk</code> template and shows all Open Graph images (both auto-generated and static). Edit <code>src/_includes/og-image.njk</code> to change the styling, then refresh this page to see your changes.</p>
   </div>
   
   <div class="preview-section">
@@ -65,8 +65,8 @@ eleventyExcludeFromCollections: true
   
   {% if ogImages %}
   <div class="preview-section">
-    <h2>Generated Images</h2>
-    <p>All generated Open Graph images:</p>
+    <h2>All OG Images</h2>
+    <p>All Open Graph images in <code>src/assets/images/og/</code> (includes auto-generated and static images like index.png and portfolio.png):</p>
     
     <div class="og-images-grid">
       {% for image in ogImages %}
