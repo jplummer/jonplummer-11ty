@@ -1,8 +1,8 @@
 {# Schema.org structured data #}
-{% if page.url == "/about/" %}
-    {% include "schema/person.njk" %}
-{% elif page.url == "/" or page.url == "/index.html" %}
-    {% include "schema/website.njk" %}
-{% elif tags and "post" in tags and date and title and page.url != "/" %}
-    {% include "schema/blogposting.njk" %}
-{% endif %}
+{%- if page.url == "/about/" %}
+{% include "schema/person.njk" %}
+{%- elif page.url == "/" or page.url == "/index.html" %}
+{% include "schema/website.njk" %}
+{%- elif tags and "post" in tags and date and title and page.url != "/" %}
+{% include "schema/blogposting.njk" %}
+{%- endif %}

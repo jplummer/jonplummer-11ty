@@ -1,18 +1,19 @@
-# Migration and Development Plan: WordPress → 11ty
+# Migration and Development Plan: WordPress to 11ty
 
-## 🎯 Active Work
+## What remains
 
-### Portfolio
-- [ ] **Additional portfolio content** ⬅
+### Portfolio 💎 
+- [ ] **Additional portfolio content**
   - [ ] Add Invoca interview presentation as portfolio piece
   - [ ] Expand Cayuse accomplishments portfolio piece
   - [ ] Expand product trio portfolio piece
   - [ ] MAYBE: Put descriptions on the main portfolio page (from item frontmatter)
   - [ ] MAYBE: Add links to key articles on the portfolio page (since it is a leader's portfolio)
 
-### Design & Polish
+### Design & Polish 
 - [x] improve generated ogImage styling
 - [ ] improve ogImage index.png, which currently has redundant stuff in it
+- [ ] have pagination links use the computed titles from the resulting pages as "title" atributes 
 - [ ] typographical improvements
   - [x] curly quotes
   - [ ] general legibility (leading, size, etc.)
@@ -189,6 +190,7 @@
 
 
 ## Future Consideration
+
 - **Alternate color schemes** and how to trigger them
 
 - **POSSE** (more tags for different types of entries?)
