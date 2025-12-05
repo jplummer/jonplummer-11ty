@@ -5,6 +5,7 @@ date: "2013-12-05T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/12/advoy_flags.png
 description: "Web applications and email templates for Baxter BioScience, including the Advoy app with country selection, bilingual interfaces, and dashboard designs."
+ogImage: /assets/images/og/portfolio.png
 ---
 <figure>
   <img src="/assets/images/2022/12/advoy_flags.png" alt="Baxter BioScience Advoy web application with country flag selection">

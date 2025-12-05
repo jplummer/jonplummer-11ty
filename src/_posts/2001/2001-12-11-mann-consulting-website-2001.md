@@ -5,6 +5,7 @@ date: "2001-12-11T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/12/mcr0a.gif
 description: "Clean, sparse website redesign for Mann Consulting featuring randomly selected main graphics, a proto-blog, and focused pages to encourage contact."
+ogImage: /assets/images/og/portfolio.png
 ---
 While working on the identity and without any experience marketing a business, I proposed and was given the greenlight to redesign the Mann Consulting website. A relatively clean and sparse site was the result, with a handful of randomly selected "single-sell" main graphics, a proto-blog, and a small number of tightly-focused pages, all aimed at explaining the benefit and encouraging a phone call.
 

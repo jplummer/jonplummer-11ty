@@ -5,6 +5,7 @@ date: "2022-10-10T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/12/Screenshot2022-11-10at11.00.16AM.png
 description: Eight-to-ten-minute company-wide presentation summarizing UX team accomplishments for 2022, including demos and an invitation to a conference talk.
+ogImage: /assets/images/og/portfolio.png
 ---
 <figure>
   <img src="/assets/images/2022/12/Screenshot2022-11-10at11.00.16AM-1024x575.png" alt="Cayuse UX accomplishments presentation slide deck">

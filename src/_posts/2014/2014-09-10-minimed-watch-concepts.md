@@ -5,6 +5,7 @@ date: "2014-09-10T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/12/001.1_idle_-_interrupted_signal.jpg
 description: "Skunkworks project exploring a wearable watch remote for insulin pumps and glucose sensors, using limited-segment LCD displays and digital crown controls."
+ogImage: /assets/images/og/portfolio.png
 ---
 A skunkworks project to make a wearable remote for an insulin pump and glucose sensor, based on an existing LCD driver with limited segment count, led naturally to wondering: what if it were really a watch, that looked and worked like a watch?
 

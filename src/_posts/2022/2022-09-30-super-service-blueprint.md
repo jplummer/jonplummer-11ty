@@ -5,6 +5,7 @@ date: "2022-09-30T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/12/Screenshot2022-11-11at2.56.37PM.png
 description: Research method mapping multiple interacting players in complex processes to identify product opportunities and understand collective workflows.
+ogImage: /assets/images/og/portfolio.png
 ---
 <figure>
   <img src="/assets/images/2022/12/Screenshot2022-11-11at2.56.37PM-1024x497.png" alt="Super service blueprint diagram showing multiple user types and their interactions">

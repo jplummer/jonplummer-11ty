@@ -5,6 +5,7 @@ date: "2001-12-10T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/12/1477187196364852.gif
 description: "Identity package for Mann Consulting, an IT consultancy, featuring a cube logo applied across business cards, letterhead, apparel, and marketing materials."
+ogImage: /assets/images/og/portfolio.png
 ---
 <figure>
   <img src="/assets/images/2022/12/1477187196364852.gif" alt="Mann Consulting final identity design with cube logo">

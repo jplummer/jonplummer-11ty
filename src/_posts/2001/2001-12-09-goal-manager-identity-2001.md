@@ -5,6 +5,7 @@ date: "2001-12-09T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/12/goalmanager_logo.png
 description: "Visual identity design for Goal Manager, an informational portal about non-cash incentives, created during the first dot-com bubble."
+ogImage: /assets/images/og/portfolio.png
 ---
 <figure>
   <img src="/assets/images/2022/12/goalmanager_logo.png" alt="Goal Manager logo and identity design">

@@ -5,6 +5,7 @@ date: "2022-09-11T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/12/ProductTrio.png
 description: "Framework for three-in-a-box planning where product management, design, and engineering collaborate to make product decisions together."
+ogImage: /assets/images/og/portfolio.png
 ---
 <figure>
   <img src="/assets/images/2022/12/ProductTrio.png" alt="Product Trio planning presentation encouraging product management, design, and engineering collaboration">
