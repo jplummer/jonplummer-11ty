@@ -10,6 +10,9 @@ function configurePassthrough(eleventyConfig) {
   // Copy .htaccess file for security
   eleventyConfig.addPassthroughCopy({ "src/.htaccess": ".htaccess" });
 
+  // Copy favicon.ico to root (required for legacy browsers and RSS readers)
+  eleventyConfig.addPassthroughCopy({ "src/favicon.ico": "favicon.ico" });
+
   // Watch for changes in assets
   eleventyConfig.addWatchTarget("src/assets");
 }
