@@ -1,6 +1,6 @@
 ---
 title: "Being strategic: A framework for goal achievement"
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2021-01-29T12:00:00-08:00"
 tags: post
 description: "I'm not a fan of LessWrong – while I like the idea of being more rational, and strive to acknowledge and feel my emotions but not let them impede my thinking"

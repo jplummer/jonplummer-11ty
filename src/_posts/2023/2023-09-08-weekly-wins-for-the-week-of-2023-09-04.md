@@ -1,6 +1,6 @@
 ---
 title: Weekly wins for the week of 2023 09 04
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2023-09-08T12:00:00-08:00"
 tags: post
 description: "A short week, but things are getting done. People are not waiting, they are seeking. They are asking questions and getting answers. They are not giving even"

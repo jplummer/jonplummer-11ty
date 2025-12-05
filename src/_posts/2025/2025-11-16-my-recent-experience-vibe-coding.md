@@ -1,6 +1,6 @@
 ---
 title: My recent experience with AI-assisted coding
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2025-11-16T12:00:00-08:00"
 tags: post
 description: "Moving this blog from WordPress to Eleventy has been my first meaningful experiment with AI-assisted coding."

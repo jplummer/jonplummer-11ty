@@ -1,6 +1,6 @@
 ---
 title: "Heather asked: Who \"owns\" accessibility?"
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2021-11-07T12:00:00-08:00"
 tags: post
 description: "Heather asked me yesterday \"who owns accessibility?\" That's a fun question. I replied: > Accessibility is not owned. Who owns quality? It's a team effort."

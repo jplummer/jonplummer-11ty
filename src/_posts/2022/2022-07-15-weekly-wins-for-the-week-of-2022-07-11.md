@@ -1,6 +1,6 @@
 ---
 title: Weekly wins for the week of 2022 07 11
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2022-07-15T12:00:00-08:00"
 tags: post
 description: "Past Belkin colleague Ryan Peterson recently began posting his \"weekly wins\" on LinkedIn. My impression is that he did this in part to steel his resolve during"

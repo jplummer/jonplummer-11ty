@@ -1,6 +1,6 @@
 ---
 title: Weekly wins for the week of 2022 10 03
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2022-10-07T12:00:00-08:00"
 tags: post
 description: "My eight minute talk wherein I tried to explain/demo the accomplishments of my department over the prior year seemed to go fine. Folks in my department liked"

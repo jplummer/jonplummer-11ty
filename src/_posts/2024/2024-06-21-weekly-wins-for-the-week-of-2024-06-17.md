@@ -1,6 +1,6 @@
 ---
 title: Weekly wins for the week of 2024 06 17
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2024-06-21T12:00:00-08:00"
 tags: post
 description: "Juneteenth National Independence Day was this last Wednesday. It was odd to have a holiday mid-week but Juneteenth is worth celebrating, worth remembering,"

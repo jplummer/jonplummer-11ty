@@ -1,6 +1,6 @@
 ---
 title: "Confusing terms: globalization, internationalization, translation, localization"
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2021-12-06T12:00:00-08:00"
 tags: post
 description: "At work there's been a move afoot to tag items in our roadmapping tool as \"globalization,\" \"internationalization,\" \"localization,\" or \"translation.\" The"

@@ -1,6 +1,6 @@
 ---
 title: ADPList recognition for design mentorship
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2023-10-03T12:00:00-08:00"
 tags: post
 description: "Certificate of recognition from ADPList for September 2023, acknowledging contributions to design mentorship and community."

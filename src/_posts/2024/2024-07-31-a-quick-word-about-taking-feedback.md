@@ -1,6 +1,6 @@
 ---
 title: A quick word about taking feedback
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2024-07-31T12:00:00-08:00"
 tags: post
 description: "When receiving feedback on a design or other work the important thing is to see the intent behind the feedback and address that, rather than take the specific"

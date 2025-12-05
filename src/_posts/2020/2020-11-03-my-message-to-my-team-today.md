@@ -1,6 +1,6 @@
 ---
 title: My message to my team today
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2020-11-03T12:00:00-08:00"
 tags: post
 description: "Gentle people, It's a moment of uncertainty and anxiety (election), piled atop a lengthy period of uncertainty and anxiety (pandemic, police killings, climate"

@@ -10,7 +10,7 @@ ogImage: /assets/images/og/portfolio.png
 <ul class="portfolio-grid">
 {% for post in collections.portfolio | reverse %}
     <li>
-        {% include "portfolio_list_item.njk" %}
+        {% include "components/portfolio_list_item.njk" %}
     </li>
 {% endfor %}
 </ul>

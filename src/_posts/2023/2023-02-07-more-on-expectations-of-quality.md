@@ -1,6 +1,6 @@
 ---
 title: More on expectations of quality
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2023-02-07T12:00:00-08:00"
 tags: post
 description: "Just like the false tradeoff between security and usability, I don’t want to play into the notion that light scope and quality are opposing forces. We will not"

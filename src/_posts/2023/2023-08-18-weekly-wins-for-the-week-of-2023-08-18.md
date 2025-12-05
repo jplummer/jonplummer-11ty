@@ -1,6 +1,6 @@
 ---
 title: Weekly wins for the week of 2023 08 18
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2023-08-18T12:00:00-08:00"
 tags: post
 description: "Quarterly coaching was straightforward and is nearly done. Only one person has not yet submitted their self-eval, and they have a good excuse. UX is on the"

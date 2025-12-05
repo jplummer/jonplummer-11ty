@@ -1,6 +1,6 @@
 ---
 title: Weekly wins for the week of 2022 10 17
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2022-10-21T12:00:00-08:00"
 tags: post
 description: "I'm using a process initiative at work to demonstrate to the company, especially to folks not on the product team, a basic UX research and design process. The"

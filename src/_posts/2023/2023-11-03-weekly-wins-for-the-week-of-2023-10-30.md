@@ -1,6 +1,6 @@
 ---
 title: Weekly wins for the week of 2023 10 30
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2023-11-03T12:00:00-08:00"
 tags: post
 description: "Things are a bit of a mess at work – a couple of key people have resigned, the 4th quarter roadmap is in turmoil, revenue is going up but there's still plenty"

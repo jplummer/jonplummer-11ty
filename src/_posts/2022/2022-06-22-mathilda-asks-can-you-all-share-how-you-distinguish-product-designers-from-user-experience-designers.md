@@ -1,6 +1,6 @@
 ---
 title: "Mathilda asks: how do you distinguish product designers from user experience designers?"
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2022-06-22T12:00:00-08:00"
 tags: post
 description: "Mathilda asks: > Can you all share how you distinguish product designers from user experience designers? I’ve been trying to determine the differentiation with"

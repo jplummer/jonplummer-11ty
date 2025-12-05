@@ -1,6 +1,6 @@
 ---
 title: Weekly wins for the week of 2022 11 14
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2022-11-20T12:00:00-08:00"
 tags: post
 description: "\"Cold\" applications to Director or VP of UX Design/Product Design jobs are going nowhere. Not a one has resulted in so much as a conversation with a recruiter."

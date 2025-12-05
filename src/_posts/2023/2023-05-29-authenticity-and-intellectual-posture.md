@@ -1,6 +1,6 @@
 ---
 title: Authenticity and intellectual posture
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2023-05-29T12:00:00-08:00"
 tags: post
 description: "I was talking with a mentee today when the topic of authenticity came up – if we are thinking so much about how we should behave, how do we know what is"

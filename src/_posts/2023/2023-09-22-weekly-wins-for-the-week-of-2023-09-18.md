@@ -1,6 +1,6 @@
 ---
 title: Weekly wins for the week of 2023 09 18
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2023-09-22T12:00:00-08:00"
 tags: post
 description: "It took two trips to Home Depot and a barked knuckle, but I repaired a leaky shower handle in less than an hour for $22. This included finding the shutoff for"

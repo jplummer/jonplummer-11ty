@@ -1,6 +1,6 @@
 ---
 title: Active project self-management
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2023-05-20T12:00:00-08:00"
 tags: post
 description: "I was fielding complaints about slowness in the UX team's contribution to projects until I started talking to the people I support about this concept. Turns"

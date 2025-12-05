@@ -1,6 +1,6 @@
 ---
 title: Do you have some key metrics that you are measuring your team on?
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2021-12-26T12:00:00-08:00"
 tags: post
 description: "I tend not to be in favor of output metrics like these; they've been shown to be counterproductive for developers (lines of code, commits, bugs crushed, etc.),"

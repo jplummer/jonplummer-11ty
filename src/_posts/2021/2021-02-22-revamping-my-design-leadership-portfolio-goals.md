@@ -1,6 +1,6 @@
 ---
 title: "Revamping my design leadership portfolio: goals"
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2021-02-22T12:00:00-08:00"
 tags: post
 description: "I'm not in a big hurry to leave my job (hi, folks!). But every once in a while a really nice opportunity comes along, and I'd like to be prepared for it. And"

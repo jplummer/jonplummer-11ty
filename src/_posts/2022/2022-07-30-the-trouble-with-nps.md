@@ -1,6 +1,6 @@
 ---
 title: Misunderstanding Net Promoter Score
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2022-07-30T12:00:00-08:00"
 tags: post
 description: "Net Promoter Score (NPS) is a popular and fashionable customer experience metric meant to express the loyalty of a company's customers."

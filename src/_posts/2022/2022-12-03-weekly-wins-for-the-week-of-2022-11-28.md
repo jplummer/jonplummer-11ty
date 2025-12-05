@@ -1,6 +1,6 @@
 ---
 title: Weekly wins for the week of 2022 11 28
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2022-12-03T12:00:00-08:00"
 tags: post
 description: "I accepted the offer and will start December 12. Startup paperwork was mostly easy, save for finding the exact dates of move in/out and start/stop for my"

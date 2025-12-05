@@ -1,6 +1,6 @@
 ---
 title: Weekly wins for the week of 2023 09 11
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2023-09-15T12:00:00-08:00"
 tags: post
 description: "One-time mentorship conversations are fun, and they remind me how I think about issues. So far everyone has been pleased with our conversations."

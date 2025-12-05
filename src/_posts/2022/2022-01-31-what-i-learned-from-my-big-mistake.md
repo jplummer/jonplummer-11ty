@@ -1,6 +1,6 @@
 ---
 title: What I learned from my big mistake
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2022-01-31T12:00:00-08:00"
 tags: post
 description: "On Friday last week I deleted a chunk of the wiki. All of the product management pages, in fact. The work of a team of fifteen, organizing and guiding the work"

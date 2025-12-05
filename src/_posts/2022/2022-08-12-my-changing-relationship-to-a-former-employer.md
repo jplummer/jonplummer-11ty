@@ -1,6 +1,6 @@
 ---
 title: My changing relationship to a former employer
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2022-08-12T12:00:00-08:00"
 tags: post
 description: "Or, a corporation becomes people in six acts: Fed up with Job A and planning to move away, I looked for work in the new locale. And I found something."

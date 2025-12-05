@@ -1,6 +1,6 @@
 ---
 title: "Our position on AI tools: Design team guidelines"
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2025-07-12T12:00:00-08:00"
 tags: post
 description: "(This is a work in progress, but a pretty good start) Designing AI-powered product experiences User needs and customer problem first Solving a valuable"

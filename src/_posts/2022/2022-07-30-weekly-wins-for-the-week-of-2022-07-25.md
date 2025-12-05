@@ -1,6 +1,6 @@
 ---
 title: Weekly wins for the week of 2022 07 25
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2022-07-30T12:00:00-08:00"
 tags: post
 description: "Three wins for this week: It was less tricky than I feared to come up with four reasonable UX-led programs for the Connect Conference this October. I'm feeling"

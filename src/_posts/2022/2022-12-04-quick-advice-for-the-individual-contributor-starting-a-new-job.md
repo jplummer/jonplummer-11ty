@@ -1,6 +1,6 @@
 ---
 title: Quick advice for the individual contributor starting a new job
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2022-12-04T12:00:00-08:00"
 tags: post
 description: "Jaemi asks: > I begin my first day tomorrow with \\[new job\\]. If there is any advice you might offer I'd welcome it. Off the cuff, I have just two things: Now"

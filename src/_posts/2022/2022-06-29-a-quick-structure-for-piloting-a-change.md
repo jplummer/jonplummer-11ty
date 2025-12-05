@@ -1,6 +1,6 @@
 ---
 title: A quick structure for piloting a change
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2022-06-29T12:00:00-08:00"
 tags: post
 description: "A recent correspondent asked how to move his team from \"thoughts and fears about plans\" to action, and I suggestion making their next intervention a pilot."

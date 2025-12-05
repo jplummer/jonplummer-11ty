@@ -1,6 +1,6 @@
 ---
 title: Weekly wins for the week of 2023 10 23
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2023-10-27T12:00:00-08:00"
 tags: post
 description: "A decidedly ☯️ week, with each ⬇️ paired with an ⬆️: During a tough retro on a key project the team ⬇️ expressed a lot of frustration with new process tweaks,"

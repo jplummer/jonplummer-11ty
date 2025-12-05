@@ -1,6 +1,6 @@
 ---
 title: "Quality expectations part two: Design completeness"
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2023-07-29T12:00:00-08:00"
 tags: post
 description: "It seems like we have a pretty good grasp of what quality should be when it comes to infrastructure – what technical soundness is, how much load we should"

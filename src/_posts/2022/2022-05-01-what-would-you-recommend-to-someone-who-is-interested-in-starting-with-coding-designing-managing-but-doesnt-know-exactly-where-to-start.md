@@ -1,6 +1,6 @@
 ---
 title: What would you recommend […] starting with coding/designing/managing, but doesn't know exactly where to start?
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2022-05-01T12:00:00-08:00"
 tags: post
 description: "How do I get experience doing a thing without a job doing the thing? By doing the thing anyway. For design or coding there are two good places to start, and"

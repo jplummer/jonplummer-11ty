@@ -1,6 +1,6 @@
 ---
 title: "Daphne asks: Transitioning from marketing to UX"
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2020-11-03T12:00:00-08:00"
 tags: post
 description: "> I have near two year experience doing oversea marketing from a leading international NAS company called Synology. My role was devising marketing strategy and"

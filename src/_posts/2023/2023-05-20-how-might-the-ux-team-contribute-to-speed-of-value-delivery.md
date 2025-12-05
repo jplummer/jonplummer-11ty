@@ -1,5 +1,5 @@
 ---
-layout: single_post.njk
+layout: layouts/single_post.njk
 title: How might the UX team contribute to speed of value delivery?
 date: "2023-05-20T12:00:00-08:00"
 tags: post

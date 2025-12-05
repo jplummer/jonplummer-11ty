@@ -1,6 +1,6 @@
 ---
 title: Weekly wins for the week of 2022 12 26
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2022-12-31T12:00:00-08:00"
 tags: post
 description: "Weekly wins seems to do its job, reminding me to remember what good is happening. Sometimes it is quiet. Two words: LEGO Minibus. It's a super fun set, though"

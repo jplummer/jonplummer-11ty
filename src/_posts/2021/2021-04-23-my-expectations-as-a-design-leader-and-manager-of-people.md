@@ -1,6 +1,6 @@
 ---
 title: My expectations as a design leader and manager of people
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2021-04-23T12:00:00-08:00"
 tags: post
 description: "Foster an ethos of continuous improvement Repeatedly return to user needs and goals to create alignment Frame design goals as the marriage of user goals and"

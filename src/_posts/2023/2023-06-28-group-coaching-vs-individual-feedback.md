@@ -1,6 +1,6 @@
 ---
 title: Group coaching vs individual feedback
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2023-06-28T12:00:00-08:00"
 tags: post
 description: "Group coaching is valuable when the message is positive (\"I invite you to do this\") and useful to all and there's no need to single someone out, or when"

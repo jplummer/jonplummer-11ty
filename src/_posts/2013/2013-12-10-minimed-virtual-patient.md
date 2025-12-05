@@ -1,6 +1,6 @@
 ---
 title: "Virtual patient software for diabetes education"
-layout: portfolio_detail.njk
+layout: layouts/portfolio_detail.njk
 date: "2013-12-10T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/12/be_hcp.png

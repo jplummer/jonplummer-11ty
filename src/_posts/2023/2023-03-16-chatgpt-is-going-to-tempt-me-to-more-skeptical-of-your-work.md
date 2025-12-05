@@ -1,6 +1,6 @@
 ---
 title: ChatGPT is going to tempt me to be more skeptical of your work
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2023-03-16T12:00:00-08:00"
 tags: post
 description: "Lately I've been seeing a lot of posts on LinkedIn and elsewhere crowing about how ChatGPT could be used to perform UX tasks. Examples: How do I use ChatGPT"

@@ -1,6 +1,6 @@
 ---
 title: Laura Cotterill asks about lack of teamwork
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2021-10-01T12:00:00-08:00"
 tags: post
 description: "In her post on LinkedIn, Laura Cotterill (one of my new coworkers) refers to Eric Chan's post about teamwork and wonders why such a seemingly obvious mode of"

@@ -1,0 +1,22 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ title | json | safe }},
+  "datePublished": "{{ date | dateToRfc3339Safe }}",
+  "dateModified": "{{ date | dateToRfc3339Safe }}",
+  "author": {
+    "@type": "Person",
+    "name": "Jon Plummer",
+    "url": "{{ site.url }}/about/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Jon Plummer",
+    "url": "{{ site.url }}"
+  },
+  "url": "{{ site.url }}{{ page.url }}",
+  "description": {{ description | default(title) | json | safe }},
+  "image": "{{ site.url }}{{ ogImageUrl }}"
+}
+</script>

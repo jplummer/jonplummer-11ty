@@ -1,6 +1,6 @@
 ---
 title: Understanding business cases for product teams (or anyone)
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2021-01-22T12:00:00-08:00"
 tags: post
 description: "To me, someone who didn't go to business school, the all-too-common admonition to “make the business case\" for something was often a showstopper."

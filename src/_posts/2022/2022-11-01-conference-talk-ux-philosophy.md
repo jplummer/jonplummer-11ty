@@ -1,6 +1,6 @@
 ---
 title: "Conference talk: My UX philosophy and design leadership approach"
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2022-11-01T12:00:00-08:00"
 tags: post
 description: "A conference talk about how the Cayuse UX design team approaches its work, focusing on reducing administrative burden and evolving design practices."

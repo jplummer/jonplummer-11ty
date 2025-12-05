@@ -1,6 +1,6 @@
 ---
 title: Linksys app revitalization
-layout: portfolio_detail.njk
+layout: layouts/portfolio_detail.njk
 date: "2020-02-29T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/12/DashboardOnline.png

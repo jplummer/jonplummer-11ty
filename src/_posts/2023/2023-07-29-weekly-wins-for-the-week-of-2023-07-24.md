@@ -1,6 +1,6 @@
 ---
 title: Weekly wins for the week of 2023 07 24
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2023-07-29T12:00:00-08:00"
 tags: post
 description: "The health scare has passed. That alone would be enough, dayenu."

@@ -1,6 +1,6 @@
 ---
 title: "Thomas W. writes: Why generic UX value arguments don't work"
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2023-11-29T12:00:00-08:00"
 tags: post
 description: "In his LinkedIn post on November 29, Thomas W. laid out a handful of arguments a designer or research could use to object to demands that UX \"prove its value.\""

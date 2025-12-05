@@ -1,6 +1,6 @@
 ---
 title: An excerpt of my 2020 self-evaluation
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2023-01-13T12:00:00-08:00"
 tags: post
 description: "Do you have any suggestions for the management team? 1) If you make a decision, tell us. Better yet, tell us right away and tell us why"

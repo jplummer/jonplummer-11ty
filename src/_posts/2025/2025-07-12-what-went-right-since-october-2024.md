@@ -1,6 +1,6 @@
 ---
 title: What went right since october 2024?
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2025-07-12T12:00:00-08:00"
 tags: post
 description: "So many things! Work I promoted someone I failed to promote someone, but learned a lot and it was the right decision We've had a couple of leadership offsites"

@@ -1,6 +1,6 @@
 ---
 title: Free to be the company blog
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2020-12-15T12:00:00-08:00"
 tags: post
 description: "You'd be forgiven for thinking my employer doesn't have a blog. It (and the website it's a part of) haven't been updated in a while, and while the content is"

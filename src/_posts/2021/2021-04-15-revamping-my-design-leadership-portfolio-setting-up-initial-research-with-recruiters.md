@@ -1,6 +1,6 @@
 ---
 title: "Revamping my design leadership portfolio: setting up initial research"
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2021-04-15T12:00:00-08:00"
 tags: post
 description: "Recruiters I've recently spoken to about passive opportunities (where the recruiter reached out to me before I was aware of the position) are more accessible"

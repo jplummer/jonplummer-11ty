@@ -1,6 +1,6 @@
 ---
 title: How to explain a new job on LinkedIn?
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2021-10-01T12:00:00-08:00"
 tags: post
 description: "As of nine weeks ago I have a new job at Cayuse. But how do I explain my accomplishments on LinkedIn when I'm so new? Maybe I don't. What if I instead explain"

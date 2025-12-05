@@ -1,6 +1,6 @@
 ---
 title: The "hidden" pages of jonplummer.com
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: 2025-11-20T20:00:00.000Z
 tags: post
 description: "A tour of the utility pages of this site—RSS feeds, documentation, sitemaps, and more—and how they are generated."

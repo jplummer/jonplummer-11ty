@@ -1,6 +1,6 @@
 ---
 title: Weekly wins for the week of 2023 01 30
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2023-02-03T12:00:00-08:00"
 tags: post
 description: "This is the first week in quite a while that I fulfilled all of my at-work weekly objectives. Sometimes lowering your sights slightly can pay off. Yet I also"

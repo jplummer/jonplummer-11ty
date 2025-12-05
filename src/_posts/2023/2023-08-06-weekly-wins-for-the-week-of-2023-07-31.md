@@ -1,6 +1,6 @@
 ---
 title: Weekly wins for the week of 2023 07 31
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2023-08-06T12:00:00-08:00"
 tags: post
 description: "It's amazing what even one day away, far from the home and the projects and the email, can do. We had planned a two-day trip but the first night fell through."

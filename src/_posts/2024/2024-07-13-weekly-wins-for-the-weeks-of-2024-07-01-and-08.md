@@ -1,6 +1,6 @@
 ---
 title: Weekly wins for the weeks of 2024 07 01 and 08
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2024-07-13T12:00:00-08:00"
 tags: post
 description: "Small quality-of-life adjustments can have an amazing effect. Sure, the fact that you need to push on the door a little bit to lock its deadbolt is not a huge"

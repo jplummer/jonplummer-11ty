@@ -1,6 +1,6 @@
 ---
 title: Sara Bermúdez asked about mindsets for the future of work
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2021-09-08T12:00:00-08:00"
 tags: post
 description: "In the Design Thinking group on LinkedIn, Sara Bermúdez asked: > I would love to hear your opinions on which are the most important mindsets for the future of"

@@ -1,13 +1,15 @@
 ---
 layout: base.njk
 title: Jon Plummer – Today I Learned
-description: "UX design leader sharing insights on design, leadership, and product development. Experience at Invoca, Cayuse, Belkin, and Medtronic."
+description: UX design leader sharing insights on design, leadership, and product development. Experience at Invoca, Cayuse, Belkin, and Medtronic.
 purpose: blog homepage
+tags: page
 pagination:
-    data: collections.post
-    reverse: true
-    size: 5
+  data: collections.post
+  reverse: true
+  size: 5
 permalink: "{% if pagination.pageNumber == 0 %}/{% else %}/page/{{ pagination.pageNumber }}/{% endif %}"
+ogImage: /assets/images/og/index.png
 ---
 {# Calculate next page's oldest post date if there's a next page #}
 {% set nextPageOldestDate = null %}
@@ -24,10 +26,10 @@ permalink: "{% if pagination.pageNumber == 0 %}/{% else %}/page/{{ pagination.pa
 {% for item in pagination.items | mergePostsAndLinks(links, pagination.pageNumber, nextPageOldestDate) %}
     {% if item.type == 'post' %}
         {% set post = item.data %}
-        {% include "post_content.njk" %}
+        {% include "components/post_content.njk" %}
     {% elif item.type == 'link' %}
         {% set link = item.data %}
-        {% include "link_item.njk" %}
+        {% include "components/link_item.njk" %}
     {% endif %}
 {% endfor %}
 

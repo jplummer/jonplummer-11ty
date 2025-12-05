@@ -1,6 +1,6 @@
 ---
 title: "My 2021 self-evaluation: Annual reflection"
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2022-12-24T12:00:00-08:00"
 tags: post
 description: "The twists and turns of my prior role are relevant to my new role. My self-eval of 2021 contains lessons for me now, though the stated goals of my new role"

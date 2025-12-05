@@ -1,6 +1,6 @@
 ---
 title: Toward coordinated experience
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2025-07-27T12:00:00-08:00"
 tags: post
 description: "I realized the other day that we (UX and others) make workflow diagrams but don’t distinguish in them between “system advances you to the next step\" or \"offers"

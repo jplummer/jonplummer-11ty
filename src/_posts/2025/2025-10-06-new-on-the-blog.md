@@ -1,6 +1,6 @@
 ---
 title: What's new on the blog this month
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2025-10-06T12:00:00-08:00"
 tags: post
 description: "I've taken some belated inspiration from Jason Kottke and introduced a feature that's new to me: short link posts between \"normal\" posts. (His look much like"

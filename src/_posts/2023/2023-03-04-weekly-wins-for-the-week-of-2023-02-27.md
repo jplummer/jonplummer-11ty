@@ -1,6 +1,6 @@
 ---
 title: Weekly wins for the week of 2023 02 27
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2023-03-04T12:00:00-08:00"
 tags: post
 description: "For the first time in several weeks I did not type \"weekly winds.\" Quarterly coaching/reviews are done. Annual merits are done. Things are almost in place for"

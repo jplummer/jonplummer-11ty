@@ -1,6 +1,6 @@
 ---
 title: Weekly wins for the week of 2023 05 29
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2023-06-02T12:00:00-08:00"
 tags: post
 description: "Memorial Day made for a short week. Some folks can do about four day's effort in four days, others (managers especially) try to do all the things and pack five"

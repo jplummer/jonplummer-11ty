@@ -1,6 +1,6 @@
 ---
 title: Weekly wins for the week of 2022 09 12
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2022-09-18T12:00:00-08:00"
 tags: post
 description: "While the team is sad at the departure of a great employee, they are holding together. I made less progress than I had hoped on my conference presentation"

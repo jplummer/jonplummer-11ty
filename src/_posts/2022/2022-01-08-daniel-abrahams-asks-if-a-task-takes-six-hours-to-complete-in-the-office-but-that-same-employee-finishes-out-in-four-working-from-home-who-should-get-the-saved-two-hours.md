@@ -1,6 +1,6 @@
 ---
 title: "Daniel Abrahams asks: \"If a task takes six hours to complete […] who should get the saved two hours?\""
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2022-01-08T12:00:00-08:00"
 tags: post
 description: "!If a task takes six hours to complete in the office, but that same employee finishes out in four working from home, who should get the saved two hours? The"

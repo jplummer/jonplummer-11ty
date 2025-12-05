@@ -1,6 +1,6 @@
 ---
 title: Tightening up my hiring process for UX practitioners
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2022-10-29T12:00:00-08:00"
 tags: post
 description: "I used to have a hiring process that carefully ensured every team member had a role in questioning, evaluating, and discussing each candidate. My employees"

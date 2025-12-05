@@ -1,6 +1,6 @@
 ---
 title: I was asked "what kind of leader are you?"
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2022-11-26T12:00:00-08:00"
 tags: post
 description: "During my recent (and successful) series of interviews one interviewer asked me \"what kind of leader are you?\" I blurted out \"supportive,\" not having really"

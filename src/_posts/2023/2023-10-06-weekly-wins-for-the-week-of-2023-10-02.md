@@ -1,6 +1,6 @@
 ---
 title: Weekly wins for the week of 2023 10 02
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2023-10-06T12:00:00-08:00"
 tags: post
 description: "I got to the end of the week feeling like I worked hard but didn't accomplish much. Lots of managing, a lot less doing, and the things I said I would do by the"

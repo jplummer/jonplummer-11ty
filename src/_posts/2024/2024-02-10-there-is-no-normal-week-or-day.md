@@ -1,6 +1,6 @@
 ---
 title: There is no "normal" week or day
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2024-02-10T12:00:00-08:00"
 tags: post
 description: "At seventeen I joined the staff of a Boy Scout camp, and as an activity area leader I had a role to play in leadership, instruction, and the interactive"

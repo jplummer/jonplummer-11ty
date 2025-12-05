@@ -1,6 +1,6 @@
 ---
 title: Weekly wins for the week of 2022 08 01
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2022-08-06T12:00:00-08:00"
 tags: post
 description: "Five(!) wins for this week. It pays to think about what good is happening: After buying some cheap running shoes ($70, about as cheap as they had that felt"

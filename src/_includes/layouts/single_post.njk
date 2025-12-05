@@ -13,10 +13,11 @@ purpose: individual post page
     'id': title | slug
 } %}
 
-{% include "post_content.njk" %}
+{% include "components/post_content.njk" %}
 
 {% set collection = collections.post %}
 {% set currentPage = page %}
 {% set itemLabel = "post" %}
 {% set navLabel = "Post navigation" %}
-{% include "collection_navigation.njk" %}
+{% include "components/collection_navigation.njk" %}
+

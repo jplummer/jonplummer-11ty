@@ -1,6 +1,6 @@
 ---
 title: Weekly wins for the week of 2023 07 10
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2023-07-14T12:00:00-08:00"
 tags: post
 description: "This was not an easy week. Several things went at least a little sideways: Tuesday's workout wrung me out; Saturday's was cut short by a whopper of a headache;"

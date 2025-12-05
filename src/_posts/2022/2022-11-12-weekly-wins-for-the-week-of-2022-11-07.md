@@ -1,6 +1,6 @@
 ---
 title: Weekly wins for the week of 2022 11 07
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2022-11-12T12:00:00-08:00"
 tags: post
 description: "My practice of doing at least one thing each day for the three topics of network cultivation, opportunities (warm and cold applications, reviewing job boards,"

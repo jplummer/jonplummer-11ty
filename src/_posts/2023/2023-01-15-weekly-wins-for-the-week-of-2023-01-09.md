@@ -1,6 +1,6 @@
 ---
 title: Weekly wins for the week of 2023 01 09
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2023-01-15T12:00:00-08:00"
 tags: post
 description: "This was meant to be a week in Santa Barbara for work and a little play. A climate-change-strengthened \"atmospheric river\" made it a week of travel"

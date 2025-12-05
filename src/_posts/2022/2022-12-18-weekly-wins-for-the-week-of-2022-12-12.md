@@ -1,6 +1,6 @@
 ---
 title: Weekly wins for the week of 2022 12 12
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2022-12-18T12:00:00-08:00"
 tags: post
 description: "I started my new job on Monday. It's nice to see good people working hard on not too many products, with a leadership team working to further narrow their"

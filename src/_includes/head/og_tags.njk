@@ -1,0 +1,21 @@
+{% set ogImageUrl = ogImage | default('/assets/images/og/index.png') %}
+<meta property="og:title" content="{% if computedTitle %}{{ computedTitle }}{% else %}{{ title | default('Jon Plummer – Today I Learned') }}{% endif %}">
+<meta property="og:url" content="{{ site.url }}{{ page.url }}">
+<meta property="og:type" content="{% if tags and 'post' in tags %}article{% else %}website{% endif %}">
+<meta property="og:description" content="{% if pagination and pagination.pageNumber > 0 %}Page {{ pagination.pageNumber }} of Jon Plummer's UX leadership blog. Insights on design leadership, product development, and team management.{% else %}{{ description | default('Jon Plummer is a UX design leader and mentor. Read his thoughts on design, leadership, and product development.') }}{% endif %}">
+<meta property="og:image" content="{{ site.url }}{{ ogImageUrl }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{% if pagination and pagination.pageNumber > 0 %}Page {{ pagination.pageNumber }} of Jon Plummer's UX design blog{% else %}{{ title | default('Jon Plummer – Today I Learned') }}{% if description %} - {{ description }}{% endif %}{% endif %}">
+{% if tags and 'post' in tags and date %}
+    <meta property="article:published_time" content="{{ date | dateToRfc3339Safe }}">
+    <meta property="article:author" content="Jon Plummer">
+    <meta property="article:section" content="Blog">
+    {% if tags %}
+    {% for tag in tags %}
+        {% if tag != 'post' %}
+        <meta property="article:tag" content="{{ tag }}">
+        {% endif %}
+    {% endfor %}
+    {% endif %}
+{% endif %}
