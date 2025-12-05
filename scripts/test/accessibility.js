@@ -139,7 +139,6 @@ async function validateAccessibility() {
       if (content.includes('<title>Redirecting...</title>')) {
         console.log(`📄 [${fileNumber}/${htmlFiles.length}] ${relativePath}:`);
         console.log(`   ⏭️  Skipped (redirect page)`);
-        console.log('');
         results.total--;
         continue;
       }
@@ -159,12 +158,9 @@ async function validateAccessibility() {
         const hasDarkIssues = darkViolations.length > 0 || darkIncomplete.length > 0;
         const hasIssues = hasLightIssues || hasDarkIssues;
         
-        // Show progress for all files, with status indicator
+        // Only show file header if there are issues
         if (hasIssues) {
           console.log(`📄 [${fileNumber}/${htmlFiles.length}] ${relativePath}:`);
-        } else {
-          // Show passing files with a simple indicator
-          console.log(`📄 [${fileNumber}/${htmlFiles.length}] ${relativePath}: ✅`);
         }
         
         // Light mode results
@@ -255,7 +251,6 @@ async function validateAccessibility() {
       } catch (error) {
         console.log(`📄 [${fileNumber}/${htmlFiles.length}] ${relativePath}:`);
         console.log(`   ❌ Error testing file: ${error.message}`);
-        console.log('');
         results.totalViolations++;
         results.filesWithViolations++;
       }

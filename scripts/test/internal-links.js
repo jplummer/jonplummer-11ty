@@ -42,12 +42,11 @@ function checkAnchor(href, htmlContent) {
 
 // Main validation function
 async function validateInternalLinks() {
-  console.log('🔗 Starting internal link validation...\n');
+  const compact = process.env.TEST_COMPACT_MODE === 'true';
   
   checkSiteDirectory();
   const siteRoot = './_site';
   
-  console.log('📋 Running full site scan');
   const htmlFiles = getHtmlFiles();
   
   if (htmlFiles.length === 0) {
@@ -55,7 +54,11 @@ async function validateInternalLinks() {
     return;
   }
   
-  console.log(`Found ${htmlFiles.length} HTML files to check\n`);
+  if (!compact) {
+    console.log('🔗 Starting internal link validation...\n');
+    console.log('📋 Running full site scan');
+    console.log(`Found ${htmlFiles.length} HTML files to check\n`);
+  }
   
   const allLinks = [];
   const results = {
@@ -87,7 +90,6 @@ async function validateInternalLinks() {
   }
   
   results.total = allLinks.length;
-  console.log(`Found ${allLinks.length} internal links across ${htmlFiles.length} files\n`);
   
   // Process links by type
   for (const link of allLinks) {
@@ -103,6 +105,13 @@ async function validateInternalLinks() {
           // Don't log successful internal links
         } else {
           results.internal.broken++;
+          // Show header messages in compact mode only when first issue is found
+          if (compact && results.internal.broken === 1 && results.anchors.broken === 0) {
+            console.log('🔗 Starting internal link validation...\n');
+            console.log('📋 Running full site scan');
+            console.log(`Found ${htmlFiles.length} HTML files to check\n`);
+            console.log(`Found ${allLinks.length} internal links across ${htmlFiles.length} files\n`);
+          }
           console.log(`❌ Internal: ${file}:${line} → ${href} (not found)`);
         }
         break;
@@ -115,6 +124,13 @@ async function validateInternalLinks() {
           // Don't log successful anchor links
         } else {
           results.anchors.broken++;
+          // Show header messages in compact mode only when first issue is found
+          if (compact && results.internal.broken === 0 && results.anchors.broken === 1) {
+            console.log('🔗 Starting internal link validation...\n');
+            console.log('📋 Running full site scan');
+            console.log(`Found ${htmlFiles.length} HTML files to check\n`);
+            console.log(`Found ${allLinks.length} internal links across ${htmlFiles.length} files\n`);
+          }
           console.log(`❌ Anchor: ${file}:${line} → ${href} (not found)`);
         }
         break;
@@ -125,13 +141,14 @@ async function validateInternalLinks() {
     }
   }
   
-  // Summary
+  // Summary - compact mode shows single line for passing, full for failing
   printSummary('Internal Link Validation', getTestEmoji('internal-links'), [
     { label: 'Total internal links', value: results.total },
     { label: 'Internal file links', value: `${results.internal.working}/${results.internal.total} working` },
     { label: 'Anchor links', value: `${results.anchors.working}/${results.anchors.total} working` },
-    { label: 'Other links', value: results.other.total }
-  ]);
+    { label: 'Other links', value: results.other.total },
+    { label: 'Broken links', value: results.internal.broken + results.anchors.broken }
+  ], { compact: compact });
   
   // Show broken links summary
   const totalBroken = results.internal.broken + results.anchors.broken;
@@ -141,10 +158,19 @@ async function validateInternalLinks() {
     if (results.anchors.broken > 0) console.log(`   - Anchor links: ${results.anchors.broken}`);
   }
   
+  // Write summary file for test runner
+  const summaryPath = path.join(__dirname, '.internal-links-summary.json');
+  fs.writeFileSync(summaryPath, JSON.stringify({ 
+    files: htmlFiles.length, 
+    issues: totalBroken, 
+    warnings: 0 
+  }), 'utf8');
+  
   exitWithResults(totalBroken, 0, {
     testType: 'internal link validation',
     issueMessage: '\n❌ Internal links need attention - these are under your control.',
-    successMessage: '\n🎉 All internal links are working correctly!'
+    successMessage: '\n🎉 All internal links are working correctly!',
+    compact: compact
   });
 }
 

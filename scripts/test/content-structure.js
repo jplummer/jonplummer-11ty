@@ -39,7 +39,10 @@ function validateRequiredFields(frontMatter, filePath) {
 
   // Validate individual fields
   if (frontMatter.title) {
-    // Content structure allows longer titles (up to 200 chars)
+    // Content structure allows longer titles (up to 200 chars) for source markdown
+    // This is more lenient than seo-meta.js (30-60) because:
+    // - We're validating source content, which may be edited before final output
+    // - seo-meta.js will catch SEO-optimized title length (30-60) in final HTML output
     const titleCheck = validateTitle(frontMatter.title, 1, 200);
     if (!titleCheck.valid) {
       issues.push(`Title: ${titleCheck.error}`);
@@ -82,12 +85,20 @@ function validateRequiredFields(frontMatter, filePath) {
 
   // Optional but recommended fields
   if (frontMatter.description) {
-    // Content structure uses 50-160 char range for descriptions
+    // Content structure uses 50-160 char range for descriptions (source validation)
+    // This is more lenient than seo-meta.js (120-160) because:
+    // - We're validating source markdown, which may be edited before final output
+    // - Allows flexibility during content creation
+    // - seo-meta.js will catch stricter SEO requirements (120-160) in final HTML output
     const descCheck = validateMetaDescription(frontMatter.description, 50, 160);
     if (!descCheck.valid) {
       warnings.push(`Meta description: ${descCheck.error}`);
     }
   } else {
+    // Missing description is a WARNING here (not ERROR) because:
+    // - This is source validation - early warning is helpful
+    // - seo-meta.js will catch it as ERROR in final HTML output if not fixed
+    // - Allows content creation workflow to continue
     warnings.push('Missing meta description (recommended for SEO)');
   }
 
@@ -146,7 +157,6 @@ function validateYamlDataFiles() {
 
     try {
       yaml.load(content);
-      console.log(`   ✅ ${fileName}`);
     } catch (error) {
       console.log(`   ❌ ${fileName}`);
       console.log(`      Error: ${error.message}`);
@@ -160,7 +170,6 @@ function validateYamlDataFiles() {
     console.log(`❌ Found ${totalIssues} YAML syntax error(s) in data files.`);
     return { valid: false, issues: totalIssues, files: yamlFiles.length };
   } else {
-    console.log(`✅ All ${yamlFiles.length} YAML data file(s) are valid.`);
     return { valid: true, issues: 0, files: yamlFiles.length };
   }
 }
@@ -174,8 +183,6 @@ function validateContentStructure() {
     console.log('\n❌ YAML data file validation failed.');
     process.exit(1);
   }
-
-  console.log('\n📝 Starting content structure validation...\n');
 
   const postsDir = './src/_posts';
   if (!fs.existsSync(postsDir)) {
@@ -191,7 +198,6 @@ function validateContentStructure() {
     // Exclude files with draft: true in frontmatter
     return !(frontMatter && frontMatter.draft === true);
   });
-  console.log(`Found ${markdownFiles.length} markdown files\n`);
 
   const results = {
     total: markdownFiles.length,
@@ -208,15 +214,15 @@ function validateContentStructure() {
     const content = readFile(file);
     const { frontMatter, error } = parseFrontMatter(content);
 
-    console.log(`📄 ${relativePath}:`);
-
     if (error) {
+      console.log(`📄 ${relativePath}:`);
       console.log(`   ❌ Front matter parsing error: ${error}`);
       results.issues++;
       continue;
     }
 
     if (!frontMatter) {
+      console.log(`📄 ${relativePath}:`);
       console.log(`   ❌ No front matter found`);
       results.issues++;
       continue;
@@ -224,25 +230,9 @@ function validateContentStructure() {
 
     // Validate file naming
     const fileNameCheck = validateFileName(file);
-    if (!fileNameCheck.valid) {
-      console.log(`   ❌ ${fileNameCheck.error}`);
-      results.issues++;
-    }
-
+    
     // Validate required fields
     const fieldValidation = validateRequiredFields(frontMatter, file);
-
-    if (fieldValidation.issues.length > 0) {
-      console.log(`   ❌ Issues:`);
-      fieldValidation.issues.forEach(issue => console.log(`      - ${issue}`));
-      results.issues += fieldValidation.issues.length;
-    }
-
-    if (fieldValidation.warnings.length > 0) {
-      console.log(`   ⚠️  Warnings:`);
-      fieldValidation.warnings.forEach(warning => console.log(`      - ${warning}`));
-      results.warnings += fieldValidation.warnings.length;
-    }
 
     // Track slugs for duplicate checking - use front matter slug if available, otherwise use directory slug
     const fileNameCheckForSlug = validateFileName(file);
@@ -259,12 +249,40 @@ function validateContentStructure() {
       }
     }
 
-    if (fieldValidation.issues.length === 0) {
-      console.log(`   ✅ Valid`);
+    // Only show file header and details if there are issues or warnings
+    const hasIssues = !fileNameCheck.valid || fieldValidation.issues.length > 0;
+    const hasWarnings = fieldValidation.warnings.length > 0;
+
+    if (hasIssues || hasWarnings) {
+      // Show header messages (always in verbose mode, only when issues in compact mode)
+      const compact = process.env.TEST_COMPACT_MODE === 'true';
+      if (!compact || (results.issues === 0 && results.warnings === 0)) {
+        if (results.issues === 0 && results.warnings === 0) {
+          console.log('\n📝 Starting content structure validation...\n');
+          console.log(`Found ${markdownFiles.length} markdown files\n`);
+        }
+      }
+      console.log(`📄 ${relativePath}:`);
+
+      if (!fileNameCheck.valid) {
+        console.log(`   ❌ ${fileNameCheck.error}`);
+        results.issues++;
+      }
+
+      if (fieldValidation.issues.length > 0) {
+        console.log(`   ❌ Issues:`);
+        fieldValidation.issues.forEach(issue => console.log(`      - ${issue}`));
+        results.issues += fieldValidation.issues.length;
+      }
+
+      if (fieldValidation.warnings.length > 0) {
+        console.log(`   ⚠️  Warnings:`);
+        fieldValidation.warnings.forEach(warning => console.log(`      - ${warning}`));
+        results.warnings += fieldValidation.warnings.length;
+      }
+    } else {
       results.valid++;
     }
-
-    console.log('');
   }
 
   // Check for duplicate slugs
@@ -274,23 +292,34 @@ function validateContentStructure() {
       console.log(`   ❌ Duplicate slug "${dup.slug}" in:`);
       dup.files.forEach(file => console.log(`      - ${file}`));
     });
-    console.log('');
   }
 
-  // Summary
+  // Check if running in compact mode (group runs)
+  const compact = process.env.TEST_COMPACT_MODE === 'true';
+  
+  // Summary - compact mode shows single line for passing, full for failing
   printSummary('Content Structure', getTestEmoji('content-structure'), [
     { label: 'Total files', value: results.total },
     { label: 'Valid files', value: results.valid },
     { label: 'Issues', value: results.issues },
     { label: 'Warnings', value: results.warnings },
     { label: 'Duplicate slugs', value: results.duplicateSlugs.length }
-  ]);
+  ], { compact: compact });
 
   // Custom exit logic: duplicate slugs count as issues
   const totalIssues = results.issues + results.duplicateSlugs.length;
+  
+  // Write summary file for test runner
+  const summaryPath = path.join(__dirname, '.content-structure-summary.json');
+  fs.writeFileSync(summaryPath, JSON.stringify({ 
+    files: results.total, 
+    issues: totalIssues, 
+    warnings: results.warnings 
+  }), 'utf8');
   exitWithResults(totalIssues, results.warnings, {
     testType: 'content structure validation',
-    successMessage: '\n🎉 All content structure validation passed!'
+    successMessage: '\n🎉 All content structure validation passed!',
+    compact: compact
   });
 }
 

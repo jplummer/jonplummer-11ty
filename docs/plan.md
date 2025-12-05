@@ -12,7 +12,7 @@
 
 ### Design & Polish 
 - [x] improve generated ogImage styling
-- [ ] improve ogImage index.png, which currently has redundant stuff in it
+- [x] improve ogImage index.png, which currently has redundant stuff in it
 - [ ] have pagination links use the computed titles from the resulting pages as "title" atributes 
 - [ ] typographical improvements
   - [x] curly quotes
@@ -21,7 +21,11 @@
   - [ ] vertical rhythm in typographic spacing https://edgdesign.co/blog/baseline-grids-in-css https://webtypography.net/toc#2.2
 - [ ] https://www.inkwell.ie/typography/recommendations.html
   - [ ] other items from https://webtypography.net/?
-  
+
+### Test suite
+- [ ] Make sure all tests are testing the right things
+- [ ] Make test output easy to read and use
+
 ### CMS
 
 **Goal**: Enable authoring from any device via web-based CMS while maintaining local build/deploy capability.
@@ -71,7 +75,7 @@
   - Install dependencies (`npm ci`)
   - Run pre-deploy validation:
     - `npm run test markdown`
-    - `npm run test content` (after build)
+    - `npm run test content-structure` (after build)
   - Generate OG images: `npm run generate-og-images`
   - Build site: `npm run build`
   - Generate changelog: `npm run changelog`

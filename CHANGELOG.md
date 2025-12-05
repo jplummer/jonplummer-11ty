@@ -1,10 +1,19 @@
 All notable changes to this project are documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to chronological ordering (newest first).
 
+## 2025-12-04
+
+- Update favicon setup to modern minimal standard
+- Refactor includes organization and simplify Open Graph tags
+- Refactor HEAD includes to eliminate redundancy and fix index page issues
+- Reduce whitespace in HEAD section
+
 ## 2025-12-03
 
 - Fix horizontal scrollbar on narrow viewports for articles with code blocks
 - Switch drafts from folder-based to frontmatter-based
 - refactor: modularize .eleventy.js configuration
+- refactor: unify exit handling and summary printing across all scripts
+- Add date range titles to paginated pages
 
 ## 2025-11-30
 

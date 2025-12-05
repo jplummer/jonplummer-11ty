@@ -160,7 +160,6 @@ function runMarkdownlint(files) {
 
 // Main validation function
 function validateMarkdown() {
-  console.log('📝 Starting markdown syntax validation...\n');
 
   const markdownFiles = findSourceMarkdownFiles();
   
@@ -168,8 +167,6 @@ function validateMarkdown() {
     console.log('❌ No markdown files found in src/ directory');
     process.exit(1);
   }
-
-  console.log(`Found ${markdownFiles.length} markdown file(s)\n`);
 
   let totalErrors = 0;
   let totalWarnings = 0;
@@ -204,6 +201,11 @@ function validateMarkdown() {
     fileWarnings.push(...h1Warnings);
     
     if (fileErrors.length > 0 || fileWarnings.length > 0) {
+      // Only show header messages when there are issues
+      if (totalErrors === 0 && totalWarnings === 0 && lintResult.errors.length === 0) {
+        console.log('📝 Starting markdown syntax validation...\n');
+        console.log(`Found ${markdownFiles.length} markdown file(s)\n`);
+      }
       console.log(`📄 ${relativePath}:`);
       
       if (fileErrors.length > 0) {
@@ -223,13 +225,19 @@ function validateMarkdown() {
         });
         totalWarnings += fileWarnings.length;
       }
-      
-      console.log('');
     }
   }
 
   // Display markdownlint errors
   if (lintResult.errors.length > 0) {
+      // Show header messages (always in verbose mode, only when issues in compact mode)
+      const compact = process.env.TEST_COMPACT_MODE === 'true';
+      if (!compact || (totalErrors === 0 && totalWarnings === 0)) {
+        if (totalErrors === 0 && totalWarnings === 0) {
+          console.log('📝 Starting markdown syntax validation...\n');
+          console.log(`Found ${markdownFiles.length} markdown file(s)\n`);
+        }
+      }
     // Group errors by file
     const errorsByFile = {};
     lintResult.errors.forEach(error => {
@@ -246,20 +254,31 @@ function validateMarkdown() {
       errors.forEach(error => {
         console.log(`      Line ${error.line}, Column ${error.column}: ${error.message}`);
       });
-      console.log('');
     }
   }
 
-  // Summary
+  // Check if running in compact mode (group runs)
+  const compact = process.env.TEST_COMPACT_MODE === 'true';
+  
+  // Summary - compact mode shows single line for passing, full for failing
   printSummary('Markdown Validation', getTestEmoji('markdown'), [
     { label: 'Files checked', value: markdownFiles.length },
     { label: 'Errors', value: totalErrors },
     { label: 'Warnings', value: totalWarnings }
-  ]);
+  ], { compact: compact });
 
+  // Write summary file for test runner
+  const summaryPath = path.join(__dirname, '.markdown-summary.json');
+  fs.writeFileSync(summaryPath, JSON.stringify({ 
+    files: markdownFiles.length, 
+    issues: totalErrors, 
+    warnings: totalWarnings 
+  }), 'utf8');
+  
   exitWithResults(totalErrors, totalWarnings, {
     testType: 'markdown validation',
-    successMessage: '\n✅ All markdown files are valid!'
+    successMessage: '\n✅ All markdown files are valid!',
+    compact: compact
   });
 }
 

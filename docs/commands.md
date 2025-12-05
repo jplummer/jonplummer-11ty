@@ -19,6 +19,8 @@
 ### 🚢 Deployment
 
 - `npm run deploy` - Deploy site to host via rsync
+- `npm run deploy --dry-run` - Test deployment without actually deploying (runs all checks and shows what would be synced)
+- `npm run deploy --skip-checks` - Deploy without running validation checks (not recommended)
 
 ### 🔧 Maintenance
 
@@ -101,8 +103,41 @@ Configuration is in `.markdownlint.json`. The test reports errors (which fail th
 ### 🚢 Deployment
 
 - `npm run deploy` - Deploy site via rsync (simplified script)
+- `npm run deploy --dry-run` - Test deployment without actually deploying. Runs all validation checks, generates OG images, and shows what would be synced via rsync's dry-run mode.
+- `npm run deploy --skip-checks` - Deploy without running validation checks (not recommended)
 
 Prior complex deployment scripts were moved to `scripts/deploy/backup/`. The current script shows rsync's native output and handles errors simply.
+
+#### Deployment Process
+
+The deploy script performs these steps in order:
+
+1. **Regenerates changelog** from git history
+2. **Builds the site** to include the new changelog
+3. **Runs validation checks** (markdown, content structure) - skipped with `--skip-checks`
+4. **Generates OG images** for any missing/outdated images - skipped with `--skip-checks`
+5. **Rebuilds the site** to include OG image frontmatter updates - skipped with `--skip-checks`
+6. **Validates OG images** for all generated pages - skipped with `--skip-checks`
+7. **Deploys via rsync** - uses `--dry-run` flag when `--dry-run` option is used
+
+#### Testing Deployment
+
+Use `--dry-run` to test the full deployment process without actually deploying:
+
+```bash
+npm run deploy --dry-run
+```
+
+This will:
+- Run all validation checks
+- Generate any missing OG images
+- Show what files would be synced (via rsync's dry-run)
+- Not actually deploy anything
+
+This is useful for:
+- Verifying the deployment process works end-to-end
+- Checking what files would be changed on the server
+- Testing configuration changes
 
 ### 📚 Update Eleventy Documentation
 

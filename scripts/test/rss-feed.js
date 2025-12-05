@@ -263,8 +263,6 @@ function validateRSSFeed(filePath) {
 
 // Main RSS validation
 function validateRSS() {
-  console.log('📡 Starting RSS feed validation...\n');
-  
   const siteDir = './_site';
   if (!fs.existsSync(siteDir)) {
     console.log('❌ _site directory not found. Run "npm run build" first.');
@@ -278,8 +276,6 @@ function validateRSS() {
     process.exit(1);
   }
   
-  console.log(`Found ${rssFiles.length} RSS/XML files\n`);
-  
   const results = {
     total: rssFiles.length,
     valid: 0,
@@ -289,32 +285,48 @@ function validateRSS() {
   // Validate each RSS file
   for (const file of rssFiles) {
     const relativePath = path.relative('./_site', file);
-    console.log(`📄 ${relativePath}:`);
-    
     const issues = validateRSSFeed(file);
     
     if (issues.length === 0) {
-      console.log(`   ✅ Valid RSS feed`);
       results.valid++;
     } else {
+      // Show header messages (always in verbose mode, only when issues in compact mode)
+      const compact = process.env.TEST_COMPACT_MODE === 'true';
+      if (!compact || results.issues === 0) {
+        if (results.issues === 0) {
+          console.log('📡 Starting RSS feed validation...\n');
+          console.log(`Found ${rssFiles.length} RSS/XML files\n`);
+        }
+      }
+      console.log(`📄 ${relativePath}:`);
       console.log(`   ❌ Issues:`);
       issues.forEach(issue => console.log(`      - ${issue}`));
       results.issues += issues.length;
     }
-    
-    console.log('');
   }
   
-  // Summary
+  // Check if running in compact mode (group runs)
+  const compact = process.env.TEST_COMPACT_MODE === 'true';
+  
+  // Summary - compact mode shows single line for passing, full for failing
   printSummary('RSS Feed Validation', getTestEmoji('rss-feed'), [
     { label: 'Total feeds', value: results.total },
     { label: 'Valid feeds', value: results.valid },
     { label: 'Issues', value: results.issues }
-  ]);
+  ], { compact: compact });
+  
+  // Write summary file for test runner
+  const summaryPath = path.join(__dirname, '.rss-feed-summary.json');
+  fs.writeFileSync(summaryPath, JSON.stringify({ 
+    files: results.total, 
+    issues: results.issues, 
+    warnings: 0 
+  }), 'utf8');
   
   exitWithResults(results.issues, 0, {
     testType: 'RSS feed validation',
-    successMessage: '\n🎉 All RSS feeds are valid!'
+    successMessage: '\n🎉 All RSS feeds are valid!',
+    compact: compact
   });
 }
 

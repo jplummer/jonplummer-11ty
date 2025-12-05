@@ -20,9 +20,29 @@
  * @param {Array} options.customSections - Array of custom section objects { title: string, lines: string[] }
  */
 function printSummary(testType, emoji, metrics, options = {}) {
-  const { customSections = [] } = options;
+  const { customSections = [], compact = false } = options;
   
-  console.log(`\n${emoji} ${testType} Summary:`);
+  // Check if there are issues
+  let hasIssues = false;
+  if (Array.isArray(metrics)) {
+    // Check if any metric indicates issues (errors, issues, warnings > 0, or files with issues > 0)
+    hasIssues = metrics.some(m => {
+      const label = m.label.toLowerCase();
+      const value = typeof m.value === 'number' ? m.value : 0;
+      return (label.includes('error') || label.includes('issue') || label.includes('warning') || 
+              (label.includes('with') && label.includes('issue'))) && value > 0;
+    });
+  } else if (metrics && typeof metrics === 'object') {
+    hasIssues = (metrics.errors > 0 || metrics.issues > 0 || metrics.warnings > 0);
+  }
+  
+  // In compact mode for passing tests, suppress output (test runner will show its own summary)
+  if (compact && !hasIssues) {
+    return;
+  }
+  
+  // Full summary for failing tests or non-compact mode
+  console.log(`${emoji} ${testType} Summary:`);
   
   // Handle content script format: { updated, skipped, errors }
   if (metrics && typeof metrics === 'object' && !Array.isArray(metrics)) {
@@ -46,15 +66,40 @@ function printSummary(testType, emoji, metrics, options = {}) {
       }
     }
   } else if (Array.isArray(metrics)) {
-    // Standard metrics array format
-    metrics.forEach(metric => {
-      console.log(`   ${metric.label}: ${metric.value}`);
-    });
+    // Standard metrics array format - show only issues and warnings counts
+    const issuesMetric = metrics.find(m => m.label.toLowerCase().includes('issue') || m.label.toLowerCase().includes('error'));
+    const warningsMetric = metrics.find(m => m.label.toLowerCase().includes('warning'));
+    const summaryParts = [];
+    if (issuesMetric && issuesMetric.value > 0) {
+      summaryParts.push(`${issuesMetric.value} issue${issuesMetric.value === 1 ? '' : 's'}`);
+    }
+    if (warningsMetric && warningsMetric.value > 0) {
+      summaryParts.push(`${warningsMetric.value} warning${warningsMetric.value === 1 ? '' : 's'}`);
+    }
+    if (summaryParts.length > 0) {
+      console.log(`   ${summaryParts.join(', ')}`);
+    }
+  }
+  
+  // Print grouped issue/warning counts if provided
+  if (options.issueTypes && options.issueTypes.size > 0) {
+    const issueCounts = Array.from(options.issueTypes.entries())
+      .sort((a, b) => b[1] - a[1]) // Sort by count descending
+      .map(([type, count]) => `${count} ${type}`)
+      .join(', ');
+    console.log(`   Issues by type: ${issueCounts}`);
+  }
+  
+  if (options.warningTypes && options.warningTypes.size > 0) {
+    const warningCounts = Array.from(options.warningTypes.entries())
+      .sort((a, b) => b[1] - a[1]) // Sort by count descending
+      .map(([type, count]) => `${count} ${type}`)
+      .join(', ');
+    console.log(`   Warnings by type: ${warningCounts}`);
   }
   
   // Print custom sections (like accessibility's light/dark mode)
   customSections.forEach(section => {
-    console.log('');
     console.log(`   ${section.title}:`);
     section.lines.forEach(line => {
       console.log(`      ${line}`);
@@ -89,7 +134,8 @@ function exitWithResults(issues, warnings = 0, options = {}) {
     successMessage = null,
     customExitLogic = null,
     issueList = null,
-    warningList = null
+    warningList = null,
+    compact = false
   } = options;
   
   // Normalize input: handle result objects (content scripts, security audit)
@@ -148,7 +194,7 @@ function exitWithResults(issues, warnings = 0, options = {}) {
     
     process.exit(1);
   } else if (warningsCount > 0) {
-    const message = warningMessage || `\n⚠️ No critical issues, but consider addressing warnings.`;
+    const message = warningMessage || `\n⚠️  No critical issues, but consider addressing warnings.`;
     console.log(message);
     
     // Print warning list if provided (for security audit)
@@ -163,8 +209,11 @@ function exitWithResults(issues, warnings = 0, options = {}) {
     
     process.exit(0);
   } else {
-    const message = successMessage || `\n🎉 All ${testType} passed.`;
-    console.log(message);
+    // Only show success message if not in compact mode (compact mode suppresses it)
+    if (!compact) {
+      const message = successMessage || `\n🎉 All ${testType} passed.`;
+      console.log(message);
+    }
     process.exit(0);
   }
 }
@@ -180,6 +229,7 @@ const TEST_EMOJIS = {
   'internal-links': '🔗',
   'links-yaml': '📌',
   'markdown': '✏️',
+  'og-images': '🖼️',
   'rss-feed': '📡',
   'seo-meta': '🎯',
   'deploy': '🚀'
@@ -212,6 +262,7 @@ function getTestDisplayName(testType) {
     'accessibility': 'Accessibility',
     'rss': 'RSS Feed',
     'rss-feed': 'RSS Feed',
+    'og-images': 'OG Images',
     'deploy': 'Deploy'
   };
   return displayNames[testType] || testType;
@@ -219,12 +270,14 @@ function getTestDisplayName(testType) {
 
 /**
  * Print overall test suite summary
- * @param {Array} results - Array of test result objects { testType: string, passed: boolean, emoji?: string }
+ * @param {Array} results - Array of test result objects { testType: string, passed: boolean, emoji?: string, warnings?: number }
  */
 function printOverallSummary(results) {
   const passed = results.filter(r => r.passed);
   const failed = results.filter(r => !r.passed);
   const total = results.length;
+  const totalWarnings = results.reduce((sum, r) => sum + (r.warnings || 0), 0);
+  const testsWithWarnings = results.filter(r => (r.warnings || 0) > 0);
   
   console.log('\n' + '='.repeat(60));
   console.log('📊 Overall Test Summary');
@@ -232,14 +285,22 @@ function printOverallSummary(results) {
   console.log(`   Total tests: ${total}`);
   console.log(`   ✅ Passed: ${passed.length}`);
   console.log(`   ❌ Failed: ${failed.length}`);
+  if (totalWarnings > 0) {
+    console.log(`   ⚠️  Warnings: ${totalWarnings} (across ${testsWithWarnings.length} test${testsWithWarnings.length === 1 ? '' : 's'})`);
+  }
   console.log('');
+  
+  // Tests with wider emojis that need extra spacing (pencil, warning, picture emojis)
+  const wideEmojiTests = ['content-structure', 'markdown', 'og-images'];
   
   if (passed.length > 0) {
     console.log('   ✅ Passed tests:');
     passed.forEach(result => {
       const emoji = result.emoji || getTestEmoji(result.testType);
       const displayName = getTestDisplayName(result.testType);
-      console.log(`      ${emoji} ${displayName}`);
+      const extraSpace = wideEmojiTests.includes(result.testType) ? ' ' : '';
+      const warningNote = (result.warnings || 0) > 0 ? ` (${result.warnings} warning${result.warnings === 1 ? '' : 's'})` : '';
+      console.log(`      ${emoji}${extraSpace} ${displayName}${warningNote}`);
     });
     console.log('');
   }
@@ -249,7 +310,9 @@ function printOverallSummary(results) {
     failed.forEach(result => {
       const emoji = result.emoji || getTestEmoji(result.testType);
       const displayName = getTestDisplayName(result.testType);
-      console.log(`      ${emoji} ${displayName}`);
+      const extraSpace = wideEmojiTests.includes(result.testType) ? ' ' : '';
+      const warningNote = (result.warnings || 0) > 0 ? ` (${result.warnings} warning${result.warnings === 1 ? '' : 's'})` : '';
+      console.log(`      ${emoji}${extraSpace} ${displayName}${warningNote}`);
     });
     console.log('');
   }
@@ -258,9 +321,16 @@ function printOverallSummary(results) {
   
   if (failed.length > 0) {
     console.log('\n❌ Some tests failed. Please review the output above.');
+    if (totalWarnings > 0) {
+      console.log(`⚠️  Note: ${totalWarnings} warning${totalWarnings === 1 ? '' : 's'} found across ${testsWithWarnings.length} test${testsWithWarnings.length === 1 ? '' : 's'}.`);
+    }
     return false;
   } else {
-    console.log('\n🎉 All tests passed!');
+    if (totalWarnings > 0) {
+      console.log(`\n🎉 All tests passed! ⚠️  ${totalWarnings} warning${totalWarnings === 1 ? '' : 's'} found across ${testsWithWarnings.length} test${testsWithWarnings.length === 1 ? '' : 's'}.`);
+    } else {
+      console.log('\n🎉 All tests passed!');
+    }
     return true;
   }
 }
