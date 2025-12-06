@@ -40,10 +40,11 @@
 **Fast Tests** (suitable for frequent validation):
 - `html` - Check HTML validity (structure, syntax, deprecated elements)
 - `internal-links` - Test only internal links (critical)
-- `content` - Test content structure
+- `content-structure` - Test content structure
 - `markdown` - Validate markdown syntax and structure
-- `seo` - Test SEO and meta tags
-- `rss` - Test RSS feeds
+- `seo-meta` - Test SEO and meta tags
+- `og-images` - Validate Open Graph images
+- `rss-feed` - Test RSS feeds
 
 **Slow Tests** (run occasionally):
 - `accessibility` - Test accessibility using axe-core - launches browser
@@ -56,7 +57,7 @@
 
 The test suite is designed to:
 - **Prevent authoring mistakes**: markdown, content structure, links-yaml validation
-- **Ensure deploys work**: html, internal-links, seo, rss validation
+- **Ensure deploys work**: html, internal-links, seo-meta, rss-feed validation
 - **Basic security checks**: deploy validation, security audit script
 
 Use `npm run test fast` for quick validation during development. Use `npm run test all` for comprehensive checks before deployment.
@@ -82,7 +83,7 @@ The `links-yaml` test validates the structure and format of `_data/links.yaml`:
 - Validates description field if present
 - Checks for unexpected fields in link objects
 
-This is faster than running the full `content` test since it only validates the links.yaml file structure, not the entire site content.
+This is faster than running the full `content-structure` test since it only validates the links.yaml file structure, not the entire site content.
 
 #### Markdown Validation
 

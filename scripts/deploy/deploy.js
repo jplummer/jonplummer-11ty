@@ -23,6 +23,14 @@ const fs = require('fs');
 const skipChecks = process.argv.includes('--skip-checks');
 const dryRun = process.argv.includes('--dry-run');
 
+// Debug: Log received arguments (helpful for troubleshooting)
+if (process.env.DEBUG_DEPLOY) {
+  console.log('Debug: process.argv =', process.argv);
+  console.log('Debug: skipChecks =', skipChecks);
+  console.log('Debug: dryRun =', dryRun);
+  console.log('');
+}
+
 if (dryRun) {
   console.log('🧪 Dry run mode: Testing deployment without actually deploying...\n');
 } else {
@@ -87,7 +95,7 @@ if (!skipChecks) {
     // Post-build test (requires _site/, validates YAML + post structure)
     if (fs.existsSync('./_site')) {
       console.log('\n   Running content structure validation...');
-      execSync('npm run test content', { stdio: 'inherit' });
+      execSync('npm run test content-structure', { stdio: 'inherit' });
     } else {
       console.log('   ⚠️  Skipping content test (requires _site/ directory)');
     }
@@ -179,6 +187,13 @@ function deploy() {
       console.log('\n🔄 Running rsync dry-run (showing what would be deployed)...\n');
     } else {
       console.log('\n🔄 Running rsync...\n');
+    }
+
+    // Safety check: NEVER deploy if dryRun is true, even if rsync flag is missing
+    if (dryRun && !rsyncCommand.includes('--dry-run')) {
+      console.error('\n❌ SAFETY CHECK FAILED: dryRun is true but rsync --dry-run flag is missing!');
+      console.error('   This should never happen. Aborting to prevent accidental deployment.');
+      process.exit(1);
     }
 
     // Execute rsync with native output (SSH key authentication is automatic)
