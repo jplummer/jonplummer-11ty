@@ -329,19 +329,22 @@ function printOverallSummary(results) {
   // Collect tests that need attention (failures or warnings)
   const testsNeedingAttention = results.filter(r => !r.passed || (r.warnings || 0) > 0);
   
-  if (testsNeedingAttention.length > 0) {
-    console.log('💡 To see details, run:');
-    testsNeedingAttention.forEach(result => {
-      console.log(`   npm run test ${result.testType}`);
-    });
-    console.log('');
-  }
-  
   if (failed.length > 0) {
     console.log('\n❌ Some tests failed. Please review the output above.');
     if (totalWarnings > 0) {
       console.log(`⚠️  Note: ${totalWarnings} warning${totalWarnings === 1 ? '' : 's'} found across ${testsWithWarnings.length} test${testsWithWarnings.length === 1 ? '' : 's'}.`);
     }
+    
+    // Show details tip after failure message
+    if (testsNeedingAttention.length > 0) {
+      console.log('');
+      console.log('💡 To see details, run:');
+      testsNeedingAttention.forEach(result => {
+        console.log(`   npm run test ${result.testType}`);
+      });
+      console.log('');
+    }
+    
     return false;
   } else {
     if (totalWarnings > 0) {
@@ -349,6 +352,17 @@ function printOverallSummary(results) {
     } else {
       console.log('\n🎉 All tests passed!');
     }
+    
+    // Show details tip after success message (if there are warnings)
+    if (testsNeedingAttention.length > 0) {
+      console.log('');
+      console.log('💡 To see details, run:');
+      testsNeedingAttention.forEach(result => {
+        console.log(`   npm run test ${result.testType}`);
+      });
+      console.log('');
+    }
+    
     return true;
   }
 }

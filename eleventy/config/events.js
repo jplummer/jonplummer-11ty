@@ -7,6 +7,17 @@ const fs = require('fs');
  * @param {object} eleventyConfig - Eleventy configuration object
  */
 function configureEvents(eleventyConfig) {
+  // Generate redirect rules before build
+  eleventyConfig.on("eleventy.beforeBuild", () => {
+    try {
+      const { generateRedirects } = require('../../scripts/utils/generate-redirects');
+      generateRedirects();
+    } catch (error) {
+      console.error('⚠️  Failed to generate redirects:', error.message);
+      // Don't fail the build if redirect generation fails
+    }
+  });
+
   // Incremental OG image generation on file changes during dev
   eleventyConfig.on("eleventy.beforeWatch", async (changedFiles) => {
     // Only process markdown and njk files that are posts or pages

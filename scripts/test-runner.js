@@ -177,11 +177,47 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
         process.stdout.write(stdoutData);
       }
       
-      // Determine result icon based on issues/warnings
+      // Build summary string with only relevant parts
+      function buildSummaryString(summary) {
+        const files = summary.files || 0;
+        const issues = summary.issues || 0;
+        const warnings = summary.warnings || 0;
+        // Use passed field if available, otherwise calculate
+        const passing = summary.passed !== undefined ? summary.passed : Math.max(0, files - (summary.filesWithIssues || 0));
+        
+        let summaryParts = [];
+        if (files > 0) {
+          const itemName = files === 1 ? 'file' : 'files';
+          summaryParts.push(`📄 ${files} ${itemName} checked`);
+        }
+        if (passing > 0) {
+          summaryParts.push(`✅ ${passing} passing`);
+        }
+        if (issues > 0) {
+          summaryParts.push(`❌ ${issues} issue${issues === 1 ? '' : 's'}`);
+        }
+        if (warnings > 0) {
+          summaryParts.push(`⚠️  ${warnings} warning${warnings === 1 ? '' : 's'}`);
+        }
+        
+        return summaryParts.join(', ');
+      }
+      
+      // Finalize summary if we have JSON result
+      let finalSummary = summary;
+      if (isJsonFormat && jsonResult) {
+        // Ensure summary is finalized (safe to call multiple times)
+        const { finalizeTestResult } = require('./utils/test-result-builder');
+        finalizeTestResult(jsonResult);
+        // Use finalized summary
+        finalSummary = jsonResult.summary || summary;
+      }
+      
+      // Determine result icon based on issues/warnings (errors take precedence)
       let resultIcon = '✅';
-      if (summary.issues > 0) {
+      if (finalSummary.issues > 0) {
         resultIcon = '❌';
-      } else if (summary.warnings > 0) {
+      } else if (finalSummary.warnings > 0) {
         resultIcon = '⚠️ ';
       }
       
@@ -191,61 +227,37 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
         let formattedOutput;
         if (formatOptions.format === 'build') {
           formattedOutput = formatBuild(jsonResult);
+          // Clear spinner line and write build format output
+          process.stdout.write(`\r\x1b[K${formattedOutput}\n`);
         } else if (showStatus) {
-          // Group runs: use compact format
-          formattedOutput = formatCompact(jsonResult);
+          // Group runs: update same line with result icon and summary
+          const summaryString = buildSummaryString(finalSummary);
+          const finalLine = `${resultIcon} ${emoji} ${displayName}: ${summaryString}`;
+          // Clear spinner line and write final result on same line
+          // Use ANSI escape code to clear from cursor to end of line, then write new content
+          process.stdout.write(`\r\x1b[K${finalLine}\n`);
         } else {
           // Individual runs: use verbose format (which includes compact at top)
           formattedOutput = formatVerbose(jsonResult, formatOptions);
-        }
-        
-        // Clear spinner and show formatted output
-        // For individual runs, formatVerbose already includes the compact header, so we just clear the spinner
-        // For group runs, we show the result icon + compact format
-        process.stdout.write(`\r${' '.repeat(statusLine.length + 2)}\r`);
-        if (showStatus) {
-          // Group runs: show result icon line, then compact format
-          process.stdout.write(`${resultIcon} ${statusLine}\n`);
-          process.stdout.write(formattedOutput + '\n');
-        } else {
-          // Individual runs: just show verbose output (which includes compact header)
-          process.stdout.write(formattedOutput + '\n');
+          // Clear spinner line
+          process.stdout.write(`\r\x1b[K${formattedOutput}\n`);
         }
       } else if (!showStatus) {
         // Old format: output was already passed through for individual runs
         // (stdout was written directly, not captured)
       } else {
-        // Old format for group runs: build compact summary line
-        const resultIcon = code === 0 ? '✅' : '❌';
-        
-        const files = summary.files || 0;
-        const issues = summary.issues || 0;
-        const warnings = summary.warnings || 0;
-        const filesWithIssues = summary.filesWithIssues || 0;
-        const passing = Math.max(0, files - filesWithIssues);
-        
-        let summaryParts = [];
-        if (files > 0) {
-          const itemName = files === 1 ? 'file' : 'files';
-          summaryParts.push(`📄 ${files} ${itemName} checked`);
-        }
-        summaryParts.push(`✅ ${passing} passing`);
-        if (issues > 0) {
-          summaryParts.push(`❌ ${issues} issue${issues === 1 ? '' : 's'}`);
-        }
-        if (warnings > 0) {
-          summaryParts.push(`⚠️  ${warnings} warning${warnings === 1 ? '' : 's'}`);
-        }
-        
-        const compactSummary = summaryParts.join(', ');
-        const compactLine = `${resultIcon} ${emoji} ${displayName}: ${compactSummary}`;
-        process.stdout.write(`${compactLine}\n`);
+        // Old format for group runs: update same line with result icon and summary
+        const summaryString = buildSummaryString(finalSummary);
+        const finalLine = `${resultIcon} ${emoji} ${displayName}: ${summaryString}`;
+        // Clear spinner line and write final result on same line
+        // Use ANSI escape code to clear from cursor to end of line, then write new content
+        process.stdout.write(`\r\x1b[K${finalLine}\n`);
       }
       
       if (code === 0) {
-        resolve({ testType, passed: true, warnings: summary.warnings || 0 });
+        resolve({ testType, passed: true, warnings: finalSummary.warnings || 0 });
       } else {
-        resolve({ testType, passed: false, warnings: summary.warnings || 0 });
+        resolve({ testType, passed: false, warnings: finalSummary.warnings || 0 });
       }
     });
     

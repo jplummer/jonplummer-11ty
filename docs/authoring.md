@@ -42,21 +42,46 @@ For technical details, see [commands.md](commands.md#-open-graph-image-generatio
 
 ## Redirects
 
-Handle URL changes (e.g., corrected post dates) by creating redirect pages.
+Handle URL changes (e.g., corrected post dates) using server-side 301 redirects.
 
 ### Create a Redirect
 
-1. Create HTML file at old URL path (e.g., `src/2022/11/09/post-slug/index.html`)
-2. Add front matter:
+1. Edit `src/_data/redirects.yaml`
+2. Add a redirect entry:
 
 ```yaml
----
-layout: redirect.njk
-redirectUrl: https://jonplummer.com/2022/11/08/corrected-url/
----
+redirects:
+  - from: /old/path/
+    to: /new/path/
 ```
 
-The `redirect.njk` template uses three redirect methods: JavaScript redirect (primary), meta refresh (fallback), manual link (for accessibility)
+3. Rebuild the site. Redirect rules are automatically generated in `.htaccess` during build.
+
+### Redirect Format
+
+- **`from`**: Old URL path (relative, with leading slash)
+- **`to`**: New URL path (relative or absolute URL)
+
+Examples:
+```yaml
+redirects:
+  # Date correction
+  - from: /2022/11/09/post-slug/
+    to: /2022/11/08/post-slug/
+  
+  # Absolute URL redirect
+  - from: /old-page/
+    to: https://example.com/new-page/
+```
+
+### How It Works
+
+Redirects are generated as Apache `Redirect 301` rules in `.htaccess` during the build process. This provides:
+- Proper 301 redirects (better for SEO than client-side redirects)
+- Fast server-side redirects (no page load required)
+- Centralized management in a single YAML file
+
+The redirect section in `.htaccess` is auto-generated and should not be edited manually.
 
 ### When to Use
 
@@ -64,4 +89,4 @@ The `redirect.njk` template uses three redirect methods: JavaScript redirect (pr
 - Slug changes
 - URL structure migrations
 - Any permanent URL change preserving old links
-- Addressing high-volumne 404 errors when the resource exists
+- Addressing high-volume 404 errors when the resource exists

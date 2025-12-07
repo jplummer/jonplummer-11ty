@@ -1,0 +1,18 @@
+# Redirect mappings
+# Format: old_path: new_path
+# Paths should be relative (no leading slash) or absolute URLs
+# These will generate Apache Redirect 301 rules in .htaccess
+
+redirects:
+  # Date corrections and URL changes
+  - from: /2022/04/17/empathy-for-the-leader-whose-company-is-being-acquired/
+    to: /2022/04/16/empathy-for-the-leader-whose-company-is-being-acquired/
+  
+  - from: /2022/07/31/the-trouble-with-nps/
+    to: /2022/07/30/the-trouble-with-nps/
+  
+  - from: /2022/11/02/conference-talk-ux-philosophy/
+    to: /2022/11/01/conference-talk-ux-philosophy/
+  
+  - from: /2022/11/09/philosophy-of-ux-research-and-design-horizon-three-benefit/
+    to: /2022/11/08/philosophy-of-ux-research-and-design-horizon-three-benefit/

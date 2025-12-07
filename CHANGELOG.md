@@ -1,9 +1,16 @@
 All notable changes to this project are documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to chronological ordering (newest first).
 
+## 2025-12-06
+
+- Improve test output formatting and UX
+- Fix npm audit vulnerabilities
+- Fix duplicate header in individual test output and move test-content-utils
+
 ## 2025-12-05
 
 - Set ogImage to portfolio.png for all portfolio pieces
 - Improve test reporting and clarify validation redundancy
+- Fix deploy script test type and add dry-run safety check
 
 ## 2025-12-04
 
