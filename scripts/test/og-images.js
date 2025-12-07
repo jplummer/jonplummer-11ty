@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { extractMetaTags, parseHtml } = require('../utils/html-utils');
 const { checkSiteDirectory, getHtmlFiles, getRelativePath, readFile } = require('../utils/test-base');
-const { printSummary, exitWithResults, getTestEmoji } = require('../utils/reporting-utils');
+const { createTestResult, addFile, addIssue, outputResult } = require('../utils/test-result-builder');
 const { parseFrontMatter } = require('../utils/frontmatter-utils');
 
 // Check if HTML content is a redirect page
@@ -187,13 +187,8 @@ function validateOgImages() {
   checkSiteDirectory();
   const htmlFiles = getHtmlFiles();
   
-  const results = {
-    total: htmlFiles.length,
-    valid: 0,
-    issues: 0,
-    missing: 0,
-    defaultImageUsed: 0
-  };
+  // Create test result using result builder
+  const result = createTestResult('og-images', 'OG Image Validation');
   
   // Validate each file
   for (const file of htmlFiles) {
@@ -202,72 +197,36 @@ function validateOgImages() {
     
     // Skip redirect pages (they don't need OG images)
     if (isRedirectPage(content)) {
-      results.total--; // Don't count redirect pages in total
-      continue;
+      continue; // Don't add to result at all
     }
+    
+    // Add file to result
+    const fileObj = addFile(result, file, relativePath);
     
     const validation = validateOgImage(content, relativePath, file);
     
+    // Add issues to file
     if (validation.issues.length > 0) {
-      // Show header messages (always in verbose mode, only when issues in compact mode)
-      const compact = process.env.TEST_COMPACT_MODE === 'true';
-      if (!compact || results.issues === 0) {
-        if (results.issues === 0) {
-          console.log('🖼️  Starting OG image validation...\n');
-          console.log(`Found ${htmlFiles.length} HTML files\n`);
-        }
-      }
-      console.log(`📄 ${relativePath}:`);
       validation.issues.forEach(issue => {
-        console.log(`   ❌ ${issue}`);
-      });
-      results.issues += validation.issues.length;
-      
-      if (!validation.ogImage) {
-        results.missing++;
-      } else if (validation.ogImage === DEFAULT_OG_IMAGE) {
-        results.defaultImageUsed++;
-      }
-    } else {
-      // Only show passing files if they're using default (for visibility)
-      if (validation.ogImage === DEFAULT_OG_IMAGE) {
-        const isAllowed = isAllowedDefaultImagePage(relativePath);
-        if (isAllowed) {
-          // Silently pass - default image is expected for these pages
-          results.valid++;
+        // Determine issue type from message
+        let issueType = 'og-image-missing';
+        if (issue.includes('default OG image')) {
+          issueType = 'og-image-default';
         }
-      } else {
-        // Silently pass - has specific OG image
-        results.valid++;
-      }
+        
+        addIssue(fileObj, {
+          type: issueType,
+          message: issue
+        });
+      });
     }
   }
   
-  // Check if running in compact mode (group runs)
-  const compact = process.env.TEST_COMPACT_MODE === 'true';
+  // Output JSON result (formatter will handle display)
+  outputResult(result);
   
-  // Summary - compact mode shows single line for passing, full for failing
-  printSummary('OG Image Validation', getTestEmoji('og-images'), [
-    { label: 'Total files', value: results.total },
-    { label: 'Valid files', value: results.valid },
-    { label: 'Issues', value: results.issues },
-    { label: 'Missing OG images', value: results.missing },
-    { label: 'Using default (not allowed)', value: results.defaultImageUsed }
-  ], { compact: compact });
-
-  // Write summary file for test runner
-  const summaryPath = path.join(__dirname, '.og-images-summary.json');
-  fs.writeFileSync(summaryPath, JSON.stringify({ 
-    files: results.total, 
-    issues: results.issues, 
-    warnings: 0 
-  }), 'utf8');
-  
-  exitWithResults(results.issues, 0, {
-    testType: 'OG image validation',
-    successMessage: '\n🎉 All OG images are valid!',
-    compact: compact
-  });
+  // Exit with appropriate code
+  process.exit(result.summary.issues > 0 ? 1 : 0);
 }
 
 // Run validation

@@ -3,6 +3,7 @@
 const { spawn } = require('child_process');
 const path = require('path');
 const { printOverallSummary, getTestEmoji, getTestDisplayName } = require('./utils/reporting-utils');
+const { formatCompact, formatVerbose, formatBuild } = require('./utils/test-formatter');
 
 // Map test types to their script files
 const testTypes = {
@@ -57,27 +58,28 @@ function listTests() {
   console.log('       npm run test all    (runs all tests: ' + allTests.join(', ') + ')');
 }
 
-function runTest(testType, showStatus = false, compact = false) {
+function runTest(testType, showStatus = false, compact = false, formatOptions = {}) {
   const scriptPath = path.join(__dirname, 'test', testTypes[testType]);
   
   return new Promise((resolve, reject) => {
     let spinnerInterval = null;
     let statusLine = '';
+    let progressInfo = '';
     const spinnerFrames = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
     let spinnerFrame = 0;
     
-    if (showStatus) {
-      const emoji = getTestEmoji(testType);
-      const displayName = getTestDisplayName(testType);
-      statusLine = `${emoji} ${displayName}...`;
-      
-      // Start spinner animation
-      spinnerInterval = setInterval(() => {
-        const spinner = spinnerFrames[spinnerFrame];
-        process.stdout.write(`\r${spinner} ${statusLine}`);
-        spinnerFrame = (spinnerFrame + 1) % spinnerFrames.length;
-      }, 100);
-    }
+    // Always show spinner for all tests
+    const emoji = getTestEmoji(testType);
+    const displayName = getTestDisplayName(testType);
+    statusLine = `${emoji} ${displayName}...`;
+    
+    // Start spinner animation
+    spinnerInterval = setInterval(() => {
+      const spinner = spinnerFrames[spinnerFrame];
+      const fullLine = progressInfo ? `${statusLine} (${progressInfo})` : statusLine;
+      process.stdout.write(`\r${spinner} ${fullLine}`);
+      spinnerFrame = (spinnerFrame + 1) % spinnerFrames.length;
+    }, 100);
     
     // Set environment variable to indicate compact mode
     const env = { ...process.env };
@@ -85,10 +87,36 @@ function runTest(testType, showStatus = false, compact = false) {
       env.TEST_COMPACT_MODE = 'true';
     }
     
+    // Capture stdout to detect JSON output, but pass through stderr for progress
+    let stdoutData = '';
+    let stderrData = '';
+    
     const child = spawn('node', [scriptPath], {
-      stdio: 'inherit',
+      stdio: ['inherit', 'pipe', 'pipe'],
       shell: false,
       env: env
+    });
+    
+    // Collect stdout
+    child.stdout.on('data', (data) => {
+      stdoutData += data.toString();
+    });
+    
+    // Parse stderr for progress updates and pass through other output
+    child.stderr.on('data', (data) => {
+      const text = data.toString();
+      stderrData += text;
+      
+      // Check for progress updates in format: __TEST_PROGRESS__current/total__
+      const progressMatch = text.match(/__TEST_PROGRESS__(\d+)\/(\d+)__/);
+      if (progressMatch) {
+        progressInfo = `${progressMatch[1]}/${progressMatch[2]}`;
+        // Don't write the progress marker to console, just update our progress info
+        return;
+      }
+      
+      // Write other stderr directly to console so progress shows in real-time
+      process.stderr.write(text);
     });
     
     child.on('close', (code) => {
@@ -98,27 +126,90 @@ function runTest(testType, showStatus = false, compact = false) {
         spinnerInterval = null;
       }
       
-      // Read test summary file if it exists
       const fs = require('fs');
-      const summaryPath = path.join(__dirname, 'test', `.${testType}-summary.json`);
       let summary = { files: 0, issues: 0, warnings: 0 };
-      if (fs.existsSync(summaryPath)) {
-        try {
-          summary = JSON.parse(fs.readFileSync(summaryPath, 'utf8'));
-          // Clean up the summary file
-          fs.unlinkSync(summaryPath);
-        } catch (e) {
-          // Ignore errors reading summary
+      let isJsonFormat = false;
+      let jsonResult = null;
+      
+      // Check if output contains JSON (new format)
+      if (stdoutData.includes('__TEST_JSON_START__') && stdoutData.includes('__TEST_JSON_END__')) {
+        // Extract JSON between markers
+        const startMarker = '__TEST_JSON_START__';
+        const endMarker = '__TEST_JSON_END__';
+        const startIdx = stdoutData.indexOf(startMarker) + startMarker.length;
+        const endIdx = stdoutData.indexOf(endMarker);
+        
+        if (startIdx > 0 && endIdx > startIdx) {
+          const jsonStr = stdoutData.substring(startIdx, endIdx).trim();
+          try {
+            jsonResult = JSON.parse(jsonStr);
+            isJsonFormat = true;
+            // Extract summary from JSON
+            summary = {
+              files: jsonResult.summary?.files || 0,
+              issues: jsonResult.summary?.issues || 0,
+              warnings: jsonResult.summary?.warnings || 0,
+              filesWithIssues: jsonResult.summary?.filesWithIssues || 0
+            };
+          } catch (e) {
+            // JSON parse failed, fall back to old format
+            console.error('Warning: Failed to parse JSON output, falling back to old format');
+          }
         }
+      } else {
+        // Old format: output was passed through, check for summary file
+        const summaryPath = path.join(__dirname, 'test', `.${testType}-summary.json`);
+        if (fs.existsSync(summaryPath)) {
+          try {
+            summary = JSON.parse(fs.readFileSync(summaryPath, 'utf8'));
+            // Clean up the summary file
+            fs.unlinkSync(summaryPath);
+          } catch (e) {
+            // Ignore errors reading summary
+          }
+        }
+        
       }
       
-      if (showStatus && statusLine) {
-        // Clear the spinner line and show compact summary
-        const emoji = getTestEmoji(testType);
-        const displayName = getTestDisplayName(testType);
+      // Don't output raw stdout if JSON was detected - we'll format it below
+      // Only output raw stdout for old format (no JSON markers)
+      if (stdoutData && !isJsonFormat) {
+        process.stdout.write(stdoutData);
+      }
+      
+      // Determine result icon based on issues/warnings
+      let resultIcon = '✅';
+      if (summary.issues > 0) {
+        resultIcon = '❌';
+      } else if (summary.warnings > 0) {
+        resultIcon = '⚠️ ';
+      }
+      
+      // Clear spinner and show result icon
+      process.stdout.write(`\r${' '.repeat(statusLine.length + 2)}\r`);
+      process.stdout.write(`${resultIcon} ${statusLine}\n`);
+      
+      // Format and show output
+      if (isJsonFormat && jsonResult) {
+        // Use format based on options
+        let formattedOutput;
+        if (formatOptions.format === 'build') {
+          formattedOutput = formatBuild(jsonResult);
+        } else if (showStatus) {
+          // Group runs: use compact format
+          formattedOutput = formatCompact(jsonResult);
+        } else {
+          // Individual runs: use verbose format
+          formattedOutput = formatVerbose(jsonResult, formatOptions);
+        }
+        process.stdout.write(formattedOutput + '\n');
+      } else if (!showStatus) {
+        // Old format: output was already passed through for individual runs
+        // (stdout was written directly, not captured)
+      } else {
+        // Old format for group runs: build compact summary line
         const resultIcon = code === 0 ? '✅' : '❌';
         
-        // Build compact summary line
         const files = summary.files || 0;
         const issues = summary.issues || 0;
         const warnings = summary.warnings || 0;
@@ -140,9 +231,6 @@ function runTest(testType, showStatus = false, compact = false) {
         
         const compactSummary = summaryParts.join(', ');
         const compactLine = `${resultIcon} ${emoji} ${displayName}: ${compactSummary}`;
-        
-        // Clear the spinner line and write compact summary
-        process.stdout.write(`\r${' '.repeat(statusLine.length + 2)}\r`);
         process.stdout.write(`${compactLine}\n`);
       }
       
@@ -160,12 +248,9 @@ function runTest(testType, showStatus = false, compact = false) {
         spinnerInterval = null;
       }
       
-      if (showStatus && statusLine) {
-        const emoji = getTestEmoji(testType);
-        const displayName = getTestDisplayName(testType);
-        process.stdout.write(`\r${' '.repeat(statusLine.length + 2)}\r`);
-        process.stdout.write(`❌ ${emoji} ${displayName}\n`);
-      }
+      // Clear spinner and show error icon
+      process.stdout.write(`\r${' '.repeat(statusLine.length + 2)}\r`);
+      process.stdout.write(`❌ ${statusLine}\n`);
       resolve({ testType, passed: false, error: error.message });
     });
   });
@@ -209,11 +294,33 @@ async function runAllTests() {
   process.exit(allPassed ? 0 : 1);
 }
 
+function parseArgs() {
+  const args = process.argv.slice(2);
+  const testType = args[0];
+  const formatOptions = {};
+  
+  // Parse flags
+  for (let i = 1; i < args.length; i++) {
+    if (args[i] === '--format' && args[i + 1]) {
+      formatOptions.format = args[i + 1];
+      i++; // Skip next arg
+    } else if (args[i] === '--group-by' && args[i + 1]) {
+      formatOptions.groupBy = args[i + 1];
+      i++; // Skip next arg
+    }
+  }
+  
+  return { testType, formatOptions };
+}
+
 async function main() {
-  const testType = process.argv[2];
+  const { testType, formatOptions } = parseArgs();
   
   if (!testType) {
     listTests();
+    console.log('\nOptions:');
+    console.log('  --format <format>     Output format: compact (default), verbose, build');
+    console.log('  --group-by <type>      Group issues by: file (default), type');
     process.exit(0);
   }
   
@@ -235,7 +342,7 @@ async function main() {
     process.exit(1);
   }
   
-  const result = await runTest(testType, false, false); // compact = false for individual runs
+  const result = await runTest(testType, false, false, formatOptions); // compact = false for individual runs
   process.exit(result.passed ? 0 : 1);
 }
 

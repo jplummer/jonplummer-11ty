@@ -5,7 +5,7 @@ const path = require('path');
 const puppeteer = require('puppeteer');
 const axeCore = require('axe-core');
 const { findHtmlFiles } = require('../utils/file-utils');
-const { printSummary, exitWithResults, getTestEmoji } = require('../utils/reporting-utils');
+const { createTestResult, addFile, addIssue, addWarning, addCustomSection, outputResult } = require('../utils/test-result-builder');
 
 // Format axe-core violations for display
 function formatViolations(violations) {
@@ -83,11 +83,6 @@ async function testFileWithAxe(browser, filePath, colorScheme = 'light', rulesOn
 
 // Main accessibility validation using axe-core
 async function validateAccessibility() {
-  console.log('♿ Starting accessibility validation with axe-core...\n');
-  console.log('Testing approach:');
-  console.log('  ☀️  Light mode: All accessibility rules');
-  console.log('  🌙 Dark mode: Color contrast only\n');
-  
   const siteDir = './_site';
   if (!fs.existsSync(siteDir)) {
     console.log('❌ _site directory not found. Run "npm run build" first.');
@@ -95,30 +90,28 @@ async function validateAccessibility() {
   }
   
   const htmlFiles = findHtmlFiles(siteDir);
-  console.log(`Found ${htmlFiles.length} HTML files\n`);
   
   if (htmlFiles.length === 0) {
-    console.log('⚠️  No HTML files found to test.');
+    // Create empty result
+    const result = createTestResult('accessibility', 'Accessibility Validation');
+    outputResult(result);
     process.exit(0);
+    return;
   }
   
-  const results = {
-    total: htmlFiles.length,
-    totalViolations: 0,
-    totalIncomplete: 0,
-    filesWithViolations: 0,
-    filesWithIncomplete: 0,
-    passes: 0,
-    lightMode: {
-      violations: 0,
-      incomplete: 0,
-      filesWithViolations: 0
-    },
-    darkMode: {
-      violations: 0,
-      incomplete: 0,
-      filesWithViolations: 0
-    }
+  // Create test result using result builder
+  const result = createTestResult('accessibility', 'Accessibility Validation');
+  
+  // Track light/dark mode stats for custom sections
+  const lightModeStats = {
+    violations: 0,
+    incomplete: 0,
+    filesWithViolations: 0
+  };
+  const darkModeStats = {
+    violations: 0,
+    incomplete: 0,
+    filesWithViolations: 0
   };
   
   // Launch browser
@@ -134,14 +127,18 @@ async function validateAccessibility() {
       const relativePath = path.relative('./_site', file);
       const fileNumber = i + 1;
       
+      // Send progress update to test runner (via stderr with special marker)
+      process.stderr.write(`__TEST_PROGRESS__${fileNumber}/${htmlFiles.length}__`);
+      
       // Skip redirect pages (they have minimal HTML and redirect immediately)
       const content = fs.readFileSync(file, 'utf8');
       if (content.includes('<title>Redirecting...</title>')) {
-        console.log(`📄 [${fileNumber}/${htmlFiles.length}] ${relativePath}:`);
-        console.log(`   ⏭️  Skipped (redirect page)`);
-        results.total--;
+        // Don't add redirect pages to result
         continue;
       }
+      
+      // Add file to result
+      const fileObj = addFile(result, file, relativePath);
       
       try {
         // Test in light mode (all rules)
@@ -154,105 +151,95 @@ async function validateAccessibility() {
         const darkViolations = darkResults.violations || [];
         const darkIncomplete = darkResults.incomplete || [];
         
-        const hasLightIssues = lightViolations.length > 0 || lightIncomplete.length > 0;
-        const hasDarkIssues = darkViolations.length > 0 || darkIncomplete.length > 0;
-        const hasIssues = hasLightIssues || hasDarkIssues;
-        
-        // Only show file header if there are issues
-        if (hasIssues) {
-          console.log(`📄 [${fileNumber}/${htmlFiles.length}] ${relativePath}:`);
-        }
-        
-        // Light mode results
-        if (hasLightIssues) {
-          console.log(`   ☀️  Light mode:`);
+        // Add light mode violations as issues
+        if (lightViolations.length > 0) {
+          const formattedIssues = formatViolations(lightViolations);
           
-          if (lightViolations.length > 0) {
-            const formattedIssues = formatViolations(lightViolations);
-            
-            formattedIssues.forEach(issue => {
-              console.log(`      ❌ ${issue.help} (${issue.impact} impact)`);
-              if (issue.nodes.length > 0) {
-                issue.nodes.slice(0, 3).forEach(node => {
-                  console.log(`         - ${node}`);
-                });
-                if (issue.nodes.length > 3) {
-                  console.log(`         ... and ${issue.nodes.length - 3} more`);
-                }
+          formattedIssues.forEach(issue => {
+            // Build message with nodes info
+            let message = `${issue.help} (${issue.impact} impact)`;
+            if (issue.nodes.length > 0) {
+              const nodeList = issue.nodes.slice(0, 3).join('; ');
+              message += `: ${nodeList}`;
+              if (issue.nodes.length > 3) {
+                message += ` (and ${issue.nodes.length - 3} more)`;
               }
-              if (issue.helpUrl) {
-                console.log(`         Learn more: ${issue.helpUrl}`);
-              }
-            });
-            
-            results.totalViolations += lightViolations.length;
-            results.lightMode.violations += lightViolations.length;
-            results.lightMode.filesWithViolations++;
-            results.filesWithViolations++;
-          }
-          
-          if (lightIncomplete.length > 0) {
-            console.log(`      ⚠️  ${lightIncomplete.length} incomplete check(s) (manual review needed)`);
-            results.totalIncomplete += lightIncomplete.length;
-            results.lightMode.incomplete += lightIncomplete.length;
-            results.filesWithIncomplete++;
-          }
-        }
-        
-        // Dark mode results (contrast only)
-        if (hasDarkIssues) {
-          console.log(`   🌙 Dark mode (contrast only):`);
-          
-          if (darkViolations.length > 0) {
-            const formattedIssues = formatViolations(darkViolations);
-            
-            formattedIssues.forEach(issue => {
-              console.log(`      ❌ ${issue.help} (${issue.impact} impact)`);
-              if (issue.nodes.length > 0) {
-                issue.nodes.slice(0, 3).forEach(node => {
-                  console.log(`         - ${node}`);
-                });
-                if (issue.nodes.length > 3) {
-                  console.log(`         ... and ${issue.nodes.length - 3} more`);
-                }
-              }
-              if (issue.helpUrl) {
-                console.log(`         Learn more: ${issue.helpUrl}`);
-              }
-            });
-            
-            results.totalViolations += darkViolations.length;
-            results.darkMode.violations += darkViolations.length;
-            results.darkMode.filesWithViolations++;
-            if (!hasLightIssues) {
-              results.filesWithViolations++;
             }
-          }
+            
+            addIssue(fileObj, {
+              type: 'accessibility-violation',
+              message: message,
+              ruleId: issue.id,
+              impact: issue.impact,
+              helpUrl: issue.helpUrl,
+              description: issue.description,
+              nodes: issue.nodes,
+              tags: issue.tags
+            });
+          });
           
-          if (darkIncomplete.length > 0) {
-            console.log(`      ⚠️  ${darkIncomplete.length} incomplete check(s) (manual review needed)`);
-            results.totalIncomplete += darkIncomplete.length;
-            results.darkMode.incomplete += darkIncomplete.length;
-            if (!hasLightIssues) {
-              results.filesWithIncomplete++;
+          lightModeStats.violations += lightViolations.length;
+          lightModeStats.filesWithViolations++;
+        }
+        
+        // Add light mode incomplete as warnings
+        if (lightIncomplete.length > 0) {
+          addWarning(fileObj, {
+            type: 'accessibility-incomplete',
+            message: `${lightIncomplete.length} incomplete check(s) (manual review needed)`,
+            mode: 'light'
+          });
+          
+          lightModeStats.incomplete += lightIncomplete.length;
+        }
+        
+        // Add dark mode violations as issues
+        if (darkViolations.length > 0) {
+          const formattedIssues = formatViolations(darkViolations);
+          
+          formattedIssues.forEach(issue => {
+            let message = `${issue.help} (${issue.impact} impact) [Dark mode]`;
+            if (issue.nodes.length > 0) {
+              const nodeList = issue.nodes.slice(0, 3).join('; ');
+              message += `: ${nodeList}`;
+              if (issue.nodes.length > 3) {
+                message += ` (and ${issue.nodes.length - 3} more)`;
+              }
             }
-          }
+            
+            addIssue(fileObj, {
+              type: 'accessibility-violation',
+              message: message,
+              ruleId: issue.id,
+              impact: issue.impact,
+              helpUrl: issue.helpUrl,
+              description: issue.description,
+              nodes: issue.nodes,
+              tags: issue.tags,
+              mode: 'dark'
+            });
+          });
+          
+          darkModeStats.violations += darkViolations.length;
+          darkModeStats.filesWithViolations++;
         }
         
-        if (!hasIssues) {
-          results.passes++;
-        }
-        
-        // Add blank line only if we printed detailed output
-        if (hasIssues) {
-          console.log('');
+        // Add dark mode incomplete as warnings
+        if (darkIncomplete.length > 0) {
+          addWarning(fileObj, {
+            type: 'accessibility-incomplete',
+            message: `${darkIncomplete.length} incomplete check(s) (manual review needed) [Dark mode]`,
+            mode: 'dark'
+          });
+          
+          darkModeStats.incomplete += darkIncomplete.length;
         }
         
       } catch (error) {
-        console.log(`📄 [${fileNumber}/${htmlFiles.length}] ${relativePath}:`);
-        console.log(`   ❌ Error testing file: ${error.message}`);
-        results.totalViolations++;
-        results.filesWithViolations++;
+        addIssue(fileObj, {
+          type: 'accessibility-error',
+          message: `Error testing file: ${error.message}`
+        });
       }
     }
     
@@ -260,39 +247,24 @@ async function validateAccessibility() {
     await browser.close();
   }
   
-  // Summary
-  printSummary('Accessibility Validation', getTestEmoji('accessibility'), [
-    { label: 'Total files', value: results.total },
-    { label: 'Total violations', value: results.totalViolations },
-    { label: 'Files with violations', value: results.filesWithViolations },
-    { label: 'Total incomplete checks', value: results.totalIncomplete },
-    { label: 'Files with incomplete checks', value: results.filesWithIncomplete },
-    { label: 'Files passing all checks', value: results.passes }
-  ], {
-    customSections: [
-      {
-        title: '☀️  Light mode',
-        lines: [
-          `Violations: ${results.lightMode.violations}`,
-          `Files with violations: ${results.lightMode.filesWithViolations}`,
-          `Incomplete checks: ${results.lightMode.incomplete}`
-        ]
-      },
-      {
-        title: '🌙 Dark mode (contrast only)',
-        lines: [
-          `Violations: ${results.darkMode.violations}`,
-          `Files with violations: ${results.darkMode.filesWithViolations}`,
-          `Incomplete checks: ${results.darkMode.incomplete}`
-        ]
-      }
-    ]
+  // Add custom sections for light/dark mode stats
+  addCustomSection(result, '☀️  Light mode', {
+    violations: lightModeStats.violations,
+    filesWithViolations: lightModeStats.filesWithViolations,
+    incomplete: lightModeStats.incomplete
   });
   
-  exitWithResults(results.totalViolations, 0, {
-    testType: 'accessibility validation',
-    successMessage: '\n🎉 All accessibility validation passed!'
+  addCustomSection(result, '🌙 Dark mode (contrast only)', {
+    violations: darkModeStats.violations,
+    filesWithViolations: darkModeStats.filesWithViolations,
+    incomplete: darkModeStats.incomplete
   });
+  
+  // Output JSON result (formatter will handle display - compact for group runs, verbose for individual)
+  outputResult(result);
+  
+  // Exit with appropriate code (errors block, warnings don't)
+  process.exit(result.summary.issues > 0 ? 1 : 0);
 }
 
 // Run validation

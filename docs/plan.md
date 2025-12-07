@@ -22,10 +22,6 @@
 - [ ] https://www.inkwell.ie/typography/recommendations.html
   - [ ] other items from https://webtypography.net/?
 
-### Test suite
-- [ ] Make sure all tests are testing the right things
-- [ ] Make test output easy to read and use
-
 ### CMS
 
 **Goal**: Enable authoring from any device via web-based CMS while maintaining local build/deploy capability.
@@ -210,3 +206,11 @@
   - Monitor deployment success/failure
   - Implement rollback procedures
   - Regular backup of generated site
+
+- **Test suite enhancements**
+  - Enhanced progress indicators - Streaming JSON, real-time updates
+  - formatTable() - Tabular format (maybe later)
+  - formatJson() - Pretty-printed JSON (might be free since tests output JSON, but not needed initially)
+  - Additional formats - HTML reports, etc.
+  - Filtering and sorting - `--filter`, `--sort` flags
+  - CI/CD integration - JUnit XML, GitHub Actions annotations, etc.

@@ -5,7 +5,7 @@ const path = require('path');
 const { execSync } = require('child_process');
 const { findMarkdownFiles } = require('../utils/file-utils');
 const { parseFrontMatter } = require('../utils/frontmatter-utils');
-const { printSummary, exitWithResults, getTestEmoji } = require('../utils/reporting-utils');
+const { createTestResult, addFile, addIssue, addWarning, outputResult } = require('../utils/test-result-builder');
 
 // Find all markdown files in src/ directory, excluding drafts and docs/
 function findSourceMarkdownFiles() {
@@ -160,7 +160,6 @@ function runMarkdownlint(files) {
 
 // Main validation function
 function validateMarkdown() {
-
   const markdownFiles = findSourceMarkdownFiles();
   
   if (markdownFiles.length === 0) {
@@ -168,76 +167,17 @@ function validateMarkdown() {
     process.exit(1);
   }
 
-  let totalErrors = 0;
-  let totalWarnings = 0;
-  const allIssues = [];
+  // Create test result using result builder
+  const result = createTestResult('markdown', 'Markdown Validation');
+  
+  // Track files in result (we'll add them as we process)
+  const fileMap = new Map();
 
   // Run markdownlint-cli2
   const lintResult = runMarkdownlint(markdownFiles);
   
-  if (!lintResult.valid) {
-    totalErrors += lintResult.errors.length;
-    allIssues.push(...lintResult.errors);
-  }
-
-  // Custom validations for each file
-  for (const file of markdownFiles) {
-    const relativePath = path.relative('./src', file);
-    const content = fs.readFileSync(file, 'utf8');
-    
-    // Skip front matter for content checks
-    const frontMatterMatch = content.match(/^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/);
-    const markdownContent = frontMatterMatch ? frontMatterMatch[2] : content;
-    
-    const fileErrors = [];
-    const fileWarnings = [];
-    
-    // Check for unclosed link parentheses
-    const linkIssues = checkUnclosedLinkParentheses(markdownContent, file);
-    fileErrors.push(...linkIssues);
-    
-    // Check for H1 headings
-    const h1Warnings = checkH1Headings(markdownContent, file);
-    fileWarnings.push(...h1Warnings);
-    
-    if (fileErrors.length > 0 || fileWarnings.length > 0) {
-      // Only show header messages when there are issues
-      if (totalErrors === 0 && totalWarnings === 0 && lintResult.errors.length === 0) {
-        console.log('📝 Starting markdown syntax validation...\n');
-        console.log(`Found ${markdownFiles.length} markdown file(s)\n`);
-      }
-      console.log(`📄 ${relativePath}:`);
-      
-      if (fileErrors.length > 0) {
-        console.log(`   ❌ Errors:`);
-        fileErrors.forEach(issue => {
-          console.log(`      Line ${issue.line}, Column ${issue.column}: ${issue.message}`);
-          console.log(`      ${issue.context}`);
-        });
-        totalErrors += fileErrors.length;
-      }
-      
-      if (fileWarnings.length > 0) {
-        console.log(`   ⚠️  Warnings:`);
-        fileWarnings.forEach(warning => {
-          console.log(`      Line ${warning.line}, Column ${warning.column}: ${warning.message}`);
-          console.log(`      ${warning.context}`);
-        });
-        totalWarnings += fileWarnings.length;
-      }
-    }
-  }
-
-  // Display markdownlint errors
-  if (lintResult.errors.length > 0) {
-      // Show header messages (always in verbose mode, only when issues in compact mode)
-      const compact = process.env.TEST_COMPACT_MODE === 'true';
-      if (!compact || (totalErrors === 0 && totalWarnings === 0)) {
-        if (totalErrors === 0 && totalWarnings === 0) {
-          console.log('📝 Starting markdown syntax validation...\n');
-          console.log(`Found ${markdownFiles.length} markdown file(s)\n`);
-        }
-      }
+  // Process markdownlint errors
+  if (!lintResult.valid && lintResult.errors.length > 0) {
     // Group errors by file
     const errorsByFile = {};
     lintResult.errors.forEach(error => {
@@ -247,39 +187,73 @@ function validateMarkdown() {
       errorsByFile[error.file].push(error);
     });
     
+    // Add files and markdownlint errors
     for (const [file, errors] of Object.entries(errorsByFile)) {
       const relativePath = path.relative('./src', file);
-      console.log(`📄 ${relativePath}:`);
-      console.log(`   ❌ Markdownlint errors:`);
+      let fileObj = fileMap.get(relativePath);
+      if (!fileObj) {
+        fileObj = addFile(result, file, relativePath);
+        fileMap.set(relativePath, fileObj);
+      }
+      
       errors.forEach(error => {
-        console.log(`      Line ${error.line}, Column ${error.column}: ${error.message}`);
+        addIssue(fileObj, {
+          type: 'markdownlint',
+          message: error.message,
+          ruleId: error.rule,
+          line: error.line,
+          column: error.column
+        });
       });
     }
   }
 
-  // Check if running in compact mode (group runs)
-  const compact = process.env.TEST_COMPACT_MODE === 'true';
-  
-  // Summary - compact mode shows single line for passing, full for failing
-  printSummary('Markdown Validation', getTestEmoji('markdown'), [
-    { label: 'Files checked', value: markdownFiles.length },
-    { label: 'Errors', value: totalErrors },
-    { label: 'Warnings', value: totalWarnings }
-  ], { compact: compact });
+  // Custom validations for each file
+  for (const file of markdownFiles) {
+    const relativePath = path.relative('./src', file);
+    const content = fs.readFileSync(file, 'utf8');
+    
+    // Get or create file object
+    let fileObj = fileMap.get(relativePath);
+    if (!fileObj) {
+      fileObj = addFile(result, file, relativePath);
+      fileMap.set(relativePath, fileObj);
+    }
+    
+    // Skip front matter for content checks
+    const frontMatterMatch = content.match(/^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/);
+    const markdownContent = frontMatterMatch ? frontMatterMatch[2] : content;
+    
+    // Check for unclosed link parentheses
+    const linkIssues = checkUnclosedLinkParentheses(markdownContent, file);
+    linkIssues.forEach(issue => {
+      addIssue(fileObj, {
+        type: 'markdown-link',
+        message: issue.message,
+        line: issue.line,
+        column: issue.column,
+        context: issue.context
+      });
+    });
+    
+    // Check for H1 headings (warnings)
+    const h1Warnings = checkH1Headings(markdownContent, file);
+    h1Warnings.forEach(warning => {
+      addWarning(fileObj, {
+        type: 'markdown-h1',
+        message: warning.message,
+        line: warning.line,
+        column: warning.column,
+        context: warning.context
+      });
+    });
+  }
 
-  // Write summary file for test runner
-  const summaryPath = path.join(__dirname, '.markdown-summary.json');
-  fs.writeFileSync(summaryPath, JSON.stringify({ 
-    files: markdownFiles.length, 
-    issues: totalErrors, 
-    warnings: totalWarnings 
-  }), 'utf8');
+  // Output JSON result (formatter will handle display)
+  outputResult(result);
   
-  exitWithResults(totalErrors, totalWarnings, {
-    testType: 'markdown validation',
-    successMessage: '\n✅ All markdown files are valid!',
-    compact: compact
-  });
+  // Exit with appropriate code (errors block, warnings don't)
+  process.exit(result.summary.issues > 0 ? 1 : 0);
 }
 
 // Run validation

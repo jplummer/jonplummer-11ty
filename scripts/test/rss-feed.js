@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 // Use Node's built-in DOMParser (available in Node 20+)
 const { DOMParser } = require('@xmldom/xmldom');
-const { printSummary, exitWithResults, getTestEmoji } = require('../utils/reporting-utils');
+const { createTestResult, addFile, addIssue, outputResult } = require('../utils/test-result-builder');
 
 // Find RSS/XML files in _site
 function findRssFiles(dir) {
@@ -276,58 +276,45 @@ function validateRSS() {
     process.exit(1);
   }
   
-  const results = {
-    total: rssFiles.length,
-    valid: 0,
-    issues: 0
-  };
+  // Create test result using result builder
+  const result = createTestResult('rss-feed', 'RSS Feed Validation');
   
   // Validate each RSS file
   for (const file of rssFiles) {
     const relativePath = path.relative('./_site', file);
     const issues = validateRSSFeed(file);
     
-    if (issues.length === 0) {
-      results.valid++;
-    } else {
-      // Show header messages (always in verbose mode, only when issues in compact mode)
-      const compact = process.env.TEST_COMPACT_MODE === 'true';
-      if (!compact || results.issues === 0) {
-        if (results.issues === 0) {
-          console.log('📡 Starting RSS feed validation...\n');
-          console.log(`Found ${rssFiles.length} RSS/XML files\n`);
+    // Add file to result
+    const fileObj = addFile(result, relativePath, file);
+    
+    // Add issues to file
+    if (issues.length > 0) {
+      issues.forEach(issue => {
+        // Determine issue type from message
+        let issueType = 'rss-structure';
+        if (issue.includes('duplicate')) {
+          issueType = 'rss-duplicate';
+        } else if (issue.includes('stale')) {
+          issueType = 'rss-freshness';
+        } else if (issue.includes('size')) {
+          issueType = 'rss-size';
+        } else if (issue.includes('Item')) {
+          issueType = 'rss-item';
         }
-      }
-      console.log(`📄 ${relativePath}:`);
-      console.log(`   ❌ Issues:`);
-      issues.forEach(issue => console.log(`      - ${issue}`));
-      results.issues += issues.length;
+        
+        addIssue(fileObj, {
+          type: issueType,
+          message: issue
+        });
+      });
     }
   }
   
-  // Check if running in compact mode (group runs)
-  const compact = process.env.TEST_COMPACT_MODE === 'true';
+  // Output JSON result (formatter will handle display)
+  outputResult(result);
   
-  // Summary - compact mode shows single line for passing, full for failing
-  printSummary('RSS Feed Validation', getTestEmoji('rss-feed'), [
-    { label: 'Total feeds', value: results.total },
-    { label: 'Valid feeds', value: results.valid },
-    { label: 'Issues', value: results.issues }
-  ], { compact: compact });
-  
-  // Write summary file for test runner
-  const summaryPath = path.join(__dirname, '.rss-feed-summary.json');
-  fs.writeFileSync(summaryPath, JSON.stringify({ 
-    files: results.total, 
-    issues: results.issues, 
-    warnings: 0 
-  }), 'utf8');
-  
-  exitWithResults(results.issues, 0, {
-    testType: 'RSS feed validation',
-    successMessage: '\n🎉 All RSS feeds are valid!',
-    compact: compact
-  });
+  // Exit with appropriate code
+  process.exit(result.summary.issues > 0 ? 1 : 0);
 }
 
 // Run validation

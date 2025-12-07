@@ -33,9 +33,8 @@ if (fs.existsSync('.env')) {
   require('dotenv').config();
 }
 
-const { log, logSection } = require('../utils/audit-logging');
-const { exitWithResults } = require('../utils/reporting-utils');
-const { generateMarkdownReport } = require('./report-generator');
+const { createTestResult, addFile, addIssue, addWarning, finalizeTestResult } = require('../utils/test-result-builder');
+const { formatVerbose, formatCompact, formatBuild } = require('../utils/test-formatter');
 
 // Import check modules
 const dependencyChecks = require('./checks/dependency-checks');
@@ -44,7 +43,7 @@ const buildChecks = require('./checks/build-checks');
 const contentChecks = require('./checks/content-checks');
 const liveSiteChecks = require('./checks/live-site-checks');
 
-// Track results with detailed findings
+// Track results with detailed findings (legacy format for check execution)
 const results = {
   passed: [],
   warnings: [],
@@ -52,6 +51,9 @@ const results = {
   manual: [],
   findings: [] // Detailed findings for markdown report
 };
+
+// Track check results for JSON output
+const checkResults = new Map(); // checkName -> { status, severity, description, recommendation, details }
 
 // Add finding to results
 function addFinding(checkName, status, severity, description, recommendation = '', details = {}) {
@@ -63,96 +65,134 @@ function addFinding(checkName, status, severity, description, recommendation = '
     recommendation: recommendation,
     details: details
   });
+  
+  // Also track for JSON output
+  checkResults.set(checkName, {
+    status,
+    severity,
+    description,
+    recommendation,
+    details
+  });
 }
 
 // Main audit function
 async function runSecurityAudit() {
-  log('🔒 Security Audit', 'blue');
-  log('Running automated security checks...\n');
-  
   // Dependency & Package Security
-  logSection('Dependency & Package Security', '📦');
   await dependencyChecks.checkNpmAudit(results, addFinding);
   await dependencyChecks.checkOutdatedPackages(results, addFinding);
   await dependencyChecks.checkNodeVersion(results, addFinding);
   await dependencyChecks.checkDeprecatedPackages(results, addFinding);
   
   // Code & Configuration Security
-  logSection('Code & Configuration Security', '⚙️');
   await configChecks.checkEnvironmentVariables(results, addFinding);
   await configChecks.checkPackageJson(results, addFinding);
   await configChecks.checkFilePermissions(results, addFinding);
   await configChecks.checkGitHistory(results, addFinding);
   
   // Build & Deployment Security
-  logSection('Build & Deployment Security', '🏗️');
   await buildChecks.checkBuildOutput(results, addFinding);
   await buildChecks.checkCSP(results, addFinding);
   
   // Content & Links Security
-  logSection('Content & Links Security', '🔗');
   await contentChecks.checkRedirects(results, addFinding);
   await contentChecks.checkThirdPartyResources(results, addFinding);
   
   // Live Site Security (if configured)
-  logSection('Live Site Security', '🌐');
   await liveSiteChecks.checkSecurityHeaders(results, addFinding);
   await liveSiteChecks.checkCertificateExpiration(results, addFinding);
   await liveSiteChecks.checkDNSRecords(results, addFinding);
   
-  // Summary
-  console.log('');
-  logSection('Summary', '📊');
-  log(`  ✓ Passed: ${results.passed.length}`, 'green');
-  log(`  ⚠ Warnings: ${results.warnings.length}`, 'yellow');
-  log(`  ✗ Failures: ${results.failures.length}`, 'red');
-  console.log('');
+  // Build JSON result using test-result-builder
+  const jsonResult = createTestResult('security-audit', 'Security Audit');
   
-  // Generate and output markdown report
-  const markdownReport = generateMarkdownReport(results);
+  // Map each check to a file entry
+  const checkOrder = [
+    // Dependency & Package Security
+    'npm audit',
+    'npm outdated',
+    'Node.js version',
+    'Deprecated packages',
+    // Code & Configuration Security
+    'Environment variables',
+    'package.json',
+    'File permissions',
+    'Git history',
+    // Build & Deployment Security
+    'Build output',
+    'Content Security Policy',
+    // Content & Links Security
+    'Redirect security',
+    'Third-party resources',
+    // Live Site Security
+    'Security headers',
+    'TLS certificate',
+    'DNS records'
+  ];
   
-  console.log('');
-  logSection('Security Report', '📄');
-  console.log(markdownReport);
-  console.log('');
-  
-  // Use unified exit function with security audit-specific messages
-  exitWithResults(results, 0, {
-    testType: 'security audit',
-    issueMessage: '❌ Security audit found issues that need attention.',
-    warningMessage: '⚠️  Security audit completed with warnings.',
-    successMessage: '✅ All automated security checks passed!\n\nSee the security report above for manual tasks checklist.',
-    issueList: results.failures.length > 0 ? results.failures : null,
-    warningList: results.warnings.length > 0 ? results.warnings : null,
-    customExitLogic: (issuesCount, warningsCount) => {
-      // Custom exit logic to preserve colored logging for security audit
-      if (issuesCount > 0) {
-        log('❌ Security audit found issues that need attention.', 'red');
-        console.log('');
-        log('Failures:', 'red');
-        results.failures.forEach(failure => {
-          console.log(`  - ${failure}`);
-        });
-        console.log('');
-        process.exit(1);
-      } else if (warningsCount > 0) {
-        log('⚠️  Security audit completed with warnings.', 'yellow');
-        console.log('');
-        log('Warnings:', 'yellow');
-        results.warnings.forEach(warning => {
-          console.log(`  - ${warning}`);
-        });
-        console.log('');
-        process.exit(0);
-      } else {
-        log('✅ All automated security checks passed!', 'green');
-        console.log('');
-        log('See the security report above for manual tasks checklist.', 'cyan');
-        console.log('');
-        process.exit(0);
-      }
+  // Map all checks to file entries (including passing ones for accurate summary)
+  checkOrder.forEach(checkName => {
+    const checkResult = checkResults.get(checkName);
+    if (!checkResult) return; // Skip if check wasn't run
+    
+    const fileObj = addFile(jsonResult, checkName);
+    
+    // Map status to issues/warnings
+    if (checkResult.status === 'fail') {
+      addIssue(fileObj, {
+        severity: 'error',
+        type: checkResult.severity || 'error',
+        message: checkResult.description,
+        recommendation: checkResult.recommendation || '',
+        details: checkResult.details
+      });
+    } else if (checkResult.status === 'warn') {
+      // Map severity: critical/high warnings should be treated as more serious
+      const warningSeverity = checkResult.severity === 'critical' || checkResult.severity === 'high'
+        ? checkResult.severity
+        : 'warning';
+      
+      addWarning(fileObj, {
+        severity: warningSeverity,
+        type: checkResult.severity || 'warning',
+        message: checkResult.description,
+        recommendation: checkResult.recommendation || '',
+        details: checkResult.details
+      });
     }
+    // 'pass' status means no issues or warnings - file stays in 'passed' state
   });
+  
+  // Finalize result to calculate summary
+  finalizeTestResult(jsonResult);
+  
+  // Output formatted result (matches test suite style)
+  const formatOptions = { groupBy: 'file' };
+  const format = process.env.SECURITY_AUDIT_FORMAT || 'verbose';
+  
+  let formattedOutput;
+  if (format === 'compact') {
+    formattedOutput = formatCompact(jsonResult);
+  } else if (format === 'build') {
+    formattedOutput = formatBuild(jsonResult);
+  } else {
+    formattedOutput = formatVerbose(jsonResult, formatOptions);
+  }
+  
+  // Output formatted result (matches test suite style)
+  console.log(formattedOutput);
+  
+  // Exit with appropriate code
+  const summary = jsonResult.summary;
+  const hasFailures = summary.issues > 0;
+  
+  if (hasFailures) {
+    process.exit(1);
+  } else if (summary.warnings > 0) {
+    process.exit(0); // Warnings don't block
+  } else {
+    process.exit(0);
+  }
 }
 
 // Run audit

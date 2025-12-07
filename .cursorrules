@@ -40,7 +40,7 @@
 - Use 2 spaces for indentation
 - Use const/let instead of var
 - Use descriptive variable and function names
-- Use template literals for string interpolation
+- Use single quotes for simple strings; use template literals (backticks) only for string interpolation or multi-line strings
 - Use arrow functions for callbacks
 - When writing code, include code strucutral comments where helpful
 - New code does not always go at the very bottom of a file. Consider context when choosing code placement
@@ -63,7 +63,7 @@
 1. First understand what’s already working - do not change or delete or break existing functionality
 2. Look for the simplest possible fix
 3. Avoid introducing unnecessary complexity. Don’t introduce new technologies without asking.
-4. Understand what the existing structure and libraries support. Seek documentation 9expecialy Eleventy documentaton mentioned below) if needed to understand these. Don't reimplement any capability that's already provided.
+4. Understand what the existing structure and libraries support. Seek documentation (especially Eleventy documentation mentioned below) if needed to understand these. Don't reimplement any capability that's already provided.
 5. Respect existing patterns and code structure
 6. Preserve all comments. We're going for maximum human readability here.
 
@@ -73,7 +73,7 @@
 - Include required front matter: title, date, layout
 - Use ISO date format: "YYYY-MM-DDTHH:mm:ss-HH:mm"
 - Include alt text for all images
-- **Eleventy documentation**: Full Eleventy documentation is available in `_misc/eleventy-docs/docs/`. Reference these docs when implementing 11ty features, especially for data files, filters, collections, pagination, and configuration. When working with 11ty-specific functionality, search the documentation first before guessing or assuming behavior.
+- **Eleventy documentation**: Full Eleventy documentation is available in `docs/reference/eleventy/docs/`. Reference these docs when implementing 11ty features, especially for data files, filters, collections, pagination, and configuration. When working with 11ty-specific functionality, search the documentation first before guessing or assuming behavior.
 
 ### JavaScript/Node.js
 - Use CommonJS (require/module.exports) for scripts

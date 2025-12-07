@@ -221,6 +221,7 @@ function exitWithResults(issues, warnings = 0, options = {}) {
 /**
  * Test type emoji mapping
  * Provides unique emojis for each test type for easy terminal distinction
+ * Trailing spaces are added to some emojis to work around rendering oddities of the MacOS terminal
  */
 const TEST_EMOJIS = {
   'accessibility': '♿',
@@ -228,17 +229,19 @@ const TEST_EMOJIS = {
   'html': '🧩',
   'internal-links': '🔗',
   'links-yaml': '📌',
-  'markdown': '✏️',
-  'og-images': '🖼️',
+  'markdown': '✏️ ',
+  'og-images': '🖼️ ',
   'rss-feed': '📡',
   'seo-meta': '🎯',
-  'deploy': '🚀'
+  'deploy': '🚀',
+  'security-audit': '🔒'
 };
 
 /**
  * Get emoji for a test type
  * @param {string} testType - Test type key
  * @returns {string} Emoji for the test type
+ * Facepalm is the default to make underfined test types stand out
  */
 function getTestEmoji(testType) {
   return TEST_EMOJIS[testType] || '🤦';
@@ -263,7 +266,8 @@ function getTestDisplayName(testType) {
     'rss': 'RSS Feed',
     'rss-feed': 'RSS Feed',
     'og-images': 'OG Images',
-    'deploy': 'Deploy'
+    'deploy': 'Deploy',
+    'security-audit': 'Security Audit'
   };
   return displayNames[testType] || testType;
 }
@@ -273,15 +277,25 @@ function getTestDisplayName(testType) {
  * @param {Array} results - Array of test result objects { testType: string, passed: boolean, emoji?: string, warnings?: number }
  */
 function printOverallSummary(results) {
+  // Handle empty results array edge case
+  if (!results || results.length === 0) {
+    console.log('');
+    console.log('📊 Overall Test Summary');
+    console.log('');
+    console.log('   🤷 No tests were run. Did you forget to invite them?');
+    console.log('');
+    return true;
+  }
+  
   const passed = results.filter(r => r.passed);
   const failed = results.filter(r => !r.passed);
   const total = results.length;
   const totalWarnings = results.reduce((sum, r) => sum + (r.warnings || 0), 0);
   const testsWithWarnings = results.filter(r => (r.warnings || 0) > 0);
   
-  console.log('\n' + '='.repeat(60));
+  console.log('');
   console.log('📊 Overall Test Summary');
-  console.log('='.repeat(60));
+  console.log('');
   console.log(`   Total tests: ${total}`);
   console.log(`   ✅ Passed: ${passed.length}`);
   console.log(`   ❌ Failed: ${failed.length}`);
@@ -290,34 +304,38 @@ function printOverallSummary(results) {
   }
   console.log('');
   
-  // Tests with wider emojis that need extra spacing (pencil, warning, picture emojis)
-  const wideEmojiTests = ['content-structure', 'markdown', 'og-images'];
-  
   if (passed.length > 0) {
     console.log('   ✅ Passed tests:');
     passed.forEach(result => {
       const emoji = result.emoji || getTestEmoji(result.testType);
       const displayName = getTestDisplayName(result.testType);
-      const extraSpace = wideEmojiTests.includes(result.testType) ? ' ' : '';
       const warningNote = (result.warnings || 0) > 0 ? ` (${result.warnings} warning${result.warnings === 1 ? '' : 's'})` : '';
-      console.log(`      ${emoji}${extraSpace} ${displayName}${warningNote}`);
+      console.log(`      ${emoji} ${displayName}${warningNote}`);
     });
     console.log('');
   }
   
   if (failed.length > 0) {
-    console.log('   ❌ Failed tests:');
+    console.log(`   ❌ Failed tests:`);
     failed.forEach(result => {
       const emoji = result.emoji || getTestEmoji(result.testType);
       const displayName = getTestDisplayName(result.testType);
-      const extraSpace = wideEmojiTests.includes(result.testType) ? ' ' : '';
       const warningNote = (result.warnings || 0) > 0 ? ` (${result.warnings} warning${result.warnings === 1 ? '' : 's'})` : '';
-      console.log(`      ${emoji}${extraSpace} ${displayName}${warningNote}`);
+      console.log(`      ${emoji} ${displayName}${warningNote}`);
     });
     console.log('');
   }
   
-  console.log('='.repeat(60));
+  // Collect tests that need attention (failures or warnings)
+  const testsNeedingAttention = results.filter(r => !r.passed || (r.warnings || 0) > 0);
+  
+  if (testsNeedingAttention.length > 0) {
+    console.log('💡 To see details, run:');
+    testsNeedingAttention.forEach(result => {
+      console.log(`   npm run test ${result.testType}`);
+    });
+    console.log('');
+  }
   
   if (failed.length > 0) {
     console.log('\n❌ Some tests failed. Please review the output above.');
@@ -343,4 +361,3 @@ module.exports = {
   printOverallSummary,
   TEST_EMOJIS
 };
-

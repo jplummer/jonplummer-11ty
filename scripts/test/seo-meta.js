@@ -4,7 +4,7 @@ const path = require('path');
 const { extractMetaTags, extractHeadings, parseHtml } = require('../utils/html-utils');
 const { validateTitle: validateTitleUtil, validateMetaDescription: validateMetaDescriptionUtil } = require('../utils/validation-utils');
 const { checkSiteDirectory, getHtmlFiles, getRelativePath, readFile } = require('../utils/test-base');
-const { printSummary, exitWithResults, getTestEmoji } = require('../utils/reporting-utils');
+const { createTestResult, addFile, addIssue, addWarning, addGlobalIssue, outputResult } = require('../utils/test-result-builder');
 
 // Check if HTML content is a redirect page
 function isRedirectPage(htmlContent) {
@@ -186,28 +186,18 @@ function validateSEO() {
   checkSiteDirectory();
   const htmlFiles = getHtmlFiles();
   
-  const results = {
-    total: htmlFiles.length,
-    issues: 0,
-    warnings: 0,
-    filesWithIssues: 0,
-    duplicateTitles: [],
-    issueTypes: new Map(), // Track issues by type
-    warningTypes: new Map() // Track warnings by type
-  };
+  // Create test result using result builder
+  const result = createTestResult('seo-meta', 'SEO Validation');
   
   // Check for duplicate titles
   const duplicateTitles = checkDuplicateTitles(htmlFiles);
-  if (duplicateTitles.length > 0) {
-    console.log('🔄 Duplicate Titles:');
-    duplicateTitles.forEach(dup => {
-      console.log(`   ❌ "${dup.title}" in:`);
-      dup.files.forEach(file => console.log(`      - ${file}`));
+  duplicateTitles.forEach(dup => {
+    addGlobalIssue(result, {
+      type: 'duplicate-title',
+      message: `Duplicate title "${dup.title}"`,
+      files: dup.files
     });
-    results.duplicateTitles = duplicateTitles;
-    const dupCount = duplicateTitles.length;
-    results.issueTypes.set('Duplicate titles', (results.issueTypes.get('Duplicate titles') || 0) + dupCount);
-  }
+  });
   
   // Validate each file
   for (const file of htmlFiles) {
@@ -217,170 +207,108 @@ function validateSEO() {
     const headings = extractHeadings(content);
     const isRedirect = isRedirectPage(content);
     
-    let fileIssues = 0;
-    let fileWarnings = 0;
-    const issueMessages = [];
-    const warningMessages = [];
+    // Add file to result
+    const fileObj = addFile(result, file, relativePath);
     
     // Basic title check (always required, but length validation skipped for redirects)
     if (!metaTags.title) {
-      const issueType = 'Title: Missing title tag';
-      issueMessages.push(`   ❌ ${issueType}`);
-      fileIssues++;
-      results.issueTypes.set(issueType, (results.issueTypes.get(issueType) || 0) + 1);
+      addIssue(fileObj, {
+        type: 'title-missing',
+        message: 'Missing title tag'
+      });
     } else if (!isRedirect) {
       // Full title validation only for non-redirect pages
       const titleIssues = validateTitle(metaTags.title);
-      if (titleIssues.length > 0) {
-        titleIssues.forEach(issue => {
-          const issueType = `Title: ${issue}`;
-          // Length issues are warnings, missing title is already handled above as error
-          if (issue.includes('too short') || issue.includes('too long') || issue.includes('separators')) {
-            warningMessages.push(`   ⚠️  ${issueType}`);
-            results.warningTypes.set(issueType, (results.warningTypes.get(issueType) || 0) + 1);
-            fileWarnings++;
-          } else {
-          issueMessages.push(`   ❌ ${issueType}`);
-          results.issueTypes.set(issueType, (results.issueTypes.get(issueType) || 0) + 1);
-            fileIssues++;
-          }
-        });
-      }
+      titleIssues.forEach(issue => {
+        // Length issues are warnings, missing title is already handled above as error
+        if (issue.includes('too short') || issue.includes('too long') || issue.includes('separators')) {
+          addWarning(fileObj, {
+            type: 'title-length',
+            message: issue
+          });
+        } else {
+          addIssue(fileObj, {
+            type: 'title-validation',
+            message: issue
+          });
+        }
+      });
     }
     
     // Meta description validation (skipped for redirects)
-    // Validates final HTML output with SEO best practices (120-160 chars)
-    // Note: This is stricter than content-structure.js (50-160) which validates source markdown
     if (!isRedirect) {
       const descIssues = validateMetaDescription(metaTags.description);
       
-      // Check for unescaped quotes in raw HTML (not parsed value)
+      // Check for unescaped quotes in raw HTML
       const rawDescMatch = content.match(/<meta\s+name=["']description["']\s+content=["']([^"']*)["']/i);
       if (rawDescMatch && rawDescMatch[1]) {
         const rawDesc = rawDescMatch[1];
-        // Check if raw HTML has unescaped straight quotes (not &quot;)
         if (rawDesc.includes('"') && !rawDesc.includes('&quot;') && !rawDesc.includes('&#34;')) {
           descIssues.push('Meta description contains unescaped quotes');
         }
       }
       
-      if (descIssues.length > 0) {
-        descIssues.forEach(issue => {
-          const issueType = `Meta Description: ${issue}`;
-          // Length issues are warnings (SEO best practice, not breaking)
-          // Missing description and unescaped quotes are errors (critical issues)
-          if (issue.includes('too short') || issue.includes('too long')) {
-            warningMessages.push(`   ⚠️  ${issueType}`);
-            results.warningTypes.set(issueType, (results.warningTypes.get(issueType) || 0) + 1);
-            fileWarnings++;
-          } else {
-          issueMessages.push(`   ❌ ${issueType}`);
-          results.issueTypes.set(issueType, (results.issueTypes.get(issueType) || 0) + 1);
-            fileIssues++;
-          }
-        });
-      }
+      descIssues.forEach(issue => {
+        // Length issues are warnings, missing/unescaped are errors
+        if (issue.includes('too short') || issue.includes('too long')) {
+          addWarning(fileObj, {
+            type: 'meta-description-length',
+            message: issue
+          });
+        } else {
+          addIssue(fileObj, {
+            type: 'meta-description',
+            message: issue
+          });
+        }
+      });
     }
     
     // Open Graph validation (skipped for redirects)
     if (!isRedirect) {
       const ogIssues = validateOpenGraph(metaTags.og);
-      if (ogIssues.length > 0) {
-        ogIssues.forEach(issue => {
-          const warningType = `Open Graph: ${issue}`;
-          warningMessages.push(`   ⚠️  ${warningType}`);
-          results.warningTypes.set(warningType, (results.warningTypes.get(warningType) || 0) + 1);
+      ogIssues.forEach(issue => {
+        addWarning(fileObj, {
+          type: 'open-graph',
+          message: issue
         });
-        fileWarnings += ogIssues.length;
-      }
+      });
     }
     
     // Heading validation (skipped for redirects and utility pages)
     const isUtilityPage = relativePath.includes('og-image-preview');
     if (!isRedirect && !isUtilityPage) {
       const headingIssues = validateHeadings(headings);
-      if (headingIssues.length > 0) {
-        headingIssues.forEach(issue => {
-          const issueType = `Headings: ${issue}`;
-          issueMessages.push(`   ❌ ${issueType}`);
-          results.issueTypes.set(issueType, (results.issueTypes.get(issueType) || 0) + 1);
+      headingIssues.forEach(issue => {
+        addIssue(fileObj, {
+          type: 'headings',
+          message: issue
         });
-        fileIssues += headingIssues.length;
-      }
+      });
     }
     
     // Check for missing canonical URL (always checked)
     if (!metaTags.canonical) {
-      const warningType = 'Missing canonical URL';
-      warningMessages.push(`   ⚠️  ${warningType}`);
-      fileWarnings++;
-      results.warningTypes.set(warningType, (results.warningTypes.get(warningType) || 0) + 1);
+      addWarning(fileObj, {
+        type: 'canonical-missing',
+        message: 'Missing canonical URL'
+      });
     }
     
     // Check for missing language attribute (always checked)
     if (!metaTags.lang) {
-      const warningType = 'Missing language attribute on <html> tag';
-      warningMessages.push(`   ⚠️  ${warningType}`);
-      fileWarnings++;
-      results.warningTypes.set(warningType, (results.warningTypes.get(warningType) || 0) + 1);
-    }
-    
-    // Only show file header and details if there are issues or warnings
-    if (fileIssues > 0 || fileWarnings > 0) {
-      // Show header messages (always in verbose mode, only when issues in compact mode)
-      const compact = process.env.TEST_COMPACT_MODE === 'true';
-      if (!compact || (results.issues === 0 && results.warnings === 0)) {
-        if (results.issues === 0 && results.warnings === 0) {
-          console.log('🔍 Starting SEO and meta validation...\n');
-          console.log(`Found ${htmlFiles.length} HTML files\n`);
-        }
-      }
-      console.log(`📄 ${relativePath}:`);
-      
-      if (isRedirect) {
-        console.log(`   ⏩ Redirect page - skipping SEO requirements`);
-      }
-      
-      issueMessages.forEach(msg => console.log(msg));
-      warningMessages.forEach(msg => console.log(msg));
-    }
-    results.issues += fileIssues;
-    results.warnings += fileWarnings;
-    if (fileIssues > 0) {
-      results.filesWithIssues++;
+      addWarning(fileObj, {
+        type: 'lang-missing',
+        message: 'Missing language attribute on <html> tag'
+      });
     }
   }
   
-  // Check if running in compact mode (group runs)
-  const compact = process.env.TEST_COMPACT_MODE === 'true';
+  // Output JSON result (formatter will handle display)
+  outputResult(result);
   
-  // Summary - compact mode shows single line for passing, full for failing
-  const totalIssues = results.issues + results.duplicateTitles.length;
-  printSummary('SEO Validation', getTestEmoji('seo-meta'), [
-    { label: 'Total files', value: results.total },
-    { label: 'Issues', value: totalIssues },
-    { label: 'Warnings', value: results.warnings }
-  ], { 
-    compact: compact,
-    issueTypes: results.issueTypes,
-    warningTypes: results.warningTypes
-  });
-
-  // Write summary file for test runner
-  const fs = require('fs');
-  // Custom exit logic: duplicate titles count as issues (totalIssues already calculated above)
-  const summaryPath = path.join(__dirname, '.seo-meta-summary.json');
-  fs.writeFileSync(summaryPath, JSON.stringify({ 
-    files: results.total, 
-    issues: totalIssues, 
-    warnings: results.warnings,
-    filesWithIssues: results.filesWithIssues
-  }), 'utf8');
-  exitWithResults(totalIssues, results.warnings, {
-    testType: 'SEO validation',
-    successMessage: '\n🎉 All SEO validation passed!',
-    compact: compact
-  });
+  // Exit with appropriate code (errors block, warnings don't)
+  process.exit(result.summary.issues > 0 ? 1 : 0);
 }
 
 // Run validation

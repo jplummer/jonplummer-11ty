@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { extractLinks, checkAnchorLink, classifyLink } = require('../utils/html-utils');
 const { checkSiteDirectory, getHtmlFiles, getRelativePath, readFile } = require('../utils/test-base');
-const { printSummary, exitWithResults, getTestEmoji } = require('../utils/reporting-utils');
+const { createTestResult, addFile, addIssue, outputResult } = require('../utils/test-result-builder');
 
 // Check if internal file exists
 function checkInternalLink(href, basePath, siteRoot) {
@@ -42,31 +42,33 @@ function checkAnchor(href, htmlContent) {
 
 // Main validation function
 async function validateInternalLinks() {
-  const compact = process.env.TEST_COMPACT_MODE === 'true';
-  
   checkSiteDirectory();
   const siteRoot = './_site';
   
   const htmlFiles = getHtmlFiles();
   
   if (htmlFiles.length === 0) {
-    console.log('✅ No files to check. All internal links are up to date!');
+    // Create empty result
+    const result = createTestResult('internal-links', 'Internal Link Validation');
+    outputResult(result);
+    process.exit(0);
     return;
   }
   
-  if (!compact) {
-    console.log('🔗 Starting internal link validation...\n');
-    console.log('📋 Running full site scan');
-    console.log(`Found ${htmlFiles.length} HTML files to check\n`);
+  // Create test result using result builder
+  const result = createTestResult('internal-links', 'Internal Link Validation');
+  
+  // Track files that have issues (we'll add them as we find broken links)
+  const fileMap = new Map();
+  
+  // Initialize all files in result (so we can track which files were checked)
+  for (const file of htmlFiles) {
+    const relativePath = getRelativePath(file);
+    const fileObj = addFile(result, file, relativePath);
+    fileMap.set(relativePath, fileObj);
   }
   
   const allLinks = [];
-  const results = {
-    total: 0,
-    internal: { total: 0, broken: 0, working: 0 },
-    anchors: { total: 0, broken: 0, working: 0 },
-    other: { total: 0 }
-  };
   
   // Collect all internal links
   for (const file of htmlFiles) {
@@ -89,89 +91,42 @@ async function validateInternalLinks() {
     }
   }
   
-  results.total = allLinks.length;
-  
   // Process links by type
   for (const link of allLinks) {
     const { href, type, file, line } = link;
+    const fileObj = fileMap.get(file);
     
     switch (type) {
       case 'internal-absolute':
       case 'internal-relative':
-        results.internal.total++;
         const internalCheck = checkInternalLink(href, link.basePath, siteRoot);
-        if (internalCheck.exists) {
-          results.internal.working++;
-          // Don't log successful internal links
-        } else {
-          results.internal.broken++;
-          // Show header messages in compact mode only when first issue is found
-          if (compact && results.internal.broken === 1 && results.anchors.broken === 0) {
-            console.log('🔗 Starting internal link validation...\n');
-            console.log('📋 Running full site scan');
-            console.log(`Found ${htmlFiles.length} HTML files to check\n`);
-            console.log(`Found ${allLinks.length} internal links across ${htmlFiles.length} files\n`);
-          }
-          console.log(`❌ Internal: ${file}:${line} → ${href} (not found)`);
+        if (!internalCheck.exists) {
+          addIssue(fileObj, {
+            type: 'internal-link-broken',
+            message: `Internal link not found: ${href}`,
+            line: line
+          });
         }
         break;
         
       case 'anchor':
-        results.anchors.total++;
         const fileContent = readFile(path.join(siteRoot, file));
-        if (checkAnchor(href, fileContent)) {
-          results.anchors.working++;
-          // Don't log successful anchor links
-        } else {
-          results.anchors.broken++;
-          // Show header messages in compact mode only when first issue is found
-          if (compact && results.internal.broken === 0 && results.anchors.broken === 1) {
-            console.log('🔗 Starting internal link validation...\n');
-            console.log('📋 Running full site scan');
-            console.log(`Found ${htmlFiles.length} HTML files to check\n`);
-            console.log(`Found ${allLinks.length} internal links across ${htmlFiles.length} files\n`);
-          }
-          console.log(`❌ Anchor: ${file}:${line} → ${href} (not found)`);
+        if (!checkAnchor(href, fileContent)) {
+          addIssue(fileObj, {
+            type: 'anchor-link-broken',
+            message: `Anchor link not found: ${href}`,
+            line: line
+          });
         }
         break;
-        
-      default:
-        results.other.total++;
-        // Don't log other link types unless they're problematic
     }
   }
   
-  // Summary - compact mode shows single line for passing, full for failing
-  printSummary('Internal Link Validation', getTestEmoji('internal-links'), [
-    { label: 'Total internal links', value: results.total },
-    { label: 'Internal file links', value: `${results.internal.working}/${results.internal.total} working` },
-    { label: 'Anchor links', value: `${results.anchors.working}/${results.anchors.total} working` },
-    { label: 'Other links', value: results.other.total },
-    { label: 'Broken links', value: results.internal.broken + results.anchors.broken }
-  ], { compact: compact });
+  // Output JSON result (formatter will handle display)
+  outputResult(result);
   
-  // Show broken links summary
-  const totalBroken = results.internal.broken + results.anchors.broken;
-  if (totalBroken > 0) {
-    console.log(`\n❌ Broken internal links found:`);
-    if (results.internal.broken > 0) console.log(`   - Internal file links: ${results.internal.broken}`);
-    if (results.anchors.broken > 0) console.log(`   - Anchor links: ${results.anchors.broken}`);
-  }
-  
-  // Write summary file for test runner
-  const summaryPath = path.join(__dirname, '.internal-links-summary.json');
-  fs.writeFileSync(summaryPath, JSON.stringify({ 
-    files: htmlFiles.length, 
-    issues: totalBroken, 
-    warnings: 0 
-  }), 'utf8');
-  
-  exitWithResults(totalBroken, 0, {
-    testType: 'internal link validation',
-    issueMessage: '\n❌ Internal links need attention - these are under your control.',
-    successMessage: '\n🎉 All internal links are working correctly!',
-    compact: compact
-  });
+  // Exit with appropriate code
+  process.exit(result.summary.issues > 0 ? 1 : 0);
 }
 
 // Run validation

@@ -15,6 +15,8 @@
 - `npm run test fast` - Run fast tests (excludes slow tests: accessibility)
 - `npm run test all` - Run all tests in sequence (includes slow tests)
 - `npm run test [type]` - Run a specific test type
+- `npm run test [type] -- --format [format]` - Specify output format: `compact`, `verbose`, or `build`
+- `npm run test [type] -- --group-by [type]` - Group issues by `file` (default) or `type`
 
 ### 🚢 Deployment
 
@@ -64,12 +66,24 @@ Use `npm run test fast` for quick validation during development. Use `npm run te
 
 #### Test Suite Architecture
 
-The test suite uses shared utilities in `scripts/test/utils/` to reduce redundancy:
+The test suite uses a centralized JSON output format with a formatter system:
+
+- **test-result-builder.js**: Utilities for building structured JSON test results
+- **test-formatter.js**: Centralized formatter that converts JSON to human-readable output
+- **test-runner.js**: Orchestrates test execution, detects JSON output, and formats results
+
+**Output Formats**:
+- **Compact** (default for group runs): Succinct summary showing files checked, passing, issues, warnings
+- **Verbose** (default for individual runs): Detailed output with issue type summary and file-by-file details
+- **Build** (`--format build`): Blocking issues only, clear pass/fail for CI/CD
+- **Type grouping** (`--group-by type`): Alternative view grouping issues by type for systematic fixes
+
+**Shared Utilities**:
 - **html-utils.js**: Cheerio-based HTML parsing (replaces fragile regex)
 - **validation-utils.js**: Common validation functions (title, description, URL, date, slug)
 - **test-base.js**: Common file operations (checking `_site` exists, finding files, reading files)
 
-All tests are independent scripts that can be run individually or through the test runner.
+All tests output structured JSON that is automatically formatted by the test runner. This enables easy iteration on output design without modifying individual test scripts.
 
 #### links.yaml Validation
 

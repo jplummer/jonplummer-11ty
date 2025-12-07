@@ -6,7 +6,7 @@ const yaml = require('js-yaml');
 const { validateDate, validateSlug, validateTitle, validateMetaDescription } = require('../utils/validation-utils');
 const { getMarkdownFiles, readFile } = require('../utils/test-base');
 const { parseFrontMatter } = require('../utils/frontmatter-utils');
-const { printSummary, exitWithResults, getTestEmoji } = require('../utils/reporting-utils');
+const { createTestResult, addFile, addIssue, addWarning, addGlobalIssue, outputResult } = require('../utils/test-result-builder');
 
 // Front matter parsing and file finding now use shared utilities
 
@@ -133,10 +133,10 @@ function validateFileName(filePath) {
 }
 
 // Validate YAML data files
-function validateYamlDataFiles() {
+function validateYamlDataFiles(result) {
   const dataDir = './src/_data';
   if (!fs.existsSync(dataDir)) {
-    return { valid: true, issues: 0, files: 0 };
+    return { valid: true };
   }
 
   const yamlFiles = fs.readdirSync(dataDir)
@@ -144,44 +144,42 @@ function validateYamlDataFiles() {
     .map(file => path.join(dataDir, file));
 
   if (yamlFiles.length === 0) {
-    return { valid: true, issues: 0, files: 0 };
+    return { valid: true };
   }
 
-  console.log('📋 Validating YAML data files...\n');
-
-  let totalIssues = 0;
-
   for (const file of yamlFiles) {
-    const fileName = path.basename(file);
+    const relativePath = path.relative('./src', file);
     const content = fs.readFileSync(file, 'utf8');
 
     try {
       yaml.load(content);
+      // Add file even if valid (so it's counted)
+      addFile(result, file, relativePath);
     } catch (error) {
-      console.log(`   ❌ ${fileName}`);
-      console.log(`      Error: ${error.message}`);
-      totalIssues++;
+      const fileObj = addFile(result, file, relativePath);
+      addIssue(fileObj, {
+        type: 'yaml-syntax',
+        message: `YAML syntax error: ${error.message}`
+      });
+      return { valid: false };
     }
   }
 
-  console.log('');
-
-  if (totalIssues > 0) {
-    console.log(`❌ Found ${totalIssues} YAML syntax error(s) in data files.`);
-    return { valid: false, issues: totalIssues, files: yamlFiles.length };
-  } else {
-    return { valid: true, issues: 0, files: yamlFiles.length };
-  }
+  return { valid: true };
 }
 
 // Main validation function
 function validateContentStructure() {
+  // Create test result using result builder
+  const result = createTestResult('content-structure', 'Content Structure');
+  
   // Validate YAML data files first
-  const yamlValidation = validateYamlDataFiles();
+  const yamlValidation = validateYamlDataFiles(result);
 
   if (!yamlValidation.valid) {
-    console.log('\n❌ YAML data file validation failed.');
+    outputResult(result);
     process.exit(1);
+    return;
   }
 
   const postsDir = './src/_posts';
@@ -199,14 +197,8 @@ function validateContentStructure() {
     return !(frontMatter && frontMatter.draft === true);
   });
 
-  const results = {
-    total: markdownFiles.length,
-    valid: 0,
-    issues: 0,
-    warnings: 0,
-    duplicateSlugs: [],
-    slugMap: new Map()
-  };
+  const slugMap = new Map();
+  const duplicateSlugs = [];
 
   // First pass: validate individual files
   for (const file of markdownFiles) {
@@ -214,113 +206,83 @@ function validateContentStructure() {
     const content = readFile(file);
     const { frontMatter, error } = parseFrontMatter(content);
 
+    // Add file to result
+    const fileObj = addFile(result, file, relativePath);
+
     if (error) {
-      console.log(`📄 ${relativePath}:`);
-      console.log(`   ❌ Front matter parsing error: ${error}`);
-      results.issues++;
+      addIssue(fileObj, {
+        type: 'frontmatter-parse',
+        message: `Front matter parsing error: ${error}`
+      });
       continue;
     }
 
     if (!frontMatter) {
-      console.log(`📄 ${relativePath}:`);
-      console.log(`   ❌ No front matter found`);
-      results.issues++;
+      addIssue(fileObj, {
+        type: 'frontmatter-missing',
+        message: 'No front matter found'
+      });
       continue;
     }
 
     // Validate file naming
     const fileNameCheck = validateFileName(file);
+    if (!fileNameCheck.valid) {
+      addIssue(fileObj, {
+        type: 'file-naming',
+        message: fileNameCheck.error
+      });
+    }
     
     // Validate required fields
     const fieldValidation = validateRequiredFields(frontMatter, file);
+    
+    // Add issues
+    fieldValidation.issues.forEach(issue => {
+      addIssue(fileObj, {
+        type: 'frontmatter-field',
+        message: issue
+      });
+    });
+    
+    // Add warnings
+    fieldValidation.warnings.forEach(warning => {
+      addWarning(fileObj, {
+        type: 'frontmatter-field',
+        message: warning
+      });
+    });
 
-    // Track slugs for duplicate checking - use front matter slug if available, otherwise use directory slug
+    // Track slugs for duplicate checking
     const fileNameCheckForSlug = validateFileName(file);
     const slugToTrack = frontMatter.slug || (fileNameCheckForSlug.valid ? fileNameCheckForSlug.expectedSlug : null);
 
     if (slugToTrack) {
-      if (results.slugMap.has(slugToTrack)) {
-        results.duplicateSlugs.push({
+      if (slugMap.has(slugToTrack)) {
+        duplicateSlugs.push({
           slug: slugToTrack,
-          files: [results.slugMap.get(slugToTrack), relativePath]
+          files: [slugMap.get(slugToTrack), relativePath]
         });
       } else {
-        results.slugMap.set(slugToTrack, relativePath);
+        slugMap.set(slugToTrack, relativePath);
       }
-    }
-
-    // Only show file header and details if there are issues or warnings
-    const hasIssues = !fileNameCheck.valid || fieldValidation.issues.length > 0;
-    const hasWarnings = fieldValidation.warnings.length > 0;
-
-    if (hasIssues || hasWarnings) {
-      // Show header messages (always in verbose mode, only when issues in compact mode)
-      const compact = process.env.TEST_COMPACT_MODE === 'true';
-      if (!compact || (results.issues === 0 && results.warnings === 0)) {
-        if (results.issues === 0 && results.warnings === 0) {
-          console.log('\n📝 Starting content structure validation...\n');
-          console.log(`Found ${markdownFiles.length} markdown files\n`);
-        }
-      }
-      console.log(`📄 ${relativePath}:`);
-
-      if (!fileNameCheck.valid) {
-        console.log(`   ❌ ${fileNameCheck.error}`);
-        results.issues++;
-      }
-
-      if (fieldValidation.issues.length > 0) {
-        console.log(`   ❌ Issues:`);
-        fieldValidation.issues.forEach(issue => console.log(`      - ${issue}`));
-        results.issues += fieldValidation.issues.length;
-      }
-
-      if (fieldValidation.warnings.length > 0) {
-        console.log(`   ⚠️  Warnings:`);
-        fieldValidation.warnings.forEach(warning => console.log(`      - ${warning}`));
-        results.warnings += fieldValidation.warnings.length;
-      }
-    } else {
-      results.valid++;
     }
   }
 
-  // Check for duplicate slugs
-  if (results.duplicateSlugs.length > 0) {
-    console.log('🔄 Duplicate slug check:');
-    results.duplicateSlugs.forEach(dup => {
-      console.log(`   ❌ Duplicate slug "${dup.slug}" in:`);
-      dup.files.forEach(file => console.log(`      - ${file}`));
+  // Add duplicate slugs as global issues
+  duplicateSlugs.forEach(dup => {
+    addGlobalIssue(result, {
+      type: 'duplicate-slug',
+      message: `Duplicate slug "${dup.slug}"`,
+      files: dup.files
     });
-  }
-
-  // Check if running in compact mode (group runs)
-  const compact = process.env.TEST_COMPACT_MODE === 'true';
-  
-  // Summary - compact mode shows single line for passing, full for failing
-  printSummary('Content Structure', getTestEmoji('content-structure'), [
-    { label: 'Total files', value: results.total },
-    { label: 'Valid files', value: results.valid },
-    { label: 'Issues', value: results.issues },
-    { label: 'Warnings', value: results.warnings },
-    { label: 'Duplicate slugs', value: results.duplicateSlugs.length }
-  ], { compact: compact });
-
-  // Custom exit logic: duplicate slugs count as issues
-  const totalIssues = results.issues + results.duplicateSlugs.length;
-  
-  // Write summary file for test runner
-  const summaryPath = path.join(__dirname, '.content-structure-summary.json');
-  fs.writeFileSync(summaryPath, JSON.stringify({ 
-    files: results.total, 
-    issues: totalIssues, 
-    warnings: results.warnings 
-  }), 'utf8');
-  exitWithResults(totalIssues, results.warnings, {
-    testType: 'content structure validation',
-    successMessage: '\n🎉 All content structure validation passed!',
-    compact: compact
   });
+
+  // Output JSON result (formatter will handle display)
+  outputResult(result);
+  
+  // Exit with appropriate code (errors block, warnings don't)
+  process.exit(result.summary.issues > 0 ? 1 : 0);
 }
 
 // Run validation
