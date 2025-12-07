@@ -6,6 +6,7 @@ All notable changes to this project are documented in this file. The format is b
 - Fix npm audit vulnerabilities
 - Fix duplicate header in individual test output and move test-content-utils
 - Improve test output formatting
+- Refactor redirects to use data-driven Apache 301 redirects
 
 ## 2025-12-05
 

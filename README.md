@@ -47,6 +47,7 @@ The Eleventy configuration is organized into modules for maintainability:
   - Markdown syntax and structure
   - Content structure validation
 - **Automated OG Image Generation**: Open Graph images are automatically generated using Puppeteer, pulling design tokens from the main stylesheet for consistency.
+- **URL Redirects**: Server-side 301 redirects managed via `src/_data/redirects.yaml`, automatically generated in `.htaccess` during build.
 - **Pre-deploy Validation**: Automatic checks before deployment to prevent authoring mistakes from going live.
 - **Security Audit**: Automated security checks for dependencies, configuration, and live site security (headers, TLS, DNS).
 
