@@ -185,10 +185,6 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
         resultIcon = '⚠️ ';
       }
       
-      // Clear spinner and show result icon
-      process.stdout.write(`\r${' '.repeat(statusLine.length + 2)}\r`);
-      process.stdout.write(`${resultIcon} ${statusLine}\n`);
-      
       // Format and show output
       if (isJsonFormat && jsonResult) {
         // Use format based on options
@@ -199,10 +195,22 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
           // Group runs: use compact format
           formattedOutput = formatCompact(jsonResult);
         } else {
-          // Individual runs: use verbose format
+          // Individual runs: use verbose format (which includes compact at top)
           formattedOutput = formatVerbose(jsonResult, formatOptions);
         }
-        process.stdout.write(formattedOutput + '\n');
+        
+        // Clear spinner and show formatted output
+        // For individual runs, formatVerbose already includes the compact header, so we just clear the spinner
+        // For group runs, we show the result icon + compact format
+        process.stdout.write(`\r${' '.repeat(statusLine.length + 2)}\r`);
+        if (showStatus) {
+          // Group runs: show result icon line, then compact format
+          process.stdout.write(`${resultIcon} ${statusLine}\n`);
+          process.stdout.write(formattedOutput + '\n');
+        } else {
+          // Individual runs: just show verbose output (which includes compact header)
+          process.stdout.write(formattedOutput + '\n');
+        }
       } else if (!showStatus) {
         // Old format: output was already passed through for individual runs
         // (stdout was written directly, not captured)

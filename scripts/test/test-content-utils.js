@@ -4,7 +4,7 @@
  * Test script for content-utils.js
  * 
  * Exercises the utilities to verify they work correctly.
- * Run with: node scripts/test-content-utils.js
+ * Run with: node scripts/test/test-content-utils.js
  */
 
 const fs = require('fs');
@@ -18,8 +18,8 @@ const {
   processFiles,
   printContentSummary,
   exitWithContentResults
-} = require('./utils/content-utils');
-const { parseFrontMatter } = require('./utils/frontmatter-utils');
+} = require('../utils/content-utils');
+const { parseFrontMatter } = require('../utils/frontmatter-utils');
 
 console.log('🧪 Testing content-utils.js\n');
 
@@ -195,4 +195,3 @@ if (testsFailed > 0) {
   console.log('\n🎉 All tests passed!');
   process.exit(0);
 }
-
