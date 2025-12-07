@@ -5,6 +5,7 @@ All notable changes to this project are documented in this file. The format is b
 - Improve test output formatting and UX
 - Fix npm audit vulnerabilities
 - Fix duplicate header in individual test output and move test-content-utils
+- Improve test output formatting
 
 ## 2025-12-05
 
