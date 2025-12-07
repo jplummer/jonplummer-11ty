@@ -18,119 +18,8 @@
 
 const { execSync } = require('child_process');
 const fs = require('fs');
+const path = require('path');
 
-// Check for command-line flags
-const skipChecks = process.argv.includes('--skip-checks');
-const dryRun = process.argv.includes('--dry-run');
-
-// Debug: Log received arguments (helpful for troubleshooting)
-if (process.env.DEBUG_DEPLOY) {
-  console.log('Debug: process.argv =', process.argv);
-  console.log('Debug: skipChecks =', skipChecks);
-  console.log('Debug: dryRun =', dryRun);
-  console.log('');
-}
-
-if (dryRun) {
-  console.log('🧪 Dry run mode: Testing deployment without actually deploying...\n');
-} else {
-  console.log('🚀 Deploying via rsync...\n');
-}
-
-// Configuration
-const config = {
-  host: 'your-domain.com',
-  username: 'your-username',
-  remotePath: '/home/your-username/your-domain.com/',
-  localPath: './_site/'
-};
-
-// Load .env configuration
-if (fs.existsSync('.env')) {
-  require('dotenv').config();
-  config.host = process.env.DEPLOY_HOST || config.host;
-  config.username = process.env.DEPLOY_USERNAME || config.username;
-  config.remotePath = process.env.DEPLOY_REMOTE_PATH || config.remotePath;
-}
-
-// Get public site domain for final message (not SSH hostname)
-let siteDomain = process.env.SITE_DOMAIN || 'jonplummer.com';
-
-// Check if _site directory exists
-if (!fs.existsSync('./_site')) {
-  console.error('❌ _site directory not found. Please run "npm run build" first.');
-  process.exit(1);
-}
-
-// Regenerate changelog before deployment
-console.log('📋 Regenerating CHANGELOG.md...');
-try {
-  execSync('node scripts/content/generate-changelog.js', { stdio: 'pipe' });
-  console.log('   ✓ Changelog updated\n');
-} catch (error) {
-  console.warn('   ⚠️  Warning: Could not regenerate changelog (continuing anyway)');
-  console.warn(`      ${error.message}\n`);
-}
-
-// Rebuild the site to include the new changelog
-console.log('🏗️  Rebuilding site...');
-try {
-  execSync('npm run build', { stdio: 'inherit' });
-  console.log('   ✓ Build completed\n');
-} catch (error) {
-  console.error('❌ Build failed. Aborting deployment.');
-  process.exit(1);
-}
-
-// Pre-deploy validation checks
-
-if (!skipChecks) {
-  console.log('🔍 Running pre-deploy validation...\n');
-  
-  try {
-    // Pre-build test (doesn't require _site/)
-    console.log('   Running markdown validation...');
-    execSync('npm run test markdown', { stdio: 'inherit' });
-    
-    // Post-build test (requires _site/, validates YAML + post structure)
-    if (fs.existsSync('./_site')) {
-      console.log('\n   Running content structure validation...');
-      execSync('npm run test content-structure', { stdio: 'inherit' });
-    } else {
-      console.log('   ⚠️  Skipping content test (requires _site/ directory)');
-    }
-    
-    console.log('\n✅ All pre-deploy checks passed\n');
-  } catch (error) {
-    console.error('\n❌ Pre-deploy validation failed. Fix errors before deploying.');
-    console.error('   To skip checks (not recommended): npm run deploy --skip-checks\n');
-    process.exit(1);
-  }
-} else {
-  console.log('⚠️  Skipping pre-deploy validation (--skip-checks flag used)\n');
-}
-
-// Generate OG images before deploy (incremental - only generates what's needed)
-if (!process.argv.includes('--skip-checks')) {
-  try {
-    console.log('🖼️  Generating OG images...');
-    execSync('npm run generate-og-images', { stdio: 'inherit' });
-    console.log('');
-    
-    // Rebuild to include any frontmatter changes from OG image generation
-    console.log('🏗️  Rebuilding site to include OG image updates...');
-    execSync('npm run build', { stdio: 'inherit' });
-    console.log('   ✓ Build completed\n');
-    
-    // Validate OG images for all generated pages
-    console.log('   Validating OG images for all pages...');
-    execSync('npm run test og-images', { stdio: 'inherit' });
-    console.log('');
-  } catch (error) {
-    console.error('\n❌ OG image check failed. Fix errors before deploying.\n');
-    process.exit(1);
-  }
-}
 
 // Check if rsync is available
 function checkRsync() {
@@ -142,7 +31,7 @@ function checkRsync() {
   }
 }
 
-function deploy() {
+function deploy(config, siteDomain, dryRun) {
   try {
     // Check prerequisites
     if (!checkRsync()) {
@@ -154,14 +43,6 @@ function deploy() {
       process.exit(1);
     }
 
-    if (dryRun) {
-      console.log('📤 Would sync files with rsync (dry run)...');
-    } else {
-      console.log('📤 Syncing files with rsync...');
-    }
-    console.log(`   Local: ${config.localPath}`);
-    console.log(`   Remote: ${config.username}@${config.host}:${config.remotePath}`);
-
     // Build rsync command (SSH key authentication is automatic)
     const rsyncCommand = [
       'rsync',
@@ -170,8 +51,8 @@ function deploy() {
       '--exclude=.DS_Store', // Exclude macOS metadata files
       '--exclude=Thumbs.db', // Exclude Windows thumbnail files
       '--exclude=*.tmp', // Exclude temporary files
-      '--progress', // Show progress
-      '--stats', // Show transfer statistics
+      '--stats', // Show transfer statistics summary (includes "Number of files transferred: 0" when nothing changes)
+      '--human-readable', // Show sizes in human-readable format
     ];
 
     // Add --dry-run flag if in dry-run mode
@@ -182,12 +63,6 @@ function deploy() {
 
     rsyncCommand.push(`${config.localPath}`); // Source directory
     rsyncCommand.push(`${config.username}@${config.host}:${config.remotePath}`); // Destination
-
-    if (dryRun) {
-      console.log('\n🔄 Running rsync dry-run (showing what would be deployed)...\n');
-    } else {
-      console.log('\n🔄 Running rsync...\n');
-    }
 
     // Safety check: NEVER deploy if dryRun is true, even if rsync flag is missing
     if (dryRun && !rsyncCommand.includes('--dry-run')) {
@@ -203,12 +78,10 @@ function deploy() {
       });
 
       if (dryRun) {
-        console.log('\n✅ Dry run completed successfully!');
-        console.log('   No files were actually deployed.');
-        console.log('   Run without --dry-run to perform the actual deployment.');
+        console.log('\n✅ 🚀 Deploy: dry run completed (no files deployed)');
       } else {
-        console.log('\n✅ Deployment completed successfully!');
-        console.log(`🌐 Your site should be live at: https://${siteDomain}`);
+        console.log(`\n✅ 🚀 Deploy: completed`);
+        console.log(`   🌐 Site live at: https://${siteDomain}`);
       }
 
     } catch (error) {
@@ -224,4 +97,179 @@ function deploy() {
   }
 }
 
-deploy();
+// Main async function to support await
+(async () => {
+  // Check for command-line flags
+  const skipChecks = process.argv.includes('--skip-checks');
+  const dryRun = process.argv.includes('--dry-run');
+
+  // Debug: Log received arguments (helpful for troubleshooting)
+  if (process.env.DEBUG_DEPLOY) {
+    console.log('Debug: process.argv =', process.argv);
+    console.log('Debug: skipChecks =', skipChecks);
+    console.log('Debug: dryRun =', dryRun);
+    console.log('');
+  }
+
+  // Configuration
+  const config = {
+    host: 'your-domain.com',
+    username: 'your-username',
+    remotePath: '/home/your-username/your-domain.com/',
+    localPath: './_site/'
+  };
+
+  // Load .env configuration (suppress dotenv debug messages)
+  if (fs.existsSync('.env')) {
+    // Temporarily suppress console.log to hide dotenv debug message
+    const originalLog = console.log;
+    console.log = () => {};
+    require('dotenv').config();
+    console.log = originalLog;
+    
+    config.host = process.env.DEPLOY_HOST || config.host;
+    config.username = process.env.DEPLOY_USERNAME || config.username;
+    config.remotePath = process.env.DEPLOY_REMOTE_PATH || config.remotePath;
+  }
+
+  // Get public site domain for final message (not SSH hostname)
+  let siteDomain = process.env.SITE_DOMAIN || 'jonplummer.com';
+
+  // Check if _site directory exists
+  if (!fs.existsSync('./_site')) {
+    console.error('❌ _site directory not found. Please run "npm run build" first.');
+    process.exit(1);
+  }
+
+  // Regenerate changelog before deployment
+  console.log('📋 Regenerating CHANGELOG.md...');
+  try {
+    // Check if changelog exists and get its content before regeneration
+    const changelogPath = path.join(process.cwd(), 'CHANGELOG.md');
+    let changelogChanged = false;
+    let oldContent = null;
+    
+    if (fs.existsSync(changelogPath)) {
+      oldContent = fs.readFileSync(changelogPath, 'utf8');
+    }
+    
+    execSync('node scripts/content/generate-changelog.js', { stdio: 'pipe' });
+    
+    // Check if content actually changed
+    if (oldContent !== null) {
+      const newContent = fs.readFileSync(changelogPath, 'utf8');
+      changelogChanged = oldContent !== newContent;
+    } else {
+      // File didn't exist before, so it was created (changed)
+      changelogChanged = true;
+    }
+    
+    if (changelogChanged) {
+      console.log('✅ 📋 Changelog: updated\n');
+    } else {
+      console.log('✅ 📋 Changelog: up-to-date\n');
+    }
+  } catch (error) {
+    console.log('⚠️  📋 Changelog: could not regenerate (continuing anyway)');
+    console.warn(`   ${error.message}\n`);
+  }
+
+  // Generate OG images before deploy (incremental - only generates what's needed)
+  let ogResult = null;
+  if (!skipChecks) {
+    console.log('🖼️  Generating OG images...');
+    try {
+      const { generateOgImages } = require('../content/generate-og-images');
+      ogResult = await generateOgImages({ quiet: true });
+      
+      // Format result in compact test style
+      const filesChecked = ogResult.filesChecked || 0;
+      const upToDate = filesChecked - ogResult.imagesGenerated - ogResult.defaultsDetected - ogResult.errors;
+      const summaryParts = [];
+      if (filesChecked > 0) {
+        summaryParts.push(`📄 ${filesChecked} ${filesChecked === 1 ? 'file' : 'files'} checked`);
+      }
+      if (upToDate > 0) {
+        summaryParts.push(`✅ ${upToDate} up-to-date`);
+      }
+      if (ogResult.imagesGenerated > 0) {
+        summaryParts.push(`${ogResult.imagesGenerated} generated`);
+      }
+      if (ogResult.defaultsDetected > 0) {
+        summaryParts.push(`⚠️  ${ogResult.defaultsDetected} default${ogResult.defaultsDetected === 1 ? '' : 's'}`);
+      }
+      if (ogResult.errors > 0) {
+        summaryParts.push(`❌ ${ogResult.errors} error${ogResult.errors === 1 ? '' : 's'}`);
+      }
+      
+      const resultIcon = ogResult.errors > 0 ? '❌' : '✅';
+      console.log(`${resultIcon} 🖼️  OG Images: ${summaryParts.join(', ')}\n`);
+      
+      // Show default warnings if any
+      if (ogResult.defaultFiles && ogResult.defaultFiles.length > 0) {
+        ogResult.defaultFiles.forEach(file => {
+          console.log(`  ⚠️  Default OG image: ${file} (no ogImage set)`);
+        });
+        console.log('');
+      }
+    } catch (error) {
+      console.log('❌ 🖼️  OG Images: generation failed');
+      if (error.message) {
+        console.error(`   ${error.message}\n`);
+      }
+      process.exit(1);
+    }
+  }
+
+  // Pre-deploy validation checks on source files (before build to catch errors early)
+  if (!skipChecks) {
+    console.log('🔍 Running pre-deploy validation...');
+    
+    try {
+      // Source file validations (don't need _site/)
+      execSync('npm run test markdown --silent', { stdio: 'inherit' });
+      execSync('npm run test content-structure --silent', { stdio: 'inherit' });
+    } catch (error) {
+      console.log('❌ 🔍 Validation: failed');
+      console.error('   To skip checks (not recommended): npm run deploy --skip-checks\n');
+      process.exit(1);
+    }
+  }
+
+  // Build site once (includes changelog + any OG image frontmatter updates)
+  const rebuildReason = ogResult && ogResult.frontmatterUpdated ? 'frontmatter updated' : 'changelog updated';
+  console.log(`🏗️  Building site (${rebuildReason})...`);
+  try {
+    execSync('npm run build --silent -- --quiet', { stdio: 'pipe' });
+    console.log('✅ 🏗️  Build: completed\n');
+  } catch (error) {
+    console.log('❌ 🏗️  Build: failed');
+    console.error('   Aborting deployment.\n');
+    process.exit(1);
+  }
+
+  // Post-build validation checks (need _site/)
+  if (!skipChecks) {
+    try {
+      // OG images validation (needs _site/ to check built pages)
+      execSync('npm run test og-images --silent', { stdio: 'inherit' });
+      
+      console.log('✅ 🔍 Validation: all checks passed\n');
+    } catch (error) {
+      console.log('❌ 🔍 Validation: failed');
+      console.error('   To skip checks (not recommended): npm run deploy --skip-checks\n');
+      process.exit(1);
+    }
+  } else {
+    console.log('⚠️  🔍 Validation: skipped (--skip-checks flag used)\n');
+  }
+
+  // Now run the actual deployment
+  if (dryRun) {
+    console.log('🧪 Dry run mode: Testing deployment without actually deploying...\n');
+  } else {
+    console.log('🚀 Deploying via rsync...\n');
+  }
+  
+  deploy(config, siteDomain, dryRun);
+})();

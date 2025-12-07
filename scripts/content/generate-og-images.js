@@ -223,9 +223,12 @@ async function processFile(filePath) {
   const ogImagePath = path.join(ogImageDir, ogImageFilename);
   const ogImageUrl = `/assets/images/og/${ogImageFilename}`;
   
+  // Check for default OG image (no ogImage set in frontmatter)
+  const hasDefaultOgImage = !frontMatter.ogImage;
+  
   // Skip if manually set ogImage exists and image file exists (allow regeneration if file is missing)
   if (frontMatter.ogImage && frontMatter.ogImage !== 'auto' && fs.existsSync(ogImagePath)) {
-    return { updated: false, skipped: true, reason: 'Manual ogImage set' };
+    return { updated: false, skipped: true, reason: 'Manual ogImage set', defaultDetected: false };
   }
   
   // Ensure og directory exists
@@ -240,9 +243,9 @@ async function processFile(filePath) {
       frontMatter.ogImage = ogImageUrl;
       const newContent = reconstructFile(content, frontMatter, body);
       fs.writeFileSync(filePath, newContent, 'utf8');
-      return { updated: true, imageGenerated: false, frontmatterUpdated: true };
+      return { updated: true, imageGenerated: false, frontmatterUpdated: true, defaultDetected: hasDefaultOgImage, filePath: filePath };
     }
-    return { updated: false, skipped: true, reason: 'OG image up to date' };
+    return { updated: false, skipped: true, reason: 'OG image up to date', defaultDetected: hasDefaultOgImage, filePath: filePath };
   }
   
   // Render HTML
@@ -256,12 +259,20 @@ async function processFile(filePath) {
   const newContent = reconstructFile(content, frontMatter, body);
   fs.writeFileSync(filePath, newContent, 'utf8');
   
-  return { updated: true, imageGenerated: true, frontmatterUpdated: true };
+  return { 
+    updated: true, 
+    imageGenerated: true, 
+    frontmatterUpdated: true, 
+    defaultDetected: hasDefaultOgImage,
+    filePath: filePath
+  };
 }
 
-// Main function
-async function main() {
-  console.log('🖼️  Generating OG images...\n');
+// Main function - can be called programmatically or from CLI
+async function generateOgImages(options = {}) {
+  const { quiet = false } = options;
+  
+  // Don't print header in quiet mode - caller will announce it
   
   const srcDir = path.join(process.cwd(), 'src');
   const postsDir = path.join(srcDir, '_posts');
@@ -302,35 +313,62 @@ async function main() {
   
   const markdownFiles = [...postFiles, ...rootFiles, ...njkFiles];
   
-  console.log(`Found ${markdownFiles.length} files to process\n`);
-  
   const results = {
     updated: 0,
     skipped: 0,
     errors: 0,
     imagesGenerated: 0,
-    frontmatterUpdated: 0
+    frontmatterUpdated: 0,
+    defaultsDetected: 0,
+    generatedFiles: [],
+    defaultFiles: []
   };
   
   for (const file of markdownFiles) {
     const relativePath = path.relative(process.cwd(), file);
-    console.log(`Processing: ${relativePath}`);
+    
+    if (!quiet) {
+      console.log(`Processing: ${relativePath}`);
+    }
     
     try {
       const result = await processFile(file);
       
       if (result.updated) {
         if (result.imageGenerated) {
-          console.log(`  ✅ Generated OG image and updated frontmatter`);
+          if (!quiet) {
+            console.log(`  ✅ Generated OG image and updated frontmatter`);
+          } else {
+            // In quiet mode, only show important events
+            console.log(`  ✅ Generated: ${relativePath}`);
+          }
           results.imagesGenerated++;
+          results.generatedFiles.push(relativePath);
+          if (result.defaultDetected) {
+            results.defaultsDetected++;
+            results.defaultFiles.push(relativePath);
+          }
         } else if (result.frontmatterUpdated) {
-          console.log(`  ✅ Updated frontmatter (image already exists)`);
+          if (!quiet) {
+            console.log(`  ✅ Updated frontmatter (image already exists)`);
+          }
           results.frontmatterUpdated++;
+          if (result.defaultDetected) {
+            results.defaultsDetected++;
+            results.defaultFiles.push(relativePath);
+          }
         }
         results.updated++;
       } else if (result.skipped) {
-        console.log(`  ⏭️  Skipped: ${result.reason}`);
+        if (!quiet) {
+          console.log(`  ⏭️  Skipped: ${result.reason}`);
+        }
         results.skipped++;
+        // Track defaults even in skipped files
+        if (result.defaultDetected) {
+          results.defaultsDetected++;
+          results.defaultFiles.push(relativePath);
+        }
       } else if (result.error) {
         console.error(`  ❌ Error: ${result.error}`);
         results.errors++;
@@ -341,16 +379,54 @@ async function main() {
     }
   }
   
-  console.log('\n📊 Summary:');
-  console.log(`   Images generated: ${results.imagesGenerated}`);
-  console.log(`   Frontmatter updated: ${results.frontmatterUpdated}`);
-  console.log(`   Total updated: ${results.updated}`);
-  console.log(`   Skipped: ${results.skipped}`);
-  console.log(`   Errors: ${results.errors}`);
+  // Show summary in test suite format
+  const filesChecked = markdownFiles.length;
+  const passing = filesChecked - results.imagesGenerated - results.defaultsDetected - results.errors;
+  
+  if (quiet) {
+    // In quiet mode, don't output summary - caller will format it
+    // Just show warnings for defaults if any
+    if (results.defaultsDetected > 0) {
+      results.defaultFiles.forEach(file => {
+        console.log(`  ⚠️  Default OG image: ${file} (no ogImage set)`);
+      });
+    }
+  } else {
+    // Full summary for CLI usage
+    console.log('\n📊 Summary:');
+    console.log(`   Images generated: ${results.imagesGenerated}`);
+    console.log(`   Frontmatter updated: ${results.frontmatterUpdated}`);
+    console.log(`   Total updated: ${results.updated}`);
+    console.log(`   Skipped: ${results.skipped}`);
+    if (results.defaultsDetected > 0) {
+      console.log(`   ⚠️  Default OG images: ${results.defaultsDetected}`);
+    }
+    console.log(`   Errors: ${results.errors}`);
+  }
   
   if (results.errors > 0) {
-    process.exit(1);
+    if (quiet) {
+      process.exit(1);
+    } else {
+      process.exit(1);
+    }
   }
+  
+  // Return result object for programmatic use
+  return {
+    frontmatterUpdated: results.updated > 0,
+    imagesGenerated: results.imagesGenerated,
+    defaultsDetected: results.defaultsDetected,
+    filesChecked: filesChecked,
+    errors: results.errors,
+    generatedFiles: results.generatedFiles,
+    defaultFiles: results.defaultFiles
+  };
+}
+
+// CLI entry point
+async function main() {
+  await generateOgImages({ quiet: false });
 }
 
 // Run if called directly
@@ -361,5 +437,5 @@ if (require.main === module) {
   });
 }
 
-module.exports = { processFile, generateOgImage, renderOgImageHtml };
+module.exports = { generateOgImages, processFile, generateOgImage, renderOgImageHtml };
 
