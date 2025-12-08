@@ -11,6 +11,7 @@
     "deploy": "node scripts/deploy/deploy.js",
     "update-docs": "node scripts/content/update-eleventy-docs.js",
     "changelog": "node scripts/content/generate-changelog.js",
+    "convert-pdf": "node scripts/content/convert-pdf-pages.js",
     "generate-og-images": "node scripts/content/generate-og-images.js",
     "security-audit": "node scripts/security/security-audit.js"
   },

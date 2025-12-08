@@ -19,6 +19,7 @@
 const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
+const { loadDotenvSilently } = require('../utils/env-utils');
 
 
 // Check if rsync is available
@@ -121,11 +122,7 @@ function deploy(config, siteDomain, dryRun) {
 
   // Load .env configuration (suppress dotenv debug messages)
   if (fs.existsSync('.env')) {
-    // Temporarily suppress console.log to hide dotenv debug message
-    const originalLog = console.log;
-    console.log = () => {};
-    require('dotenv').config();
-    console.log = originalLog;
+    loadDotenvSilently();
     
     config.host = process.env.DEPLOY_HOST || config.host;
     config.username = process.env.DEPLOY_USERNAME || config.username;

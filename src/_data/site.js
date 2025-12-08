@@ -1,6 +1,7 @@
 // Load environment variables if .env exists
 if (require('fs').existsSync('.env')) {
-  require('dotenv').config();
+  const { loadDotenvSilently } = require('../../scripts/utils/env-utils');
+  loadDotenvSilently();
 }
 
 module.exports = function() {

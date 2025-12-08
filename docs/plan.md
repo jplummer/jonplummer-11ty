@@ -3,12 +3,12 @@
 ## What remains
 
 ### Portfolio 💎 
+- [x] Establish method for PDF-based portfolio post offering, to enable…
 - [ ] **Additional portfolio content**
-  - [ ] Add Invoca interview presentation as portfolio piece
-  - [ ] Expand Cayuse accomplishments portfolio piece
+  - [x] Expand Cayuse accomplishments portfolio piece
   - [ ] Expand product trio portfolio piece
-  - [ ] MAYBE: Put descriptions on the main portfolio page (from item frontmatter)
-  - [ ] MAYBE: Add links to key articles on the portfolio page (since it is a leader's portfolio)
+  - [ ] Add Invoca interview presentation as portfolio piece
+  - [ ] Put descriptions on the main portfolio page (from item frontmatter)
 
 ### Design & Polish 
 - [x] improve generated ogImage styling

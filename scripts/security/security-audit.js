@@ -27,10 +27,11 @@
  */
 
 const fs = require('fs');
+const { loadDotenvSilently } = require('../utils/env-utils');
 
 // Load environment variables if .env exists
 if (fs.existsSync('.env')) {
-  require('dotenv').config();
+  loadDotenvSilently();
 }
 
 const { createTestResult, addFile, addIssue, addWarning, finalizeTestResult } = require('../utils/test-result-builder');

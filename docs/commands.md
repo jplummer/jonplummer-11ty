@@ -28,6 +28,7 @@
 
 - `npm run update-docs` - Update cached Eleventy documentation
 - `npm run changelog` - Generate CHANGELOG.md from git history
+- `npm run convert-pdf` - Convert PDF pages to images for portfolio items
 - `npm run generate-og-images` - Generate Open Graph images for posts and pages
 - `npm run security-audit` - Run security audit and maintenance checks
 
@@ -175,6 +176,37 @@ Run this periodically to keep the cached docs up to date with the latest 11ty fe
 The changelog is automatically generated from the git commit history, organized by date (newest first). It includes all commits from the beginning of the project and follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format.
 
 The changelog is automatically regenerated before each deployment. You can also run this command manually whenever you want to update it.
+
+### 📄 PDF Page Conversion
+
+- `npm run convert-pdf <pdf-file> [year/month]` - Convert PDF pages to images for portfolio display
+
+**For authoring usage** (how to use PDFs in portfolio items), see [authoring.md](authoring.md#pdf-pages).
+
+This script converts each page of a PDF to a PNG image for page-by-page display in portfolio items. The images are saved to `src/assets/images/[year]/[month]/` and the PDF is copied to `src/assets/pdfs/[year]/[month]/` for reference.
+
+#### Usage
+
+```bash
+npm run convert-pdf "Product Trio.pdf" 2022/12
+```
+
+The `year/month` parameter is optional. If omitted, it defaults to the current year/month.
+
+#### What It Does
+
+1. Converts each PDF page to a PNG image
+2. Saves images to `src/assets/images/[year]/[month]/` with naming pattern `[slug]-page-[number].png`
+3. Copies the PDF to `src/assets/pdfs/[year]/[month]/`
+4. Generates a markdown template with figure elements for each page
+
+#### Output
+
+The script outputs a markdown template that you can copy into your portfolio item markdown file. The template includes:
+- Figure elements for each page with placeholder notes
+- A link to download the full PDF
+
+You then add notes for each page in the `<figcaption>` elements.
 
 ### 🖼️ Open Graph Image Generation
 

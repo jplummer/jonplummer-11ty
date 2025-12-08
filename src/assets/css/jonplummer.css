@@ -47,6 +47,7 @@
   /* Colors - based on DR10 palette, adjusted for WCAG AA contrast */
   --text-color: #2a2a2a; /* darker for contrast on #d3d8d2 background */
   --text-color-light: #5a5a5a;
+  --border-color: #d0d0d0; /* subtle border for images */
   --background-color: #d3d8d2;
   --content-background-color: #fff;
   --link-color: #e6423a;
@@ -60,6 +61,7 @@
   :root {
     --text-color: #e0e0e0;
     --text-color-light: #b0b0b0;
+    --border-color: #4a4a4a; /* subtle border for images in dark mode */
     --background-color: #1a1a1a;
     --content-background-color: #2d2d2d;
     --link-color: #ff6b6b; /* lighter version of DR10 red #e6423a */
@@ -511,6 +513,7 @@ article.portfolio-detail section > p:has(> img:only-child) img,
 article.portfolio-detail section > figure img {
   width: 100%;
   height: auto;
+  border: 1px solid var(--border-color);
 }
 
 /* Captions align with the text column */

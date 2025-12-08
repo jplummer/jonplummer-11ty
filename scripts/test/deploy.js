@@ -19,12 +19,13 @@
 const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
+const { loadDotenvSilently } = require('../utils/env-utils');
 
 console.log('🔍 Testing rsync deployment connectivity...\n');
 
 // Load environment variables
 if (fs.existsSync('.env')) {
-  require('dotenv').config();
+  loadDotenvSilently();
   console.log('✅ .env file found and loaded');
 } else {
   console.log('❌ .env file not found');
