@@ -1,5 +1,12 @@
 All notable changes to this project are documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to chronological ordering (newest first).
 
+## 2025-12-07
+
+- Optimize deploy output and eliminate redundant builds
+- Update CHANGELOG.md and README.md
+- Add PDF page-by-page display for portfolio items
+- Reduce build verbosity and add animated spinner
+
 ## 2025-12-06
 
 - Improve test output formatting and UX

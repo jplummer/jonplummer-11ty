@@ -4,4 +4,7 @@
         <img src="/assets/images/{{ post.data.coverImage }}" alt="{{ post.data.title | default('Portfolio item') }}">
     </a>
     <p><a href="{{ post.url }}" rel="bookmark">{{ post.data.title | smartquotes | stripHtml }}</a></p>
+    {% if post.data.description %}
+    <p class="portfolio-item-description">{{ post.data.description | smartquotes | stripHtml }}</p>
+    {% endif %}
 </article>

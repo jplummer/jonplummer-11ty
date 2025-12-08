@@ -571,6 +571,7 @@ article.portfolio-item {
   flex-direction: column;
   gap: var(--spacing-xs);
   padding-bottom: 0;
+  margin-bottom: var(--spacing-lg);
 }
 
 article.portfolio-item img {
@@ -585,6 +586,14 @@ article.portfolio-item p {
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-sm);
   margin: 0;
+}
+
+article.portfolio-item p.portfolio-item-description {
+  font-size: var(--font-size-xs);
+  font-weight: normal;
+  line-height: var(--line-height-xs);
+  color: var(--text-color-light);
+  margin-top: var(--spacing-xs);
 }
 
 /* Portrait Grid Container */

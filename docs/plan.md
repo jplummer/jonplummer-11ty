@@ -2,13 +2,15 @@
 
 ## What remains
 
-### Portfolio 💎 
+### Portfolio 💎
 - [x] Establish method for PDF-based portfolio post offering, to enable…
 - [ ] **Additional portfolio content**
   - [x] Expand Cayuse accomplishments portfolio piece
-  - [ ] Expand product trio portfolio piece
-  - [ ] Add Invoca interview presentation as portfolio piece
-  - [ ] Put descriptions on the main portfolio page (from item frontmatter)
+  - [x] Expand product trio portfolio piece
+  - [x] Add Invoca interview presentation as portfolio piece
+  - [x] Put descriptions on the main portfolio page (from item frontmatter)
+  - [ ] Add/expand/investigate https://jonplummer.com/2022/11/01/conference-talk-ux-philosophy/
+  - [ ] look through talks for more talks!
 
 ### Design & Polish 
 - [x] improve generated ogImage styling
