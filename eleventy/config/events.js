@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require('fs');
+const { SPINNER_FRAMES } = require('../../scripts/utils/spinner-utils');
 
 /**
  * Configures Eleventy event handlers.
@@ -12,8 +13,6 @@ function configureEvents(eleventyConfig) {
   let buildStartTime;
   let spinnerInterval;
 
-  // Spinner characters for animation
-  const spinnerChars = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
   let spinnerIndex = 0;
 
   // Helper to clean up spinner
@@ -45,8 +44,8 @@ function configureEvents(eleventyConfig) {
       
       // Start spinner animation
       spinnerInterval = setInterval(() => {
-        spinnerIndex = (spinnerIndex + 1) % spinnerChars.length;
-        process.stdout.write(`\rBuilding... ${spinnerChars[spinnerIndex]}`);
+        spinnerIndex = (spinnerIndex + 1) % SPINNER_FRAMES.length;
+        process.stdout.write(`\rBuilding... ${SPINNER_FRAMES[spinnerIndex]}`);
       }, 100);
     }
   });

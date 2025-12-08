@@ -4,6 +4,7 @@ const { spawn } = require('child_process');
 const path = require('path');
 const { printOverallSummary, getTestEmoji, getTestDisplayName } = require('./utils/reporting-utils');
 const { formatCompact, formatVerbose, formatBuild } = require('./utils/test-formatter');
+const { SPINNER_FRAMES } = require('./utils/spinner-utils');
 
 // Map test types to their script files
 const testTypes = {
@@ -67,7 +68,6 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
     let spinnerInterval = null;
     let statusLine = '';
     let progressInfo = '';
-    const spinnerFrames = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
     let spinnerFrame = 0;
     
     // Always show spinner for all tests
@@ -77,10 +77,10 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
     
     // Start spinner animation
     spinnerInterval = setInterval(() => {
-      const spinner = spinnerFrames[spinnerFrame];
+      const spinner = SPINNER_FRAMES[spinnerFrame];
       const fullLine = progressInfo ? `${statusLine} (${progressInfo})` : statusLine;
       process.stdout.write(`\r${spinner} ${fullLine}`);
-      spinnerFrame = (spinnerFrame + 1) % spinnerFrames.length;
+      spinnerFrame = (spinnerFrame + 1) % SPINNER_FRAMES.length;
     }, 100);
     
     // Set environment variable to indicate compact mode

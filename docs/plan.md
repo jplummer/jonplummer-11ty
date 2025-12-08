@@ -23,6 +23,7 @@
   - [ ] vertical rhythm in typographic spacing https://edgdesign.co/blog/baseline-grids-in-css https://webtypography.net/toc#2.2
 - [ ] https://www.inkwell.ie/typography/recommendations.html
   - [ ] other items from https://webtypography.net/?
+- [ ] Fool around with terminal spinners a la https://github.com/sindresorhus/cli-spinners/blob/main/spinners.json
 
 ### CMS
 
