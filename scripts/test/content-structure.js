@@ -253,9 +253,8 @@ function validateContentStructure() {
       });
     });
 
-    // Track slugs for duplicate checking
-    const fileNameCheckForSlug = validateFileName(file);
-    const slugToTrack = frontMatter.slug || (fileNameCheckForSlug.valid ? fileNameCheckForSlug.expectedSlug : null);
+    // Track slugs for duplicate checking (reuse fileNameCheck from above)
+    const slugToTrack = frontMatter.slug || (fileNameCheck.valid ? fileNameCheck.expectedSlug : null);
 
     if (slugToTrack) {
       if (slugMap.has(slugToTrack)) {

@@ -159,7 +159,7 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
             console.error(`  Test: ${testType}`);
             console.error(`  Error: ${e.message}`);
           }
-        }
+          }
       }
       
       // Don't output raw stdout if JSON was detected - we'll format it below
@@ -194,13 +194,10 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
         return summaryParts.join(', ');
       }
       
-      // Finalize summary if we have JSON result
+      // Use summary from JSON result (already finalized by outputResult())
       let finalSummary = summary;
       if (isJsonFormat && jsonResult) {
-        // Ensure summary is finalized (safe to call multiple times)
-        const { finalizeTestResult } = require('./utils/test-result-builder');
-        finalizeTestResult(jsonResult);
-        // Use finalized summary
+        // jsonResult.summary is already finalized by outputResult() before stringification
         finalSummary = jsonResult.summary || summary;
       }
       

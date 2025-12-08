@@ -71,10 +71,8 @@ function reconstructFile(originalContent, frontMatter, body, options = {}) {
     yamlContent = fixedLines.join('\n');
   }
   
-  if (!match) {
-    return `---\n${yamlContent}---\n${body}`;
-  }
-  
+  // Reconstruct file with front matter and body
+  // Note: match check was removed as both branches returned the same value
   return `---\n${yamlContent}---\n${body}`;
 }
 

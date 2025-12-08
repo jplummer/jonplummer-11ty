@@ -83,7 +83,7 @@ function formatVerbose(result, options = {}) {
   output.push(formatCompact(result));
   output.push('');
   
-  // Only show detailed results if there are issues or warnings
+  // Show detailed results if there are issues/warnings, or if all files passed (for smoke testing)
   if (summary.issues > 0 || summary.warnings > 0) {
     // Global issues (duplicates, etc.) - show first as they're often critical
     if (result.globalIssues && result.globalIssues.length > 0) {
@@ -195,6 +195,9 @@ function formatVerbose(result, options = {}) {
     
     // Suggestions come last
     output.push('💡 Tip: Try --group-by type to see issues grouped by type (useful for systematic fixes)');
+  } else {
+    // All tests passed - show a brief confirmation for verbose mode
+    output.push('✅ All files passed validation with no issues or warnings.');
   }
   
   return output.join('\n');

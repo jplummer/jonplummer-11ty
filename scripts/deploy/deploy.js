@@ -74,12 +74,19 @@ function deploy(config, siteDomain, dryRun) {
 
     // Execute rsync with native output (SSH key authentication is automatic)
     try {
+      if (dryRun) {
+        console.log('📋 rsync dry-run output (no files will be transferred):');
+        console.log('─'.repeat(60));
+      }
+      
       execSync(rsyncCommand.join(' '), {
         stdio: 'inherit' // Show rsync's native output
       });
 
       if (dryRun) {
-        console.log('\n✅ 🚀 Deploy: dry run completed (no files deployed)');
+        console.log('─'.repeat(60));
+        console.log('✅ 🚀 Deploy: dry run completed (no files deployed)');
+        console.log('   This was a test run only - no changes were made to the server.');
       } else {
         console.log(`\n✅ 🚀 Deploy: completed`);
         console.log(`   🌐 Site live at: https://${siteDomain}`);
@@ -140,10 +147,10 @@ function deploy(config, siteDomain, dryRun) {
 
   // Regenerate changelog before deployment
   console.log('📋 Regenerating CHANGELOG.md...');
+  let changelogChanged = false;
   try {
     // Check if changelog exists and get its content before regeneration
     const changelogPath = path.join(process.cwd(), 'CHANGELOG.md');
-    let changelogChanged = false;
     let oldContent = null;
     
     if (fs.existsSync(changelogPath)) {
@@ -169,6 +176,8 @@ function deploy(config, siteDomain, dryRun) {
   } catch (error) {
     console.log('⚠️  📋 Changelog: could not regenerate (continuing anyway)');
     console.warn(`   ${error.message}\n`);
+    // If changelog generation failed, assume it didn't change
+    changelogChanged = false;
   }
 
   // Generate OG images before deploy (incremental - only generates what's needed)
@@ -234,7 +243,16 @@ function deploy(config, siteDomain, dryRun) {
   }
 
   // Build site once (includes changelog + any OG image frontmatter updates)
-  const rebuildReason = ogResult && ogResult.frontmatterUpdated ? 'frontmatter updated' : 'changelog updated';
+  // Determine rebuild reason based on what actually changed
+  let rebuildReason = 'rebuilding';
+  const frontmatterUpdated = ogResult && ogResult.frontmatterUpdated;
+  if (changelogChanged && frontmatterUpdated) {
+    rebuildReason = 'changelog and frontmatter updated';
+  } else if (changelogChanged) {
+    rebuildReason = 'changelog updated';
+  } else if (frontmatterUpdated) {
+    rebuildReason = 'frontmatter updated';
+  }
   console.log(`🏗️  Building site (${rebuildReason})...`);
   try {
     execSync('npm run build --silent -- --quiet', { stdio: 'pipe' });
