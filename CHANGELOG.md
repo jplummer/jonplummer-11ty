@@ -6,6 +6,9 @@ All notable changes to this project are documented in this file. The format is b
 - Update CHANGELOG.md and README.md
 - Add PDF page-by-page display for portfolio items
 - Reduce build verbosity and add animated spinner
+- Add portfolio descriptions to index and improve portfolio items
+- Convert links-yaml test to unified format and clean up old format code
+- Extract spinner frames to shared utility for easier experimentation
 
 ## 2025-12-06
 
