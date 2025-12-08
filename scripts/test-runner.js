@@ -23,6 +23,7 @@ const testTypes = {
 // Suitable for pre-commit hooks or frequent validation
 const fastTests = [
   'html',
+  'links-yaml',
   'internal-links',
   'content-structure',
   'markdown',
@@ -34,6 +35,7 @@ const fastTests = [
 // Tests to run for "test all" (includes all tests, including slow ones)
 const allTests = [
   'html',
+  'links-yaml',
   'internal-links',
   'content-structure',
   'markdown',
@@ -152,27 +154,16 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
               filesWithIssues: jsonResult.summary?.filesWithIssues || 0
             };
           } catch (e) {
-            // JSON parse failed, fall back to old format
-            console.error('Warning: Failed to parse JSON output, falling back to old format');
+            // JSON parse failed - this shouldn't happen with new format tests
+            console.error('Warning: Failed to parse JSON output from test');
+            console.error(`  Test: ${testType}`);
+            console.error(`  Error: ${e.message}`);
           }
         }
-      } else {
-        // Old format: output was passed through, check for summary file
-        const summaryPath = path.join(__dirname, 'test', `.${testType}-summary.json`);
-        if (fs.existsSync(summaryPath)) {
-          try {
-            summary = JSON.parse(fs.readFileSync(summaryPath, 'utf8'));
-            // Clean up the summary file
-            fs.unlinkSync(summaryPath);
-          } catch (e) {
-            // Ignore errors reading summary
-          }
-        }
-        
       }
       
       // Don't output raw stdout if JSON was detected - we'll format it below
-      // Only output raw stdout for old format (no JSON markers)
+      // For tests without JSON markers (like deploy.js), pass through stdout directly
       if (stdoutData && !isJsonFormat) {
         process.stdout.write(stdoutData);
       }
@@ -243,15 +234,11 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
           process.stdout.write(`\r\x1b[K${formattedOutput}\n`);
         }
       } else if (!showStatus) {
-        // Old format: output was already passed through for individual runs
-        // (stdout was written directly, not captured)
+        // Non-JSON output (e.g., deploy.js): output was already passed through for individual runs
+        // No additional formatting needed
       } else {
-        // Old format for group runs: update same line with result icon and summary
-        const summaryString = buildSummaryString(finalSummary);
-        const finalLine = `${resultIcon} ${emoji} ${displayName}: ${summaryString}`;
-        // Clear spinner line and write final result on same line
-        // Use ANSI escape code to clear from cursor to end of line, then write new content
-        process.stdout.write(`\r\x1b[K${finalLine}\n`);
+        // Non-JSON output in group runs: just clear spinner, output was already shown
+        process.stdout.write(`\r\x1b[K`);
       }
       
       if (code === 0) {

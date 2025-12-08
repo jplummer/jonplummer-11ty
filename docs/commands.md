@@ -42,6 +42,7 @@
 
 **Fast Tests** (suitable for frequent validation):
 - `html` - Check HTML validity (structure, syntax, deprecated elements)
+- `links-yaml` - Validate links.yaml structure and format
 - `internal-links` - Test only internal links (critical)
 - `content-structure` - Test content structure
 - `markdown` - Validate markdown syntax and structure
@@ -53,7 +54,6 @@
 - `accessibility` - Test accessibility using axe-core - launches browser
 
 **Other Tests**:
-- `links-yaml` - Validate links.yaml structure and format
 - `deploy` - Test deployment (environment, local build check, dependencies, SSH, remote directory, rsync dry-run)
 
 #### Test Suite Focus
@@ -67,24 +67,24 @@ Use `npm run test fast` for quick validation during development. Use `npm run te
 
 #### Test Suite Architecture
 
-The test suite uses a centralized JSON output format with a formatter system:
+The test suite uses a centralized JSON output format with a formatter system. All validation tests use the unified format:
 
-- **test-result-builder.js**: Utilities for building structured JSON test results
+- **test-result-builder.js**: Utilities for building structured JSON test results (`createTestResult`, `addFile`, `addIssue`, `addWarning`, `outputResult`)
 - **test-formatter.js**: Centralized formatter that converts JSON to human-readable output
-- **test-runner.js**: Orchestrates test execution, detects JSON output, and formats results
+- **test-runner.js**: Orchestrates test execution, detects JSON output via markers (`__TEST_JSON_START__`/`__TEST_JSON_END__`), and formats results
 
 **Output Formats**:
 - **Compact** (default for group runs): Succinct summary showing files checked, passing, issues, warnings
 - **Verbose** (default for individual runs): Detailed output with issue type summary and file-by-file details
-- **Build** (`--format build`): Blocking issues only, clear pass/fail for CI/CD
+- **Build** (`--format build`): Blocking issues only, clear pass/fail for CI/CD (treats critical warnings as blocking)
 - **Type grouping** (`--group-by type`): Alternative view grouping issues by type for systematic fixes
 
 **Shared Utilities**:
 - **html-utils.js**: Cheerio-based HTML parsing (replaces fragile regex)
 - **validation-utils.js**: Common validation functions (title, description, URL, date, slug)
-- **test-base.js**: Common file operations (checking `_site` exists, finding files, reading files)
+- **file-utils.js**: Common file operations (finding markdown files, checking `_site` exists)
 
-All tests output structured JSON that is automatically formatted by the test runner. This enables easy iteration on output design without modifying individual test scripts.
+All validation tests output structured JSON that is automatically formatted by the test runner. This enables easy iteration on output design without modifying individual test scripts. The `deploy` test is a special case (connectivity test) that outputs directly to console rather than using the JSON format.
 
 #### links.yaml Validation
 

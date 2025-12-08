@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
 const { validateDate, validateUrl, validateTitle } = require('../utils/validation-utils');
-const { printSummary, exitWithResults, getTestEmoji } = require('../utils/reporting-utils');
+const { createTestResult, addFile, addIssue, addWarning, outputResult } = require('../utils/test-result-builder');
 
 // Validate description (optional but should be valid if present)
 function validateDescription(description) {
@@ -67,12 +67,19 @@ function validateLink(link, linkIndex, dateKey) {
 function validateLinksYaml() {
   const linksFile = './src/_data/links.yaml';
 
+  // Create test result
+  const result = createTestResult('links-yaml', 'Links YAML Validation');
+  const fileObj = addFile(result, 'src/_data/links.yaml');
+
   if (!fs.existsSync(linksFile)) {
-    console.log(`❌ File not found: ${linksFile}`);
+    addIssue(fileObj, {
+      severity: 'error',
+      type: 'file-not-found',
+      message: `File not found: ${linksFile}`
+    });
+    outputResult(result);
     process.exit(1);
   }
-
-  console.log('📋 Validating links.yaml structure...\n');
 
   const content = fs.readFileSync(linksFile, 'utf8');
   let data;
@@ -81,27 +88,44 @@ function validateLinksYaml() {
   try {
     data = yaml.load(content, { schema: yaml.JSON_SCHEMA });
   } catch (error) {
-    console.log(`❌ YAML syntax error: ${error.message}`);
+    addIssue(fileObj, {
+      severity: 'error',
+      type: 'yaml-syntax-error',
+      message: `YAML syntax error: ${error.message}`
+    });
+    outputResult(result);
     process.exit(1);
   }
 
   if (!data || typeof data !== 'object') {
-    console.log('❌ Invalid structure: root must be an object');
+    addIssue(fileObj, {
+      severity: 'error',
+      type: 'invalid-structure',
+      message: 'Invalid structure: root must be an object'
+    });
+    outputResult(result);
     process.exit(1);
   }
 
-  const allIssues = [];
   const dateKeys = Object.keys(data);
 
   if (dateKeys.length === 0) {
-    console.log('⚠️  Warning: No date entries found');
+    addWarning(fileObj, {
+      severity: 'warning',
+      type: 'empty-file',
+      message: 'No date entries found'
+    });
   }
 
   // Validate each date entry
   for (const dateKey of dateKeys) {
     const dateCheck = validateDate(dateKey);
     if (!dateCheck.valid) {
-      allIssues.push(`Date key "${dateKey}": ${dateCheck.error}`);
+      addIssue(fileObj, {
+        severity: 'error',
+        type: 'invalid-date-key',
+        message: `Date key "${dateKey}": ${dateCheck.error}`
+      });
       continue;
     }
 
@@ -109,52 +133,50 @@ function validateLinksYaml() {
 
     // Check that date value is an array
     if (!Array.isArray(links)) {
-      allIssues.push(`Date "${dateKey}": Value must be an array`);
+      addIssue(fileObj, {
+        severity: 'error',
+        type: 'invalid-date-value',
+        message: `Date "${dateKey}": Value must be an array`
+      });
       continue;
     }
 
     if (links.length === 0) {
-      console.log(`   ⚠️  "${dateKey}": Empty array (no links)`);
+      addWarning(fileObj, {
+        severity: 'warning',
+        type: 'empty-array',
+        message: `Date "${dateKey}": Empty array (no links)`
+      });
       continue;
     }
 
     // Validate each link in the array
     links.forEach((link, index) => {
       if (!link || typeof link !== 'object') {
-        allIssues.push(`Date "${dateKey}", Link ${index + 1}: Must be an object`);
+        addIssue(fileObj, {
+          severity: 'error',
+          type: 'invalid-link-object',
+          message: `Date "${dateKey}", Link ${index + 1}: Must be an object`
+        });
         return;
       }
 
       const linkIssues = validateLink(link, index, dateKey);
-      linkIssues.forEach(issue => {
-        allIssues.push(`Date "${dateKey}", ${issue}`);
+      linkIssues.forEach(issueMessage => {
+        addIssue(fileObj, {
+          severity: 'error',
+          type: 'link-validation-error',
+          message: `Date "${dateKey}", ${issueMessage}`
+        });
       });
     });
   }
 
-  // Report results
-  const totalLinks = dateKeys.reduce((sum, key) => {
-    const links = data[key];
-    return sum + (Array.isArray(links) ? links.length : 0);
-  }, 0);
+  // Output JSON result (formatter will handle display)
+  outputResult(result);
 
-  if (allIssues.length > 0) {
-    console.log('❌ Validation issues found:\n');
-    allIssues.forEach(issue => {
-      console.log(`   ${issue}`);
-    });
-  }
-
-  printSummary('Links YAML Validation', getTestEmoji('links-yaml'), [
-    { label: 'Date entries', value: dateKeys.length },
-    { label: 'Total links', value: totalLinks },
-    { label: 'Issues', value: allIssues.length }
-  ]);
-
-  exitWithResults(allIssues.length, 0, {
-    testType: 'links.yaml validation',
-    successMessage: '\n✅ links.yaml is valid!'
-  });
+  // Exit with appropriate code (errors block, warnings don't)
+  process.exit(result.summary.issues > 0 ? 1 : 0);
 }
 
 // Run validation

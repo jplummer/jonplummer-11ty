@@ -40,9 +40,11 @@ The Eleventy configuration is organized into modules for maintainability:
   - No specific attention for garbage platforms like Facebook and Xitter, open standards only
 - **Automated Testing**: Comprehensive test suite that checks:
   - HTML validity and structure
+  - Links YAML structure and format
   - Broken internal links (critical for site navigation)
   - Accessibility (WCAG compliance via axe-core)
   - SEO meta tags
+  - Open Graph images
   - RSS feed validity
   - Markdown syntax and structure
   - Content structure validation
