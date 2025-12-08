@@ -7,6 +7,61 @@ const fs = require('fs');
  * @param {object} eleventyConfig - Eleventy configuration object
  */
 function configureEvents(eleventyConfig) {
+  // Check if we're in quiet mode (via command line args or config)
+  const isQuiet = process.argv.includes('--quiet') || process.env.ELEVENTY_QUIET === 'true';
+  let buildStartTime;
+  let spinnerInterval;
+
+  // Spinner characters for animation
+  const spinnerChars = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
+  let spinnerIndex = 0;
+
+  // Helper to clean up spinner
+  function cleanupSpinner() {
+    if (spinnerInterval) {
+      clearInterval(spinnerInterval);
+      spinnerInterval = null;
+      // Clear the spinner line
+      process.stdout.write('\r' + ' '.repeat(20) + '\r');
+    }
+  }
+
+  // Clean up spinner on process exit or error
+  process.on('exit', cleanupSpinner);
+  process.on('SIGINT', () => {
+    cleanupSpinner();
+    process.exit(0);
+  });
+  process.on('SIGTERM', () => {
+    cleanupSpinner();
+    process.exit(0);
+  });
+
+  // Minimal progress indicator at build start
+  eleventyConfig.on("eleventy.before", () => {
+    if (isQuiet) {
+      buildStartTime = Date.now();
+      process.stdout.write('Building... ');
+      
+      // Start spinner animation
+      spinnerInterval = setInterval(() => {
+        spinnerIndex = (spinnerIndex + 1) % spinnerChars.length;
+        process.stdout.write(`\rBuilding... ${spinnerChars[spinnerIndex]}`);
+      }, 100);
+    }
+  });
+
+  // Minimal progress indicator at build end
+  eleventyConfig.on("eleventy.after", ({ results }) => {
+    if (isQuiet && buildStartTime) {
+      cleanupSpinner();
+      
+      const duration = ((Date.now() - buildStartTime) / 1000).toFixed(1);
+      const fileCount = results ? results.length : 0;
+      console.log(`✓ Built ${fileCount} file${fileCount !== 1 ? 's' : ''} in ${duration}s`);
+    }
+  });
+
   // Generate redirect rules before build
   eleventyConfig.on("eleventy.beforeBuild", () => {
     try {

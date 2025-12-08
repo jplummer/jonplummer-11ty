@@ -4,8 +4,10 @@
   "main": "index.js",
   "scripts": {
     "test": "node scripts/test-runner.js",
-    "build": "eleventy",
-    "dev": "eleventy --serve --watch",
+    "build": "eleventy --quiet",
+    "build:verbose": "eleventy",
+    "dev": "eleventy --serve --watch --quiet",
+    "dev:verbose": "eleventy --serve --watch",
     "clean": "rm -rf _site",
     "validate": "node scripts/test-runner.js html",
     "deploy": "node scripts/deploy/deploy.js",
