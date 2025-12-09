@@ -90,7 +90,7 @@ function main() {
   exitWithResults(results, 0, {
     testType: 'Quote Post Descriptions',
     issueMessage: '\n❌ Errors occurred during processing.',
-    successMessage: '\n✅ Processing completed successfully.'
+    successMessage: '\n✅ Processing completed.'
   });
 }
 
@@ -100,4 +100,3 @@ if (require.main === module) {
 }
 
 module.exports = { processPostFile };
-

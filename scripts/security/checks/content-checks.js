@@ -32,7 +32,7 @@ async function checkRedirects(results, addFinding) {
             findRedirectFiles(fullPath);
           } else if (entry === 'index.html' || entry.endsWith('.html')) {
             const content = fs.readFileSync(fullPath, 'utf8');
-            if (content.includes('layout: redirect.njk') || content.includes('redirectUrl:')) {
+            if (content.includes('redirectUrl:')) {
               redirectFiles.push(fullPath);
             }
           }

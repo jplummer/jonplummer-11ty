@@ -184,4 +184,3 @@ if (require.main === module) {
 }
 
 module.exports = { extractDescription, processPostFile };
-
