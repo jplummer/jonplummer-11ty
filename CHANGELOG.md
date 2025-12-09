@@ -1,14 +1,20 @@
-All notable changes to this project are documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
+All notable changes to this project are documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to chronological ordering (newest first).
+
+## 2025-12-08
+
+- Typography improvements: modular scale, baseline grid, and print styles
+- Add spinners to deploy script for lengthy operations
 
 ## 2025-12-07
 
 - Optimize deploy output and eliminate redundant builds
-- Update CHANGELOG.md and README.md
 - Add PDF page-by-page display for portfolio items
 - Reduce build verbosity and add animated spinner
 - Add portfolio descriptions to index and improve portfolio items
 - Convert links-yaml test to unified format and clean up old format code
 - Extract spinner frames to shared utility for easier experimentation
+- Fix inefficiencies and improve test/deploy output clarity
+- Fix HTML validation error in Invoca interview post
 
 ## 2025-12-06
 
@@ -29,24 +35,22 @@ All notable changes to this project are documented in this file. The format is b
 - Update favicon setup to modern minimal standard
 - Refactor includes organization and simplify Open Graph tags
 - Refactor HEAD includes to eliminate redundancy and fix index page issues
-- Reduce whitespace in HEAD section
 
 ## 2025-12-03
 
 - Fix horizontal scrollbar on narrow viewports for articles with code blocks
 - Switch drafts from folder-based to frontmatter-based
-- refactor: modularize .eleventy.js configuration
-- refactor: unify exit handling and summary printing across all scripts
+- Modularize .eleventy.js configuration
+- Unify exit handling and summary printing across all scripts
 - Add date range titles to paginated pages
 
 ## 2025-11-30
 
 - Fix sitemap pagination to only include existing pages
 - Fix sitemap pagination, improve titles, and fix unescaped quotes
-- fix: upgrade dotenv and fix security audit npm outdated check
-- test: improve SEO validation for redirect pages and unescaped quotes
-- content: update redirect template and post content
-- docs: add periodic maintenance section and update plan
+- Upgrade dotenv and fix security audit npm outdated check
+- Improve SEO validation for redirect pages and unescaped quotes
+- Update redirect template and post content
 
 ## 2025-11-26
 
@@ -54,13 +58,12 @@ All notable changes to this project are documented in this file. The format is b
 - Security audit improvements and deployment fixes
 - Add security-audit-report.md to .gitignore
 - Reduce security audit scope for static site
-- fix: resolve HTML validation errors in changelog and code blocks
 - Enable smart quotes in markdown and titles
 - Refactor test suite and fix nested anchor issue
-- Refactor: Consolidate templates and utilities, fix test issues
-- docs: consolidate documentation and reduce redundancy
-- chore: downgrade dotenv from v17 to v16
-- fix: correct typo in now page
+- Consolidate templates and utilities, fix test issues
+- Consolidate documentation and reduce redundancy
+- Downgrade dotenv from v17 to v16
+- Correct typo in now page
 
 ## 2025-11-25
 
@@ -77,45 +80,44 @@ All notable changes to this project are documented in this file. The format is b
 ## 2025-11-23
 
 - Update content and fix markdown lint issues
-- feat: implement comprehensive SEO and OG image generation
-- docs: reorganize planning docs into subprojects directory
+- Implement comprehensive SEO and OG image generation
+- Reorganize planning docs into subprojects directory
 
 ## 2025-11-22
 
-- feat: add pre-deploy validation to prevent authoring mistakes
-- refactor: move h1 elements from content to template
-- feat: add new links to links feed
+- Add pre-deploy validation to prevent authoring mistakes
+- Move h1 elements from content to template
+- Add planning documentation for testing strategy
+- Add new links to links feed
 - Convert error pages to Markdown and unify link underlining
 - Fix meta description validation and add missing descriptions
-- Documentation updates: 3 commits
-- fix: fix markdown lint errors in post files
+- Fix markdown lint errors in post files
 
 ## 2025-11-20
 
-- feat: add portrait-grid utility for multi-column image layouts in portfolio details
-- style: apply portrait-grid to portfolio posts with portrait images
-- docs: update plan.md to reflect completed portfolio template work
+- Add portrait-grid utility for multi-column image layouts in portfolio details
+- Apply portrait-grid to portfolio posts with portrait images
 
 ## 2025-11-19
 
 - Refactor project structure and improve documentation
-- refactor: move _misc to structured docs/ folder
-- feat: implement dedicated portfolio detail layout with full-width images and siloed nav
-- style: refine portfolio layout - text aligns with article column, images full width
-- fix: ensure portfolio detail images span full grid while text stays in column
-- feat: implement image captions for portfolio items
-- refactor: update all portfolio items to use portfolio_detail layout
-- style: wrap all portfolio images in &lt;figure&gt; tags for consistent layout
-- feat: implement responsive portfolio grid layout
+- Move _misc to structured docs/ folder
+- Add AI agent instructions to README
+- Implement dedicated portfolio detail layout with full-width images and siloed nav
+- Refine portfolio layout - text aligns with article column, images full width
+- Ensure portfolio detail images span full grid while text stays in column
+- Implement image captions for portfolio items
+- Update all portfolio items to use portfolio_detail layout
+- Wrap all portfolio images in &lt;figure&gt; tags for consistent layout
+- Implement responsive portfolio grid layout
 - Add blog post about hidden site pages
 - General site updates and content cleanup
-- feat: add humans.txt and AI-blocking robots.txt
-- refactor: standardize all portfolio images to use HTML &lt;figure&gt; syntax
-- chore: deduplicate .gitignore entries
-- docs: add AI agent instructions to README
-- docs: add links to technologies in technologies.md
-- fix: move .htaccess to src/ so it gets copied to build
-- fix: ignore docs/ folder instead of deprecated _misc/
+- Add humans.txt and AI-blocking robots.txt
+- Standardize all portfolio images to use HTML &lt;figure&gt; syntax
+- Deduplicate .gitignore entries
+- Move .htaccess to src/ so it gets copied to build
+- Ignore docs/ folder instead of deprecated _misc/
+- Add links to technologies in technologies.md
 
 ## 2025-11-16
 
@@ -129,7 +131,6 @@ All notable changes to this project are documented in this file. The format is b
 - Add SEO meta descriptions to all posts and organize content scripts
 - Add post template for new blog posts
 - Add documentation maintenance scripts and reorganize project docs
-- Reorganize plan.md and make CHANGELOG.md a rendered page
 - Update documentation and deployment script
 
 ## 2025-11-01
@@ -151,10 +152,6 @@ All notable changes to this project are documented in this file. The format is b
 - Add 404 and 500 error pages with permalinks
 - Reorganize documentation: move color ideas to notes.md
 
-## 2025-10-19
-
-- Updated plan.md
-
 ## 2025-10-08
 
 - New post, cleanup scripts
@@ -174,7 +171,6 @@ All notable changes to this project are documented in this file. The format is b
 - Fix feed issues
 - Update deploy.js
 - More tweaks to deploy scripts
-- Trailing whitespace and content
 - Vertical rhythm
 - Sitemap generation
 - Refine test scripts
@@ -198,7 +194,7 @@ All notable changes to this project are documented in this file. The format is b
 
 ## 2025-09-20
 
-- htaccess
+- Htaccess
 - Redirect /feed/
 - Update .gitignore
 - Simplify htaccess
@@ -213,13 +209,11 @@ All notable changes to this project are documented in this file. The format is b
 - Tests
 - Link checking refinements
 - Improved link checking
-- SFTP –&gt; rsync
+- SFTP –> rsync
 - Documentation cleanup
 - Paging fixes
 - Cleanup unnecessary files
 - Dark mode
-- Updated plan
-- Updated plan
 
 ## 2025-09-13
 
@@ -231,11 +225,10 @@ All notable changes to this project are documented in this file. The format is b
 ## 2025-09-07
 
 - Pagination and single posts
-- Reduced whitespace in lists
 
 ## 2025-09-06
 
-- index pagination
+- Index pagination
 
 ## 2025-09-05
 
@@ -254,11 +247,9 @@ All notable changes to this project are documented in this file. The format is b
 - Copied in images from wp.local project
 - Building up templates and includes
 - Added post and portfolio tags to posts
-- Migrating tasks to plan.md
 
 ## 2025-08-27
 
 - Initial commit
-- Update .gitignore
 - Update .gitignore
 
