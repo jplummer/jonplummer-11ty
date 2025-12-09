@@ -16,10 +16,11 @@
  * - --dry-run: Run all checks and show what would be deployed, but don't actually deploy
  */
 
-const { execSync } = require('child_process');
+const { execSync, spawn } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const { loadDotenvSilently } = require('../utils/env-utils');
+const { SPINNER_FRAMES } = require('../utils/spinner-utils');
 
 
 // Check if rsync is available
@@ -32,7 +33,98 @@ function checkRsync() {
   }
 }
 
-function deploy(config, siteDomain, dryRun) {
+// Run a command with a spinner
+function runWithSpinner(command, message, options = {}) {
+  return new Promise((resolve, reject) => {
+    const { showOutput = false, shell = false } = options;
+    let spinnerInterval = null;
+    let spinnerFrame = 0;
+    let stdoutData = '';
+    let stderrData = '';
+    
+    // Start spinner (write to stderr so it doesn't interfere with stdout)
+    spinnerInterval = setInterval(() => {
+      const spinner = SPINNER_FRAMES[spinnerFrame];
+      process.stderr.write(`\r${spinner} ${message}`);
+      spinnerFrame = (spinnerFrame + 1) % SPINNER_FRAMES.length;
+    }, 100);
+    
+    // Parse command for spawn
+    const commandParts = Array.isArray(command) ? command : command.split(' ');
+    const cmd = commandParts[0];
+    const args = commandParts.slice(1);
+    
+    // Spawn process
+    const child = spawn(cmd, args, {
+      stdio: ['inherit', 'pipe', 'pipe'],
+      shell: shell
+    });
+    
+    // Handle output
+    child.stdout.on('data', (data) => {
+      const text = data.toString();
+      stdoutData += text;
+      
+      if (showOutput) {
+        // Stop spinner when output arrives
+        if (spinnerInterval) {
+          clearInterval(spinnerInterval);
+          spinnerInterval = null;
+          // Clear spinner line
+          process.stderr.write('\r' + ' '.repeat(message.length + 3) + '\r');
+        }
+        process.stdout.write(text);
+      }
+    });
+    
+    child.stderr.on('data', (data) => {
+      const text = data.toString();
+      stderrData += text;
+      
+      if (showOutput) {
+        // Stop spinner when output arrives
+        if (spinnerInterval) {
+          clearInterval(spinnerInterval);
+          spinnerInterval = null;
+          // Clear spinner line
+          process.stderr.write('\r' + ' '.repeat(message.length + 3) + '\r');
+        }
+        process.stderr.write(text);
+      }
+    });
+    
+    // Handle completion
+    child.on('close', (code) => {
+      // Stop spinner
+      if (spinnerInterval) {
+        clearInterval(spinnerInterval);
+        spinnerInterval = null;
+      }
+      
+      // Clear spinner line
+      process.stderr.write('\r' + ' '.repeat(message.length + 3) + '\r');
+      
+      if (code === 0) {
+        resolve({ stdout: stdoutData, stderr: stderrData });
+      } else {
+        reject(new Error(`Command failed with exit code ${code}`));
+      }
+    });
+    
+    // Handle spawn errors
+    child.on('error', (error) => {
+      // Stop spinner
+      if (spinnerInterval) {
+        clearInterval(spinnerInterval);
+        spinnerInterval = null;
+      }
+      process.stderr.write('\r' + ' '.repeat(message.length + 3) + '\r');
+      reject(error);
+    });
+  });
+}
+
+async function deploy(config, siteDomain, dryRun) {
   try {
     // Check prerequisites
     if (!checkRsync()) {
@@ -72,31 +164,95 @@ function deploy(config, siteDomain, dryRun) {
       process.exit(1);
     }
 
-    // Execute rsync with native output (SSH key authentication is automatic)
-    try {
-      if (dryRun) {
-        console.log('📋 rsync dry-run output (no files will be transferred):');
-        console.log('─'.repeat(60));
-      }
+    // Execute rsync with spinner and buffered output
+    return new Promise((resolve, reject) => {
+      let spinnerInterval = null;
+      let spinnerFrame = 0;
+      let stdoutData = '';
+      let stderrData = '';
       
-      execSync(rsyncCommand.join(' '), {
-        stdio: 'inherit' // Show rsync's native output
+      // Start spinner
+      const spinnerMessage = dryRun ? 'Deploying (dry-run)...' : 'Deploying via rsync...';
+      spinnerInterval = setInterval(() => {
+        const spinner = SPINNER_FRAMES[spinnerFrame];
+        process.stdout.write(`\r${spinner} ${spinnerMessage}`);
+        spinnerFrame = (spinnerFrame + 1) % SPINNER_FRAMES.length;
+      }, 100);
+      
+      // Spawn rsync process
+      const rsyncProcess = spawn(rsyncCommand[0], rsyncCommand.slice(1), {
+        stdio: ['inherit', 'pipe', 'pipe'],
+        shell: false
       });
-
-      if (dryRun) {
-        console.log('─'.repeat(60));
-        console.log('✅ 🚀 Deploy: dry run completed (no files deployed)');
-        console.log('   This was a test run only - no changes were made to the server.');
-      } else {
-        console.log(`\n✅ 🚀 Deploy: completed`);
-        console.log(`   🌐 Site live at: https://${siteDomain}`);
-      }
-
-    } catch (error) {
-      console.error('\n❌ Deployment failed:');
-      console.error(`   Exit code: ${error.status}`);
-      process.exit(1);
-    }
+      
+      // Buffer stdout
+      rsyncProcess.stdout.on('data', (data) => {
+        stdoutData += data.toString();
+      });
+      
+      // Buffer stderr
+      rsyncProcess.stderr.on('data', (data) => {
+        stderrData += data.toString();
+      });
+      
+      // Handle completion
+      rsyncProcess.on('close', (code) => {
+        // Stop spinner
+        if (spinnerInterval) {
+          clearInterval(spinnerInterval);
+          spinnerInterval = null;
+        }
+        
+        // Clear spinner line
+        process.stdout.write('\r' + ' '.repeat(50) + '\r');
+        
+        // Display buffered output
+        if (dryRun) {
+          console.log('📋 rsync dry-run output (no files will be transferred):');
+          console.log('─'.repeat(60));
+        }
+        
+        if (stdoutData) {
+          process.stdout.write(stdoutData);
+        }
+        if (stderrData) {
+          process.stderr.write(stderrData);
+        }
+        
+        if (dryRun) {
+          console.log('─'.repeat(60));
+        }
+        
+        // Handle result
+        if (code === 0) {
+          if (dryRun) {
+            console.log('✅ 🚀 Deploy: dry run completed (no files deployed)');
+            console.log('   This was a test run only - no changes were made to the server.');
+          } else {
+            console.log(`\n✅ 🚀 Deploy: completed`);
+            console.log(`   🌐 Site live at: https://${siteDomain}`);
+          }
+          resolve();
+        } else {
+          console.error('\n❌ Deployment failed:');
+          console.error(`   Exit code: ${code}`);
+          reject(new Error(`rsync exited with code ${code}`));
+        }
+      });
+      
+      // Handle spawn errors
+      rsyncProcess.on('error', (error) => {
+        // Stop spinner
+        if (spinnerInterval) {
+          clearInterval(spinnerInterval);
+          spinnerInterval = null;
+        }
+        process.stdout.write('\r' + ' '.repeat(50) + '\r');
+        console.error('\n❌ Deployment failed:');
+        console.error(`   ${error.message}`);
+        reject(error);
+      });
+    });
 
   } catch (error) {
     console.error('\n❌ Deployment failed:');
@@ -146,7 +302,6 @@ function deploy(config, siteDomain, dryRun) {
   }
 
   // Regenerate changelog before deployment
-  console.log('📋 Regenerating CHANGELOG.md...');
   let changelogChanged = false;
   try {
     // Check if changelog exists and get its content before regeneration
@@ -157,7 +312,7 @@ function deploy(config, siteDomain, dryRun) {
       oldContent = fs.readFileSync(changelogPath, 'utf8');
     }
     
-    execSync('node scripts/content/generate-changelog.js', { stdio: 'pipe' });
+    await runWithSpinner('node scripts/content/generate-changelog.js', 'Regenerating CHANGELOG.md...');
     
     // Check if content actually changed
     if (oldContent !== null) {
@@ -183,10 +338,27 @@ function deploy(config, siteDomain, dryRun) {
   // Generate OG images before deploy (incremental - only generates what's needed)
   let ogResult = null;
   if (!skipChecks) {
-    console.log('🖼️  Generating OG images...');
+    // Show spinner while generating OG images
+    let spinnerInterval = null;
+    let spinnerFrame = 0;
+    const spinnerMessage = 'Generating OG images...';
+    
+    spinnerInterval = setInterval(() => {
+      const spinner = SPINNER_FRAMES[spinnerFrame];
+      process.stdout.write(`\r${spinner} 🖼️  ${spinnerMessage}`);
+      spinnerFrame = (spinnerFrame + 1) % SPINNER_FRAMES.length;
+    }, 100);
+    
     try {
       const { generateOgImages } = require('../content/generate-og-images');
       ogResult = await generateOgImages({ quiet: true });
+      
+      // Stop spinner
+      if (spinnerInterval) {
+        clearInterval(spinnerInterval);
+        spinnerInterval = null;
+      }
+      process.stdout.write('\r' + ' '.repeat(50) + '\r');
       
       // Format result in compact test style
       const filesChecked = ogResult.filesChecked || 0;
@@ -219,6 +391,12 @@ function deploy(config, siteDomain, dryRun) {
         console.log('');
       }
     } catch (error) {
+      // Stop spinner on error
+      if (spinnerInterval) {
+        clearInterval(spinnerInterval);
+        spinnerInterval = null;
+      }
+      process.stdout.write('\r' + ' '.repeat(50) + '\r');
       console.log('❌ 🖼️  OG Images: generation failed');
       if (error.message) {
         console.error(`   ${error.message}\n`);
@@ -229,12 +407,10 @@ function deploy(config, siteDomain, dryRun) {
 
   // Pre-deploy validation checks on source files (before build to catch errors early)
   if (!skipChecks) {
-    console.log('🔍 Running pre-deploy validation...');
-    
     try {
       // Source file validations (don't need _site/)
-      execSync('npm run test markdown --silent', { stdio: 'inherit' });
-      execSync('npm run test content-structure --silent', { stdio: 'inherit' });
+      await runWithSpinner('npm run test markdown --silent', 'Running pre-deploy validation (markdown)...', { showOutput: true, shell: true });
+      await runWithSpinner('npm run test content-structure --silent', 'Running pre-deploy validation (content-structure)...', { showOutput: true, shell: true });
     } catch (error) {
       console.log('❌ 🔍 Validation: failed');
       console.error('   To skip checks (not recommended): npm run deploy --skip-checks\n');
@@ -253,9 +429,8 @@ function deploy(config, siteDomain, dryRun) {
   } else if (frontmatterUpdated) {
     rebuildReason = 'frontmatter updated';
   }
-  console.log(`🏗️  Building site (${rebuildReason})...`);
   try {
-    execSync('npm run build --silent -- --quiet', { stdio: 'pipe' });
+    await runWithSpinner('npm run build --silent -- --quiet', `Building site (${rebuildReason})...`, { shell: true });
     console.log('✅ 🏗️  Build: completed\n');
   } catch (error) {
     console.log('❌ 🏗️  Build: failed');
@@ -267,7 +442,7 @@ function deploy(config, siteDomain, dryRun) {
   if (!skipChecks) {
     try {
       // OG images validation (needs _site/ to check built pages)
-      execSync('npm run test og-images --silent', { stdio: 'inherit' });
+      await runWithSpinner('npm run test og-images --silent', 'Running post-build validation (og-images)...', { showOutput: true, shell: true });
       
       console.log('✅ 🔍 Validation: all checks passed\n');
     } catch (error) {
@@ -286,5 +461,9 @@ function deploy(config, siteDomain, dryRun) {
     console.log('🚀 Deploying via rsync...\n');
   }
   
-  deploy(config, siteDomain, dryRun);
+  try {
+    await deploy(config, siteDomain, dryRun);
+  } catch (error) {
+    process.exit(1);
+  }
 })();
