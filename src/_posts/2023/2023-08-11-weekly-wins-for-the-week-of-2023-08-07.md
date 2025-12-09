@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2023 08 07
 layout: layouts/single_post.njk
 date: "2023-08-11T12:00:00-08:00"
 tags: post
-description: "My brother and his family visited the state. The drive to see them all and spend the night was mercifully easy, and a great time was had by all. My"
+description: My brother and his family visited the state. The drive to see them all and spend the night was mercifully easy, and a great time was had by all. My
 ogImage: /assets/images/og/2023-08-11-weekly-wins-for-the-week-of-2023-08-07.png
 ---
 - My brother and his family visited the state. The drive to see them all and spend the night was mercifully easy, and a great time was had by all.

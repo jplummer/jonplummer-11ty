@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2024 06 24
 layout: layouts/single_post.njk
 date: "2024-06-29T12:00:00-08:00"
 tags: post
-description: "Work was…fine…this week. Lots of folks are out or about to be out and while there's a moment to try to wrestle projects and processes into shape there are not"
+description: Work was…fine…this week. Lots of folks are out or about to be out and while there's a moment to try to wrestle projects and processes into shape there are not
 ogImage: /assets/images/og/2024-06-29-weekly-wins-for-the-week-of-2024-06-24.png
 ---
 Work was…fine…this week. Lots of folks are out or about to be out and while there's a moment to try to wrestle projects and processes into shape there are not a lot of people to do that with; preparing projects to to bowl along while they are out is more pressing. But with the girl and the lady out of the house I was productive with home projects. In the last week I've:

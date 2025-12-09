@@ -4,8 +4,10 @@
 
 ### 💻 Daily Development
 
-- `npm run dev` - Start development server with auto-rebuild on file changes (`--serve --watch`)
-- `npm run build` - Build production site
+- `npm run dev` - Start development server with auto-rebuild on file changes (`--serve --watch --quiet`)
+- `npm run dev:verbose` - Start development server with verbose output (`--serve --watch`)
+- `npm run build` - Build production site (`--quiet`)
+- `npm run build:verbose` - Build production site with verbose output
 - `npm run clean` - Clean build directory
 
 ### 🧪 Testing
@@ -129,12 +131,11 @@ Prior complex deployment scripts were moved to `scripts/deploy/backup/`. The cur
 The deploy script performs these steps in order:
 
 1. **Regenerates changelog** from git history
-2. **Builds the site** to include the new changelog
-3. **Runs validation checks** (markdown, content structure) - skipped with `--skip-checks`
-4. **Generates OG images** for any missing/outdated images - skipped with `--skip-checks`
-5. **Rebuilds the site** to include OG image frontmatter updates - skipped with `--skip-checks`
-6. **Validates OG images** for all generated pages - skipped with `--skip-checks`
-7. **Deploys via rsync** - uses `--dry-run` flag when `--dry-run` option is used
+2. **Generates OG images** for any missing/outdated images (before build) - skipped with `--skip-checks`
+3. **Runs pre-deploy validation** (markdown, content structure) on source files - skipped with `--skip-checks`
+4. **Builds the site** once (includes changelog + OG image frontmatter updates)
+5. **Runs post-build validation** (og-images) on built HTML - skipped with `--skip-checks`
+6. **Deploys via rsync** - uses `--dry-run` flag when `--dry-run` option is used
 
 #### Testing Deployment
 
@@ -248,9 +249,21 @@ npm run generate-og-images
 The script will:
 - Generate images for posts and pages that don't have them
 - Regenerate images if the source file (title, description, date) has changed
+- Regenerate images if `ogImage` is set in frontmatter but the image file doesn't exist
 - Skip images that are up to date (incremental generation - typically <1 second if all up-to-date)
 - Skip portfolio items (individual portfolio pieces don't need OG images)
-- Skip files with manually set `ogImage` values
+- Skip files with manually set `ogImage` values only if the image file exists
+
+**Force Regeneration**: To regenerate all images (useful after changing OG image styling):
+
+```bash
+npm run generate-og-images -- --force
+```
+
+The `--force` flag will:
+- Regenerate all images, even if they exist and are up to date
+- Override the skip logic for manually set `ogImage` values
+- Useful when you've updated the `og-image.njk` template or CSS styling
 
 #### Previewing Images
 

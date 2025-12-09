@@ -1,10 +1,4 @@
-# Design Notes
-
-## Layout
-
-
-
-## Color Ideas
+# Colors
 
 Color ideas inspired by https://www.presentandcorrect.com/blogs/blog/rams-palette and found at https://mcochris.com:
 - DR01: #aab7bf, #736356, #bfb1a8, #ad1d1d, #261201

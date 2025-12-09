@@ -1,31 +1,11 @@
-# Migration and Development Plan: WordPress to 11ty
+# Ideas
 
-## What remains
-
-### Portfolio 💎
-- [x] Establish method for PDF-based portfolio post offering, to enable…
+## Portfolio 💎💎💎 DO SOME EVERY WEEKEND
 - [ ] **Additional portfolio content**
-  - [x] Expand Cayuse accomplishments portfolio piece
-  - [x] Expand product trio portfolio piece
-  - [x] Add Invoca interview presentation as portfolio piece
-  - [x] Put descriptions on the main portfolio page (from item frontmatter)
   - [ ] Add/expand/investigate https://jonplummer.com/2022/11/01/conference-talk-ux-philosophy/
   - [ ] look through talks for more talks!
 
-### Design & Polish 
-- [x] improve generated ogImage styling
-- [x] improve ogImage index.png, which currently has redundant stuff in it
-- [ ] have pagination links use the computed titles from the resulting pages as "title" atributes 
-- [ ] typographical improvements
-  - [x] curly quotes
-  - [ ] general legibility (leading, size, etc.)
-  - [ ] refine type scale https://webtypography.net/3.1.1
-  - [ ] vertical rhythm in typographic spacing https://edgdesign.co/blog/baseline-grids-in-css https://webtypography.net/toc#2.2
-- [ ] https://www.inkwell.ie/typography/recommendations.html
-  - [ ] other items from https://webtypography.net/?
-- [ ] Fool around with terminal spinners a la https://github.com/sindresorhus/cli-spinners/blob/main/spinners.json
-
-### CMS
+## CMS
 
 **Goal**: Enable authoring from any device via web-based CMS while maintaining local build/deploy capability.
 

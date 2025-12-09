@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2022 09 26
 layout: layouts/single_post.njk
 date: "2022-10-01T12:00:00-08:00"
 tags: post
-description: "I blasted through a workout centered on lunges this weekend. This would have been unthinkable a year ago, or even six months ago. In an attempt to be a little"
+description: I blasted through a workout centered on lunges this weekend. This would have been unthinkable a year ago, or even six months ago. In an attempt to be a little
 ogImage: /assets/images/og/2022-10-01-weekly-wins-for-the-week-of-2022-09-26.png
 ---
 - I blasted through a workout centered on lunges this weekend. This would have been unthinkable a year ago, or even six months ago.

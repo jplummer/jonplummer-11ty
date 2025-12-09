@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2024 07 15
 layout: layouts/single_post.njk
 date: "2024-07-20T12:00:00-08:00"
 tags: post
-description: "Vacations are winding down and people are starting to come back to work. The team is filling out again. I convinced the SVP of Product to be quizzed about our"
+description: Vacations are winding down and people are starting to come back to work. The team is filling out again. I convinced the SVP of Product to be quizzed about our
 ogImage: /assets/images/og/2024-07-20-weekly-wins-for-the-week-of-2024-07-15.png
 ---
 - Vacations are winding down and people are starting to come back to work. The team is filling out again.

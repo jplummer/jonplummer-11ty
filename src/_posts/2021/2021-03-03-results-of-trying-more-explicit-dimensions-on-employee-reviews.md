@@ -3,7 +3,7 @@ title: Trying more explicit dimensions on employee reviews
 layout: layouts/single_post.njk
 date: "2021-03-03T12:00:00-08:00"
 tags: post
-description: "A little while ago I resolved to use explicit dimensions to solicit peer feedback and to organize my feedback on employees I needed to review. I also said that"
+description: A little while ago I resolved to use explicit dimensions to solicit peer feedback and to organize my feedback on employees I needed to review. I also said that
 ogImage: /assets/images/og/2021-03-03-results-of-trying-more-explicit-dimensions-on-employee-reviews.png
 ---
 A little while ago I resolved to use explicit dimensions to solicit peer feedback and to organize my feedback on employees I needed to review. I also said that I'd let you know how it goes.

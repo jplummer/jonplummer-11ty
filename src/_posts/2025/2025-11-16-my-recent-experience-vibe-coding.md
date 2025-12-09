@@ -3,7 +3,7 @@ title: My recent experience with AI-assisted coding
 layout: layouts/single_post.njk
 date: "2025-11-16T12:00:00-08:00"
 tags: post
-description: "Moving this blog from WordPress to Eleventy has been my first meaningful experiment with AI-assisted coding."
+description: Moving this blog from WordPress to Eleventy has been my first meaningful experiment with AI-assisted coding.
 ogImage: /assets/images/og/2025-11-16-my-recent-experience-vibe-coding.png
 ---
 This blog has gone through a lot of generations – once a portfolio site, then a self-hosted WordPress blog ([boo](https://techcrunch.com/2024/02/22/tumblr-ceo-publicly-spars-with-trans-user-over-account-ban-revealing-private-account-names-in-the-process/), [Matt](https://en.wikipedia.org/wiki/WP_Engine#WordPress_dispute_and_lawsuit)!), later a static site backed by local WordPress as a CMS, and now an [Eleventy](https://www.11ty.dev)-based generated static site.

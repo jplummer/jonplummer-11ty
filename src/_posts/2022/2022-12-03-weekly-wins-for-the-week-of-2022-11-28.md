@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2022 11 28
 layout: layouts/single_post.njk
 date: "2022-12-03T12:00:00-08:00"
 tags: post
-description: "I accepted the offer and will start December 12. Startup paperwork was mostly easy, save for finding the exact dates of move in/out and start/stop for my"
+description: I accepted the offer and will start December 12. Startup paperwork was mostly easy, save for finding the exact dates of move in/out and start/stop for my
 ogImage: /assets/images/og/2022-12-03-weekly-wins-for-the-week-of-2022-11-28.png
 ---
 - I accepted the offer and will start December 12. Startup paperwork was mostly easy, save for finding the exact dates of move in/out and start/stop for my address and work histories. Getting a local notary to do my I-9 right took a couple of tries, but it is done, supposedly.

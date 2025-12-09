@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2022 11 27
 layout: layouts/single_post.njk
 date: "2022-11-26T12:00:00-08:00"
 tags: post
-description: "It's been American Thanksgiving this week, and we hosted due to local family either having smaller places or being in the midst of a remodel. We managed to get"
+description: It's been American Thanksgiving this week, and we hosted due to local family either having smaller places or being in the midst of a remodel. We managed to get
 ogImage: /assets/images/og/2022-11-26-weekly-wins-for-the-week-of-2022-11-27.png
 ---
 It's been American Thanksgiving this week, and we hosted due to local family either having smaller places or being in the midst of a remodel.

@@ -2,33 +2,96 @@
 
 /**
  * Spinner Utilities
- * 
  * Shared spinner frames for progress indicators across the codebase.
  * Centralized here to make it easy to experiment with different spinner styles.
  */
 
-/**
- * Braille spinner frames - smooth, accessible animation
- * These are Unicode braille characters that create a rotating effect
- */
-const SPINNER_FRAMES = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
+const SPINNER_FRAMES = ['◡', '⊙', '◠', ' '];
 
-/**
- * Alternative spinner styles (for experimentation)
- * Uncomment and use SPINNER_FRAMES_* to try different styles
- */
+// Classic
+// const SPIN = ['|', '/', '-', '\\'];
 
-// Classic dots
-// const SPINNER_FRAMES_DOTS = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
+// Braille/dots
+// const BRAILLE_1 = ['⠈', '⠐', '⠠', '⠄', '⠂', '⠁'];
+// const BRAILLE_3 = ['⠋', '⠙', '⠸', '⠴', '⠦', '⠇'];
+// const BRAILLE_BOUNCE = ['⠄', '⠆', '⠇', '⠋', '⠙', '⠸', '⠰', '⠠', '⠰', '⠸', '⠙', '⠋', '⠇', '⠆'];
+// const BRAILLE_BOUNCE_SIMPLE = ['⠁', '⠂', '⠄', '⠂'];
 
-// Simple dots
-// const SPINNER_FRAMES_SIMPLE = ['.', '..', '...', '   '];
+// Arrows and triangles
+// const ARROW_ROTATE = ['←', '↖', '↑', '↗', '→', '↘', '↓', '↙'];
+// const ARROW_JITTER = ['→', '↖', '↓', '↗', '←', '↘', '↑', '↙'];
+// const TRIANGLE_ROTATE = ['▲', '▶', '▼', '◀'];
+// const TRIANGLE_ROTATE_CORNER = ['◢', '◣', '◤', '◥'];
+// const TRIANGLE_HOLLOW = ['▹', '▿', '◃', '▵'];
+// const TRIANGLE_SPIN_DIAGONAL = ['◤', '⧸', '◢', ' '];
+// const TRIANGLE_SPIN_DOUBLE_DIAGONAL = ['◤', '⟋', '◢', ' ', '◥', '⟍', '◣', ' '];
 
-// Arrows
-// const SPINNER_FRAMES_ARROWS = ['←', '↖', '↑', '↗', '→', '↘', '↓', '↙'];
+// Circles
+// const CIRCLE_RING = ['○', '◎', '◉', '●', '◉', '◎'];
+// const CIRCLE_PULSE = ['·', '•', '●', '•'];
+// const CIRCLE_FLIP = ['◡', '⊙', '◠', ' '];
 
-// Bars
-// const SPINNER_FRAMES_BARS = ['▁', '▃', '▅', '▇', '█', '▇', '▅', '▃'];
+// Squares
+// const SQUARE_FILL_HORIZ = ['□', '◧', '■', '◨'];
+
+// Box drawing
+// const CORNER_ROTATE = ['┌', '┐', '┘', '└'];
+// const TEE_ROTATE = ['┴', '├', '┬', '┤'];
+// const CROSS_ROTATE = ['┤', '┘', '┴', '└', '├', '┌', '┬', '┐'];
+// const CROSS_HORIZ = ['┤', '┼', '├', '│'];
+
+// Blocks/Progress bars
+// const BLOCK_FILL = ['░', '▒', '▓', '█', '▓', '▒'];
+// const BLOCK_GROW = ['▁', '▃', '▅', '▇', '█', '▇', '▅', '▃'];
+// const BLOCK_WAVE = ['▁', '▂', '▃', '▄', '▅', '▆', '▇', '█', '▇', '▆', '▅', '▄', '▃', '▂'];
+// const BAR_HORIZONTAL = ['▏', '▎', '▍', '▌', '▋', '▊', '▉', '█', '▉', '▊', '▋', '▌', '▍', '▎'];
+// const BLOCK_HALF_ROTATE = ['▌', '▀', '▐', '▄'];
+// const BLOCK_SMEAR_ROTATE = ['▙', '▌', '▛', '▀', '▜', '▐', '▟', '▄'];
+// const BLOCK_SNAKE_ROTATE = ['▙', '▌', '▘', '▀', '▜', '▐', '▗', '▄'];
+// const BLOCK_QUARTER_ROTATE = ['▖', '▘', '▝', '▗'];
+
+// Pie/Sectors
+// const PIE_HALF = ['◐', '◓', '◑', '◒'];
+// const PIE_ROTATE = ['◴', '◷', '◶', '◵'];
+// const PIE_ROTATE_SQUARE = ['◳', '◲', '◱', '◰'];
+// const ARC_ROTATE = ['◜', '◝', '◞', '◟'];
+
+// Stars
+// const STAR_PULSE = ['✶', '✷', '✹', '✷'];
+// const STAR_PULSE_EXTENDED = ['✶', '✸', '✹', '✺', '✹', '✷'];
+// const STAR_PULSE_EXTENDED_PLUS = ['✶', '✷', '✸', '✹', '✺', '✹', '✸', '✷'];
+// const ASTERISK_VAR = ['*', '+', '×', '✻'];
+// const TWINKLE = ['·', '⁖', '⁘', '✧', '⁘', '⁖'];
+// const STAR_BEAT = ['✺', '✹', '✷', '✻', '✽', '✾', '❈', '❉'];
+
+// Math symbols
+// const EQUAL_GROW = ['-', '=', '≡', '≣', '≡', '='];
+
+// Misc
+// const ICHING_SPIN_1 = ['☱', '☲', '☴'];
+// const ICHING_SPIN_2 = ['☰', '☱', '☳', '☶', '☴', '☱', '☲', '☴'];
+// const ICHING_ALL = ['☰', '☱', '☲', '☳', '☴', '☵', '☶', '☷'];
+
+// Emoji
+// const EMOJI_ARROW_ROTATE = ['➡️', '↘️', '⬇️', '↙️', '⬅️', '↖️', '⬆️', '↗️'];
+// const EMOJI_RAINBOW = ['🔴', '🟠', '🟡', '🟢', '🔵', '🟣', '🟤'];
+// const EMOJI_CLOCK = ['🕛', '🕐', '🕑', '🕒', '🕓', '🕔', '🕕', '🕖', '🕗', '🕘', '🕙', '🕚'];
+// const EMOJI_MOON = ['🌑', '🌒', '🌓', '🌔', '🌕', '🌖', '🌗', '🌘'];
+// const EMOJI_EARTH = ['🌍', '🌎', '🌏'];
+// const EMOJI_VOLCANO = ['🏔️', '⛰️', '🌋', '🗻'];
+// const EMOJI_TRAVEL = ['🌄', '🌅', '🌆', '🌇', '🌉', '🌃', '🏙️', '🌁'];
+// const EMOJI_MAIL = ['📪', '📭', '📬', '📫', '📬', '📭'];
+// const EMOJI_BOOK = ['📕', '📙', '📔', '📒', '📗', '📘', '📓'];
+// const EMOJI_CASH = ['💷', '💶', '💵', '💵'];
+// const EMOJI_BOX_PULSE = ['⏹️', '⏺️'];
+// const EMOJI_FLAG_PULSE = ['🏳', '🏁', '🏴', '🏁'];
+// const EMOJI_SMILE = ['🙂', '😊', '😀', '😃', '😄', '😁', '😄', '😃', '😀', '😊'];
+// const EMOJI_HAND = ['✋', '☝️', '✌️', '🤞', '🤘', '🤟', '🖖', '🖐️'];
+// const EMOJI_FLOWER = ['🌸', '🏵️', '🌺', '🌻', '🌼', '🍀'];
+// const EMOJI_FRUIT = ['🍎', '🍊', '🍌', '🍏', '🫐', '🍇', '🍓', '🍑', '🍋', '🍐', '🍒', '🥭', '🍍', '🍉', '🥝'];
+// const EMOJI_BALL = ['⚽', '🏉', '⚾', '🏀', '🥎', '🏐', '🏈', '🎾', '🎱', '🪩'];
+// const EMOJI_CAR = ['🚗', '🚕', '🚙', '🚌', '🚎', '🏎️', '🚓', '🚑', '🚒', '🚐'];
+// const EMOJI_SLOT = ['7️⃣', '🔔', '🏇', '🍒', '🍋', '💎', '👑', '🍑', '🪙', '🍉', '💰', '🍀', '🍊', '🀰'];
 
 module.exports = {
   SPINNER_FRAMES

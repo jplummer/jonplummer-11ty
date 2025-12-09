@@ -188,7 +188,8 @@ async function generateOgImage(html, outputPath) {
 }
 
 // Process a single file
-async function processFile(filePath) {
+async function processFile(filePath, options = {}) {
+  const { force = false } = options;
   const content = fs.readFileSync(filePath, 'utf8');
   const { frontMatter, content: body, error } = parseFrontMatter(content);
   
@@ -226,9 +227,15 @@ async function processFile(filePath) {
   // Check for default OG image (no ogImage set in frontmatter)
   const hasDefaultOgImage = !frontMatter.ogImage;
   
-  // Skip if manually set ogImage exists and image file exists (allow regeneration if file is missing)
-  if (frontMatter.ogImage && frontMatter.ogImage !== 'auto' && fs.existsSync(ogImagePath)) {
-    return { updated: false, skipped: true, reason: 'Manual ogImage set', defaultDetected: false };
+  // Skip if manually set ogImage exists AND image file exists (only skip if both are true)
+  // If force is true, regenerate everything regardless
+  // If ogImage is set but file doesn't exist, we need to generate it
+  if (!force && frontMatter.ogImage && frontMatter.ogImage !== 'auto') {
+    // Check if the file actually exists - if not, we need to generate it
+    if (fs.existsSync(ogImagePath)) {
+      return { updated: false, skipped: true, reason: 'Manual ogImage set and file exists', defaultDetected: false };
+    }
+    // File doesn't exist, so we'll generate it below
   }
   
   // Ensure og directory exists
@@ -236,8 +243,8 @@ async function processFile(filePath) {
     fs.mkdirSync(ogImageDir, { recursive: true });
   }
   
-  // Check if regeneration is needed (force if image doesn't exist)
-  if (!needsRegeneration(ogImagePath, frontMatter, filePath) && fs.existsSync(ogImagePath)) {
+  // Check if regeneration is needed (force if image doesn't exist or force flag is set)
+  if (!force && !needsRegeneration(ogImagePath, frontMatter, filePath) && fs.existsSync(ogImagePath)) {
     // Still update frontmatter if ogImage is missing
     if (!frontMatter.ogImage) {
       frontMatter.ogImage = ogImageUrl;
@@ -270,7 +277,7 @@ async function processFile(filePath) {
 
 // Main function - can be called programmatically or from CLI
 async function generateOgImages(options = {}) {
-  const { quiet = false } = options;
+  const { quiet = false, force = false } = options;
   
   // Don't print header in quiet mode - caller will announce it
   
@@ -332,7 +339,7 @@ async function generateOgImages(options = {}) {
     }
     
     try {
-      const result = await processFile(file);
+      const result = await processFile(file, { force });
       
       if (result.updated) {
         if (result.imageGenerated) {
@@ -426,7 +433,8 @@ async function generateOgImages(options = {}) {
 
 // CLI entry point
 async function main() {
-  await generateOgImages({ quiet: false });
+  const force = process.argv.includes('--force');
+  await generateOgImages({ quiet: false, force });
 }
 
 // Run if called directly

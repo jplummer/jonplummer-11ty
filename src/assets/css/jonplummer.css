@@ -6,17 +6,19 @@
   --breakpoint-single-column: 54rem; /* custom properties don't work in a media query, alas */
 
   /* Typography */
+  /* Modular type scale based on 1rem (16px) base. All sizes follow modular ratios.
+     See: https://webtypography.net/3.1.1 */
   --font-family: system-ui, sans-serif;
   --text-size: 16px;
   --line-height: 1.5;
-  --font-size-xxs: 0.875rem;  --line-height-xxs: 1.715;
-  --font-size-xs: 1rem; --line-height-xs: 1.5;
-  --font-size-sm: 1.125rem; --line-height-sm: 1.3334;
-  --font-size-md: 1.25rem; --line-height-md: 1.2;
-  --font-size-lg: 1.5rem; --line-height-lg: 1;
-  --font-size-xl: 2rem; --line-height-xl: 1;
-  --font-size-2xl: 2.5rem; --line-height-2xl: 1.2;
-  --font-size-3xl: 4rem; --line-height-3xl: 1;
+  --paragraph-spacing: calc(var(--line-height) * 1em);
+  --font-size-xs: 1rem; --line-height-xs: 1.5; /* base: 1.0 */
+  --font-size-sm: 1.125rem; --line-height-sm: 1.3334; /* ratio: 1.125 */
+  --font-size-md: 1.25rem; --line-height-md: 1.2; /* ratio: 1.25 */
+  --font-size-lg: 1.5rem; --line-height-lg: 1.2; /* ratio: 1.5 */
+  --font-size-xl: 2rem; --line-height-xl: 1.2; /* ratio: 2.0 */
+  --font-size-2xl: 2.5rem; --line-height-2xl: 1.2; /* ratio: 2.5 */
+  --font-size-3xl: 4rem; --line-height-3xl: 1.2; /* ratio: 4.0 */
   --line-height-tight: 1.1;
 
   /* Font weights */
@@ -30,12 +32,13 @@
   --letter-spacing-normal: normal;
   --letter-spacing-loose: 0.025em;
 
-  /* Spacing */
-  --spacing-xs: 0.5rem;
-  --spacing-sm: 1rem;
-  --spacing-md: 1.25rem;
-  --spacing-lg: 2rem;
-  --spacing-xl: 2.25rem;
+  /* Spacing - based on baseline grid (8px/0.5rem unit) */
+  --baseline-unit: 0.5rem; /* 8px - finer control for baseline grid */
+  --spacing-xs: 0.5rem; /* 1 baseline */
+  --spacing-sm: 1rem; /* 2 baselines */
+  --spacing-md: 1.5rem; /* 3 baselines */
+  --spacing-lg: 2rem; /* 4 baselines */
+  --spacing-xl: 2.5rem; /* 5 baselines */
   --spacing-ex: 5ex;
 
   /* Z-index */
@@ -104,7 +107,7 @@ body {
   font-family: var(--font-family);
   font-size: var(--text-size);
   line-height: var(--line-height);
-  letter-spacing: var(--letter-spacing-loose);
+  letter-spacing: var(--letter-spacing-normal);
   color: var(--text-color);
   background-color: var(--background-color);
 }
@@ -216,8 +219,8 @@ nav li {
 
 /* Navigation typography and colors */
 nav a {
-  font-size: var(--font-size-xxs);
-  line-height: var(--line-height-xxs);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-xs);
   text-decoration: none;
   color: var(--link-color);
   transition: color 0.3s ease;
@@ -347,7 +350,15 @@ main > h1 {
 
 /* Paragraphs */
 p {
-  margin: var(--spacing-sm) 0;
+  margin: var(--paragraph-spacing) 0;
+}
+
+/* Blockquotes */
+blockquote {
+  margin: var(--spacing-lg) 0;
+  padding-left: var(--spacing-md);
+  font-style: italic;
+  border-left: 2px solid var(--border-color);
 }
 
 /* Horizontal rules */
@@ -366,8 +377,8 @@ button, input, label {
 /* License typography and colors */
 .license,
 footer p {
-  font-size: var(--font-size-xxs);
-  line-height: var(--line-height-xxs);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-xs);
   color: var(--link-visited-color);
 }
 
@@ -380,7 +391,7 @@ footer p {
 
 /* Code blocks */
 code, pre {
-  font-size: var(--font-size-xxs);
+  font-size: var(--font-size-xs);
   line-height: var(--line-height-xs);
 }
 
@@ -748,7 +759,7 @@ header a.skip:focus {
 }
 
 .og-images-grid-item code {
-  font-size: var(--font-size-xxs);
+  font-size: var(--font-size-xs);
   word-break: break-all;
 }
 
@@ -760,25 +771,19 @@ header a.skip:focus {
   --gutter: 2rem;
   --max-width: 66rem;
   --breakpoint-single-column: 54rem;
+  /* Typography - Modular type scale based on 1rem (16px) base. All sizes follow modular ratios.
+     See: https://webtypography.net/3.1.1 */
   --font-family: system-ui, sans-serif;
   --text-size: 16px;
   --line-height: 1.5;
-  --font-size-xxs: 0.875rem;
-  --line-height-xxs: 1.715;
-  --font-size-xs: 1rem;
-  --line-height-xs: 1.5;
-  --font-size-sm: 1.125rem;
-  --line-height-sm: 1.3334;
-  --font-size-md: 1.25rem;
-  --line-height-md: 1.2;
-  --font-size-lg: 1.5rem;
-  --line-height-lg: 1;
-  --font-size-xl: 2rem;
-  --line-height-xl: 1;
-  --font-size-2xl: 2.5rem;
-  --line-height-2xl: 1.2;
-  --font-size-3xl: 4rem;
-  --line-height-3xl: 1;
+  --paragraph-spacing: calc(var(--line-height) * 1em);
+  --font-size-xs: 1rem; --line-height-xs: 1.5; /* base: 1.0 */
+  --font-size-sm: 1.125rem; --line-height-sm: 1.3334; /* ratio: 1.125 */
+  --font-size-md: 1.25rem; --line-height-md: 1.2; /* ratio: 1.25 */
+  --font-size-lg: 1.5rem; --line-height-lg: 1.2; /* ratio: 1.5 */
+  --font-size-xl: 2rem; --line-height-xl: 1.2; /* ratio: 2.0 */
+  --font-size-2xl: 2.5rem; --line-height-2xl: 1.2; /* ratio: 2.5 */
+  --font-size-3xl: 4rem; --line-height-3xl: 1.2; /* ratio: 4.0 */
   --line-height-tight: 1.1;
   --font-weight-thin: 100;
   --font-weight-semibold: 600;
@@ -787,11 +792,13 @@ header a.skip:focus {
   --letter-spacing-tight: -0.025em;
   --letter-spacing-normal: normal;
   --letter-spacing-loose: 0.025em;
-  --spacing-xs: 0.5rem;
-  --spacing-sm: 1rem;
-  --spacing-md: 1.25rem;
-  --spacing-lg: 2rem;
-  --spacing-xl: 2.25rem;
+  /* Spacing - based on baseline grid (8px/0.5rem unit) */
+  --baseline-unit: 0.5rem; /* 8px - finer control for baseline grid */
+  --spacing-xs: 0.5rem; /* 1 baseline */
+  --spacing-sm: 1rem; /* 2 baselines */
+  --spacing-md: 1.5rem; /* 3 baselines */
+  --spacing-lg: 2rem; /* 4 baselines */
+  --spacing-xl: 2.5rem; /* 5 baselines */
   --spacing-ex: 5ex;
   
   /* Force light theme for OG images */
@@ -812,7 +819,7 @@ header a.skip:focus {
   font-family: var(--font-family);
   font-size: 1.5rem;
   line-height: var(--line-height);
-  letter-spacing: var(--letter-spacing-loose);
+  letter-spacing: var(--letter-spacing-normal);
   color: var(--text-color);
   background-color: var(--background-color);
   display: flex;
@@ -883,4 +890,249 @@ header a.skip:focus {
 .og-image-rendered .og-date {
   font-size: 1.5rem;
   font-style: italic;
+}
+
+/* === PRINT STYLES === */
+/* Print stylesheet for single blog posts - greyscale, optimized for letter/A4 */
+
+@media print {
+  /* Force light mode colors for print (greyscale) */
+  :root {
+    --text-color: #2a2a2a;
+    --text-color-light: #5a5a5a;
+    --border-color: #d0d0d0;
+    --background-color: #fff;
+    --content-background-color: #fff;
+    --link-color: #2a2a2a;
+    --link-hover-color: #2a2a2a;
+    --link-visited-color: #2a2a2a;
+    --link-active-color: #2a2a2a;
+  }
+
+  /* Page setup for letter/A4 */
+  @page {
+    size: letter;
+    margin: 0.75in;
+  }
+
+  @page {
+    size: A4;
+    margin: 19mm;
+  }
+
+  /* Base print styles */
+  * {
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 12pt;
+    line-height: 1.5;
+    font-family: system-ui, sans-serif;
+  }
+
+  /* Hide navigation and non-content elements */
+  body > header nav,
+  nav.post-navigation,
+  nav.pagination,
+  header a.skip,
+  a.skip,
+  .sr-only,
+  body > footer {
+    display: none !important;
+  }
+
+  /* Simplify header - keep only the site title */
+  body > header {
+    margin-bottom: 1rem;
+  }
+
+  body > header hgroup p {
+    display: none;
+  }
+
+  /* Single column layout for articles */
+  article {
+    display: block !important;
+    grid-template-columns: none !important;
+    grid-template-areas: none !important;
+    gap: 0 !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Article header */
+  article header {
+    margin-bottom: 1rem;
+  }
+
+  article header h1 {
+    font-size: 18pt;
+    line-height: 1.2;
+    margin: 0 0 0.5rem 0;
+    page-break-after: avoid;
+  }
+
+  /* Article footer (date) */
+  article footer {
+    margin: 0.5rem 0 1rem 0;
+    font-size: 10pt;
+    color: #5a5a5a;
+  }
+
+  /* Article content */
+  article section {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Typography adjustments for print */
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  h1 {
+    font-size: 16pt;
+    margin-top: 1rem;
+  }
+
+  h2 {
+    font-size: 14pt;
+    margin-top: 0.75rem;
+  }
+
+  h3 {
+    font-size: 12pt;
+    margin-top: 0.75rem;
+  }
+
+  h4, h5, h6 {
+    font-size: 11pt;
+    margin-top: 0.5rem;
+  }
+
+  p {
+    margin: 0.75rem 0;
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* Prevent page breaks inside these elements */
+  blockquote,
+  pre,
+  code,
+  figure,
+  img {
+    page-break-inside: avoid;
+  }
+
+  /* Links - show URLs - override all link states */
+  a,
+  a:link,
+  a:visited,
+  a:hover,
+  a:active,
+  a:focus {
+    color: #000 !important;
+    text-decoration: underline;
+  }
+
+  /* Remove underline from h1 links */
+  h1 a,
+  h1 a:link,
+  h1 a:visited,
+  h1 a:hover,
+  h1 a:active,
+  h1 a:focus {
+    text-decoration: none;
+  }
+
+  /* Show URLs for all links with href (external and internal) */
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #5a5a5a;
+    word-break: break-all;
+  }
+
+  /* Don't show URLs for anchor links */
+  a[href^="#"]:after {
+    content: "";
+  }
+
+  /* Images */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+    page-break-inside: avoid;
+    page-break-after: avoid;
+  }
+
+  /* Code blocks */
+  pre {
+    border: 1pt solid #000;
+    padding: 0.5rem;
+    background: #f5f5f5 !important;
+    page-break-inside: avoid;
+  }
+
+  code {
+    background: #f5f5f5 !important;
+    padding: 0.1rem 0.2rem;
+  }
+
+  /* Blockquotes */
+  blockquote {
+    border-left: 2pt solid #000;
+    padding-left: 1rem;
+    margin: 1rem 0;
+    page-break-inside: avoid;
+  }
+
+  /* Horizontal rules */
+  hr {
+    border-top: 1pt solid #000;
+    margin: 1rem 0;
+  }
+
+  /* Lists */
+  ul, ol {
+    margin: 0.75rem 0;
+    padding-left: 1.5rem;
+  }
+
+  li {
+    margin: 0.25rem 0;
+  }
+
+  /* Remove decorative elements */
+  article section::after,
+  main[data-tags*="page"]::after {
+    display: none !important;
+  }
+
+  /* Page breaks */
+  .page-break {
+    page-break-before: always;
+  }
+
+  /* Ensure main content area has no background */
+  body > header,
+  body > main,
+  body > footer {
+    background: #fff !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  main {
+    margin: 0 !important;
+  }
 }

@@ -3,7 +3,7 @@ title: "Communications: providing both context and instructions"
 layout: layouts/single_post.njk
 date: "2022-11-04T12:00:00-08:00"
 tags: post
-description: "A small incident today reminds me of the importance of explaining not just what action you'd like taken but why. I have found this to be true so often that"
+description: A small incident today reminds me of the importance of explaining not just what action you'd like taken but why. I have found this to be true so often that
 ogImage: /assets/images/og/2022-11-04-communications-providing-both-context-and-instructions.png
 ---
 ## Bottom line

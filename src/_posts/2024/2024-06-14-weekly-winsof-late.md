@@ -3,7 +3,7 @@ title: "Weekly wins of late: Team accomplishments"
 layout: layouts/single_post.njk
 date: "2024-06-14T12:00:00-08:00"
 tags: post
-description: "I fell off the weekly wins wagon hard in November, then wrote just one earlier this month. Time to get back on. Social win – I saw a friend and past coworker"
+description: I fell off the weekly wins wagon hard in November, then wrote just one earlier this month. Time to get back on. Social win – I saw a friend and past coworker
 ogImage: /assets/images/og/2024-06-14-weekly-winsof-late.png
 ---
 I fell off the weekly wins wagon _hard_ in November, then wrote just one earlier this month. Time to get back on:

@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2023 11 20
 layout: layouts/single_post.njk
 date: "2023-11-22T12:00:00-08:00"
 tags: post
-description: "A short work week is a beautiful thing. Having your entire department out for a day so you can catch up on administrative tasks is also nice, if a tad lonely."
+description: A short work week is a beautiful thing. Having your entire department out for a day so you can catch up on administrative tasks is also nice, if a tad lonely.
 ogImage: /assets/images/og/2023-11-22-weekly-wins-for-the-week-of-2023-11-20.png
 ---
 - A short work week is a beautiful thing. Having your entire department out for a day so you can catch up on administrative tasks is also nice, if a tad lonely.

@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2023 04 03
 layout: layouts/single_post.njk
 date: "2023-04-09T12:00:00-08:00"
 tags: post
-description: "Good Friday Spring Holiday – this day off caught many at work by pleasant surprise. A chat with the SVP of Engineering reminded me that I'm overdue on"
+description: Good Friday Spring Holiday – this day off caught many at work by pleasant surprise. A chat with the SVP of Engineering reminded me that I'm overdue on
 ogImage: /assets/images/og/2023-04-09-weekly-wins-for-the-week-of-2023-04-03.png
 ---
 - Good Friday Spring Holiday – this day off caught many at work by pleasant surprise.

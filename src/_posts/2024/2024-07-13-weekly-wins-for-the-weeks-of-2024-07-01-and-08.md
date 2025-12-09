@@ -3,7 +3,7 @@ title: Weekly wins for the weeks of 2024 07 01 and 08
 layout: layouts/single_post.njk
 date: "2024-07-13T12:00:00-08:00"
 tags: post
-description: "Small quality-of-life adjustments can have an amazing effect. Sure, the fact that you need to push on the door a little bit to lock its deadbolt is not a huge"
+description: Small quality-of-life adjustments can have an amazing effect. Sure, the fact that you need to push on the door a little bit to lock its deadbolt is not a huge
 ogImage: /assets/images/og/2024-07-13-weekly-wins-for-the-weeks-of-2024-07-01-and-08.png
 ---
 Small quality-of-life adjustments can have an amazing effect. Sure, the fact that you need to push on the door a little bit to lock its deadbolt is not a huge deal; it hardly slows you down, takes little effort, and there's nearly no additional wear-and-tear as a result. Not a huge deal _once_, that is. Eight times a day every day as people come and go, sometimes with full hands or in a hurry, adds up to thousands of exactly-repeated minor annoyances per year with a single cause that is readily fixed. So the value of that fix is quite high, even if each incident is barely noticeable.
