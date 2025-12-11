@@ -1,9 +1,14 @@
 # Ideas
 
 ## Portfolio 💎💎💎 DO SOME EVERY WEEKEND
-- [ ] **Additional portfolio content**
-  - [ ] Add/expand/investigate https://jonplummer.com/2022/11/01/conference-talk-ux-philosophy/
-  - [ ] look through talks for more talks!
+- [ ] Add the PDF fthat would go with https://jonplummer.com/2022/11/01/conference-talk-ux-philosophy/
+- [ ] look through /talks (current and old) for more talks
+- [ ] Evaluate for inclusion
+  - [ ] Talks from Cayuse
+  - [ ] Talks from Belkin
+  - [ ] Small artifacts from Belkin
+  - [ ] Talks from Invoca
+- [ ] OFTEN: sweep slack for links
 
 ## CMS
 
@@ -173,6 +178,16 @@
 
 
 ## Future Consideration
+
+- https://davidea.st/articles/11ty-tips-i-wish-i-knew-from-the-start/ ?
+
+- reduce need for assets duplicated across /src and /_site
+  - (addPassthroughCopy)?
+    - https://w3things.com/blog/eleventy-passthrough-file-copy/ ?
+  - https://slinkity.dev/docs/asset-management/ ?
+  - https://medium.com/@tarngerine/how-the-heck-do-i-use-eleventy-the-intro-guide-i-wish-i-had-84d9b2689031 ?
+
+- https://llmstxt.org/ ?
 
 - **Alternate color schemes** and how to trigger them
 

@@ -6,7 +6,7 @@
  * Centralized here to make it easy to experiment with different spinner styles.
  */
 
-const SPINNER_FRAMES = ['◡', '⊙', '◠', ' '];
+const SPINNER_FRAMES = ['◠', '⊙', '◡', ' '];
 
 // Classic
 // const SPIN = ['|', '/', '-', '\\'];
@@ -19,7 +19,8 @@ const SPINNER_FRAMES = ['◡', '⊙', '◠', ' '];
 
 // Arrows and triangles
 // const ARROW_ROTATE = ['←', '↖', '↑', '↗', '→', '↘', '↓', '↙'];
-// const ARROW_JITTER = ['→', '↖', '↓', '↗', '←', '↘', '↑', '↙'];
+// const ARROW_RANDOM = ['→', '↖', '↓', '↗', '←', '↘', '↑', '↙'];
+// const ARROW_JITTER = ['←', '↖', '↑', '↗', '→', '↘', '↓', '↙'];
 // const TRIANGLE_ROTATE = ['▲', '▶', '▼', '◀'];
 // const TRIANGLE_ROTATE_CORNER = ['◢', '◣', '◤', '◥'];
 // const TRIANGLE_HOLLOW = ['▹', '▿', '◃', '▵'];
@@ -29,7 +30,7 @@ const SPINNER_FRAMES = ['◡', '⊙', '◠', ' '];
 // Circles
 // const CIRCLE_RING = ['○', '◎', '◉', '●', '◉', '◎'];
 // const CIRCLE_PULSE = ['·', '•', '●', '•'];
-// const CIRCLE_FLIP = ['◡', '⊙', '◠', ' '];
+// const CIRCLE_FLIP = ['◠', '⊙', '◡', ' '];
 
 // Squares
 // const SQUARE_FILL_HORIZ = ['□', '◧', '■', '◨'];
@@ -42,9 +43,6 @@ const SPINNER_FRAMES = ['◡', '⊙', '◠', ' '];
 
 // Blocks/Progress bars
 // const BLOCK_FILL = ['░', '▒', '▓', '█', '▓', '▒'];
-// const BLOCK_GROW = ['▁', '▃', '▅', '▇', '█', '▇', '▅', '▃'];
-// const BLOCK_WAVE = ['▁', '▂', '▃', '▄', '▅', '▆', '▇', '█', '▇', '▆', '▅', '▄', '▃', '▂'];
-// const BAR_HORIZONTAL = ['▏', '▎', '▍', '▌', '▋', '▊', '▉', '█', '▉', '▊', '▋', '▌', '▍', '▎'];
 // const BLOCK_HALF_ROTATE = ['▌', '▀', '▐', '▄'];
 // const BLOCK_SMEAR_ROTATE = ['▙', '▌', '▛', '▀', '▜', '▐', '▟', '▄'];
 // const BLOCK_SNAKE_ROTATE = ['▙', '▌', '▘', '▀', '▜', '▐', '▗', '▄'];
@@ -54,7 +52,6 @@ const SPINNER_FRAMES = ['◡', '⊙', '◠', ' '];
 // const PIE_HALF = ['◐', '◓', '◑', '◒'];
 // const PIE_ROTATE = ['◴', '◷', '◶', '◵'];
 // const PIE_ROTATE_SQUARE = ['◳', '◲', '◱', '◰'];
-// const ARC_ROTATE = ['◜', '◝', '◞', '◟'];
 
 // Stars
 // const STAR_PULSE = ['✶', '✷', '✹', '✷'];

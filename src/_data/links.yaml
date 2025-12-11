@@ -1,3 +1,26 @@
+2025-12-10:
+  - url: https://www.youtube.com/watch?v=BsWxPI9UM4c
+    title: "Why AI evals are the hottest new skill for product builders; with Hamel Husain and Shreya Shankar – Lenny's Podcast"
+    description: '"Hamel Husain and Shreya Shankar teach the world''s most popular course on AI evals and have trained over 2,000 PMs and engineers (including many teams at OpenAI and Anthropic). In this conversation, they demystify the process of developing effective evals, walk through real examples, and share practical techniques that''ll help you improve your AI product."'
+2025-12-09:
+  - url: https://www.figma.com/best-practices/typography-systems-in-figma/
+    title: "Typography systems in Figma – Figma"
+    description: '"Learn how to create and manage typography systems in Figma, including how to use typography tokens, responsive scaling, and more."'
+  - url: https://adobe.design/stories/design-for-scale/designing-design-systems-a-framework-for-names-terms-and-definitions
+    title: "Designing design systems: a framework for names, terms, and definitions – Jess Sattell"
+    description: '"Say what you mean." This article provides a framework for designing design systems that is easy to understand and implement.'
+  - url: https://www.uxpin.com/studio/blog/design-system-naming-conventions/
+    title: "Design system naming conventions – UXPin"
+    description: '"Check out what design system naming conventions are and get 10 tips on how to set them up for your organizations."'
+  - url: https://www.designsystemscollective.com/complex-typography-token-naming-conventions-in-design-systems-25c920539d13
+    title: "Complex typography token naming conventions in design systems – Gulshan Rahman"
+    description: '"A deep dive into the challenges of naming typography tokens in design systems, exploring best practices and naming conventions to ensure consistency and clarity."'
+  - url: https://m3.material.io/styles/typography/applying-type
+    title: "Applying type – Material Design"
+    description: '"Learn how to apply type in Material Design, including how to use typography tokens, responsive scaling, and more."'
+  - url: https://uxdesign.cc/mastering-typography-in-design-systems-with-semantic-tokens-and-responsive-scaling-6ccd598d9f21
+    title: "Mastering typography in design systems with semantic tokens and responsive scaling – Oluwatosin Obalana"
+    description: '"Learn how to master typography in design systems using semantic tokens and responsive scaling to create a consistent and scalable typography system."'
 2025-11-30:
   - url: https://interconnected.org/home/2025/11/28/plumbing
     title: "Context plumbing – Matt Webb"
