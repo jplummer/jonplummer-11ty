@@ -6,7 +6,10 @@
 
 - **`layout`** - Template to use (e.g., `single_post.njk`)
 - **`title`** - Page title
-- **`date`** - Publication date: `"YYYY-MM-DDTHH:mm:ss-HH:mm"` (posts only)
+- **`date`** - Publication date (posts only). Can be:
+  - Full format: `"YYYY-MM-DDTHH:mm:ss-HH:mm"` (e.g., `"2025-10-08T12:00:00-08:00"`)
+  - Date-only format: `"YYYY-MM-DD"` (e.g., `"2025-10-08"`) - assumes PST/PDT
+  - See [Date and Timezone Handling](date-timezone-handling.md) for details
 - **`tags`** - Array including `post`. Additional tags become `article:tag` meta tags.
 
 ### Optional

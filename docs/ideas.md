@@ -2,13 +2,17 @@
 
 ## Portfolio 💎💎💎 DO SOME EVERY WEEKEND
 - [ ] Add the PDF fthat would go with https://jonplummer.com/2022/11/01/conference-talk-ux-philosophy/
-- [ ] look through /talks (current and old) for more talks
-- [ ] Evaluate for inclusion
+- [ ] Look through /talks (current and old) for more talks, and evaluate for inclusion
   - [ ] Talks from Cayuse
   - [ ] Talks from Belkin
   - [ ] Small artifacts from Belkin
   - [ ] Talks from Invoca
 - [ ] OFTEN: sweep slack for links
+
+- [x] Fix timezone issues (relect real authoring date as I experienced it, but don't break incoming links by changing URLs to existing content)
+- [ ] **Watch ahrefs this weekend** for "URL changed" errors; site health should be at or near 100
+
+- [ ] Automate image optimization (see https://www.aleksandrhovhannisyan.com/blog/eleventy-the-good-the-bad-and-the-possum/#5-it-has-an-excellent-image-plugin )
 
 ## CMS
 
@@ -179,15 +183,15 @@
 
 ## Future Consideration
 
-- https://davidea.st/articles/11ty-tips-i-wish-i-knew-from-the-start/ ?
-
-- reduce need for assets duplicated across /src and /_site
-  - (addPassthroughCopy)?
-    - https://w3things.com/blog/eleventy-passthrough-file-copy/ ?
-  - https://slinkity.dev/docs/asset-management/ ?
-  - https://medium.com/@tarngerine/how-the-heck-do-i-use-eleventy-the-intro-guide-i-wish-i-had-84d9b2689031 ?
+- make portfolio layout not depend on embedded HTML; consider
+  - markdown-it-attrs and markdown-it-container? 
+  - custom shortcodes?
+  - Slinkity?
+  - something else?
 
 - https://llmstxt.org/ ?
+
+- learn about 11ty Debug Mode
 
 - **Alternate color schemes** and how to trigger them
 
