@@ -1,4 +1,8 @@
-All notable changes to this project are documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to chronological ordering (newest first).
+This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),newest first.
+
+## 2025-12-10
+
+- Update agent protocol, dev mode passthrough, and add recent links
 
 ## 2025-12-09
 
@@ -257,3 +261,5 @@ All notable changes to this project are documented in this file. The format is b
 - Initial commit
 - Update .gitignore
 
+
+<p class="deploy-date">Last deployed on <time datetime="2025-12-12T04:53:38.672Z">2025-12-12</time></p>

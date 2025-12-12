@@ -1,3 +1,11 @@
+/**
+ * Shortcode: Render OG image
+ * 
+ * Used as an Eleventy shortcode (registered in `config/shortcodes.js`).
+ * Renders the OG image template and extracts body content for generating
+ * Open Graph images for posts.
+ */
+
 const path = require('path');
 const fs = require('fs');
 const nunjucks = require('nunjucks');

@@ -1,4 +1,11 @@
 /**
+ * Eleventy configuration: Preprocessors and ignores
+ * 
+ * Called from `.eleventy.js` during Eleventy initialization (typically called last).
+ * Configures preprocessors (e.g., draft post exclusion) and files/directories to ignore.
+ */
+
+/**
  * Configures Eleventy preprocessors and ignores.
  * 
  * @param {object} eleventyConfig - Eleventy configuration object

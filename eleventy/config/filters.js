@@ -1,3 +1,11 @@
+/**
+ * Eleventy configuration: Filter registration
+ * 
+ * Called from `.eleventy.js` during Eleventy initialization (after markdown renderer is created).
+ * Registers all custom filters available in Nunjucks templates, including date formatting,
+ * markdown processing, and data manipulation filters.
+ */
+
 const fs = require("fs");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const { normalizeDate, formatPostDate, formatDateRange } = require("../utils/date-utils");

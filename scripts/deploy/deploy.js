@@ -312,7 +312,7 @@ async function deploy(config, siteDomain, dryRun) {
       oldContent = fs.readFileSync(changelogPath, 'utf8');
     }
     
-    await runWithSpinner('node scripts/content/generate-changelog.js', 'Regenerating CHANGELOG.md...');
+    await runWithSpinner('node scripts/content/generate-changelog.js --deploy', 'Regenerating CHANGELOG.md...');
     
     // Check if content actually changed
     if (oldContent !== null) {

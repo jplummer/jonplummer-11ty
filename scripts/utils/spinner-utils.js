@@ -9,7 +9,7 @@
 const SPINNER_FRAMES = ['◠', '⊙', '◡', ' '];
 
 // Classic
-// const SPIN = ['|', '/', '-', '\\'];
+// const SPIN = ['|', '/', '—', '\\'];
 
 // Braille/dots
 // const BRAILLE_1 = ['⠈', '⠐', '⠠', '⠄', '⠂', '⠁'];

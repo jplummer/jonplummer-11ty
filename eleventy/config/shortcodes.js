@@ -1,3 +1,10 @@
+/**
+ * Eleventy configuration: Shortcode registration
+ * 
+ * Called from `.eleventy.js` during Eleventy initialization.
+ * Registers all custom shortcodes available in Nunjucks templates (e.g., renderOgImage, year).
+ */
+
 const renderOgImage = require("../shortcodes/render-og-image");
 
 /**

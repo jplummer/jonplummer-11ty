@@ -1,3 +1,10 @@
+/**
+ * Utility: Date formatting and normalization
+ * 
+ * Utility module used by filters, shortcodes, and templates throughout the site.
+ * Provides date normalization and formatting functions using Luxon.
+ */
+
 const { DateTime } = require("luxon");
 
 /**

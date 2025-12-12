@@ -1,3 +1,11 @@
+/**
+ * Eleventy configuration: Passthrough copy and watch targets
+ * 
+ * Called from `.eleventy.js` during Eleventy initialization.
+ * Configures which files/directories should be copied directly to the output
+ * without processing, and which should be watched for changes during development.
+ */
+
 const fs = require('fs');
 const path = require('path');
 

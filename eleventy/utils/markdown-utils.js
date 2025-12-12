@@ -1,3 +1,10 @@
+/**
+ * Utility: Markdown renderer initialization
+ * 
+ * Utility module used by `.eleventy.js` to create the markdown renderer instance.
+ * Configures markdown-it with site-specific settings (HTML support, line breaks, linkify, typographer).
+ */
+
 const markdownIt = require("markdown-it");
 
 /**

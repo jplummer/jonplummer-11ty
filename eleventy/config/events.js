@@ -1,3 +1,11 @@
+/**
+ * Eleventy configuration: Event handlers
+ * 
+ * Called from `.eleventy.js` during Eleventy initialization.
+ * Registers event handlers for build lifecycle events (before, after, beforeBuild, beforeWatch).
+ * Handles progress indicators, redirect generation, and incremental OG image generation.
+ */
+
 const path = require('path');
 const fs = require('fs');
 const { SPINNER_FRAMES } = require('../../scripts/utils/spinner-utils');

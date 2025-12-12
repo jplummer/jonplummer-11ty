@@ -342,9 +342,7 @@ try {
 
   // Generate changelog content
   // Note: No h1 heading here - the frontmatter title in changelog.md provides it
-  let changelog = 'All notable changes to this project are documented in this file. ';
-  changelog += 'The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), ';
-  changelog += 'and this project adheres to chronological ordering (newest first).\n\n';
+  let changelog = 'This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),newest first.\n\n';
 
   for (const date of sortedDates) {
     changelog += `## ${date}\n\n`;
@@ -359,6 +357,13 @@ try {
     }
 
     changelog += '\n';
+  }
+
+  // Append deploy date if --deploy flag is set
+  const isDeploy = process.argv.includes('--deploy');
+  if (isDeploy) {
+    const deployDate = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+    changelog += `\n<p class="deploy-date">Last deployed on <time datetime="${new Date().toISOString()}">${deployDate}</time></p>\n`;
   }
 
   // Write changelog file

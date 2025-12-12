@@ -1,3 +1,11 @@
+/**
+ * Utility: CSS custom properties extraction
+ * 
+ * Utility module used by filters and shortcodes (e.g., renderOgImage shortcode).
+ * Extracts CSS custom properties from the :root block in the main stylesheet
+ * for use in OG image generation.
+ */
+
 const fs = require('fs');
 const path = require('path');
 

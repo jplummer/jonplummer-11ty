@@ -1,4 +1,11 @@
 /**
+ * Eleventy configuration: Plugin registration
+ * 
+ * Called from `.eleventy.js` during Eleventy initialization.
+ * Registers all Eleventy plugins used by the site (RSS, syntax highlighting, date formatting, etc.).
+ */
+
+/**
  * Registers Eleventy plugins.
  * 
  * @param {object} eleventyConfig - Eleventy configuration object

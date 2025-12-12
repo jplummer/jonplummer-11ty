@@ -1,3 +1,11 @@
+/**
+ * Eleventy configuration: Data file extensions
+ * 
+ * Called from `.eleventy.js` during Eleventy initialization (must be called first,
+ * before other configs that use data files).
+ * Adds support for YAML data files (.yaml and .yml extensions).
+ */
+
 const yaml = require("js-yaml");
 
 /**

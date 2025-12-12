@@ -1,4 +1,12 @@
 /**
+ * Filter: Merge posts and links chronologically
+ * 
+ * Used as an Eleventy filter (registered in `config/filters.js`).
+ * Merges blog posts and link entries chronologically for display on the homepage,
+ * handling pagination by including links between posts based on date ranges.
+ */
+
+/**
  * Merges posts and links chronologically for display on the homepage.
  * Handles pagination by including links between posts based on date ranges.
  * 
@@ -28,6 +36,7 @@ function mergePostsAndLinks(posts, links, pageNumber, nextPageOldestDate) {
   const oldestPostDate = sortedPosts[sortedPosts.length - 1].date;
 
   // On page 1 only: Add links newer than the newest post first
+  // All other pages: Start with the newest post, followed by links, repeating as needed
   if (isPage1) {
     for (const [date, linkList] of Object.entries(links)) {
       const linkDate = new Date(date);
