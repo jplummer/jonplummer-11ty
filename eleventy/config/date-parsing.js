@@ -43,12 +43,20 @@ function configureDateParsing(eleventyConfig) {
       }
     }
     
+    // If we didn't create a localDate (dateValue wasn't Date or string), return undefined
+    // This lets Eleventy use its default date parsing
+    if (!localDate) {
+      return;
+    }
+    
     if (localDate?.isValid === false) {
       throw new Error(
         `Invalid \`date\` value (${dateValue}) is invalid for ${this.page.inputPath}: ${localDate.invalidReason}`
       );
     }
     
+    // Return DateTime - Eleventy automatically converts to Date for templates
+    // This preserves timezone information while ensuring templates receive Date objects
     return localDate;
   });
 }

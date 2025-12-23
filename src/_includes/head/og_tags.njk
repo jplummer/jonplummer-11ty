@@ -7,7 +7,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="{{ ogImageAltValue }}">
 {%- if tags and 'post' in tags and date %}
-<meta property="article:published_time" content="{{ date | dateToRfc3339Safe }}">
+<meta property="article:published_time" content="{{ date | dateToRfc3339 }}">
 <meta property="article:author" content="Jon Plummer">
 <meta property="article:section" content="Blog">
 {%- if tags %}

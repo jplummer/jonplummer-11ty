@@ -85,18 +85,18 @@ Both formats will generate the same URL: `/2025/10/08/your-slug/`
 
 Two test scripts verify the implementation:
 
-1. **`test-permalink-compatibility.js`**:
+1. **`scripts/test/test-permalink-compatibility.js`**:
    - Tests all 181 existing posts to ensure permalinks remain unchanged
    - Compares current vs proposed permalink logic
-   - Run with: `node test-permalink-compatibility.js`
+   - Run with: `node scripts/test/test-permalink-compatibility.js`
 
-2. **`test-date-changes.js`**:
+2. **`scripts/test/test-date-changes.js`**:
    - Comprehensive test suite that:
      - Verifies permalink compatibility
      - Builds the site
      - Checks key output files (sitemap.xml, feed.xml, index.html, links-feed.xml)
      - Validates URL structure and content
-   - Run with: `node test-date-changes.js`
+   - Run with: `node scripts/test/test-date-changes.js`
 
 ## Verification
 
@@ -126,7 +126,7 @@ If a date appears to be off by one day:
 ### URLs changing unexpectedly
 
 If post URLs change after a build:
-- Run `node test-permalink-compatibility.js` to verify all permalinks
+- Run `node scripts/test/test-permalink-compatibility.js` to verify all permalinks
 - Check that date strings in frontmatter are properly formatted
 - Ensure the date parsing configuration is loaded correctly
 
@@ -177,7 +177,7 @@ If reverting manually, these files were modified:
 
 After rolling back, verify:
 ```bash
-npm run clean && npm run build && node test-permalink-compatibility.js
+npm run clean && npm run build && node scripts/test/test-permalink-compatibility.js
 ```
 
 All 181 posts should still generate identical URLs (the test compares against the original logic).
@@ -185,8 +185,8 @@ All 181 posts should still generate identical URLs (the test compares against th
 ### Test Scripts
 
 The test scripts can be kept for future reference:
-- `test-permalink-compatibility.js` - Verifies permalink compatibility
-- `test-date-changes.js` - Comprehensive test suite
+- `scripts/test/test-permalink-compatibility.js` - Verifies permalink compatibility
+- `scripts/test/test-date-changes.js` - Comprehensive test suite
 
 ## Implementation Conversation Summary
 
@@ -893,7 +893,7 @@ console.log('🧪 Testing date/timezone changes...\n');
 // Step 1: Verify permalink compatibility
 console.log('1️⃣  Testing permalink compatibility...');
 try {
-  const result = execSync('node test-permalink-compatibility.js', { 
+  const result = execSync('node scripts/test/test-permalink-compatibility.js', { 
     encoding: 'utf8',
     stdio: 'pipe'
   });
@@ -1127,18 +1127,18 @@ Both formats will generate the same URL: `/2025/10/08/your-slug/`
 
 Two test scripts verify the implementation:
 
-1. **`test-permalink-compatibility.js`**:
+1. **`scripts/test/test-permalink-compatibility.js`**:
    - Tests all 181 existing posts to ensure permalinks remain unchanged
    - Compares current vs proposed permalink logic
-   - Run with: `node test-permalink-compatibility.js`
+   - Run with: `node scripts/test/test-permalink-compatibility.js`
 
-2. **`test-date-changes.js`**:
+2. **`scripts/test/test-date-changes.js`**:
    - Comprehensive test suite that:
      - Verifies permalink compatibility
      - Builds the site
      - Checks key output files (sitemap.xml, feed.xml, index.html, links-feed.xml)
      - Validates URL structure and content
-   - Run with: `node test-date-changes.js`
+   - Run with: `node scripts/test/test-date-changes.js`
 
 ## Verification
 
@@ -1168,7 +1168,7 @@ If a date appears to be off by one day:
 ### URLs changing unexpectedly
 
 If post URLs change after a build:
-- Run `node test-permalink-compatibility.js` to verify all permalinks
+- Run `node scripts/test/test-permalink-compatibility.js` to verify all permalinks
 - Check that date strings in frontmatter are properly formatted
 - Ensure the date parsing configuration is loaded correctly
 
@@ -1242,7 +1242,7 @@ date: "YYYY-MM-DDTHH:mm:ss-HH:mm"  # or "YYYY-MM-DD" for date-only (assumes PST/
 
 ### Ready to commit
 
-All tests pass. The implementation is backward-compatible and ready for production. The test scripts (`test-permalink-compatibility.js` and `test-date-changes.js`) are available for future verification.
+All tests pass. The implementation is backward-compatible and ready for production. The test scripts (`scripts/test/test-permalink-compatibility.js` and `scripts/test/test-date-changes.js`) are available for future verification.
 
 Should I proceed with anything else, or are you ready to review and commit?
 
@@ -1359,8 +1359,8 @@ The changes are ready. Summary:
 - Build completes successfully
 
 **If you want to verify before deploying:**
-- `node test-permalink-compatibility.js` - verifies all permalinks
-- `node test-date-changes.js` - full test suite including build verification
+- `node scripts/test/test-permalink-compatibility.js` - verifies all permalinks
+- `node scripts/test/test-date-changes.js` - full test suite including build verification
 
 **If anything goes wrong:**
 - The test scripts will catch URL changes
@@ -1410,13 +1410,13 @@ Typo in the filename: `test-permallink-compatibility.js` should be `test-permali
 
 The correct command is:
 ```bash
-npm run clean && npm run build && node test-permalink-compatibility.js
+npm run clean && npm run build && node scripts/test/test-permalink-compatibility.js
 ```
 
 The file exists as `test-permalink-compatibility.js` (created earlier). Run the corrected command.
 
 ```shellscript
-npm run clean && npm run build && node test-permalink-compatibility.js
+npm run clean && npm run build && node scripts/test/test-permalink-compatibility.js
 ```
 
 ---
@@ -1432,13 +1432,13 @@ I see I have a typo in that command string
 Correct command:
 
 ```bash
-npm run clean && npm run build && node test-permalink-compatibility.js
+npm run clean && npm run build && node scripts/test/test-permalink-compatibility.js
 ```
 
 The file is `test-permalink-compatibility.js` (with an 'a' in permalink).
 
 ```shellscript
-npm run clean && npm run build && node test-permalink-compatibility.js
+npm run clean && npm run build && node scripts/test/test-permalink-compatibility.js
 ```
 
 ---
@@ -1540,7 +1540,7 @@ If reverting manually, these files were modified:
 
 After rolling back, verify:
 ```bash
-npm run clean && npm run build && node test-permalink-compatibility.js
+npm run clean && npm run build && node scripts/test/test-permalink-compatibility.js
 ```
 
 All 181 posts should still generate identical URLs (the test compares against the original logic).
@@ -1548,8 +1548,8 @@ All 181 posts should still generate identical URLs (the test compares against th
 ### Test Scripts
 
 The test scripts can be kept for future reference:
-- `test-permalink-compatibility.js` - Verifies permalink compatibility
-- `test-date-changes.js` - Comprehensive test suite
+- `scripts/test/test-permalink-compatibility.js` - Verifies permalink compatibility
+- `scripts/test/test-date-changes.js` - Comprehensive test suite
 
 ## Implementation Conversation Summary
 

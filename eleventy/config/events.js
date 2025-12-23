@@ -28,12 +28,18 @@ function configureEvents(eleventyConfig) {
     if (spinnerInterval) {
       clearInterval(spinnerInterval);
       spinnerInterval = null;
-      // Clear the spinner line
-      process.stdout.write('\r' + ' '.repeat(20) + '\r');
+      // Clear the spinner line - use synchronous write
+      try {
+        process.stdout.write('\r' + ' '.repeat(50) + '\r');
+      } catch (e) {
+        // Ignore errors if stdout is closed
+      }
     }
   }
 
   // Clean up spinner on process exit or error
+  // Use 'beforeExit' which fires before 'exit' and allows async operations
+  process.on('beforeExit', cleanupSpinner);
   process.on('exit', cleanupSpinner);
   process.on('SIGINT', () => {
     cleanupSpinner();
@@ -51,10 +57,12 @@ function configureEvents(eleventyConfig) {
       process.stdout.write('Building... ');
       
       // Start spinner animation
+      // Use unref() so the interval doesn't keep the process alive if Eleventy exits
       spinnerInterval = setInterval(() => {
         spinnerIndex = (spinnerIndex + 1) % SPINNER_FRAMES.length;
         process.stdout.write(`\rBuilding... ${SPINNER_FRAMES[spinnerIndex]}`);
       }, 100);
+      spinnerInterval.unref();
     }
   });
 

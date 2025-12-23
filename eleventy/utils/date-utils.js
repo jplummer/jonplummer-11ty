@@ -9,26 +9,50 @@ const { DateTime } = require("luxon");
 
 /**
  * Normalizes a date value to a Date object.
- * Handles both Date objects and date strings.
+ * Handles Date objects, date strings, and Luxon DateTime objects.
  * 
- * @param {Date|string|null|undefined} dateObj - Date to normalize
+ * @param {Date|string|DateTime|null|undefined} dateObj - Date to normalize
  * @returns {Date|null} Normalized Date object, or null if input is null/undefined
  */
 function normalizeDate(dateObj) {
   if (dateObj === null || dateObj === undefined) {
     return null;
   }
-  return dateObj instanceof Date ? dateObj : new Date(dateObj);
+  
+  // If already a Date object, return as-is
+  if (dateObj instanceof Date) {
+    return dateObj;
+  }
+  
+  // If it's a Luxon DateTime object, convert to Date
+  // isValid is a boolean property in Luxon, not a function
+  if (dateObj && typeof dateObj === 'object' && 'isValid' in dateObj && typeof dateObj.toJSDate === 'function') {
+    // This is a Luxon DateTime object
+    return dateObj.toJSDate();
+  }
+  
+  // Otherwise, try to create a Date from the value (string, number, etc.)
+  return new Date(dateObj);
 }
 
 /**
  * Formats a date for display in posts.
  * Uses Luxon to format as medium date (e.g., "Jan 15, 2024").
  * 
- * @param {Date|string} dateObj - Date to format
+ * @param {Date|string|DateTime} dateObj - Date to format
  * @returns {string} Formatted date string
  */
 function formatPostDate(dateObj) {
+  if (!dateObj) {
+    return '';
+  }
+  
+  // If it's already a Luxon DateTime, use it directly
+  if (dateObj && typeof dateObj === 'object' && 'isValid' in dateObj && typeof dateObj.toJSDate === 'function') {
+    return dateObj.toLocaleString(DateTime.DATE_MED);
+  }
+  
+  // Otherwise, normalize to Date and convert to Luxon
   const date = normalizeDate(dateObj);
   if (!date) {
     return '';
@@ -41,20 +65,39 @@ function formatPostDate(dateObj) {
  * If both dates are the same, returns just the single date.
  * Uses en dash with no spaces when numbers are adjacent to the dash.
  * 
- * @param {Date|string} startDate - Start date
- * @param {Date|string} endDate - End date
+ * @param {Date|string|DateTime} startDate - Start date
+ * @param {Date|string|DateTime} endDate - End date
  * @returns {string} Formatted date range string
  */
 function formatDateRange(startDate, endDate) {
-  const start = normalizeDate(startDate);
-  const end = normalizeDate(endDate);
-  
-  if (!start || !end) {
+  if (!startDate || !endDate) {
     return '';
   }
   
-  const startDt = DateTime.fromJSDate(start);
-  const endDt = DateTime.fromJSDate(end);
+  // Convert to Luxon DateTime objects, handling both Date and DateTime inputs
+  let startDt, endDt;
+  
+  if (startDate && typeof startDate === 'object' && 'isValid' in startDate && typeof startDate.toJSDate === 'function') {
+    // Already a Luxon DateTime
+    startDt = startDate;
+  } else {
+    const start = normalizeDate(startDate);
+    if (!start) {
+      return '';
+    }
+    startDt = DateTime.fromJSDate(start);
+  }
+  
+  if (endDate && typeof endDate === 'object' && 'isValid' in endDate && typeof endDate.toJSDate === 'function') {
+    // Already a Luxon DateTime
+    endDt = endDate;
+  } else {
+    const end = normalizeDate(endDate);
+    if (!end) {
+      return '';
+    }
+    endDt = DateTime.fromJSDate(end);
+  }
   
   // If same date, return single date
   if (startDt.hasSame(endDt, 'day')) {

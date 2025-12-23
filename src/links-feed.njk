@@ -10,18 +10,16 @@ eleventyExcludeFromCollections: true
         <description>Found links from Jon Plummer's blog</description>
         <language>en-US</language>
         {% set firstItem = collections.post | reverse | limit(20) | mergePostsAndLinks(links) | first %}
-        <lastBuildDate>{% if firstItem %}{{ firstItem.date | dateToRfc3339 }}{% else %}{{ (collections.post | first).data.date | dateToRfc3339Safe }}{% endif %}</lastBuildDate>
-
+        <lastBuildDate>{% if firstItem %}{{ firstItem.date | dateToRfc3339 }}{% else %}{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}{% endif %}</lastBuildDate>
         {% for item in collections.post | reverse | limit(20) | mergePostsAndLinks(links) %}
             {% if item.type == 'link' %}
             <item>
                 <title>{{ item.data.title | smartquotes | stripHtml }}</title>
                 <link>{{ item.data.url }}</link>
+                <guid>{{ item.data.url }}</guid>
                 <pubDate>{{ item.date | dateToRfc3339 }}</pubDate>
-
                 {# Rich content with full HTML #}
                 <content:encoded><![CDATA[<p><a href="{{ item.data.url }}">{{ item.data.title | smartquotes | stripHtml }}</a>{% if item.data.description %}<br>{{ item.data.description | markdownInline | safe }}{% endif %}</p>{% if site.url %}<p><small>Shared on <a href="{{ site.url }}">jonplummer.com</a></small></p>{% endif %}]]></content:encoded>
-
                 {# Simple description (markdown processed, but no link since <link> provides URL) #}
                 <description><![CDATA[{{ item.data.title | smartquotes | stripHtml }}{% if item.data.description %} - {{ item.data.description | markdownInline | safe }}{% endif %}]]></description>
             </item>

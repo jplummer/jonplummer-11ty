@@ -9,7 +9,7 @@ eleventyExcludeFromCollections: true
         <link>{{ site.url }}</link>
         <description>Today I Learned - Personal blog about work, life, and learning</description>
         <language>en-US</language>
-        <lastBuildDate>{{ (collections.post | first).data.date | dateToRfc3339Safe }}</lastBuildDate>
+        <lastBuildDate>{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}</lastBuildDate>
 
         {% for item in collections.post | reverse | limit(20) %}
         <item>

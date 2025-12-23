@@ -40,7 +40,6 @@
   },
   "dependencies": {
     "dotenv": "^17.2.3",
-    "eleventy-plugin-date": "^1.0.0",
     "markdown-it": "^14.1.0"
   },
   "overrides": {

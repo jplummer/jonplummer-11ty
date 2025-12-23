@@ -7,8 +7,6 @@
  */
 
 const fs = require("fs");
-const pluginRss = require("@11ty/eleventy-plugin-rss");
-const { DateTime } = require("luxon");
 const { normalizeDate, formatPostDate, formatDateRange } = require("../utils/date-utils");
 const { extractCssCustomProperties } = require("../utils/css-utils");
 const mergePostsAndLinks = require("../filters/merge-posts-and-links");
@@ -37,25 +35,35 @@ function configureFilters(eleventyConfig, md) {
   // add dateRange filter
   eleventyConfig.addFilter("dateRange", formatDateRange);
 
-  // Wrap dateToRfc3339 to handle both Date objects, date strings, and Luxon DateTime objects
-  // Preserves timezone information from Luxon DateTime objects
-  eleventyConfig.addFilter("dateToRfc3339Safe", (dateObj) => {
-    if (!dateObj) {
-      return '';
-    }
-    
-    // Handle Luxon DateTime objects directly to preserve timezone
-    if (dateObj && typeof dateObj === 'object' && dateObj.isValid && typeof dateObj.isValid === 'function') {
-      // This is a Luxon DateTime object
-      return dateObj.toISO();
-    }
-    
-    // Handle Date objects and strings
-    const date = normalizeDate(dateObj);
-    if (!date) {
-      return '';
-    }
-    return pluginRss.dateToRfc3339(date);
+  // Override dateToRfc3339 as a plugin to ensure it runs AFTER the RSS plugin registers its filter
+  // Plugins run in a second configuration stage, so we must use a plugin wrapper to override
+  // the RSS plugin's filter. This handles DateTime objects from our custom date parsing.
+  eleventyConfig.addPlugin(function(eleventyConfig) {
+    eleventyConfig.addNunjucksFilter("dateToRfc3339", (dateObj) => {
+      if (!dateObj) {
+        return '';
+      }
+      
+      let date;
+      
+      // If it's a DateTime, convert to Date
+      if (dateObj && typeof dateObj === 'object' && typeof dateObj.toJSDate === 'function') {
+        date = dateObj.toJSDate();
+      } else if (dateObj instanceof Date) {
+        date = dateObj;
+      } else {
+        // Otherwise, try to normalize
+        date = normalizeDate(dateObj);
+      }
+      
+      // Validate date
+      if (!date || !(date instanceof Date) || isNaN(date.getTime())) {
+        return '';
+      }
+      
+      // Format as RFC3339 (ISO 8601) - toISOString() produces RFC3339 format
+      return date.toISOString();
+    });
   });
 
   // Add markdown filter
