@@ -13,17 +13,15 @@
 
 - [ ] OFTEN: sweep slack for links
 
-- [x] Fix timezone issues (going forward reflect real authoring date as I experienced it, but don't break incoming links by changing URLs to existing content)
-  - [x] Watch ahrefs this weekend for "URL changed" errors; site health should be at or near 100
+- [ ] Watch for ahrefs improvement in image size complaints this weekend
 
-- [x] handle "image too large" ahrefs feedback
-  - [x] Automate image optimization (see https://www.aleksandrhovhannisyan.com/blog/eleventy-the-good-the-bad-and-the-possum/#5-it-has-an-excellent-image-plugin and https://bholmes.dev/blog/picture-perfect-image-optimization/ )
-  - [x] make portfolio layout not depend on embedded HTML
-    - [x] markdown-it-attrs and markdown-it-container?
-    - [x] custom shortcodes
-  - [x] portfolio image widths: full, 2/3, 1/3, smaller for mobile images
-  - [x] make sure margins etc are good in portfolio items, using blog poasts as the example
+- [ ] Polish title and description of each feed
 
+- [ ] Reinvestigate color scheme
+
+- [x] gzip css
+
+- [ ] other ways to speed up site load?
 
 ## CMS
 

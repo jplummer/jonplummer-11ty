@@ -1,5 +1,15 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),newest first.
 
+## 2025-12-22
+
+- Add responsive image optimization with figure support
+- Remove backup files from migration
+
+## 2025-12-11
+
+- Add code documentation headers and update tooling
+- Implement timezone-aware date handling with PST/PDT default
+
 ## 2025-12-10
 
 - Update agent protocol, dev mode passthrough, and add recent links
@@ -262,4 +272,5 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Update .gitignore
 
 
-Last deployed on 2025-12-12
+
+Last deployed on 2025-12-23

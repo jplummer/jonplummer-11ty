@@ -655,6 +655,7 @@ article.portfolio-detail section > .portrait-grid figure {
 article.portfolio-detail section > .portrait-grid figure img {
   width: 100%;
   height: auto;
+  border: 1px solid var(--border-color);
 }
 
 article.portfolio-detail section > .portrait-grid figure figcaption {
