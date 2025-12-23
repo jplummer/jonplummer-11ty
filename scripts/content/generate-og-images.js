@@ -7,6 +7,7 @@ const nunjucks = require('nunjucks');
 const { DateTime } = require('luxon');
 const { findMarkdownFiles } = require('../utils/file-utils');
 const { parseFrontMatter, reconstructFile } = require('../utils/frontmatter-utils');
+const { isPost } = require('../utils/content-utils');
 
 // Configure Nunjucks environment
 const nunjucksEnv = new nunjucks.Environment(
@@ -209,12 +210,11 @@ async function processFile(filePath, options = {}) {
   }
   
   // Determine if this is a post or page
-  const isPost = frontMatter.tags && frontMatter.tags.includes('post');
   const isPage = frontMatter.tags && frontMatter.tags.includes('page');
   const isPortfolioPage = filePath.endsWith('portfolio.njk') || filePath.endsWith('portfolio.md');
   
   // Only process posts, pages, and portfolio page
-  if (!isPost && !isPage && !isPortfolioPage) {
+  if (!isPost(frontMatter) && !isPage && !isPortfolioPage) {
     return { updated: false, skipped: true, reason: 'Not a post or page' };
   }
   

@@ -15,13 +15,17 @@
 
 - [ ] Watch for ahrefs improvement in image size complaints this weekend
 
-- [ ] Polish title and description of each feed
+- [ ] RSS cleanup
+  - [ ] address `npm test rss-feed` issues
+  - [ ] Polish title and description of each feed
+
+- [ ] site performance
+  - [x] image optimization
+  - [x] gzip css (.htaccess is doing it already, yo)
+  - [ ] other ways to speed up site load?
 
 - [ ] Reinvestigate color scheme
 
-- [x] gzip css
-
-- [ ] other ways to speed up site load?
 
 ## CMS
 

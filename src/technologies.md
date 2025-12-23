@@ -23,7 +23,6 @@ ogImage: /assets/images/og/technologies.png
   - Plugins:
     - **[@11ty/eleventy-plugin-rss](https://www.npmjs.com/package/@11ty/eleventy-plugin-rss)**: Generates RSS/XML feeds from collections
     - **[@11ty/eleventy-plugin-syntaxhighlight](https://www.npmjs.com/package/@11ty/eleventy-plugin-syntaxhighlight)**: Adds syntax highlighting for code blocks
-    - **[eleventy-plugin-date](https://www.npmjs.com/package/eleventy-plugin-date)**: Provides date formatting filters using Luxon
 - **[Node.js](https://nodejs.org/)**
   - JavaScript runtime for running build scripts, test scripts, and deployment scripts
   - Module system: **CommonJS** (uses `require()` and `module.exports`)

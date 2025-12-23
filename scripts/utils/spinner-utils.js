@@ -6,7 +6,7 @@
  * Centralized here to make it easy to experiment with different spinner styles.
  */
 
-const SPINNER_FRAMES = ['◤', '⧸', '◢', ' '];
+const SPINNER_FRAMES = ['◤', '⟋', '◢', ' '];
 
 // Classic
 // const SPIN = ['|', '/', '—', '\\'];
@@ -24,7 +24,7 @@ const SPINNER_FRAMES = ['◤', '⧸', '◢', ' '];
 // const TRIANGLE_ROTATE = ['▲', '▶', '▼', '◀'];
 // const TRIANGLE_ROTATE_CORNER = ['◢', '◣', '◤', '◥'];
 // const TRIANGLE_HOLLOW = ['▹', '▿', '◃', '▵'];
-// const TRIANGLE_SPIN_DIAGONAL = ['◤', '⧸', '◢', ' '];
+// const TRIANGLE_SPIN_DIAGONAL = ['◤', '⟋', '◢', ' '];
 // const TRIANGLE_SPIN_DOUBLE_DIAGONAL = ['◤', '⟋', '◢', ' ', '◥', '⟍', '◣', ' '];
 
 // Circles
