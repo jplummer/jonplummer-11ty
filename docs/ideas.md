@@ -16,8 +16,9 @@
 - [ ] Watch for ahrefs improvement in image size complaints this weekend
 
 - [ ] RSS cleanup
-  - [ ] address `npm test rss-feed` issues
+  - [x] address `npm test rss-feed` issues
   - [ ] Polish title and description of each feed
+  - [ ] *Consider* RFC822 dates rather than RFC3339 for full RSS 2.0 compliance
 
 - [ ] site performance
   - [x] image optimization

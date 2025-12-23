@@ -55,8 +55,14 @@ function configureDateParsing(eleventyConfig) {
       );
     }
     
-    // Return DateTime - Eleventy automatically converts to Date for templates
-    // This preserves timezone information while ensuring templates receive Date objects
+    // Return DateTime - Eleventy automatically converts to Date using .toJSDate()
+    // 
+    // Why return DateTime instead of Date?
+    // - DateTime preserves timezone intent (e.g., "2025-10-08" = Oct 8 in PST, not UTC)
+    // - Eleventy converts DateTime → Date (preserves moment in time, loses timezone)
+    // - Permalink function converts Date → DateTime in PST to extract date components correctly
+    // 
+    // This round-trip ensures URLs match the date in frontmatter regardless of build system timezone
     return localDate;
   });
 }
