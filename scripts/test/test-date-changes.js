@@ -12,7 +12,7 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-const OUTPUT_DIR = '_site';
+const OUTPUT_DIR = path.join(__dirname, '..', '..', '_site');
 const KEY_FILES = [
   'sitemap.xml',
   'feed.xml',
@@ -25,7 +25,7 @@ console.log('🧪 Testing date/timezone changes...\n');
 // Step 1: Verify permalink compatibility
 console.log('1️⃣  Testing permalink compatibility...');
 try {
-  const result = execSync('node test-permalink-compatibility.js', { 
+  const result = execSync('node scripts/test/test-permalink-compatibility.js', { 
     encoding: 'utf8',
     stdio: 'pipe'
   });

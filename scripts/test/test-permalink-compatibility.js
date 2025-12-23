@@ -38,7 +38,7 @@ function proposedPermalink(dateString) {
 }
 
 // Find all post files
-const postsDir = path.join(__dirname, 'src', '_posts');
+const postsDir = path.join(__dirname, '..', '..', 'src', '_posts');
 const postFiles = [];
 
 function findPostFiles(dir) {
