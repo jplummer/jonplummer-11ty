@@ -53,8 +53,8 @@
   --border-color: #d0d0d0; /* subtle border for images */
   --background-color: #d3d8d2;
   --content-background-color: #fff;
-  --link-color: #e6423a;
-  --link-hover-color: #d97706; /* darker orange for contrast on white */
+  --link-color: #d63d36; /* darkened from #e6423a to meet WCAG AA 4.5:1 (4.59:1) */
+  --link-hover-color: #b26205; /* darkened from #d97706 to meet WCAG AA 4.5:1 (4.52:1) */
   --link-visited-color: #5b4a3b;
   --link-active-color: #0d703f;
 }
@@ -149,12 +149,16 @@ body>footer {
 }
 
 /* Header layout with hgroup and navigation */
-header {
+header,
+hgroup {
   display: flex;
-  justify-content: space-between;
   align-items: baseline;
-  flex-wrap: wrap;
   gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+header {
+  justify-content: space-between;
 }
 
 /* Article grid layout */
@@ -238,28 +242,26 @@ nav a[aria-current="page"] {
   color: var(--link-color);
 }
 
-/* Post navigation layout */
-nav.post-navigation {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* Pagination layout */
+/* Post navigation and pagination layout */
+nav.post-navigation,
 nav.pagination {
   display: flex;
   align-items: center;
 }
 
+nav.post-navigation {
+  justify-content: space-between;
+}
+
 /* Navigation prev/next positioning */
 nav.post-navigation a.prev,
 nav.pagination a.prev {
-  margin-right: auto;
+  margin-inline-end: auto;
 }
 
 nav.post-navigation a.next,
 nav.pagination a.next {
-  margin-left: auto;
+  margin-inline-start: auto;
 }
 
 /* === TYPOGRAPHY === */
@@ -275,34 +277,33 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: var(--letter-spacing-tight);
 }
 
+h1, h2, h3, h4, h5 {
+  font-weight: var(--font-weight-bold);
+}
+
 h1 {
   font-size: var(--font-size-2xl);
   line-height: var(--line-height-2xl);
-  font-weight: var(--font-weight-bold);
 }
 
 h2 {
   font-size: var(--font-size-xl);
   line-height: var(--line-height-xl);
-  font-weight: var(--font-weight-bold);
 }
 
 h3 {
   font-size: var(--font-size-lg);
   line-height: var(--line-height-lg);
-  font-weight: var(--font-weight-bold);
 }
 
 h4 {
   font-size: var(--font-size-md);
   line-height: var(--line-height-md);
-  font-weight: var(--font-weight-bold);
 }
 
 h5 {
   font-size: var(--font-size-sm);
   line-height: var(--line-height-sm);
-  font-weight: var(--font-weight-bold);
 }
 
 h6 {
@@ -311,13 +312,7 @@ h6 {
   font-weight: var(--font-weight-black);
 }
 
-/* Hgroup layout and typography */
-hgroup {
-  display: flex;
-  align-items: baseline;
-  gap: var(--spacing-sm);
-  flex-wrap: wrap;
-}
+/* Hgroup typography */
 
 hgroup h1 {
   font-size: var(--font-size-3xl);
@@ -363,7 +358,6 @@ blockquote {
 
 /* Horizontal rules */
 hr {
-  border: 0;
   border-top: 1px solid var(--text-color-light);
   margin: var(--spacing-lg) 0;
   opacity: 0.5;
@@ -418,7 +412,8 @@ a {
 }
 
 a:hover,
-a:focus {
+a:focus,
+article section a:hover {
   color: var(--link-hover-color);
   text-decoration: underline;
 }
@@ -452,11 +447,6 @@ article h1 a:hover {
   text-decoration: underline;
 }
 
-/* Links in article sections */
-article section a:hover {
-  color: var(--link-hover-color);
-}
-
 /* Hgroup links keep link-color even when visited */
 hgroup h1 a:visited,
 hgroup p {
@@ -471,13 +461,13 @@ article.link-item {
   color: var(--link-visited-color);
 }
 
-article.link-item section {
-  margin: 0;
-  padding: 0;
-}
-
+article.link-item section,
 article.link-item p {
   margin: 0;
+}
+
+article.link-item section {
+  padding: 0;
 }
 
 /* End-of-post square */
@@ -502,17 +492,13 @@ article.portfolio-detail header {
 }
 
 article.portfolio-detail section {
-  /* Span full width of the parent grid, taking over areas b and c */
   grid-column: 1 / -1;
-  
-  /* Re-establish the parent's grid inside this section */
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: var(--paragraph-spacing) var(--gutter);
 }
 
 article.portfolio-detail section > * {
-  /* All standard content (text, lists, etc.) goes to the right column */
   grid-column: 2;
 }
 
@@ -526,8 +512,7 @@ article.portfolio-detail section > h3,
 article.portfolio-detail section > h4,
 article.portfolio-detail section > h5,
 article.portfolio-detail section > h6 {
-  margin-top: 0;
-  margin-bottom: 0;
+  margin-block: 0;
 }
 
 /* Images (and their wrapper paragraphs) span the full width */
@@ -552,9 +537,7 @@ article.portfolio-detail section > figure figcaption {
     line-height: var(--line-height-xs);
     color: var(--text-color-light);
     font-style: italic;
-    /* This makes the caption align with the text column (2fr) */
-    /* Figure spans full width (3fr + gap), text column starts at (1fr + gap) */
-    /* So padding = (1fr / (3fr + gap)) * 100% + gap = ((100% - gap) / 3) + gap */
+    /* Align caption with text column: ((100% - gap) / 3) + gap */
     padding-left: calc(((100% - var(--gutter)) / 3) + var(--gutter)); 
 }
 
@@ -627,22 +610,22 @@ article.portfolio-item p.portfolio-item-description {
 
 /* Portrait Grid Container */
 article.portfolio-detail section > .portrait-grid {
-  grid-column: 1 / -1; /* Span full width of the article */
+  grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: repeat(1, 1fr); /* Mobile: 1 col */
+  grid-template-columns: 1fr;
   gap: var(--gutter);
   margin: var(--spacing-lg) 0;
 }
 
 @media (min-width: 40rem) {
   article.portfolio-detail section > .portrait-grid {
-    grid-template-columns: repeat(2, 1fr); /* Tablet: 2 cols */
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width: 60rem) {
   article.portfolio-detail section > .portrait-grid {
-    grid-template-columns: repeat(3, 1fr); /* Desktop: 3 cols */
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -664,7 +647,7 @@ article.portfolio-detail section > .portrait-grid figure figcaption {
   line-height: var(--line-height-xs);
   color: var(--text-color-light);
   font-style: italic;
-  padding-left: 0; /* Reset padding since these are in narrow columns */
+  padding-left: 0;
 }
 
 /* === UTILITIES === */
@@ -786,47 +769,14 @@ header a.skip:focus {
 /* Styles for OG images rendered via renderOgImage shortcode (scoped to .og-image-rendered) */
 
 .og-image-rendered {
-  /* CSS custom properties from main stylesheet (scoped) */
-  --gutter: 2rem;
-  --max-width: 66rem;
-  --breakpoint-single-column: 54rem;
-  /* Typography - Modular type scale based on 1rem (16px) base. All sizes follow modular ratios.
-     See: https://webtypography.net/3.1.1 */
-  --font-family: system-ui, sans-serif;
-  --text-size: 16px;
-  --line-height: 1.5;
-  --paragraph-spacing: calc(var(--line-height) * 1em);
-  --font-size-xs: 1rem; --line-height-xs: 1.5; /* base: 1.0 */
-  --font-size-sm: 1.125rem; --line-height-sm: 1.3334; /* ratio: 1.125 */
-  --font-size-md: 1.25rem; --line-height-md: 1.2; /* ratio: 1.25 */
-  --font-size-lg: 1.5rem; --line-height-lg: 1.2; /* ratio: 1.5 */
-  --font-size-xl: 2rem; --line-height-xl: 1.2; /* ratio: 2.0 */
-  --font-size-2xl: 2.5rem; --line-height-2xl: 1.2; /* ratio: 2.5 */
-  --font-size-3xl: 4rem; --line-height-3xl: 1.2; /* ratio: 4.0 */
-  --line-height-tight: 1.1;
-  --font-weight-thin: 100;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
-  --font-weight-black: 900;
-  --letter-spacing-tight: -0.025em;
-  --letter-spacing-normal: normal;
-  --letter-spacing-loose: 0.025em;
-  /* Spacing - based on baseline grid (8px/0.5rem unit) */
-  --baseline-unit: 0.5rem; /* 8px - finer control for baseline grid */
-  --spacing-xs: 0.5rem; /* 1 baseline */
-  --spacing-sm: 1rem; /* 2 baselines */
-  --spacing-md: 1.5rem; /* 3 baselines */
-  --spacing-lg: 2rem; /* 4 baselines */
-  --spacing-xl: 2.5rem; /* 5 baselines */
-  --spacing-ex: 5ex;
-  
-  /* Force light theme for OG images */
+  /* Inherits all CSS custom properties from :root (typography, spacing, etc.)
+     Only override colors to force light theme for OG image preview */
   --text-color: #2a2a2a;
   --text-color-light: #5a5a5a;
   --background-color: #d3d8d2;
   --content-background-color: #fff;
-  --link-color: #e6423a;
-  --link-hover-color: #d97706;
+  --link-color: #d63d36; /* darkened to meet WCAG AA 4.5:1 */
+  --link-hover-color: #b26205; /* darkened to meet WCAG AA 4.5:1 */
   --link-visited-color: #5b4a3b;
   --link-active-color: #0d703f;
   
