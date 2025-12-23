@@ -116,6 +116,43 @@ Replace the placeholder notes with actual descriptions for each page.
 - PDFs are stored in `src/assets/pdfs/` for reference and download
 - The conversion happens during authoring, not during build
 
+## Images with Captions
+
+Images with captions use an extended markdown syntax that automatically generates optimized, responsive images.
+
+### Syntax
+
+```markdown
+![Alt text](/assets/images/path/to/image.png)
+*Caption text here*
+```
+
+The image will be automatically:
+- Optimized in multiple sizes (WebP and JPEG formats)
+- Wrapped in a `<figure>` element with `<picture>` for responsive images
+- Lazy-loaded for better performance
+
+### Example
+
+```markdown
+![Dashboard view](/assets/images/2022/12/dashboard.png)
+*Main dashboard showing key metrics and navigation*
+```
+
+This generates a `<figure>` element with:
+- Responsive `<picture>` element with multiple image sizes
+- Optimized WebP and JPEG formats
+- Lazy loading and async decoding
+- Caption in a `<figcaption>` element
+
+### Notes
+
+- Images are automatically optimized during build
+- Multiple sizes are generated for different screen sizes
+- Images are stored in `/img/` directory in the output
+- Captions are optional - omit the italic line if no caption is needed
+- Standard markdown image syntax (without caption) still works and images are still optimized
+
 ## Redirects
 
 Handle URL changes (e.g., corrected post dates) using server-side 301 redirects.

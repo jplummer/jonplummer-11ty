@@ -1,3 +1,18 @@
+2025-12-22:
+  - url: https://ngrok.com/blog/prompt-caching/
+    title: "Prompt caching: 10x cheaper LLM tokens, but how? – Sam Rose"
+    description: 'An explanation of prompt caching (and LLMs in general) by the inimitable Sam Rose. (His visualizations of programming concepts are accessible and smart.)'
+2025-12-19:
+  - url: https://leadershiplighthouse.substack.com/p/i-went-all-in-on-ai-the-mit-study
+    title: "I Went All-In on AI. The MIT Study Was Right. – Josh Anderson"
+    description: '"The companies that will thrive aren''t the ones with the best AI tools. They''re the ones whose people use AI to become better, not to become lazier. They''re the ones where humans own the decisions, own the code, own the strategy, and use AI as an amplifier, not an autopilot."'
+  - url: https://lukew.com/ff/entry.asp?2137
+    title: "AI Coding Agents for Designers – Luke Wroblewski"
+    description: '"In an increasing number of technology companies, the majority of code is being written by AI coding agents. While that primarily boosts software developer productivity, they aren''t the only ones that can benefit from this transformation."'
+2025-12-17:
+  - url: https://terriblesoftware.org/2025/11/25/what-actually-makes-you-senior/
+    title: "What Actually Makes You Senior – Matheus Lima"
+    description: 'The same is true for designers: "The one skill that separates senior engineers from everyone else isn''t technical. It''s the ability to take ambiguous problems and make them concrete."'
 2025-12-10:
   - url: https://www.youtube.com/watch?v=BsWxPI9UM4c
     title: "Why AI evals are the hottest new skill for product builders; with Hamel Husain and Shreya Shankar – Lenny's Podcast"

@@ -145,7 +145,9 @@ if (!hasSSHKey && !hasSshpass && !hasPassword) {
 console.log('\n🔐 Testing SSH connectivity...');
 function testSSHConnection() {
   try {
-    console.log(`Testing SSH connection to ${config.username}@${config.host}...`);
+    // Mask host in logs for security (username is typically not sensitive)
+    const maskedHost = config.host ? config.host.replace(/./g, '*') : '***';
+    console.log(`Testing SSH connection to ${config.username}@${maskedHost}...`);
     
     let sshCommand;
     
@@ -153,8 +155,9 @@ function testSSHConnection() {
       // Test with SSH key
       sshCommand = `ssh -o ConnectTimeout=10 -o BatchMode=yes ${config.username}@${config.host} "echo 'SSH connection successful'"`;
     } else if (hasSshpass && hasPassword) {
-      // Test with sshpass
-      sshCommand = `sshpass -p '${config.password}' ssh -o ConnectTimeout=10 ${config.username}@${config.host} "echo 'SSH connection successful'"`;
+      // Test with sshpass using environment variable (avoids password in command line/process list)
+      process.env.SSHPASS = config.password;
+      sshCommand = `sshpass -e ssh -o ConnectTimeout=10 ${config.username}@${config.host} "echo 'SSH connection successful'"`;
     } else {
       // Test with password prompt (this will fail in automated testing)
       console.log('   Skipping SSH test (no automated authentication available)');
@@ -197,8 +200,9 @@ function testRemoteDirectory() {
       // Test with SSH key
       lsCommand = `ssh ${config.username}@${config.host} "ls -la '${config.remotePath}'"`;
     } else if (hasSshpass && hasPassword) {
-      // Test with sshpass
-      lsCommand = `sshpass -p '${config.password}' ssh ${config.username}@${config.host} "ls -la '${config.remotePath}'"`;
+      // Test with sshpass using environment variable (avoids password in command line/process list)
+      process.env.SSHPASS = config.password;
+      lsCommand = `sshpass -e ssh ${config.username}@${config.host} "ls -la '${config.remotePath}'"`;
     } else {
       // Skip if no automated authentication
       console.log('   Skipping directory test (no automated authentication available)');
@@ -245,8 +249,9 @@ function testRsyncUpload() {
       // Use SSH key authentication
       rsyncCommand = `rsync -avz --dry-run ${testFile} ${config.username}@${config.host}:${config.remotePath}`;
     } else if (hasSshpass && hasPassword) {
-      // Use sshpass for password authentication
-      rsyncCommand = `sshpass -p '${config.password}' rsync -avz --dry-run ${testFile} ${config.username}@${config.host}:${config.remotePath}`;
+      // Use sshpass for password authentication via environment variable (avoids password in command line/process list)
+      process.env.SSHPASS = config.password;
+      rsyncCommand = `sshpass -e rsync -avz --dry-run ${testFile} ${config.username}@${config.host}:${config.remotePath}`;
     } else {
       // Use password prompt (this will fail in automated testing)
       console.log('   Skipping rsync test (no automated authentication available)');

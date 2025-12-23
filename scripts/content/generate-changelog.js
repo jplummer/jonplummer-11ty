@@ -363,7 +363,7 @@ try {
   const isDeploy = process.argv.includes('--deploy');
   if (isDeploy) {
     const deployDate = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
-    changelog += `\n<p class="deploy-date">Last deployed on <time datetime="${new Date().toISOString()}">${deployDate}</time></p>\n`;
+    changelog += `\n\nLast deployed on ${deployDate}\n`;
   }
 
   // Write changelog file

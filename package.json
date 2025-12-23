@@ -14,8 +14,10 @@
     "update-docs": "node scripts/content/update-eleventy-docs.js",
     "changelog": "node scripts/content/generate-changelog.js",
     "convert-pdf": "node scripts/content/convert-pdf-pages.js",
+    "convert-pdf-with-notes": "node scripts/content/convert-pdf-pages-with-notes.js",
     "generate-og-images": "node scripts/content/generate-og-images.js",
-    "security-audit": "node scripts/security/security-audit.js"
+    "security-audit": "node scripts/security/security-audit.js",
+    "migrate-figures": "node scripts/migrations/convert-figures-to-markdown.js"
   },
   "keywords": [],
   "author": "Jon Plummer",
@@ -24,6 +26,7 @@
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
     "@11ty/eleventy-fetch": "^5.1.0",
+    "@11ty/eleventy-img": "^6.0.0",
     "@11ty/eleventy-plugin-rss": "^2.0.4",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
     "@xmldom/xmldom": "^0.8.11",
@@ -39,5 +42,11 @@
     "dotenv": "^17.2.3",
     "eleventy-plugin-date": "^1.0.0",
     "markdown-it": "^14.1.0"
+  },
+  "overrides": {
+    "form-data": ">=2.5.4",
+    "jpeg-js": ">=0.4.4",
+    "minimist": ">=1.2.6",
+    "tough-cookie": ">=4.1.3"
   }
 }

@@ -148,7 +148,7 @@ function convertPage(pdfPath, pageNum, outputFile) {
     const outputPrefix = outputFile.replace(/-\d+\.png$/, '').replace(/\.png$/, '');
     
     execSync(
-      `pdftocairo -png -f ${pageNum} -l ${pageNum} "${pdfPath}" "${outputPrefix}"`,
+      `pdftocairo -png -r 300 -f ${pageNum} -l ${pageNum} "${pdfPath}" "${outputPrefix}"`,
       { stdio: 'ignore', cwd: process.cwd() }
     );
     

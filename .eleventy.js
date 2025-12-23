@@ -7,6 +7,7 @@ const configureDateParsing = require("./eleventy/config/date-parsing");
 const configurePlugins = require("./eleventy/config/plugins");
 const configureFilters = require("./eleventy/config/filters");
 const configureShortcodes = require("./eleventy/config/shortcodes");
+const configureTransforms = require("./eleventy/config/transforms");
 const configurePassthrough = require("./eleventy/config/passthrough");
 const configureEvents = require("./eleventy/config/events");
 const configurePreprocessors = require("./eleventy/config/preprocessors");
@@ -31,6 +32,9 @@ module.exports = function (eleventyConfig) {
   
   // Configure shortcodes
   configureShortcodes(eleventyConfig);
+  
+  // Configure transforms (must be before image optimization plugin)
+  configureTransforms(eleventyConfig);
   
   // Configure passthrough copy and watch targets
   configurePassthrough(eleventyConfig);

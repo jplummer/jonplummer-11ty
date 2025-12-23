@@ -34,6 +34,9 @@ function stripMarkdown(text) {
   text = text.replace(/^[\s]*\d+\.\s+/gm, '');
   
   // Remove HTML tags
+  // SECURITY NOTE: This regex is acceptable here because we're processing trusted content
+  // (our own post content), not user input. For untrusted content, use a proper HTML
+  // sanitization library.
   text = text.replace(/<[^>]+>/g, '');
   
   // Remove extra whitespace and normalize

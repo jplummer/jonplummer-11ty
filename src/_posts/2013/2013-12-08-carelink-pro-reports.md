@@ -9,35 +9,23 @@ ogImage: /assets/images/og/portfolio.png
 ---
 A patient with an insulin pump and a glucose monitor has health data positively streaming off of them, yet endocrinologists typically struggled with the reports they were given, often relying on cruder measures to make behavioral recommendations and rough adjustments to pump settings between quarterly visits. Direct research with five endocrinology offices, which later became a lead user program with two doctors in one office, helped us create a new set of reports aimed squarely at answering key clinical questions and showing patient behavior and results together.
 
-<figure>
-  <img src="/assets/images/2022/12/daily.png" alt="CareLink Pro daily report showing glucose patterns throughout the day">
-  <figcaption>Daily detail report showing glucose readings, insulin doses, and meal markers throughout a single day, helping identify patterns and dosage/timing issues.</figcaption>
-</figure>
+![CareLink Pro daily report showing glucose patterns throughout the day](/assets/images/2022/12/daily.png)
+*Daily detail report showing glucose readings, insulin doses, and meal markers throughout a single day, helping identify patterns and dosage/timing issues.*
 
-<figure>
-  <img src="/assets/images/2022/12/overview.png" alt="CareLink Pro overview report with summary statistics">
-  <figcaption>Overview report providing summary statistics and key metrics across the selected time period, giving physicians a quick assessment of patient control. Meal analysis, wherein meals are aligned in time for modal analysis, was a key innovation at the time.</figcaption>
-</figure>
+![CareLink Pro overview report with summary statistics](/assets/images/2022/12/overview.png)
+*Overview report providing summary statistics and key metrics across the selected time period, giving physicians a quick assessment of patient control. Meal analysis, wherein meals are aligned in time for modal analysis, was a key innovation at the time.*
 
-<figure>
-  <img src="/assets/images/2022/12/sensor.png" alt="CareLink Pro sensor data report with continuous glucose monitoring">
-  <figcaption>Sensor data report displaying continuous glucose monitoring (CGM) data with detailed trend analysis and time-in-range metrics. Meal and overnight analyses are sensor-enabled enhancements to the prior report.</figcaption>
-</figure>
+![CareLink Pro sensor data report with continuous glucose monitoring](/assets/images/2022/12/sensor.png)
+*Sensor data report displaying continuous glucose monitoring (CGM) data with detailed trend analysis and time-in-range metrics. Meal and overnight analyses are sensor-enabled enhancements to the prior report.*
 
-<figure>
-  <img src="/assets/images/2022/12/logbook.png" alt="CareLink Pro logbook report with manual entries">
-  <figcaption>Logbook report showing manual entries including fingerstick readings, meals, exercise, and other events logged by the patient.</figcaption>
-</figure>
+![CareLink Pro logbook report with manual entries](/assets/images/2022/12/logbook.png)
+*Logbook report showing manual entries including fingerstick readings, meals, exercise, and other events logged by the patient.*
 
-<figure>
-  <img src="/assets/images/2022/12/adherence.png" alt="CareLink Pro adherence report showing patient compliance metrics">
-  <figcaption>Adherence report (patented feature) providing a first-glance assessment of how well the patient is following their diabetes management regimen, indicating data reliability.</figcaption>
-</figure>
+![CareLink Pro adherence report showing patient compliance metrics](/assets/images/2022/12/adherence.png)
+*Adherence report (patented feature) providing a first-glance assessment of how well the patient is following their diabetes management regimen, indicating data reliability.*
 
-<figure>
-  <img src="/assets/images/2022/12/pump_settings.png" alt="CareLink Pro pump settings report">
-  <figcaption>Pump settings report displaying current insulin pump configuration including basal rates, insulin-to-carb ratios, and correction factors.</figcaption>
-</figure>
+![CareLink Pro pump settings report](/assets/images/2022/12/pump_settings.png)
+*Pump settings report displaying current insulin pump configuration including basal rates, insulin-to-carb ratios, and correction factors.*
 
 Central to these reports is the idea that as a patient takes more fingersticks the analysis should begin to approach that which is possible with a sensor; with a sensor a detailed train of behavior and results should be made clear and scannable.
 

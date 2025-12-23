@@ -141,6 +141,9 @@ async function checkCertificateExpiration(results, addFinding) {
     console.log(`    Using domain: ${domain}`);
     
     return new Promise((resolve) => {
+      // SECURITY NOTE: rejectUnauthorized: false is intentional here.
+      // We need to connect even if the certificate is expired/invalid to check
+      // its expiration date. This is a security check script, not production code.
       const socket = tls.connect(443, domain, { servername: domain, rejectUnauthorized: false }, () => {
         try {
           const cert = socket.getPeerCertificate(true);

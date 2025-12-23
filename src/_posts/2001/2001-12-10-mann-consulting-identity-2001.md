@@ -7,10 +7,8 @@ coverImage: 2022/12/1477187196364852.gif
 description: "Identity package for Mann Consulting, an IT consultancy, featuring a cube logo applied across business cards, letterhead, apparel, and marketing materials."
 ogImage: /assets/images/og/portfolio.png
 ---
-<figure>
-  <img src="/assets/images/2022/12/1477187196364852.gif" alt="Mann Consulting final identity design with cube logo">
-  <figcaption>Final Mann Consulting identity featuring the cube logo and logotype, applied across business cards, letterhead, apparel, and marketing materials.</figcaption>
-</figure>
+![Mann Consulting final identity design with cube logo](/assets/images/2022/12/1477187196364852.gif)
+*Final Mann Consulting identity featuring the cube logo and logotype, applied across business cards, letterhead, apparel, and marketing materials.*
 
 Identity package for Mann Consulting, a small IT consultancy in San Francisco focused on advertising and graphic design firms. Many venues were explored, but I kept coming back to the cube. Nearly two decades on they are still quite happy with it.
 
@@ -18,52 +16,32 @@ My role: ideation and development of the mark and logotype, application to busin
 
 Exploratory work:
 
-<figure>
-  <img src="/assets/images/2022/12/1045052202745056.gif" alt="Mann Consulting identity exploration concept 1">
-  <figcaption>Early identity exploration showing alternative approaches to the logo design before settling on the cube concept.</figcaption>
-</figure>
+![Mann Consulting identity exploration concept 1](/assets/images/2022/12/1045052202745056.gif)
+*Early identity exploration showing alternative approaches to the logo design before settling on the cube concept.*
 
-<figure>
-  <img src="/assets/images/2022/12/1058061297735050.gif" alt="Mann Consulting identity exploration concept 2">
-  <figcaption>Another identity exploration with different geometric and typographic treatments.</figcaption>
-</figure>
+![Mann Consulting identity exploration concept 2](/assets/images/2022/12/1058061297735050.gif)
+*Another identity exploration with different geometric and typographic treatments.*
 
-<figure>
-  <img src="/assets/images/2022/12/1179294144834859.gif" alt="Mann Consulting identity exploration concept 3">
-  <figcaption>Identity concept exploring alternative mark designs and logotype combinations.</figcaption>
-</figure>
+![Mann Consulting identity exploration concept 3](/assets/images/2022/12/1179294144834859.gif)
+*Identity concept exploring alternative mark designs and logotype combinations.*
 
-<figure>
-  <img src="/assets/images/2022/12/1348224751355251.gif" alt="Mann Consulting identity exploration concept 4">
-  <figcaption>Design exploration showing different visual approaches to representing the consulting firm's identity.</figcaption>
-</figure>
+![Mann Consulting identity exploration concept 4](/assets/images/2022/12/1348224751355251.gif)
+*Design exploration showing different visual approaches to representing the consulting firm's identity.*
 
-<figure>
-  <img src="/assets/images/2022/12/1358024051385451.gif" alt="Mann Consulting identity exploration concept 5">
-  <figcaption>Alternative identity concept with different mark and typography treatment.</figcaption>
-</figure>
+![Mann Consulting identity exploration concept 5](/assets/images/2022/12/1358024051385451.gif)
+*Alternative identity concept with different mark and typography treatment.*
 
-<figure>
-  <img src="/assets/images/2022/12/1369064622764958.gif" alt="Mann Consulting identity exploration concept 6">
-  <figcaption>Exploration of the letter M. Someone liked Accenture, which is irrelevant.</figcaption>
-</figure>
+![Mann Consulting identity exploration concept 6](/assets/images/2022/12/1369064622764958.gif)
+*Exploration of the letter M. Someone liked Accenture, which is irrelevant.*
 
-<figure>
-  <img src="/assets/images/2022/12/1455452602675456.gif" alt="Mann Consulting identity exploration concept 7">
-  <figcaption>Exploration of cube arrangements.</figcaption>
-</figure>
+![Mann Consulting identity exploration concept 7](/assets/images/2022/12/1455452602675456.gif)
+*Exploration of cube arrangements.*
 
-<figure>
-  <img src="/assets/images/2022/12/1458482922704953.gif" alt="Mann Consulting identity exploration concept 8">
-  <figcaption>Some old logos combined letters into a single cshape, which is tricky when you have an M.</figcaption>
-</figure>
+![Mann Consulting identity exploration concept 8](/assets/images/2022/12/1458482922704953.gif)
+*Some old logos combined letters into a single cshape, which is tricky when you have an M.*
 
-<figure>
-  <img src="/assets/images/2022/12/1461064399475355.gif" alt="Mann Consulting identity exploration concept 9">
-  <figcaption>What if two cubes?</figcaption>
-</figure>
+![Mann Consulting identity exploration concept 9](/assets/images/2022/12/1461064399475355.gif)
+*What if two cubes?*
 
-<figure>
-  <img src="/assets/images/2022/12/1658524951755451.gif" alt="Mann Consulting identity exploration concept 10">
-  <figcaption>Pixel M exploration led back to the cube concept.</figcaption>
-</figure>
+![Mann Consulting identity exploration concept 10](/assets/images/2022/12/1658524951755451.gif)
+*Pixel M exploration led back to the cube concept.*

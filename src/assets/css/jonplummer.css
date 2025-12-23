@@ -497,6 +497,10 @@ article.portfolio-detail section::after {
 }
 
 /* Portfolio Detail Styles */
+article.portfolio-detail header {
+  margin-bottom: var(--paragraph-spacing);
+}
+
 article.portfolio-detail section {
   /* Span full width of the parent grid, taking over areas b and c */
   grid-column: 1 / -1;
@@ -504,12 +508,26 @@ article.portfolio-detail section {
   /* Re-establish the parent's grid inside this section */
   display: grid;
   grid-template-columns: 1fr 2fr;
-  gap: 0 var(--gutter);
+  gap: var(--paragraph-spacing) var(--gutter);
 }
 
 article.portfolio-detail section > * {
   /* All standard content (text, lists, etc.) goes to the right column */
   grid-column: 2;
+}
+
+/* Remove paragraph margins since grid gap handles spacing between grid items */
+article.portfolio-detail section > p,
+article.portfolio-detail section > ul,
+article.portfolio-detail section > ol,
+article.portfolio-detail section > h1,
+article.portfolio-detail section > h2,
+article.portfolio-detail section > h3,
+article.portfolio-detail section > h4,
+article.portfolio-detail section > h5,
+article.portfolio-detail section > h6 {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 /* Images (and their wrapper paragraphs) span the full width */

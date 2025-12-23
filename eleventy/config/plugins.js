@@ -23,6 +23,21 @@ function configurePlugins(eleventyConfig) {
   // Render plugin for rendering templates
   const { RenderPlugin } = require("@11ty/eleventy");
   eleventyConfig.addPlugin(RenderPlugin);
+
+  // Image optimization plugin
+  const { eleventyImageTransformPlugin } = require("@11ty/eleventy-img");
+  eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
+    formats: ["webp", "jpeg"],
+    widths: [400, 800, 1200, 1600, "auto"],
+    urlPath: "/img/",
+    outputDir: "./_site/img/",
+    htmlOptions: {
+      imgAttributes: {
+        loading: "lazy",
+        decoding: "async"
+      }
+    }
+  });
 }
 
 module.exports = configurePlugins;

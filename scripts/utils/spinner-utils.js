@@ -6,7 +6,7 @@
  * Centralized here to make it easy to experiment with different spinner styles.
  */
 
-const SPINNER_FRAMES = ['◠', '⊙', '◡', ' '];
+const SPINNER_FRAMES = ['◤', '⧸', '◢', ' '];
 
 // Classic
 // const SPIN = ['|', '/', '—', '\\'];
@@ -20,7 +20,7 @@ const SPINNER_FRAMES = ['◠', '⊙', '◡', ' '];
 // Arrows and triangles
 // const ARROW_ROTATE = ['←', '↖', '↑', '↗', '→', '↘', '↓', '↙'];
 // const ARROW_RANDOM = ['→', '↖', '↓', '↗', '←', '↘', '↑', '↙'];
-// const ARROW_JITTER = ['←', '↖', '↑', '↗', '→', '↘', '↓', '↙'];
+// const ARROW_WHOOSH = ['←', '←', '↖', '↖', '↑', '↑', '↑', '↗', '↗', '→', '→', '↘', '↓', '↙'];
 // const TRIANGLE_ROTATE = ['▲', '▶', '▼', '◀'];
 // const TRIANGLE_ROTATE_CORNER = ['◢', '◣', '◤', '◥'];
 // const TRIANGLE_HOLLOW = ['▹', '▿', '◃', '▵'];

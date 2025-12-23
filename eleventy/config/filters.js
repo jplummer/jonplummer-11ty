@@ -68,6 +68,9 @@ function configureFilters(eleventyConfig, md) {
   eleventyConfig.addFilter("stripHtml", function (content) {
     if (!content) return content;
     // Remove HTML tags but preserve text content
+    // SECURITY NOTE: This regex is acceptable here because we're processing trusted content
+    // (our own post titles), not user input. For untrusted content, use a proper HTML
+    // sanitization library.
     return String(content).replace(/<[^>]*>/g, '');
   });
 

@@ -37,6 +37,8 @@ function countFiles(dir) {
   return count;
 }
 
+// Hardcoded trusted repository URL (CodeQL: Shell command built from environment values)
+// This is a known constant, not user input, so it's safe to use directly
 const ELEVENTY_REPO = 'https://github.com/11ty/11ty-website.git';
 const TEMP_DIR = path.join(__dirname, '../../.temp-eleventy-clone');
 const DOCS_SOURCE = path.join(TEMP_DIR, 'src', 'docs');

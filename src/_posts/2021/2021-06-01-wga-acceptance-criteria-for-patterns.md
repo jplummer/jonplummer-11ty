@@ -12,20 +12,15 @@ At Concentric Sky we delivered some form of design system or pattern library to 
 Central to this effort was the [Acceptance Criteria for Patterns](https://misc.jonplummer.com/portfolio/WGU%20acceptance%20criteria%20for%20patterns.pdf) document pictured here. The document included a block diagram of a typical page, followed by descriptions of the form and expected behavior of each pattern, and which smaller patterns each larger pattern incorporates. Each pattern also links the corresponding part of the design system.
 
 <div class="portrait-grid">
-<figure>
-  <img src="/assets/images/2022/12/Screenshot2022-11-11at3.30.55PM-960x1024.png" alt="WGU acceptance criteria document showing pattern block diagram">
-  <figcaption>First page of the Acceptance Criteria for Patterns document showing the block diagram of a typical page layout with labeled pattern areas.</figcaption>
-</figure>
 
-<figure>
-  <img src="/assets/images/2022/12/Screenshot2022-11-11at3.31.41PM-929x1024.png" alt="WGU acceptance criteria document showing pattern descriptions">
-  <figcaption>Pattern description page detailing the form, expected behavior, and component relationships for a specific pattern in the design system.</figcaption>
-</figure>
+![WGU acceptance criteria document showing pattern block diagram](/assets/images/2022/12/Screenshot2022-11-11at3.30.55PM-960x1024.png)
+*First page of the Acceptance Criteria for Patterns document showing the block diagram of a typical page layout with labeled pattern areas.*
 
-<figure>
-  <img src="/assets/images/2022/12/Screenshot2022-11-11at3.31.21PM-1024x1000.png" alt="WGU acceptance criteria document showing pattern relationships">
-  <figcaption>Common controls are a nearly-ubiquitous pattern which can be described once. Be sure to call out the exceptions here and in the specific places where those exceptions apply to implementers don't need to keep the entire document in theri heads.</figcaption>
-</figure>
+![WGU acceptance criteria document showing pattern descriptions](/assets/images/2022/12/Screenshot2022-11-11at3.31.41PM-929x1024.png)
+*Pattern description page detailing the form, expected behavior, and component relationships for a specific pattern in the design system.*
+
+![WGU acceptance criteria document showing pattern relationships](/assets/images/2022/12/Screenshot2022-11-11at3.31.21PM-1024x1000.png)
+*Common controls are a nearly-ubiquitous pattern which can be described once. Be sure to call out the exceptions here and in the specific places where those exceptions apply to implementers don't need to keep the entire document in theri heads.*
 </div>
 
 The document serves as a reference to front- and back-end developers and QA, and greatly sped the production of shared code and the subsequent testing of the views and workflows produced. It's estimated that front-end views for the first version of the tool took less than half the time to develop and test one the patterns were in place, and QA commentary was able to focus on larger behavioral questions rather than detailed control behavior and layout.

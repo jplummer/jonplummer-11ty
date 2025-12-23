@@ -1,18 +1,29 @@
 # Ideas
 
-## Portfolio 💎💎💎 DO SOME EVERY WEEKEND
-- [ ] Add the PDF fthat would go with https://jonplummer.com/2022/11/01/conference-talk-ux-philosophy/
-- [ ] Look through /talks (current and old) for more talks, and evaluate for inclusion
-  - [ ] Talks from Cayuse
-  - [ ] Talks from Belkin
-  - [ ] Small artifacts from Belkin
-  - [ ] Talks from Invoca
+- [ ] Portfolio 💎💎💎 DO SOMETHING EVERY WEEKEND
+  - [ ] Explore presentation-to-portfolio item automation, including speaker notes
+    - [ ] What does it take to get speaker notes out of a PPT?
+    - [ ] What does it take to get speaker notes out of a Google Slides preso?
+  - [ ] Look through /talks (current and old) for more talks, and evaluate for inclusion
+    - [ ] Talks from Belkin
+    - [ ] Small artifacts from Belkin
+    - [ ] Talks from Invoca
+    - [ ] Talks from CSky
+    - [ ] Talks from Cayuse
+
 - [ ] OFTEN: sweep slack for links
 
-- [x] Fix timezone issues (relect real authoring date as I experienced it, but don't break incoming links by changing URLs to existing content)
-- [ ] **Watch ahrefs this weekend** for "URL changed" errors; site health should be at or near 100
+- [x] Fix timezone issues (going forward reflect real authoring date as I experienced it, but don't break incoming links by changing URLs to existing content)
+  - [x] Watch ahrefs this weekend for "URL changed" errors; site health should be at or near 100
 
-- [ ] Automate image optimization (see https://www.aleksandrhovhannisyan.com/blog/eleventy-the-good-the-bad-and-the-possum/#5-it-has-an-excellent-image-plugin )
+- [x] handle "image too large" ahrefs feedback
+  - [x] Automate image optimization (see https://www.aleksandrhovhannisyan.com/blog/eleventy-the-good-the-bad-and-the-possum/#5-it-has-an-excellent-image-plugin and https://bholmes.dev/blog/picture-perfect-image-optimization/ )
+  - [x] make portfolio layout not depend on embedded HTML
+    - [x] markdown-it-attrs and markdown-it-container?
+    - [x] custom shortcodes
+  - [x] portfolio image widths: full, 2/3, 1/3, smaller for mobile images
+  - [x] make sure margins etc are good in portfolio items, using blog poasts as the example
+
 
 ## CMS
 
@@ -183,17 +194,32 @@
 
 ## Future Consideration
 
-- make portfolio layout not depend on embedded HTML; consider
-  - markdown-it-attrs and markdown-it-container? 
-  - custom shortcodes?
-  - Slinkity?
-  - something else?
+- IndexNow
+
+- handle GitHub Dependabot complaints https://github.com/jplummer/jonplummer-11ty/security/dependabot
+
+- https://kagi.com/search?q=contemporary+blog+styling+2025 ?
 
 - https://llmstxt.org/ ?
+
+- https://github.com/steipete/agent-rules ?
+
+- https://github.com/Invoca/prompt-library ?
 
 - learn about 11ty Debug Mode
 
 - **Alternate color schemes** and how to trigger them
+  - According to build/deploy day?
+  - Day of view regardless of when built?
+  - Random selection from a handful of options, per 24h session?
+  - Random selection from a handful of options, cookied, change on reload?
+  - Animated color cycle over a long time scale?
+  - Animated color cycle triggered by window.blur()?
+
+- **Progressive enhancements**
+  - Signal external links (maybe not, the assumptin is that 99% of links are external, and already written about as such)
+  - Preview external links
+  - ?
 
 - **POSSE** (more tags for different types of entries?)
 

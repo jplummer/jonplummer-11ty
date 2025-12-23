@@ -11,46 +11,30 @@ While working on the identity and without any experience marketing a business, I
 
 The winning design and identity:
 
-<figure>
-  <img src="/assets/images/2022/12/mcr0a.gif" alt="Mann Consulting website homepage design">
-  <figcaption>Final Mann Consulting website homepage design featuring clean, sparse layout with randomly selected main graphics and focused messaging to encourage contact.</figcaption>
-</figure>
+![Mann Consulting website homepage design](/assets/images/2022/12/mcr0a.gif)
+*Final Mann Consulting website homepage design featuring clean, sparse layout with randomly selected main graphics and focused messaging to encourage contact.*
 
 My role: pitch, concepts, visual design, HTML and graphics production
 
 Some other possibilities, with a provisional identity:
 
-<figure>
-  <img src="/assets/images/2022/12/1259491721675154.gif" alt="Mann Consulting website design alternative concept 1">
-  <figcaption>Alternative website design concept exploring different visual approaches and layout options for the Mann Consulting site.</figcaption>
-</figure>
+![Mann Consulting website design alternative concept 1](/assets/images/2022/12/1259491721675154.gif)
+*Alternative website design concept exploring different visual approaches and layout options for the Mann Consulting site.*
 
-<figure>
-  <img src="/assets/images/2022/12/1345052502415656.gif" alt="Mann Consulting website design alternative concept 2">
-  <figcaption>Another alternative design concept with different typography..</figcaption>
-</figure>
+![Mann Consulting website design alternative concept 2](/assets/images/2022/12/1345052502415656.gif)
+*Another alternative design concept with different typography..*
 
-<figure>
-  <img src="/assets/images/2022/12/1355752802454956.gif" alt="Mann Consulting website design alternative concept 3">
-  <figcaption>Alternative concept exploring a more columnar layout.</figcaption>
-</figure>
+![Mann Consulting website design alternative concept 3](/assets/images/2022/12/1355752802454956.gif)
+*Alternative concept exploring a more columnar layout.*
 
-<figure>
-  <img src="/assets/images/2022/12/1568561297195050.gif" alt="Mann Consulting website design alternative concept 4">
-  <figcaption>Design alternative with different visual treatment.</figcaption>
-</figure>
+![Mann Consulting website design alternative concept 4](/assets/images/2022/12/1568561297195050.gif)
+*Design alternative with different visual treatment.*
 
-<figure>
-  <img src="/assets/images/2022/12/1679464222944858.gif" alt="Mann Consulting website design alternative concept 5">
-  <figcaption>Alternative concept exploring a more minimal, text-focused approach to the website design.</figcaption>
-</figure>
+![Mann Consulting website design alternative concept 5](/assets/images/2022/12/1679464222944858.gif)
+*Alternative concept exploring a more minimal, text-focused approach to the website design.*
 
-<figure>
-  <img src="/assets/images/2022/12/1787887096275652.gif" alt="Mann Consulting website design alternative concept 6">
-  <figcaption>Another design exploration with different color palette and visual elements.</figcaption>
-</figure>
+![Mann Consulting website design alternative concept 6](/assets/images/2022/12/1787887096275652.gif)
+*Another design exploration with different color palette and visual elements.*
 
-<figure>
-  <img src="/assets/images/2022/12/1958161897105550-1.gif" alt="Mann Consulting website design alternative concept 7">
-  <figcaption>The idea of rotating "single sell" graphics for a focused but continuously-refreshed appearance won the day.</figcaption>
-</figure>
+![Mann Consulting website design alternative concept 7](/assets/images/2022/12/1958161897105550-1.gif)
+*The idea of rotating "single sell" graphics for a focused but continuously-refreshed appearance won the day.*
