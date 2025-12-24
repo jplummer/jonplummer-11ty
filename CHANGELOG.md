@@ -1,9 +1,18 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),newest first.
 
+## 2025-12-23
+
+- Improve date/timezone handling with DateTime support
+- Reorganize test files into scripts/test/ directory
+- Remove unused code and migration scripts
+- Miscellaneous updates and improvements
+- Add post on agent conversations
+
 ## 2025-12-22
 
 - Add responsive image optimization with figure support
 - Remove backup files from migration
+- Fix RSS feed formatting and timezone handling
 
 ## 2025-12-11
 

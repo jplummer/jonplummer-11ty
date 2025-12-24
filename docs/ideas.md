@@ -4,6 +4,7 @@
   - [ ] Explore presentation-to-portfolio item automation, including speaker notes
     - [ ] What does it take to get speaker notes out of a PPT?
     - [ ] What does it take to get speaker notes out of a Google Slides preso?
+    - [ ] Can we then import those as captions?
   - [ ] Look through /talks (current and old) for more talks, and evaluate for inclusion
     - [ ] Talks from Belkin
     - [ ] Small artifacts from Belkin
@@ -17,15 +18,12 @@
 
 - [ ] RSS cleanup
   - [x] address `npm test rss-feed` issues
-  - [ ] Polish title and description of each feed
-  - [ ] *Consider* RFC822 dates rather than RFC3339 for full RSS 2.0 compliance
-
-- [ ] site performance
-  - [x] image optimization
-  - [x] gzip css (.htaccess is doing it already, yo)
-  - [ ] other ways to speed up site load?
+  - [ ] Polish feed-level titles and descriptions
+  - [-] *Consider* RFC822 dates rather than RFC3339 for full RSS 2.0 compliance (not really needed)
 
 - [ ] Reinvestigate color scheme
+  - [ ] *Consider* addressing accessibility test script deficiencies per /docs/accesssibility-test-limitations.md
+  - [ ] *Consider* other color inspirations
 
 
 ## CMS

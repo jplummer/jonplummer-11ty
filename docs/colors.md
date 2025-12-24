@@ -23,8 +23,9 @@ Based on DR10a palette, adjusted for light mode contrast:
 - Content background: #fff
 - Text: #2a2a2a (darker for contrast on #d3d8d2 background)
 - Text light: #5a5a5a
-- Link: #e6423a (DR10 red)
-- Link hover: #d97706 (darker orange for contrast on white)
+- Border: #d0d0d0 (subtle border for images)
+- Link: #d63d36 (darkened from DR10 red #e6423a to meet WCAG AA 4.5:1 - contrast ratio 4.59:1)
+- Link hover: #b26205 (darkened from #d97706 to meet WCAG AA 4.5:1 - contrast ratio 4.52:1)
 - Link visited: #5b4a3b (DR10 dark brown)
 - Link active: #0d703f (DR10 green)
 
@@ -35,7 +36,8 @@ Based on DR10a palette, adjusted for dark mode contrast:
 - Content background: #2d2d2d
 - Text: #e0e0e0
 - Text light: #b0b0b0
+- Border: #4a4a4a (subtle border for images in dark mode)
 - Link: #ff6b6b (lighter version of DR10 red #e6423a)
 - Link hover: #f1b73a (DR10 yellow-orange)
-- Link visited: #a89585 (lighter version of DR10 dark brown #5b4a3b, adjusted for WCAG AA)
+- Link visited: #a89585 (lighter version of DR10 dark brown #5b4a3b, adjusted for WCAG AA contrast)
 - Link active: #2db366 (lighter version of DR10 green #0d703f)

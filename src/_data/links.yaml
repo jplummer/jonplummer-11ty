@@ -1,3 +1,13 @@
+2025-12-24:
+  - url: https://linear.app/now/design-is-more-than-code
+    title: "Design is more than code – Karri Sasrinen"
+    description: '"…I think centering this debate on code and tools is reductive. The bigger question to me is what happens to how we see designers contributing in the future, especially now with AI and these new tools."'
+  - url: https://www.thealgorithmicbridge.com/p/the-shape-of-artificial-intelligence?__readwiseLocation=
+    title: "The Shape of Artificial Intelligence – Alberto Romero"
+    description: '"…we must try to give a clearer shape to the current manifestation of AI (chatbots, large language models, etc.). We are the earliest historians of this weird, elusive technology, and as such, it''s our duty to begin a conversation that''s likely to take decades (or centuries, if we remain alive by then) to be fully fleshed out…"'
+  - url: https://www.nngroup.com/articles/explainable-ai/
+    title: "Explainable AI in Chat Interfaces – Megan Chan"
+    description: '"Without explanations, AI systems are black boxes. Explaining to people how an AI system has reached a particular output helps users form accurate mental models, prevents the spread of misinformation, and helps users decide whether to trust an AI output."'
 2025-12-22:
   - url: https://ngrok.com/blog/prompt-caching/
     title: "Prompt caching: 10x cheaper LLM tokens, but how? – Sam Rose"

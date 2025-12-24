@@ -5,9 +5,9 @@ eleventyExcludeFromCollections: true
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
-        <title>Jon Plummer - Remaindered Links</title>
+        <title>Jon Plummer - Links</title>
         <link>{{ site.url }}</link>
-        <description>Found links from Jon Plummer's blog</description>
+        <description>Links from Jon Plummer's blog</description>
         <language>en-US</language>
         {% set firstItem = collections.post | reverse | limit(20) | mergePostsAndLinks(links) | first %}
         <lastBuildDate>{% if firstItem %}{{ firstItem.date | dateToRfc3339 }}{% else %}{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}{% endif %}</lastBuildDate>
