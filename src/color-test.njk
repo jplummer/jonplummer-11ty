@@ -1,0 +1,523 @@
+---
+layout: base.njk
+title: Color Test Page
+description: Test page for experimenting with color schemes
+permalink: /color-test/
+eleventyExcludeFromCollections: true
+ogImage: /assets/images/og/portfolio.png
+---
+
+<div class="color-test-container">
+  <section class="color-test-controls">
+    <h2>Color Scheme Switcher</h2>
+    <p>Select a color scheme to test different combinations:</p>
+    <select id="color-scheme-selector" aria-label="Select color scheme">
+      <option value="default">Default (Current - DR10a)</option>
+      <option value="DR01">DR01</option>
+      <option value="DR02">DR02</option>
+      <option value="DR03">DR03</option>
+      <option value="DR04">DR04</option>
+      <option value="DR05">DR05</option>
+      <option value="DR06">DR06</option>
+      <option value="DR06a">DR06a (Adjusted)</option>
+      <option value="DR07">DR07</option>
+      <option value="DR08">DR08</option>
+      <option value="DR09">DR09</option>
+      <option value="DR10">DR10</option>
+      <option value="DR10a">DR10a (Adjusted - Current)</option>
+      <option value="custom">Custom (Edit below)</option>
+    </select>
+    <details>
+      <summary>Custom Color Editor</summary>
+      <div class="custom-color-editor">
+        <label>
+          Text Color:
+          <input type="color" id="custom-text-color" value="#2a2a2a">
+        </label>
+        <label>
+          Text Color Light:
+          <input type="color" id="custom-text-color-light" value="#5a5a5a">
+        </label>
+        <label>
+          Background Color:
+          <input type="color" id="custom-background-color" value="#d3d8d2">
+        </label>
+        <label>
+          Content Background:
+          <input type="color" id="custom-content-background-color" value="#ffffff">
+        </label>
+        <label>
+          Link Color:
+          <input type="color" id="custom-link-color" value="#d63d36">
+        </label>
+        <label>
+          Link Hover Color:
+          <input type="color" id="custom-link-hover-color" value="#b26205">
+        </label>
+        <label>
+          Link Visited Color:
+          <input type="color" id="custom-link-visited-color" value="#5b4a3b">
+        </label>
+        <label>
+          Link Active Color:
+          <input type="color" id="custom-link-active-color" value="#0d703f">
+        </label>
+        <label>
+          Border Color:
+          <input type="color" id="custom-border-color" value="#d0d0d0">
+        </label>
+        <button id="apply-custom-colors">Apply Custom Colors</button>
+        <button id="reset-colors">Reset to Default</button>
+      </div>
+    </details>
+  </section>
+
+  <hr>
+
+  <section class="color-test-content">
+    <h2>Index Page Elements</h2>
+    
+    <h3>Post Content</h3>
+    <article>
+      <header>
+        <h1><a href="#test-post" rel="bookmark">Sample Blog Post Title for Color Testing</a></h1>
+      </header>
+      <section>
+        <p>This is a sample blog post paragraph to test how text colors appear in the content area. It includes <a href="#test-link">a link</a> to test link colors, and <strong>strong text</strong> for emphasis.</p>
+        <p>Here's another paragraph with more content. We can see how the spacing and colors work together. This paragraph also has <a href="#visited-link" class="visited">a visited link</a> to test visited link styling.</p>
+        <h2>Sample Heading 2</h2>
+        <p>Content under a heading to see how hierarchy works with the color scheme.</p>
+        <blockquote>
+          This is a blockquote to test how quoted text appears with the current color scheme.
+        </blockquote>
+      </section>
+      <footer>
+        <p class="posted-on"><time datetime="2025-01-15">January 15, 2025</time></p>
+      </footer>
+    </article>
+
+    <h3>Link Item</h3>
+    <article class="link-item">
+      <section>
+        <p>
+          <a href="https://example.com" target="_blank" rel="noopener noreferrer">Sample Link Title</a>
+          <span class="link-description"> - This is a sample link description to test how link items appear in the color scheme.</span>
+        </p>
+      </section>
+    </article>
+
+    <h3>Pagination</h3>
+    <nav class="pagination" aria-label="Post pagination">
+      <a class="prev" href="#older">← Older posts</a>
+      <a class="next" href="#newer">Newer posts →</a>
+    </nav>
+  </section>
+
+  <hr>
+
+  <section class="color-test-content">
+    <h2>Single Post Elements</h2>
+    
+    <h3>Post Navigation</h3>
+    <nav class="post-navigation" aria-label="Post navigation">
+      <a href="#previous" class="prev">← Previous post: Previous Post Title</a>
+      <a href="#next" class="next">Next post: Next Post Title →</a>
+    </nav>
+  </section>
+
+  <hr>
+
+  <section class="color-test-content">
+    <h2>Portfolio Elements</h2>
+    
+    <h3>Portfolio Grid</h3>
+    <ul class="portfolio-grid">
+      <li>
+        <article class="portfolio-item" id="portfolio-item-1">
+          <a href="#portfolio-1" aria-hidden="true" tabindex="-1">
+            <img src="/assets/images/og/portfolio.png" alt="Portfolio item 1">
+          </a>
+          <p><a href="#portfolio-1" rel="bookmark">Sample Portfolio Item Title</a></p>
+          <p class="portfolio-item-description">This is a sample portfolio item description to test how portfolio items appear in the color scheme.</p>
+        </article>
+      </li>
+      <li>
+        <article class="portfolio-item" id="portfolio-item-2">
+          <a href="#portfolio-2" aria-hidden="true" tabindex="-1">
+            <img src="/assets/images/og/about.png" alt="Portfolio item 2">
+          </a>
+          <p><a href="#portfolio-2" rel="bookmark">Another Portfolio Item</a></p>
+          <p class="portfolio-item-description">Another description to see how multiple portfolio items look together.</p>
+        </article>
+      </li>
+      <li>
+        <article class="portfolio-item" id="portfolio-item-3">
+          <a href="#portfolio-3" aria-hidden="true" tabindex="-1">
+            <img src="/assets/images/og/now.png" alt="Portfolio item 3">
+          </a>
+          <p><a href="#portfolio-3" rel="bookmark">Third Portfolio Item</a></p>
+        </article>
+      </li>
+    </ul>
+  </section>
+
+  <hr>
+
+  <section class="color-test-content">
+    <h2>OG Image HTML Structure</h2>
+    <p>This is the raw HTML structure used for OG images (before the image render step):</p>
+    <div class="og-image-html-preview">
+      <div class="og-image-rendered">
+        <div class="og-content">
+          <hgroup class="og-hgroup">
+            <h1><a href="/">Jon Plummer</a></h1>
+            <p>Today I Learned</p>
+          </hgroup>
+          <h1 class="og-title">Sample Post Title for OG Image Testing</h1>
+          <p class="og-description">This is a sample description to test how OG images appear with different color schemes.</p>
+          <p class="og-date">January 15, 2025</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .color-test-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--gutter);
+  }
+
+  .color-test-controls {
+    background: var(--content-background-color);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    border: 1px solid var(--border-color);
+  }
+
+  .color-test-controls h2 {
+    margin-top: 0;
+  }
+
+  .color-test-controls select {
+    display: block;
+    width: 100%;
+    max-width: 20rem;
+    padding: var(--spacing-xs);
+    margin: var(--spacing-md) 0;
+    font-size: var(--font-size-sm);
+  }
+
+  .custom-color-editor {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+  }
+
+  .custom-color-editor label {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    font-size: var(--font-size-xs);
+  }
+
+  .custom-color-editor input[type="color"] {
+    width: 100%;
+    height: 2.5rem;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+  }
+
+  .custom-color-editor button {
+    grid-column: 1 / -1;
+    padding: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    background: var(--link-color);
+    color: var(--content-background-color);
+    border: none;
+    margin-top: var(--spacing-sm);
+  }
+
+  .custom-color-editor button:hover {
+    background: var(--link-hover-color);
+  }
+
+  .custom-color-editor button#reset-colors {
+    background: var(--text-color-light);
+  }
+
+  .custom-color-editor button#reset-colors:hover {
+    background: var(--text-color);
+  }
+
+  .color-test-content {
+    margin: var(--spacing-xl) 0;
+  }
+
+  .color-test-content h2 {
+    margin-top: var(--spacing-xl);
+  }
+
+  .color-test-content h3 {
+    margin-top: var(--spacing-lg);
+  }
+
+  .og-image-html-preview {
+    margin: var(--spacing-lg) 0;
+    border: 2px solid var(--border-color);
+    overflow: hidden;
+    background: var(--background-color);
+    width: 600px;
+    height: 315px;
+    position: relative;
+  }
+
+  .og-image-html-preview .og-image-rendered {
+    transform: scale(0.5);
+    transform-origin: top left;
+    width: 1200px;
+    height: 630px;
+  }
+
+  /* Test visited link styling */
+  a.visited {
+    color: var(--link-visited-color);
+  }
+</style>
+
+<script>
+  // Color scheme presets based on colors.md
+  // DR palettes: each has 5 colors mapped to appropriate roles
+  const colorSchemes = {
+    default: {
+      '--text-color': '#2a2a2a',
+      '--text-color-light': '#5a5a5a',
+      '--background-color': '#d3d8d2',
+      '--content-background-color': '#fff',
+      '--link-color': '#d63d36',
+      '--link-hover-color': '#b26205',
+      '--link-visited-color': '#5b4a3b',
+      '--link-active-color': '#0d703f',
+      '--border-color': '#d0d0d0'
+    },
+    'DR01': {
+      '--text-color': '#261201',
+      '--text-color-light': '#736356',
+      '--background-color': '#bfb1a8',
+      '--content-background-color': '#fff',
+      '--link-color': '#ad1d1d',
+      '--link-hover-color': '#736356',
+      '--link-visited-color': '#261201',
+      '--link-active-color': '#ad1d1d',
+      '--border-color': '#aab7bf'
+    },
+    'DR02': {
+      '--text-color': '#0d0000',
+      '--text-color-light': '#3a3124',
+      '--background-color': '#b9ada4',
+      '--content-background-color': '#fff',
+      '--link-color': '#84754a',
+      '--link-hover-color': '#3a3124',
+      '--link-visited-color': '#96937d',
+      '--link-active-color': '#84754a',
+      '--border-color': '#96937d'
+    },
+    'DR03': {
+      '--text-color': '#5f503e',
+      '--text-color-light': '#9c9c9c',
+      '--background-color': '#e1e4e1',
+      '--content-background-color': '#fff',
+      '--link-color': '#bf7c2a',
+      '--link-hover-color': '#c09c6f',
+      '--link-visited-color': '#5f503e',
+      '--link-active-color': '#bf7c2a',
+      '--border-color': '#9c9c9c'
+    },
+    'DR04': {
+      '--text-color': '#372e2d',
+      '--text-color-light': '#84764b',
+      '--background-color': '#dbd7d3',
+      '--content-background-color': '#fff',
+      '--link-color': '#84764b',
+      '--link-hover-color': '#b7b183',
+      '--link-visited-color': '#372e2d',
+      '--link-active-color': '#84764b',
+      '--border-color': '#bcb3a6'
+    },
+    'DR05': {
+      '--text-color': '#3b4b59',
+      '--text-color-light': '#bfa07a',
+      '--background-color': '#d9c3b0',
+      '--content-background-color': '#fff',
+      '--link-color': '#af2e1b',
+      '--link-hover-color': '#cc6324',
+      '--link-visited-color': '#3b4b59',
+      '--link-active-color': '#af2e1b',
+      '--border-color': '#bfa07a'
+    },
+    'DR06': {
+      '--text-color': '#736b1e',
+      '--text-color-light': '#bf1b1b',
+      '--background-color': '#d9d2c6',
+      '--content-background-color': '#fff',
+      '--link-color': '#ed3f1c',
+      '--link-hover-color': '#ed8008',
+      '--link-visited-color': '#736b1e',
+      '--link-active-color': '#ed3f1c',
+      '--border-color': '#d9d2c6'
+    },
+    'DR06a': {
+      '--text-color': '#736b1e',
+      '--text-color-light': '#bf1b1b',
+      '--background-color': '#dadccf',
+      '--content-background-color': '#fff',
+      '--link-color': '#ed3f1c',
+      '--link-hover-color': '#ed8008',
+      '--link-visited-color': '#736b1e',
+      '--link-active-color': '#ed3f1c',
+      '--border-color': '#dadccf'
+    },
+    'DR07': {
+      '--text-color': '#292a2e',
+      '--text-color-light': '#50474c',
+      '--background-color': '#bebab0',
+      '--content-background-color': '#fff',
+      '--link-color': '#ae2f25',
+      '--link-hover-color': '#e15e3e',
+      '--link-visited-color': '#315b7b',
+      '--link-active-color': '#ae2f25',
+      '--border-color': '#50474c'
+    },
+    'DR08': {
+      '--text-color': '#a43f14',
+      '--text-color-light': '#9a9a9a',
+      '--background-color': '#bebab0',
+      '--content-background-color': '#fff',
+      '--link-color': '#bd7033',
+      '--link-hover-color': '#d8a367',
+      '--link-visited-color': '#a43f14',
+      '--link-active-color': '#bd7033',
+      '--border-color': '#9a9a9a'
+    },
+    'DR09': {
+      '--text-color': '#40341f',
+      '--text-color-light': '#8b8178',
+      '--background-color': '#d9cab8',
+      '--content-background-color': '#fff',
+      '--link-color': '#c5441f',
+      '--link-hover-color': '#f07032',
+      '--link-visited-color': '#40341f',
+      '--link-active-color': '#c5441f',
+      '--border-color': '#8b8178'
+    },
+    'DR10': {
+      '--text-color': '#5b4a3b',
+      '--text-color-light': '#5b4a3b',
+      '--background-color': '#d3d8d2',
+      '--content-background-color': '#fff',
+      '--link-color': '#e6423a',
+      '--link-hover-color': '#f1b73a',
+      '--link-visited-color': '#5b4a3b',
+      '--link-active-color': '#0d703f',
+      '--border-color': '#d3d8d2'
+    },
+    'DR10a': {
+      '--text-color': '#2a2a2a',
+      '--text-color-light': '#5a5a5a',
+      '--background-color': '#d3d8d2',
+      '--content-background-color': '#fff',
+      '--link-color': '#d63d36',
+      '--link-hover-color': '#b26205',
+      '--link-visited-color': '#5b4a3b',
+      '--link-active-color': '#0d703f',
+      '--border-color': '#d0d0d0'
+    }
+  };
+
+  // Map CSS properties to input IDs
+  const propertyToInputId = {
+    '--text-color': 'custom-text-color',
+    '--text-color-light': 'custom-text-color-light',
+    '--background-color': 'custom-background-color',
+    '--content-background-color': 'custom-content-background-color',
+    '--link-color': 'custom-link-color',
+    '--link-hover-color': 'custom-link-hover-color',
+    '--link-visited-color': 'custom-link-visited-color',
+    '--link-active-color': 'custom-link-active-color',
+    '--border-color': 'custom-border-color'
+  };
+
+  // Apply color scheme
+  function applyColorScheme(schemeName) {
+    const scheme = colorSchemes[schemeName];
+    if (!scheme) return;
+
+    const root = document.documentElement;
+    Object.entries(scheme).forEach(([property, value]) => {
+      root.style.setProperty(property, value);
+    });
+
+    // Update custom color inputs if scheme is not 'custom'
+    if (schemeName !== 'custom') {
+      Object.entries(scheme).forEach(([property, value]) => {
+        const inputId = propertyToInputId[property];
+        if (inputId) {
+          const input = document.getElementById(inputId);
+          if (input) {
+            input.value = value;
+          }
+        }
+      });
+    }
+  }
+
+  // Apply custom colors
+  function applyCustomColors() {
+    const root = document.documentElement;
+    Object.entries(propertyToInputId).forEach(([property, inputId]) => {
+      const input = document.getElementById(inputId);
+      if (input) {
+        root.style.setProperty(property, input.value);
+      }
+    });
+  }
+
+  // Reset to default
+  function resetColors() {
+    applyColorScheme('default');
+    document.getElementById('color-scheme-selector').value = 'default';
+  }
+
+  // Initialize event listeners
+  document.addEventListener('DOMContentLoaded', () => {
+    const selector = document.getElementById('color-scheme-selector');
+    const applyCustomBtn = document.getElementById('apply-custom-colors');
+    const resetBtn = document.getElementById('reset-colors');
+
+    if (selector) {
+      selector.addEventListener('change', (e) => {
+        if (e.target.value === 'custom') {
+          // Switch to custom mode - don't apply anything yet
+          return;
+        }
+        applyColorScheme(e.target.value);
+      });
+    }
+
+    if (applyCustomBtn) {
+      applyCustomBtn.addEventListener('click', () => {
+        applyCustomColors();
+        if (selector) {
+          selector.value = 'custom';
+        }
+      });
+    }
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', resetColors);
+    }
+  });
+</script>

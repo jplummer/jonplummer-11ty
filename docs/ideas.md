@@ -14,21 +14,19 @@
 
 - [ ] OFTEN: sweep slack for links
 
+- [x] I make a lot of dumb spelling errors. Implement spell checking somehow
+
 - [ ] Watch for ahrefs improvement in image size complaints this weekend
 
-- [ ] RSS cleanup
-  - [x] address `npm test rss-feed` issues
-  - [ ] Polish feed-level titles and descriptions
-  - [-] *Consider* RFC822 dates rather than RFC3339 for full RSS 2.0 compliance (not really needed)
-
 - [ ] Reinvestigate color scheme
+  - [x] Make color playground page with style switcher
   - [ ] *Consider* addressing accessibility test script deficiencies per /docs/accesssibility-test-limitations.md
-  - [ ] *Consider* other color inspirations
+  - [ ] *Consider* other color inspiration sources
 
 
 ## CMS
 
-**Goal**: Enable authoring from any device via web-based CMS while maintaining local build/deploy capability.
+**Goals**: Enable authoring from any device via web-based CMS while maintaining local build/deploy capability. Prevent common errors in authoring. Make it relatively quick and easy to capture links and ideas. Make it relatively easy to start posts in one place and finish them someplace else.
 
 **Approach**: Decap CMS (git-based) + GitHub Actions for automated build/deploy on CMS edits.
 

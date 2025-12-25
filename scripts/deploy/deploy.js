@@ -144,6 +144,7 @@ async function deploy(config, siteDomain, dryRun) {
       '--exclude=.DS_Store', // Exclude macOS metadata files
       '--exclude=Thumbs.db', // Exclude Windows thumbnail files
       '--exclude=*.tmp', // Exclude temporary files
+      '--exclude=color-test/', // Exclude color test page from deployment
       '--stats', // Show transfer statistics summary (includes "Number of files transferred: 0" when nothing changes)
       '--human-readable', // Show sizes in human-readable format
     ];

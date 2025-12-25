@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),newest first.
 
+## 2025-12-24
+
+- Add luxon dependency and update colors documentation
+
 ## 2025-12-23
 
 - Improve date/timezone handling with DateTime support
@@ -7,6 +11,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Remove unused code and migration scripts
 - Miscellaneous updates and improvements
 - Add post on agent conversations
+- Refactor CSS: consolidate rules and remove duplication
 
 ## 2025-12-22
 
@@ -282,4 +287,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2025-12-23
+Last deployed on 2025-12-25
