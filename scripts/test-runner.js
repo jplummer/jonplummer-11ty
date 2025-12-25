@@ -13,6 +13,7 @@ const testTypes = {
   'internal-links': 'internal-links.js',
   'content-structure': 'content-structure.js',
   'markdown': 'markdown.js',
+  'spell': 'spell.js',
   'seo-meta': 'seo-meta.js',
   'og-images': 'og-images.js',
   'accessibility': 'accessibility.js',
@@ -28,6 +29,7 @@ const fastTests = [
   'internal-links',
   'content-structure',
   'markdown',
+  'spell',
   'seo-meta',
   'og-images',
   'rss-feed'
@@ -40,6 +42,7 @@ const allTests = [
   'internal-links',
   'content-structure',
   'markdown',
+  'spell',
   'seo-meta',
   'og-images',
   'accessibility',

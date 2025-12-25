@@ -20,6 +20,7 @@ Fast Tests (suitable for pre-commit hooks or frequent validation):
 - `internal-links` - Internal link validity
 - `content-structure` - Content structure validation
 - `markdown` - Markdown syntax validation
+- `spell` - Spell checking
 - `seo-meta` - SEO and meta tags
 - `og-images` - Open Graph images
 - `rss-feed` - RSS feed validation
@@ -108,6 +109,35 @@ Checks:
 - Directory exclusion: Excludes `docs/` directory from validation
 
 Requirements: Source markdown files in `src/` directory, `.markdownlint.json` configuration file
+
+### spell.js - Spell Check
+
+Validates spelling in markdown and YAML files using `cspell`. Checks all markdown files in `src/` and all YAML files including `src/_data/links.yaml`.
+
+When to use:
+- When writing or editing content
+- Before committing content changes
+- As part of `npm run test fast` or `npm run test all`
+- To catch spelling errors before deployment
+
+Automatically invoked by:
+- `npm run test fast` (included in fast tests)
+- `npm run test all` (included in all tests)
+
+Checks:
+- Markdown files: All `.md` files in `src/` directory
+- YAML files: All `.yaml` and `.yml` files in `src/` directory (including `src/_data/links.yaml`)
+- Custom dictionary: Uses `cspell-custom-words.txt` for project-specific terms
+- Draft exclusion: Automatically excludes markdown files with `draft: true` in front matter
+- Unknown words: Reports spelling errors with file, line, column, and word
+
+Configuration:
+- `cspell.json`: Main configuration file specifying file patterns, ignore paths, and dictionary settings
+- `cspell-custom-words.txt`: Custom dictionary for project-specific terms, names, and technical terms (one word per line)
+
+To add custom words: Edit `cspell-custom-words.txt` and add one word per line. The spell check will automatically use your custom dictionary.
+
+Requirements: Source markdown and YAML files in `src/` directory, `cspell.json` configuration file
 
 ### seo-meta.js - SEO and Meta Tags Validation
 

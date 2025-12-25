@@ -1,0 +1,10 @@
+# Custom dictionary for spell checking
+# Add project-specific terms, names, and technical terms here
+# One word per line
+
+Invoca
+Cayuse
+Belkin
+WeMo
+Linksys
+intertwingled
