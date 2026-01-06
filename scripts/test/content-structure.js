@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
-const { validateDate, validateSlug, validateTitle, validateMetaDescription } = require('../utils/validation-utils');
+const { validateDate, validateSlug } = require('../utils/validation-utils');
 const { getMarkdownFiles, readFile } = require('../utils/test-base');
 const { parseFrontMatter } = require('../utils/frontmatter-utils');
 const { createTestResult, addFile, addIssue, addWarning, addGlobalIssue, outputResult } = require('../utils/test-result-builder');
@@ -11,8 +11,8 @@ const { createTestResult, addFile, addIssue, addWarning, addGlobalIssue, outputR
 // Front matter parsing and file finding now use shared utilities
 
 // Validation functions now use shared validation-utils
-// Note: content-structure.js uses different validation rules (e.g., title max 200, description 50-160)
-// So we adapt the shared validators with appropriate parameters
+// Focuses on structure validation (YAML syntax, required fields, formats)
+// SEO-specific checks (title/description length) are handled by seo-meta.js
 
 // Check for required fields
 function validateRequiredFields(frontMatter, filePath) {
@@ -39,13 +39,9 @@ function validateRequiredFields(frontMatter, filePath) {
 
   // Validate individual fields
   if (frontMatter.title) {
-    // Content structure allows longer titles (up to 200 chars) for source markdown
-    // This is more lenient than seo-meta.js (30-60) because:
-    // - We're validating source content, which may be edited before final output
-    // - seo-meta.js will catch SEO-optimized title length (30-60) in final HTML output
-    const titleCheck = validateTitle(frontMatter.title, 1, 200);
-    if (!titleCheck.valid) {
-      issues.push(`Title: ${titleCheck.error}`);
+    // Basic validation: must be a non-empty string
+    if (typeof frontMatter.title !== 'string' || frontMatter.title.trim().length === 0) {
+      issues.push(`Title: must be a non-empty string`);
     }
   }
 
@@ -83,24 +79,7 @@ function validateRequiredFields(frontMatter, filePath) {
     }
   }
 
-  // Optional but recommended fields
-  if (frontMatter.description) {
-    // Content structure uses 50-160 char range for descriptions (source validation)
-    // This is more lenient than seo-meta.js (120-160) because:
-    // - We're validating source markdown, which may be edited before final output
-    // - Allows flexibility during content creation
-    // - seo-meta.js will catch stricter SEO requirements (120-160) in final HTML output
-    const descCheck = validateMetaDescription(frontMatter.description, 50, 160);
-    if (!descCheck.valid) {
-      warnings.push(`Meta description: ${descCheck.error}`);
-    }
-  } else {
-    // Missing description is a WARNING here (not ERROR) because:
-    // - This is source validation - early warning is helpful
-    // - seo-meta.js will catch it as ERROR in final HTML output if not fixed
-    // - Allows content creation workflow to continue
-    warnings.push('Missing meta description (recommended for SEO)');
-  }
+  // Optional fields - no validation needed (SEO checks are handled by seo-meta.js)
 
   // Check for duplicate slugs
   if (frontMatter.slug) {

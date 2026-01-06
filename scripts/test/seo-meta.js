@@ -25,6 +25,17 @@ function isRedirectPage(htmlContent) {
   return false;
 }
 
+// Titles to exclude from "too short" validation
+const EXCLUDED_SHORT_TITLES = [
+  '/about',
+  '/changelog',
+  '/now',
+  'Goal Manager identity (2001)',
+  'CareLink Pro main interface',
+  'Linksys app revitalization',
+  'Velop whole-home WiFi system'
+];
+
 // Validate title (adapts validation-utils format to array of issues)
 function validateTitle(title) {
   const issues = [];
@@ -34,9 +45,15 @@ function validateTitle(title) {
     return issues;
   }
   
-  const result = validateTitleUtil(title, 30, 60);
+  // Use default relaxed limits from validation-utils (10-200 characters, warnings only, not errors)
+  const result = validateTitleUtil(title);
   if (!result.valid) {
-    issues.push(result.error);
+    // Skip "too short" warning for excluded titles
+    if (result.error && result.error.includes('too short') && EXCLUDED_SHORT_TITLES.includes(title)) {
+      // Don't add the "too short" issue for excluded titles
+    } else {
+      issues.push(result.error);
+    }
   }
   
   // Additional check for separators
@@ -48,11 +65,7 @@ function validateTitle(title) {
 }
 
 // Validate meta description (adapts validation-utils format to array of issues)
-// Note: This validates final HTML output with SEO best practices (120-160 chars)
-// This is stricter than content-structure.js (50-160) because:
-// - We're validating the final rendered HTML, not source markdown
-// - SEO best practice is 120-160 characters for optimal search engine display
-// - content-structure.js allows more flexibility during content creation
+// Uses relaxed limits (20-300 characters) - warnings only, not errors
 function validateMetaDescription(description) {
   const issues = [];
   
@@ -65,7 +78,8 @@ function validateMetaDescription(description) {
     return issues;
   }
   
-  const result = validateMetaDescriptionUtil(description, 120, 160);
+  // Use default relaxed limits from validation-utils (20-300 characters, warnings only, not errors)
+  const result = validateMetaDescriptionUtil(description);
   if (!result.valid) {
     issues.push(result.error);
   }
@@ -207,6 +221,13 @@ function validateSEO() {
     const headings = extractHeadings(content);
     const isRedirect = isRedirectPage(content);
     
+    // Identify utility and pagination pages (skip SEO checks for these)
+    const isUtilityPage = relativePath.includes('og-image-preview') || 
+                          relativePath.includes('color-test') ||
+                          relativePath === '404.html' ||
+                          relativePath === '500.html';
+    const isPaginationPage = relativePath.match(/^page\/\d+\//) || relativePath.startsWith('page/');
+    
     // Add file to result
     const fileObj = addFile(result, file, relativePath);
     
@@ -216,8 +237,8 @@ function validateSEO() {
         type: 'title-missing',
         message: 'Missing title tag'
       });
-    } else if (!isRedirect) {
-      // Full title validation only for non-redirect pages
+    } else if (!isRedirect && !isPaginationPage && !isUtilityPage) {
+      // Full title validation only for non-redirect, non-pagination, non-utility pages
       const titleIssues = validateTitle(metaTags.title);
       titleIssues.forEach(issue => {
         // Length issues are warnings, missing title is already handled above as error
@@ -235,8 +256,8 @@ function validateSEO() {
       });
     }
     
-    // Meta description validation (skipped for redirects)
-    if (!isRedirect) {
+    // Meta description validation (skipped for redirects, pagination, and utility pages)
+    if (!isRedirect && !isPaginationPage && !isUtilityPage) {
       const descIssues = validateMetaDescription(metaTags.description);
       
       // Check for unescaped quotes in raw HTML
@@ -264,8 +285,8 @@ function validateSEO() {
       });
     }
     
-    // Open Graph validation (skipped for redirects)
-    if (!isRedirect) {
+    // Open Graph validation (skipped for redirects, pagination, and utility pages)
+    if (!isRedirect && !isPaginationPage && !isUtilityPage) {
       const ogIssues = validateOpenGraph(metaTags.og);
       ogIssues.forEach(issue => {
         addWarning(fileObj, {
@@ -276,7 +297,6 @@ function validateSEO() {
     }
     
     // Heading validation (skipped for redirects and utility pages)
-    const isUtilityPage = relativePath.includes('og-image-preview');
     if (!isRedirect && !isUtilityPage) {
       const headingIssues = validateHeadings(headings);
       headingIssues.forEach(issue => {

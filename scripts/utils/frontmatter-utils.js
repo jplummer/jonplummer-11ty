@@ -76,8 +76,59 @@ function reconstructFile(originalContent, frontMatter, body, options = {}) {
   return `---\n${yamlContent}---\n${body}`;
 }
 
+/**
+ * Safely format a string value for YAML frontmatter
+ * This ensures proper quoting and escaping to prevent parsing errors
+ * @param {string} value - The string value to format
+ * @returns {string} Properly formatted YAML string
+ */
+function formatYamlString(value) {
+  if (!value || typeof value !== 'string') {
+    return value;
+  }
+  
+  // Check if the string needs quoting
+  // Strings need quoting if they contain:
+  // - Special YAML characters: :, #, |, >, &, *, !, %, @, `
+  // - Quotes (single or double)
+  // - Leading/trailing whitespace
+  // - Start with special characters that might be interpreted as YAML syntax
+  const needsQuoting = /[:#|>&*!%@`'"\n\r]/.test(value) || 
+                       /^\s|\s$/.test(value) ||
+                       /^[0-9-]/.test(value) ||
+                       value.toLowerCase() === 'true' ||
+                       value.toLowerCase() === 'false' ||
+                       value.toLowerCase() === 'null' ||
+                       value.toLowerCase() === 'yes' ||
+                       value.toLowerCase() === 'no' ||
+                       value.toLowerCase() === 'on' ||
+                       value.toLowerCase() === 'off';
+  
+  if (!needsQuoting) {
+    return value;
+  }
+  
+  // If the string contains double quotes, use double quotes and escape them
+  // If it contains single quotes but no double quotes, use single quotes
+  // If it contains both, use double quotes and escape double quotes
+  if (value.includes('"') && value.includes("'")) {
+    // Contains both - use double quotes and escape double quotes
+    return `"${value.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`;
+  } else if (value.includes('"')) {
+    // Contains double quotes - use double quotes and escape them
+    return `"${value.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`;
+  } else if (value.includes("'")) {
+    // Contains single quotes - use double quotes (single quotes can't contain single quotes)
+    return `"${value.replace(/\\/g, '\\\\')}"`;
+  } else {
+    // No quotes - use double quotes for safety
+    return `"${value.replace(/\\/g, '\\\\')}"`;
+  }
+}
+
 module.exports = {
   parseFrontMatter,
-  reconstructFile
+  reconstructFile,
+  formatYamlString
 };
 

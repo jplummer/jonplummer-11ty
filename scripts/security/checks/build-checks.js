@@ -22,17 +22,17 @@ async function checkBuildOutput(results, addFinding) {
       return {
         passed: false,
         warning: true,
-        details: '_site/ directory not found (run "npm run build" first)',
+        details: '_site/ directory not found (run "pnpm run build" first)',
         message: 'Build output: _site/ not found',
         finding: {
           severity: 'low',
           description: '_site/ directory not found',
-          recommendation: 'Run "npm run build" to generate build output before checking for sensitive files.'
+          recommendation: 'Run "pnpm run build" to generate build output before checking for sensitive files.'
         }
       };
     }
     
-    const sensitivePatterns = ['.env', '.git', 'package.json', 'package-lock.json', 'node_modules'];
+    const sensitivePatterns = ['.env', '.git', 'package.json', 'package-lock.json', 'pnpm-lock.yaml', 'node_modules'];
     const found = [];
     
     function checkDir(dir) {

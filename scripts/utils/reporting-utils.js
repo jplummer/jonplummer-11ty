@@ -342,7 +342,7 @@ function printOverallSummary(results) {
       console.log('');
       console.log('💡 To see details, run:');
       testsNeedingAttention.forEach(result => {
-        console.log(`   npm run test ${result.testType}`);
+        console.log(`   pnpm run test ${result.testType}`);
       });
       console.log('');
     }
@@ -360,7 +360,7 @@ function printOverallSummary(results) {
       console.log('');
       console.log('💡 To see details, run:');
       testsNeedingAttention.forEach(result => {
-        console.log(`   npm run test ${result.testType}`);
+        console.log(`   pnpm run test ${result.testType}`);
       });
       console.log('');
     }

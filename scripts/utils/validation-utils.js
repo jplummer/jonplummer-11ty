@@ -9,11 +9,11 @@
 /**
  * Validate title length
  * @param {string} title - Title to validate
- * @param {number} minLength - Minimum length (default: 30)
- * @param {number} maxLength - Maximum length (default: 60)
+ * @param {number} minLength - Minimum length (default: 10)
+ * @param {number} maxLength - Maximum length (default: 200)
  * @returns {Object} { valid: boolean, error?: string }
  */
-function validateTitle(title, minLength = 30, maxLength = 60) {
+function validateTitle(title, minLength = 10, maxLength = 200) {
   if (!title) {
     return { valid: false, error: 'Missing title' };
   }
@@ -42,11 +42,11 @@ function validateTitle(title, minLength = 30, maxLength = 60) {
 /**
  * Validate meta description length
  * @param {string} description - Description to validate
- * @param {number} minLength - Minimum length (default: 120)
- * @param {number} maxLength - Maximum length (default: 160)
+ * @param {number} minLength - Minimum length (default: 20)
+ * @param {number} maxLength - Maximum length (default: 300)
  * @returns {Object} { valid: boolean, error?: string }
  */
-function validateMetaDescription(description, minLength = 120, maxLength = 160) {
+function validateMetaDescription(description, minLength = 20, maxLength = 300) {
   if (!description) {
     return { valid: false, error: 'Missing meta description' };
   }

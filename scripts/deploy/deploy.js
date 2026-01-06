@@ -298,7 +298,7 @@ async function deploy(config, siteDomain, dryRun) {
 
   // Check if _site directory exists
   if (!fs.existsSync('./_site')) {
-    console.error('❌ _site directory not found. Please run "npm run build" first.');
+    console.error('❌ _site directory not found. Please run "pnpm run build" first.');
     process.exit(1);
   }
 
@@ -410,11 +410,11 @@ async function deploy(config, siteDomain, dryRun) {
   if (!skipChecks) {
     try {
       // Source file validations (don't need _site/)
-      await runWithSpinner('npm run test markdown --silent', 'Running pre-deploy validation (markdown)...', { showOutput: true, shell: true });
-      await runWithSpinner('npm run test content-structure --silent', 'Running pre-deploy validation (content-structure)...', { showOutput: true, shell: true });
+      await runWithSpinner('pnpm run test markdown --silent', 'Running pre-deploy validation (markdown)...', { showOutput: true, shell: true });
+      await runWithSpinner('pnpm run test content-structure --silent', 'Running pre-deploy validation (content-structure)...', { showOutput: true, shell: true });
     } catch (error) {
       console.log('❌ 🔍 Validation: failed');
-      console.error('   To skip checks (not recommended): npm run deploy --skip-checks\n');
+      console.error('   To skip checks (not recommended): pnpm run deploy --skip-checks\n');
       process.exit(1);
     }
   }
@@ -431,11 +431,21 @@ async function deploy(config, siteDomain, dryRun) {
     rebuildReason = 'frontmatter updated';
   }
   try {
-    await runWithSpinner('npm run build --silent -- --quiet', `Building site (${rebuildReason})...`, { shell: true });
+    // Use shell: true and pass as single string to handle command properly
+    await runWithSpinner('pnpm run build -- --quiet', `Building site (${rebuildReason})...`, { shell: true, showOutput: false });
     console.log('✅ 🏗️  Build: completed\n');
   } catch (error) {
     console.log('❌ 🏗️  Build: failed');
-    console.error('   Aborting deployment.\n');
+    // Show the actual build error by running build again with output visible
+    console.error('\n   Running build to show error details:\n');
+    try {
+      const { execSync } = require('child_process');
+      execSync('pnpm run build -- --quiet', { stdio: 'inherit', shell: true });
+    } catch (buildError) {
+      // Build error already shown via stdio: 'inherit'
+      // Exit code will be non-zero, which is expected
+    }
+    console.error('\n   Aborting deployment.\n');
     process.exit(1);
   }
 
@@ -443,12 +453,12 @@ async function deploy(config, siteDomain, dryRun) {
   if (!skipChecks) {
     try {
       // OG images validation (needs _site/ to check built pages)
-      await runWithSpinner('npm run test og-images --silent', 'Running post-build validation (og-images)...', { showOutput: true, shell: true });
+      await runWithSpinner('pnpm run test og-images --silent', 'Running post-build validation (og-images)...', { showOutput: true, shell: true });
       
       console.log('✅ 🔍 Validation: all checks passed\n');
     } catch (error) {
       console.log('❌ 🔍 Validation: failed');
-      console.error('   To skip checks (not recommended): npm run deploy --skip-checks\n');
+      console.error('   To skip checks (not recommended): pnpm run deploy --skip-checks\n');
       process.exit(1);
     }
   } else {

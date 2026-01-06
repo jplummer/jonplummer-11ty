@@ -3,22 +3,22 @@
 /**
  * Dependency & Package Security Checks
  * 
- * Checks for npm vulnerabilities, outdated packages, deprecated packages, and Node.js version
+ * Checks for pnpm vulnerabilities, outdated packages, deprecated packages, and Node.js version
  */
 
 const { execSync } = require('child_process');
 
 /**
- * Check npm audit for vulnerabilities
+ * Check pnpm audit for vulnerabilities
  * @param {Object} results - Results object
  * @param {Function} addFinding - Function to add findings
  * @returns {Promise<boolean>} True if passed
  */
 async function checkNpmAudit(results, addFinding) {
   const { runCheck } = require('../../utils/check-runner');
-  return runCheck('npm audit', async () => {
+  return runCheck('pnpm audit', async () => {
     try {
-      const output = execSync('npm audit --json', { encoding: 'utf8', stdio: 'pipe' });
+      const output = execSync('pnpm audit --json', { encoding: 'utf8', stdio: 'pipe' });
       const audit = JSON.parse(output);
       
       if (audit.vulnerabilities) {
@@ -33,11 +33,11 @@ async function checkNpmAudit(results, addFinding) {
           return {
             passed: false,
             details: `${vulnCount} vulnerabilities found (${critical} critical, ${high} high, ${moderate} moderate, ${low} low)`,
-            message: 'npm audit: vulnerabilities found',
+            message: 'pnpm audit: vulnerabilities found',
             finding: {
               severity,
               description: `${vulnCount} vulnerabilities found in dependencies`,
-              recommendation: 'Run "npm audit fix" to automatically fix vulnerabilities where possible. Review and manually address any remaining issues.',
+              recommendation: 'Run "pnpm audit --fix" to automatically fix vulnerabilities where possible. Review and manually address any remaining issues.',
               details: { total: vulnCount, critical, high, moderate, low, vulnerabilities: audit.vulnerabilities }
             }
           };
@@ -47,25 +47,25 @@ async function checkNpmAudit(results, addFinding) {
       return {
         passed: true,
         details: 'No vulnerabilities found',
-        message: 'npm audit',
+        message: 'pnpm audit',
         finding: {
           severity: 'info',
           description: 'No vulnerabilities found in dependencies'
         }
       };
     } catch (error) {
-      // npm audit exits with non-zero if vulnerabilities found
+      // pnpm audit exits with non-zero if vulnerabilities found
       try {
         const output = error.stdout || error.message;
         if (output.includes('vulnerabilities')) {
           return {
             passed: false,
-            details: 'Vulnerabilities found (run "npm audit" for details)',
-            message: 'npm audit: vulnerabilities found',
+            details: 'Vulnerabilities found (run "pnpm audit" for details)',
+            message: 'pnpm audit: vulnerabilities found',
             finding: {
               severity: 'high',
               description: 'Vulnerabilities found in dependencies',
-              recommendation: 'Run "npm audit" for detailed information, then "npm audit fix" to resolve issues.'
+              recommendation: 'Run "pnpm audit" for detailed information, then "pnpm audit --fix" to resolve issues.'
             }
           };
         }
@@ -75,12 +75,12 @@ async function checkNpmAudit(results, addFinding) {
       return {
         passed: false,
         warning: true,
-        details: 'Could not run npm audit (may need npm update)',
-        message: 'npm audit: could not run',
+        details: 'Could not run pnpm audit (may need pnpm update)',
+        message: 'pnpm audit: could not run',
         finding: {
           severity: 'medium',
-          description: 'Could not run npm audit',
-          recommendation: 'Update npm to the latest version: "npm install -g npm@latest"'
+          description: 'Could not run pnpm audit',
+          recommendation: 'Update pnpm to the latest version: "brew upgrade pnpm" or "npm install -g pnpm@latest"'
         }
       };
     }
@@ -95,9 +95,9 @@ async function checkNpmAudit(results, addFinding) {
  */
 async function checkOutdatedPackages(results, addFinding) {
   const { runCheck } = require('../../utils/check-runner');
-  return runCheck('npm outdated', async () => {
+  return runCheck('pnpm outdated', async () => {
     try {
-      const output = execSync('npm outdated --json', { encoding: 'utf8', stdio: 'pipe' });
+      const output = execSync('pnpm outdated --json', { encoding: 'utf8', stdio: 'pipe' });
       const outdated = JSON.parse(output);
       
       if (Object.keys(outdated).length > 0) {
@@ -108,11 +108,11 @@ async function checkOutdatedPackages(results, addFinding) {
           passed: false,
           warning: true,
           details: `${count} package(s) outdated: ${packages}${more}`,
-          message: `npm outdated: ${count} packages need updates`,
+          message: `pnpm outdated: ${count} packages need updates`,
           finding: {
             severity: 'medium',
             description: `${count} package(s) are outdated`,
-            recommendation: 'Run "npm outdated" to see details, then "npm update" to update packages. Test thoroughly after updating.',
+            recommendation: 'Run "pnpm outdated" to see details, then "pnpm update" to update packages. Test thoroughly after updating.',
             details: { count, packages: Object.keys(outdated) }
           }
         };
@@ -121,14 +121,14 @@ async function checkOutdatedPackages(results, addFinding) {
       return {
         passed: true,
         details: 'All packages up to date',
-        message: 'npm outdated',
+        message: 'pnpm outdated',
         finding: {
           severity: 'info',
           description: 'All packages are up to date'
         }
       };
     } catch (error) {
-      // npm outdated exits with non-zero if packages are outdated OR if there's an error
+      // pnpm outdated exits with non-zero if packages are outdated OR if there's an error
       let output = '';
       if (error.stdout) {
         output = error.stdout.toString();
@@ -138,7 +138,7 @@ async function checkOutdatedPackages(results, addFinding) {
         output = error.message;
       }
       
-      // Try to parse as JSON (npm outdated --json outputs JSON even on error)
+      // Try to parse as JSON (pnpm outdated --json outputs JSON even on error)
       try {
         const outdated = JSON.parse(output);
         if (Object.keys(outdated).length > 0) {
@@ -162,7 +162,7 @@ async function checkOutdatedPackages(results, addFinding) {
           return {
             passed: true,
             details: 'All packages up to date',
-            message: 'npm outdated',
+            message: 'pnpm outdated',
             finding: {
               severity: 'info',
               description: 'All packages are up to date'
@@ -175,12 +175,12 @@ async function checkOutdatedPackages(results, addFinding) {
           return {
             passed: false,
             warning: true,
-            details: 'Some packages are outdated (run "npm outdated" for details)',
-            message: 'npm outdated: packages need updates',
+            details: 'Some packages are outdated (run "pnpm outdated" for details)',
+            message: 'pnpm outdated: packages need updates',
             finding: {
               severity: 'medium',
               description: 'Some packages are outdated',
-              recommendation: 'Run "npm outdated" for details, then update packages and test thoroughly.'
+              recommendation: 'Run "pnpm outdated" for details, then update packages and test thoroughly.'
             }
           };
         }
@@ -197,13 +197,13 @@ async function checkOutdatedPackages(results, addFinding) {
         passed: false,
         warning: true,
         details: `Could not check outdated packages: ${errorMsg}`,
-        message: 'npm outdated: could not check',
+        message: 'pnpm outdated: could not check',
         finding: {
           severity: 'low',
           description: `Could not check for outdated packages: ${errorMsg}`,
           recommendation: error.code === 'ENOENT' 
-            ? 'Verify npm is installed and in your PATH. Run "which npm" to check.'
-            : 'Verify npm is working correctly and try running "npm outdated" manually.'
+            ? 'Verify pnpm is installed and in your PATH. Run "which pnpm" to check.'
+            : 'Verify pnpm is working correctly and try running "pnpm outdated" manually.'
         }
       };
     }
@@ -275,7 +275,7 @@ async function checkDeprecatedPackages(results, addFinding) {
   const { runCheck } = require('../../utils/check-runner');
   return runCheck('Deprecated packages', async () => {
     try {
-      const output = execSync('npm list --depth=0 --json', { encoding: 'utf8', stdio: 'pipe' });
+      const output = execSync('pnpm list --depth=0 --json', { encoding: 'utf8', stdio: 'pipe' });
       const packages = JSON.parse(output);
       const deprecated = [];
       
@@ -338,7 +338,7 @@ async function checkDeprecatedPackages(results, addFinding) {
         finding: {
           severity: 'low',
           description: 'Could not check for deprecated packages',
-          recommendation: 'Verify npm is working correctly and try again.'
+          recommendation: 'Verify pnpm is working correctly and try again.'
         }
       };
     }

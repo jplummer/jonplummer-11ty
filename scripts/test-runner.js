@@ -59,9 +59,9 @@ function listTests() {
     else if (isInAll) note = ' (included in "test all")';
     console.log(`  ${type}${note}`);
   });
-  console.log('\nUsage: npm run test [type]');
-  console.log('       npm run test fast   (runs fast tests: ' + fastTests.join(', ') + ')');
-  console.log('       npm run test all    (runs all tests: ' + allTests.join(', ') + ')');
+  console.log('\nUsage: pnpm run test [type]');
+  console.log('       pnpm run test fast   (runs fast tests: ' + fastTests.join(', ') + ')');
+  console.log('       pnpm run test all    (runs all tests: ' + allTests.join(', ') + ')');
 }
 
 function runTest(testType, showStatus = false, compact = false, formatOptions = {}) {

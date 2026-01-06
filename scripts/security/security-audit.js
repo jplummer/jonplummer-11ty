@@ -20,7 +20,7 @@
  *   DEPLOY_HOST is used for deployment (SSH), SITE_DOMAIN is for live site checks.
  * 
  * The script:
- * - Automates checks where possible (npm audit, outdated packages, security headers, etc.)
+ * - Automates checks where possible (pnpm audit, outdated packages, security headers, etc.)
  * - Outputs a markdown security report to the console
  * - Provides a checklist of manual tasks that require human review
  * - Exits with code 0 if all automated checks pass, 1 if issues found
@@ -110,8 +110,8 @@ async function runSecurityAudit() {
   // Map each check to a file entry
   const checkOrder = [
     // Dependency & Package Security
-    'npm audit',
-    'npm outdated',
+    'pnpm audit',
+    'pnpm outdated',
     'Node.js version',
     'Deprecated packages',
     // Code & Configuration Security
