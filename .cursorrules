@@ -1,6 +1,6 @@
 # Project-Specific Rules
 
-This file contains project-specific rules for this Eleventy site. Universal rules are configured in Cursor User Rules.
+This file contains project-specific rules for this Eleventy site. Universal rules are configured in Cursor User Rules (accessible via Cursor Settings → Rules for AI, or Command Palette → "Preferences: Open User Settings (JSON)" and look for `cursor.aiRules`).
 
 ## 11ty-specific
 - Prefer Nunjucks (.njk) for templates.

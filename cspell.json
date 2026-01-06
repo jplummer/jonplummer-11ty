@@ -21,10 +21,17 @@
     "_site/**",
     ".git/**",
     "package-lock.json",
+    "pnpm-lock.yaml",
     "CHANGELOG.md",
     "docs/reference/**"
   ],
   "flagWords": [],
-  "words": []
+  "words": [],
+  "enableFiletypes": [
+    "markdown",
+    "yaml"
+  ],
+  "checkLimit": 500,
+  "suggestions": false
 }
 

@@ -1,6 +1,7 @@
 # Ignore large non-code directories that aren't needed for context
 _site/
 node_modules/
+pnpm-lock.yaml
 
 # Keep these for context:
 # docs/reference/eleventy/ - Eleventy documentation for reference
