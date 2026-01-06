@@ -3,7 +3,7 @@ title: Post title here
 layout: single_post.njk
 date: "YYYY-MM-DDTHH:mm:ss-HH:mm"  # or "YYYY-MM-DD" for date-only (assumes PST/PDT)
 tags: post
-description: "Meta description for SEO (120-160 characters recommended)"
+description: "Meta description for SEO (20-300 characters recommended, warnings only if outside range)"
 ogImage: /assets/images/og/YYYY-MM-DD-post-slug.png
 ---
 

@@ -6,11 +6,11 @@ This project includes a suite of validation tests covering content structure, HT
 
 ## Test Execution
 
-- `npm run test` - List available test types
-- `npm run test [type]` - Run a specific test type
-- `npm run test fast` - Run all fast tests (excludes slow tests like accessibility)
-- `npm run test all` - Run all tests including slow ones
-- `npm run validate` - Quick HTML validity check (shortcut for `npm run test html`)
+- `pnpm run test` - List available test types
+- `pnpm run test [type]` - Run a specific test type
+- `pnpm run test fast` - Run all fast tests (excludes slow tests like accessibility)
+- `pnpm run test all` - Run all tests including slow ones
+- `pnpm run validate` - Quick HTML validity check (shortcut for `pnpm run test html`)
 
 ### Test Categories
 
@@ -40,13 +40,13 @@ Validates HTML files in `_site/` directory for structural correctness, syntax er
 When to use:
 - Before deployment to catch HTML errors
 - After making template changes
-- As part of `npm run test fast` or `npm run test all`
-- Use `npm run validate` for quick HTML checks
+- As part of `pnpm run test fast` or `pnpm run test all`
+- Use `pnpm run validate` for quick HTML checks
 
 Automatically invoked by:
-- `npm run test fast` (included in fast tests)
-- `npm run test all` (included in all tests)
-- `npm run validate` (shortcut command)
+- `pnpm run test fast` (included in fast tests)
+- `pnpm run test all` (included in all tests)
+- `pnpm run validate` (shortcut command)
 
 Checks:
 - HTML structure validation (html-validate)
@@ -56,7 +56,7 @@ Checks:
 - Missing required elements
 - Severity levels: errors (blocking) and warnings (non-blocking)
 
-Requirements: `_site/` directory must exist (run `npm run build` first)
+Requirements: `_site/` directory must exist (run `pnpm run build` first)
 
 ### content-structure.js - Content Structure Validation
 
@@ -65,20 +65,20 @@ Validates source markdown files in `src/_posts/` for proper front matter structu
 When to use:
 - When creating or editing posts
 - Before committing new content
-- As part of `npm run test fast` or `npm run test all`
+- As part of `pnpm run test fast` or `pnpm run test all`
 - Automatically during deployment (pre-deploy validation)
 
 Automatically invoked by:
-- `npm run test fast` (included in fast tests)
-- `npm run test all` (included in all tests)
+- `pnpm run test fast` (included in fast tests)
+- `pnpm run test all` (included in all tests)
 - `scripts/deploy/deploy.js` (pre-deploy validation, before build)
 
 Checks:
 - Required fields: `title`, `date` (required), `slug` (required if not provided by directory structure)
-- Title validation: 1-200 characters (ERROR if outside range). More lenient than `seo-meta.js` (30-60) because this validates source content
+- Title validation: Must be non-empty string (length validation handled by `seo-meta.js`)
 - Date validation: Valid ISO date format (YYYY-MM-DD or ISO datetime)
 - Slug validation: Valid slug format (alphanumeric, hyphens, underscores)
-- Meta description: 50-160 characters (WARNING if outside range, WARNING if missing). More lenient than `seo-meta.js` (120-160) because this validates source markdown. Missing description is WARNING here (not ERROR) - `seo-meta.js` will catch it as ERROR in final output
+- Meta description: Optional field (length validation handled by `seo-meta.js`). Missing description is WARNING here (not ERROR) - `seo-meta.js` will catch it as ERROR in final output
 - File naming: Must follow `YYYY/YYYY-MM-DD-slug.md` convention
 - Duplicate slugs: Checks for duplicate slugs across all posts
 - YAML data files: Validates YAML syntax in `src/_data/*.yaml` files
@@ -93,12 +93,12 @@ Validates markdown syntax in source files using `markdownlint-cli2` and custom c
 When to use:
 - When writing or editing markdown content
 - Before committing content changes
-- As part of `npm run test fast` or `npm run test all`
+- As part of `pnpm run test fast` or `pnpm run test all`
 - Automatically during deployment (pre-deploy validation)
 
 Automatically invoked by:
-- `npm run test fast` (included in fast tests)
-- `npm run test all` (included in all tests)
+- `pnpm run test fast` (included in fast tests)
+- `pnpm run test all` (included in all tests)
 - `scripts/deploy/deploy.js` (pre-deploy validation, before build)
 
 Checks:
@@ -117,12 +117,12 @@ Validates spelling in markdown and YAML files using `cspell`. Checks all markdow
 When to use:
 - When writing or editing content
 - Before committing content changes
-- As part of `npm run test fast` or `npm run test all`
+- As part of `pnpm run test fast` or `pnpm run test all`
 - To catch spelling errors before deployment
 
 Automatically invoked by:
-- `npm run test fast` (included in fast tests)
-- `npm run test all` (included in all tests)
+- `pnpm run test fast` (included in fast tests)
+- `pnpm run test all` (included in all tests)
 
 Checks:
 - Markdown files: All `.md` files in `src/` directory
@@ -146,24 +146,24 @@ Validates SEO metadata in final HTML output, including title tags, meta descript
 When to use:
 - Before deployment to ensure SEO compliance
 - After template changes that affect meta tags
-- As part of `npm run test fast` or `npm run test all`
+- As part of `pnpm run test fast` or `pnpm run test all`
 
 Automatically invoked by:
-- `npm run test fast` (included in fast tests)
-- `npm run test all` (included in all tests)
+- `pnpm run test fast` (included in fast tests)
+- `pnpm run test all` (included in all tests)
 
 Checks:
-- Title tag: ERROR if missing, WARNING if length is not 30-60 characters (SEO best practice), WARNING if too many separators (|), skipped for redirect pages
-- Meta description: ERROR if missing (critical for SEO), WARNING if length is not 120-160 characters (SEO best practice), ERROR if contains unescaped quotes, skipped for redirect pages
+- Title tag: ERROR if missing, WARNING if length is not 10-200 characters (relaxed limits), WARNING if too many separators (|), skipped for redirect pages
+- Meta description: ERROR if missing (critical for SEO), WARNING if length is not 20-300 characters (relaxed limits), ERROR if contains unescaped quotes, skipped for redirect pages
 - Open Graph tags (WARNINGS): Required `og:title`, `og:description`, `og:type`, recommended `og:image`, `og:url`, validates tag lengths and formats, skipped for redirect pages
 - Heading hierarchy: ERROR if no H1 heading found, ERROR if heading hierarchy skips levels (e.g., H2 → H4), ERROR if empty headings found, skipped for redirect pages and utility pages (e.g., og-image-preview)
 - Duplicate titles: ERROR if multiple pages share the same title
 - Canonical URL: WARNING if missing
 - Language attribute: WARNING if missing on `<html>` tag
 
-Note: This test uses stricter ranges than `content-structure.js` because it validates final HTML output with SEO best practices: Title 30-60 chars (vs 1-200 in content-structure), Meta description 120-160 chars (vs 50-160 in content-structure), Missing description is ERROR here (vs WARNING in content-structure)
+Note: Length validation uses relaxed limits (Title 10-200 chars, Description 20-300 chars) and generates warnings only, not errors. Missing content is still an ERROR. Open Graph limits remain stricter (title ≤95 chars, description ≤200 chars) due to platform requirements.
 
-Requirements: `_site/` directory must exist (run `npm run build` first)
+Requirements: `_site/` directory must exist (run `pnpm run build` first)
 
 ### accessibility.js - Accessibility Validation
 
@@ -173,10 +173,10 @@ When to use:
 - Before major releases
 - After significant template or content changes
 - Periodically to ensure accessibility compliance
-- As part of `npm run test all` (not included in fast tests due to speed)
+- As part of `pnpm run test all` (not included in fast tests due to speed)
 
 Automatically invoked by:
-- `npm run test all` (included in all tests, but NOT in fast tests)
+- `pnpm run test all` (included in all tests, but NOT in fast tests)
 
 Checks:
 - Light mode: Full axe-core rule set (color contrast, ARIA attributes, keyboard navigation, focus management, semantic HTML, and all other WCAG accessibility rules)
@@ -185,7 +185,7 @@ Checks:
 - Incomplete checks: Reported as warnings (require manual review)
 - Redirect pages: Automatically skipped (minimal HTML, redirect immediately)
 
-Requirements: `_site/` directory must exist (run `npm run build` first), Puppeteer (launches headless browser), slower than other tests (runs browser for each page)
+Requirements: `_site/` directory must exist (run `pnpm run build` first), Puppeteer (launches headless browser), slower than other tests (runs browser for each page)
 
 ### links-yaml.js - Links YAML Validation
 
@@ -194,11 +194,11 @@ Validates the structure and format of `src/_data/links.yaml`, ensuring proper da
 When to use:
 - When editing `links.yaml` file
 - Before committing changes to links data
-- As part of `npm run test fast` or `npm run test all`
+- As part of `pnpm run test fast` or `pnpm run test all`
 
 Automatically invoked by:
-- `npm run test fast` (included in fast tests)
-- `npm run test all` (included in all tests)
+- `pnpm run test fast` (included in fast tests)
+- `pnpm run test all` (included in all tests)
 
 Checks:
 - File existence: ERROR if `src/_data/links.yaml` not found
@@ -220,11 +220,11 @@ Validates that all internal links in HTML files point to existing pages or ancho
 When to use:
 - Before deployment to catch broken internal links
 - After restructuring site URLs
-- As part of `npm run test fast` or `npm run test all`
+- As part of `pnpm run test fast` or `pnpm run test all`
 
 Automatically invoked by:
-- `npm run test fast` (included in fast tests)
-- `npm run test all` (included in all tests)
+- `pnpm run test fast` (included in fast tests)
+- `pnpm run test all` (included in all tests)
 
 Checks:
 - Internal file links: Absolute paths (starting with `/`), relative paths, checks for file existence with common extensions (`.html`, `.htm`, `/index.html`, `/index.htm`)
@@ -232,7 +232,7 @@ Checks:
 - Link classification: Only validates internal links (absolute, relative, anchor), skips external links, email links, phone links
 - File tracking: Reports which file contains each broken link
 
-Requirements: `_site/` directory must exist (run `npm run build` first)
+Requirements: `_site/` directory must exist (run `pnpm run build` first)
 
 ### og-images.js - Open Graph Image Validation
 
@@ -241,12 +241,12 @@ Validates that all HTML pages have appropriate Open Graph images. Checks for mis
 When to use:
 - Before deployment to ensure social media sharing works
 - After adding new pages
-- As part of `npm run test fast` or `npm run test all`
+- As part of `pnpm run test fast` or `pnpm run test all`
 - Automatically during deployment (post-build validation)
 
 Automatically invoked by:
-- `npm run test fast` (included in fast tests)
-- `npm run test all` (included in all tests)
+- `pnpm run test fast` (included in fast tests)
+- `pnpm run test all` (included in all tests)
 - `scripts/deploy/deploy.js` (post-build validation, after build)
 
 Checks:
@@ -254,7 +254,7 @@ Checks:
 - Default image usage: ERROR if default image (`/assets/images/og/index.png`) is used on non-index pages, allowed for main index (`index.html`) and paginated indexes (`page/1/index.html`, etc.), checks source file front matter to determine if default is explicitly set
 - Redirect pages: Automatically skipped (don't need OG images)
 
-Requirements: `_site/` directory must exist (run `npm run build` first)
+Requirements: `_site/` directory must exist (run `pnpm run build` first)
 
 ### rss-feed.js - RSS Feed Validation
 
@@ -263,11 +263,11 @@ Validates RSS/XML feed files in `_site/` directory for proper structure, require
 When to use:
 - Before deployment to ensure RSS feeds work correctly
 - After RSS template changes
-- As part of `npm run test fast` or `npm run test all`
+- As part of `pnpm run test fast` or `pnpm run test all`
 
 Automatically invoked by:
-- `npm run test fast` (included in fast tests)
-- `npm run test all` (included in all tests)
+- `pnpm run test fast` (included in fast tests)
+- `pnpm run test all` (included in all tests)
 
 Checks:
 - RSS structure: Valid XML format, RSS root element with version attribute (0.91, 0.92, 1.0, 2.0), channel element with required fields `title`, `description`, `link`
@@ -276,7 +276,7 @@ Checks:
 - Feed freshness: WARNING if last update was > 30 days ago
 - Feed size: WARNING if feed size > 500KB (suggests pagination)
 
-Requirements: `_site/` directory must exist (run `npm run build` first), RSS/XML files in `_site/` directory (excludes sitemap files)
+Requirements: `_site/` directory must exist (run `pnpm run build` first), RSS/XML files in `_site/` directory (excludes sitemap files)
 
 ### deploy.js - Deployment Testing
 
@@ -288,7 +288,7 @@ When to use:
 - When changing deployment configuration
 - Before running actual deployment
 
-Automatically invoked by: Not automatically invoked by other scripts. Run manually with `npm run test deploy`
+Automatically invoked by: Not automatically invoked by other scripts. Run manually with `pnpm run test deploy`
 
 Checks:
 - Environment variables: `DEPLOY_HOST` (required), `DEPLOY_USERNAME` (required), `DEPLOY_REMOTE_PATH` (required), `DEPLOY_PASSWORD` (optional, masked in output)
@@ -299,7 +299,7 @@ Checks:
 - Remote directory access: Tests access to remote deployment directory
 - rsync upload capability: Tests rsync file transfer (dry-run) with test file
 
-Requirements: `.env` file with deployment configuration, `rsync` installed on system, SSH access to remote server, `_site/` directory must exist (run `npm run build` first)
+Requirements: `.env` file with deployment configuration, `rsync` installed on system, SSH access to remote server, `_site/` directory must exist (run `pnpm run build` first)
 
 ## Deployment Integration
 

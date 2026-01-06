@@ -1,38 +1,38 @@
-# 🔨 NPM Commands
+# 🔨 PNPM Commands
 
 ## Quick Reference
 
 ### 💻 Daily Development
 
-- `npm run dev` - Start development server with auto-rebuild on file changes (`--serve --watch --quiet`)
-- `npm run dev:verbose` - Start development server with verbose output (`--serve --watch`)
-- `npm run build` - Build production site (`--quiet`)
-- `npm run build:verbose` - Build production site with verbose output
-- `npm run clean` - Clean build directory
+- `pnpm run dev` - Start development server with auto-rebuild on file changes (`--serve --watch --quiet`)
+- `pnpm run dev:verbose` - Start development server with verbose output (`--serve --watch`)
+- `pnpm run build` - Build production site (`--quiet`)
+- `pnpm run build:verbose` - Build production site with verbose output
+- `pnpm run clean` - Clean build directory
 
 ### 🧪 Testing
 
-- `npm run test` - List available test types
-- `npm run validate` - Quick HTML validity check (shortcut for `npm run test html`)
-- `npm run test fast` - Run fast tests (excludes slow tests: accessibility)
-- `npm run test all` - Run all tests in sequence (includes slow tests)
-- `npm run test [type]` - Run a specific test type
-- `npm run test [type] -- --format [format]` - Specify output format: `compact`, `verbose`, or `build`
-- `npm run test [type] -- --group-by [type]` - Group issues by `file` (default) or `type`
+- `pnpm run test` - List available test types
+- `pnpm run validate` - Quick HTML validity check (shortcut for `pnpm run test html`)
+- `pnpm run test fast` - Run fast tests (excludes slow tests: accessibility)
+- `pnpm run test all` - Run all tests in sequence (includes slow tests)
+- `pnpm run test [type]` - Run a specific test type
+- `pnpm run test [type] -- --format [format]` - Specify output format: `compact`, `verbose`, or `build`
+- `pnpm run test [type] -- --group-by [type]` - Group issues by `file` (default) or `type`
 
 ### 🚢 Deployment
 
-- `npm run deploy` - Deploy site to host via rsync
-- `npm run deploy --dry-run` - Test deployment without actually deploying (runs all checks and shows what would be synced)
-- `npm run deploy --skip-checks` - Deploy without running validation checks (not recommended)
+- `pnpm run deploy` - Deploy site to host via rsync
+- `pnpm run deploy --dry-run` - Test deployment without actually deploying (runs all checks and shows what would be synced)
+- `pnpm run deploy --skip-checks` - Deploy without running validation checks (not recommended)
 
 ### 🔧 Maintenance
 
-- `npm run update-docs` - Update cached Eleventy documentation
-- `npm run changelog` - Generate CHANGELOG.md from git history
-- `npm run convert-pdf` - Convert PDF pages to images for portfolio items
-- `npm run generate-og-images` - Generate Open Graph images for posts and pages
-- `npm run security-audit` - Run security audit and maintenance checks
+- `pnpm run update-docs` - Update cached Eleventy documentation
+- `pnpm run changelog` - Generate CHANGELOG.md from git history
+- `pnpm run convert-pdf` - Convert PDF pages to images for portfolio items
+- `pnpm run generate-og-images` - Generate Open Graph images for posts and pages
+- `pnpm run security-audit` - Run security audit and maintenance checks
 
 ---
 
@@ -65,7 +65,7 @@ The test suite is designed to:
 - **Ensure deploys work**: html, internal-links, seo-meta, rss-feed validation
 - **Basic security checks**: deploy validation, security audit script
 
-Use `npm run test fast` for quick validation during development. Use `npm run test all` for comprehensive checks before deployment.
+Use `pnpm run test fast` for quick validation during development. Use `pnpm run test all` for comprehensive checks before deployment.
 
 #### Test Suite Architecture
 
@@ -120,9 +120,9 @@ Configuration is in `.markdownlint.json`. The test reports errors (which fail th
 
 ### 🚢 Deployment
 
-- `npm run deploy` - Deploy site via rsync (simplified script)
-- `npm run deploy --dry-run` - Test deployment without actually deploying. Runs all validation checks, generates OG images, and shows what would be synced via rsync's dry-run mode.
-- `npm run deploy --skip-checks` - Deploy without running validation checks (not recommended)
+- `pnpm run deploy` - Deploy site via rsync (simplified script)
+- `pnpm run deploy --dry-run` - Test deployment without actually deploying. Runs all validation checks, generates OG images, and shows what would be synced via rsync's dry-run mode.
+- `pnpm run deploy --skip-checks` - Deploy without running validation checks (not recommended)
 
 Prior complex deployment scripts were moved to `scripts/deploy/backup/`. The current script shows rsync's native output and handles errors simply.
 
@@ -142,7 +142,7 @@ The deploy script performs these steps in order:
 Use `--dry-run` to test the full deployment process without actually deploying:
 
 ```bash
-npm run deploy --dry-run
+pnpm run deploy --dry-run
 ```
 
 This will:
@@ -158,7 +158,7 @@ This is useful for:
 
 ### 📚 Update Eleventy Documentation
 
-- `npm run update-docs` - Pull latest 11ty documentation from official repo
+- `pnpm run update-docs` - Pull latest 11ty documentation from official repo
 
 The Eleventy documentation is cached in `docs/reference/eleventy/` to provide context to Cursor and prevent confusion about what 11ty naturally provides. This script:
 
@@ -172,7 +172,7 @@ Run this periodically to keep the cached docs up to date with the latest 11ty fe
 
 ### 📋 Changelog Generation
 
-- `npm run changelog` - Generate CHANGELOG.md from git commit history
+- `pnpm run changelog` - Generate CHANGELOG.md from git commit history
 
 The changelog is automatically generated from the git commit history, organized by date (newest first). It includes all commits from the beginning of the project and follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format.
 
@@ -180,7 +180,7 @@ The changelog is automatically regenerated before each deployment. You can also 
 
 ### 📄 PDF Page Conversion
 
-- `npm run convert-pdf <pdf-file> [year/month]` - Convert PDF pages to images for portfolio display
+- `pnpm run convert-pdf <pdf-file> [year/month]` - Convert PDF pages to images for portfolio display
 
 **For authoring usage** (how to use PDFs in portfolio items), see [authoring.md](authoring.md#pdf-pages).
 
@@ -189,7 +189,7 @@ This script converts each page of a PDF to a PNG image for page-by-page display 
 #### Usage
 
 ```bash
-npm run convert-pdf "Product Trio.pdf" 2022/12
+pnpm run convert-pdf "Product Trio.pdf" 2022/12
 ```
 
 The `year/month` parameter is optional. If omitted, it defaults to the current year/month.
@@ -211,7 +211,7 @@ You then add notes for each page in the `<figcaption>` elements.
 
 ### 🖼️ Open Graph Image Generation
 
-- `npm run generate-og-images` - Generate Open Graph images for posts and pages
+- `pnpm run generate-og-images` - Generate Open Graph images for posts and pages
 
 **For authoring usage** (how to use `ogImage` in front matter, auto vs manual), see [authoring.md](authoring.md#open-graph-images).
 
@@ -243,7 +243,7 @@ The OG images use the `src/_includes/og-image.njk` template which includes:
 **Manual Generation**: You can also run the script manually:
 
 ```bash
-npm run generate-og-images
+pnpm run generate-og-images
 ```
 
 The script will:
@@ -257,7 +257,7 @@ The script will:
 **Force Regeneration**: To regenerate all images (useful after changing OG image styling):
 
 ```bash
-npm run generate-og-images -- --force
+pnpm run generate-og-images -- --force
 ```
 
 The `--force` flag will:
@@ -276,7 +276,7 @@ This preview page shows:
 You can also preview generated images in other ways:
 
 1. **Finder**: Browse `src/assets/images/og/` directly
-2. **Dev Server**: Run `npm run dev` and visit individual images: `http://localhost:8080/assets/images/og/[filename].png`
+2. **Dev Server**: Run `pnpm run dev` and visit individual images: `http://localhost:8080/assets/images/og/[filename].png`
 3. **Build Output**: Images are copied to `_site/assets/images/og/` during build
 
 **Note**: The preview page is excluded from deployment (it's for authoring only).
@@ -287,7 +287,7 @@ To customize the OG image design, edit `src/_includes/og-image.njk`. The templat
 
 ### 🔒 Security Audit
 
-- `npm run security-audit` - Run security audit and maintenance checks
+- `pnpm run security-audit` - Run security audit and maintenance checks
 
 The security audit script performs periodic security and maintenance checks for the site. It automates checks where possible and provides a checklist of manual tasks.
 
@@ -304,10 +304,10 @@ SITE_DOMAIN=jonplummer.com
 #### Automated Checks
 
 The script automatically checks:
-- **npm audit**: Scans for known vulnerabilities in dependencies
-- **npm outdated**: Identifies packages that need updates
+- **pnpm audit**: Scans for known vulnerabilities in dependencies
+- **pnpm outdated**: Identifies packages that need updates
 - **Node.js version**: Verifies you're using an LTS version (even-numbered versions: 18, 20, 22, etc.)
-- **Deprecated packages**: Checks for deprecated npm packages
+- **Deprecated packages**: Checks for deprecated pnpm packages
 - **Environment variables**: Ensures `.env` is properly ignored by git
 - **Package.json**: Validates configuration
 - **Build output**: Scans `_site/` for sensitive files that shouldn't be deployed
@@ -334,7 +334,7 @@ The script also provides a focused checklist of manual security tasks relevant t
 Run the audit periodically (e.g., monthly or before major deployments):
 
 ```bash
-npm run security-audit
+pnpm run security-audit
 ```
 
 The script exits with:
@@ -352,7 +352,7 @@ These tasks should be performed regularly, not as one-time work items.
 ### Security Audit
 
 - **Frequency**: Monthly or before major deployments
-- **Command**: `npm run security-audit`
+- **Command**: `pnpm run security-audit`
 - **Tasks**:
   - Run the security audit script
   - Review and address automated check results

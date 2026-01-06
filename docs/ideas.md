@@ -1,6 +1,6 @@
 # Ideas
 
-- [ ] Portfolio 💎💎💎 DO SOMETHING EVERY WEEKEND
+- [ ] Portfolio 💎 DO SOMETHING EVERY WEEKEND
   - [ ] Explore presentation-to-portfolio item automation, including speaker notes
     - [ ] What does it take to get speaker notes out of a PPT?
     - [ ] What does it take to get speaker notes out of a Google Slides preso?
@@ -14,15 +14,24 @@
 
 - [ ] OFTEN: sweep slack for links
 
-- [x] I make a lot of dumb spelling errors. Implement spell checking somehow
-
-- [ ] Watch for ahrefs improvement in image size complaints this weekend
+- [ ] Socials
+  - [ ] Consider: Improve existing Fed account bridging according to https://fed.brid.gy/docs#fediverse-enhanced
+  - [ ] Consider: Auto-post links to my BSky and mas.to feeds, perhaps via https://brid.gy
+  - [ ] Consider: Auto-post posts to my BSky and mas.to feeds, perhaps via https://brid.gy
 
 - [ ] Reinvestigate color scheme
   - [x] Make color playground page with style switcher
   - [ ] *Consider* addressing accessibility test script deficiencies per /docs/accesssibility-test-limitations.md
   - [ ] *Consider* other color inspiration sources
 
+- [x] Address `test seo-meta` warnings
+  - [x] Catalog allowable exceptions and make the test be fine with those
+
+- [x] I make a lot of dumb spelling errors. Implement spell checking somehow
+
+- [x] Watch for ahrefs improvement in image size complaints this weekend (it worked! AHrefs health score now 100 and steady)
+
+- [x] pnpm vs npm
 
 ## CMS
 
@@ -70,13 +79,13 @@
   - Trigger on push to `main` branch
   - Checkout code
   - Setup Node.js (use LTS version matching local)
-  - Install dependencies (`npm ci`)
+  - Install dependencies (`pnpm install`)
   - Run pre-deploy validation:
-    - `npm run test markdown`
-    - `npm run test content-structure` (after build)
-  - Generate OG images: `npm run generate-og-images`
-  - Build site: `npm run build`
-  - Generate changelog: `npm run changelog`
+    - `pnpm run test markdown`
+    - `pnpm run test content-structure` (after build)
+  - Generate OG images: `pnpm run generate-og-images`
+  - Build site: `pnpm run build`
+  - Generate changelog: `pnpm run changelog`
   - Rebuild to include changelog
   - Deploy via rsync:
     - Use SSH key from secrets
@@ -137,7 +146,7 @@
 
 - [ ] Test local deploy still works
   - Make local change
-  - Run `npm run deploy`
+  - Run `pnpm run deploy`
   - Verify local deploy script still functions
 
 - [ ] Test edge cases
@@ -196,6 +205,8 @@
 - IndexNow
 
 - handle GitHub Dependabot complaints https://github.com/jplummer/jonplummer-11ty/security/dependabot
+
+- https://bsky.app/profile/did:plc:re3ebnp5v7ffagz6rb6xfei4
 
 - https://kagi.com/search?q=contemporary+blog+styling+2025 ?
 

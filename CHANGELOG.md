@@ -3,6 +3,8 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 ## 2025-12-24
 
 - Add luxon dependency and update colors documentation
+- Add spell checking to test suite
+- Update ideas, exclude color-test from deploy, add links
 
 ## 2025-12-23
 
@@ -287,4 +289,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2025-12-25
+Last deployed on 2026-01-06

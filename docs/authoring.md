@@ -14,11 +14,86 @@
 
 ### Optional
 
-- **`description`** - Meta description (120-160 chars). Defaults to title if omitted.
+- **`description`** - Meta description (20-300 chars recommended, warnings only if outside range). Defaults to title if omitted.
 - **`ogImage`** - OG image path. Use `auto` or omit to auto-generate. Format: `/assets/images/og/YYYY-MM-DD-post-slug.png`
 - **`permalink`** - Custom URL structure
 - **`eleventyExcludeFromCollections`** - Set to `true` to exclude
 - **`draft`** - Set to `true` to mark as draft. Drafts are excluded from production builds but visible in dev mode.
+
+## Frontmatter Formatting
+
+This section outlines best practices for editing frontmatter in markdown files to prevent parsing errors.
+
+### Description Field Formatting
+
+The `description` field in frontmatter is particularly prone to parsing errors because it often contains:
+- Quotes (single or double)
+- Colons
+- Special characters
+- Apostrophes
+
+#### Rules for Description Values
+
+1. **Always quote descriptions** that contain:
+   - Colons (`:`)
+   - Quotes (`"` or `'`)
+   - Special YAML characters (`#`, `|`, `>`, `&`, `*`, `!`, `%`, `@`, `` ` ``)
+   - Leading or trailing whitespace
+
+2. **Escaping quotes**:
+   - If using double quotes, escape internal double quotes with `\"`
+   - Example: `description: "He said \"hello\" to me."`
+   - If the string contains single quotes but no double quotes, you can use single quotes
+   - Example: `description: 'It's a great day.'`
+   - If the string contains both single and double quotes, use double quotes and escape the double quotes
+   - Example: `description: "He said \"It's great\" to me."`
+
+3. **Common patterns**:
+   ```yaml
+   # Simple description (no quotes needed)
+   description: A simple description without special characters
+   
+   # Description with colon (needs quotes)
+   description: "A description with a colon: this is important"
+   
+   # Description with quotes (escape internal quotes)
+   description: "He said \"hello\" to me"
+   
+   # Description with apostrophe (can use single quotes)
+   description: 'It's a great day'
+   
+   # Description with both (use double quotes, escape double quotes)
+   description: "He said \"It's great\" to me"
+   ```
+
+### Using the Format Utility
+
+When making programmatic changes to frontmatter, use the `formatYamlString` utility:
+
+```javascript
+const { formatYamlString } = require('./scripts/utils/frontmatter-utils');
+
+const description = 'He said "hello" to me';
+const formatted = formatYamlString(description);
+// Result: "He said \"hello\" to me"
+```
+
+### Testing
+
+Run the content structure test to catch frontmatter parsing errors:
+
+```bash
+pnpm run test content-structure
+```
+
+This will identify any files with frontmatter parsing errors before they cause build failures.
+
+### Common Errors
+
+1. **Unescaped quotes**: `description: He said "hello"` → Should be: `description: "He said \"hello\""`
+2. **Unquoted colons**: `description: This is important: remember it` → Should be: `description: "This is important: remember it"`
+3. **Mixed quotes**: `description: "He said 'hello'"` → This is fine, but be consistent
+4. **Trailing spaces in quotes**: `description: "Text "` → Remove trailing spaces or quote properly
 
 ## Open Graph Images
 
