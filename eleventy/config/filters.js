@@ -105,6 +105,13 @@ function configureFilters(eleventyConfig, md) {
 
   // Add custom filter to merge posts and links chronologically
   eleventyConfig.addFilter("mergePostsAndLinks", mergePostsAndLinks);
+
+  // Add truncate filter for strings
+  eleventyConfig.addFilter("truncate", function (str, length, append = '...') {
+    if (!str || typeof str !== 'string') return str;
+    if (str.length <= length) return str;
+    return str.slice(0, length - append.length) + append;
+  });
 }
 
 module.exports = configureFilters;

@@ -9,7 +9,9 @@ eleventyExcludeFromCollections: true
         <link>{{ site.url }}</link>
         <description>Today I Learned - Personal blog about work, life, and learning</description>
         <language>en-US</language>
-        <lastBuildDate>{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}</lastBuildDate>
+        {# Use the newest post's publication date (not modification time) to avoid triggering RSS readers on metadata updates #}
+        {% set newestPost = collections.post | reverse | first %}
+        <lastBuildDate>{% if newestPost %}{{ newestPost.date | dateToRfc3339 }}{% else %}{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}{% endif %}</lastBuildDate>
 
         {% for item in collections.post | reverse | limit(20) %}
         <item>

@@ -66,8 +66,8 @@ ogImage: /assets/images/og/portfolio.png
           Border Color:
           <input type="color" id="custom-border-color" value="#d0d0d0">
         </label>
-        <button id="apply-custom-colors">Apply Custom Colors</button>
-        <button id="reset-colors">Reset to Default</button>
+        <button type="button" id="apply-custom-colors">Apply Custom Colors</button>
+        <button type="button" id="reset-colors">Reset to Default</button>
       </div>
     </details>
   </section>
@@ -78,13 +78,13 @@ ogImage: /assets/images/og/portfolio.png
     <h2>Index Page Elements</h2>
     
     <h3>Post Content</h3>
-    <article>
+    <article id="test-post">
       <header>
         <h1><a href="#test-post" rel="bookmark">Sample Blog Post Title for Color Testing</a></h1>
       </header>
       <section>
-        <p>This is a sample blog post paragraph to test how text colors appear in the content area. It includes <a href="#test-link">a link</a> to test link colors, and <strong>strong text</strong> for emphasis.</p>
-        <p>Here's another paragraph with more content. We can see how the spacing and colors work together. This paragraph also has <a href="#visited-link" class="visited">a visited link</a> to test visited link styling.</p>
+        <p>This is a sample blog post paragraph to test how text colors appear in the content area. It includes <a href="#test-link" id="test-link">a link</a> to test link colors, and <strong>strong text</strong> for emphasis.</p>
+        <p>Here's another paragraph with more content. We can see how the spacing and colors work together. This paragraph also has <a href="#visited-link" id="visited-link" class="visited">a visited link</a> to test visited link styling.</p>
         <h2>Sample Heading 2</h2>
         <p>Content under a heading to see how hierarchy works with the color scheme.</p>
         <blockquote>
@@ -108,8 +108,8 @@ ogImage: /assets/images/og/portfolio.png
 
     <h3>Pagination</h3>
     <nav class="pagination" aria-label="Post pagination">
-      <a class="prev" href="#older">← Older posts</a>
-      <a class="next" href="#newer">Newer posts →</a>
+      <a class="prev" href="#older" id="older">← Older posts</a>
+      <a class="next" href="#newer" id="newer">Newer posts →</a>
     </nav>
   </section>
 
@@ -120,8 +120,8 @@ ogImage: /assets/images/og/portfolio.png
     
     <h3>Post Navigation</h3>
     <nav class="post-navigation" aria-label="Post navigation">
-      <a href="#previous" class="prev">← Previous post: Previous Post Title</a>
-      <a href="#next" class="next">Next post: Next Post Title →</a>
+      <a href="#previous" id="previous" class="prev">← Previous post: Previous Post Title</a>
+      <a href="#next" id="next" class="next">Next post: Next Post Title →</a>
     </nav>
   </section>
 
@@ -133,7 +133,7 @@ ogImage: /assets/images/og/portfolio.png
     <h3>Portfolio Grid</h3>
     <ul class="portfolio-grid">
       <li>
-        <article class="portfolio-item" id="portfolio-item-1">
+        <article class="portfolio-item" id="portfolio-1">
           <a href="#portfolio-1" aria-hidden="true" tabindex="-1">
             <img src="/assets/images/og/portfolio.png" alt="Portfolio item 1">
           </a>
@@ -142,7 +142,7 @@ ogImage: /assets/images/og/portfolio.png
         </article>
       </li>
       <li>
-        <article class="portfolio-item" id="portfolio-item-2">
+        <article class="portfolio-item" id="portfolio-2">
           <a href="#portfolio-2" aria-hidden="true" tabindex="-1">
             <img src="/assets/images/og/about.png" alt="Portfolio item 2">
           </a>
@@ -151,7 +151,7 @@ ogImage: /assets/images/og/portfolio.png
         </article>
       </li>
       <li>
-        <article class="portfolio-item" id="portfolio-item-3">
+        <article class="portfolio-item" id="portfolio-3">
           <a href="#portfolio-3" aria-hidden="true" tabindex="-1">
             <img src="/assets/images/og/now.png" alt="Portfolio item 3">
           </a>
