@@ -1,5 +1,5 @@
 ---
-title: "PT asks: \"how do I convince leadership to care about UX research?\""
+title: How to convince leadership to care about UX research
 layout: layouts/single_post.njk
 date: "2023-09-15T12:00:00-08:00"
 tags: post

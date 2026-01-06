@@ -1,9 +1,9 @@
 ---
-title: What went right in October?
+title: "What went right in October 2024?"
 layout: layouts/single_post.njk
 date: "2024-11-02T12:00:00-08:00"
 tags: post
-description: "So many things, in retrospect: Home progress! Landscaping is done, trees are in Storm drains are cleaned The network is regularly providing 1200Mbps, after"
+description: "So many things went right in October: home progress with landscaping done, trees planted, storm drains cleaned, network providing 1200Mbps, and more."
 ogImage: /assets/images/og/2024-11-02-what-went-right-in-october.png
 ---
 So many things, in retrospect:

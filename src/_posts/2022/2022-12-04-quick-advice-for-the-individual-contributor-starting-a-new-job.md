@@ -1,9 +1,9 @@
 ---
-title: Quick advice for the individual contributor starting a new job
+title: Quick advice for starting a new job as an individual contributor
 layout: layouts/single_post.njk
 date: "2022-12-04T12:00:00-08:00"
 tags: post
-description: "Jaemi asks: > I begin my first day tomorrow with \\[new job\\]. If there is any advice you might offer I'd welcome it. Off the cuff, I have just two things: Now"
+description: "Jaemi asks for advice for starting a new job. Quick advice for individual contributors: Now is the time to ask questions and make connections."
 ogImage: /assets/images/og/2022-12-04-quick-advice-for-the-individual-contributor-starting-a-new-job.png
 ---
 Jaemi asks:

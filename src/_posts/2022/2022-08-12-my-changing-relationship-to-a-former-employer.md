@@ -3,7 +3,7 @@ title: My changing relationship to a former employer
 layout: layouts/single_post.njk
 date: "2022-08-12T12:00:00-08:00"
 tags: post
-description: "Or, a corporation becomes people in six acts: Fed up with Job A and planning to move away, I looked for work in the new locale. And I found something."
+description: "Or, a corporation becomes people in six acts: Fed up with Job A, I looked for work in the new locale and found something. My changing relationship to a former employer."
 ogImage: /assets/images/og/2022-08-12-my-changing-relationship-to-a-former-employer.png
 ---
 Or, _a **corporation** becomes **people** in six acts:_

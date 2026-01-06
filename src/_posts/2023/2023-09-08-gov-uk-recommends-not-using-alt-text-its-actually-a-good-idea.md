@@ -1,5 +1,5 @@
 ---
-title: Gov.uk recommends NOT using alt text. It's actually a good idea
+title: Why Gov.uk's alt text guidance is actually good advice
 layout: layouts/single_post.njk
 date: "2023-09-08T12:00:00-08:00"
 tags: post

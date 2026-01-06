@@ -1,9 +1,9 @@
 ---
-title: Quick links on SaaS UI trends
+title: Quick links on SaaS UI design trends
 layout: layouts/single_post.njk
 date: "2025-10-05T12:00:00-08:00"
 tags: post
-description: "Some collected examples of SaaS UI trends: SaaS UI Design SaaS Interface UX Design for SaaS Interfaces in 2025: What's the Difference? SaaS Software UI –"
+description: "Collected examples of SaaS UI design trends and best practices, including resources on SaaS interface design, UX patterns, and modern SaaS software UI approaches."
 ogImage: /assets/images/og/2025-10-05-quick-saas-ui-links.png
 ---
 Some collected examples of SaaS UI trends:

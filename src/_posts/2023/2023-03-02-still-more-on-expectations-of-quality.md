@@ -3,7 +3,7 @@ title: Still more on expectations of quality
 layout: layouts/single_post.njk
 date: "2023-03-02T12:00:00-08:00"
 tags: post
-description: The general idea is that scope should scale but quality should not. All of these are achievable in small scopes and if we care about quality are not “extra”
+description: "The general idea is that scope should scale but quality should not. All of these are achievable in small scopes and if we care about quality are not \"extra\" work."
 ogImage: /assets/images/og/2023-03-02-still-more-on-expectations-of-quality.png
 ---
 The general idea is that **scope should scale but quality should not**. [All of these](/2023/02/02/quality-expectations/) are achievable in small scopes and if we care about quality are not “extra” costs.

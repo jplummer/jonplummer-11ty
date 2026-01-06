@@ -1,9 +1,9 @@
 ---
-title: Nice has no place in business
+title: Nice has no place in business, but kindness does
 layout: layouts/single_post.njk
 date: "2023-08-18T12:00:00-08:00"
 tags: post
-description: Merlin Mann is fond of saying "you don't have to be nice, but you should be kind." In this statement "nice" refers to being agreeable, and "kind" to being
+description: "Merlin Mann says \"you don't have to be nice, but you should be kind.\" In business, being agreeable can lead to self-negation. Stand up for what you need while remaining kind."
 ogImage: /assets/images/og/2023-08-18-nice-has-no-place-in-business.png
 ---
 [Merlin Mann](http://www.merlinmann.com) is fond of saying "you don't have to be nice, but you should be kind." In this statement "nice" refers to being agreeable, and "kind" to being friendly. These are not the same.

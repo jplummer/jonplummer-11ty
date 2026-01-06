@@ -3,7 +3,7 @@ title: Empathy for the employee that arrives via acquisition
 layout: layouts/single_post.njk
 date: "2022-02-06T12:00:00-08:00"
 tags: post
-description: An employee who comes to your team via an acquisition was likely in the dark until the acquisition was announced didn't apply to be part of your company, your
+description: "An employee who comes to your team via an acquisition was likely in the dark until announced, didn't apply to be part of your company, and will fear the future. Here's how to show empathy."
 ogImage: /assets/images/og/2022-02-06-empathy-for-the-employee-that-arrives-via-acquisition.png
 ---
 An employee who comes to your team via an acquisition

@@ -3,7 +3,7 @@ title: Taking time off? Here's what I expect as your manager.
 layout: layouts/single_post.njk
 date: "2022-04-27T12:00:00-08:00"
 tags: post
-description: You can file for time off in the relevant system and I'll approve it. It is important to give your product team at least as much warning so that you can help
+description: "You can file for time off and I'll approve it. It's important to give your product team warning so you can help plan around your absence. Taking time off? Here's what I expect."
 ogImage: /assets/images/og/2022-04-27-taking-time-off-heres-what-i-expect-as-your-manager.png
 ---
 You can file for time off in the relevant system and I'll approve it. It is important to give your product team at least as much warning so that you can help them adapt to your absence.

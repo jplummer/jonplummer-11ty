@@ -3,7 +3,7 @@ title: A quick note to the design team about meeting invitations
 layout: layouts/single_post.njk
 date: "2021-06-11T12:00:00-08:00"
 tags: post
-description: Gentle people, I recently complained to the directors and project managers about meeting invitations without agendas, or without a clear goal, or without a
+description: "I recently complained to directors about meeting invitations without agendas, clear goals, or context. Here's a quick note to the design team about what makes invitations effective."
 ogImage: /assets/images/og/2021-06-11-a-quick-note-to-the-design-team-about-meeting-invitations.png
 ---
 Gentle people,

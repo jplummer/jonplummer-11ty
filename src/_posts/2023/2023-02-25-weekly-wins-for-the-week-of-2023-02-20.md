@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2023 02 20
 layout: layouts/single_post.njk
 date: "2023-02-25T12:00:00-08:00"
 tags: post
-description: The taxes are done. Never mind that the American tax system is needlessly difficult for the vast majority of taxpayers due in part to the political
+description: "The taxes are done. Never mind that the American tax system is needlessly difficult for the vast majority of taxpayers. Weekly wins and reflections."
 ogImage: /assets/images/og/2023-02-25-weekly-wins-for-the-week-of-2023-02-20.png
 ---
 - The taxes are done. Never mind that the American tax system is needlessly difficult for the vast majority of taxpayers due in part to the political intervention of companies that make money off of this difficulty; the taxes are done.

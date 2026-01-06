@@ -1,10 +1,10 @@
 ---
-title: My interview with Invoca
+title: My presentation to Invoca's hiring committee
 layout: layouts/portfolio_detail.njk
 date: "2022-12-01T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/12/jon-plummer-invoca-final-preso-page-24.png
-description: My presentation to the hiring committee at Invoca; it worked!
+description: A presentation to the hiring committee at Invoca in lieu of a portfolio review, covering leadership style, design process, and examples of work. It worked!
 ogImage: /assets/images/og/portfolio.png
 ---
 In late 2022 I gave a presentation to the hiring committee at Invoca in lieu of a portfolio review, a sensible adaptation when hiring design leaders who aren't likely to have recent personally-crafted portfolio pieces. And it worked! They hired me right away.

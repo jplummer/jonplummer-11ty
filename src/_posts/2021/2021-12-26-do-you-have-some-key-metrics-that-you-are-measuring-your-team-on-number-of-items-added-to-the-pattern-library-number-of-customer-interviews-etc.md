@@ -1,5 +1,5 @@
 ---
-title: Do you have some key metrics that you are measuring your team on?
+title: "Evaluating design team performance: the four Cs"
 layout: layouts/single_post.njk
 date: "2021-12-26T12:00:00-08:00"
 tags: post
