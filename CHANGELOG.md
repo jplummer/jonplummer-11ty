@@ -1,5 +1,21 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),newest first.
 
+## 2026-01-06
+
+- Remove unused to-ico dependency and reorganize Eleventy docs
+- Update pnpm-lock.yaml after removing to-ico
+
+## 2026-01-05
+
+- Migrate from npm to pnpm
+- Update configuration files
+- Move outdated documentation to archive
+- Update documentation
+- Improve validation, testing, and security scripts
+- Update templates and layouts
+- Update content pages
+- Update post content and add new post
+
 ## 2025-12-24
 
 - Add luxon dependency and update colors documentation
@@ -289,4 +305,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-01-06
+Last deployed on 2026-01-07

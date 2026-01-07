@@ -1,7 +1,7 @@
 ---
 title: /about
 description: Jon Plummer is a UX design leader and mentor with experience at Invoca, Cayuse, Belkin, and Medtronic. Learn about his design leadership philosophy and career.
-date: 2025-08-01T00:00:00.000Z
+date: 2026-01-06
 layout: base.njk
 tags: page
 permalink: /about/
@@ -21,7 +21,7 @@ I lead product design teams for web and mobile apps, edtech, smart home, wi-fi, 
 ## Before that
 
 - Director of User Experience at [Cayuse](https://cayuse.com/), a research management SaaS provider
-- Director of User Experience at [Concentric Sky](https://concentricsky.com/) for numerous ed-tech and post-secondary educational clients and the [Badgr](https://www.instructure.com/products/canvas/canvas-credentials-digital-badges/badgr-pathways) microcredential platform (which is now part of Instructure)
+- Director of User Experience at [Concentric Sky](https://concentricsky.com/) for numerous ed-tech and post-secondary educational clients and the [Badgr](https://www.parchment.com/platform/higher-education/issuing/) microcredential platform (which is now part of Instructure Parchment)
 - Senior Director of Product Experience Design at [Belkin](https://belkin.com/), especially for [Wemo](https://wemo.com/) and [Linksys](https://linksys.com/)
 - UX Manager at [Medtronic MiniMed](https://www.medtronicdiabetes.com/)
 - Volunteer at [The Compton Initiative](https://justdogood.org/)
