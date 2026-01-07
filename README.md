@@ -66,11 +66,11 @@ If you want to see how the code works:
 
 ## 🤖 For AI Agents
 
-This repository contains a cached copy of the official Eleventy documentation in `docs/reference/eleventy/` and a script to make that copy up-to-date. This puts the Eleventy documentation into agent context, which seems to work better than searching the web for Eleventy implementation details.
+This repository contains a cached copy of the official Eleventy documentation in `docs/eleventy/` and a script to make that copy up-to-date. This puts the Eleventy documentation into agent context, which seems to work better than searching the web for Eleventy implementation details.
 
 ### CRITICAL INSTRUCTION
 
-Before implementing any feature, filter, collection, or configuration, an agent MUST check `docs/reference/eleventy/` to see if Eleventy supports it natively.
+Before implementing any feature, filter, collection, or configuration, an agent MUST check `docs/eleventy/` to see if Eleventy supports it natively.
 
 - Do not reimplement standard Eleventy features (e.g. pagination, collections, data cascade, date functions).
 - Use the provided documentation to understand the "Eleventy way" of doing things.

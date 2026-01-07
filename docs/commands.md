@@ -1,6 +1,21 @@
-# 🔨 PNPM Commands
+# 🥁 PNPM Commands
 
 ## Quick Reference
+
+### 🧣 Deployment Workflow
+
+Recommended process for deploying changes with an up-to-date changelog:
+
+1. Make changes (write posts, update content, etc.)
+2. `pnpm run build` - Verify local build works
+3. `pnpm run test fast` - Run validation checks
+4. Fix any issues found, then repeat steps 2-3 until all tests pass
+5. `git commit` - Commit changes (required: changelog generation reads from git history)
+6. `pnpm run deploy` - Deploy to live site (automatically regenerates changelog and runs validation)
+7. Verify the live site works as expected
+8. `git push` - Push commits to remote repository
+
+**Why this order?** The deploy script regenerates the changelog from git commit history, so commits must exist before deployment. See [Deployment Process](#deployment-process) for details.
 
 ### 💻 Daily Development
 
@@ -160,10 +175,10 @@ This is useful for:
 
 - `pnpm run update-docs` - Pull latest 11ty documentation from official repo
 
-The Eleventy documentation is cached in `docs/reference/eleventy/` to provide context to Cursor and prevent confusion about what 11ty naturally provides. This script:
+The Eleventy documentation is cached in `docs/eleventy/` to provide context to Cursor and prevent confusion about what 11ty naturally provides. This script:
 
 1. Clones the `11ty/11ty-website` repository to a temporary directory (shallow clone)
-2. Copies the `docs` directory to `docs/reference/eleventy/docs`
+2. Copies the `docs` directory to `docs/eleventy`
 3. Cleans up temporary files
 
 The script outputs a summary showing the commit hash and file count changes (added/removed/unchanged) to help track what was updated.

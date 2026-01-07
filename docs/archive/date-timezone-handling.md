@@ -250,7 +250,7 @@ During implementation, discovered that `DateTime.fromISO()` was being called on 
 
 ## Related Documentation
 
-- [Eleventy Date Documentation](docs/reference/eleventy/docs/dates.md)
+- [Eleventy Date Documentation](docs/eleventy/dates.md)
 - [Authoring Guide](docs/authoring.md) - Front matter date format requirements
 - [Post Template](docs/templates/post-template.md) - Example date formats
 
@@ -1181,7 +1181,7 @@ If you see date parsing errors:
 
 ## Related Documentation
 
-- [Eleventy Date Documentation](docs/reference/eleventy/docs/dates.md)
+- [Eleventy Date Documentation](docs/eleventy/dates.md)
 - [Authoring Guide](docs/authoring.md) - Front matter date format requirements
 - [Post Template](docs/templates/post-template.md) - Example date formats
 
@@ -1613,7 +1613,7 @@ During implementation, discovered that `DateTime.fromISO()` was being called on 
 
 ## Related Documentation
 
-- [Eleventy Date Documentation](docs/reference/eleventy/docs/dates.md)
+- [Eleventy Date Documentation](docs/eleventy/dates.md)
 - [Authoring Guide](docs/authoring.md) - Front matter date format requirements
 - [Post Template](docs/templates/post-template.md) - Example date formats
 ```

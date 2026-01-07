@@ -33,6 +33,8 @@
 
 - [x] pnpm vs npm
 
+- [x] address Dependabot and `pnpm audit` warnings
+
 ## CMS
 
 **Goals**: Enable authoring from any device via web-based CMS while maintaining local build/deploy capability. Prevent common errors in authoring. Make it relatively quick and easy to capture links and ideas. Make it relatively easy to start posts in one place and finish them someplace else.

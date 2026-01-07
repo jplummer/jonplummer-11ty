@@ -4,11 +4,11 @@
  * Update Eleventy Documentation
  * 
  * Pulls the latest 11ty documentation from the official 11ty-website repository
- * and updates the cached docs in docs/reference/eleventy.
+ * and updates the cached docs in docs/eleventy.
  * 
  * This script:
  * 1. Clones the 11ty/11ty-website repo to a temporary directory
- * 2. Copies the docs directory to docs/reference/eleventy/docs
+ * 2. Copies the docs directory to docs/eleventy
  * 3. Cleans up the temporary clone
  */
 
@@ -42,7 +42,7 @@ function countFiles(dir) {
 const ELEVENTY_REPO = 'https://github.com/11ty/11ty-website.git';
 const TEMP_DIR = path.join(__dirname, '../../.temp-eleventy-clone');
 const DOCS_SOURCE = path.join(TEMP_DIR, 'src', 'docs');
-const DOCS_TARGET = path.join(__dirname, '../../docs/reference/eleventy/docs');
+const DOCS_TARGET = path.join(__dirname, '../../docs/eleventy');
 
 console.log('📚 Updating Eleventy documentation...\n');
 
@@ -53,9 +53,9 @@ if (fs.existsSync(TEMP_DIR)) {
 }
 
 try {
-  // Clone the repo (shallow clone for speed)
+  // Clone the repo (shallow clone with some history to see changes)
   console.log('Cloning 11ty/11ty-website repository...');
-  execSync(`git clone --depth 1 ${ELEVENTY_REPO} ${TEMP_DIR}`, {
+  execSync(`git clone --depth 10 ${ELEVENTY_REPO} ${TEMP_DIR}`, {
     stdio: 'inherit'
   });
 
@@ -67,11 +67,35 @@ try {
   // Count files before update (if they exist)
   const filesBefore = fs.existsSync(DOCS_TARGET) ? countFiles(DOCS_TARGET) : 0;
 
-  // Get commit hash from cloned repo for reference
+  // Get commit hash and info from cloned repo for reference
   const commitHash = execSync('git rev-parse HEAD', {
     cwd: TEMP_DIR,
     encoding: 'utf-8'
   }).trim().substring(0, 7);
+  
+  const commitMessage = execSync('git log -1 --pretty=format:"%s"', {
+    cwd: TEMP_DIR,
+    encoding: 'utf-8'
+  }).trim();
+  
+  const commitDate = execSync('git log -1 --pretty=format:"%ad" --date=short', {
+    cwd: TEMP_DIR,
+    encoding: 'utf-8'
+  }).trim();
+  
+  // Get list of changed files in docs directory from this commit
+  let changedFiles = [];
+  try {
+    const gitDiff = execSync('git diff --name-only HEAD~1 HEAD -- src/docs/', {
+      cwd: TEMP_DIR,
+      encoding: 'utf-8'
+    }).trim();
+    if (gitDiff) {
+      changedFiles = gitDiff.split('\n').filter(f => f).map(f => f.replace('src/docs/', ''));
+    }
+  } catch (e) {
+    // If HEAD~1 doesn't exist (shallow clone), skip file diff
+  }
 
   // Remove existing docs directory
   if (fs.existsSync(DOCS_TARGET)) {
@@ -86,7 +110,7 @@ try {
   }
 
   // Copy docs directory
-  console.log('Copying docs to docs/reference/eleventy/docs...');
+  console.log('Copying docs to docs/eleventy...');
   fs.cpSync(DOCS_SOURCE, DOCS_TARGET, { recursive: true });
 
   // Count files after update
@@ -99,7 +123,8 @@ try {
   // Show summary
   console.log('\n✅ Eleventy documentation updated successfully!');
   console.log(`   Docs location: ${DOCS_TARGET}`);
-  console.log(`   Commit: ${commitHash}`);
+  console.log(`   Commit: ${commitHash} (${commitDate})`);
+  console.log(`   Message: ${commitMessage}`);
   if (filesBefore > 0) {
     const diff = filesAfter - filesBefore;
     if (diff > 0) {
@@ -111,6 +136,17 @@ try {
     }
   } else {
     console.log(`   Files: ${filesAfter} (initial sync)`);
+  }
+  
+  if (changedFiles.length > 0) {
+    console.log(`\n   Changed files (${changedFiles.length}):`);
+    const displayFiles = changedFiles.slice(0, 10);
+    displayFiles.forEach(file => {
+      console.log(`     - ${file}`);
+    });
+    if (changedFiles.length > 10) {
+      console.log(`     ... and ${changedFiles.length - 10} more`);
+    }
   }
   
 } catch (error) {

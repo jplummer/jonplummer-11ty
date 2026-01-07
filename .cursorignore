@@ -4,5 +4,5 @@ node_modules/
 pnpm-lock.yaml
 
 # Keep these for context:
-# docs/reference/eleventy/ - Eleventy documentation for reference
+# docs/eleventy/ - Eleventy documentation for reference
 # docs/plan.md - Project documentation

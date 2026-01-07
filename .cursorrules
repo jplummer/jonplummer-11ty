@@ -7,8 +7,19 @@ This file contains project-specific rules for this Eleventy site. Universal rule
 - Follow the established _posts/YYYY/ directory structure for posts.
 - Include required front matter: title, date, layout, tags (posts must include `post` in tags array).
 - Use ISO date format: "YYYY-MM-DDTHH:mm:ss-HH:mm".
-- Full Eleventy documentation is available in `docs/reference/eleventy/docs/`. Reference these docs when implementing 11ty features, especially for data files, filters, collections, pagination, and configuration.
-    - When working with 11ty-specific functionality, search the documentation first before guessing or assuming behavior.
+
+### ⚠️ CRITICAL: Check Eleventy Documentation Before Implementing Features
+**MANDATORY WORKFLOW**: Before implementing ANY Eleventy feature, filter, collection, data file, pagination, or configuration:
+1. **FIRST**: Search `docs/eleventy/` using `codebase_search` to find if Eleventy supports it natively
+2. **THEN**: Read the relevant documentation file(s) using `read_file`
+3. **ONLY THEN**: Implement using Eleventy's built-in capabilities
+
+**DO NOT**:
+- Reimplement standard Eleventy features (pagination, collections, data cascade, date functions, filters, shortcodes)
+- Write custom code for features Eleventy provides natively
+- Guess or assume behavior - always check the docs first
+
+Use `codebase_search` with queries like "How does Eleventy handle [feature]?" targeting `docs/eleventy/` to find relevant documentation dynamically.
 
 ## JavaScript/Node.js
 - Use CommonJS (require/module.exports) for scripts.
