@@ -9,7 +9,7 @@ ogImage: /assets/images/og/portfolio.png
 ---
 At one point the Linksys app, meant to offer people setup, control, and monitoring of their Linksys networks at home, was rated below three stars on the iTunes Store and had a lifetime rating of 3.3 on the Google Play Store. A new information architecture, a fresh coat of paint, and many performance and interactivity improvements brought it to 4.5 stars on iTunes and a 4.1 lifetime on Google, helped by a judicious amount of review solicitation.
 
-<div class="portrait-grid">
+{% portraitGrid %}
 
 ![Linksys app dashboard showing network online status](/assets/images/2022/12/DashboardOnline-269x1024.png)
 *Main dashboard view showing network status, connected devices, and overall network health at a glance.*
@@ -34,7 +34,8 @@ At one point the Linksys app, meant to offer people setup, control, and monitori
 
 ![Linksys app confirmation screen for removing device prioritization](/assets/images/2022/12/XboxCopy@2x-576x1024.png)
 *Confirmation screen for removing device prioritization, allowing users to cancel or confirm the action.*
-</div>
+
+{% endportraitGrid %}
 
 My role: Product owner, leader of the design team and cajoler of the software and firmware engineering teams. Substitute product manager for a somewhat neglected area. Part-time scrum master for design and blended design/development teams.
 

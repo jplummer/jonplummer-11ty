@@ -9,7 +9,7 @@ ogImage: /assets/images/og/portfolio.png
 ---
 The Velop Whole-Home Wi-Fi System is a collection of identical routers that work together to behave as a single virtual device, blanketing your home in fast and strong Wi-Fi coverage without the usual degradation in speed provided by traditional range extenders. They connect to each other wirelessly over dedicated channels, or can be connected via wire, distributing Wi-Fi radios and Ethernet ports around your home where you need them.
 
-<div class="portrait-grid">
+{% portraitGrid %}
 
 ![Velop app initial setup screen welcoming users](/assets/images/2022/12/SET_103-576x1024.jpg)
 *Initial setup screen welcoming users to the Velop system and beginning the setup process.*
@@ -41,7 +41,7 @@ The Velop Whole-Home Wi-Fi System is a collection of identical routers that work
 ![Velop app placement guidance for additional nodes](/assets/images/2022/12/SET_260-576x1024.png)
 *Placement of additional nodes was a key challenge in early product testing. A little guidance goes a long way.*
 
-</div>
+{% endportraitGrid %}
 
 One Velop node is a very nice Wi-Fi router, and two or three will provide excellent range and speed for larger homes. To make setting up this multi-unit system as straightforward as possible we devised an app-based routine that detects available nodes and offers them to the user, walks them through the minimal wiring tasks necessary, detects their Internet settings, assists with the placement of nodes, and shows their network growing as they succeed in setting up each node in turn.
 

@@ -247,6 +247,7 @@
 
 ## DONE
 
+- [x] Refactor markdown renderer configuration - replaced HTML blocks with `{% portraitGrid %}` paired shortcode, eliminating need for preprocessor entirely (2026-01-10)
 - [x] implement quick authoring-related tests just for new changes (2026-01-10)
 - [x] fix spell checking, since it totally doesn't catch anything (2026-01-10)
 - [x] fix spelling across site (2026-01-10)

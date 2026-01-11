@@ -14,7 +14,7 @@ Wemo is a family of intelligent products for the home that allow you to control 
 ![WeMo app main device list screen with all connected devices](/assets/images/2022/12/devices_withhand-1024x761.png)
 *Main device list screen displaying all connected WeMo devices with their current on/off status and quick controls.*
 
-<div class="portrait-grid">
+{% portraitGrid %}
 
 ![WeMo app device list screen showing all connected WeMo devices](/assets/images/2022/12/ios7_devicelist03_iphone5-577x1024.png)
 *Main WeMo app interface showing device status and controls, redesigned for iOS 7 with a cleaner, flatter aesthetic.*
@@ -36,7 +36,8 @@ Wemo is a family of intelligent products for the home that allow you to control 
 
 ![WeMo app updated interface from 2017](/assets/images/2022/12/Screenshot2017-06-0321.50.19-727x1024.png)
 *The initial physical device offering included a switch module with power sensing and a motion detector.*
-</div>
+
+{% endportraitGrid %}
 
 ![WeMo app rules management screen showing all automation rules](/assets/images/2022/12/rules.png)
 *Rules management screen displaying all active automation rules, allowing users to view, edit, or delete scheduled behaviors.*

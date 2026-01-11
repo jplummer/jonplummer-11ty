@@ -5,8 +5,6 @@
  * Configures preprocessors (e.g., draft post exclusion) and files/directories to ignore.
  */
 
-const processMarkdownInHtmlBlocks = require("../preprocessors/process-markdown-in-html-blocks");
-
 /**
  * Configures Eleventy preprocessors and ignores.
  * 
@@ -18,11 +16,6 @@ function configurePreprocessors(eleventyConfig) {
     if(data.draft && process.env.ELEVENTY_RUN_MODE === "build") {
       return false;
     }
-  });
-
-  // Process markdown inside HTML blocks (like div.portrait-grid)
-  eleventyConfig.addPreprocessor("markdown-in-html", "*.md", (data, content) => {
-    return processMarkdownInHtmlBlocks(content);
   });
 
   // Ignore the 'docs' folder

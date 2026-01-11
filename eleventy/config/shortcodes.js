@@ -18,6 +18,12 @@ function configureShortcodes(eleventyConfig) {
 
   // Add custom Nunjucks shortcode: year
   eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
+
+  // Paired shortcode for portrait-grid layout (multi-column image gallery)
+  // Content inside is processed as markdown automatically by Eleventy
+  eleventyConfig.addPairedShortcode("portraitGrid", function(content) {
+    return `<div class="portrait-grid">\n${content}\n</div>`;
+  });
 }
 
 module.exports = configureShortcodes;

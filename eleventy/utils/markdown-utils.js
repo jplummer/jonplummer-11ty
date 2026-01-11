@@ -14,12 +14,30 @@ const markdownIt = require("markdown-it");
  * @returns {markdownIt} Configured markdown-it instance
  */
 function createMarkdownRenderer() {
-  return markdownIt({
+  const md = markdownIt({
     html: true, // Allow HTML in markdown
     breaks: true, // Convert line breaks to <br>
     linkify: true, // Auto-convert URLs to links
     typographer: true // Convert straight quotes to smart quotes
   });
+  
+  // Override link_open renderer to convert http:// to https:// for auto-linked URLs
+  // This ensures URLs without a protocol (like "misc.jonplummer.com") default to https://
+  const defaultLinkOpen = md.renderer.rules.link_open || function(tokens, idx, options, env, self) {
+    return self.renderToken(tokens, idx, options);
+  };
+  
+  md.renderer.rules.link_open = function(tokens, idx, options, env, self) {
+    const token = tokens[idx];
+    const href = token.attrGet('href');
+    // Only modify auto-linked URLs (those that start with http://, not manually written links)
+    if (href && href.startsWith('http://')) {
+      token.attrSet('href', href.replace('http://', 'https://'));
+    }
+    return defaultLinkOpen(tokens, idx, options, env, self);
+  };
+  
+  return md;
 }
 
 module.exports = {
