@@ -2,7 +2,7 @@
 
 const { spawn } = require('child_process');
 const path = require('path');
-const { printOverallSummary, getTestEmoji, getTestDisplayName, formatCompact, formatVerbose, formatBuild } = require('./utils/test-results');
+const { printOverallSummary, getTestEmoji, getTestDisplayName, formatVerbose, formatBuild } = require('./utils/test-results');
 const { SPINNER_FRAMES } = require('./utils/spinner-utils');
 
 // Map test types to their script files
@@ -10,22 +10,17 @@ const { SPINNER_FRAMES } = require('./utils/spinner-utils');
 const testTypes = {
   'html': 'html.js',
   'links': 'links-yaml.js',
-  'links-yaml': 'links-yaml.js', // backward compatibility
   'internal-links': 'internal-links.js',
   'frontmatter': 'frontmatter.js',
   'markdown': 'markdown.js',
   'spell': 'spell.js',
   'seo': 'seo-meta.js',
-  'seo-meta': 'seo-meta.js', // backward compatibility
   'og-images': 'og-images.js',
   'a11y': 'accessibility.js',
-  'accessibility': 'accessibility.js', // backward compatibility
   'rss': 'rss-feed.js',
-  'rss-feed': 'rss-feed.js', // backward compatibility
   'deploy': 'deploy.js',
   'indexnow': 'indexnow.js',
-  'security': { file: 'security-audit.js', dir: 'security' },
-  'security-audit': { file: 'security-audit.js', dir: 'security' } // backward compatibility
+  'security': { file: 'security-audit.js', dir: 'security' }
 };
 
 // Fast tests (excludes slow tests like a11y)
@@ -61,24 +56,9 @@ const allTests = [
 function listTests() {
   console.log('Available test types:\n');
   
-  // Test descriptions
-  const testDescriptions = {
-    'html': 'HTML validity',
-    'links': 'Links YAML structure',
-    'internal-links': 'Internal link validity',
-    'frontmatter': 'Frontmatter validation',
-    'markdown': 'Markdown syntax',
-    'spell': 'Spell checking',
-    'seo': 'SEO and meta tags',
-    'og-images': 'Open Graph images',
-    'a11y': 'Accessibility (WCAG compliance)',
-    'rss': 'RSS feed validation',
-    'deploy': 'Deployment connectivity',
-    'indexnow': 'IndexNow configuration',
-    'security': 'Security audit'
-  };
+  const { getTestDescription } = require('./utils/test-results');
   
-  // Only show primary names (not backward compatibility aliases)
+  // Only show primary names
   const primaryNames = ['html', 'links', 'internal-links', 'frontmatter', 'markdown', 'spell', 'seo', 'og-images', 'a11y', 'rss', 'deploy', 'indexnow', 'security'];
   
   primaryNames.forEach(type => {
@@ -87,7 +67,7 @@ function listTests() {
     let note = '';
     if (isInFast) note = ' (included in "test fast" and "test all")';
     else if (isInAll) note = ' (included in "test all")';
-    const description = testDescriptions[type] || '';
+    const description = getTestDescription(type);
     const descText = description ? ` - ${description}` : '';
     console.log(`  ${type}${descText}${note}`);
   });
@@ -406,9 +386,6 @@ function parseArgs() {
     if (args[i] === '--format' && args[i + 1]) {
       formatOptions.format = args[i + 1];
       i++; // Skip next arg
-    } else if (args[i] === '--group-by' && args[i + 1]) {
-      formatOptions.groupBy = args[i + 1];
-      i++; // Skip next arg
     }
   }
   
@@ -421,8 +398,7 @@ async function main() {
   if (!testType) {
     listTests();
     console.log('\nOptions:');
-    console.log('  --format <format>     Output format: compact (default), verbose, build');
-    console.log('  --group-by <type>      Group issues by: file (default), type');
+    console.log('  --format <format>     Output format: verbose (default), build');
     process.exit(0);
   }
   

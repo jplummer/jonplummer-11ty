@@ -242,22 +242,17 @@ function outputResult(result) {
  */
 const TEST_EMOJIS = {
   'a11y': '🌈',
-  'accessibility': '🌈', // alias for backward compatibility
-  'frontmatter': '🗂️',
+  'frontmatter': '🗂️ ',
   'html': '🧩',
   'internal-links': '🔗',
   'links': '📌',
-  'links-yaml': '📌', // alias for backward compatibility
-  'markdown': '✍️',
+  'markdown': '✍️ ',
   'spell': '🧙',
   'og-images': '📸',
   'rss': '📡',
-  'rss-feed': '📡', // alias for backward compatibility
   'seo': '📈',
-  'seo-meta': '📈', // alias for backward compatibility
   'deploy': '🚀',
   'security': '🛡️',
-  'security-audit': '🛡️', // alias for backward compatibility
   'indexnow': '📣'
 };
 
@@ -280,24 +275,43 @@ function getTestDisplayName(testType) {
   const displayNames = {
     'html': 'HTML Validation',
     'links': 'Links YAML',
-    'links-yaml': 'Links YAML', // alias for backward compatibility
     'internal-links': 'Internal Links',
     'content': 'Content Structure',
     'frontmatter': 'Frontmatter',
     'markdown': 'Markdown',
     'spell': 'Spell Check',
     'seo': 'SEO Meta',
-    'seo-meta': 'SEO Meta', // alias for backward compatibility
     'a11y': 'Accessibility',
-    'accessibility': 'Accessibility', // alias for backward compatibility
     'rss': 'RSS Feed',
-    'rss-feed': 'RSS Feed', // alias for backward compatibility
     'og-images': 'OG Images',
     'deploy': 'Deploy',
-    'security': 'Security Audit',
-    'security-audit': 'Security Audit' // alias for backward compatibility
+    'security': 'Security Audit'
   };
   return displayNames[testType] || testType;
+}
+
+/**
+ * Get description for test type (short description for list view)
+ * @param {string} testType - Test type key
+ * @returns {string} Description
+ */
+function getTestDescription(testType) {
+  const descriptions = {
+    'html': 'HTML validity',
+    'links': 'Links YAML structure',
+    'internal-links': 'Internal link validity',
+    'frontmatter': 'Frontmatter validation',
+    'markdown': 'Markdown syntax',
+    'spell': 'Spell checking',
+    'seo': 'SEO and meta tags',
+    'og-images': 'Open Graph images',
+    'a11y': 'Accessibility (WCAG compliance)',
+    'rss': 'RSS feed validation',
+    'deploy': 'Deployment connectivity',
+    'indexnow': 'IndexNow configuration',
+    'security': 'Security audit'
+  };
+  return descriptions[testType] || '';
 }
 
 /**
@@ -612,17 +626,11 @@ function printOverallSummary(results) {
 // ============================================================================
 
 /**
- * Format compact output for group runs
- * Matches current compact output exactly: reassuring, focused, succinct
- * 
- * @param {Object} result - Test result object from result builder
- * @returns {string} Formatted output string
+ * Helper: Build summary line for test result (used in verbose output header)
+ * @param {Object} result - Test result object
+ * @returns {string} Summary line
  */
-function formatCompact(result) {
-  // Always finalize to ensure summary is calculated correctly
-  // (safe to call multiple times, recalculates from current state)
-  finalizeTestResult(result);
-  
+function buildSummaryLine(result) {
   const emoji = getTestEmoji(result.testType);
   const displayName = getTestDisplayName(result.testType);
   const summary = result.summary;
@@ -636,9 +644,9 @@ function formatCompact(result) {
   // Design: Reassure first (what's good), then direct attention (what needs fixing)
   let summaryParts = [];
   if (files > 0) {
-    // For security-audit, skip "checked" line (redundant with "passing" line)
+    // For security, skip "checked" line (redundant with "passing" line)
     // For other tests, show "files checked"
-    if (result.testType !== 'security' && result.testType !== 'security-audit') {
+    if (result.testType !== 'security') {
       const itemName = files === 1 ? 'file' : 'files';
       summaryParts.push(`📄 ${files} ${itemName} checked`);
     }
@@ -762,28 +770,21 @@ function groupIssuesByType(result) {
 
 /**
  * Format verbose output for individual runs
- * Starts with compact summary for consistency, then shows detailed by-file results
+ * Starts with summary for consistency, then shows detailed by-file results
  * 
  * @param {Object} result - Test result object from result builder
- * @param {Object} options - Formatting options
- * @param {string} options.groupBy - 'file' (default) or 'type'
+ * @param {Object} options - Formatting options (currently unused, kept for API compatibility)
  * @returns {string} Formatted output string
  */
 function formatVerbose(result, options = {}) {
   // Always finalize to ensure summary is calculated correctly
   finalizeTestResult(result);
   
-  const groupBy = options.groupBy || 'file';
-  
-  if (groupBy === 'type') {
-    return formatVerboseByType(result);
-  }
-  
   const output = [];
   const summary = result.summary;
   
-  // Start with compact output for consistency with group runs
-  output.push(formatCompact(result));
+  // Start with summary line for consistency
+  output.push(buildSummaryLine(result));
   output.push('');
   
   // Show detailed results if there are issues/warnings, or if all files passed (for smoke testing)
@@ -903,133 +904,6 @@ function formatVerbose(result, options = {}) {
   return output.join('\n');
 }
 
-/**
- * Format verbose output grouped by issue type
- * Alternative view useful for systematic fixes
- * 
- * @param {Object} result - Test result object from result builder
- * @returns {string} Formatted output string
- */
-function formatVerboseByType(result) {
-  // Always finalize to ensure summary is calculated correctly
-  finalizeTestResult(result);
-  
-  // Alternative view: Group by issue type
-  // Useful when same issue appears in many files - fix systematically
-  const output = [];
-  const summary = result.summary;
-  
-  // Start with compact output for consistency
-  output.push(formatCompact(result));
-  output.push('');
-  
-  // Only show detailed results if there are issues or warnings
-  if (summary.issues > 0 || summary.warnings > 0) {
-    // Global issues first
-    if (result.globalIssues && result.globalIssues.length > 0) {
-      output.push('🌐 Global Issues:');
-      result.globalIssues.forEach(issue => {
-        output.push(`  ❌ ${issue.message}`);
-        if (issue.files) {
-          issue.files.forEach(file => output.push(`    - ${file}`));
-        }
-      });
-      output.push('');
-    }
-    
-    // Group all issues by type (now includes message details for more specificity)
-    const issueTypes = groupIssuesByType(result);
-    
-    // Helper to get a friendly description from the first issue's message
-    function getFriendlyDescription(issues) {
-      if (issues.length > 0 && issues[0].message) {
-        return issues[0].message;
-      }
-      return 'Unknown issue';
-    }
-    
-    // Show errors first
-    if (issueTypes.errors.length > 0) {
-      output.push('❌ Errors by type:');
-      output.push('');
-      issueTypes.errors.forEach(({ type, count, files, issues }) => {
-        const friendlyDesc = getFriendlyDescription(issues);
-        output.push(`  ❌ ${friendlyDesc}`);
-        output.push(`  ${count} occurrence${count === 1 ? '' : 's'} in ${files.length} file${files.length === 1 ? '' : 's'}:`);
-        // Show each file - just the path, no redundant message
-        files.forEach(file => {
-          const fileIssues = issues.filter(i => i.file === file);
-          // If there are line numbers, include them
-          const hasLineNumbers = fileIssues.some(i => i.line);
-          if (hasLineNumbers) {
-            fileIssues.forEach(issue => {
-              let line = `  📄 ${file}`;
-              if (issue.line) {
-                line += ` (line ${issue.line}`;
-                if (issue.column) line += `, col ${issue.column}`;
-                line += ')';
-              }
-              output.push(line);
-            });
-          } else {
-            // No line numbers - just show file once
-            output.push(`  📄 ${file}`);
-          }
-        });
-        output.push('');
-      });
-    }
-    
-    // Then warnings
-    if (issueTypes.warnings.length > 0) {
-      output.push('⚠️  Warnings by type:');
-      output.push('');
-      issueTypes.warnings.forEach(({ type, count, files, issues }) => {
-        const friendlyDesc = getFriendlyDescription(issues);
-        output.push(`  ⚠️  ${friendlyDesc}`);
-        output.push(`  ${count} occurrence${count === 1 ? '' : 's'} in ${files.length} file${files.length === 1 ? '' : 's'}:`);
-        // Show each file - just the path, no redundant message
-        files.forEach(file => {
-          const fileIssues = issues.filter(i => i.file === file);
-          // If there are line numbers, include them
-          const hasLineNumbers = fileIssues.some(i => i.line);
-          if (hasLineNumbers) {
-            fileIssues.forEach(issue => {
-              let line = `  📄 ${file}`;
-              if (issue.line) {
-                line += ` (line ${issue.line}`;
-                if (issue.column) line += `, col ${issue.column}`;
-                line += ')';
-              }
-              output.push(line);
-            });
-          } else {
-            // No line numbers - just show file once
-            output.push(`  📄 ${file}`);
-          }
-        });
-        output.push('');
-      });
-    }
-    
-    // Custom sections (e.g., accessibility light/dark mode)
-    if (result.customSections && Object.keys(result.customSections).length > 0) {
-      Object.entries(result.customSections).forEach(([name, data]) => {
-        output.push(`  ${name}:`);
-        if (typeof data === 'object' && !Array.isArray(data)) {
-          Object.entries(data).forEach(([key, value]) => {
-            output.push(`    ${key}: ${value}`);
-          });
-        } else {
-          output.push(`    ${data}`);
-        }
-        output.push('');
-      });
-    }
-  }
-  
-  return output.join('\n');
-}
 
 /**
  * Format build/deploy output for CI/CD
@@ -1184,15 +1058,14 @@ module.exports = {
   // Reporting Helpers
   getTestEmoji,
   getTestDisplayName,
+  getTestDescription,
   printSummary,
   exitWithResults,
   printOverallSummary,
   TEST_EMOJIS,
   
   // Formatting
-  formatCompact,
   formatVerbose,
-  formatVerboseByType,
   formatBuild,
   groupIssuesByType
 };

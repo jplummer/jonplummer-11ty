@@ -192,8 +192,6 @@
 
 ### 🖍 Also…
 
-- look into https://github.com/ttscoff/md-fixup ?
-
 - handle GitHub Dependabot complaints https://github.com/jplummer/jonplummer-11ty/security/dependabot
 
 - https://bsky.app/profile/did:plc:re3ebnp5v7ffagz6rb6xfei4 ?
@@ -217,7 +215,6 @@
   - Animated color cycle triggered by window.blur()?
 
 - **Progressive enhancements**
-  - Signal external links (maybe not, the assumptin is that 99% of links are external, and already written about as such)
   - Preview external links
   - ?
 
@@ -242,6 +239,13 @@
   - Additional formats - HTML reports, etc.
   - Filtering and sorting - `--filter`, `--sort` flags
   - CI/CD integration - JUnit XML, GitHub Actions annotations, etc.
+
+---
+
+## MAYBE DON'T
+
+- look into https://github.com/ttscoff/md-fixup ? – not needed, good authoring-oritneted tests shoudl be enough for now
+  - Signal external links (maybe not, the assumptin is that 99% of links are external, and already written about as such)
 
 ---
 

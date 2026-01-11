@@ -18,7 +18,6 @@ const { logCheck } = require('./audit-logging');
  * @returns {Promise<boolean>} True if check passed, false otherwise
  */
 async function runCheck(checkName, checkFn, results, addFinding) {
-  const { logCheck } = require('./audit-logging');
   logCheck(checkName, 'pending', 'Checking...');
   
   try {

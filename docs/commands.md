@@ -32,8 +32,7 @@ Recommended process for deploying changes with an up-to-date changelog:
 - `pnpm run test fast` - Run fast tests (excludes slow tests like a11y)
 - `pnpm run test all` - Run all tests in sequence (includes slow tests)
 - `pnpm run test [type]` - Run a specific test type
-- `pnpm run test [type] -- --format [format]` - Specify output format: `compact`, `verbose`, or `build`
-- `pnpm run test [type] -- --group-by [type]` - Group issues by `file` (default) or `type`
+- `pnpm run test [type] -- --format [format]` - Specify output format: `verbose` (default) or `build`
 
 ### 🚢 Deployment
 
@@ -53,65 +52,7 @@ Recommended process for deploying changes with an up-to-date changelog:
 
 ## Detailed Explanations
 
-### 🧪 Testing
-
-#### Available Test Types
-
-**Fast Tests** (suitable for frequent validation):
-- `html` - Check HTML validity (structure, syntax, deprecated elements)
-- `links` - Validate links.yaml structure and format
-- `internal-links` - Test only internal links (critical)
-- `frontmatter` - Test frontmatter validation
-- `markdown` - Validate markdown syntax and structure
-- `seo` - Test SEO and meta tags
-- `og-images` - Validate Open Graph images
-- `rss` - Test RSS feeds
-
-**Slow Tests** (run occasionally):
-- `a11y` - Test accessibility using axe-core - launches browser
-
-**Other Tests**:
-- `deploy` - Test deployment (environment, local build check, dependencies, SSH, remote directory, rsync dry-run)
-- `security` - Security audit (dependencies, configuration, live site security)
-
-#### Test Suite Focus
-
-The test suite is designed to:
-- **Prevent authoring mistakes**: markdown, content structure, links validation
-- **Ensure deploys work**: html, internal-links, seo, rss validation
-- **Basic security checks**: deploy validation, security script
-
-Use `pnpm run test fast` for quick validation during development. Use `pnpm run test all` for comprehensive checks before deployment.
-
-#### links.yaml Validation
-
-The `links` test validates the structure and format of `_data/links.yaml`:
-
-- Validates YAML syntax
-- Checks date keys are in YYYY-MM-DD format and are valid dates
-- Ensures each date entry contains an array of link objects
-- Validates each link has required fields (`url`, `title`)
-- Validates URL format (http/https)
-- Validates description field if present
-- Checks for unexpected fields in link objects
-
-This is faster than running the full `frontmatter` test since it only validates the links.yaml file structure, not the entire site content.
-
-#### Markdown Validation
-
-The `markdown` test validates markdown syntax and structure for all markdown files that are rendered on the live site:
-
-- Validates markdown syntax using markdownlint-cli2
-- Checks for unclosed parentheses in markdown links (e.g., `[text](url` without closing `)`)
-- Detects incorrect heading hierarchy (e.g., h2 → h4 skipping h3)
-- Warns about H1 headings in markdown content (templates add H1 from front matter `title`)
-- Validates spacing, formatting, and other markdown best practices
-
-The test checks all `.md` files in `src/` directory, excluding:
-- Files with `draft: true` in frontmatter (draft posts not published)
-- `docs/` (documentation not part of live site)
-
-Configuration is in `.markdownlint.json`. The test reports errors (which fail the build) and warnings (which don't fail but should be addressed).
+See [tests.md](tests.md) for detailed test documentation.
 
 ### 🚢 Deployment
 

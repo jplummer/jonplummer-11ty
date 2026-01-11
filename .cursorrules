@@ -32,3 +32,61 @@ This file contains project-specific rules for this Eleventy site. Universal rule
 - Include meta descriptions for SEO (50-160 characters).
 - Use proper markdown syntax.
 - Keep paragraphs concise and scannable.
+
+## Testing Requirements
+
+### 🔍 CRITICAL: Testing is Part of Every Change
+
+**When making any change, testing considerations are required, not optional.**
+
+1. **Before implementing a change:**
+   - Identify which existing tests (if any) will validate this change
+   - Determine if new tests are needed or existing tests need updates
+   - Consider what could break and how to verify it doesn't
+
+2. **During implementation:**
+   - If adding new functionality, consider what tests should cover it
+   - If modifying existing code, verify existing tests still pass
+   - If fixing a bug, add or update tests to prevent regression
+
+3. **After implementation:**
+   - Run relevant tests to verify the change works
+   - Run `pnpm run test fast` for quick validation
+   - Consider whether the change affects build output (HTML, RSS, etc.) and test accordingly
+
+### Test Suite Overview
+
+**Fast tests** (run frequently): `html`, `links`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `rss`, `indexnow`
+
+**Slow tests** (run occasionally): `a11y`
+
+**Other tests**: `deploy`, `security`
+
+### Testing by Change Type
+
+- **Content changes** (posts, pages): Run `pnpm run test changed` or specific tests (`spell`, `markdown`, `frontmatter`, `seo`)
+- **Template/layout changes**: Run `pnpm run build` then `pnpm run test html`, `pnpm run test seo`
+- **Script changes**: Run relevant functional tests, verify scripts execute correctly
+- **Configuration changes**: Run `pnpm run test fast` to catch regressions
+- **Build output changes**: Run `pnpm run test html`, `pnpm run test rss`, `pnpm run test og-images`
+
+### When to Add New Tests
+
+- New validation rules or checks
+- New content types or structures
+- New build outputs or formats
+- New scripts or utilities that need verification
+- **Authoring errors discovered**: When a user error in content authoring is found, create a test to catch similar mistakes in the future
+- **External system issues**: When interacting with outside systems (APIs, services, dependencies) that are fragile, unreliable, or change unexpectedly, add tests to detect when they break or change behavior
+
+### Defensive Testing: Learning from Errors
+
+**When fixing issues, especially authoring mistakes or external system problems, create repeatable tests:**
+
+1. **Authoring errors**: If a content mistake is discovered (wrong frontmatter format, broken markdown, missing required fields, etc.), add a test that would have caught it
+2. **External dependencies**: If an external system (API, service, library update) causes issues, add tests that verify expected behavior and will fail if the system changes unexpectedly
+3. **Make tests repeatable**: Tests should run automatically and catch the same issue if it happens again
+
+**Example**: If a post is published with invalid frontmatter that breaks the build, add a test case that validates that specific pattern and would have caught the error.
+
+**If unsure which tests to run, default to `pnpm run test fast` for comprehensive validation.**

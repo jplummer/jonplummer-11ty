@@ -34,7 +34,7 @@ if (fs.existsSync('.env')) {
   loadDotenvSilently();
 }
 
-const { createTestResult, addFile, addIssue, addWarning, finalizeTestResult, formatVerbose, formatCompact, formatBuild } = require('../utils/test-results');
+const { createTestResult, addFile, addIssue, addWarning, finalizeTestResult, formatVerbose, formatBuild } = require('../utils/test-results');
 
 // Import check modules
 const dependencyChecks = require('./checks/dependency-checks');
@@ -167,16 +167,13 @@ async function runSecurityAudit() {
   finalizeTestResult(jsonResult);
   
   // Output formatted result (matches test suite style)
-  const formatOptions = { groupBy: 'file' };
   const format = process.env.SECURITY_AUDIT_FORMAT || 'verbose';
   
   let formattedOutput;
-  if (format === 'compact') {
-    formattedOutput = formatCompact(jsonResult);
-  } else if (format === 'build') {
+  if (format === 'build') {
     formattedOutput = formatBuild(jsonResult);
   } else {
-    formattedOutput = formatVerbose(jsonResult, formatOptions);
+    formattedOutput = formatVerbose(jsonResult);
   }
   
   // Output formatted result (matches test suite style)
