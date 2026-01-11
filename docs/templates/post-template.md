@@ -1,6 +1,6 @@
 ---
 title: Post title here
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "YYYY-MM-DDTHH:mm:ss-HH:mm"  # or "YYYY-MM-DD" for date-only (assumes PST/PDT)
 tags: post
 description: "Meta description for SEO (20-300 characters recommended, warnings only if outside range)"
@@ -52,7 +52,7 @@ The following SEO and social media meta tags are automatically generated for all
 ```yaml
 ---
 title: Design Quality Expectations for Product Teams
-layout: single_post.njk
+layout: layouts/single_post.njk
 date: "2023-02-02T12:00:00-08:00"
 tags: 
   - post

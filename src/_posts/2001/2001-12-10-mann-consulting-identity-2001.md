@@ -38,7 +38,7 @@ Exploratory work:
 *Exploration of cube arrangements.*
 
 ![Mann Consulting identity exploration concept 8](/assets/images/2022/12/1458482922704953.gif)
-*Some old logos combined letters into a single cshape, which is tricky when you have an M.*
+*Some old logos combined letters into a single shape, which is tricky when you have an M.*
 
 ![Mann Consulting identity exploration concept 9](/assets/images/2022/12/1461064399475355.gif)
 *What if two cubes?*

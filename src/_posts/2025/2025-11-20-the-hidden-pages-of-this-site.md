@@ -77,7 +77,7 @@ If you're wondering when a specific feature was added or if I've fixed a bug you
 
 A detailed breakdown of the building blocks: Eleventy, Node.js, specific plugins, and testing tools.
 
-### How the technolgies list is generated
+### How the technologies list is generated
 
 This one is currently a static Markdown file (`src/technologies.md`). While I could automate it by reading `package.json`, I prefer to generate then edit this list to add context about each tool and remove the overly-obvious, rather than just dumping a list of version numbers.
 

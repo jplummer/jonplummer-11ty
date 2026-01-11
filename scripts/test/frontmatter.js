@@ -148,9 +148,9 @@ function validateYamlDataFiles(result) {
 }
 
 // Main validation function
-function validateContentStructure() {
+function validateFrontmatter() {
   // Create test result using result builder
-  const result = createTestResult('content-structure', 'Content Structure');
+  const result = createTestResult('frontmatter', 'Frontmatter');
   
   // Validate YAML data files first
   const yamlValidation = validateYamlDataFiles(result);
@@ -264,4 +264,4 @@ function validateContentStructure() {
 }
 
 // Run validation
-validateContentStructure();
+validateFrontmatter();

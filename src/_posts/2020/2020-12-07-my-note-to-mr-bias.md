@@ -30,7 +30,7 @@ Mr. Bias wanted folks to look over his new portfolio, and I was happy to help. H
 >
 > So I'm watching for signs of people being interested in these topics, doing them, and hopefully doing them well or progressively better. Happily all of these things are expressible or at least hintable in an online portfolio such as yours.
 >
-> Your writeup for Pay the Poet is straightforward and sensible, but it leaves me wanting a little bit more re the above items, especially what you (or the team) learned. I think this is mainly because you have some fairly uninformative statements in there such as "Poets love the Instagram UI." This is a bit of a "so what"—what do they love about the UI? Emotionally, functionally, etc.? You do mention that they are used to Insta's upload interface, which is specific. Specificity, plainly spoken, is your friend here.
+> Your writeup for Pay the Poet is straightforward and sensible, but it leaves me wanting a little bit more re the above items, especially what you (or the team) learned. I think this is mainly because you have some fairly uninformative statements in there such as "Poets love the Instagram UI." This is a bit of a "so what"—what do they love about the UI? Emotionally, functionally, etc.? You do mention that they are used to Instagram's upload interface, which is specific. Specificity, plainly spoken, is your friend here.
 >
 > Another, "PayPal is a popular and secure method of payment that users trust" hints that there's more there, but you don't go further. What other payment vehicles did you ask about? Is anything important beyond trust?
 >

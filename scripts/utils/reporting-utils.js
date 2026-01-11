@@ -225,7 +225,7 @@ function exitWithResults(issues, warnings = 0, options = {}) {
  */
 const TEST_EMOJIS = {
   'accessibility': '♿',
-  'content-structure': '📝',
+  'frontmatter': '📁',
   'html': '🧩',
   'internal-links': '🔗',
   'links-yaml': '📌',
@@ -235,7 +235,7 @@ const TEST_EMOJIS = {
   'rss-feed': '📡',
   'seo-meta': '🎯',
   'deploy': '🚀',
-  'security-audit': '🔒'
+  'security-audit': '👮🏻‍♀️'
 };
 
 /**
@@ -245,7 +245,7 @@ const TEST_EMOJIS = {
  * Facepalm is the default to make underfined test types stand out
  */
 function getTestEmoji(testType) {
-  return TEST_EMOJIS[testType] || '🤦';
+  return TEST_EMOJIS[testType] || '🤦🏻‍♀️';
 }
 
 /**
@@ -259,7 +259,7 @@ function getTestDisplayName(testType) {
     'links-yaml': 'Links YAML',
     'internal-links': 'Internal Links',
     'content': 'Content Structure',
-    'content-structure': 'Content Structure',
+    'frontmatter': 'Frontmatter',
     'markdown': 'Markdown',
     'spell': 'Spell Check',
     'seo': 'SEO Meta',

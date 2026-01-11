@@ -18,7 +18,7 @@ Fast Tests (suitable for pre-commit hooks or frequent validation):
 - `html` - HTML validity
 - `links-yaml` - Links YAML structure
 - `internal-links` - Internal link validity
-- `content-structure` - Content structure validation
+- `frontmatter` - Frontmatter validation
 - `markdown` - Markdown syntax validation
 - `spell` - Spell checking
 - `seo-meta` - SEO and meta tags
@@ -58,7 +58,7 @@ Checks:
 
 Requirements: `_site/` directory must exist (run `pnpm run build` first)
 
-### content-structure.js - Content Structure Validation
+### frontmatter.js - Frontmatter Validation
 
 Validates source markdown files in `src/_posts/` for proper front matter structure, file naming conventions, and required fields. Also validates YAML data files in `src/_data/`.
 
@@ -307,7 +307,7 @@ The deployment script (`scripts/deploy/deploy.js`) automatically runs specific t
 
 Pre-deploy validation (before build):
 - `markdown` - Validates markdown syntax
-- `content-structure` - Validates content structure
+- `frontmatter` - Validates frontmatter
 
 Post-build validation (after build):
 - `og-images` - Validates Open Graph images

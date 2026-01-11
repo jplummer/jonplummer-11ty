@@ -18,13 +18,13 @@ The Velop Whole-Home Wi-Fi System is a collection of identical routers that work
 *Creating an account means we can use the cloud service to associate your new system with your prior settings, if any, connect more easily to certain ISPs, collect diagnostics for support, and use a variety of connections to perfect the setup of a mesh network.*
 
 ![Velop app asking user about their network configuration](/assets/images/2022/12/SET_121.png)
-*Asking the user abotu their particular network makes it possible to give them just the right instructions.*
+*Asking the user about their particular network makes it possible to give them just the right instructions.*
 
 ![Velop app focusing attention on parts needed from the bundle](/assets/images/2022/12/SET_105-576x1024.png)
 *Depending on the bundle there might be a lot in the box, so let's focus user attention on just the parts they need for this step.*
 
 ![Velop app wiring instructions for dismantling old network](/assets/images/2022/12/SET_123-576x1024.png)
-*Wiring the new network involvees dismantling the old. But not too much!*
+*Wiring the new network involves dismantling the old. But not too much!*
 
 ![Velop app detecting and configuring new node automatically](/assets/images/2022/12/SET_124-576x1024.png)
 *Once the new node is powered we can detect it, offer it to the user, and configure it automatically.*

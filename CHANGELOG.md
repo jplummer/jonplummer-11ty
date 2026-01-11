@@ -4,6 +4,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 - Remove unused to-ico dependency and reorganize Eleventy docs
 - Update pnpm-lock.yaml after removing to-ico
+- Update about page with current date and Badgr link
 
 ## 2026-01-05
 

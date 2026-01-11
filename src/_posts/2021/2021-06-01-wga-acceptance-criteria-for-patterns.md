@@ -20,7 +20,7 @@ Central to this effort was the [Acceptance Criteria for Patterns](https://misc.j
 *Pattern description page detailing the form, expected behavior, and component relationships for a specific pattern in the design system.*
 
 ![WGU acceptance criteria document showing pattern relationships](/assets/images/2022/12/Screenshot2022-11-11at3.31.21PM-1024x1000.png)
-*Common controls are a nearly-ubiquitous pattern which can be described once. Be sure to call out the exceptions here and in the specific places where those exceptions apply to implementers don't need to keep the entire document in theri heads.*
+*Common controls are a nearly-ubiquitous pattern which can be described once. Be sure to call out the exceptions here and in the specific places where those exceptions apply to implementers don't need to keep the entire document in their heads.*
 </div>
 
 The document serves as a reference to front- and back-end developers and QA, and greatly sped the production of shared code and the subsequent testing of the views and workflows produced. It's estimated that front-end views for the first version of the tool took less than half the time to develop and test one the patterns were in place, and QA commentary was able to focus on larger behavioral questions rather than detailed control behavior and layout.

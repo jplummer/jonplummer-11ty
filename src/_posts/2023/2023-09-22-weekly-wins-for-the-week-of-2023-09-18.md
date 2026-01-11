@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2023 09 18
 layout: layouts/single_post.njk
 date: "2023-09-22T12:00:00-08:00"
 tags: post
-description: It took two trips to Home Depot and a barked knuckle, but I repaired a leaky shower handle in less than an hour for $22. This included finding the shutoff for
+description: It took two trips to Home Depot and a barked knuckle, but I repaired a leaky shower handle in less than an hour for $22.
 ogImage: /assets/images/og/2023-09-22-weekly-wins-for-the-week-of-2023-09-18.png
 ---
 It took two trips to Home Depot and a barked knuckle, but I repaired a leaky shower handle in less than an hour for $22. This included finding the shutoff for the whole unit and working around others' demands for water. I even managed to notice and fix the hot/cold swap that I inadvertently introduced **before** buttoning everything up. #capabledad #stillgotit

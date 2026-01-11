@@ -72,7 +72,7 @@ function validateMetaDescription(description) {
   if (!description) {
     // Missing description is ERROR here (not WARNING) because:
     // - This is final output validation - critical for SEO
-    // - content-structure.js already warned about this in source
+    // - frontmatter.js already warned about this in source
     // - Missing meta description significantly impacts SEO
     issues.push('Missing meta description');
     return issues;

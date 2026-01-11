@@ -13,7 +13,7 @@ Medtronic engaged IDEO to help design a next-generation pump to succeed the Mini
 *A bolus (one-time insulin dose) status screen showing the last dose of insulin and approximately how much has been metabolized, along with the basal infusion rate. Such a view did not exist on pumps of the day, and patients longed for a way to know how much of the meal-related or correction bolus they had taken was still available in their bloodstream to continue lowering their blood sugar.*
 
 ![MiniMed pump main menu with status icons and soft labels](/assets/images/2022/12/2_main.gif)
-*The main menu with status icons and "soft labels" for the A and B buttons. the design laguage was an extension of the pre-existing segmented displays prevalent at the time.*
+*The main menu with status icons and "soft labels" for the A and B buttons. The design language was an extension of the pre-existing segmented displays prevalent at the time.*
 
 ![MiniMed pump settings screen for adjusting pump parameters](/assets/images/2022/12/3_changing_settings_3.gif)
 *Navigating through pump settings to adjust audio feedback, basal rates, maximum bolus, and other pump parameters.*

@@ -80,10 +80,10 @@ const formatted = formatYamlString(description);
 
 ### Testing
 
-Run the content structure test to catch frontmatter parsing errors:
+Run the frontmatter test to catch frontmatter parsing errors:
 
 ```bash
-pnpm run test content-structure
+pnpm run test frontmatter
 ```
 
 This will identify any files with frontmatter parsing errors before they cause build failures.

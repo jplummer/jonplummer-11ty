@@ -15,7 +15,7 @@ ogImage: /assets/images/og/portfolio.png
 *Reporting options allowed meal periods to be set for detailed analyses.*
 
 ![CareLink Pro additional report view](/assets/images/2022/12/reports3.png)
-*Report selection interface allowing reports to be delievered as a set for comprehensive patient review.*
+*Report selection interface allowing reports to be delivered as a set for comprehensive patient review.*
 
 ![CareLink Pro device management screen](/assets/images/2022/12/devices.png)
 *Device management interface showing connected insulin pumps and glucose monitors, with device status and synchronization information.*

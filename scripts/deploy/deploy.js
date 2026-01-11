@@ -411,7 +411,7 @@ async function deploy(config, siteDomain, dryRun) {
     try {
       // Source file validations (don't need _site/)
       await runWithSpinner('pnpm run test markdown --silent', 'Running pre-deploy validation (markdown)...', { showOutput: true, shell: true });
-      await runWithSpinner('pnpm run test content-structure --silent', 'Running pre-deploy validation (content-structure)...', { showOutput: true, shell: true });
+      await runWithSpinner('pnpm run test frontmatter --silent', 'Running pre-deploy validation (frontmatter)...', { showOutput: true, shell: true });
     } catch (error) {
       console.log('❌ 🔍 Validation: failed');
       console.error('   To skip checks (not recommended): pnpm run deploy --skip-checks\n');

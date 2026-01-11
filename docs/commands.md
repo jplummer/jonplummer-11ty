@@ -61,7 +61,7 @@ Recommended process for deploying changes with an up-to-date changelog:
 - `html` - Check HTML validity (structure, syntax, deprecated elements)
 - `links-yaml` - Validate links.yaml structure and format
 - `internal-links` - Test only internal links (critical)
-- `content-structure` - Test content structure
+- `frontmatter` - Test frontmatter validation
 - `markdown` - Validate markdown syntax and structure
 - `seo-meta` - Test SEO and meta tags
 - `og-images` - Validate Open Graph images
@@ -115,7 +115,7 @@ The `links-yaml` test validates the structure and format of `_data/links.yaml`:
 - Validates description field if present
 - Checks for unexpected fields in link objects
 
-This is faster than running the full `content-structure` test since it only validates the links.yaml file structure, not the entire site content.
+This is faster than running the full `frontmatter` test since it only validates the links.yaml file structure, not the entire site content.
 
 #### Markdown Validation
 
