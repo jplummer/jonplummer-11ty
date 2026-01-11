@@ -3,8 +3,8 @@
 const fs = require('fs');
 const path = require('path');
 const { extractMetaTags, parseHtml } = require('../utils/html-utils');
-const { checkSiteDirectory, getHtmlFiles, getRelativePath, readFile } = require('../utils/test-helpers');
-const { createTestResult, addFile, addIssue, outputResult } = require('../utils/test-results');
+const { getHtmlFiles, getRelativePath, readFile } = require('../utils/test-helpers');
+const { addFile, addIssue } = require('../utils/test-results');
 const { parseFrontMatter } = require('../utils/frontmatter-utils');
 
 // Check if HTML content is a redirect page
@@ -183,12 +183,8 @@ function validateOgImage(content, relativePath, filePath) {
 }
 
 // Main validation function
-function validateOgImages() {
-  checkSiteDirectory();
+function validate(result) {
   const htmlFiles = getHtmlFiles();
-  
-  // Create test result using result builder
-  const result = createTestResult('og-images', 'OG Image Validation');
   
   // Validate each file
   for (const file of htmlFiles) {
@@ -221,14 +217,18 @@ function validateOgImages() {
       });
     }
   }
-  
-  // Output JSON result (formatter will handle display)
-  outputResult(result);
-  
-  // Exit with appropriate code
-  process.exit(result.summary.issues > 0 ? 1 : 0);
 }
 
-// Run validation
-validateOgImages();
+// Run test with helper
+const { runTest } = require('../utils/test-runner-helper');
+
+runTest({
+  testType: 'og-images',
+  testName: 'OG Image Validation',
+  requiresSite: true,
+  validateFn: validate
+}).catch(err => {
+  console.error(err);
+  process.exit(1);
+});
 

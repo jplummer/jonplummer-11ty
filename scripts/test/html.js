@@ -1,20 +1,15 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
 const { HtmlValidate, FileSystemConfigLoader } = require('html-validate');
-const { checkSiteDirectory, getHtmlFiles, getRelativePath, readFile } = require('../utils/test-helpers');
-const { createTestResult, addFile, addIssue, addWarning, outputResult } = require('../utils/test-results');
+const { getHtmlFiles, getRelativePath, readFile } = require('../utils/test-helpers');
+const { addFile, addIssue, addWarning } = require('../utils/test-results');
+const { runTest } = require('../utils/test-runner-helper');
 
-async function validate() {
-  checkSiteDirectory();
+async function validate(result) {
   const htmlFiles = getHtmlFiles();
 
   const loader = new FileSystemConfigLoader();
   const htmlvalidate = new HtmlValidate(loader);
-  
-  // Create test result using result builder
-  const result = createTestResult('html', 'HTML Validation');
 
   for (const file of htmlFiles) {
     const relativePath = getRelativePath(file);
@@ -51,15 +46,17 @@ async function validate() {
       });
     }
   }
-
-  // Output JSON result (formatter will handle display)
-  outputResult(result);
-  
-  // Exit with appropriate code (errors block, warnings don't)
-  process.exit(result.summary.issues > 0 ? 1 : 0);
 }
 
-validate().catch(err => {
+// Run test with helper
+runTest({
+  testType: 'html',
+  testName: 'HTML Validation',
+  requiresSite: true,
+  validateFn: async (result) => {
+    await validate(result);
+  }
+}).catch(err => {
   console.error(err);
   process.exit(1);
 });

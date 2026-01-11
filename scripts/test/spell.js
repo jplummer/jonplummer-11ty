@@ -5,7 +5,8 @@ const path = require('path');
 const { execSync } = require('child_process');
 const { findFilesByExtension } = require('../utils/file-utils');
 const { parseFrontMatter } = require('../utils/frontmatter-utils');
-const { createTestResult, addFile, addWarning, outputResult, formatVerbose } = require('../utils/test-results');
+const { addFile, addWarning } = require('../utils/test-results');
+const { runTest, checkChangedFlag } = require('../utils/test-runner-helper');
 
 // Find all markdown and YAML files in src/ directory, excluding drafts
 function findSourceFiles() {
@@ -189,25 +190,16 @@ function getChangedFiles() {
 }
 
 // Main validation function
-function validateSpelling() {
-  // Check if specific files were provided as command-line arguments
-  const args = process.argv.slice(2);
+function validate(result, options) {
+  const { useChanged, files: providedFiles } = options;
+  
   let files = [];
   
-  // Check for --changed flag
-  const changedFlagIndex = args.indexOf('--changed');
-  const useChanged = changedFlagIndex !== -1;
-  
   if (useChanged) {
-    // Get files changed since last commit
     files = getChangedFiles();
-    if (files.length === 0) {
-      console.log('✅ No markdown or YAML files changed since last commit');
-      process.exit(0);
-    }
-  } else if (args.length > 0) {
-    // Use provided file paths
-    files = args.map(arg => {
+  } else if (providedFiles && providedFiles.length > 0) {
+    // Use provided file paths (from command-line arguments)
+    files = providedFiles.map(arg => {
       // Resolve relative paths to absolute
       if (path.isAbsolute(arg)) {
         return arg;
@@ -224,17 +216,21 @@ function validateSpelling() {
   }
   
   if (files.length === 0) {
-    const providedArgs = process.argv.slice(2);
-    if (providedArgs.length > 0) {
-      console.log('❌ No valid markdown or YAML files found from provided paths');
+    const { addGlobalIssue } = require('../utils/test-results');
+    const args = process.argv.slice(2).filter(arg => arg !== '--changed');
+    if (args.length > 0) {
+      addGlobalIssue(result, {
+        type: 'no-files',
+        message: 'No valid markdown or YAML files found from provided paths'
+      });
     } else {
-      console.log('❌ No markdown or YAML files found in src/ directory');
+      addGlobalIssue(result, {
+        type: 'no-files',
+        message: 'No markdown or YAML files found in src/ directory'
+      });
     }
-    process.exit(1);
+    return;
   }
-
-  // Create test result using result builder
-  const result = createTestResult('spell', 'Spell Check');
   
   // Track files in result
   const fileMap = new Map();
@@ -290,28 +286,28 @@ function validateSpelling() {
       addFile(result, relativePath, file);
     }
   }
-
-  // Check if we're being run directly (not through test-runner)
-  // If run directly, format output ourselves; otherwise output JSON for test-runner
-  const isDirectRun = !process.env.TEST_RUNNER;
-  
-  if (isDirectRun) {
-    // Format and display output directly
-    const formatted = formatVerbose(result, {});
-    console.log(formatted);
-    process.exit(result.summary.issues > 0 ? 1 : 0);
-  } else {
-    // Output JSON result (test-runner will handle display)
-    outputResult(result);
-    
-    // Give stdout time to flush before exiting
-    // Use setImmediate to ensure all writes are complete
-    setImmediate(() => {
-      process.exit(result.summary.issues > 0 ? 1 : 0);
-    });
-  }
 }
 
-// Run validation
-validateSpelling();
+// Handle command-line arguments for spell check (supports file paths)
+const args = process.argv.slice(2);
+const useChanged = checkChangedFlag();
+const fileArgs = args.filter(arg => arg !== '--changed');
+
+// If files are provided as arguments, handle separately (not using helper for this case)
+if (fileArgs.length > 0 && !useChanged) {
+  const { createTestResult } = require('../utils/test-results');
+  const { outputAndExit } = require('../utils/test-runner-helper');
+  const result = createTestResult('spell', 'Spell Check');
+  validate(result, { useChanged: false, files: fileArgs });
+  outputAndExit(result);
+} else {
+  // Use helper for --changed or default (all files)
+  runTest({
+    testType: 'spell',
+    testName: 'Spell Check',
+    requiresSite: false,
+    validateFn: validate,
+    getChangedFilesFn: useChanged ? getChangedFiles : null
+  });
+}
 

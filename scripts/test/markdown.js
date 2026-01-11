@@ -5,7 +5,8 @@ const path = require('path');
 const { execSync } = require('child_process');
 const { findMarkdownFiles } = require('../utils/file-utils');
 const { parseFrontMatter } = require('../utils/frontmatter-utils');
-const { createTestResult, addFile, addIssue, addWarning, outputResult, formatVerbose } = require('../utils/test-results');
+const { addFile, addIssue, addWarning } = require('../utils/test-results');
+const { runTest, checkChangedFlag } = require('../utils/test-runner-helper');
 
 // Get files changed since last commit
 function getChangedFiles() {
@@ -183,37 +184,24 @@ function runMarkdownlint(files) {
 }
 
 // Main validation function
-function validateMarkdown() {
-  // Check if --changed flag is provided
-  const args = process.argv.slice(2);
-  const useChanged = args.includes('--changed');
+function validate(result, options) {
+  const { useChanged } = options;
   
   let markdownFiles;
   if (useChanged) {
     markdownFiles = getChangedFiles();
-  if (markdownFiles.length === 0) {
-    console.log('✅ No markdown files changed since last commit');
-    const result = createTestResult('markdown', 'Markdown Validation');
-    const isDirectRun = !process.env.TEST_RUNNER;
-    if (isDirectRun) {
-      const formatted = formatVerbose(result, {});
-      console.log(formatted);
-    } else {
-      outputResult(result);
-    }
-    process.exit(0);
-  }
   } else {
     markdownFiles = findSourceMarkdownFiles();
   }
   
   if (markdownFiles.length === 0) {
-    console.log('❌ No markdown files found in src/ directory');
-    process.exit(1);
+    const { addGlobalIssue } = require('../utils/test-results');
+    addGlobalIssue(result, {
+      type: 'no-files',
+      message: 'No markdown files found in src/ directory'
+    });
+    return;
   }
-
-  // Create test result using result builder
-  const result = createTestResult('markdown', 'Markdown Validation');
   
   // Track files in result (we'll add them as we process)
   const fileMap = new Map();
@@ -293,23 +281,14 @@ function validateMarkdown() {
       });
     });
   }
-
-  // Output JSON result (formatter will handle display)
-  // Check if we're being run directly (not through test-runner)
-  const isDirectRun = !process.env.TEST_RUNNER;
-  
-  if (isDirectRun) {
-    // Format and display output directly
-    const formatted = formatVerbose(result, {});
-    console.log(formatted);
-    process.exit(result.summary.issues > 0 ? 1 : 0);
-  } else {
-    // Output JSON result (test-runner will handle display)
-    outputResult(result);
-    process.exit(result.summary.issues > 0 ? 1 : 0);
-  }
 }
 
-// Run validation
-validateMarkdown();
+// Run test with helper
+runTest({
+  testType: 'markdown',
+  testName: 'Markdown Validation',
+  requiresSite: false,
+  validateFn: validate,
+  getChangedFilesFn: checkChangedFlag() ? getChangedFiles : null
+});
 

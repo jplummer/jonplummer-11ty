@@ -3,8 +3,8 @@
 const fs = require('fs');
 const path = require('path');
 const { extractLinks, checkAnchorLink, classifyLink } = require('../utils/html-utils');
-const { checkSiteDirectory, getHtmlFiles, getRelativePath, readFile } = require('../utils/test-helpers');
-const { createTestResult, addFile, addIssue, outputResult } = require('../utils/test-results');
+const { getHtmlFiles, getRelativePath, readFile } = require('../utils/test-helpers');
+const { addFile, addIssue } = require('../utils/test-results');
 
 // Check if internal file exists
 function checkInternalLink(href, basePath, siteRoot) {
@@ -41,22 +41,14 @@ function checkAnchor(href, htmlContent) {
 }
 
 // Main validation function
-async function validateInternalLinks() {
-  checkSiteDirectory();
+async function validate(result) {
   const siteRoot = './_site';
-  
   const htmlFiles = getHtmlFiles();
   
   if (htmlFiles.length === 0) {
-    // Create empty result
-    const result = createTestResult('internal-links', 'Internal Link Validation');
-    outputResult(result);
-    process.exit(0);
+    // No files to check - result is already empty, just return
     return;
   }
-  
-  // Create test result using result builder
-  const result = createTestResult('internal-links', 'Internal Link Validation');
   
   // Track files that have issues (we'll add them as we find broken links)
   const fileMap = new Map();
@@ -121,16 +113,17 @@ async function validateInternalLinks() {
         break;
     }
   }
-  
-  // Output JSON result (formatter will handle display)
-  outputResult(result);
-  
-  // Exit with appropriate code
-  process.exit(result.summary.issues > 0 ? 1 : 0);
 }
 
-// Run validation
-validateInternalLinks().catch(error => {
+// Run test with helper
+const { runTest } = require('../utils/test-runner-helper');
+
+runTest({
+  testType: 'internal-links',
+  testName: 'Internal Link Validation',
+  requiresSite: true,
+  validateFn: validate
+}).catch(error => {
   console.error('Error during internal link validation:', error);
   process.exit(1);
 });

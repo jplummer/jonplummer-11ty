@@ -7,7 +7,8 @@ const yaml = require('js-yaml');
 const { validateDate, validateSlug } = require('../utils/validation-utils');
 const { getMarkdownFiles, readFile } = require('../utils/test-helpers');
 const { parseFrontMatter } = require('../utils/frontmatter-utils');
-const { createTestResult, addFile, addIssue, addWarning, addGlobalIssue, outputResult, formatVerbose } = require('../utils/test-results');
+const { addFile, addIssue, addWarning, addGlobalIssue } = require('../utils/test-results');
+const { runTest, checkChangedFlag } = require('../utils/test-runner-helper');
 
 // Front matter parsing and file finding now use shared utilities
 
@@ -173,26 +174,14 @@ function getChangedFiles() {
 }
 
 // Main validation function
-function validateFrontmatter() {
-  // Check if --changed flag is provided
-  const args = process.argv.slice(2);
-  const useChanged = args.includes('--changed');
-  
-  // Create test result using result builder
-  const result = createTestResult('frontmatter', 'Frontmatter');
+function validate(result, options) {
+  const { useChanged } = options;
   
   // Validate YAML data files first
   const yamlValidation = validateYamlDataFiles(result);
 
   if (!yamlValidation.valid) {
-    const isDirectRun = !process.env.TEST_RUNNER;
-    if (isDirectRun) {
-      const formatted = formatVerbose(result, {});
-      console.log(formatted);
-    } else {
-      outputResult(result);
-    }
-    process.exit(1);
+    // YAML validation failed - result already has issues, just return
     return;
   }
 
@@ -206,20 +195,10 @@ function validateFrontmatter() {
   let allMarkdownFiles;
   if (useChanged) {
     allMarkdownFiles = getChangedFiles();
-    if (allMarkdownFiles.length === 0) {
-      console.log('✅ No markdown files changed since last commit');
-      const isDirectRun = !process.env.TEST_RUNNER;
-      if (isDirectRun) {
-        const formatted = formatVerbose(result, {});
-        console.log(formatted);
-      } else {
-        outputResult(result);
-      }
-      process.exit(0);
-    }
   } else {
     allMarkdownFiles = getMarkdownFiles(postsDir);
   }
+  
   const markdownFiles = allMarkdownFiles.filter(file => {
     const content = readFile(file);
     const { frontMatter } = parseFrontMatter(content);
@@ -306,21 +285,13 @@ function validateFrontmatter() {
       files: dup.files
     });
   });
-
-  // Check if we're being run directly (not through test-runner)
-  const isDirectRun = !process.env.TEST_RUNNER;
-  
-  if (isDirectRun) {
-    // Format and display output directly
-    const formatted = formatVerbose(result, {});
-    console.log(formatted);
-    process.exit(result.summary.issues > 0 ? 1 : 0);
-  } else {
-    // Output JSON result (test-runner will handle display)
-    outputResult(result);
-    process.exit(result.summary.issues > 0 ? 1 : 0);
-  }
 }
 
-// Run validation
-validateFrontmatter();
+// Run test with helper
+runTest({
+  testType: 'frontmatter',
+  testName: 'Frontmatter',
+  requiresSite: false,
+  validateFn: validate,
+  getChangedFilesFn: checkChangedFlag() ? getChangedFiles : null
+});

@@ -5,7 +5,8 @@ const path = require('path');
 const { execSync } = require('child_process');
 const yaml = require('js-yaml');
 const { validateDate, validateUrl, validateTitle } = require('../utils/validation-utils');
-const { createTestResult, addFile, addIssue, addWarning, outputResult, formatVerbose } = require('../utils/test-results');
+const { addFile, addIssue, addWarning } = require('../utils/test-results');
+const { runTest } = require('../utils/test-runner-helper');
 
 // Check if links.yaml changed since last commit
 function hasLinksYamlChanged() {
@@ -80,29 +81,8 @@ function validateLink(link, linkIndex, dateKey) {
 }
 
 // Main validation function
-function validateLinksYaml() {
-  // Check if --changed flag is provided
-  const args = process.argv.slice(2);
-  const useChanged = args.includes('--changed');
-  
-  // If --changed flag and links.yaml hasn't changed, skip
-  if (useChanged && !hasLinksYamlChanged()) {
-    console.log('✅ links.yaml not changed since last commit');
-    const result = createTestResult('links', 'Links YAML Validation');
-    const isDirectRun = !process.env.TEST_RUNNER;
-    if (isDirectRun) {
-      const formatted = formatVerbose(result, {});
-      console.log(formatted);
-    } else {
-      outputResult(result);
-    }
-    process.exit(0);
-  }
-  
+function validate(result) {
   const linksFile = './src/_data/links.yaml';
-
-  // Create test result
-  const result = createTestResult('links-yaml', 'Links YAML Validation');
   const fileObj = addFile(result, 'src/_data/links.yaml');
 
   if (!fs.existsSync(linksFile)) {
@@ -111,8 +91,7 @@ function validateLinksYaml() {
       type: 'file-not-found',
       message: `File not found: ${linksFile}`
     });
-    outputResult(result);
-    process.exit(1);
+    return;
   }
 
   const content = fs.readFileSync(linksFile, 'utf8');
@@ -127,8 +106,7 @@ function validateLinksYaml() {
       type: 'yaml-syntax-error',
       message: `YAML syntax error: ${error.message}`
     });
-    outputResult(result);
-    process.exit(1);
+    return;
   }
 
   if (!data || typeof data !== 'object') {
@@ -137,8 +115,7 @@ function validateLinksYaml() {
       type: 'invalid-structure',
       message: 'Invalid structure: root must be an object'
     });
-    outputResult(result);
-    process.exit(1);
+    return;
   }
 
   const dateKeys = Object.keys(data);
@@ -205,22 +182,18 @@ function validateLinksYaml() {
       });
     });
   }
-
-  // Check if we're being run directly (not through test-runner)
-  const isDirectRun = !process.env.TEST_RUNNER;
-  
-  if (isDirectRun) {
-    // Format and display output directly
-    const formatted = formatVerbose(result, {});
-    console.log(formatted);
-    process.exit(result.summary.issues > 0 ? 1 : 0);
-  } else {
-    // Output JSON result (test-runner will handle display)
-    outputResult(result);
-    process.exit(result.summary.issues > 0 ? 1 : 0);
-  }
 }
 
-// Run validation
-validateLinksYaml();
+// Run test with helper
+runTest({
+  testType: 'links',
+  testName: 'Links YAML Validation',
+  requiresSite: false,
+  validateFn: validate,
+  shouldSkipFn: () => {
+    const { checkChangedFlag } = require('../utils/test-runner-helper');
+    return checkChangedFlag() && !hasLinksYamlChanged();
+  },
+  skipMessage: '✅ links.yaml not changed since last commit'
+});
 

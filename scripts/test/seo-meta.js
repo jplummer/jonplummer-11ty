@@ -6,7 +6,8 @@ const { execSync } = require('child_process');
 const { extractMetaTags, extractHeadings, parseHtml } = require('../utils/html-utils');
 const { validateTitle: validateTitleUtil, validateMetaDescription: validateMetaDescriptionUtil } = require('../utils/validation-utils');
 const { checkSiteDirectory, getHtmlFiles, getRelativePath, readFile } = require('../utils/test-helpers');
-const { createTestResult, addFile, addIssue, addWarning, addGlobalIssue, outputResult, formatVerbose } = require('../utils/test-results');
+const { addFile, addIssue, addWarning, addGlobalIssue } = require('../utils/test-results');
+const { runTest, checkChangedFlag } = require('../utils/test-runner-helper');
 
 // Get changed files since last commit
 function getChangedFiles() {
@@ -298,27 +299,9 @@ function checkDuplicateTitles(files) {
 }
 
 // Main SEO validation
-function validateSEO() {
-  // Check if --changed flag is provided
-  const args = process.argv.slice(2);
-  const useChanged = args.includes('--changed');
+function validate(result, options) {
+  const { useChanged } = options;
   
-  // If --changed flag, only check if markdown files changed
-  // links.yaml changes don't affect page SEO metadata, so skip if only links.yaml changed
-  if (useChanged && !hasMarkdownFilesChanged()) {
-    console.log('✅ No markdown files changed for SEO check (links.yaml changes don\'t affect page SEO)');
-    const result = createTestResult('seo', 'SEO Validation');
-    const isDirectRun = !process.env.TEST_RUNNER;
-    if (isDirectRun) {
-      const formatted = formatVerbose(result, {});
-      console.log(formatted);
-    } else {
-      outputResult(result);
-    }
-    process.exit(0);
-  }
-  
-  checkSiteDirectory();
   let htmlFiles = getHtmlFiles();
   
   // Filter HTML files to only those whose source files changed (when using --changed flag)
@@ -336,21 +319,10 @@ function validateSEO() {
     });
     
     if (htmlFiles.length === 0) {
-      console.log('✅ No HTML files to check (no rendered files correspond to changed markdown files)');
-      const result = createTestResult('seo', 'SEO Validation');
-      const isDirectRun = !process.env.TEST_RUNNER;
-      if (isDirectRun) {
-        const formatted = formatVerbose(result, {});
-        console.log(formatted);
-      } else {
-        outputResult(result);
-      }
-      process.exit(0);
+      // No HTML files to check - result is already empty, just return
+      return;
     }
   }
-  
-  // Create test result using result builder
-  const result = createTestResult('seo-meta', 'SEO Validation');
   
   // Check for duplicate titles (only among files being checked)
   const duplicateTitles = checkDuplicateTitles(htmlFiles);
@@ -472,21 +444,16 @@ function validateSEO() {
       });
     }
   }
-  
-  // Check if we're being run directly (not through test-runner)
-  const isDirectRun = !process.env.TEST_RUNNER;
-  
-  if (isDirectRun) {
-    // Format and display output directly
-    const formatted = formatVerbose(result, {});
-    console.log(formatted);
-    process.exit(result.summary.issues > 0 ? 1 : 0);
-  } else {
-    // Output JSON result (test-runner will handle display)
-    outputResult(result);
-    process.exit(result.summary.issues > 0 ? 1 : 0);
-  }
 }
 
-// Run validation
-validateSEO();
+// Run test with helper
+runTest({
+  testType: 'seo',
+  testName: 'SEO Validation',
+  requiresSite: true,
+  validateFn: validate,
+  shouldSkipFn: () => {
+    return checkChangedFlag() && !hasMarkdownFilesChanged();
+  },
+  skipMessage: '✅ No markdown files changed for SEO check (links.yaml changes don\'t affect page SEO)'
+});

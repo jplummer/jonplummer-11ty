@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 // Use Node's built-in DOMParser (available in Node 20+)
 const { DOMParser } = require('@xmldom/xmldom');
-const { createTestResult, addFile, addIssue, outputResult } = require('../utils/test-results');
+const { addFile, addIssue } = require('../utils/test-results');
 
 // Find RSS/XML files in _site
 function findRssFiles(dir) {
@@ -262,22 +262,19 @@ function validateRSSFeed(filePath) {
 }
 
 // Main RSS validation
-function validateRSS() {
+function validate(result) {
   const siteDir = './_site';
-  if (!fs.existsSync(siteDir)) {
-    console.log('❌ _site directory not found. Run "npm run build" first.');
-    process.exit(1);
-  }
-  
   const rssFiles = findRssFiles(siteDir);
   
   if (rssFiles.length === 0) {
-    console.log('❌ No RSS/XML files found in _site directory');
-    process.exit(1);
+    // Add global issue for no RSS files found
+    const { addGlobalIssue } = require('../utils/test-results');
+    addGlobalIssue(result, {
+      type: 'rss-no-files',
+      message: 'No RSS/XML files found in _site directory'
+    });
+    return;
   }
-  
-  // Create test result using result builder
-  const result = createTestResult('rss', 'RSS Feed Validation');
   
   // Validate each RSS file
   for (const file of rssFiles) {
@@ -309,13 +306,17 @@ function validateRSS() {
       });
     }
   }
-  
-  // Output JSON result (formatter will handle display)
-  outputResult(result);
-  
-  // Exit with appropriate code
-  process.exit(result.summary.issues > 0 ? 1 : 0);
 }
 
-// Run validation
-validateRSS();
+// Run test with helper
+const { runTest } = require('../utils/test-runner-helper');
+
+runTest({
+  testType: 'rss',
+  testName: 'RSS Feed Validation',
+  requiresSite: true,
+  validateFn: validate
+}).catch(err => {
+  console.error(err);
+  process.exit(1);
+});
