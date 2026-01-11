@@ -5,6 +5,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Refactor portrait-grid to use paired shortcode instead of HTML blocks
 - Fix spellcheck and SEO test filtering
 - Remove unused markdown-in-html-blocks preprocessor
+- Optimize accessibility test performance and consolidate test utilities
 
 ## 2026-01-10
 
