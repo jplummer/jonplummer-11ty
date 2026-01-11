@@ -24,6 +24,10 @@ function configurePassthrough(eleventyConfig) {
   // Copy favicon.ico to root (required for legacy browsers and RSS readers)
   eleventyConfig.addPassthroughCopy({ "src/favicon.ico": "favicon.ico" });
 
+  // Copy IndexNow key file(s) from src/ root to site root
+  // This allows IndexNow verification via key file at domain root
+  eleventyConfig.addPassthroughCopy({ "src/*.txt": "." });
+
   // Watch for changes in assets
   eleventyConfig.addWatchTarget("src/assets");
 

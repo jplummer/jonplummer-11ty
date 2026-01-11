@@ -17,7 +17,8 @@ const testTypes = {
   'og-images': 'og-images.js',
   'accessibility': 'accessibility.js',
   'rss-feed': 'rss-feed.js',
-  'deploy': 'deploy.js'
+  'deploy': 'deploy.js',
+  'indexnow': 'indexnow.js'
 };
 
 // Fast tests (excludes slow tests: accessibility)
@@ -31,7 +32,8 @@ const fastTests = [
   'spell',
   'seo-meta',
   'og-images',
-  'rss-feed'
+  'rss-feed',
+  'indexnow'
 ];
 
 // Tests to run for "test all" (includes all tests, including slow ones)

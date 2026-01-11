@@ -128,3 +128,6 @@ $RECYCLE.BIN/
 *.tmp
 *.orig
 .temp-eleventy-clone/
+
+# IndexNow state
+.indexnow-state.json

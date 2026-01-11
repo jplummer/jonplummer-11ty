@@ -474,6 +474,18 @@ async function deploy(config, siteDomain, dryRun) {
   
   try {
     await deploy(config, siteDomain, dryRun);
+    
+    // Notify IndexNow after successful deployment (only if not dry-run)
+    if (!dryRun) {
+      try {
+        const { processIndexNow } = require('../utils/indexnow');
+        await processIndexNow({ quiet: false });
+      } catch (error) {
+        // Don't fail deployment if IndexNow fails
+        console.log('⚠️  🔍 IndexNow: notification failed (deployment succeeded)');
+        console.warn(`   ${error.message}\n`);
+      }
+    }
   } catch (error) {
     process.exit(1);
   }
