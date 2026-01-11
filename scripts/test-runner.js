@@ -377,6 +377,20 @@ async function main() {
     return;
   }
   
+  if (testType === 'changed') {
+    // Alias for test-changed.js script
+    const { spawn } = require('child_process');
+    const testChangedPath = path.join(__dirname, 'test-changed.js');
+    const child = spawn('node', [testChangedPath], {
+      stdio: 'inherit',
+      shell: false
+    });
+    child.on('close', (code) => {
+      process.exit(code || 0);
+    });
+    return;
+  }
+  
   if (!testTypes[testType]) {
     console.error(`❌ Unknown test type: ${testType}\n`);
     listTests();

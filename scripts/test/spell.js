@@ -6,6 +6,7 @@ const { execSync } = require('child_process');
 const { findFilesByExtension } = require('../utils/file-utils');
 const { parseFrontMatter } = require('../utils/frontmatter-utils');
 const { createTestResult, addFile, addWarning, outputResult } = require('../utils/test-result-builder');
+const { formatVerbose } = require('../utils/test-formatter');
 
 // Find all markdown and YAML files in src/ directory, excluding drafts
 function findSourceFiles() {
@@ -163,12 +164,73 @@ function runCspell(files) {
   }
 }
 
+// Get files changed since last commit
+function getChangedFiles() {
+  try {
+    // Get list of changed files (modified, added, renamed)
+    const output = execSync('git diff --name-only --diff-filter=ACMR HEAD', {
+      encoding: 'utf8',
+      cwd: process.cwd()
+    });
+    
+    const changedFiles = output.trim().split('\n').filter(line => line.trim());
+    
+    // Filter for markdown and YAML files in src/
+    return changedFiles
+      .filter(file => {
+        const ext = path.extname(file).toLowerCase();
+        return ['.md', '.yaml', '.yml'].includes(ext) && file.startsWith('src/');
+      })
+      .map(file => path.resolve(process.cwd(), file))
+      .filter(file => fs.existsSync(file));
+  } catch (error) {
+    console.error('Error getting changed files from git:', error.message);
+    return [];
+  }
+}
+
 // Main validation function
 function validateSpelling() {
-  const files = findSourceFiles();
+  // Check if specific files were provided as command-line arguments
+  const args = process.argv.slice(2);
+  let files = [];
+  
+  // Check for --changed flag
+  const changedFlagIndex = args.indexOf('--changed');
+  const useChanged = changedFlagIndex !== -1;
+  
+  if (useChanged) {
+    // Get files changed since last commit
+    files = getChangedFiles();
+    if (files.length === 0) {
+      console.log('✅ No markdown or YAML files changed since last commit');
+      process.exit(0);
+    }
+  } else if (args.length > 0) {
+    // Use provided file paths
+    files = args.map(arg => {
+      // Resolve relative paths to absolute
+      if (path.isAbsolute(arg)) {
+        return arg;
+      }
+      return path.resolve(process.cwd(), arg);
+    }).filter(file => {
+      // Only include markdown and YAML files
+      const ext = path.extname(file).toLowerCase();
+      return ['.md', '.yaml', '.yml'].includes(ext) && fs.existsSync(file);
+    });
+  } else {
+    // Default: find all source files
+    files = findSourceFiles();
+  }
   
   if (files.length === 0) {
-    console.log('❌ No markdown or YAML files found in src/ directory');
+    const providedArgs = process.argv.slice(2);
+    if (providedArgs.length > 0) {
+      console.log('❌ No valid markdown or YAML files found from provided paths');
+    } else {
+      console.log('❌ No markdown or YAML files found in src/ directory');
+    }
     process.exit(1);
   }
 
@@ -194,7 +256,11 @@ function validateSpelling() {
     
     // Add files and spelling errors
     for (const [file, errors] of Object.entries(errorsByFile)) {
-      const relativePath = path.relative('./src', file);
+      // Calculate relative path - try src/ first, otherwise use relative to cwd
+      let relativePath = path.relative('./src', file);
+      if (relativePath.startsWith('..')) {
+        relativePath = path.relative(process.cwd(), file);
+      }
       let fileObj = fileMap.get(relativePath);
       if (!fileObj) {
         fileObj = addFile(result, relativePath, file);
@@ -216,20 +282,35 @@ function validateSpelling() {
   // Add files that passed (no errors)
   // Note: When there are many errors, this makes the JSON large, but it's needed for accurate reporting
   for (const file of files) {
-    const relativePath = path.relative('./src', file);
+    // Calculate relative path - try src/ first, otherwise use relative to cwd
+    let relativePath = path.relative('./src', file);
+    if (relativePath.startsWith('..')) {
+      relativePath = path.relative(process.cwd(), file);
+    }
     if (!fileMap.has(relativePath)) {
-      addFile(result, file, relativePath);
+      addFile(result, relativePath, file);
     }
   }
 
-  // Output JSON result (formatter will handle display)
-  outputResult(result);
+  // Check if we're being run directly (not through test-runner)
+  // If run directly, format output ourselves; otherwise output JSON for test-runner
+  const isDirectRun = !process.env.TEST_RUNNER;
   
-  // Give stdout time to flush before exiting
-  // Use setImmediate to ensure all writes are complete
-  setImmediate(() => {
+  if (isDirectRun) {
+    // Format and display output directly
+    const formatted = formatVerbose(result, {});
+    console.log(formatted);
     process.exit(result.summary.issues > 0 ? 1 : 0);
-  });
+  } else {
+    // Output JSON result (test-runner will handle display)
+    outputResult(result);
+    
+    // Give stdout time to flush before exiting
+    // Use setImmediate to ensure all writes are complete
+    setImmediate(() => {
+      process.exit(result.summary.issues > 0 ? 1 : 0);
+    });
+  }
 }
 
 // Run validation

@@ -10,6 +10,7 @@ This project includes a suite of validation tests covering content structure, HT
 - `pnpm run test [type]` - Run a specific test type
 - `pnpm run test fast` - Run all fast tests (excludes slow tests like accessibility)
 - `pnpm run test all` - Run all tests including slow ones
+- `pnpm run test changed` - Run authoring tests on files changed since last commit (spell, frontmatter, markdown, links-yaml, seo-meta)
 - `pnpm run validate` - Quick HTML validity check (shortcut for `pnpm run test html`)
 
 ### Test Categories
@@ -124,20 +125,45 @@ Automatically invoked by:
 - `pnpm run test fast` (included in fast tests)
 - `pnpm run test all` (included in all tests)
 
+Commands:
+- `pnpm run test spell` - Check all markdown and YAML files
+- `pnpm run test:spell:changed` - Check only files changed since last commit (recommended for new posts and links.yaml)
+- `pnpm run test:spell:file <file>` - Check specific file(s)
+
 Checks:
 - Markdown files: All `.md` files in `src/` directory
 - YAML files: All `.yaml` and `.yml` files in `src/` directory (including `src/_data/links.yaml`)
 - Custom dictionary: Uses `cspell-custom-words.txt` for project-specific terms
 - Draft exclusion: Automatically excludes markdown files with `draft: true` in front matter
-- Unknown words: Reports spelling errors with file, line, column, and word
+- Unknown words: Reports spelling warnings (not errors) with file, line, column, and word
+- Ignores: Links, URLs, domains, hashtags, YAML paths/strings (see `docs/cspell-patterns.md` for details)
 
 Configuration:
-- `cspell.json`: Main configuration file specifying file patterns, ignore paths, and dictionary settings
+- `cspell.json`: Main configuration file specifying file patterns, ignore paths, dictionary settings, and regex patterns
 - `cspell-custom-words.txt`: Custom dictionary for project-specific terms, names, and technical terms (one word per line)
 
-To add custom words: Edit `cspell-custom-words.txt` and add one word per line. The spell check will automatically use your custom dictionary.
-
 Requirements: Source markdown and YAML files in `src/` directory, `cspell.json` configuration file
+
+### test-changed.js - Test Changed Files
+
+Runs authoring-related tests on files changed since the last commit. Ideal for catching common authoring problems before committing.
+
+When to use:
+- Before committing new posts or changes to links.yaml
+- When editing content to catch issues early
+- As a quick validation before deployment
+
+Command:
+- `pnpm run test changed` - Runs all authoring tests on changed files (or `pnpm run test:changed`)
+
+Tests run:
+- **spell** - Checks only changed markdown/YAML files (uses `--changed` flag)
+- **frontmatter** - Checks all files (validates frontmatter structure)
+- **markdown** - Checks all files (validates markdown syntax)
+- **links-yaml** - Checks all files (validates links.yaml structure)
+- **seo-meta** - Checks all files (validates SEO metadata)
+
+Note: Only spell check is limited to changed files. Other tests check all files to ensure your changes didn't break anything elsewhere.
 
 ### seo-meta.js - SEO and Meta Tags Validation
 

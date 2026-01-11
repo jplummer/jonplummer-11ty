@@ -4,6 +4,10 @@
   "main": "index.js",
   "scripts": {
     "test": "node scripts/test-runner.js",
+    "test:spell": "node scripts/test-runner.js spell",
+    "test:spell:file": "node scripts/test/spell.js",
+    "test:spell:changed": "node scripts/test/spell.js --changed",
+    "test:changed": "node scripts/test-changed.js",
     "build": "eleventy --quiet",
     "build:verbose": "eleventy",
     "dev": "eleventy --serve --watch --quiet",
