@@ -43,10 +43,10 @@ async function renderOgImage(title, description, date) {
   const cssCustomProperties = extractCssCustomProperties();
   
   const html = nunjucksEnv.renderString(template, {
-    title: title,
+    title,
     description: description || null,
     date: dateObj,
-    cssCustomProperties: cssCustomProperties
+    cssCustomProperties
   });
   
   // Extract body content (styles are now in external CSS file)

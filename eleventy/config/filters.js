@@ -133,27 +133,10 @@ function configureFilters(eleventyConfig, md) {
   // the RSS plugin's filter. This handles DateTime objects from our custom date parsing.
   eleventyConfig.addPlugin(function(eleventyConfig) {
     eleventyConfig.addNunjucksFilter("dateToRfc3339", (dateObj) => {
-      if (!dateObj) {
+      const date = normalizeDate(dateObj);
+      if (!date || isNaN(date.getTime())) {
         return '';
       }
-      
-      let date;
-      
-      // If it's a DateTime, convert to Date
-      if (dateObj && typeof dateObj === 'object' && typeof dateObj.toJSDate === 'function') {
-        date = dateObj.toJSDate();
-      } else if (dateObj instanceof Date) {
-        date = dateObj;
-      } else {
-        // Otherwise, try to normalize
-        date = normalizeDate(dateObj);
-      }
-      
-      // Validate date
-      if (!date || !(date instanceof Date) || isNaN(date.getTime())) {
-        return '';
-      }
-      
       // Format as RFC3339 (ISO 8601) - toISOString() produces RFC3339 format
       return date.toISOString();
     });
