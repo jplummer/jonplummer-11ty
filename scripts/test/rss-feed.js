@@ -277,7 +277,7 @@ function validateRSS() {
   }
   
   // Create test result using result builder
-  const result = createTestResult('rss-feed', 'RSS Feed Validation');
+  const result = createTestResult('rss', 'RSS Feed Validation');
   
   // Validate each RSS file
   for (const file of rssFiles) {

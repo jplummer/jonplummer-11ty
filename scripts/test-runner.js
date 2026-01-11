@@ -6,59 +6,90 @@ const { printOverallSummary, getTestEmoji, getTestDisplayName, formatCompact, fo
 const { SPINNER_FRAMES } = require('./utils/spinner-utils');
 
 // Map test types to their script files
+// Format: 'test-name': { file: 'script.js', dir: 'test' } or 'test-name': 'script.js' (defaults to 'test' dir)
 const testTypes = {
   'html': 'html.js',
-  'links-yaml': 'links-yaml.js',
+  'links': 'links-yaml.js',
+  'links-yaml': 'links-yaml.js', // backward compatibility
   'internal-links': 'internal-links.js',
   'frontmatter': 'frontmatter.js',
   'markdown': 'markdown.js',
   'spell': 'spell.js',
-  'seo-meta': 'seo-meta.js',
+  'seo': 'seo-meta.js',
+  'seo-meta': 'seo-meta.js', // backward compatibility
   'og-images': 'og-images.js',
-  'accessibility': 'accessibility.js',
-  'rss-feed': 'rss-feed.js',
+  'a11y': 'accessibility.js',
+  'accessibility': 'accessibility.js', // backward compatibility
+  'rss': 'rss-feed.js',
+  'rss-feed': 'rss-feed.js', // backward compatibility
   'deploy': 'deploy.js',
-  'indexnow': 'indexnow.js'
+  'indexnow': 'indexnow.js',
+  'security': { file: 'security-audit.js', dir: 'security' },
+  'security-audit': { file: 'security-audit.js', dir: 'security' } // backward compatibility
 };
 
-// Fast tests (excludes slow tests: accessibility)
+// Fast tests (excludes slow tests like a11y)
 // Suitable for pre-commit hooks or frequent validation
 const fastTests = [
   'html',
-  'links-yaml',
+  'links',
   'internal-links',
   'frontmatter',
   'markdown',
   'spell',
-  'seo-meta',
+  'seo',
   'og-images',
-  'rss-feed',
+  'rss',
   'indexnow'
 ];
 
 // Tests to run for "test all" (includes all tests, including slow ones)
 const allTests = [
   'html',
-  'links-yaml',
+  'links',
   'internal-links',
   'frontmatter',
   'markdown',
   'spell',
-  'seo-meta',
+  'seo',
   'og-images',
-  'accessibility',
-  'rss-feed'
+  'rss',
+  'indexnow',
+  'a11y'
 ];
 
 function listTests() {
   console.log('Available test types:\n');
-  Object.keys(testTypes).forEach(type => {
+  
+  // Test descriptions
+  const testDescriptions = {
+    'html': 'HTML validity',
+    'links': 'Links YAML structure',
+    'internal-links': 'Internal link validity',
+    'frontmatter': 'Frontmatter validation',
+    'markdown': 'Markdown syntax',
+    'spell': 'Spell checking',
+    'seo': 'SEO and meta tags',
+    'og-images': 'Open Graph images',
+    'a11y': 'Accessibility (WCAG compliance)',
+    'rss': 'RSS feed validation',
+    'deploy': 'Deployment connectivity',
+    'indexnow': 'IndexNow configuration',
+    'security': 'Security audit'
+  };
+  
+  // Only show primary names (not backward compatibility aliases)
+  const primaryNames = ['html', 'links', 'internal-links', 'frontmatter', 'markdown', 'spell', 'seo', 'og-images', 'a11y', 'rss', 'deploy', 'indexnow', 'security'];
+  
+  primaryNames.forEach(type => {
     const isInAll = allTests.includes(type);
     const isInFast = fastTests.includes(type);
     let note = '';
     if (isInFast) note = ' (included in "test fast" and "test all")';
     else if (isInAll) note = ' (included in "test all")';
-    console.log(`  ${type}${note}`);
+    const description = testDescriptions[type] || '';
+    const descText = description ? ` - ${description}` : '';
+    console.log(`  ${type}${descText}${note}`);
   });
   console.log('\nUsage: pnpm run test [type]');
   console.log('       pnpm run test fast   (runs fast tests: ' + fastTests.join(', ') + ')');
@@ -66,7 +97,18 @@ function listTests() {
 }
 
 function runTest(testType, showStatus = false, compact = false, formatOptions = {}) {
-  const scriptPath = path.join(__dirname, 'test', testTypes[testType]);
+  const testConfig = testTypes[testType];
+  if (!testConfig) {
+    throw new Error(`Unknown test type: ${testType}`);
+  }
+  
+  // Handle both string (defaults to 'test' dir) and object (specifies dir) formats
+  let scriptPath;
+  if (typeof testConfig === 'string') {
+    scriptPath = path.join(__dirname, 'test', testConfig);
+  } else {
+    scriptPath = path.join(__dirname, testConfig.dir, testConfig.file);
+  }
   
   return new Promise((resolve, reject) => {
     let spinnerInterval = null;

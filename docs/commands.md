@@ -29,7 +29,7 @@ Recommended process for deploying changes with an up-to-date changelog:
 
 - `pnpm run test` - List available test types
 - `pnpm run validate` - Quick HTML validity check (shortcut for `pnpm run test html`)
-- `pnpm run test fast` - Run fast tests (excludes slow tests: accessibility)
+- `pnpm run test fast` - Run fast tests (excludes slow tests like a11y)
 - `pnpm run test all` - Run all tests in sequence (includes slow tests)
 - `pnpm run test [type]` - Run a specific test type
 - `pnpm run test [type] -- --format [format]` - Specify output format: `compact`, `verbose`, or `build`
@@ -59,32 +59,33 @@ Recommended process for deploying changes with an up-to-date changelog:
 
 **Fast Tests** (suitable for frequent validation):
 - `html` - Check HTML validity (structure, syntax, deprecated elements)
-- `links-yaml` - Validate links.yaml structure and format
+- `links` - Validate links.yaml structure and format
 - `internal-links` - Test only internal links (critical)
 - `frontmatter` - Test frontmatter validation
 - `markdown` - Validate markdown syntax and structure
-- `seo-meta` - Test SEO and meta tags
+- `seo` - Test SEO and meta tags
 - `og-images` - Validate Open Graph images
-- `rss-feed` - Test RSS feeds
+- `rss` - Test RSS feeds
 
 **Slow Tests** (run occasionally):
-- `accessibility` - Test accessibility using axe-core - launches browser
+- `a11y` - Test accessibility using axe-core - launches browser
 
 **Other Tests**:
 - `deploy` - Test deployment (environment, local build check, dependencies, SSH, remote directory, rsync dry-run)
+- `security` - Security audit (dependencies, configuration, live site security)
 
 #### Test Suite Focus
 
 The test suite is designed to:
-- **Prevent authoring mistakes**: markdown, content structure, links-yaml validation
-- **Ensure deploys work**: html, internal-links, seo-meta, rss-feed validation
-- **Basic security checks**: deploy validation, security audit script
+- **Prevent authoring mistakes**: markdown, content structure, links validation
+- **Ensure deploys work**: html, internal-links, seo, rss validation
+- **Basic security checks**: deploy validation, security script
 
 Use `pnpm run test fast` for quick validation during development. Use `pnpm run test all` for comprehensive checks before deployment.
 
 #### links.yaml Validation
 
-The `links-yaml` test validates the structure and format of `_data/links.yaml`:
+The `links` test validates the structure and format of `_data/links.yaml`:
 
 - Validates YAML syntax
 - Checks date keys are in YYYY-MM-DD format and are valid dates

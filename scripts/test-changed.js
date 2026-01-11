@@ -4,12 +4,21 @@
  * Test Changed Files
  * 
  * Runs authoring-related tests on files changed since last commit.
- * Tests: spell, frontmatter, markdown, links-yaml, seo-meta
+ * Tests: spell, frontmatter, markdown, links, seo
  */
 
 const { execSync } = require('child_process');
 const path = require('path');
 const fs = require('fs');
+
+// Map test type names to script file names
+const testScriptMap = {
+  'spell': 'spell',
+  'frontmatter': 'frontmatter',
+  'markdown': 'markdown',
+  'links': 'links-yaml',
+  'seo': 'seo-meta'
+};
 
 // Get files changed since last commit
 function getChangedFiles() {
@@ -37,8 +46,10 @@ function runTest(testName, useChanged = false) {
   try {
     let command;
     if (useChanged) {
+      // Map test name to script file name
+      const scriptName = testScriptMap[testName] || testName;
       // Run test directly with --changed flag for formatted output
-      command = `node scripts/test/${testName}.js --changed`;
+      command = `node scripts/test/${scriptName}.js --changed`;
     } else {
       // Run through test-runner (checks all files)
       command = `node scripts/test-runner.js ${testName}`;
@@ -75,8 +86,8 @@ function main() {
     { name: 'spell', useChanged: true, scope: 'changed files only' },
     { name: 'frontmatter', useChanged: true, scope: 'changed files only' },
     { name: 'markdown', useChanged: true, scope: 'changed files only' },
-    { name: 'links-yaml', useChanged: true, scope: 'changed files only' },
-    { name: 'seo-meta', useChanged: true, scope: 'changed files only (if markdown files changed)' }
+    { name: 'links', useChanged: true, scope: 'changed files only' },
+    { name: 'seo', useChanged: true, scope: 'changed files only (if markdown files changed)' }
   ];
   
   let allPassed = true;

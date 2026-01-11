@@ -22,7 +22,7 @@
 
 /**
  * Create a new test result object with minimum required fields
- * @param {string} testType - Test type identifier (e.g., 'html', 'rss-feed')
+ * @param {string} testType - Test type identifier (e.g., 'html', 'rss')
  * @param {string} testName - Human-readable test name (e.g., 'HTML Validation')
  * @returns {Object} Initialized test result object
  */
@@ -241,18 +241,24 @@ function outputResult(result) {
  * Trailing spaces are added to some emojis to work around rendering oddities of the MacOS terminal
  */
 const TEST_EMOJIS = {
-  'accessibility': '♿',
-  'frontmatter': '📁',
+  'a11y': '🌈',
+  'accessibility': '🌈', // alias for backward compatibility
+  'frontmatter': '🗂️',
   'html': '🧩',
   'internal-links': '🔗',
-  'links-yaml': '📌',
-  'markdown': '✏️ ',
-  'spell': '🔤',
-  'og-images': '🖼️ ',
-  'rss-feed': '📡',
-  'seo-meta': '🎯',
+  'links': '📌',
+  'links-yaml': '📌', // alias for backward compatibility
+  'markdown': '✍️',
+  'spell': '🧙',
+  'og-images': '📸',
+  'rss': '📡',
+  'rss-feed': '📡', // alias for backward compatibility
+  'seo': '📈',
+  'seo-meta': '📈', // alias for backward compatibility
   'deploy': '🚀',
-  'security-audit': '👮🏻‍♀️'
+  'security': '🛡️',
+  'security-audit': '🛡️', // alias for backward compatibility
+  'indexnow': '📣'
 };
 
 /**
@@ -273,20 +279,23 @@ function getTestEmoji(testType) {
 function getTestDisplayName(testType) {
   const displayNames = {
     'html': 'HTML Validation',
-    'links-yaml': 'Links YAML',
+    'links': 'Links YAML',
+    'links-yaml': 'Links YAML', // alias for backward compatibility
     'internal-links': 'Internal Links',
     'content': 'Content Structure',
     'frontmatter': 'Frontmatter',
     'markdown': 'Markdown',
     'spell': 'Spell Check',
     'seo': 'SEO Meta',
-    'seo-meta': 'SEO Meta',
-    'accessibility': 'Accessibility',
+    'seo-meta': 'SEO Meta', // alias for backward compatibility
+    'a11y': 'Accessibility',
+    'accessibility': 'Accessibility', // alias for backward compatibility
     'rss': 'RSS Feed',
-    'rss-feed': 'RSS Feed',
+    'rss-feed': 'RSS Feed', // alias for backward compatibility
     'og-images': 'OG Images',
     'deploy': 'Deploy',
-    'security-audit': 'Security Audit'
+    'security': 'Security Audit',
+    'security-audit': 'Security Audit' // alias for backward compatibility
   };
   return displayNames[testType] || testType;
 }
@@ -629,7 +638,7 @@ function formatCompact(result) {
   if (files > 0) {
     // For security-audit, skip "checked" line (redundant with "passing" line)
     // For other tests, show "files checked"
-    if (result.testType !== 'security-audit') {
+    if (result.testType !== 'security' && result.testType !== 'security-audit') {
       const itemName = files === 1 ? 'file' : 'files';
       summaryParts.push(`📄 ${files} ${itemName} checked`);
     }
@@ -1067,7 +1076,7 @@ function formatBuild(result) {
   // Clear pass/fail header
   if (blockingIssues === 0) {
     output.push(`✅ ${emoji} ${displayName}: PASSED`);
-    if (result.testType === 'security-audit') {
+    if (result.testType === 'security' || result.testType === 'security-audit') {
       output.push(`  All checks passed (${summary.files} checks)`);
     } else {
       output.push(`  All checks passed (${summary.files} files checked)`);

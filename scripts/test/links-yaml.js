@@ -88,7 +88,7 @@ function validateLinksYaml() {
   // If --changed flag and links.yaml hasn't changed, skip
   if (useChanged && !hasLinksYamlChanged()) {
     console.log('✅ links.yaml not changed since last commit');
-    const result = createTestResult('links-yaml', 'Links YAML Validation');
+    const result = createTestResult('links', 'Links YAML Validation');
     const isDirectRun = !process.env.TEST_RUNNER;
     if (isDirectRun) {
       const formatted = formatVerbose(result, {});

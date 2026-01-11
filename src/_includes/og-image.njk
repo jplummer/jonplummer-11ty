@@ -92,7 +92,7 @@
     }
     
     /* Author name styling (matches site header) */
-    .og-hgroup h1 {
+    .og-hgroup > div {
       font-size: 6rem;
       line-height: var(--line-height-3xl);
       font-weight: var(--font-weight-thin);
@@ -100,7 +100,7 @@
       color: var(--link-color);
     }
     
-    .og-hgroup h1 a {
+    .og-hgroup > div a {
       color: var(--link-color) !important;
       text-decoration: none;
     }
@@ -137,10 +137,10 @@
 </head>
 <body>
   <div class="og-content">
-    <hgroup class="og-hgroup">
+    <div class="og-hgroup">
       <h1><a href="/">Jon Plummer</a></h1>
       <p>Today I Learned</p>
-    </hgroup>
+    </div>
     <h1 class="og-title">{{ title }}</h1>
     {% if description %}
     <p class="og-description">{{ description }}</p>

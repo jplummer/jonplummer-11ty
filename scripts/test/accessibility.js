@@ -349,7 +349,7 @@ async function validateAccessibility() {
   
   if (htmlFiles.length === 0) {
     // Create empty result
-    const result = createTestResult('accessibility', 'Accessibility Validation');
+    const result = createTestResult('a11y', 'Accessibility Validation');
     if (useChanged) {
       // Add a note that no files need testing
       addCustomSection(result, 'ℹ️  Note', {

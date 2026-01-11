@@ -16,7 +16,7 @@
     - [ ] Talks from CSky
     - [ ] Talks from Cayuse
 
-- [ ] OFTEN: sweep slack for links
+- [ ] OFTEN: sweep Slack for links
 
 - [ ] Socials
   - [ ] *Consider* improving existing Fed account bridging according to https://fed.brid.gy/docs#fediverse-enhanced

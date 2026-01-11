@@ -104,7 +104,7 @@ async function runSecurityAudit() {
   await liveSiteChecks.checkDNSRecords(results, addFinding);
   
   // Build JSON result using test-results utilities
-  const jsonResult = createTestResult('security-audit', 'Security Audit');
+  const jsonResult = createTestResult('security', 'Security Audit');
   
   // Map each check to a file entry
   const checkOrder = [

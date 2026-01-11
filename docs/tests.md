@@ -8,29 +8,30 @@ This project includes a suite of validation tests covering content structure, HT
 
 - `pnpm run test` - List available test types
 - `pnpm run test [type]` - Run a specific test type
-- `pnpm run test fast` - Run all fast tests (excludes slow tests like accessibility)
+- `pnpm run test fast` - Run all fast tests (excludes slow tests like a11y)
 - `pnpm run test all` - Run all tests including slow ones
-- `pnpm run test changed` - Run authoring tests on files changed since last commit (spell, frontmatter, markdown, links-yaml, seo-meta)
+- `pnpm run test changed` - Run authoring tests on files changed since last commit (spell, frontmatter, markdown, links, seo)
 - `pnpm run validate` - Quick HTML validity check (shortcut for `pnpm run test html`)
 
 ### Test Categories
 
 Fast Tests (suitable for pre-commit hooks or frequent validation):
 - `html` - HTML validity
-- `links-yaml` - Links YAML structure
+- `links` - Links YAML structure
 - `internal-links` - Internal link validity
 - `frontmatter` - Frontmatter validation
 - `markdown` - Markdown syntax validation
 - `spell` - Spell checking
-- `seo-meta` - SEO and meta tags
+- `seo` - SEO and meta tags
 - `og-images` - Open Graph images
-- `rss-feed` - RSS feed validation
+- `rss` - RSS feed validation
 
 Slow Tests (run occasionally):
-- `accessibility` - Accessibility validation using axe-core (launches browser)
+- `a11y` - Accessibility validation using axe-core (launches browser)
 
 Other Tests:
 - `deploy` - Deployment connectivity and configuration testing
+- `security` - Security audit (dependencies, configuration, live site security)
 
 ## Test Scripts
 
@@ -89,7 +90,7 @@ Checks:
 - YAML data files: Validates YAML syntax in `src/_data/*.yaml` files
 - Draft exclusion: Automatically excludes files with `draft: true` in front matter
 
-Note: This test uses more lenient ranges than `seo-meta.js` because it validates source markdown files, which may be edited before final output. The stricter `seo-meta.js` test validates the final HTML output with SEO best practices.
+Note: This test uses more lenient ranges than `seo.js` because it validates source markdown files, which may be edited before final output. The stricter `seo.js` test validates the final HTML output with SEO best practices.
 
 ### markdown.js - Markdown Syntax Validation
 
@@ -168,15 +169,15 @@ Tests run (all check only changed files when using `--changed` flag):
 - **spell** - Checks only changed markdown/YAML files
 - **frontmatter** - Checks only changed markdown files (and YAML data files if changed)
 - **markdown** - Checks only changed markdown files
-- **links-yaml** - Checks links.yaml only if it changed (skips if unchanged)
-- **seo-meta** - Checks only if markdown files changed (skips if only links.yaml changed, since links.yaml doesn't affect page SEO metadata)
+- **links** - Checks links.yaml only if it changed (skips if unchanged)
+- **seo** - Checks only if markdown files changed (skips if only links.yaml changed, since links.yaml doesn't affect page SEO metadata)
 
-### seo-meta.js - SEO and Meta Tags Validation
+### seo.js - SEO and Meta Tags Validation
 
 Validates SEO metadata in final HTML output, including title tags, meta descriptions, Open Graph tags, heading hierarchy, and duplicate titles.
 
 Commands:
-- `pnpm run test seo-meta` - Check all files
+- `pnpm run test seo` - Check all files
 - `node scripts/test/seo-meta.js --changed` - Check only if markdown files changed (skips if only links.yaml changed, since links.yaml doesn't affect page SEO metadata)
 
 When to use:
@@ -201,7 +202,7 @@ Note: Length validation uses relaxed limits (Title 10-200 chars, Description 20-
 
 Requirements: `_site/` directory must exist (run `pnpm run build` first)
 
-### accessibility.js - Accessibility Validation
+### a11y.js - Accessibility Validation
 
 Tests HTML files for accessibility violations using `axe-core` via Puppeteer. Tests each page in both light and dark mode (dark mode tests contrast only).
 
@@ -223,7 +224,7 @@ Checks:
 
 Requirements: `_site/` directory must exist (run `pnpm run build` first), Puppeteer (launches headless browser), slower than other tests (runs browser for each page)
 
-### links-yaml.js - Links YAML Validation
+### links.js - Links YAML Validation
 
 Validates the structure and format of `src/_data/links.yaml`, ensuring proper date keys, link objects, and required fields.
 
@@ -233,7 +234,7 @@ When to use:
 - As part of `pnpm run test fast` or `pnpm run test all`
 
 Commands:
-- `pnpm run test links-yaml` - Check links.yaml
+- `pnpm run test links` - Check links.yaml
 - `node scripts/test/links-yaml.js --changed` - Check only if links.yaml changed (skips if unchanged)
 
 Automatically invoked by:
@@ -296,7 +297,7 @@ Checks:
 
 Requirements: `_site/` directory must exist (run `pnpm run build` first)
 
-### rss-feed.js - RSS Feed Validation
+### rss.js - RSS Feed Validation
 
 Validates RSS/XML feed files in `_site/` directory for proper structure, required elements, item validity, and feed health.
 
@@ -340,6 +341,28 @@ Checks:
 - rsync upload capability: Tests rsync file transfer (dry-run) with test file
 
 Requirements: `.env` file with deployment configuration, `rsync` installed on system, SSH access to remote server, `_site/` directory must exist (run `pnpm run build` first)
+
+### security.js - Security Audit
+
+Performs security and maintenance checks for dependencies, configuration, and live site security (headers, TLS, DNS).
+
+When to use:
+- Periodically to ensure security compliance
+- Before deployment to catch security issues
+- When updating dependencies
+- When changing security configuration
+
+Automatically invoked by: Not automatically invoked by other scripts. Run manually with `pnpm run test security` or `pnpm run security-audit`
+
+Checks:
+- Dependency security: `pnpm audit` for known vulnerabilities, `pnpm outdated` for outdated packages
+- Node.js version: Checks for supported Node.js version
+- Environment variables: Validates required environment variables are set
+- Configuration files: Checks `.htaccess` for security headers, CSP configuration
+- Live site security: Security headers (requires `SITE_DOMAIN`), TLS certificate expiration, DNS records
+- Manual checklist: Provides focused checklist of manual security tasks
+
+Requirements: `.env` file with `SITE_DOMAIN` (optional, for live site checks), `_site/` directory must exist for some checks (run `pnpm run build` first)
 
 ## Deployment Integration
 

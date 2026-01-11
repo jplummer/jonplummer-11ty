@@ -307,7 +307,7 @@ function validateSEO() {
   // links.yaml changes don't affect page SEO metadata, so skip if only links.yaml changed
   if (useChanged && !hasMarkdownFilesChanged()) {
     console.log('✅ No markdown files changed for SEO check (links.yaml changes don\'t affect page SEO)');
-    const result = createTestResult('seo-meta', 'SEO Validation');
+    const result = createTestResult('seo', 'SEO Validation');
     const isDirectRun = !process.env.TEST_RUNNER;
     if (isDirectRun) {
       const formatted = formatVerbose(result, {});
@@ -337,7 +337,7 @@ function validateSEO() {
     
     if (htmlFiles.length === 0) {
       console.log('✅ No HTML files to check (no rendered files correspond to changed markdown files)');
-      const result = createTestResult('seo-meta', 'SEO Validation');
+      const result = createTestResult('seo', 'SEO Validation');
       const isDirectRun = !process.env.TEST_RUNNER;
       if (isDirectRun) {
         const formatted = formatVerbose(result, {});
