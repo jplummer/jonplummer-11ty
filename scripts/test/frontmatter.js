@@ -2,11 +2,13 @@
 
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 const yaml = require('js-yaml');
 const { validateDate, validateSlug } = require('../utils/validation-utils');
 const { getMarkdownFiles, readFile } = require('../utils/test-base');
 const { parseFrontMatter } = require('../utils/frontmatter-utils');
 const { createTestResult, addFile, addIssue, addWarning, addGlobalIssue, outputResult } = require('../utils/test-result-builder');
+const { formatVerbose } = require('../utils/test-formatter');
 
 // Front matter parsing and file finding now use shared utilities
 
@@ -147,8 +149,36 @@ function validateYamlDataFiles(result) {
   return { valid: true };
 }
 
+// Get files changed since last commit
+function getChangedFiles() {
+  try {
+    const output = execSync('git diff --name-only --diff-filter=ACMR HEAD', {
+      encoding: 'utf8',
+      cwd: process.cwd()
+    });
+    
+    const changedFiles = output.trim().split('\n').filter(line => line.trim());
+    
+    // Filter for markdown files in src/_posts
+    return changedFiles
+      .filter(file => {
+        const ext = path.extname(file).toLowerCase();
+        return ext === '.md' && file.startsWith('src/_posts/');
+      })
+      .map(file => path.resolve(process.cwd(), file))
+      .filter(file => fs.existsSync(file));
+  } catch (error) {
+    console.error('Error getting changed files from git:', error.message);
+    return [];
+  }
+}
+
 // Main validation function
 function validateFrontmatter() {
+  // Check if --changed flag is provided
+  const args = process.argv.slice(2);
+  const useChanged = args.includes('--changed');
+  
   // Create test result using result builder
   const result = createTestResult('frontmatter', 'Frontmatter');
   
@@ -156,7 +186,13 @@ function validateFrontmatter() {
   const yamlValidation = validateYamlDataFiles(result);
 
   if (!yamlValidation.valid) {
-    outputResult(result);
+    const isDirectRun = !process.env.TEST_RUNNER;
+    if (isDirectRun) {
+      const formatted = formatVerbose(result, {});
+      console.log(formatted);
+    } else {
+      outputResult(result);
+    }
     process.exit(1);
     return;
   }
@@ -167,8 +203,24 @@ function validateFrontmatter() {
     process.exit(1);
   }
 
-  // Get markdown files and exclude drafts (check frontmatter for draft: true)
-  const allMarkdownFiles = getMarkdownFiles(postsDir);
+  // Get markdown files - either changed files or all files
+  let allMarkdownFiles;
+  if (useChanged) {
+    allMarkdownFiles = getChangedFiles();
+    if (allMarkdownFiles.length === 0) {
+      console.log('✅ No markdown files changed since last commit');
+      const isDirectRun = !process.env.TEST_RUNNER;
+      if (isDirectRun) {
+        const formatted = formatVerbose(result, {});
+        console.log(formatted);
+      } else {
+        outputResult(result);
+      }
+      process.exit(0);
+    }
+  } else {
+    allMarkdownFiles = getMarkdownFiles(postsDir);
+  }
   const markdownFiles = allMarkdownFiles.filter(file => {
     const content = readFile(file);
     const { frontMatter } = parseFrontMatter(content);
@@ -256,11 +308,19 @@ function validateFrontmatter() {
     });
   });
 
-  // Output JSON result (formatter will handle display)
-  outputResult(result);
+  // Check if we're being run directly (not through test-runner)
+  const isDirectRun = !process.env.TEST_RUNNER;
   
-  // Exit with appropriate code (errors block, warnings don't)
-  process.exit(result.summary.issues > 0 ? 1 : 0);
+  if (isDirectRun) {
+    // Format and display output directly
+    const formatted = formatVerbose(result, {});
+    console.log(formatted);
+    process.exit(result.summary.issues > 0 ? 1 : 0);
+  } else {
+    // Output JSON result (test-runner will handle display)
+    outputResult(result);
+    process.exit(result.summary.issues > 0 ? 1 : 0);
+  }
 }
 
 // Run validation

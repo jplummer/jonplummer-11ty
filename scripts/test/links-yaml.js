@@ -2,9 +2,26 @@
 
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 const yaml = require('js-yaml');
 const { validateDate, validateUrl, validateTitle } = require('../utils/validation-utils');
 const { createTestResult, addFile, addIssue, addWarning, outputResult } = require('../utils/test-result-builder');
+const { formatVerbose } = require('../utils/test-formatter');
+
+// Check if links.yaml changed since last commit
+function hasLinksYamlChanged() {
+  try {
+    const output = execSync('git diff --name-only --diff-filter=ACMR HEAD', {
+      encoding: 'utf8',
+      cwd: process.cwd()
+    });
+    
+    const changedFiles = output.trim().split('\n').filter(line => line.trim());
+    return changedFiles.includes('src/_data/links.yaml');
+  } catch (error) {
+    return false;
+  }
+}
 
 // Validate description (optional but should be valid if present)
 function validateDescription(description) {
@@ -65,6 +82,24 @@ function validateLink(link, linkIndex, dateKey) {
 
 // Main validation function
 function validateLinksYaml() {
+  // Check if --changed flag is provided
+  const args = process.argv.slice(2);
+  const useChanged = args.includes('--changed');
+  
+  // If --changed flag and links.yaml hasn't changed, skip
+  if (useChanged && !hasLinksYamlChanged()) {
+    console.log('✅ links.yaml not changed since last commit');
+    const result = createTestResult('links-yaml', 'Links YAML Validation');
+    const isDirectRun = !process.env.TEST_RUNNER;
+    if (isDirectRun) {
+      const formatted = formatVerbose(result, {});
+      console.log(formatted);
+    } else {
+      outputResult(result);
+    }
+    process.exit(0);
+  }
+  
   const linksFile = './src/_data/links.yaml';
 
   // Create test result
@@ -172,11 +207,19 @@ function validateLinksYaml() {
     });
   }
 
-  // Output JSON result (formatter will handle display)
-  outputResult(result);
-
-  // Exit with appropriate code (errors block, warnings don't)
-  process.exit(result.summary.issues > 0 ? 1 : 0);
+  // Check if we're being run directly (not through test-runner)
+  const isDirectRun = !process.env.TEST_RUNNER;
+  
+  if (isDirectRun) {
+    // Format and display output directly
+    const formatted = formatVerbose(result, {});
+    console.log(formatted);
+    process.exit(result.summary.issues > 0 ? 1 : 0);
+  } else {
+    // Output JSON result (test-runner will handle display)
+    outputResult(result);
+    process.exit(result.summary.issues > 0 ? 1 : 0);
+  }
 }
 
 // Run validation

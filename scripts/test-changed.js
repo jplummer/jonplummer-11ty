@@ -36,11 +36,11 @@ function getChangedFiles() {
 function runTest(testName, useChanged = false) {
   try {
     let command;
-    if (testName === 'spell' && useChanged) {
-      // Spell check with --changed flag (runs directly for formatted output)
-      command = `node scripts/test/spell.js --changed`;
+    if (useChanged) {
+      // Run test directly with --changed flag for formatted output
+      command = `node scripts/test/${testName}.js --changed`;
     } else {
-      // Other tests run through test-runner (checks all files)
+      // Run through test-runner (checks all files)
       command = `node scripts/test-runner.js ${testName}`;
     }
     
@@ -73,10 +73,10 @@ function main() {
   
   const tests = [
     { name: 'spell', useChanged: true, scope: 'changed files only' },
-    { name: 'frontmatter', useChanged: false, scope: 'all files' },
-    { name: 'markdown', useChanged: false, scope: 'all files' },
-    { name: 'links-yaml', useChanged: false, scope: 'all files' },
-    { name: 'seo-meta', useChanged: false, scope: 'all files' }
+    { name: 'frontmatter', useChanged: true, scope: 'changed files only' },
+    { name: 'markdown', useChanged: true, scope: 'changed files only' },
+    { name: 'links-yaml', useChanged: true, scope: 'changed files only' },
+    { name: 'seo-meta', useChanged: true, scope: 'changed files only (if markdown files changed)' }
   ];
   
   let allPassed = true;

@@ -6,6 +6,31 @@ const { execSync } = require('child_process');
 const { findMarkdownFiles } = require('../utils/file-utils');
 const { parseFrontMatter } = require('../utils/frontmatter-utils');
 const { createTestResult, addFile, addIssue, addWarning, outputResult } = require('../utils/test-result-builder');
+const { formatVerbose } = require('../utils/test-formatter');
+
+// Get files changed since last commit
+function getChangedFiles() {
+  try {
+    const output = execSync('git diff --name-only --diff-filter=ACMR HEAD', {
+      encoding: 'utf8',
+      cwd: process.cwd()
+    });
+    
+    const changedFiles = output.trim().split('\n').filter(line => line.trim());
+    
+    // Filter for markdown files in src/
+    return changedFiles
+      .filter(file => {
+        const ext = path.extname(file).toLowerCase();
+        return ext === '.md' && file.startsWith('src/');
+      })
+      .map(file => path.resolve(process.cwd(), file))
+      .filter(file => fs.existsSync(file));
+  } catch (error) {
+    console.error('Error getting changed files from git:', error.message);
+    return [];
+  }
+}
 
 // Find all markdown files in src/ directory, excluding drafts and docs/
 function findSourceMarkdownFiles() {
@@ -160,7 +185,28 @@ function runMarkdownlint(files) {
 
 // Main validation function
 function validateMarkdown() {
-  const markdownFiles = findSourceMarkdownFiles();
+  // Check if --changed flag is provided
+  const args = process.argv.slice(2);
+  const useChanged = args.includes('--changed');
+  
+  let markdownFiles;
+  if (useChanged) {
+    markdownFiles = getChangedFiles();
+  if (markdownFiles.length === 0) {
+    console.log('✅ No markdown files changed since last commit');
+    const result = createTestResult('markdown', 'Markdown Validation');
+    const isDirectRun = !process.env.TEST_RUNNER;
+    if (isDirectRun) {
+      const formatted = formatVerbose(result, {});
+      console.log(formatted);
+    } else {
+      outputResult(result);
+    }
+    process.exit(0);
+  }
+  } else {
+    markdownFiles = findSourceMarkdownFiles();
+  }
   
   if (markdownFiles.length === 0) {
     console.log('❌ No markdown files found in src/ directory');
@@ -250,10 +296,19 @@ function validateMarkdown() {
   }
 
   // Output JSON result (formatter will handle display)
-  outputResult(result);
+  // Check if we're being run directly (not through test-runner)
+  const isDirectRun = !process.env.TEST_RUNNER;
   
-  // Exit with appropriate code (errors block, warnings don't)
-  process.exit(result.summary.issues > 0 ? 1 : 0);
+  if (isDirectRun) {
+    // Format and display output directly
+    const formatted = formatVerbose(result, {});
+    console.log(formatted);
+    process.exit(result.summary.issues > 0 ? 1 : 0);
+  } else {
+    // Output JSON result (test-runner will handle display)
+    outputResult(result);
+    process.exit(result.summary.issues > 0 ? 1 : 0);
+  }
 }
 
 // Run validation

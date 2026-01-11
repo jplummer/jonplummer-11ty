@@ -69,6 +69,10 @@ When to use:
 - As part of `pnpm run test fast` or `pnpm run test all`
 - Automatically during deployment (pre-deploy validation)
 
+Commands:
+- `pnpm run test frontmatter` - Check all files
+- `node scripts/test/frontmatter.js --changed` - Check only changed files
+
 Automatically invoked by:
 - `pnpm run test fast` (included in fast tests)
 - `pnpm run test all` (included in all tests)
@@ -96,6 +100,10 @@ When to use:
 - Before committing content changes
 - As part of `pnpm run test fast` or `pnpm run test all`
 - Automatically during deployment (pre-deploy validation)
+
+Commands:
+- `pnpm run test markdown` - Check all files
+- `node scripts/test/markdown.js --changed` - Check only changed files
 
 Automatically invoked by:
 - `pnpm run test fast` (included in fast tests)
@@ -156,18 +164,20 @@ When to use:
 Command:
 - `pnpm run test changed` - Runs all authoring tests on changed files (or `pnpm run test:changed`)
 
-Tests run:
-- **spell** - Checks only changed markdown/YAML files (uses `--changed` flag)
-- **frontmatter** - Checks all files (validates frontmatter structure)
-- **markdown** - Checks all files (validates markdown syntax)
-- **links-yaml** - Checks all files (validates links.yaml structure)
-- **seo-meta** - Checks all files (validates SEO metadata)
-
-Note: Only spell check is limited to changed files. Other tests check all files to ensure your changes didn't break anything elsewhere.
+Tests run (all check only changed files when using `--changed` flag):
+- **spell** - Checks only changed markdown/YAML files
+- **frontmatter** - Checks only changed markdown files (and YAML data files if changed)
+- **markdown** - Checks only changed markdown files
+- **links-yaml** - Checks links.yaml only if it changed (skips if unchanged)
+- **seo-meta** - Checks only if markdown files changed (skips if only links.yaml changed, since links.yaml doesn't affect page SEO metadata)
 
 ### seo-meta.js - SEO and Meta Tags Validation
 
 Validates SEO metadata in final HTML output, including title tags, meta descriptions, Open Graph tags, heading hierarchy, and duplicate titles.
+
+Commands:
+- `pnpm run test seo-meta` - Check all files
+- `node scripts/test/seo-meta.js --changed` - Check only if markdown files changed (skips if only links.yaml changed, since links.yaml doesn't affect page SEO metadata)
 
 When to use:
 - Before deployment to ensure SEO compliance
@@ -221,6 +231,10 @@ When to use:
 - When editing `links.yaml` file
 - Before committing changes to links data
 - As part of `pnpm run test fast` or `pnpm run test all`
+
+Commands:
+- `pnpm run test links-yaml` - Check links.yaml
+- `node scripts/test/links-yaml.js --changed` - Check only if links.yaml changed (skips if unchanged)
 
 Automatically invoked by:
 - `pnpm run test fast` (included in fast tests)
