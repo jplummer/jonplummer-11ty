@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const path = require('path');
+const fs = require('fs');
 const { execSync } = require('child_process');
 const { extractMetaTags, extractHeadings, parseHtml } = require('../utils/html-utils');
 const { validateTitle: validateTitleUtil, validateMetaDescription: validateMetaDescriptionUtil } = require('../utils/validation-utils');
@@ -29,6 +30,83 @@ function hasMarkdownFilesChanged() {
     const ext = path.extname(file).toLowerCase();
     return ext === '.md' && file.startsWith('src/');
   });
+}
+
+// Get changed markdown files as absolute paths
+function getChangedMarkdownFiles() {
+  const changedFiles = getChangedFiles();
+  return changedFiles
+    .filter(file => {
+      const ext = path.extname(file).toLowerCase();
+      return ext === '.md' && file.startsWith('src/');
+    })
+    .map(file => path.resolve(process.cwd(), file))
+    .filter(file => fs.existsSync(file));
+}
+
+// Try to find source file for a generated HTML path
+function findSourceFile(relativePath) {
+  const srcDir = path.join(process.cwd(), 'src');
+  const normalizedPath = relativePath.replace(/\\/g, '/');
+  
+  // Try common patterns:
+  // 1. Direct match: about.html -> src/about.md or src/about.njk
+  // 2. Index files: page/1/index.html -> src/index.njk (paginated)
+  // 3. Post files: 2025/01/15/post-slug/index.html -> src/_posts/2025/01/15/post-slug.md
+  // 4. Permalink files: og-image-preview/index.html -> src/og-image-preview.njk
+  
+  // Remove index.html and trailing slash
+  let searchPath = normalizedPath.replace(/\/index\.html$/, '').replace(/^\/+/, '');
+  
+  // Try .md first, then .njk
+  const extensions = ['.md', '.njk'];
+  for (const ext of extensions) {
+    const filePath = path.join(srcDir, searchPath + ext);
+    if (fs.existsSync(filePath)) {
+      return filePath;
+    }
+  }
+  
+  // Try with index.html removed but keep directory
+  if (normalizedPath.endsWith('/index.html')) {
+    const dirPath = normalizedPath.replace(/\/index\.html$/, '');
+    for (const ext of extensions) {
+      const filePath = path.join(srcDir, dirPath + ext);
+      if (fs.existsSync(filePath)) {
+        return filePath;
+      }
+    }
+  }
+  
+  // For permalink files that create subdirectories (e.g., og-image-preview/index.html -> og-image-preview.njk)
+  // Extract the directory name and try it as a filename
+  if (normalizedPath.includes('/') && normalizedPath.endsWith('/index.html')) {
+    const dirName = normalizedPath.split('/')[0];
+    for (const ext of extensions) {
+      const filePath = path.join(srcDir, dirName + ext);
+      if (fs.existsSync(filePath)) {
+        return filePath;
+      }
+    }
+  }
+  
+  // For paginated pages, check if it's from index.njk
+  if (normalizedPath.match(/^page\/\d+\/index\.html$/)) {
+    const indexPath = path.join(srcDir, 'index.njk');
+    if (fs.existsSync(indexPath)) {
+      return indexPath;
+    }
+  }
+  
+  // Root index
+  if (normalizedPath === 'index.html') {
+    const indexPath = path.join(srcDir, 'index.njk');
+    if (fs.existsSync(indexPath)) {
+      return indexPath;
+    }
+  }
+  
+  return null;
 }
 
 // Check if HTML content is a redirect page
@@ -242,12 +320,40 @@ function validateSEO() {
   }
   
   checkSiteDirectory();
-  const htmlFiles = getHtmlFiles();
+  let htmlFiles = getHtmlFiles();
+  
+  // Filter HTML files to only those whose source files changed (when using --changed flag)
+  if (useChanged) {
+    const changedMarkdownFiles = getChangedMarkdownFiles();
+    const changedMarkdownFilesSet = new Set(changedMarkdownFiles);
+    
+    htmlFiles = htmlFiles.filter(htmlFile => {
+      const relativePath = getRelativePath(htmlFile);
+      const sourceFile = findSourceFile(relativePath);
+      
+      // Only include files whose source files we can find AND are in the changed files list
+      // If we can't find the source file, exclude it (we don't know if it changed)
+      return sourceFile && changedMarkdownFilesSet.has(sourceFile);
+    });
+    
+    if (htmlFiles.length === 0) {
+      console.log('✅ No HTML files to check (no rendered files correspond to changed markdown files)');
+      const result = createTestResult('seo-meta', 'SEO Validation');
+      const isDirectRun = !process.env.TEST_RUNNER;
+      if (isDirectRun) {
+        const formatted = formatVerbose(result, {});
+        console.log(formatted);
+      } else {
+        outputResult(result);
+      }
+      process.exit(0);
+    }
+  }
   
   // Create test result using result builder
   const result = createTestResult('seo-meta', 'SEO Validation');
   
-  // Check for duplicate titles
+  // Check for duplicate titles (only among files being checked)
   const duplicateTitles = checkDuplicateTitles(htmlFiles);
   duplicateTitles.forEach(dup => {
     addGlobalIssue(result, {
