@@ -1,4 +1,4 @@
-const mergePostsAndLinks = require("../eleventy/filters/merge-posts-and-links");
+const { mergePostsAndLinks } = require("../eleventy/config/filters");
 const { formatDateRange } = require("../eleventy/utils/date-utils");
 
 module.exports = {

@@ -8,6 +8,41 @@
 const { DateTime } = require("luxon");
 
 /**
+ * Checks if a value is a Luxon DateTime object.
+ * 
+ * @param {any} value - Value to check
+ * @returns {boolean} True if value is a Luxon DateTime
+ */
+function isLuxonDateTime(value) {
+  return value && typeof value === 'object' && 'isValid' in value && typeof value.toJSDate === 'function';
+}
+
+/**
+ * Converts any date-like value to a Luxon DateTime object.
+ * 
+ * @param {Date|string|DateTime|null|undefined} dateObj - Date to convert
+ * @returns {DateTime|null} Luxon DateTime object, or null if input is null/undefined/invalid
+ */
+function toDateTime(dateObj) {
+  if (!dateObj) {
+    return null;
+  }
+  
+  // If already a Luxon DateTime, return as-is
+  if (isLuxonDateTime(dateObj)) {
+    return dateObj;
+  }
+  
+  // Normalize to Date first, then convert to DateTime
+  const date = normalizeDate(dateObj);
+  if (!date) {
+    return null;
+  }
+  
+  return DateTime.fromJSDate(date);
+}
+
+/**
  * Normalizes a date value to a Date object.
  * Handles Date objects, date strings, and Luxon DateTime objects.
  * 
@@ -25,9 +60,7 @@ function normalizeDate(dateObj) {
   }
   
   // If it's a Luxon DateTime object, convert to Date
-  // isValid is a boolean property in Luxon, not a function
-  if (dateObj && typeof dateObj === 'object' && 'isValid' in dateObj && typeof dateObj.toJSDate === 'function') {
-    // This is a Luxon DateTime object
+  if (isLuxonDateTime(dateObj)) {
     return dateObj.toJSDate();
   }
   
@@ -43,21 +76,11 @@ function normalizeDate(dateObj) {
  * @returns {string} Formatted date string
  */
 function formatPostDate(dateObj) {
-  if (!dateObj) {
+  const dt = toDateTime(dateObj);
+  if (!dt) {
     return '';
   }
-  
-  // If it's already a Luxon DateTime, use it directly
-  if (dateObj && typeof dateObj === 'object' && 'isValid' in dateObj && typeof dateObj.toJSDate === 'function') {
-    return dateObj.toLocaleString(DateTime.DATE_MED);
-  }
-  
-  // Otherwise, normalize to Date and convert to Luxon
-  const date = normalizeDate(dateObj);
-  if (!date) {
-    return '';
-  }
-  return DateTime.fromJSDate(date).toLocaleString(DateTime.DATE_MED);
+  return dt.toLocaleString(DateTime.DATE_MED);
 }
 
 /**
@@ -70,33 +93,11 @@ function formatPostDate(dateObj) {
  * @returns {string} Formatted date range string
  */
 function formatDateRange(startDate, endDate) {
-  if (!startDate || !endDate) {
+  const startDt = toDateTime(startDate);
+  const endDt = toDateTime(endDate);
+  
+  if (!startDt || !endDt) {
     return '';
-  }
-  
-  // Convert to Luxon DateTime objects, handling both Date and DateTime inputs
-  let startDt, endDt;
-  
-  if (startDate && typeof startDate === 'object' && 'isValid' in startDate && typeof startDate.toJSDate === 'function') {
-    // Already a Luxon DateTime
-    startDt = startDate;
-  } else {
-    const start = normalizeDate(startDate);
-    if (!start) {
-      return '';
-    }
-    startDt = DateTime.fromJSDate(start);
-  }
-  
-  if (endDate && typeof endDate === 'object' && 'isValid' in endDate && typeof endDate.toJSDate === 'function') {
-    // Already a Luxon DateTime
-    endDt = endDate;
-  } else {
-    const end = normalizeDate(endDate);
-    if (!end) {
-      return '';
-    }
-    endDt = DateTime.fromJSDate(end);
   }
   
   // If same date, return single date

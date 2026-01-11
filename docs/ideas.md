@@ -4,7 +4,7 @@
 
 - [ ] **REMINDER (2026-02-11)**: Check if `docs/ELEVENTY-DEBUGGING-WORKFLOW.md` is actually being used by Cursor - search for evidence in chat history and codebase
 
-- [ ] Portfolio 💎 DO A THING EVERY WEEKEND
+- [ ] Portfolio 💎 DO SOMETHING EVERY WEEKEND
   - [ ] Explore presentation-to-portfolio item automation, including speaker notes
     - [ ] What does it take to get speaker notes out of a PPT?
     - [ ] What does it take to get speaker notes out of a Google Slides preso?

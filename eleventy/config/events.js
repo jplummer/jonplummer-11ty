@@ -18,9 +18,7 @@ const { SPINNER_FRAMES } = require('../../scripts/utils/spinner-utils');
 function configureEvents(eleventyConfig) {
   // Check if we're in quiet mode (via command line args or config)
   const isQuiet = process.argv.includes('--quiet') || process.env.ELEVENTY_QUIET === 'true';
-  let buildStartTime;
   let spinnerInterval;
-
   let spinnerIndex = 0;
 
   // Helper to clean up spinner
@@ -53,7 +51,6 @@ function configureEvents(eleventyConfig) {
   // Minimal progress indicator at build start
   eleventyConfig.on("eleventy.before", () => {
     if (isQuiet) {
-      buildStartTime = Date.now();
       process.stdout.write('Building... ');
       
       // Start spinner animation
@@ -66,14 +63,10 @@ function configureEvents(eleventyConfig) {
     }
   });
 
-  // Minimal progress indicator at build end
-  eleventyConfig.on("eleventy.after", ({ results }) => {
-    if (isQuiet && buildStartTime) {
+  // Clean up spinner when build completes
+  eleventyConfig.on("eleventy.after", () => {
+    if (isQuiet) {
       cleanupSpinner();
-      
-      const duration = ((Date.now() - buildStartTime) / 1000).toFixed(1);
-      const fileCount = results ? results.length : 0;
-      console.log(`✓ Built ${fileCount} file${fileCount !== 1 ? 's' : ''} in ${duration}s`);
     }
   });
 
