@@ -25,7 +25,7 @@ console.log('🧪 Testing date/timezone changes...\n');
 // Step 1: Verify permalink compatibility
 console.log('1️⃣  Testing permalink compatibility...');
 try {
-  const result = execSync('node scripts/test/test-permalink-compatibility.js', { 
+  const result = execSync('node scripts/archive/migrations/test-permalink-compatibility.js', { 
     encoding: 'utf8',
     stdio: 'pipe'
   });

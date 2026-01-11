@@ -19,9 +19,9 @@ In his [recent Patreon post](https://www.patreon.com/posts/seeking-your-on-14784
 I don't usually comment on Patreon or YouTube, but I had something to say about this one! Changing your work *to meet your own goals, in accordance with your own values*, is authentic; it couldn't be anything else.
 
 > It's not "selling out" to try things to make your work return more engagement and value if the work remains true to your values, if the work is still the work you want to do, if you and it are still authentic. And authentic really just means your behavior is in conformance with your values. I have a hard time imagining you being in authentic for more than a moment; I imagine you'd feel those pangs immediately.
-> 
+>
 > When I was in social work school (yeah, it's a whole story) it was fashionable to denigrate people who wanted to "do well by doing good." I didn't speak up much at the time, but it seemed wrong to me to complain that people who were actually doing good "weren't sacrificing enough" – that martyrdom was necessary for the good you did to be real. Eff that in the eye-hole; everyone wants to do well, most people want to do good, and if you are doing good that's good, isn't it? It's good until someone is being exploited, then it's not.
-> 
+>
 > That's not an exact parallel with your situation, but you get it.
 
 In the video Van uses the "Michael Jordan playing baseball" example – but Michael did that it to fulfill his own dream, not to ply a shitty product for a quick buck. It was an unfortunate but deeply authentic act that, alas, was only possible due to his stature and fortune.

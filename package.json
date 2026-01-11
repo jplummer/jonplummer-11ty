@@ -20,8 +20,7 @@
     "convert-pdf": "node scripts/content/convert-pdf-pages.js",
     "convert-pdf-with-notes": "node scripts/content/convert-pdf-pages-with-notes.js",
     "generate-og-images": "node scripts/content/generate-og-images.js",
-    "security-audit": "node scripts/security/security-audit.js",
-    "migrate-figures": "node scripts/migrations/convert-figures-to-markdown.js"
+    "security-audit": "node scripts/security/security-audit.js"
   },
   "keywords": [],
   "author": "Jon Plummer",

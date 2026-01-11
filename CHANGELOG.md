@@ -1,10 +1,18 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),newest first.
 
+## 2026-01-11
+
+- Refactor portrait-grid to use paired shortcode instead of HTML blocks
+- Fix spellcheck and SEO test filtering
+- Remove unused markdown-in-html-blocks preprocessor
+
 ## 2026-01-10
 
 - Improve spell check: add ignore patterns, custom words, and better output
 - Add new post and update various files
 - Update pnpm-lock.yaml
+- Add test:changed script for authoring validation
+- Add --changed flag support to all authoring tests
 
 ## 2026-01-06
 

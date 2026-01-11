@@ -42,7 +42,7 @@ There are a lot of slides, but much of this presentation is meant to be fast-pac
 *Page 10: While at Belkin I institutionalized regularly-scheduled usability testing…*
 
 ![jon-plummer-invoca-final-preso page 11](/assets/images/2022/12/jon-plummer-invoca-final-preso-page-11.png)
-*Page 11: and in-person formative research, and reinvgorated the beta testing program…*
+*Page 11: and in-person formative research, and reinvigorated the beta testing program…*
 
 ![jon-plummer-invoca-final-preso page 12](/assets/images/2022/12/jon-plummer-invoca-final-preso-page-12.png)
 *Page 12: revamped Belkin router setup, enhancing customer success and cutting support costs markedly…*

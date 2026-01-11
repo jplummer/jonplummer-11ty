@@ -1,9 +1,12 @@
 #!/usr/bin/env node
 
 /**
- * Test Base Utilities
+ * Test Helpers
  * 
- * Common file operations and test infrastructure
+ * Common file operations and test infrastructure utilities.
+ * 
+ * This file consolidates functionality from:
+ * - test-base.js: File operations for tests
  */
 
 const fs = require('fs');

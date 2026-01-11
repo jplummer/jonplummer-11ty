@@ -54,8 +54,14 @@ async function renderOgImage(title, description, date) {
   const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
   
   if (bodyMatch) {
+    // Replace h1 elements with div elements to avoid heading hierarchy issues in preview pages
+    // CSS class selectors (like .og-title) will still work
+    let bodyContent = bodyMatch[1];
+    bodyContent = bodyContent.replace(/<h1(\s[^>]*)?>/gi, '<div$1>');
+    bodyContent = bodyContent.replace(/<\/h1>/gi, '</div>');
+    
     // Return body content wrapped in a div (styles are in external CSS scoped to .og-image-rendered)
-    return `<div class="og-image-rendered">${bodyMatch[1]}</div>`;
+    return `<div class="og-image-rendered">${bodyContent}</div>`;
   }
   return html;
 }

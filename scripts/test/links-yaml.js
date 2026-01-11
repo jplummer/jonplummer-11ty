@@ -5,8 +5,7 @@ const path = require('path');
 const { execSync } = require('child_process');
 const yaml = require('js-yaml');
 const { validateDate, validateUrl, validateTitle } = require('../utils/validation-utils');
-const { createTestResult, addFile, addIssue, addWarning, outputResult } = require('../utils/test-result-builder');
-const { formatVerbose } = require('../utils/test-formatter');
+const { createTestResult, addFile, addIssue, addWarning, outputResult, formatVerbose } = require('../utils/test-results');
 
 // Check if links.yaml changed since last commit
 function hasLinksYamlChanged() {

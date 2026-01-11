@@ -21,6 +21,19 @@ This file contains project-specific rules for this Eleventy site. Universal rule
 
 Use `codebase_search` with queries like "How does Eleventy handle [feature]?" targeting `docs/eleventy/` to find relevant documentation dynamically.
 
+### 🔍 CRITICAL: Debugging Unexpected Behavior
+
+**When encountering unexpected behavior, follow the debugging workflow:**
+
+1. **ASSUME ELEVENTY IS WORKING CORRECTLY** - Most "bugs" are misunderstandings of Eleventy's behavior
+2. **Read `docs/ELEVENTY-DEBUGGING-WORKFLOW.md`** - This contains the systematic debugging process
+3. **Use Eleventy's debug mode** - Run `DEBUG=Eleventy* pnpm run build` to see what Eleventy is doing
+4. **Check relevant docs** - Map the behavior to the appropriate Eleventy documentation
+5. **Check pitfalls** - Review `docs/eleventy/pitfalls.md` for known gotchas
+6. **Only then consider custom code** - After verifying Eleventy doesn't provide this, ask user before implementing
+
+**Common mistake**: Writing workarounds for behavior that is actually Eleventy working as designed. Always check docs first.
+
 ## JavaScript/Node.js
 - Use CommonJS (require/module.exports) for scripts.
 - Include shebang for executable scripts: #!/usr/bin/env node.

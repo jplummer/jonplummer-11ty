@@ -2,8 +2,7 @@
 
 const { spawn } = require('child_process');
 const path = require('path');
-const { printOverallSummary, getTestEmoji, getTestDisplayName } = require('./utils/reporting-utils');
-const { formatCompact, formatVerbose, formatBuild } = require('./utils/test-formatter');
+const { printOverallSummary, getTestEmoji, getTestDisplayName, formatCompact, formatVerbose, formatBuild } = require('./utils/test-results');
 const { SPINNER_FRAMES } = require('./utils/spinner-utils');
 
 // Map test types to their script files
@@ -86,8 +85,9 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
       spinnerFrame = (spinnerFrame + 1) % SPINNER_FRAMES.length;
     }, 100);
     
-    // Set environment variable to indicate compact mode
+    // Set environment variables
     const env = { ...process.env };
+    env.TEST_RUNNER = 'true'; // Tell tests to output JSON, not formatted text
     if (compact) {
       env.TEST_COMPACT_MODE = 'true';
     }
@@ -125,10 +125,12 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
     });
     
     child.on('close', (code) => {
-      // Stop spinner
+      // Stop spinner and clear the line immediately to prevent race condition
       if (spinnerInterval) {
         clearInterval(spinnerInterval);
         spinnerInterval = null;
+        // Immediately clear the spinner line to prevent any remaining frame from showing
+        process.stdout.write('\r\x1b[K');
       }
       
       const fs = require('fs');
@@ -247,10 +249,11 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
               // Individual runs: use verbose format (which includes compact at top)
               formattedOutput = formatVerbose(jsonResult, formatOptions);
               // Clear spinner line and write formatted output
-              if (formattedOutput) {
+              // Always ensure we write something - formatVerbose should never be empty, but be defensive
+              if (formattedOutput && formattedOutput.trim().length > 0) {
                 process.stdout.write(`\r\x1b[K${formattedOutput}\n`);
               } else {
-                // Fallback if formatting returns empty
+                // Fallback if formatting returns empty - always show at least the summary
                 const summaryString = buildSummaryString(finalSummary);
                 process.stdout.write(`\r\x1b[K${resultIcon} ${emoji} ${displayName}: ${summaryString}\n`);
               }
@@ -264,15 +267,29 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
           }
         } else {
           // JSON detected but parsing failed - show summary only
+          // This should not happen, but ensure we always show something
           const summaryString = buildSummaryString(finalSummary);
           process.stdout.write(`\r\x1b[K${resultIcon} ${emoji} ${displayName}: ${summaryString}\n`);
+          // Also log the issue for debugging
+          if (stdoutData && stdoutData.length > 0) {
+            console.error(`\nWarning: JSON markers found but parsing failed for ${testType}`);
+            console.error(`Output length: ${stdoutData.length}`);
+            console.error(`First 500 chars: ${stdoutData.substring(0, 500)}`);
+          }
         }
-      } else if (!showStatus) {
-        // Non-JSON output (e.g., deploy.js): output was already passed through for individual runs
-        // No additional formatting needed
       } else {
-        // Non-JSON output in group runs: just clear spinner, output was already shown
-        process.stdout.write(`\r\x1b[K`);
+        // No JSON format detected
+        if (!showStatus && stdoutData && stdoutData.trim().length > 0) {
+          // Individual run with non-JSON output - pass it through
+          process.stdout.write(`\r\x1b[K${stdoutData}`);
+        } else if (!showStatus) {
+          // Individual run but no output at all - show at least a summary
+          const summaryString = buildSummaryString(finalSummary);
+          process.stdout.write(`\r\x1b[K${resultIcon} ${emoji} ${displayName}: ${summaryString}\n`);
+        } else {
+          // Group run with non-JSON output - just clear spinner
+          process.stdout.write(`\r\x1b[K`);
+        }
       }
       
       if (code === 0) {

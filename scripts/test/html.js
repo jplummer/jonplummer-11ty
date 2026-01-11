@@ -3,8 +3,8 @@
 const fs = require('fs');
 const path = require('path');
 const { HtmlValidate, FileSystemConfigLoader } = require('html-validate');
-const { checkSiteDirectory, getHtmlFiles, getRelativePath, readFile } = require('../utils/test-base');
-const { createTestResult, addFile, addIssue, addWarning, outputResult } = require('../utils/test-result-builder');
+const { checkSiteDirectory, getHtmlFiles, getRelativePath, readFile } = require('../utils/test-helpers');
+const { createTestResult, addFile, addIssue, addWarning, outputResult } = require('../utils/test-results');
 
 async function validate() {
   checkSiteDirectory();

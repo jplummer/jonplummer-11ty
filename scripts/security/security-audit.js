@@ -34,8 +34,7 @@ if (fs.existsSync('.env')) {
   loadDotenvSilently();
 }
 
-const { createTestResult, addFile, addIssue, addWarning, finalizeTestResult } = require('../utils/test-result-builder');
-const { formatVerbose, formatCompact, formatBuild } = require('../utils/test-formatter');
+const { createTestResult, addFile, addIssue, addWarning, finalizeTestResult, formatVerbose, formatCompact, formatBuild } = require('../utils/test-results');
 
 // Import check modules
 const dependencyChecks = require('./checks/dependency-checks');
@@ -104,7 +103,7 @@ async function runSecurityAudit() {
   await liveSiteChecks.checkCertificateExpiration(results, addFinding);
   await liveSiteChecks.checkDNSRecords(results, addFinding);
   
-  // Build JSON result using test-result-builder
+  // Build JSON result using test-results utilities
   const jsonResult = createTestResult('security-audit', 'Security Audit');
   
   // Map each check to a file entry

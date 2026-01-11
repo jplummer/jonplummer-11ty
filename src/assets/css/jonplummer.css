@@ -685,9 +685,6 @@ header a.skip:focus {
 
 .preview-info {
   margin-bottom: var(--spacing-lg);
-  padding: var(--spacing-md);
-  background: var(--content-background-color);
-  border: 1px solid var(--text-color-light);
 }
 
 .preview-section {
@@ -705,12 +702,6 @@ header a.skip:focus {
   flex-direction: column;
   gap: var(--spacing-lg);
   margin: var(--spacing-lg) 0;
-}
-
-.og-preview-item {
-  border: 1px solid var(--text-color-light);
-  padding: var(--spacing-md);
-  background: var(--content-background-color);
 }
 
 .og-preview-item h3 {
@@ -823,7 +814,8 @@ header a.skip:focus {
   flex-wrap: wrap;
 }
 
-.og-image-rendered .og-hgroup h1 {
+.og-image-rendered .og-hgroup h1,
+.og-image-rendered .og-hgroup > div:first-child {
   font-size: 6rem;
   line-height: var(--line-height-3xl);
   font-weight: var(--font-weight-thin);
@@ -831,7 +823,8 @@ header a.skip:focus {
   color: var(--link-color);
 }
 
-.og-image-rendered .og-hgroup h1 a {
+.og-image-rendered .og-hgroup h1 a,
+.og-image-rendered .og-hgroup > div:first-child a {
   color: var(--link-color) !important;
   text-decoration: none;
 }

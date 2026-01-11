@@ -247,12 +247,12 @@
 
 ## DONE
 
-- [x] Refactor markdown renderer configuration - replaced HTML blocks with `{% portraitGrid %}` paired shortcode, eliminating need for preprocessor entirely (2026-01-10)
-- [x] implement quick authoring-related tests just for new changes (2026-01-10)
-- [x] fix spell checking, since it totally doesn't catch anything (2026-01-10)
-- [x] fix spelling across site (2026-01-10)
-- [x] address Dependabot and `pnpm audit` warnings (2026-01-06)
-- [x] setup SSH access to GitHub from personal laptop (2026-01-06)
+- [x] Refactor markdown renderer configuration - replaced HTML blocks with `{% portraitGrid %}` paired shortcode, eliminating need for preprocessor entirely (2026-01-11)
+- [x] Implement quick authoring-related tests just for new changes (2026-01-10)
+- [x] Fix spell checking, since it totally doesn't catch anything (2026-01-10)
+- [x] Fix spelling across site (2026-01-10)
+- [x] Address Dependabot and `pnpm audit` warnings (2026-01-06)
+- [x] Setup SSH access to GitHub from personal laptop (2026-01-06)
 - [x] pnpm vs npm (2026-01-05)
 - [x] Make color playground page with style switcher (2025-12-24)
 - [x] Watch for ahrefs improvement in image size complaints this weekend (it worked! ahrefs health score now 100 and steady) (2025-12-24)
@@ -268,11 +268,11 @@
 - [x] gzip css (2025-12-22)
 - [x] handle "image too large" ahrefs feedback (2025-12-22)
   - [x] Automate image optimization (see https://www.aleksandrhovhannisyan.com/blog/eleventy-the-good-the-bad-and-the-possum/#5-it-has-an-excellent-image-plugin and https://bholmes.dev/blog/picture-perfect-image-optimization/ )
-- [x] make portfolio layout not depend on embedded HTML
+- [x] Make portfolio layout not depend on embedded HTML
   - [x] markdown-it-attrs and markdown-it-container?
-  - [x] custom shortcodes
-- [x] portfolio image widths: full, 2/3, 1/3, smaller for mobile images
-- [x] make sure margins etc are good in portfolio items, using blog posts as the example
+  - [x] Custom shortcodes
+- [x] Portfolio image widths: full, 2/3, 1/3, smaller for mobile images
+- [x] Make sure margins etc are good in portfolio items, using blog posts as the example
 - [x] Fix timezone issues (going forward reflect real authoring date as I experienced it, but don't break incoming links by changing URLs to existing content) (2025-12-22)
 - [x] Watch ahrefs this weekend for "URL changed" errors; site health should be at or near 100 (2025-12-22)
 - [x] Optimize deploy output and eliminate redundant builds (2025-12-07)
@@ -283,11 +283,11 @@
 - [x] Expand product trio portfolio piece
 - [x] Add Invoca interview presentation as portfolio piece
 - [x] Put descriptions on the main portfolio page (from item frontmatter)
-- [x] improve generated ogImage styling (2025-12-07)
-- [x] improve ogImage index.png, which currently has redundant stuff in it (2025-12-07)
+- [x] Improve generated ogImage styling (2025-12-07)
+- [x] Improve ogImage index.png, which currently has redundant stuff in it (2025-12-07)
 - [x] Refactor HEAD includes to eliminate redundancy and fix index page issues (2025-12-04)
 - [x] Update favicon setup to modern minimal standard (2025-12-04)
-- [x] curly quotes (2025-12-04)
+- [x] Curly quotes (2025-12-04)
 - [x] Switch drafts from folder-based to frontmatter-based (2025-12-03)
 - [x] Modularize .eleventy.js configuration (2025-12-03)
 - [x] Add date range titles to paginated pages (2025-12-03)
@@ -300,8 +300,8 @@
 - [x] Add SITE_DOMAIN environment variable for centralized domain configuration (2025-11-26)
 - [x] Security audit improvements and deployment fixes (2025-11-26)
 - [x] Enable smart quotes in markdown and titles (2025-11-26)
-- [x] address `npm test rss-feed` issues (2025-11-26)
-- [x] image optimization (2025-11-26)
+- [x] Address `npm test rss-feed` issues (2025-11-26)
+- [x] Image optimization (2025-11-26)
 - [x] Refactor test suite and fix nested anchor issue (2025-11-26)
 - [x] Consolidate templates and utilities, fix test issues (2025-11-26)
 - [x] Security improvements: passwordless SSH, CSP hardening, dependency fixes (2025-11-25)

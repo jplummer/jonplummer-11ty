@@ -5,8 +5,7 @@ const path = require('path');
 const { execSync } = require('child_process');
 const { findMarkdownFiles } = require('../utils/file-utils');
 const { parseFrontMatter } = require('../utils/frontmatter-utils');
-const { createTestResult, addFile, addIssue, addWarning, outputResult } = require('../utils/test-result-builder');
-const { formatVerbose } = require('../utils/test-formatter');
+const { createTestResult, addFile, addIssue, addWarning, outputResult, formatVerbose } = require('../utils/test-results');
 
 // Get files changed since last commit
 function getChangedFiles() {

@@ -5,9 +5,8 @@ const fs = require('fs');
 const { execSync } = require('child_process');
 const { extractMetaTags, extractHeadings, parseHtml } = require('../utils/html-utils');
 const { validateTitle: validateTitleUtil, validateMetaDescription: validateMetaDescriptionUtil } = require('../utils/validation-utils');
-const { checkSiteDirectory, getHtmlFiles, getRelativePath, readFile } = require('../utils/test-base');
-const { createTestResult, addFile, addIssue, addWarning, addGlobalIssue, outputResult } = require('../utils/test-result-builder');
-const { formatVerbose } = require('../utils/test-formatter');
+const { checkSiteDirectory, getHtmlFiles, getRelativePath, readFile } = require('../utils/test-helpers');
+const { createTestResult, addFile, addIssue, addWarning, addGlobalIssue, outputResult, formatVerbose } = require('../utils/test-results');
 
 // Get changed files since last commit
 function getChangedFiles() {

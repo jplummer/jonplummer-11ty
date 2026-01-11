@@ -3,8 +3,8 @@
 const fs = require('fs');
 const path = require('path');
 const { extractLinks, checkAnchorLink, classifyLink } = require('../utils/html-utils');
-const { checkSiteDirectory, getHtmlFiles, getRelativePath, readFile } = require('../utils/test-base');
-const { createTestResult, addFile, addIssue, outputResult } = require('../utils/test-result-builder');
+const { checkSiteDirectory, getHtmlFiles, getRelativePath, readFile } = require('../utils/test-helpers');
+const { createTestResult, addFile, addIssue, outputResult } = require('../utils/test-results');
 
 // Check if internal file exists
 function checkInternalLink(href, basePath, siteRoot) {

@@ -82,27 +82,6 @@ The test suite is designed to:
 
 Use `pnpm run test fast` for quick validation during development. Use `pnpm run test all` for comprehensive checks before deployment.
 
-#### Test Suite Architecture
-
-The test suite uses a centralized JSON output format with a formatter system. All validation tests use the unified format:
-
-- **test-result-builder.js**: Utilities for building structured JSON test results (`createTestResult`, `addFile`, `addIssue`, `addWarning`, `outputResult`)
-- **test-formatter.js**: Centralized formatter that converts JSON to human-readable output
-- **test-runner.js**: Orchestrates test execution, detects JSON output via markers (`__TEST_JSON_START__`/`__TEST_JSON_END__`), and formats results
-
-**Output Formats**:
-- **Compact** (default for group runs): Succinct summary showing files checked, passing, issues, warnings
-- **Verbose** (default for individual runs): Detailed output with issue type summary and file-by-file details
-- **Build** (`--format build`): Blocking issues only, clear pass/fail for CI/CD (treats critical warnings as blocking)
-- **Type grouping** (`--group-by type`): Alternative view grouping issues by type for systematic fixes
-
-**Shared Utilities**:
-- **html-utils.js**: Cheerio-based HTML parsing (replaces fragile regex)
-- **validation-utils.js**: Common validation functions (title, description, URL, date, slug)
-- **file-utils.js**: Common file operations (finding markdown files, checking `_site` exists)
-
-All validation tests output structured JSON that is automatically formatted by the test runner. This enables easy iteration on output design without modifying individual test scripts. The `deploy` test is a special case (connectivity test) that outputs directly to console rather than using the JSON format.
-
 #### links.yaml Validation
 
 The `links-yaml` test validates the structure and format of `_data/links.yaml`:

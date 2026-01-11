@@ -5,8 +5,7 @@ const path = require('path');
 const { execSync } = require('child_process');
 const { findFilesByExtension } = require('../utils/file-utils');
 const { parseFrontMatter } = require('../utils/frontmatter-utils');
-const { createTestResult, addFile, addWarning, outputResult } = require('../utils/test-result-builder');
-const { formatVerbose } = require('../utils/test-formatter');
+const { createTestResult, addFile, addWarning, outputResult, formatVerbose } = require('../utils/test-results');
 
 // Find all markdown and YAML files in src/ directory, excluding drafts
 function findSourceFiles() {

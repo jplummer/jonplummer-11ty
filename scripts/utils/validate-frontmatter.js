@@ -10,7 +10,7 @@
 const fs = require('fs');
 const path = require('path');
 const { parseFrontMatter, formatYamlString } = require('./frontmatter-utils');
-const { getMarkdownFiles, readFile } = require('./test-base');
+const { getMarkdownFiles, readFile } = require('./test-helpers');
 
 function validateFrontmatter(fix = false) {
   const srcDir = './src';

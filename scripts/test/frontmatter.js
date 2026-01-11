@@ -5,10 +5,9 @@ const path = require('path');
 const { execSync } = require('child_process');
 const yaml = require('js-yaml');
 const { validateDate, validateSlug } = require('../utils/validation-utils');
-const { getMarkdownFiles, readFile } = require('../utils/test-base');
+const { getMarkdownFiles, readFile } = require('../utils/test-helpers');
 const { parseFrontMatter } = require('../utils/frontmatter-utils');
-const { createTestResult, addFile, addIssue, addWarning, addGlobalIssue, outputResult } = require('../utils/test-result-builder');
-const { formatVerbose } = require('../utils/test-formatter');
+const { createTestResult, addFile, addIssue, addWarning, addGlobalIssue, outputResult, formatVerbose } = require('../utils/test-results');
 
 // Front matter parsing and file finding now use shared utilities
 

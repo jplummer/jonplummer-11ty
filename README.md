@@ -68,10 +68,19 @@ If you want to see how the code works:
 
 This repository contains a cached copy of the official Eleventy documentation in `docs/eleventy/` and a script to make that copy up-to-date. This puts the Eleventy documentation into agent context, which seems to work better than searching the web for Eleventy implementation details.
 
-### CRITICAL INSTRUCTION
+### CRITICAL INSTRUCTIONS
 
+**Before Implementing Features:**
 Before implementing any feature, filter, collection, or configuration, an agent MUST check `docs/eleventy/` to see if Eleventy supports it natively.
 
 - Do not reimplement standard Eleventy features (e.g. pagination, collections, data cascade, date functions).
 - Use the provided documentation to understand the "Eleventy way" of doing things.
 - Prefer using Eleventy-supplied capabilities over writing custom code.
+
+**When Debugging Unexpected Behavior:**
+When encountering unexpected behavior, **assume Eleventy is working correctly** and follow the debugging workflow:
+
+- Read `docs/ELEVENTY-DEBUGGING-WORKFLOW.md` for the systematic debugging process
+- Use Eleventy's debug mode: `DEBUG=Eleventy* pnpm run build`
+- Check relevant Eleventy documentation before writing workarounds
+- Most "bugs" are actually misunderstandings of how Eleventy's features work

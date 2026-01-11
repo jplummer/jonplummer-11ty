@@ -3,8 +3,8 @@
 const fs = require('fs');
 const path = require('path');
 const { extractMetaTags, parseHtml } = require('../utils/html-utils');
-const { checkSiteDirectory, getHtmlFiles, getRelativePath, readFile } = require('../utils/test-base');
-const { createTestResult, addFile, addIssue, outputResult } = require('../utils/test-result-builder');
+const { checkSiteDirectory, getHtmlFiles, getRelativePath, readFile } = require('../utils/test-helpers');
+const { createTestResult, addFile, addIssue, outputResult } = require('../utils/test-results');
 const { parseFrontMatter } = require('../utils/frontmatter-utils');
 
 // Check if HTML content is a redirect page
