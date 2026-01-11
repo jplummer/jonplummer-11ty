@@ -2,11 +2,6 @@
 
 ## ☑️ Selected
 
-- [x] fix spell checking, since it totally doesn't catch anything
-- [x] fix spelling across site
-
-- [ ] look into https://github.com/ttscoff/md-fixup
-
 - [ ] Portfolio 💎 DO A THING EVERY WEEKEND
   - [ ] Explore presentation-to-portfolio item automation, including speaker notes
     - [ ] What does it take to get speaker notes out of a PPT?
@@ -195,11 +190,13 @@
 
 ### 🖍 Also…
 
-- IndexNow
+- IndexNow ?
+
+- look into https://github.com/ttscoff/md-fixup ?
 
 - handle GitHub Dependabot complaints https://github.com/jplummer/jonplummer-11ty/security/dependabot
 
-- https://bsky.app/profile/did:plc:re3ebnp5v7ffagz6rb6xfei4
+- https://bsky.app/profile/did:plc:re3ebnp5v7ffagz6rb6xfei4 ?
 
 - https://kagi.com/search?q=contemporary+blog+styling+2025 ?
 
@@ -250,6 +247,9 @@
 
 ## DONE
 
+- [x] implement quick authoring-related tests just for new changes (2026-01-10)
+- [x] fix spell checking, since it totally doesn't catch anything (2026-01-10)
+- [x] fix spelling across site (2026-01-10)
 - [x] address Dependabot and `pnpm audit` warnings (2026-01-06)
 - [x] setup SSH access to GitHub from personal laptop (2026-01-06)
 - [x] pnpm vs npm (2026-01-05)

@@ -1,5 +1,11 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),newest first.
 
+## 2026-01-10
+
+- Improve spell check: add ignore patterns, custom words, and better output
+- Add new post and update various files
+- Update pnpm-lock.yaml
+
 ## 2026-01-06
 
 - Remove unused to-ico dependency and reorganize Eleventy docs
@@ -306,4 +312,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-01-07
+Last deployed on 2026-01-11
