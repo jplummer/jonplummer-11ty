@@ -8,19 +8,6 @@ This file contains project-specific rules for this Eleventy site. Universal rule
 - Include required front matter: title, date, layout, tags (posts must include `post` in tags array).
 - Use ISO date format: "YYYY-MM-DDTHH:mm:ss-HH:mm".
 
-### ⚠️ CRITICAL: Check Eleventy Documentation Before Implementing Features
-**MANDATORY WORKFLOW**: Before implementing ANY Eleventy feature, filter, collection, data file, pagination, or configuration:
-1. **FIRST**: Search `docs/eleventy/` using `codebase_search` to find if Eleventy supports it natively
-2. **THEN**: Read the relevant documentation file(s) using `read_file`
-3. **ONLY THEN**: Implement using Eleventy's built-in capabilities
-
-**DO NOT**:
-- Reimplement standard Eleventy features (pagination, collections, data cascade, date functions, filters, shortcodes)
-- Write custom code for features Eleventy provides natively
-- Guess or assume behavior - always check the docs first
-
-Use `codebase_search` with queries like "How does Eleventy handle [feature]?" targeting `docs/eleventy/` to find relevant documentation dynamically.
-
 ### 🔍 CRITICAL: Debugging Unexpected Behavior
 
 **When encountering unexpected behavior, follow the debugging workflow:**
@@ -28,11 +15,9 @@ Use `codebase_search` with queries like "How does Eleventy handle [feature]?" ta
 1. **ASSUME ELEVENTY IS WORKING CORRECTLY** - Most "bugs" are misunderstandings of Eleventy's behavior
 2. **Read `docs/ELEVENTY-DEBUGGING-WORKFLOW.md`** - This contains the systematic debugging process
 3. **Use Eleventy's debug mode** - Run `DEBUG=Eleventy* pnpm run build` to see what Eleventy is doing
-4. **Check relevant docs** - Map the behavior to the appropriate Eleventy documentation
-5. **Check pitfalls** - Review `docs/eleventy/pitfalls.md` for known gotchas
-6. **Only then consider custom code** - After verifying Eleventy doesn't provide this, ask user before implementing
+4. **Only then consider custom code** - After verifying Eleventy doesn't provide this, ask user before implementing
 
-**Common mistake**: Writing workarounds for behavior that is actually Eleventy working as designed. Always check docs first.
+**Common mistake**: Writing workarounds for behavior that is actually Eleventy working as designed.
 
 ## JavaScript/Node.js
 - Use CommonJS (require/module.exports) for scripts.

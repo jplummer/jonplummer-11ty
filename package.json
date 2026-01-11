@@ -15,7 +15,6 @@
     "clean": "rm -rf _site",
     "validate": "node scripts/test-runner.js html",
     "deploy": "node scripts/deploy/deploy.js",
-    "update-docs": "node scripts/content/update-eleventy-docs.js",
     "changelog": "node scripts/content/generate-changelog.js",
     "convert-pdf": "node scripts/content/convert-pdf-pages.js",
     "convert-pdf-with-notes": "node scripts/content/convert-pdf-pages-with-notes.js",

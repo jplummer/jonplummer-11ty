@@ -2,7 +2,3 @@
 _site/
 node_modules/
 pnpm-lock.yaml
-
-# Keep these for context:
-# docs/eleventy/ - Eleventy documentation for reference
-# docs/plan.md - Project documentation

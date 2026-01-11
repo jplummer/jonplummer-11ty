@@ -150,19 +150,6 @@ This is useful for:
 - Checking what files would be changed on the server
 - Testing configuration changes
 
-### 📚 Update Eleventy Documentation
-
-- `pnpm run update-docs` - Pull latest 11ty documentation from official repo
-
-The Eleventy documentation is cached in `docs/eleventy/` to provide context to Cursor and prevent confusion about what 11ty naturally provides. This script:
-
-1. Clones the `11ty/11ty-website` repository to a temporary directory (shallow clone)
-2. Copies the `docs` directory to `docs/eleventy`
-3. Cleans up temporary files
-
-The script outputs a summary showing the commit hash and file count changes (added/removed/unchanged) to help track what was updated.
-
-Run this periodically to keep the cached docs up to date with the latest 11ty features and changes.
 
 ### 📋 Changelog Generation
 

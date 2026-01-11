@@ -1,5 +1,5 @@
 // Utilities
-const { createMarkdownRenderer } = require("./eleventy/utils/markdown-utils");
+const { configureMarkdown } = require("./eleventy/utils/markdown-utils");
 
 // Configuration modules
 const configureDataExtensions = require("./eleventy/config/data-extensions");
@@ -20,9 +20,8 @@ module.exports = function (eleventyConfig) {
   // Configure date parsing (must be early, before other configs that use dates)
   configureDateParsing(eleventyConfig);
   
-  // Initialize markdown-it (needed by filters)
-  const md = createMarkdownRenderer();
-  eleventyConfig.setLibrary("md", md);
+  // Configure markdown using native setLibrary API (returns instance for filters)
+  const md = configureMarkdown(eleventyConfig);
   
   // Configure plugins
   configurePlugins(eleventyConfig);

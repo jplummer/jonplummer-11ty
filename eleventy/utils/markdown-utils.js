@@ -1,19 +1,22 @@
 /**
- * Utility: Markdown renderer initialization
+ * Utility: Markdown renderer configuration
  * 
- * Utility module used by `.eleventy.js` to create the markdown renderer instance.
- * Configures markdown-it with site-specific settings (HTML support, line breaks, linkify, typographer).
+ * Configures markdown-it with site-specific settings using Eleventy's native setLibrary API.
+ * Also provides the configured instance for use in filters.
  */
 
 const markdownIt = require("markdown-it");
 
 /**
- * Initializes and configures markdown-it instance.
- * Used for markdown processing throughout the site.
+ * Creates and configures a markdown-it instance.
+ * Uses Eleventy's native setLibrary API to register the configured instance.
  * 
- * @returns {markdownIt} Configured markdown-it instance
+ * @param {object} eleventyConfig - Eleventy configuration object
+ * @returns {markdownIt} Configured markdown-it instance for use in filters
  */
-function createMarkdownRenderer() {
+function configureMarkdown(eleventyConfig) {
+  // Create markdown-it instance with site-specific options
+  // Options must be set at construction time
   const md = markdownIt({
     html: true, // Allow HTML in markdown
     breaks: true, // Convert line breaks to <br>
@@ -37,10 +40,13 @@ function createMarkdownRenderer() {
     return defaultLinkOpen(tokens, idx, options, env, self);
   };
   
+  // Register the configured instance using Eleventy's native API
+  eleventyConfig.setLibrary("md", md);
+  
   return md;
 }
 
 module.exports = {
-  createMarkdownRenderer
+  configureMarkdown
 };
 
