@@ -11,7 +11,7 @@ const testTypes = {
   'html': 'html.js',
   'links-yaml': 'links-yaml.js',
   'internal-links': 'internal-links.js',
-  'content-structure': 'content-structure.js',
+  'frontmatter': 'frontmatter.js',
   'markdown': 'markdown.js',
   'spell': 'spell.js',
   'seo-meta': 'seo-meta.js',
@@ -27,7 +27,7 @@ const fastTests = [
   'html',
   'links-yaml',
   'internal-links',
-  'content-structure',
+  'frontmatter',
   'markdown',
   'spell',
   'seo-meta',
@@ -40,7 +40,7 @@ const allTests = [
   'html',
   'links-yaml',
   'internal-links',
-  'content-structure',
+  'frontmatter',
   'markdown',
   'spell',
   'seo-meta',
@@ -137,7 +137,15 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
       let jsonResult = null;
       
       // Check if output contains JSON (new format)
-      if (stdoutData.includes('__TEST_JSON_START__') && stdoutData.includes('__TEST_JSON_END__')) {
+      // If JSON markers are present, NEVER output raw stdout - always suppress it
+      const hasStartMarker = stdoutData.includes('__TEST_JSON_START__');
+      const hasEndMarker = stdoutData.includes('__TEST_JSON_END__');
+      const hasJsonMarkers = hasStartMarker && hasEndMarker;
+      
+      if (hasJsonMarkers) {
+        // Mark as JSON format immediately to suppress raw output
+        isJsonFormat = true;
+        
         // Extract JSON between markers
         const startMarker = '__TEST_JSON_START__';
         const endMarker = '__TEST_JSON_END__';
@@ -148,7 +156,6 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
           const jsonStr = stdoutData.substring(startIdx, endIdx).trim();
           try {
             jsonResult = JSON.parse(jsonStr);
-            isJsonFormat = true;
             // Extract summary from JSON
             summary = {
               files: jsonResult.summary?.files || 0,
@@ -161,13 +168,20 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
             console.error('Warning: Failed to parse JSON output from test');
             console.error(`  Test: ${testType}`);
             console.error(`  Error: ${e.message}`);
+            // jsonResult stays null, but isJsonFormat is already true to suppress output
           }
-          }
+        } else {
+          // Markers found but couldn't extract JSON - show error
+          console.error('Warning: JSON markers found but could not extract JSON');
+          console.error(`  Test: ${testType}`);
+          console.error(`  Start index: ${startIdx}, End index: ${endIdx}`);
+        }
       }
       
-      // Don't output raw stdout if JSON was detected - we'll format it below
+      // NEVER output raw stdout if JSON markers were detected (double-check to be safe)
       // For tests without JSON markers (like deploy.js), pass through stdout directly
-      if (stdoutData && !isJsonFormat) {
+      const definitelyHasJson = stdoutData.includes('__TEST_JSON_START__') || stdoutData.includes('__TEST_JSON_END__');
+      if (stdoutData && !isJsonFormat && !definitelyHasJson) {
         process.stdout.write(stdoutData);
       }
       
@@ -213,25 +227,45 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
       }
       
       // Format and show output
-      if (isJsonFormat && jsonResult) {
-        // Use format based on options
-        let formattedOutput;
-        if (formatOptions.format === 'build') {
-          formattedOutput = formatBuild(jsonResult);
-          // Clear spinner line and write build format output
-          process.stdout.write(`\r\x1b[K${formattedOutput}\n`);
-        } else if (showStatus) {
-          // Group runs: update same line with result icon and summary
-          const summaryString = buildSummaryString(finalSummary);
-          const finalLine = `${resultIcon} ${emoji} ${displayName}: ${summaryString}`;
-          // Clear spinner line and write final result on same line
-          // Use ANSI escape code to clear from cursor to end of line, then write new content
-          process.stdout.write(`\r\x1b[K${finalLine}\n`);
+      if (isJsonFormat) {
+        if (jsonResult) {
+          // Use format based on options
+          let formattedOutput;
+          try {
+            if (formatOptions.format === 'build') {
+              formattedOutput = formatBuild(jsonResult);
+              // Clear spinner line and write build format output
+              process.stdout.write(`\r\x1b[K${formattedOutput}\n`);
+            } else if (showStatus) {
+              // Group runs: update same line with result icon and summary
+              const summaryString = buildSummaryString(finalSummary);
+              const finalLine = `${resultIcon} ${emoji} ${displayName}: ${summaryString}`;
+              // Clear spinner line and write final result on same line
+              // Use ANSI escape code to clear from cursor to end of line, then write new content
+              process.stdout.write(`\r\x1b[K${finalLine}\n`);
+            } else {
+              // Individual runs: use verbose format (which includes compact at top)
+              formattedOutput = formatVerbose(jsonResult, formatOptions);
+              // Clear spinner line and write formatted output
+              if (formattedOutput) {
+                process.stdout.write(`\r\x1b[K${formattedOutput}\n`);
+              } else {
+                // Fallback if formatting returns empty
+                const summaryString = buildSummaryString(finalSummary);
+                process.stdout.write(`\r\x1b[K${resultIcon} ${emoji} ${displayName}: ${summaryString}\n`);
+              }
+            }
+          } catch (e) {
+            // Formatting failed - show error and summary
+            console.error(`\nError formatting test output: ${e.message}`);
+            console.error(e.stack);
+            const summaryString = buildSummaryString(finalSummary);
+            process.stdout.write(`\r\x1b[K${resultIcon} ${emoji} ${displayName}: ${summaryString}\n`);
+          }
         } else {
-          // Individual runs: use verbose format (which includes compact at top)
-          formattedOutput = formatVerbose(jsonResult, formatOptions);
-          // Clear spinner line
-          process.stdout.write(`\r\x1b[K${formattedOutput}\n`);
+          // JSON detected but parsing failed - show summary only
+          const summaryString = buildSummaryString(finalSummary);
+          process.stdout.write(`\r\x1b[K${resultIcon} ${emoji} ${displayName}: ${summaryString}\n`);
         }
       } else if (!showStatus) {
         // Non-JSON output (e.g., deploy.js): output was already passed through for individual runs

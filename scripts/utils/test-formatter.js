@@ -192,9 +192,6 @@ function formatVerbose(result, options = {}) {
         output.push('');
       });
     }
-    
-    // Suggestions come last
-    output.push('💡 Tip: Try --group-by type to see issues grouped by type (useful for systematic fixes)');
   } else {
     // All tests passed - show a brief confirmation for verbose mode
     output.push('✅ All files passed validation with no issues or warnings.');

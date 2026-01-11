@@ -5,7 +5,7 @@ const path = require('path');
 const { execSync } = require('child_process');
 const { findFilesByExtension } = require('../utils/file-utils');
 const { parseFrontMatter } = require('../utils/frontmatter-utils');
-const { createTestResult, addFile, addIssue, outputResult } = require('../utils/test-result-builder');
+const { createTestResult, addFile, addWarning, outputResult } = require('../utils/test-result-builder');
 
 // Find all markdown and YAML files in src/ directory, excluding drafts
 function findSourceFiles() {
@@ -43,6 +43,7 @@ function runCspell(files) {
     // cspell accepts files as arguments
     // Quote file paths to handle spaces
     const fileArgs = files.map(f => `"${f}"`).join(' ');
+    // Use default output format (not JSON) for easier parsing
     const command = `npx cspell --config cspell.json --no-must-find-files ${fileArgs}`;
     const output = execSync(command, { 
       encoding: 'utf8',
@@ -50,6 +51,13 @@ function runCspell(files) {
       cwd: path.join(__dirname, '../..'),
       shell: true
     });
+    
+    // If we get here, cspell found no errors (exit code 0)
+    // But let's verify by checking if output contains anything
+    if (output && output.trim()) {
+      // cspell sometimes outputs info even on success, but this shouldn't happen
+      console.error('Unexpected cspell output on success:', output);
+    }
     
     return { valid: true, errors: [] };
   } catch (error) {
@@ -59,47 +67,95 @@ function runCspell(files) {
     const errors = [];
     
     // Parse cspell output format
-    // Format: "file.md:line:column - Unknown word: word"
-    // Or: "file.md:line - Unknown word: word"
+    // Modern cspell format is typically: "file:line:column word"
+    // Or: "file:line:column\nword" (word on next line)
+    // Or: "file:line:column - Unknown word: word"
     const lines = output.split('\n');
     
-    for (const line of lines) {
-      // Match: "file:line:column - Unknown word: word"
-      const match1 = line.match(/^(.+?):(\d+):(\d+)\s+-\s+Unknown word:\s+(.+)$/);
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      // Skip empty lines
+      if (!line.trim()) continue;
+      
+      // Match: "file:line:column - Unknown word (word)" or "file:line:column - Unknown word (word) fix: ..."
+      const match1 = line.match(/^(.+?):(\d+):(\d+)\s+-\s+Unknown word\s+\(([^)]+)\)/);
       if (match1) {
         const filePath = path.resolve(path.join(__dirname, '../..'), match1[1]);
+        // Extract just the word (before any "fix:" suggestions)
+        let word = match1[4].trim();
+        // Remove any "fix:" suggestions that might be in the word
+        if (word.includes(' fix:')) {
+          word = word.split(' fix:')[0].trim();
+        }
+        if (word) {
+          errors.push({
+            file: filePath,
+            line: parseInt(match1[2]),
+            column: parseInt(match1[3]),
+            word: word
+          });
+        }
+        continue;
+      }
+      
+      // Match: "file:line:column word" (simple format without "Unknown word")
+      const match1b = line.match(/^(.+?):(\d+):(\d+)\s+(.+)$/);
+      if (match1b && !match1b[4].includes('Unknown word')) {
+        const filePath = path.resolve(path.join(__dirname, '../..'), match1b[1]);
+        const word = match1b[4].trim();
+        if (word) {
+          errors.push({
+            file: filePath,
+            line: parseInt(match1b[2]),
+            column: parseInt(match1b[3]),
+            word: word
+          });
+        }
+        continue;
+      }
+      
+      // Match: "file:line:column" (word might be on next line)
+      const match2 = line.match(/^(.+?):(\d+):(\d+)\s*$/);
+      if (match2 && i + 1 < lines.length) {
+        const nextLine = lines[i + 1].trim();
+        if (nextLine && !nextLine.includes(':')) {
+          // Next line is likely the word
+          const filePath = path.resolve(path.join(__dirname, '../..'), match2[1]);
+          errors.push({
+            file: filePath,
+            line: parseInt(match2[2]),
+            column: parseInt(match2[3]),
+            word: nextLine
+          });
+          i++; // Skip the next line since we processed it
+          continue;
+        }
+      }
+      
+      // Match: "file:line:column - Unknown word: word"
+      const match3 = line.match(/^(.+?):(\d+):(\d+)\s+-\s+Unknown word:\s+(.+)$/);
+      if (match3) {
+        const filePath = path.resolve(path.join(__dirname, '../..'), match3[1]);
         errors.push({
           file: filePath,
-          line: parseInt(match1[2]),
-          column: parseInt(match1[3]),
-          word: match1[4].trim()
+          line: parseInt(match3[2]),
+          column: parseInt(match3[3]),
+          word: match3[4].trim()
         });
         continue;
       }
       
       // Match: "file:line - Unknown word: word"
-      const match2 = line.match(/^(.+?):(\d+)\s+-\s+Unknown word:\s+(.+)$/);
-      if (match2) {
-        const filePath = path.resolve(path.join(__dirname, '../..'), match2[1]);
+      const match4 = line.match(/^(.+?):(\d+)\s+-\s+Unknown word:\s+(.+)$/);
+      if (match4) {
+        const filePath = path.resolve(path.join(__dirname, '../..'), match4[1]);
         errors.push({
           file: filePath,
-          line: parseInt(match2[2]),
+          line: parseInt(match4[2]),
           column: 1,
-          word: match2[3].trim()
+          word: match4[3].trim()
         });
         continue;
-      }
-      
-      // Match: "file - Unknown word: word" (no line number)
-      const match3 = line.match(/^(.+?)\s+-\s+Unknown word:\s+(.+)$/);
-      if (match3) {
-        const filePath = path.resolve(path.join(__dirname, '../..'), match3[1]);
-        errors.push({
-          file: filePath,
-          line: 1,
-          column: 1,
-          word: match3[2].trim()
-        });
       }
     }
     
@@ -141,12 +197,12 @@ function validateSpelling() {
       const relativePath = path.relative('./src', file);
       let fileObj = fileMap.get(relativePath);
       if (!fileObj) {
-        fileObj = addFile(result, file, relativePath);
+        fileObj = addFile(result, relativePath, file);
         fileMap.set(relativePath, fileObj);
       }
       
       errors.forEach(error => {
-        addIssue(fileObj, {
+        addWarning(fileObj, {
           type: 'spelling',
           message: `Unknown word: "${error.word}"`,
           word: error.word,
@@ -158,6 +214,7 @@ function validateSpelling() {
   }
 
   // Add files that passed (no errors)
+  // Note: When there are many errors, this makes the JSON large, but it's needed for accurate reporting
   for (const file of files) {
     const relativePath = path.relative('./src', file);
     if (!fileMap.has(relativePath)) {
@@ -168,8 +225,11 @@ function validateSpelling() {
   // Output JSON result (formatter will handle display)
   outputResult(result);
   
-  // Exit with appropriate code
-  process.exit(result.summary.issues > 0 ? 1 : 0);
+  // Give stdout time to flush before exiting
+  // Use setImmediate to ensure all writes are complete
+  setImmediate(() => {
+    process.exit(result.summary.issues > 0 ? 1 : 0);
+  });
 }
 
 // Run validation

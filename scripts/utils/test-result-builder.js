@@ -204,11 +204,9 @@ function outputResult(result) {
   const jsonStr = JSON.stringify(result, null, 2);
   const output = '__TEST_JSON_START__\n' + jsonStr + '\n__TEST_JSON_END__\n';
   
-  // Write in chunks to avoid buffer limits, then flush
-  const chunkSize = 16384; // 16KB chunks
-  for (let i = 0; i < output.length; i += chunkSize) {
-    process.stdout.write(output.slice(i, i + chunkSize));
-  }
+  // Write everything at once - for piped stdout, this should work fine
+  // If the output is very large, Node.js will handle buffering automatically
+  process.stdout.write(output);
   
   // Explicitly flush stdout to ensure all data is written before process exits
   if (process.stdout.flushSync) {

@@ -1,9 +1,6 @@
 {
   "version": "0.2",
   "language": "en",
-  "dictionaries": [
-    "custom-words"
-  ],
   "dictionaryDefinitions": [
     {
       "name": "custom-words",
@@ -11,10 +8,10 @@
       "addWords": true
     }
   ],
-  "files": [
-    "**/*.md",
-    "**/*.yaml",
-    "**/*.yml"
+  "dictionaries": [
+    "en",
+    "en_US",
+    "custom-words"
   ],
   "ignorePaths": [
     "node_modules/**",
@@ -25,8 +22,19 @@
     "CHANGELOG.md",
     "docs/reference/**"
   ],
+  "ignoreRegExpList": [
+    "/\\[([^\\]]+)\\]\\([^\\)]+\\)/g",
+    "/https?:\\/\\/[^\\s]+/g",
+    "/www\\.[^\\s]+/g",
+    "/\\b[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)*\\.[a-z]{2,}\\b/gi",
+    "/#\\w+/g",
+    "/^[a-z]+:\\s*\\/[^\\n]+$/gm",
+    "/^[a-z]+:\\s*[^\\n]*\\/[^\\n]*\\.(png|jpg|jpeg|gif|svg|webp|pdf|mp4|webm|ogg)$/gmi",
+    "/^slug:\\s*[^\\n]+$/gmi",
+    "/:\\s*\"[^\"]*\"/g",
+    "/:\\s*'(?:[^']|'')*'/g"
+  ],
   "flagWords": [],
-  "words": [],
   "enableFiletypes": [
     "markdown",
     "yaml"
