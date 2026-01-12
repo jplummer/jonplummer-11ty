@@ -251,6 +251,8 @@
 
 ## DONE
 
+- [x] Reorganize legacy .cursorrules into Cursor's preferred user rules and Project-specific rules structure, commit to GitHub, and cache outside of project (2026-01-11)
+- [x] Explore codebase for deadwood  (2026-01-11) 
 - [x] Implement IndexNow support (2026-01-11)
 - [x] Refactor markdown renderer configuration - replaced HTML blocks with `{% portraitGrid %}` paired shortcode, eliminating need for preprocessor entirely (2026-01-11)
 - [x] Fix spellcheck and SEO test filtering - improved `--changed` flag behavior for spell and seo-meta tests (2026-01-11)
