@@ -1,0 +1,10 @@
+---
+description: Markdown formatting rules and conventions
+globs: ['**/*.md', 'docs/**']
+alwaysApply: true
+---
+
+## Rules for writing Markdown
+
+- When proposing an edit to a markdown file, indent any code snippets inside it with two spaces. Indentation levels 0 and 4 are not allowed.
+- If a markdown code block is indented with any value other than 2 spaces, automatically fix it.

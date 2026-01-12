@@ -110,13 +110,7 @@ Generated images use format: `/assets/images/og/YYYY-MM-DD-post-slug.png`
 
 Preview at `http://localhost:8080/og-image-preview/` (excluded from deployment)
 
-### Generation
-
-- **Dev**: Auto-generated on file save
-- **Deploy**: Auto-checked before deployment
-- **Manual**: Run `npm run generate-og-images`
-
-For technical details, see [commands.md](commands.md#-open-graph-image-generation).
+For technical details on generation, see [commands.md](commands.md#-open-graph-image-generation).
 
 ## PDF Pages
 
@@ -143,15 +137,11 @@ This is a one-time setup. After installation, you can convert PDFs as needed.
    
    If Poppler is not installed, the script will provide clear error messages with installation instructions.
 
-2. The script will:
-   - Convert each PDF page to a PNG image
-   - Save images to `src/assets/images/[year]/[month]/`
-   - Copy the PDF to `src/assets/pdfs/[year]/[month]/`
-   - Generate a markdown template with figure elements for each page
+   For technical details on what the script does, see [commands.md](commands.md#-pdf-page-conversion).
 
-3. Copy the generated template into your portfolio item markdown file
+2. Copy the generated template into your portfolio item markdown file
 
-4. Add notes for each page in the `<figcaption>` elements
+3. Add notes for each page in the `<figcaption>` elements
 
 ### Example
 

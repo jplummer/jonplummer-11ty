@@ -1,3 +1,9 @@
+---
+description: Eleventy Debugging Workflow - Assume Eleventy works correctly and follow systematic debugging process
+globs: []
+alwaysApply: true
+---
+
 # Eleventy Debugging Workflow for AI Agents
 
 ## Core Principle: Assume Eleventy Works Correctly
@@ -134,5 +140,3 @@ Ask the user before:
 **Always explain**: "I see [behavior]. According to Eleventy documentation (https://www.11ty.dev/docs/), this is expected because [reason]. Should I [proposed solution] or is there a different approach you prefer?"
 
 **If unsure about Eleventy's behavior**: Use `web_search` to find the official documentation before making assumptions.
-
-

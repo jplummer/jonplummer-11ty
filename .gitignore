@@ -122,7 +122,10 @@ $RECYCLE.BIN/
 *.sublime-project
 *.sublime-workspace
 .cursor-workspace
-.cursor/
+.cursor/*
+!.cursor/
+!.cursor/rules/
+!.cursor/rules/**
 
 # Temporary files
 *.tmp

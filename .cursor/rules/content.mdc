@@ -1,0 +1,13 @@
+---
+description: Content authoring guidelines and standards
+globs: ['src/_posts/**/*.md', 'src/**/*.md']
+alwaysApply: true
+---
+
+## Content Guidelines
+
+- Write clear, engaging titles.
+- Use descriptive image filenames.
+- Include meta descriptions for SEO (50-160 characters).
+- Use proper markdown syntax.
+- Keep paragraphs concise and scannable.

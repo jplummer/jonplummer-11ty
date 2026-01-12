@@ -1,0 +1,23 @@
+---
+description: Eleventy-specific project rules and conventions
+globs: ['**/*.njk', '**/*.11tydata.js', '**/.eleventy.js', 'eleventy/**']
+alwaysApply: true
+---
+
+## 11ty-specific
+
+- Prefer Nunjucks (.njk) for templates.
+- Follow the established _posts/YYYY/ directory structure for posts.
+- Include required front matter: title, date, layout, tags (posts must include `post` in tags array).
+- Use ISO date format: "YYYY-MM-DDTHH:mm:ss-HH:mm".
+
+### 🔍 CRITICAL: Debugging Unexpected Behavior
+
+**When encountering unexpected behavior, follow the debugging workflow:**
+
+1. **ASSUME ELEVENTY IS WORKING CORRECTLY** - Most "bugs" are misunderstandings of Eleventy's behavior
+2. **See `.cursor/rules/eleventy-debugging.mdc`** - This contains the systematic debugging process
+3. **Use Eleventy's debug mode** - Run `DEBUG=Eleventy* pnpm run build` to see what Eleventy is doing
+4. **Only then consider custom code** - After verifying Eleventy doesn't provide this, ask user before implementing
+
+**Common mistake**: Writing workarounds for behavior that is actually Eleventy working as designed.

@@ -1,37 +1,8 @@
-# Project-Specific Rules
-
-This file contains project-specific rules for this Eleventy site. Universal rules are configured in Cursor User Rules (accessible via Cursor Settings → Rules for AI, or Command Palette → "Preferences: Open User Settings (JSON)" and look for `cursor.aiRules`).
-
-## 11ty-specific
-- Prefer Nunjucks (.njk) for templates.
-- Follow the established _posts/YYYY/ directory structure for posts.
-- Include required front matter: title, date, layout, tags (posts must include `post` in tags array).
-- Use ISO date format: "YYYY-MM-DDTHH:mm:ss-HH:mm".
-
-### 🔍 CRITICAL: Debugging Unexpected Behavior
-
-**When encountering unexpected behavior, follow the debugging workflow:**
-
-1. **ASSUME ELEVENTY IS WORKING CORRECTLY** - Most "bugs" are misunderstandings of Eleventy's behavior
-2. **Read `docs/ELEVENTY-DEBUGGING-WORKFLOW.md`** - This contains the systematic debugging process
-3. **Use Eleventy's debug mode** - Run `DEBUG=Eleventy* pnpm run build` to see what Eleventy is doing
-4. **Only then consider custom code** - After verifying Eleventy doesn't provide this, ask user before implementing
-
-**Common mistake**: Writing workarounds for behavior that is actually Eleventy working as designed.
-
-## JavaScript/Node.js
-- Use CommonJS (require/module.exports) for scripts.
-- Include shebang for executable scripts: #!/usr/bin/env node.
-- Handle errors gracefully with try-catch.
-- Use fs and path modules for file operations.
-- Exit with appropriate codes (0 for success, 1 for failure).
-
-## Content Guidelines
-- Write clear, engaging titles.
-- Use descriptive image filenames.
-- Include meta descriptions for SEO (50-160 characters).
-- Use proper markdown syntax.
-- Keep paragraphs concise and scannable.
+---
+description: Testing requirements and guidelines for all changes
+globs: ['scripts/test/**/*.js', 'scripts/**/*.js']
+alwaysApply: true
+---
 
 ## Testing Requirements
 

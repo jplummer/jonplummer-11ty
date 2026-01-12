@@ -69,6 +69,6 @@ If you want to see how the code works:
 **When Debugging Unexpected Behavior:**
 When encountering unexpected behavior, **assume Eleventy is working correctly** and follow the debugging workflow:
 
-- Read `docs/ELEVENTY-DEBUGGING-WORKFLOW.md` for the systematic debugging process
+- See `.cursor/rules/eleventy-debugging.mdc` for the systematic debugging process
 - Use Eleventy's debug mode: `DEBUG=Eleventy* pnpm run build`
 - Most "bugs" are actually misunderstandings of how Eleventy's features work

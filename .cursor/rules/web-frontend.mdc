@@ -1,0 +1,21 @@
+---
+description: Web front-end coding standards and best practices
+globs: ['src/**/*.njk', 'src/assets/css/**', 'src/**/*.html', 'src/_includes/**']
+alwaysApply: true
+---
+
+## When writing web front-end code
+
+- Prefer semantic HTML with as few non-semantic elements as possible and sparing use of classes and IDs.
+- Prefer vanilla CSS with common values pulled out into custom properties.
+- ALWAYS use design tokens (CSS custom properties) if present.
+    - Before using hardcoded values for font sizes, line heights, spacing, colors, or other design values, check all CSS files for existing custom properties.
+    - Use tokens (e.g., `--font-size-xxs`, `--spacing-sm`, `--text-color`) instead of magic numbers or hardcoded values.
+- Include alt text for all non-decorative images.
+    - If information would be lost by not displaying an image, it needs alt text.
+    - If an image is purely decorative, use an empty alt attribute.
+    - No image should lack an alt attribute.
+- Consider accessibility, but add ARIA attributes sparingly, preferring the natural behavior of semantic HTML elements in the browser where adequate.
+- Prefer as little JavaScript as possible, and let's discuss when there's good reason before implementing any needed capabilities in JavaScript.
+- Use mobile-first responsive design.
+- Ask me if color contrast seems insufficient.

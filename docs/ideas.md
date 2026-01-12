@@ -2,7 +2,7 @@
 
 ## ☑️ Selected
 
-- [ ] **REMINDER (2026-02-11)**: Check if `docs/ELEVENTY-DEBUGGING-WORKFLOW.md` is actually being used by Cursor - search for evidence in chat history and codebase
+- [ ] **REMINDER (2026-02-11)**: Check if `.cursor/rules/eleventy-debugging.mdc` is actually being used by Cursor - search for evidence in chat history and codebase
 
 - [ ] Portfolio 💎 DO SOMETHING EVERY WEEKEND
   - [ ] Explore presentation-to-portfolio item automation, including speaker notes

@@ -1,0 +1,13 @@
+---
+description: JavaScript and Node.js coding standards for scripts
+globs: ['scripts/**/*.js', 'eleventy/**/*.js']
+alwaysApply: true
+---
+
+## JavaScript/Node.js
+
+- Use CommonJS (require/module.exports) for scripts.
+- Include shebang for executable scripts: #!/usr/bin/env node.
+- Handle errors gracefully with try-catch.
+- Use fs and path modules for file operations.
+- Exit with appropriate codes (0 for success, 1 for failure).
