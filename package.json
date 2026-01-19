@@ -31,6 +31,7 @@
     "@11ty/eleventy-plugin-rss": "^2.0.4",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
     "@xmldom/xmldom": "^0.8.11",
+    "apca-w3": "^0.1.9",
     "axe-core": "^4.11.1",
     "cheerio": "^1.1.2",
     "cspell": "^9.4.0",

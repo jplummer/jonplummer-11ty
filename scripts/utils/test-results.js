@@ -242,6 +242,7 @@ function outputResult(result) {
  */
 const TEST_EMOJIS = {
   'a11y': '🌈',
+  'color-contrast': '🎨',
   'frontmatter': '🗂️ ',
   'html': '🧩',
   'internal-links': '🔗',
@@ -282,6 +283,7 @@ function getTestDisplayName(testType) {
     'spell': 'Spell Check',
     'seo': 'SEO Meta',
     'a11y': 'Accessibility',
+    'color-contrast': 'Color Contrast',
     'rss': 'RSS Feed',
     'og-images': 'OG Images',
     'deploy': 'Deploy',
@@ -306,6 +308,7 @@ function getTestDescription(testType) {
     'seo': 'SEO and meta tags',
     'og-images': 'Open Graph images',
     'a11y': 'Accessibility (WCAG compliance)',
+    'color-contrast': 'Color contrast (APCA)',
     'rss': 'RSS feed validation',
     'deploy': 'Deployment connectivity',
     'indexnow': 'IndexNow configuration',

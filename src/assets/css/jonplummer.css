@@ -63,14 +63,14 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --text-color: #e0e0e0;
-    --text-color-light: #b0b0b0;
+    --text-color-light: #c8c8c8; /* adjusted for APCA Lc 65+ */
     --border-color: #4a4a4a; /* subtle border for images in dark mode */
     --background-color: #1a1a1a;
     --content-background-color: #2d2d2d;
-    --link-color: #ff6b6b; /* lighter version of DR10 red #e6423a */
+    --link-color: #ffa0a0; /* lighter version of DR10 red #e6423a, adjusted for APCA Lc 60+ */
     --link-hover-color: #f1b73a; /* DR10 yellow-orange */
-    --link-visited-color: #a89585; /* lighter version of DR10 dark brown #5b4a3b, adjusted for WCAG AA contrast */
-    --link-active-color: #2db366; /* lighter version of DR10 green #0d703f */
+    --link-visited-color: #d0c0b0; /* lighter version of DR10 dark brown #5b4a3b, adjusted for APCA Lc 62+ */
+    --link-active-color: #60d890; /* lighter version of DR10 green #0d703f, adjusted for APCA Lc 62+ */
   }
 }
 

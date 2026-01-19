@@ -287,9 +287,13 @@ async function testFileWithAxeBothModes(browser, filePath) {
     // Inject axe-core once
     await page.addScriptTag({ content: axeCore.source });
     
-    // Test light mode (all rules)
+    // Test light mode (all rules except color-contrast)
     const lightResults = await page.evaluate(() => {
-      return axe.run();
+      return axe.run({
+        rules: {
+          'color-contrast': { enabled: false }  // Disabled - use separate color linting tool
+        }
+      });
     });
     
     // Switch to dark mode and wait a moment for styles to recompute
@@ -297,28 +301,16 @@ async function testFileWithAxeBothModes(browser, filePath) {
       { name: 'prefers-color-scheme', value: 'dark' }
     ]);
     
-    // Wait for styles to recompute after media query change
-    await page.evaluate(() => {
-      // Force style computation by reading computed styles
-      const elements = document.querySelectorAll('*');
-      elements.forEach(el => {
-        window.getComputedStyle(el).color;
-        window.getComputedStyle(el).backgroundColor;
-      });
-    });
-    // Small delay to ensure CSS custom properties are resolved
-    // Use Promise-based delay instead of deprecated waitForTimeout
-    await new Promise(resolve => setTimeout(resolve, 100));
+    // Small delay to ensure CSS custom properties are resolved (much faster than computing all styles)
+    await new Promise(resolve => setTimeout(resolve, 50));
     
-    // Test dark mode (contrast only)
+    // Test dark mode (all rules except color-contrast)
     const darkResults = await page.evaluate(() => {
-      const config = {
-        runOnly: {
-          type: 'rule',
-          values: ['color-contrast']
+      return axe.run({
+        rules: {
+          'color-contrast': { enabled: false }  // Disabled - use separate color linting tool
         }
-      };
-      return axe.run(config);
+      });
     });
     
     await page.close();
@@ -398,7 +390,7 @@ async function validateAccessibility() {
     incomplete: lightModeStats.incomplete
   });
   
-  addCustomSection(result, '🌙 Dark mode (contrast only)', {
+  addCustomSection(result, '🌙 Dark mode', {
     violations: darkModeStats.violations,
     filesWithViolations: darkModeStats.filesWithViolations,
     incomplete: darkModeStats.incomplete
