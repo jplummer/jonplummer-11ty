@@ -207,7 +207,19 @@ function figureTransform(content, outputPath) {
     }
   });
 
-  return hasChanges ? $.html() : content;
+  // Serialize HTML with proper boolean attribute handling
+  // Note: We need to manually format boolean attributes to avoid cheerio adding =""
+  if (hasChanges) {
+    const html = $.html();
+    // Fix boolean attributes that cheerio adds ="" to
+    // Common boolean attributes: required, disabled, checked, selected, readonly, multiple, etc.
+    return html
+      .replace(/\s(required|disabled|checked|selected|readonly|multiple|autofocus|autoplay|controls|loop|muted|default|ismap|novalidate|open|reversed|scoped|seamless|sortable|truespeed|typemustmatch)=""/g, ' $1');
+  }
+  
+  // Even if we didn't make figure changes, fix boolean attributes in the content
+  // This handles cases where Nunjucks or other processing adds ="" to boolean attributes
+  return content.replace(/\s(required|disabled|checked|selected|readonly|multiple|autofocus|autoplay|controls|loop|muted|default|ismap|novalidate|open|reversed|scoped|seamless|sortable|truespeed|typemustmatch)=""/g, ' $1');
 }
 
 /**

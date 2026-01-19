@@ -4,6 +4,8 @@
 
 - [ ] **REMINDER (2026-02-11)**: Check if `.cursor/rules/eleventy-debugging.mdc` is actually being used by Cursor - search for evidence in chat history and codebase
 
+- [ ] Make capturing links during the workday (from another machine) easier somehow
+
 - [ ] Portfolio 💎 DO SOMETHING EVERY WEEKEND
   - [ ] Explore presentation-to-portfolio item automation, including speaker notes
     - [ ] What does it take to get speaker notes out of a PPT?
@@ -31,7 +33,7 @@
 
 ### 📓 CMS
 
-**Goals**: Enable authoring from any device via web-based CMS while maintaining local build/deploy capability. Prevent common errors in authoring. Make it relatively quick and easy to capture links and ideas. Make it relatively easy to start posts in one place and finish them someplace else.
+**Goals**: Enable authoring from any device via web-based CMS while maintaining local build/deploy capability. Prevent common errors in authoring. Make it quick and easy to capture links and ideas. Make it easy to start posts in one place and finish them someplace else.
 
 **Approach**: Decap CMS (git-based) + GitHub Actions for automated build/deploy on CMS edits.
 
@@ -192,7 +194,15 @@
 
 ### 🖍 Also…
 
-- handle GitHub Dependabot complaints https://github.com/jplummer/jonplummer-11ty/security/dependabot
+- Performance/regressions
+  - Lighthouse CLI ?
+  - Automate/integrate ahrefs somehow ?
+  - DebugBear
+  - Screpy
+  - Auditzy
+  - webpagetest.org
+  - Core Web Vitals
+  - PageSpeed Insights
 
 - https://bsky.app/profile/did:plc:re3ebnp5v7ffagz6rb6xfei4 ?
 

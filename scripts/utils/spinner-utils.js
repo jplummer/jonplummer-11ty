@@ -8,6 +8,10 @@
 
 const SPINNER_FRAMES = ['◤', '⟋', '◢', ' '];
 
+module.exports = {
+  SPINNER_FRAMES
+};
+
 // Classic
 // const SPIN = ['|', '/', '—', '\\'];
 
@@ -48,11 +52,12 @@ const SPINNER_FRAMES = ['◤', '⟋', '◢', ' '];
 // const ASTERISK_VAR = ['*', '+', '×', '✻'];
 // const TWINKLE = ['·', '⁖', '⁘', '✧', '⁘', '⁖'];
 // const STAR_BEAT = ['✺', '✹', '✷', '✻', '✽', '✾', '❈', '❉'];
+// const CLAUDE_SPARK = ["·", "✻", "✽", "✶", "✳", "✢"];
 
 // Math symbols
 // const EQUAL_GROW = ['-', '=', '≡', '≣', '≡', '='];
 
-// Misc
+// I Ching
 // const ICHING_SPIN_1 = ['☱', '☲', '☴'];
 // const ICHING_SPIN_2 = ['☰', '☱', '☳', '☶', '☴', '☱', '☲', '☴'];
 // const ICHING_ALL = ['☰', '☱', '☲', '☳', '☴', '☵', '☶', '☷'];
@@ -65,7 +70,3 @@ const SPINNER_FRAMES = ['◤', '⟋', '◢', ' '];
 // const EMOJI_VOLCANO = ['🏔️', '⛰️', '🌋', '🗻'];
 // const EMOJI_HAND = ['✋', '☝️', '✌️', '🤞', '🤘', '🤟', '🖖', '🖐️'];
 // const EMOJI_SLOTS = ['7️⃣', '🔔', '🏇', '🍒', '🍋', '💎', '👑', '🍑', '🪙', '🍉', '💰', '🍀', '🍊', '🀰'];
-
-module.exports = {
-  SPINNER_FRAMES
-};

@@ -26,6 +26,39 @@ function isRedirectPage(htmlContent) {
   return false;
 }
 
+// Check if a file is non-public (draft or development tool)
+function isNonPublicFile(relativePath) {
+  const normalizedPath = relativePath.replace(/\\/g, '/');
+  
+  // Known non-public file patterns (development tools, etc.)
+  const nonPublicPatterns = [
+    /^add-link\.html$/,
+    /^add-link\/index\.html$/
+  ];
+  
+  for (const pattern of nonPublicPatterns) {
+    if (pattern.test(normalizedPath)) {
+      return true;
+    }
+  }
+  
+  // Check if source file has draft: true in frontmatter
+  const sourceFile = findSourceFile(relativePath);
+  if (sourceFile && fs.existsSync(sourceFile)) {
+    try {
+      const sourceContent = fs.readFileSync(sourceFile, 'utf8');
+      const { frontMatter } = parseFrontMatter(sourceContent);
+      if (frontMatter && frontMatter.draft === true) {
+        return true;
+      }
+    } catch (e) {
+      // If we can't parse the source file, continue checking
+    }
+  }
+  
+  return false;
+}
+
 // Default OG image path (allowed for paginated indexes and main index)
 const DEFAULT_OG_IMAGE = '/assets/images/og/index.png';
 
@@ -193,6 +226,11 @@ function validate(result) {
     
     // Skip redirect pages (they don't need OG images)
     if (isRedirectPage(content)) {
+      continue; // Don't add to result at all
+    }
+    
+    // Skip non-public files (drafts, development tools, etc.)
+    if (isNonPublicFile(relativePath)) {
       continue; // Don't add to result at all
     }
     

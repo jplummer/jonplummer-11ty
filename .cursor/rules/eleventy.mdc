@@ -21,3 +21,15 @@ alwaysApply: true
 4. **Only then consider custom code** - After verifying Eleventy doesn't provide this, ask user before implementing
 
 **Common mistake**: Writing workarounds for behavior that is actually Eleventy working as designed.
+
+### 📚 Documentation Resources
+
+**Official documentation:**
+- https://www.11ty.dev/docs/ - The official Eleventy documentation
+
+**Community resources:**
+- https://11tybundle.dev - Curated feed of 11ty blog posts, tutorials, examples, and community content. Useful for discovering patterns, solutions, and how the community is using 11ty.
+- https://11ty.rocks - Collection of 11ty starters, plugins, tutorials, and config samples. Includes quick tips, .eleventy.js examples, and video tutorials.
+- https://learn-eleventy.pages.dev - Comprehensive 31-lesson project-based course covering 11ty fundamentals plus HTML, CSS, accessibility, and performance best practices.
+- https://11ty-recipes.mikeaparicio.com - Modular step-by-step guides for adding specific features (pagination, Sass, SEO, etc.) to an 11ty site. Choose only what you need.
+- https://11tythemes.com - Directory of 80+ themes with filters for style, popularity, and stack. Useful for design inspiration and starter layouts.

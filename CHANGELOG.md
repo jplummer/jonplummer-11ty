@@ -1,11 +1,25 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),newest first.
 
+## 2026-01-19
+
+- Optimize accessibility testing and add APCA color contrast checks
+
 ## 2026-01-11
 
 - Refactor portrait-grid to use paired shortcode instead of HTML blocks
 - Fix spellcheck and SEO test filtering
 - Remove unused markdown-in-html-blocks preprocessor
 - Optimize accessibility test performance and consolidate test utilities
+- Implement IndexNow support for search engine notifications
+- Remove cached Eleventy docs and refactor markdown config
+- Consolidate Eleventy config and simplify date utilities
+- Simplify dateToRfc3339 filter and use ES6 object shorthand
+- Shorten test type names and fix HTML validation errors
+- Standardize test scripts with test-runner-helper
+- Remove unused test utilities and fix redundancies
+- Remove archived migration scripts
+- Migrate to Cursor .cursor/rules/ structure and clean up documentation
+- Update ideas.md: mark cursor rules reorganization and deadwood exploration as complete
 
 ## 2026-01-10
 
@@ -321,4 +335,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-01-11
+Last deployed on 2026-01-19
