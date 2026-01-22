@@ -28,9 +28,6 @@ function configurePassthrough(eleventyConfig) {
   // This allows IndexNow verification via key file at domain root
   eleventyConfig.addPassthroughCopy({ "src/*.txt": "." });
 
-  // Copy standalone HTML files (like add-link.html) without processing
-  eleventyConfig.addPassthroughCopy({ "src/add-link.html": "add-link.html" });
-
   // Watch for changes in assets
   eleventyConfig.addWatchTarget("src/assets");
 

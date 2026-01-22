@@ -4,7 +4,7 @@
 
 - [ ] **REMINDER (2026-02-11)**: Check if `.cursor/rules/eleventy-debugging.mdc` is actually being used by Cursor - search for evidence in chat history and codebase
 
-- [ ] Make capturing links during the workday (from another machine) easier somehow
+- [x] Make capturing links during the workday (from another machine) easier somehow (2026-01-21)
 
 - [ ] Portfolio 💎 DO SOMETHING EVERY WEEKEND
   - [ ] Explore presentation-to-portfolio item automation, including speaker notes

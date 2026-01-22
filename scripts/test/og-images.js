@@ -31,10 +31,7 @@ function isNonPublicFile(relativePath) {
   const normalizedPath = relativePath.replace(/\\/g, '/');
   
   // Known non-public file patterns (development tools, etc.)
-  const nonPublicPatterns = [
-    /^add-link\.html$/,
-    /^add-link\/index\.html$/
-  ];
+  const nonPublicPatterns = [];
   
   for (const pattern of nonPublicPatterns) {
     if (pattern.test(normalizedPath)) {
