@@ -1,5 +1,14 @@
 # Authoring
 
+## Link Capture
+
+For capturing links to `links.yaml`, see [NotePlan Link Import](noteplan-import.md).
+
+**Quick workflow:**
+1. Capture links in NotePlan (from any device)
+2. Run `pnpm run import-links` when ready
+3. Links are automatically formatted and validated
+
 ## Front Matter Variables
 
 ### Required

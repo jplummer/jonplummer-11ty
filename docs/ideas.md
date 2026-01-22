@@ -4,8 +4,6 @@
 
 - [ ] **REMINDER (2026-02-11)**: Check if `.cursor/rules/eleventy-debugging.mdc` is actually being used by Cursor - search for evidence in chat history and codebase
 
-- [x] Make capturing links during the workday (from another machine) easier somehow (2026-01-21)
-
 - [ ] Portfolio 💎 DO SOMETHING EVERY WEEKEND
   - [ ] Explore presentation-to-portfolio item automation, including speaker notes
     - [ ] What does it take to get speaker notes out of a PPT?
@@ -17,8 +15,6 @@
     - [ ] Talks from Invoca
     - [ ] Talks from CSky
     - [ ] Talks from Cayuse
-
-- [ ] OFTEN: sweep Slack for links
 
 - [ ] Socials
   - [ ] *Consider* improving existing Fed account bridging according to https://fed.brid.gy/docs#fediverse-enhanced
@@ -261,6 +257,11 @@
 
 ## DONE
 
+- [x] Make capturing links during the workday (from another machine) easier somehow (2026-01-21)
+  - Implemented NotePlan import workflow with `pnpm run import-links`
+  - Removed GitHub-based form approach
+  - Automatic YAML formatting and duplicate detection
+  - See docs/noteplan-import.md
 - [x] Reorganize legacy .cursorrules into Cursor's preferred user rules and Project-specific rules structure, commit to GitHub, and cache outside of project (2026-01-11)
 - [x] Explore codebase for deadwood  (2026-01-11) 
 - [x] Implement IndexNow support (2026-01-11)

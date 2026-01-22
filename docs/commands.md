@@ -40,6 +40,14 @@ Recommended process for deploying changes with an up-to-date changelog:
 - `pnpm run deploy --dry-run` - Test deployment without actually deploying (runs all checks and shows what would be synced)
 - `pnpm run deploy --skip-checks` - Deploy without running validation checks (not recommended)
 
+### 📝 Content Authoring
+
+- `pnpm run import-links` - Import links from NotePlan to links.yaml
+- `pnpm run import-links --clear` - Import and clear NotePlan note
+- `pnpm run import-links --date=2025-12-25` - Import with specific date
+
+See [noteplan-import.md](noteplan-import.md) for complete workflow documentation.
+
 ### 🔧 Maintenance
 
 - `pnpm run update-docs` - Update cached Eleventy documentation
