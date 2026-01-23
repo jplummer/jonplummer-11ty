@@ -1,8 +1,13 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),newest first.
 
+## 2026-01-22
+
+- Fix spelling and SEO validation warnings
+
 ## 2026-01-21
 
 - Add NotePlan link import workflow, remove GitHub form approach
+- Document NotePlan import workflow in commands.md and authoring.md
 
 ## 2026-01-19
 
@@ -340,4 +345,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-01-22
+Last deployed on 2026-01-23

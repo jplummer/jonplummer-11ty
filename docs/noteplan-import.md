@@ -21,25 +21,30 @@ Add links in this format:
 * [Time's Up, Babycakes – Blair Enns](https://www.winwithoutpitching.com/times-up-babycakes/) Blair Enns of Win Without Pitching remind us that value-based pricing becomes increasingly relevant when more of the work is done, or at least facilitated, by AI. The [podcast](https://www.winwithoutpitching.com/posttype/podcast/) is pretty great, too.
 ```
 
-### 2. Import When Ready
-
-```bash
-pnpm run import-links
-```
-
-This will:
-- Find your NotePlan note
-- Parse all links
-- Check for duplicate URLs
-- Add new links to `links.yaml` with today's date
-- Skip any duplicates (shows which ones and their existing date)
-- Validate YAML formatting
-
-### 3. Deploy
+### 2. Deploy (import happens automatically)
 
 ```bash
 pnpm run build
 pnpm run test fast
+pnpm run deploy
+```
+
+The deploy script automatically:
+- Imports links from NotePlan
+- Finds your NotePlan note
+- Parses all links
+- Checks for duplicate URLs
+- Adds new links to `links.yaml` with today's date
+- Skips any duplicates (shows which ones and their existing date)
+- Validates YAML formatting
+- Builds and deploys the site
+
+**Alternative:** Import manually first if you want to preview links locally:
+
+```bash
+pnpm run import-links
+pnpm run build
+# Review site at http://localhost:8080
 pnpm run deploy
 ```
 

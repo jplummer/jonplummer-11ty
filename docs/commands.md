@@ -6,16 +6,16 @@
 
 Recommended process for deploying changes with an up-to-date changelog:
 
-1. Make changes (write posts, update content, etc.)
+1. Make changes (write posts, update content, add links to NotePlan, etc.)
 2. `pnpm run build` - Verify local build works
 3. `pnpm run test fast` - Run validation checks
 4. Fix any issues found, then repeat steps 2-3 until all tests pass
 5. `git commit` - Commit changes (required: changelog generation reads from git history)
-6. `pnpm run deploy` - Deploy to live site (automatically regenerates changelog and runs validation)
+6. `pnpm run deploy` - Deploy to live site (automatically imports links, regenerates changelog, and runs validation)
 7. Verify the live site works as expected
 8. `git push` - Push commits to remote repository
 
-**Why this order?** The deploy script regenerates the changelog from git commit history, so commits must exist before deployment. See [Deployment Process](#deployment-process) for details.
+**Why this order?** The deploy script regenerates the changelog from git commit history, so commits must exist before deployment. Links from NotePlan are automatically imported during deployment. See [Deployment Process](#deployment-process) for details.
 
 ### 💻 Daily Development
 
@@ -42,9 +42,11 @@ Recommended process for deploying changes with an up-to-date changelog:
 
 ### 📝 Content Authoring
 
-- `pnpm run import-links` - Import links from NotePlan to links.yaml
+- `pnpm run import-links` - Import links from NotePlan to links.yaml (also runs automatically during `pnpm run deploy`)
 - `pnpm run import-links --clear` - Import and clear NotePlan note
 - `pnpm run import-links --date=2025-12-25` - Import with specific date
+
+**Note:** Link import runs automatically during deployment. Use `pnpm run import-links` manually when you want to preview imported links locally before deploying.
 
 See [noteplan-import.md](noteplan-import.md) for complete workflow documentation.
 
@@ -74,12 +76,13 @@ Prior complex deployment scripts were moved to `scripts/deploy/backup/`. The cur
 
 The deploy script performs these steps in order:
 
-1. **Regenerates changelog** from git history
-2. **Generates OG images** for any missing/outdated images (before build) - skipped with `--skip-checks`
-3. **Runs pre-deploy validation** (markdown, content structure) on source files - skipped with `--skip-checks`
-4. **Builds the site** once (includes changelog + OG image frontmatter updates)
-5. **Runs post-build validation** (og-images) on built HTML - skipped with `--skip-checks`
-6. **Deploys via rsync** - uses `--dry-run` flag when `--dry-run` option is used
+1. **Imports links** from NotePlan to `links.yaml` (always runs, gracefully skips if no links found)
+2. **Regenerates changelog** from git history
+3. **Generates OG images** for any missing/outdated images (before build) - skipped with `--skip-checks`
+4. **Runs pre-deploy validation** (markdown, content structure) on source files - skipped with `--skip-checks`
+5. **Builds the site** once (includes changelog + OG image frontmatter updates)
+6. **Runs post-build validation** (og-images) on built HTML - skipped with `--skip-checks`
+7. **Deploys via rsync** - uses `--dry-run` flag when `--dry-run` option is used
 
 #### Testing Deployment
 
@@ -90,6 +93,7 @@ pnpm run deploy --dry-run
 ```
 
 This will:
+- Import any pending links from NotePlan
 - Run all validation checks
 - Generate any missing OG images
 - Show what files would be synced (via rsync's dry-run)

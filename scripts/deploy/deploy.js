@@ -302,6 +302,16 @@ async function deploy(config, siteDomain, dryRun) {
     process.exit(1);
   }
 
+  // Import links from NotePlan before deployment
+  try {
+    await runWithSpinner('node scripts/content/import-noteplan-links.js', 'Importing links from NotePlan...');
+    console.log('✅ 📎 Links: import completed\n');
+  } catch (error) {
+    // Don't fail deployment if no links to import or NotePlan note not found
+    // The import script exits with 0 for "no links found" scenarios
+    console.log('⚠️  📎 Links: import skipped (no links found or note not found)\n');
+  }
+
   // Regenerate changelog before deployment
   let changelogChanged = false;
   try {
