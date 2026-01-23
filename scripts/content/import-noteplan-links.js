@@ -188,8 +188,8 @@ function parseLinksYaml(content) {
             (url.startsWith("'") && url.endsWith("'"))) {
           url = url.slice(1, -1);
         }
-        // Unescape
-        url = url.replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+        // Unescape (handle both backslash escapes and doubled apostrophes)
+        url = url.replace(/\\"/g, '"').replace(/\\\\/g, '\\').replace(/''/g, "'");
         linkObj.url = url;
       }
       
@@ -205,8 +205,8 @@ function parseLinksYaml(content) {
               (title.startsWith("'") && title.endsWith("'"))) {
             title = title.slice(1, -1);
           }
-          // Unescape
-          title = title.replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+          // Unescape (handle both backslash escapes and doubled apostrophes)
+          title = title.replace(/\\"/g, '"').replace(/\\\\/g, '\\').replace(/''/g, "'");
           linkObj.title = title;
         }
         i++;
@@ -222,8 +222,8 @@ function parseLinksYaml(content) {
               (desc.startsWith("'") && desc.endsWith("'"))) {
             desc = desc.slice(1, -1);
           }
-          // Unescape
-          desc = desc.replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+          // Unescape (handle both backslash escapes and doubled apostrophes)
+          desc = desc.replace(/\\"/g, '"').replace(/\\\\/g, '\\').replace(/''/g, "'");
           linkObj.description = desc;
         }
         i++;

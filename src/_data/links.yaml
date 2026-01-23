@@ -1,12 +1,17 @@
+2026-01-23:
+  - url: "https://uxdesign.cc/designers-as-agent-orchestrators-what-i-learnt-shipping-with-ai-in-2025-3b1bf30048a3"
+    title: "Designers as agent orchestrators: what I learnt shipping with AI in 2025 – Benhur Senabathi"
+    description: "\"Translating how software should work was never the hard part for designers. Translating that understanding into code was. AI didn’t lower the bar; it removed it.\""
+
 2026-01-22:
   - url: "https://www.winwithoutpitching.com/times-up-babycakes/"
-    title: Time's Up, Babycakes – Blair Enns
+    title: "Time's Up, Babycakes – Blair Enns"
     description: "Blair Enns of Win Without Pitching remind us that value-based pricing becomes increasingly relevant when more of the work is done, or at least facilitated, by AI. Taste and smarts are valuable, time on its own is not, and time is becoming rapidly less relevant. He'd say selling time has never been the right thing to do, of course. The [podcast](https://www.winwithoutpitching.com/posttype/podcast/) is pretty great, too."
 
 2026-01-19:
   - url: "https://every.to/guides/agent-native"
     title: Agent-native Architectures – Dan Shipper and Claude
-    description: "\"You can build applications where features aren''t code you write—they''re outcomes you describe, achieved by an agent with tools, operating in a loop until the outcome is reached. This opens up a new field: software that works the way Claude Code works, applied to categories far beyond coding.\""
+    description: "\"You can build applications where features aren't code you write—they're outcomes you describe, achieved by an agent with tools, operating in a loop until the outcome is reached. This opens up a new field: software that works the way Claude Code works, applied to categories far beyond coding.\""
 
 2026-01-18:
   - url: "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents"
@@ -16,15 +21,15 @@
 2026-01-17:
   - url: "https://boagworld.com/emails/2026/"
     title: "What I'm seeing for UX as we move into 2026 – Paul Boag"
-    description: "\"…rather than trying to predict the future (I learned my lesson after confidently declaring QR codes were dead in 2019), I want to talk about what I''m seeing among the UX professionals I work with, and what I think it means for 2026.\""
+    description: "\"…rather than trying to predict the future (I learned my lesson after confidently declaring QR codes were dead in 2019), I want to talk about what I'm seeing among the UX professionals I work with, and what I think it means for 2026.\""
   - url: "https://detail.design/"
     title: A collection of small details that make a big difference – Rene Wang
-    description: "\"These details aren''t accidents. They''re decisions. Careful, intentional decisions made by people who care deeply about craft. You might say that not everyone is going to notice these, but I truly believe that small details add up and make the experience feel more polished. Even if they go unnoticed.\""
+    description: "\"These details aren't accidents. They're decisions. Careful, intentional decisions made by people who care deeply about craft. You might say that not everyone is going to notice these, but I truly believe that small details add up and make the experience feel more polished. Even if they go unnoticed.\""
 
 2026-01-13:
   - url: "https://uxdesign.cc/escaping-ai-sludge-why-mvps-should-be-delightful-04d267292458"
     title: "Escaping AI sludge: why MVPs should be delightful – James Skinner"
-    description: "\"Function is the floor, not the ceiling. It''s time to raise the bar and prove that the most viable products are the ones that feel human.\""
+    description: "\"Function is the floor, not the ceiling. It's time to raise the bar and prove that the most viable products are the ones that feel human.\""
 
 2025-12-24:
   - url: "https://linear.app/now/design-is-more-than-code"
@@ -32,7 +37,7 @@
     description: "\"…I think centering this debate on code and tools is reductive. The bigger question to me is what happens to how we see designers contributing in the future, especially now with AI and these new tools.\""
   - url: "https://www.thealgorithmicbridge.com/p/the-shape-of-artificial-intelligence?__readwiseLocation="
     title: The Shape of Artificial Intelligence – Alberto Romero
-    description: "\"…we must try to give a clearer shape to the current manifestation of AI (chatbots, large language models, etc.). We are the earliest historians of this weird, elusive technology, and as such, it''s our duty to begin a conversation that''s likely to take decades (or centuries, if we remain alive by then) to be fully fleshed out…\""
+    description: "\"…we must try to give a clearer shape to the current manifestation of AI (chatbots, large language models, etc.). We are the earliest historians of this weird, elusive technology, and as such, it's our duty to begin a conversation that's likely to take decades (or centuries, if we remain alive by then) to be fully fleshed out…\""
   - url: "https://www.nngroup.com/articles/explainable-ai/"
     title: Explainable AI in Chat Interfaces – Megan Chan
     description: "\"Without explanations, AI systems are black boxes. Explaining to people how an AI system has reached a particular output helps users form accurate mental models, prevents the spread of misinformation, and helps users decide whether to trust an AI output.\""
@@ -45,20 +50,20 @@
 2025-12-19:
   - url: "https://leadershiplighthouse.substack.com/p/i-went-all-in-on-ai-the-mit-study"
     title: I Went All-In on AI. The MIT Study Was Right. – Josh Anderson
-    description: "\"The companies that will thrive aren''t the ones with the best AI tools. They''re the ones whose people use AI to become better, not to become lazier. They''re the ones where humans own the decisions, own the code, own the strategy, and use AI as an amplifier, not an autopilot.\""
+    description: "\"The companies that will thrive aren't the ones with the best AI tools. They're the ones whose people use AI to become better, not to become lazier. They're the ones where humans own the decisions, own the code, own the strategy, and use AI as an amplifier, not an autopilot.\""
   - url: "https://lukew.com/ff/entry.asp?2137"
     title: AI Coding Agents for Designers – Luke Wroblewski
-    description: "\"In an increasing number of technology companies, the majority of code is being written by AI coding agents. While that primarily boosts software developer productivity, they aren''t the only ones that can benefit from this transformation.\""
+    description: "\"In an increasing number of technology companies, the majority of code is being written by AI coding agents. While that primarily boosts software developer productivity, they aren't the only ones that can benefit from this transformation.\""
 
 2025-12-17:
   - url: "https://terriblesoftware.org/2025/11/25/what-actually-makes-you-senior/"
     title: What Actually Makes You Senior – Matheus Lima
-    description: "The same is true for designers: \"The one skill that separates senior engineers from everyone else isn''t technical. It''s the ability to take ambiguous problems and make them concrete.\""
+    description: "The same is true for designers: \"The one skill that separates senior engineers from everyone else isn't technical. It's the ability to take ambiguous problems and make them concrete.\""
 
 2025-12-10:
   - url: "https://www.youtube.com/watch?v=BsWxPI9UM4c"
     title: "Why AI evals are the hottest new skill for product builders; with Hamel Husain and Shreya Shankar – Lenny's Podcast"
-    description: "\"Hamel Husain and Shreya Shankar teach the world''s most popular course on AI evals and have trained over 2,000 PMs and engineers (including many teams at OpenAI and Anthropic). In this conversation, they demystify the process of developing effective evals, walk through real examples, and share practical techniques that''ll help you improve your AI product.\""
+    description: "\"Hamel Husain and Shreya Shankar teach the world's most popular course on AI evals and have trained over 2,000 PMs and engineers (including many teams at OpenAI and Anthropic). In this conversation, they demystify the process of developing effective evals, walk through real examples, and share practical techniques that'll help you improve your AI product.\""
 
 2025-12-09:
   - url: "https://www.figma.com/best-practices/typography-systems-in-figma/"
@@ -83,7 +88,7 @@
 2025-11-30:
   - url: "https://interconnected.org/home/2025/11/28/plumbing"
     title: Context plumbing – Matt Webb
-    description: "\"These past few weeks I''ve been deep in code and doing what I think about as context plumbing. I''ve been building an AI system and that''s what it feels like.\""
+    description: "\"These past few weeks I've been deep in code and doing what I think about as context plumbing. I've been building an AI system and that's what it feels like.\""
 
 2025-11-25:
   - url: "https://uxdesign.cc/dear-llm-heres-how-my-design-system-works-b59fb9a342b7"
@@ -101,7 +106,7 @@
 2025-11-21:
   - url: "https://www.chrbutler.com/the-fundamentals-problem"
     title: The Fundamentals Problem – Christopher Butler
-    description: "\"Anyone can make something that looks designed, but that doesn''t mean that design has happened.\""
+    description: "\"Anyone can make something that looks designed, but that doesn't mean that design has happened.\""
 
 2025-11-20:
   - url: "https://sopd.design/"
@@ -116,12 +121,12 @@
 2025-11-15:
   - url: "https://lukew.com/ff/entry.asp?2133"
     title: How Design Teams Are Reacting to 10x Developer Productivity from AI – Luke Wroblewski
-    description: "\"At this point it''s pretty obvious that AI coding agents can massively accelerate the time it takes to build software. But when software development teams experience huge productivity booms, how do design teams respond?\""
+    description: "\"At this point it's pretty obvious that AI coding agents can massively accelerate the time it takes to build software. But when software development teams experience huge productivity booms, how do design teams respond?\""
 
 2025-11-08:
   - url: "https://frederickvanbrabant.com/blog/2025-10-31-architectural-debt-is-not-just-technical-debt/"
     title: Architectural debt is not just technical debt – Frederick Vanbrabant
-    description: "\"These days, I''m less concerned with how the software itself works. That''s just not feasible when your organization has hundreds of applications. My main concerns are more about how these applications interact with the rest of the landscape. How the data flows, where data lives, whether there are bottlenecks, who''s going to maintain it, and what role will this application have in the future.\""
+    description: "\"These days, I'm less concerned with how the software itself works. That's just not feasible when your organization has hundreds of applications. My main concerns are more about how these applications interact with the rest of the landscape. How the data flows, where data lives, whether there are bottlenecks, who's going to maintain it, and what role will this application have in the future.\""
   - url: "https://www.youtube.com/watch?v=1jWA3mE5o9Y"
     title: "Video: How I Broke My Drinking Habit w/ Edith Zimmerman"
     description: Cartoonist Edith Zimmerman discusses that to occupy herself after quitting drinking (and, in essence, to replace the drinking habit) she had to explore and rediscover old interests rather than find new ones.
@@ -135,7 +140,7 @@
 2025-11-01:
   - url: "https://noahpenza.com/blog/this-site-is-very-quick-it-uses-ssg-and-isr/"
     title: This site is very quick, it uses SSG and ISR – Noah Penza
-    description: "\"I''m not a fan of waiting. We spend enough time doing it every day — waiting in traffic, for videos to buffer, for Excel to open. Wherever possible, I do everything I can to minimize those wait times. It simply offers a far superior experience for the end-user to have components show in an instant, rather than rely on spinners and skeletons. That''s why I chose to implement Static Site Generation (SSG) with Incremental Static Regeneration (ISR) for this website.\" THIS site also uses SSG. I don''t have much need for ISR as there''s no server-side generation in my case."
+    description: "\"I'm not a fan of waiting. We spend enough time doing it every day — waiting in traffic, for videos to buffer, for Excel to open. Wherever possible, I do everything I can to minimize those wait times. It simply offers a far superior experience for the end-user to have components show in an instant, rather than rely on spinners and skeletons. That's why I chose to implement Static Site Generation (SSG) with Incremental Static Regeneration (ISR) for this website.\" THIS site also uses SSG. I don't have much need for ISR as there's no server-side generation in my case."
 
 2025-10-31:
   - url: "https://itamargilad.com/okr-faq/"
@@ -146,18 +151,18 @@
     description: "\"AI is like nothing we’ve ever done before. It demands a new level of rapid, flexible, user-centered thinking and rapid adjustment, neatly expressed in this new process diagram.\""
   - url: "https://drobinin.com/posts/designing-software-for-things-that-rot/"
     title: Designing software for things that rot – Vadim Drobinin
-    description: "\"The white mold was good. The green-grey mold was probably fine. The fuzzy black spot was... well, that''s when I ended up in a midnight rabbit hole of forum posts debating whether that particular shade of black meant penicillium or something that would send me to hospital.\""
+    description: "\"The white mold was good. The green-grey mold was probably fine. The fuzzy black spot was... well, that's when I ended up in a midnight rabbit hole of forum posts debating whether that particular shade of black meant penicillium or something that would send me to hospital.\""
 
 2025-10-21:
   - url: "https://uxdesign.cc/ai-interfaces-and-the-role-of-good-writing-222cef13047f"
     title: AI interfaces and the role of good writing – Nick DeLallo
-    description: "\"If you''re lost in an AI user flow, blame the writing.\""
+    description: "\"If you're lost in an AI user flow, blame the writing.\""
   - url: "https://uxdesign.cc/trust-isnt-a-feature-it-s-the-interface-24fff9b2c2e6"
     title: "Trust isn't a feature, it's the interface – Tara Bird"
-    description: "\"How do we build trust with AI? We can''t. We can only build interfaces that help people trust AI.\""
+    description: "\"How do we build trust with AI? We can't. We can only build interfaces that help people trust AI.\""
   - url: "https://www.learnui.design/blog/wheres-the-ai-design-renaissance.html"
     title: "Where's the AI design renaissance? – Erik D. Kennedy"
-    description: "\"In 2022, I sent out some then-new Midjourney generations with the caption: If this doesn''t revolutionize design, I don''t know what will. Three years later, I am surprised to note… there hasn''t been a revolution! This is particularly notable, since the last 3 years have been a non-stop firehose of AI hype.\""
+    description: "\"In 2022, I sent out some then-new Midjourney generations with the caption: If this doesn't revolutionize design, I don't know what will. Three years later, I am surprised to note… there hasn't been a revolution! This is particularly notable, since the last 3 years have been a non-stop firehose of AI hype.\""
 
 2025-10-10:
   - url: "https://uxpsychology.substack.com/p/why-user-self-efficacy-matters-for"
@@ -167,7 +172,7 @@
 2025-10-08:
   - url: "https://menlovc.com/perspective/ais-ui-problem-is-actually-a-new-era-of-software/"
     title: "AI's UI Problem Is Actually A New Era of Software – Derek Xiao"
-    description: "\"While traditional software broadcasts differentiation through interfaces (Salesforce''s fields, Slack''s channels), AI''s value lies elsewhere: not in what you see, but what you don''t.\""
+    description: "\"While traditional software broadcasts differentiation through interfaces (Salesforce's fields, Slack's channels), AI's value lies elsewhere: not in what you see, but what you don't.\""
 
 2025-10-06:
   - url: "https://www.beautifulpublicdata.com/nasa-ames-research-center-archives/"
@@ -219,7 +224,7 @@
     description: "I've long been a proponent of storyboarding, wireflows, and other methods that look at a process (or better, a network of processes) rather than focusing on single-screen mockups, especially when getting started putting an experience together. And this is becoming more important as we shift focus toward providing ai-powered capabilities to our customers. Here's a little very light reading on storyboarding that might be useful. (It's one article worth of content in a series of four posts, alas.)"
   - url: "https://www.latent.space/p/gpt-5-review"
     title: "GPT-5 hands-on: welcome to the stone age – Latent.Space"
-    description: "\"OpenAI''s long awaited GPT-5 is here and swyx + ben have been testing with OpenAI for a while now. tldr; we think it''s a significant leap towards AGI\""
+    description: "\"OpenAI's long awaited GPT-5 is here and swyx + ben have been testing with OpenAI for a while now. tldr; we think it's a significant leap towards AGI\""
   - url: "https://www.mynameisjehad.com/emerging-patterns-in-designing-for-ai/"
     title: Emerging patterns in designing for AI – My Name Is Jehad
     description: "\"There are a few emerging patterns in designing for AI-first experiences. Here are a few\""
@@ -249,7 +254,7 @@
     description: A chat between designers and engineers can result in sleight-of-hand that seems nicer/fancier than the constraints would suggest
   - url: "https://www.smashingmagazine.com/2025/08/beyond-hype-what-ai-can-do-product-design/"
     title: "Beyond the hype: what AI can really do for product design – Nikita Samutin"
-    description: "\"AI tools are improving fast, but it''s still not clear how they fit into a real product design workflow. Nikita Samutin walks through four core stages — from analytics and ideation to prototyping and visual design — to show where AI fits and where it doesn''t, illustrated with real-world examples\""
+    description: "\"AI tools are improving fast, but it's still not clear how they fit into a real product design workflow. Nikita Samutin walks through four core stages — from analytics and ideation to prototyping and visual design — to show where AI fits and where it doesn't, illustrated with real-world examples\""
   - url: "https://www.youtube.com/watch?v=bBtTu-QfW2Q"
     title: "Video: How to master Cursor Chat to build features with control – Ian Nuttall"
     description: "\"Chat with an LLM right in the sidebar, with one click apply of code changes, or running terminal commands\""
@@ -261,13 +266,13 @@
     description: "\"The Fogg Behavior Model shows that three elements must converge at the same moment for a behavior to occur: motivation, ability, and a prompt\""
   - url: "https://rosenverse.rosenfeldmedia.com/videos/research-in-the-face-of-complexity-new-sensibility-for-new-situations"
     title: "Video: Research in the face of complexity: new sensibility for new situations – Dave Hora"
-    description: "\"How we design and deliver products is changing; how research plays is following suit. Our environment is complex, and evolving. AI''s role in design, product, research, and engineering is accelerating. New practices are shifting the boundaries between our functions\""
+    description: "\"How we design and deliver products is changing; how research plays is following suit. Our environment is complex, and evolving. AI's role in design, product, research, and engineering is accelerating. New practices are shifting the boundaries between our functions\""
   - url: "https://www.getstark.co/blog/wcag-vs-eaa/"
     title: "WCAG vs EAA: understanding where WCAG stops and the EAA starts – Team Stark"
-    description: "\"Many teams believe that meeting WCAG standards means their digital products are compliant with the European Accessibility Act (EAA). Using a clear comparison grounded in EN 301 549 and EN 17161, we extensively detail what''s in and out of scope—and why organizations need to operationalize accessibility like they do privacy and security\""
+    description: "\"Many teams believe that meeting WCAG standards means their digital products are compliant with the European Accessibility Act (EAA). Using a clear comparison grounded in EN 301 549 and EN 17161, we extensively detail what's in and out of scope—and why organizations need to operationalize accessibility like they do privacy and security\""
   - url: "https://webinars.zeroheight.com/register/zeroheight-ds-live-tj-pitre-context-based-design-systems-preparing-for-an-ai-driven-future"
     title: "Video: DS live: context-based design systems: preparing for an AI-driven future – TJ Pitre"
-    description: "\"Design systems aren''t just about consistency anymore, they''re becoming the connective tissue between people, tools, and intelligent agents\""
+    description: "\"Design systems aren't just about consistency anymore, they're becoming the connective tissue between people, tools, and intelligent agents\""
   - url: "https://www.browserstack.com/accessibility-design-toolkit"
     title: BrowserStack accessibility design toolkit
     description: "\"Adhere to WCAG by building an accessible component library, auto-detecting issues for web & mobile interfaces, and streamlining dev handoff\""
@@ -276,10 +281,10 @@
     description: Focus management for accessibility matters, and is complicated by modal dialogs and rich text editors
   - url: "https://www.w3.org/International/questions/qa-personal-names"
     title: Personal names around the world – W3C Internationalization Committee
-    description: "\"How do people''s names differ around the world, and what are the implications of those differences on the design of forms, databases, ontologies, etc. for the Web?\""
+    description: "\"How do people's names differ around the world, and what are the implications of those differences on the design of forms, databases, ontologies, etc. for the Web?\""
   - url: "https://www.kalzumeus.com/2010/06/17/falsehoods-programmers-believe-about-names/"
     title: Falsehoods programmers believe about names – Patrick McKenzie
-    description: "\"…so, as a public service, I''m going to list assumptions your systems probably make about names.  All of these assumptions are wrong.  Try to make less of them next time you write a system which touches names\""
+    description: "\"…so, as a public service, I'm going to list assumptions your systems probably make about names.  All of these assumptions are wrong.  Try to make less of them next time you write a system which touches names\""
   - url: "https://www.youtube.com/watch?v=ysPbXH0LpIEz"
     title: "Video: Prompting 101 | Code w/ Claude – Anthropic"
     description: This session demonstrates best practices using a real-world car accident claim scenario
@@ -288,7 +293,7 @@
     description: "\"What started as intuitive \"vibe coding\" with AI assistants quickly revealed why UX professionals need systematic Information Architecture approaches more than ever\""
   - url: "https://bsky.app/profile/spavel.bsky.social/post/3llh3wy5les2y"
     title: "BSky: You CAN but you WON'T – @spavel.bsky.social"
-    description: "\"…and this is a great lesson in User Experience Design: you CAN but you WON''T, because of how the software is designed\""
+    description: "\"…and this is a great lesson in User Experience Design: you CAN but you WON'T, because of how the software is designed\""
 
 2025-06-29:
   - url: "https://linear.app/now/why-is-quality-so-rare"
