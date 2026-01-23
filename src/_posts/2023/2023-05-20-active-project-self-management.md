@@ -3,7 +3,7 @@ title: Active project self-management
 layout: layouts/single_post.njk
 date: "2023-05-20T12:00:00-08:00"
 tags: post
-description: "I was fielding complaints about slowness in the UX team's contribution to projects until I started talking to the people I support about this concept. Active project self-management helps teams move faster."
+description: "I was fielding complaints about slowness in the UX team until I started talking about active project self-management. It helps teams move faster."
 ogImage: /assets/images/og/2023-05-20-active-project-self-management.png
 ---
 I was fielding complaints about slowness in the UX team's contribution to projects until I started talking to the people I support about this concept. Turns out it is good for anyone who works on a team, anyone who works with others.

@@ -1,8 +1,13 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),newest first.
 
+## 2026-01-21
+
+- Add NotePlan link import workflow, remove GitHub form approach
+
 ## 2026-01-19
 
 - Optimize accessibility testing and add APCA color contrast checks
+- Fix HTML validation and add link capture form
 
 ## 2026-01-11
 
@@ -335,4 +340,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-01-19
+Last deployed on 2026-01-22
