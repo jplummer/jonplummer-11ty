@@ -1,0 +1,17 @@
+---
+description: Persistent memory for learnings across sessions
+globs: []
+alwaysApply: true
+---
+
+## Agent Memory
+
+When you encounter a mistake that could recur, or learn something important about this project, append it to this file under the relevant heading below. Keep entries concise. Remove entries that turn out to be wrong or outdated.
+
+When completing a task, consider whether anything you learned should be recorded here.
+
+### Project patterns
+
+### Gotchas
+
+### What worked

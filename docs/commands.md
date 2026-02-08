@@ -20,8 +20,9 @@ Recommended process for deploying changes with an up-to-date changelog:
 ### 💻 Daily Development
 
 - `pnpm run dev` - Start development server with auto-rebuild on file changes (`--serve --watch --quiet`)
+  - Auto-runs: `generate-og-images` incrementally on file save (via `eleventy.beforeWatch`)
 - `pnpm run dev:verbose` - Start development server with verbose output (`--serve --watch`)
-- `pnpm run build` - Build production site (`--quiet`)
+- `pnpm run build` - Build production site (`--quiet`) (auto: `deploy`)
 - `pnpm run build:verbose` - Build production site with verbose output
 - `pnpm run clean` - Clean build directory
 
@@ -30,32 +31,32 @@ Recommended process for deploying changes with an up-to-date changelog:
 - `pnpm run test` - List available test types
 - `pnpm run validate` - Quick HTML validity check (shortcut for `pnpm run test html`)
 - `pnpm run test fast` - Run fast tests (excludes slow tests like a11y)
+  - Runs: `html` → `links` → `internal-links` → `frontmatter` → `markdown` → `spell` → `seo` → `og-images` → `color-contrast` → `rss` → `indexnow`
 - `pnpm run test all` - Run all tests in sequence (includes slow tests)
+  - Runs: everything in `test fast` → `a11y`
 - `pnpm run test [type]` - Run a specific test type
 - `pnpm run test [type] -- --format [format]` - Specify output format: `verbose` (default) or `build`
 
 ### 🚢 Deployment
 
 - `pnpm run deploy` - Deploy site to host via rsync
+  - Runs: `import-links` → `changelog` → `generate-og-images` → `test markdown` → `test frontmatter` → `build` → `test og-images` → rsync → IndexNow
 - `pnpm run deploy --dry-run` - Test deployment without actually deploying (runs all checks and shows what would be synced)
 - `pnpm run deploy --skip-checks` - Deploy without running validation checks (not recommended)
 
 ### 📝 Content Authoring
 
-- `pnpm run import-links` - Import links from NotePlan to links.yaml (also runs automatically during `pnpm run deploy`)
+- `pnpm run import-links` - Import links from NotePlan to links.yaml (auto: `deploy`)
 - `pnpm run import-links --clear` - Import and clear NotePlan note
 - `pnpm run import-links --date=2025-12-25` - Import with specific date
-
-**Note:** Link import runs automatically during deployment. Use `pnpm run import-links` manually when you want to preview imported links locally before deploying.
 
 See [noteplan-import.md](noteplan-import.md) for complete workflow documentation.
 
 ### 🔧 Maintenance
 
-- `pnpm run update-docs` - Update cached Eleventy documentation
-- `pnpm run changelog` - Generate CHANGELOG.md from git history
+- `pnpm run changelog` - Generate CHANGELOG.md from git history (auto: `deploy`)
 - `pnpm run convert-pdf` - Convert PDF pages to images for portfolio items
-- `pnpm run generate-og-images` - Generate Open Graph images for posts and pages
+- `pnpm run generate-og-images` - Generate Open Graph images for posts and pages (auto: `deploy`, `dev`)
 - `pnpm run security-audit` - Run security audit and maintenance checks
 
 ---
@@ -79,10 +80,11 @@ The deploy script performs these steps in order:
 1. **Imports links** from NotePlan to `links.yaml` (always runs, gracefully skips if no links found)
 2. **Regenerates changelog** from git history
 3. **Generates OG images** for any missing/outdated images (before build) - skipped with `--skip-checks`
-4. **Runs pre-deploy validation** (markdown, content structure) on source files - skipped with `--skip-checks`
+4. **Runs pre-deploy validation** (`test markdown`, `test frontmatter`) on source files - skipped with `--skip-checks`
 5. **Builds the site** once (includes changelog + OG image frontmatter updates)
-6. **Runs post-build validation** (og-images) on built HTML - skipped with `--skip-checks`
+6. **Runs post-build validation** (`test og-images`) on built HTML - skipped with `--skip-checks`
 7. **Deploys via rsync** - uses `--dry-run` flag when `--dry-run` option is used
+8. **Submits IndexNow** notification for search engine indexing - skipped with `--dry-run`
 
 #### Testing Deployment
 

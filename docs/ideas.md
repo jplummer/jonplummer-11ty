@@ -3,6 +3,10 @@
 ## ☑️ Selected
 
 - [ ] **REMINDER (2026-02-11)**: Check if `.cursor/rules/eleventy-debugging.mdc` is actually being used by Cursor - search for evidence in chat history and codebase
+- [ ] **REMINDER (2026-02-15)**: Check if `.cursor/rules/memory.mdc` is working
+  - Has the agent written any entries? Check `git diff .cursor/rules/memory.mdc`
+  - Does a new session reference stored memories without prompting? Ask "what have you learned about this project?"
+  - If empty after several sessions, try ending a session with "record what you learned in your memory file"
 
 - [ ] Portfolio 💎 DO SOMETHING EVERY WEEKEND
   - [ ] Explore presentation-to-portfolio item automation, including speaker notes
