@@ -17,6 +17,7 @@ Personal blog built with Eleventy (11ty) and Nunjucks templates.
 @.cursor/rules/javascript.mdc
 @.cursor/rules/markdown.mdc
 @.cursor/rules/content.mdc
+@.cursor/rules/memory.mdc
 
 ## Reference docs
 

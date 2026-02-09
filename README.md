@@ -66,8 +66,20 @@ If you want to see how the code works:
 
 ## 🤖 For AI Agents
 
-**When Debugging Unexpected Behavior:**
-When encountering unexpected behavior, **assume Eleventy is working correctly** and follow the debugging workflow:
+### Instructions and memory
+
+Project rules live in `.cursor/rules/*.mdc`. These are Cursor's native format but the content is plain markdown (after a short YAML frontmatter block), so any tool can read them.
+
+Both Cursor and Claude Code are configured to load these rules:
+
+- **Cursor** reads `.cursor/rules/*.mdc` directly via `alwaysApply: true` in each file's frontmatter.
+- **Claude Code** reads them via `@` imports in `CLAUDE.md`, which also imports `docs/commands.md`, `docs/authoring.md`, and `docs/tests.md`.
+
+**Shared memory**: `.cursor/rules/memory.mdc` is a shared file where both agents record learnings across sessions. Both are instructed to write to this file. Claude Code's own `MEMORY.md` is a pointer that imports `memory.mdc` to avoid duplication.
+
+### When debugging unexpected behavior
+
+**Assume Eleventy is working correctly** and follow the debugging workflow:
 
 - See `.cursor/rules/eleventy-debugging.mdc` for the systematic debugging process
 - Use Eleventy's debug mode: `DEBUG=Eleventy* pnpm run build`

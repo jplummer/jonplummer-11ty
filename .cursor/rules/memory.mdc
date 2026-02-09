@@ -6,12 +6,33 @@ alwaysApply: true
 
 ## Agent Memory
 
-When you encounter a mistake that could recur, or learn something important about this project, append it to this file under the relevant heading below. Keep entries concise. Remove entries that turn out to be wrong or outdated.
+Shared memory file for both Cursor and Claude Code agents. When you encounter a mistake that could recur, or learn something important about this project, append it to this file under the relevant heading below. Keep entries concise. Remove entries that turn out to be wrong or outdated.
 
 When completing a task, consider whether anything you learned should be recorded here.
 
-### Project patterns
+### Project structure
+- Eleventy (11ty) personal blog with Nunjucks templates
+- Agent instructions live in `.cursor/rules/*.mdc` (Cursor) and `CLAUDE.md` (Claude Code)
+- CLAUDE.md uses `@` imports to pull in cursor rules and docs — avoids duplication
+- Docs: `docs/commands.md`, `docs/authoring.md`, `docs/tests.md`, `docs/ideas.md`
+- `docs/ideas.md` is the task tracker — has Selected, Future, Maybe Don't, and Done sections
+- Reminders use format: `- [ ] **REMINDER (YYYY-MM-DD)**: description`
+
+### Command relationships
+- `deploy` runs: `import-links` → `changelog` → `generate-og-images` → `test markdown` → `test frontmatter` → `build` → `test og-images` → rsync → IndexNow
+- `test fast` runs 11 tests; `test all` adds `a11y`
+- `dev` auto-generates OG images on file save via `eleventy.beforeWatch`
+- `validate` is shortcut for `test html`
+
+### Workflow preferences
+- User commits intentionally — never commit without being asked
+- Pre-existing unstaged changes should be left alone (don't include unrelated files)
+- User values concise communication and clear tradeoff analysis
+- User uses both Cursor and Claude Code — this file is the shared memory for both
+- When modifying docs, check for stale cross-references across all doc files
 
 ### Gotchas
+- `.cursor/rules/*.mdc` files have YAML frontmatter (globs, alwaysApply) that Claude Code ignores — content is still valid markdown after the frontmatter
+- `convert-pdf-with-notes` exists in package.json but isn't documented in commands.md (intentional or oversight — not yet clarified)
 
 ### What worked
