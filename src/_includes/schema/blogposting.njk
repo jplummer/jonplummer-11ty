@@ -2,7 +2,7 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": {{ title | json | safe }},
+  "headline": {{ title | dump | safe }},
   "datePublished": "{{ date | dateToRfc3339 }}",
   "dateModified": "{{ date | dateToRfc3339 }}",
   "author": {
@@ -16,7 +16,7 @@
     "url": "{{ site.url }}"
   },
   "url": "{{ site.url }}{{ page.url }}",
-  "description": {{ description | default(title) | json | safe }},
+  "description": {{ description | default(title) | dump | safe }},
   "image": "{{ site.url }}{{ ogImageUrl }}"
 }
 </script>

@@ -3,6 +3,8 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 ## 2026-01-22
 
 - Fix spelling and SEO validation warnings
+- Fix YAML apostrophe escaping in links.yaml
+- Integrate link import into deployment workflow
 
 ## 2026-01-21
 
@@ -345,4 +347,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-01-23
+Last deployed on 2026-02-08

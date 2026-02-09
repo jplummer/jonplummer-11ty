@@ -24,7 +24,7 @@ eleventyExcludeFromCollections: true
             <content:encoded><![CDATA[{{ item.templateContent | safe }}]]></content:encoded>
 
             {# Post excerpt for compatibility #}
-            <description><![CDATA[{{ item.data.excerpt | default(item.templateContent | truncate(300)) | safe }}]]></description>
+            <description><![CDATA[{{ item.data.excerpt | default(item.templateContent | truncate(297, true)) | safe }}]]></description>
 
             {# Categories/tags if you have them #}
             {% if item.data.tags %}

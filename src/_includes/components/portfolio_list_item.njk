@@ -3,8 +3,8 @@
     <a href="{{ post.url }}" aria-hidden="true" tabindex="-1">
         <img src="/assets/images/{{ post.data.coverImage }}" alt="{{ post.data.title | default('Portfolio item') }}">
     </a>
-    <p><a href="{{ post.url }}" rel="bookmark">{{ post.data.title | smartquotes | stripHtml }}</a></p>
+    <p><a href="{{ post.url }}" rel="bookmark">{{ post.data.title | smartquotes | striptags }}</a></p>
     {% if post.data.description %}
-    <p class="portfolio-item-description">{{ post.data.description | smartquotes | stripHtml }}</p>
+    <p class="portfolio-item-description">{{ post.data.description | smartquotes | striptags }}</p>
     {% endif %}
 </article>

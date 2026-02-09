@@ -7,4 +7,4 @@ tags: page
 permalink: /readme/
 ogImage: /assets/images/og/readme.png
 ---
-{{ "README.md" | readFile | markdown | safe }}
+{% renderFile "./README.md" %}

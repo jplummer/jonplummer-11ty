@@ -12,7 +12,7 @@
     {%- endif %}
     {# Truncate OG title to 95 characters if too long #}
     {%- if computedTitleValue | length > 95 %}
-        {%- set ogTitleValue = computedTitleValue | truncate(92, '...') %}
+        {%- set ogTitleValue = computedTitleValue | truncate(92, true) %}
     {%- else %}
         {%- set ogTitleValue = computedTitleValue %}
     {%- endif %}

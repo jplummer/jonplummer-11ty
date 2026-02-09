@@ -9,10 +9,10 @@
     {% set previousItem = collection | getPreviousCollectionItem(currentPage) %}
     {% set nextItem = collection | getNextCollectionItem(currentPage) %}
     {% if previousItem %}
-    <a href="{{ previousItem.url }}" class="prev">← Previous {{ itemLabel }}: {{ previousItem.data.title | smartquotes | stripHtml }}</a>
+    <a href="{{ previousItem.url }}" class="prev">← Previous {{ itemLabel }}: {{ previousItem.data.title | smartquotes | striptags }}</a>
     {% endif %}
 
     {% if nextItem %}
-    <a href="{{ nextItem.url }}" class="next">Next {{ itemLabel }}: {{ nextItem.data.title | smartquotes | stripHtml }} →</a>
+    <a href="{{ nextItem.url }}" class="next">Next {{ itemLabel }}: {{ nextItem.data.title | smartquotes | striptags }} →</a>
     {% endif %}
 </nav>

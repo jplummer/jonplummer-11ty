@@ -7,4 +7,4 @@ tags: page
 permalink: /changelog/
 ogImage: /assets/images/og/changelog.png
 ---
-{{ "CHANGELOG.md" | readFile | markdown | safe }}
+{% renderFile "./CHANGELOG.md" %}
