@@ -6,6 +6,7 @@
  */
 
 const markdownIt = require("markdown-it");
+const figurePlugin = require("./markdown-it-figure");
 
 /**
  * Creates and configures a markdown-it instance.
@@ -23,6 +24,9 @@ function configureMarkdown(eleventyConfig) {
     linkify: true, // Auto-convert URLs to links
     typographer: true // Convert straight quotes to smart quotes
   });
+  
+  // Convert image + italic caption to <figure>/<figcaption> at parse time
+  md.use(figurePlugin);
   
   // Override link_open renderer to convert http:// to https:// for auto-linked URLs
   // This ensures URLs without a protocol (like "misc.jonplummer.com") default to https://
