@@ -17,6 +17,8 @@ When completing a task, consider whether anything you learned should be recorded
 - Docs: `docs/commands.md`, `docs/authoring.md`, `docs/tests.md`, `docs/ideas.md`
 - `docs/ideas.md` is the task tracker — has Selected, Future, Maybe Don't, and Done sections
 - Reminders use format: `- [ ] **REMINDER (YYYY-MM-DD)**: description`
+- Eleventy config is modularized in `eleventy/config/` (filters, plugins, events, etc.) and `eleventy/utils/` (markdown, date, CSS utilities)
+- `eleventy/config/transforms.js` is intentionally empty — figure wrapping moved to markdown-it plugin at parse time
 
 ### Command relationships
 - `deploy` runs: `import-links` → `changelog` → `generate-og-images` → `test markdown` → `test frontmatter` → `build` → `test og-images` → rsync → IndexNow
@@ -34,5 +36,9 @@ When completing a task, consider whether anything you learned should be recorded
 ### Gotchas
 - `.cursor/rules/*.mdc` files have YAML frontmatter (globs, alwaysApply) that Claude Code ignores — content is still valid markdown after the frontmatter
 - `convert-pdf-with-notes` exists in package.json but isn't documented in commands.md (intentional or oversight — not yet clarified)
+- **Date handling is load-bearing** — `addDateParsing` (timezone-aware) + permalink generation preserve WordPress-era URLs. Do not simplify without verifying every URL remains unchanged.
+- Figure captions use the convention: image line immediately followed by `*caption text*` (no blank line). The `markdown-it-figure` plugin in `eleventy/utils/markdown-it-figure.js` handles this at parse time.
+- Redirects: add entries to `src/_data/redirects.yaml` — the `src/.htaccess.njk` template renders them automatically via the data cascade. No separate script needed.
 
 ### What worked
+- Parallel agents work well for independent code changes (e.g., two unrelated simplifications at once)

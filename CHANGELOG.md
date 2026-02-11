@@ -1,4 +1,13 @@
-This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),newest first.
+This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
+
+## 2026-02-09
+
+- Replace custom filters with Nunjucks/Eleventy built-ins
+
+## 2026-02-08
+
+- Add CLAUDE.md with references to existing project rules and docs
+- Add agent memory rule and document command relationships
 
 ## 2026-01-22
 
@@ -347,4 +356,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-02-08
+Last deployed on 2026-02-09

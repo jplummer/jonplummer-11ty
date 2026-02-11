@@ -342,7 +342,7 @@ try {
 
   // Generate changelog content
   // Note: No h1 heading here - the frontmatter title in changelog.md provides it
-  let changelog = 'This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),newest first.\n\n';
+  let changelog = 'This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.\n\n';
 
   for (const date of sortedDates) {
     changelog += `## ${date}\n\n`;
