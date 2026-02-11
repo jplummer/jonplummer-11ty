@@ -2,8 +2,8 @@
  * Eleventy configuration: Event handlers
  * 
  * Called from `.eleventy.js` during Eleventy initialization.
- * Registers event handlers for build lifecycle events (before, after, beforeBuild, beforeWatch).
- * Handles progress indicators, redirect generation, and incremental OG image generation.
+ * Registers event handlers for build lifecycle events (before, after, beforeWatch).
+ * Handles progress indicators and incremental OG image generation.
  */
 
 const path = require('path');
@@ -67,17 +67,6 @@ function configureEvents(eleventyConfig) {
   eleventyConfig.on("eleventy.after", () => {
     if (isQuiet) {
       cleanupSpinner();
-    }
-  });
-
-  // Generate redirect rules before build
-  eleventyConfig.on("eleventy.beforeBuild", () => {
-    try {
-      const { generateRedirects } = require('../../scripts/utils/generate-redirects');
-      generateRedirects();
-    } catch (error) {
-      console.error('⚠️  Failed to generate redirects:', error.message);
-      // Don't fail the build if redirect generation fails
     }
   });
 

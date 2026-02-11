@@ -1,3 +1,7 @@
+---
+permalink: /.htaccess
+eleventyExcludeFromCollections: true
+---
 # Basic .htaccess for JonPlummer.com
 # Simplified version to avoid 500 errors
 
@@ -72,9 +76,7 @@ ErrorDocument 500 /500.html
 # Redirects (auto-generated - do not edit manually)
 # Generated from src/_data/redirects.yaml
 # To add redirects, edit redirects.yaml and rebuild
-
-Redirect 301 /2022/04/17/empathy-for-the-leader-whose-company-is-being-acquired/ /2022/04/16/empathy-for-the-leader-whose-company-is-being-acquired/
-Redirect 301 /2022/07/31/the-trouble-with-nps/ /2022/07/30/the-trouble-with-nps/
-Redirect 301 /2022/11/02/conference-talk-ux-philosophy/ /2022/11/01/conference-talk-ux-philosophy/
-Redirect 301 /2022/11/09/philosophy-of-ux-research-and-design-horizon-three-benefit/ /2022/11/08/philosophy-of-ux-research-and-design-horizon-three-benefit/
+{% for redirect in redirects.redirects %}
+Redirect 301 {{ redirect.from }} {{ redirect.to }}
+{%- endfor %}
 # End redirects
