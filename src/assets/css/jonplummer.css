@@ -360,6 +360,36 @@ blockquote {
   border-left: 2px solid var(--border-color);
 }
 
+/* Content warnings (details/summary) */
+details {
+  margin: var(--spacing-lg) 0;
+}
+
+summary {
+  cursor: default;
+  list-style: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary::after {
+  content: "Show text";
+  margin-left: 0.25em;
+  color: var(--link-color);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+summary:hover::after {
+  color: var(--link-hover-color);
+}
+
+details[open] > summary::after {
+  content: "Hide text";
+}
+
 /* Horizontal rules */
 hr {
   border-top: 1px solid var(--text-color-light);
@@ -1052,6 +1082,15 @@ header a.skip:focus {
   code {
     background: #f5f5f5 !important;
     padding: 0.1rem 0.2rem;
+  }
+
+  /* Content warnings - expand for print */
+  details {
+    display: block;
+  }
+
+  summary {
+    display: none;
   }
 
   /* Blockquotes */

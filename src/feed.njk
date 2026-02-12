@@ -20,11 +20,19 @@ eleventyExcludeFromCollections: true
             <guid>{{ item.url | absoluteUrl(site.url) }}</guid>
             <pubDate>{{ item.date | dateToRfc3339 }}</pubDate>
 
-            {# Full post content #}
+            {# Full post content (or warning + link for content-warned posts) #}
+            {% if item.data.contentWarning %}
+            <content:encoded><![CDATA[<p>{{ item.data.contentWarning }}</p><p><a href="{{ item.url | absoluteUrl(site.url) }}">Read on jonplummer.com</a></p>]]></content:encoded>
+            {% else %}
             <content:encoded><![CDATA[{{ item.templateContent | safe }}]]></content:encoded>
+            {% endif %}
 
             {# Post excerpt for compatibility #}
+            {% if item.data.contentWarning %}
+            <description><![CDATA[{{ item.data.contentWarning }}]]></description>
+            {% else %}
             <description><![CDATA[{{ item.data.excerpt | default(item.templateContent | truncate(297, true)) | safe }}]]></description>
+            {% endif %}
 
             {# Categories/tags if you have them #}
             {% if item.data.tags %}

@@ -28,6 +28,7 @@ For capturing links to `links.yaml`, see [NotePlan Link Import](noteplan-import.
 - **`permalink`** - Custom URL structure
 - **`eleventyExcludeFromCollections`** - Set to `true` to exclude
 - **`draft`** - Set to `true` to mark as draft. Drafts are excluded from production builds but visible in dev mode.
+- **`contentWarning`** - Warning text displayed before gated content. When set, the RSS feed shows only this warning with a link instead of the full post content. Pair with `<details>/<summary>` in the markdown body to collapse content on-site.
 
 ## Frontmatter Formatting
 
