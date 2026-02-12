@@ -4,9 +4,7 @@
 
 - [ ] Write every weekend
 
-- [ ] Look for and quash needlessly custom code in favor of native eleventy capabilities or more direct custom code
-
-- [ ] **REMINDER (2026-02-11)**: Check if `.cursor/rules/eleventy-debugging.mdc` is actually being used by Cursor - search for evidence in chat history and codebase
+- [ ] "content warning" way to hide text of out-of-norm posts
 
 - [ ] **REMINDER (2026-02-15)**: Check if `.cursor/rules/memory.mdc` is working
   - Has the agent written any entries? Check `git diff .cursor/rules/memory.mdc`
@@ -100,6 +98,14 @@
 
 ## DONE
 
+- [x] Verify `.cursor/rules/eleventy-debugging.mdc` is being used by Cursor (2026-02-10)
+  - Rule has `alwaysApply: true` and is confirmed loaded in every conversation
+  - Observed influencing agent behavior (assuming Eleventy works correctly, checking native capabilities first)
+- [x] Look for and quash needlessly custom code in favor of native eleventy capabilities or more direct custom code (2026-02-10)
+  - Replaced ~180-line cheerio figure transform with ~80-line markdown-it plugin
+  - Replaced redirect generation script + build event with a Nunjucks template using the data cascade
+  - Fixed pre-existing image aspect ratio distortion (CSS `height: auto`)
+  - Evaluated date handling, decided it's load-bearing and should not be simplified
 - [x] Make capturing links during the workday (from another machine) easier somehow (2026-01-21)
   - Implemented NotePlan import workflow with `pnpm run import-links`
   - Removed GitHub-based form approach

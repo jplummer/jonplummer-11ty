@@ -1,5 +1,12 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-02-11
+
+- Replace cheerio figure transform with markdown-it plugin
+- Replace redirect script with Nunjucks template
+- Fix image aspect ratio distortion
+- Add content warning feature for gated blog posts
+
 ## 2026-02-09
 
 - Replace custom filters with Nunjucks/Eleventy built-ins
@@ -356,4 +363,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-02-09
+Last deployed on 2026-02-12
