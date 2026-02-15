@@ -41,12 +41,6 @@
   --spacing-xl: 2.5rem; /* 5 baselines */
   --spacing-ex: 5ex;
 
-  /* Z-index */
-  --z-index-skip-link: 100;
-
-  /* Accessibility */
-  --sr-only-offset: -9999rem;
-
   /* Colors - based on DR10 palette, adjusted for WCAG AA contrast */
   --text-color: #2a2a2a; /* darker for contrast on #d3d8d2 background */
   --text-color-light: #5a5a5a;

@@ -2,16 +2,14 @@
 
 ## ☑️ Selected
 
-- [ ] Write every weekend
-
-- [ ] "content warning" way to hide text of out-of-norm posts
+- [ ] Write or portfolio every weekend
 
 - [ ] **REMINDER (2026-02-15)**: Check if `.cursor/rules/memory.mdc` is working
   - Has the agent written any entries? Check `git diff .cursor/rules/memory.mdc`
   - Does a new session reference stored memories without prompting? Ask "what have you learned about this project?"
   - If empty after several sessions, try ending a session with "record what you learned in your memory file"
 
-- [ ] Portfolio 💎 DO SOMETHING EVERY WEEKEND
+- [ ] Portfolio
   - [ ] Explore presentation-to-portfolio item automation, including speaker notes
     - [ ] What does it take to get speaker notes out of a PPT?
     - [ ] What does it take to get speaker notes out of a Google Slides preso?
@@ -98,6 +96,8 @@
 
 ## DONE
 
+- [x] "content warning" way to hide text of out-of-norm posts (2026-02-11)
+  - Implemented `contentWarning` frontmatter field with expandable `<details>` wrapper
 - [x] Verify `.cursor/rules/eleventy-debugging.mdc` is being used by Cursor (2026-02-10)
   - Rule has `alwaysApply: true` and is confirmed loaded in every conversation
   - Observed influencing agent behavior (assuming Eleventy works correctly, checking native capabilities first)
