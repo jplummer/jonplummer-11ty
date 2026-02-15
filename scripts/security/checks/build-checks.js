@@ -104,17 +104,18 @@ async function checkBuildOutput(results, addFinding) {
 async function checkCSP(results, addFinding) {
   const { runCheck } = require('../../utils/check-runner');
   return runCheck('Content Security Policy', async () => {
-    const htaccessPath = 'src/.htaccess';
+    // .htaccess is generated from a Nunjucks template via Eleventy's data cascade
+    const htaccessPath = 'src/.htaccess.njk';
     if (!fs.existsSync(htaccessPath)) {
       return {
         passed: false,
         warning: true,
-        details: '.htaccess file not found',
-        message: 'CSP: .htaccess not found',
+        details: '.htaccess.njk template not found',
+        message: 'CSP: .htaccess.njk not found',
         finding: {
           severity: 'medium',
-          description: '.htaccess file not found',
-          recommendation: 'Consider adding Content Security Policy headers to improve XSS protection. Add CSP headers to your web server configuration.'
+          description: '.htaccess.njk template not found',
+          recommendation: 'Consider adding Content Security Policy headers to improve XSS protection. The .htaccess template should exist at src/.htaccess.njk.'
         }
       };
     }
@@ -127,12 +128,12 @@ async function checkCSP(results, addFinding) {
         return {
           passed: false,
           warning: true,
-          details: 'CSP header not found in .htaccess',
+          details: 'CSP header not found in .htaccess.njk',
           message: 'CSP: header not found',
           finding: {
             severity: 'medium',
-            description: 'CSP header not found in .htaccess',
-            recommendation: 'Add Content Security Policy headers to .htaccess to prevent XSS attacks. Use a restrictive policy that only allows necessary resources.'
+            description: 'CSP header not found in .htaccess.njk',
+            recommendation: 'Add Content Security Policy headers to .htaccess.njk to prevent XSS attacks. Use a restrictive policy that only allows necessary resources.'
           }
         };
       }
@@ -182,12 +183,12 @@ async function checkCSP(results, addFinding) {
       return {
         passed: false,
         warning: true,
-        details: `Could not parse .htaccess: ${error.message}`,
+        details: `Could not parse .htaccess.njk: ${error.message}`,
         message: 'CSP: could not check',
         finding: {
           severity: 'low',
-          description: `Could not parse .htaccess: ${error.message}`,
-          recommendation: 'Verify .htaccess file is readable and properly formatted.'
+          description: `Could not parse .htaccess.njk: ${error.message}`,
+          recommendation: 'Verify .htaccess.njk template is readable and properly formatted.'
         }
       };
     }
