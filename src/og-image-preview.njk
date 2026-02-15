@@ -23,7 +23,9 @@ ogImage: /assets/images/og/index.png
         <div class="og-preview-container">
           <div class="og-preview-scaled">
             <div class="og-preview-content">
-              {% renderOgImage "How to Build Better Products", "A comprehensive guide to product development that covers everything from ideation to launch.", "2025-01-15" %}
+              <div class="og-image-rendered">
+              {% renderFile "./src/_includes/og-image-body.njk", { title: "How to Build Better Products", description: "A comprehensive guide to product development that covers everything from ideation to launch.", date: "2025-01-15" } %}
+              </div>
             </div>
           </div>
         </div>
@@ -34,7 +36,9 @@ ogImage: /assets/images/og/index.png
         <div class="og-preview-container">
           <div class="og-preview-scaled">
             <div class="og-preview-content">
-              {% renderOgImage "About This Site", "Learn more about the purpose and philosophy behind this website.", null %}
+              <div class="og-image-rendered">
+              {% renderFile "./src/_includes/og-image-body.njk", { title: "About This Site", description: "Learn more about the purpose and philosophy behind this website." } %}
+              </div>
             </div>
           </div>
         </div>
@@ -45,7 +49,9 @@ ogImage: /assets/images/og/index.png
         <div class="og-preview-container">
           <div class="og-preview-scaled">
             <div class="og-preview-content">
-              {% renderOgImage "Contact", null, null %}
+              <div class="og-image-rendered">
+              {% renderFile "./src/_includes/og-image-body.njk", { title: "Contact" } %}
+              </div>
             </div>
           </div>
         </div>
@@ -56,7 +62,9 @@ ogImage: /assets/images/og/index.png
         <div class="og-preview-container">
           <div class="og-preview-scaled">
             <div class="og-preview-content">
-              {% renderOgImage "The Complete Guide to Understanding Complex Systems and Making Better Decisions", "This is a longer description that might wrap to multiple lines and test how the template handles extended content.", "2025-01-20" %}
+              <div class="og-image-rendered">
+              {% renderFile "./src/_includes/og-image-body.njk", { title: "The Complete Guide to Understanding Complex Systems and Making Better Decisions", description: "This is a longer description that might wrap to multiple lines and test how the template handles extended content.", date: "2025-01-20" } %}
+              </div>
             </div>
           </div>
         </div>

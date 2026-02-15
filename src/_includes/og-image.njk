@@ -91,7 +91,7 @@
       flex-wrap: wrap;
     }
     
-    /* Author name styling (matches site header) */
+    /* Author name styling (matches site header, uses div — not a heading since this is a screenshot target) */
     .og-hgroup > div {
       font-size: 6rem;
       line-height: var(--line-height-3xl);
@@ -136,19 +136,7 @@
   </style>
 </head>
 <body>
-  <div class="og-content">
-    <div class="og-hgroup">
-      <h1><a href="/">Jon Plummer</a></h1>
-      <p>Today I Learned</p>
-    </div>
-    <h1 class="og-title">{{ title }}</h1>
-    {% if description %}
-    <p class="og-description">{{ description }}</p>
-    {% endif %}
-    {% if date %}
-    <p class="og-date">{{ date | postDate }}</p>
-    {% endif %}
-  </div>
+  {% include "og-image-body.njk" %}
 </body>
 </html>
 

@@ -1,7 +1,7 @@
 /**
  * Utility: CSS custom properties extraction
  * 
- * Utility module used by filters and shortcodes (e.g., renderOgImage shortcode).
+ * Utility module used by filters and scripts (e.g., generate-og-images.js).
  * Extracts CSS custom properties from the :root block in the main stylesheet
  * for use in OG image generation.
  */

@@ -791,7 +791,7 @@ header a.skip:focus {
 }
 
 /* === OG IMAGE RENDERED STYLES === */
-/* Styles for OG images rendered via renderOgImage shortcode (scoped to .og-image-rendered) */
+/* Styles for OG images rendered via renderFile in og-image-preview (scoped to .og-image-rendered) */
 
 .og-image-rendered {
   /* Inherits all CSS custom properties from :root (typography, spacing, etc.)

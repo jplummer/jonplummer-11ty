@@ -1,0 +1,29 @@
+{#-
+  Open Graph Image Body Content
+  
+  Partial template containing the OG image content markup. Used by:
+  - og-image.njk: Full HTML document for Puppeteer screenshot generation
+  - og-image-preview.njk: Inline preview via Eleventy's renderFile shortcode
+  
+  Uses <div> elements instead of headings since this content is either
+  rendered as a screenshot (Puppeteer) or embedded inside an existing page
+  (preview), where heading semantics are not meaningful.
+  
+  Variables:
+  - title: Post title (required)
+  - description: Post description (optional)
+  - date: Post date (optional, formatted via postDate filter)
+-#}
+<div class="og-content">
+    <div class="og-hgroup">
+      <div><a href="/">Jon Plummer</a></div>
+      <p>Today I Learned</p>
+    </div>
+    <div class="og-title">{{ title }}</div>
+    {% if description %}
+    <p class="og-description">{{ description }}</p>
+    {% endif %}
+    {% if date %}
+    <p class="og-date">{{ date | postDate }}</p>
+    {% endif %}
+</div>

@@ -14,6 +14,7 @@
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
+const { formatYamlString } = require('../utils/frontmatter-utils');
 
 // NotePlan path (setapp version)
 const NOTEPLAN_NOTES_DIR = path.join(
@@ -108,36 +109,6 @@ function parseNotePlanNote(content) {
   }
 
   return links;
-}
-
-/**
- * Format YAML string with proper quoting and escaping
- */
-function formatYamlString(value) {
-  if (!value || typeof value !== 'string') {
-    return value;
-  }
-
-  // Check if needs quoting
-  const needsQuoting = /[:#|>&*!%@`'"\n\r]/.test(value) || 
-                       /^\s|\s$/.test(value) ||
-                       /^[0-9-]/.test(value) ||
-                       ['true', 'false', 'null', 'yes', 'no', 'on', 'off'].includes(value.toLowerCase());
-
-  if (!needsQuoting) {
-    return value;
-  }
-
-  // Escape and quote
-  if (value.includes('"') && value.includes("'")) {
-    return `"${value.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`;
-  } else if (value.includes('"')) {
-    return `"${value.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`;
-  } else if (value.includes("'")) {
-    return `"${value.replace(/\\/g, '\\\\')}"`;
-  } else {
-    return `"${value.replace(/\\/g, '\\\\')}"`;
-  }
 }
 
 /**
