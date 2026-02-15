@@ -4,10 +4,8 @@
 
 - [ ] Write or portfolio every weekend
 
-- [ ] **REMINDER (2026-02-15)**: Check if `.cursor/rules/memory.mdc` is working
-  - Has the agent written any entries? Check `git diff .cursor/rules/memory.mdc`
-  - Does a new session reference stored memories without prompting? Ask "what have you learned about this project?"
-  - If empty after several sessions, try ending a session with "record what you learned in your memory file"
+- [ ] **REMINDER (2026-02-19)**: Is the stronger memory.mdc language working?
+  - Check `git log --oneline --all -- .cursor/rules/memory.mdc` — are there unprompted updates from recent sessions? If not, the directive language isn't enough; consider moving the instruction to user rules or CLAUDE.md
 
 - [ ] Portfolio
   - [ ] Explore presentation-to-portfolio item automation, including speaker notes

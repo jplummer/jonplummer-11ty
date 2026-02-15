@@ -8,7 +8,7 @@ alwaysApply: true
 
 Shared memory file for both Cursor and Claude Code agents. When you encounter a mistake that could recur, or learn something important about this project, append it to this file under the relevant heading below. Keep entries concise. Remove entries that turn out to be wrong or outdated.
 
-When completing a task, consider whether anything you learned should be recorded here.
+**At the end of every task session, update this file** with any new learnings before your final response. Don't ask — just do it. If nothing was learned, skip silently.
 
 ### Project structure
 - Eleventy (11ty) personal blog with Nunjucks templates
@@ -32,6 +32,12 @@ When completing a task, consider whether anything you learned should be recorded
 - User values concise communication and clear tradeoff analysis
 - User uses both Cursor and Claude Code — this file is the shared memory for both
 - When modifying docs, check for stale cross-references across all doc files
+
+### DRY decisions
+- OG image preview uses Eleventy's native `renderFile` shortcode (RenderPlugin) + `og-image-body.njk` partial — no custom Nunjucks env needed
+- `generate-og-images.js` still has its own Nunjucks env with inline `postDate` and `extractCssCustomProperties` — known remaining DRY opportunity, acceptable because it runs outside Eleventy
+- Shared PDF conversion functions live in `scripts/utils/pdf-utils.js`
+- User rejected a `readMarkdownFile()` consolidation utility — the pattern repeats across scripts but a shared helper added indirection without clear payoff
 
 ### Gotchas
 - `.cursor/rules/*.mdc` files have YAML frontmatter (globs, alwaysApply) that Claude Code ignores — content is still valid markdown after the frontmatter
