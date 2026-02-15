@@ -1,126 +1,29 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
-.pnpm-debug.log*
-
-# Diagnostic reports
-report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
-
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# Test coverage
-coverage
-*.lcov
-.nyc_output
-lib-cov
-
-# Dependency directories
+# Node
 node_modules/
-jspm_packages/
-bower_components
-web_modules/
-
-# Build tools and caches
-.grunt
-.lock-wscript
-build/Release
-*.tsbuildinfo
-.npm
-.eslintcache
-.stylelintcache
-.node_repl_history
-*.tgz
-.rpt2_cache/
-.rts2_cache_cjs/
-.rts2_cache_es/
-.rts2_cache_umd/
-
-# Yarn
-.yarn-integrity
-.yarn/cache
-.yarn/unplugged
-.yarn/build-state.yml
-.yarn/install-state.gz
-.pnp.*
+*.log
+.pnpm-debug.log*
 
 # Environment variables
 .env
-.env.development.local
-.env.test.local
-.env.production.local
-.env.local
-
-# Build outputs and caches
-.cache
-.parcel-cache
-.next
-out
-.nuxt
-dist
-.temp
-.vuepress/dist
-.docusaurus
-.fusebox/
-.serverless/
-.dynamodb/
-
-# Framework-specific
-# Gatsby
-.cache/
-## Uncomment the public line if your project uses Gatsby and not Next.js
-## https://nextjs.org/blog/next-9-1#public-directory-support
-# public
-
-# VitePress
-**/.vitepress/dist
-**/.vitepress/cache
+.env*.local
 
 # 11ty
 _site/
+.cache/
 
-# Security audit report (generated)
+# Generated files
 security-audit-report.md
+.indexnow-state.json
 
-# TernJS
-.tern-port
-
-# VSCode test
-.vscode-test
-
-## OS-specific cruft
-
-# macOS
+# OS
 .DS_Store
-.DS_Store?
-.Spotlight-V100
-.Trashes
-
-# Windows
 Thumbs.db
-Thumbs.db?
-ehthumbs.db
-desktop.ini
-$RECYCLE.BIN/
 
-# Linux
-.directory
-*~
-
-# Editor/IDE files
+# Editors
 .vscode/
 .idea/
 *.swp
 *.swo
-*.sublime-project
-*.sublime-workspace
 .cursor-workspace
 .cursor/*
 !.cursor/
@@ -131,6 +34,3 @@ $RECYCLE.BIN/
 *.tmp
 *.orig
 .temp-eleventy-clone/
-
-# IndexNow state
-.indexnow-state.json

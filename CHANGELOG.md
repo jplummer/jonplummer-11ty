@@ -1,11 +1,19 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-02-14
+
+- Fix security audit: update CSP check for .htaccess.njk template, override markdown-it to resolve ReDoS vulnerability
+- DRY up duplicated code across scripts and templates
+- Remove unused CSS tokens; update ideas and pnpm overrides
+- Update agent memory, ideas tracker, and pnpm overrides
+
 ## 2026-02-11
 
 - Replace cheerio figure transform with markdown-it plugin
 - Replace redirect script with Nunjucks template
 - Fix image aspect ratio distortion
 - Add content warning feature for gated blog posts
+- Fix Dependabot vuln: override @isaacs/brace-expansion to 5.0.1
 
 ## 2026-02-09
 
@@ -363,4 +371,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-02-12
+Last deployed on 2026-02-15
