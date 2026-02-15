@@ -7,15 +7,16 @@
 Recommended process for deploying changes with an up-to-date changelog:
 
 1. Make changes (write posts, update content, add links to NotePlan, etc.)
-2. `pnpm run build` - Verify local build works
-3. `pnpm run test fast` - Run validation checks
-4. Fix any issues found, then repeat steps 2-3 until all tests pass
-5. `git commit` - Commit changes (required: changelog generation reads from git history)
-6. `pnpm run deploy` - Deploy to live site (automatically imports links, regenerates changelog, and runs validation)
-7. Verify the live site works as expected
-8. `git push` - Push commits to remote repository
+2. `pnpm run import-links` - Import any pending links from NotePlan (if applicable)
+3. `pnpm run build` - Verify local build works
+4. `pnpm run test fast` - Run validation checks
+5. Fix any issues found, then repeat steps 3-4 until all tests pass
+6. `git commit` - Commit changes (required: changelog generation reads from git history)
+7. `pnpm run deploy` - Deploy to live site (regenerates changelog and runs validation)
+8. Verify the live site works as expected
+9. `git push` - Push commits to remote repository
 
-**Why this order?** The deploy script regenerates the changelog from git commit history, so commits must exist before deployment. Links from NotePlan are automatically imported during deployment. See [Deployment Process](#deployment-process) for details.
+**Why this order?** Importing links before building lets you review and test them locally. The deploy script regenerates the changelog from git commit history, so commits must exist before deployment. See [Deployment Process](#deployment-process) for details.
 
 ### 💻 Daily Development
 
@@ -40,7 +41,7 @@ Recommended process for deploying changes with an up-to-date changelog:
 ### 🚢 Deployment
 
 - `pnpm run deploy` - Deploy site to host via rsync
-  - Runs: `import-links` → `changelog` → `generate-og-images` → `test markdown` → `test frontmatter` → `build` → `test og-images` → rsync → IndexNow
+  - Runs: `changelog` → `generate-og-images` → `test markdown` → `test frontmatter` → `build` → `test og-images` → rsync → IndexNow
 - `pnpm run deploy --dry-run` - Test deployment without actually deploying (runs all checks and shows what would be synced)
 - `pnpm run deploy --skip-checks` - Deploy without running validation checks (not recommended)
 
@@ -77,14 +78,15 @@ Prior complex deployment scripts were moved to `scripts/deploy/backup/`. The cur
 
 The deploy script performs these steps in order:
 
-1. **Imports links** from NotePlan to `links.yaml` (always runs, gracefully skips if no links found)
-2. **Regenerates changelog** from git history
-3. **Generates OG images** for any missing/outdated images (before build) - skipped with `--skip-checks`
-4. **Runs pre-deploy validation** (`test markdown`, `test frontmatter`) on source files - skipped with `--skip-checks`
-5. **Builds the site** once (includes changelog + OG image frontmatter updates)
-6. **Runs post-build validation** (`test og-images`) on built HTML - skipped with `--skip-checks`
-7. **Deploys via rsync** - uses `--dry-run` flag when `--dry-run` option is used
-8. **Submits IndexNow** notification for search engine indexing - skipped with `--dry-run`
+1. **Regenerates changelog** from git history
+2. **Generates OG images** for any missing/outdated images (before build) - skipped with `--skip-checks`
+3. **Runs pre-deploy validation** (`test markdown`, `test frontmatter`) on source files - skipped with `--skip-checks`
+4. **Builds the site** once (includes changelog + OG image frontmatter updates)
+5. **Runs post-build validation** (`test og-images`) on built HTML - skipped with `--skip-checks`
+6. **Deploys via rsync** - uses `--dry-run` flag when `--dry-run` option is used
+7. **Submits IndexNow** notification for search engine indexing - skipped with `--dry-run`
+
+**Note:** Links from NotePlan should be imported *before* committing (`pnpm run import-links`), not during deployment. This lets you review and test links locally before they go live.
 
 #### Testing Deployment
 
@@ -95,7 +97,6 @@ pnpm run deploy --dry-run
 ```
 
 This will:
-- Import any pending links from NotePlan
 - Run all validation checks
 - Generate any missing OG images
 - Show what files would be synced (via rsync's dry-run)

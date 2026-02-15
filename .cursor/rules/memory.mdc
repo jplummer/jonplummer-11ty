@@ -21,7 +21,8 @@ Shared memory file for both Cursor and Claude Code agents. When you encounter a 
 - `eleventy/config/transforms.js` is intentionally empty — figure wrapping moved to markdown-it plugin at parse time
 
 ### Command relationships
-- `deploy` runs: `import-links` → `changelog` → `generate-og-images` → `test markdown` → `test frontmatter` → `build` → `test og-images` → rsync → IndexNow
+- `deploy` runs: `changelog` → `generate-og-images` → `test markdown` → `test frontmatter` → `build` → `test og-images` → rsync → IndexNow
+- `import-links` is a manual pre-commit step, not part of deploy — run it before building/committing so links can be reviewed and tested locally
 - `test fast` runs 11 tests; `test all` adds `a11y`
 - `dev` auto-generates OG images on file save via `eleventy.beforeWatch`
 - `validate` is shortcut for `test html`

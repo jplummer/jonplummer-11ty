@@ -1,3 +1,8 @@
+2026-02-15:
+  - url: "https://readwise-assets.s3.amazonaws.com/media/wisereads/articles/how-ai-impacts-skill-formation/1128.pdf"
+    title: How AI Impacts Skill Formation – Judy Hanwen Shen and Alex Tamkin
+    description: "\"Novice workers who rely heavily on AI to complete unfamiliar tasks may compromise their own skill acquisition in the process. We conduct randomized experiments to study how developers gained mastery of a new asynchronous programming library with and without the assistance of AI. We find that AI use impairs conceptual understanding, code reading, and debugging abilities, without delivering significant efficiency gains on average.”"
+
 2026-02-08:
   - url: "https://medium.com/@dannypeck/ai-imposter-syndrome-and-the-evolution-of-what-it-means-to-be-a-developer-89c6fafbdf8b"
     title: AI, Imposter Syndrome, and the Evolution of What It Means to Be a Developer – Danny Peck
