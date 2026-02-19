@@ -35,19 +35,16 @@ const targetDate = dateArg ? dateArg.split('=')[1] : new Date().toISOString().sp
  * Find NotePlan note by searching for content
  */
 function findNotePlanNote(searchTitle) {
-  // Search in Personal folder (most common location)
-  const personalDir = path.join(NOTEPLAN_NOTES_DIR, 'Personal');
-  
-  if (!fs.existsSync(personalDir)) {
-    console.error('❌ NotePlan Personal folder not found at:', personalDir);
+  if (!fs.existsSync(NOTEPLAN_NOTES_DIR)) {
+    console.error('❌ NotePlan Notes folder not found at:', NOTEPLAN_NOTES_DIR);
     console.error('   Check that NotePlan is installed and has notes.');
     process.exit(1);
   }
 
-  // Get all .txt files in Personal folder
-  const files = fs.readdirSync(personalDir)
+  // Get all .txt files in Notes root
+  const files = fs.readdirSync(NOTEPLAN_NOTES_DIR)
     .filter(file => file.endsWith('.txt'))
-    .map(file => path.join(personalDir, file));
+    .map(file => path.join(NOTEPLAN_NOTES_DIR, file));
 
   // Search file contents for the title
   for (const filePath of files) {

@@ -150,9 +150,9 @@ This decouples link capture from deployment, so you can collect many links and d
 
 ## NotePlan Location
 
-The script looks for notes in:
+The script looks for notes in the Notes root:
 ```
-~/Library/Containers/co.noteplan.NotePlan-setapp/Data/Library/Application Support/co.noteplan.NotePlan-setapp/Notes/Personal/
+~/Library/Containers/co.noteplan.NotePlan-setapp/Data/Library/Application Support/co.noteplan.NotePlan-setapp/Notes/
 ```
 
 **Note:** This is for NotePlan via Setapp. If you have standalone NotePlan, the path may be:
@@ -160,7 +160,7 @@ The script looks for notes in:
 ~/Library/Containers/co.noteplan.NotePlan3/Data/Library/Application Support/co.noteplan.NotePlan3/Notes/
 ```
 
-The script will search for a note with "Links to import" in the title.
+The script will search for a `.txt` file with "Links to import" in the first line.
 
 ## Validation
 
@@ -209,7 +209,7 @@ The import script automatically detects duplicate URLs:
 ### "Note not found"
 
 - Create a note in NotePlan titled "Links to import"
-- Make sure it's in your Personal folder
+- Make sure it's in the Notes root (not inside a subfolder)
 - Check the path if using standalone NotePlan (not Setapp)
 
 ### "No links found in note"
@@ -237,7 +237,7 @@ The import script automatically detects duplicate URLs:
 **iOS Share Extension:**
 1. Share from Safari/browser
 2. Choose "NotePlan"
-3. Select "Links to import" note
+3. Select the "Links to import" note
 4. NotePlan adds: `* [Page Title](URL)`
 5. Optionally add description below
 
@@ -295,7 +295,7 @@ Next steps:
 
 ## File Locations
 
-- **NotePlan note**: `~/Library/Containers/.../Notes/Personal/Links to import.txt`
+- **NotePlan note**: `~/Library/Containers/.../Notes/Links to import.txt`
 - **Import script**: `scripts/content/import-noteplan-links.js`
 - **Target file**: `src/_data/links.yaml`
 - **Validation test**: `scripts/test/links-yaml.js`

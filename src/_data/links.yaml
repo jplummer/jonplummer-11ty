@@ -1,3 +1,20 @@
+2026-02-19:
+  - url: "https://modern-css.com/"
+    title: Modern CSS Code Snippets – Naeem Noor
+    description: I first learned CSS as CSS was starting to meet widespread browser support in 1999. A lot of my CSS reflexes are out-of-date, so sites like this are exciting, eye-opening, and threaten to draw me back toward front-end development.
+  - url: "https://surfingcomplexity.blog/2026/02/16/poor-deming-never-stood-a-chance/"
+    title: Poor Deming never stood a chance – Lorin Hochstein
+    description: "\"Deming’s perspective can be summed up with the old saying: *if you don’t change the system, the system doesn’t change.* He argued that if you wanted improvements, you had to make systemic changes. Furthermore, you had to understand the system if you wanted to come up with a system improvement that would actually work.\""
+  - url: "https://uxdesign.cc/ais-text-trap-moving-towards-a-more-interactive-future-7035bbc4aaa5"
+    title: "AI’s text-trap: Moving towards a more interactive future – Ishan Korde"
+    description: "\"When the interaction is text-only and detached from your product, the user experience is no longer a differentiator, and your product is at risk of becoming a commodity.\""
+  - url: "https://www.nngroup.com/articles/design-system-enforcer/"
+    title: Your Design System Needs an Enforcer - Laura Klein
+    description: "\"Having an enforcer doesn't mean being inflexible or building an ivory tower. It means being thoughtful and consistent about how the system evolves.”"
+  - url: "https://unsung.aresluna.org/how-to-make-sure-a-designer-never-files-a-bug-again/"
+    title: How to make sure a designer never files a bug again – Marcin Wichary
+    description: "\"If it’s working as intended, but *it feels buggy to the user* – it ought to be a bug. If it’s a long-standing bug, it should be considered as [cumulative damage already done](https://unsung.aresluna.org/the-autocorrect-battle-of-wills/), not “oh, this has been like this for a long time, no one cares.”\""
+
 2026-02-15:
   - url: "https://readwise-assets.s3.amazonaws.com/media/wisereads/articles/how-ai-impacts-skill-formation/1128.pdf"
     title: How AI Impacts Skill Formation – Judy Hanwen Shen and Alex Tamkin
