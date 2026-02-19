@@ -86,4 +86,4 @@ With most of our work going toward rewrites that had not yet launched there was 
 ![quick-ux-accomplishments-2022-10-05 page 25](/assets/images/2022/10/quick-ux-accomplishments-2022-10-05-page-25.png)
 *Page 25: Thanks for humoring me racing through this, and if you want a touch more depth I welcome you to come to my talk at Connect on the first day.*
 
-The [full PDF](/assets/pdfs/2022/10/Quick UX accomplishments 2022 10 05.pdf) is available.
+The [full PDF](/assets/pdfs/2022/10/quick-ux-accomplishments-2022-10-05.pdf) is available.

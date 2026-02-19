@@ -46,6 +46,7 @@ Shared memory file for both Cursor and Claude Code agents. When you encounter a 
 - **Date handling is load-bearing** — `addDateParsing` (timezone-aware) + permalink generation preserve WordPress-era URLs. Do not simplify without verifying every URL remains unchanged.
 - Figure captions use the convention: image line immediately followed by `*caption text*` (no blank line). The `markdown-it-figure` plugin in `eleventy/utils/markdown-it-figure.js` handles this at parse time.
 - Redirects: add entries to `src/_data/redirects.yaml` — the `src/.htaccess.njk` template renders them automatically via the data cascade. No separate script needed.
+- **Eleventy image transform wraps `<img>` in `<picture>`** — when a parent element becomes a CSS grid container, `<picture>` is the grid item, not `<img>`. Target `> picture` for grid placement (e.g., `grid-column: 1 / -1`).
 
 ### What worked
 - Parallel agents work well for independent code changes (e.g., two unrelated simplifications at once)

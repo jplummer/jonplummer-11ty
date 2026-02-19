@@ -104,6 +104,7 @@ body {
   letter-spacing: var(--letter-spacing-normal);
   color: var(--text-color);
   background-color: var(--background-color);
+  scrollbar-gutter: stable;
 }
 
 /* Make images easier to work with */
@@ -187,7 +188,7 @@ article footer {
 
 /* Single column responsive layout */
 /* Note: Cannot use var(--breakpoint-single-column) in media query, so value is hardcoded here */
-@media all and (max-width: 54rem) {
+@media (width <= 54rem) {
   article {
     grid-template-columns: 1fr;
     grid-template-areas: 
@@ -522,7 +523,7 @@ article.portfolio-detail header {
 article.portfolio-detail section {
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: subgrid;
   gap: var(--paragraph-spacing) var(--gutter);
 }
 
@@ -551,6 +552,16 @@ article.portfolio-detail section > img {
   margin: var(--spacing-lg) 0;
 }
 
+article.portfolio-detail section > figure {
+  display: grid;
+  grid-template-columns: subgrid;
+}
+
+article.portfolio-detail section > figure > picture,
+article.portfolio-detail section > figure > img {
+  grid-column: 1 / -1;
+}
+
 article.portfolio-detail section > p:has(> img:only-child) img,
 article.portfolio-detail section > figure img {
   width: 100%;
@@ -565,22 +576,17 @@ article.portfolio-detail section > figure figcaption {
     line-height: var(--line-height-xs);
     color: var(--text-color-light);
     font-style: italic;
-    /* Align caption with text column: ((100% - gap) / 3) + gap */
-    padding-left: calc(((100% - var(--gutter)) / 3) + var(--gutter)); 
+    grid-column: 2;
 }
 
 /* Mobile adjustments for portfolio detail */
-@media all and (max-width: 54rem) {
-  article.portfolio-detail section {
-    grid-template-columns: 1fr;
-  }
-  
+@media (width <= 54rem) {
   article.portfolio-detail section > * {
     grid-column: 1;
   }
   
   article.portfolio-detail section > figure figcaption {
-    padding-left: 0;
+    grid-column: 1;
   }
 }
 
@@ -593,13 +599,13 @@ ul.portfolio-grid {
   list-style: none;
 }
 
-@media (min-width: 40rem) {
+@media (width >= 40rem) {
   ul.portfolio-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (min-width: 60rem) {
+@media (width >= 60rem) {
   ul.portfolio-grid {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -645,13 +651,13 @@ article.portfolio-detail section > .portrait-grid {
   margin: var(--spacing-lg) 0;
 }
 
-@media (min-width: 40rem) {
+@media (width >= 40rem) {
   article.portfolio-detail section > .portrait-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (min-width: 60rem) {
+@media (width >= 60rem) {
   article.portfolio-detail section > .portrait-grid {
     grid-template-columns: repeat(3, 1fr);
   }

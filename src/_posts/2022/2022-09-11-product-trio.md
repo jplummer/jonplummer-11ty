@@ -48,4 +48,4 @@ One shouldn’t have to sell the concept of three-in-a-box planning, where produ
 ![product-trio page 13](/assets/images/2022/09/product-trio-page-13.png)
 *Page 13: Germaine calls it “product trio” which is more pleasant-sounding. Regardless, it is now what we are expected to do.*
 
-The [full PDF](/assets/pdfs/2022/09/Product Trio.pdf) is available.
+The [full PDF](/assets/pdfs/2022/09/product-trio.pdf) is available.

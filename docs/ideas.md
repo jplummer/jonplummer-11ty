@@ -22,6 +22,8 @@
 - [ ] Reinvestigate color scheme
   - [ ] *Consider* addressing accessibility test script deficiencies per /docs/archive/accesssibility-test-limitations.md
   - [ ] *Consider* other color inspiration sources
+  - [ ] Perhaps use oklch colors for vividness? See https://modern-css.com/vivid-colors-beyond-srgb/ 
+
 
 ## 🔮 Future Consideration
 
@@ -46,6 +48,8 @@
 - https://github.com/steipete/agent-rules ?
 
 - https://github.com/Invoca/prompt-library ?
+
+- https://modern-css.com ?
 
 - learn about 11ty Debug Mode
 

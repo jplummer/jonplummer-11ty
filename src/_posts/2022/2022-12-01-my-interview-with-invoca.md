@@ -176,4 +176,4 @@ There are a lot of slides, but much of this presentation is meant to be fast-pac
 ![jon-plummer-invoca-final-preso page 55](/assets/images/2022/12/jon-plummer-invoca-final-preso-page-55.png)
 *Page 55: Questions, comments, observations?*
 
-The [full PDF](/assets/pdfs/2022/12/Jon Plummer Invoca final preso.pdf) is available.
+The [full PDF](/assets/pdfs/2022/12/jon-plummer-invoca-final-preso.pdf) is available.
