@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-02-15
+
+- Move import-links from deploy pipeline to manual pre-commit step
+
 ## 2026-02-14
 
 - Fix security audit: update CSP check for .htaccess.njk template, override markdown-it to resolve ReDoS vulnerability
@@ -371,4 +375,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-02-15
+Last deployed on 2026-02-19
