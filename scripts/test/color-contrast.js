@@ -6,6 +6,7 @@ const { calcAPCA } = require('apca-w3');
 const { createTestResult, addFile, addIssue, addWarning, addCustomSection, outputResult } = require('../utils/test-results');
 
 // Parse CSS custom properties from CSS file
+// Supports both light-dark() syntax and legacy separate @media blocks
 function parseCSSColors(cssFilePath) {
   const cssContent = fs.readFileSync(cssFilePath, 'utf8');
   
@@ -14,26 +15,38 @@ function parseCSSColors(cssFilePath) {
     dark: {}
   };
   
-  // Extract light mode colors from :root
   const rootMatch = cssContent.match(/:root\s*\{([^}]+)\}/);
   if (rootMatch) {
     const rootContent = rootMatch[1];
-    // Match CSS custom properties with hex color values
-    const colorMatches = rootContent.matchAll(/--([a-z-]+):\s*(#[0-9a-fA-F]{3,6})/g);
-    for (const match of colorMatches) {
+
+    // Match light-dark(lightColor, darkColor) syntax
+    const lightDarkMatches = rootContent.matchAll(/--([a-z-]+):\s*light-dark\(\s*(#[0-9a-fA-F]{3,6})\s*,\s*(#[0-9a-fA-F]{3,6})\s*\)/g);
+    for (const match of lightDarkMatches) {
+      const [, varName, lightValue, darkValue] = match;
+      colors.light[varName] = lightValue;
+      colors.dark[varName] = darkValue;
+    }
+
+    // Match plain hex values (for properties not using light-dark)
+    const plainMatches = rootContent.matchAll(/--([a-z-]+):\s*(#[0-9a-fA-F]{3,6})\s*;/g);
+    for (const match of plainMatches) {
       const [, varName, colorValue] = match;
-      colors.light[varName] = colorValue;
+      if (!colors.light[varName]) {
+        colors.light[varName] = colorValue;
+      }
     }
   }
   
-  // Extract dark mode colors from @media (prefers-color-scheme: dark)
+  // Also check legacy @media (prefers-color-scheme: dark) block
   const darkModeMatch = cssContent.match(/@media\s*\(prefers-color-scheme:\s*dark\)\s*\{[^{]*:root\s*\{([^}]+)\}/);
   if (darkModeMatch) {
     const darkContent = darkModeMatch[1];
     const colorMatches = darkContent.matchAll(/--([a-z-]+):\s*(#[0-9a-fA-F]{3,6})/g);
     for (const match of colorMatches) {
       const [, varName, colorValue] = match;
-      colors.dark[varName] = colorValue;
+      if (!colors.dark[varName]) {
+        colors.dark[varName] = colorValue;
+      }
     }
   }
   

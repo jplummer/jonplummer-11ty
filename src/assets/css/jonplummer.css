@@ -41,31 +41,18 @@
   --spacing-xl: 2.5rem; /* 5 baselines */
   --spacing-ex: 5ex;
 
-  /* Colors - based on DR10 palette, adjusted for WCAG AA contrast */
-  --text-color: #2a2a2a; /* darker for contrast on #d3d8d2 background */
-  --text-color-light: #5a5a5a;
-  --border-color: #d0d0d0; /* subtle border for images */
-  --background-color: #d3d8d2;
-  --content-background-color: #fff;
-  --link-color: #d63d36; /* darkened from #e6423a to meet WCAG AA 4.5:1 (4.59:1) */
-  --link-hover-color: #b26205; /* darkened from #d97706 to meet WCAG AA 4.5:1 (4.52:1) */
-  --link-visited-color: #5b4a3b;
-  --link-active-color: #0d703f;
-}
-
-/* Redefine colors for dark mode - based on DR10 palette */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text-color: #e0e0e0;
-    --text-color-light: #c8c8c8; /* adjusted for APCA Lc 65+ */
-    --border-color: #4a4a4a; /* subtle border for images in dark mode */
-    --background-color: #1a1a1a;
-    --content-background-color: #2d2d2d;
-    --link-color: #ffa0a0; /* lighter version of DR10 red #e6423a, adjusted for APCA Lc 60+ */
-    --link-hover-color: #f1b73a; /* DR10 yellow-orange */
-    --link-visited-color: #d0c0b0; /* lighter version of DR10 dark brown #5b4a3b, adjusted for APCA Lc 62+ */
-    --link-active-color: #60d890; /* lighter version of DR10 green #0d703f, adjusted for APCA Lc 62+ */
-  }
+  /* Colors - based on DR10 palette, adjusted for WCAG AA contrast
+     light-dark(light, dark) picks the value matching the user's color scheme */
+  color-scheme: light dark;
+  --text-color: light-dark(#2a2a2a, #e0e0e0);
+  --text-color-light: light-dark(#5a5a5a, #c8c8c8); /* APCA Lc 65+ in dark */
+  --border-color: light-dark(#d0d0d0, #4a4a4a);
+  --background-color: light-dark(#d3d8d2, #1a1a1a);
+  --content-background-color: light-dark(#fff, #2d2d2d);
+  --link-color: light-dark(#d63d36, #ffa0a0); /* WCAG AA 4.5:1 in light; APCA Lc 60+ in dark */
+  --link-hover-color: light-dark(#b26205, #f1b73a); /* WCAG AA 4.5:1 in light */
+  --link-visited-color: light-dark(#5b4a3b, #d0c0b0); /* APCA Lc 62+ in dark */
+  --link-active-color: light-dark(#0d703f, #60d890); /* APCA Lc 62+ in dark */
 }
 
 /* === RESETS & BASE STYLES === */
