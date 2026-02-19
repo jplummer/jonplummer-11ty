@@ -8,10 +8,20 @@
   - Check `git log --oneline --all -- .cursor/rules/memory.mdc` — are there unprompted updates from recent sessions? If not, the directive language isn't enough; consider moving the instruction to user rules or CLAUDE.md
 
 - [ ] Portfolio
-  - [ ] Explore presentation-to-portfolio item automation, including speaker notes
-    - [ ] What does it take to get speaker notes out of a PPT?
-    - [ ] What does it take to get speaker notes out of a Google Slides preso?
-    - [ ] Can we then import those as captions?
+  - [ ] Presentation-to-portfolio automation (in progress — see notes below)
+    - **Status**: Script drafted, not yet tested with real data
+    - **What exists**: `scripts/content/convert-pdf-pages-with-notes.js` — accepts a PDF (visuals) and a text file (notes), generates markdown with figures and pre-populated figcaptions. Run via `npm run convert-pdf-with-notes`.
+    - **Also done**: Bumped `convert-pdf` to 300 DPI for better image quality on retina screens.
+    - **What we learned about notes export**:
+      - Neither PowerPoint nor Google Slides has a clean "export notes only" feature
+      - PPT "Outline/Plain Text" exports slide content, not notes
+      - Google Slides plain text export includes all slide text, not just notes
+      - Best options: (a) copy/paste notes into a text file with blank lines between slides, or (b) use a Google Apps Script to extract notes from Google Slides into a Google Doc
+    - **Notes parser handles**: blank-line-separated notes, numbered format (`1: note text`), and sequential one-per-line
+    - **Open questions**:
+      - [ ] Test with a real presentation to see if the effort is low enough to actually use
+      - [ ] Is copy/pasting notes into a text file tolerable, or does it need to be more automated?
+      - [ ] Would a Google Apps Script for extracting notes be worth setting up?
   - [ ] Look through /talks (current and old) for more talks, and evaluate for inclusion
     - [ ] Talks from Belkin
     - [ ] Small artifacts from Belkin
@@ -56,6 +66,7 @@
   - Fluid spacing with clamp() for gutter/spacing tokens
   - Container queries for portfolio grid (respond to container width instead of viewport)
   - View transitions for smooth page-to-page navigation
+  - View transitions for smooth crossing of layout breakpoints
   - color-mix() to derive hover/active colors from base colors (pairs with oklch)
 
 - learn about 11ty Debug Mode
