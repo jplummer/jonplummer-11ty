@@ -14,9 +14,9 @@ Recommended process for deploying changes with an up-to-date changelog:
 6. `git commit` - Commit changes (required: changelog generation reads from git history)
 7. `pnpm run deploy` - Deploy to live site (regenerates changelog and runs validation)
 8. Verify the live site works as expected
-9. `git push` - Push commits to remote repository
+9. `git push` - Push your commit if you haven't already. If the changelog was updated, deploy already committed and pushed it.
 
-**Why this order?** Importing links before building lets you review and test them locally. The deploy script regenerates the changelog from git commit history, so commits must exist before deployment. See [Deployment Process](#deployment-process) for details.
+**Why this order?** Importing links before building lets you review and test them locally. The deploy script regenerates the changelog from git commit history, so commits must exist before deployment. When the changelog changes, deploy commits and pushes it so you don't have to. See [Deployment Process](#deployment-process) for details.
 
 ### 💻 Daily Development
 
@@ -85,6 +85,7 @@ The deploy script performs these steps in order:
 5. **Runs post-build validation** (`test og-images`) on built HTML - skipped with `--skip-checks`
 6. **Deploys via rsync** - uses `--dry-run` flag when `--dry-run` option is used
 7. **Submits IndexNow** notification for search engine indexing - skipped with `--dry-run`
+8. **Commits and pushes changelog** if it was updated - skipped with `--dry-run`
 
 **Note:** Links from NotePlan should be imported *before* committing (`pnpm run import-links`), not during deployment. This lets you review and test links locally before they go live.
 
@@ -114,7 +115,7 @@ This is useful for:
 
 The changelog is automatically generated from the git commit history, organized by date (newest first). It includes all commits from the beginning of the project and follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format.
 
-The changelog is automatically regenerated before each deployment. You can also run this command manually whenever you want to update it.
+The changelog is automatically regenerated before each deployment. When it changes, the deploy script commits and pushes it so the repo stays in sync. You can also run this command manually whenever you want to update it.
 
 ### 📄 PDF Page Conversion
 

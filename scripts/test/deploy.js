@@ -23,6 +23,21 @@ const { loadDotenvSilently } = require('../utils/env-utils');
 
 console.log('🔍 Testing rsync deployment connectivity...\n');
 
+// Test 0: Deploy script contains changelog commit/push logic (regression guard)
+const deployScriptPath = path.join(__dirname, '..', 'deploy', 'deploy.js');
+if (fs.existsSync(deployScriptPath)) {
+  const deployContent = fs.readFileSync(deployScriptPath, 'utf8');
+  const hasChangelogCommitLogic =
+    deployContent.includes('changelogChanged') &&
+    deployContent.includes('git add CHANGELOG.md') &&
+    deployContent.includes('changelog: update') &&
+    deployContent.includes('git push');
+  if (!hasChangelogCommitLogic) {
+    console.log('❌ Deploy script missing changelog commit/push logic');
+    process.exit(1);
+  }
+}
+
 // Load environment variables
 if (fs.existsSync('.env')) {
   loadDotenvSilently();
@@ -101,8 +116,10 @@ if (!checkRsync()) {
 // Test 4: Check authentication methods
 console.log('\n🔑 Testing authentication methods...');
 function checkSSHKey() {
-  const sshKeyPath = path.join(process.env.HOME || process.env.USERPROFILE, '.ssh', 'id_rsa');
-  return fs.existsSync(sshKeyPath);
+  const sshDir = path.join(process.env.HOME || process.env.USERPROFILE, '.ssh');
+  if (!fs.existsSync(sshDir)) return false;
+  const defaultKeys = ['id_ed25519', 'id_ecdsa', 'id_rsa'];
+  return defaultKeys.some((name) => fs.existsSync(path.join(sshDir, name)));
 }
 
 function checkSshpass() {

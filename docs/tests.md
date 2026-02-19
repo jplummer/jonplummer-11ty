@@ -111,6 +111,8 @@ Runs authoring tests on files changed since last commit: `spell`, `frontmatter`,
 
 The deployment script automatically runs: `markdown` and `frontmatter` (pre-build), `og-images` (post-build). Can be skipped with `--skip-checks` (not recommended).
 
+**Changelog commit on deploy:** When the changelog is updated during deploy, the script commits and pushes it (skipped with `--dry-run`). To verify manually: make a content commit, run `pnpm run deploy` (not dry-run), then check that a second commit "changelog: update" was created and pushed. The deploy test suite includes a structural check that the deploy script contains this logic.
+
 ## Test Architecture
 
 All tests (except `deploy.js`) use a unified JSON output format automatically formatted by the test runner:

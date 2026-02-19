@@ -56,6 +56,9 @@ const allTests = [
   'a11y'
 ];
 
+// Tests that don't use JSON output — use inherited stdout so output isn't buffered and re-written (avoids duplicate output)
+const nonJsonTests = ['deploy', 'security'];
+
 function listTests() {
   console.log('Available test types:\n');
   
@@ -120,19 +123,23 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
     }
     
     // Capture stdout to detect JSON output, but pass through stderr for progress
+    // Non-JSON tests (deploy, security) use inherited stdout so output appears once, not buffered and re-written
     let stdoutData = '';
     let stderrData = '';
+    const useInheritStdout = nonJsonTests.includes(testType);
     
     const child = spawn('node', [scriptPath], {
-      stdio: ['inherit', 'pipe', 'pipe'],
+      stdio: ['inherit', useInheritStdout ? 'inherit' : 'pipe', 'pipe'],
       shell: false,
       env: env
     });
     
-    // Collect stdout
-    child.stdout.on('data', (data) => {
-      stdoutData += data.toString();
-    });
+    // Collect stdout only when we're piping it (so we can detect JSON or pass through)
+    if (!useInheritStdout) {
+      child.stdout.on('data', (data) => {
+        stdoutData += data.toString();
+      });
+    }
     
     // Parse stderr for progress updates and pass through other output
     child.stderr.on('data', (data) => {
@@ -307,14 +314,14 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
       } else {
         // No JSON format detected
         if (!showStatus && stdoutData && stdoutData.trim().length > 0) {
-          // Individual run with non-JSON output - pass it through
+          // Individual run with non-JSON output - pass it through (buffered)
           process.stdout.write(`\r\x1b[K${stdoutData}`);
-        } else if (!showStatus) {
-          // Individual run but no output at all - show at least a summary
+        } else if (!showStatus && !useInheritStdout) {
+          // Individual run but no output at all - show at least a summary (skip when stdout was inherited - test already printed)
           const summaryString = buildSummaryString(finalSummary);
           process.stdout.write(`\r\x1b[K${resultIcon} ${emoji} ${displayName}: ${summaryString}\n`);
         } else {
-          // Group run with non-JSON output - just clear spinner
+          // Group run, or inherited stdout (output already shown) - just clear spinner
           process.stdout.write(`\r\x1b[K`);
         }
       }

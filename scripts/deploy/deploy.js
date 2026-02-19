@@ -485,6 +485,19 @@ async function deploy(config, siteDomain, dryRun) {
         console.log('⚠️  🔍 IndexNow: notification failed (deployment succeeded)');
         console.warn(`   ${error.message}\n`);
       }
+
+      // Commit and push changelog if it was updated (keeps repo in sync)
+      if (changelogChanged) {
+        try {
+          execSync('git add CHANGELOG.md', { cwd: process.cwd(), stdio: 'pipe' });
+          execSync('git commit -m "changelog: update"', { cwd: process.cwd(), stdio: 'pipe' });
+          execSync('git push', { cwd: process.cwd(), stdio: 'inherit' });
+          console.log('✅ 📋 Changelog: committed and pushed\n');
+        } catch (error) {
+          console.log('⚠️  📋 Changelog: could not commit/push (deployment succeeded)');
+          console.warn(`   ${error.message}\n`);
+        }
+      }
     }
   } catch (error) {
     process.exit(1);
