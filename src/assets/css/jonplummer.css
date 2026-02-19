@@ -332,6 +332,7 @@ main > h1 {
 /* Paragraphs */
 p {
   margin: var(--paragraph-spacing) 0;
+  text-wrap: pretty;
 }
 
 /* Blockquotes */

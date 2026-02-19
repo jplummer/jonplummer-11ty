@@ -51,6 +51,13 @@
 
 - https://modern-css.com ?
 
+- **Modern CSS techniques to consider**
+  - Fluid typography with clamp() for smooth scaling across breakpoints (see https://modern-css.com/fluid-typography-without-media-queries/)
+  - Fluid spacing with clamp() for gutter/spacing tokens
+  - Container queries for portfolio grid (respond to container width instead of viewport)
+  - View transitions for smooth page-to-page navigation
+  - color-mix() to derive hover/active colors from base colors (pairs with oklch)
+
 - learn about 11ty Debug Mode
 
 - **Alternate color schemes** and how to trigger them
