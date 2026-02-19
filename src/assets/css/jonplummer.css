@@ -503,77 +503,104 @@ article.portfolio-detail section::after {
 }
 
 /* Portfolio Detail Styles */
-article.portfolio-detail header {
-  margin-bottom: var(--paragraph-spacing);
-}
-
-article.portfolio-detail section {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: subgrid;
-  gap: var(--paragraph-spacing) var(--gutter);
-}
-
-article.portfolio-detail section > * {
-  grid-column: 2;
-}
-
-/* Remove paragraph margins since grid gap handles spacing between grid items */
-article.portfolio-detail section > p,
-article.portfolio-detail section > ul,
-article.portfolio-detail section > ol,
-article.portfolio-detail section > h1,
-article.portfolio-detail section > h2,
-article.portfolio-detail section > h3,
-article.portfolio-detail section > h4,
-article.portfolio-detail section > h5,
-article.portfolio-detail section > h6 {
-  margin-block: 0;
-}
-
-/* Images (and their wrapper paragraphs) span the full width */
-article.portfolio-detail section > p:has(> img:only-child),
-article.portfolio-detail section > figure,
-article.portfolio-detail section > img {
-  grid-column: 1 / -1;
-  margin: var(--spacing-lg) 0;
-}
-
-article.portfolio-detail section > figure {
-  display: grid;
-  grid-template-columns: subgrid;
-}
-
-article.portfolio-detail section > figure > picture,
-article.portfolio-detail section > figure > img {
-  grid-column: 1 / -1;
-}
-
-article.portfolio-detail section > p:has(> img:only-child) img,
-article.portfolio-detail section > figure img {
-  width: 100%;
-  height: auto;
-  border: 1px solid var(--border-color);
-}
-
-/* Captions align with the text column */
-article.portfolio-detail section > figure figcaption {
-    margin-top: var(--spacing-xs);
-    font-size: var(--font-size-xs);
-    line-height: var(--line-height-xs);
-    color: var(--text-color-light);
-    font-style: italic;
-    grid-column: 2;
-}
-
-/* Mobile adjustments for portfolio detail */
-@media (width <= 54rem) {
-  article.portfolio-detail section > * {
-    grid-column: 1;
+article.portfolio-detail {
+  & header {
+    margin-bottom: var(--paragraph-spacing);
   }
-  
-  article.portfolio-detail section > figure figcaption {
-    grid-column: 1;
+
+  & section {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
+    gap: var(--paragraph-spacing) var(--gutter);
+
+    & > * {
+      grid-column: 2;
+
+      @media (width <= 54rem) {
+        grid-column: 1;
+      }
+    }
+
+    /* Grid gap handles spacing between grid items */
+    & > :is(p, ul, ol, h1, h2, h3, h4, h5, h6) {
+      margin-block: 0;
+    }
+
+    /* Images (and their wrapper paragraphs) span the full width */
+    & > p:has(> img:only-child),
+    & > figure,
+    & > img {
+      grid-column: 1 / -1;
+      margin: var(--spacing-lg) 0;
+    }
+
+    & > p:has(> img:only-child) img,
+    & > figure img {
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--border-color);
+    }
+
+    & > figure {
+      display: grid;
+      grid-template-columns: subgrid;
+
+      & > picture, & > img {
+        grid-column: 1 / -1;
+      }
+
+      /* Captions align with the text column */
+      & figcaption {
+        margin-top: var(--spacing-xs);
+        font-size: var(--font-size-xs);
+        line-height: var(--line-height-xs);
+        color: var(--text-color-light);
+        font-style: italic;
+        grid-column: 2;
+
+        @media (width <= 54rem) {
+          grid-column: 1;
+        }
+      }
+    }
+
+    /* Portrait Grid Container */
+    & > .portrait-grid {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--gutter);
+      margin: var(--spacing-lg) 0;
+
+      @media (width >= 40rem) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @media (width >= 60rem) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      & figure {
+        margin: 0;
+        grid-column: auto;
+
+        & img {
+          width: 100%;
+          height: auto;
+          border: 1px solid var(--border-color);
+        }
+
+        & figcaption {
+          margin-top: var(--spacing-xs);
+          font-size: var(--font-size-xs);
+          line-height: var(--line-height-xs);
+          color: var(--text-color-light);
+          font-style: italic;
+          padding-left: 0;
+        }
+      }
+    }
   }
 }
 
@@ -629,47 +656,6 @@ article.portfolio-item p.portfolio-item-description {
   margin-top: var(--spacing-xs);
 }
 
-/* Portrait Grid Container */
-article.portfolio-detail section > .portrait-grid {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--gutter);
-  margin: var(--spacing-lg) 0;
-}
-
-@media (width >= 40rem) {
-  article.portfolio-detail section > .portrait-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (width >= 60rem) {
-  article.portfolio-detail section > .portrait-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* Ensure figures inside the grid behave */
-article.portfolio-detail section > .portrait-grid figure {
-  margin: 0;
-  grid-column: auto; /* Reset grid-column from the generic figure rule */
-}
-
-article.portfolio-detail section > .portrait-grid figure img {
-  width: 100%;
-  height: auto;
-  border: 1px solid var(--border-color);
-}
-
-article.portfolio-detail section > .portrait-grid figure figcaption {
-  margin-top: var(--spacing-xs);
-  font-size: var(--font-size-xs);
-  line-height: var(--line-height-xs);
-  color: var(--text-color-light);
-  font-style: italic;
-  padding-left: 0;
-}
 
 /* === UTILITIES === */
 
@@ -781,8 +767,7 @@ header a.skip:focus {
 /* Styles for OG images rendered via renderFile in og-image-preview (scoped to .og-image-rendered) */
 
 .og-image-rendered {
-  /* Inherits all CSS custom properties from :root (typography, spacing, etc.)
-     Only override colors to force light theme for OG image preview */
+  /* Override colors to force light theme for OG image preview */
   --text-color: #2a2a2a;
   --text-color-light: #5a5a5a;
   --background-color: #d3d8d2;
@@ -806,73 +791,71 @@ header a.skip:focus {
   display: flex;
   justify-content: center;
   align-items: center;
-}
 
-.og-image-rendered * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+  & * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
-.og-image-rendered a {
-  color: inherit;
-  text-decoration: none;
-}
+  & a {
+    color: inherit;
+    text-decoration: none;
+  }
 
-.og-image-rendered .og-content {
-  width: 100%;
-  background-color: var(--content-background-color);
-  padding: 4rem;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-}
+  & .og-content {
+    width: 100%;
+    background-color: var(--content-background-color);
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
 
-.og-image-rendered .og-hgroup {
-  display: flex;
-  align-items: baseline;
-  gap: var(--spacing-sm);
-  flex-wrap: wrap;
-}
+  & .og-hgroup {
+    display: flex;
+    align-items: baseline;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
 
-.og-image-rendered .og-hgroup h1,
-.og-image-rendered .og-hgroup > div:first-child {
-  font-size: 6rem;
-  line-height: var(--line-height-3xl);
-  font-weight: var(--font-weight-thin);
-  letter-spacing: var(--letter-spacing-tight);
-  color: var(--link-color);
-}
+    & h1, & > div:first-child {
+      font-size: 6rem;
+      line-height: var(--line-height-3xl);
+      font-weight: var(--font-weight-thin);
+      letter-spacing: var(--letter-spacing-tight);
+      color: var(--link-color);
 
-.og-image-rendered .og-hgroup h1 a,
-.og-image-rendered .og-hgroup > div:first-child a {
-  color: var(--link-color) !important;
-  text-decoration: none;
-}
+      & a {
+        color: var(--link-color) !important;
+        text-decoration: none;
+      }
+    }
 
-.og-image-rendered .og-hgroup p {
-  font-size: 1.5rem;
-  line-height: var(--line-height-xs);
-  font-style: italic;
-  color: var(--link-color);
-}
+    & p {
+      font-size: 1.5rem;
+      line-height: var(--line-height-xs);
+      font-style: italic;
+      color: var(--link-color);
+    }
+  }
 
-.og-image-rendered .og-title {
-  font-size: 3.5rem;
-  line-height: var(--line-height-2xl);
-  font-weight: var(--font-weight-semibold);
-  letter-spacing: var(--letter-spacing-tight);
-  text-wrap: balance;
-}
+  & .og-title {
+    font-size: 3.5rem;
+    line-height: var(--line-height-2xl);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--letter-spacing-tight);
+    text-wrap: balance;
+  }
 
-.og-image-rendered .og-description {
-  font-size: 1.75rem;
-  max-width: 90%;
-}
+  & .og-description {
+    font-size: 1.75rem;
+    max-width: 90%;
+  }
 
-.og-image-rendered .og-date {
-  font-size: 1.5rem;
-  font-style: italic;
+  & .og-date {
+    font-size: 1.5rem;
+    font-style: italic;
+  }
 }
 
 /* === PRINT STYLES === */

@@ -47,6 +47,10 @@ Shared memory file for both Cursor and Claude Code agents. When you encounter a 
 - Figure captions use the convention: image line immediately followed by `*caption text*` (no blank line). The `markdown-it-figure` plugin in `eleventy/utils/markdown-it-figure.js` handles this at parse time.
 - Redirects: add entries to `src/_data/redirects.yaml` — the `src/.htaccess.njk` template renders them automatically via the data cascade. No separate script needed.
 - **Eleventy image transform wraps `<img>` in `<picture>`** — when a parent element becomes a CSS grid container, `<picture>` is the grid item, not `<img>`. Target `> picture` for grid placement (e.g., `grid-column: 1 / -1`).
+- **Spaces in asset filenames** break markdown link parsing (markdown-it doesn't recognize them as URLs) AND the Eleventy dev server's passthrough mode. Use kebab-case for all asset filenames.
+- **Dark mode uses `light-dark()`** — colors are defined once in `:root` with `light-dark(lightVal, darkVal)`. Don't add a separate `@media (prefers-color-scheme: dark)` block; add new colors using the same pattern.
+- **`scripts/test/color-contrast.js` parses CSS directly** — if the color syntax in the CSS changes, the parser regex needs updating too.
 
 ### What worked
 - Parallel agents work well for independent code changes (e.g., two unrelated simplifications at once)
+- modern-css.com is a good reference for identifying CSS modernization opportunities
