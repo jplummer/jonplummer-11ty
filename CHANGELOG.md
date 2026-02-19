@@ -1,5 +1,14 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-02-18
+
+- Update NotePlan import to search Notes root; import 5 links
+- Add agent commands and efficiency guidance from project-template
+- Modernize CSS with subgrid, range queries, and scrollbar-gutter
+- Use light-dark() for dark mode colors, removing duplicate block
+- Use native CSS nesting for portfolio-detail and OG image styles
+- Add text-wrap: pretty to paragraphs; note future CSS ideas
+
 ## 2026-02-15
 
 - Move import-links from deploy pipeline to manual pre-commit step
