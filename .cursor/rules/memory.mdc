@@ -36,7 +36,7 @@ Shared memory file for both Cursor and Claude Code agents. When you encounter a 
 
 ### DRY decisions
 - OG image preview uses Eleventy's native `renderFile` shortcode (RenderPlugin) + `og-image-body.njk` partial — no custom Nunjucks env needed
-- `generate-og-images.js` still has its own Nunjucks env with inline `postDate` and `extractCssCustomProperties` — known remaining DRY opportunity, acceptable because it runs outside Eleventy
+- `generate-og-images.js` has its own Nunjucks env with inline `postDate` — it runs outside Eleventy so needs its own renderer. `extractCssCustomProperties` is now shared from `eleventy/utils/css-utils.js`.
 - Shared PDF conversion functions live in `scripts/utils/pdf-utils.js`
 - User rejected a `readMarkdownFile()` consolidation utility — the pattern repeats across scripts but a shared helper added indirection without clear payoff
 

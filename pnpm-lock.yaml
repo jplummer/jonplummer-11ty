@@ -57,6 +57,9 @@ importers:
       markdownlint-cli2:
         specifier: ^0.20.0
         version: 0.20.0
+      nunjucks:
+        specifier: ^3.2.4
+        version: 3.2.4(chokidar@3.6.0)
       puppeteer:
         specifier: ^24.37.3
         version: 24.37.3

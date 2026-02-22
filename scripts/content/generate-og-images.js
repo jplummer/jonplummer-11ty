@@ -8,6 +8,7 @@ const { DateTime } = require('luxon');
 const { findMarkdownFiles } = require('../utils/file-utils');
 const { parseFrontMatter, reconstructFile } = require('../utils/frontmatter-utils');
 const { isPost } = require('../utils/content-utils');
+const { extractCssCustomProperties } = require('../../eleventy/utils/css-utils');
 
 // Configure Nunjucks environment
 const nunjucksEnv = new nunjucks.Environment(
@@ -23,46 +24,7 @@ nunjucksEnv.addFilter('postDate', (dateObj) => {
   return DateTime.fromJSDate(date).toLocaleString(DateTime.DATE_MED);
 });
 
-// Extract CSS custom properties from main stylesheet
-function extractCssCustomProperties() {
-  const cssPath = path.join(process.cwd(), 'src', 'assets', 'css', 'jonplummer.css');
-  const cssContent = fs.readFileSync(cssPath, 'utf8');
-  
-  // Extract :root block - match from :root to closing brace
-  // Use a more robust regex that handles nested braces in comments
-  const rootStart = cssContent.indexOf(':root');
-  if (rootStart === -1) {
-    throw new Error('Could not find :root block in CSS file');
-  }
-  
-  // Find the opening brace after :root
-  let braceStart = cssContent.indexOf('{', rootStart);
-  if (braceStart === -1) {
-    throw new Error('Could not find opening brace for :root block');
-  }
-  
-  // Find matching closing brace by counting braces
-  let braceCount = 0;
-  let braceEnd = braceStart;
-  for (let i = braceStart; i < cssContent.length; i++) {
-    if (cssContent[i] === '{') {
-      braceCount++;
-    } else if (cssContent[i] === '}') {
-      braceCount--;
-      if (braceCount === 0) {
-        braceEnd = i;
-        break;
-      }
-    }
-  }
-  
-  if (braceCount !== 0) {
-    throw new Error('Could not find matching closing brace for :root block');
-  }
-  
-  // Extract the :root block including the selector and braces
-  return cssContent.substring(rootStart, braceEnd + 1);
-}
+
 
 // Front matter parsing and reconstruction now use shared utilities
 

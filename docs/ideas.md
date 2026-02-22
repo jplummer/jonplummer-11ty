@@ -4,8 +4,10 @@
 
 - [ ] Write or portfolio every weekend
 
-- [ ] **REMINDER (2026-02-19)**: Is the stronger memory.mdc language working?
+- [x] **REMINDER (2026-02-19)**: Is the stronger memory.mdc language working?
   - Check `git log --oneline --all -- .cursor/rules/memory.mdc` — are there unprompted updates from recent sessions? If not, the directive language isn't enough; consider moving the instruction to user rules or CLAUDE.md
+
+- [ ] Security, needlessly custom code, unused coade, and bloat audit
 
 - [ ] Portfolio
   - [ ] Presentation-to-portfolio automation (in progress — see notes below)
@@ -32,7 +34,9 @@
 - [ ] Reinvestigate color scheme
   - [ ] *Consider* addressing accessibility test script deficiencies per /docs/archive/accesssibility-test-limitations.md
   - [ ] *Consider* other color inspiration sources
-  - [ ] Perhaps use oklch colors for vividness? See https://modern-css.com/vivid-colors-beyond-srgb/ 
+  - [ ] Perhaps use oklch colors for vividness? See https://modern-css.com/vivid-colors-beyond-srgb/
+  - **Tool**: `scripts/utils/suggest-colors.js` — standalone APCA color suggestion script; finds lighter alternatives that meet contrast targets against a given background
+  - **Tool**: `src/color-test.njk` — dev-only color scheme playground with 12 presets and custom editor; excluded from deploy but builds locally at `/color-test/`
 
 
 ## 🔮 Future Consideration
@@ -104,6 +108,12 @@
   - Additional formats - HTML reports, etc.
   - Filtering and sorting - `--filter`, `--sort` flags
   - CI/CD integration - JUnit XML, GitHub Actions annotations, etc.
+
+---
+
+## 🧩 Might Be Fun to Think About
+
+- [ ] Make `scripts/test/deploy.js` SSH commands use `spawn()` with array arguments instead of string concatenation — matches the pattern already used in `scripts/deploy/deploy.js` and is easier to read
 
 ---
 

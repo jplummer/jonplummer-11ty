@@ -53,6 +53,9 @@ function getPageCount(pdfPath) {
  * @param {string} outputFile - Absolute path for the output PNG file
  */
 function convertPage(pdfPath, pageNum, outputFile) {
+  if (!Number.isInteger(pageNum) || pageNum < 1) {
+    throw new Error(`Invalid page number: ${pageNum}`);
+  }
   try {
     // pdftocairo -png -f <first-page> -l <last-page> input.pdf output-prefix
     // Output will be: output-prefix-<zero-padded-page-num>.png (e.g., prefix-01.png)

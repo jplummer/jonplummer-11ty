@@ -40,6 +40,7 @@
     "js-yaml": "^4.1.1",
     "luxon": "^3.7.2",
     "markdownlint-cli2": "^0.20.0",
+    "nunjucks": "^3.2.4",
     "puppeteer": "^24.37.3"
   },
   "dependencies": {
