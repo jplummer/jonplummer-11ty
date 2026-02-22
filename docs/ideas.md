@@ -4,11 +4,6 @@
 
 - [ ] Write or portfolio every weekend
 
-- [x] **REMINDER (2026-02-19)**: Is the stronger memory.mdc language working?
-  - Check `git log --oneline --all -- .cursor/rules/memory.mdc` — are there unprompted updates from recent sessions? If not, the directive language isn't enough; consider moving the instruction to user rules or CLAUDE.md
-
-- [ ] Security, needlessly custom code, unused coade, and bloat audit
-
 - [ ] Portfolio
   - [ ] Presentation-to-portfolio automation (in progress — see notes below)
     - **Status**: Script drafted, not yet tested with real data
@@ -109,11 +104,7 @@
   - Filtering and sorting - `--filter`, `--sort` flags
   - CI/CD integration - JUnit XML, GitHub Actions annotations, etc.
 
----
-
-## 🧩 Might Be Fun to Think About
-
-- [ ] Make `scripts/test/deploy.js` SSH commands use `spawn()` with array arguments instead of string concatenation — matches the pattern already used in `scripts/deploy/deploy.js` and is easier to read
+- Make `scripts/test/deploy.js` SSH commands use `spawn()` with array arguments instead of string concatenation — matches the pattern already used in `scripts/deploy/deploy.js` and is easier to read
 
 ---
 
@@ -126,6 +117,9 @@
 
 ## DONE
 
+- [x] Security, needlessly custom code, unused code, and bloat audit (2026-02-21)
+  - Deduped extractCssCustomProperties, simplified dotenv loading, trimmed unused exports, added nunjucks as explicit dep
+- [x] **REMINDER (2026-02-19)**: Is the stronger memory.mdc language working? — Yes, confirmed unprompted updates in recent sessions
 - [x] "content warning" way to hide text of out-of-norm posts (2026-02-11)
   - Implemented `contentWarning` frontmatter field with expandable `<details>` wrapper
 - [x] Verify `.cursor/rules/eleventy-debugging.mdc` is being used by Cursor (2026-02-10)
