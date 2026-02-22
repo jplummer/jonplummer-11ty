@@ -1,5 +1,10 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-02-21
+
+- Reduce needlessly custom code and clean up unused exports
+- Add post on watching agents work; update ideas tracker
+
 ## 2026-02-18
 
 - Update NotePlan import to search Notes root; import 5 links
@@ -8,6 +13,8 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Use light-dark() for dark mode colors, removing duplicate block
 - Use native CSS nesting for portfolio-detail and OG image styles
 - Add text-wrap: pretty to paragraphs; note future CSS ideas
+- Make FIX command project-aware with test commands and Eleventy debugging reference
+- Document presentation-to-portfolio automation investigation status
 
 ## 2026-02-15
 
@@ -384,4 +391,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-02-19
+Last deployed on 2026-02-22
