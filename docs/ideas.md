@@ -27,7 +27,7 @@
     - [ ] Talks from Cayuse
 
 - [ ] Reinvestigate color scheme
-  - [ ] *Consider* addressing accessibility test script deficiencies per /docs/archive/accesssibility-test-limitations.md
+  - [ ] *Consider* addressing accessibility test script deficiencies per [accessibility-test-limitations](archive/accessibility-test-limitations.md)
   - [ ] *Consider* other color inspiration sources
   - [ ] Perhaps use oklch colors for vividness? See https://modern-css.com/vivid-colors-beyond-srgb/
   - **Tool**: `scripts/utils/suggest-colors.js` — standalone APCA color suggestion script; finds lighter alternatives that meet contrast targets against a given background

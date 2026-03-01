@@ -11,7 +11,25 @@
 
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 const { findHtmlFiles, findMarkdownFiles } = require('./file-utils');
+
+/**
+ * Get file paths changed since HEAD (added, copied, modified, renamed).
+ * Used by tests that support --changed to limit scope.
+ * @returns {string[]} Relative paths from repo root (no filtering).
+ */
+function getChangedFilesSinceHead() {
+  try {
+    const output = execSync('git diff --name-only --diff-filter=ACMR HEAD', {
+      encoding: 'utf8',
+      cwd: process.cwd()
+    });
+    return output.trim().split('\n').filter(line => line.trim());
+  } catch (error) {
+    return [];
+  }
+}
 
 /**
  * Check if _site directory exists
@@ -69,6 +87,7 @@ function readFile(filePath) {
 
 module.exports = {
   checkSiteDirectory,
+  getChangedFilesSinceHead,
   getHtmlFiles,
   getMarkdownFiles,
   getRelativePath,

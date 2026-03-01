@@ -2,25 +2,14 @@
 
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
 const yaml = require('js-yaml');
 const { validateDate, validateUrl, validateTitle } = require('../utils/validation-utils');
+const { getChangedFilesSinceHead } = require('../utils/test-helpers');
 const { addFile, addIssue, addWarning } = require('../utils/test-results');
 const { runTest } = require('../utils/test-runner-helper');
 
-// Check if links.yaml changed since last commit
 function hasLinksYamlChanged() {
-  try {
-    const output = execSync('git diff --name-only --diff-filter=ACMR HEAD', {
-      encoding: 'utf8',
-      cwd: process.cwd()
-    });
-    
-    const changedFiles = output.trim().split('\n').filter(line => line.trim());
-    return changedFiles.includes('src/_data/links.yaml');
-  } catch (error) {
-    return false;
-  }
+  return getChangedFilesSinceHead().includes('src/_data/links.yaml');
 }
 
 // Validate description (optional but should be valid if present)

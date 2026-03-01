@@ -2,25 +2,14 @@
 
 const path = require('path');
 const fs = require('fs');
-const { execSync } = require('child_process');
 const { extractMetaTags, extractHeadings, parseHtml } = require('../utils/html-utils');
 const { validateTitle: validateTitleUtil, validateMetaDescription: validateMetaDescriptionUtil } = require('../utils/validation-utils');
-const { checkSiteDirectory, getHtmlFiles, getRelativePath, readFile } = require('../utils/test-helpers');
+const { checkSiteDirectory, getChangedFilesSinceHead, getHtmlFiles, getRelativePath, readFile } = require('../utils/test-helpers');
 const { addFile, addIssue, addWarning, addGlobalIssue } = require('../utils/test-results');
 const { runTest, checkChangedFlag } = require('../utils/test-runner-helper');
 
-// Get changed files since last commit
 function getChangedFiles() {
-  try {
-    const output = execSync('git diff --name-only --diff-filter=ACMR HEAD', {
-      encoding: 'utf8',
-      cwd: process.cwd()
-    });
-    
-    return output.trim().split('\n').filter(line => line.trim());
-  } catch (error) {
-    return [];
-  }
+  return getChangedFilesSinceHead();
 }
 
 // Check if any markdown files changed (links.yaml changes don't affect page SEO)

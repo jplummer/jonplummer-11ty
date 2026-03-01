@@ -4,32 +4,15 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 const { findMarkdownFiles } = require('../utils/file-utils');
+const { getChangedFilesSinceHead } = require('../utils/test-helpers');
 const { parseFrontMatter } = require('../utils/frontmatter-utils');
 const { addFile, addIssue, addWarning } = require('../utils/test-results');
 const { runTest, checkChangedFlag } = require('../utils/test-runner-helper');
 
-// Get files changed since last commit
 function getChangedFiles() {
-  try {
-    const output = execSync('git diff --name-only --diff-filter=ACMR HEAD', {
-      encoding: 'utf8',
-      cwd: process.cwd()
-    });
-    
-    const changedFiles = output.trim().split('\n').filter(line => line.trim());
-    
-    // Filter for markdown files in src/
-    return changedFiles
-      .filter(file => {
-        const ext = path.extname(file).toLowerCase();
-        return ext === '.md' && file.startsWith('src/');
-      })
-      .map(file => path.resolve(process.cwd(), file))
-      .filter(file => fs.existsSync(file));
-  } catch (error) {
-    console.error('Error getting changed files from git:', error.message);
-    return [];
-  }
+  return getChangedFilesSinceHead()
+    .filter(file => path.extname(file).toLowerCase() === '.md' && file.startsWith('src/'))
+    .filter(file => fs.existsSync(file));
 }
 
 // Find all markdown files in src/ directory, excluding drafts and docs/

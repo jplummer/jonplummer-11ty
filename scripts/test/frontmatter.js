@@ -2,10 +2,9 @@
 
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
 const yaml = require('js-yaml');
 const { validateDate, validateSlug } = require('../utils/validation-utils');
-const { getMarkdownFiles, readFile } = require('../utils/test-helpers');
+const { getChangedFilesSinceHead, getMarkdownFiles, readFile } = require('../utils/test-helpers');
 const { parseFrontMatter } = require('../utils/frontmatter-utils');
 const { addFile, addIssue, addWarning, addGlobalIssue } = require('../utils/test-results');
 const { runTest, checkChangedFlag } = require('../utils/test-runner-helper');
@@ -149,28 +148,10 @@ function validateYamlDataFiles(result) {
   return { valid: true };
 }
 
-// Get files changed since last commit
 function getChangedFiles() {
-  try {
-    const output = execSync('git diff --name-only --diff-filter=ACMR HEAD', {
-      encoding: 'utf8',
-      cwd: process.cwd()
-    });
-    
-    const changedFiles = output.trim().split('\n').filter(line => line.trim());
-    
-    // Filter for markdown files in src/_posts
-    return changedFiles
-      .filter(file => {
-        const ext = path.extname(file).toLowerCase();
-        return ext === '.md' && file.startsWith('src/_posts/');
-      })
-      .map(file => path.resolve(process.cwd(), file))
-      .filter(file => fs.existsSync(file));
-  } catch (error) {
-    console.error('Error getting changed files from git:', error.message);
-    return [];
-  }
+  return getChangedFilesSinceHead()
+    .filter(file => path.extname(file).toLowerCase() === '.md' && file.startsWith('src/_posts/'))
+    .filter(file => fs.existsSync(file));
 }
 
 // Main validation function

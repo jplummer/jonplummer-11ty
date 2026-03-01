@@ -2,7 +2,6 @@
 
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
 const puppeteer = require('puppeteer');
 const axeCore = require('axe-core');
 const { findHtmlFiles } = require('../utils/file-utils');
@@ -33,18 +32,9 @@ function formatViolations(violations) {
   return issues;
 }
 
-// Get files changed since last commit
 function getChangedFiles() {
-  try {
-    const output = execSync('git diff --name-only --diff-filter=ACMR HEAD', {
-      encoding: 'utf8',
-      cwd: process.cwd()
-    });
-    
-    return output.trim().split('\n').filter(line => line.trim());
-  } catch (error) {
-    return [];
-  }
+  const { getChangedFilesSinceHead } = require('../utils/test-helpers');
+  return getChangedFilesSinceHead();
 }
 
 // Check if templates, layouts, or CSS changed (affects all pages)

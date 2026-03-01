@@ -9,7 +9,7 @@
 
 const { execSync } = require('child_process');
 const path = require('path');
-const fs = require('fs');
+const { getChangedFilesSinceHead } = require('./utils/test-helpers');
 
 // Map test type names to script file names
 const testScriptMap = {
@@ -20,25 +20,11 @@ const testScriptMap = {
   'seo': 'seo-meta'
 };
 
-// Get files changed since last commit
 function getChangedFiles() {
-  try {
-    const output = execSync('git diff --name-only --diff-filter=ACMR HEAD', {
-      encoding: 'utf8',
-      cwd: process.cwd()
-    });
-    
-    const changedFiles = output.trim().split('\n').filter(line => line.trim());
-    
-    // Filter for relevant files (markdown, yaml)
-    return changedFiles.filter(file => {
-      const ext = path.extname(file).toLowerCase();
-      return ['.md', '.yaml', '.yml'].includes(ext) && file.startsWith('src/');
-    });
-  } catch (error) {
-    console.error('Error getting changed files from git:', error.message);
-    return [];
-  }
+  return getChangedFilesSinceHead().filter(file => {
+    const ext = path.extname(file).toLowerCase();
+    return ['.md', '.yaml', '.yml'].includes(ext) && file.startsWith('src/');
+  });
 }
 
 // Run a test and return results
