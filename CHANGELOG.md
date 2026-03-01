@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-02-28
+
+- Fix doc links and add getChangedFilesSinceHead to test-helpers
+
 ## 2026-02-21
 
 - Reduce needlessly custom code and clean up unused exports
