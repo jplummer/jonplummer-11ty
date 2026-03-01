@@ -1,3 +1,26 @@
+2026-03-01:
+  - url: "https://www.doc.cc/articles/craft-crisis"
+    title: Why AI is exposing design’s craft crisis – DolphinArnstein
+    description: "\"The story went like this: designers focus on users, empathy, and problem-solving. Engineers focus on implementation, code, and technical constraints. Clean separation of concerns. Everyone stays in their lane. […] What we lost wasn’t the ability to code. What we lost was the ability to participate in technical conversations.\""
+  - url: "https://joshbrake.substack.com/p/the-missing-prompts"
+    title: The Missing Prompts – Josh Brake
+    description: An Eisenhower matrix of sorts for when and how to use AI tools, depending on what matter for the task at hand.
+  - url: "https://jonnyburch.com/life-after-figma/"
+    title: Life after Figma is coming (and it will be glorious)
+    description: "\"In this new race Figma actually has a disadvantage. They’re suddenly the slow incumbent with the wrong tech stack and a large enterprise customer-base adding drag.\""
+  - url: "https://margaretstorey.com/blog/2026/02/09/cognitive-debt/"
+    title: How Generative and Agentic AI Shift Concern from Technical Debt to Cognitive Debt
+    description: "\"Even if AI agents produce code that could be easy to understand, the humans involved may have simply lost the plot and may not understand what the program is supposed to do, how their intentions were implemented, or how to possibly change it.\""
+  - url: "https://cannoneyed.com/essays/software-industrial-revolution"
+    title: The Software Industrial Revolution – Andy Coenen
+    description: "\"Welcome to the beginning of the Software Industrial Revolution. Just like the first Industrial Revolution, this will change the world in profound and unexpected ways. But unlike the first Industrial Revolution, this one won't take decades. It might not even take years.”"
+  - url: "https://leadership.garden/ai-the-work-moved/"
+    title: "The Work Moved: What the AI Coding Debate Actually Agrees On – Csaba Okrona"
+    description: "\"AI agents generate 98% more PRs but reviews take 91% longer. The work didn't disappear — it moved. A synthesis of eight perspectives on where it actually went.”"
+  - url: "https://www.natemeyvis.com/on-cognitive-debt/"
+    title: On cognitive debt – Nate Meyvis
+    description: "\"'Cognitive debt' […] describes an important phenomenon that is much to be avoided. It is absolutely happening with AI-driven codebases—the links above have examples, and I've felt it in my own projects. […] I suspect, however, that […w]hen you control for the size and scope of the project, cognitive debt tends to be at least as bad, and usually worse, in pre-AI codebases than in AI codebases…\""
+
 2026-02-19:
   - url: "https://modern-css.com/"
     title: Modern CSS Code Snippets – Naeem Noor

@@ -67,7 +67,7 @@ Ranked:
 >
 > Does that land accurately? Because if so, it shifts the label a bit — you might be less "atheist" in the assertive sense, and more something like an **agnostic naturalist with strong epistemic humility**.
 
-To me the exclusivity and infallibility clauses are needlessly exclusionary and deeply anti-intellectual, more so than belief in miracles woudl be. Remembering that there is more we don't know than we do, it is possible that today's "miracle" will be scientifically explained tomorrow. Also, some of the scriptural miracles, such as the "loaves and fishes" story, can be seen as moral parables rather than miracles *per se*. So miracles do bother me the least. (I'm also not credulous of them.)
+To me the exclusivity and infallibility clauses are needlessly exclusionary and deeply anti-intellectual, more so than belief in miracles would be. Remembering that there is more we don't know than we do, it is possible that today's "miracle" will be scientifically explained tomorrow. Also, some of the scriptural miracles, such as the "loaves and fishes" story, can be seen as moral parables rather than miracles *per se*. So miracles do bother me the least. (I'm also not credulous of them.)
 
 That ethical framework extends to the idea of salvation – that there's a magic formula that anoints you forever more as good or bad is also counter to my thoughts about what it means to live ethically.
 
