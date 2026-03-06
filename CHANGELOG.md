@@ -3,6 +3,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 ## 2026-02-28
 
 - Fix doc links and add getChangedFilesSinceHead to test-helpers
+- Update links, posts, and now page
 
 ## 2026-02-21
 
@@ -395,4 +396,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-03-01
+Last deployed on 2026-03-06
