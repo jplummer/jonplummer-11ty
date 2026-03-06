@@ -132,6 +132,18 @@ Vadim
 Wroblewski
 Xiao
 Zhou
+Coenen
+Arnstein
+Meyvis
+Naeem
+Noor
+Lorin
+Hochstein
+Marcin
+Wichary
+Hanwen
+Shen
+Tamkin
 
 # Other Valid Terms
 allyship
@@ -147,6 +159,7 @@ deprioritize
 deprioritized
 descope
 duckburg
+endedness
 explainability
 feelsgoodman
 fingerstick
