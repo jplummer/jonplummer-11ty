@@ -1,5 +1,17 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-03-13
+
+- Move mergePostsAndLinks to eleventy/utils/merge-posts-links.js
+- Tighten article spacing on narrow viewports
+- Bump devDependencies: cspell, html-validate, puppeteer
+- Import-links: show only new links and duplicate count
+- Update links
+
+## 2026-03-05
+
+- Update /now page and deps (March 2026)
+
 ## 2026-02-28
 
 - Fix doc links and add getChangedFilesSinceHead to test-helpers
@@ -396,4 +408,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-03-06
+Last deployed on 2026-03-14
