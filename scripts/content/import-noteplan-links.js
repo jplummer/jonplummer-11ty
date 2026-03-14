@@ -314,20 +314,6 @@ if (parsedLinks.length === 0) {
 
 console.log(`📝 Found ${parsedLinks.length} link(s) to import\n`);
 
-// Display what will be imported
-for (let i = 0; i < parsedLinks.length; i++) {
-  const link = parsedLinks[i];
-  console.log(`   ${i + 1}. ${link.title}`);
-  console.log(`      URL: ${link.url}`);
-  if (link.description) {
-    const truncDesc = link.description.length > 60 
-      ? link.description.substring(0, 57) + '...' 
-      : link.description;
-    console.log(`      Description: ${truncDesc}`);
-  }
-  console.log('');
-}
-
 // Read existing links.yaml
 if (!fs.existsSync(LINKS_YAML_PATH)) {
   console.error(`❌ links.yaml not found at: ${LINKS_YAML_PATH}`);
@@ -340,24 +326,21 @@ const linksData = parseLinksYaml(yamlContent);
 // Add new links (skips duplicates)
 const results = addLinksToData(linksData, targetDate, parsedLinks);
 
-// Show skipped duplicates
-if (results.skipped.length > 0) {
-  console.log(`⚠️  Skipped ${results.skipped.length} duplicate(s):\n`);
-  for (const item of results.skipped) {
-    console.log(`   • ${item.link.title}`);
-    console.log(`     URL: ${item.link.url}`);
-    console.log(`     Already exists on: ${item.existingDate}`);
-    console.log('');
-  }
-}
-
 // Only write if there are changes
 if (results.added.length > 0) {
   // Format and write back
   const newYamlContent = formatLinksYaml(linksData);
   fs.writeFileSync(LINKS_YAML_PATH, newYamlContent, 'utf8');
 
-  console.log(`✅ Imported ${results.added.length} link(s) to links.yaml with date: ${targetDate}\n`);
+  console.log(`✅ Imported ${results.added.length} new link(s) (date: ${targetDate}):\n`);
+  for (const link of results.added) {
+    console.log(`   • ${link.title}`);
+    console.log(`     ${link.url}`);
+  }
+  if (results.skipped.length > 0) {
+    console.log(`\n⚠️  Skipped ${results.skipped.length} duplicate(s).`);
+  }
+  console.log('');
 
   // Clear note if requested
   if (shouldClear) {
@@ -371,6 +354,6 @@ if (results.added.length > 0) {
   console.log('  3. pnpm run deploy  (deploy to live site)');
   console.log('');
 } else {
-  console.log('ℹ️  No new links to import (all were duplicates)\n');
+  console.log(`ℹ️  No new links to import. Skipped ${results.skipped.length} duplicate(s).\n`);
   process.exit(0);
 }
