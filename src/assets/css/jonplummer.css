@@ -156,7 +156,7 @@ article {
     "b c";
   gap: 0 var(--gutter);
   margin: 0;
-  padding-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-xl);
 }
 
 /* Article grid areas */
@@ -188,6 +188,22 @@ article footer {
   header {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  /* A bit more space above the post heading when stacked */
+  article header {
+    margin-top: var(--spacing-xs);
+  }
+
+  /* Treat heading + date as one block, single gap before content (avoids double paragraph-spacing) */
+  article footer p {
+    margin-top: var(--baseline-unit);
+  }
+  article section {
+    margin-top: var(--spacing-xs);
+  }
+  article section > *:first-child {
+    margin-top: 0;
   }
 }
 
