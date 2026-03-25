@@ -1,8 +1,11 @@
 {# purpose: site navigation #}
 <nav aria-label="Site navigation">
     <ul>
-        <li><a href="/about/"{% if page.url == "/about/" %} aria-current="page"{% endif %}>About me</a></li>
-        <li><a href="/now/"{% if page.url == "/now/" %} aria-current="page"{% endif %}>Now</a></li>
-        <li><a href="/portfolio/"{% if page.url == "/portfolio/" %} aria-current="page"{% endif %}>Portfolio</a></li>
+        {% if page.url != "/" %}
+        <li><a href="/">/index</a></li>
+        {% endif %}
+        <li><a href="/about/"{% if page.url == "/about/" %} aria-current="page"{% endif %}>/about</a></li>
+        <li><a href="/now/"{% if page.url == "/now/" %} aria-current="page"{% endif %}>/now</a></li>
+        <li><a href="/portfolio/"{% if page.url == "/portfolio/" %} aria-current="page"{% endif %}>/portfolio</a></li>
     </ul>
 </nav>
