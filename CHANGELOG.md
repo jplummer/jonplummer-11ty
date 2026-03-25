@@ -1,5 +1,11 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-03-24
+
+- Update links; add names to cspell; refresh commands doc emoji
+- Bump Eleventy, html-validate, and puppeteer
+- Feat(nav): path-style labels and conditional /index link
+
 ## 2026-03-13
 
 - Move mergePostsAndLinks to eleventy/utils/merge-posts-links.js
@@ -408,4 +414,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-03-23
+Last deployed on 2026-03-25
