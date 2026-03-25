@@ -1,8 +1,8 @@
-# 🥁 PNPM Commands
+# 🎪 PNPM Commands
 
 ## Quick Reference
 
-### 🧣 Deployment Workflow
+### 🧭 Deployment Workflow
 
 Recommended process for deploying changes with an up-to-date changelog:
 
@@ -18,7 +18,7 @@ Recommended process for deploying changes with an up-to-date changelog:
 
 **Why this order?** Importing links before building lets you review and test them locally. The deploy script regenerates the changelog from git commit history, so commits must exist before deployment. When the changelog changes, deploy commits and pushes it so you don't have to. See [Deployment Process](#deployment-process) for details.
 
-### 💻 Daily Development
+### 🪴 Daily Development
 
 - `pnpm run dev` - Start development server with auto-rebuild on file changes (`--serve --watch --quiet`)
   - Auto-runs: `generate-og-images` incrementally on file save (via `eleventy.beforeWatch`)
@@ -27,7 +27,7 @@ Recommended process for deploying changes with an up-to-date changelog:
 - `pnpm run build:verbose` - Build production site with verbose output
 - `pnpm run clean` - Clean build directory
 
-### 🧪 Testing
+### 🪲 Testing
 
 - `pnpm run test` - List available test types
 - `pnpm run validate` - Quick HTML validity check (shortcut for `pnpm run test html`)
@@ -38,14 +38,14 @@ Recommended process for deploying changes with an up-to-date changelog:
 - `pnpm run test [type]` - Run a specific test type
 - `pnpm run test [type] -- --format [format]` - Specify output format: `verbose` (default) or `build`
 
-### 🚢 Deployment
+### 🪂 Deployment
 
 - `pnpm run deploy` - Deploy site to host via rsync
   - Runs: `changelog` → `generate-og-images` → `test markdown` → `test frontmatter` → `build` → `test og-images` → rsync → IndexNow
 - `pnpm run deploy --dry-run` - Test deployment without actually deploying (runs all checks and shows what would be synced)
 - `pnpm run deploy --skip-checks` - Deploy without running validation checks (not recommended)
 
-### 📝 Content Authoring
+### 🪶 Content Authoring
 
 - `pnpm run import-links` - Import links from NotePlan to links.yaml (auto: `deploy`)
 - `pnpm run import-links --clear` - Import and clear NotePlan note
@@ -53,7 +53,7 @@ Recommended process for deploying changes with an up-to-date changelog:
 
 See [noteplan-import.md](noteplan-import.md) for complete workflow documentation.
 
-### 🔧 Maintenance
+### 🧹 Maintenance
 
 - `pnpm run changelog` - Generate CHANGELOG.md from git history (auto: `deploy`)
 - `pnpm run convert-pdf` - Convert PDF pages to images for portfolio items
@@ -66,7 +66,7 @@ See [noteplan-import.md](noteplan-import.md) for complete workflow documentation
 
 See [tests.md](tests.md) for detailed test documentation.
 
-### 🚢 Deployment
+### 🪂 Deployment
 
 - `pnpm run deploy` - Deploy site via rsync (simplified script)
 - `pnpm run deploy --dry-run` - Test deployment without actually deploying. Runs all validation checks, generates OG images, and shows what would be synced via rsync's dry-run mode.
@@ -109,7 +109,7 @@ This is useful for:
 - Testing configuration changes
 
 
-### 📋 Changelog Generation
+### 🗃️ Changelog Generation
 
 - `pnpm run changelog` - Generate CHANGELOG.md from git commit history
 
@@ -117,7 +117,7 @@ The changelog is automatically generated from the git commit history, organized 
 
 The changelog is automatically regenerated before each deployment. When it changes, the deploy script commits and pushes it so the repo stays in sync. You can also run this command manually whenever you want to update it.
 
-### 📄 PDF Page Conversion
+### 📑 PDF Page Conversion
 
 - `pnpm run convert-pdf <pdf-file> [year/month]` - Convert PDF pages to images for portfolio display
 
@@ -148,7 +148,7 @@ The script outputs a markdown template that you can copy into your portfolio ite
 
 You then add notes for each page in the `<figcaption>` elements.
 
-### 🖼️ Open Graph Image Generation
+### 🪞 Open Graph Image Generation
 
 - `pnpm run generate-og-images` - Generate Open Graph images for posts and pages
 
@@ -224,7 +224,7 @@ You can also preview generated images in other ways:
 
 To customize the OG image design, edit `src/_includes/og-image.njk`. The template uses your site's CSS custom properties, so changes to colors, typography, and spacing will automatically be reflected in the generated images.
 
-### 🔒 Security Audit
+### 🛡️ Security Audit
 
 - `pnpm run security-audit` - Run security audit and maintenance checks
 
@@ -284,7 +284,7 @@ See `scripts/security/security-audit.js` header comments for the complete list o
 
 ---
 
-## 🔄 Periodic Maintenance
+## ♻️ Periodic Maintenance
 
 These tasks should be performed regularly, not as one-time work items.
 

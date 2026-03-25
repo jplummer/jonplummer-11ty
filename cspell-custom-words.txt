@@ -65,6 +65,7 @@ WSIX
 Abrahams
 Ausiello
 Bain
+Belião
 ben
 Bermúdez
 Brummer
@@ -89,6 +90,7 @@ Gothelf
 Gulshan
 Hamel
 Hardik
+Hoang
 Hsiao
 Huba
 Husain
@@ -144,6 +146,7 @@ Wichary
 Hanwen
 Shen
 Tamkin
+Tane
 
 # Other Valid Terms
 allyship
