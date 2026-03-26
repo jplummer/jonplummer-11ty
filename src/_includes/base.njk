@@ -39,6 +39,7 @@
     {%- endif %}
     {%- include "head/meta_basic.njk" %}
     {%- include "head/links.njk" %}
+    {%- include "head/wisdom-feed.njk" %}
     {%- include "head/title.njk" %}
     {%- include "head/favicons.njk" %}
     {%- include "head/meta_description.njk" %}
@@ -57,7 +58,9 @@
 </header>
 
 <main id="main" aria-label="Main content"{% if tags %} data-tags="{{ tags | join(' ') }}"{% endif %}>
-    {% if tags and "page" in tags and title and page.url != "/" and not (pagination and pagination.pageNumber > 0) %}
+    {# Hide H1 on blog index pagination (page 2+); keep H1 on /wisdom/* tag pages (also paginated, one file per tag). #}
+    {% set hidePaginatedH1 = pagination and pagination.pageNumber > 0 and page.url.indexOf('/wisdom/') !== 0 %}
+    {% if tags and "page" in tags and title and page.url != "/" and not hidePaginatedH1 %}
     <h1>{{ title | smartquotes | safe }}</h1>
     {% endif %}
     {{ content | safe }}

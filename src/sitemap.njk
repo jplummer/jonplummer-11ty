@@ -24,6 +24,22 @@ eleventyExcludeFromCollections: true
   {% endif %}
   {% endfor %}
 
+  {# Collected wisdom #}
+  <url>
+    <loc>{{ site.url }}/wisdom/</loc>
+    <lastmod>{% if wisdom.entries.length %}{{ wisdom.entries[0].added | dateToRfc3339 }}{% else %}{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}{% endif %}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  {% for tag in wisdom.allTags %}
+  <url>
+    <loc>{{ site.url }}/wisdom/tags/{{ tag }}/</loc>
+    <lastmod>{% if wisdom.entries.length %}{{ wisdom.entries[0].added | dateToRfc3339 }}{% else %}{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}{% endif %}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  {% endfor %}
+
   {# Portfolio page #}
   <url>
     <loc>{{ site.url }}/portfolio/</loc>

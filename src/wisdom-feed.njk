@@ -1,0 +1,24 @@
+---
+permalink: /wisdom-feed.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>Jon Plummer - Collected wisdom</title>
+        <link>{{ site.url }}/wisdom/</link>
+        <description>Short notes and observations from Jon Plummer</description>
+        <language>en-US</language>
+        <lastBuildDate>{% if wisdom.entries.length %}{{ wisdom.entries[0].added | dateToRfc3339 }}{% else %}{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}{% endif %}</lastBuildDate>
+        {% for entry in wisdom.entries %}
+            <item>
+                <title>{{ entry.body | markdown | striptags | truncate(120, true, '…') }}</title>
+                <link>{{ site.url }}/wisdom/#{{ entry.slug }}</link>
+                <guid isPermaLink="false">{{ site.url }}/wisdom/#{{ entry.slug }}</guid>
+                <pubDate>{{ entry.added | dateToRfc3339 }}</pubDate>
+                <content:encoded><![CDATA[{{ entry.body | markdown | safe }}{% if site.url %}<p><small>From <a href="{{ site.url }}/wisdom/">Collected wisdom</a> on <a href="{{ site.url }}">jonplummer.com</a></small></p>{% endif %}]]></content:encoded>
+                <description><![CDATA[{{ entry.body | markdown | striptags | truncate(280, true, '…') }}]]></description>
+            </item>
+        {% endfor %}
+    </channel>
+</rss>

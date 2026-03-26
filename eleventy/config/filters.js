@@ -48,6 +48,12 @@ function configureFilters(eleventyConfig, md) {
     return md.renderInline(content);
   });
 
+  // Block markdown (for data-driven bodies, e.g. collected wisdom)
+  eleventyConfig.addFilter("markdown", function (content) {
+    if (!content) return "";
+    return md.render(String(content));
+  });
+
   // Add smart quotes filter (applies typographer rules to plain text)
   eleventyConfig.addFilter("smartquotes", function (content) {
     if (!content) return content;

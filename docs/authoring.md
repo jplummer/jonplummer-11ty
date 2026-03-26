@@ -9,6 +9,18 @@ For capturing links to `links.yaml`, see [NotePlan Link Import](noteplan-import.
 2. Run `pnpm run deploy` - links are automatically imported, formatted, and validated
 3. Or run `pnpm run import-links` manually to preview locally first
 
+## Collected wisdom
+
+Short notes live in `src/_data/wisdom-entries.yaml` (loaded via `src/_data/wisdom.js`). They appear on `/wisdom/`, on per-tag pages under `/wisdom/tags/<tag>/`, and in `/wisdom-feed.xml`. Dates are **not** shown on the site; each entry still needs `added: "YYYY-MM-DD"` for ordering and RSS.
+
+**Shape:**
+
+- Root key `entries`: array of objects.
+- Each object: `added` (`YYYY-MM-DD` string), `tags` (non-empty array of slug-style strings), `body` (multiline string; use `|` in YAML; markdown allowed).
+- `slug` (optional): unique, lowercase `a-z0-9-_`. If omitted, a stable id is derived from the body for fragment links and RSS.
+
+Run `pnpm run test wisdom` after editing. Unexpected fields are rejected.
+
 ## Front Matter Variables
 
 ### Required

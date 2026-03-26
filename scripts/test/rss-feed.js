@@ -36,7 +36,8 @@ function parseXML(content) {
 }
 
 // Validate RSS structure
-function validateRSSStructure(doc) {
+function validateRSSStructure(doc, options = {}) {
+  const { fileBaseName = '' } = options;
   const issues = [];
   
   if (!doc) {
@@ -77,9 +78,9 @@ function validateRSSStructure(doc) {
     }
   }
   
-  // Check for items
+  // Check for items (wisdom feed may be empty without breaking the build)
   const items = channelElement.getElementsByTagName('item');
-  if (items.length === 0) {
+  if (items.length === 0 && fileBaseName !== 'wisdom-feed.xml') {
     issues.push('No items found in RSS feed');
   }
   
@@ -237,11 +238,12 @@ function checkFeedSize(content) {
 function validateRSSFeed(filePath) {
   const content = fs.readFileSync(filePath, 'utf8');
   const doc = parseXML(content);
+  const fileBaseName = path.basename(filePath);
   
   const issues = [];
   
   // Basic structure validation
-  const structureIssues = validateRSSStructure(doc);
+  const structureIssues = validateRSSStructure(doc, { fileBaseName });
   issues.push(...structureIssues);
   
   if (doc) {
@@ -259,6 +261,21 @@ function validateRSSFeed(filePath) {
   issues.push(...sizeIssues);
   
   return issues;
+}
+
+function validateWisdomFeedDiscovery(result) {
+  const indexPath = path.join(process.cwd(), '_site', 'index.html');
+  if (!fs.existsSync(indexPath)) {
+    return;
+  }
+  const html = fs.readFileSync(indexPath, 'utf8');
+  if (!html.includes('wisdom-feed.xml')) {
+    const fileObj = addFile(result, '_site/index.html', indexPath);
+    addIssue(fileObj, {
+      type: 'wisdom-feed-discovery',
+      message: 'Homepage HTML missing link rel=alternate for /wisdom-feed.xml'
+    });
+  }
 }
 
 // Main RSS validation
@@ -306,6 +323,8 @@ function validate(result) {
       });
     }
   }
+
+  validateWisdomFeedDiscovery(result);
 }
 
 // Run test with helper

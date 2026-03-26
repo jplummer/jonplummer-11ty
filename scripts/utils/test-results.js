@@ -247,6 +247,7 @@ const TEST_EMOJIS = {
   'html': '🧩',
   'internal-links': '🔗',
   'links': '📌',
+  'wisdom': '🦉',
   'markdown': '✍️ ',
   'spell': '🧙',
   'og-images': '📸',
@@ -276,6 +277,7 @@ function getTestDisplayName(testType) {
   const displayNames = {
     'html': 'HTML Validation',
     'links': 'Links YAML',
+    'wisdom': 'Wisdom YAML',
     'internal-links': 'Internal Links',
     'content': 'Content Structure',
     'frontmatter': 'Frontmatter',
@@ -301,6 +303,7 @@ function getTestDescription(testType) {
   const descriptions = {
     'html': 'HTML validity',
     'links': 'Links YAML structure',
+    'wisdom': 'Collected wisdom YAML structure',
     'internal-links': 'Internal link validity',
     'frontmatter': 'Frontmatter validation',
     'markdown': 'Markdown syntax',

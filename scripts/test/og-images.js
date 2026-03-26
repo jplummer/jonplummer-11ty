@@ -75,6 +75,14 @@ function isAllowedDefaultImagePage(relativePath) {
   if (pageMatch) {
     return true;
   }
+
+  // Collected wisdom index and tag listing pages share the site default OG image
+  if (normalizedPath === 'wisdom/index.html') {
+    return true;
+  }
+  if (normalizedPath.match(/^wisdom\/tags\/[^/]+\/index\.html$/)) {
+    return true;
+  }
   
   return false;
 }

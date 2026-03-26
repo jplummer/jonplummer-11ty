@@ -10,6 +10,7 @@ const { SPINNER_FRAMES } = require('./utils/spinner-utils');
 const testTypes = {
   'html': 'html.js',
   'links': 'links-yaml.js',
+  'wisdom': 'wisdom-yaml.js',
   'internal-links': 'internal-links.js',
   'frontmatter': 'frontmatter.js',
   'markdown': 'markdown.js',
@@ -29,6 +30,7 @@ const testTypes = {
 const fastTests = [
   'html',
   'links',
+  'wisdom',
   'internal-links',
   'frontmatter',
   'markdown',
@@ -44,6 +46,7 @@ const fastTests = [
 const allTests = [
   'html',
   'links',
+  'wisdom',
   'internal-links',
   'frontmatter',
   'markdown',
@@ -65,7 +68,7 @@ function listTests() {
   const { getTestDescription } = require('./utils/test-results');
   
   // Only show primary names
-  const primaryNames = ['html', 'links', 'internal-links', 'frontmatter', 'markdown', 'spell', 'seo', 'og-images', 'a11y', 'color-contrast', 'rss', 'deploy', 'indexnow', 'security'];
+  const primaryNames = ['html', 'links', 'wisdom', 'internal-links', 'frontmatter', 'markdown', 'spell', 'seo', 'og-images', 'a11y', 'color-contrast', 'rss', 'deploy', 'indexnow', 'security'];
   
   primaryNames.forEach(type => {
     const isInAll = allTests.includes(type);

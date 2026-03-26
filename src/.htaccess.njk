@@ -80,3 +80,12 @@ ErrorDocument 500 /500.html
 Redirect 301 {{ redirect.from }} {{ redirect.to }}
 {%- endfor %}
 # End redirects
+
+# Wisdom: requests for tag URLs with no built page → /wisdom/ (e.g. retired tags)
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^wisdom/tags/[a-z0-9-]+/?$ /wisdom/ [R=301,L]
+</IfModule>

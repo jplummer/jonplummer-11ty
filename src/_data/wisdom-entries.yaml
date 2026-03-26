@@ -1,0 +1,858 @@
+# Collected wisdom — short notes, ordered by `added` in the feed (newest first).
+# Required per entry: added (YYYY-MM-DD), tags (array), body (multiline string, markdown OK).
+# Tags: lowercase slug-style [a-z0-9-]+ (same rules as entry slugs).
+# Optional: slug (lowercase a-z0-9-_). If omitted, a stable id is derived from the body for anchors and RSS.
+# Dates are used for RSS and sorting only; they are not shown on the site.
+
+entries:
+  - added: '2026-03-23'
+    tags:
+      - product
+    body: Product Value Proposition (PVP) training is really customer development training – the needs and motivations of the customer directly inform the value to be delivered and the manner of doing so.
+  - added: '2026-03-23'
+    tags:
+      - process
+    body: Allocate UX people, time, and treasure to serve a business, not a product.
+  - added: '2026-03-23'
+    tags:
+      - product
+    body: |-
+      Product concept construction cheat sheet:
+      - (What is our mission)
+      - Who is our customer
+      - What do they value
+      - What benefit do we want to deliver
+      - How do we want to deliver it
+      - What else must we do to be credible here
+      - How is this intrinsically different
+      - (What are our results)
+      - What is our plan
+  - added: '2026-03-23'
+    tags:
+      - strategy
+    body: '"To have an effective mission you have to work out an exacting match of your opportunities, competence and commitment. Every good mission statement reflects all three. Look first at the outside environment. The organization that starts from the inside and then tries to find places to put its resources is going to fritter itself away." – Peter F. Drucker'
+  - added: '2026-03-23'
+    tags:
+      - kaizen
+    body: |-
+      UX value stream analysis:
+
+      **Muda (waste)**
+      - Defects
+      - Overproduction of things not demanded by actual customers
+      - Inventories awaiting further processing or consumption
+      - Unnecessary over-processing (for example, relying on inspections rather than designing the process to eliminate problems)
+      - Unnecessary motion of employees
+      - Unnecessary transport and handling of goods
+      - Waiting for an upstream process to deliver, or for a machine to finish processing, or for a supporting function to be completed, or for an interrupted worker to get back to work…
+
+      **Mura (inconsistency)**
+      - Confusion — missing or misinformation. Confusing goals and metrics.
+
+      **Muri (unreasonableness)**
+      - Unsafe or unergonomic work conditions
+      - Underutilized human potential — skills, talents, and creativity
+      - Demands out of scale with capabilities
+  - added: '2026-03-23'
+    tags:
+      - kaizen
+    body: |-
+      Rule 1 — Clearly specify all activities (standardize work)
+      - Content (what is being done?)
+      - Sequence (in what order?)
+      - Timing (how long should it take?)
+      - Outcome (what clearly defined measurable results are expected?)
+
+      Rule 2 — Clearly define all connections to every customer and supplier (no ambiguity)
+      - Direct (no intermediary between)
+      - Yes or No answers (no "maybe")
+
+      Rule 3 — Clearly define all pathways (organize for uninterrupted flow)
+      - Simple (with as few steps and people as possible)
+      - Direct steps to deliver the requested product or service
+      - Clearly defined standard work and job instructions
+
+      Rule 4 — Continuously improve (develop leaders who can apply the scientific method to improve anything)
+      - Direct response to any problem that arises
+      - By those doing the work — as close to the problem as possible
+      - Whenever possible, start as an experiment
+      - Supported by a coach
+  - added: '2026-03-23'
+    tags:
+      - experience
+    body: |-
+      Is it:
+      - Informationally correct
+      - Interactively correct
+      - Aesthetically correct
+      - Emotionally correct
+  - added: '2026-03-23'
+    tags:
+      - experience
+    body: Every experience needs a theme — an organizing principle that helps us choose what to do with every part of the experience.
+  - added: '2026-03-23'
+    tags:
+      - product
+    body: Customers don't want choice — they want the one thing that they want.
+  - added: '2026-03-23'
+    tags:
+      - product
+    body: You are what you charge for — how do you get paid for the experience, for the time customers spend with you? Admission? Membership? What am I actually buying?
+  - added: '2026-03-23'
+    tags:
+      - experience
+    body: Engagement is essential to a successful experience. Engage as many senses as possible — and what you can't engage, evoke.
+  - added: '2026-03-23'
+    tags:
+      - experience
+    body: Look at your product for the first time. This doesn't mean merely considering the novice user, but making the product immediately intelligible for the occasional user, who becomes partially novice between bouts of using the product, and smoothing out recognition for intermediate users so that they may one day become advanced. In essence, lowering the barrier to proficiency by requiring less recall and less rote learning of controls and processes.
+  - added: '2026-03-23'
+    tags:
+      - experience
+    body: |-
+      One interface to rule them all. Be strict about hierarchy; the primary read must be chosen and adhered to, and there should be no more than four reads or layers on a given screen, in general. A "main event" screen has mostly one thing to do, maximum three. It is the most branded part of the experience, usually.
+      - Main event — most user time is spent here — 1–3 reads, most branded
+      - Secondary screen — 4+ reads
+      - Deep screen — ~12 reads, more standard
+  - added: '2026-03-23'
+    tags:
+      - simplicity
+    body: |-
+      - Reduce user actions
+      - Reduce opportunities for error
+      - Do what we can for the user
+      - Don't ask questions the user is not prepared to answer
+      - Help technical minutiae be sensible and understandable
+  - added: '2026-03-23'
+    tags:
+      - design
+    body: |-
+      Reduce the opportunity to make problematic mistakes:
+      - Reduce technical decisions
+      - Detect, detect and ask, reframe questions
+      - Don't ask things the user isn't prepared to answer
+      - Reduce physical operations when they can be done wrong unknowingly
+      - Make it easy to do the right thing — a straightforward path to success
+      - Be less confusing than before
+      - Make it clear when it is right, that it has worked, that they did a good job
+      - Don't complain; rather guide (or do it for them, automate)
+  - added: '2026-03-23'
+    tags:
+      - experience
+    body: Define and articulate the desired experience early so that the design and implementation are focused and not bloated.
+  - added: '2026-03-23'
+    tags:
+      - design
+    body: We say "on" and "off" rather than "enable" and "disable".
+  - added: '2026-03-23'
+    tags:
+      - simplicity
+    body: indicate the form elements that are exceptions; if you have fewer optional fields, indicate the optional ones. if you have mostly optional fields, indicate the required ones.
+  - added: '2026-03-23'
+    tags:
+      - design
+    body: Be simple and positive-active in speech and attitude in interfaces and business and living.
+  - added: '2026-03-23'
+    tags:
+      - experience
+    body: |-
+      How do you want your customer to feel?
+      - Typical emotions here, at this point in the process, would be…
+      - Desired emotions would be…
+  - added: '2026-03-23'
+    tags:
+      - research
+    body: |-
+      All that really matters is that you have empathy for your person. Personae foster empathy. Personae are:
+      - written in the person's own voice
+      - personality
+      - motivations
+      - behaviors
+      - aspirations
+      - what keeps them up at night
+  - added: '2026-03-23'
+    tags:
+      - clarity
+    body: '"I find users react very positively when things are clear and understandable. That''s what particularly bothers me today — the arbitrariness and thoughtlessness with which so many things are produced and brought to market. Not only in the sector of consumer goods, but in architecture and advertising." – Dieter Rams'
+  - added: '2026-03-23'
+    tags:
+      - clarity
+    body: The "empty" state should probably not be empty.
+  - added: '2026-03-23'
+    tags:
+      - research
+    body: We put things into the lab not just to see if the design functions when faced with a real person, but also to investigate expectations and opportunities.
+  - added: '2026-03-23'
+    tags:
+      - product
+    body: Do not take orders — do not become a hired robot — rather than making a sandwich ask about the feeling of hunger and offer possibilities of satisfaction.
+  - added: '2026-03-23'
+    tags:
+      - design
+    body: '"Decisions should be based on evaluating models of the real thing, not intellectual but physical models." – Dieter Rams'
+  - added: '2026-03-23'
+    tags:
+      - simplicity
+    body: |-
+      Can you do without? Can you do better without?
+      For any bit of data:
+      - Is this needed?
+      - What does it help me do?
+      - What decisions does it drive or help with?
+      - What behavior does it encourage?
+      - What would the effect be of not having it?
+      For any control:
+      - What is the effect of choosing one setting or the other?
+      - Which setting is the right one? (maybe the other setting is not needed)
+      - What is the harm in doing it wrong?
+      - What is the harm in removing the control altogether?
+      - Can the system choose the right answer?
+  - added: '2026-03-23'
+    tags:
+      - research
+    body: There's something we didn't cover when talking about the "5 whys" that should be mentioned. One of the things that can happen when you do the "5 whys" technique (some people call it "7 whys") is that you can get a leap to a very abstract level that doesn't actually illuminate anything; the person you're talking to takes your questioning as an intellectual challenge and makes a broad statement that encompasses the topic you're talking about but is too vague to really get a handle on. Usually this statement would fail to communicate much of interest to a person not directly involved in the conversation, which is the clearest sign of its weakness. An analog of this is the vague job title or business description that doesn't tell you what is actually done. "I'm an analog solutions provider." The trick in these situations is to bring the discussion back down toward specifics by asking an investigatory question, such as "what makes that special," "what makes that necessary," "why do I want that," "what would it be like to have this" — to bring the umbrella term back to something an individual person would experience. Sometimes you need a few "what" questions to drop down to a useful level again.
+  - added: '2026-03-23'
+    tags:
+      - product
+    body: |-
+      You want "peace of mind" to be your benefit? OK, let's do it. For real this time, no handwaving. Peace of mind requires:
+      - A real, felt fear or anxiety that is to be alleviated (for the situation we are tackling this might be a collection of fears/anxieties)
+      - Conscious, nameable recognition of each fear or anxiety (though we might prompt recognition)
+      - Visible removal or address of each fear or anxiety
+      - A (recurring) pleasant reminder that it/they continue to be addressed
+  - added: '2026-03-23'
+    tags:
+      - experience
+    body: No loose parts! If there must be a loose part, give me somewhere to keep it — otherwise you are asking me to make a decision about maybe throwing away something I just bought.
+  - added: '2026-03-23'
+    tags:
+      - simplicity
+    body: |-
+      Some other principles that have informed recent work in networking:
+      - Don't complain; automate or guide instead.
+      - Make success obvious.
+      - Reduce opportunities for mistakes.
+      - Don't ask (for information) if you don't have to (i.e. if you can get it another way)
+      - Reduce technical decision-making
+      Simple is *actually*:
+      - Clear
+      - Fast
+      - Few decisions
+      - Doing the one right thing is obvious
+  - added: '2026-03-23'
+    tags:
+      - strategy
+    body: '"Do one thing well." – Rory Sutherland (Fishbach goal dilution: https://faculty.chicagobooth.edu/ayelet.fishbach/research/dilution.pdf)'
+  - added: '2026-03-23'
+    tags:
+      - product
+    body: |-
+      Perceptions are leaky, so impute the qualities you want wherever you can.
+
+      When you leave a car wash your car feels like it drives better. Analgesics that are branded seem to work better with the same chemistry. Perceptions can be enhanced or damaged with nearby effort rather than direct effort, especially when perception is the thing that needs to move. A milestone partway through enhances serial task completion. If your perception is much worse than your reality, what on earth are you doing trying to change reality? Go after perception. Choose your frame of reference, and the value you create changes character completely.
+  - added: '2026-03-23'
+    tags:
+      - product
+    body: '"Happiness is increased when people feel control over what is done much more than if it is a little or a lot. Pensioners are much happier than the young unemployed due to the feeling of choice. Reframing (emotional adjustment of objective fact) is a way to elicit the correct emotion. Decreasing uncertainty decreases frustration, irritation, and anxiety." – Rory Sutherland'
+  - added: '2026-03-23'
+    tags:
+      - strategy
+    body: '"There''s a natural bias against the creative and emotional that serves us poorly — the rational should also be subject to emotional/psychological evaluation, because logic is not sufficient." – Rory Sutherland'
+  - added: '2026-03-23'
+    tags:
+      - strategy
+    body: '"Successful businesses consider three things: economic solutions, emotional/psychological solutions, and technical solutions." – Rory Sutherland'
+  - added: '2026-03-23'
+    tags:
+      - research
+    body: 'Happiness is increased when people give to charity or to people they know or create prosocial experiences: http://rady.ucsd.edu/faculty/seminars/2011/papers/norton.pdf and http://research.chicagobooth.edu/cdr/docs/spendingmoney-norton.pdf'
+  - added: '2026-03-23'
+    tags:
+      - product
+    body: What something is is a function not only of its cost but also of its meaning, which can be altered with a frame. Money is not just money; the pain is proportional to the meaning and not the amount. (Anchoring also helps with this.) https://en.wikipedia.org/wiki/Praxeology#Austrian_School_approach
+  - added: '2026-03-23'
+    tags:
+      - experience
+    body: |-
+      Packaging / out-of-box setup
+      - Make it easy to open
+      - Make it self-orienting
+      - Present the product nicely, cleanly
+      - Show care for the product and user through design of protection, material selection
+      - Make the right parts fall to hand at the right time
+      - Plan the process
+      - Accommodate people going off-book
+      - Reduce physical operations the person must perform
+      - Don't ask questions the person can't answer
+      - Figure out the right or most likely behavior and take care of it
+      - Packaging quality supports purchase price
+      - Packaging quality supports a person's confidence in the product
+      - Packaging is an opportunity to display our thoughtfulness to the user
+      - Make it a single experience; product, packaging, in-box materials, software, and behavior all the product of a single mind
+      - Ship the product ready to use, or nearly so
+  - added: '2026-03-23'
+    tags:
+      - experience
+    body: I think, I see, I hear, I taste, I touch → I feel, I say, I do.
+  - added: '2026-03-23'
+    tags:
+      - product
+    body: Consider emotion at every phase — often in setup the emotional job is to support user confidence in the product and in their own action.
+  - added: '2026-03-23'
+    tags:
+      - design
+    body: Typical error responses need a negative and positive component (what happened and what you can do) but many errors can be taken care of automatically (so they disappear) or handled as conditions or requests rather than problems (positive response only).
+  - added: '2026-03-23'
+    tags:
+      - design
+    body: |-
+      Don't forget to design for:
+      - First run
+      - Empty data set
+      - One item
+      - Many items (full use)
+      - Error conditions
+  - added: '2026-03-23'
+    tags:
+      - design
+    body: Design the centerpiece (epicenter) first rather than starting from the known — starting from the known boxes around your core offering can result in a donut, where everything is solid but the reason we are here.
+  - added: '2026-03-23'
+    tags:
+      - strategy
+    body: |-
+      Don't "pick a door" — design for the situation.
+      - Easy = fast + obvious
+      - Performance = credible + reliable
+      - Exciting = delightful + surprise
+  - added: '2026-03-23'
+    tags:
+      - research
+    body: Tricky design decisions should be supported by observation and experimentation.
+  - added: '2026-03-23'
+    tags:
+      - process
+    body: |-
+      "Genius design" (articulates the holistic experience, gets outside the norm, changes paradigms, new tools/capabilities/outcomes)
+
+      versus
+      "Data-driven design" (reduces risk, validates and selects, makes sure it works, incremental improvement):
+
+      You need both.
+  - added: '2026-03-23'
+    tags:
+      - culture
+    body: |-
+      Omiyage: "little gift," a small happy surprise
+      Omakase: an experience created by an expert
+      Lagniappe: a little something extra
+      Kaizen: continuous improvement through repeated attention
+      Ideality: considering the ideal unfettered experience, then walking it back to what is implementable
+      Damn good basic: doing only the underlying, simplest, core thing that must be done extremely well
+      Genchi genbutsu: go and see
+  - added: '2026-03-23'
+    tags:
+      - strategy
+    body: |-
+      UX drives loyalty and revenue.
+
+      A successful UX is a string of good performances at moments of truth. A slip makes it hard to catch up.
+
+      Something must be delightful, pleasantly surprising.
+  - added: '2026-03-23'
+    tags:
+      - product
+    body: The idea is to support and increase confidence that our promises will be well-fulfilled. A successful UX appeals to the emotions. Anyone can have a positive impact on UX from where they sit in the organization. Anyone. (Everyone must!) A demo that appeals to the emotions, plus actual human reactions (evidence of emotion),       beats ROI figures any day (so appeal to emotion in all things).
+  - added: '2026-03-23'
+    tags:
+      - product
+    body: |-
+      Clear signals. Controls that match the way you think. The right sensors for the job. Evidence of thoughtfulness. Delight / happy surprise. Initial state.
+      States
+      - Receiving: I heard you
+      - Preparing: I'm getting ready
+      - Executing: I'm doing it
+      - Finished: It is done
+      - Ready: I'm ready for more
+      - Final state
+  - added: '2026-03-23'
+    tags:
+      - product
+    body: |-
+      Plans (things to be done) are inferior to dreams (inspiring beliefs we want to be a part of) in convincing and motivating people.
+
+      NO
+      1. What the product is
+      2. How you act on belief
+      3. Why: what you believe and why you do it
+
+      YES (this order inspires; use it to sell to people who believe what you believe or want to)
+      1. Why: what you believe and why you do it
+      2. How you act on belief
+      3. What the product is
+  - added: '2026-03-23'
+    tags:
+      - process
+    body: |-
+      General UX strategy
+      1. Start with customer wants and needs
+      2. Check that these are real
+      3. Define a desirable experience
+      4. See that it is actually desirable (test)
+      5. Design a solution to deliver that experience
+      6. See that it actually delivers (test)
+      7. Refine, express every detail
+      8. Implement, verify implementation
+      9. Ship
+      10. Observe
+      11. Plan the updates
+  - added: '2026-03-23'
+    tags:
+      - process
+    body: Define and articulate desired end experience early so that the design and implementation work are focused and you don't over-build.
+  - added: '2026-03-23'
+    tags:
+      - process
+    body: |-
+      "Conservation of complexity" – Sarah Gallivan Mitchell
+      "Real people, real life" – Aaron Sevier
+  - added: '2026-03-23'
+    tags:
+      - product
+    body: |-
+      Action and response (physical control)
+      - The blinking red button. Brightness. Contrast. Shape. Separateness / salience. Gathering attention.
+      - The finger approaches. Touch. Feeling of material. Light leakage around finger. Surface resistance.
+      - Depress button. Traveling resistance. Smoothness.
+      - "Click" — coincident: tactile signal of activation, auditory signal of activation, visual feedback change at the same instant (blinking stops) — waiting for button UP will cause confusion.
+      - Perception and action
+  - added: '2026-03-23'
+    tags:
+      - product
+    body: |-
+      Stimulus
+      - t0 Sound
+      - t0 Pressure
+      - t1 Heat — directional, ambient, change, physically present (forms of "remote touch")
+      - t2 Scent — non-directional, ambient, slow gradient, emotionally powerful
+      **Orienting impulse**
+
+      Sum of stimuli crosses danger/noxious/interest threshold, causes orienting impulse to directional stimuli. It is easiest to orient to stimuli that are strong, continuous, or periodic (rather than randomly occurring). Quickly periodic stimuli are powerful but can be strident or noxious.
+      **Oriented**
+
+      Orientation improves as input becomes finer. Now vision can come into play as a primary sense.
+      - t0 Light/color
+      - t1 Broad form
+      - t2 Major details
+      - t3 Minor detail and pattern
+  - added: '2026-03-23'
+    tags:
+      - strategy
+    body: |-
+      Features as capabilities: experience strategy map
+
+      The intersection of "people want to X" and "company wants people to Y" is where you need capabilities/features.
+
+      A capability is a channel, a form, an interface, an indicator, etc.
+
+      For each capability, list:
+      - User tasks
+      - Company needs
+      - Force-rank them
+
+      For each task, list:
+      - Emotional dimensions and considerations
+      - High-level approach
+      - Success criteria (how do you know when it is good?)
+  - added: '2026-03-23'
+    tags:
+      - process
+    body: |-
+      An assessment of project scope must include:
+      - The general goal
+      - Things we want to avoid
+      - Assumptions and expectations
+      - Activities
+      - Deliverables
+      - Duration
+      - Resources and budget
+  - added: '2026-03-23'
+    tags:
+      - product
+    body: |-
+      How do you know what to make?
+      - Uncover opportunities to help: observe people
+      - Understand business goals: stakeholder investigation, existing tech support data, feedback from retail partners
+      - Uncover opportunities to do better: competitive evaluation
+      - Understand what makes a truly good result: understand the expert position
+  - added: '2026-03-23'
+    tags:
+      - research
+    body: |-
+      Product evaluation (competitive or self)
+
+      Any time the product delights or disappoints you is worthy of a little write-up; pictures and video help.
+      - What is it
+      - Did it do what you expected it to do?
+      - Major pain and pleasure points
+      - Top opportunities or recommendations
+      - Apparent features
+      - Outer packaging
+      - Opening the box
+      - What is presented, in what order
+      - Does presentation reinforce brand or product story
+      - Informativeness of presentation
+      - Does presentation lead into setup
+
+      Getting it set up — physical
+      - Length of process
+      - Intelligibility of process/instructions
+      - Items falling to hand at the right time? Having to hunt for items?
+      - Missing or extra parts
+      - Anything cumbersome or difficult? Anything unexpectedly easy or pleasant?
+      - Is it clear what to do next?
+
+      Getting it set up — software
+      - Length of process
+      - Intelligibility of process/instructions
+      - Appropriateness of needed information/decisions during setup
+      - Is it clear what to do next?
+
+      First use
+      - Device behavior on first power
+      - Time to first value
+      - Any poorly-explained or seemingly needless operations?
+      - Other operations required to get the system working (especially)
+
+      Day-to-day use
+      - Easy to get started?
+      - Time to startup
+      - Any repeated operations necessary?
+      - Appropriateness of feedback during startup
+      - Appropriateness of feedback to user action
+      - Other pain or pleasure points
+
+      Troubleshooting
+      - What went wrong? How did you know? What did you do? Did it work?
+
+      Support
+      - Did you use support? Why? What was that experience like?
+
+      Wrap-up
+      - Apparent value proposition
+      - Top five great things about the product
+      - Top five things wrong with the product
+      - "If only it would…" and other experience gaps, improvement opportunities
+      - Recommendations
+  - added: '2026-03-23'
+    tags:
+      - product
+    body: |-
+      Cupcake theory
+      - Deliver desirability simply
+      - Do one thing extremely well, then build on it in later versions
+      - Clarity is the key to focus is the key to simple
+  - added: '2026-03-23'
+    tags:
+      - experience
+    body: |-
+      Networking: connector and client LED behavior standards
+
+      Talk about port order:
+      - High to low
+      - Horizontally
+      - Grouping of like functions
+      - Considerations of cable weight, stability, user operation, frequency of use of various connectors
+
+      Activity blinking is suitable for technical environments or continuous monitoring where there is no better evidence of activity. It is not pleasant in the home or car and can be distracting. We avoid it.
+
+      Lots of LEDs can create anxiety in the user if the meaning of the indicators is not immediately obvious and if it is not completely clear how to respond to a change. We tend to reduce indicators where possible.
+  - added: '2026-03-23'
+    tags:
+      - design
+    body: 'Skeuomorphism: we don''t need it, generally. A skeuomorph is a virtual representation of a physical object that is intended to make the virtual object seem familiar. In general skeuomorphs shortchange the advantages and communicability of a virtual interface all while disappointing the user. Cf. iCal on OS X Lion.'
+  - added: '2026-03-23'
+    tags:
+      - strategy
+    body: 'In-idiom vs. out-of-idiom: Operating systems (Windows XP, Windows Vista, Windows 7, OS X, iOS, Android, etc.) come with their own conventions. Following these conventions enhances user familiarity (things work the way the user has been trained to expect). But we should feel free to improve on the conventions when doing so would markedly improve the central experience of the product, and we should judiciously alter what we safely can to create a unified and branded experience across platforms.'
+  - added: '2026-03-23'
+    tags:
+      - process
+    body: |-
+      Innovation principles
+      1. Experience the world instead of talking about experiencing the world
+      2. See and hear with the mind of a child
+      3. Always ask: "How do we want people to feel after they experience this?"
+      4. Prototype as if you are right. Listen as if you are wrong.
+      5. Anything can be prototyped. You can prototype with anything.
+      6. Live life at the intersection
+      7. Develop a taste for the many flavors of innovation
+      8. Most new ideas aren't
+      9. Killing good ideas is a good idea
+      10. Baby steps often lead to big leaps
+      11. Everyone needs time to innovate
+      12. Instead of managing, try cultivating
+      13. Do everything right, and you'll still fail
+      14. Failure sucks, but instructs
+      15. Celebrate errors of commission. Stamp out errors of omission.
+      16. Grok the gestalt of teams
+      17. It's not the years, it's the mileage
+      18. Learn to orbit the hairball
+  - added: '2026-03-23'
+    tags:
+      - process
+    body: |-
+      The situation: Need to systematize a department's work.
+      Your random word is: Noon
+
+      Idea: Periodic activity
+      - Find out what we do regularly, and standardize
+      - Find out what we make regularly, and standardize
+      - Detect patterns in the work
+      - Find parts we reuse, and make a library
+      - Find out what I have to learn over and over, and capture it
+
+      Idea: A meeting
+      - For every meeting, detect if it is needed or could have been handled another way
+      - For every communication, determine if it is unique or regular, and template it
+      - Ask the team to collect their work patterns
+
+      Idea: Lunch
+      - Use lunch as a time for the team to step back from the work and examine it
+      - If I work through lunch, automate the thing that caused me to do so
+
+      Idea: The sun
+      - Shine a light on things that went wrong; use five whys to understand where to apply a system
+
+      Idea: A break
+      - Take a break from the churn before systematizing
+      - Treat this as an opportunity to UCD ourselves
+      - Get out of the business to work on the business
+
+      Idea: A showdown
+      - Make sure that questioning employees doesn't become judgment
+
+      Idea: No shadows
+      - Look at anything and everything, no matter whose, without personal judgment
+  - added: '2026-03-23'
+    tags:
+      - experience
+    body: |-
+      Packaging dos and don'ts
+      - People need a tool to remove shrink-wrap
+      - Cat-locks can rip
+      - Wafer seals should be added like salting the food – sparingly
+      - Box-in-a-box is hard to pull out
+      - Provide a way to grab hold of something that must be pulled
+      - Don't wafer-seal a cat-lock, jeez!
+      - Brand as an orienting feature
+      - Flaps impede access to product
+  - added: '2026-03-23'
+    tags:
+      - strategy
+    body: |-
+      Technical/experience ideality
+      - Magical
+      - Natural
+      - Natural + technical
+      - Technical
+      - Needlessly technical
+      - Obtuse
+      - Externally-focused
+      - Needs-based
+      - Evidence-based
+      - Innovative
+      - Elegant
+      - Anthropomorphic
+      - Convenient
+      - Practical
+      - Functional
+      - Context awareness
+      - Natural interaction
+      - Continuity
+      - Multi-user
+  - added: '2026-03-23'
+    tags:
+      - product
+    body: |-
+      Ogilvy's eleven principles, adapted for UX
+      1. What you provide is more important than how you provide it
+      2. Unless your experience is built around a great idea, it will flop
+      3. Give the benefit
+      4. You cannot bore people into using
+      5. Be well-mannered but don't get in the way
+      6. Make your experience contemporary
+      7. Committees can criticize experiences, but they cannot write them
+      8. If you are lucky enough to create a good experience, repeat it until it stops pulling
+      9. Never create an experience which you wouldn't want your own family to have
+      10. The image and the brand
+      11. Don't be a copy-cat
+  - added: '2026-03-23'
+    tags:
+      - experience
+    body: |-
+      - Satisfies requirements
+      - Exists among others (not alone)
+      - Beautiful
+      - Innovative, logical, and clever
+      - Intuitive and uncomplicated
+  - added: '2026-03-23'
+    tags:
+      - strategy
+    body: |-
+      Consistency and persistence
+      "They came out of nowhere" is really "they started working on this a long time ago" — it takes a long time to produce an overnight success.
+  - added: '2026-03-23'
+    tags:
+      - process
+    body: |-
+      1. Here is what we presented last week
+      2. These were the outcomes and actions
+      3. Here's what we did
+      4. Here are our challenges
+      5. Discuss
+      6. Accept and reflect resulting actions
+  - added: '2026-03-23'
+    tags:
+      - strategy
+    body: |-
+      - Does it complement our strategic direction?
+      - Does it have a strong business case?
+      - Is it blessed by someone above? Can we get that?
+  - added: '2026-03-23'
+    tags:
+      - research
+    body: |-
+      1. Insights
+      2. Opportunities
+      3. Problems/needs/wishes people have that we could solve
+      4. Potential solutions
+  - added: '2026-03-23'
+    tags:
+      - product
+    body: |-
+      Product manager vs. designer
+
+      On a scale from perfect to total crap, the manager looks for results to fall between "minimally acceptable" and "too good for the ROI" while the designer looks for results to fall between "good enough" and "diminishing returns."
+
+      But "minimally acceptable" is below "good enough" — so we must establish the "good enough" floor. The target zone is between "good enough" and "too good for the ROI", biased high in that zone.
+  - added: '2026-03-23'
+    tags:
+      - product
+    body: |-
+      Expected commercial value (ECV)
+
+      ((((future value × chance of commercial success) − launch costs) × chance of technical success given current constraints) − development costs) = ECV
+  - added: '2026-03-23'
+    tags:
+      - culture
+    body: |-
+      Design everything
+      Simplicity is a tactic (not a goal, not a strategy)
+      Content — structure — elegance
+      Predictability — flexibility — accountability — professionalism
+      In groups or business you are what you seem to be
+      Skills, expertise, values, wills and wants; what distinguishes you from others?
+  - added: '2026-03-23'
+    tags:
+      - culture
+    body: Do not change the boss, but learn from the boss; do not adapt to the boss, but find opportunity in the problems of the boss; the boss is still the boss
+  - added: '2026-03-23'
+    tags:
+      - process
+    body: '"Inspiration is for amateurs; the rest of us just get to work." – Chuck Close'
+  - added: '2026-03-23'
+    tags:
+      - process
+    body: Three people need to know exactly what the product is and does — PM, tech lead, UX person.
+  - added: '2026-03-23'
+    tags:
+      - process
+    body: It takes discipline to work/plan methodically/evolutionarily. It takes discipline to examine successes so they can be repeated. It takes discipline to collect, evaluate, and choose the right action on feedback (which may include no action).
+  - added: '2026-03-23'
+    tags:
+      - product
+    body: |-
+      Marty Cagan — product and UX
+      1. The job of the PM is to discover a product that is valuable, usable, and feasible
+      2. Product discovery is a collaboration between the PM, interaction designer, and software architect (trio)
+      3. Engineering is important and difficult, but user experience design is even more important and usually more difficult
+      4. Engineers are typically very poor at user experience design — engineers think in terms of implementation models, but users think in terms of conceptual models
+      5. User experience design means interaction design, visual design, and industrial design
+      6. Functionality (product requirements) and user experience design are inherently intertwined
+      7. Product ideas must be tested, early and often, on actual target users in order to come up with a product that is valuable and usable
+      8. We need a high-fidelity prototype so we can quickly, easily, and frequently test our ideas on real users using a realistic user experience
+      9. The job of the PM is to identify the minimal possible product that meets the objectives — valuable, usable, and feasible — minimizing both time to market and user complexity
+      10. Once this minimal successful product has been discovered and validated, it is not something that can be delivered piecemeal with the same results
+  - added: '2026-03-23'
+    tags:
+      - culture
+    body: |-
+      Did I do my best to set clear goals for myself?
+      Did I do my best to make progress toward those goals?
+      Did I do my best to be happy?
+      Did I do my best to find meaning?
+      Did I do my best to build positive relationships?
+      Did I do my best to be fully engaged?
+  - added: '2026-03-23'
+    tags:
+      - kaizen
+    body: |-
+      Words most often spoken in a Lean organization
+      1. Customer
+      2. Value
+      3. Problem
+      4. Why
+      5. Standard
+      6. Process
+      7. See
+      8. Cause
+      9. Team
+      10. How
+      11. Experiment
+      12. When
+      13. Data
+      14. Check
+      15. Result
+      16. Learn
+      17. Better
+      18. Sustainable
+      19. Purpose
+      20. Thanks
+  - added: '2026-03-23'
+    tags:
+      - process
+    body: |-
+      Relate short-term decisions to the long-term more explicitly. This will…
+      - Continue to build up the experience roadmap, with new and explicit attention to dependency order of the enabled experiences, and do so in an internally public manner.
+      - Stop redefining the process interfaces between UX/ID and Marketing, and instead push the humans to communicate. We seem to re-document and reassert the process every year, but the results don't change materially; time to do something different.
+      - Participate in re-defining how we plan projects so that there will be a greater connection between resource availability and business priority, if only for my own sanity and sense of effectiveness. This should make it possible for work to become a little more standard, tamping down the high volume of events and exceptions that make improvement difficult.
+  - added: '2026-03-23'
+    tags:
+      - product
+    body: 'How to win: find (a) simple solutions (b) to overlooked problems (c) that actually need to be solved, and (d) deliver them as informally as possible, (e) starting with a simplistic version 1 and (f) iterating rapidly.'
+  - added: '2026-03-23'
+    tags:
+      - design
+    body: |-
+      Good design
+      1. Fulfills its function
+      2. Respects its materials
+      3. Is suited to its method of production
+      4. Combines these in imaginative expression
+  - added: '2026-03-23'
+    tags:
+      - design
+    body: |-
+      UX modes of thought
+      - Reduce opportunities to make mistakes
+      - Don't ask questions the user is not prepared to answer
+      - Do as much as we can for the user, rather than asking or making them figure it out
+      - Always ask about the emotional effect
+  - added: '2026-03-20'
+    tags:
+      - process
+    body: Small steps shipped beat big plans deferred. Momentum is a habit, not a mood.
+  - added: '2026-03-15'
+    tags:
+      - clarity
+    body: If the next reader cannot follow your reasoning in five minutes, the system is not yet clear enough — even when the code works.

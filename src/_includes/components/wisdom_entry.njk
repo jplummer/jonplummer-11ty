@@ -1,0 +1,8 @@
+<article class="wisdom-entry" id="{{ entry.slug }}">
+  <footer>
+    <p class="posted-on">{% for t in entry.tags %}<a href="/wisdom/tags/{{ t }}/"{% if wisdomPageTag and t == wisdomPageTag %} aria-current="page"{% endif %}>#{{ t }}</a>{% if not loop.last %} {% endif %}{% endfor %}</p>
+  </footer>
+  <section>
+    {{ entry.body | markdown | safe }}
+  </section>
+</article>

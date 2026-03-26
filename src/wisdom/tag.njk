@@ -1,0 +1,23 @@
+---
+layout: base.njk
+pagination:
+  data: wisdom.allTags
+  size: 1
+  alias: tag
+permalink: wisdom/tags/{{ tag }}/index.html
+tags: page
+ogImage: /assets/images/og/wisdom-tags-{{ tag }}-index.html.png
+eleventyComputed:
+  title: "Collected wisdom – #{{ tag }}"
+  description: Collected wisdom entries tagged “{{ tag }}”.
+---
+<p class="wisdom-intro"><a href="/wisdom/">All wisdom</a> · {% for t in wisdom.allTags %}<a href="/wisdom/tags/{{ t }}/"{% if t == tag %} aria-current="page"{% endif %}>#{{ t }}</a>{% if not loop.last %} · {% endif %}{% endfor %}</p>
+
+<section class="wisdom-list" aria-label="Wisdom tagged {{ tag }}">
+{% for entry in wisdom.entries %}
+{% if tag in entry.tags %}
+{% set wisdomPageTag = tag %}
+{% include "components/wisdom_entry.njk" %}
+{% endif %}
+{% endfor %}
+</section>

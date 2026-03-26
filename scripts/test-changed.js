@@ -17,6 +17,7 @@ const testScriptMap = {
   'frontmatter': 'frontmatter',
   'markdown': 'markdown',
   'links': 'links-yaml',
+  'wisdom': 'wisdom-yaml',
   'seo': 'seo-meta'
 };
 
@@ -73,6 +74,7 @@ function main() {
     { name: 'frontmatter', useChanged: true, scope: 'changed files only' },
     { name: 'markdown', useChanged: true, scope: 'changed files only' },
     { name: 'links', useChanged: true, scope: 'changed files only' },
+    { name: 'wisdom', useChanged: true, scope: 'changed files only' },
     { name: 'seo', useChanged: true, scope: 'changed files only (if markdown files changed)' }
   ];
   

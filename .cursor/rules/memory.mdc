@@ -23,7 +23,8 @@ Shared memory file for both Cursor and Claude Code agents. When you encounter a 
 ### Command relationships
 - `deploy` runs: `changelog` → `generate-og-images` → `test markdown` → `test frontmatter` → `build` → `test og-images` → rsync → IndexNow; if changelog changed, deploy then commits and pushes it (skipped with `--dry-run`)
 - `import-links` is a manual pre-commit step, not part of deploy — run it before building/committing so links can be reviewed and tested locally
-- `test fast` runs 11 tests; `test all` adds `a11y`
+- `test fast` runs 12 tests (`wisdom` validates `wisdom-entries.yaml`); `test all` adds `a11y`
+- Collected wisdom: `src/_data/wisdom-entries.yaml` + `wisdom.js` (sorted entries + `allTags`), pages `/wisdom/` and `/wisdom/tags/<tag>/`, RSS `/wisdom-feed.xml`, head link in `head/wisdom-feed.njk`; `markdown` filter renders block markdown from YAML; list UI uses `_includes/components/wisdom_entry.njk` (`footer` + `section`, same article grid as blog index; `article.wisdom-entry` skips the title row)
 - `dev` auto-generates OG images on file save via `eleventy.beforeWatch`
 - `validate` is shortcut for `test html`
 
@@ -50,6 +51,8 @@ Shared memory file for both Cursor and Claude Code agents. When you encounter a 
 - **Spaces in asset filenames** break markdown link parsing (markdown-it doesn't recognize them as URLs) AND the Eleventy dev server's passthrough mode. Use kebab-case for all asset filenames.
 - **Dark mode uses `light-dark()`** — colors are defined once in `:root` with `light-dark(lightVal, darkVal)`. Don't add a separate `@media (prefers-color-scheme: dark)` block; add new colors using the same pattern.
 - **`scripts/test/color-contrast.js` parses CSS directly** — if the color syntax in the CSS changes, the parser regex needs updating too.
+- **Wisdom entry slugs are optional** — `src/_data/wisdom.js` now derives stable hash-based ids from `body` when `slug` is missing, and `scripts/test/wisdom-yaml.js` only validates `slug` when provided.
+- **Wisdom YAML can break when multiline markdown is serialized as plain inline `body:` strings** — keep wisdom `body` content in block scalar style (`|-`/`|`) when rewriting to avoid mapping/indentation parse errors.
 
 ### What worked
 - Parallel agents work well for independent code changes (e.g., two unrelated simplifications at once)

@@ -55,6 +55,12 @@ Validates structure and format of `src/_data/links.yaml`: date keys (YYYY-MM-DD)
 
 **Note:** With `--changed`, skips if links.yaml hasn't changed.
 
+### wisdom-yaml.js
+
+Validates `src/_data/wisdom-entries.yaml` for the Collected wisdom section (`/wisdom/`): `entries` array, required fields (`slug`, `added`, `tags`, `body`), slug format and uniqueness, `added` as `YYYY-MM-DD`, at least one tag per entry (slug-style tags), no unexpected fields.
+
+**Note:** With `--changed`, skips if `wisdom-entries.yaml` or `wisdom.js` hasn't changed.
+
 ## HTML Output Tests
 
 Tests that validate built HTML files in `_site/` directory. **Requires:** `pnpm run build` first.

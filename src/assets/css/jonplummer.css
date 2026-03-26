@@ -173,6 +173,12 @@ article footer {
   grid-area: b;
 }
 
+/* Wisdom list: meta (tags) + body only — no full-width title row like blog posts */
+article.wisdom-entry {
+  grid-template-areas:
+    "b c";
+}
+
 /* Single column responsive layout */
 /* Note: Cannot use var(--breakpoint-single-column) in media query, so value is hardcoded here */
 @media (width <= 54rem) {
@@ -204,6 +210,12 @@ article footer {
   }
   article section > *:first-child {
     margin-top: 0;
+  }
+
+  article.wisdom-entry {
+    grid-template-areas:
+      "b"
+      "c";
   }
 }
 
