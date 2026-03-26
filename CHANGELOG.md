@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-03-25
+
+- Add Collected Wisdom (/wisdom/, tags, RSS) and wisdom test
+
 ## 2026-03-24
 
 - Update links; add names to cspell; refresh commands doc emoji
@@ -414,4 +418,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-03-25
+Last deployed on 2026-03-26
