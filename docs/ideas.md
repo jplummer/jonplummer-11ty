@@ -117,6 +117,7 @@
 
 ## DONE
 
+- [x] Collected Wisdom: `wisdom-entries.yaml`, `/wisdom/`, per-tag pages, `/wisdom-feed.xml`, `test wisdom`, nav + sitemap; one-shot YAML generator removed in favor of editing YAML only (2026-03-25)
 - [x] Security, needlessly custom code, unused code, and bloat audit (2026-02-21)
   - Deduped extractCssCustomProperties, simplified dotenv loading, trimmed unused exports, added nunjucks as explicit dep
 - [x] **REMINDER (2026-02-19)**: Is the stronger memory.mdc language working? — Yes, confirmed unprompted updates in recent sessions
