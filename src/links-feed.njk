@@ -9,9 +9,10 @@ eleventyExcludeFromCollections: true
         <link>{{ site.url }}</link>
         <description>Links from Jon Plummer's blog</description>
         <language>en-US</language>
-        {% set firstItem = collections.post | reverse | limit(20) | mergePostsAndLinks(links) | first %}
+        {% set merged = collections.post | reverse | limit(20) | mergePostsAndLinks(links, 0) %}
+        {% set firstItem = merged | first %}
         <lastBuildDate>{% if firstItem %}{{ firstItem.date | dateToRfc3339 }}{% else %}{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}{% endif %}</lastBuildDate>
-        {% for item in collections.post | reverse | limit(20) | mergePostsAndLinks(links) %}
+        {% for item in merged %}
             {% if item.type == 'link' %}
             <item>
                 <title>{{ item.data.title | smartquotes | striptags }}</title>

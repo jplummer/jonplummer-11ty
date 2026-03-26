@@ -53,6 +53,7 @@ Shared memory file for both Cursor and Claude Code agents. When you encounter a 
 - **`scripts/test/color-contrast.js` parses CSS directly** — if the color syntax in the CSS changes, the parser regex needs updating too.
 - **Wisdom entry slugs are optional** — `src/_data/wisdom.js` now derives stable hash-based ids from `body` when `slug` is missing, and `scripts/test/wisdom-yaml.js` only validates `slug` when provided.
 - **Wisdom YAML can break when multiline markdown is serialized as plain inline `body:` strings** — keep wisdom `body` content in block scalar style (`|-`/`|`) when rewriting to avoid mapping/indentation parse errors.
+- **`mergePostsAndLinks` needs `pageNumber === 0` for “page 1” behavior** — only then does it prepend links dated after the newest post. `src/links-feed.njk` must pass `0` (e.g. `mergePostsAndLinks(links, 0)`); otherwise the feed drops newer links and looks frozen at the latest post date.
 
 ### What worked
 - Parallel agents work well for independent code changes (e.g., two unrelated simplifications at once)

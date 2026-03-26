@@ -2,6 +2,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 ## 2026-03-25
 
+- Fix links RSS: include links newer than the latest post (match homepage merge, `mergePostsAndLinks` page 0)
 - Add Collected Wisdom (/wisdom/, tags, RSS) and wisdom test
 
 ## 2026-03-24

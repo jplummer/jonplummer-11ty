@@ -9,6 +9,8 @@ For capturing links to `links.yaml`, see [NotePlan Link Import](noteplan-import.
 2. Run `pnpm run deploy` - links are automatically imported, formatted, and validated
 3. Or run `pnpm run import-links` manually to preview locally first
 
+Imported links appear on the homepage (merged with posts by date, same ordering as page 1 of the index) and in the RSS feed at `/links-feed.xml`.
+
 ## Collected wisdom
 
 Short notes live in `src/_data/wisdom-entries.yaml` (loaded via `src/_data/wisdom.js`). They appear on `/wisdom/`, on per-tag pages under `/wisdom/tags/<tag>/`, and in `/wisdom-feed.xml`. Dates are **not** shown on the site; each entry still needs `added: "YYYY-MM-DD"` for ordering and RSS.
