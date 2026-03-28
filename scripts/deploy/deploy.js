@@ -363,31 +363,31 @@ async function deploy(config, siteDomain, dryRun) {
       
       // Format result in compact test style
       const filesChecked = ogResult.filesChecked || 0;
-      const upToDate = filesChecked - ogResult.imagesGenerated - ogResult.defaultsDetected - ogResult.errors;
+      const filesUpdated = ogResult.filesUpdated || 0;
+      const unchanged = filesChecked - filesUpdated - (ogResult.errors || 0);
       const summaryParts = [];
       if (filesChecked > 0) {
         summaryParts.push(`📄 ${filesChecked} ${filesChecked === 1 ? 'file' : 'files'} checked`);
       }
-      if (upToDate > 0) {
-        summaryParts.push(`✅ ${upToDate} up-to-date`);
+      if (unchanged > 0) {
+        summaryParts.push(`✅ ${unchanged} unchanged`);
       }
       if (ogResult.imagesGenerated > 0) {
         summaryParts.push(`${ogResult.imagesGenerated} generated`);
       }
-      if (ogResult.defaultsDetected > 0) {
-        summaryParts.push(`⚠️  ${ogResult.defaultsDetected} default${ogResult.defaultsDetected === 1 ? '' : 's'}`);
+      if (ogResult.frontmatterOgImageSynced > 0) {
+        summaryParts.push(`ℹ️  ${ogResult.frontmatterOgImageSynced} front matter sync${ogResult.frontmatterOgImageSynced === 1 ? '' : 's'}`);
       }
       if (ogResult.errors > 0) {
         summaryParts.push(`❌ ${ogResult.errors} error${ogResult.errors === 1 ? '' : 's'}`);
       }
-      
+
       const resultIcon = ogResult.errors > 0 ? '❌' : '✅';
       console.log(`${resultIcon} 🖼️  OG Images: ${summaryParts.join(', ')}\n`);
-      
-      // Show default warnings if any
-      if (ogResult.defaultFiles && ogResult.defaultFiles.length > 0) {
-        ogResult.defaultFiles.forEach(file => {
-          console.log(`  ⚠️  Default OG image: ${file} (no ogImage set)`);
+
+      if (ogResult.frontmatterOgImageSyncedFiles && ogResult.frontmatterOgImageSyncedFiles.length > 0) {
+        ogResult.frontmatterOgImageSyncedFiles.forEach((file) => {
+          console.log(`  ℹ️  Filled in ogImage in front matter (PNG already existed): ${file}`);
         });
         console.log('');
       }

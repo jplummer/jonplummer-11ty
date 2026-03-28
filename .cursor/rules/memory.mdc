@@ -29,7 +29,7 @@ Shared memory file for both Cursor and Claude Code agents. When you encounter a 
 - `validate` is shortcut for `test html`
 
 ### Workflow preferences
-- **Color themes (2026-03)**: Not pursuing “different theme per weekday” on the live site. Goal is to **generate/explore many** wild candidates (widen beyond straight-laced hand-authored palettes), **refine a shortlist**, then ship **2–4 solid dark/light pairs** with good accessibility (APCA / existing contrast tests).
+- **Color themes (2026-03)**: Not pursuing “different theme per weekday” on the live site. Goal is to **generate/explore many** wild candidates (widen beyond straight-laced hand-authored palettes), **refine a shortlist**, then ship **2–4 solid dark/light pairs** with good accessibility (APCA / existing contrast tests). **`pnpm run color-gallery`** writes `scripts/color-explore/output/` (gitignored): OKLCH hue sweep, APCA nudging, static HTML + `themes.json` — see `docs/color-theme-exploration.md`.
 - User commits intentionally — never commit without being asked
 - Pre-existing unstaged changes should be left alone (don't include unrelated files)
 - User values concise communication and clear tradeoff analysis
@@ -54,8 +54,9 @@ Shared memory file for both Cursor and Claude Code agents. When you encounter a 
 - **Dark mode uses `light-dark()`** — colors are defined once in `:root` with `light-dark(lightVal, darkVal)`. Don't add a separate `@media (prefers-color-scheme: dark)` block; add new colors using the same pattern.
 - **`scripts/test/color-contrast.js` parses CSS directly** — if the color syntax in the CSS changes, the parser regex needs updating too.
 - **Wisdom entry slugs are optional** — `eleventy/utils/wisdom-build.js` derives stable hash-based ids from `body` when `slug` is missing, and `scripts/test/wisdom-yaml.js` only validates `slug` when provided.
-- **Wisdom YAML can break when multiline markdown is serialized as plain inline `body:` strings** — keep wisdom `body` content in block scalar style (`|-`/`|`) when rewriting to avoid mapping/indentation parse errors.
+- **Wisdom YAML can break when multiline markdown is serialized as plain inline `body:` strings** — keep wisdom `body` content in block scalar style (`|-`/`|`) when rewriting to avoid mapping/indentation parse errors. Block lines must be indented **more** than the `body:` line (e.g. two extra spaces); same indentation as `body:` is invalid YAML.
 - **`mergePostsAndLinks` needs `pageNumber === 0` for “page 1” behavior** — only then does it prepend links dated after the newest post. `src/links-feed.njk` must pass `0` (e.g. `mergePostsAndLinks(links, 0)`); otherwise the feed drops newer links and looks frozen at the latest post date.
+- **OG image generation** — Recurses `src/**/*.njk` (excludes `_posts`/`_includes`/`_data`/`assets`). Skips `pagination:` templates (one file → many URLs; use shared `ogImage` like `index.png`). `ogImage: auto` must not trigger perpetual regen: `needsRegeneration` ignores `auto` for path comparison. Deploy OG line uses `filesUpdated` for “unchanged”; ℹ️ only when `ogImage` was absent in front matter but the PNG file already existed.
 
 ### What worked
 - Parallel agents work well for independent code changes (e.g., two unrelated simplifications at once)

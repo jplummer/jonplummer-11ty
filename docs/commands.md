@@ -59,6 +59,7 @@ See [noteplan-import.md](noteplan-import.md) for complete workflow documentation
 - `pnpm run convert-pdf` - Convert PDF pages to images for portfolio items
 - `pnpm run generate-og-images` - Generate Open Graph images for posts and pages (auto: `deploy`, `dev`)
 - `pnpm run security-audit` - Run security audit and maintenance checks
+- `pnpm run color-gallery` - Generate APCA-aware theme gallery (HTML + JSON) under `scripts/color-explore/output/` — see [color-theme-exploration.md](color-theme-exploration.md)
 
 ---
 
@@ -158,7 +159,7 @@ This script automatically generates OG images (1200×630px) for all posts and pa
 
 #### How It Works
 
-1. **Scans** all posts in `src/_posts/` and pages in `src/` (excluding portfolio items)
+1. **Scans** all posts in `src/_posts/`, Markdown pages anywhere under `src/`, and all `src/**/*.njk` outside `_posts`, `_includes`, `_data`, and `assets` (excluding portfolio items and pagination templates)
 2. **Renders** each page's title, description, and date (if a post) using the `og-image.njk` template
 3. **Generates** PNG images using Puppeteer (headless browser)
 4. **Updates** frontmatter with the `ogImage` path

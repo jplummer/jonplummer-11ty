@@ -30,6 +30,9 @@ Thumbs.db
 !.cursor/rules/
 !.cursor/rules/**
 
+# Color exploration (generated; see docs/color-theme-exploration.md)
+scripts/color-explore/output/
+
 # Temporary files
 *.tmp
 *.orig

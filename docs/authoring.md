@@ -121,14 +121,16 @@ This will identify any files with frontmatter parsing errors before they cause b
 
 ## Open Graph Images
 
-OG images are auto-generated for posts and pages.
+OG images are auto-generated for posts and for templates tagged `page` (or the portfolio page), including nested routes such as `src/wisdom/index.njk`. For a page, the PNG filename comes from `permalink` (for example `/wisdom/` → `wisdom.png`).
+
+Templates that use `pagination:` are skipped by the generator (one file builds many URLs, so a single PNG would be wrong). Point those at a shared image, typically `/assets/images/og/index.png`.
 
 ### Usage
 
 - **Auto-generate**: Set `ogImage: auto` or omit the field
 - **Manual**: Set `ogImage` to a custom path (e.g., `/assets/images/custom-og.png`)
 
-Generated images use format: `/assets/images/og/YYYY-MM-DD-post-slug.png`
+Posts use `/assets/images/og/YYYY-MM-DD-post-slug.png`. Pages use the permalink-derived slug as above.
 
 ### Preview
 

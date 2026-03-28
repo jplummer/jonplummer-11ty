@@ -5,7 +5,7 @@ const path = require('path');
 const puppeteer = require('puppeteer');
 const nunjucks = require('nunjucks');
 const { DateTime } = require('luxon');
-const { findMarkdownFiles } = require('../utils/file-utils');
+const { findMarkdownFiles, findFilesByExtension } = require('../utils/file-utils');
 const { parseFrontMatter, reconstructFile } = require('../utils/frontmatter-utils');
 const { isPost } = require('../utils/content-utils');
 const { extractCssCustomProperties } = require('../../eleventy/utils/css-utils');
@@ -84,7 +84,7 @@ function needsRegeneration(ogImagePath, pageData, filePath) {
   }
   
   // Also check if frontmatter has ogImage but it doesn't match expected path
-  if (pageData.ogImage) {
+  if (pageData.ogImage && pageData.ogImage !== 'auto') {
     const expectedPath = `/assets/images/og/${generateOgImageFilename(pageData, filePath)}`;
     if (pageData.ogImage !== expectedPath) {
       return true;
@@ -179,6 +179,11 @@ async function processFile(filePath, options = {}) {
   if (!isPost(frontMatter) && !isPage && !isPortfolioPage) {
     return { updated: false, skipped: true, reason: 'Not a post or page' };
   }
+
+  // One template file emits many URLs; filename would be wrong — use shared ogImage (e.g. index.png)
+  if (frontMatter.pagination) {
+    return { updated: false, skipped: true, reason: 'Pagination template (skipped)' };
+  }
   
   // Generate OG image filename
   const ogImageFilename = generateOgImageFilename(frontMatter, filePath);
@@ -186,8 +191,8 @@ async function processFile(filePath, options = {}) {
   const ogImagePath = path.join(ogImageDir, ogImageFilename);
   const ogImageUrl = `/assets/images/og/${ogImageFilename}`;
   
-  // Check for default OG image (no ogImage set in frontmatter)
-  const hasDefaultOgImage = !frontMatter.ogImage;
+  // True only when front matter had no ogImage key (not `auto`, not a manual path)
+  const hadMissingOgImageKey = !frontMatter.ogImage;
   
   // Skip if manually set ogImage exists AND image file exists (only skip if both are true)
   // If force is true, regenerate everything regardless
@@ -195,7 +200,7 @@ async function processFile(filePath, options = {}) {
   if (!force && frontMatter.ogImage && frontMatter.ogImage !== 'auto') {
     // Check if the file actually exists - if not, we need to generate it
     if (fs.existsSync(ogImagePath)) {
-      return { updated: false, skipped: true, reason: 'Manual ogImage set and file exists', defaultDetected: false };
+      return { updated: false, skipped: true, reason: 'Manual ogImage set and file exists' };
     }
     // File doesn't exist, so we'll generate it below
   }
@@ -212,9 +217,15 @@ async function processFile(filePath, options = {}) {
       frontMatter.ogImage = ogImageUrl;
       const newContent = reconstructFile(content, frontMatter, body);
       fs.writeFileSync(filePath, newContent, 'utf8');
-      return { updated: true, imageGenerated: false, frontmatterUpdated: true, defaultDetected: hasDefaultOgImage, filePath: filePath };
+      return {
+        updated: true,
+        imageGenerated: false,
+        frontmatterUpdated: true,
+        frontmatterOgImageSynced: hadMissingOgImageKey,
+        filePath: filePath
+      };
     }
-    return { updated: false, skipped: true, reason: 'OG image up to date', defaultDetected: hasDefaultOgImage, filePath: filePath };
+    return { updated: false, skipped: true, reason: 'OG image up to date', filePath: filePath };
   }
   
   // Render HTML
@@ -228,11 +239,11 @@ async function processFile(filePath, options = {}) {
   const newContent = reconstructFile(content, frontMatter, body);
   fs.writeFileSync(filePath, newContent, 'utf8');
   
-  return { 
-    updated: true, 
-    imageGenerated: true, 
-    frontmatterUpdated: true, 
-    defaultDetected: hasDefaultOgImage,
+  return {
+    updated: true,
+    imageGenerated: true,
+    frontmatterUpdated: true,
+    frontmatterOgImageSynced: false,
     filePath: filePath
   };
 }
@@ -269,10 +280,13 @@ async function generateOgImages(options = {}) {
     return !(frontMatter && frontMatter.draft === true);
   });
   
-  // Also find .njk files in src root, excluding drafts
-  const allNjkFiles = fs.readdirSync(srcDir)
-    .filter(f => f.endsWith('.njk'))
-    .map(f => path.join(srcDir, f));
+  // All .njk templates under src/ (e.g. src/wisdom/index.njk), excluding special dirs
+  const allNjkFiles = findFilesByExtension(srcDir, ['.njk']).filter(f =>
+    !f.includes('_posts') &&
+    !f.includes('_includes') &&
+    !f.includes('_data') &&
+    !f.includes('assets')
+  );
   const njkFiles = allNjkFiles.filter(f => {
     const content = fs.readFileSync(f, 'utf8');
     const { frontMatter } = parseFrontMatter(content);
@@ -287,10 +301,10 @@ async function generateOgImages(options = {}) {
     skipped: 0,
     errors: 0,
     imagesGenerated: 0,
-    frontmatterUpdated: 0,
-    defaultsDetected: 0,
+    frontmatterOnlyUpdates: 0,
+    frontmatterOgImageSynced: 0,
     generatedFiles: [],
-    defaultFiles: []
+    frontmatterOgImageSyncedFiles: []
   };
   
   for (const file of markdownFiles) {
@@ -313,18 +327,14 @@ async function generateOgImages(options = {}) {
           }
           results.imagesGenerated++;
           results.generatedFiles.push(relativePath);
-          if (result.defaultDetected) {
-            results.defaultsDetected++;
-            results.defaultFiles.push(relativePath);
-          }
         } else if (result.frontmatterUpdated) {
           if (!quiet) {
             console.log(`  ✅ Updated frontmatter (image already exists)`);
           }
-          results.frontmatterUpdated++;
-          if (result.defaultDetected) {
-            results.defaultsDetected++;
-            results.defaultFiles.push(relativePath);
+          results.frontmatterOnlyUpdates++;
+          if (result.frontmatterOgImageSynced) {
+            results.frontmatterOgImageSynced++;
+            results.frontmatterOgImageSyncedFiles.push(relativePath);
           }
         }
         results.updated++;
@@ -333,11 +343,6 @@ async function generateOgImages(options = {}) {
           console.log(`  ⏭️  Skipped: ${result.reason}`);
         }
         results.skipped++;
-        // Track defaults even in skipped files
-        if (result.defaultDetected) {
-          results.defaultsDetected++;
-          results.defaultFiles.push(relativePath);
-        }
       } else if (result.error) {
         console.error(`  ❌ Error: ${result.error}`);
         results.errors++;
@@ -348,28 +353,20 @@ async function generateOgImages(options = {}) {
     }
   }
   
-  // Show summary in test suite format
   const filesChecked = markdownFiles.length;
-  const passing = filesChecked - results.imagesGenerated - results.defaultsDetected - results.errors;
-  
+
   if (quiet) {
-    // In quiet mode, don't output summary - caller will format it
-    // Just show warnings for defaults if any
-    if (results.defaultsDetected > 0) {
-      results.defaultFiles.forEach(file => {
-        console.log(`  ⚠️  Default OG image: ${file} (no ogImage set)`);
+    if (results.frontmatterOgImageSyncedFiles.length > 0) {
+      results.frontmatterOgImageSyncedFiles.forEach((file) => {
+        console.log(`  ℹ️  Filled in ogImage in front matter (PNG already existed): ${file}`);
       });
     }
   } else {
-    // Full summary for CLI usage
     console.log('\n📊 Summary:');
     console.log(`   Images generated: ${results.imagesGenerated}`);
-    console.log(`   Frontmatter updated: ${results.frontmatterUpdated}`);
+    console.log(`   Frontmatter only (ogImage added, PNG existed): ${results.frontmatterOnlyUpdates}`);
     console.log(`   Total updated: ${results.updated}`);
     console.log(`   Skipped: ${results.skipped}`);
-    if (results.defaultsDetected > 0) {
-      console.log(`   ⚠️  Default OG images: ${results.defaultsDetected}`);
-    }
     console.log(`   Errors: ${results.errors}`);
   }
   
@@ -384,12 +381,13 @@ async function generateOgImages(options = {}) {
   // Return result object for programmatic use
   return {
     frontmatterUpdated: results.updated > 0,
+    filesUpdated: results.updated,
     imagesGenerated: results.imagesGenerated,
-    defaultsDetected: results.defaultsDetected,
+    frontmatterOgImageSynced: results.frontmatterOgImageSynced,
     filesChecked: filesChecked,
     errors: results.errors,
     generatedFiles: results.generatedFiles,
-    defaultFiles: results.defaultFiles
+    frontmatterOgImageSyncedFiles: results.frontmatterOgImageSyncedFiles
   };
 }
 

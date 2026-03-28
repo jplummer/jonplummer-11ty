@@ -9,6 +9,14 @@ entries:
     tags:
       - strategy
     body: |-
+      Technology Win/Loss Heuristic
+      * Worthwhile – does something worthwhile for those who are paying for it (not necessarily the end users)
+      * Affordable – monetarily, educationally, etc.
+      * Nondisruptive – must be minimally (i.e. not) disruptive to the current environment (i.e. it may disrupt the incumbent technology but it needs to fit my business or my life)
+  - added: '2026-03-28'
+    tags:
+      - strategy
+    body: |-
       Values I wish for
       - Deliver WOW through attention to solving real customer problems
       - Experiment with new ideas

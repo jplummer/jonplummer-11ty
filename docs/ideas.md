@@ -2,8 +2,6 @@
 
 ## ☑️ Selected
 
-- [ ] Write or portfolio every weekend
-
 - [ ] Portfolio
   - [ ] Presentation-to-portfolio automation (in progress — see notes below)
     - **Status**: Script drafted, not yet tested with real data
@@ -31,34 +29,19 @@
   - [ ] *Consider* other color inspiration sources
   - [ ] Perhaps use oklch colors for vividness? See https://modern-css.com/vivid-colors-beyond-srgb/
   - **Tool**: `scripts/utils/suggest-colors.js` — standalone APCA color suggestion script; finds lighter alternatives that meet contrast targets against a given background
+  - **Tool**: `pnpm run color-gallery` — OKLCH sweep + APCA nudge → static gallery + `themes.json`; see [color-theme-exploration.md](color-theme-exploration.md)
   - **Tool**: `src/color-test.njk` — dev-only color scheme playground with 12 presets and custom editor; excluded from deploy but builds locally at `/color-test/`
 
 
 ## 🔮 Future Consideration
 
-### 🖍 Also…
-
-- Performance/regressions
-  - Lighthouse CLI ?
-  - Automate/integrate ahrefs somehow ?
-  - DebugBear
-  - Screpy
-  - Auditzy
-  - webpagetest.org
-  - Core Web Vitals
-  - PageSpeed Insights
-
-- https://bsky.app/profile/did:plc:re3ebnp5v7ffagz6rb6xfei4 ?
+### 🖍 Also…  
 
 - https://kagi.com/search?q=contemporary+blog+styling+2025 ?
-
-- https://llmstxt.org/ ?
 
 - https://github.com/steipete/agent-rules ?
 
 - https://github.com/Invoca/prompt-library ?
-
-- https://modern-css.com ?
 
 - **Modern CSS techniques to consider**
   - Fluid typography with clamp() for smooth scaling across breakpoints (see https://modern-css.com/fluid-typography-without-media-queries/)
@@ -67,8 +50,6 @@
   - View transitions for smooth page-to-page navigation
   - View transitions for smooth crossing of layout breakpoints
   - color-mix() to derive hover/active colors from base colors (pairs with oklch)
-
-- learn about 11ty Debug Mode
 
 - **Alternate color schemes** and how to trigger them
   - According to build/deploy day?
@@ -82,19 +63,7 @@
   - Preview external links
   - ?
 
-- **POSSE** (more tags for different types of entries?)
-
-- **GitHub Actions** (This is not how I'm using GitHub just yet)
-  - Automatic builds on push to main branch
-  - Run 11ty build process
-  - Validate generated HTML (using custom validation scripts)
-  - Upload to hosting provider
-
-- **Monitoring & Maintenance**
-  - Set up build notifications
-  - Monitor deployment success/failure
-  - Implement rollback procedures
-  - Regular backup of generated site
+- **POSSE** (more tags for different types of entries? https://standard.site? BSky/AT bridging?)
 
 - **Test suite enhancements**
   - Enhanced progress indicators - Streaming JSON, real-time updates
@@ -108,10 +77,30 @@
 
 ---
 
-## MAYBE DON'T
+## MAYBE LET'S DON'T DO THESE
 
+- Performance/regressions — static text-first site; not worth a dedicated monitoring/regression stack for now
+  - Lighthouse CLI ?
+  - Automate/integrate ahrefs somehow ?
+  - DebugBear
+  - Screpy
+  - Auditzy
+  - webpagetest.org
+  - Core Web Vitals
+  - PageSpeed Insights
+- https://llmstxt.org/ ? – low payoff for a text-first blog (spec targets doc-heavy sites); skip `/llms.txt` and parallel `.md` URLs unless a concrete need appears
 - look into https://github.com/ttscoff/md-fixup ? – not needed, good authoring-oriented tests should be enough for now
-  - Signal external links (maybe not, the assumptin is that 99% of links are external, and already written about as such)
+- Signal external links (maybe not, the assumption is that 99.9% of links are external, and already written about as such)
+- **GitHub Actions** (This is not how I'm using GitHub just yet)
+  - Automatic builds on push to main branch
+  - Run 11ty build process
+  - Validate generated HTML (using custom validation scripts)
+  - Upload to hosting provider
+- **Monitoring & Maintenance**
+  - Set up build notifications
+  - Monitor deployment success/failure
+  - Implement rollback procedures
+  - Regular backup of generated site
 
 ---
 
