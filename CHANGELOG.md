@@ -3,6 +3,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 ## 2026-03-28
 
 - Add post announcing collected wisdom
+- Collected wisdom, OG pipeline, and color gallery tooling
 
 ## 2026-03-27
 
