@@ -11,8 +11,8 @@ entries:
     body: Product Value Proposition (PVP) training is really customer development training – the needs and motivations of the customer directly inform the value to be delivered and the manner of doing so.
   - added: '2026-03-23'
     tags:
-      - process
-    body: Allocate UX people, time, and treasure to serve a business, not a product.
+      - planning
+    body: Allocate people, time, and treasure to serve a business, not a product.
   - added: '2026-03-23'
     tags:
       - product
@@ -391,7 +391,7 @@ entries:
       3. What the product is
   - added: '2026-03-23'
     tags:
-      - process
+      - planning
     body: |-
       General UX strategy
       1. Start with customer wants and needs
@@ -465,7 +465,7 @@ entries:
       - Success criteria (how do you know when it is good?)
   - added: '2026-03-23'
     tags:
-      - process
+      - planning
     body: |-
       An assessment of project scope must include:
       - The general goal
@@ -820,7 +820,7 @@ entries:
       20. Thanks
   - added: '2026-03-23'
     tags:
-      - process
+      - planning
     body: |-
       Relate short-term decisions to the long-term more explicitly. This will…
       - Continue to build up the experience roadmap, with new and explicit attention to dependency order of the enabled experiences, and do so in an internally public manner.

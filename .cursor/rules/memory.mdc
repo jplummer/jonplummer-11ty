@@ -23,12 +23,13 @@ Shared memory file for both Cursor and Claude Code agents. When you encounter a 
 ### Command relationships
 - `deploy` runs: `changelog` → `generate-og-images` → `test markdown` → `test frontmatter` → `build` → `test og-images` → rsync → IndexNow; if changelog changed, deploy then commits and pushes it (skipped with `--dry-run`)
 - `import-links` is a manual pre-commit step, not part of deploy — run it before building/committing so links can be reviewed and tested locally
-- `test fast` runs 12 tests (`wisdom` validates `wisdom-entries.yaml`); `test all` adds `a11y`
-- Collected wisdom: `src/_data/wisdom-entries.yaml` + `wisdom.js` (sorted entries + `allTags`), pages `/wisdom/` and `/wisdom/tags/<tag>/`, RSS `/wisdom-feed.xml`, head link in `head/wisdom-feed.njk`; `markdown` filter renders block markdown from YAML; list UI uses `_includes/components/wisdom_entry.njk` (`footer` + `section`, same article grid as blog index; `article.wisdom-entry` skips the title row)
+- `test fast` runs 12 tests (`wisdom` validates `src/_data/wisdom-entries.yaml`); `test all` adds `a11y`
+- Collected wisdom: `src/_data/wisdom-entries.yaml` (same folder as `links.yaml`; YAML parsed twice—Eleventy global `wisdom-entries` + `wisdom.js` → `wisdom`) + `wisdom-build.js` + `wisdom-entries-path.js`. Pagination needs `wisdom` in `getGlobalData()` — not `eleventyComputed` (runs too late). `_data/*.js` callbacks do not receive sibling `_data` keys. Pages `/wisdom/` and `/wisdom/tags/<tag>/`, RSS `/wisdom-feed.xml`, head link in `head/wisdom-feed.njk`; `markdown` filter renders block markdown from YAML; list UI uses `_includes/components/wisdom_entry.njk` (`footer` + `section`, same article grid as blog index; `article.wisdom-entry` skips the title row)
 - `dev` auto-generates OG images on file save via `eleventy.beforeWatch`
 - `validate` is shortcut for `test html`
 
 ### Workflow preferences
+- **Color themes (2026-03)**: Not pursuing “different theme per weekday” on the live site. Goal is to **generate/explore many** wild candidates (widen beyond straight-laced hand-authored palettes), **refine a shortlist**, then ship **2–4 solid dark/light pairs** with good accessibility (APCA / existing contrast tests).
 - User commits intentionally — never commit without being asked
 - Pre-existing unstaged changes should be left alone (don't include unrelated files)
 - User values concise communication and clear tradeoff analysis
@@ -36,6 +37,7 @@ Shared memory file for both Cursor and Claude Code agents. When you encounter a 
 - When modifying docs, check for stale cross-references across all doc files
 
 ### DRY decisions
+- **Wisdom data (2026-03)**: `src/_data/wisdom-entries.yaml` + `wisdom.js` + `wisdom-build.js`; duplicate YAML parse accepted for authoring next to `links.yaml`; `test wisdom` asserts build + `getGlobalData().wisdom` vs disk.
 - OG image preview uses Eleventy's native `renderFile` shortcode (RenderPlugin) + `og-image-body.njk` partial — no custom Nunjucks env needed
 - `generate-og-images.js` has its own Nunjucks env with inline `postDate` — it runs outside Eleventy so needs its own renderer. `extractCssCustomProperties` is now shared from `eleventy/utils/css-utils.js`.
 - Shared PDF conversion functions live in `scripts/utils/pdf-utils.js`
@@ -51,7 +53,7 @@ Shared memory file for both Cursor and Claude Code agents. When you encounter a 
 - **Spaces in asset filenames** break markdown link parsing (markdown-it doesn't recognize them as URLs) AND the Eleventy dev server's passthrough mode. Use kebab-case for all asset filenames.
 - **Dark mode uses `light-dark()`** — colors are defined once in `:root` with `light-dark(lightVal, darkVal)`. Don't add a separate `@media (prefers-color-scheme: dark)` block; add new colors using the same pattern.
 - **`scripts/test/color-contrast.js` parses CSS directly** — if the color syntax in the CSS changes, the parser regex needs updating too.
-- **Wisdom entry slugs are optional** — `src/_data/wisdom.js` now derives stable hash-based ids from `body` when `slug` is missing, and `scripts/test/wisdom-yaml.js` only validates `slug` when provided.
+- **Wisdom entry slugs are optional** — `eleventy/utils/wisdom-build.js` derives stable hash-based ids from `body` when `slug` is missing, and `scripts/test/wisdom-yaml.js` only validates `slug` when provided.
 - **Wisdom YAML can break when multiline markdown is serialized as plain inline `body:` strings** — keep wisdom `body` content in block scalar style (`|-`/`|`) when rewriting to avoid mapping/indentation parse errors.
 - **`mergePostsAndLinks` needs `pageNumber === 0` for “page 1” behavior** — only then does it prepend links dated after the newest post. `src/links-feed.njk` must pass `0` (e.g. `mergePostsAndLinks(links, 0)`); otherwise the feed drops newer links and looks frozen at the latest post date.
 

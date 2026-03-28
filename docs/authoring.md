@@ -13,7 +13,7 @@ Imported links appear on the homepage (merged with posts by date, same ordering 
 
 ## Collected wisdom
 
-Short notes live in `src/_data/wisdom-entries.yaml` (loaded via `src/_data/wisdom.js`). They appear on `/wisdom/`, on per-tag pages under `/wisdom/tags/<tag>/`, and in `/wisdom-feed.xml`. Dates are **not** shown on the site; each entry still needs `added: "YYYY-MM-DD"` for ordering and RSS.
+Short notes live in `src/_data/wisdom-entries.yaml` (same folder as `links.yaml` and the rest of site data). Eleventy loads that file as global `wisdom-entries`; `src/_data/wisdom.js` reads the same file and exposes global `wisdom` (sorted entries, `allTags`, hash slugs when `slug` is omitted) via `eleventy/utils/wisdom-build.js`—so the YAML is parsed twice on each build, which keeps authoring in one place and satisfies pagination. Entries appear on `/wisdom/`, on per-tag pages under `/wisdom/tags/<tag>/`, and in `/wisdom-feed.xml`. Dates are **not** shown on the site; each entry still needs `added: "YYYY-MM-DD"` for ordering and RSS.
 
 **Shape:**
 
