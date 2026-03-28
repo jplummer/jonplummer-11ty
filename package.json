@@ -20,7 +20,8 @@
     "convert-pdf-with-notes": "node scripts/content/convert-pdf-pages-with-notes.js",
     "generate-og-images": "node scripts/content/generate-og-images.js",
     "import-links": "node scripts/content/import-noteplan-links.js",
-    "security-audit": "node scripts/security/security-audit.js"
+    "security-audit": "node scripts/security/security-audit.js",
+    "color-gallery": "node scripts/color-explore/generate-gallery.js"
   },
   "keywords": [],
   "author": "Jon Plummer",
@@ -36,6 +37,7 @@
     "axe-core": "^4.11.1",
     "cheerio": "^1.2.0",
     "cspell": "^9.7.0",
+    "culori": "^4.0.2",
     "html-validate": "^10.11.2",
     "js-yaml": "^4.1.1",
     "luxon": "^3.7.2",

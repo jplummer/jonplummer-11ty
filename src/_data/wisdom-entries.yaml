@@ -5,6 +5,26 @@
 # Dates are used for RSS and sorting only; they are not shown on the site.
 
 entries:
+  - added: '2026-03-28'
+    tags:
+      - strategy
+    body: |-
+      Values I wish for
+      - Deliver WOW through attention to solving real customer problems
+      - Experiment with new ideas
+      - Prototype everything
+      - Mine conflict to discover alignment
+      - Inform decisions with observation and real data
+      - Make your teammates better
+      - Learn big skills
+      - Be vocal, open, and clear
+      - Speak to your audience
+      - Care for the details
+      - Good ideas come from everywhere
+      - Work at making it easy
+      - Demonstrate excellence to each other
+      - By people, for people
+      - Put humanity into every product, communication, and deliverable
   - added: '2026-03-23'
     tags:
       - product
@@ -147,7 +167,7 @@ entries:
   - added: '2026-03-23'
     tags:
       - simplicity
-    body: indicate the form elements that are exceptions; if you have fewer optional fields, indicate the optional ones. if you have mostly optional fields, indicate the required ones.
+    body: Indicate the form elements that are exceptions; if you have fewer optional fields, indicate the optional ones. If you have mostly optional fields, indicate the required ones.
   - added: '2026-03-23'
     tags:
       - design
