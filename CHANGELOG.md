@@ -1,9 +1,19 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-03-28
+
+- Add post announcing collected wisdom
+
+## 2026-03-27
+
+- Refactor wisdom data build and extend tests
+- Refresh pnpm lockfile
+
 ## 2026-03-25
 
-- Fix links RSS: include links newer than the latest post (match homepage merge, `mergePostsAndLinks` page 0)
 - Add Collected Wisdom (/wisdom/, tags, RSS) and wisdom test
+- Fix links RSS: include links newer than latest post
+- Record Collected Wisdom in ideas tracker
 
 ## 2026-03-24
 
@@ -419,4 +429,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-03-26
+Last deployed on 2026-03-28
