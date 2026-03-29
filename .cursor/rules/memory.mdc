@@ -14,7 +14,7 @@ Shared memory file for both Cursor and Claude Code agents. When you encounter a 
 - Eleventy (11ty) personal blog with Nunjucks templates
 - Agent instructions live in `.cursor/rules/*.mdc` (Cursor) and `CLAUDE.md` (Claude Code)
 - CLAUDE.md uses `@` imports to pull in cursor rules and docs — avoids duplication
-- Docs: `docs/commands.md`, `docs/authoring.md`, `docs/tests.md`, `docs/ideas.md`
+- Docs: `docs/commands.md`, `docs/authoring.md`, `docs/tests.md`, `docs/ideas.md`; exploration write-ups: `docs/color-theme-exploration.md` & `docs/font-stack-exploration.md` each have a **Companion tooling** section; quick links under Maintenance in `docs/commands.md`
 - `docs/ideas.md` is the task tracker — has Selected, Future, Maybe Don't, and Done sections
 - Reminders use format: `- [ ] **REMINDER (YYYY-MM-DD)**: description`
 - Eleventy config is modularized in `eleventy/config/` (filters, plugins, events, etc.) and `eleventy/utils/` (markdown, date, CSS utilities)
@@ -55,7 +55,8 @@ Shared memory file for both Cursor and Claude Code agents. When you encounter a 
 - **Eleventy image transform wraps `<img>` in `<picture>`** — when a parent element becomes a CSS grid container, `<picture>` is the grid item, not `<img>`. Target `> picture` for grid placement (e.g., `grid-column: 1 / -1`).
 - **Spaces in asset filenames** break markdown link parsing (markdown-it doesn't recognize them as URLs) AND the Eleventy dev server's passthrough mode. Use kebab-case for all asset filenames.
 - **Dark mode uses `light-dark()`** — colors are defined once in `:root` with `light-dark(lightVal, darkVal)`. Don't add a separate `@media (prefers-color-scheme: dark)` block; add new colors using the same pattern.
-- **`scripts/test/color-contrast.js` parses CSS directly** — if the color syntax in the CSS changes, the parser regex needs updating too.
+- **`scripts/test/color-contrast.js` parses `:root` `light-dark()`** — supports hex or `oklch(...)` (incl. `%` lightness / `deg` hue); converts via **culori** to hex for `apca-w3`. If you add new color syntax, extend parsing or convert in CSS.
+- **`docs/archive/accessibility-test-limitations.md` is historical** — a11y (`accessibility.js`) disables axe `color-contrast` on purpose; token/APCA checks are `pnpm run test color-contrast` (in `test fast`). Archive “fix axe timing” items largely superseded unless re-enabling axe contrast is desired.
 - **Wisdom entry slugs are optional** — `eleventy/utils/wisdom-build.js` derives stable hash-based ids from `body` when `slug` is missing, and `scripts/test/wisdom-yaml.js` only validates `slug` when provided.
 - **Wisdom YAML can break when multiline markdown is serialized as plain inline `body:` strings** — keep wisdom `body` content in block scalar style (`|-`/`|`) when rewriting to avoid mapping/indentation parse errors. Block lines must be indented **more** than the `body:` line (e.g. two extra spaces); same indentation as `body:` is invalid YAML.
 - **`mergePostsAndLinks` needs `pageNumber === 0` for “page 1” behavior** — only then does it prepend links dated after the newest post. `src/links-feed.njk` must pass `0` (e.g. `mergePostsAndLinks(links, 0)`); otherwise the feed drops newer links and looks frozen at the latest post date.

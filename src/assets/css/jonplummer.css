@@ -41,18 +41,18 @@
   --spacing-xl: 2.5rem; /* 5 baselines */
   --spacing-ex: 5ex;
 
-  /* Colors - based on DR10 palette, adjusted for WCAG AA contrast
+  /* Colors - based on DR10 palette, adjusted for WCAG AA contrast (OKLCH, sRGB gamut).
      light-dark(light, dark) picks the value matching the user's color scheme */
   color-scheme: light dark;
-  --text-color: light-dark(#2a2a2a, #e0e0e0);
-  --text-color-light: light-dark(#5a5a5a, #c8c8c8); /* APCA Lc 65+ in dark */
-  --border-color: light-dark(#d0d0d0, #4a4a4a);
-  --background-color: light-dark(#d3d8d2, #1a1a1a);
-  --content-background-color: light-dark(#fff, #2d2d2d);
-  --link-color: light-dark(#d63d36, #ffa0a0); /* WCAG AA 4.5:1 in light; APCA Lc 60+ in dark */
-  --link-hover-color: light-dark(#b26205, #f1b73a); /* WCAG AA 4.5:1 in light */
-  --link-visited-color: light-dark(#5b4a3b, #d0c0b0); /* APCA Lc 62+ in dark */
-  --link-active-color: light-dark(#0d703f, #60d890); /* APCA Lc 62+ in dark */
+  --text-color: light-dark(oklch(28.5% 0 0deg), oklch(90.7% 0 0deg));
+  --text-color-light: light-dark(oklch(46.8% 0 0deg), oklch(83.3% 0 0deg)); /* APCA Lc 65+ in dark */
+  --border-color: light-dark(oklch(85.8% 0 0deg), oklch(40.9% 0 0deg));
+  --background-color: light-dark(oklch(87.7% 0.0097 140.5deg), oklch(21.8% 0 0deg));
+  --content-background-color: light-dark(oklch(100% 0 0deg), oklch(29.7% 0 0deg));
+  --link-color: light-dark(oklch(58.6% 0.191 27.4deg), oklch(80.2% 0.114 19.9deg)); /* WCAG AA 4.5:1 in light; APCA Lc 60+ in dark */
+  --link-hover-color: light-dark(oklch(57.683% 0.1348 59.17deg), oklch(81.223% 0.1492 82.24deg)); /* WCAG AA 4.5:1 in light */
+  --link-visited-color: light-dark(oklch(42.2% 0.0332 63.2deg), oklch(81.7% 0.0285 67.4deg)); /* APCA Lc 62+ in dark */
+  --link-active-color: light-dark(oklch(48.055% 0.1152 154.58deg), oklch(79.507% 0.15 154.56deg)); /* APCA Lc 62+ in dark */
 }
 
 /* === RESETS & BASE STYLES === */
@@ -759,7 +759,7 @@ header a.skip:focus {
   height: 315px;
   overflow: hidden;
   border: 1px solid var(--text-color-light);
-  background: white;
+  background: oklch(100% 0 0deg);
 }
 
 .og-preview-content {
@@ -797,14 +797,14 @@ header a.skip:focus {
 
 .og-image-rendered {
   /* Override colors to force light theme for OG image preview */
-  --text-color: #2a2a2a;
-  --text-color-light: #5a5a5a;
-  --background-color: #d3d8d2;
-  --content-background-color: #fff;
-  --link-color: #d63d36; /* darkened to meet WCAG AA 4.5:1 */
-  --link-hover-color: #b26205; /* darkened to meet WCAG AA 4.5:1 */
-  --link-visited-color: #5b4a3b;
-  --link-active-color: #0d703f;
+  --text-color: oklch(28.5% 0 0deg);
+  --text-color-light: oklch(46.8% 0 0deg);
+  --background-color: oklch(87.7% 0.0097 140.5deg);
+  --content-background-color: oklch(100% 0 0deg);
+  --link-color: oklch(58.6% 0.191 27.4deg); /* darkened to meet WCAG AA 4.5:1 */
+  --link-hover-color: oklch(57.683% 0.1348 59.17deg); /* darkened to meet WCAG AA 4.5:1 */
+  --link-visited-color: oklch(42.2% 0.0332 63.2deg);
+  --link-active-color: oklch(48.055% 0.1152 154.58deg);
   
   box-sizing: border-box;
   margin: 0;
@@ -893,15 +893,15 @@ header a.skip:focus {
 @media print {
   /* Force light mode colors for print (greyscale) */
   :root {
-    --text-color: #2a2a2a;
-    --text-color-light: #5a5a5a;
-    --border-color: #d0d0d0;
-    --background-color: #fff;
-    --content-background-color: #fff;
-    --link-color: #2a2a2a;
-    --link-hover-color: #2a2a2a;
-    --link-visited-color: #2a2a2a;
-    --link-active-color: #2a2a2a;
+    --text-color: oklch(28.5% 0 0deg);
+    --text-color-light: oklch(46.8% 0 0deg);
+    --border-color: oklch(85.8% 0 0deg);
+    --background-color: oklch(100% 0 0deg);
+    --content-background-color: oklch(100% 0 0deg);
+    --link-color: oklch(28.5% 0 0deg);
+    --link-hover-color: oklch(28.5% 0 0deg);
+    --link-visited-color: oklch(28.5% 0 0deg);
+    --link-active-color: oklch(28.5% 0 0deg);
   }
 
   /* Page setup for letter/A4 */
@@ -918,14 +918,14 @@ header a.skip:focus {
   /* Base print styles */
   * {
     background: transparent !important;
-    color: #000 !important;
+    color: oklch(0% 0 0deg) !important;
     box-shadow: none !important;
     text-shadow: none !important;
   }
 
   body {
-    background: #fff;
-    color: #000;
+    background: oklch(100% 0 0deg);
+    color: oklch(0% 0 0deg);
     font-size: 12pt;
     line-height: 1.5;
     font-family: system-ui, sans-serif;
@@ -978,7 +978,7 @@ header a.skip:focus {
   article footer {
     margin: 0.5rem 0 1rem 0;
     font-size: 10pt;
-    color: #5a5a5a;
+    color: oklch(46.8% 0 0deg);
   }
 
   /* Article content */
@@ -1035,7 +1035,7 @@ header a.skip:focus {
   a:hover,
   a:active,
   a:focus {
-    color: #000 !important;
+    color: oklch(0% 0 0deg) !important;
     text-decoration: underline;
   }
 
@@ -1053,7 +1053,7 @@ header a.skip:focus {
   a[href]:after {
     content: " (" attr(href) ")";
     font-size: 9pt;
-    color: #5a5a5a;
+    color: oklch(46.8% 0 0deg);
     word-break: break-all;
   }
 
@@ -1072,14 +1072,14 @@ header a.skip:focus {
 
   /* Code blocks */
   pre {
-    border: 1pt solid #000;
+    border: 1pt solid oklch(0% 0 0deg);
     padding: 0.5rem;
-    background: #f5f5f5 !important;
+    background: oklch(97% 0 0deg) !important;
     page-break-inside: avoid;
   }
 
   code {
-    background: #f5f5f5 !important;
+    background: oklch(97% 0 0deg) !important;
     padding: 0.1rem 0.2rem;
   }
 
@@ -1094,7 +1094,7 @@ header a.skip:focus {
 
   /* Blockquotes */
   blockquote {
-    border-left: 2pt solid #000;
+    border-left: 2pt solid oklch(0% 0 0deg);
     padding-left: 1rem;
     margin: 1rem 0;
     page-break-inside: avoid;
@@ -1102,7 +1102,7 @@ header a.skip:focus {
 
   /* Horizontal rules */
   hr {
-    border-top: 1pt solid #000;
+    border-top: 1pt solid oklch(0% 0 0deg);
     margin: 1rem 0;
   }
 
@@ -1131,7 +1131,7 @@ header a.skip:focus {
   body > header,
   body > main,
   body > footer {
-    background: #fff !important;
+    background: oklch(100% 0 0deg) !important;
     max-width: 100% !important;
     padding: 0 !important;
   }

@@ -7,7 +7,7 @@ Generate **many** candidate light/dark palettes (wider than hand-picked “safe�
 ## Baby plan (pipeline)
 
 1. **Wide** — Run the gallery generator (default **one hue-reference card** with an in-page **hue rotation** slider, or `--hue-sweep` for a multi-card wheel, or random, optional monochrome). By default it also adds **one Harmony lab card** (recipe dropdown and **hue rotation**, plus **analogous spread** / **split spread** / **harmony skew** only when the selected recipe uses them; lightness/chroma stay from the APCA-nudged build for each recipe), **one Black & white card** (radios: Strict / Newsprint / High contrast), **wild** high-chroma recipes (each with rotation), then **five terminal-inspired** palettes. **`themes.json` still lists nine `harmony-*` presets** (same CLI tuning / hide-failed rules as other sections). The page groups those under **collapsible section headings** (click to expand/collapse): hue reference → harmony schemes → B&W → wild → terminal. Output is local HTML + JSON; not deployed. Internally, candidate colors stay **OKLCH objects** (culori) through generation, nudging, and preview; **APCA** still uses **sRGB-gamut–mapped hex** (`culori` `toGamut('rgb')`) because `apca-w3` expects that. JSON/HTML export remains **`oklch(...)` strings** (`themes.json` still lists **three** B&W presets by id: `bw-strict`, `bw-paper`, `bw-contrast`, plus `harmony-*` ids). On the **Harmony lab**, **Copy tokens** updates with the live controls; other cards: preview sliders only change **inline** styles unless noted. Rotating **H** at fixed **L** and **C** in OKLCH usually keeps APCA in the same ballpark, but **relative luminance in sRGB** shifts slightly with hue, so it is **not** a strict guarantee the build’s Lc floor holds at every angle—spot-check if that matters.
-2. **Pick** — Open `scripts/color-explore/output/index.html` in a browser, note IDs you like in `docs/ideas.md` or a scratch file.
+2. **Pick** — Open `scripts/color-explore/output/index.html` in a browser; note candidate IDs in a scratch file or try them in `/color-test/` (see [Companion tooling](#companion-tooling) below).
 3. **Refine** — Paste values into `/color-test/` custom editor or add a preset; tune by eye.
 4. **Ship** — Promote winners to `jonplummer.css` using `light-dark(light, dark)` on each token. Run `pnpm run test color-contrast` and `pnpm run test a11y`.
 
@@ -67,8 +67,19 @@ Good sources of hex tables: official theme repos, [terminal.sexy](https://termin
 - No LLM integration (use `themes.json` + your tool of choice).
 - No automatic write to `jonplummer.css` (deliberate human gate).
 
+## Companion tooling
+
+These sit alongside the gallery; pnpm shortcuts also appear under **Maintenance** in [commands.md](commands.md).
+
+| What | How |
+|------|-----|
+| **Theme gallery** | `pnpm run color-gallery` → `scripts/color-explore/output/` (this doc, [Commands](commands.md)). |
+| **Color test page** | `src/color-test.njk` — run `pnpm run dev` or `pnpm run build`, open **`/color-test/`**. Twelve presets, custom color inputs, dev-only (not deployed). Paste tokens from the gallery or `themes.json` before promoting to `jonplummer.css`. |
+| **Suggest colors script** | `node scripts/utils/suggest-colors.js` — small standalone APCA helper (hardcoded sample pairs in the file; edit for your background/foregrounds). Not registered in `package.json`. |
+| **Contrast test** | `pnpm run test color-contrast` — reads `light-dark()` pairs from `src/assets/css/jonplummer.css` (hex or `oklch()`), converts via culori for APCA. See [tests.md](tests.md) for the fast-test list. |
+
 ## Related
 
-- `src/color-test.njk` — Interactive refinement.
-- `scripts/utils/suggest-colors.js` — One-off APCA nudges for specific failing colors.
-- `scripts/test/color-contrast.js` — Authoritative pair checks for the live stylesheet.
+- `src/assets/css/jonplummer.css` — Production tokens to ship winners into.
+- `scripts/test/color-contrast.js` — Implementation of the contrast check above.
+- [Font stack exploration](font-stack-exploration.md) — sibling workflow for type (`pnpm run font-gallery`).

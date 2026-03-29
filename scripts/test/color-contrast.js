@@ -3,10 +3,34 @@
 const fs = require('fs');
 const path = require('path');
 const { calcAPCA } = require('apca-w3');
+const { parse, formatHex } = require('culori');
 const { createTestResult, addFile, addIssue, addWarning, addCustomSection, outputResult } = require('../utils/test-results');
 
+function expandShortHex(hex) {
+  if (hex.length === 4 && hex.startsWith('#')) {
+    return `#${hex[1]}${hex[1]}${hex[2]}${hex[2]}${hex[3]}${hex[3]}`.toLowerCase();
+  }
+  return hex.toLowerCase();
+}
+
+/** Normalize a CSS color (hex or oklch) to #rrggbb for apca-w3. */
+function colorToHex(cssColor) {
+  if (cssColor == null || typeof cssColor !== 'string') {
+    return null;
+  }
+  const v = cssColor.trim();
+  if (v.startsWith('#')) {
+    return expandShortHex(v);
+  }
+  const color = parse(v);
+  if (!color) {
+    return null;
+  }
+  return formatHex(color).toLowerCase();
+}
+
 // Parse CSS custom properties from CSS file
-// Supports both light-dark() syntax and legacy separate @media blocks
+// Supports light-dark(hex|oklch, hex|oklch) and legacy separate @media blocks
 function parseCSSColors(cssFilePath) {
   const cssContent = fs.readFileSync(cssFilePath, 'utf8');
   
@@ -19,20 +43,34 @@ function parseCSSColors(cssFilePath) {
   if (rootMatch) {
     const rootContent = rootMatch[1];
 
+    const colorCapture = '(#[0-9a-fA-F]{3,8}|oklch\\([^)]+\\))';
+
     // Match light-dark(lightColor, darkColor) syntax
-    const lightDarkMatches = rootContent.matchAll(/--([a-z-]+):\s*light-dark\(\s*(#[0-9a-fA-F]{3,6})\s*,\s*(#[0-9a-fA-F]{3,6})\s*\)/g);
+    const lightDarkRe = new RegExp(
+      `--([a-z-]+):\\s*light-dark\\(\\s*${colorCapture}\\s*,\\s*${colorCapture}\\s*\\)`,
+      'g'
+    );
+    const lightDarkMatches = rootContent.matchAll(lightDarkRe);
     for (const match of lightDarkMatches) {
       const [, varName, lightValue, darkValue] = match;
-      colors.light[varName] = lightValue;
-      colors.dark[varName] = darkValue;
+      const lightHex = colorToHex(lightValue);
+      const darkHex = colorToHex(darkValue);
+      if (lightHex && darkHex) {
+        colors.light[varName] = lightHex;
+        colors.dark[varName] = darkHex;
+      }
     }
 
-    // Match plain hex values (for properties not using light-dark)
-    const plainMatches = rootContent.matchAll(/--([a-z-]+):\s*(#[0-9a-fA-F]{3,6})\s*;/g);
+    // Match plain color values (for properties not using light-dark)
+    const plainRe = new RegExp(`--([a-z-]+):\\s*${colorCapture}\\s*;`, 'g');
+    const plainMatches = rootContent.matchAll(plainRe);
     for (const match of plainMatches) {
       const [, varName, colorValue] = match;
       if (!colors.light[varName]) {
-        colors.light[varName] = colorValue;
+        const hex = colorToHex(colorValue);
+        if (hex) {
+          colors.light[varName] = hex;
+        }
       }
     }
   }
@@ -41,11 +79,14 @@ function parseCSSColors(cssFilePath) {
   const darkModeMatch = cssContent.match(/@media\s*\(prefers-color-scheme:\s*dark\)\s*\{[^{]*:root\s*\{([^}]+)\}/);
   if (darkModeMatch) {
     const darkContent = darkModeMatch[1];
-    const colorMatches = darkContent.matchAll(/--([a-z-]+):\s*(#[0-9a-fA-F]{3,6})/g);
-    for (const match of colorMatches) {
+    const legacyMatches = darkContent.matchAll(
+      /--([a-z-]+):\s*(#[0-9a-fA-F]{3,8}|oklch\([^)]+\))/g
+    );
+    for (const match of legacyMatches) {
       const [, varName, colorValue] = match;
-      if (!colors.dark[varName]) {
-        colors.dark[varName] = colorValue;
+      const hex = colorToHex(colorValue);
+      if (hex && !colors.dark[varName]) {
+        colors.dark[varName] = hex;
       }
     }
   }

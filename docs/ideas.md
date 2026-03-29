@@ -24,20 +24,11 @@
     - [ ] Talks from CSky
     - [ ] Talks from Cayuse
 
-- [ ] Reinvestigate color scheme
-  - [ ] *Consider* addressing accessibility test script deficiencies per [accessibility-test-limitations](archive/accessibility-test-limitations.md)
-  - [ ] *Consider* other color inspiration sources
-  - [ ] Perhaps use oklch colors for vividness? See https://modern-css.com/vivid-colors-beyond-srgb/
-  - **Tool**: `scripts/utils/suggest-colors.js` — standalone APCA color suggestion script; finds lighter alternatives that meet contrast targets against a given background
-  - **Tool**: `pnpm run color-gallery` — APCA-nudged OKLCH candidates: hue reference (optional sweep/random/mono), **Harmony lab** (one in-page card—recipe + hue + contextual angle sliders; `themes.json` still has nine `harmony-*` entries), B&W combo, wild + terminal presets → `scripts/color-explore/output/`; see [color-theme-exploration.md](color-theme-exploration.md)
-  - **Tool**: `src/color-test.njk` — dev-only color scheme playground with 12 presets and custom editor; excluded from deploy but builds locally at `/color-test/`
-
-
 ## 🔮 Future Consideration
 
 ### 🖍 Also…  
 
-- https://kagi.com/search?q=contemporary+blog+styling+2025 ?
+- https://kagi.com/search?q=contemporary+blog+styling+2026 ?
 
 - https://github.com/steipete/agent-rules ?
 
@@ -106,6 +97,9 @@
 
 ## DONE
 
+- [x] Reinvestigate color scheme (2026-03-28)
+  - Live theme tokens use **OKLCH** in `src/assets/css/jonplummer.css` (`light-dark(oklch(...), ...)`). Gallery pipeline, `/color-test/`, `suggest-colors.js`, and contrast checking are documented in [color-theme-exploration.md](color-theme-exploration.md) and the Maintenance bullets in [commands.md](commands.md).
+  - Archived intent: extra color inspiration (gallery, terminals, wild presets); OKLCH as the authoring space ([vivid colors / gamut](https://modern-css.com/vivid-colors-beyond-srgb/) as reference). **Canceled / deferred:** accessibility-test-script upgrades per [accessibility-test-limitations](archive/accessibility-test-limitations.md).
 - [x] Collected Wisdom: `wisdom-entries.yaml`, `/wisdom/`, per-tag pages, `/wisdom-feed.xml`, `test wisdom`, nav + sitemap; one-shot YAML generator removed in favor of editing YAML only (2026-03-25)
 - [x] Security, needlessly custom code, unused code, and bloat audit (2026-02-21)
   - Deduped extractCssCustomProperties, simplified dotenv loading, trimmed unused exports, added nunjucks as explicit dep
