@@ -29,7 +29,7 @@
   - [ ] *Consider* other color inspiration sources
   - [ ] Perhaps use oklch colors for vividness? See https://modern-css.com/vivid-colors-beyond-srgb/
   - **Tool**: `scripts/utils/suggest-colors.js` — standalone APCA color suggestion script; finds lighter alternatives that meet contrast targets against a given background
-  - **Tool**: `pnpm run color-gallery` — OKLCH sweep + APCA nudge → static gallery + `themes.json`; see [color-theme-exploration.md](color-theme-exploration.md)
+  - **Tool**: `pnpm run color-gallery` — APCA-nudged OKLCH candidates: hue reference (optional sweep/random/mono), **Harmony lab** (one in-page card—recipe + hue + contextual angle sliders; `themes.json` still has nine `harmony-*` entries), B&W combo, wild + terminal presets → `scripts/color-explore/output/`; see [color-theme-exploration.md](color-theme-exploration.md)
   - **Tool**: `src/color-test.njk` — dev-only color scheme playground with 12 presets and custom editor; excluded from deploy but builds locally at `/color-test/`
 
 
