@@ -55,6 +55,18 @@
   --link-active-color: light-dark(oklch(48.055% 0.1152 154.58deg), oklch(79.507% 0.15 154.56deg)); /* APCA Lc 62+ in dark */
 }
 
+/* Cross-document view transitions (MPA): same-origin navigations from in-page links.
+   Unsupported browsers ignore @view-transition. */
+@view-transition {
+  navigation: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+}
+
 /* === RESETS & BASE STYLES === */
 
 /* Box sizing rules */

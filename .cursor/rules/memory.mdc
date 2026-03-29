@@ -19,6 +19,7 @@ Shared memory file for both Cursor and Claude Code agents. When you encounter a 
 - Reminders use format: `- [ ] **REMINDER (YYYY-MM-DD)**: description`
 - Eleventy config is modularized in `eleventy/config/` (filters, plugins, events, etc.) and `eleventy/utils/` (markdown, date, CSS utilities)
 - `eleventy/config/transforms.js` is intentionally empty — figure wrapping moved to markdown-it plugin at parse time
+- Cross-document view transitions: `@view-transition { navigation: auto; }` in `src/assets/css/jonplummer.css`; `navigation: none` under `prefers-reduced-motion: reduce`
 
 ### Command relationships
 - `deploy` runs: `changelog` → `generate-og-images` → `test markdown` → `test frontmatter` → `build` → `test og-images` → rsync → IndexNow; if changelog changed, deploy then commits and pushes it (skipped with `--dry-run`)
