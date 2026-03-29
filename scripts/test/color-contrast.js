@@ -2,9 +2,12 @@
 
 const fs = require('fs');
 const path = require('path');
-const { calcAPCA } = require('apca-w3');
 const { parse, formatHex } = require('culori');
+const { absApcaLcSrgb, absApcaLcP3 } = require('../utils/apca-dual');
 const { createTestResult, addFile, addIssue, addWarning, addCustomSection, outputResult } = require('../utils/test-results');
+
+/** Warn when sRGB and Display P3 APCA Lc differ by at least this much. */
+const LC_DIVERGENCE_WARN = 4;
 
 function expandShortHex(hex) {
   if (hex.length === 4 && hex.startsWith('#')) {
@@ -53,11 +56,11 @@ function parseCSSColors(cssFilePath) {
     const lightDarkMatches = rootContent.matchAll(lightDarkRe);
     for (const match of lightDarkMatches) {
       const [, varName, lightValue, darkValue] = match;
-      const lightHex = colorToHex(lightValue);
-      const darkHex = colorToHex(darkValue);
-      if (lightHex && darkHex) {
-        colors.light[varName] = lightHex;
-        colors.dark[varName] = darkHex;
+      const lightRaw = lightValue.trim();
+      const darkRaw = darkValue.trim();
+      if (colorToHex(lightRaw) && colorToHex(darkRaw)) {
+        colors.light[varName] = lightRaw;
+        colors.dark[varName] = darkRaw;
       }
     }
 
@@ -67,9 +70,9 @@ function parseCSSColors(cssFilePath) {
     for (const match of plainMatches) {
       const [, varName, colorValue] = match;
       if (!colors.light[varName]) {
-        const hex = colorToHex(colorValue);
-        if (hex) {
-          colors.light[varName] = hex;
+        const raw = colorValue.trim();
+        if (colorToHex(raw)) {
+          colors.light[varName] = raw;
         }
       }
     }
@@ -84,9 +87,9 @@ function parseCSSColors(cssFilePath) {
     );
     for (const match of legacyMatches) {
       const [, varName, colorValue] = match;
-      const hex = colorToHex(colorValue);
-      if (hex && !colors.dark[varName]) {
-        colors.dark[varName] = hex;
+      const raw = colorValue.trim();
+      if (colorToHex(raw) && !colors.dark[varName]) {
+        colors.dark[varName] = raw;
       }
     }
   }
@@ -304,46 +307,94 @@ function checkColorContrast() {
   let darkModeWarnings = 0;
   
   colorPairs.forEach(pair => {
-    // Calculate APCA contrast (returns Lc value, can be positive or negative depending on polarity)
-    const contrastLc = calcAPCA(pair.foreground, pair.background);
-    const absContrastLc = Math.abs(contrastLc);
-    
-    // Check against thresholds
-    if (absContrastLc < pair.minLc) {
-      // Fails minimum threshold
-      const message = `${pair.category} (${pair.mode}): Lc ${absContrastLc.toFixed(1)} is below minimum ${pair.minLc} for ${pair.fontSize} text. FG: ${pair.foreground} / BG: ${pair.background}`;
+    const lcSrgb = absApcaLcSrgb(pair.foreground, pair.background);
+    const lcP3 = absApcaLcP3(pair.foreground, pair.background);
+    if (lcSrgb == null) {
       addIssue(fileObj, {
-        type: 'color-contrast-fail',
-        message: message,
-        mode: pair.mode,
-        category: pair.category,
-        foreground: pair.foreground,
-        background: pair.background,
-        contrastLc: absContrastLc,
-        minLc: pair.minLc,
-        preferredLc: pair.preferredLc
+        type: 'color-contrast-parse',
+        message: `${pair.category} (${pair.mode}): could not parse colors for APCA. FG: ${pair.foreground} / BG: ${pair.background}`
       });
-      
       if (pair.mode === 'light') {
         lightModeIssues++;
       } else {
         darkModeIssues++;
       }
-    } else if (absContrastLc < pair.preferredLc) {
-      // Passes minimum but below preferred
-      const message = `${pair.category} (${pair.mode}): Lc ${absContrastLc.toFixed(1)} is below preferred ${pair.preferredLc} (but above minimum ${pair.minLc}). FG: ${pair.foreground} / BG: ${pair.background}`;
+      return;
+    }
+
+    const fgHex = colorToHex(pair.foreground) || pair.foreground;
+    const bgHex = colorToHex(pair.background) || pair.background;
+    const lcP3Str = lcP3 != null ? lcP3.toFixed(1) : 'n/a';
+
+    if (lcP3 != null && lcSrgb >= pair.minLc && lcP3 < pair.minLc) {
       addWarning(fileObj, {
-        type: 'color-contrast-suboptimal',
-        message: message,
+        type: 'color-contrast-p3-below-min',
+        message: `${pair.category} (${pair.mode}): Lc (P3) ${lcP3.toFixed(1)} is below minimum ${pair.minLc} while Lc (sRGB) ${lcSrgb.toFixed(1)} passes — wide-gamut displays may see weaker contrast. FG: ${fgHex} / BG: ${bgHex}`,
+        mode: pair.mode,
+        category: pair.category,
+        lcSrgb,
+        lcP3
+      });
+      if (pair.mode === 'light') {
+        lightModeWarnings++;
+      } else {
+        darkModeWarnings++;
+      }
+    } else if (
+      lcP3 != null &&
+      lcSrgb >= pair.minLc &&
+      Math.abs(lcP3 - lcSrgb) >= LC_DIVERGENCE_WARN
+    ) {
+      addWarning(fileObj, {
+        type: 'color-contrast-srgb-p3-divergence',
+        message: `${pair.category} (${pair.mode}): Lc (sRGB) ${lcSrgb.toFixed(1)} vs Lc (P3) ${lcP3.toFixed(1)} — gamut mapping differs between pipelines. FG: ${fgHex} / BG: ${bgHex}`,
+        mode: pair.mode,
+        category: pair.category,
+        lcSrgb,
+        lcP3
+      });
+      if (pair.mode === 'light') {
+        lightModeWarnings++;
+      } else {
+        darkModeWarnings++;
+      }
+    }
+
+    if (lcSrgb < pair.minLc) {
+      const message = `${pair.category} (${pair.mode}): Lc (sRGB) ${lcSrgb.toFixed(1)} (P3 ${lcP3Str}) below minimum ${pair.minLc} for ${pair.fontSize} text. FG: ${fgHex} / BG: ${bgHex}`;
+      addIssue(fileObj, {
+        type: 'color-contrast-fail',
+        message,
         mode: pair.mode,
         category: pair.category,
         foreground: pair.foreground,
         background: pair.background,
-        contrastLc: absContrastLc,
+        contrastLc: lcSrgb,
+        contrastLcP3: lcP3,
         minLc: pair.minLc,
         preferredLc: pair.preferredLc
       });
-      
+
+      if (pair.mode === 'light') {
+        lightModeIssues++;
+      } else {
+        darkModeIssues++;
+      }
+    } else if (lcSrgb < pair.preferredLc) {
+      const message = `${pair.category} (${pair.mode}): Lc (sRGB) ${lcSrgb.toFixed(1)} (P3 ${lcP3Str}) below preferred ${pair.preferredLc} (above minimum ${pair.minLc}). FG: ${fgHex} / BG: ${bgHex}`;
+      addWarning(fileObj, {
+        type: 'color-contrast-suboptimal',
+        message,
+        mode: pair.mode,
+        category: pair.category,
+        foreground: pair.foreground,
+        background: pair.background,
+        contrastLc: lcSrgb,
+        contrastLcP3: lcP3,
+        minLc: pair.minLc,
+        preferredLc: pair.preferredLc
+      });
+
       if (pair.mode === 'light') {
         lightModeWarnings++;
       } else {
@@ -374,6 +425,10 @@ function checkColorContrast() {
   addCustomSection(result, 'ℹ️  About APCA', {
     note: 'APCA (Accessible Perceptual Contrast Algorithm) is a modern contrast metric that better matches human perception than WCAG 2.x contrast ratios. It\'s part of the upcoming WCAG 3.0 standard.',
     thresholds: 'Body text (16-18px): Lc 75+ preferred, Lc 60+ minimum. Large text (24px+): Lc 60+ preferred, Lc 45+ minimum.'
+  });
+
+  addCustomSection(result, '🖥  sRGB vs Display P3', {
+    note: 'Each pair reports Lc after culori gamut mapping to sRGB (APCA-W3 sRGBtoY) and, in messages, Lc after mapping to Display P3 (displayP3toY). Pass/fail uses the sRGB path only. Warnings appear when P3 is below minimum while sRGB passes, or when the two Lc values diverge by ' + LC_DIVERGENCE_WARN + ' or more.'
   });
   
   // Output result

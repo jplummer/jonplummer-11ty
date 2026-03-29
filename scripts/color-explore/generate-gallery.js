@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /**
  * OKLCH-based theme candidates + APCA nudging → static HTML gallery + themes.json
+ * (Dual APCA: min Lc after sRGB gamut vs Display P3 gamut — see scripts/utils/apca-dual.js.)
  *
  * Usage:
  *   node scripts/color-explore/generate-gallery.js
@@ -20,11 +21,10 @@
 const fs = require('fs');
 const path = require('path');
 const { buildTerminalPresetThemes } = require('./terminal-presets.js');
-const { calcAPCA } = require('apca-w3');
-const { formatHex, parse, converter, toGamut } = require('culori');
+const { absApcaLcSrgb, absApcaLcP3 } = require('../utils/apca-dual');
+const { parse, converter } = require('culori');
 
 const toOklch = converter('oklch');
-const mapToRgbGamut = toGamut('rgb');
 
 const MIN_LC = 60;
 
@@ -43,12 +43,6 @@ function oklchToCss(color) {
   const cr = Math.round(c * 10000) / 10000;
   const hr = Math.round(h * 10) / 10;
   return `oklch(${lr} ${cr} ${hr})`;
-}
-
-/** apca-w3 expects sRGB hex; gamut-map so wide-OKLCH tokens still get a metric. */
-function oklchToHexForApca(color) {
-  if (!color || color.mode !== 'oklch') return '#808080';
-  return formatHex(mapToRgbGamut(color));
 }
 
 function oklchEqual(a, b) {
@@ -106,8 +100,31 @@ function clampHarmonyDeg(value, min, max, fallback) {
   return Math.min(max, Math.max(min, n));
 }
 
+/** Min APCA Lc after culori → sRGB gamut (APCA-W3 sRGBtoY). Used for nudging and pass/fail. */
 function lc(fg, bg) {
-  return Math.abs(calcAPCA(oklchToHexForApca(fg), oklchToHexForApca(bg)));
+  return absApcaLcSrgb(fg, bg) ?? 0;
+}
+
+function lcP3(fg, bg) {
+  return absApcaLcP3(fg, bg) ?? 0;
+}
+
+function worstLcP3(theme, mode) {
+  let w = Infinity;
+  for (const p of PAIRS) {
+    if (p.mode !== mode) continue;
+    const fg = theme[p.fg];
+    const bg = theme[p.bg];
+    if (!fg || !bg) continue;
+    w = Math.min(w, lcP3(fg, bg));
+  }
+  return w === Infinity ? 0 : w;
+}
+
+function themeWorstLcDual(themeLight, themeDark) {
+  const srgb = Math.min(worstLc(themeLight, 'light'), worstLc(themeDark, 'dark'));
+  const p3 = Math.min(worstLcP3(themeLight, 'light'), worstLcP3(themeDark, 'dark'));
+  return { srgb, p3 };
 }
 
 function nudgeFgTowardContrast(fg, bg) {
@@ -815,22 +832,28 @@ function flattenThemesForExport(visibleSections, harmonyExportThemes) {
     for (const t of themes) {
       if (t._kind === 'bw-combo') {
         for (const v of t._processedVariants) {
+          const dual = themeWorstLcDual(v.light, v.dark);
           out.push({
             id: v.id,
             label: v.label,
             hue: null,
             light: tokensToCssRecord(v.light),
             dark: tokensToCssRecord(v.dark),
+            worstLcSrgb: Math.round(dual.srgb * 10) / 10,
+            worstLcP3: Math.round(dual.p3 * 10) / 10,
             passesApcaMin: !v._failed
           });
         }
       } else if (t._kind !== 'harmony-lab') {
+        const dual = themeWorstLcDual(t.light, t.dark);
         out.push({
           id: t.id,
           label: t.label,
           hue: t.hue,
           light: tokensToCssRecord(t.light),
           dark: tokensToCssRecord(t.dark),
+          worstLcSrgb: Math.round(dual.srgb * 10) / 10,
+          worstLcP3: Math.round(dual.p3 * 10) / 10,
           passesApcaMin: !t._failed
         });
       }
@@ -848,9 +871,16 @@ function huePackSectionTitle(mono, randomN, hueSweep) {
 
 function renderBWComboCard(t) {
   const anyFailed = t._failed;
+  const v0 = t._processedVariants[0];
+  const d0 = themeWorstLcDual(v0.light, v0.dark);
+  const dualHint =
+    ' · min Lc sRGB ' +
+    d0.srgb.toFixed(0) +
+    ' · P3 ' +
+    d0.p3.toFixed(0);
   const status = anyFailed
-    ? '<span class="badge fail">below Lc ' + MIN_LC + ' (one or more presets)</span>'
-    : '<span class="badge ok">APCA ≥ ' + MIN_LC + '</span>';
+    ? '<span class="badge fail">below Lc ' + MIN_LC + dualHint + ' (one or more presets)</span>'
+    : '<span class="badge ok">APCA ≥ ' + MIN_LC + dualHint + '</span>';
 
   const variantsPayload = t._processedVariants.map((v) => ({
     lightStyle: varsToInlineStyle(v.light),
@@ -866,7 +896,6 @@ function renderBWComboCard(t) {
     )
     .join('');
 
-  const v0 = t._processedVariants[0];
   const sl0 = varsToInlineStyle(v0.light);
   const sd0 = varsToInlineStyle(v0.dark);
 
@@ -949,7 +978,7 @@ function renderHarmonyLabCard(t) {
     <h2>${escapeHtml(t.label)}</h2>
     <span class="badge ok">${p.recipes.length} recipe${p.recipes.length === 1 ? '' : 's'} · L/C from nudged build</span>
   </header>
-  <p class="harmony-lab-lede">Pick a recipe, rotate hue, and tune only the angles that recipe uses (L/C stay from the APCA-nudged export). <code>themes.json</code> lists the same harmony recipes as this selector (after hide-failed).</p>
+  <p class="harmony-lab-lede">Pick a recipe, rotate hue, and tune only the angles that recipe uses (L/C stay from the APCA-nudged export). <code>themes.json</code> lists the same harmony recipes as this selector (after hide-failed), with <code>worstLcSrgb</code> and <code>worstLcP3</code> per entry.</p>
   <div class="harmony-lab-controls" role="group" aria-label="Harmony lab">
     <div class="harmony-lab-grid">
       <label class="harmony-lab-field harmony-lab-field-span">Recipe
@@ -993,9 +1022,12 @@ function renderHarmonyLabCard(t) {
 function renderCard(t, failed) {
   const sl = varsToInlineStyle(t.light);
   const sd = varsToInlineStyle(t.dark);
+  const dual = themeWorstLcDual(t.light, t.dark);
+  const dualHint =
+    ' · min Lc sRGB ' + dual.srgb.toFixed(0) + ' · P3 ' + dual.p3.toFixed(0);
   const status = failed
-    ? '<span class="badge fail">below Lc ' + MIN_LC + '</span>'
-    : '<span class="badge ok">APCA ≥ ' + MIN_LC + '</span>';
+    ? '<span class="badge fail">below Lc ' + MIN_LC + dualHint + '</span>'
+    : '<span class="badge ok">APCA ≥ ' + MIN_LC + dualHint + '</span>';
 
   const hueBar = t._hueSlider
     ? `<div class="hue-rotate-bar" role="group" aria-label="Preview hue rotation">
@@ -1765,6 +1797,8 @@ function main() {
     tokenFormat: 'css-oklch',
     tokenSyntax:
       'Each color string is oklch(L C H): L 0–1, C chroma, H degrees (CSS Color 4 / baseline browsers). Use as --token: oklch(...) or inside light-dark().',
+    apcaDual:
+      'Each theme includes worstLcSrgb and worstLcP3 (minimum Lc across the same token pairs as pnpm run test color-contrast). sRGB path: culori toGamut("rgb") + apca-w3 sRGBtoY. P3 path: toGamut("p3") + displayP3toY. passesApcaMin uses the sRGB path only.',
     themes: exportThemes
   };
   if (harmonyTuningForJson) {
@@ -1793,7 +1827,7 @@ function main() {
   }
   const meta = [
     `Generated ${new Date().toISOString()}`,
-    `Min APCA Lc: ${MIN_LC} (matches color-contrast test minimum)`,
+    `Min APCA Lc: ${MIN_LC} (sRGB path; matches color-contrast test). Cards show min Lc sRGB vs P3.`,
     mono
       ? 'Mode: monochrome'
       : randomN > 0

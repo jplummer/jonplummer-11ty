@@ -67,6 +67,10 @@ Runs [Stylelint](https://stylelint.io) on `src/**/*.css` using `.stylelintrc.jso
 
 **Note:** With `--changed`, exits successfully if no `src/**/*.css` files changed since last commit.
 
+### color-contrast.js
+
+Reads `light-dark()` (and legacy dark `:root`) color pairs from `src/assets/css/jonplummer.css`, parses hex or `oklch()` as **raw** values, then computes APCA **Lc** twice: after culori **`toGamut('rgb')`** with **apca-w3** `sRGBtoY`, and after **`toGamut('p3')`** with **`displayP3toY`**. **Pass/fail** (exit code) uses the **sRGB** path only (same thresholds as before). **Warnings** cover large sRGB-vs-P3 Lc divergence (while sRGB still meets minimum) and P3 below minimum while sRGB passes. Shared helpers live in `scripts/utils/apca-dual.js`.
+
 ## HTML Output Tests
 
 Tests that validate built HTML files in `_site/` directory. **Requires:** `pnpm run build` first.

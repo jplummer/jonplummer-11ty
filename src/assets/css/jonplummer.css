@@ -447,6 +447,15 @@ pre code {
   font-size: inherit;
 }
 
+/* Inline code from markdown `backticks` (not fenced blocks) */
+:not(pre) > code {
+  background-color: color-mix(in oklch, var(--text-color) 9%, var(--content-background-color));
+  padding: 0.12em 0.4em;
+  border-radius: 0.2em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
 /* === LINKS === */
 
 /* Base link styles */
