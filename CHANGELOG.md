@@ -1,9 +1,18 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-03-29
+
+- Add dual sRGB/P3 APCA checks, draft OKLCH post, inline code style
+
 ## 2026-03-28
 
 - Add post announcing collected wisdom
 - Collected wisdom, OG pipeline, and color gallery tooling
+- Add Stylelint for site CSS and wire into test fast
+- Add font stack preview lab (Modern Font Stacks)
+- Feat(color-gallery): Harmony lab with contextual angle controls
+- Docs(ideas): align color-gallery blurb with Harmony lab
+- OKLCH theme tokens, APCA parser, exploration docs
 
 ## 2026-03-27
 
@@ -430,4 +439,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-03-28
+Last deployed on 2026-03-29
