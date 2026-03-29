@@ -61,6 +61,7 @@ See [noteplan-import.md](noteplan-import.md) for complete workflow documentation
 - `pnpm run generate-og-images` - Generate Open Graph images for posts and pages (auto: `deploy`, `dev`)
 - `pnpm run security-audit` - Run security audit and maintenance checks
 - `pnpm run color-gallery` - Generate APCA-aware theme gallery (HTML + JSON) under `scripts/color-explore/output/` — see [color-theme-exploration.md](color-theme-exploration.md)
+- `pnpm run font-gallery` - Generate single-card font lab (headings vs body stacks, live site scale/colors) under `scripts/font-explore/output/` — see [font-stack-exploration.md](font-stack-exploration.md)
 
 ---
 

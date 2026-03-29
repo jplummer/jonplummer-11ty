@@ -33,6 +33,9 @@ Thumbs.db
 # Color exploration (generated; see docs/color-theme-exploration.md)
 scripts/color-explore/output/
 
+# Font stack exploration (generated; see docs/font-stack-exploration.md)
+scripts/font-explore/output/
+
 # Temporary files
 *.tmp
 *.orig

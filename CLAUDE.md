@@ -45,3 +45,4 @@ Agent commands live in `.claude/commands/`. Claude Code can invoke them as slash
 @docs/commands.md
 @docs/authoring.md
 @docs/tests.md
+@docs/font-stack-exploration.md
