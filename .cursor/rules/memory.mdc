@@ -23,12 +23,13 @@ Shared memory file for both Cursor and Claude Code agents. When you encounter a 
 ### Command relationships
 - `deploy` runs: `changelog` → `generate-og-images` → `test markdown` → `test frontmatter` → `build` → `test og-images` → rsync → IndexNow; if changelog changed, deploy then commits and pushes it (skipped with `--dry-run`)
 - `import-links` is a manual pre-commit step, not part of deploy — run it before building/committing so links can be reviewed and tested locally
-- `test fast` runs 12 tests (`wisdom` validates `src/_data/wisdom-entries.yaml`); `test all` adds `a11y`
+- `test fast` runs 13 tests (`wisdom` validates `src/_data/wisdom-entries.yaml`); `test all` adds `a11y`
 - Collected wisdom: `src/_data/wisdom-entries.yaml` (same folder as `links.yaml`; YAML parsed twice—Eleventy global `wisdom-entries` + `wisdom.js` → `wisdom`) + `wisdom-build.js` + `wisdom-entries-path.js`. Pagination needs `wisdom` in `getGlobalData()` — not `eleventyComputed` (runs too late). `_data/*.js` callbacks do not receive sibling `_data` keys. Pages `/wisdom/` and `/wisdom/tags/<tag>/`, RSS `/wisdom-feed.xml`, head link in `head/wisdom-feed.njk`; `markdown` filter renders block markdown from YAML; list UI uses `_includes/components/wisdom_entry.njk` (`footer` + `section`, same article grid as blog index; `article.wisdom-entry` skips the title row)
 - `dev` auto-generates OG images on file save via `eleventy.beforeWatch`
 - `validate` is shortcut for `test html`
 
 ### Workflow preferences
+- **Stylelint**: `pnpm run lint:css` or `pnpm run test css`; config `.stylelintrc.json` (extends standard; several rules off for this stylesheet — see `docs/tests.md`). `scripts/test/css.js` uses `runTest`/`outputAndExit` like spell; maps Stylelint warnings to `line`/`column`/`ruleId`/`helpUrl` for `formatVerbose`. Included in `test fast`.
 - **Color themes (2026-03)**: Not pursuing “different theme per weekday” on the live site. Goal is to **generate/explore many** wild candidates (widen beyond straight-laced hand-authored palettes), **refine a shortlist**, then ship **2–4 solid dark/light pairs** with good accessibility (APCA / existing contrast tests). **`pnpm run color-gallery`** writes `scripts/color-explore/output/` (gitignored): OKLCH hue sweep, APCA nudging, static HTML + `themes.json` — see `docs/color-theme-exploration.md`.
 - User commits intentionally — never commit without being asked
 - Pre-existing unstaged changes should be left alone (don't include unrelated files)

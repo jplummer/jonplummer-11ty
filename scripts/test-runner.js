@@ -19,6 +19,7 @@ const testTypes = {
   'og-images': 'og-images.js',
   'a11y': 'accessibility.js',
   'color-contrast': 'color-contrast.js',
+  'css': 'css.js',
   'rss': 'rss-feed.js',
   'deploy': 'deploy.js',
   'indexnow': 'indexnow.js',
@@ -38,6 +39,7 @@ const fastTests = [
   'seo',
   'og-images',
   'color-contrast',
+  'css',
   'rss',
   'indexnow'
 ];
@@ -54,6 +56,7 @@ const allTests = [
   'seo',
   'og-images',
   'color-contrast',
+  'css',
   'rss',
   'indexnow',
   'a11y'
@@ -68,7 +71,7 @@ function listTests() {
   const { getTestDescription } = require('./utils/test-results');
   
   // Only show primary names
-  const primaryNames = ['html', 'links', 'wisdom', 'internal-links', 'frontmatter', 'markdown', 'spell', 'seo', 'og-images', 'a11y', 'color-contrast', 'rss', 'deploy', 'indexnow', 'security'];
+  const primaryNames = ['html', 'links', 'wisdom', 'internal-links', 'frontmatter', 'markdown', 'spell', 'seo', 'og-images', 'a11y', 'color-contrast', 'css', 'rss', 'deploy', 'indexnow', 'security'];
   
   primaryNames.forEach(type => {
     const isInAll = allTests.includes(type);

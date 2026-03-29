@@ -21,7 +21,8 @@
     "generate-og-images": "node scripts/content/generate-og-images.js",
     "import-links": "node scripts/content/import-noteplan-links.js",
     "security-audit": "node scripts/security/security-audit.js",
-    "color-gallery": "node scripts/color-explore/generate-gallery.js"
+    "color-gallery": "node scripts/color-explore/generate-gallery.js",
+    "lint:css": "stylelint \"src/**/*.css\""
   },
   "keywords": [],
   "author": "Jon Plummer",
@@ -43,7 +44,9 @@
     "luxon": "^3.7.2",
     "markdownlint-cli2": "^0.20.0",
     "nunjucks": "^3.2.4",
-    "puppeteer": "^24.40.0"
+    "puppeteer": "^24.40.0",
+    "stylelint": "^17.6.0",
+    "stylelint-config-standard": "^40.0.0"
   },
   "dependencies": {
     "dotenv": "^17.3.1",

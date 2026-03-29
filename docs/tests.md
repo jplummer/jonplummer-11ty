@@ -23,7 +23,7 @@ This project includes a suite of validation tests covering content structure, HT
 
 ### Test Categories
 
-**Fast Tests:** `html`, `links`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `rss`
+**Fast Tests:** `html`, `links`, `wisdom`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `indexnow`
 
 **Slow Tests:** `a11y` (launches browser)
 
@@ -60,6 +60,12 @@ Validates structure and format of `src/_data/links.yaml`: date keys (YYYY-MM-DD)
 Validates `src/_data/wisdom-entries.yaml` for the Collected wisdom section (`/wisdom/`): `entries` array, required fields (`slug`, `added`, `tags`, `body`), slug format and uniqueness, `added` as `YYYY-MM-DD`, at least one tag per entry (slug-style tags), no unexpected fields. After that passes, checks `eleventy/utils/wisdom-build.js` output (sort order, `allTags`, slug rules) and runs an Eleventy `getGlobalData()` smoke check so global `wisdom` matches `buildWisdom` of the file on disk.
 
 **Note:** With `--changed`, skips if `wisdom-entries.yaml`, `wisdom.js`, `wisdom-build.js`, or `wisdom-entries-path.js` under the paths above hasn't changed.
+
+### css.js
+
+Runs [Stylelint](https://stylelint.io) on `src/**/*.css` using `.stylelintrc.json` (extends `stylelint-config-standard` with project-specific rule overrides for modern CSS, print styles, and layout-specificity ordering).
+
+**Note:** With `--changed`, exits successfully if no `src/**/*.css` files changed since last commit.
 
 ## HTML Output Tests
 
