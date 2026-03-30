@@ -59,7 +59,7 @@ Validates structure and format of `src/_data/links.yaml`: date keys (YYYY-MM-DD)
 
 Validates `src/_data/wisdom-entries.yaml` for the Collected wisdom section (`/wisdom/`): `entries` array, required fields (`slug`, `added`, `tags`, `body`), slug format and uniqueness, `added` as `YYYY-MM-DD`, at least one tag per entry (slug-style tags), no unexpected fields. After that passes, checks `eleventy/utils/wisdom-build.js` output (sort order, `allTags`, slug rules) and runs an Eleventy `getGlobalData()` smoke check so global `wisdom` matches `buildWisdom` of the file on disk.
 
-**Note:** With `--changed`, skips if `wisdom-entries.yaml`, `wisdom.js`, `wisdom-build.js`, or `wisdom-entries-path.js` under the paths above hasn't changed.
+**Note:** With `--changed`, skips if `src/_data/wisdom-entries.yaml`, `src/_data/wisdom.js`, `wisdom-build.js`, or `wisdom-entries-path.js` under the paths above hasn't changed.
 
 ### css.js
 

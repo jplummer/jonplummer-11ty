@@ -5,6 +5,428 @@
 # Dates are used for RSS and sorting only; they are not shown on the site.
 
 entries:
+  - added: '2026-03-29'
+    tags:
+      - planning
+    body: |-
+      Business case template
+      * We have (problem)
+        * It costs us this (in treasure, pain, missed opportunities)
+      * A way forward is (solution)
+        * It will cost us this to get started (in treasure, people, space, equipment, etc.)
+      * In the first (timeframe) it will yield (result), based on the similar experience of (others)
+        * Ideal for us is if it ramps to producing (result)
+        * Other opportunities it might create include (stretch)
+      * There’s also (alternative solution)
+        * It’s better than the other (because)
+        * It’s worse than the other (because)
+
+      Any part of this you can’t answer can be answered with the help of folks in your org, folks you know or learn about via working the network, or can be left asked but unanswered
+  - added: '2026-03-29'
+    tags:
+      - culture
+    body: |-
+      Change can feel like loss – which of these is operating?
+      * Loss of Control
+      * Loss of Pride
+      * Loss of Narrative (how I think of a thing, what the story is/was)
+      * Loss of Time
+      * Loss of Competence
+      * Loss of Familiarity
+  - added: '2026-03-29'
+    tags:
+      - planning
+    body: |-
+      Design leader’s event loop
+
+      People
+
+      * How can I improve our recruiting pipeline? How can I fill this open position?
+      * Who needs feedback from last week?
+      * Does everyone on this team know what is expected of them?
+
+      Projects
+
+      * Are my projects on track? Is anyone blocked?
+      * Do I need to update anyone or any other teams about project status?
+      * Are there projects on the back burner we could/should start?
+
+      Process
+
+      * What needs to be covered at standup?
+      * What process drops am I noticing that I can nudge?
+      * Are we managing projects the right way?
+      * Am I ready for today’s meetings? Can any be canceled?
+      * What are my goals for the week? How did I do last week?
+      * What do I need to do to be more successful in my job?
+
+      Organization
+
+      * What can I do this week to take a step forward on my goals for the organization?
+      * Do my long-term for goals for the organization still make sense?
+  - added: '2026-03-29'
+    tags:
+      - culture
+    body: |-
+      Activities contributing to happiness
+
+      1. Expressing gratitude
+      2. Practicing acts of kindness
+      3. Learning to forgive (not much cause)
+      4. Committing to your goals (list)
+      5. Cultivating optimism (doing in general)
+      6. Nurturing social relationships
+      7. Increasing flow experiences (fulfilling work and hobbies)
+      8. Practicing religion and spirituality (nature and connection)
+      9. Avoiding overthinking and social comparison
+      10. Developing strategies for coping
+      11. Savoring life’s joys
+      12. Taking care of your body
+  - added: '2026-03-29'
+    tags:
+      - planning
+    body: |-      
+      5-15 template
+        * Name:
+        * Week ending:
+        * Accomplishments for the week: (List completed activities and notable accomplishments. In general, what is working? What is your current situation?)
+        * Priorities for next week: (Be specific.)
+        * Challenges/roadblocks: (Describe potential challenges that may impede your intended tasks/goals.)
+        * Lessons learned/opportunities for improvement: (List any area that might benefit from improvement; questions you are trying to solve; lessons recently learned or relearned.)
+  - added: '2026-03-29'
+    tags:
+      - culture
+    body: |-
+      First/early 1:1 questions
+
+        * What makes you grumpy? How will I know? How can I help?
+        * How do you like feedback – what medium? Routine or as it happens?
+        * How do you like recognition – public or private?
+        * What makes 1:1s valuable for you?
+        * What are your goals for the year? The quarter?
+        * What do you need from your manager?
+        * What do you need from your team?
+        * What do you need from your peers?
+      
+      Check in later
+
+        * Human learning and growth requires the right amount of four things: new challenges, low ego, space to reflect and brainstorm, and timely and clear feedback. How are these four going for you? Is there one you need more or less of?
+  - added: '2026-03-29'
+    tags:
+      - product
+    body: |-
+      Metrics
+      * Highest level: are we making money, can we save money, do we look good? If you can provide defensible metrics from your data for one or more of these, you win.
+      * Next levels:
+        * CAPS. Capacity, Availability, Performance, Scalability. What is your data doing for the company when observed through those lenses?
+        * DURSLEy. Duration, Utilization, Rate, Saturation, Latency, Errors. How is your data looking when observed through those lenses?
+        
+      These may look non-security-oriented at first, but using them to review security is how you differentiate from FUD-spewing insurance sales. Got a vuln or missing patch? Join the club. Got some vendors that say it’s bad? Okay. Got proof that it endangers the company? Now you’re talking "executive dashboard."
+
+      These may look non-design-oriented at first, but using them to review design is how you differentiate from turd-polishers. Got experience debt? Join the club. Got some customer complaints? Okay. Got proof that adoption is hindered, renewals are down, task completion is low? Now you’re talking "executive dashboard."
+  - added: '2026-03-29'
+    tags:
+      - hiring
+    body: |-
+      Phone interview general outline
+
+        * Have they read the job description
+        * About our position, team, and company
+        * Tell me about your experience in relevant positions
+        * Why leaving current position
+        * What’s most difficult about this position
+        * What’s most important about this position
+        * Who did you report to
+        * Who did you work with most regularly
+        * What challenges arose, what successes
+        * Salary expectations – Not to limit you or commit you to a certain dollar figure, but what’s the minimum salary you’d consider right now to accept another position?
+        * Their questions
+        * Thanks and next steps
+
+      Watch for
+
+        * Cogent, coherent
+        * Speaks in specifics, depth available, answers the question
+        * Energetic
+        * Answers demonstrate relevant experience
+        * Verification of job requirements
+        * Asks good questions
+  - added: '2026-03-29'
+    tags:
+      - culture
+    body: |-
+      Cleanup prior to exit
+
+      1. write your job description
+      2. make sure everyone in your org is leveled properly
+      3. If not having a single successor, have at least one person who can handle a primary responsibility that will be caused by your absence. Set this up as a primary development goal for that person.
+      4. Make sure that the vision you have been trying to lean the team and org towards is not only understood by your designers, but by your peers with a sense of commitment towards that vision, as well.
+      5. Have a heart to heart with your CEO or highest accessible leader about your team. Be specific about people's value to you, as well as your sense of their potential. Relay your vision for the team and the company based on your lens.
+      6. Be sure before you leave that there is a development plan in place for all your direct reports.
+  - added: '2026-03-29'
+    tags:
+      - hiring
+    body: |-
+      When hiring designers, watch for evidence of:
+
+        * Research
+        * Documentation informativeness
+        * Handling/resolving complexity
+        * Clarity of communication
+        * Insight and synthesis
+        * Articulateness
+        * UI skills
+        * Bonus skills
+  - added: '2026-03-29'
+    tags:
+      - culture
+    body: |-
+      IDEO evaluation dimensions
+
+        * Client – how well you are working with others
+        * Content – high quality output, useful and usable
+        * Culture – your contribution to the betterment of the firm
+        * Commerce – your contribution to business results
+  - added: '2026-03-29'
+    tags:
+      - culture
+    body: |-
+      Belkin talent management dimensions
+
+        * Job performance – delivering results in the job, meeting goals
+        * Work conduct – manner of working, including attendance, initiative, values
+        * Customer focus – peers, leaders, customers
+        * Job competencies – competent to perform the job
+        * Broad skills – breadth of capabilities beyond strict job requirements
+  - added: '2026-03-29'
+    tags:
+      - culture
+    body: |-
+      Western Washington University core criteria
+
+        * Communication
+        * Leadership
+        * Diversity
+        * Policy compliance
+        * Customer service
+        * Job knowledge
+        * Productivity
+        * Integrity
+        * Engagement
+        * Innovation
+        * Teamwork
+  - added: '2026-03-29'
+    tags:
+      - culture
+    body: |-
+      Belkin values
+
+        * Pursue the ideal
+        * Succeed as a team
+        * Be positive-active
+        * Maintain your edge
+        * Recharge
+  - added: '2026-03-29'
+    tags:
+      - culture
+    body: |-
+      The Home Depot employee values
+
+        * Entrepreneurial spirit
+        * Taking care of our people
+        * Respect for all people
+        * Doing the right thing
+        * Building strong relationships
+        * Giving back
+        * Excellent customer service
+        * Creating shareholder value
+  - added: '2026-03-29'
+    tags:
+      - planning
+    body: |-
+      Things to budget for
+        * Conference attendance including travel and expenses for each person and each new headcount
+        * Training
+        * Books and reports episodic
+        * New lab stuff
+        * Recruiting for lab – put in R&D segment of Input_FY12_Budget
+        * Contractors & their equipment and software
+        * New hires & their equipment and software
+        * Outside firms
+        * Equipment refreshes
+        * Software updates & new tools
+        * Research trips
+        * Eval products (software, apps, hardware)
+        * Development hardware (android phones, tablets, ipad)
+  - added: '2026-03-29'
+    tags:
+      - planning
+    body: |-
+      Things to consider reviewing
+
+      - User goals and pain points
+      - Customer info
+      - CA info
+      - Bugs
+      - Feature requests
+      - PRD and MRD
+      - Current system behavior
+      - Competitive systems/features
+      - Prior design materials
+      - Prior testing results
+      - Prior beta results
+      - Lay reviews
+      - Pro reviews
+      - NPS commentary
+  - added: '2026-03-29'
+    tags:
+      - planning
+    body: |-
+      Things to consider definining
+
+      - Documentation
+      - Errors
+      - Empty state
+      - First run state
+      - Notifications
+      - Non-behavior – when should the system be careful to do nothing
+      - UI workflow
+      - UI structure/architecture
+      - Hardware behavior – buttons, indicators, sound
+      - Port arrangement
+      - Physical setup process
+      - Virtual setup process
+      - On-product information
+      - Inner box arrangement
+  - added: '2026-03-29'
+    tags:
+      - planning
+    body: |-
+      Weekly Review How-to, cribbed from "Getting Things Done" by David Allen
+
+        * Loose Papers - put in inbox to process
+        * Process Notes - review notes for action items, waiting-fors, projects, etc.
+        * Review Past Calendar - lingering actions? Reference data?
+        * Review Upcoming Calendar - capture actions triggered
+        * Empty Your Head - put in writing any new actions, projects, waiting-fors, somedays, etc. not yet captured
+        * Review Action Lists - mark off completed actions, review for reminders of further action steps to record
+        * Review Waiting-For List - record appropriate actions for any needed follow-up. Mark off things no longer waiting
+        * Review Project (and Larger Outcome) Lists - evaluate status of projects and outcomes one by one; ensure at least one action item on each. Browse WIP support material to trigger new actions, completions, waiting-fors, etc.
+        * Review Any Relevant Checklists - to trigger new actions
+        * Review Someday/Maybe List - move newly-active to projects list, delete no longer interesting projectsBe Creative and Courageous - any other hare-brained, creative, thought-provoking, risk-taking ideas to add into the system?
+  - added: '2026-03-29'
+    tags:
+      - experience
+    body: |-
+      Things to make guidelines for
+
+      - Aesthetics
+        - Overall use of color – tonal? Tonal with pops? Poppy?
+        - Flat or modeled?
+        - Translucency, light, materials
+      - Interactions
+        - What to do with various wait times
+        - How to handle errors and messages
+        - Information density
+        - Basic interaction geography
+        - Transitions
+      - Audio
+        - Tone of voice
+      - Discovery
+        - Naming
+        - Icon
+        - Which screenshots to use to show in the app store?
+      - Performance
+        - Startup time
+        - Device discovery time
+        - Search results time
+        - Time through a key day-to-day workflow
+        - Time through setup workflow
+        - Goal: get quickly from launch to the main event
+        - Goal: feel responsive and crisp
+      - For THIS app, what will make it sticky?
+      - For THIS app, what will make it special?
+      - For THIS app, what will demonstrate thoughtfulness?
+  - added: '2026-03-29'
+    tags:
+      - strategy
+    body: |-
+      Strategy basics
+
+      * Mission – why we exist
+      * Values – what we believe in and how we will behave
+      * Vision – what we want to be
+      * Strategy – what our competitive game plan will be
+      * Objective – the ends we will achieve
+      * Scope – the domain in which we operate
+      * Advantage – the means by which we will compete
+      * Balanced scorecard – how we will monitor and implement that plan
+      * Tactics – the specific actions we will take to achieve our objectives
+      * Metrics – the specific metrics we will use to monitor our progress
+
+  - added: '2026-03-29'
+    tags:
+      - process
+    body: |-
+      STAR email template
+
+      * Situation
+      * Objective
+      * Action
+      * Result
+      * Alternative Action
+      * Alternative Result
+  - added: '2026-03-29'
+    tags:
+      - planning
+    body: |-
+      What do we mean by impact?
+
+      Assumption: all below improve revenue and/or profitability, directly or indirectly
+
+        1. Increases reach (addressable market) of in strategic category (sell what we have)
+        2. Delivers needed product in strategic category
+        3. Addresses unmet need of strategic customer/in strategic category
+        4. Improves appeal of product in strategic category
+        5. Develops or delivers strategic technical capability
+        6. Reduces returns or support costs
+        7. Reduces customer complaints
+  - added: '2026-03-29'
+    tags:
+      - culture
+    body: |-
+      How we work together
+
+        * Help me understand – People will have questions about how something works, or why something is done a certain way. Understanding it better helps them do a good job
+        * No surprises
+        * It’s not about you, it’s about the work – Conflict is fine, even helpful, provided it gets resolved. There’s gold at the root of disagreement. But we must fight fair, about the work and not the people
+        * We are here to help each other, so _serve_
+        * We need help from each other, so _ask_
+        * "I understand"
+        * Ramp down to real – It’s a long way from idea to delivery. Support each other in getting progressively more specific in concept, specifications, estimate, and planning. We move an idea into reality together and in steps
+        * Learn from last time – Mistakes will be made. Problems will arise. Proper address of these will mitigate not only the short-term effect of an episode, but reduce the likelihood that the unfortunate event will happen again
+        * Call the ball – If a decision is to be made, make it. Don’t let it linger beyond a reasonable and active investigatory period
+        * Deliver according to “How we work with users” – Every person, directly or indirectly, plays a part in serving our customers and determining wether their interaction with our product will be pleasant or awkward. Helping them is our most serious obligation
+  - added: '2026-03-29'
+    tags:
+      - process
+    body: |-
+      Top engagement questions
+
+      * At work, I have the opportunity to do what I do best every day. – This is the single-best survey item you can ask an employee. If they score high on this, it means they have been assigned a job for which they have the talent to excel. Mastering this begins with companies identifying employees' strengths and putting them in the right roles.
+      * There is someone at work who encourages my development.
+      * At work, my opinions seem to count.
+  - added: '2026-03-29'
+    tags:
+      - planning
+    body: |-
+      Self-Marketing Question
+
+        * What do people think of me now?
+        * What should they think?
+        * Who is the primary audience?
+        * Quality is in - what level of quality do I project?
+        * What is the clear difference between me & the next guy?
   - added: '2026-03-28'
     tags:
       - strategy

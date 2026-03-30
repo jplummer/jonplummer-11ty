@@ -1,6 +1,6 @@
 /**
- * Pure transform: raw wisdom-entries root (from YAML / global data) → sorted entries + allTags.
- * Used by eleventy/config/wisdom-global.js and by tests.
+ * Pure transform: raw wisdom YAML root (from `wisdom-entries.yaml` / global data) → sorted entries + allTags.
+ * Used by `src/_data/wisdom.js` and by tests.
  */
 const crypto = require('crypto');
 
@@ -10,7 +10,7 @@ function slugFromBody(body) {
 }
 
 /**
- * @param {{ entries?: object[] }} root - Parsed root of wisdom-entries.yaml (`entries` array)
+ * @param {{ entries?: object[] }} root - Parsed root of `wisdom-entries.yaml` (`entries` array)
  * @returns {{ entries: object[], allTags: string[] }}
  */
 function buildWisdom(root) {

@@ -172,7 +172,7 @@ function validateWisdomBuildOutput(fileObj, data) {
 }
 
 /**
- * Ensure getGlobalData().wisdom matches buildWisdom(parsed YAML on disk) (src/_data/wisdom.js wiring).
+ * Ensure getGlobalData().wisdom matches buildWisdom(parsed YAML on disk) (`src/_data/wisdom.js`).
  */
 async function validateWisdomGlobalDataMerge(fileObj) {
   try {
