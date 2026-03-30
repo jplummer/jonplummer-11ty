@@ -3,6 +3,8 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 ## 2026-03-29
 
 - Add dual sRGB/P3 APCA checks, draft OKLCH post, inline code style
+- Feat(css): cross-document view transitions
+- Keep collected wisdom in wisdom-entries.yaml; document data cascade
 
 ## 2026-03-28
 
@@ -439,4 +441,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-03-29
+Last deployed on 2026-03-30
