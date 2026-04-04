@@ -1,5 +1,10 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-04-03
+
+- Add spring 2026 posts, OG images, and presentation-to-portfolio tooling
+- Cspell words, dependency refresh, content edits
+
 ## 2026-03-29
 
 - Add dual sRGB/P3 APCA checks, draft OKLCH post, inline code style
