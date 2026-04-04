@@ -16,7 +16,7 @@ module.exports = function (eleventyConfig) {
   
   // Configure data extensions (must be before other configs that use data files)
   configureDataExtensions(eleventyConfig);
-  
+
   // Configure date parsing (must be early, before other configs that use dates)
   configureDateParsing(eleventyConfig);
   

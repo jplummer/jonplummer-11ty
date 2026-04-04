@@ -253,6 +253,7 @@ const TEST_EMOJIS = {
   'spell': '🧙',
   'og-images': '📸',
   'rss': '📡',
+  'portfolio-notes': '📎',
   'seo': '📈',
   'deploy': '🚀',
   'security': '🛡️',
@@ -289,6 +290,7 @@ function getTestDisplayName(testType) {
     'color-contrast': 'Color Contrast',
     'css': 'CSS (Stylelint)',
     'rss': 'RSS Feed',
+    'portfolio-notes': 'Portfolio notes parsing',
     'og-images': 'OG Images',
     'deploy': 'Deploy',
     'security': 'Security Audit'
@@ -316,6 +318,7 @@ function getTestDescription(testType) {
     'color-contrast': 'Color contrast (APCA)',
     'css': 'CSS lint (Stylelint)',
     'rss': 'RSS feed validation',
+    'portfolio-notes': 'Portfolio speaker-notes text parsing',
     'deploy': 'Deployment connectivity',
     'indexnow': 'IndexNow configuration',
     'security': 'Security audit'

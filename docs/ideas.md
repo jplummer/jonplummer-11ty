@@ -4,19 +4,24 @@
 
 - [ ] Portfolio
   - [ ] Presentation-to-portfolio automation (in progress — see notes below)
-    - **Status**: Script drafted, not yet tested with real data
-    - **What exists**: `scripts/content/convert-pdf-pages-with-notes.js` — accepts a PDF (visuals) and a text file (notes), generates markdown with figures and pre-populated figcaptions. Run via `npm run convert-pdf-with-notes`.
-    - **Also done**: Bumped `convert-pdf` to 300 DPI for better image quality on retina screens.
-    - **What we learned about notes export**:
-      - Neither PowerPoint nor Google Slides has a clean "export notes only" feature
-      - PPT "Outline/Plain Text" exports slide content, not notes
-      - Google Slides plain text export includes all slide text, not just notes
-      - Best options: (a) copy/paste notes into a text file with blank lines between slides, or (b) use a Google Apps Script to extract notes from Google Slides into a Google Doc
-    - **Notes parser handles**: blank-line-separated notes, numbered format (`1: note text`), and sequential one-per-line
+    - **Status**: Local **PDF + `.pptx`** path shipped (`pnpm run convert-presentation`); cloud fetch (Drive / Graph) not built yet
+    - **What exists**: `convert-pdf-pages-with-notes.js` (PDF + notes file); `convert-presentation-portfolio.js` + `extract-pptx-notes.py` (PDF + `.pptx` → notes via python-pptx). Parser: `scripts/utils/portfolio-notes.js`. Test: `pnpm run test portfolio-notes`. Docs: [commands.md](commands.md#-pdf-page-conversion).
+    - **Agreed pipeline** (equivalent pages from Google or Microsoft):
+      - **Images**: PDF → PNG (existing scripts). **Notes**: read from `.pptx` (speaker notes live in OOXML; standard PDF export does not carry them reliably).
+      - **Google**: Drive API `files.export` → PDF + PPTX in one automation pass (personal account OAuth first); optional MCP/tools for ad-hoc pulls; repeatable batch via a simple list file (URLs + local paths) if we want several imports at once — no heavy per-deck YAML registry needed for one-shot imports.
+      - **Microsoft**: Graph API download `.pptx`; generate PDF on this Mac with **installed Office** (scripted export) for layout/font fidelity; **LibreOffice** only as an optional fallback or on machines without Office.
+      - **Bridge**: **python-pptx** → numbered notes file → `convert-pdf-pages-with-notes.js` (shared parser in `portfolio-notes.js`).
+    - **Still manual / fallback**: paste notes into a text file if someone skips `.pptx`; Google Apps Script → Doc is deprioritized vs python-pptx on exported PPTX.
+    - **Notes parser** (`portfolio-notes.js`): numbered (`1: …`, `Slide 1: …`, empty `2: ` allowed), blank-line–separated blocks, sequential one-per-line when not numbered
+    - **Next steps** (implementation order):
+      - [x] Python: extract notes from `.pptx` → temp notes file (validate slide count vs PDF page count)
+      - [x] Orchestrator: local `(pdf, pptx) + datePath` → python → `convert-pdf-pages-with-notes`
+      - [ ] Google: OAuth + export PDF + PPTX by file ID or Slides URL
+      - [ ] Microsoft: Graph download PPTX + Office PDF export script
+      - [ ] Optional: batch input file (one URL or path per line; extend if two columns needed)
     - **Open questions**:
-      - [ ] Test with a real presentation to see if the effort is low enough to actually use
-      - [ ] Is copy/pasting notes into a text file tolerable, or does it need to be more automated?
-      - [ ] Would a Google Apps Script for extracting notes be worth setting up?
+      - [ ] Test end-to-end on a real deck (Google and, separately, Microsoft path)
+      - [ ] Office automation fragility on macOS (worth documenting workarounds if updates break AppleScript/JXA)
   - [ ] Look through /talks (current and old) for more talks, and evaluate for inclusion
     - [ ] Talks from Belkin
     - [ ] Small artifacts from Belkin
@@ -38,8 +43,7 @@
   - Fluid typography with clamp() for smooth scaling across breakpoints (see https://modern-css.com/fluid-typography-without-media-queries/)
   - Fluid spacing with clamp() for gutter/spacing tokens
   - Container queries for portfolio grid (respond to container width instead of viewport)
-  - View transitions for smooth page-to-page navigation
-  - View transitions for smooth crossing of layout breakpoints
+  - [x] View transitions for smooth page-to-page navigation
   - color-mix() to derive hover/active colors from base colors (pairs with oklch)
 
 - **Alternate color schemes** and how to trigger them
@@ -64,8 +68,6 @@
   - Filtering and sorting - `--filter`, `--sort` flags
   - CI/CD integration - JUnit XML, GitHub Actions annotations, etc.
 
-- Make `scripts/test/deploy.js` SSH commands use `spawn()` with array arguments instead of string concatenation — matches the pattern already used in `scripts/deploy/deploy.js` and is easier to read
-
 ---
 
 ## MAYBE LET'S DON'T DO THESE
@@ -82,6 +84,7 @@
 - https://llmstxt.org/ ? – low payoff for a text-first blog (spec targets doc-heavy sites); skip `/llms.txt` and parallel `.md` URLs unless a concrete need appears
 - look into https://github.com/ttscoff/md-fixup ? – not needed, good authoring-oriented tests should be enough for now
 - Signal external links (maybe not, the assumption is that 99.9% of links are external, and already written about as such)
+- View transitions for smooth crossing of layout breakpoints (likely to be awkward and late when resize causes a breakpoint transition)
 - **GitHub Actions** (This is not how I'm using GitHub just yet)
   - Automatic builds on push to main branch
   - Run 11ty build process
@@ -92,6 +95,7 @@
   - Monitor deployment success/failure
   - Implement rollback procedures
   - Regular backup of generated site
+- Make `scripts/test/deploy.js` SSH commands use `spawn()` with array arguments instead of string concatenation — matches the pattern already used in `scripts/deploy/deploy.js` and is easier to read
 
 ---
 

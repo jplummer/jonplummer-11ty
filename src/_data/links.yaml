@@ -1,3 +1,20 @@
+2026-04-04:
+  - url: "https://uxdesign.cc/context-engineering-a-repeatable-ai-workflow-for-product-designers-8d7b55b83b2b"
+    title: "Context engineering: A repeatable AI workflow for product designers – Vadym Grin"
+    description: "\"While handling complex reasoning tasks, the accuracy [can go down](https://useai.substack.com/p/beyond-prompts-why-context-management) by as much as 70%. But lots of designers still treat AI like a black box: dump in requirements, hope for magic, refine endlessly when it doesn’t work. The problem isn’t “bad prompting,” it’s not giving AI the information it needs to think clearly.\""
+  - url: "https://www.smashingmagazine.com/2026/03/modal-separate-page-ux-decision-tree/"
+    title: "Modal vs. Separate Page: UX Decision Tree – Vitaly Friedman"
+    description: "\"How do we choose between **showing a modal** to users, and when do we navigate them to a separate, new page? And does it matter at all? Actually, it does. The decision influences users’ flow, their context, their ability to look up details, and with it **error frequency and task completion**. Both options can be disruptive and frustrating — at the wrong time, and at the wrong place."
+  - url: "https://www.linkedin.com/pulse/design-tech-report-2026-from-ux-ax-john-maeda-3elrc/"
+    title: "Design in Tech Report 2026: From UX to AX – John Maeda"
+    description: "\"This year’s Design in Tech Report is about a major shift for designers. We are moving from**UX to AX**: from user experience to agentic experience. In the UX era, designers focused on helping people do things. We designed flows, screens, menus, and paths. We helped users move through software step by step. In the AX era, that changes. Agents can now act on a user’s behalf. So the design problem shifts. It is no longer just, “How do I help someone do this?” It becomes, “How do I help someone know whether it was done well?”\""
+  - url: "https://uxdesign.cc/the-hidden-cost-of-ai-prototypes-that-are-made-to-die-00cc4d491dec"
+    title: The hidden cost of AI prototypes that are made to die – Allie Paschal
+    description: "\"The hidden cost of AI prototypes is that they can’t move forward. And when the underlying output is treated as “disposable” automatically, product teams pay for it later in the product lifecycle through translation work, rewrites, and reduced speed.\""
+  - url: "https://petergpt.github.io/bullshit-benchmark/viewer/index.v2.html?q=sw_tce_01&a=anthropic/claude-opus-4.5@reasoning%3Dnone&b=meta-llama/llama-3.1-8b-instruct@reasoning%3Ddefault"
+    title: BullshitBench Viewer – Peter Gostev
+    description: A benchmark for LLMs scoring their ability to push back on bullshit constructed in a handful of categories, such as fabricated authority, nested nonsense, misapplied mechanism, and wrong unit of analysis. Anthropic models seem to score highly.
+
 2026-03-23:
   - url: "https://blog.mozilla.ai/when-shipping-becomes-too-easy/?__readwiseLocation=￼"
     title: When Shipping Software Becomes Too Easy – Julie Belião

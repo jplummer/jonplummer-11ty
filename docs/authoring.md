@@ -154,25 +154,29 @@ This is a one-time setup. After installation, you can convert PDFs as needed.
 
 ### Converting a PDF
 
-1. Run the conversion script:
-   ```bash
-   npm run convert-pdf "path/to/file.pdf" [year/month]
-   ```
-   
+1. Run the conversion script you need:
+   - **Slides + speaker notes (recommended when you have a `.pptx`):** export a **PDF** and the **same deck as `.pptx`** from Google Slides or PowerPoint, then:
+     ```bash
+     pnpm run convert-presentation "path/to/deck.pdf" "path/to/deck.pptx" [year/month]
+     ```
+     One-time: `pip install -r scripts/content/requirements-deck.txt` and `python3` on your PATH. See [commands.md § PDF page conversion](commands.md#-pdf-page-conversion) for full detail.
+   - **PDF + your own notes file:** `pnpm run convert-pdf-with-notes "file.pdf" "notes.txt" [year/month]`
+   - **PDF only (placeholder captions):** `pnpm run convert-pdf "path/to/file.pdf" [year/month]`
+
    The `year/month` parameter is optional. If omitted, it defaults to the current year/month (e.g., `2024/12`).
-   
+
    If Poppler is not installed, the script will provide clear error messages with installation instructions.
 
-   For technical details on what the script does, see [commands.md](commands.md#-pdf-page-conversion).
+   For technical details on what each command does, see [commands.md](commands.md#-pdf-page-conversion).
 
 2. Copy the generated template into your portfolio item markdown file
 
-3. Add notes for each page in the `<figcaption>` elements
+3. If you used `convert-pdf` only, add notes for each page in the `<figcaption>` elements; with `convert-presentation` or `convert-pdf-with-notes`, captions are pre-filled from the deck or notes file (edit as needed)
 
 ### Example
 
 ```bash
-npm run convert-pdf "Product Trio.pdf" 2022/12
+pnpm run convert-pdf "Product Trio.pdf" 2022/12
 ```
 
 This generates:

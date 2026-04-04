@@ -18,6 +18,7 @@
     "changelog": "node scripts/content/generate-changelog.js",
     "convert-pdf": "node scripts/content/convert-pdf-pages.js",
     "convert-pdf-with-notes": "node scripts/content/convert-pdf-pages-with-notes.js",
+    "convert-presentation": "node scripts/content/convert-presentation-portfolio.js",
     "generate-og-images": "node scripts/content/generate-og-images.js",
     "import-links": "node scripts/content/import-noteplan-links.js",
     "security-audit": "node scripts/security/security-audit.js",

@@ -32,7 +32,7 @@ Recommended process for deploying changes with an up-to-date changelog:
 - `pnpm run test` - List available test types
 - `pnpm run validate` - Quick HTML validity check (shortcut for `pnpm run test html`)
 - `pnpm run test fast` - Run fast tests (excludes slow tests like a11y)
-  - Runs: `html` → `links` → `wisdom` → `internal-links` → `frontmatter` → `markdown` → `spell` → `seo` → `og-images` → `color-contrast` → `css` → `rss` → `indexnow`
+  - Runs: `html` → `links` → `wisdom` → `internal-links` → `frontmatter` → `markdown` → `spell` → `seo` → `og-images` → `color-contrast` → `css` → `rss` → `portfolio-notes` → `indexnow`
 - `pnpm run test all` - Run all tests in sequence (includes slow tests)
   - Runs: everything in `test fast` → `a11y`
 - `pnpm run test [type]` - Run a specific test type
@@ -58,6 +58,8 @@ See [noteplan-import.md](noteplan-import.md) for complete workflow documentation
 
 - `pnpm run changelog` - Generate CHANGELOG.md from git history (auto: `deploy`)
 - `pnpm run convert-pdf` - Convert PDF pages to images for portfolio items
+- `pnpm run convert-presentation` - PDF + matching `.pptx` → images and markdown with speaker notes (see [PDF page conversion](#-pdf-page-conversion))
+- `pnpm run convert-pdf-with-notes` - PDF + hand-authored notes file → same output as above (notes not read from pptx)
 - `pnpm run generate-og-images` - Generate Open Graph images for posts and pages (auto: `deploy`, `dev`)
 - `pnpm run security-audit` - Run security audit and maintenance checks
 - `pnpm run color-gallery` - Generate APCA-aware theme gallery (HTML + JSON) under `scripts/color-explore/output/` — see [color-theme-exploration.md](color-theme-exploration.md)
@@ -124,13 +126,11 @@ The changelog is automatically regenerated before each deployment. When it chang
 
 ### 📑 PDF Page Conversion
 
-- `pnpm run convert-pdf <pdf-file> [year/month]` - Convert PDF pages to images for portfolio display
-
 **For authoring usage** (how to use PDFs in portfolio items), see [authoring.md](authoring.md#pdf-pages).
 
-This script converts each page of a PDF to a PNG image for page-by-page display in portfolio items. The images are saved to `src/assets/images/[year]/[month]/` and the PDF is copied to `src/assets/pdfs/[year]/[month]/` for reference.
+#### `convert-pdf` — PDF only (placeholder captions)
 
-#### Usage
+- `pnpm run convert-pdf <pdf-file> [year/month]` — Converts each page of a PDF to a PNG for portfolio display.
 
 ```bash
 pnpm run convert-pdf "Product Trio.pdf" 2022/12
@@ -138,20 +138,50 @@ pnpm run convert-pdf "Product Trio.pdf" 2022/12
 
 The `year/month` parameter is optional. If omitted, it defaults to the current year/month.
 
-#### What It Does
+**What it does**
 
-1. Converts each PDF page to a PNG image
+1. Converts each PDF page to a PNG image (300 DPI via Poppler `pdftocairo`)
 2. Saves images to `src/assets/images/[year]/[month]/` with naming pattern `[slug]-page-[number].png`
 3. Copies the PDF to `src/assets/pdfs/[year]/[month]/`
-4. Generates a markdown template with figure elements for each page
+4. Prints a markdown template with placeholder text in each `<figcaption>`
 
-#### Output
+#### `convert-pdf-with-notes` — PDF + notes file you write
 
-The script outputs a markdown template that you can copy into your portfolio item markdown file. The template includes:
-- Figure elements for each page with placeholder notes
-- A link to download the full PDF
+- `pnpm run convert-pdf-with-notes <pdf-file> <notes-file> [year/month]` — Same images and layout as `convert-pdf`, but captions come from a plain-text notes file.
 
-You then add notes for each page in the `<figcaption>` elements.
+Notes file formats are documented in the script header in `scripts/content/convert-pdf-pages-with-notes.js`. Parsing is shared with the pptx path via `scripts/utils/portfolio-notes.js` (numbered lines `1: …` / `Slide 1: …`, including empty notes, or blank-line–separated blocks).
+
+#### `convert-presentation` — PDF + matching `.pptx` (speaker notes from the deck)
+
+- `pnpm run convert-presentation <pdf-file> <pptx-file> [year/month]` — Extracts speaker notes from the PowerPoint file with Python (`python-pptx`), then runs the same PDF → PNG + markdown flow as `convert-pdf-with-notes`.
+
+**One-time setup (in addition to Poppler):**
+
+```bash
+pip install -r scripts/content/requirements-deck.txt
+```
+
+Requires `python3` on your `PATH` and the `extract-pptx-notes.py` helper (committed in `scripts/content/`).
+
+**Usage**
+
+```bash
+pnpm run convert-presentation "My Talk.pdf" "My Talk.pptx" 2026/03
+```
+
+Export the PDF and `.pptx` from the same source (e.g. Google Slides → download both, or PowerPoint → Save as PDF + save `.pptx`) so slide order and page count stay aligned. If the slide count from the `.pptx` does not match the PDF page count, the script warns and still uses the PDF for images.
+
+**What it does**
+
+1. Runs `scripts/content/extract-pptx-notes.py` to build a numbered notes file (temporary)
+2. Invokes `convert-pdf-pages-with-notes.js` with that file
+3. You copy the printed markdown into your portfolio post as usual
+
+Planned later (not in this command yet): fetching files from Google Drive / Microsoft Graph; until then, download the pair locally and run the command above.
+
+#### Output (all three flows)
+
+The scripts print a markdown template to stdout. Copy it into your portfolio item. Templates include `<figure>` / `<img>` / `<figcaption>` per page and a link to the full PDF under `/assets/pdfs/`.
 
 ### 🪞 Open Graph Image Generation
 

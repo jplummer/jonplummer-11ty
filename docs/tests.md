@@ -23,7 +23,7 @@ This project includes a suite of validation tests covering content structure, HT
 
 ### Test Categories
 
-**Fast Tests:** `html`, `links`, `wisdom`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `indexnow`
+**Fast Tests:** `html`, `links`, `wisdom`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `portfolio-notes`, `indexnow`
 
 **Slow Tests:** `a11y` (launches browser)
 
@@ -70,6 +70,10 @@ Runs [Stylelint](https://stylelint.io) on `src/**/*.css` using `.stylelintrc.jso
 ### color-contrast.js
 
 Reads `light-dark()` (and legacy dark `:root`) color pairs from `src/assets/css/jonplummer.css`, parses hex or `oklch()` as **raw** values, then computes APCA **Lc** twice: after culori **`toGamut('rgb')`** with **apca-w3** `sRGBtoY`, and after **`toGamut('p3')`** with **`displayP3toY`**. **Pass/fail** (exit code) uses the **sRGB** path only (same thresholds as before). **Warnings** cover large sRGB-vs-P3 Lc divergence (while sRGB still meets minimum) and P3 below minimum while sRGB passes. Shared helpers live in `scripts/utils/apca-dual.js`.
+
+### portfolio-notes.js
+
+Runs fixture assertions against `parseNotesContent()` in `scripts/utils/portfolio-notes.js` (numbered lines including empty slides, `Slide N:` / `N)` variants, blank-line blocks). Guards regression for `convert-pdf-pages-with-notes` and `convert-presentation-portfolio`. With `--changed`, skips if neither the parser nor this test file changed since the last commit.
 
 ## HTML Output Tests
 

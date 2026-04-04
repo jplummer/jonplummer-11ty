@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const { checkPopplerInstalled, getPageCount, convertPage, getDefaultDatePath } = require('../utils/pdf-utils');
+const { parseNotesFile } = require('../utils/portfolio-notes');
 
 /**
  * Convert PDF pages to images and generate markdown template with speaker notes
@@ -10,8 +11,9 @@ const { checkPopplerInstalled, getPageCount, convertPage, getDefaultDatePath } =
  * Usage: node scripts/content/convert-pdf-pages-with-notes.js <pdf-file> <notes-file> [year/month]
  * Example: node scripts/content/convert-pdf-pages-with-notes.js Product\ Trio.pdf notes.txt 2022/12
  * 
- * Notes file format: Plain text file where each slide's notes are separated by blank lines.
- * Notes can contain newlines within them - they'll be preserved as spaces in the output.
+ * Notes file format: Parsed by scripts/utils/portfolio-notes.js — blank-line separated blocks,
+ * or numbered lines "1: text" / "Slide 1: text" / "1) text" (empty notes allowed, e.g. "2: ").
+ * Newlines within a blank-line block are joined with spaces in the output.
  * 
  * Requires: Poppler (install via: brew install poppler)
  */
@@ -118,74 +120,6 @@ try {
 } catch (error) {
   console.error('\nError converting PDF:', error.message);
   process.exit(1);
-}
-
-
-/**
- * Parse notes file - handles multiple formats flexibly
- * 
- * Formats supported:
- * 1. Blank-line separated: Each slide's notes separated by blank lines
- * 2. Numbered lines: "1: note text" or "Slide 1: note text"
- * 3. Sequential: One note per line (simple case)
- */
-function parseNotesFile(notesPath) {
-  const content = fs.readFileSync(notesPath, 'utf8');
-  const lines = content.split(/\r?\n/);
-  
-  // Try to detect format
-  // Check if it's numbered format (e.g., "1: note" or "Slide 1: note")
-  const numberedPattern = /^(?:slide\s+)?(\d+)[:.)]\s*(.+)$/i;
-  const firstLineMatch = lines[0]?.trim().match(numberedPattern);
-  
-  if (firstLineMatch) {
-    // Numbered format - extract by slide number
-    const notesByNumber = {};
-    lines.forEach(line => {
-      const match = line.trim().match(numberedPattern);
-      if (match) {
-        const slideNum = parseInt(match[1], 10);
-        const noteText = match[2].trim();
-        if (noteText) {
-          notesByNumber[slideNum] = noteText;
-        }
-      }
-    });
-    
-    // Convert to array (1-indexed, so index 0 is unused)
-    const maxSlide = Math.max(...Object.keys(notesByNumber).map(Number), 0);
-    const notes = [];
-    for (let i = 1; i <= maxSlide; i++) {
-      notes.push(notesByNumber[i] || '');
-    }
-    return notes;
-  }
-  
-  // Blank-line separated format or sequential
-  const notes = [];
-  let currentNote = [];
-  
-  for (const line of lines) {
-    const trimmed = line.trim();
-    
-    if (trimmed === '') {
-      // Blank line - end of current note, start new one
-      if (currentNote.length > 0) {
-        notes.push(currentNote.join(' ').trim());
-        currentNote = [];
-      }
-    } else {
-      // Part of current note
-      currentNote.push(trimmed);
-    }
-  }
-  
-  // Don't forget the last note if file doesn't end with blank line
-  if (currentNote.length > 0) {
-    notes.push(currentNote.join(' ').trim());
-  }
-  
-  return notes;
 }
 
 /**

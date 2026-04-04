@@ -45,11 +45,13 @@ Shared memory file for both Cursor and Claude Code agents. When you encounter a 
 - OG image preview uses Eleventy's native `renderFile` shortcode (RenderPlugin) + `og-image-body.njk` partial — no custom Nunjucks env needed
 - `generate-og-images.js` has its own Nunjucks env with inline `postDate` — it runs outside Eleventy so needs its own renderer. `extractCssCustomProperties` is now shared from `eleventy/utils/css-utils.js`.
 - Shared PDF conversion functions live in `scripts/utils/pdf-utils.js`
+- **Presentation-to-portfolio (2026-03)**: Notes from `.pptx` (python-pptx); slide images from PDF via `pdf-utils`/Poppler. Google: Drive API export PDF + PPTX (personal OAuth first). Microsoft: Graph download PPTX + scripted PDF export with **Office on Mac** (LibreOffice optional fallback). One-shot CLI args enough; optional batch list (URLs + local paths). Checklist and next steps: `docs/ideas.md` (Selected → Portfolio).
 - User rejected a `readMarkdownFile()` consolidation utility — the pattern repeats across scripts but a shared helper added indirection without clear payoff
 
 ### Gotchas
+
 - `.cursor/rules/*.mdc` files have YAML frontmatter (globs, alwaysApply) that Claude Code ignores — content is still valid markdown after the frontmatter
-- `convert-pdf-with-notes` exists in package.json but isn't documented in commands.md (intentional or oversight — not yet clarified)
+- **Portfolio import**: `pnpm run convert-presentation` (PDF + `.pptx` → notes via `extract-pptx-notes.py` + python-pptx); `convert-pdf-with-notes` for hand-authored notes. See `docs/commands.md` § PDF page conversion; `docs/authoring.md` § Converting a PDF.
 - **Date handling is load-bearing** — `addDateParsing` (timezone-aware) + permalink generation preserve WordPress-era URLs. Do not simplify without verifying every URL remains unchanged.
 - Figure captions use the convention: image line immediately followed by `*caption text*` (no blank line). The `markdown-it-figure` plugin in `eleventy/utils/markdown-it-figure.js` handles this at parse time.
 - Redirects: add entries to `src/_data/redirects.yaml` — the `src/.htaccess.njk` template renders them automatically via the data cascade. No separate script needed.
@@ -61,6 +63,7 @@ Shared memory file for both Cursor and Claude Code agents. When you encounter a 
 - **Do not rename `wisdom-entries.yaml` → `wisdom.yaml`** while `wisdom.js` exists — both would map to global `wisdom` and raw YAML overwrites built `entries`.
 - **Wisdom entry slugs are optional** — `eleventy/utils/wisdom-build.js` derives stable hash-based ids from `body` when `slug` is missing, and `scripts/test/wisdom-yaml.js` only validates `slug` when provided.
 - **Wisdom YAML can break when multiline markdown is serialized as plain inline `body:` strings** — keep wisdom `body` content in block scalar style (`|-`/`|`) when rewriting to avoid mapping/indentation parse errors. Block lines must be indented **more** than the `body:` line (e.g. two extra spaces); same indentation as `body:` is invalid YAML.
+- **Shortcuts: Notes folder export** — Inside **Repeat with Each**, actions (e.g. **Make Markdown from Note**) must take **`Repeat Item`**, not the **Find Notes** output variable (often also labeled **Note**). Using the find output inside the loop triggers **Choose item** with **Done** disabled.
 - **`mergePostsAndLinks` needs `pageNumber === 0` for “page 1” behavior** — only then does it prepend links dated after the newest post. `src/links-feed.njk` must pass `0` (e.g. `mergePostsAndLinks(links, 0)`); otherwise the feed drops newer links and looks frozen at the latest post date.
 - **OG image generation** — Recurses `src/**/*.njk` (excludes `_posts`/`_includes`/`_data`/`assets`). Skips `pagination:` templates (one file → many URLs; use shared `ogImage` like `index.png`). `ogImage: auto` must not trigger perpetual regen: `needsRegeneration` ignores `auto` for path comparison. Deploy OG line uses `filesUpdated` for “unchanged”; ℹ️ only when `ogImage` was absent in front matter but the PNG file already existed.
 

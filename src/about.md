@@ -16,6 +16,7 @@ I lead product design teams for web and mobile apps, edtech, smart home, wi-fi, 
 - Director of User Experience at [Invoca](https://invoca.com/), making AI-assisted conversation intelligence software for marketing and sales folks
 - Mentor at [ADPList.org](https://adplist.org) and [Designed.org](https://designed.org/), here to help designers think well about their work, consider the leap to management, and to help new managers wrestle with their new responsibilities
 - Mentor at [tupu.io](https://tupu.io/), same deal
+- Rank amateur code tinkerer as shown by [my GitHub profile](https://github.com/jplummer/)
 - Husband, father, tinkerer, maker, just handy enough to be trouble
 
 ## Before that
