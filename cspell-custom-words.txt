@@ -34,6 +34,14 @@ Yippy
 
 # Technical Terms & Acronyms
 agentic
+APCA
+DURSL
+Genchi
+genbutsu
+Muda
+Mura
+Muri
+OKLCH
 chatbots
 cursorrules
 dataviz
@@ -71,6 +79,7 @@ Bermúdez
 Brummer
 Bryanne
 Bunyi
+Cagan
 Chenxin
 Cotterill
 Crockford
@@ -83,10 +92,12 @@ Enns
 Fabrizia
 Fogg
 Fornaio
+Gallivan
 Georgiadis
 Germaine
 Gilad
 Gothelf
+Gostev
 Gulshan
 Hamel
 Hardik
@@ -98,6 +109,8 @@ Iasonas
 Imperato
 Itamar
 Jaemi
+jamiem
+juliangautier
 Karri
 Keegan
 Kohler
@@ -123,6 +136,7 @@ Salamon
 Samutin
 Sattell
 Seigler
+Sevier
 Shreya
 Ström
 swyx
@@ -177,11 +191,14 @@ interoperation
 lowball
 mentee
 mentees
+kaizen
 microinteractive
 monitorable
 mori
 narratively
 offsites
+Omakase
+Omiyage
 operationalization
 partialize
 partializing
@@ -210,6 +227,7 @@ threeish
 ultramarathoners
 underdelivering
 undoable
+unergonomic
 unmoderated
 unmodulated
 vibed

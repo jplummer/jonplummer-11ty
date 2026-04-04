@@ -282,7 +282,7 @@ entries:
     tags:
       - planning
     body: |-
-      Things to consider definining
+      Things to consider defining
 
       - Documentation
       - Errors
@@ -305,13 +305,13 @@ entries:
       Weekly Review How-to, cribbed from "Getting Things Done" by David Allen
 
         * Loose Papers - put in inbox to process
-        * Process Notes - review notes for action items, waiting-fors, projects, etc.
+        * Process Notes - review notes for action items, waiting-for, projects, etc.
         * Review Past Calendar - lingering actions? Reference data?
         * Review Upcoming Calendar - capture actions triggered
-        * Empty Your Head - put in writing any new actions, projects, waiting-fors, somedays, etc. not yet captured
+        * Empty Your Head - put in writing any new actions, projects, waiting-for, someday, etc. not yet captured
         * Review Action Lists - mark off completed actions, review for reminders of further action steps to record
         * Review Waiting-For List - record appropriate actions for any needed follow-up. Mark off things no longer waiting
-        * Review Project (and Larger Outcome) Lists - evaluate status of projects and outcomes one by one; ensure at least one action item on each. Browse WIP support material to trigger new actions, completions, waiting-fors, etc.
+        * Review Project (and Larger Outcome) Lists - evaluate status of projects and outcomes one by one; ensure at least one action item on each. Browse WIP support material to trigger new actions, completions, waiting-for, etc.
         * Review Any Relevant Checklists - to trigger new actions
         * Review Someday/Maybe List - move newly-active to projects list, delete no longer interesting projectsBe Creative and Courageous - any other hare-brained, creative, thought-provoking, risk-taking ideas to add into the system?
   - added: '2026-03-29'
@@ -434,7 +434,7 @@ entries:
       Technology Win/Loss Heuristic
       * Worthwhile – does something worthwhile for those who are paying for it (not necessarily the end users)
       * Affordable – monetarily, educationally, etc.
-      * Nondisruptive – must be minimally (i.e. not) disruptive to the current environment (i.e. it may disrupt the incumbent technology but it needs to fit my business or my life)
+      * Non-disruptive – must be minimally (i.e. not) disruptive to the current environment (i.e. it may disrupt the incumbent technology but it needs to fit my business or my life)
   - added: '2026-03-28'
     tags:
       - strategy
