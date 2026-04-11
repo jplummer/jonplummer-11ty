@@ -1,5 +1,10 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-04-11
+
+- Add problem statement post, OG image, links import, about updates
+- Docs, galleries, and root-relative asset paths for file previews
+
 ## 2026-04-10
 
 - Refresh About copy and ideas tracker
