@@ -2,11 +2,8 @@
 
 ## ☑️ Selected
 
-- [ ] **Confirm SVG favicon follows system light/dark** — [SVG favicons that respect theme preference](https://pawelgrzybek.com/svg-favicons-that-respect-theme-preference/) (Pawel Grzybek). `icon.svg` already uses embedded `@media (prefers-color-scheme: …)`; **audit** that we match the article’s guidance, tab icons look right in the browsers we care about, and `head/favicons.njk` (`.ico`, `apple-touch-icon`) is still an acceptable pairing.
-
-- [ ] Portfolio
-
-  - [ ] Presentation-to-portfolio automation (in progress — see notes below)
+- Portfolio
+  - Presentation-to-portfolio automation (in progress — see notes below)
     - **Status**: Local **PDF + `.pptx`** path shipped (`pnpm run convert-presentation`); cloud fetch (Drive / Graph) not built yet
     - **What exists**: `convert-pdf-pages-with-notes.js` (PDF + notes file); `convert-presentation-portfolio.js` + `extract-pptx-notes.py` (PDF + `.pptx` → notes via python-pptx). Parser: `scripts/utils/portfolio-notes.js`. Test: `pnpm run test portfolio-notes`. Docs: [commands.md](commands.md#-pdf-page-conversion).
     - **Agreed pipeline** (equivalent pages from Google or Microsoft):
@@ -15,41 +12,36 @@
       - **Microsoft**: Graph API download `.pptx`; generate PDF on this Mac with **installed Office** (scripted export) for layout/font fidelity; **LibreOffice** only as an optional fallback or on machines without Office.
       - **Bridge**: **python-pptx** → numbered notes file → `convert-pdf-pages-with-notes.js` (shared parser in `portfolio-notes.js`).
     - **Still manual / fallback**: paste notes into a text file if someone skips `.pptx`; Google Apps Script → Doc is deprioritized vs python-pptx on exported PPTX.
-    - **Notes parser** (`portfolio-notes.js`): numbered (`1: …`, `Slide 1: …`, empty `2: ` allowed), blank-line–separated blocks, sequential one-per-line when not numbered
+    - **Notes parser** (`portfolio-notes.js`): numbered (`1: …`, `Slide 1: …`, empty `2:`  allowed), blank-line–separated blocks, sequential one-per-line when not numbered
     - **Next steps** (implementation order):
-      - [x] Python: extract notes from `.pptx` → temp notes file (validate slide count vs PDF page count)
-      - [x] Orchestrator: local `(pdf, pptx) + datePath` → python → `convert-pdf-pages-with-notes`
-      - [ ] Google: OAuth + export PDF + PPTX by file ID or Slides URL
-      - [ ] Microsoft: Graph download PPTX + Office PDF export script
-      - [ ] Optional: batch input file (one URL or path per line; extend if two columns needed)
+      - Python: extract notes from `.pptx` → temp notes file (validate slide count vs PDF page count)
+      - Orchestrator: local `(pdf, pptx) + datePath` → python → `convert-pdf-pages-with-notes`
+      - Google: OAuth + export PDF + PPTX by file ID or Slides URL
+      - Microsoft: Graph download PPTX + Office PDF export script
+      - Optional: batch input file (one URL or path per line; extend if two columns needed)
     - **Open questions**:
-      - [ ] Test end-to-end on a real deck (Google and, separately, Microsoft path)
-      - [ ] Office automation fragility on macOS (worth documenting workarounds if updates break AppleScript/JXA)
-
-  - [ ] Look through /talks (current and old) for more talks, and evaluate for inclusion
-    - [ ] Talks from Belkin
-    - [ ] Small artifacts from Belkin
-    - [ ] Talks from Invoca
-    - [ ] Talks from CSky
-    - [ ] Talks from Cayuse
+      - Test end-to-end on a real deck (Google and, separately, Microsoft path)
+      - Office automation fragility on macOS (worth documenting workarounds if updates break AppleScript/JXA)
+  - Look through /talks (current and old) for more talks, and evaluate for inclusion
+    - Talks from Belkin
+    - Small artifacts from Belkin
+    - Talks from Invoca
+    - Talks from CSky
+    - Talks from Cayuse
 
 ## 🔮 Future Consideration
 
-### 🖍 Also…  
+### 🖍 Also…
 
-- https://kagi.com/search?q=contemporary+blog+styling+2026 ?
-
-- https://github.com/steipete/agent-rules ?
-
-- https://github.com/Invoca/prompt-library ?
-
+- [https://kagi.com/search?q=contemporary+blog+styling+2026](https://kagi.com/search?q=contemporary+blog+styling+2026) ?
+- [https://github.com/steipete/agent-rules](https://github.com/steipete/agent-rules) ?
+- [https://github.com/Invoca/prompt-library](https://github.com/Invoca/prompt-library) ?
 - **Modern CSS techniques to consider**
-  - Fluid typography with clamp() for smooth scaling across breakpoints (see https://modern-css.com/fluid-typography-without-media-queries/)
+  - Fluid typography with clamp() for smooth scaling across breakpoints (see [https://modern-css.com/fluid-typography-without-media-queries/](https://modern-css.com/fluid-typography-without-media-queries/))
   - Fluid spacing with clamp() for gutter/spacing tokens
   - Container queries for portfolio grid (respond to container width instead of viewport)
-  - [x] View transitions for smooth page-to-page navigation
+  - View transitions for smooth page-to-page navigation
   - color-mix() to derive hover/active colors from base colors (pairs with oklch)
-
 - **Alternate color schemes** and how to trigger them
   - According to build/deploy day?
   - Day of view regardless of when built?
@@ -57,13 +49,10 @@
   - Random selection from a handful of options, cookied, change on reload?
   - Animated color cycle over a long time scale?
   - Animated color cycle triggered by window.blur()?
-
 - **Progressive enhancements**
   - Preview external links
   - ?
-
-- **POSSE** (more tags for different types of entries? https://standard.site? BSky/AT bridging?)
-
+- **POSSE** (more tags for different types of entries? [https://standard.site](https://standard.site)? BSky/AT bridging?)
 - **Test suite enhancements**
   - Enhanced progress indicators - Streaming JSON, real-time updates
   - formatTable() - Tabular format (maybe later)
@@ -85,8 +74,8 @@
   - webpagetest.org
   - Core Web Vitals
   - PageSpeed Insights
-- https://llmstxt.org/ ? – low payoff for a text-first blog (spec targets doc-heavy sites); skip `/llms.txt` and parallel `.md` URLs unless a concrete need appears
-- look into https://github.com/ttscoff/md-fixup ? – not needed, good authoring-oriented tests should be enough for now
+- [https://llmstxt.org/](https://llmstxt.org/) ? – low payoff for a text-first blog (spec targets doc-heavy sites); skip `/llms.txt` and parallel `.md` URLs unless a concrete need appears
+- look into [https://github.com/ttscoff/md-fixup](https://github.com/ttscoff/md-fixup) ? – not needed, good authoring-oriented tests should be enough for now
 - Signal external links (maybe not, the assumption is that 99.9% of links are external, and already written about as such)
 - View transitions for smooth crossing of layout breakpoints (likely to be awkward and late when resize causes a breakpoint transition)
 - **GitHub Actions** (This is not how I'm using GitHub just yet)
@@ -105,153 +94,153 @@
 
 ## DONE
 
-- [x] Reinvestigate color scheme (2026-03-28)
+- Reinvestigate color scheme (2026-03-28)
   - Live theme tokens use **OKLCH** in `src/assets/css/jonplummer.css` (`light-dark(oklch(...), ...)`). Gallery pipeline, `/color-test/`, `suggest-colors.js`, and contrast checking are documented in [color-theme-exploration.md](color-theme-exploration.md) and the Maintenance bullets in [commands.md](commands.md).
   - Archived intent: extra color inspiration (gallery, terminals, wild presets); OKLCH as the authoring space ([vivid colors / gamut](https://modern-css.com/vivid-colors-beyond-srgb/) as reference). **Canceled / deferred:** accessibility-test-script upgrades per [accessibility-test-limitations](archive/accessibility-test-limitations.md).
-- [x] Collected Wisdom: `wisdom-entries.yaml`, `/wisdom/`, per-tag pages, `/wisdom-feed.xml`, `test wisdom`, nav + sitemap; one-shot YAML generator removed in favor of editing YAML only (2026-03-25)
-- [x] Security, needlessly custom code, unused code, and bloat audit (2026-02-21)
+- Collected Wisdom: `wisdom-entries.yaml`, `/wisdom/`, per-tag pages, `/wisdom-feed.xml`, `test wisdom`, nav + sitemap; one-shot YAML generator removed in favor of editing YAML only (2026-03-25)
+- Security, needlessly custom code, unused code, and bloat audit (2026-02-21)
   - Deduped extractCssCustomProperties, simplified dotenv loading, trimmed unused exports, added nunjucks as explicit dep
-- [x] **REMINDER (2026-02-19)**: Is the stronger memory.mdc language working? — Yes, confirmed unprompted updates in recent sessions
-- [x] "content warning" way to hide text of out-of-norm posts (2026-02-11)
+- **REMINDER (2026-02-19)**: Is the stronger memory.mdc language working? — Yes, confirmed unprompted updates in recent sessions
+- "content warning" way to hide text of out-of-norm posts (2026-02-11)
   - Implemented `contentWarning` frontmatter field with expandable `<details>` wrapper
-- [x] Verify `.cursor/rules/eleventy-debugging.mdc` is being used by Cursor (2026-02-10)
+- Verify `.cursor/rules/eleventy-debugging.mdc` is being used by Cursor (2026-02-10)
   - Rule has `alwaysApply: true` and is confirmed loaded in every conversation
   - Observed influencing agent behavior (assuming Eleventy works correctly, checking native capabilities first)
-- [x] Look for and quash needlessly custom code in favor of native eleventy capabilities or more direct custom code (2026-02-10)
+- Look for and quash needlessly custom code in favor of native eleventy capabilities or more direct custom code (2026-02-10)
   - Replaced ~180-line cheerio figure transform with ~80-line markdown-it plugin
   - Replaced redirect generation script + build event with a Nunjucks template using the data cascade
   - Fixed pre-existing image aspect ratio distortion (CSS `height: auto`)
   - Evaluated date handling, decided it's load-bearing and should not be simplified
-- [x] Make capturing links during the workday (from another machine) easier somehow (2026-01-21)
+- Make capturing links during the workday (from another machine) easier somehow (2026-01-21)
   - Implemented NotePlan import workflow with `pnpm run import-links`
   - Removed GitHub-based form approach
   - Automatic YAML formatting and duplicate detection
   - See docs/noteplan-import.md
-- [x] Reorganize legacy .cursorrules into Cursor's preferred user rules and Project-specific rules structure, commit to GitHub, and cache outside of project (2026-01-11)
-- [x] Explore codebase for deadwood  (2026-01-11) 
-- [x] Implement IndexNow support (2026-01-11)
-- [x] Refactor markdown renderer configuration - replaced HTML blocks with `{% portraitGrid %}` paired shortcode, eliminating need for preprocessor entirely (2026-01-11)
-- [x] Fix spellcheck and SEO test filtering - improved `--changed` flag behavior for spell and seo-meta tests (2026-01-11)
-- [x] Implement quick authoring-related tests just for new changes (2026-01-10)
-- [x] Fix spell checking, since it totally doesn't catch anything (2026-01-10)
-- [x] Fix spelling across site (2026-01-10)
-- [x] Address Dependabot and `pnpm audit` warnings (2026-01-06)
-- [x] Setup SSH access to GitHub from personal laptop (2026-01-06)
-- [x] pnpm vs npm (2026-01-05)
-- [x] Make color playground page with style switcher (2025-12-24)
-- [x] Watch for ahrefs improvement in image size complaints this weekend (it worked! ahrefs health score now 100 and steady) (2025-12-24)
-- [x] Address `test seo-meta` warnings (2025-12-24)
-  - [x] Catalog allowable exceptions and make the test be fine with those
-- [x] I make a lot of dumb spelling errors. Implement spell checking somehow (2025-12-23)
-- [x] Typography improvements: modular scale, baseline grid, and print styles (2025-12-08)
-- [x] Add spinners to deploy script for lengthy operations (2025-12-08)
-- [x] Refactor redirects to use data-driven Apache 301 redirects (2025-12-06)
-- [x] Improve test output formatting and UX (2025-12-06)
-- [x] Fix npm audit vulnerabilities (2025-12-06)
-- [x] Handle drafts (2025-12-22)
-- [x] gzip css (2025-12-22)
-- [x] handle "image too large" ahrefs feedback (2025-12-22)
-  - [x] Automate image optimization (see https://www.aleksandrhovhannisyan.com/blog/eleventy-the-good-the-bad-and-the-possum/#5-it-has-an-excellent-image-plugin and https://bholmes.dev/blog/picture-perfect-image-optimization/ )
-- [x] Make portfolio layout not depend on embedded HTML
-  - [x] markdown-it-attrs and markdown-it-container?
-  - [x] Custom shortcodes
-- [x] Portfolio image widths: full, 2/3, 1/3, smaller for mobile images
-- [x] Make sure margins etc are good in portfolio items, using blog posts as the example
-- [x] Fix timezone issues (going forward reflect real authoring date as I experienced it, but don't break incoming links by changing URLs to existing content) (2025-12-22)
-- [x] Watch ahrefs this weekend for "URL changed" errors; site health should be at or near 100 (2025-12-22)
-- [x] Optimize deploy output and eliminate redundant builds (2025-12-07)
-- [x] Extract spinner frames to shared utility for easier experimentation (2025-12-07)
-- [x] Convert links-yaml test to unified format and clean up old format code (2025-12-07)
-- [x] Establish method for PDF-based portfolio post offering, to enable… (2025-12-07)
-- [x] Expand Cayuse accomplishments portfolio piece
-- [x] Expand product trio portfolio piece
-- [x] Add Invoca interview presentation as portfolio piece
-- [x] Put descriptions on the main portfolio page (from item frontmatter)
-- [x] Improve generated ogImage styling (2025-12-07)
-- [x] Improve ogImage index.png, which currently has redundant stuff in it (2025-12-07)
-- [x] Refactor HEAD includes to eliminate redundancy and fix index page issues (2025-12-04)
-- [x] Update favicon setup to modern minimal standard (2025-12-04)
-- [x] Curly quotes (2025-12-04)
-- [x] Switch drafts from folder-based to frontmatter-based (2025-12-03)
-- [x] Modularize .eleventy.js configuration (2025-12-03)
-- [x] Add date range titles to paginated pages (2025-12-03)
-- [x] Fix horizontal scrollbar on narrow viewports for articles with code blocks (2025-12-03)
-- [x] Unify exit handling and summary printing across all scripts (2025-12-03)
-- [x] Fix sitemap pagination to only include existing pages (2025-11-30)
-- [x] Fix sitemap pagination, improve titles, and fix unescaped quotes (2025-11-30)
-- [x] Improve SEO validation for redirect pages and unescaped quotes (2025-11-30)
-- [x] Fix timezone issues (relect real authoring date as I experienced it, but don't break incoming links by changing URLs to existing content) (2025-12-11)
-- [x] Add SITE_DOMAIN environment variable for centralized domain configuration (2025-11-26)
-- [x] Security audit improvements and deployment fixes (2025-11-26)
-- [x] Enable smart quotes in markdown and titles (2025-11-26)
-- [x] Address `npm test rss-feed` issues (2025-11-26)
-- [x] Image optimization (2025-11-26)
-- [x] Refactor test suite and fix nested anchor issue (2025-11-26)
-- [x] Consolidate templates and utilities, fix test issues (2025-11-26)
-- [x] Security improvements: passwordless SSH, CSP hardening, dependency fixes (2025-11-25)
-- [x] Improve OG image styling and fix color issues (2025-11-24)
-- [x] Fix portfolio figure caption styling and update alt texts (2025-11-24)
-- [x] Convert post titles from Title Case to sentence case (2025-11-24)
-- [x] Implement comprehensive SEO and OG image generation (2025-11-23)
-- [x] Fix meta description validation and add missing descriptions (2025-11-22)
-- [x] Move h1 elements from content to template (2025-11-22)
-- [x] Convert error pages to Markdown and unify link underlining (2025-11-22)
-- [x] Add pre-deploy validation to prevent authoring mistakes (2025-11-22)
-- [x] Add portrait-grid utility for multi-column image layouts in portfolio details (2025-11-20)
-- [x] Implement dedicated portfolio detail layout with full-width images and siloed nav (2025-11-19)
-- [x] Implement image captions for portfolio items (2025-11-19)
-- [x] Implement responsive portfolio grid layout (2025-11-19)
-- [x] Standardize all portfolio images to use HTML figure syntax (2025-11-19)
-- [x] Add humans.txt and AI-blocking robots.txt (2025-11-19)
-- [x] Add AI agent instructions to README (2025-11-19)
-- [x] Reorganize project structure and improve documentation (2025-11-19)
-- [x] Move _misc to structured docs/ folder (2025-11-19)
-- [x] Move .htaccess to src/ so it gets copied to build (2025-11-19)
-- [x] Add schema.org structured data for SEO (Person, WebSite, BlogPosting) (2025-11-15)
-- [x] Add SEO meta descriptions to all posts (2025-11-15)
-- [x] Add links.yaml validation script (2025-11-15)
-- [x] Add post template for new blog posts (2025-11-15)
-- [x] Update color scheme to DR10 (2025-11-15)
-- [x] Add documentation maintenance scripts and reorganize project docs (2025-11-15)
-- [x] Add security headers to .htaccess (2025-11-01)
-- [x] Add 404 and 500 error pages with permalinks (2025-11-01)
-- [x] Add YAML validation to tests (2025-11-01)
-- [x] Fix YAML formatting in links.yaml (2025-11-01)
-- [x] Fix nested paragraphs in link descriptions (2025-11-01)
-- [x] Update link rendering to show newest links on page 1 (2025-11-01)
-- [x] Refactor HTML validation and test organization (2025-11-01)
-- [x] Clean up defunct capabilities and improve naming consistency (2025-11-01)
-- [x] Add _site to .gitignore and remove from git tracking (2025-11-01)
-- [x] Simplify link checking scripts and update notes formatting (2025-11-01)
-- [x] Add sitemap generation (2025-10-05)
-- [x] Fix feed issues (2025-10-05)
-- [x] Implement remaindered links feature (2025-10-05)
-- [x] Fixed post dates on individual post pages (2025-10-05)
-- [x] Vertical rhythm (2025-10-05)
-- [x] Refine test scripts (2025-10-05)
-- [x] Add active page highlighting to navigation (2025-10-04)
-- [x] Improve typographic hierarchy with letterspacing (2025-10-04)
-- [x] Meta descriptions and validation (2025-09-27)
-- [x] Added cursor rules file (2025-09-27)
-- [x] Redirect /feed/ (2025-09-20)
-- [x] Scripts; validation and deployment (2025-09-14)
-- [x] Tests (2025-09-14)
-- [x] Improved link checking (2025-09-14)
-- [x] SFTP → rsync migration (2025-09-14)
-- [x] Documentation cleanup (2025-09-14)
-- [x] Paging fixes (2025-09-14)
-- [x] Dark mode (2025-09-14)
-- [x] Site nav fixes (2025-09-13)
-- [x] Added aria-label (2025-09-13)
-- [x] Added sitemap (2025-09-13)
-- [x] Basic validation issues (2025-09-13)
-- [x] Pagination and single posts (2025-09-07)
-- [x] Index pagination (2025-09-06)
-- [x] Fixed some basic rendering issues that had lingered for too long (2025-09-01)
-- [x] Portfolio index loads items now (2025-09-01)
-- [x] Got rid of frontmatter rendering problems for main pages (2025-09-01)
-- [x] Basic typography and spacing for blog posts (2025-09-01)
-- [x] Building up templates and includes (2025-08-30)
-- [x] Added post and portfolio tags to posts (2025-08-30)
-- [x] Copied in images from wp.local project (2025-08-30)
-- [x] Reworked Posts structure (2025-08-30)
+- Reorganize legacy .cursorrules into Cursor's preferred user rules and Project-specific rules structure, commit to GitHub, and cache outside of project (2026-01-11)
+- Explore codebase for deadwood  (2026-01-11) 
+- Implement IndexNow support (2026-01-11)
+- Refactor markdown renderer configuration - replaced HTML blocks with `{% portraitGrid %}` paired shortcode, eliminating need for preprocessor entirely (2026-01-11)
+- Fix spellcheck and SEO test filtering - improved `--changed` flag behavior for spell and seo-meta tests (2026-01-11)
+- Implement quick authoring-related tests just for new changes (2026-01-10)
+- Fix spell checking, since it totally doesn't catch anything (2026-01-10)
+- Fix spelling across site (2026-01-10)
+- Address Dependabot and `pnpm audit` warnings (2026-01-06)
+- Setup SSH access to GitHub from personal laptop (2026-01-06)
+- pnpm vs npm (2026-01-05)
+- Make color playground page with style switcher (2025-12-24)
+- Watch for ahrefs improvement in image size complaints this weekend (it worked! ahrefs health score now 100 and steady) (2025-12-24)
+- Address `test seo-meta` warnings (2025-12-24)
+  - Catalog allowable exceptions and make the test be fine with those
+- I make a lot of dumb spelling errors. Implement spell checking somehow (2025-12-23)
+- Typography improvements: modular scale, baseline grid, and print styles (2025-12-08)
+- Add spinners to deploy script for lengthy operations (2025-12-08)
+- Refactor redirects to use data-driven Apache 301 redirects (2025-12-06)
+- Improve test output formatting and UX (2025-12-06)
+- Fix npm audit vulnerabilities (2025-12-06)
+- Handle drafts (2025-12-22)
+- gzip css (2025-12-22)
+- handle "image too large" ahrefs feedback (2025-12-22)
+  - Automate image optimization (see [https://www.aleksandrhovhannisyan.com/blog/eleventy-the-good-the-bad-and-the-possum/#5-it-has-an-excellent-image-plugin](https://www.aleksandrhovhannisyan.com/blog/eleventy-the-good-the-bad-and-the-possum/#5-it-has-an-excellent-image-plugin) and [https://bholmes.dev/blog/picture-perfect-image-optimization/](https://bholmes.dev/blog/picture-perfect-image-optimization/) )
+- Make portfolio layout not depend on embedded HTML
+  - markdown-it-attrs and markdown-it-container?
+  - Custom shortcodes
+- Portfolio image widths: full, 2/3, 1/3, smaller for mobile images
+- Make sure margins etc are good in portfolio items, using blog posts as the example
+- Fix timezone issues (going forward reflect real authoring date as I experienced it, but don't break incoming links by changing URLs to existing content) (2025-12-22)
+- Watch ahrefs this weekend for "URL changed" errors; site health should be at or near 100 (2025-12-22)
+- Optimize deploy output and eliminate redundant builds (2025-12-07)
+- Extract spinner frames to shared utility for easier experimentation (2025-12-07)
+- Convert links-yaml test to unified format and clean up old format code (2025-12-07)
+- Establish method for PDF-based portfolio post offering, to enable… (2025-12-07)
+- Expand Cayuse accomplishments portfolio piece
+- Expand product trio portfolio piece
+- Add Invoca interview presentation as portfolio piece
+- Put descriptions on the main portfolio page (from item frontmatter)
+- Improve generated ogImage styling (2025-12-07)
+- Improve ogImage index.png, which currently has redundant stuff in it (2025-12-07)
+- Refactor HEAD includes to eliminate redundancy and fix index page issues (2025-12-04)
+- Update favicon setup to modern minimal standard (2025-12-04)
+- Curly quotes (2025-12-04)
+- Switch drafts from folder-based to frontmatter-based (2025-12-03)
+- Modularize .eleventy.js configuration (2025-12-03)
+- Add date range titles to paginated pages (2025-12-03)
+- Fix horizontal scrollbar on narrow viewports for articles with code blocks (2025-12-03)
+- Unify exit handling and summary printing across all scripts (2025-12-03)
+- Fix sitemap pagination to only include existing pages (2025-11-30)
+- Fix sitemap pagination, improve titles, and fix unescaped quotes (2025-11-30)
+- Improve SEO validation for redirect pages and unescaped quotes (2025-11-30)
+- Fix timezone issues (relect real authoring date as I experienced it, but don't break incoming links by changing URLs to existing content) (2025-12-11)
+- Add SITE_DOMAIN environment variable for centralized domain configuration (2025-11-26)
+- Security audit improvements and deployment fixes (2025-11-26)
+- Enable smart quotes in markdown and titles (2025-11-26)
+- Address `npm test rss-feed` issues (2025-11-26)
+- Image optimization (2025-11-26)
+- Refactor test suite and fix nested anchor issue (2025-11-26)
+- Consolidate templates and utilities, fix test issues (2025-11-26)
+- Security improvements: passwordless SSH, CSP hardening, dependency fixes (2025-11-25)
+- Improve OG image styling and fix color issues (2025-11-24)
+- Fix portfolio figure caption styling and update alt texts (2025-11-24)
+- Convert post titles from Title Case to sentence case (2025-11-24)
+- Implement comprehensive SEO and OG image generation (2025-11-23)
+- Fix meta description validation and add missing descriptions (2025-11-22)
+- Move h1 elements from content to template (2025-11-22)
+- Convert error pages to Markdown and unify link underlining (2025-11-22)
+- Add pre-deploy validation to prevent authoring mistakes (2025-11-22)
+- Add portrait-grid utility for multi-column image layouts in portfolio details (2025-11-20)
+- Implement dedicated portfolio detail layout with full-width images and siloed nav (2025-11-19)
+- Implement image captions for portfolio items (2025-11-19)
+- Implement responsive portfolio grid layout (2025-11-19)
+- Standardize all portfolio images to use HTML figure syntax (2025-11-19)
+- Add humans.txt and AI-blocking robots.txt (2025-11-19)
+- Add AI agent instructions to README (2025-11-19)
+- Reorganize project structure and improve documentation (2025-11-19)
+- Move _misc to structured docs/ folder (2025-11-19)
+- Move .htaccess to src/ so it gets copied to build (2025-11-19)
+- Add schema.org structured data for SEO (Person, WebSite, BlogPosting) (2025-11-15)
+- Add SEO meta descriptions to all posts (2025-11-15)
+- Add links.yaml validation script (2025-11-15)
+- Add post template for new blog posts (2025-11-15)
+- Update color scheme to DR10 (2025-11-15)
+- Add documentation maintenance scripts and reorganize project docs (2025-11-15)
+- Add security headers to .htaccess (2025-11-01)
+- Add 404 and 500 error pages with permalinks (2025-11-01)
+- Add YAML validation to tests (2025-11-01)
+- Fix YAML formatting in links.yaml (2025-11-01)
+- Fix nested paragraphs in link descriptions (2025-11-01)
+- Update link rendering to show newest links on page 1 (2025-11-01)
+- Refactor HTML validation and test organization (2025-11-01)
+- Clean up defunct capabilities and improve naming consistency (2025-11-01)
+- Add _site to .gitignore and remove from git tracking (2025-11-01)
+- Simplify link checking scripts and update notes formatting (2025-11-01)
+- Add sitemap generation (2025-10-05)
+- Fix feed issues (2025-10-05)
+- Implement remaindered links feature (2025-10-05)
+- Fixed post dates on individual post pages (2025-10-05)
+- Vertical rhythm (2025-10-05)
+- Refine test scripts (2025-10-05)
+- Add active page highlighting to navigation (2025-10-04)
+- Improve typographic hierarchy with letterspacing (2025-10-04)
+- Meta descriptions and validation (2025-09-27)
+- Added cursor rules file (2025-09-27)
+- Redirect /feed/ (2025-09-20)
+- Scripts; validation and deployment (2025-09-14)
+- Tests (2025-09-14)
+- Improved link checking (2025-09-14)
+- SFTP → rsync migration (2025-09-14)
+- Documentation cleanup (2025-09-14)
+- Paging fixes (2025-09-14)
+- Dark mode (2025-09-14)
+- Site nav fixes (2025-09-13)
+- Added aria-label (2025-09-13)
+- Added sitemap (2025-09-13)
+- Basic validation issues (2025-09-13)
+- Pagination and single posts (2025-09-07)
+- Index pagination (2025-09-06)
+- Fixed some basic rendering issues that had lingered for too long (2025-09-01)
+- Portfolio index loads items now (2025-09-01)
+- Got rid of frontmatter rendering problems for main pages (2025-09-01)
+- Basic typography and spacing for blog posts (2025-09-01)
+- Building up templates and includes (2025-08-30)
+- Added post and portfolio tags to posts (2025-08-30)
+- Copied in images from wp.local project (2025-08-30)
+- Reworked Posts structure (2025-08-30)
