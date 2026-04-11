@@ -134,7 +134,7 @@ Posts use `/assets/images/og/YYYY-MM-DD-post-slug.png`. Pages use the permalink-
 
 ### Preview
 
-Preview at `http://localhost:8080/og-image-preview/` (excluded from deployment)
+Preview at `http://localhost:8080/og-image-preview/` (excluded from deployment), or open `_site/og-image-preview/index.html` from disk after a build — styles resolve there too (relative asset URLs).
 
 For technical details on generation, see [commands.md](commands.md#-open-graph-image-generation).
 

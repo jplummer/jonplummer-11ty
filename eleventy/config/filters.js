@@ -6,6 +6,7 @@
  * markdown processing, and data manipulation filters.
  */
 
+const path = require("path");
 const { normalizeDate, formatPostDate, formatDateRange } = require("../utils/date-utils");
 const { extractCssCustomProperties } = require("../utils/css-utils");
 const { mergePostsAndLinks } = require("../utils/merge-posts-links");
@@ -17,6 +18,29 @@ const { mergePostsAndLinks } = require("../utils/merge-posts-links");
  * @param {object} md - Markdown renderer instance
  */
 function configureFilters(eleventyConfig, md) {
+  /**
+   * Prefix so asset URLs work from `file://` (e.g. `_site/og-image-preview/index.html`) and
+   * from any served path depth. Empty string at output root; `../` per subdirectory level.
+   *
+   * `page.outputPath` may be absolute (includes `_site/...`); strip through `_site/` before
+   * counting dirname depth so we do not emit `../../..` by accident.
+   */
+  eleventyConfig.addFilter("rootRelativePathPrefix", (outputPath) => {
+    if (!outputPath || typeof outputPath !== "string") {
+      return "";
+    }
+    let rel = outputPath.replace(/\\/g, "/");
+    const stripped = rel.replace(/^.*\/_site\//, "");
+    rel = stripped === rel ? rel.replace(/^_site\//, "") : stripped;
+    rel = rel.replace(/^\.\/+/, "");
+    const dir = path.posix.dirname(rel);
+    if (dir === "." || dir === "") {
+      return "";
+    }
+    const depth = dir.split("/").filter(Boolean).length;
+    return "../".repeat(depth);
+  });
+
   // Add custom Nunjucks filter: limit
   eleventyConfig.addFilter("limit", function (array, limit) {
     if (!Array.isArray(array)) return array;

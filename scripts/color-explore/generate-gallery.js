@@ -11,7 +11,7 @@
  *   node scripts/color-explore/generate-gallery.js --monochrome
  *   node scripts/color-explore/generate-gallery.js --include-failed
  *   node scripts/color-explore/generate-gallery.js --no-extras   (hue sweep / random / mono only)
- *   node scripts/color-explore/generate-gallery.js --wild 12
+ *   node scripts/color-explore/generate-gallery.js --wild 12   (wild pack cycles 10 recipe families)
  *   node scripts/color-explore/generate-gallery.js --analogous-spread 36 --split-spread 32 --harmony-skew 8
  *   (Harmony: one “Harmony lab” card in HTML; themes.json still has one entry per recipe.)
  *
@@ -328,13 +328,17 @@ function rnd(a, b) {
 }
 
 /**
- * Higher chroma, complementary / triadic / neon recipes (not a hue sweep).
+ * Higher-chroma experimental recipes (not a hue sweep). Ten families (`i % 10`).
+ * All tokens stay OKLCH objects for APCA nudge + `oklch()` export. CSS gradients are
+ * not used here: band fills on the real site use `background-color: var(--token)`, and
+ * gradients want `background` / `background-image` instead — a gallery-only layer could
+ * be added later if we want visible mesh gradients in previews only.
  */
 function buildWildThemes(count) {
   const themes = [];
   for (let i = 0; i < count; i++) {
     const h = rnd(0, 360);
-    const kind = i % 5;
+    const kind = i % 10;
     let label;
     let light;
     let dark;
@@ -444,7 +448,7 @@ function buildWildThemes(count) {
         'link-visited-color': o(0.66, cPop * 0.5, (h + 285) % 360),
         'link-active-color': o(0.76, cPop * 0.75, (h + 125) % 360)
       };
-    } else {
+    } else if (kind === 4) {
       label = `Wild · clash (${Math.round(h)}°)`;
       const c1 = rnd(0.12, 0.26);
       const c2 = rnd(0.15, 0.3);
@@ -469,6 +473,139 @@ function buildWildThemes(count) {
         'link-hover-color': o(0.84, c1 * 0.95, (h + 275) % 360),
         'link-visited-color': o(0.68, c2 * 0.55, (h + 305) % 360),
         'link-active-color': o(0.8, c1 * 0.85, (h + 70) % 360)
+      };
+    } else if (kind === 5) {
+      const hInk = (h + 268 + rnd(0, 24)) % 360;
+      const hNeon = (h + rnd(95, 125)) % 360;
+      label = `Wild · voltage (${Math.round(h)}°)`;
+      const cEdge = rnd(0.12, 0.22);
+      light = {
+        'content-background-color': o(rnd(0.93, 0.99), rnd(0.05, 0.12), hInk),
+        'background-color': o(rnd(0.76, 0.86), rnd(0.09, 0.18), (hInk + 22) % 360),
+        'text-color': o(0.12, rnd(0.06, 0.12), (hInk + 178) % 360),
+        'text-color-light': o(0.34, rnd(0.07, 0.14), (hInk + 188) % 360),
+        'border-color': o(0.66, cEdge, hInk),
+        'link-color': o(0.5, rnd(0.22, 0.34), hNeon),
+        'link-hover-color': o(0.44, rnd(0.2, 0.32), (hNeon + 38) % 360),
+        'link-visited-color': o(0.4, rnd(0.14, 0.22), (hNeon + 175) % 360),
+        'link-active-color': o(0.48, rnd(0.2, 0.3), (hNeon + 72) % 360)
+      };
+      dark = {
+        'content-background-color': o(rnd(0.1, 0.16), rnd(0.12, 0.2), hInk),
+        'background-color': o(rnd(0.03, 0.08), rnd(0.14, 0.22), (hInk + 18) % 360),
+        'text-color': o(0.94, rnd(0.04, 0.09), (hInk + 48) % 360),
+        'text-color-light': o(0.72, rnd(0.07, 0.12), hInk),
+        'border-color': o(0.3, cEdge * 1.1, (hInk + 35) % 360),
+        'link-color': o(0.84, rnd(0.22, 0.34), hNeon),
+        'link-hover-color': o(0.9, rnd(0.2, 0.3), (hNeon + 42) % 360),
+        'link-visited-color': o(0.72, rnd(0.14, 0.22), (hNeon + 178) % 360),
+        'link-active-color': o(0.88, rnd(0.2, 0.28), (hNeon + 68) % 360)
+      };
+    } else if (kind === 6) {
+      const hScream = (h + rnd(150, 210)) % 360;
+      const cScream = rnd(0.14, 0.26);
+      label = `Wild · spectral rim (${Math.round(h)}°)`;
+      light = {
+        'content-background-color': o(rnd(0.96, 0.995), rnd(0.02, 0.06), h),
+        'background-color': o(rnd(0.88, 0.94), rnd(0.04, 0.1), (h + rnd(8, 28)) % 360),
+        'text-color': o(rnd(0.14, 0.22), cScream, hScream),
+        'text-color-light': o(rnd(0.32, 0.42), rnd(0.08, 0.16), (hScream + 35) % 360),
+        'border-color': o(0.76, rnd(0.06, 0.14), (h + 55) % 360),
+        'link-color': o(0.48, rnd(0.18, 0.3), (h + 108) % 360),
+        'link-hover-color': o(0.42, rnd(0.18, 0.28), (h + 200) % 360),
+        'link-visited-color': o(0.38, rnd(0.12, 0.2), (h + 252) % 360),
+        'link-active-color': o(0.46, rnd(0.16, 0.26), (h + 145) % 360)
+      };
+      dark = {
+        'content-background-color': o(rnd(0.18, 0.26), rnd(0.06, 0.12), (h + 12) % 360),
+        'background-color': o(rnd(0.08, 0.14), rnd(0.08, 0.14), h),
+        'text-color': o(rnd(0.88, 0.96), rnd(0.05, 0.1), hScream),
+        'text-color-light': o(rnd(0.68, 0.8), rnd(0.08, 0.14), (hScream + 30) % 360),
+        'border-color': o(0.36, rnd(0.1, 0.18), (h + 60) % 360),
+        'link-color': o(0.78, rnd(0.18, 0.3), (h + 112) % 360),
+        'link-hover-color': o(0.86, rnd(0.16, 0.28), (h + 205) % 360),
+        'link-visited-color': o(0.7, rnd(0.12, 0.2), (h + 255) % 360),
+        'link-active-color': o(0.82, rnd(0.16, 0.26), (h + 150) % 360)
+      };
+    } else if (kind === 7) {
+      const hMint = (h + rnd(130, 170)) % 360;
+      label = `Wild · saltwater taffy (${Math.round(h)}°)`;
+      const cPastel = rnd(0.07, 0.16);
+      const cPop = rnd(0.2, 0.32);
+      light = {
+        'content-background-color': o(rnd(0.95, 0.99), cPastel, h),
+        'background-color': o(rnd(0.86, 0.93), cPastel * 1.05, hMint),
+        'text-color': o(0.2, rnd(0.06, 0.12), (h + 195) % 360),
+        'text-color-light': o(0.42, rnd(0.05, 0.11), (h + 210) % 360),
+        'border-color': o(0.78, rnd(0.06, 0.12), (hMint + 40) % 360),
+        'link-color': o(0.46, cPop, (h + rnd(70, 110)) % 360),
+        'link-hover-color': o(0.4, cPop, (h + rnd(200, 250)) % 360),
+        'link-visited-color': o(0.38, cPop * 0.55, (h + 285) % 360),
+        'link-active-color': o(0.44, cPop * 0.92, (h + 140) % 360)
+      };
+      dark = {
+        'content-background-color': o(rnd(0.22, 0.3), cPastel * 1.15, h),
+        'background-color': o(rnd(0.14, 0.2), cPastel, hMint),
+        'text-color': o(0.92, rnd(0.05, 0.1), (h + 200) % 360),
+        'text-color-light': o(0.72, rnd(0.06, 0.12), (h + 215) % 360),
+        'border-color': o(0.4, rnd(0.08, 0.14), (hMint + 35) % 360),
+        'link-color': o(0.74, cPop * 0.9, (h + rnd(75, 115)) % 360),
+        'link-hover-color': o(0.82, cPop * 0.85, (h + rnd(205, 255)) % 360),
+        'link-visited-color': o(0.66, cPop * 0.52, (h + 288) % 360),
+        'link-active-color': o(0.78, cPop * 0.8, (h + 135) % 360)
+      };
+    } else if (kind === 8) {
+      const hMud = (h + rnd(240, 300)) % 360;
+      label = `Wild · bruise (${Math.round(h)}°)`;
+      const cMud = rnd(0.1, 0.2);
+      light = {
+        'content-background-color': o(rnd(0.38, 0.48), cMud, hMud),
+        'background-color': o(rnd(0.28, 0.38), cMud * 1.05, (hMud + 18) % 360),
+        'text-color': o(rnd(0.88, 0.96), rnd(0.04, 0.09), (hMud + 140) % 360),
+        'text-color-light': o(rnd(0.72, 0.82), rnd(0.06, 0.11), (hMud + 155) % 360),
+        'border-color': o(0.52, rnd(0.08, 0.14), (hMud + 50) % 360),
+        'link-color': o(0.55, rnd(0.16, 0.26), (hMud + 200) % 360),
+        'link-hover-color': o(0.5, rnd(0.14, 0.24), (hMud + 230) % 360),
+        'link-visited-color': o(0.46, rnd(0.12, 0.2), (hMud + 85) % 360),
+        'link-active-color': o(0.52, rnd(0.14, 0.22), (hMud + 115) % 360)
+      };
+      dark = {
+        'content-background-color': o(rnd(0.14, 0.22), cMud * 1.1, hMud),
+        'background-color': o(rnd(0.06, 0.12), cMud * 1.15, (hMud + 15) % 360),
+        'text-color': o(0.9, rnd(0.05, 0.1), (hMud + 130) % 360),
+        'text-color-light': o(0.7, rnd(0.07, 0.12), (hMud + 145) % 360),
+        'border-color': o(0.32, rnd(0.1, 0.16), (hMud + 45) % 360),
+        'link-color': o(0.78, rnd(0.16, 0.26), (hMud + 205) % 360),
+        'link-hover-color': o(0.86, rnd(0.14, 0.24), (hMud + 235) % 360),
+        'link-visited-color': o(0.7, rnd(0.12, 0.2), (hMud + 88) % 360),
+        'link-active-color': o(0.82, rnd(0.14, 0.22), (hMud + 118) % 360)
+      };
+    } else {
+      const hC = (h + rnd(170, 200)) % 360;
+      const hM = (hC + 180) % 360;
+      label = `Wild · lasergrid (${Math.round(h)}°)`;
+      const cLine = rnd(0.14, 0.24);
+      light = {
+        'content-background-color': o(rnd(0.97, 0.995), rnd(0.01, 0.04), (h + 210) % 360),
+        'background-color': o(rnd(0.88, 0.94), rnd(0.03, 0.08), (h + 225) % 360),
+        'text-color': o(0.16, rnd(0.05, 0.1), (h + 240) % 360),
+        'text-color-light': o(0.38, rnd(0.04, 0.09), (h + 250) % 360),
+        'border-color': o(0.62, cLine, hC),
+        'link-color': o(0.48, rnd(0.2, 0.3), hC),
+        'link-hover-color': o(0.42, rnd(0.2, 0.3), hM),
+        'link-visited-color': o(0.38, rnd(0.14, 0.22), (hC + 90) % 360),
+        'link-active-color': o(0.46, rnd(0.18, 0.28), hM)
+      };
+      dark = {
+        'content-background-color': o(rnd(0.12, 0.18), rnd(0.06, 0.12), (h + 215) % 360),
+        'background-color': o(rnd(0.06, 0.1), rnd(0.08, 0.14), (h + 230) % 360),
+        'text-color': o(0.94, rnd(0.04, 0.08), (h + 235) % 360),
+        'text-color-light': o(0.74, rnd(0.06, 0.1), (h + 245) % 360),
+        'border-color': o(0.34, cLine * 1.05, hC),
+        'link-color': o(0.82, rnd(0.2, 0.3), hC),
+        'link-hover-color': o(0.88, rnd(0.18, 0.28), hM),
+        'link-visited-color': o(0.72, rnd(0.14, 0.22), (hC + 95) % 360),
+        'link-active-color': o(0.86, rnd(0.18, 0.28), hM)
       };
     }
 
@@ -1111,6 +1248,8 @@ function renderHtml(visibleSections, meta) {
     }
     .gallery-ui h1.page-title { margin-top: 0; font-size: 1.25rem; font-weight: 600; }
     .gallery-ui .meta { color: #aaa; font-size: 0.9rem; margin-bottom: 1.5rem; max-width: 62rem; line-height: 1.45; }
+    .gallery-ui .meta a { color: #9ec5fe; }
+    .gallery-ui .meta a:hover { text-decoration: underline; }
     .gallery-ui .gallery-section-details {
       margin-bottom: 1.75rem;
       width: 100%;
@@ -1129,15 +1268,26 @@ function renderHtml(visibleSections, meta) {
       gap: 0.5rem;
       user-select: none;
     }
-    .gallery-ui .gallery-section-summary::-webkit-details-marker { display: none; }
-    .gallery-ui .gallery-section-summary::before {
-      content: '▸';
-      flex-shrink: 0;
-      font-size: 0.75rem;
-      color: #888;
-      transition: transform 0.15s ease;
+    .gallery-ui .gallery-section-summary::-webkit-details-marker,
+    .gallery-ui .tokens summary::-webkit-details-marker {
+      display: none;
     }
-    .gallery-ui .gallery-section-details[open] > .gallery-section-summary::before {
+    /* Isosceles right triangle: 90° at tip; closed → tip right, open → rotate 90° → tip down */
+    .gallery-ui .gallery-section-summary::before,
+    .gallery-ui .tokens summary::before {
+      content: '';
+      flex-shrink: 0;
+      width: 0.45rem;
+      height: 0.9rem;
+      display: block;
+      background-color: #b0b0b0;
+      clip-path: polygon(100% 50%, 0 0, 0 100%);
+      transition: transform 0.18s ease;
+      /* Centroid of the triangle (~33% 50%): rotates without drifting up like tip-pivot (100% 50%) */
+      transform-origin: 33.333% 50%;
+    }
+    .gallery-ui .gallery-section-details[open] > .gallery-section-summary::before,
+    .gallery-ui .tokens[open] > summary::before {
       transform: rotate(90deg);
     }
     .gallery-ui .gallery-section-h {
@@ -1279,10 +1429,23 @@ function renderHtml(visibleSections, meta) {
       margin-bottom: 0.35rem;
     }
     .gallery-ui .tokens { margin-top: 0.75rem; }
-    .gallery-ui .tokens summary { cursor: pointer; font-size: 0.85rem; color: #ccc; list-style: revert; }
-    /* Site content-warning styles append “Show text” to every summary — not wanted here */
-    .gallery-ui .tokens summary::after { content: none !important; }
-    .gallery-ui .tokens details[open] > summary::after { content: none !important; }
+    .gallery-ui .tokens summary {
+      cursor: pointer;
+      font-size: 0.85rem;
+      color: #ccc;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      user-select: none;
+    }
+    /* Site summary::after (Show text / Hide text) — gallery uses triangle carets only */
+    .gallery-ui .tokens summary::after,
+    .gallery-ui .tokens details[open] > summary::after,
+    .gallery-ui .gallery-section-summary::after,
+    .gallery-ui .gallery-section-details[open] > .gallery-section-summary::after {
+      content: none !important;
+    }
     .gallery-ui .code { font-size: 0.65rem; overflow: auto; max-height: 12rem; background: #111; padding: 0.5rem; border-radius: 4px; color: #ddd; border: 1px solid #333; }
 
     /*
@@ -1403,7 +1566,7 @@ function renderHtml(visibleSections, meta) {
   <!-- Regenerate: pnpm run color-gallery -->
   <h1 class="page-title">Color theme gallery</h1>
   <p class="meta">${escapeHtml(meta)}</p>
-  <p class="meta" style="margin-top:-0.75rem">Previews load <code>src/assets/css/jonplummer.css</code> via a relative URL — open this file from the repo (<code>scripts/color-explore/output/index.html</code>) so styles resolve. Each block heading toggles expand/collapse.</p>
+  <p class="meta" style="margin-top:-0.75rem">Previews load <code>src/assets/css/jonplummer.css</code> via a relative URL — open this file from the repo (<code>scripts/color-explore/output/index.html</code>) so styles resolve. Each block heading toggles expand/collapse. Other tools: <a href="../../font-explore/output/index.html">Font stack preview</a> · <a href="../../../_site/og-image-preview/index.html">OG image preview</a> (run <code>pnpm run build</code> first, then open that path from disk).</p>
 ${bodyContent}
   <script>
 (function () {

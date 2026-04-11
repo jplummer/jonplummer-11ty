@@ -30,7 +30,7 @@ Initial values come from `DEFAULT_HEADING_STACK_ID`, `DEFAULT_BODY_STACK_ID`, an
 
 ## Outputs
 
-- `scripts/font-explore/output/index.html` — the lab page.
+- `scripts/font-explore/output/index.html` — the lab page. The header links to the **color theme gallery** and **OG image preview** (`_site/og-image-preview/index.html` after `pnpm run build`).
 - `scripts/font-explore/output/stacks.json` — stack list, `siteDefaultStackId`, and `defaults` (`headingStackId`, `bodyStackId`, `syncStacks`).
 
 ## Shipping a pair

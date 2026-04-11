@@ -443,7 +443,7 @@ ${HOME_PREVIEW_SCOPED_CSS}
 </head>
 <body class="font-gallery-ui">
   <h1 class="page-title">Font stack preview</h1>
-  <p class="meta">Single home-page slice at <strong>live</strong> type scale and <code>light-dark()</code> colors from <code>jonplummer.css</code>. Open from the repo so the stylesheet resolves. Regenerate: <code>pnpm run font-gallery</code>. <a href="../../color-explore/output/index.html">Color gallery</a>.</p>
+  <p class="meta">Single home-page slice at <strong>live</strong> type scale and <code>light-dark()</code> colors from <code>jonplummer.css</code>. Open from the repo so the stylesheet resolves. Regenerate: <code>pnpm run font-gallery</code>. Other tools: <a href="../../color-explore/output/index.html">Color theme gallery</a> · <a href="../../../_site/og-image-preview/index.html">OG image preview</a> (run <code>pnpm run build</code> first, then open that path from disk).</p>
 ${card}
 </body>
 </html>`;

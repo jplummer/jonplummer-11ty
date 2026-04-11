@@ -744,6 +744,14 @@ header a.skip:focus {
   margin-bottom: var(--spacing-lg);
 }
 
+.preview-tool-links p {
+  margin-bottom: var(--spacing-sm);
+}
+
+.preview-tool-links p:last-child {
+  margin-bottom: 0;
+}
+
 .preview-section {
   margin: var(--spacing-lg) 0;
 }

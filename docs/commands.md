@@ -241,11 +241,12 @@ The `--force` flag will:
 
 #### Previewing Images
 
-**Preview the template at: `http://localhost:8080/og-image-preview/`**
+**Preview the template at: `http://localhost:8080/og-image-preview/`** — or open `_site/og-image-preview/index.html` from disk after a build; the main stylesheet and favicons use **relative** URLs so `file://` works at any output depth.
 
 This preview page shows:
 - Live examples of the OG image template with sample data
 - A gallery of all generated OG images
+- Links to the **color** and **font** static preview HTML under `scripts/` (relative links work when you open `_site/og-image-preview/index.html` from disk after `pnpm run build`; with dev-only browsing, open those files from the repo instead)
 
 You can also preview generated images in other ways:
 
