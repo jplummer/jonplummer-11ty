@@ -3,6 +3,8 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 ## 2026-04-10
 
 - Refresh About copy and ideas tracker
+- Tidy ideas tracker and executive prototype post
+- Update agent memory for ideas.md list style
 
 ## 2026-04-03
 
