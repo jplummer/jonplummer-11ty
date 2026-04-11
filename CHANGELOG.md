@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-04-10
+
+- Refresh About copy and ideas tracker
+
 ## 2026-04-03
 
 - Add spring 2026 posts, OG images, and presentation-to-portfolio tooling
@@ -446,4 +450,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-04-04
+Last deployed on 2026-04-11
