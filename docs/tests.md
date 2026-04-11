@@ -45,7 +45,7 @@ Validates markdown syntax using `markdownlint-cli2` and custom checks for unclos
 
 ### spell.js
 
-Validates spelling in markdown and YAML files using `cspell`. Uses custom dictionary (`cspell-custom-words.txt`), excludes drafts, reports warnings (not errors).
+Validates spelling in markdown and YAML files using `cspell`. Uses custom dictionary (`cspell-custom-words.txt`), excludes drafts, reports warnings (not errors). `cspell` 10.x requires Node **>= 22.18** (see root `package.json` `engines`).
 
 **Note:** Also supports `node scripts/test/spell.js <file>` to check specific files.
 

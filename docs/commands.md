@@ -280,7 +280,7 @@ SITE_DOMAIN=jonplummer.com
 The script automatically checks:
 - **pnpm audit**: Scans for known vulnerabilities in dependencies
 - **pnpm outdated**: Identifies packages that need updates
-- **Node.js version**: Verifies you're using an LTS version (even-numbered versions: 18, 20, 22, etc.)
+- **Node.js version**: Verifies you're using an LTS version (even-numbered versions: 18, 20, 22, etc.). This repo also declares **`engines.node` >= 22.18** (required by `cspell` 10.x); use that or newer for installs and `pnpm test spell`.
 - **Deprecated packages**: Checks for deprecated pnpm packages
 - **Environment variables**: Ensures `.env` is properly ignored by git
 - **Package.json**: Validates configuration

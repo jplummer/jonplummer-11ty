@@ -7,12 +7,14 @@
 
 /**
  * Registers Eleventy plugins.
- * 
+ *
  * @param {object} eleventyConfig - Eleventy configuration object
+ * @returns {Promise<void>}
  */
-function configurePlugins(eleventyConfig) {
-  // RSS plugin
-  eleventyConfig.addPlugin(require("@11ty/eleventy-plugin-rss"));
+async function configurePlugins(eleventyConfig) {
+  // RSS plugin (v3+ is ESM-only — dynamic import from CommonJS config)
+  const rssModule = await import("@11ty/eleventy-plugin-rss");
+  eleventyConfig.addPlugin(rssModule.default);
 
   // Syntax highlighting
   eleventyConfig.addPlugin(require("@11ty/eleventy-plugin-syntaxhighlight"));

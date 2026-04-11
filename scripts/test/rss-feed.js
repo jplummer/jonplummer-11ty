@@ -2,7 +2,6 @@
 
 const fs = require('fs');
 const path = require('path');
-// Use Node's built-in DOMParser (available in Node 20+)
 const { DOMParser } = require('@xmldom/xmldom');
 const { addFile, addIssue } = require('../utils/test-results');
 

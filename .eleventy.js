@@ -12,7 +12,7 @@ const configurePassthrough = require("./eleventy/config/passthrough");
 const configureEvents = require("./eleventy/config/events");
 const configurePreprocessors = require("./eleventy/config/preprocessors");
 
-module.exports = function (eleventyConfig) {
+module.exports = async function (eleventyConfig) {
   
   // Configure data extensions (must be before other configs that use data files)
   configureDataExtensions(eleventyConfig);
@@ -24,7 +24,7 @@ module.exports = function (eleventyConfig) {
   const md = configureMarkdown(eleventyConfig);
   
   // Configure plugins
-  configurePlugins(eleventyConfig);
+  await configurePlugins(eleventyConfig);
   
   // Configure filters (needs markdown renderer)
   configureFilters(eleventyConfig, md);
