@@ -1,7 +1,7 @@
 ---
 title: /about
 description: Jon Plummer is a UX design leader and mentor with experience at Invoca, Cayuse, Belkin, and Medtronic. Learn about his design leadership philosophy and career.
-date: 2026-01-06
+date: 2026-04-10
 layout: base.njk
 tags: page
 permalink: /about/
@@ -9,26 +9,28 @@ ogImage: /assets/images/og/about.png
 ---
 (updated {{ date | postDate }})
 
-I lead product design teams for web and mobile apps, edtech, smart home, wi-fi, consumer electronics, medical devices, and more.
+I lead design teams that turn complex software – from AI-era SaaS to IoT, medical devices, and edtech – into experiences people can figure out without training or guesswork.
 
 ## Currently
 
-- Director of User Experience at [Invoca](https://invoca.com/), making AI-assisted conversation intelligence software for marketing and sales folks
-- Mentor at [ADPList.org](https://adplist.org) and [Designed.org](https://designed.org/), here to help designers think well about their work, consider the leap to management, and to help new managers wrestle with their new responsibilities
-- Mentor at [tupu.io](https://tupu.io/), same deal
-- Rank amateur code tinkerer as shown by [my GitHub profile](https://github.com/jplummer/)
+- Director of User Experience at [Invoca](https://invoca.com/), leading UX through an AI transformation: shipping conversational AI products and building the team and practices to sustain it
+- Mentor at [ADPList.org](https://adplist.org) and [Designed.org](https://designed.org/), here to help designers think about their work, consider the leap to management, and to help new managers wrestle with their new responsibilities
+- Mentor at [tupu.io](https://tupu.io/), same deal but open to more types of workers
+- AI-assisted vibe-coder, as evidenced by [my GitHub profile](https://github.com/jplummer/)
 - Husband, father, tinkerer, maker, just handy enough to be trouble
 
 ## Before that
 
 - Director of User Experience at [Cayuse](https://cayuse.com/), a research management SaaS provider
-- Director of User Experience at [Concentric Sky](https://concentricsky.com/) for numerous ed-tech and post-secondary educational clients and the [Badgr](https://www.parchment.com/platform/higher-education/issuing/) microcredential platform (which is now part of Instructure Parchment)
-- Senior Director of Product Experience Design at [Belkin](https://belkin.com/), especially for [Wemo](https://wemo.com/) and [Linksys](https://linksys.com/)
-- UX Manager at [Medtronic MiniMed](https://www.medtronicdiabetes.com/)
-- Volunteer at [The Compton Initiative](https://justdogood.org/)
-- Volunteer at [The Great LA River Cleanup](https://folar.org/cleanup/)
+- Director of User Experience at [Concentric Sky](https://concentricsky.com/) for numerous ed-tech and post-secondary educational clients and the [Badgr](https://www.parchment.com/platform/higher-education/issuing/) microcredential platform (which is now part of [Instructure Parchment](https://www.instructure.com/parchment))
+- Senior Director of Product Experience Design at [Belkin](https://belkin.com/), especially for [Wemo](https://www.belkin.com/support-article/?articleNum=335419) and [Linksys](https://linksys.com/)
+- UX Manager at [Medtronic MiniMed](https://www.medtronicdiabetes.com/)
+- Volunteer at [The Compton Initiative](https://justdogood.org/)
+- Volunteer at [The Great LA River Cleanup](https://folar.org/cleanup/)
 
-I love to develop and lead designers and researchers, and I love to help folks marry hardware, software, and services to produce pleasant, fulfilling product experiences that solve real-world problems. I have a [portfolio](https://jonplummer.io/) that's not super-duper up-to-date, and a [scratchpad of thoughts and notes](https://jonplummer.com/) about design and design leadership and making. I also have a handful of [patents](https://patents.google.com/?inventor=Jon+Plummer&num=100) in IoT, software, and medical device technology.
+I love to develop and lead designers and researchers. My working belief – reinforced by watching AI reshape what software can do – is that the need for clear, coordinated, learnable product experiences is only growing. The hard part isn't generating ideas; it's proving they're sound and then delivering them well. I love helping teams do that from a basis of real customer knowledge.
+
+I have a [portfolio](https://jonplummer.io/) and a [scratchpad of thoughts and notes](https://jonplummer.com/) on design, AI, and making things. I also have [20+ patents](https://patents.google.com/?inventor=Jon+Plummer&num=100) in IoT, software, and medical device technology.
 
 * * *
 
@@ -54,13 +56,13 @@ We worked in a highly technical industry, and while it was difficult at times to
 
 Jon is an extremely thoughtful and caring leader who is always willing to support his team in any way that he can. On top of his deep knowledge and expertise in UX, Jon has an amazing ability to foster a work environment of open communication and trust. When working on challenging projects, I always felt comfortable asking him for advice and never felt like I was asking a "dumb question". Despite being spread thin across different projects, Jon was always engaged and asked insightful questions to help define and shape ambiguous client requests and projects. I am extremely grateful to have had the opportunity to learn from Jon early in my UX career. His guidance and mentorship the past few years has made me a more confident designer and any team would be beyond lucky to have him.
 
-(There are more recommendations on [my LinkedIn profile](https://www.linkedin.com/in/jplummer/details/recommendations/).)
+(There are more recommendations on [my LinkedIn profile](https://www.linkedin.com/in/jplummer/details/recommendations/).)
 
 ## Awards
 
-- **International Design Excellence Awards, Finalist** Issued by Industrial Designers Society of America (IDSA), Aug 2013, for WeMo iOS app
-- **User Experience Award: Silver** for Best Consumer Device Issued by User Experience Awards, May 2013, for WeMo by Belkin
-- **International Design Excellence Awards, Silver** Issued by Industrial Designers Society of America (IDSA), Sep 2012, for Belkin Next Generation Router Family
+- **International Design Excellence Awards, Finalist** Issued by Industrial Designers Society of America (IDSA), Aug 2013, for WeMo iOS app
+- **User Experience Award: Silver** for Best Consumer Device Issued by User Experience Awards, May 2013, for WeMo by Belkin
+- **International Design Excellence Awards, Silver** Issued by Industrial Designers Society of America (IDSA), Sep 2012, for Belkin Next Generation Router Family
 
 ## Patents
 
@@ -80,4 +82,4 @@ Jon is an extremely thoughtful and caring leader who is always willing to suppor
 
 * * *
 
-See more via [my LinkedIn profile](https://linkedin.com/in/jplummer), and message me there if you have something to say. Or email [me@jonplummer.com](mailto:me@jonplummercom?Subject=Mail%20from%20jonplummer.name).
+See more via [my LinkedIn profile](https://linkedin.com/in/jplummer), and message me there if you have something to say. Or email [me@jonplummer.com](mailto:me@jonplummercom?Subject=Mail%20from%20jonplummer.name).

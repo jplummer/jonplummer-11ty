@@ -2,7 +2,10 @@
 
 ## ☑️ Selected
 
+- [ ] **Confirm SVG favicon follows system light/dark** — [SVG favicons that respect theme preference](https://pawelgrzybek.com/svg-favicons-that-respect-theme-preference/) (Pawel Grzybek). `icon.svg` already uses embedded `@media (prefers-color-scheme: …)`; **audit** that we match the article’s guidance, tab icons look right in the browsers we care about, and `head/favicons.njk` (`.ico`, `apple-touch-icon`) is still an acceptable pairing.
+
 - [ ] Portfolio
+
   - [ ] Presentation-to-portfolio automation (in progress — see notes below)
     - **Status**: Local **PDF + `.pptx`** path shipped (`pnpm run convert-presentation`); cloud fetch (Drive / Graph) not built yet
     - **What exists**: `convert-pdf-pages-with-notes.js` (PDF + notes file); `convert-presentation-portfolio.js` + `extract-pptx-notes.py` (PDF + `.pptx` → notes via python-pptx). Parser: `scripts/utils/portfolio-notes.js`. Test: `pnpm run test portfolio-notes`. Docs: [commands.md](commands.md#-pdf-page-conversion).
@@ -22,6 +25,7 @@
     - **Open questions**:
       - [ ] Test end-to-end on a real deck (Google and, separately, Microsoft path)
       - [ ] Office automation fragility on macOS (worth documenting workarounds if updates break AppleScript/JXA)
+
   - [ ] Look through /talks (current and old) for more talks, and evaluate for inclusion
     - [ ] Talks from Belkin
     - [ ] Small artifacts from Belkin
