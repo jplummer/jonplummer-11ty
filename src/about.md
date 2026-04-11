@@ -1,7 +1,7 @@
 ---
 title: /about
 description: Jon Plummer is a UX design leader and mentor with experience at Invoca, Cayuse, Belkin, and Medtronic. Learn about his design leadership philosophy and career.
-date: 2026-04-10
+date: 2026-04-12
 layout: base.njk
 tags: page
 permalink: /about/
@@ -9,28 +9,19 @@ ogImage: /assets/images/og/about.png
 ---
 (updated {{ date | postDate }})
 
-I lead design teams that turn complex software – from AI-era SaaS to IoT, medical devices, and edtech – into experiences people can figure out without training or guesswork.
+I speak the languages of design, engineering, and business.
 
-## Currently
+That's been useful everywhere I've worked — but it matters most right now, when the most common mistake in AI product development is assuming that powerful models reduce the need for clear, coordinated interfaces. They don't. Agentic AI shifts complexity from direct manipulation toward understanding, verification, and correction. That demands interfaces that are simpler, not more elaborate, and experiences that work without training.
 
-- Director of User Experience at [Invoca](https://invoca.com/), leading UX through an AI transformation: shipping conversational AI products and building the team and practices to sustain it
-- Mentor at [ADPList.org](https://adplist.org) and [Designed.org](https://designed.org/), here to help designers think about their work, consider the leap to management, and to help new managers wrestle with their new responsibilities
-- Mentor at [tupu.io](https://tupu.io/), same deal but open to more types of workers
-- AI-assisted vibe-coder, as evidenced by [my GitHub profile](https://github.com/jplummer/)
-- Husband, father, tinkerer, maker, just handy enough to be trouble
+I wrote about this in [Toward Coordinated Experience](https://jonplummer.com/2025/07/27/toward-coordinated-experience/), and it's the thread that runs through most of what I write here.
 
-## Before that
+By day I'm Director of User Experience at Invoca, leading a design team through an AI product transformation. Before that: Cayuse, Concentric Sky, and eleven years at Belkin, where I rose from Senior Designer to Senior Director and built the UX function for Linksys and Wemo from scratch. Along the way I picked up 20+ patents, an IDSA Silver award, and a lot of hard-won opinions about how design actually earns trust in engineering- and product-led organizations.
 
-- Director of User Experience at [Cayuse](https://cayuse.com/), a research management SaaS provider
-- Director of User Experience at [Concentric Sky](https://concentricsky.com/) for numerous ed-tech and post-secondary educational clients and the [Badgr](https://www.parchment.com/platform/higher-education/issuing/) microcredential platform (which is now part of [Instructure Parchment](https://www.instructure.com/parchment))
-- Senior Director of Product Experience Design at [Belkin](https://belkin.com/), especially for [Wemo](https://www.belkin.com/support-article/?articleNum=335419) and [Linksys](https://linksys.com/)
-- UX Manager at [Medtronic MiniMed](https://www.medtronicdiabetes.com/)
-- Volunteer at [The Compton Initiative](https://justdogood.org/)
-- Volunteer at [The Great LA River Cleanup](https://folar.org/cleanup/)
+My management style is Socratic. I give feedback by asking questions, help people arrive at answers themselves, and develop designers who can hold a point of view and defend it — not just execute one.
 
-I love to develop and lead designers and researchers. My working belief – reinforced by watching AI reshape what software can do – is that the need for clear, coordinated, learnable product experiences is only growing. The hard part isn't generating ideas; it's proving they're sound and then delivering them well. I love helping teams do that from a basis of real customer knowledge.
+Outside work I'm a deep dabbler — jazz piano, 3D printing, amateur industrial design, light electronics, home improvement, vibe-coding, cooking. The common thread is making ideas tangible.
 
-I have a [portfolio](https://jonplummer.io/) and a [scratchpad of thoughts and notes](https://jonplummer.com/) on design, AI, and making things. I also have [20+ patents](https://patents.google.com/?inventor=Jon+Plummer&num=100) in IoT, software, and medical device technology.
+I mentor at [Designed.org](https://designed.org) and [tupu.io](https://tupu.io). You can find me on [LinkedIn](https://linkedin.com/in/jplummer) or reach me at jon@jonplummer.com.
 
 * * *
 
@@ -82,4 +73,4 @@ Jon is an extremely thoughtful and caring leader who is always willing to suppor
 
 * * *
 
-See more via [my LinkedIn profile](https://linkedin.com/in/jplummer), and message me there if you have something to say. Or email [me@jonplummer.com](mailto:me@jonplummercom?Subject=Mail%20from%20jonplummer.name).
+See more via [my LinkedIn profile](https://linkedin.com/in/jplummer), and message me there if you have something to say. Or email [me@jonplummer.com](mailto:me@jonplummer.com?Subject=Mail%20from%20jonplummer.name).

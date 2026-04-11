@@ -1,3 +1,23 @@
+2026-04-11:
+  - url: "https://jeffgothelf.com/blog/safe-was-bad-for-agility-for-ai-its-catastrophic/"
+    title: "SAFe Was Bad for Agility. For AI, It's Catastrophic – Jeff Gothelf"
+    description: "I never thought much of SAFe and learned to reject job opportunities in organizations that practice it. But it's even more problematic in the age of AI, when customer discovery and live experimentation are the name of the game and directed incrementalism can be intensely effective."
+  - url: "https://bitsplitting.org/2026/04/01/the-beginning-of-programming-as-well-know-it/?__readwiseLocation="
+    title: The Beginning of Programming as We’ll Know It –Daniel Jalkut
+    description: "\"But for now, real programmers will always win. Why? Because we are uniquely positioned to harness *most* of the power of AI while augmenting it with human taste, wisdom, and caution, among other qualities that an AI is thus far incapable of possessing.\""
+  - url: "https://uxdesign.cc/designers-finally-have-a-say-in-the-product-they-design-396c999e1227"
+    title: Designers finally have a say in the product they design – Daniel Mitev
+    description: "\"The industry has been asking whether designers should code for over a decade. It was always the wrong question, or at least the wrong framing. It implied the barrier was technical: that designers lacked something fundamental, something that required years of study to acquire. Learn TypeScript. Understand the DOM. Earn your way across the divide. That wasn’t the barrier.\""
+  - url: "https://www.meditationsinanemergency.com/between-the-impossible-and-the-inevitable-the-case-for-defiance-aka-never-f-king-surrender/"
+    title: "Between the Impossible and the Inevitable: The Case for Defiance (aka Never F**king Surrender) – Rebecca Solnit"
+    description: "\"The future is being made in the present, including by how we show up or fail to. If we know what's going to happen, we cannot participate in deciding what happens, and vice-versa. To pretend to have the power of being in charge of the former is to surrender the motivation to impact the latter in an active and intentional way. […] And yet claims we have no power to impact what happens are nevertheless an intervention in what will happen, by discouraging participation, by encouraging passivity, surrender, acquiescence.\""
+  - url: "https://www.chrbutler.com/craft-is-untouchable?__readwiseLocation="
+    title: Craft is Untouchable – Christopher Butler
+    description: "\"Structure still communicates before content. Visual hierarchy still guides attention. Negative space still creates rhythm. These principles don’t vanish because I’m working through AI rather than directly manipulating pixels.\""
+  - url: "https://hvpandya.com/design-wisdom"
+    title: "16 pieces of design wisdom – Hardik Pandya"
+    description: "\"You need to completely change the way you think about feedback. This took me years. And more than the years, it took incredibly smart and secure people sharing feedback in ways that I had never seen it being shared for me to realize it was a dialogue. People just want to be able to talk about their work. The work they are doing. And it helps tremendously to be able to see something in front of you to be able to talk about it. We are visual people. **Designs are vehicles for ideas that make the conversation possible.**\""
+
 2026-04-04:
   - url: "https://uxdesign.cc/context-engineering-a-repeatable-ai-workflow-for-product-designers-8d7b55b83b2b"
     title: "Context engineering: A repeatable AI workflow for product designers – Vadym Grin"
