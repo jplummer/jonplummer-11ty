@@ -1,0 +1,120 @@
+---
+layout: base.njk
+title: /style-exercise
+description: Full-site style rehearsal (tokens and typography on a fixed exercise layout).
+# Build: omitted via root `.eleventyignore` until the route returns; `/style-exercise/` → `/color/` in redirects.
+permalink: /style-exercise/
+eleventyExcludeFromCollections: true
+ogImage: /assets/images/og/index.png
+---
+
+<link rel="stylesheet" href="/assets/css/style-exercise.css">
+{% include "components/utility_sibling_nav.njk" %}
+
+<script type="application/json" id="color-lab-schemes">{{ colorLabSchemes.presets | dump | safe }}</script>
+<script type="module" src="/assets/js/color-lab.js"></script>
+
+<div class="style-exercise-page color-test-container" data-color-lab-exercise>
+  <h1>Style exercise</h1>
+  <p class="style-exercise-lede">Synthetic layout that stresses common patterns from this site. Colors follow <code>?scheme=</code> (same keys as <a href="/color/">/color</a>, for example <code>?scheme=DR07</code>). Fonts use the live site defaults unless you change stacks on <a href="/type/">/type</a>.</p>
+
+  <p class="color-preview-actions">
+    <a class="style-exercise-cta" href="/color/">Open color lab</a>
+  </p>
+
+  <hr>
+
+  <section class="color-test-content">
+    <h2>Index patterns</h2>
+
+    <h3>Post content</h3>
+    <article id="exercise-post">
+      <header>
+        <h2><a href="#exercise-post" rel="bookmark">Sample title for token review</a></h2>
+      </header>
+      <section>
+        <p>This paragraph checks body text and <a href="#exercise-link" id="exercise-link">default links</a>. <strong>Emphasis</strong> should stay readable.</p>
+        <p>Second paragraph with <a href="#visited" id="visited" class="visited">visited styling</a> for contrast checks.</p>
+        <h3>Heading three</h3>
+        <p>Content under a subheading.</p>
+        <blockquote>
+          Blockquote rhythm and color against the content surface.
+        </blockquote>
+        <pre><code>const example = 'monospace in context';</code></pre>
+      </section>
+      <footer>
+        <p class="posted-on"><time datetime="2026-04-11">April 11, 2026</time></p>
+      </footer>
+    </article>
+
+    <h3>Link item</h3>
+    <article class="link-item">
+      <section>
+        <p>
+          <a href="https://example.com" target="_blank" rel="noopener noreferrer">Sample link title</a><span class="link-description"> — description text beside the title.</span>
+        </p>
+      </section>
+    </article>
+
+    <h3>Pagination</h3>
+    <nav class="pagination" aria-label="Post pagination">
+      <a class="prev" href="#exercise-post">← Older posts</a>
+      <a class="next" href="#ex-port-1">Newer posts →</a>
+    </nav>
+  </section>
+
+  <hr>
+
+  <section class="color-test-content">
+    <h2>Post navigation</h2>
+    <nav class="post-navigation" aria-label="Post navigation">
+      <a href="#exercise-post" class="prev">← Previous: Earlier post</a>
+      <a href="#ex-port-1" class="next">Later post →</a>
+    </nav>
+  </section>
+
+  <hr>
+
+  <section class="color-test-content">
+    <h2>Portfolio grid</h2>
+    <ul class="portfolio-grid">
+      <li>
+        <article class="portfolio-item" id="ex-port-1">
+          <a href="#ex-port-1" aria-hidden="true" tabindex="-1">
+            <img src="/assets/images/og/portfolio.png" alt="Portfolio sample 1">
+          </a>
+          <p><a href="#ex-port-1" rel="bookmark">Portfolio item title</a></p>
+          <p class="portfolio-item-description">Short supporting line under the title.</p>
+        </article>
+      </li>
+      <li>
+        <article class="portfolio-item" id="ex-port-2">
+          <a href="#ex-port-2" aria-hidden="true" tabindex="-1">
+            <img src="/assets/images/og/about.png" alt="Portfolio sample 2">
+          </a>
+          <p><a href="#ex-port-2" rel="bookmark">Second item</a></p>
+        </article>
+      </li>
+    </ul>
+  </section>
+
+  <hr>
+
+  <section class="color-test-content">
+    <h2>OG frame</h2>
+    <p>Scaled OG markup to see headline and description colors together.</p>
+    <div class="og-image-html-preview">
+      <div class="og-image-rendered">
+        <div class="og-content">
+          <hgroup class="og-hgroup">
+            <h1><a href="/">Jon Plummer</a></h1>
+            <p>Today I Learned</p>
+          </hgroup>
+          <h1 class="og-title">Sample OG title</h1>
+          <p class="og-description">Sample OG description for scheme checks.</p>
+          <p class="og-date">April 11, 2026</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

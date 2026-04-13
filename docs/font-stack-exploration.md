@@ -30,7 +30,7 @@ Initial values come from `DEFAULT_HEADING_STACK_ID`, `DEFAULT_BODY_STACK_ID`, an
 
 ## Outputs
 
-- `scripts/font-explore/output/index.html` — the lab page. The header links to the **color theme gallery** and **OG image preview** (`_site/og-image-preview/index.html` after `pnpm run build`).
+- `scripts/font-explore/output/index.html` — the lab page. The header links to the **color theme gallery** and the **OG image preview** (`_site/ogimages/index.html` after `pnpm run build`, or the live `/ogimages/` URL).
 - `scripts/font-explore/output/stacks.json` — stack list, `siteDefaultStackId`, and `defaults` (`headingStackId`, `bodyStackId`, `syncStacks`).
 
 ## Shipping a pair
@@ -51,9 +51,9 @@ These sit with the gallery; the pnpm shortcut also appears under **Maintenance**
 | **Generator + stack data** | `scripts/font-explore/generate-font-gallery.js` — builds the HTML; `scripts/font-explore/modern-font-stacks.js` — stack definitions and `SITE_DEFAULT_STACK_ID` (must stay aligned with live `--font-family` when you change the default). |
 | **CSS validation** | `pnpm run test css` / `pnpm run lint:css` — after editing font tokens in `jonplummer.css`. Listed in [tests.md](tests.md) as part of the fast suite. |
 
-There is no separate `/font-test/` template (unlike `/color-test/`); the lab is the generated file only.
+There is no separate `/font-test/` template (unlike `/color/`). **`pnpm run font-gallery`** writes `scripts/font-explore/output/index.html` (for `file://` review) **and** updates **`src/_includes/partials/font-lab-card.fragment.html`**, which **`/type/`** inlines via the `fontLabCard` shortcode. Old **`/type/gallery/`** URLs redirect to **`/type/`**.
 
 ## Related
 
 - `src/assets/css/jonplummer.css` — Production `--font-family` and type scale to match in the preview.
-- [Color theme exploration](color-theme-exploration.md) — sibling workflow for palettes (`pnpm run color-gallery`).
+- [Color theme exploration](color-theme-exploration.md) — sibling workflow for palettes (`pnpm run build` refreshes `/color/` embed; `pnpm run color-gallery` for CLI flags + `output/`).

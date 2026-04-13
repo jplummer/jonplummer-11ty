@@ -177,6 +177,10 @@ function escapeCssSelector(str) {
  * @returns {boolean} True if anchor exists
  */
 function checkAnchorLink(htmlContent, anchorId) {
+  if (anchorId == null || String(anchorId).trim() === '') {
+    return true;
+  }
+
   const $ = parseHtml(htmlContent);
   
   // Escape anchorId to prevent CSS selector injection

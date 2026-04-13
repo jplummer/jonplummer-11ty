@@ -4,6 +4,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 - Add problem statement post, OG image, links import, about updates
 - Docs, galleries, and root-relative asset paths for file previews
+- Hidden utility routes `/type/`, `/color/`, `/ogimages/` with sibling nav; optional `/type/gallery/` passthrough from font-gallery output; redirects from `/color-test/` and `/og-image-preview/`
 
 ## 2026-04-10
 

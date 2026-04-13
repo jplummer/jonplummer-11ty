@@ -4,6 +4,19 @@
 # These will generate Apache Redirect 301 rules in .htaccess
 
 redirects:
+  # Utility page URL updates
+  - from: /style-exercise/
+    to: /color/
+
+  - from: /color-test/
+    to: /color/
+
+  - from: /og-image-preview/
+    to: /ogimages/
+
+  - from: /type/gallery/
+    to: /type/
+
   # Date corrections and URL changes
   - from: /2022/04/17/empathy-for-the-leader-whose-company-is-being-acquired/
     to: /2022/04/16/empathy-for-the-leader-whose-company-is-being-acquired/

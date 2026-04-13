@@ -62,8 +62,8 @@ See [noteplan-import.md](noteplan-import.md) for complete workflow documentation
 - `pnpm run convert-pdf-with-notes` - PDF + hand-authored notes file → same output as above (notes not read from pptx)
 - `pnpm run generate-og-images` - Generate Open Graph images for posts and pages (auto: `deploy`, `dev`)
 - `pnpm run security-audit` - Run security audit and maintenance checks
-- `pnpm run color-gallery` - Generate APCA-aware theme gallery (HTML + JSON) under `scripts/color-explore/output/` — see [color-theme-exploration.md](color-theme-exploration.md)
-- Color theme **tooling** (gallery output, `/color-test/` page, `node scripts/utils/suggest-colors.js`, `pnpm run test color-contrast`) — summarized in [color-theme-exploration.md § Companion tooling](color-theme-exploration.md#companion-tooling)
+- `pnpm run color-gallery` - Generate APCA-aware theme gallery (HTML + JSON) under `scripts/color-explore/output/` **and** refresh the `/color/` embed files in `src/` (same defaults as Eleventy). Use this for **CLI flags** (`--hue-sweep`, `--random`, etc.); **`pnpm run build`** / **`dev`** already run the embed step via `eleventy.before` — see [color-theme-exploration.md](color-theme-exploration.md)
+- Color theme **tooling** (gallery output, `/color/` page, `node scripts/utils/suggest-colors.js`, `pnpm run test color-contrast`) — summarized in [color-theme-exploration.md § Companion tooling](color-theme-exploration.md#companion-tooling)
 - `pnpm run font-gallery` - Generate single-card font lab (headings vs body stacks, live site scale/colors) under `scripts/font-explore/output/` — see [font-stack-exploration.md](font-stack-exploration.md)
 - Font stack **tooling** (gallery output, generator paths, CSS lint after shipping) — [font-stack-exploration.md § Companion tooling](font-stack-exploration.md#companion-tooling)
 
@@ -241,12 +241,12 @@ The `--force` flag will:
 
 #### Previewing Images
 
-**Preview the template at: `http://localhost:8080/og-image-preview/`** — or open `_site/og-image-preview/index.html` from disk after a build; the main stylesheet and favicons use **relative** URLs so `file://` works at any output depth.
+**Preview the template at: `http://localhost:8080/ogimages/`** — or open `_site/ogimages/index.html` from disk after a build; the main stylesheet and favicons use **relative** URLs so `file://` works at any output depth.
 
 This preview page shows:
 - Live examples of the OG image template with sample data
 - A gallery of all generated OG images
-- Links to the **color** and **font** static preview HTML under `scripts/` (relative links work when you open `_site/og-image-preview/index.html` from disk after `pnpm run build`; with dev-only browsing, open those files from the repo instead)
+- Links to the **color** and **font** static preview HTML under `scripts/` (relative links work when you open `_site/ogimages/index.html` from disk after `pnpm run build`; with dev-only browsing, open those files from the repo instead)
 
 You can also preview generated images in other ways:
 

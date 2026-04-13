@@ -31,6 +31,17 @@
 
 ## 🔮 Future Consideration
 
+### Utility / lab pages (color, type, OG) — “hidden in public”
+
+- **Shared UX pattern**: Color explorer and type explorer both use the **same full-page, full-size preview popout** (dedicated **exercise page** that stresses site tokens and typography—not a single “real” post or page that covers everything). Each explorer keeps **smaller in-page previews** (color gallery already works this way); type should follow that model once the explorer lives on-site.
+- **`/type/`**: Treat the **font stack explorer as the thing**, not a “hub.” **Inline the explorer at `/type/`** so there is one canonical URL; drop the instructional hub + separate `/type/gallery/` split when implementation allows (gallery generator output may need to target embeddable markup or a build-time merge).
+- **Thumbnails / browse grid**: Prefer **text + swatches** first; then try **live mini-previews** if performance and complexity stay acceptable.
+- **URLs**: No **`/labs/`** prefix for now; keep **simple top-level paths** alongside other lightly public utilities (`/color/`, `/ogimages/`, etc.).
+- **Color direction** (broader): **`/color/`** embed is **regenerated on each `pnpm run build` / `dev`** (`eleventy.before`); use **`pnpm run color-gallery`** for CLI flags / gitignored **`output/`**. DR presets live in the gallery as a **combo card** beside generated families. **`/style-exercise/`** is **not built** for now (source kept as `src/style-exercise.njk`, listed in **`.eleventyignore`**); it **301 redirects to `/color/`**. **Full-page rehearsal** can return as a popout or by dropping the ignore entry later. **Canonical scheme IDs** across gallery export and preview URLs can still be tightened over time.
+- **Quality bar for these pages**: Relaxed **SEO** expectations; **thumbnail accessibility** not a priority early on. **Production must not 404** for intentional visitors (build/CI should ensure artifacts exist or the page degrades gracefully with clear copy).
+- **Deferred — authoring vs visitors “creating” schemes** (was interview Q5): Whether scheme tweaks are **author-only** (edit data, redeploy) vs **visitor-editable with persistence** is **out of scope until** this area stabilizes; revisit when the browse + popout story exists.
+- **Color gallery — custom pickers**: Bring back the former `/color/` **custom hex color controls** (apply / reset) **inside** the generated color gallery UI so ad-hoc experiments do not require leaving the one canonical `/color/` page.
+
 ### 🖍 Also…
 
 - [https://kagi.com/search?q=contemporary+blog+styling+2026](https://kagi.com/search?q=contemporary+blog+styling+2026) ?
@@ -95,7 +106,7 @@
 ## DONE
 
 - Reinvestigate color scheme (2026-03-28)
-  - Live theme tokens use **OKLCH** in `src/assets/css/jonplummer.css` (`light-dark(oklch(...), ...)`). Gallery pipeline, `/color-test/`, `suggest-colors.js`, and contrast checking are documented in [color-theme-exploration.md](color-theme-exploration.md) and the Maintenance bullets in [commands.md](commands.md).
+  - Live theme tokens use **OKLCH** in `src/assets/css/jonplummer.css` (`light-dark(oklch(...), ...)`). Gallery pipeline, `/color/`, `suggest-colors.js`, and contrast checking are documented in [color-theme-exploration.md](color-theme-exploration.md) and the Maintenance bullets in [commands.md](commands.md).
   - Archived intent: extra color inspiration (gallery, terminals, wild presets); OKLCH as the authoring space ([vivid colors / gamut](https://modern-css.com/vivid-colors-beyond-srgb/) as reference). **Canceled / deferred:** accessibility-test-script upgrades per [accessibility-test-limitations](archive/accessibility-test-limitations.md).
 - Collected Wisdom: `wisdom-entries.yaml`, `/wisdom/`, per-tag pages, `/wisdom-feed.xml`, `test wisdom`, nav + sitemap; one-shot YAML generator removed in favor of editing YAML only (2026-03-25)
 - Security, needlessly custom code, unused code, and bloat audit (2026-02-21)

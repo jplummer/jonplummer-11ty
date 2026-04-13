@@ -42,7 +42,7 @@ function findSourceFile(relativePath) {
   // 1. Direct match: about.html -> src/about.md or src/about.njk
   // 2. Index files: page/1/index.html -> src/index.njk (paginated)
   // 3. Post files: 2025/01/15/post-slug/index.html -> src/_posts/2025/01/15/post-slug.md
-  // 4. Permalink files: og-image-preview/index.html -> src/og-image-preview.njk
+  // 4. Permalink files: ogimages/index.html -> src/ogimages.njk
   
   // Remove index.html and trailing slash
   let searchPath = normalizedPath.replace(/\/index\.html$/, '').replace(/^\/+/, '');
@@ -67,7 +67,7 @@ function findSourceFile(relativePath) {
     }
   }
   
-  // For permalink files that create subdirectories (e.g., og-image-preview/index.html -> og-image-preview.njk)
+  // For permalink files that create subdirectories (e.g., ogimages/index.html -> ogimages.njk)
   // Extract the directory name and try it as a filename
   if (normalizedPath.includes('/') && normalizedPath.endsWith('/index.html')) {
     const dirName = normalizedPath.split('/')[0];
@@ -332,8 +332,9 @@ function validate(result, options) {
     const isRedirect = isRedirectPage(content);
     
     // Identify utility and pagination pages (skip SEO checks for these)
-    const isUtilityPage = relativePath.includes('og-image-preview') || 
-                          relativePath.includes('color-test') ||
+    const isUtilityPage = relativePath === 'ogimages/index.html' ||
+                          relativePath === 'color/index.html' ||
+                          relativePath === 'type/index.html' ||
                           relativePath === '404.html' ||
                           relativePath === '500.html';
     const isPaginationPage = relativePath.match(/^page\/\d+\//) || relativePath.startsWith('page/');

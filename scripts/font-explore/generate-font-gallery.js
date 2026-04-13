@@ -16,6 +16,24 @@ const path = require('path');
 const { MODERN_FONT_STACKS, SITE_DEFAULT_STACK_ID } = require('./modern-font-stacks.js');
 
 const OUT_DIR = path.join(__dirname, 'output');
+const FONT_LAB_SCOPED_CSS = path.join(
+  process.cwd(),
+  'src',
+  'assets',
+  'css',
+  'font-lab-scoped.css'
+);
+const FONT_LAB_FRAGMENT = path.join(
+  process.cwd(),
+  'src',
+  '_includes',
+  'partials',
+  'font-lab-card.fragment.html'
+);
+
+function readScopedCss() {
+  return fs.readFileSync(FONT_LAB_SCOPED_CSS, 'utf8');
+}
 
 /** Initial heading stack (see also DEFAULT_BODY_STACK_ID, DEFAULT_SYNC_STACKS). */
 const DEFAULT_HEADING_STACK_ID = SITE_DEFAULT_STACK_ID;
@@ -55,13 +73,13 @@ function siteHomePreviewFragment({
 
   return `<div class="theme-root home-preview"${rootIdAttr}>
         <div class="jp-page"${jpIdAttr}${jpStyleAttr}>
-          <header>
+          <header aria-label="Preview: site header">
             <a class="skip" href="#font-preview-main">Skip to content</a>
             <hgroup>
               <h1${hStyle}><a href="#" rel="home">Jon Plummer</a></h1>
               <p>Today I Learned</p>
             </hgroup>
-            <nav aria-label="Site navigation">
+            <nav aria-label="Preview: primary navigation">
               <ul>
                 <li><a href="#">/about</a></li>
                 <li><a href="#">/now</a></li>
@@ -70,16 +88,17 @@ function siteHomePreviewFragment({
               </ul>
             </nav>
           </header>
-          <main id="font-preview-main" aria-label="Main content">
+          <section id="font-preview-main" class="font-preview-main" aria-labelledby="font-preview-main-heading">
+            <h2 class="sr-only" id="font-preview-main-heading">Preview: main column</h2>
             <article>
-              <header>
+              <header aria-label="Preview: article title">
                 <h1${hStyle}><a href="#" rel="bookmark">What we owe junior designers in review</a></h1>
               </header>
               <section>
                 <p>Feedback works when it is <a href="#">specific</a> and <a href="#" class="sim-visited">grounded in examples</a>. <strong>Kind</strong> delivery helps the second sentence read like a real lede.</p>
                 <pre><code>const tone = 'curious';</code></pre>
               </section>
-              <footer>
+              <footer aria-label="Preview: article footer">
                 <p class="posted-on"><time datetime="2026-03-15">March 15, 2026</time></p>
               </footer>
             </article>
@@ -90,12 +109,12 @@ function siteHomePreviewFragment({
                 </p>
               </section>
             </article>
-            <nav class="pagination" aria-label="Post pagination">
+            <nav class="pagination" aria-label="Preview: pagination">
               <a class="prev" href="#">← Older posts</a>
               <a class="next" href="#">Newer posts →</a>
             </nav>
-          </main>
-          <footer aria-label="Site footer">
+          </section>
+          <footer aria-label="Preview: site footer">
             <p class="license">Copyright 2026 Jon Plummer</p>
           </footer>
         </div>
@@ -105,77 +124,6 @@ function siteHomePreviewFragment({
         </div>
       </div>`;
 }
-
-/**
- * Live-sized preview: no shrunken type tokens — inherit :root from jonplummer.css.
- * Replicates body band layout under .jp-page (selectors differ from body>header on site).
- */
-const HOME_PREVIEW_SCOPED_CSS = `
-    .font-preview-lane {
-      max-width: var(--max-width);
-      margin-inline: auto;
-      width: 100%;
-      box-sizing: border-box;
-    }
-    .theme-root.home-preview {
-      width: 100%;
-    }
-    .theme-root.home-preview .jp-page {
-      margin: 0;
-      background-color: var(--background-color);
-      color: var(--text-color);
-      overflow: hidden;
-      border-radius: 6px;
-      border: 1px solid color-mix(in srgb, var(--border-color) 70%, transparent);
-      box-shadow: 0 1px 8px rgba(0,0,0,0.12);
-      padding: 0;
-    }
-    .theme-root.home-preview .swatch-legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem 0.75rem;
-      margin-top: var(--spacing-sm);
-      font-size: var(--font-size-xs);
-      line-height: var(--line-height-xs);
-      color: var(--text-color-light);
-    }
-    .theme-root.home-preview .swatch-legend .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
-    .theme-root.home-preview .swatch-legend code {
-      font-size: 0.85em;
-      opacity: 0.92;
-    }
-    .theme-root.home-preview .chip-swatch {
-      width: 1.1rem;
-      height: 1.1rem;
-      border-radius: 2px;
-      border: 1px solid color-mix(in srgb, var(--border-color) 85%, transparent);
-      flex-shrink: 0;
-      display: inline-block;
-      vertical-align: middle;
-    }
-    .theme-root.home-preview .jp-page > header,
-    .theme-root.home-preview .jp-page > main,
-    .theme-root.home-preview .jp-page > footer {
-      margin: 0 auto;
-      padding: var(--gutter);
-      max-width: var(--max-width);
-      width: 100%;
-      box-sizing: border-box;
-      background-color: var(--content-background-color);
-    }
-    .theme-root.home-preview article section pre {
-      width: fit-content;
-      max-width: 100%;
-      box-sizing: border-box;
-    }
-    .theme-root.home-preview a.sim-visited {
-      color: var(--link-visited-color);
-    }
-`;
 
 function renderSelectOptions(selectedId) {
   return MODERN_FONT_STACKS.map((s) => {
@@ -308,8 +256,8 @@ ${renderSelectOptions(bodySel)}
 </section>`;
 }
 
-function renderHtml() {
-  const card = renderFontLabCard();
+function renderHtml(cardHtml) {
+  const card = cardHtml || renderFontLabCard();
 
   return `<!DOCTYPE html>
 <html lang="en" class="font-gallery-ui">
@@ -418,7 +366,7 @@ function renderHtml() {
       color: #eee;
       font-size: 0.88rem;
     }
-${HOME_PREVIEW_SCOPED_CSS}
+${readScopedCss()}
     .font-gallery-ui .copy-block { margin-top: 0.85rem; }
     .font-gallery-ui .copy-block summary {
       cursor: pointer;
@@ -443,7 +391,7 @@ ${HOME_PREVIEW_SCOPED_CSS}
 </head>
 <body class="font-gallery-ui">
   <h1 class="page-title">Font stack preview</h1>
-  <p class="meta">Single home-page slice at <strong>live</strong> type scale and <code>light-dark()</code> colors from <code>jonplummer.css</code>. Open from the repo so the stylesheet resolves. Regenerate: <code>pnpm run font-gallery</code>. Other tools: <a href="../../color-explore/output/index.html">Color theme gallery</a> · <a href="../../../_site/og-image-preview/index.html">OG image preview</a> (run <code>pnpm run build</code> first, then open that path from disk).</p>
+  <p class="meta">Single home-page slice at <strong>live</strong> type scale and <code>light-dark()</code> colors from <code>jonplummer.css</code>. Open from the repo so the stylesheet resolves. Regenerate: <code>pnpm run font-gallery</code>. Color theme lab output: <code>scripts/color-explore/output/index.html</code>. Deployed utilities: <a href="https://jonplummer.com/type/">/type</a> · <a href="https://jonplummer.com/color/">/color</a> · <a href="https://jonplummer.com/ogimages/">/ogimages</a> (Eleventy).</p>
 ${card}
 </body>
 </html>`;
@@ -452,7 +400,12 @@ ${card}
 function main() {
   try {
     fs.mkdirSync(OUT_DIR, { recursive: true });
-    const html = renderHtml();
+    const card = renderFontLabCard();
+    fs.mkdirSync(path.dirname(FONT_LAB_FRAGMENT), { recursive: true });
+    fs.writeFileSync(FONT_LAB_FRAGMENT, card, 'utf8');
+    console.log(`Wrote ${FONT_LAB_FRAGMENT}`);
+
+    const html = renderHtml(card);
     fs.writeFileSync(path.join(OUT_DIR, 'index.html'), html, 'utf8');
     const jsonPayload = {
       source: 'https://modernfontstacks.com',
