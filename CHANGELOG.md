@@ -1,10 +1,14 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-04-12
+
+- Rename color-test.njk to color.njk and og-image-preview.njk to ogimages.njk.
+- Feat(utility): color gallery embed, /type lab, sibling nav, and build hook
+
 ## 2026-04-11
 
 - Add problem statement post, OG image, links import, about updates
 - Docs, galleries, and root-relative asset paths for file previews
-- Hidden utility routes `/type/`, `/color/`, `/ogimages/` with sibling nav; optional `/type/gallery/` passthrough from font-gallery output; redirects from `/color-test/` and `/og-image-preview/`
 
 ## 2026-04-10
 
@@ -459,4 +463,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-04-11
+Last deployed on 2026-04-15
