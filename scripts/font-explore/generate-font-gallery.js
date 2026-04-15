@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
  * Single-card font lab: index-shaped preview at live site type scale and colors
- * (jonplummer.css + system light/dark). Two selectors (headings vs rest) + optional lock.
+ * (jonplummer.css + system light/dark). Two selectors (headings vs rest); body select’s
+ * first option mirrors the heading stack.
  *
  * Usage:
  *   node scripts/font-explore/generate-font-gallery.js
@@ -35,14 +36,11 @@ function readScopedCss() {
   return fs.readFileSync(FONT_LAB_SCOPED_CSS, 'utf8');
 }
 
-/** Initial heading stack (see also DEFAULT_BODY_STACK_ID, DEFAULT_SYNC_STACKS). */
+/** Initial heading stack (body select defaults to “Same as headings”). */
 const DEFAULT_HEADING_STACK_ID = SITE_DEFAULT_STACK_ID;
 
-/** Initial body stack. */
-const DEFAULT_BODY_STACK_ID = SITE_DEFAULT_STACK_ID;
-
-/** If true, generated HTML has the “same stack” checkbox checked and both selects match. */
-const DEFAULT_SYNC_STACKS = true;
+/** Sentinel `<option value>`: body text uses the heading stack until a concrete stack is chosen. */
+const BODY_SAME_AS_HEADINGS = 'same-as-headings';
 
 function escapeHtml(text) {
   return String(text)
@@ -132,6 +130,23 @@ function renderSelectOptions(selectedId) {
   }).join('\n');
 }
 
+function renderBodySelectOptions(selectedBodyValue) {
+  const sameSel = selectedBodyValue === BODY_SAME_AS_HEADINGS ? ' selected' : '';
+  const lines = [
+    `    <option value="${BODY_SAME_AS_HEADINGS}"${sameSel}>Same as headings</option>`
+  ];
+  for (const s of MODERN_FONT_STACKS) {
+    const sel =
+      s.id === selectedBodyValue && selectedBodyValue !== BODY_SAME_AS_HEADINGS
+        ? ' selected'
+        : '';
+    lines.push(
+      `    <option value="${escapeHtml(s.id)}"${sel}>${escapeHtml(s.name)}</option>`
+    );
+  }
+  return lines.join('\n');
+}
+
 function renderFontLabCard() {
   const head = stackById(DEFAULT_HEADING_STACK_ID);
   if (!head) {
@@ -142,13 +157,9 @@ function renderFontLabCard() {
     MODERN_FONT_STACKS.map((s) => ({ id: s.id, name: s.name, family: s.family }))
   );
 
-  const syncChecked = DEFAULT_SYNC_STACKS ? ' checked' : '';
   const headingSel = DEFAULT_HEADING_STACK_ID;
-  const bodySel = DEFAULT_SYNC_STACKS ? DEFAULT_HEADING_STACK_ID : DEFAULT_BODY_STACK_ID;
-  const bodyStack = stackById(bodySel);
-  if (!bodyStack) {
-    throw new Error('Invalid body stack id for initial state');
-  }
+  const bodySelectValue = BODY_SAME_AS_HEADINGS;
+  const bodyStack = head;
 
   const cssBlock = `.jp-page,
 .jp-page nav,
@@ -165,16 +176,9 @@ h1, h2, h3, h4 {
   font-family: ${head.family};
 }`;
 
-  return `<section class="card font-tool-card" aria-labelledby="font-lab-title">
-  <header class="card-h">
-    <h2 class="card-title" id="font-lab-title">Font stack preview</h2>
-  </header>
+  return `<section class="card font-tool-card" aria-label="Font stacks">
   <p class="tool-note">Uses the same index-shaped markup as the live home page. Colors and type scale come from <code>jonplummer.css</code> (your OS light/dark choice). Stacks: <a href="https://modernfontstacks.com" target="_blank" rel="noopener noreferrer">Modern Font Stacks</a>.</p>
   <div class="tool-controls" role="group" aria-label="Font stack selection">
-    <label class="sync-label">
-      <input type="checkbox" id="font-sync-stacks"${syncChecked}>
-      Same font stack for headings and everything else
-    </label>
     <div class="tool-selects">
       <div class="tool-field">
         <label for="font-heading-stack">Headings (<code>h1</code>–<code>h4</code>)</label>
@@ -185,7 +189,7 @@ ${renderSelectOptions(headingSel)}
       <div class="tool-field">
         <label for="font-body-stack">Everything else</label>
         <select id="font-body-stack" name="font-body-stack">
-${renderSelectOptions(bodySel)}
+${renderBodySelectOptions(bodySelectValue)}
         </select>
       </div>
     </div>
@@ -212,14 +216,18 @@ ${renderSelectOptions(bodySel)}
   for (var i = 0; i < stacks.length; i++) {
     byId[stacks[i].id] = stacks[i];
   }
+  var SAME = '${BODY_SAME_AS_HEADINGS}';
   var selH = document.getElementById('font-heading-stack');
   var selB = document.getElementById('font-body-stack');
-  var sync = document.getElementById('font-sync-stacks');
   var mixJp = document.getElementById('font-preview-jp');
   var cssOut = document.getElementById('font-css-code');
+  function bodyResolved() {
+    if (selB.value === SAME) return byId[selH.value];
+    return byId[selB.value];
+  }
   function applyFonts() {
     var h = byId[selH.value];
-    var b = byId[selB.value];
+    var b = bodyResolved();
     if (!h || !b || !mixJp || !cssOut) return;
     mixJp.style.fontFamily = b.family;
     mixJp.querySelectorAll('h1, h2, h3, h4').forEach(function (el) {
@@ -228,28 +236,13 @@ ${renderSelectOptions(bodySel)}
     cssOut.textContent = '.jp-page,\\n.jp-page nav,\\n.jp-page p,\\n.jp-page li,\\n.jp-page .license,\\n.jp-page .posted-on,\\n.jp-page .link-description,\\n.jp-page pre,\\n.jp-page code {\\n  font-family: ' + b.family + ';\\n}\\nh1, h2, h3, h4 {\\n  font-family: ' + h.family + ';\\n}';
   }
   function onHeadingChange() {
-    if (sync && sync.checked) {
-      selB.value = selH.value;
-    }
     applyFonts();
   }
   function onBodyChange() {
-    if (sync && sync.checked) {
-      selH.value = selB.value;
-    }
-    applyFonts();
-  }
-  function onSyncChange() {
-    if (sync && sync.checked) {
-      selB.value = selH.value;
-    }
     applyFonts();
   }
   selH.addEventListener('change', onHeadingChange);
   selB.addEventListener('change', onBodyChange);
-  if (sync) {
-    sync.addEventListener('change', onSyncChange);
-  }
   applyFonts();
 })();
   </script>
@@ -297,19 +290,6 @@ function renderHtml(cardHtml) {
       margin-inline: auto;
       box-sizing: border-box;
     }
-    .font-gallery-ui .card-h {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      margin-bottom: 0.5rem;
-    }
-    .font-gallery-ui .card-title {
-      margin: 0;
-      font-size: 1.05rem;
-      color: #eee;
-    }
     .font-gallery-ui .tool-note {
       font-size: 0.88rem;
       color: #bbb;
@@ -320,23 +300,10 @@ function renderHtml(cardHtml) {
     .font-gallery-ui .tool-note code { font-size: 0.82rem; }
     .font-gallery-ui .tool-controls {
       margin-bottom: 1rem;
-      padding: 0.65rem 0.75rem;
-      background: #1a1a1a;
-      border-radius: 6px;
-      border: 1px solid #333;
-    }
-    .font-gallery-ui .sync-label {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.85rem;
-      color: #ddd;
-      cursor: pointer;
-      margin: 0 0 0.75rem;
-    }
-    .font-gallery-ui .sync-label input {
-      margin: 0;
-      flex-shrink: 0;
+      padding: 0;
+      background: transparent;
+      border: none;
+      border-radius: 0;
     }
     .font-gallery-ui .tool-selects {
       display: flex;
@@ -413,8 +380,7 @@ function main() {
       stacks: MODERN_FONT_STACKS,
       defaults: {
         headingStackId: DEFAULT_HEADING_STACK_ID,
-        bodyStackId: DEFAULT_BODY_STACK_ID,
-        syncStacks: DEFAULT_SYNC_STACKS
+        bodySelectValue: BODY_SAME_AS_HEADINGS
       }
     };
     fs.writeFileSync(path.join(OUT_DIR, 'stacks.json'), JSON.stringify(jsonPayload, null, 2), 'utf8');

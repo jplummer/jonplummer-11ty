@@ -2,7 +2,7 @@
 
 ## Goal
 
-Try [Modern Font Stacks](https://modernfontstacks.com) against the **real** site type scale and colors (`jonplummer.css`, system light/dark). The live blog uses **System UI** via `--font-family`. This tool is one index-shaped preview with two menus (headings vs everything else) and an optional lock so both stay identical.
+Try [Modern Font Stacks](https://modernfontstacks.com) against the **real** site type scale and colors (`jonplummer.css`, system light/dark). The live blog uses **System UI** via `--font-family`. This tool is one index-shaped preview with two menus (headings vs everything else); the body menu’s first option keeps body text on the heading stack until you pick a different stack.
 
 ## Workflow
 
@@ -23,15 +23,14 @@ Output under `scripts/font-explore/output/` is gitignored; regenerate after edit
 - **One card** — home-page slice (header, post, link row, pagination, footer) at **full** `:root` typography (no shrunken preview tokens). Colors are unchanged from production tokens (`light-dark()` follows your OS).
 - **Headings** selector — applies to `h1`–`h4` in the preview (site title + article title today).
 - **Everything else** — `font-family` on `.jp-page` so nav, paragraphs, footer, `pre`/`code`, etc. use the body stack.
-- **Checkbox** — when checked, changing either menu keeps the other in sync; when unchecked, they move independently.
 - **Example CSS** — updates with the menus; embedded JSON keeps the page working on `file://`.
 
-Initial values come from `DEFAULT_HEADING_STACK_ID`, `DEFAULT_BODY_STACK_ID`, and `DEFAULT_SYNC_STACKS` in `scripts/font-explore/generate-font-gallery.js`.
+Initial heading stack comes from `DEFAULT_HEADING_STACK_ID` in `scripts/font-explore/generate-font-gallery.js`; the body select defaults to **Same as headings** (`same-as-headings`).
 
 ## Outputs
 
 - `scripts/font-explore/output/index.html` — the lab page. The header links to the **color theme gallery** and the **OG image preview** (`_site/ogimages/index.html` after `pnpm run build`, or the live `/ogimages/` URL).
-- `scripts/font-explore/output/stacks.json` — stack list, `siteDefaultStackId`, and `defaults` (`headingStackId`, `bodyStackId`, `syncStacks`).
+- `scripts/font-explore/output/stacks.json` — stack list, `siteDefaultStackId`, and `defaults` (`headingStackId`, `bodySelectValue`).
 
 ## Shipping a pair
 

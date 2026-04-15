@@ -1,13 +1,6 @@
-<section class="card font-tool-card" aria-labelledby="font-lab-title">
-  <header class="card-h">
-    <h2 class="card-title" id="font-lab-title">Font stack preview</h2>
-  </header>
+<section class="card font-tool-card" aria-label="Font stacks">
   <p class="tool-note">Uses the same index-shaped markup as the live home page. Colors and type scale come from <code>jonplummer.css</code> (your OS light/dark choice). Stacks: <a href="https://modernfontstacks.com" target="_blank" rel="noopener noreferrer">Modern Font Stacks</a>.</p>
   <div class="tool-controls" role="group" aria-label="Font stack selection">
-    <label class="sync-label">
-      <input type="checkbox" id="font-sync-stacks" checked>
-      Same font stack for headings and everything else
-    </label>
     <div class="tool-selects">
       <div class="tool-field">
         <label for="font-heading-stack">Headings (<code>h1</code>–<code>h4</code>)</label>
@@ -32,7 +25,8 @@
       <div class="tool-field">
         <label for="font-body-stack">Everything else</label>
         <select id="font-body-stack" name="font-body-stack">
-    <option value="system-ui" selected>System UI</option>
+    <option value="same-as-headings" selected>Same as headings</option>
+    <option value="system-ui">System UI</option>
     <option value="transitional">Transitional</option>
     <option value="old-style">Old Style</option>
     <option value="humanist">Humanist</option>
@@ -132,14 +126,18 @@ h1, h2, h3, h4 {
   for (var i = 0; i < stacks.length; i++) {
     byId[stacks[i].id] = stacks[i];
   }
+  var SAME = 'same-as-headings';
   var selH = document.getElementById('font-heading-stack');
   var selB = document.getElementById('font-body-stack');
-  var sync = document.getElementById('font-sync-stacks');
   var mixJp = document.getElementById('font-preview-jp');
   var cssOut = document.getElementById('font-css-code');
+  function bodyResolved() {
+    if (selB.value === SAME) return byId[selH.value];
+    return byId[selB.value];
+  }
   function applyFonts() {
     var h = byId[selH.value];
-    var b = byId[selB.value];
+    var b = bodyResolved();
     if (!h || !b || !mixJp || !cssOut) return;
     mixJp.style.fontFamily = b.family;
     mixJp.querySelectorAll('h1, h2, h3, h4').forEach(function (el) {
@@ -148,28 +146,13 @@ h1, h2, h3, h4 {
     cssOut.textContent = '.jp-page,\n.jp-page nav,\n.jp-page p,\n.jp-page li,\n.jp-page .license,\n.jp-page .posted-on,\n.jp-page .link-description,\n.jp-page pre,\n.jp-page code {\n  font-family: ' + b.family + ';\n}\nh1, h2, h3, h4 {\n  font-family: ' + h.family + ';\n}';
   }
   function onHeadingChange() {
-    if (sync && sync.checked) {
-      selB.value = selH.value;
-    }
     applyFonts();
   }
   function onBodyChange() {
-    if (sync && sync.checked) {
-      selH.value = selB.value;
-    }
-    applyFonts();
-  }
-  function onSyncChange() {
-    if (sync && sync.checked) {
-      selB.value = selH.value;
-    }
     applyFonts();
   }
   selH.addEventListener('change', onHeadingChange);
   selB.addEventListener('change', onBodyChange);
-  if (sync) {
-    sync.addEventListener('change', onSyncChange);
-  }
   applyFonts();
 })();
   </script>

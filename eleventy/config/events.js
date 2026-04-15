@@ -52,7 +52,7 @@ function configureEvents(eleventyConfig) {
   eleventyConfig.on("eleventy.before", () => {
     try {
       const { runColorGalleryBuild } = require('../../scripts/color-explore/generate-gallery.js');
-      runColorGalleryBuild({ quiet: isQuiet });
+      runColorGalleryBuild({ quiet: isQuiet, stableWildThemes: true });
     } catch (err) {
       console.error('Color gallery (site embed) failed:', err.message);
       throw err;

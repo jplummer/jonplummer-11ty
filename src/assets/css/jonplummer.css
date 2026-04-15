@@ -778,13 +778,19 @@ header a.skip:focus {
 /* === OG IMAGE PREVIEW PAGE === */
 /* Styles for the OG image preview page (dev tool) */
 
+/* Width and horizontal padding come from `body > main` (match /changelog/, /technologies/). */
 .preview-container {
-  max-width: var(--max-width);
-  margin: var(--spacing-lg) auto;
-  padding: 0 var(--gutter);
+  max-width: none;
+  margin: 0;
+  padding: 0;
 }
 
 .preview-info {
+  margin-bottom: var(--spacing-lg);
+}
+
+/* /color/ — intro above generated embed (same spacing idea as .preview-info on /ogimages/) */
+.color-gallery-page-intro {
   margin-bottom: var(--spacing-lg);
 }
 

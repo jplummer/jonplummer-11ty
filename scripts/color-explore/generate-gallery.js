@@ -297,7 +297,9 @@ function defaultGalleryBuildOptions() {
     harmonyAnalogousSpread: 28,
     harmonySplitSpread: 28,
     harmonySkew: 12,
-    quiet: false
+    quiet: false,
+    /** When true, wild-pack RNG is deterministic so site embed files do not churn under Eleventy watch. */
+    stableWildThemes: false
   };
 }
 
@@ -549,8 +551,8 @@ function buildBlackWhiteComboRaw() {
 }
 
 /** One gallery card: all wild recipes behind one scheme select (was one card per recipe). */
-function buildWildComboRaw(count) {
-  const items = buildWildThemes(count);
+function buildWildComboRaw(count, rng = mathRnd) {
+  const items = buildWildThemes(count, rng);
   return {
     id: 'wild-combo',
     _kind: 'wild-combo',
@@ -584,8 +586,23 @@ function buildTerminalComboRaw() {
   };
 }
 
-function rnd(a, b) {
+function mathRnd(a, b) {
   return a + Math.random() * (b - a);
+}
+
+/**
+ * Deterministic uniform draws in [a, b] for stable gallery output.
+ * Wild pack themes used `mathRnd` (Math.random); that made `color-gallery-embed-inner.html`
+ * differ on every `eleventy.before`, retriggering `--watch` in a tight loop.
+ */
+function createStableRng(seed) {
+  let s = Math.floor(Number(seed)) % 2147483646;
+  if (s <= 0) s += 2147483646;
+  return (a, b) => {
+    s = (s * 16807) % 2147483647;
+    const u = (s - 1) / 2147483646;
+    return a + u * (b - a);
+  };
 }
 
 /**
@@ -595,10 +612,10 @@ function rnd(a, b) {
  * gradients want `background` / `background-image` instead — a gallery-only layer could
  * be added later if we want visible mesh gradients in previews only.
  */
-function buildWildThemes(count) {
+function buildWildThemes(count, rng = mathRnd) {
   const themes = [];
   for (let i = 0; i < count; i++) {
-    const h = rnd(0, 360);
+    const h = rng(0, 360);
     const kind = i % 10;
     let label;
     let light;
@@ -607,13 +624,13 @@ function buildWildThemes(count) {
     if (kind === 0) {
       const hOpp = (h + 180) % 360;
       label = `Wild · complementary (${Math.round(h)}°)`;
-      const cBg = rnd(0.03, 0.1);
-      const cHot = rnd(0.18, 0.32);
+      const cBg = rng(0.03, 0.1);
+      const cHot = rng(0.18, 0.32);
       light = {
-        'content-background-color': o(rnd(0.97, 0.995), cBg * 0.5, h),
-        'background-color': o(rnd(0.86, 0.93), cBg, h),
-        'text-color': o(rnd(0.15, 0.26), rnd(0.02, 0.06), h),
-        'text-color-light': o(rnd(0.38, 0.48), rnd(0.02, 0.05), h),
+        'content-background-color': o(rng(0.97, 0.995), cBg * 0.5, h),
+        'background-color': o(rng(0.86, 0.93), cBg, h),
+        'text-color': o(rng(0.15, 0.26), rng(0.02, 0.06), h),
+        'text-color-light': o(rng(0.38, 0.48), rng(0.02, 0.05), h),
         'border-color': o(0.78, cBg * 0.6, h),
         'link-color': o(0.45, cHot, hOpp),
         'link-hover-color': o(0.38, cHot * 1.05, (hOpp + 25) % 360),
@@ -621,10 +638,10 @@ function buildWildThemes(count) {
         'link-active-color': o(0.48, cHot * 0.85, (h + 55) % 360)
       };
       dark = {
-        'content-background-color': o(rnd(0.22, 0.3), cBg * 1.4, h),
-        'background-color': o(rnd(0.1, 0.16), cBg * 1.2, h),
-        'text-color': o(rnd(0.9, 0.96), rnd(0.02, 0.05), h),
-        'text-color-light': o(rnd(0.72, 0.82), rnd(0.03, 0.07), h),
+        'content-background-color': o(rng(0.22, 0.3), cBg * 1.4, h),
+        'background-color': o(rng(0.1, 0.16), cBg * 1.2, h),
+        'text-color': o(rng(0.9, 0.96), rng(0.02, 0.05), h),
+        'text-color-light': o(rng(0.72, 0.82), rng(0.03, 0.07), h),
         'border-color': o(0.4, cBg, h),
         'link-color': o(0.72, cHot * 0.85, hOpp),
         'link-hover-color': o(0.8, cHot * 0.75, (hOpp + 30) % 360),
@@ -633,7 +650,7 @@ function buildWildThemes(count) {
       };
     } else if (kind === 1) {
       label = `Wild · neon dark (${Math.round(h)}°)`;
-      const cAcc = rnd(0.2, 0.34);
+      const cAcc = rng(0.2, 0.34);
       light = {
         'content-background-color': o(0.99, 0.02, h),
         'background-color': o(0.9, 0.04, h),
@@ -660,10 +677,10 @@ function buildWildThemes(count) {
       const h2 = (h + 120) % 360;
       const h3 = (h + 240) % 360;
       label = `Wild · triadic links (${Math.round(h)}°)`;
-      const cT = rnd(0.16, 0.28);
+      const cT = rng(0.16, 0.28);
       light = {
-        'content-background-color': o(0.985, rnd(0.02, 0.06), h),
-        'background-color': o(0.9, rnd(0.04, 0.09), h),
+        'content-background-color': o(0.985, rng(0.02, 0.06), h),
+        'background-color': o(0.9, rng(0.04, 0.09), h),
         'text-color': o(0.22, 0.04, h),
         'text-color-light': o(0.44, 0.04, h),
         'border-color': o(0.8, 0.05, h),
@@ -685,13 +702,13 @@ function buildWildThemes(count) {
       };
     } else if (kind === 3) {
       label = `Wild · candy wash (${Math.round(h)}°)`;
-      const cWash = rnd(0.08, 0.18);
-      const cPop = rnd(0.22, 0.35);
+      const cWash = rng(0.08, 0.18);
+      const cPop = rng(0.22, 0.35);
       light = {
-        'content-background-color': o(rnd(0.94, 0.99), cWash, h),
-        'background-color': o(rnd(0.82, 0.9), cWash * 1.1, (h + 40) % 360),
-        'text-color': o(0.18, rnd(0.05, 0.12), (h + 180) % 360),
-        'text-color-light': o(0.4, rnd(0.04, 0.1), h),
+        'content-background-color': o(rng(0.94, 0.99), cWash, h),
+        'background-color': o(rng(0.82, 0.9), cWash * 1.1, (h + 40) % 360),
+        'text-color': o(0.18, rng(0.05, 0.12), (h + 180) % 360),
+        'text-color-light': o(0.4, rng(0.04, 0.1), h),
         'border-color': o(0.75, cWash * 0.7, h),
         'link-color': o(0.46, cPop, (h + 160) % 360),
         'link-hover-color': o(0.4, cPop, (h + 200) % 360),
@@ -699,8 +716,8 @@ function buildWildThemes(count) {
         'link-active-color': o(0.44, cPop * 0.9, (h + 130) % 360)
       };
       dark = {
-        'content-background-color': o(rnd(0.24, 0.32), cWash * 1.2, h),
-        'background-color': o(rnd(0.12, 0.18), cWash, (h + 35) % 360),
+        'content-background-color': o(rng(0.24, 0.32), cWash * 1.2, h),
+        'background-color': o(rng(0.12, 0.18), cWash, (h + 35) % 360),
         'text-color': o(0.92, 0.05, h),
         'text-color-light': o(0.72, 0.07, h),
         'border-color': o(0.4, cWash, h),
@@ -711,22 +728,22 @@ function buildWildThemes(count) {
       };
     } else if (kind === 4) {
       label = `Wild · clash (${Math.round(h)}°)`;
-      const c1 = rnd(0.12, 0.26);
-      const c2 = rnd(0.15, 0.3);
+      const c1 = rng(0.12, 0.26);
+      const c2 = rng(0.15, 0.3);
       light = {
-        'content-background-color': o(rnd(0.96, 0.995), c1, h),
-        'background-color': o(rnd(0.78, 0.88), c2, (h + 85) % 360),
-        'text-color': o(0.2, rnd(0.06, 0.14), (h + 200) % 360),
-        'text-color-light': o(0.42, rnd(0.05, 0.12), (h + 220) % 360),
-        'border-color': o(0.72, rnd(0.08, 0.16), (h + 40) % 360),
+        'content-background-color': o(rng(0.96, 0.995), c1, h),
+        'background-color': o(rng(0.78, 0.88), c2, (h + 85) % 360),
+        'text-color': o(0.2, rng(0.06, 0.14), (h + 200) % 360),
+        'text-color-light': o(0.42, rng(0.05, 0.12), (h + 220) % 360),
+        'border-color': o(0.72, rng(0.08, 0.16), (h + 40) % 360),
         'link-color': o(0.5, c2, (h + 150) % 360),
         'link-hover-color': o(0.44, c1 * 1.2, (h + 270) % 360),
         'link-visited-color': o(0.36, c2 * 0.6, (h + 310) % 360),
         'link-active-color': o(0.48, c1, (h + 60) % 360)
       };
       dark = {
-        'content-background-color': o(rnd(0.22, 0.3), c1 * 1.1, (h + 15) % 360),
-        'background-color': o(rnd(0.08, 0.14), c2 * 0.9, (h + 95) % 360),
+        'content-background-color': o(rng(0.22, 0.3), c1 * 1.1, (h + 15) % 360),
+        'background-color': o(rng(0.08, 0.14), c2 * 0.9, (h + 95) % 360),
         'text-color': o(0.93, 0.06, (h + 25) % 360),
         'text-color-light': o(0.74, 0.08, (h + 35) % 360),
         'border-color': o(0.38, c1, (h + 50) % 360),
@@ -736,137 +753,137 @@ function buildWildThemes(count) {
         'link-active-color': o(0.8, c1 * 0.85, (h + 70) % 360)
       };
     } else if (kind === 5) {
-      const hInk = (h + 268 + rnd(0, 24)) % 360;
-      const hNeon = (h + rnd(95, 125)) % 360;
+      const hInk = (h + 268 + rng(0, 24)) % 360;
+      const hNeon = (h + rng(95, 125)) % 360;
       label = `Wild · voltage (${Math.round(h)}°)`;
-      const cEdge = rnd(0.12, 0.22);
+      const cEdge = rng(0.12, 0.22);
       light = {
-        'content-background-color': o(rnd(0.93, 0.99), rnd(0.05, 0.12), hInk),
-        'background-color': o(rnd(0.76, 0.86), rnd(0.09, 0.18), (hInk + 22) % 360),
-        'text-color': o(0.12, rnd(0.06, 0.12), (hInk + 178) % 360),
-        'text-color-light': o(0.34, rnd(0.07, 0.14), (hInk + 188) % 360),
+        'content-background-color': o(rng(0.93, 0.99), rng(0.05, 0.12), hInk),
+        'background-color': o(rng(0.76, 0.86), rng(0.09, 0.18), (hInk + 22) % 360),
+        'text-color': o(0.12, rng(0.06, 0.12), (hInk + 178) % 360),
+        'text-color-light': o(0.34, rng(0.07, 0.14), (hInk + 188) % 360),
         'border-color': o(0.66, cEdge, hInk),
-        'link-color': o(0.5, rnd(0.22, 0.34), hNeon),
-        'link-hover-color': o(0.44, rnd(0.2, 0.32), (hNeon + 38) % 360),
-        'link-visited-color': o(0.4, rnd(0.14, 0.22), (hNeon + 175) % 360),
-        'link-active-color': o(0.48, rnd(0.2, 0.3), (hNeon + 72) % 360)
+        'link-color': o(0.5, rng(0.22, 0.34), hNeon),
+        'link-hover-color': o(0.44, rng(0.2, 0.32), (hNeon + 38) % 360),
+        'link-visited-color': o(0.4, rng(0.14, 0.22), (hNeon + 175) % 360),
+        'link-active-color': o(0.48, rng(0.2, 0.3), (hNeon + 72) % 360)
       };
       dark = {
-        'content-background-color': o(rnd(0.1, 0.16), rnd(0.12, 0.2), hInk),
-        'background-color': o(rnd(0.03, 0.08), rnd(0.14, 0.22), (hInk + 18) % 360),
-        'text-color': o(0.94, rnd(0.04, 0.09), (hInk + 48) % 360),
-        'text-color-light': o(0.72, rnd(0.07, 0.12), hInk),
+        'content-background-color': o(rng(0.1, 0.16), rng(0.12, 0.2), hInk),
+        'background-color': o(rng(0.03, 0.08), rng(0.14, 0.22), (hInk + 18) % 360),
+        'text-color': o(0.94, rng(0.04, 0.09), (hInk + 48) % 360),
+        'text-color-light': o(0.72, rng(0.07, 0.12), hInk),
         'border-color': o(0.3, cEdge * 1.1, (hInk + 35) % 360),
-        'link-color': o(0.84, rnd(0.22, 0.34), hNeon),
-        'link-hover-color': o(0.9, rnd(0.2, 0.3), (hNeon + 42) % 360),
-        'link-visited-color': o(0.72, rnd(0.14, 0.22), (hNeon + 178) % 360),
-        'link-active-color': o(0.88, rnd(0.2, 0.28), (hNeon + 68) % 360)
+        'link-color': o(0.84, rng(0.22, 0.34), hNeon),
+        'link-hover-color': o(0.9, rng(0.2, 0.3), (hNeon + 42) % 360),
+        'link-visited-color': o(0.72, rng(0.14, 0.22), (hNeon + 178) % 360),
+        'link-active-color': o(0.88, rng(0.2, 0.28), (hNeon + 68) % 360)
       };
     } else if (kind === 6) {
-      const hScream = (h + rnd(150, 210)) % 360;
-      const cScream = rnd(0.14, 0.26);
+      const hScream = (h + rng(150, 210)) % 360;
+      const cScream = rng(0.14, 0.26);
       label = `Wild · spectral rim (${Math.round(h)}°)`;
       light = {
-        'content-background-color': o(rnd(0.96, 0.995), rnd(0.02, 0.06), h),
-        'background-color': o(rnd(0.88, 0.94), rnd(0.04, 0.1), (h + rnd(8, 28)) % 360),
-        'text-color': o(rnd(0.14, 0.22), cScream, hScream),
-        'text-color-light': o(rnd(0.32, 0.42), rnd(0.08, 0.16), (hScream + 35) % 360),
-        'border-color': o(0.76, rnd(0.06, 0.14), (h + 55) % 360),
-        'link-color': o(0.48, rnd(0.18, 0.3), (h + 108) % 360),
-        'link-hover-color': o(0.42, rnd(0.18, 0.28), (h + 200) % 360),
-        'link-visited-color': o(0.38, rnd(0.12, 0.2), (h + 252) % 360),
-        'link-active-color': o(0.46, rnd(0.16, 0.26), (h + 145) % 360)
+        'content-background-color': o(rng(0.96, 0.995), rng(0.02, 0.06), h),
+        'background-color': o(rng(0.88, 0.94), rng(0.04, 0.1), (h + rng(8, 28)) % 360),
+        'text-color': o(rng(0.14, 0.22), cScream, hScream),
+        'text-color-light': o(rng(0.32, 0.42), rng(0.08, 0.16), (hScream + 35) % 360),
+        'border-color': o(0.76, rng(0.06, 0.14), (h + 55) % 360),
+        'link-color': o(0.48, rng(0.18, 0.3), (h + 108) % 360),
+        'link-hover-color': o(0.42, rng(0.18, 0.28), (h + 200) % 360),
+        'link-visited-color': o(0.38, rng(0.12, 0.2), (h + 252) % 360),
+        'link-active-color': o(0.46, rng(0.16, 0.26), (h + 145) % 360)
       };
       dark = {
-        'content-background-color': o(rnd(0.18, 0.26), rnd(0.06, 0.12), (h + 12) % 360),
-        'background-color': o(rnd(0.08, 0.14), rnd(0.08, 0.14), h),
-        'text-color': o(rnd(0.88, 0.96), rnd(0.05, 0.1), hScream),
-        'text-color-light': o(rnd(0.68, 0.8), rnd(0.08, 0.14), (hScream + 30) % 360),
-        'border-color': o(0.36, rnd(0.1, 0.18), (h + 60) % 360),
-        'link-color': o(0.78, rnd(0.18, 0.3), (h + 112) % 360),
-        'link-hover-color': o(0.86, rnd(0.16, 0.28), (h + 205) % 360),
-        'link-visited-color': o(0.7, rnd(0.12, 0.2), (h + 255) % 360),
-        'link-active-color': o(0.82, rnd(0.16, 0.26), (h + 150) % 360)
+        'content-background-color': o(rng(0.18, 0.26), rng(0.06, 0.12), (h + 12) % 360),
+        'background-color': o(rng(0.08, 0.14), rng(0.08, 0.14), h),
+        'text-color': o(rng(0.88, 0.96), rng(0.05, 0.1), hScream),
+        'text-color-light': o(rng(0.68, 0.8), rng(0.08, 0.14), (hScream + 30) % 360),
+        'border-color': o(0.36, rng(0.1, 0.18), (h + 60) % 360),
+        'link-color': o(0.78, rng(0.18, 0.3), (h + 112) % 360),
+        'link-hover-color': o(0.86, rng(0.16, 0.28), (h + 205) % 360),
+        'link-visited-color': o(0.7, rng(0.12, 0.2), (h + 255) % 360),
+        'link-active-color': o(0.82, rng(0.16, 0.26), (h + 150) % 360)
       };
     } else if (kind === 7) {
-      const hMint = (h + rnd(130, 170)) % 360;
+      const hMint = (h + rng(130, 170)) % 360;
       label = `Wild · saltwater taffy (${Math.round(h)}°)`;
-      const cPastel = rnd(0.07, 0.16);
-      const cPop = rnd(0.2, 0.32);
+      const cPastel = rng(0.07, 0.16);
+      const cPop = rng(0.2, 0.32);
       light = {
-        'content-background-color': o(rnd(0.95, 0.99), cPastel, h),
-        'background-color': o(rnd(0.86, 0.93), cPastel * 1.05, hMint),
-        'text-color': o(0.2, rnd(0.06, 0.12), (h + 195) % 360),
-        'text-color-light': o(0.42, rnd(0.05, 0.11), (h + 210) % 360),
-        'border-color': o(0.78, rnd(0.06, 0.12), (hMint + 40) % 360),
-        'link-color': o(0.46, cPop, (h + rnd(70, 110)) % 360),
-        'link-hover-color': o(0.4, cPop, (h + rnd(200, 250)) % 360),
+        'content-background-color': o(rng(0.95, 0.99), cPastel, h),
+        'background-color': o(rng(0.86, 0.93), cPastel * 1.05, hMint),
+        'text-color': o(0.2, rng(0.06, 0.12), (h + 195) % 360),
+        'text-color-light': o(0.42, rng(0.05, 0.11), (h + 210) % 360),
+        'border-color': o(0.78, rng(0.06, 0.12), (hMint + 40) % 360),
+        'link-color': o(0.46, cPop, (h + rng(70, 110)) % 360),
+        'link-hover-color': o(0.4, cPop, (h + rng(200, 250)) % 360),
         'link-visited-color': o(0.38, cPop * 0.55, (h + 285) % 360),
         'link-active-color': o(0.44, cPop * 0.92, (h + 140) % 360)
       };
       dark = {
-        'content-background-color': o(rnd(0.22, 0.3), cPastel * 1.15, h),
-        'background-color': o(rnd(0.14, 0.2), cPastel, hMint),
-        'text-color': o(0.92, rnd(0.05, 0.1), (h + 200) % 360),
-        'text-color-light': o(0.72, rnd(0.06, 0.12), (h + 215) % 360),
-        'border-color': o(0.4, rnd(0.08, 0.14), (hMint + 35) % 360),
-        'link-color': o(0.74, cPop * 0.9, (h + rnd(75, 115)) % 360),
-        'link-hover-color': o(0.82, cPop * 0.85, (h + rnd(205, 255)) % 360),
+        'content-background-color': o(rng(0.22, 0.3), cPastel * 1.15, h),
+        'background-color': o(rng(0.14, 0.2), cPastel, hMint),
+        'text-color': o(0.92, rng(0.05, 0.1), (h + 200) % 360),
+        'text-color-light': o(0.72, rng(0.06, 0.12), (h + 215) % 360),
+        'border-color': o(0.4, rng(0.08, 0.14), (hMint + 35) % 360),
+        'link-color': o(0.74, cPop * 0.9, (h + rng(75, 115)) % 360),
+        'link-hover-color': o(0.82, cPop * 0.85, (h + rng(205, 255)) % 360),
         'link-visited-color': o(0.66, cPop * 0.52, (h + 288) % 360),
         'link-active-color': o(0.78, cPop * 0.8, (h + 135) % 360)
       };
     } else if (kind === 8) {
-      const hMud = (h + rnd(240, 300)) % 360;
+      const hMud = (h + rng(240, 300)) % 360;
       label = `Wild · bruise (${Math.round(h)}°)`;
-      const cMud = rnd(0.1, 0.2);
+      const cMud = rng(0.1, 0.2);
       light = {
-        'content-background-color': o(rnd(0.38, 0.48), cMud, hMud),
-        'background-color': o(rnd(0.28, 0.38), cMud * 1.05, (hMud + 18) % 360),
-        'text-color': o(rnd(0.88, 0.96), rnd(0.04, 0.09), (hMud + 140) % 360),
-        'text-color-light': o(rnd(0.72, 0.82), rnd(0.06, 0.11), (hMud + 155) % 360),
-        'border-color': o(0.52, rnd(0.08, 0.14), (hMud + 50) % 360),
-        'link-color': o(0.55, rnd(0.16, 0.26), (hMud + 200) % 360),
-        'link-hover-color': o(0.5, rnd(0.14, 0.24), (hMud + 230) % 360),
-        'link-visited-color': o(0.46, rnd(0.12, 0.2), (hMud + 85) % 360),
-        'link-active-color': o(0.52, rnd(0.14, 0.22), (hMud + 115) % 360)
+        'content-background-color': o(rng(0.38, 0.48), cMud, hMud),
+        'background-color': o(rng(0.28, 0.38), cMud * 1.05, (hMud + 18) % 360),
+        'text-color': o(rng(0.88, 0.96), rng(0.04, 0.09), (hMud + 140) % 360),
+        'text-color-light': o(rng(0.72, 0.82), rng(0.06, 0.11), (hMud + 155) % 360),
+        'border-color': o(0.52, rng(0.08, 0.14), (hMud + 50) % 360),
+        'link-color': o(0.55, rng(0.16, 0.26), (hMud + 200) % 360),
+        'link-hover-color': o(0.5, rng(0.14, 0.24), (hMud + 230) % 360),
+        'link-visited-color': o(0.46, rng(0.12, 0.2), (hMud + 85) % 360),
+        'link-active-color': o(0.52, rng(0.14, 0.22), (hMud + 115) % 360)
       };
       dark = {
-        'content-background-color': o(rnd(0.14, 0.22), cMud * 1.1, hMud),
-        'background-color': o(rnd(0.06, 0.12), cMud * 1.15, (hMud + 15) % 360),
-        'text-color': o(0.9, rnd(0.05, 0.1), (hMud + 130) % 360),
-        'text-color-light': o(0.7, rnd(0.07, 0.12), (hMud + 145) % 360),
-        'border-color': o(0.32, rnd(0.1, 0.16), (hMud + 45) % 360),
-        'link-color': o(0.78, rnd(0.16, 0.26), (hMud + 205) % 360),
-        'link-hover-color': o(0.86, rnd(0.14, 0.24), (hMud + 235) % 360),
-        'link-visited-color': o(0.7, rnd(0.12, 0.2), (hMud + 88) % 360),
-        'link-active-color': o(0.82, rnd(0.14, 0.22), (hMud + 118) % 360)
+        'content-background-color': o(rng(0.14, 0.22), cMud * 1.1, hMud),
+        'background-color': o(rng(0.06, 0.12), cMud * 1.15, (hMud + 15) % 360),
+        'text-color': o(0.9, rng(0.05, 0.1), (hMud + 130) % 360),
+        'text-color-light': o(0.7, rng(0.07, 0.12), (hMud + 145) % 360),
+        'border-color': o(0.32, rng(0.1, 0.16), (hMud + 45) % 360),
+        'link-color': o(0.78, rng(0.16, 0.26), (hMud + 205) % 360),
+        'link-hover-color': o(0.86, rng(0.14, 0.24), (hMud + 235) % 360),
+        'link-visited-color': o(0.7, rng(0.12, 0.2), (hMud + 88) % 360),
+        'link-active-color': o(0.82, rng(0.14, 0.22), (hMud + 118) % 360)
       };
     } else {
-      const hC = (h + rnd(170, 200)) % 360;
+      const hC = (h + rng(170, 200)) % 360;
       const hM = (hC + 180) % 360;
       label = `Wild · lasergrid (${Math.round(h)}°)`;
-      const cLine = rnd(0.14, 0.24);
+      const cLine = rng(0.14, 0.24);
       light = {
-        'content-background-color': o(rnd(0.97, 0.995), rnd(0.01, 0.04), (h + 210) % 360),
-        'background-color': o(rnd(0.88, 0.94), rnd(0.03, 0.08), (h + 225) % 360),
-        'text-color': o(0.16, rnd(0.05, 0.1), (h + 240) % 360),
-        'text-color-light': o(0.38, rnd(0.04, 0.09), (h + 250) % 360),
+        'content-background-color': o(rng(0.97, 0.995), rng(0.01, 0.04), (h + 210) % 360),
+        'background-color': o(rng(0.88, 0.94), rng(0.03, 0.08), (h + 225) % 360),
+        'text-color': o(0.16, rng(0.05, 0.1), (h + 240) % 360),
+        'text-color-light': o(0.38, rng(0.04, 0.09), (h + 250) % 360),
         'border-color': o(0.62, cLine, hC),
-        'link-color': o(0.48, rnd(0.2, 0.3), hC),
-        'link-hover-color': o(0.42, rnd(0.2, 0.3), hM),
-        'link-visited-color': o(0.38, rnd(0.14, 0.22), (hC + 90) % 360),
-        'link-active-color': o(0.46, rnd(0.18, 0.28), hM)
+        'link-color': o(0.48, rng(0.2, 0.3), hC),
+        'link-hover-color': o(0.42, rng(0.2, 0.3), hM),
+        'link-visited-color': o(0.38, rng(0.14, 0.22), (hC + 90) % 360),
+        'link-active-color': o(0.46, rng(0.18, 0.28), hM)
       };
       dark = {
-        'content-background-color': o(rnd(0.12, 0.18), rnd(0.06, 0.12), (h + 215) % 360),
-        'background-color': o(rnd(0.06, 0.1), rnd(0.08, 0.14), (h + 230) % 360),
-        'text-color': o(0.94, rnd(0.04, 0.08), (h + 235) % 360),
-        'text-color-light': o(0.74, rnd(0.06, 0.1), (h + 245) % 360),
+        'content-background-color': o(rng(0.12, 0.18), rng(0.06, 0.12), (h + 215) % 360),
+        'background-color': o(rng(0.06, 0.1), rng(0.08, 0.14), (h + 230) % 360),
+        'text-color': o(0.94, rng(0.04, 0.08), (h + 235) % 360),
+        'text-color-light': o(0.74, rng(0.06, 0.1), (h + 245) % 360),
         'border-color': o(0.34, cLine * 1.05, hC),
-        'link-color': o(0.82, rnd(0.2, 0.3), hC),
-        'link-hover-color': o(0.88, rnd(0.18, 0.28), hM),
-        'link-visited-color': o(0.72, rnd(0.14, 0.22), (hC + 95) % 360),
-        'link-active-color': o(0.86, rnd(0.18, 0.28), hM)
+        'link-color': o(0.82, rng(0.2, 0.3), hC),
+        'link-hover-color': o(0.88, rng(0.18, 0.28), hM),
+        'link-visited-color': o(0.72, rng(0.14, 0.22), (hC + 95) % 360),
+        'link-active-color': o(0.86, rng(0.18, 0.28), hM)
       };
     }
 
@@ -2685,6 +2702,7 @@ function writeColorGalleryEmbedFiles(fullHtml) {
 /**
  * Build standalone + site embed gallery (defaults = CLI with no flags).
  * @param {Record<string, unknown>} [opts] — merged over {@link defaultGalleryBuildOptions}; set `quiet: true` to suppress logs.
+ *   Set `stableWildThemes: true` when embedding from Eleventy so wild-pack `mathRnd` output is deterministic (avoids watch loops).
  */
 function runColorGalleryBuild(opts = {}) {
   const o = { ...defaultGalleryBuildOptions(), ...opts };
@@ -2697,6 +2715,7 @@ function runColorGalleryBuild(opts = {}) {
   const noExtras = o.noExtras;
   const wildCount = o.wildCount;
   const quiet = o.quiet === true;
+  const wildRng = o.stableWildThemes === true ? createStableRng(0x573111) : mathRnd;
 
   let hues;
   if (randomN > 0) {
@@ -2758,7 +2777,7 @@ function runColorGalleryBuild(opts = {}) {
       rawSections.push({
         slug: 'wild',
         title: 'Wild',
-        items: [buildWildComboRaw(wildCount)]
+        items: [buildWildComboRaw(wildCount, wildRng)]
       });
     }
     rawSections.push({
