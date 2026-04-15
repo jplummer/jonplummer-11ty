@@ -7,6 +7,33 @@
  */
 
 const yaml = require('js-yaml');
+const matter = require('gray-matter');
+
+/**
+ * Parse markdown front matter the same way Eleventy does (gray-matter).
+ * Use for `src/_posts/*.md` so tests match the build; catches malformed YAML
+ * and mistakes like `## title:` without a closing `---` delimiter.
+ *
+ * @param {string} content - Full markdown file content
+ * @returns {Object} { frontMatter: object|null, content: string, error?: string }
+ */
+function parseMarkdownFrontMatter(content) {
+  try {
+    const result = matter(content);
+    const data = result.data;
+    const hasKeys = data && typeof data === 'object' && Object.keys(data).length > 0;
+    return {
+      frontMatter: hasKeys ? data : null,
+      content: result.content,
+    };
+  } catch (error) {
+    return {
+      frontMatter: null,
+      content,
+      error: error.message,
+    };
+  }
+}
 
 /**
  * Parse front matter from markdown file content
@@ -128,6 +155,7 @@ function formatYamlString(value) {
 
 module.exports = {
   parseFrontMatter,
+  parseMarkdownFrontMatter,
   reconstructFile,
   formatYamlString
 };

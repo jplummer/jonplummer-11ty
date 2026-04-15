@@ -36,6 +36,10 @@ if (fs.existsSync(deployScriptPath)) {
     console.log('❌ Deploy script missing changelog commit/push logic');
     process.exit(1);
   }
+  if (deployContent.includes('--exclude=color/')) {
+    console.log('❌ Deploy rsync must not exclude color/ (/color/ is a normal page)');
+    process.exit(1);
+  }
 }
 
 // Load environment variables

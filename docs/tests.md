@@ -37,6 +37,8 @@ Tests that validate source files (markdown, YAML) before build.
 
 Validates source markdown files in `src/_posts/` for proper front matter structure, file naming conventions, and required fields. Also validates YAML data files in `src/_data/`.
 
+Post markdown is parsed with **gray-matter** (same stack as Eleventy), not the regex-based `parseFrontMatter()` used elsewhere for simple delimiter splitting. A small regression guard asserts that a `## title:` line without a closing `---` delimiter fails parse the way the build would.
+
 **Checks:** Required fields (`title`, `date`, `slug`), date/slug format validation, file naming convention (`YYYY/YYYY-MM-DD-slug.md`), duplicate slugs, YAML data file syntax.
 
 ### markdown.js

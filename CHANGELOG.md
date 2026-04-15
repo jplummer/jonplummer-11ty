@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-04-14
+
+- Post /type/, /color/, /ogimages/ hidden pages; refresh labs and embeds
+
 ## 2026-04-12
 
 - Rename color-test.njk to color.njk and og-image-preview.njk to ogimages.njk.

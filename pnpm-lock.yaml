@@ -48,6 +48,9 @@ importers:
       culori:
         specifier: ^4.0.2
         version: 4.0.2
+      gray-matter:
+        specifier: 4.0.3
+        version: 4.0.3
       html-validate:
         specifier: ^10.11.3
         version: 10.11.3

@@ -44,6 +44,7 @@
     "cheerio": "^1.2.0",
     "cspell": "^10.0.0",
     "culori": "^4.0.2",
+    "gray-matter": "4.0.3",
     "html-validate": "^10.11.3",
     "js-yaml": "^4.1.1",
     "luxon": "^3.7.2",
