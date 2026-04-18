@@ -50,7 +50,7 @@ These sit with the gallery; the pnpm shortcut also appears under **Maintenance**
 | **Generator + stack data** | `scripts/font-explore/generate-font-gallery.js` — builds the HTML; `scripts/font-explore/modern-font-stacks.js` — stack definitions and `SITE_DEFAULT_STACK_ID` (must stay aligned with live `--font-family` when you change the default). |
 | **CSS validation** | `pnpm run test css` / `pnpm run lint:css` — after editing font tokens in `jonplummer.css`. Listed in [tests.md](tests.md) as part of the fast suite. |
 
-There is no separate `/font-test/` template (unlike `/color/`). **`pnpm run font-gallery`** writes `scripts/font-explore/output/index.html` (for `file://` review) **and** updates **`src/_includes/partials/font-lab-card.fragment.html`**, which **`/type/`** inlines via the `fontLabCard` shortcode. Old **`/type/gallery/`** URLs redirect to **`/type/`**.
+There is no separate `/font-test/` template (unlike `/color/`). **`pnpm run font-gallery`** writes `scripts/font-explore/output/index.html` (for `file://` review) **and** updates **`src/_includes/partials/font-lab-card.fragment.html`** plus **`src/assets/js/font-lab-card.js`** (same-origin script so production **CSP** allows the stack `<select>` logic; inline `<script>` is blocked). **`/type/`** pulls the fragment via the `fontLabCard` shortcode. Old **`/type/gallery/`** URLs redirect to **`/type/`**.
 
 ## Related
 

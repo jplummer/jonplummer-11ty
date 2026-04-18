@@ -15,6 +15,7 @@
 const fs = require('fs');
 const path = require('path');
 const { MODERN_FONT_STACKS, SITE_DEFAULT_STACK_ID } = require('./modern-font-stacks.js');
+const { formatFontLabPasteCss } = require('./font-lab-paste-css.js');
 
 const OUT_DIR = path.join(__dirname, 'output');
 const FONT_LAB_SCOPED_CSS = path.join(
@@ -31,6 +32,9 @@ const FONT_LAB_FRAGMENT = path.join(
   'partials',
   'font-lab-card.fragment.html'
 );
+
+/** Same-origin `<script src>` so Apache CSP `script-src 'self'` allows controls (inline scripts blocked). */
+const FONT_LAB_CARD_JS = path.join(process.cwd(), 'src', 'assets', 'js', 'font-lab-card.js');
 
 function readScopedCss() {
   return fs.readFileSync(FONT_LAB_SCOPED_CSS, 'utf8');
@@ -130,6 +134,51 @@ function renderSelectOptions(selectedId) {
   }).join('\n');
 }
 
+/** Built browser file: shared formatter via .toString() so paste output stays DRY with Node. */
+function fontLabCardRuntimeSource() {
+  const formatterSource = formatFontLabPasteCss.toString();
+  return `${formatterSource}
+
+(function () {
+  var elJson = document.getElementById('font-stacks-json');
+  if (!elJson) return;
+  var stacks = JSON.parse(elJson.textContent);
+  var byId = {};
+  for (var i = 0; i < stacks.length; i++) {
+    byId[stacks[i].id] = stacks[i];
+  }
+  var SAME = '${BODY_SAME_AS_HEADINGS}';
+  var selH = document.getElementById('font-heading-stack');
+  var selB = document.getElementById('font-body-stack');
+  var mixJp = document.getElementById('font-preview-jp');
+  var cssOut = document.getElementById('font-css-code');
+  function bodyResolved() {
+    if (selB.value === SAME) return byId[selH.value];
+    return byId[selB.value];
+  }
+  function applyFonts() {
+    var h = byId[selH.value];
+    var b = bodyResolved();
+    if (!h || !b || !mixJp || !cssOut) return;
+    mixJp.style.fontFamily = b.family;
+    mixJp.querySelectorAll('h1, h2, h3, h4').forEach(function (el) {
+      el.style.fontFamily = h.family;
+    });
+    cssOut.textContent = formatFontLabPasteCss(b.family, h.family);
+  }
+  function onHeadingChange() {
+    applyFonts();
+  }
+  function onBodyChange() {
+    applyFonts();
+  }
+  selH.addEventListener('change', onHeadingChange);
+  selB.addEventListener('change', onBodyChange);
+  applyFonts();
+})();
+`;
+}
+
 function renderBodySelectOptions(selectedBodyValue) {
   const sameSel = selectedBodyValue === BODY_SAME_AS_HEADINGS ? ' selected' : '';
   const lines = [
@@ -147,7 +196,12 @@ function renderBodySelectOptions(selectedBodyValue) {
   return lines.join('\n');
 }
 
-function renderFontLabCard() {
+function renderFontLabCard(options = {}) {
+  const scriptSrc =
+    typeof options.scriptSrc === 'string' && options.scriptSrc.length > 0
+      ? options.scriptSrc
+      : '/assets/js/font-lab-card.js';
+
   const head = stackById(DEFAULT_HEADING_STACK_ID);
   if (!head) {
     throw new Error('Invalid DEFAULT_HEADING_STACK_ID');
@@ -161,20 +215,7 @@ function renderFontLabCard() {
   const bodySelectValue = BODY_SAME_AS_HEADINGS;
   const bodyStack = head;
 
-  const cssBlock = `.jp-page,
-.jp-page nav,
-.jp-page p,
-.jp-page li,
-.jp-page .license,
-.jp-page .posted-on,
-.jp-page .link-description,
-.jp-page pre,
-.jp-page code {
-  font-family: ${bodyStack.family};
-}
-h1, h2, h3, h4 {
-  font-family: ${head.family};
-}`;
+  const cssBlock = formatFontLabPasteCss(bodyStack.family, head.family);
 
   return `<section class="card font-tool-card" aria-label="Font stacks">
   <p class="tool-note">Uses the same index-shaped markup as the live home page. Colors and type scale come from <code>jonplummer.css</code> (your OS light/dark choice). Stacks: <a href="https://modernfontstacks.com" target="_blank" rel="noopener noreferrer">Modern Font Stacks</a>.</p>
@@ -207,45 +248,7 @@ ${renderBodySelectOptions(bodySelectValue)}
     <pre class="code"><code id="font-css-code">${escapeHtml(cssBlock)}</code></pre>
   </details>
   <script type="application/json" id="font-stacks-json">${stacksJson.replace(/</g, '\\u003c')}</script>
-  <script>
-(function () {
-  var elJson = document.getElementById('font-stacks-json');
-  if (!elJson) return;
-  var stacks = JSON.parse(elJson.textContent);
-  var byId = {};
-  for (var i = 0; i < stacks.length; i++) {
-    byId[stacks[i].id] = stacks[i];
-  }
-  var SAME = '${BODY_SAME_AS_HEADINGS}';
-  var selH = document.getElementById('font-heading-stack');
-  var selB = document.getElementById('font-body-stack');
-  var mixJp = document.getElementById('font-preview-jp');
-  var cssOut = document.getElementById('font-css-code');
-  function bodyResolved() {
-    if (selB.value === SAME) return byId[selH.value];
-    return byId[selB.value];
-  }
-  function applyFonts() {
-    var h = byId[selH.value];
-    var b = bodyResolved();
-    if (!h || !b || !mixJp || !cssOut) return;
-    mixJp.style.fontFamily = b.family;
-    mixJp.querySelectorAll('h1, h2, h3, h4').forEach(function (el) {
-      el.style.fontFamily = h.family;
-    });
-    cssOut.textContent = '.jp-page,\\n.jp-page nav,\\n.jp-page p,\\n.jp-page li,\\n.jp-page .license,\\n.jp-page .posted-on,\\n.jp-page .link-description,\\n.jp-page pre,\\n.jp-page code {\\n  font-family: ' + b.family + ';\\n}\\nh1, h2, h3, h4 {\\n  font-family: ' + h.family + ';\\n}';
-  }
-  function onHeadingChange() {
-    applyFonts();
-  }
-  function onBodyChange() {
-    applyFonts();
-  }
-  selH.addEventListener('change', onHeadingChange);
-  selB.addEventListener('change', onBodyChange);
-  applyFonts();
-})();
-  </script>
+  <script src="${escapeHtml(scriptSrc)}"></script>
 </section>`;
 }
 
@@ -367,12 +370,20 @@ ${card}
 function main() {
   try {
     fs.mkdirSync(OUT_DIR, { recursive: true });
-    const card = renderFontLabCard();
+    const jsHeader =
+      '/* Generated by scripts/font-explore/generate-font-gallery.js — not hand-edited. */\n';
+    fs.mkdirSync(path.dirname(FONT_LAB_CARD_JS), { recursive: true });
+    fs.writeFileSync(FONT_LAB_CARD_JS, `${jsHeader}${fontLabCardRuntimeSource()}\n`, 'utf8');
+    console.log(`Wrote ${FONT_LAB_CARD_JS}`);
+
+    const card = renderFontLabCard({ scriptSrc: '/assets/js/font-lab-card.js' });
     fs.mkdirSync(path.dirname(FONT_LAB_FRAGMENT), { recursive: true });
     fs.writeFileSync(FONT_LAB_FRAGMENT, card, 'utf8');
     console.log(`Wrote ${FONT_LAB_FRAGMENT}`);
 
-    const html = renderHtml(card);
+    const html = renderHtml(
+      renderFontLabCard({ scriptSrc: '../../../src/assets/js/font-lab-card.js' })
+    );
     fs.writeFileSync(path.join(OUT_DIR, 'index.html'), html, 'utf8');
     const jsonPayload = {
       source: 'https://modernfontstacks.com',
