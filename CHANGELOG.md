@@ -3,6 +3,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 ## 2026-04-14
 
 - Post /type/, /color/, /ogimages/ hidden pages; refresh labs and embeds
+- Deploy /color/, align post frontmatter with Eleventy, fix hidden-pages YAML
 
 ## 2026-04-12
 
@@ -467,4 +468,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-04-15
+Last deployed on 2026-04-18
