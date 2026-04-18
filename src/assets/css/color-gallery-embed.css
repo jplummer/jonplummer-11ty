@@ -189,7 +189,7 @@
       border-radius: 50%;
       border: 1px solid color-mix(in oklch, var(--border-color) 88%, transparent);
       box-sizing: border-box;
-      background: conic-gradient(from -90deg, hsl(0 100% 50%), hsl(15 100% 50%), hsl(30 100% 50%), hsl(45 100% 50%), hsl(60 100% 50%), hsl(75 100% 50%), hsl(90 100% 50%), hsl(105 100% 50%), hsl(120 100% 50%), hsl(135 100% 50%), hsl(150 100% 50%), hsl(165 100% 50%), hsl(180 100% 50%), hsl(195 100% 50%), hsl(210 100% 50%), hsl(225 100% 50%), hsl(240 100% 50%), hsl(255 100% 50%), hsl(270 100% 50%), hsl(285 100% 50%), hsl(300 100% 50%), hsl(315 100% 50%), hsl(330 100% 50%), hsl(345 100% 50%), hsl(360 100% 50%));
+      background: conic-gradient(from -90deg, oklch(0.72 0.21 0deg), oklch(0.72 0.21 15deg), oklch(0.72 0.21 30deg), oklch(0.72 0.21 45deg), oklch(0.72 0.21 60deg), oklch(0.72 0.21 75deg), oklch(0.72 0.21 90deg), oklch(0.72 0.21 105deg), oklch(0.72 0.21 120deg), oklch(0.72 0.21 135deg), oklch(0.72 0.21 150deg), oklch(0.72 0.21 165deg), oklch(0.72 0.21 180deg), oklch(0.72 0.21 195deg), oklch(0.72 0.21 210deg), oklch(0.72 0.21 225deg), oklch(0.72 0.21 240deg), oklch(0.72 0.21 255deg), oklch(0.72 0.21 270deg), oklch(0.72 0.21 285deg), oklch(0.72 0.21 300deg), oklch(0.72 0.21 315deg), oklch(0.72 0.21 330deg), oklch(0.72 0.21 345deg), oklch(0.72 0.21 360deg));
     }
     .color-gallery-embed .color-wheel-dots {
       position: absolute;
