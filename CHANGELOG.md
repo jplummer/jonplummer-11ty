@@ -1,5 +1,10 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-04-17
+
+- Feat(type): paste-friendly Example CSS with explicit monospace token
+- Feat(color): external embed script, CSP, and security check alignment
+
 ## 2026-04-14
 
 - Post /type/, /color/, /ogimages/ hidden pages; refresh labs and embeds
