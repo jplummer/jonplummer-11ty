@@ -121,7 +121,10 @@ function isRedirectPage(htmlContent) {
 const EXCLUDED_SHORT_TITLES = [
   '/about',
   '/changelog',
+  '/color',
   '/now',
+  '/ogimages',
+  '/type',
   'Goal Manager identity (2001)',
   'CareLink Pro main interface',
   'Linksys app revitalization',
@@ -331,10 +334,8 @@ function validate(result, options) {
     const headings = extractHeadings(content);
     const isRedirect = isRedirectPage(content);
     
-    // Identify utility and pagination pages (skip SEO checks for these)
-    const isUtilityPage = relativePath === 'ogimages/index.html' ||
-                          relativePath === 'color/index.html' ||
-                          relativePath === 'type/index.html' ||
+    // Error pages (skip SEO checks); lab URLs /type /color /ogimages match /changelog /technologies
+    const isErrorPage =
                           relativePath === '404.html' ||
                           relativePath === '500.html';
     const isPaginationPage = relativePath.match(/^page\/\d+\//) || relativePath.startsWith('page/');
@@ -348,8 +349,8 @@ function validate(result, options) {
         type: 'title-missing',
         message: 'Missing title tag'
       });
-    } else if (!isRedirect && !isPaginationPage && !isUtilityPage) {
-      // Full title validation only for non-redirect, non-pagination, non-utility pages
+    } else if (!isRedirect && !isPaginationPage && !isErrorPage) {
+      // Full title validation only for non-redirect, non-pagination, non-error pages
       const titleIssues = validateTitle(metaTags.title);
       titleIssues.forEach(issue => {
         // Length issues are warnings, missing title is already handled above as error
@@ -367,8 +368,8 @@ function validate(result, options) {
       });
     }
     
-    // Meta description validation (skipped for redirects, pagination, and utility pages)
-    if (!isRedirect && !isPaginationPage && !isUtilityPage) {
+    // Meta description validation (skipped for redirects, pagination, and error pages)
+    if (!isRedirect && !isPaginationPage && !isErrorPage) {
       const descIssues = validateMetaDescription(metaTags.description);
       
       // Check for unescaped quotes in raw HTML
@@ -396,8 +397,8 @@ function validate(result, options) {
       });
     }
     
-    // Open Graph validation (skipped for redirects, pagination, and utility pages)
-    if (!isRedirect && !isPaginationPage && !isUtilityPage) {
+    // Open Graph validation (skipped for redirects, pagination, and error pages)
+    if (!isRedirect && !isPaginationPage && !isErrorPage) {
       const ogIssues = validateOpenGraph(metaTags.og);
       ogIssues.forEach(issue => {
         addWarning(fileObj, {
@@ -407,8 +408,8 @@ function validate(result, options) {
       });
     }
     
-    // Heading validation (skipped for redirects and utility pages)
-    if (!isRedirect && !isUtilityPage) {
+    // Heading validation (skipped for redirects and error pages)
+    if (!isRedirect && !isErrorPage) {
       const headingIssues = validateHeadings(headings);
       headingIssues.forEach(issue => {
         addIssue(fileObj, {

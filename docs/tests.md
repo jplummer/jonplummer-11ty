@@ -99,7 +99,7 @@ Validates RSS/XML feed files for proper structure, required elements, and feed h
 
 ### seo.js
 
-Validates SEO metadata: title tags (10-200 chars), meta descriptions (20-300 chars), Open Graph tags, heading hierarchy (H1 required, no skipped levels), duplicate titles, canonical URL, language attribute. Skips redirect and utility pages.
+Validates SEO metadata: title tags (10-200 chars), meta descriptions (20-300 chars), Open Graph tags, heading hierarchy (H1 required, no skipped levels), duplicate titles, canonical URL, language attribute. Skips redirects, blog pagination URLs, and error pages (404/500).
 
 **Note:** With `--changed`, only checks if markdown files changed (skips if only links.yaml changed).
 
