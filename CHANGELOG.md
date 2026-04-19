@@ -1,5 +1,10 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-04-19
+
+- Lab URLs in page collection; OG grid newest-first
+- Feat(ogimages): sort OG grid by content date; share filename helper
+
 ## 2026-04-17
 
 - Feat(type): paste-friendly Example CSS with explicit monospace token
@@ -473,4 +478,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-04-18
+Last deployed on 2026-04-19
