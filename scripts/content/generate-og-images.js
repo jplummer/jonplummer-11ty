@@ -9,6 +9,7 @@ const { findMarkdownFiles, findFilesByExtension } = require('../utils/file-utils
 const { parseFrontMatter, reconstructFile } = require('../utils/frontmatter-utils');
 const { isPost } = require('../utils/content-utils');
 const { extractCssCustomProperties } = require('../../eleventy/utils/css-utils');
+const { generateOgImageFilename } = require('../utils/og-image-filename');
 
 // Configure Nunjucks environment
 const nunjucksEnv = new nunjucks.Environment(
@@ -27,35 +28,6 @@ nunjucksEnv.addFilter('postDate', (dateObj) => {
 
 
 // Front matter parsing and reconstruction now use shared utilities
-
-// Generate filename for OG image based on page URL or slug
-function generateOgImageFilename(pageData, filePath) {
-  // For posts, use the date-based path structure
-  if (pageData.tags && pageData.tags.includes('post') && pageData.date) {
-    const date = new Date(pageData.date);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    // Extract slug from filename (remove date prefix if present)
-    let slug = path.basename(filePath, path.extname(filePath));
-    // Remove date prefix if filename starts with YYYY-MM-DD-
-    const datePrefix = `${year}-${month}-${day}-`;
-    if (slug.startsWith(datePrefix)) {
-      slug = slug.substring(datePrefix.length);
-    }
-    return `${year}-${month}-${day}-${slug}.png`;
-  }
-  
-  // For pages, use the permalink or filename
-  if (pageData.permalink) {
-    const slug = pageData.permalink.replace(/^\//, '').replace(/\/$/, '').replace(/\//g, '-') || 'index';
-    return `${slug}.png`;
-  }
-  
-  // Fallback to filename
-  const slug = path.basename(filePath, path.extname(filePath));
-  return `${slug}.png`;
-}
 
 // Generate hash of source data for incremental generation
 function generateDataHash(pageData) {

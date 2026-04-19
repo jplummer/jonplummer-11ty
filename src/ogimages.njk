@@ -73,7 +73,7 @@ ogImage: /assets/images/og/ogimages.png
   {% if ogImages %}
   <div class="preview-section">
     <h2>All OG Images</h2>
-    <p>All Open Graph images in <code>src/assets/images/og/</code> (includes auto-generated and static images like index.png and portfolio.png). Order is newest first by file modification time (typically matches images regenerated most recently):</p>
+    <p>All Open Graph images in <code>src/assets/images/og/</code> (includes auto-generated and static images like index.png and portfolio.png). Sorted with newest content first, using each template’s <code>date</code> in front matter when present (post publication date or an explicit page date).</p>
     
     <div class="og-images-grid">
       {% for image in ogImages %}
