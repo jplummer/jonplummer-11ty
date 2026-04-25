@@ -4,6 +4,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 - Update ideas tracker and add new post draft assets.
 - Docs(memory): note test:changed behavior for untracked files
+- Bring utility pages and related updates into main
 
 ## 2026-04-19
 
