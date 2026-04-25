@@ -1,0 +1,122 @@
+<section class="card font-tool-card" aria-label="Font stacks">
+  <p class="tool-note">Uses the same index-shaped markup as the live home page. Colors and type scale come from <code>jonplummer.css</code> (your OS light/dark choice). Stacks: <a href="https://modernfontstacks.com" target="_blank" rel="noopener noreferrer">Modern Font Stacks</a>.</p>
+  <div class="tool-controls" role="group" aria-label="Font stack selection">
+    <div class="tool-selects">
+      <div class="tool-field">
+        <label for="font-heading-stack">Headings (<code>h1</code>–<code>h4</code>)</label>
+        <select id="font-heading-stack" name="font-heading-stack">
+    <option value="system-ui" selected>System UI</option>
+    <option value="transitional">Transitional</option>
+    <option value="old-style">Old Style</option>
+    <option value="humanist">Humanist</option>
+    <option value="geometric-humanist">Geometric Humanist</option>
+    <option value="classical-humanist">Classical Humanist</option>
+    <option value="neo-grotesque">Neo-Grotesque</option>
+    <option value="monospace-slab-serif">Monospace Slab Serif</option>
+    <option value="monospace-code">Monospace Code</option>
+    <option value="industrial">Industrial</option>
+    <option value="rounded-sans">Rounded Sans</option>
+    <option value="slab-serif">Slab Serif</option>
+    <option value="antique">Antique</option>
+    <option value="didone">Didone</option>
+    <option value="handwritten">Handwritten</option>
+        </select>
+      </div>
+      <div class="tool-field">
+        <label for="font-body-stack">Everything else</label>
+        <select id="font-body-stack" name="font-body-stack">
+    <option value="same-as-headings" selected>Same as headings</option>
+    <option value="system-ui">System UI</option>
+    <option value="transitional">Transitional</option>
+    <option value="old-style">Old Style</option>
+    <option value="humanist">Humanist</option>
+    <option value="geometric-humanist">Geometric Humanist</option>
+    <option value="classical-humanist">Classical Humanist</option>
+    <option value="neo-grotesque">Neo-Grotesque</option>
+    <option value="monospace-slab-serif">Monospace Slab Serif</option>
+    <option value="monospace-code">Monospace Code</option>
+    <option value="industrial">Industrial</option>
+    <option value="rounded-sans">Rounded Sans</option>
+    <option value="slab-serif">Slab Serif</option>
+    <option value="antique">Antique</option>
+    <option value="didone">Didone</option>
+    <option value="handwritten">Handwritten</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="font-preview-lane">
+  <div class="theme-root home-preview" id="font-preview-root">
+        <div class="jp-page" id="font-preview-jp" style="font-family: system-ui, sans-serif">
+          <header aria-label="Preview: site header">
+            <a class="skip" href="#font-preview-main">Skip to content</a>
+            <hgroup>
+              <h1 style="font-family: system-ui, sans-serif"><a href="#" rel="home">Jon Plummer</a></h1>
+              <p>Today I Learned</p>
+            </hgroup>
+            <nav aria-label="Preview: primary navigation">
+              <ul>
+                <li><a href="#">/about</a></li>
+                <li><a href="#">/now</a></li>
+                <li><a href="#">/portfolio</a></li>
+                <li><a href="#" class="sim-visited">/wisdom</a></li>
+              </ul>
+            </nav>
+          </header>
+          <section id="font-preview-main" class="font-preview-main" aria-labelledby="font-preview-main-heading">
+            <h2 class="sr-only" id="font-preview-main-heading">Preview: main column</h2>
+            <article>
+              <header aria-label="Preview: article title">
+                <h1 style="font-family: system-ui, sans-serif"><a href="#" rel="bookmark">What we owe junior designers in review</a></h1>
+              </header>
+              <section>
+                <p>Feedback works when it is <a href="#">specific</a> and <a href="#" class="sim-visited">grounded in examples</a>. <strong>Kind</strong> delivery helps the second sentence read like a real lede.</p>
+                <pre><code>const tone = 'curious';</code></pre>
+              </section>
+              <footer aria-label="Preview: article footer">
+                <p class="posted-on"><time datetime="2026-03-15">March 15, 2026</time></p>
+              </footer>
+            </article>
+            <article class="link-item">
+              <section>
+                <p>
+                  <a href="#">How product trios survive reorgs</a><span class="link-description"> — remaindered link blurb.</span>
+                </p>
+              </section>
+            </article>
+            <nav class="pagination" aria-label="Preview: pagination">
+              <a class="prev" href="#">← Older posts</a>
+              <a class="next" href="#">Newer posts →</a>
+            </nav>
+          </section>
+          <footer aria-label="Preview: site footer">
+            <p class="license">Copyright 2026 Jon Plummer</p>
+          </footer>
+        </div>
+        <div class="swatch-legend" aria-hidden="true">
+          <span class="chip"><span class="chip-swatch" style="background-color: var(--background-color)"></span> Page <code>--background-color</code></span>
+          <span class="chip"><span class="chip-swatch" style="background-color: var(--content-background-color)"></span> Content <code>--content-background-color</code></span>
+        </div>
+      </div>
+  </div>
+  <details class="copy-block">
+    <summary>Example CSS</summary>
+    <pre class="code"><code id="font-css-code">/* Tokens + hooks — order is for copying, not matching this site’s CSS file layout. */
+/* code/pre: UA styles use monospace; --font-family-mono sets it explicitly (not the body stack). */
+
+:root {
+  --font-family: system-ui, sans-serif;
+  --font-family-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+}
+
+body {
+  font-family: var(--font-family);
+}
+
+code, pre, kbd, samp {
+  font-family: var(--font-family-mono);
+}</code></pre>
+  </details>
+  <script type="application/json" id="font-stacks-json">[{"id":"system-ui","name":"System UI","family":"system-ui, sans-serif"},{"id":"transitional","name":"Transitional","family":"Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif"},{"id":"old-style","name":"Old Style","family":"'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif"},{"id":"humanist","name":"Humanist","family":"Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif"},{"id":"geometric-humanist","name":"Geometric Humanist","family":"Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif"},{"id":"classical-humanist","name":"Classical Humanist","family":"Optima, Candara, 'Noto Sans', source-sans-pro, sans-serif"},{"id":"neo-grotesque","name":"Neo-Grotesque","family":"Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif"},{"id":"monospace-slab-serif","name":"Monospace Slab Serif","family":"'Nimbus Mono PS', 'Courier New', monospace"},{"id":"monospace-code","name":"Monospace Code","family":"ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace"},{"id":"industrial","name":"Industrial","family":"Bahnschrift, 'DIN Alternate', 'Franklin Gothic Medium', 'Nimbus Sans Narrow', sans-serif-condensed, sans-serif"},{"id":"rounded-sans","name":"Rounded Sans","family":"ui-rounded, 'Hiragino Maru Gothic ProN', Quicksand, Comfortaa, Manjari, 'Arial Rounded MT', 'Arial Rounded MT Bold', Calibri, source-sans-pro, sans-serif"},{"id":"slab-serif","name":"Slab Serif","family":"Rockwell, 'Rockwell Nova', 'Roboto Slab', 'DejaVu Serif', 'Sitka Small', serif"},{"id":"antique","name":"Antique","family":"Superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia, serif"},{"id":"didone","name":"Didone","family":"Didot, 'Bodoni MT', 'Noto Serif Display', 'URW Palladio L', P052, Sylfaen, serif"},{"id":"handwritten","name":"Handwritten","family":"'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive"}]</script>
+  <script src="/assets/js/font-lab-card.js"></script>
+</section>

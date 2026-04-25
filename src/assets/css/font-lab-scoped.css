@@ -1,0 +1,75 @@
+/* Font stack lab: mini home preview (shared by /type/ and standalone font-gallery output) */
+
+.font-preview-lane {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.theme-root.home-preview {
+  width: 100%;
+}
+
+.theme-root.home-preview .jp-page {
+  margin: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  overflow: hidden;
+  border-radius: 6px;
+  border: 1px solid color-mix(in srgb, var(--border-color) 70%, transparent);
+  box-shadow: 0 1px 8px rgb(0 0 0 / 12%);
+  padding: 0;
+}
+
+.theme-root.home-preview .swatch-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.75rem;
+  margin-top: var(--spacing-sm);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-xs);
+  color: var(--text-color-light);
+}
+
+.theme-root.home-preview .swatch-legend .chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.theme-root.home-preview .swatch-legend code {
+  font-size: 0.85em;
+  opacity: 0.92;
+}
+
+.theme-root.home-preview .chip-swatch {
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 2px;
+  border: 1px solid color-mix(in srgb, var(--border-color) 85%, transparent);
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.theme-root.home-preview .jp-page > header,
+.theme-root.home-preview .jp-page > section.font-preview-main,
+.theme-root.home-preview .jp-page > footer {
+  margin: 0 auto;
+  padding: var(--gutter);
+  max-width: var(--max-width);
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--content-background-color);
+}
+
+.theme-root.home-preview article section pre {
+  width: fit-content;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.theme-root.home-preview a.sim-visited {
+  color: var(--link-visited-color);
+}

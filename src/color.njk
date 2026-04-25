@@ -1,0 +1,14 @@
+---
+title: /color
+description: OKLCH color theme gallery with DR site presets, harmony lab, wild pack, and terminal-inspired themes.
+date: 2025-11-15T00:00:00.000Z
+layout: base.njk
+tags: page
+permalink: /color/
+ogImage: /assets/images/og/color.png
+---
+<link rel="stylesheet" href="/assets/css/color-gallery-embed.css">
+<div class="color-gallery-page-intro">
+  <p>This page embeds the color theme gallery: home-layout previews with OKLCH tokens applied on top of <code>jonplummer.css</code>. The live embed files live under <code>src/_includes/partials/</code> and <code>src/assets/css/</code>; they refresh when you run <code>pnpm run build</code> or <code>pnpm run dev</code>. For generator flags and a standalone copy, run <code>pnpm run color-gallery</code> and open <code>scripts/color-explore/output/index.html</code> from the repo.</p>
+</div>
+{% colorGalleryEmbed %}

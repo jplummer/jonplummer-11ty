@@ -19,7 +19,7 @@ const { mergePostsAndLinks } = require("../utils/merge-posts-links");
  */
 function configureFilters(eleventyConfig, md) {
   /**
-   * Prefix so asset URLs work from `file://` (e.g. `_site/og-image-preview/index.html`) and
+   * Prefix so asset URLs work from `file://` (e.g. `_site/ogimages/index.html`) and
    * from any served path depth. Empty string at output root; `../` per subdirectory level.
    *
    * `page.outputPath` may be absolute (includes `_site/...`); strip through `_site/` before

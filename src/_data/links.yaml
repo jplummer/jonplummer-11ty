@@ -1,3 +1,19 @@
+2026-04-18:
+  - url: "https://stopsloppypasta.ai/en/"
+    title: "Stop Sloppypasta: Don't paste raw LLM output at people"
+    description: "We're all using AI tools to do our work. Our bosses our demanding it, and expecting delicious speed as a result. But that doesn't mean you should abandon quality – and you'll probably have to be *more* diligent, not less, to create it."
+  - url: "https://dontasktoask.com/"
+    title: "Don't ask to ask, just ask"
+    description: "Similarly, the (very nice) social stroke of asking if you can ask a question – it's not needed in an asynchronous environment. Just ask. People will be happier if you just ask."
+  - url: "https://www.nohello.com/"
+    title: No Hello
+    description: "An oldie, but a goodie. Don't waste time in Slack or teams saying hi and waiting for a response. That's wasteful and annoying. Just say hi and get to it in the same message. It's not rude, it's kind."
+
+2026-04-15:
+  - url: "https://www.anildash.com/2026/04/06/people-love-to-work-hard/"
+    title: Actually, people love to work hard - Anil Dash
+    description: "\"As has often been documented, the hoary chestnut of saying “nobody wants to work anymore” dates back decades, if not centuries, and it’s never been true in all those years of deletion. It is, firstly, a tactic that bosses use for negging workers in a vain attempt to try to drive down wages (and to successfully get media to blame people for their own underemployment), but it also serves as an effective demonstration of just how little society understand about what actually motivates people.\""
+
 2026-04-11:
   - url: "https://jeffgothelf.com/blog/safe-was-bad-for-agility-for-ai-its-catastrophic/"
     title: "SAFe Was Bad for Agility. For AI, It's Catastrophic – Jeff Gothelf"

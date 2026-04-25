@@ -1,21 +1,14 @@
 ---
 layout: base.njk
-title: OG Image Preview
-permalink: /og-image-preview/
-eleventyExcludeFromCollections: true
-ogImage: /assets/images/og/index.png
+title: /ogimages
+description: Preview Open Graph image templates and generated assets.
+permalink: /ogimages/
+tags: page
+ogImage: /assets/images/og/ogimages.png
 ---
-
 <div class="preview-container">
-  <h1>OG Image Preview</h1>
-  
   <div class="preview-info">
     <p>This page previews the <code>og-image.njk</code> template and shows all Open Graph images (both auto-generated and static). Edit <code>src/_includes/og-image.njk</code> to change the styling, then refresh this page to see your changes.</p>
-  </div>
-
-  <div class="preview-info preview-tool-links">
-    <p><strong>Related preview tools</strong> — links to the color and font labs resolve when you open this page from disk as <code>_site/og-image-preview/index.html</code> (after <code>pnpm run build</code>). Site chrome (CSS, favicons) uses relative URLs so this page is styled on <code>file://</code> as well as on <code>pnpm run dev</code>. With dev only, open the <code>scripts/…/output/index.html</code> files from your editor or file manager.</p>
-    <p><a href="../../scripts/font-explore/output/index.html">Font stack preview</a> (<code>pnpm run font-gallery</code>) · <a href="../../scripts/color-explore/output/index.html">Color theme gallery</a> (<code>pnpm run color-gallery</code>)</p>
   </div>
   
   <div class="preview-section">
@@ -80,7 +73,7 @@ ogImage: /assets/images/og/index.png
   {% if ogImages %}
   <div class="preview-section">
     <h2>All OG Images</h2>
-    <p>All Open Graph images in <code>src/assets/images/og/</code> (includes auto-generated and static images like index.png and portfolio.png):</p>
+    <p>All Open Graph images in <code>src/assets/images/og/</code> (includes auto-generated and static images like index.png and portfolio.png). Sorted with newest content first, using each template’s <code>date</code> in front matter when present (post publication date or an explicit page date).</p>
     
     <div class="og-images-grid">
       {% for image in ogImages %}

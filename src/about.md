@@ -21,7 +21,7 @@ My management style is Socratic. I give feedback by asking questions, help peopl
 
 Outside work I'm a deep dabbler — jazz piano, 3D printing, amateur industrial design, light electronics, home improvement, vibe-coding, cooking. The common thread is making ideas tangible.
 
-I mentor at [Designed.org](https://designed.org) and [tupu.io](https://tupu.io). You can find me on [LinkedIn](https://linkedin.com/in/jplummer) or reach me at jon@jonplummer.com.
+I mentor at [Designed.org](https://designed.org) and [tupu.io](https://tupu.io). See more via [my LinkedIn profile](https://linkedin.com/in/jplummer) and message me there if you have something to say, or reach me at [jon@jonplummer.com](mailto:jon@jonplummer.com?Subject=I%20visited%20jonplummer.com/about).
 
 * * *
 
@@ -70,7 +70,3 @@ Jon is an extremely thoughtful and caring leader who is always willing to suppor
 - [Crowd-sourced location determination](https://google.com/patents/US20160165570A1)
 
 …and more patents pending in networking and IoT.
-
-* * *
-
-See more via [my LinkedIn profile](https://linkedin.com/in/jplummer), and message me there if you have something to say. Or email [me@jonplummer.com](mailto:me@jonplummer.com?Subject=Mail%20from%20jonplummer.name).

@@ -25,7 +25,7 @@ function configurePreprocessors(eleventyConfig) {
   eleventyConfig.ignores.add("**/*.backup");
   eleventyConfig.ignores.add("**/*.backup.md");
   
-  // Note: og-image-preview.njk is excluded from collections via front matter
+  // Note: ogimages.njk is excluded from collections via front matter
   // but should still be built for local preview during development
 }
 

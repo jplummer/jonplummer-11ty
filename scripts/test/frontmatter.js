@@ -5,7 +5,7 @@ const path = require('path');
 const yaml = require('js-yaml');
 const { validateDate, validateSlug } = require('../utils/validation-utils');
 const { getChangedFilesSinceHead, getMarkdownFiles, readFile } = require('../utils/test-helpers');
-const { parseFrontMatter } = require('../utils/frontmatter-utils');
+const { parseFrontMatter, parseMarkdownFrontMatter } = require('../utils/frontmatter-utils');
 const { addFile, addIssue, addWarning, addGlobalIssue } = require('../utils/test-results');
 const { runTest, checkChangedFlag } = require('../utils/test-runner-helper');
 
@@ -154,10 +154,49 @@ function getChangedFiles() {
     .filter(file => fs.existsSync(file));
 }
 
+/**
+ * Guard against drift between this test and Eleventy: broken `## title:` plus
+ * missing closing `---` must fail parse (same failure mode as `eleventy` build).
+ */
+function assertPostFrontmatterParserRegressionGuard() {
+  const broken = [
+    '---',
+    '',
+    '## title: Broken',
+    'layout: layouts/single_post.njk',
+    'date: 2025-11-20T20:00:00.000Z',
+    'tags: post',
+    '',
+    'Body',
+    '',
+  ].join('\n');
+  const brokenResult = parseMarkdownFrontMatter(broken);
+  if (!brokenResult.error) {
+    throw new Error(
+      'frontmatter regression: expected parse failure for ## title: without closing --- (Eleventy would fail here)'
+    );
+  }
+  const ok = [
+    '---',
+    'title: Ok',
+    'layout: layouts/single_post.njk',
+    'date: 2025-11-20T20:00:00.000Z',
+    'tags: post',
+    '---',
+    'Hello',
+  ].join('\n');
+  const okResult = parseMarkdownFrontMatter(ok);
+  if (okResult.error || !okResult.frontMatter || okResult.frontMatter.title !== 'Ok') {
+    throw new Error('frontmatter regression: expected successful parse for well-formed post front matter');
+  }
+}
+
 // Main validation function
 function validate(result, options) {
   const { useChanged } = options;
-  
+
+  assertPostFrontmatterParserRegressionGuard();
+
   // Validate YAML data files first
   const yamlValidation = validateYamlDataFiles(result);
 
@@ -182,7 +221,11 @@ function validate(result, options) {
   
   const markdownFiles = allMarkdownFiles.filter(file => {
     const content = readFile(file);
-    const { frontMatter } = parseFrontMatter(content);
+    const { frontMatter, error } = parseMarkdownFrontMatter(content);
+    // Keep parse failures in the list so the main loop reports Eleventy-aligned errors
+    if (error) {
+      return true;
+    }
     // Exclude files with draft: true in frontmatter
     return !(frontMatter && frontMatter.draft === true);
   });
@@ -194,7 +237,7 @@ function validate(result, options) {
   for (const file of markdownFiles) {
     const relativePath = path.relative('./src/_posts', file);
     const content = readFile(file);
-    const { frontMatter, error } = parseFrontMatter(content);
+    const { frontMatter, error } = parseMarkdownFrontMatter(content);
 
     // Add file to result
     const fileObj = addFile(result, file, relativePath);

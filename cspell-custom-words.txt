@@ -42,6 +42,7 @@ Muda
 Mura
 Muri
 OKLCH
+ogimages
 chatbots
 cursorrules
 dataviz

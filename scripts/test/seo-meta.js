@@ -42,7 +42,7 @@ function findSourceFile(relativePath) {
   // 1. Direct match: about.html -> src/about.md or src/about.njk
   // 2. Index files: page/1/index.html -> src/index.njk (paginated)
   // 3. Post files: 2025/01/15/post-slug/index.html -> src/_posts/2025/01/15/post-slug.md
-  // 4. Permalink files: og-image-preview/index.html -> src/og-image-preview.njk
+  // 4. Permalink files: ogimages/index.html -> src/ogimages.njk
   
   // Remove index.html and trailing slash
   let searchPath = normalizedPath.replace(/\/index\.html$/, '').replace(/^\/+/, '');
@@ -67,7 +67,7 @@ function findSourceFile(relativePath) {
     }
   }
   
-  // For permalink files that create subdirectories (e.g., og-image-preview/index.html -> og-image-preview.njk)
+  // For permalink files that create subdirectories (e.g., ogimages/index.html -> ogimages.njk)
   // Extract the directory name and try it as a filename
   if (normalizedPath.includes('/') && normalizedPath.endsWith('/index.html')) {
     const dirName = normalizedPath.split('/')[0];
@@ -121,7 +121,10 @@ function isRedirectPage(htmlContent) {
 const EXCLUDED_SHORT_TITLES = [
   '/about',
   '/changelog',
+  '/color',
   '/now',
+  '/ogimages',
+  '/type',
   'Goal Manager identity (2001)',
   'CareLink Pro main interface',
   'Linksys app revitalization',
@@ -331,9 +334,8 @@ function validate(result, options) {
     const headings = extractHeadings(content);
     const isRedirect = isRedirectPage(content);
     
-    // Identify utility and pagination pages (skip SEO checks for these)
-    const isUtilityPage = relativePath.includes('og-image-preview') || 
-                          relativePath.includes('color-test') ||
+    // Error pages (skip SEO checks); lab URLs /type /color /ogimages match /changelog /technologies
+    const isErrorPage =
                           relativePath === '404.html' ||
                           relativePath === '500.html';
     const isPaginationPage = relativePath.match(/^page\/\d+\//) || relativePath.startsWith('page/');
@@ -347,8 +349,8 @@ function validate(result, options) {
         type: 'title-missing',
         message: 'Missing title tag'
       });
-    } else if (!isRedirect && !isPaginationPage && !isUtilityPage) {
-      // Full title validation only for non-redirect, non-pagination, non-utility pages
+    } else if (!isRedirect && !isPaginationPage && !isErrorPage) {
+      // Full title validation only for non-redirect, non-pagination, non-error pages
       const titleIssues = validateTitle(metaTags.title);
       titleIssues.forEach(issue => {
         // Length issues are warnings, missing title is already handled above as error
@@ -366,8 +368,8 @@ function validate(result, options) {
       });
     }
     
-    // Meta description validation (skipped for redirects, pagination, and utility pages)
-    if (!isRedirect && !isPaginationPage && !isUtilityPage) {
+    // Meta description validation (skipped for redirects, pagination, and error pages)
+    if (!isRedirect && !isPaginationPage && !isErrorPage) {
       const descIssues = validateMetaDescription(metaTags.description);
       
       // Check for unescaped quotes in raw HTML
@@ -395,8 +397,8 @@ function validate(result, options) {
       });
     }
     
-    // Open Graph validation (skipped for redirects, pagination, and utility pages)
-    if (!isRedirect && !isPaginationPage && !isUtilityPage) {
+    // Open Graph validation (skipped for redirects, pagination, and error pages)
+    if (!isRedirect && !isPaginationPage && !isErrorPage) {
       const ogIssues = validateOpenGraph(metaTags.og);
       ogIssues.forEach(issue => {
         addWarning(fileObj, {
@@ -406,8 +408,8 @@ function validate(result, options) {
       });
     }
     
-    // Heading validation (skipped for redirects and utility pages)
-    if (!isRedirect && !isUtilityPage) {
+    // Heading validation (skipped for redirects and error pages)
+    if (!isRedirect && !isErrorPage) {
       const headingIssues = validateHeadings(headings);
       headingIssues.forEach(issue => {
         addIssue(fileObj, {

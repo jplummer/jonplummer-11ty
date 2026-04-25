@@ -1,0 +1,14 @@
+{# purpose: cross-links between hidden utility pages (below site header, not main nav) #}
+<nav class="utility-sibling-nav" aria-label="Related utility pages">
+  <ul class="utility-sibling-nav-list">
+    {% for item in utilityPages.siblings %}
+    <li>
+      {% if page.url == item.url %}
+      <span class="utility-sibling-nav-current" aria-current="page">{{ item.label }}</span>
+      {% else %}
+      <a href="{{ item.url }}">{{ item.label }}</a>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</nav>

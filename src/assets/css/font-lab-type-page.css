@@ -1,0 +1,110 @@
+/* Font lab card chrome on live site (/type/) — uses design tokens */
+
+/* Inherit width from `main` (same horizontal inset as /changelog/, /technologies/). */
+.type-tool-page {
+  margin: 0;
+  padding: 0;
+  max-width: none;
+}
+
+.type-tool-page .font-tool-card {
+  padding: var(--spacing-md) 0 var(--spacing-lg);
+  background: var(--content-background-color);
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  box-sizing: border-box;
+}
+
+.type-tool-page .tool-note {
+  font-size: var(--font-size-sm);
+  color: var(--text-color-light);
+  line-height: var(--line-height-md);
+  margin: 0 0 var(--spacing-md);
+  max-width: 50rem;
+}
+
+.type-tool-page .tool-note code {
+  font-size: var(--font-size-xs);
+}
+
+.type-tool-page .tool-controls {
+  margin-bottom: var(--spacing-md);
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+.type-tool-page .tool-selects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm) var(--spacing-md);
+  align-items: flex-end;
+}
+
+.type-tool-page .tool-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  min-width: min(20rem, 100%);
+  flex: 1 1 12rem;
+}
+
+.type-tool-page .tool-field label {
+  font-size: var(--font-size-xs);
+  color: var(--text-color-light);
+}
+
+.type-tool-page .tool-field label code {
+  font-size: 0.7rem;
+}
+
+.type-tool-page .tool-field select {
+  width: 100%;
+  max-width: 22rem;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: 4px;
+  border: none;
+  background: var(--content-background-color);
+  color: var(--text-color);
+  font-size: var(--font-size-sm);
+}
+
+.type-tool-page .copy-block {
+  margin-top: var(--spacing-md);
+}
+
+.type-tool-page .copy-block summary {
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  color: var(--text-color-light);
+  list-style: revert;
+}
+
+.type-tool-page .copy-block summary::after {
+  content: none !important;
+}
+
+.type-tool-page details.copy-block[open] > summary::after {
+  content: none !important;
+}
+
+.type-tool-page .code {
+  font-size: var(--font-size-xs);
+  overflow: auto;
+  max-height: 14rem;
+  background: var(--background-color);
+  padding: var(--spacing-sm);
+  border-radius: 4px;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  margin: var(--spacing-sm) 0 0;
+}
+
+.type-tool-missing {
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  color: var(--text-color-light);
+}

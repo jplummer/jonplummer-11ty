@@ -31,6 +31,17 @@
 
 ## 🔮 Future Consideration
 
+### Utility / lab pages (color, type, OG) — “hidden in public”
+
+- **Shared UX pattern**: Color explorer and type explorer both target the **same full-page, full-size preview popout** idea (a dedicated **exercise page** that stresses site tokens and typography—not one “real” post that tries to cover everything). **`/color/`** already has **smaller in-page previews** in the gallery; **`/type/`** already embeds **`fontLabCard`** on the canonical page. Remaining gap vs color: optional **full-page type rehearsal** / popout parity (see **`/style-exercise/`** → **`/color/`** below).
+- **`/type/`**: **Shipped**: **`src/type.njk`** is the font stack explorer (not a separate hub); **`/type/gallery/`** redirects to **`/type/`** (`redirects.yaml`). **Still open**: pipe **`pnpm run font-gallery`** output into **embeddable** markup or a **build-time merge** so previews stay rich without hand-duplicating structure (browse / thumbnails: next bullet).
+- **Thumbnails / browse grid**: Prefer **text + swatches** first; then try **live mini-previews** if performance and complexity stay acceptable.
+- **URLs**: No **`/labs/`** prefix for now; keep **simple top-level paths** alongside other lightly public utilities (`/color/`, `/ogimages/`, etc.).
+- **Color direction** (broader): **`/color/`** embed is **regenerated on each `pnpm run build` / `dev`** (`eleventy.before`); use **`pnpm run color-gallery`** for CLI flags / gitignored **`output/`**. DR presets live in the gallery as a **combo card** beside generated families. **`/style-exercise/`** is **not built** for now (source kept as `src/style-exercise.njk`, listed in **`.eleventyignore`**); it **301 redirects to `/color/`**. **Full-page rehearsal** can return as a popout or by dropping the ignore entry later. **Canonical scheme IDs** across gallery export and preview URLs can still be tightened over time.
+- **Quality bar for these pages**: Relaxed **SEO** expectations; **thumbnail accessibility** not a priority early on. **Production must not 404** for intentional visitors (build/CI should ensure artifacts exist or the page degrades gracefully with clear copy).
+- **Deferred — authoring vs visitors “creating” schemes** (was interview Q5): Whether scheme tweaks are **author-only** (edit data, redeploy) vs **visitor-editable with persistence** is **out of scope until** this area stabilizes; revisit when the browse + popout story exists.
+- **Color gallery — custom pickers**: Bring back the former `/color/` **custom hex color controls** (apply / reset) **inside** the generated color gallery UI so ad-hoc experiments do not require leaving the one canonical `/color/` page.
+
 ### 🖍 Also…
 
 - [https://kagi.com/search?q=contemporary+blog+styling+2026](https://kagi.com/search?q=contemporary+blog+styling+2026) ?
@@ -95,7 +106,7 @@
 ## DONE
 
 - Reinvestigate color scheme (2026-03-28)
-  - Live theme tokens use **OKLCH** in `src/assets/css/jonplummer.css` (`light-dark(oklch(...), ...)`). Gallery pipeline, `/color-test/`, `suggest-colors.js`, and contrast checking are documented in [color-theme-exploration.md](color-theme-exploration.md) and the Maintenance bullets in [commands.md](commands.md).
+  - Live theme tokens use **OKLCH** in `src/assets/css/jonplummer.css` (`light-dark(oklch(...), ...)`). Gallery pipeline, `/color/`, `suggest-colors.js`, and contrast checking are documented in [color-theme-exploration.md](color-theme-exploration.md) and the Maintenance bullets in [commands.md](commands.md).
   - Archived intent: extra color inspiration (gallery, terminals, wild presets); OKLCH as the authoring space ([vivid colors / gamut](https://modern-css.com/vivid-colors-beyond-srgb/) as reference). **Canceled / deferred:** accessibility-test-script upgrades per [accessibility-test-limitations](archive/accessibility-test-limitations.md).
 - Collected Wisdom: `wisdom-entries.yaml`, `/wisdom/`, per-tag pages, `/wisdom-feed.xml`, `test wisdom`, nav + sitemap; one-shot YAML generator removed in favor of editing YAML only (2026-03-25)
 - Security, needlessly custom code, unused code, and bloat audit (2026-02-21)
@@ -146,7 +157,7 @@
   - Custom shortcodes
 - Portfolio image widths: full, 2/3, 1/3, smaller for mobile images
 - Make sure margins etc are good in portfolio items, using blog posts as the example
-- Fix timezone issues (going forward reflect real authoring date as I experienced it, but don't break incoming links by changing URLs to existing content) (2025-12-22)
+- Fix timezone issues (reflect real authoring date as experienced; do not break incoming links by changing URLs for existing content) (2025-12-11; follow-up 2025-12-22)
 - Watch ahrefs this weekend for "URL changed" errors; site health should be at or near 100 (2025-12-22)
 - Optimize deploy output and eliminate redundant builds (2025-12-07)
 - Extract spinner frames to shared utility for easier experimentation (2025-12-07)
@@ -169,7 +180,6 @@
 - Fix sitemap pagination to only include existing pages (2025-11-30)
 - Fix sitemap pagination, improve titles, and fix unescaped quotes (2025-11-30)
 - Improve SEO validation for redirect pages and unescaped quotes (2025-11-30)
-- Fix timezone issues (relect real authoring date as I experienced it, but don't break incoming links by changing URLs to existing content) (2025-12-11)
 - Add SITE_DOMAIN environment variable for centralized domain configuration (2025-11-26)
 - Security audit improvements and deployment fixes (2025-11-26)
 - Enable smart quotes in markdown and titles (2025-11-26)

@@ -731,25 +731,67 @@ header a.skip:focus {
   z-index: 100;
 }
 
-/* === OG IMAGE PREVIEW PAGE === */
-/* Styles for the OG image preview page (dev tool) */
+/* === HIDDEN UTILITY PAGES === */
+/* Cross-links for /type, /color, /ogimages (below main header, not main nav) */
 
-.preview-container {
+.utility-sibling-nav {
+  max-width: var(--max-width);
+  margin: var(--spacing-md) auto var(--spacing-sm);
+  padding: 0 var(--gutter);
+  /* Stay above the color gallery embed paint order so links stay clickable if layers overlap. */
+  position: relative;
+  z-index: 2;
+}
+
+.utility-sibling-nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-xs) var(--spacing-md);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: var(--font-size-xs);
+  color: var(--text-color-light);
+}
+
+.utility-sibling-nav-list a {
+  color: var(--link-color);
+}
+
+.utility-sibling-nav-current {
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-color);
+}
+
+.utility-page {
   max-width: var(--max-width);
   margin: var(--spacing-lg) auto;
   padding: 0 var(--gutter);
+}
+
+.utility-type-page h1 {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-md);
+}
+
+/* === OG IMAGE PREVIEW PAGE === */
+/* Styles for the OG image preview page (dev tool) */
+
+/* Width and horizontal padding come from `body > main` (match /changelog/, /technologies/). */
+.preview-container {
+  max-width: none;
+  margin: 0;
+  padding: 0;
 }
 
 .preview-info {
   margin-bottom: var(--spacing-lg);
 }
 
-.preview-tool-links p {
-  margin-bottom: var(--spacing-sm);
-}
-
-.preview-tool-links p:last-child {
-  margin-bottom: 0;
+/* /color/ — intro above generated embed (same spacing idea as .preview-info on /ogimages/) */
+.color-gallery-page-intro {
+  margin-bottom: var(--spacing-lg);
 }
 
 .preview-section {
@@ -822,7 +864,7 @@ header a.skip:focus {
 }
 
 /* === OG IMAGE RENDERED STYLES === */
-/* Styles for OG images rendered via renderFile in og-image-preview (scoped to .og-image-rendered) */
+/* Styles for OG images rendered via renderFile in ogimages.njk (scoped to .og-image-rendered) */
 
 .og-image-rendered {
   /* Override colors to force light theme for OG image preview */

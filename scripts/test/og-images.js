@@ -96,7 +96,7 @@ function findSourceFile(relativePath) {
   // 1. Direct match: about.html -> src/about.md or src/about.njk
   // 2. Index files: page/1/index.html -> src/index.njk (paginated)
   // 3. Post files: 2025/01/15/post-slug/index.html -> src/_posts/2025/01/15/post-slug.md
-  // 4. Permalink files: og-image-preview/index.html -> src/og-image-preview.njk
+  // 4. Permalink files: ogimages/index.html -> src/ogimages.njk
   
   // Remove index.html and trailing slash
   let searchPath = normalizedPath.replace(/\/index\.html$/, '').replace(/^\/+/, '');
@@ -121,7 +121,7 @@ function findSourceFile(relativePath) {
     }
   }
   
-  // For permalink files that create subdirectories (e.g., og-image-preview/index.html -> og-image-preview.njk)
+  // For permalink files that create subdirectories (e.g., ogimages/index.html -> ogimages.njk)
   // Extract the directory name and try it as a filename
   if (normalizedPath.includes('/') && normalizedPath.endsWith('/index.html')) {
     const dirName = normalizedPath.split('/')[0];
@@ -228,6 +228,11 @@ function validate(result) {
   for (const file of htmlFiles) {
     const relativePath = getRelativePath(file);
     const content = readFile(file);
+
+    // Stale output from old permalinks (safe to delete _site/ and rebuild)
+    if (relativePath.startsWith('og-image-preview/') || relativePath.startsWith('color-test/')) {
+      continue;
+    }
     
     // Skip redirect pages (they don't need OG images)
     if (isRedirectPage(content)) {

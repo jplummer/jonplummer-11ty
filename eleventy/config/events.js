@@ -50,6 +50,14 @@ function configureEvents(eleventyConfig) {
 
   // Minimal progress indicator at build start
   eleventyConfig.on("eleventy.before", () => {
+    try {
+      const { runColorGalleryBuild } = require('../../scripts/color-explore/generate-gallery.js');
+      runColorGalleryBuild({ quiet: isQuiet, stableWildThemes: true });
+    } catch (err) {
+      console.error('Color gallery (site embed) failed:', err.message);
+      throw err;
+    }
+
     if (isQuiet) {
       process.stdout.write('Building... ');
       

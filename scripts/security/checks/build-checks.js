@@ -139,17 +139,27 @@ async function checkCSP(results, addFinding) {
       }
       
       const csp = cspMatch[1];
-      
-      if (csp.includes("'unsafe-inline'")) {
+
+      // style-src 'unsafe-inline' is allowed: /color/ gallery applies OKLCH tokens via style attributes + JS
+      // (static site; no per-request nonces). Still flag unsafe-inline on script-src / default-src.
+      const directives = csp.split(';').map((d) => d.trim()).filter(Boolean);
+      const inlineInScriptDirective = directives.some((d) => {
+        if (!/^script-src\s/i.test(d) && !/^default-src\s/i.test(d)) {
+          return false;
+        }
+        return d.includes("'unsafe-inline'");
+      });
+      if (inlineInScriptDirective) {
         return {
           passed: false,
           warning: true,
-          details: 'CSP contains unsafe-inline (security risk)',
-          message: 'CSP: contains unsafe-inline',
+          details: 'CSP: script-src or default-src includes unsafe-inline',
+          message: 'CSP: unsafe-inline on scripts',
           finding: {
             severity: 'high',
-            description: 'CSP contains unsafe-inline directive',
-            recommendation: 'Remove unsafe-inline from CSP. Use nonces or hashes for inline scripts/styles instead.',
+            description: 'CSP allows inline scripts via unsafe-inline on script-src or default-src',
+            recommendation:
+              'Avoid unsafe-inline on script directives. The color gallery uses an external script only; keep inline script out of CSP.',
             details: { csp }
           }
         };
@@ -172,11 +182,12 @@ async function checkCSP(results, addFinding) {
       
       return {
         passed: true,
-        details: 'CSP configured without unsafe-inline/unsafe-eval',
+        details: 'CSP has no script-side unsafe-inline; style-src may use unsafe-inline for /color/',
         message: 'CSP: properly configured',
         finding: {
           severity: 'info',
-          description: 'CSP configured without unsafe-inline/unsafe-eval directives'
+          description:
+            'CSP avoids unsafe-inline on script-src; style-src may include unsafe-inline for the static color gallery'
         }
       };
     } catch (error) {
