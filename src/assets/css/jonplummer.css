@@ -43,16 +43,17 @@
 
   /* Colors - based on DR10 palette, adjusted for WCAG AA contrast (OKLCH, sRGB gamut).
      light-dark(light, dark) picks the value matching the user's color scheme */
+
   color-scheme: light dark;
-  --text-color: light-dark(oklch(28.5% 0 0deg), oklch(90.7% 0 0deg));
-  --text-color-light: light-dark(oklch(46.8% 0 0deg), oklch(83.3% 0 0deg)); /* APCA Lc 65+ in dark */
-  --border-color: light-dark(oklch(85.8% 0 0deg), oklch(40.9% 0 0deg));
-  --background-color: light-dark(oklch(87.7% 0.0097 140.5deg), oklch(21.8% 0 0deg));
-  --content-background-color: light-dark(oklch(100% 0 0deg), oklch(29.7% 0 0deg));
-  --link-color: light-dark(oklch(58.6% 0.191 27.4deg), oklch(80.2% 0.114 19.9deg)); /* WCAG AA 4.5:1 in light; APCA Lc 60+ in dark */
-  --link-hover-color: light-dark(oklch(57.683% 0.1348 59.17deg), oklch(81.223% 0.1492 82.24deg)); /* WCAG AA 4.5:1 in light */
-  --link-visited-color: light-dark(oklch(42.2% 0.0332 63.2deg), oklch(81.7% 0.0285 67.4deg)); /* APCA Lc 62+ in dark */
-  --link-active-color: light-dark(oklch(48.055% 0.1152 154.58deg), oklch(79.507% 0.15 154.56deg)); /* APCA Lc 62+ in dark */
+  --text-color: light-dark(oklch(28.5% 0 0deg), oklch(93% 0 0deg));
+  --text-color-light: light-dark(oklch(46.8% 0 0deg), oklch(78% 0 0deg));
+  --border-color: light-dark(oklch(85.8% 0 0deg), oklch(38% 0 0deg));
+  --background-color: light-dark(oklch(87.7% 0.0098 140.51deg), oklch(12% 0.0098 140.51deg));
+  --content-background-color: light-dark(oklch(100% 0 0deg), oklch(20% 0 0deg));
+  --link-color: light-dark(oklch(58.6% 0.1911 27.41deg), oklch(86.6% 0.1911 27.41deg));
+  --link-hover-color: light-dark(oklch(57.7% 0.1348 59.17deg), oklch(85.7% 0.1348 59.17deg));
+  --link-visited-color: light-dark(oklch(42.2% 0.0332 63.17deg), oklch(77.4% 0.0332 63.17deg));
+  --link-active-color: light-dark(oklch(48.1% 0.1152 154.58deg), oklch(76.1% 0.1152 154.58deg));
 }
 
 /* Cross-document view transitions (MPA): same-origin navigations from in-page links.
