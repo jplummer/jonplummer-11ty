@@ -182,12 +182,76 @@ const JONPLUMMER_PASTE_KEYS = [
   'link-active-color'
 ];
 
-/** Opening lines of the paste snippet (mirrors `jonplummer.css` :root color block). */
-const JONPLUMMER_PASTE_HEADER_LINES = [
-  '  /* Colors - based on DR10 palette, adjusted for WCAG AA contrast (OKLCH, sRGB gamut).',
-  "     light-dark(light, dark) picks the value matching the user's color scheme */",
-  '  color-scheme: light dark;'
-];
+/** Safe for a single-line CSS comment body (escapes a literal asterisk-slash close). */
+function sanitizePasteCommentText(s) {
+  return String(s ?? '')
+    .replace(/\r?\n/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .replace(/\*\//g, '*\\/');
+}
+
+/**
+ * Which harmony angle sliders apply (mirrors the browser bundle from galleryEmbedRuntimeScriptJs;
+ * keep in sync when adding recipes).
+ */
+function tuningSlidersForRecipe(recipeId) {
+  return {
+    a: recipeId === 'harmony-analogous',
+    s:
+      recipeId === 'harmony-split-complementary' ||
+      recipeId === 'harmony-skewed-split-complementary',
+    k:
+      recipeId === 'harmony-skewed-triadic' ||
+      recipeId === 'harmony-skewed-tetradic' ||
+      recipeId === 'harmony-skewed-split-complementary'
+  };
+}
+
+/** Opening lines of the paste snippet (same shape as `jonplummer.css` :root color block). */
+function pasteHeaderLines(selectionLead) {
+  const lead = sanitizePasteCommentText(selectionLead) || 'Color gallery';
+  return [
+    `  /* ${lead}: OKLCH (sRGB gamut), exported from this gallery build (APCA-tuned to ≥ ${MIN_LC} Lc on the sRGB path). light-dark(light, dark) picks the value matching the user's color scheme. */`,
+    '  color-scheme: light dark;'
+  ];
+}
+
+function variantComboPasteSummary(kind, cardLabel, variantRadioLabel) {
+  const card = sanitizePasteCommentText(cardLabel);
+  const choice = sanitizePasteCommentText(variantRadioLabel);
+  if (kind === 'bw-combo') return `${card} — preset ${choice}`;
+  if (kind === 'dr-combo') return `${card} — site preset ${choice}`;
+  if (kind === 'wild-combo') return `${card} — scheme ${choice}`;
+  if (kind === 'terminal-combo') return `${card} — scheme ${choice}`;
+  return `${card} — ${choice}`;
+}
+
+function harmonyLabStaticPasteLead(payload, recipe) {
+  const base = Math.round((((payload.baseHue % 360) + 360) % 360) * 10) / 10;
+  const bits = [
+    `recipe ${sanitizePasteCommentText(recipe.label)}`,
+    `base hue ${base}°`,
+    'hue rotation +0°'
+  ];
+  const vis = tuningSlidersForRecipe(recipe.id);
+  const td = payload.tuningDefaults;
+  if (vis.a) bits.push(`analogous spread ${td.analogousSpread}°`);
+  if (vis.s) bits.push(`split spread ${td.splitSpread}°`);
+  if (vis.k) bits.push(`harmony skew ${td.harmonySkew}°`);
+  return `Harmony lab — ${bits.join(' · ')}`;
+}
+
+/** Hue-pack / single-theme cards: section title + card label + optional hue-slider note. */
+function galleryCardPasteSummary(t, sec) {
+  const secTitle = sec && sec.title ? sanitizePasteCommentText(sec.title) : '';
+  const card = sanitizePasteCommentText(t.label);
+  const base = [secTitle, card].filter(Boolean).join(' — ');
+  if (t._hueSlider) {
+    return `${base} · preview hue rotation +0° (Copy tokens = APCA-tuned build snapshot)`;
+  }
+  return base || 'Color gallery';
+}
 
 /** `oklch(28.5% 0 0deg)`-style strings to match hand-authored `jonplummer.css`. */
 function oklchToJonplummerCss(color) {
@@ -207,8 +271,8 @@ function oklchToJonplummerCss(color) {
 }
 
 /** Multi-line snippet for :root — same shape as the color section in `jonplummer.css`. */
-function tokensToJonplummerPasteBlock(lightObj, darkObj) {
-  const lines = [...JONPLUMMER_PASTE_HEADER_LINES];
+function tokensToJonplummerPasteBlock(lightObj, darkObj, selectionLead) {
+  const lines = [...pasteHeaderLines(selectionLead)];
   for (const key of JONPLUMMER_PASTE_KEYS) {
     const a = lightObj[key];
     const b = darkObj[key];
@@ -963,7 +1027,7 @@ function buildHarmonySchemes(hBase, opts = {}) {
   const A = clampHarmonyDeg(opts.analogousSpread, 6, 55, 28);
   const S = clampHarmonyDeg(opts.splitSpread, 12, 48, 28);
   const K = clampHarmonyDeg(opts.harmonySkew, 0, 40, 12);
-  const hk = Math.round(K / 2);
+  const hk = K;
 
   const cBg = 0.055;
   const cText = 0.04;
@@ -1051,9 +1115,9 @@ function buildHarmonySchemes(hBase, opts = {}) {
       build: () =>
         pair(
           180 - S + hk,
-          180 + S - hk,
+          180 + S + hk,
           180 - S + hk - 4,
-          180 + S - hk - 4
+          180 + S + hk - 4
         )
     }
   ];
@@ -1210,10 +1274,6 @@ function renderHomePreview(cssVarsInline, schemeLabel, previewUid) {
           <footer aria-label="Preview ${lab} · ${uid} · site footer">
             <p class="license">Copyright 2026 Jon Plummer</p>
           </footer>
-        </div>
-        <div class="swatch-legend" aria-hidden="true">
-          <span class="chip"><span class="chip-swatch" style="background-color: var(--background-color)"></span> Page <code>--background-color</code></span>
-          <span class="chip"><span class="chip-swatch" style="background-color: var(--content-background-color)"></span> Content <code>--content-background-color</code></span>
         </div>
       </div>
     </div>`;
@@ -1407,7 +1467,13 @@ function renderVariantComboCard(t, siteEmbed = false, sec = null) {
   const variantsPayload = t._processedVariants.map((v) => ({
     lightStyle: varsToInlineStyle(v.light),
     darkStyle: varsToInlineStyle(v.dark),
-    tokensText: tokensToJonplummerPasteBlock(v.light, v.dark)
+    tokensText: tokensToJonplummerPasteBlock(
+      v.light,
+      v.dark,
+      variantComboPasteSummary(t._kind, t.label, v.radioLabel)
+    ),
+    worstLcSrgb: Math.round(themeWorstLcDual(v.light, v.dark).srgb),
+    worstLcP3: Math.round(themeWorstLcDual(v.light, v.dark).p3)
   }));
   const safeJson = JSON.stringify(variantsPayload).replace(/</g, '\\u003c');
 
@@ -1445,8 +1511,14 @@ function renderVariantComboCard(t, siteEmbed = false, sec = null) {
     ${renderHomePreview(sd0, 'Dark', `${t.id}-D`)}
   </div>
   <details class="tokens">
-    <summary>Copy tokens (jonplummer.css :root shape)</summary>
-    <pre class="code ${preClass}">${escapeHtml(tokensToJonplummerPasteBlock(v0.light, v0.dark))}</pre>
+    <summary>View CSS tokens</summary>
+    <pre class="code ${preClass}">${escapeHtml(
+      tokensToJonplummerPasteBlock(
+        v0.light,
+        v0.dark,
+        variantComboPasteSummary(t._kind, t.label, v0.radioLabel)
+      )
+    )}</pre>
   </details>
 </section>`;
   }
@@ -1468,8 +1540,14 @@ function renderVariantComboCard(t, siteEmbed = false, sec = null) {
     ${renderHomePreview(sd0, 'Dark', `${t.id}-D`)}
   </div>
   <details class="tokens">
-    <summary>Copy tokens (jonplummer.css :root shape)</summary>
-    <pre class="code ${preClass}">${escapeHtml(tokensToJonplummerPasteBlock(v0.light, v0.dark))}</pre>
+    <summary>View CSS tokens</summary>
+    <pre class="code ${preClass}">${escapeHtml(
+      tokensToJonplummerPasteBlock(
+        v0.light,
+        v0.dark,
+        variantComboPasteSummary(t._kind, t.label, v0.radioLabel)
+      )
+    )}</pre>
   </details>
 </section>`;
 }
@@ -1517,11 +1595,17 @@ function renderHarmonyLabCard(t, siteEmbed = false, sec = null) {
       return [k, o(l, c, p.baseHue)];
     })
   );
-  const initialTokensPre = escapeHtml(tokensToJonplummerPasteBlock(initialLight, initialDark));
+  const initialTokensPre = escapeHtml(
+    tokensToJonplummerPasteBlock(initialLight, initialDark, harmonyLabStaticPasteLead(p, r0))
+  );
+
+  const harmonyBadgeText =
+    `${p.recipes.length} harmony recipe${p.recipes.length === 1 ? '' : 's'} · ` +
+    `L/C from APCA-tuned export (≥ ${MIN_LC} Lc at build)`;
 
   const ledeHtml = siteEmbed
-    ? 'Recipe, hue, and angle sliders (L/C from the nudged export). <code>themes.json</code> matches this selector after hide-failed.'
-    : 'Pick a recipe, rotate hue, and tune only the angles that recipe uses (L/C stay from the APCA-nudged export). <code>themes.json</code> lists the same harmony recipes as this selector (after hide-failed), with <code>worstLcSrgb</code> and <code>worstLcP3</code> per entry.';
+    ? 'Recipe, hue, and angle sliders (L/C from the APCA-tuned export). <code>themes.json</code> matches this selector after hide-failed.'
+    : 'Pick a recipe, rotate hue, and tune only the angles that recipe uses (L/C stay from the APCA-tuned export). <code>themes.json</code> lists the same harmony recipes as this selector (after hide-failed), with <code>worstLcSrgb</code> and <code>worstLcP3</code> per entry.';
   const harmonyBody = `
   <p class="harmony-lab-lede">${ledeHtml}</p>
   <div class="harmony-lab-controls" role="group" aria-label="Harmony lab">
@@ -1567,7 +1651,7 @@ function renderHarmonyLabCard(t, siteEmbed = false, sec = null) {
     ${renderHomePreview(sd0, 'Dark', 'harmony-lab-D')}
   </div>
   <details class="tokens">
-    <summary>Copy tokens (jonplummer.css :root shape) — live preview</summary>
+    <summary>View CSS tokens</summary>
     <pre class="code harmony-lab-tokens-pre">${initialTokensPre}</pre>
   </details>`;
 
@@ -1578,7 +1662,7 @@ function renderHarmonyLabCard(t, siteEmbed = false, sec = null) {
   <script type="application/json" class="harmony-lab-json">${safePayload}</script>
   <header class="gallery-card-head">
     <h1 class="gallery-card-title">${h1}</h1>
-    <span class="badge ok">${p.recipes.length} recipe${p.recipes.length === 1 ? '' : 's'} · L/C from nudged build</span>
+    <span class="badge ok">${harmonyBadgeText}</span>
   </header>${harmonyBody}
 </section>`;
   }
@@ -1588,7 +1672,7 @@ function renderHarmonyLabCard(t, siteEmbed = false, sec = null) {
   <script type="application/json" class="harmony-lab-json">${safePayload}</script>
   <header class="card-h">
     <h2>${escapeHtml(t.label)}</h2>
-    <span class="badge ok">${p.recipes.length} recipe${p.recipes.length === 1 ? '' : 's'} · L/C from nudged build</span>
+    <span class="badge ok">${harmonyBadgeText}</span>
   </header>${harmonyBody}
 </section>`;
 }
@@ -1605,7 +1689,7 @@ function renderCard(t, failed, siteEmbed = false, sec = null) {
 
   const hueNote = siteEmbed
     ? 'Shifts each <code>oklch()</code> hue; <strong>Copy tokens</strong> stays the build snapshot.'
-    : 'Adds degrees to each <code>oklch()</code> hue (L and C unchanged). Copy tokens is still the nudged base from the build.';
+    : 'Adds degrees to each <code>oklch()</code> hue (L and C unchanged). Copy tokens is still the APCA-tuned export from the build.';
   const hueInputId = `hue-rotate-${escapeHtml(t.id)}`;
   const hueBar = t._hueSlider
     ? `<div class="hue-rotate-bar" role="group" aria-label="Preview hue rotation">
@@ -1639,8 +1723,8 @@ function renderCard(t, failed, siteEmbed = false, sec = null) {
     ${renderHomePreview(sd, 'Dark', `${t.id}-D`)}
   </div>
   <details class="tokens">
-    <summary>Copy tokens (jonplummer.css :root shape)</summary>
-    <pre class="code">${escapeHtml(tokensToJonplummerPasteBlock(t.light, t.dark))}</pre>
+    <summary>View CSS tokens</summary>
+    <pre class="code">${escapeHtml(tokensToJonplummerPasteBlock(t.light, t.dark, galleryCardPasteSummary(t, sec)))}</pre>
   </details>
 </section>`;
   }
@@ -1657,8 +1741,8 @@ function renderCard(t, failed, siteEmbed = false, sec = null) {
     ${renderHomePreview(sd, 'Dark', `${t.id}-D`)}
   </div>
   <details class="tokens">
-    <summary>Copy tokens (jonplummer.css :root shape)</summary>
-    <pre class="code">${escapeHtml(tokensToJonplummerPasteBlock(t.light, t.dark))}</pre>
+    <summary>View CSS tokens</summary>
+    <pre class="code">${escapeHtml(tokensToJonplummerPasteBlock(t.light, t.dark, galleryCardPasteSummary(t, sec)))}</pre>
   </details>
 </section>`;
 }
@@ -1695,10 +1779,10 @@ function renderGallerySections(sectionList, options = {}) {
             t._kind === 'wild-combo' ||
             t._kind === 'terminal-combo'
           ) {
-            return renderVariantComboCard(t, false);
+            return renderVariantComboCard(t, false, sec);
           }
-          if (t._kind === 'harmony-lab') return renderHarmonyLabCard(t, false);
-          return renderCard(t, t._failed, false);
+          if (t._kind === 'harmony-lab') return renderHarmonyLabCard(t, false, sec);
+          return renderCard(t, t._failed, false, sec);
         })
         .join('\n');
       return `<details class="gallery-section-details" open aria-labelledby="${headingId}">
@@ -1720,9 +1804,33 @@ ${cards}
  * Kept as a separate file so production CSP (`script-src 'self'`) allows it; inline `<script>` is blocked.
  */
 function galleryEmbedRuntimeScriptJs() {
+  const tuningSlidersForRecipeStr = tuningSlidersForRecipe.toString();
   return `(function () {
+  var MIN_LC = ${MIN_LC};
   var JONPLUMMER_PASTE_KEYS = ${JSON.stringify(JONPLUMMER_PASTE_KEYS)};
-  var JONPLUMMER_PASTE_HEADER_LINES = ${JSON.stringify(JONPLUMMER_PASTE_HEADER_LINES)};
+  ${tuningSlidersForRecipeStr}
+  function pasteCommentLinesFromLead(lead) {
+    return [
+      '  /* ' +
+        lead +
+        ": OKLCH (sRGB gamut), exported from this gallery build (APCA-tuned to ≥ " +
+        MIN_LC +
+        " Lc on the sRGB path). light-dark(light, dark) picks the value matching the user's color scheme. */",
+      '  color-scheme: light dark;'
+    ];
+  }
+  function updateComboStatus(section, variant) {
+    var badge = section.querySelector('.badge');
+    if (!badge || !variant) return;
+    var srgb = Number(variant.worstLcSrgb);
+    var p3 = Number(variant.worstLcP3);
+    if (!isFinite(srgb) || !isFinite(p3)) return;
+    var dualHint = ' · min Lc sRGB ' + srgb.toFixed(0) + ' · P3 ' + p3.toFixed(0);
+    var pass = srgb >= MIN_LC;
+    badge.classList.remove('ok', 'fail');
+    badge.classList.add(pass ? 'ok' : 'fail');
+    badge.textContent = (pass ? 'APCA ≥ ' + MIN_LC : 'below Lc ' + MIN_LC) + dualHint;
+  }
   function rotateOklchInStyle(styleStr, deltaDeg) {
     var d = Number(deltaDeg) || 0;
     return styleStr.replace(/oklch\\(\\s*([\\d.]+)\\s+([\\d.]+)\\s+([-+]?[\\d.]+)\\s*\\)/gi, function (_, l, c, h) {
@@ -1787,6 +1895,7 @@ function galleryEmbedRuntimeScriptJs() {
       lightEl.dataset.originalStyle = v.lightStyle;
       darkEl.dataset.originalStyle = v.darkStyle;
       if (pre) pre.textContent = v.tokensText;
+      updateComboStatus(section, v);
     }
     var bwSel = section.querySelector('[data-bw-variant-select]');
     if (bwSel) {
@@ -1819,6 +1928,7 @@ function galleryEmbedRuntimeScriptJs() {
       lightEl.dataset.originalStyle = v.lightStyle;
       darkEl.dataset.originalStyle = v.darkStyle;
       if (pre) pre.textContent = v.tokensText;
+      updateComboStatus(section, v);
     }
     var drSel = section.querySelector('[data-dr-variant-select]');
     if (drSel) {
@@ -1851,6 +1961,7 @@ function galleryEmbedRuntimeScriptJs() {
       lightEl.dataset.originalStyle = v.lightStyle;
       darkEl.dataset.originalStyle = v.darkStyle;
       if (pre) pre.textContent = v.tokensText;
+      updateComboStatus(section, v);
     }
     var sel = section.querySelector('[data-wild-variant-select]');
     if (sel) {
@@ -1883,6 +1994,7 @@ function galleryEmbedRuntimeScriptJs() {
       lightEl.dataset.originalStyle = v.lightStyle;
       darkEl.dataset.originalStyle = v.darkStyle;
       if (pre) pre.textContent = v.tokensText;
+      updateComboStatus(section, v);
     }
     var tsel = section.querySelector('[data-terminal-variant-select]');
     if (tsel) {
@@ -1944,19 +2056,6 @@ function galleryEmbedRuntimeScriptJs() {
       return ((h % 360) + 360) % 360;
     }
 
-    function tuningSlidersForRecipe(recipeId) {
-      return {
-        a: recipeId === 'harmony-analogous',
-        s:
-          recipeId === 'harmony-split-complementary' ||
-          recipeId === 'harmony-skewed-split-complementary',
-        k:
-          recipeId === 'harmony-skewed-triadic' ||
-          recipeId === 'harmony-skewed-tetradic' ||
-          recipeId === 'harmony-skewed-split-complementary'
-      };
-    }
-
     function setTuningVisibility(recipeId) {
       var vis = tuningSlidersForRecipe(recipeId);
       if (wrapA) wrapA.hidden = !vis.a;
@@ -1965,7 +2064,7 @@ function galleryEmbedRuntimeScriptJs() {
     }
 
     function linkDeltas(recipeId, A, S, K) {
-      var hk = Math.round(K / 2);
+      var hk = K;
       var flank = Math.round(0.857 * A);
       switch (recipeId) {
         case 'harmony-monochromatic':
@@ -1990,9 +2089,9 @@ function galleryEmbedRuntimeScriptJs() {
         case 'harmony-skewed-split-complementary':
           return {
             link: 180 - S + hk,
-            hover: 180 + S - hk,
+            hover: 180 + S + hk,
             visited: 180 - S + hk - 4,
-            active: 180 + S - hk - 4
+            active: 180 + S + hk - 4
           };
         default:
           return { link: 0, hover: 0, visited: 0, active: 0 };
@@ -2054,10 +2153,29 @@ function galleryEmbedRuntimeScriptJs() {
       return 'oklch(' + lp + '% ' + cr + ' ' + hr + 'deg)';
     }
 
-    function jonplummerPasteFromRecipe(recLight, recDark, baseH, rot, recipeId, A, S, K) {
-      var hub = normHue(baseH + rot);
+    function harmonyPasteSelectionLead(recLabel, baseH, rotDeg, recipeId, A, S, K) {
+      var safeLabel = String(recLabel || '')
+        .replace(/\\r?\\n/g, ' ')
+        .replace(/\\s+/g, ' ')
+        .trim()
+        .replace(/\\*\\//g, '*\\\\/');
+      var bits = [
+        'recipe ' + safeLabel,
+        'base hue ' + Math.round(normHue(baseH) * 10) / 10 + '°',
+        'hue rotation +' + Math.round(normHue(rotDeg) * 10) / 10 + '°'
+      ];
+      var vis = tuningSlidersForRecipe(recipeId);
+      if (vis.a) bits.push('analogous spread ' + Math.round(A) + '°');
+      if (vis.s) bits.push('split spread ' + Math.round(S) + '°');
+      if (vis.k) bits.push('harmony skew ' + Math.round(K) + '°');
+      return 'Harmony lab — ' + bits.join(' · ');
+    }
+
+    function jonplummerPasteFromRecipe(recLight, recDark, baseH, rotDeg, recipeId, recipeLabel, A, S, K) {
+      var hub = normHue(baseH + rotDeg);
       var d = linkDeltas(recipeId, A, S, K);
-      var lines = JONPLUMMER_PASTE_HEADER_LINES.slice();
+      var lead = harmonyPasteSelectionLead(String(recipeLabel || ''), baseH, rotDeg, recipeId, A, S, K);
+      var lines = pasteCommentLinesFromLead(lead).slice();
       JONPLUMMER_PASTE_KEYS.forEach(function (k) {
         var lk = null;
         var dk = null;
@@ -2123,6 +2241,7 @@ function galleryEmbedRuntimeScriptJs() {
           payload.baseHue,
           rot,
           rid,
+          rec.label,
           A,
           S,
           K
@@ -2232,14 +2351,23 @@ function renderHtml(visibleSections, meta, options = {}) {
     .gallery-ui .tokens summary::before {
       content: '';
       flex-shrink: 0;
-      width: 0.45rem;
-      height: 0.9rem;
+      /* Square box avoids self-clipping when the caret rotates 90deg. */
+      /* Whole-pixel box avoids subpixel anti-aliasing that can distort the triangle. */
+      width: 10px;
+      height: 10px;
       display: block;
       background-color: color-mix(in oklch, var(--text-color-light) 85%, var(--content-background-color));
-      clip-path: polygon(100% 50%, 0 0, 0 100%);
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M 12 6 L 6 0 L 6 12 Z' fill='white'/%3E%3C/svg%3E");
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      -webkit-mask-size: contain;
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M 12 6 L 6 0 L 6 12 Z' fill='white'/%3E%3C/svg%3E");
+      mask-repeat: no-repeat;
+      mask-position: center;
+      mask-size: contain;
       transition: transform 0.18s ease;
-      /* Centroid of the triangle (~33% 50%): rotates without drifting up like tip-pivot (100% 50%) */
-      transform-origin: 33.333% 50%;
+      /* Center pivot keeps the rotated triangle inside the square box. */
+      transform-origin: 50% 50%;
     }
     .gallery-ui .gallery-section-details[open] > .gallery-section-summary::before,
     .gallery-ui .tokens[open] > summary::before {
@@ -2543,7 +2671,19 @@ function renderHtml(visibleSections, meta, options = {}) {
     .gallery-ui .gallery-section-details[open] > .gallery-section-summary::after {
       content: none !important;
     }
-    .gallery-ui .code { font-size: 0.65rem; overflow: auto; max-height: 12rem; background: var(--gallery-code-bg); padding: 0.5rem; border-radius: 4px; color: var(--text-color); border: 1px solid var(--border-color); }
+    .gallery-ui .code {
+      font-size: 0.65rem;
+      overflow: auto;
+      max-height: 12rem;
+      background: var(--gallery-code-bg);
+      padding: 0.5rem;
+      border-radius: 4px;
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      word-break: normal;
+    }
 
     /*
       Mimic body > header, main, footer bands (jonplummer uses body>header selector;
@@ -2590,33 +2730,6 @@ function renderHtml(visibleSections, meta, options = {}) {
       border: 1px solid color-mix(in srgb, var(--border-color) 70%, transparent);
       box-shadow: 0 1px 8px rgba(0,0,0,0.12);
       padding: 0.55rem 1.1rem 0.65rem;
-    }
-    .theme-root.home-preview .swatch-legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem 0.75rem;
-      margin-top: 0.4rem;
-      font-size: 0.62rem;
-      line-height: 1.3;
-      color: var(--text-color-light);
-    }
-    .theme-root.home-preview .swatch-legend .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
-    .theme-root.home-preview .swatch-legend code {
-      font-size: 0.58rem;
-      opacity: 0.92;
-    }
-    .theme-root.home-preview .chip-swatch {
-      width: 1.1rem;
-      height: 1.1rem;
-      border-radius: 2px;
-      border: 1px solid color-mix(in srgb, var(--border-color) 85%, transparent);
-      flex-shrink: 0;
-      display: inline-block;
-      vertical-align: middle;
     }
     .theme-root.home-preview .jp-page > header,
     .theme-root.home-preview .jp-page > .gallery-preview-main,
