@@ -4,6 +4,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 - Lab URLs in page collection; OG grid newest-first
 - Feat(ogimages): sort OG grid by content date; share filename helper
+- Docs(posts): minor edits to five 2026 articles
 
 ## 2026-04-17
 
@@ -478,4 +479,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-04-19
+Last deployed on 2026-04-25
