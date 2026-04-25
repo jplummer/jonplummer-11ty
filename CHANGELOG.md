@@ -1,5 +1,31 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-04-24
+
+- Update ideas tracker and add new post draft assets.
+- Docs(memory): note test:changed behavior for untracked files
+
+## 2026-04-19
+
+- Lab URLs in page collection; OG grid newest-first
+- Feat(ogimages): sort OG grid by content date; share filename helper
+- Docs(posts): minor edits to five 2026 articles
+
+## 2026-04-17
+
+- Feat(type): paste-friendly Example CSS with explicit monospace token
+- Feat(color): external embed script, CSP, and security check alignment
+
+## 2026-04-14
+
+- Post /type/, /color/, /ogimages/ hidden pages; refresh labs and embeds
+- Deploy /color/, align post frontmatter with Eleventy, fix hidden-pages YAML
+
+## 2026-04-12
+
+- Rename color-test.njk to color.njk and og-image-preview.njk to ogimages.njk.
+- Feat(utility): color gallery embed, /type lab, sibling nav, and build hook
+
 ## 2026-04-11
 
 - Add problem statement post, OG image, links import, about updates
@@ -458,4 +484,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-04-11
+Last deployed on 2026-04-25
