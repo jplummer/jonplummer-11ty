@@ -1,0 +1,32 @@
+---
+description: Conventions for Eleventy posts under src/_posts (paths, front matter, drafts).
+globs: ['src/_posts/**/*.md']
+alwaysApply: false
+---
+
+## Paths and filenames
+
+- Location: `src/_posts/YYYY/YYYY-MM-DD-kebab-slug.md`
+- The folder **`YYYY`** must match the calendar year in **`date`** and in the filename prefix.
+
+## Required front matter
+
+- `layout: layouts/single_post.njk`
+- `title`
+- `date` — date-only `YYYY-MM-DD` (Los Angeles–aligned semantics per project docs) or full ISO with offset; must agree with the filename date
+- `tags` — must include `post` (scalar `tags: post` or a YAML list)
+
+## Drafts
+
+- `draft: true` — excluded from **production** builds; still built in **dev** (`eleventy/config/preprocessors.js`).
+- Remove `draft` or set `draft: false` when publishing; then run `pnpm run test frontmatter`.
+
+## Optional / careful fields
+
+- `description` — quote when it contains colons, quotes, or YAML-friction characters (`docs/authoring.md`, Frontmatter Formatting).
+- `ogImage` — omit or rely on auto-generation unless setting a concrete path.
+- `permalink` / URL changes — prefer `src/_data/redirects.yaml` for old URLs (`docs/authoring.md`, Redirects).
+
+## Detail
+
+See `docs/authoring.md` and `docs/templates/post-template.md` at the repository root.

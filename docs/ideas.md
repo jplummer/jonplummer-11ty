@@ -33,8 +33,8 @@
 
 ### Utility / lab pages (color, type, OG) — “hidden in public”
 
-- **Shared UX pattern**: Color explorer and type explorer both use the **same full-page, full-size preview popout** (dedicated **exercise page** that stresses site tokens and typography—not a single “real” post or page that covers everything). Each explorer keeps **smaller in-page previews** (color gallery already works this way); type should follow that model once the explorer lives on-site.
-- **`/type/`**: Treat the **font stack explorer as the thing**, not a “hub.” **Inline the explorer at `/type/`** so there is one canonical URL; drop the instructional hub + separate `/type/gallery/` split when implementation allows (gallery generator output may need to target embeddable markup or a build-time merge).
+- **Shared UX pattern**: Color explorer and type explorer both target the **same full-page, full-size preview popout** idea (a dedicated **exercise page** that stresses site tokens and typography—not one “real” post that tries to cover everything). **`/color/`** already has **smaller in-page previews** in the gallery; **`/type/`** already embeds **`fontLabCard`** on the canonical page. Remaining gap vs color: optional **full-page type rehearsal** / popout parity (see **`/style-exercise/`** → **`/color/`** below).
+- **`/type/`**: **Shipped**: **`src/type.njk`** is the font stack explorer (not a separate hub); **`/type/gallery/`** redirects to **`/type/`** (`redirects.yaml`). **Still open**: pipe **`pnpm run font-gallery`** output into **embeddable** markup or a **build-time merge** so previews stay rich without hand-duplicating structure (browse / thumbnails: next bullet).
 - **Thumbnails / browse grid**: Prefer **text + swatches** first; then try **live mini-previews** if performance and complexity stay acceptable.
 - **URLs**: No **`/labs/`** prefix for now; keep **simple top-level paths** alongside other lightly public utilities (`/color/`, `/ogimages/`, etc.).
 - **Color direction** (broader): **`/color/`** embed is **regenerated on each `pnpm run build` / `dev`** (`eleventy.before`); use **`pnpm run color-gallery`** for CLI flags / gitignored **`output/`**. DR presets live in the gallery as a **combo card** beside generated families. **`/style-exercise/`** is **not built** for now (source kept as `src/style-exercise.njk`, listed in **`.eleventyignore`**); it **301 redirects to `/color/`**. **Full-page rehearsal** can return as a popout or by dropping the ignore entry later. **Canonical scheme IDs** across gallery export and preview URLs can still be tightened over time.
@@ -157,7 +157,7 @@
   - Custom shortcodes
 - Portfolio image widths: full, 2/3, 1/3, smaller for mobile images
 - Make sure margins etc are good in portfolio items, using blog posts as the example
-- Fix timezone issues (going forward reflect real authoring date as I experienced it, but don't break incoming links by changing URLs to existing content) (2025-12-22)
+- Fix timezone issues (reflect real authoring date as experienced; do not break incoming links by changing URLs for existing content) (2025-12-11; follow-up 2025-12-22)
 - Watch ahrefs this weekend for "URL changed" errors; site health should be at or near 100 (2025-12-22)
 - Optimize deploy output and eliminate redundant builds (2025-12-07)
 - Extract spinner frames to shared utility for easier experimentation (2025-12-07)
@@ -180,7 +180,6 @@
 - Fix sitemap pagination to only include existing pages (2025-11-30)
 - Fix sitemap pagination, improve titles, and fix unescaped quotes (2025-11-30)
 - Improve SEO validation for redirect pages and unescaped quotes (2025-11-30)
-- Fix timezone issues (relect real authoring date as I experienced it, but don't break incoming links by changing URLs to existing content) (2025-12-11)
 - Add SITE_DOMAIN environment variable for centralized domain configuration (2025-11-26)
 - Security audit improvements and deployment fixes (2025-11-26)
 - Enable smart quotes in markdown and titles (2025-11-26)
