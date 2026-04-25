@@ -1,5 +1,10 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-04-25
+
+- Fix color gallery token panel and harmony slider mappings
+- Update jonplummer color token tuning
+
 ## 2026-04-24
 
 - Update ideas tracker and add new post draft assets.
