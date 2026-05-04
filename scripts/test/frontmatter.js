@@ -91,6 +91,63 @@ function validateRequiredFields(frontMatter, filePath) {
   return { issues, warnings };
 }
 
+/**
+ * Top-level `src/*.md` templates (not under `_posts/`).
+ * Error pages omit `date` (same pattern as optional slug on posts from path).
+ */
+function validateRootSrcMarkdownFields(frontMatter, filePath) {
+  const issues = [];
+  const warnings = [];
+  const base = path.basename(filePath);
+
+  if (!frontMatter.title) {
+    issues.push('Missing required field: title');
+  } else if (typeof frontMatter.title !== 'string' || frontMatter.title.trim().length === 0) {
+    issues.push('Title: must be a non-empty string');
+  }
+
+  const skipDate = base === '500.md' || base === '404.md';
+  if (!skipDate) {
+    if (!frontMatter.date) {
+      issues.push('Missing required field: date');
+    } else {
+      let dateToValidate = frontMatter.date;
+      if (dateToValidate instanceof Date) {
+        dateToValidate = dateToValidate.toISOString().split('T')[0];
+      } else if (typeof dateToValidate === 'string') {
+        if (dateToValidate.includes('T')) {
+          dateToValidate = dateToValidate.split('T')[0];
+        }
+      } else {
+        issues.push('Date: Date must be a string or Date object');
+        return { issues, warnings };
+      }
+      const dateCheck = validateDate(dateToValidate);
+      if (!dateCheck.valid) {
+        issues.push(`Date: ${dateCheck.error}`);
+      }
+    }
+  }
+
+  return { issues, warnings };
+}
+
+function getAllRootSrcMarkdownPaths() {
+  const srcDir = './src';
+  if (!fs.existsSync(srcDir)) {
+    return [];
+  }
+  return fs.readdirSync(srcDir)
+    .filter(name => name.endsWith('.md'))
+    .map(name => path.join(srcDir, name));
+}
+
+function getChangedRootSrcMarkdownPaths() {
+  return getChangedFilesSinceHead()
+    .filter(file => path.extname(file).toLowerCase() === '.md' && path.dirname(file) === 'src')
+    .filter(file => fs.existsSync(file));
+}
+
 // Check file naming convention
 function validateFileName(filePath) {
   const fileName = path.basename(filePath);
@@ -211,15 +268,18 @@ function validate(result, options) {
     process.exit(1);
   }
 
-  // Get markdown files - either changed files or all files
-  let allMarkdownFiles;
+  // Posts under `_posts/`, plus top-level `src/*.md` (same scope as IndexNow static pages + `500.md`)
+  let postMarkdownFiles;
+  let rootMarkdownFiles;
   if (useChanged) {
-    allMarkdownFiles = getChangedFiles();
+    postMarkdownFiles = getChangedFiles();
+    rootMarkdownFiles = getChangedRootSrcMarkdownPaths();
   } else {
-    allMarkdownFiles = getMarkdownFiles(postsDir);
+    postMarkdownFiles = getMarkdownFiles(postsDir);
+    rootMarkdownFiles = getAllRootSrcMarkdownPaths();
   }
-  
-  const markdownFiles = allMarkdownFiles.filter(file => {
+
+  const markdownFiles = postMarkdownFiles.filter(file => {
     const content = readFile(file);
     const { frontMatter, error } = parseMarkdownFrontMatter(content);
     // Keep parse failures in the list so the main loop reports Eleventy-aligned errors
@@ -299,6 +359,55 @@ function validate(result, options) {
         slugMap.set(slugToTrack, relativePath);
       }
     }
+  }
+
+  const filteredRootMarkdownFiles = rootMarkdownFiles.filter(file => {
+    const content = readFile(file);
+    const { frontMatter, error } = parseMarkdownFrontMatter(content);
+    if (error) {
+      return true;
+    }
+    return !(frontMatter && frontMatter.draft === true);
+  });
+
+  for (const file of filteredRootMarkdownFiles) {
+    const relativePath = path.relative('./src', file);
+    const content = readFile(file);
+    const { frontMatter, error } = parseMarkdownFrontMatter(content);
+
+    const fileObj = addFile(result, file, relativePath);
+
+    if (error) {
+      addIssue(fileObj, {
+        type: 'frontmatter-parse',
+        message: `Front matter parsing error: ${error}`
+      });
+      continue;
+    }
+
+    if (!frontMatter) {
+      addIssue(fileObj, {
+        type: 'frontmatter-missing',
+        message: 'No front matter found'
+      });
+      continue;
+    }
+
+    const fieldValidation = validateRootSrcMarkdownFields(frontMatter, file);
+
+    fieldValidation.issues.forEach(issue => {
+      addIssue(fileObj, {
+        type: 'frontmatter-field',
+        message: issue
+      });
+    });
+
+    fieldValidation.warnings.forEach(warning => {
+      addWarning(fileObj, {
+        type: 'frontmatter-field',
+        message: warning
+      });
+    });
   }
 
   // Add duplicate slugs as global issues

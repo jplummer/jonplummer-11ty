@@ -8,7 +8,71 @@
 
 const path = require('path');
 const fs = require('fs');
+const { spawn } = require('child_process');
 const { SPINNER_FRAMES } = require('../../scripts/utils/spinner-utils');
+
+/** Avoid reopening the browser on every watch rebuild */
+let devBrowserOpened = false;
+
+const DEFAULT_DEV_PORT = 8080;
+
+/**
+ * CLI `--port` matches Eleventy dev server (docs: `--serve --port=8081`).
+ * If Eleventy bumps the port because the requested port is busy, set
+ * `ELEVENTY_DEV_SERVER_URL` to the URL printed in the terminal.
+ */
+function getCliDevServerPort() {
+  const argv = process.argv;
+  for (let i = 0; i < argv.length; i++) {
+    const a = argv[i];
+    if (a.startsWith('--port=')) {
+      const n = parseInt(a.slice('--port='.length), 10);
+      if (!Number.isNaN(n)) return n;
+    }
+    if (a === '--port' && argv[i + 1]) {
+      const n = parseInt(argv[i + 1], 10);
+      if (!Number.isNaN(n)) return n;
+    }
+  }
+  return DEFAULT_DEV_PORT;
+}
+
+function shouldOpenDevBrowserOnce() {
+  if (process.env.ELEVENTY_RUN_MODE !== 'serve') return false;
+  const optOut = process.env.ELEVENTY_OPEN_BROWSER;
+  if (optOut === '0' || optOut === 'false' || optOut === 'no') return false;
+  if (process.env.CI === 'true' || process.env.CI === '1') return false;
+  return true;
+}
+
+function openExternalUrl(url) {
+  const plat = process.platform;
+  try {
+    if (plat === 'darwin') {
+      spawn('open', [url], { detached: true, stdio: 'ignore' }).unref();
+    } else if (plat === 'win32') {
+      spawn('cmd', ['/c', 'start', '', url], { detached: true, stdio: 'ignore' }).unref();
+    } else {
+      spawn('xdg-open', [url], { detached: true, stdio: 'ignore' }).unref();
+    }
+  } catch (_) {
+    // ignore — optional UX
+  }
+}
+
+/** First successful build in `--serve`: open site after a short delay so the server can bind */
+function scheduleOpenDevBrowserOnce() {
+  if (devBrowserOpened || !shouldOpenDevBrowserOnce()) return;
+  devBrowserOpened = true;
+
+  const explicit = process.env.ELEVENTY_DEV_SERVER_URL;
+  const url =
+    explicit && explicit.trim().length > 0
+      ? explicit.trim()
+      : `http://127.0.0.1:${getCliDevServerPort()}/`;
+
+  setTimeout(() => openExternalUrl(url), 400);
+}
 
 /**
  * Configures Eleventy event handlers.
@@ -76,6 +140,7 @@ function configureEvents(eleventyConfig) {
     if (isQuiet) {
       cleanupSpinner();
     }
+    scheduleOpenDevBrowserOnce();
   });
 
   // Incremental OG image generation on file changes during dev

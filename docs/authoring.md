@@ -48,6 +48,8 @@ Run `pnpm run test wisdom` after editing. Unexpected fields are rejected.
 
 This section outlines best practices for editing frontmatter in markdown files to prevent parsing errors.
 
+Front matter is **YAML between two `---` lines**: an opening delimiter on line 1, then key/value pairs (plain YAML — do not prefix keys with Markdown heading syntax such as `##`), then a **closing `---`** before the Markdown body. Omitting the closing fence or mixing in heading syntax breaks Eleventy’s parser (gray-matter) and can drop fields silently (for example, `#` starts a YAML comment).
+
 ### Description Field Formatting
 
 The `description` field in frontmatter is particularly prone to parsing errors because it often contains:
@@ -110,7 +112,7 @@ Run the frontmatter test to catch frontmatter parsing errors:
 pnpm run test frontmatter
 ```
 
-This will identify any files with frontmatter parsing errors before they cause build failures.
+This checks all posts under `src/_posts/` and every top-level `src/*.md` template (for example `about.md`, `now.md`, `changelog.md`, error pages). It will identify parsing errors before they cause build failures.
 
 ### Common Errors
 

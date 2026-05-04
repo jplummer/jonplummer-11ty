@@ -22,6 +22,7 @@ Recommended process for deploying changes with an up-to-date changelog:
 
 - `pnpm run dev` - Start development server with auto-rebuild on file changes (`--serve --watch --quiet`)
   - Auto-runs: `generate-og-images` incrementally on file save (via `eleventy.beforeWatch`)
+  - After the first build, opens `http://127.0.0.1:<port>/` in your browser once (`--port` respected; disable with `ELEVENTY_OPEN_BROWSER=0`; if Eleventy uses another port because the default is busy, set `ELEVENTY_DEV_SERVER_URL` to the URL from the terminal)
 - `pnpm run dev:verbose` - Start development server with verbose output (`--serve --watch`)
 - `pnpm run build` - Build production site (`--quiet`) (auto: `deploy`)
 - `pnpm run build:verbose` - Build production site with verbose output
