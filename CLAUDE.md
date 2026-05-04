@@ -13,8 +13,9 @@ Personal blog built with Eleventy (11ty) and Nunjucks templates.
 ### Batch Similar Changes
 When fixing multiple similar issues (like updating multiple test cases):
 1. First, analyze ALL instances that need fixing
-2. Make ALL changes in a single batch using parallel tool calls
-3. Only then verify the results (run tests, linters, etc.)
+2. Consider the simplest possible change(s) that will accomplish the desired goal. Prefer making use of the native capabilities of included packages rather than re-implementing variations of the same functionality or bringing in additional libraries unless strictly necessary.
+3. Make ALL changes in a single batch using parallel tool calls
+4. Then verify the results (run tests, linters, etc.)
 
 Do NOT fix issues one-at-a-time with verification steps in between unless:
 - Later changes depend on the results of earlier changes
