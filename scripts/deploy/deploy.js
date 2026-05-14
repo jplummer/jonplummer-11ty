@@ -49,16 +49,16 @@ function runWithSpinner(command, message, options = {}) {
       spinnerFrame = (spinnerFrame + 1) % SPINNER_FRAMES.length;
     }, 100);
     
-    // Parse command for spawn
-    const commandParts = Array.isArray(command) ? command : command.split(' ');
-    const cmd = commandParts[0];
-    const args = commandParts.slice(1);
-    
     // Spawn process
-    const child = spawn(cmd, args, {
-      stdio: ['inherit', 'pipe', 'pipe'],
-      shell: shell
-    });
+    let child;
+    if (shell) {
+      // Pass full command string unsplit to avoid DEP0190 warning
+      const cmd = Array.isArray(command) ? command.join(' ') : command;
+      child = spawn(cmd, [], { stdio: ['inherit', 'pipe', 'pipe'], shell: true });
+    } else {
+      const commandParts = Array.isArray(command) ? command : command.split(' ');
+      child = spawn(commandParts[0], commandParts.slice(1), { stdio: ['inherit', 'pipe', 'pipe'] });
+    }
     
     // Handle output
     child.stdout.on('data', (data) => {
