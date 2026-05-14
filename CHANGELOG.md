@@ -3,6 +3,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 ## 2026-05-13
 
 - Fix link rendering; add spinner variants; update deps
+- Add facilitation tips post; fix spawn shell warning
 
 ## 2026-05-03
 
