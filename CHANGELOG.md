@@ -1,5 +1,10 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-05-03
+
+- Fix static-page frontmatter checks; open browser once on dev serve
+- Add draft Concept Sprint post; clarify batch-change guidance in CLAUDE.md
+
 ## 2026-04-25
 
 - Fix color gallery token panel and harmony slider mappings
@@ -490,4 +495,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-05-04
+Last deployed on 2026-05-14

@@ -27,7 +27,7 @@ The Welcome should be brief. Participants are eager to get into the material, an
 
 ### 1. Immersion
 
-_Supplies: sticky notes and fine-point markers, presentation materials, guest speakers, computers and a good internet connection_
+Supplies: sticky notes and fine-point markers, presentation materials, guest speakers, computers and a good internet connection
 
 In Immersion the team learns all they can about current product capabilities, customers, competitive and alternative technologies, the difficulties customers face, and the opportunities those difficulties present. The goal is to steep ourselves in information that might be relevant to customer behavior or the aims of the sprint.
 
@@ -46,7 +46,7 @@ Scheduling this phase is critical. Speakers must be tightly scheduled, arrive on
 
 ### 2. Problem review and categorization
 
-_Supplies: sticky notes and fine-point markers, whiteboard and markers_
+Supplies: sticky notes and fine-point markers, whiteboard and markers
 
 Each participant presents the problems they captured during Immersion. As problems are presented, others may find that they think of new ones; these should be offered to the group and added to the pool.
 
@@ -63,7 +63,7 @@ Often the group will converge naturally on the most promising clusters. When the
 
 ### 3. Benefit generation and categorization
 
-_Supplies: sticky notes and fine-point markers, whiteboard and markers_
+Supplies: sticky notes and fine-point markers, whiteboard and markers
 
 As with problems, participants have been watching for potential customer benefits during Immersion and have captured them on sticky notes. Before presenting those, however, the group pauses to consider the problem clusters from Phase 2: for each cluster, participants ask themselves what benefits a customer would receive if that problem were solved, and make note of any new benefits.
 
@@ -83,7 +83,7 @@ Use dot voting to help the team converge if needed.
 
 ### 4. Concept generation and selection
 
-_Supplies: fine-point markers, letter paper, whiteboard and markers, computers and a good internet connection_
+Supplies: fine-point markers, letter paper, whiteboard and markers, computers and a good internet connection
 
 Before concept generation begins, the group selects a problem/benefit pair to work against — typically comprising top-scoring candidates from phases 2 and 3. This target helps the group generate specific ideas that might reinforce each other, and maintains focus during the build phase. That said, a concept that also addresses additional problems or delivers additional benefits is not penalized for it; ambition is welcome as long as the concept is buildable and coherent.
 
@@ -101,7 +101,7 @@ Blending or combining elements from multiple sketches is encouraged, but the gro
 
 ### 5. Building and customer validation prep
 
-_Supplies: computers and a good internet connection_
+Supplies: computers and a good internet connection
 
 With a concept selected, the entire group turns to building a demo. It's up to the group to decide what to build (working software), what to fake (HTML, Figma, or slides), and what to leave as presentation materials. Any combination of these is valid, so long as the group arrives at Customer Validation with:
 
@@ -119,7 +119,7 @@ Building and validation prep together constitute the longest sustained work peri
 
 ### 6a. Customer validation
 
-_Supplies: customers, computers and a good internet connection_
+Supplies: customers, computers and a good internet connection
 
 Customer validation sessions are run by a small subset of the group — typically a presenter, someone operating the demo, and a note-taker. The rest of the sprint participants are welcome to observe quietly; engineers and architects will often use this time to decamp and begin implementation planning in parallel (see 6b Implementation Planning).
 
@@ -146,7 +146,7 @@ Scheduling this phase is critical; see Notes about scheduling below.
 
 ### 6b. Implementation planning
 
-_Supplies: whiteboard and markers, computers and a good internet connection, and a location out of earshot of the validation team so as not to disturb the customers_
+Supplies: whiteboard and markers, computers and a good internet connection, and a location out of earshot of the validation team so as not to disturb the customers
 
 While the validation team is with customers, engineers and architects – and any others not needed in the room – turn their attention to what it would take to ship an MVP. This work runs in parallel with Customer validation.
 
@@ -166,7 +166,7 @@ Note: this process was designed before AI-assisted coding dramatically changed w
 
 ### 7. Pitch preparation
 
-_Supplies: computers and a good internet connection_
+Supplies: computers and a good internet connection
 
 With customer validation complete and implementation planning in hand, the full group reconvenes to prepare a pitch for an internal executive audience. The pitch is short, 15 to 30 minutes including the demo, and tells a condensed story of the sprint.
 

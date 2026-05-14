@@ -1,3 +1,26 @@
+2026-05-14:
+  - url: "https://www.youtube.com/watch?v=KWrsLqnB6vA"
+    title: How Claude Code’s Creator Starts EVERY Project – Austin Marchese
+    description: Good and quick rundown of some Claude tips form the Claude Code tech lead himself, some surprising.
+  - url: "https://github.com/obra/superpowers"
+    title: "obra/superpowers: An agentic skills framework & software development methodology that works. – Jesse Vincent"
+    description: "\"Superpowers is a complete software development methodology for your coding agents, built on top of a set of composable skills and some initial instructions that make sure your agent uses them.\""
+  - url: "https://andrewmurphy.io/blog/if-you-thought-the-speed-of-writing-code-was-your-problem-you-have-bigger-problems"
+    title: If you thought the speed of writing code was your problem - you have bigger problems – Andrew Murphy
+    description: "When you optimize a step that is not the bottleneck, you don't get a faster system. You get a more broken one."
+  - url: "https://jeffgothelf.com/blog/vibe-coding-surfaces-the-questions-product-management-answers-them/"
+    title: Vibe coding surfaces the questions. Product management answers them – Jeff Gothelf
+    description: "\"Every team I work with right now is building faster, shipping more and generally making more output. And a surprising number of them are confused about why it doesn’t feel like progress. It doesn’t feel like progress because speed without direction is just accelerated uncertainty. The “now what?” problem isn’t unique to my brother. Every team being urged to deliver more interactive versions of their ideas faster is facing it. And this question doesn’t get smaller when you ship faster. It gets bigger.\""
+  - url: "https://webaim.org/projects/million/"
+    title: The WebAIM Million – WebAIM
+    description: Every year, the fine folks at Web Accessibility In Mind do some automated testing on the top million home pages to see what accessibility problems they have in common. The most prevalent problems are also the most elementary, which is surprising.
+  - url: "https://daverupert.com/2026/04/more-talk-less-grok/"
+    title: When moving fast, talking is the first thing to break – Dave Rupert
+    description: "\"When you make speed and “moving fast” the biggest priority on a project or in an organization, the first thing to breakdown is talking to each other. Talking takes time. Consensus is expensive and slow. In a pressurized environment there’s no time to schedule calls, get input from subject matter experts, or resolve key differences of opinion. *ASAP* makes a big assumption that all relevant parties are already in the room.\""
+  - url: "https://www.nngroup.com/articles/handmade-designs/"
+    title: "Handmade Designs: The New Trust Signal – Megan Chan"
+    description: "\"People are buying vinyl, dusting off their wired headphones, shooting on film, and opting for things that are slower. Digital fatigue and AI fatigue are changing what resonates, and audiences are gravitating towards designs that look handmade.\""
+
 2026-04-18:
   - url: "https://stopsloppypasta.ai/en/"
     title: "Stop Sloppypasta: Don't paste raw LLM output at people"
