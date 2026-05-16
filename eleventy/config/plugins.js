@@ -19,10 +19,6 @@ async function configurePlugins(eleventyConfig) {
   // Syntax highlighting
   eleventyConfig.addPlugin(require("@11ty/eleventy-plugin-syntaxhighlight"));
 
-  // Date formatting via Luxon
-  // NOTE: eleventy-plugin-date is commented out - we use custom date filters instead
-  // eleventyConfig.addPlugin(require("eleventy-plugin-date"));
-
   // Render plugin for rendering templates
   const { RenderPlugin } = require("@11ty/eleventy");
   eleventyConfig.addPlugin(RenderPlugin);

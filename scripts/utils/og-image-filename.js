@@ -1,8 +1,6 @@
 const path = require('path');
 
 /**
- * Same rules as `scripts/content/generate-og-images.js` — keep in sync when changing naming.
- *
  * @param {object} pageData Front matter
  * @param {string} filePath Absolute path to source file
  * @returns {string} Basename for the PNG under `src/assets/images/og/`

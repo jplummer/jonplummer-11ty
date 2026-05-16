@@ -1,3 +1,17 @@
+2026-05-16:
+  - url: "https://crookedtimber.org/2026/05/12/the-text-is-not-the-product/"
+    title: The text is not the product — Lisa Herzog
+    description: "Generative AI makes it easy to produce scads of text. But simply producing text is not the point, in many cases – creating meaning, communicating ideas, is. So let's remember that production is cheap and and volume is no signifier of effort, anymore. Focus on the reason we are producing the text in the first place."
+  - url: "https://unsung.aresluna.org/subtle-line-between-animations-that-help-and-animations-that-hurt/?__readwiseLocation="
+    title: “Subtle line between animations that help and animations that hurt” – Marchin Wichary
+    description: "Animation can be a quality of life improvement for your software, provided you don't get it wrong. And numerous other small opportunities to make the experience better also exist."
+  - url: "https://simonwillison.net/2023/Aug/27/wordcamp-llms/#personal-ai-ethics"
+    title: Personal AI ethics – Simon Willison
+    description: "A few solid points on how to be ethical when using an LLM or other AI tool. A key part of Simon's longer \"Making Large Language Models work for you,\" still relevant three years on."
+  - url: "https://distantprovince.by/posts/its-rude-to-show-ai-output-to-people/"
+    title: "It's rude to show AI output to people – Alex Martsinovich"
+    description: "Alex asks that we demonstrate proof-of-thought when we use AI tools. It's a good policy even when we aren't using AI tools!"
+
 2026-05-14:
   - url: "https://www.youtube.com/watch?v=KWrsLqnB6vA"
     title: How Claude Code’s Creator Starts EVERY Project – Austin Marchese
