@@ -57,10 +57,5 @@
   "dependencies": {
     "dotenv": "^17.4.1",
     "markdown-it": "^14.1.1"
-  },
-  "pnpm": {
-    "overrides": {
-      "markdown-it": ">=14.1.1"
-    }
   }
 }
