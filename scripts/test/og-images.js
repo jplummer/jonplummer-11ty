@@ -100,7 +100,17 @@ function findSourceFile(relativePath) {
   
   // Remove index.html and trailing slash
   let searchPath = normalizedPath.replace(/\/index\.html$/, '').replace(/^\/+/, '');
-  
+
+  // Post permalinks: 2026/05/24/slug/index.html -> src/_posts/2026/2026-05-24-slug.md
+  const postMatch = searchPath.match(/^(\d{4})\/(\d{2})\/(\d{2})\/([^/]+)$/);
+  if (postMatch) {
+    const [, year, month, day, slug] = postMatch;
+    const postPath = path.join(srcDir, '_posts', year, `${year}-${month}-${day}-${slug}.md`);
+    if (fs.existsSync(postPath)) {
+      return postPath;
+    }
+  }
+
   // Try .md first, then .njk
   const extensions = ['.md', '.njk'];
   for (const ext of extensions) {

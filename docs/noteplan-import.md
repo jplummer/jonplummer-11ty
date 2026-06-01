@@ -160,7 +160,7 @@ The script looks for notes in the Notes root:
 ~/Library/Containers/co.noteplan.NotePlan3/Data/Library/Application Support/co.noteplan.NotePlan3/Notes/
 ```
 
-The script will search for a `.txt` file with "Links to import" in the first line.
+The script will search for a `.md` or legacy `.txt` note titled "Links to import" (first line or filename), including subfolders such as `Personal/`.
 
 ## Validation
 
@@ -269,7 +269,7 @@ $ pnpm run import-links
 
 🔍 Looking for NotePlan note: "Links to import"...
 
-✅ Found note: Links to import.txt
+✅ Found note: Links to import.md
 
 📝 Found 3 link(s) to import
 
@@ -295,7 +295,7 @@ Next steps:
 
 ## File Locations
 
-- **NotePlan note**: `~/Library/Containers/.../Notes/Links to import.txt`
+- **NotePlan note**: `~/Library/Containers/.../Notes/Links to import.md` (or legacy `.txt`)
 - **Import script**: `scripts/content/import-noteplan-links.js`
 - **Target file**: `src/_data/links.yaml`
 - **Validation test**: `scripts/test/links-yaml.js`

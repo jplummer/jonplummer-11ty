@@ -1,3 +1,23 @@
+2026-06-01:
+  - url: "https://www.harvarddesignmagazine.org/articles/ai-as-a-design-medium-rodenbeck/"
+    title: AI as a Design Medium - Erick Rodenbeck
+    description: "AI tools will push your design toward something stable, conventional, boring, cliché. That's great if your sole aim is to be efficient, but it'll make it hard to find the interesting edges of the solution space where the new ideas lurk."
+  - url: "https://papersplease.org/wp/know-your-rights/"
+    title: "Know your rights as a U.S. Citizen – Papers, Please!"
+    description: Worth a read.
+  - url: "https://activistchecklist.org"
+    title: Digital Security Checklists for Activists
+    description: Worth a read.
+  - url: "https://uxdesign.cc/the-prompt-is-not-an-interface-41b77277681d"
+    title: The prompt is not an interface. Why AI sent us back to the command line… – Joshua Leigh
+    description: "The difficulty with chat interfaces is they it squeeze all of our thinking and perception into a single narrow channel. I've witnessed this myself, struggling to describe the changes I'd like to explore with a card-shuffle animation, trying with difficulty to explain just what felt unsettling about the result and how I thought it might need to be changed. Chat is an exciting interface that can be bolted on just about anywhere, but it's not always the best choice."
+  - url: "https://uxmag.com/articles/the-spiral-climbs-ideas-are-expensive-systems-are-cheap"
+    title: "The Spiral Climbs: Ideas Are Expensive, Systems Are Cheap – Pavel Bukengolts"
+    description: "At first sounds like it is opposite to the way I generally think of things, where ideas are cheap and the successful, thoughtful execution of an idea is the hard part. Pavels' thesis is that execution is becoming so cheap, and iteration borne of usage so easy that the energy needs to go into refining and expressing the idea. Same as it ever was."
+  - url: "https://blog.mozilla.ai/when-shipping-becomes-too-easy/?__readwiseLocation="
+    title: When Shipping Software Becomes Too Easy – Julie Belião
+    description: "\"If shipping becomes frictionless, the real scarcity moves elsewhere: clarity of intent, product judgment, and long-term coherence. Product management becomes less about leading and coordinating work and more about protecting direction.\""
+
 2026-05-16:
   - url: "https://crookedtimber.org/2026/05/12/the-text-is-not-the-product/"
     title: The text is not the product — Lisa Herzog

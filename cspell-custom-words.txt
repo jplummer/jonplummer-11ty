@@ -6,6 +6,7 @@
 ADPList
 Advate
 Advoy
+Ahrefs
 Badgr
 Belkin
 Baudu
@@ -23,6 +24,7 @@ Instructure
 Invoca
 Kagi
 Linksys
+Monotasker
 Qualtrics
 Readwise
 RISD
@@ -162,6 +164,11 @@ Hanwen
 Shen
 Tamkin
 Tane
+Herzog
+Marchin
+Willison
+Jalkut
+Mitev
 
 # Other Valid Terms
 allyship
@@ -190,13 +197,14 @@ informationally
 inspectable
 interoperation
 lowball
+kaizen
 mentee
 mentees
-kaizen
 microinteractive
 monitorable
 mori
 narratively
+negging
 offsites
 Omakase
 Omiyage

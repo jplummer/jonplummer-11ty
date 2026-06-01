@@ -31,8 +31,35 @@ const shouldClear = args.includes('--clear');
 const dateArg = args.find(arg => arg.startsWith('--date='));
 const targetDate = dateArg ? dateArg.split('=')[1] : new Date().toISOString().split('T')[0];
 
+const SKIP_NOTE_DIRS = new Set(['@Trash', '@Archive']);
+
 /**
- * Find NotePlan note by searching for content
+ * Collect NotePlan note files (.txt legacy, .md current) under Notes/
+ */
+function collectNotePlanNoteFiles(dir) {
+  const files = [];
+
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const fullPath = path.join(dir, entry.name);
+
+    if (entry.isDirectory()) {
+      if (SKIP_NOTE_DIRS.has(entry.name)) {
+        continue;
+      }
+      files.push(...collectNotePlanNoteFiles(fullPath));
+      continue;
+    }
+
+    if (entry.isFile() && (entry.name.endsWith('.txt') || entry.name.endsWith('.md'))) {
+      files.push(fullPath);
+    }
+  }
+
+  return files;
+}
+
+/**
+ * Find NotePlan note by title in first line or filename stem
  */
 function findNotePlanNote(searchTitle) {
   if (!fs.existsSync(NOTEPLAN_NOTES_DIR)) {
@@ -41,22 +68,26 @@ function findNotePlanNote(searchTitle) {
     process.exit(1);
   }
 
-  // Get all .txt files in Notes root
-  const files = fs.readdirSync(NOTEPLAN_NOTES_DIR)
-    .filter(file => file.endsWith('.txt'))
-    .map(file => path.join(NOTEPLAN_NOTES_DIR, file));
+  const files = collectNotePlanNoteFiles(NOTEPLAN_NOTES_DIR);
 
-  // Search file contents for the title
   for (const filePath of files) {
     const content = fs.readFileSync(filePath, 'utf8');
-    // Check if first line contains the search title
     const firstLine = content.split('\n')[0];
-    if (firstLine.includes(searchTitle)) {
+    const stem = path.basename(filePath, path.extname(filePath));
+
+    if (firstLine.includes(searchTitle) || stem === searchTitle) {
       return filePath;
     }
   }
 
   return null;
+}
+
+/**
+ * Strip invisible characters NotePlan sometimes inserts around pasted URLs
+ */
+function sanitizeUrl(url) {
+  return url.replace(/\uFEFF|\uFFFC/g, '').trim();
 }
 
 /**
@@ -71,7 +102,7 @@ function parseLink(line) {
   }
 
   const title = linkMatch[1].trim();
-  const url = linkMatch[2].trim();
+  const url = sanitizeUrl(linkMatch[2]);
 
   // Everything after the link is the description
   const afterLink = line.substring(linkMatch.index + linkMatch[0].length).trim();

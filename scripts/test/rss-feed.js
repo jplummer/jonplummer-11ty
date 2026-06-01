@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const { DOMParser } = require('@xmldom/xmldom');
-const { addFile, addIssue } = require('../utils/test-results');
+const { addFile, addIssue, addWarning } = require('../utils/test-results');
 
 // Find RSS/XML files in _site
 function findRssFiles(dir) {
@@ -315,10 +315,15 @@ function validate(result) {
           issueType = 'rss-item';
         }
         
-        addIssue(fileObj, {
+        const payload = {
           type: issueType,
           message: issue
-        });
+        };
+        if (issue.includes('stale')) {
+          addWarning(fileObj, payload);
+        } else {
+          addIssue(fileObj, payload);
+        }
       });
     }
   }

@@ -1,5 +1,13 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-05-24
+
+- Add post; remove deprecated pnpm.overrides from package.json
+
+## 2026-05-15
+
+- Add links for 2026-05-16; remove dead commented code
+
 ## 2026-05-13
 
 - Fix link rendering; add spinner variants; update deps
@@ -500,4 +508,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-05-16
+Last deployed on 2026-05-24

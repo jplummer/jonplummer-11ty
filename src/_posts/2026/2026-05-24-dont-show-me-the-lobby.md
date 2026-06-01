@@ -2,12 +2,11 @@
 title: Don't show me the lobby
 layout: layouts/single_post.njk
 date: "2026-05-24"
-draft: true
 tags:
   - post
-description: "Why Monotasker skips the lobby and drops you straight into the work."
+description: Why Monotasker skips the lobby and drops you straight into the work.
+ogImage: /assets/images/og/2026-05-23-2026-05-24-dont-show-me-the-lobby.png
 ---
-
 The first thing you do in Monotasker is tap a checkbox. No tutorial, no tour. And no permissions granted yet. Just the thing you'll tap every time you use the app.
 
 (Monotasker is in App Store review – I'll update this post with a link when it's live.)
@@ -40,7 +39,7 @@ Why it works: that card and its checkbox are the centerpiece of the app. Not a m
 
 I've written before about [coordinated experience](https://jonplummer.com/2025/07/27/toward-coordinated-experience/) – the idea that a well-designed system guides users through a task completely, without asking them to do work the system could do for them. Onboarding is the same problem one level up. Most onboarding asks users to remember what the tutorial explained, then go find those things once they arrive.
 
-Putting users inside the interface from the first tap removes that work. The permission dialog isn't something that happens before the app – it's something that happends naturally at the right time. The empty state is the real experience, waiting for input.
+Putting users inside the interface from the first tap removes that work. The permission dialog isn't something that happens before the app – it's something that happens naturally at the right time. The empty state is the real experience, waiting for input.
 
 Resist the impulse to design a special onboarding mode with its own visual language. Use the real thing. Trust the interface to explain itself.
 
