@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-06-01
+
+- Fix NotePlan .md import; publish Monotasker post and refresh /now.
+
 ## 2026-05-24
 
 - Add post; remove deprecated pnpm.overrides from package.json
@@ -508,4 +512,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-05-24
+Last deployed on 2026-06-01
