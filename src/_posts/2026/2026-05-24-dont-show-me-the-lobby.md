@@ -7,15 +7,13 @@ tags:
 description: Why Monotasker skips the lobby and drops you straight into the work.
 ogImage: /assets/images/og/2026-05-23-2026-05-24-dont-show-me-the-lobby.png
 ---
-The first thing you do in Monotasker is tap a checkbox. No tutorial, no tour. And no permissions granted yet. Just the thing you'll tap every time you use the app.
-
-(Monotasker is in App Store review – I'll update this post with a link when it's live.)
+The first thing you do in [Monotasker](https://apps.apple.com/app/monotasker/id6770424713) is tap a checkbox. No tutorial, no tour. And no permissions granted yet. Just the thing you'll tap every time you use the app.
 
 That first tap fires the iOS Reminders permission dialog. Not a blurb with a "Connect my Reminders" button – the completion checkbox. The same gesture the app is built around.
 
 I built Monotasker to solve a specific problem: I have too many side projects, and it's easy to get bogged down in the list. Staring at 30 items can be as bad as having no list at all. The app picks one reminder at random and shows it to you, persistently, until you decide you're done with it or want a new one. That's it.
 
-The more interesting design decision happens before you ever load your tasks.
+The more interesting design decision pays off before you ever load your tasks.
 
 ## The lobby problem
 
@@ -25,7 +23,7 @@ The implicit message: "here's what to expect from the app. Remember all of this.
 
 That moment of arrival requires re-learning. You have to reconcile what you were just told with what's actually in front of you. The controls are smaller. The tone is different. The decisions you make matter now.
 
-Nearly every app has a lobby standing between you and what you came for. Or a tour – a list of things to remember that you'll forget before you need them.
+Nearly every app has a lobby standing between you and what you came for. Or a tour – a list of things that you'll forget before you need them.
 
 ## One interface, not two
 
