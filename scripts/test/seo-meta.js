@@ -338,7 +338,12 @@ function validate(result, options) {
     const isErrorPage =
                           relativePath === '404.html' ||
                           relativePath === '500.html';
+    const isPassthroughDemo = relativePath.startsWith('assets/demos/');
     const isPaginationPage = relativePath.match(/^page\/\d+\//) || relativePath.startsWith('page/');
+    
+    if (isPassthroughDemo) {
+      continue;
+    }
     
     // Add file to result
     const fileObj = addFile(result, file, relativePath);

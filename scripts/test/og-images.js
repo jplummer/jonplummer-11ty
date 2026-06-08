@@ -243,6 +243,11 @@ function validate(result) {
     if (relativePath.startsWith('og-image-preview/') || relativePath.startsWith('color-test/')) {
       continue;
     }
+
+    // Passthrough demo HTML (iframe targets under /assets/demos/)
+    if (relativePath.startsWith('assets/demos/')) {
+      continue;
+    }
     
     // Skip redirect pages (they don't need OG images)
     if (isRedirectPage(content)) {

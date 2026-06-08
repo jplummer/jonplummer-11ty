@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auto API name behavior test bed</title>
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --card-bg: #ffffff;
+      --border: #e1e4e8;
+      --text: #24292e;
+      --muted: #6a737d;
+      --accent: #0366d6;
+      --accent-soft: #e1f0ff;
+      --danger: #d73a49;
+      --badge-bg: #eef2f6;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 24px;
+      line-height: 1.5;
+    }
+    header { max-width: 1200px; margin: 0 auto 24px; }
+    h1 { margin: 0 0 4px; font-size: 22px; }
+    .intro { color: var(--muted); margin: 0 0 16px; font-size: 14px; }
+
+    .page-controls {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+      padding: 14px 16px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+    .page-controls fieldset {
+      border: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .page-controls legend {
+      font-weight: 600;
+      margin-right: 6px;
+      padding: 0;
+    }
+    .page-controls label {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+    .page-controls button {
+      padding: 6px 12px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .page-controls button:hover { background: #f3f4f6; }
+
+    .featured-section {
+      max-width: 600px;
+      margin: 0 auto 20px;
+    }
+    .card.featured {
+      border: 2px solid var(--accent);
+      box-shadow: 0 2px 14px rgba(3, 102, 214, 0.14);
+    }
+    .favorite-pill, .interesting-pill, .works-pill, .basic-pill {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-right: 8px;
+      text-transform: uppercase;
+      vertical-align: middle;
+    }
+    .favorite-pill { background: var(--accent); color: white; }
+    .interesting-pill {
+      background: #fff4d6;
+      color: #8a6500;
+      border: 1px solid #f2d57a;
+    }
+    .works-pill {
+      background: #e6f7eb;
+      color: #1e6b34;
+      border: 1px solid #b8e2c5;
+    }
+    .basic-pill {
+      background: #eef2f6;
+      color: #57606a;
+      border: 1px solid #d4d9df;
+    }
+
+    .reveal-row {
+      display: flex;
+      justify-content: flex-end;
+      margin: 8px 0 16px;
+    }
+    .reveal-row button {
+      padding: 6px 12px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .reveal-row button:hover { background: #f3f4f6; color: var(--text); }
+
+    .card.rejected { display: none; }
+    body.reveal-rejected .card.rejected { display: flex; }
+    body.reveal-rejected .card.rejected { opacity: 0.85; }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 14px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .card-title { font-weight: 600; font-size: 15px; }
+    .card-title .num { color: var(--muted); font-weight: 400; margin-right: 4px; }
+    .card-actions {
+      display: flex;
+      gap: 6px;
+    }
+    .card-actions button {
+      font-size: 11px;
+      color: var(--muted);
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      cursor: pointer;
+      padding: 2px 8px;
+    }
+    .card-actions button:hover { background: #f3f4f6; color: var(--text); }
+
+    .pattern-input {
+      padding: 4px 8px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+      font-size: 13px;
+      width: 220px;
+    }
+    .pattern-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(3, 102, 214, 0.18);
+    }
+    .pattern-input.invalid {
+      border-color: var(--danger);
+      box-shadow: 0 0 0 2px rgba(215, 58, 73, 0.15);
+    }
+    .card-desc {
+      font-size: 12.5px;
+      color: var(--muted);
+      margin: 0 0 2px;
+    }
+    .field { display: flex; flex-direction: column; gap: 2px; }
+    .field > label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .field-row {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 6px 8px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 14px;
+      font-family: inherit;
+      min-width: 0;
+    }
+    .field-row input[type="text"] { flex: 1 1 auto; }
+    input[type="text"]:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(3, 102, 214, 0.18);
+    }
+    input.api {
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    }
+    input.invalid {
+      border-color: var(--danger);
+      box-shadow: 0 0 0 2px rgba(215, 58, 73, 0.15);
+    }
+    .error {
+      font-size: 12px;
+      color: var(--danger);
+      min-height: 16px;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      background: var(--badge-bg);
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, monospace;
+    }
+    .debug {
+      font-size: 11px;
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, monospace;
+      padding-top: 6px;
+      border-top: 1px dashed var(--border);
+      margin-top: 2px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    body.hide-debug .debug { display: none; }
+
+    .suggest {
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .suggest code {
+      background: var(--badge-bg);
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-size: 12px;
+      color: var(--text);
+    }
+    .suggest button {
+      padding: 2px 8px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 11px;
+    }
+    .suggest button:hover { background: #f3f4f6; }
+
+    .lock-btn, .generate-btn {
+      padding: 6px 10px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    .lock-btn:hover, .generate-btn:hover { background: #f3f4f6; }
+    .lock-btn.locked { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+
+    .config-summary {
+      max-width: 1200px;
+      margin: 24px auto 0;
+      padding: 12px 16px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 12px;
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, monospace;
+    }
+    .config-summary strong { color: var(--text); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Auto API name behavior test bed</h1>
+    <p class="intro">Twelve ways the API Name field could react when Display Name changes. The goal: find the helpful but least surprising behavior. Try typing in any card; use the examples to compare end states across all twelve.</p>
+    <div class="page-controls">
+      <fieldset>
+        <legend>Transform:</legend>
+        <label><input type="radio" name="transform" value="preserve"> Preserve case</label>
+        <label><input type="radio" name="transform" value="lowercase"> lowercase</label>
+        <label><input type="radio" name="transform" value="snake_case" checked> snake_case</label>
+        <label><input type="radio" name="transform" value="camelCase"> camelCase</label>
+      </fieldset>
+      <label>
+        Allowed pattern:
+        <input
+          type="text"
+          id="pattern-input"
+          class="pattern-input"
+          value="^[A-Za-z0-9_-]+$"
+          spellcheck="false"
+          autocomplete="off"
+        />
+      </label>
+      <label><input type="checkbox" id="debug-toggle" checked> Show debug info</label>
+      <button id="reset-all" type="button">Reset all</button>
+    </div>
+    <div class="reveal-row">
+      <button id="reveal-rejected" type="button">Reveal rejected options</button>
+    </div>
+  </header>
+  <section class="featured-section" id="featured"></section>
+  <main id="cards"></main>
+  <div class="config-summary">
+    <strong>CONFIG</strong> — forbidden whole-name (case-insensitive): GET, POST, PUT, DELETE, UPDATE, LIST &nbsp;|&nbsp; debounce: 400ms
+  </div>
+
+  <script src="auto-api-name-demo.js"></script>
+</body>
+</html>
