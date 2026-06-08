@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-06-03
+
+- Publish Designers who ship; update Monotasker post for App Store launch.
+
 ## 2026-06-01
 
 - Fix NotePlan .md import; publish Monotasker post and refresh /now.
@@ -512,4 +516,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-06-03
+Last deployed on 2026-06-08
