@@ -35,7 +35,7 @@ Options -Indexes
     Header always set X-Content-Type-Options "nosniff"
     
     # Prevent clickjacking attacks
-    Header always set X-Frame-Options "DENY"
+    Header always set X-Frame-Options "SAMEORIGIN"
     
     # Enable HSTS (only on HTTPS connections)
     Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=HTTPS
@@ -49,7 +49,7 @@ Options -Indexes
     # Content Security Policy — script only from same origin (gallery JS is /assets/js/color-gallery-embed.js).
     # style-src needs 'unsafe-inline' so the color gallery works: per-preview tokens use style="" on .theme-root
     # and the runtime sets styles via setAttribute (static HTML has no server nonce/hashes). Dev server omits CSP.
-    Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none';"
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'self';"
 </IfModule>
 
 # Enable compression (if mod_deflate is available)
