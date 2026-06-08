@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-06-08
+
+- Add prototype post with iframe demo and SMS portfolio video.
+
 ## 2026-06-03
 
 - Publish Designers who ship; update Monotasker post for App Store launch.
