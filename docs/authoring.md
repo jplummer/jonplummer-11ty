@@ -161,7 +161,7 @@ This is a one-time setup. After installation, you can convert PDFs as needed.
      ```bash
      pnpm run convert-presentation "path/to/deck.pdf" "path/to/deck.pptx" [year/month]
      ```
-     One-time: `pip install -r scripts/content/requirements-deck.txt` and `python3` on your PATH. See [commands.md § PDF page conversion](commands.md#-pdf-page-conversion) for full detail.
+     One-time: `pnpm run setup-deck-python` (project venv with `python-pptx`; avoids Homebrew PEP 668 pip errors). See [commands.md § PDF page conversion](commands.md#-pdf-page-conversion) for full detail.
    - **PDF + your own notes file:** `pnpm run convert-pdf-with-notes "file.pdf" "notes.txt" [year/month]`
    - **PDF only (placeholder captions):** `pnpm run convert-pdf "path/to/file.pdf" [year/month]`
 

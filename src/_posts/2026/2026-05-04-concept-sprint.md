@@ -9,8 +9,6 @@ ogImage: /assets/images/og/2026-05-04-concept-sprint.png
 ---
 A Concept Sprint is a short, usually week-long, in-person exercise meant to accelerate high-level exploration of a new area of development, a significant problem, or a strategic initiative. A blended team – product, design, architecture, engineering, marketing, and any truly relevant business stakeholders – generates a high-value product concept, validates it with live customers, and produces a pitch covering the problem, benefit, concept, and rough cost and timeframe to deliver a first version. The team works through seven phases led by a facilitator, book-ended by a welcome and a wrap-up. Below are my general instructions and guidelines, arrived at after running several of these at multiple companies.
 
----
-
 ## Phases
 
 ### a. Welcome
@@ -22,8 +20,6 @@ The Welcome is a short orientation for participants before Immersion begins. The
 - **Assumptions and known constraints:** Anything the group is taking as given before we start — for example, a strategic directive to explore a particular technology, a market segment we are or aren't targeting, or a business constraint that will shape what's in scope.
 
 The Welcome should be brief. Participants are eager to get into the material, and the most important orientation happens through doing, not explaining. Get through it crisply and move into Immersion.
-
----
 
 ### 1. Immersion
 
@@ -42,8 +38,6 @@ Remind participants to capture problems and benefits on individual sticky notes 
 
 Scheduling this phase is critical. Speakers must be tightly scheduled, arrive on time, and deliver informationally-dense presentations. This phase opens the sprint; wasted time here delays everything that follows.
 
----
-
 ### 2. Problem review and categorization
 
 Supplies: sticky notes and fine-point markers, whiteboard and markers
@@ -58,8 +52,6 @@ The group then evaluates each cluster on two dimensions:
 2. How **painful** it is (expensive, maddening, intractable – is it something customers badly want solved?). These are the group's best estimates, not data points; the goal is to make a collective judgment rather than wait for certainty that doesn't exist yet.
 
 Often the group will converge naturally on the most promising clusters. When they don't, a dot-voting exercise can surface what the group is collectively thinking and narrow the scope of debate.
-
----
 
 ### 3. Benefit generation and categorization
 
@@ -79,8 +71,6 @@ Problems and benefits are evaluated separately because the relationship between 
 
 Use dot voting to help the team converge if needed.
 
----
-
 ### 4. Concept generation and selection
 
 Supplies: fine-point markers, letter paper, whiteboard and markers, computers and a good internet connection
@@ -97,8 +87,6 @@ A second sketching pass is sometimes useful, for example if concepts weren't spe
 
 Blending or combining elements from multiple sketches is encouraged, but the group must land on a single coherent concept before moving to the build phase. Use dot voting to help the team converge if needed.
 
----
-
 ### 5. Building and customer validation prep
 
 Supplies: computers and a good internet connection
@@ -114,8 +102,6 @@ As with concept sketches, we must resist the temptation to be abstract. A demo t
 Once the demo is in good enough shape, the group starts validation prep. This means aligning on the key questions the team hopes to answer during customer sessions and preparing a loose interview guide to keep conversations productive. Roles for the sessions should be assigned: who presents the context, who runs the demo, who asks questions, who takes notes. (Building can continue until the arrival of the first customer.)
 
 Building and validation prep together constitute the longest sustained work period of the sprint. The facilitator's job during this phase is to protect the time, keep the group focused on what is essential rather than merely nice to have, and ensure the group arrives at customer validation with something they feel confident showing.
-
----
 
 ### 6a. Customer validation
 
@@ -142,8 +128,6 @@ This feedback can be used to refine the demo between sessions, and it will be us
 
 Scheduling this phase is critical; see Notes about scheduling below.
 
----
-
 ### 6b. Implementation planning
 
 Supplies: whiteboard and markers, computers and a good internet connection, and a location out of earshot of the validation team so as not to disturb the customers
@@ -161,8 +145,6 @@ The central questions are:
 This is not a sprint plan or a commitment. It is a first-order answer to "could we do this, and roughly how" — the kind of grounded estimate that gives leadership something real to weigh when they see the pitch. T-shirt sizes and a sequence/schedule sketch on a whiteboard are fine. The goal is to arrive at pitch preparation with enough implementation shape that the concept doesn't feel like a dream, and enough honesty about risks and unknowns that it doesn't feel like a fantasy.
 
 Note: this process was designed before AI-assisted coding dramatically changed what a small team can build in a short time. The implementation planning conversation should take that into account; what once required a large team or a long runway may no longer, though new constraints may emerge in their place.
-
----
 
 ### 7. Pitch preparation
 
@@ -182,17 +164,13 @@ The pitch should be honest about what was validated and what remains uncertain. 
 
 The sprint team should resist the urge to over-produce the pitch deck. The demo and the customer reactions are the most compelling material; the slides exist to set them up.
 
----
-
-### z. Wrap-up
+### 8. Wrap-up
 
 Regardless of how the validation went, the team has accomplished a remarkable amount in a short time and should be thanked genuinely for their effort and creativity.
 
 The Wrap-up is also the moment to align on next steps: who will be in the pitch, when it will happen, and who owns any loose ends. These don't need to be resolved in the room, but they should be named and assigned before people scatter.
 
 A retrospective can happen another time if needed. The goal here is to close the week with gratitude and a sense of accomplishment, not to extend it.
-
----
 
 ## Notes about scheduling
 
@@ -205,8 +183,6 @@ A concept sprint is logistically demanding and the schedule is unforgiving. Two 
 **Immersion opens the sprint.** Speakers must be tightly scheduled, arrive on time, and deliver informationally-dense presentations. Wasted time in Immersion is wasted time everywhere downstream, but don't shortchange it; insufficiently-immersed participants generate fewer, less-powerful ideas.
 
 **Participants need time each day to stay connected to the rest of the organization.** Build predictable breaks into the daily schedule for people to check messages and handle urgent matters; it protects their focus the rest of the day.
-
----
 
 ## Ground rules
 

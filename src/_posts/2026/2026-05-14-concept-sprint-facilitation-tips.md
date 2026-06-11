@@ -9,8 +9,6 @@ ogImage: /assets/images/og/2026-05-14-concept-sprint-facilitation-tips.png
 ---
 These notes assume you've read the process documentation. What follows is the harder-to-document stuff: the principles, the traps, and the moves.
 
----
-
 ## The facilitator's role
 
 Your job is to be a warm, trusted guide with enough authority to keep things moving and enough energy to keep things active. You are not a neutral observer, not a drill sergeant. You are an interested participant who happens to be bringing the team to a happy destination.
@@ -25,8 +23,6 @@ A few principles worth internalizing before you walk in the door:
 6. Contribute where you can, but hold your ideas lightly. Never be so invested in your own ideas that you exert undue influence on any phase. Contribute where it helps: generating ideas, noticing problems, reframing benefits, demo prep, pitch prep, note-taking during validation, and synthesis afterward. Don't take on anything critical during the build phase — you'll have too much else to do.
 7. Let the schedule apply the pressure, not you. Name what needs to happen next and expect the group to participate.
 8. Celebrate little successes. The sprint has natural high points — a cluster that everyone recognizes, a concept that makes the room light up, a customer who gets visibly excited. Name these moments. Bring snacks.
-
----
 
 ## Immersion
 
@@ -45,8 +41,6 @@ Don't shortchange Immersion to save time. Under-immersed participants generate f
 
 _Participants should arrive at phase 2 with several customer problems already on stickies._
 
----
-
 ## Problems (Phase 2)
 
 Surface the full range of customer problems the group has noticed, cluster them into meaningful themes, and identify which clusters are most worth solving.
@@ -63,8 +57,6 @@ On scoring: the dimensions are _common_ (does it affect many customers, come up 
 
 _Carry the problem clusters forward into phase 3._
 
----
-
 ## Benefits (Phase 3)
 
 Ultimately the product will solve one or more problems by delivering a benefit. In this phase we are choosing the benefit to pursue.
@@ -80,8 +72,6 @@ Pitfalls to watch for:
 Problems and benefits are not one-to-one. A single problem may spawn many benefits; a single benefit may cover multiple problems. The latter is often especially attractive strategically — worth saying out loud when the group is close to a decision.
 
 _Carry the selected problem/benefit set forward as the brief for concept generation. Write it where everyone can see it._
-
----
 
 ## Concept Generation (Phase 4)
 
@@ -105,8 +95,6 @@ If the group starts re-litigating the problem/benefit choice after concept selec
 
 _Concept selection is where the sprint pivots from divergence to convergence._
 
----
-
 ## Building (Phase 5)
 
 Produce a demo that expresses the problem, the benefit, and the concept — real enough for a customer to react to honestly.
@@ -120,8 +108,6 @@ The most common build failure is a demo too long to fit a 30-minute customer ses
 Keep the session structure firmly in mind: problem expression/validation, benefit expression, concept demo, follow-up questions. All four must be ready before the first customer arrives.
 
 _The build phase ends when the demo is strong enough to show or we run out of time — not when it's perfect._
-
----
 
 ## Customer Validation (Phase 6a)
 
@@ -139,8 +125,6 @@ When a session is deflating, remind the team that a skeptical customer is valid 
 
 Sync with the implementation planning team whenever there's a long gap and at the end of the day. Often the people in 6b finish first and can rejoin the validation team. Before pitch prep begins, make sure both teams have presented their findings to each other.
 
----
-
 ## Implementation Planning (Phase 6b)
 
 Arrive at a credible, honest answer to "could we do this, and roughly how," enough for leadership to weigh, not enough to be mistaken for a commitment.
@@ -155,8 +139,6 @@ Pitfalls to watch for:
 - Forgetting existing capabilities. Ask explicitly: what do we already have that we can use or adapt? Existing platform capabilities, APIs, and infrastructure can dramatically accelerate delivery and change what belongs in the MVP.
 
 _This process predates AI-assisted coding. What once required a large team or long runway may no longer. Factor that in! It may shift scope, surface new constraints in place of old ones, or make a dependency diagram a better deliverable than a rough schedule._
-
----
 
 ## Pitch Preparation (Phase 7)
 

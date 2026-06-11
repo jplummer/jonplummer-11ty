@@ -13,6 +13,8 @@ Earlier this year I created a feature to help Invoca customers understand the bu
 
 This isn't a flex; if anything, it's becoming table-stakes for any product manager or designer.
 
+## The new table stakes
+
 The lines between product management, engineering, and design have been blurring for years. Who owns research? Who owns the customer problem? Who owns accessibility? Who owns measurement? AI design and development tooling has accelerated this trend past the point where anyone can ignore it. A PM who can write a working prototype in an afternoon changes what they need from a designer. An engineer who can generate UI variations in minutes changes what "handoff" means. A designer who can correct an accessibility problem in code and submit a pull request to put that into production has reduced the load on engineering. A designer who can solve a customer problem via a prototype that uses real data has made product management easier and provided more direction to engineering than a sheaf of pictures of interfaces ever could.
 
 If you stay in your lane you are now the bottleneck. This isn't bad news for designers; it's exciting to be able to do more, to bring concepts all the way up to the glass.
@@ -21,6 +23,8 @@ The best designers I've worked with were never purely visual thinkers. Many didn
 
 The closer you get to shipping, the better your design gets. You start making decisions with real consequences. You trip over edge cases earlier as you find the limits of the data available to you.
 
+## The blur
+
 The flip side is that the blur creates a challenge for design leaders. The jobs that matter most — raising the strategic value of design, keeping teams focused on actual customer needs, developing designer capability and integration — are all in flux at once as teams figure out how to work together anew.
 
 Getting your hands dirty with the new tools is critical for design leaders in this moment of upheaval. Design leaders once could champion established processes they learned earlier in their careers; these processes are being thoroughly upset now. You still have to establish standards, reassert the user's interests, and manage competing priorities, but the way the team will work is not yet established. A director who hasn't used these tools can't lead the conversation about them.
@@ -28,6 +32,8 @@ Getting your hands dirty with the new tools is critical for design leaders in th
 A PM with Figma Make might feel they don't need a designer to make something ready for engineers to chew on. An engineer with Claude Code might prefer to ship and measure in hopes that their idea about the customer problem was sound. A designer with Lovable might race on past the product manager and the engineer to put a prototype in customer hands. Any of these can move fast. Any of them can also skip right past the problem they were trying to solve. The tools accelerate both good judgment and bad — which is exactly why someone needs to stay oriented to what users actually need, and why that someone needs to be in the room, not waiting to be consulted.
 
 Designers can no longer be a translation layer between PM and engineering. A designer's knowledge of workflows, alternative controls, customer vocabulary, user attention management, and patterns from outside their industry is especially well-suited to offer useful new ideas to their organization. The pressure is on designers to explore and offer concepts that are more fully-realized, more directly testable, and more cognizant of the engineering environment than ever before.
+
+## The new designer imperative
 
 The result is a demand for designers that have more depth in areas adjacent to their traditional role, with more fluency in front-end development, data structures, customer development, metrics. There's more pressure to have *range*. A designer with range understands enough about product strategy and code to collaborate without translation – to drive the conversation rather than draft behind it. That's different from being asked to do everyone's job.
 

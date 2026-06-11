@@ -8,7 +8,7 @@
  *
  * Requires:
  *   - Poppler (brew install poppler)
- *   - Python 3 with python-pptx: pip install -r scripts/content/requirements-deck.txt
+ *   - Python 3 with python-pptx: pnpm run setup-deck-python (project venv; see docs/commands.md)
  */
 
 const { spawnSync } = require('child_process');
@@ -18,6 +18,7 @@ const path = require('path');
 
 const { checkPopplerInstalled, getPageCount, getDefaultDatePath } = require('../utils/pdf-utils');
 const { parseNotesFile } = require('../utils/portfolio-notes');
+const { resolveDeckPython, deckVenvExists, SETUP_HINT } = require('../utils/deck-python');
 
 const args = process.argv.slice(2);
 
@@ -58,15 +59,25 @@ const extractPy = path.join(__dirname, 'extract-pptx-notes.py');
 const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'portfolio-notes-'));
 const notesPath = path.join(tmpDir, 'notes.txt');
 
+const deckPython = resolveDeckPython();
+if (!deckVenvExists()) {
+  console.warn(
+    '\nNote: scripts/content/.venv/ not found; using system python3. On Homebrew Python, run:\n' +
+      SETUP_HINT,
+  );
+}
+
 let slideCountFromPptx = 0;
 try {
-  const py = spawnSync(
-    'python3',
-    [extractPy, pptxPath, '-o', notesPath],
-    { encoding: 'utf8' },
-  );
+  const py = spawnSync(deckPython, [extractPy, pptxPath, '-o', notesPath], {
+    encoding: 'utf8',
+  });
   if (py.status !== 0) {
-    console.error(py.stderr || py.stdout || 'python3 extract-pptx-notes failed');
+    const detail = py.stderr || py.stdout || 'extract-pptx-notes failed';
+    console.error(detail);
+    if (/python-pptx|ImportError|externally-managed-environment/i.test(detail)) {
+      console.error('\n' + SETUP_HINT);
+    }
     process.exit(py.status || 1);
   }
   slideCountFromPptx = parseNotesFile(notesPath).length;

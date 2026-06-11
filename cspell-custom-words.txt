@@ -22,12 +22,14 @@ IDSA
 Instagram
 Instructure
 Invoca
+Invocans
 Kagi
 Linksys
 Monotasker
 Qualtrics
 Readwise
 RISD
+Savioke
 Squarespace
 Velop
 WeMo
@@ -37,6 +39,7 @@ Yippy
 # Technical Terms & Acronyms
 agentic
 APCA
+DTMF
 DURSL
 Genchi
 genbutsu
@@ -63,13 +66,17 @@ microcredential
 Mbps
 mvps
 obligatoes
+popout
 roadmapping
+SDLC
 Storyboarding
 storyboarding
 VPAT
 WCAG
 wireflows
 wireframes
+WORFS
+writebacks
 WSIX
 
 # Proper Names (People)
@@ -169,6 +176,9 @@ Marchin
 Willison
 Jalkut
 Mitev
+Neeman
+Bouabdallah
+Rodenbeck
 
 # Other Valid Terms
 allyship

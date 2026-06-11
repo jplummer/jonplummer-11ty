@@ -6,7 +6,7 @@ Output format matches scripts/utils/portfolio-notes.js numbered mode:
   2:
   3: third slide notes
 
-Requires: pip install -r scripts/content/requirements-deck.txt
+Requires: pnpm run setup-deck-python (project venv with python-pptx)
 """
 
 from __future__ import annotations
@@ -19,7 +19,7 @@ try:
 except ImportError:
     print(
         'Error: python-pptx is not installed. Run:\n'
-        '  pip install -r scripts/content/requirements-deck.txt',
+        '  pnpm run setup-deck-python',
         file=sys.stderr,
     )
     sys.exit(1)

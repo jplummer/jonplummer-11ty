@@ -600,9 +600,10 @@ article:not(.link-item) section::after,
 main[data-tags*="page"]::after {
   content: "";
   display: block;
-  width: 0.5rem;
-  height: 0.5rem;
+  width: 0.625rem;
+  height: 0.625rem;
   background-color: var(--text-color-light);
+  border-radius: 2px;
   margin: var(--spacing-sm) 0 0 0;
 }
 

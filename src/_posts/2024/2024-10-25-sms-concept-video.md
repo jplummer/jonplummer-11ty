@@ -24,7 +24,7 @@ I made a video.
 I produced it solo in Final Cut Pro, combining screen recordings from my own phone, video clips from other tools, still assets from Figma, and library sound effects including DTMF tones to make the simulated experience feel as close to a real phone interaction as possible. After the demo, people were asking me how I "recorded all of that." Nobody asked how I constructed it. That reaction wasn't just a compliment to the production – it meant stakeholders had thinking of the experience as real, not a prototype of something that doesn't exist. The concept had landed.
 
 <video src="/assets/images/2024/10/cko-sms-concept-video-8.m4v" controls></video>
-*Demo video showing a web visitor navigating a site, dialing a presented number, following the IVR prompt to accept the SMS invitiation, having an SMS conversation, then being offered a priority number to dial to continue the transaction with a human agent. Throughout the experience their consumer profile is accrued and evaluatioed, and the conversion results are shown and associated with that record. Some of the experience is audio-only.*
+*Demo video showing a web visitor navigating a site, dialing a presented number, following the IVR prompt to accept the SMS invitation, having an SMS conversation, then being offered a priority number to dial to continue the transaction with a human agent. Throughout the experience their consumer profile is accrued and evaluated, and the conversion results are shown and associated with that record. Some of the experience is audio-only.*
 
 ## What the concept demonstrated
 

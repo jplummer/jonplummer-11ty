@@ -59,6 +59,7 @@ See [noteplan-import.md](noteplan-import.md) for complete workflow documentation
 
 - `pnpm run changelog` - Generate CHANGELOG.md from git history (auto: `deploy`)
 - `pnpm run convert-pdf` - Convert PDF pages to images for portfolio items
+- `pnpm run setup-deck-python` - One-time venv for `convert-presentation` (`python-pptx`; Homebrew-safe)
 - `pnpm run convert-presentation` - PDF + matching `.pptx` → images and markdown with speaker notes (see [PDF page conversion](#-pdf-page-conversion))
 - `pnpm run convert-pdf-with-notes` - PDF + hand-authored notes file → same output as above (notes not read from pptx)
 - `pnpm run generate-og-images` - Generate Open Graph images for posts and pages (auto: `deploy`, `dev`)
@@ -159,10 +160,12 @@ Notes file formats are documented in the script header in `scripts/content/conve
 **One-time setup (in addition to Poppler):**
 
 ```bash
-pip install -r scripts/content/requirements-deck.txt
+pnpm run setup-deck-python
 ```
 
-Requires `python3` on your `PATH` and the `extract-pptx-notes.py` helper (committed in `scripts/content/`).
+Creates `scripts/content/.venv/` with `python-pptx` (avoids Homebrew PEP 668 “externally-managed-environment” errors from bare `pip install`). Requires `python3` on your `PATH` for the initial venv bootstrap.
+
+Requires the `extract-pptx-notes.py` helper (committed in `scripts/content/`). `convert-presentation` uses the venv Python automatically when present.
 
 **Usage**
 

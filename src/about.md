@@ -13,19 +13,39 @@ I speak the languages of design, engineering, and business.
 
 That's been useful everywhere I've worked — but it matters most right now, when the most common mistake in AI product development is assuming that powerful models reduce the need for clear, coordinated interfaces. They don't. Agentic AI shifts complexity from direct manipulation toward understanding, verification, and correction. That demands interfaces that are simpler, not more elaborate, and experiences that work without training.
 
-I wrote about this in [Toward Coordinated Experience](https://jonplummer.com/2025/07/27/toward-coordinated-experience/), and it's the thread that runs through most of what I write here.
+I wrote about this in [Toward Coordinated Experience](https://jonplummer.com/2025/07/27/toward-coordinated-experience/), and it's the thread that runs through a lot of what I write here.
 
-By day I'm Director of User Experience at Invoca, leading a design team through an AI product transformation. Before that: Cayuse, Concentric Sky, and eleven years at Belkin, where I rose from Senior Designer to Senior Director and built the UX function for Linksys and Wemo from scratch. Along the way I picked up 20+ patents, an IDSA Silver award, and a lot of hard-won opinions about how design actually earns trust in engineering- and product-led organizations.
+Most recently I was Director of User Experience at Invoca, where I led a design team through an AI product transformation. Before that: Cayuse, Concentric Sky, and eleven years at Belkin, where I rose from Senior Designer to Senior Director and built the UX function for Linksys and Wemo from scratch. Along the way I picked up 20+ patents, an IDSA Silver award, and a lot of hard-won opinions about how design actually earns trust in engineering- and product-led organizations.
 
-My management style is Socratic. I give feedback by asking questions, help people arrive at answers themselves, and develop designers who can hold a point of view and defend it — not just execute one.
+I develop designers who can hold a point of view and defend it, not just execute one. I get there by asking them the questions they should be asking, helping them find their own way to an answer. But I'm not hands-off: when the situation calls for a direct read, I give one. I interpret, I instruct, I push back. The goal is people who can think well under pressure and make good calls without being managed through every decision.
 
-Outside work I'm a deep dabbler — jazz piano, 3D printing, amateur industrial design, light electronics, home improvement, vibe-coding, cooking. The common thread is making ideas tangible.
+Outside work I'm a deep dabbler — jazz piano, 3D printing and amateur industrial design, home improvement, vibe-coding, cooking. The common threads are improving what's before me and making ideas tangible. I keep my hands in the tools at work and at home so I can show people the ropes and learn along with them.
 
 I mentor at [Designed.org](https://designed.org) and [tupu.io](https://tupu.io). See more via [my LinkedIn profile](https://linkedin.com/in/jplummer) and message me there if you have something to say, or reach me at [jon@jonplummer.com](mailto:jon@jonplummer.com?Subject=I%20visited%20jonplummer.com/about).
 
 * * *
 
 ## Recommendations
+
+### **Brittany Choy**, Senior User Experience Designer, Invoca
+
+I worked as a UX Designer for Jon at Invoca, where I eventually grew to be a Sr. UX Designer under his attentive and caring leadership.
+
+Jon is a thoughtful, well-spoken, and patient design leader who was effective in promoting customer-forward thinking across the entire product team. He expertly navigated conversations with both engineering and product stakeholders when the user experience was in danger, all while remaining respectful and calm.
+
+Jon also consistently created a safe, constructive environment. Whether in team critique sessions or 1:1s, I felt comfortable sharing work in progress even when it was not yet polished, asking questions, and bringing up concerns. When providing feedback on our work, Jon always asked insightful questions that anchored our designs back to the customer goals and values we want to deliver. This helped keep the team focused on the "why" behind our work.
+
+In uncertain situations, whether navigating changing priorities or the rapidly evolving industry, Jon approached them with openness and curiosity. When AI tools became more common in design work, he always focused on how we could adopt them to improve our work rather than treating them as something to fear.
+
+In short, Jon expertly leads with confidence and compassion, and I always appreciated his genuine investment in both my career and personal growth. I would gladly work with Jon again.
+
+### **Jake Rowe**, Senior User Experience Designer, Invoca
+
+I had the pleasure of working under Jon for 4 years at Invoca. Jon is the type of leader who makes it effortless to follow. He was that rare type of leader who doesn’t have an ego and is genuinely invested and interested in the success of those under him. Jon makes it his business to always be available to bounce ideas off of, give feedback and direction on a project, or counsel on how best to navigate an interpersonal conflict with a teammate.
+
+Most notably, Jon has a way of effortlessly advocating for the best user experience simply by asking the right questions at the right time. He leads those involved in the conversation to make the key connections and decisions, leaving the discussion feeling empowered and advocating on behalf of the user. Jon always amazed me with the depth of his knowledge and insight. The Invoca product is extremely technical and vast, but somehow Jon always had suggestions, questions, and insights that were always on point.
+
+Jon is an amazing person and a joy to work with. He truly brings out the best in those around him. Jon is the type of design leader that any company would be lucky to have.
 
 ### **Suzanne Hopkins**, Director of Product Management, Cayuse
 

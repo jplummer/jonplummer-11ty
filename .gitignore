@@ -1,5 +1,6 @@
 # Node
 node_modules/
+.pnpm-store/
 *.log
 .pnpm-debug.log*
 
@@ -35,6 +36,9 @@ scripts/color-explore/output/
 
 # Font stack exploration (generated; see docs/font-stack-exploration.md)
 scripts/font-explore/output/
+
+# Portfolio deck conversion (python-pptx venv; pnpm run setup-deck-python)
+scripts/content/.venv/
 
 # Temporary files
 *.tmp
