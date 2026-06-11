@@ -3,6 +3,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 ## 2026-06-08
 
 - Add prototype post with iframe demo and SMS portfolio video.
+- Bump Eleventy to 3.1.6; allow same-origin iframe embeds for demos.
 
 ## 2026-06-03
 
@@ -520,4 +521,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-06-08
+Last deployed on 2026-06-11
