@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-06-11
+
+- Add new portfolio posts and presentation assets; update security dep
+
 ## 2026-06-08
 
 - Add prototype post with iframe demo and SMS portfolio video.
@@ -521,4 +525,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-06-11
+Last deployed on 2026-06-12
