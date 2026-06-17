@@ -18,6 +18,11 @@ function configurePassthrough(eleventyConfig) {
   // Copy static assets
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
 
+  // Exclude demo HTML files from Nunjucks — demos may contain JSX style={{ }}
+  // syntax that conflicts with the Nunjucks parser. Passthrough copy above still
+  // delivers them to _site/assets/demos/ as raw HTML.
+  eleventyConfig.ignores.add("src/assets/demos/**/*.html");
+
   // Copy .htaccess file for security
   eleventyConfig.addPassthroughCopy({ "src/.htaccess": ".htaccess" });
 

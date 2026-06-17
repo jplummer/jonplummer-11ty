@@ -38,6 +38,7 @@ Recommended process for deploying changes with an up-to-date changelog:
   - Runs: everything in `test fast` → `a11y`
 - `pnpm run test [type]` - Run a specific test type
 - `pnpm run lint:css` - Lint `src/**/*.css` with [Stylelint](https://stylelint.io) (same rules as `pnpm run test css`)
+- `pnpm run fix:markdown` - Auto-fix whitespace/formatting issues in markdown files (trailing spaces, missing newlines, blank lines around headings, etc.) — run this before `pnpm run test markdown` to clear nuisance failures
 - `pnpm run test [type] -- --format [format]` - Specify output format: `verbose` (default) or `build`
 
 ### 🪂 Deployment

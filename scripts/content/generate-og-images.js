@@ -366,7 +366,8 @@ async function generateOgImages(options = {}) {
 // CLI entry point
 async function main() {
   const force = process.argv.includes('--force');
-  await generateOgImages({ quiet: false, force });
+  const quiet = process.argv.includes('--quiet');
+  await generateOgImages({ quiet, force });
 }
 
 // Run if called directly

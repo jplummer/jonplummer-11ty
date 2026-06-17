@@ -46,7 +46,7 @@ Nowadays this presentation would be similar, but emphasize changes to the design
 
 <figure>
   <img src="/assets/images/2025/02/invoca-design-system-page-8.png" alt="invoca-design-system page 8">
-  <figcaption>Page 8: Here’s the thing. We’re here to serve our customers. Every scrap of effort in R&D ultimately is meant to improve the customer’s ability to accomplish something they need or forestall an interruption to that ability. The design system aims to take away some of our own toil so that we can be more generous with our time and attention and help those customers more. That is our job.</figcaption>
+  <figcaption>Page 8: Here’s the thing. We’re here to serve our customers. Every scrap of effort in R&amp;D ultimately is meant to improve the customer’s ability to accomplish something they need or forestall an interruption to that ability. The design system aims to take away some of our own toil so that we can be more generous with our time and attention and help those customers more. That is our job.</figcaption>
 </figure>
 
 <figure>
