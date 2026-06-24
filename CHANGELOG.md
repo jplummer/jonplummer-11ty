@@ -1,5 +1,10 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-06-17
+
+- Add new posts and build improvements; fix demo HTML passthrough
+- Update dependencies: markdown-it, js-yaml, puppeteer, stylelint, and others
+
 ## 2026-06-11
 
 - Add new portfolio posts and presentation assets; update security dep
@@ -525,4 +530,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-06-16
+Last deployed on 2026-06-24
