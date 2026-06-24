@@ -76,6 +76,7 @@ WCAG
 wireflows
 wireframes
 WORFS
+writeback
 writebacks
 WSIX
 
@@ -91,6 +92,7 @@ Bryanne
 Bunyi
 Cagan
 Chenxin
+Choy
 Cotterill
 Crockford
 Crumlish
@@ -199,6 +201,7 @@ explainability
 feelsgoodman
 fingerstick
 fingersticks
+gapless
 hackathon
 handwaving
 hintable
@@ -206,11 +209,13 @@ honeydo
 informationally
 inspectable
 interoperation
-lowball
+janky
 kaizen
+lowball
 mentee
 mentees
 microinteractive
+microinteraction
 monitorable
 mori
 narratively
@@ -243,6 +248,7 @@ strat
 subgoals
 touchpoints
 threeish
+Traversability
 ultramarathoners
 underdelivering
 undoable
