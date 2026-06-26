@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-06-24
+
+- Update quality moves post wording
+
 ## 2026-06-17
 
 - Add new posts and build improvements; fix demo HTML passthrough
@@ -530,4 +534,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-06-24
+Last deployed on 2026-06-26
