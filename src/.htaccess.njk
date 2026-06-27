@@ -57,6 +57,11 @@ Options -Indexes
     AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript
 </IfModule>
 
+# Set MIME types for formats Apache may not know
+<IfModule mod_mime.c>
+    AddType video/mp4 .m4v .mp4
+</IfModule>
+
 # Set cache headers (if mod_expires is available)
 <IfModule mod_expires.c>
     ExpiresActive On

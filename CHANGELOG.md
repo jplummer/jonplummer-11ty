@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-06-26
+
+- Orchestrate build with pre/post test pipeline
+
 ## 2026-06-24
 
 - Update quality moves post wording
@@ -534,4 +538,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-06-26
+Last deployed on 2026-06-27
