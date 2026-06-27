@@ -44,9 +44,8 @@ Recommended process for deploying changes with an up-to-date changelog:
 ### 🪂 Deployment
 
 - `pnpm run deploy` - Deploy site to host via rsync
-  - Runs: `changelog` → `generate-og-images` → `test markdown` → `test frontmatter` → `build` → `test og-images` → rsync → IndexNow
+  - Runs: `changelog` → `build` (source checks + OG images + Eleventy + output checks) → rsync → IndexNow
 - `pnpm run deploy --dry-run` - Test deployment without actually deploying (runs all checks and shows what would be synced)
-- `pnpm run deploy --skip-checks` - Deploy without running validation checks (not recommended)
 
 ### 🪶 Content Authoring
 
@@ -79,8 +78,7 @@ See [tests.md](tests.md) for detailed test documentation.
 ### 🪂 Deployment
 
 - `pnpm run deploy` - Deploy site via rsync (simplified script)
-- `pnpm run deploy --dry-run` - Test deployment without actually deploying. Runs all validation checks, generates OG images, and shows what would be synced via rsync's dry-run mode.
-- `pnpm run deploy --skip-checks` - Deploy without running validation checks (not recommended)
+- `pnpm run deploy --dry-run` - Test deployment without actually deploying. Runs all checks and shows what would be synced via rsync's dry-run mode.
 
 Prior complex deployment scripts were moved to `scripts/deploy/backup/`. The current script shows rsync's native output and handles errors simply.
 
@@ -89,13 +87,10 @@ Prior complex deployment scripts were moved to `scripts/deploy/backup/`. The cur
 The deploy script performs these steps in order:
 
 1. **Regenerates changelog** from git history
-2. **Generates OG images** for any missing/outdated images (before build) - skipped with `--skip-checks`
-3. **Runs pre-deploy validation** (`test markdown`, `test frontmatter`) on source files - skipped with `--skip-checks`
-4. **Builds the site** once (includes changelog + OG image frontmatter updates)
-5. **Runs post-build validation** (`test og-images`) on built HTML - skipped with `--skip-checks`
-6. **Deploys via rsync** - uses `--dry-run` flag when `--dry-run` option is used
-7. **Submits IndexNow** notification for search engine indexing - skipped with `--dry-run`
-8. **Commits and pushes changelog** if it was updated - skipped with `--dry-run`
+2. **Builds the site** via `pnpm run build` — runs all source checks, generates OG images, runs Eleventy, then runs all output checks
+3. **Deploys via rsync** - uses `--dry-run` flag when `--dry-run` option is used
+4. **Submits IndexNow** notification for search engine indexing - skipped with `--dry-run`
+5. **Commits and pushes changelog** if it was updated - skipped with `--dry-run`
 
 **Note:** Links from NotePlan should be imported *before* committing (`pnpm run import-links`), not during deployment. This lets you review and test links locally before they go live.
 

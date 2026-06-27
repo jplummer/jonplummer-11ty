@@ -12,7 +12,6 @@
  * - .env file with DEPLOY_HOST, DEPLOY_USERNAME, DEPLOY_REMOTE_PATH
  * 
  * Options:
- * - --skip-checks: Skip validation checks (not recommended)
  * - --dry-run: Run all checks and show what would be deployed, but don't actually deploy
  */
 
@@ -264,13 +263,11 @@ async function deploy(config, siteDomain, dryRun) {
 // Main async function to support await
 (async () => {
   // Check for command-line flags
-  const skipChecks = process.argv.includes('--skip-checks');
   const dryRun = process.argv.includes('--dry-run');
 
   // Debug: Log received arguments (helpful for troubleshooting)
   if (process.env.DEBUG_DEPLOY) {
     console.log('Debug: process.argv =', process.argv);
-    console.log('Debug: skipChecks =', skipChecks);
     console.log('Debug: dryRun =', dryRun);
     console.log('');
   }
@@ -294,12 +291,6 @@ async function deploy(config, siteDomain, dryRun) {
 
   // Get public site domain for final message (not SSH hostname)
   let siteDomain = process.env.SITE_DOMAIN || 'jonplummer.com';
-
-  // Check if _site directory exists
-  if (!fs.existsSync('./_site')) {
-    console.error('❌ _site directory not found. Please run "pnpm run build" first.');
-    process.exit(1);
-  }
 
   // Regenerate changelog before deployment
   let changelogChanged = false;
@@ -335,133 +326,12 @@ async function deploy(config, siteDomain, dryRun) {
     changelogChanged = false;
   }
 
-  // Generate OG images before deploy (incremental - only generates what's needed)
-  let ogResult = null;
-  if (!skipChecks) {
-    // Show spinner while generating OG images
-    let spinnerInterval = null;
-    let spinnerFrame = 0;
-    const spinnerMessage = 'Generating OG images...';
-    
-    spinnerInterval = setInterval(() => {
-      const spinner = SPINNER_FRAMES[spinnerFrame];
-      process.stdout.write(`\r${spinner} 🖼️  ${spinnerMessage}`);
-      spinnerFrame = (spinnerFrame + 1) % SPINNER_FRAMES.length;
-    }, 100);
-    
-    try {
-      const { generateOgImages } = require('../content/generate-og-images');
-      ogResult = await generateOgImages({ quiet: true });
-      
-      // Stop spinner
-      if (spinnerInterval) {
-        clearInterval(spinnerInterval);
-        spinnerInterval = null;
-      }
-      process.stdout.write('\r' + ' '.repeat(50) + '\r');
-      
-      // Format result in compact test style
-      const filesChecked = ogResult.filesChecked || 0;
-      const filesUpdated = ogResult.filesUpdated || 0;
-      const unchanged = filesChecked - filesUpdated - (ogResult.errors || 0);
-      const summaryParts = [];
-      if (filesChecked > 0) {
-        summaryParts.push(`📄 ${filesChecked} ${filesChecked === 1 ? 'file' : 'files'} checked`);
-      }
-      if (unchanged > 0) {
-        summaryParts.push(`✅ ${unchanged} unchanged`);
-      }
-      if (ogResult.imagesGenerated > 0) {
-        summaryParts.push(`${ogResult.imagesGenerated} generated`);
-      }
-      if (ogResult.frontmatterOgImageSynced > 0) {
-        summaryParts.push(`ℹ️  ${ogResult.frontmatterOgImageSynced} front matter sync${ogResult.frontmatterOgImageSynced === 1 ? '' : 's'}`);
-      }
-      if (ogResult.errors > 0) {
-        summaryParts.push(`❌ ${ogResult.errors} error${ogResult.errors === 1 ? '' : 's'}`);
-      }
-
-      const resultIcon = ogResult.errors > 0 ? '❌' : '✅';
-      console.log(`${resultIcon} 🖼️  OG Images: ${summaryParts.join(', ')}\n`);
-
-      if (ogResult.frontmatterOgImageSyncedFiles && ogResult.frontmatterOgImageSyncedFiles.length > 0) {
-        ogResult.frontmatterOgImageSyncedFiles.forEach((file) => {
-          console.log(`  ℹ️  Filled in ogImage in front matter (PNG already existed): ${file}`);
-        });
-        console.log('');
-      }
-    } catch (error) {
-      // Stop spinner on error
-      if (spinnerInterval) {
-        clearInterval(spinnerInterval);
-        spinnerInterval = null;
-      }
-      process.stdout.write('\r' + ' '.repeat(50) + '\r');
-      console.log('❌ 🖼️  OG Images: generation failed');
-      if (error.message) {
-        console.error(`   ${error.message}\n`);
-      }
-      process.exit(1);
-    }
-  }
-
-  // Pre-deploy validation checks on source files (before build to catch errors early)
-  if (!skipChecks) {
-    try {
-      // Source file validations (don't need _site/)
-      await runWithSpinner('pnpm run test markdown --silent', 'Running pre-deploy validation (markdown)...', { showOutput: true, shell: true });
-      await runWithSpinner('pnpm run test frontmatter --silent', 'Running pre-deploy validation (frontmatter)...', { showOutput: true, shell: true });
-    } catch (error) {
-      console.log('❌ 🔍 Validation: failed');
-      console.error('   To skip checks (not recommended): pnpm run deploy --skip-checks\n');
-      process.exit(1);
-    }
-  }
-
-  // Build site once (includes changelog + any OG image frontmatter updates)
-  // Determine rebuild reason based on what actually changed
-  let rebuildReason = 'rebuilding';
-  const frontmatterUpdated = ogResult && ogResult.frontmatterUpdated;
-  if (changelogChanged && frontmatterUpdated) {
-    rebuildReason = 'changelog and frontmatter updated';
-  } else if (changelogChanged) {
-    rebuildReason = 'changelog updated';
-  } else if (frontmatterUpdated) {
-    rebuildReason = 'frontmatter updated';
-  }
+  // Build site (source checks, OG images, Eleventy, output checks)
   try {
-    // Use shell: true and pass as single string to handle command properly
-    await runWithSpinner('pnpm run build -- --quiet', `Building site (${rebuildReason})...`, { shell: true, showOutput: false });
-    console.log('✅ 🏗️  Build: completed\n');
-  } catch (error) {
-    console.log('❌ 🏗️  Build: failed');
-    // Show the actual build error by running build again with output visible
-    console.error('\n   Running build to show error details:\n');
-    try {
-      const { execSync } = require('child_process');
-      execSync('pnpm run build -- --quiet', { stdio: 'inherit', shell: true });
-    } catch (buildError) {
-      // Build error already shown via stdio: 'inherit'
-      // Exit code will be non-zero, which is expected
-    }
-    console.error('\n   Aborting deployment.\n');
+    execSync('pnpm run build', { stdio: 'inherit', shell: true });
+  } catch {
+    console.error('\n❌ 🏗️  Build failed. Aborting deployment.\n');
     process.exit(1);
-  }
-
-  // Post-build validation checks (need _site/)
-  if (!skipChecks) {
-    try {
-      // OG images validation (needs _site/ to check built pages)
-      await runWithSpinner('pnpm run test og-images --silent', 'Running post-build validation (og-images)...', { showOutput: true, shell: true });
-      
-      console.log('✅ 🔍 Validation: all checks passed\n');
-    } catch (error) {
-      console.log('❌ 🔍 Validation: failed');
-      console.error('   To skip checks (not recommended): pnpm run deploy --skip-checks\n');
-      process.exit(1);
-    }
-  } else {
-    console.log('⚠️  🔍 Validation: skipped (--skip-checks flag used)\n');
   }
 
   // Now run the actual deployment
