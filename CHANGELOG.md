@@ -3,6 +3,8 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 ## 2026-06-26
 
 - Orchestrate build with pre/post test pipeline
+- Delegate build tests to build.js, remove --skip-checks
+- Add Monotasker portfolio post, MIME types, build pipeline docs
 
 ## 2026-06-24
 
@@ -538,4 +540,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-06-27
+Last deployed on 2026-06-29
