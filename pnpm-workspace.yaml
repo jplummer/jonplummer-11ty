@@ -2,6 +2,11 @@ allowBuilds:
   puppeteer: true
   sharp: true
 
+minimumReleaseAgeExclude:
+  - markdown-it@14.1.2
+  - js-yaml@3.15.0
+  - js-yaml@4.1.2
+
 onlyBuiltDependencies:
   - puppeteer
 
@@ -10,6 +15,9 @@ overrides:
   form-data@<2.5.4: '>=2.5.4'
   jpeg-js@<0.4.0: '>=0.4.0'
   jpeg-js@<0.4.4: '>=0.4.4'
+  js-yaml@<3.15.0: ^3.15.0
+  js-yaml@>=4.0.0 <=4.1.1: ^4.1.2
+  markdown-it@<=14.1.1: ^14.1.2
   markdown-it@>=13.0.0 <14.1.1: '>=14.1.1'
   minimist@<0.2.1: '>=0.2.1'
   minimist@<0.2.4: '>=0.2.4'

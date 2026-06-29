@@ -53,7 +53,7 @@
     "markdownlint-cli2": "^0.22.1",
     "nunjucks": "^3.2.4",
     "puppeteer": "^24.43.1",
-    "stylelint": "^17.13.0",
+    "stylelint": "^17.14.0",
     "stylelint-config-standard": "^40.0.0"
   },
   "dependencies": {
