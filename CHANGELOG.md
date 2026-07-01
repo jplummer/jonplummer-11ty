@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-07-01
+
+- Add wisdom entry on VUCA and VUCA Prime
+
 ## 2026-06-29
 
 - Add post: The Agent Will Not Ask
