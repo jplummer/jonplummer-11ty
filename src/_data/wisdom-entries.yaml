@@ -5,6 +5,16 @@
 # Dates are used for RSS and sorting only; they are not shown on the site.
 
 entries:
+  - added: '2026-07-01'
+    tags:
+      - culture
+      - strategy
+    body: |-
+      VUCA and Vuca Prime
+      * combat Volatility with Vision – the ability to establish a stable idea of the compelling future
+      * combat Uncertainty with Understanding – the ability to gather diverse perspectives and seek root causes
+      * combat Complexity with Clarity – the ability to bring focus to what truly matters
+      * combat Ambiguity with Agility – the ability to make small investments and pivot quickly as you learn
   - added: '2026-03-29'
     tags:
       - planning
