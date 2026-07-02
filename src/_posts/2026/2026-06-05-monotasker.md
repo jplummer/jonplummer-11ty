@@ -45,7 +45,9 @@ A shuffle icon at the bottom of the card handles this. Tapping it visibly return
 
 ## How it was built
 
-I directed the development using Claude and Cursor rather than writing Swift myself. Working with the iOS Remiders service is tricky for novices like me. The combination of clear design intent and a coding agent doing the implementation made this app possible. Writing a polished iOS app from scratch with an object model I don't understand would have taken months and probably never shipped. With AI handling the Swift, I could stay at the level of product decisions. Importantly, I started from a fairly detailed spect that I had Claude co-write, interviewing me about my intent and concerns and poking holes in my thinking. We built up a fairly detailed behavioral spec before attempting to code anything so the full scope of the project could be understood.
+Importantly, I started from a detailed spec that I had Claude co-write, interviewing me about my intent and concerns and poking holes in my thinking. We built up the behavioral description before attempting to code anything so the full scope of the project could be understood.
+
+I directed the development using Claude and Cursor rather than writing Swift myself. Working with the iOS Reminders service is tricky even for experienced iOS developers. The combination of clear design intent and a coding agent doing the implementation made this app possible. Writing a polished iOS app from scratch with an object model I don't understand would have taken months and probably never shipped; with AI handling the Swift I could stay at the level of product decisions.
 
 This is the same approach I use when prototyping for professional work: I'm fluent enough in code to specify precisely what I want, steer direction, and catch errors, and it's helpful to have the agent asking me questions as we go. The judgment stays mine. The keystrokes don't have to.
 
