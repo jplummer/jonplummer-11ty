@@ -12,9 +12,9 @@
   Preview this template at: http://localhost:8080/ogimages/
   
   Structure:
-  - body: Fixed 1200x630px container with light gray background
+  - body: Fixed 1200x630px container with cool outer field
   - .og-content: White content area with 4rem padding
-  - .og-hgroup: Author name and "Today I Learned" tagline (both in link color)
+  - .og-hgroup: Author name (neutral) and "Today I Learned" tagline (muted)
   - .og-title: Post title (matches article h1 styling)
   - .og-description: Optional post description
   - .og-date: Optional formatted post date
@@ -24,6 +24,8 @@
   - description: Post description (optional)
   - date: Post date in ISO format (optional)
   - cssCustomProperties: Extracted :root CSS from main stylesheet
+  - productionFontFaces: @font-face rules with file:// URLs for Puppeteer
+  - lightThemeColorOverrides: Light halves of :root color tokens
 -#}
 <!DOCTYPE html>
 <html lang="en-US">
@@ -31,20 +33,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
+    /* Production @font-face (file:// URLs for Puppeteer) */
+    {{ productionFontFaces | safe }}
+
     /* CSS custom properties from main stylesheet */
     {{ cssCustomProperties | safe }}
     
-    /* Force light theme for OG images - ensures consistent appearance */
-    :root {
-      --text-color: #2a2a2a;
-      --text-color-light: #5a5a5a;
-      --background-color: #d3d8d2;
-      --content-background-color: #fff;
-      --link-color: #d63d36; /* darkened to meet WCAG AA 4.5:1 */
-      --link-hover-color: #b26205; /* darkened to meet WCAG AA 4.5:1 */
-      --link-visited-color: #5b4a3b;
-      --link-active-color: #0d703f;
-    }
+    /* Force light theme for OG images - light halves from jonplummer.css :root */
+    {{ lightThemeColorOverrides | safe }}
     
     * {
       box-sizing: border-box;
@@ -65,9 +61,9 @@
       font-family: var(--font-family);
       font-size: 1.5rem;
       line-height: var(--line-height);
-      letter-spacing: var(--letter-spacing-loose);
+      letter-spacing: var(--letter-spacing-normal);
       color: var(--text-color);
-      background-color: var(--background-color); /* Light gray bars at top/bottom */
+      background-color: var(--background-color);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -91,17 +87,19 @@
       flex-wrap: wrap;
     }
     
-    /* Author name styling (matches site header, uses div — not a heading since this is a screenshot target) */
+    /* Author name styling (matches site header) */
     .og-hgroup > div {
+      font-family: var(--font-family-display);
       font-size: 6rem;
       line-height: var(--line-height-3xl);
       font-weight: var(--font-weight-thin);
       letter-spacing: var(--letter-spacing-tight);
-      color: var(--link-color);
+      text-transform: uppercase;
+      color: var(--text-color);
     }
     
     .og-hgroup > div a {
-      color: var(--link-color) !important;
+      color: var(--text-color) !important;
       text-decoration: none;
     }
     
@@ -110,15 +108,16 @@
       font-size: 1.5rem;
       line-height: var(--line-height-xs);
       font-style: italic;
-      color: var(--link-color);
+      color: var(--text-color-light);
     }
     
     /* Post title (matches article h1 styling) */
     .og-title {
+      font-family: var(--font-family-display);
       font-size: 3.5rem;
       line-height: var(--line-height-2xl);
       font-weight: var(--font-weight-semibold);
-      letter-spacing: var(--letter-spacing-tight);
+      letter-spacing: var(--letter-spacing-normal);
       text-wrap: balance;
     }
     
@@ -131,7 +130,6 @@
     /* Post date */
     .og-date {
       font-size: 1.5rem;
-      font-style: italic;
     }
   </style>
 </head>
@@ -139,4 +137,3 @@
   {% include "og-image-body.njk" %}
 </body>
 </html>
-

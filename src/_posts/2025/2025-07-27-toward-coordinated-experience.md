@@ -3,7 +3,7 @@ title: "Toward coordinated experience: workflow and system design"
 layout: layouts/single_post.njk
 date: "2025-07-27T12:00:00-08:00"
 tags: post
-description: "We make workflow diagrams but don't distinguish between \"system advances you to the next step\" and \"system offers you the next step.\" This distinction matters for coordinated experience."
+description: We make workflow diagrams but don't distinguish between "system advances you to the next step" and "system offers you the next step." This distinction matters for coordinated experience.
 ogImage: /assets/images/og/2025-07-27-toward-coordinated-experience.png
 ---
 ## Background

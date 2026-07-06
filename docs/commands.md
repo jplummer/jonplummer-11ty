@@ -33,7 +33,7 @@ Recommended process for deploying changes with an up-to-date changelog:
 - `pnpm run test` - List available test types
 - `pnpm run validate` - Quick HTML validity check (shortcut for `pnpm run test html`)
 - `pnpm run test fast` - Run fast tests (excludes slow tests like a11y)
-  - Runs: `html` → `links` → `wisdom` → `internal-links` → `frontmatter` → `markdown` → `spell` → `seo` → `og-images` → `color-contrast` → `css` → `rss` → `portfolio-notes` → `indexnow`
+  - Runs: `html` → `links` → `wisdom` → `internal-links` → `frontmatter` → `markdown` → `spell` → `seo` → `og-images` → `color-contrast` → `css` → `rss` → `portfolio-notes` → `deploy-assets` → `indexnow`
 - `pnpm run test all` - Run all tests in sequence (includes slow tests)
   - Runs: everything in `test fast` → `a11y`
 - `pnpm run test [type]` - Run a specific test type

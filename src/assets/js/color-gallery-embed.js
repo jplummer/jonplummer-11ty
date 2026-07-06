@@ -125,6 +125,10 @@
     var darkEl = previews[1];
     var pre = section.querySelector('.dr-tokens-pre');
     if (!lightEl || !darkEl) return;
+    function setRevisionPlacementPreview(on) {
+      lightEl.classList.toggle('revision-placement-preview', on);
+      darkEl.classList.toggle('revision-placement-preview', on);
+    }
     function applyIdxDr(i) {
       var v = variants[i];
       if (!v) return;
@@ -133,6 +137,7 @@
       lightEl.dataset.originalStyle = v.lightStyle;
       darkEl.dataset.originalStyle = v.darkStyle;
       if (pre) pre.textContent = v.tokensText;
+      setRevisionPlacementPreview(v.presetKey === 'default');
       updateComboStatus(section, v);
     }
     var drSel = section.querySelector('[data-dr-variant-select]');

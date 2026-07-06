@@ -480,6 +480,59 @@
     .theme-root.home-preview a.sim-visited {
       color: var(--link-visited-color);
     }
+
+    /*
+      Site default: accent on links/controls only — neutral masthead, hybrid links,
+      neutral end token (never accent on decoration). Toggled when dr-combo selects default (site).
+    */
+    .theme-root.home-preview.revision-placement-preview {
+      --token-color: color-mix(in oklch, var(--text-color) 28%, var(--content-background-color));
+    }
+    .theme-root.home-preview.revision-placement-preview .jp-page hgroup h1,
+    .theme-root.home-preview.revision-placement-preview .jp-page hgroup h1 a,
+    .theme-root.home-preview.revision-placement-preview .jp-page hgroup h1 a:visited {
+      color: var(--text-color);
+      font-weight: var(--font-weight-semibold);
+    }
+    .theme-root.home-preview.revision-placement-preview .jp-page hgroup p {
+      color: var(--text-color-light);
+    }
+    /* Nav + pagination: accent at rest for :link and :visited */
+    .theme-root.home-preview.revision-placement-preview .jp-page > header nav a:any-link,
+    .theme-root.home-preview.revision-placement-preview .jp-page nav.pagination a:any-link {
+      color: var(--link-color);
+    }
+    .theme-root.home-preview.revision-placement-preview .jp-page > header nav a:any-link:is(:hover, :focus-visible),
+    .theme-root.home-preview.revision-placement-preview .jp-page nav.pagination a:any-link:is(:hover, :focus-visible) {
+      color: var(--link-hover-color);
+    }
+    .theme-root.home-preview.revision-placement-preview .jp-page hgroup h1 a:any-link {
+      color: var(--text-color);
+    }
+    .theme-root.home-preview.revision-placement-preview .jp-page hgroup h1 a:is(:hover, :focus-visible) {
+      color: var(--link-color);
+    }
+    .theme-root.home-preview.revision-placement-preview .jp-page article:not(.link-item) section a:not([class]):link {
+      color: var(--text-color);
+    }
+    .theme-root.home-preview.revision-placement-preview .jp-page article:not(.link-item) section a:not([class]):visited {
+      color: var(--link-visited-color);
+    }
+    .theme-root.home-preview.revision-placement-preview .jp-page article:not(.link-item) section a:not([class]):is(:hover, :focus-visible) {
+      color: var(--link-color);
+    }
+    .theme-root.home-preview.revision-placement-preview .jp-page article.link-item section a:link {
+      color: var(--link-color);
+    }
+    .theme-root.home-preview.revision-placement-preview .jp-page article.link-item section a:visited {
+      color: var(--link-visited-color);
+    }
+    .theme-root.home-preview.revision-placement-preview .jp-page article.link-item section a:is(:hover, :focus-visible) {
+      color: var(--link-color);
+    }
+    .theme-root.home-preview.revision-placement-preview .jp-page article:not(.link-item) section::after {
+      background-color: var(--token-color, var(--border-color));
+    }
 /* Live /color/ embed — flat flow, post-scale titles, minimal chrome */
 .color-gallery-embed.color-gallery-embed--site {
   padding: var(--spacing-sm) 0 var(--spacing-xl);

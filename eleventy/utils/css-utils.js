@@ -55,7 +55,70 @@ function extractCssCustomProperties() {
   return cssContent.substring(rootStart, braceEnd + 1);
 }
 
+/**
+ * Reads production @font-face rules for Puppeteer OG screenshots.
+ * Uses base64 data URLs — file:// src fails from setContent (about:blank origin).
+ *
+ * @returns {string} @font-face CSS (empty if fonts.css missing)
+ */
+function extractProductionFontFacesForInline() {
+  const fontsCssPath = path.join(process.cwd(), 'src', 'assets', 'css', 'fonts.css');
+  if (!fs.existsSync(fontsCssPath)) {
+    return '';
+  }
+
+  const fontDir = path.join(process.cwd(), 'src', 'assets', 'fonts', 'lab');
+  let css = fs.readFileSync(fontsCssPath, 'utf8');
+  css = css.replace(/url\("\/assets\/fonts\/lab\/([^"]+)"\)/g, (_match, filename) => {
+    const fontPath = path.join(fontDir, filename);
+    if (!fs.existsSync(fontPath)) {
+      throw new Error(`OG font file missing: ${fontPath}`);
+    }
+    const base64 = fs.readFileSync(fontPath).toString('base64');
+    return `url("data:font/woff2;base64,${base64}")`;
+  });
+  return css.trim();
+}
+
+const LIGHT_THEME_COLOR_VARS = [
+  'text-color',
+  'text-color-light',
+  'border-color',
+  'background-color',
+  'content-background-color',
+  'link-color',
+  'link-hover-color',
+  'link-visited-color',
+  'link-active-color'
+];
+
+/**
+ * Extracts light-scheme color values from :root `light-dark()` tokens for forced-light contexts (OG PNGs).
+ *
+ * @returns {string} `:root { … }` block with light-only values
+ */
+function extractLightThemeColorOverrides() {
+  const rootBlock = extractCssCustomProperties();
+  const lines = [];
+
+  for (const varName of LIGHT_THEME_COLOR_VARS) {
+    const re = new RegExp(`--${varName}:\\s*light-dark\\(\\s*([^,]+?)\\s*,\\s*[^)]+\\)`);
+    const match = rootBlock.match(re);
+    if (match) {
+      lines.push(`  --${varName}: ${match[1].trim()};`);
+    }
+  }
+
+  if (lines.length !== LIGHT_THEME_COLOR_VARS.length) {
+    throw new Error('Could not extract all light theme color overrides from :root');
+  }
+
+  return `:root {\n${lines.join('\n')}\n}`;
+}
+
 module.exports = {
-  extractCssCustomProperties
+  extractCssCustomProperties,
+  extractProductionFontFacesForInline,
+  extractLightThemeColorOverrides
 };
 

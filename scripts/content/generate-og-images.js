@@ -8,7 +8,7 @@ const { DateTime } = require('luxon');
 const { findMarkdownFiles, findFilesByExtension } = require('../utils/file-utils');
 const { parseFrontMatter, reconstructFile } = require('../utils/frontmatter-utils');
 const { isPost } = require('../utils/content-utils');
-const { extractCssCustomProperties } = require('../../eleventy/utils/css-utils');
+const { extractCssCustomProperties, extractProductionFontFacesForInline, extractLightThemeColorOverrides } = require('../../eleventy/utils/css-utils');
 const { generateOgImageFilename } = require('../utils/og-image-filename');
 
 // Configure Nunjucks environment
@@ -39,6 +39,23 @@ function generateDataHash(pageData) {
   return Buffer.from(dataString).toString('base64').substring(0, 16);
 }
 
+const OG_SHARED_DEPS = [
+  path.join(process.cwd(), 'src', '_includes', 'og-image.njk'),
+  path.join(process.cwd(), 'src', '_includes', 'og-image-body.njk'),
+  path.join(process.cwd(), 'src', 'assets', 'css', 'jonplummer.css'),
+  path.join(process.cwd(), 'src', 'assets', 'css', 'fonts.css'),
+  path.join(process.cwd(), 'eleventy', 'utils', 'css-utils.js')
+];
+
+function sharedOgDepsNewerThan(ogImageStat) {
+  return OG_SHARED_DEPS.some((depPath) => {
+    if (!fs.existsSync(depPath)) {
+      return false;
+    }
+    return fs.statSync(depPath).mtime > ogImageStat.mtime;
+  });
+}
+
 // Check if OG image needs regeneration
 function needsRegeneration(ogImagePath, pageData, filePath) {
   // If OG image doesn't exist, need to generate
@@ -52,6 +69,11 @@ function needsRegeneration(ogImagePath, pageData, filePath) {
   
   // If source file is newer than OG image, regenerate
   if (sourceFileStat.mtime > ogImageStat.mtime) {
+    return true;
+  }
+
+  // Template, shared partial, site CSS, or font/CSS utils changed
+  if (sharedOgDepsNewerThan(ogImageStat)) {
     return true;
   }
   
@@ -76,21 +98,30 @@ async function renderOgImageHtml(pageData) {
   
   // Extract CSS custom properties from main stylesheet
   const cssCustomProperties = extractCssCustomProperties();
-  
+  const productionFontFaces = extractProductionFontFacesForInline();
+  const lightThemeColorOverrides = extractLightThemeColorOverrides();
+
   return nunjucksEnv.renderString(template, {
     title: pageData.title,
     description: pageData.description || null,
     date: dateObj,
-    cssCustomProperties: cssCustomProperties
+    cssCustomProperties: cssCustomProperties,
+    productionFontFaces: productionFontFaces,
+    lightThemeColorOverrides: lightThemeColorOverrides
   });
 }
 
 // Generate OG image using Puppeteer
 async function generateOgImage(html, outputPath) {
-  const browser = await puppeteer.launch({
+  const launchOptions = {
     headless: true,
     args: ['--no-sandbox', '--disable-setuid-sandbox']
-  });
+  };
+  if (process.env.PUPPETEER_EXECUTABLE_PATH) {
+    launchOptions.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
+  }
+
+  const browser = await puppeteer.launch(launchOptions);
   
   try {
     const page = await browser.newPage();
@@ -101,11 +132,22 @@ async function generateOgImage(html, outputPath) {
     });
     
     await page.setContent(html, {
-      waitUntil: 'networkidle0'
+      waitUntil: 'domcontentloaded'
     });
-    
-    // Wait a bit for fonts to render
-    await new Promise(resolve => setTimeout(resolve, 500));
+
+    const fontsReady = await page.evaluate(async () => {
+      await document.fonts.ready;
+      return {
+        display: document.fonts.check('600 3.5rem "Big Shoulders"'),
+        body: document.fonts.check('1.5rem "Public Sans"')
+      };
+    });
+
+    if (!fontsReady.display || !fontsReady.body) {
+      throw new Error(
+        `OG webfonts not loaded (Big Shoulders: ${fontsReady.display}, Public Sans: ${fontsReady.body})`
+      );
+    }
     
     await page.screenshot({
       path: outputPath,
@@ -206,15 +248,20 @@ async function processFile(filePath, options = {}) {
   // Generate image
   await generateOgImage(html, ogImagePath);
   
-  // Update frontmatter
-  frontMatter.ogImage = ogImageUrl;
-  const newContent = reconstructFile(content, frontMatter, body);
-  fs.writeFileSync(filePath, newContent, 'utf8');
+  // Update frontmatter only when ogImage path changes (avoids dev watch full rebuilds on PNG-only regen)
+  const needsFrontmatterWrite =
+    !frontMatter.ogImage || frontMatter.ogImage !== ogImageUrl;
+
+  if (needsFrontmatterWrite) {
+    frontMatter.ogImage = ogImageUrl;
+    const newContent = reconstructFile(content, frontMatter, body);
+    fs.writeFileSync(filePath, newContent, 'utf8');
+  }
   
   return {
     updated: true,
     imageGenerated: true,
-    frontmatterUpdated: true,
+    frontmatterUpdated: needsFrontmatterWrite,
     frontmatterOgImageSynced: false,
     filePath: filePath
   };

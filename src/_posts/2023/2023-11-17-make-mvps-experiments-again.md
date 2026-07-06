@@ -3,7 +3,7 @@ title: Make MVPs experiments again, not just minimum features
 layout: layouts/single_post.njk
 date: "2023-11-17T12:00:00-08:00"
 tags: post
-description: "There seems to be broad agreement that MVP should serve a philosophy of experimentation and hypothesis testing. An MVP should be an experiment, not just a minimum feature set."
+description: There seems to be broad agreement that MVP should serve a philosophy of experimentation and hypothesis testing. An MVP should be an experiment, not just a minimum feature set.
 ogImage: /assets/images/og/2023-11-17-make-mvps-experiments-again.png
 ---
 ## Background

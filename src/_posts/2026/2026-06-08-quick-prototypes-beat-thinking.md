@@ -24,12 +24,12 @@ Building a dozen working variants took less time than the initial team discussio
 
 Try typing in a Display Name on a few cards. Touch the transform radio buttons. Click "Reveal rejected options" to see the full set I generated before narrowing down. (There are some ideas in there that are only obviously bad in retrospect.)
 
-<p class="post-demo-popout"><a href="/assets/demos/auto-api-name/" target="_blank" rel="noopener">see demo in a new tab</a></p>
+<p class="post-demo-popout"><a href="/assets/demos/auto-api-name/index.html" target="_blank" rel="noopener">see demo in a new tab</a></p>
 
 <div class="post-demo-embed">
   <iframe
     class="post-demo-embed-frame"
-    src="/assets/demos/auto-api-name/"
+    src="/assets/demos/auto-api-name/index.html"
     title="Auto API name behavior test bed — twelve field-sync behaviors plus a favorite"
     loading="lazy"
   ></iframe>

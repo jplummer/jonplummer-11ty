@@ -93,7 +93,7 @@ const MODERN_FONT_STACKS = [
   }
 ];
 
-/** Matches `src/assets/css/jonplummer.css` `--font-family` (system-ui stack). */
+/** Installed stack closest to pre–Public Sans production (system UI). Live body is exploratory `public-sans`. */
 const SITE_DEFAULT_STACK_ID = 'system-ui';
 
 module.exports = {

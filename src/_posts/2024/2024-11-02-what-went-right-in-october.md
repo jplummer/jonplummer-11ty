@@ -1,5 +1,5 @@
 ---
-title: "What went right in October 2024?"
+title: What went right in October 2024?
 layout: layouts/single_post.njk
 date: "2024-11-02T12:00:00-08:00"
 tags: post

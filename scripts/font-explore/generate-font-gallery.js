@@ -15,6 +15,11 @@
 const fs = require('fs');
 const path = require('path');
 const { MODERN_FONT_STACKS, SITE_DEFAULT_STACK_ID } = require('./modern-font-stacks.js');
+const {
+  EXPLORATORY_FONT_STACKS,
+  LAB_DEFAULT_HEADING_STACK_ID,
+  LAB_DEFAULT_BODY_STACK_ID
+} = require('./exploratory-font-stacks.js');
 const { formatFontLabPasteCss } = require('./font-lab-paste-css.js');
 
 const OUT_DIR = path.join(__dirname, 'output');
@@ -40,22 +45,33 @@ function readScopedCss() {
   return fs.readFileSync(FONT_LAB_SCOPED_CSS, 'utf8');
 }
 
-/** Initial heading stack (body select defaults to “Same as headings”). */
-const DEFAULT_HEADING_STACK_ID = SITE_DEFAULT_STACK_ID;
+/** Initial heading stack on /type/ (production site default remains system-ui). */
+const DEFAULT_HEADING_STACK_ID = LAB_DEFAULT_HEADING_STACK_ID;
 
-/** Sentinel `<option value>`: body text uses the heading stack until a concrete stack is chosen. */
-const BODY_SAME_AS_HEADINGS = 'same-as-headings';
-
-function escapeHtml(text) {
-  return String(text)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+function labStackRecords() {
+  const installed = MODERN_FONT_STACKS.map((s) => ({
+    id: s.id,
+    name: s.name,
+    family: s.family,
+    group: 'installed',
+    headingScope: 'all-headings',
+    webFont: false,
+    bodyEligible: true
+  }));
+  const exploratory = EXPLORATORY_FONT_STACKS.map((s) => ({
+    id: s.id,
+    name: s.name,
+    family: s.family,
+    group: 'exploratory',
+    headingScope: s.headingScope || 'all-headings',
+    webFont: true,
+    bodyEligible: s.bodyEligible !== false
+  }));
+  return [...installed, ...exploratory];
 }
 
-function stackById(id) {
-  return MODERN_FONT_STACKS.find((s) => s.id === id);
+function stackById(id, stacks) {
+  return stacks.find((s) => s.id === id);
 }
 
 /**
@@ -127,11 +143,66 @@ function siteHomePreviewFragment({
       </div>`;
 }
 
-function renderSelectOptions(selectedId) {
-  return MODERN_FONT_STACKS.map((s) => {
-    const sel = s.id === selectedId ? ' selected' : '';
-    return `    <option value="${escapeHtml(s.id)}"${sel}>${escapeHtml(s.name)}</option>`;
-  }).join('\n');
+/** Sentinel `<option value>`: body text uses the heading stack until a concrete stack is chosen. */
+const BODY_SAME_AS_HEADINGS = 'same-as-headings';
+
+function escapeHtml(text) {
+  return String(text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function renderStackOption(stack, selectedId) {
+  const sel = stack.id === selectedId ? ' selected' : '';
+  return `    <option value="${escapeHtml(stack.id)}"${sel}>${escapeHtml(stack.name)}</option>`;
+}
+
+function renderHeadingSelectOptions(stacks, selectedId) {
+  const installed = stacks.filter((s) => s.group === 'installed');
+  const exploratory = stacks.filter((s) => s.group === 'exploratory');
+  const blocks = [];
+  if (installed.length) {
+    blocks.push(
+      '    <optgroup label="Installed (system fonts)">',
+      installed.map((s) => renderStackOption(s, selectedId)).join('\n'),
+      '    </optgroup>'
+    );
+  }
+  if (exploratory.length) {
+    blocks.push(
+      '    <optgroup label="Exploratory (self-hosted WOFF2)">',
+      exploratory.map((s) => renderStackOption(s, selectedId)).join('\n'),
+      '    </optgroup>'
+    );
+  }
+  return blocks.join('\n');
+}
+
+function renderBodySelectOptions(stacks, selectedBodyValue) {
+  const sameSel = selectedBodyValue === BODY_SAME_AS_HEADINGS ? ' selected' : '';
+  const lines = [
+    `    <option value="${BODY_SAME_AS_HEADINGS}"${sameSel}>Same as headings</option>`
+  ];
+  const bodyStacks = stacks.filter((s) => s.bodyEligible);
+  const installed = bodyStacks.filter((s) => s.group === 'installed');
+  const exploratory = bodyStacks.filter((s) => s.group === 'exploratory');
+  if (installed.length) {
+    lines.push('    <optgroup label="Installed (system fonts)">');
+    for (const s of installed) {
+      lines.push(renderStackOption(s, selectedBodyValue));
+    }
+    lines.push('    </optgroup>');
+  }
+  if (exploratory.length) {
+    lines.push('    <optgroup label="Exploratory (self-hosted WOFF2)">');
+    for (const s of exploratory) {
+      lines.push(renderStackOption(s, selectedBodyValue));
+    }
+    lines.push('    </optgroup>');
+  }
+  return lines.join('\n');
 }
 
 /** Built browser file: shared formatter via .toString() so paste output stays DRY with Node. */
@@ -160,11 +231,27 @@ function fontLabCardRuntimeSource() {
     var h = byId[selH.value];
     var b = bodyResolved();
     if (!h || !b || !mixJp || !cssOut) return;
+    var scope = h.headingScope || 'all-headings';
     mixJp.style.fontFamily = b.family;
     mixJp.querySelectorAll('h1, h2, h3, h4').forEach(function (el) {
-      el.style.fontFamily = h.family;
+      el.style.fontFamily = b.family;
     });
-    cssOut.textContent = formatFontLabPasteCss(b.family, h.family);
+    if (scope === 'hgroup-only') {
+      var siteH1 = mixJp.querySelector('header hgroup h1');
+      if (siteH1) siteH1.style.fontFamily = h.family;
+    } else if (scope === 'h1-titles') {
+      mixJp.querySelectorAll('header hgroup h1, article h1').forEach(function (el) {
+        el.style.fontFamily = h.family;
+      });
+    } else {
+      mixJp.querySelectorAll('h1, h2, h3, h4').forEach(function (el) {
+        el.style.fontFamily = h.family;
+      });
+    }
+    cssOut.textContent = formatFontLabPasteCss(b.family, h.family, {
+      headingScope: scope,
+      webFont: !!(h.webFont || b.webFont)
+    });
   }
   function onHeadingChange() {
     applyFonts();
@@ -179,58 +266,56 @@ function fontLabCardRuntimeSource() {
 `;
 }
 
-function renderBodySelectOptions(selectedBodyValue) {
-  const sameSel = selectedBodyValue === BODY_SAME_AS_HEADINGS ? ' selected' : '';
-  const lines = [
-    `    <option value="${BODY_SAME_AS_HEADINGS}"${sameSel}>Same as headings</option>`
-  ];
-  for (const s of MODERN_FONT_STACKS) {
-    const sel =
-      s.id === selectedBodyValue && selectedBodyValue !== BODY_SAME_AS_HEADINGS
-        ? ' selected'
-        : '';
-    lines.push(
-      `    <option value="${escapeHtml(s.id)}"${sel}>${escapeHtml(s.name)}</option>`
-    );
-  }
-  return lines.join('\n');
-}
-
 function renderFontLabCard(options = {}) {
   const scriptSrc =
     typeof options.scriptSrc === 'string' && options.scriptSrc.length > 0
       ? options.scriptSrc
       : '/assets/js/font-lab-card.js';
 
-  const head = stackById(DEFAULT_HEADING_STACK_ID);
+  const stacks = labStackRecords();
+  const head = stackById(DEFAULT_HEADING_STACK_ID, stacks);
   if (!head) {
     throw new Error('Invalid DEFAULT_HEADING_STACK_ID');
   }
 
   const stacksJson = JSON.stringify(
-    MODERN_FONT_STACKS.map((s) => ({ id: s.id, name: s.name, family: s.family }))
+    stacks.map((s) => ({
+      id: s.id,
+      name: s.name,
+      family: s.family,
+      group: s.group,
+      headingScope: s.headingScope,
+      webFont: s.webFont,
+      bodyEligible: s.bodyEligible
+    }))
   );
 
   const headingSel = DEFAULT_HEADING_STACK_ID;
-  const bodySelectValue = BODY_SAME_AS_HEADINGS;
-  const bodyStack = head;
+  const bodySelectValue = LAB_DEFAULT_BODY_STACK_ID;
+  const bodyStack = stackById(LAB_DEFAULT_BODY_STACK_ID, stacks);
+  if (!bodyStack) {
+    throw new Error('Invalid LAB_DEFAULT_BODY_STACK_ID');
+  }
 
-  const cssBlock = formatFontLabPasteCss(bodyStack.family, head.family);
+  const cssBlock = formatFontLabPasteCss(bodyStack.family, head.family, {
+    headingScope: head.headingScope,
+    webFont: true
+  });
 
   return `<section class="card font-tool-card" aria-label="Font stacks">
-  <p class="tool-note">Uses the same index-shaped markup as the live home page. Colors and type scale come from <code>jonplummer.css</code> (your OS light/dark choice). Stacks: <a href="https://modernfontstacks.com" target="_blank" rel="noopener noreferrer">Modern Font Stacks</a>.</p>
+  <p class="tool-note">Home-page preview at live type scale and revision colors from <code>jonplummer.css</code>. Try <strong>Archivo</strong> (whole site) or <strong>Big Shoulders Display</strong> + <strong>Public Sans</strong> (title vs rest). Exploratory faces load from self-hosted WOFF2 on this page only — not Google CDN. Installed stacks: <a href="https://modernfontstacks.com" target="_blank" rel="noopener noreferrer">Modern Font Stacks</a>.</p>
   <div class="tool-controls" role="group" aria-label="Font stack selection">
     <div class="tool-selects">
       <div class="tool-field">
-        <label for="font-heading-stack">Headings (<code>h1</code>–<code>h4</code>)</label>
+        <label for="font-heading-stack">Headings (<code>h1</code>–<code>h4</code>, or site title only)</label>
         <select id="font-heading-stack" name="font-heading-stack">
-${renderSelectOptions(headingSel)}
+${renderHeadingSelectOptions(stacks, headingSel)}
         </select>
       </div>
       <div class="tool-field">
         <label for="font-body-stack">Everything else</label>
         <select id="font-body-stack" name="font-body-stack">
-${renderBodySelectOptions(bodySelectValue)}
+${renderBodySelectOptions(stacks, bodySelectValue)}
         </select>
       </div>
     </div>
@@ -385,13 +470,15 @@ function main() {
       renderFontLabCard({ scriptSrc: '../../../src/assets/js/font-lab-card.js' })
     );
     fs.writeFileSync(path.join(OUT_DIR, 'index.html'), html, 'utf8');
+    const stacks = labStackRecords();
     const jsonPayload = {
       source: 'https://modernfontstacks.com',
-      siteDefaultStackId: SITE_DEFAULT_STACK_ID,
-      stacks: MODERN_FONT_STACKS,
+      siteDefaultStackId: LAB_DEFAULT_BODY_STACK_ID,
+      labDefaultHeadingStackId: LAB_DEFAULT_HEADING_STACK_ID,
+      stacks,
       defaults: {
         headingStackId: DEFAULT_HEADING_STACK_ID,
-        bodySelectValue: BODY_SAME_AS_HEADINGS
+        bodySelectValue: LAB_DEFAULT_BODY_STACK_ID
       }
     };
     fs.writeFileSync(path.join(OUT_DIR, 'stacks.json'), JSON.stringify(jsonPayload, null, 2), 'utf8');

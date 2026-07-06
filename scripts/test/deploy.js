@@ -40,6 +40,10 @@ if (fs.existsSync(deployScriptPath)) {
     console.log('❌ Deploy rsync must not exclude color/ (/color/ is a normal page)');
     process.exit(1);
   }
+  if (deployContent.includes('--exclude=assets/fonts')) {
+    console.log('❌ Deploy rsync must not exclude assets/fonts/ (self-hosted WOFF2 required)');
+    process.exit(1);
+  }
 }
 
 // Load environment variables

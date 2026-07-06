@@ -41,6 +41,15 @@ importers:
       '@11ty/eleventy-plugin-syntaxhighlight':
         specifier: ^5.0.2
         version: 5.0.2
+      '@fontsource-variable/archivo':
+        specifier: ^5.2.8
+        version: 5.2.8
+      '@fontsource-variable/big-shoulders':
+        specifier: ^5.2.6
+        version: 5.2.6
+      '@fontsource-variable/public-sans':
+        specifier: ^5.2.7
+        version: 5.2.7
       '@xmldom/xmldom':
         specifier: ^0.9.10
         version: 0.9.10
@@ -433,6 +442,15 @@ packages:
 
   '@emnapi/runtime@1.11.1':
     resolution: {integrity: sha512-vgj7R3y3Wgx24IQaGPA/R6YFXLHVMOZ0uVEyIQPaWs+rd1AzfEMXlAC22FYwO1XkKR6NPsq7mUandH8oIRdZFw==}
+
+  '@fontsource-variable/archivo@5.2.8':
+    resolution: {integrity: sha512-R8EotpKHEsKv7d7oiUyjyPENRi2gtAlwdTlzDCOs5BfX/LJP7jvUYJ4fF/qyd3rnbgk3r1xp33g1P57bYJfhzQ==}
+
+  '@fontsource-variable/big-shoulders@5.2.6':
+    resolution: {integrity: sha512-b3KplwhOEjQBqD6RdCef3+3Nisw4j9t2Av2I++VfYy0bcRd/aJSIiaX4o2cxspumNhfKy2u83QXta/iMt76emQ==}
+
+  '@fontsource-variable/public-sans@5.2.7':
+    resolution: {integrity: sha512-4mvade2J3slKkvwRkS+p8T3szet/0vhWoSnuUJTVU81Uo2pRpSZY/Y8bSLRqpSwzIPxjVmRJ53oq6JKP/l/PSg==}
 
   '@html-validate/stylish@5.2.0':
     resolution: {integrity: sha512-7lF57/RTs2tZi0FtgY7Y5CP73Y2GEPPMaJ9PeZKRRUOs7Bt7/Qlqt8kdsAbVMO7GrpuWtUfGvR11riSOryioow==}
@@ -2541,6 +2559,12 @@ snapshots:
     dependencies:
       tslib: 2.8.1
     optional: true
+
+  '@fontsource-variable/archivo@5.2.8': {}
+
+  '@fontsource-variable/big-shoulders@5.2.6': {}
+
+  '@fontsource-variable/public-sans@5.2.7': {}
 
   '@html-validate/stylish@5.2.0': {}
 

@@ -96,6 +96,19 @@ function synthesizeDarkCompanionForDr(light) {
   return dark;
 }
 
+/** Site default dark pair: extra outer-field vs content-band separation (light pair unchanged). */
+function adjustSiteDefaultDark(dark) {
+  const bg = dark['background-color'];
+  const content = dark['content-background-color'];
+  if (bg && bg.mode === 'oklch') {
+    dark['background-color'] = { ...bg, l: 0.1 };
+  }
+  if (content && content.mode === 'oklch') {
+    dark['content-background-color'] = { ...content, l: 0.22 };
+  }
+  return dark;
+}
+
 const DR_PRESET_ORDER = [
   'default',
   'DR01',
@@ -120,11 +133,18 @@ function buildDrComboRaw() {
       continue;
     }
     const light = presetHexCssToOklchTheme(presets[key]);
-    const dark = synthesizeDarkCompanionForDr(light);
+    let dark = synthesizeDarkCompanionForDr(light);
+    if (key === 'default') {
+      dark = adjustSiteDefaultDark(dark);
+    }
     variants.push({
       id: `dr-${key}`,
+      presetKey: key,
       label: key,
-      radioLabel: key === 'default' ? 'Default' : key,
+      radioLabel:
+        key === 'default'
+          ? 'Default (site)'
+          : key,
       light,
       dark
     });
@@ -1297,6 +1317,7 @@ function processGalleryItem(t) {
       const passes = themePasses(light, dark);
       return {
         id: v.id,
+        presetKey: v.presetKey,
         label: v.label,
         radioLabel: v.radioLabel,
         light,
@@ -1465,6 +1486,7 @@ function renderVariantComboCard(t, siteEmbed = false, sec = null) {
     : '<span class="badge ok">APCA ≥ ' + MIN_LC + dualHint + '</span>';
 
   const variantsPayload = t._processedVariants.map((v) => ({
+    presetKey: v.presetKey || '',
     lightStyle: varsToInlineStyle(v.light),
     darkStyle: varsToInlineStyle(v.dark),
     tokensText: tokensToJonplummerPasteBlock(
@@ -1920,6 +1942,10 @@ function galleryEmbedRuntimeScriptJs() {
     var darkEl = previews[1];
     var pre = section.querySelector('.dr-tokens-pre');
     if (!lightEl || !darkEl) return;
+    function setRevisionPlacementPreview(on) {
+      lightEl.classList.toggle('revision-placement-preview', on);
+      darkEl.classList.toggle('revision-placement-preview', on);
+    }
     function applyIdxDr(i) {
       var v = variants[i];
       if (!v) return;
@@ -1928,6 +1954,7 @@ function galleryEmbedRuntimeScriptJs() {
       lightEl.dataset.originalStyle = v.lightStyle;
       darkEl.dataset.originalStyle = v.darkStyle;
       if (pre) pre.textContent = v.tokensText;
+      setRevisionPlacementPreview(v.presetKey === 'default');
       updateComboStatus(section, v);
     }
     var drSel = section.querySelector('[data-dr-variant-select]');
@@ -2769,6 +2796,59 @@ function renderHtml(visibleSections, meta, options = {}) {
     /* Simulated visited (file:// previews rarely have :visited match) */
     .theme-root.home-preview a.sim-visited {
       color: var(--link-visited-color);
+    }
+
+    /*
+      Site default: accent on links/controls only — neutral masthead, hybrid links,
+      neutral end token (never accent on decoration). Toggled when dr-combo selects default (site).
+    */
+    .theme-root.home-preview.revision-placement-preview {
+      --token-color: color-mix(in oklch, var(--text-color) 28%, var(--content-background-color));
+    }
+    .theme-root.home-preview.revision-placement-preview .jp-page hgroup h1,
+    .theme-root.home-preview.revision-placement-preview .jp-page hgroup h1 a,
+    .theme-root.home-preview.revision-placement-preview .jp-page hgroup h1 a:visited {
+      color: var(--text-color);
+      font-weight: var(--font-weight-semibold);
+    }
+    .theme-root.home-preview.revision-placement-preview .jp-page hgroup p {
+      color: var(--text-color-light);
+    }
+    /* Nav + pagination: accent at rest for :link and :visited */
+    .theme-root.home-preview.revision-placement-preview .jp-page > header nav a:any-link,
+    .theme-root.home-preview.revision-placement-preview .jp-page nav.pagination a:any-link {
+      color: var(--link-color);
+    }
+    .theme-root.home-preview.revision-placement-preview .jp-page > header nav a:any-link:is(:hover, :focus-visible),
+    .theme-root.home-preview.revision-placement-preview .jp-page nav.pagination a:any-link:is(:hover, :focus-visible) {
+      color: var(--link-hover-color);
+    }
+    .theme-root.home-preview.revision-placement-preview .jp-page hgroup h1 a:any-link {
+      color: var(--text-color);
+    }
+    .theme-root.home-preview.revision-placement-preview .jp-page hgroup h1 a:is(:hover, :focus-visible) {
+      color: var(--link-color);
+    }
+    .theme-root.home-preview.revision-placement-preview .jp-page article:not(.link-item) section a:not([class]):link {
+      color: var(--text-color);
+    }
+    .theme-root.home-preview.revision-placement-preview .jp-page article:not(.link-item) section a:not([class]):visited {
+      color: var(--link-visited-color);
+    }
+    .theme-root.home-preview.revision-placement-preview .jp-page article:not(.link-item) section a:not([class]):is(:hover, :focus-visible) {
+      color: var(--link-color);
+    }
+    .theme-root.home-preview.revision-placement-preview .jp-page article.link-item section a:link {
+      color: var(--link-color);
+    }
+    .theme-root.home-preview.revision-placement-preview .jp-page article.link-item section a:visited {
+      color: var(--link-visited-color);
+    }
+    .theme-root.home-preview.revision-placement-preview .jp-page article.link-item section a:is(:hover, :focus-visible) {
+      color: var(--link-color);
+    }
+    .theme-root.home-preview.revision-placement-preview .jp-page article:not(.link-item) section::after {
+      background-color: var(--token-color, var(--border-color));
     }
   </style>
 </head>

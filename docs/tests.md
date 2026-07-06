@@ -23,7 +23,7 @@ This project includes a suite of validation tests covering content structure, HT
 
 ### Test Categories
 
-**Fast Tests:** `html`, `links`, `wisdom`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `portfolio-notes`, `indexnow`
+**Fast Tests:** `html`, `links`, `wisdom`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `portfolio-notes`, `deploy-assets`, `indexnow`
 
 **Slow Tests:** `a11y` (launches browser)
 
@@ -80,6 +80,10 @@ Reads `light-dark()` (and legacy dark `:root`) color pairs from `src/assets/css/
 ### portfolio-notes.js
 
 Runs fixture assertions against `parseNotesContent()` in `scripts/utils/portfolio-notes.js` (numbered lines including empty slides, `Slide N:` / `N)` variants, blank-line blocks). Guards regression for `convert-pdf-pages-with-notes` and `convert-presentation-portfolio`. With `--changed`, skips if neither the parser nor this test file changed since the last commit.
+
+### deploy-assets.js
+
+After `pnpm run build`, verifies `_site/` contains self-hosted fonts (WOFF2 under `assets/fonts/lab/`, `@font-face` in `jonplummer.css`), font preloads, inline critical shell in `<head>`, and that `scripts/deploy/deploy.js` does not rsync-exclude `assets/fonts/`.
 
 ## HTML Output Tests
 

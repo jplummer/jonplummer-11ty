@@ -1,5 +1,5 @@
 ---
-title: '"Specialized enterprise users" and accessibility'
+title: "\"Specialized enterprise users\" and accessibility"
 layout: layouts/single_post.njk
 date: "2023-06-15T12:00:00-08:00"
 tags: post

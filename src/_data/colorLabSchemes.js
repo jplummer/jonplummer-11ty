@@ -6,15 +6,15 @@
 
 const presets = {
   default: {
-    '--text-color': '#2a2a2a',
-    '--text-color-light': '#5a5a5a',
-    '--background-color': '#d3d8d2',
+    '--text-color': '#2a2d32',
+    '--text-color-light': '#5c6169',
+    '--background-color': '#f1f3f7',
     '--content-background-color': '#fff',
     '--link-color': '#d63d36',
     '--link-hover-color': '#b26205',
-    '--link-visited-color': '#5b4a3b',
+    '--link-visited-color': '#4a4f57',
     '--link-active-color': '#0d703f',
-    '--border-color': '#d0d0d0'
+    '--border-color': '#d8dce3'
   },
   DR01: {
     '--text-color': '#261201',

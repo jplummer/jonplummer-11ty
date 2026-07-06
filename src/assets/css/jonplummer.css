@@ -1,3 +1,26 @@
+/*
+  Self-hosted WOFF2 (Latin wght subsets, OFL via @fontsource-variable).
+  Also in jonplummer.css for one stylesheet on pages; kept here for OG extract + reference.
+*/
+
+@font-face {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: optional;
+  src: url("/assets/fonts/lab/public-sans-latin-wght-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Big Shoulders";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: optional;
+  src: url("/assets/fonts/lab/big-shoulders-latin-wght-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 /* === CSS CUSTOM PROPERTIES ===*/
 :root {
   /* Layout */
@@ -8,7 +31,8 @@
   /* Typography */
   /* Modular type scale based on 1rem (16px) base. All sizes follow modular ratios.
      See: https://webtypography.net/3.1.1 */
-  --font-family: system-ui, sans-serif;
+  --font-family: "Public Sans", sans-serif;
+  --font-family-display: "Big Shoulders", sans-serif;
   --text-size: 16px;
   --line-height: 1.5;
   --paragraph-spacing: calc(var(--line-height) * 1em);
@@ -41,19 +65,19 @@
   --spacing-xl: 2.5rem; /* 5 baselines */
   --spacing-ex: 5ex;
 
-  /* Colors - based on DR10 palette, adjusted for WCAG AA contrast (OKLCH, sRGB gamut).
-     light-dark(light, dark) picks the value matching the user's color scheme */
+  /* Colors — revision 2026 (cool chrome, accent on controls). APCA-tuned OKLCH; light-dark picks by color scheme. */
 
   color-scheme: light dark;
-  --text-color: light-dark(oklch(28.5% 0 0deg), oklch(93% 0 0deg));
-  --text-color-light: light-dark(oklch(46.8% 0 0deg), oklch(78% 0 0deg));
-  --border-color: light-dark(oklch(85.8% 0 0deg), oklch(38% 0 0deg));
-  --background-color: light-dark(oklch(87.7% 0.0098 140.51deg), oklch(12% 0.0098 140.51deg));
-  --content-background-color: light-dark(oklch(100% 0 0deg), oklch(20% 0 0deg));
+  --text-color: light-dark(oklch(29.6% 0.01 260.71deg), oklch(93% 0.01 260.71deg));
+  --text-color-light: light-dark(oklch(49.1% 0.0142 259.82deg), oklch(78% 0.0142 259.82deg));
+  --border-color: light-dark(oklch(89.3% 0.0105 261.79deg), oklch(38% 0.0105 261.79deg));
+  --background-color: light-dark(oklch(96.4% 0.0058 264.53deg), oklch(10% 0.0058 264.53deg));
+  --content-background-color: light-dark(oklch(100% 0 0deg), oklch(22% 0 0deg));
   --link-color: light-dark(oklch(58.6% 0.1911 27.41deg), oklch(86.6% 0.1911 27.41deg));
   --link-hover-color: light-dark(oklch(57.7% 0.1348 59.17deg), oklch(85.7% 0.1348 59.17deg));
-  --link-visited-color: light-dark(oklch(42.2% 0.0332 63.17deg), oklch(77.4% 0.0332 63.17deg));
+  --link-visited-color: light-dark(oklch(42.6% 0.0148 259.82deg), oklch(77.8% 0.0148 259.82deg));
   --link-active-color: light-dark(oklch(48.1% 0.1152 154.58deg), oklch(76.1% 0.1152 154.58deg));
+  --token-color: color-mix(in oklch, var(--text-color) 28%, var(--content-background-color));
 
   /* Icons — overlapping window outlines (single path), for CSS mask-image */
   --icon-new-tab-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 12 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 1H11V7' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M1 5h6v6H1z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E");
@@ -200,9 +224,8 @@ article footer {
   transition: color 0.3s ease;
 }
 
-.post-demo-popout a:hover,
-.post-demo-popout a:focus {
-  color: var(--link-hover-color);
+.post-demo-popout a:is(:hover, :focus-visible) {
+  color: var(--link-color);
 }
 
 .post-demo-popout a::after {
@@ -212,7 +235,7 @@ article footer {
   height: 0.75rem;
   margin-inline-start: var(--baseline-unit);
   vertical-align: -0.075em;
-  background-color: var(--text-color-light);
+  background-color: currentColor;
   transition: background-color 0.3s ease;
   -webkit-mask-image: var(--icon-new-tab-mask);
   -webkit-mask-repeat: no-repeat;
@@ -222,11 +245,6 @@ article footer {
   mask-repeat: no-repeat;
   mask-position: center;
   mask-size: contain;
-}
-
-.post-demo-popout a:hover::after,
-.post-demo-popout a:focus::after {
-  background-color: var(--link-hover-color);
 }
 
 .post-demo-embed {
@@ -306,8 +324,10 @@ nav li {
   margin: 0;
 }
 
-/* Navigation typography and colors */
-nav a {
+/* Navigation typography and colors — accent at rest for :link and :visited */
+body > header nav a:any-link,
+nav.pagination a:any-link,
+nav.post-navigation a:any-link {
   font-size: var(--font-size-xs);
   line-height: var(--line-height-xs);
   text-decoration: none;
@@ -315,15 +335,13 @@ nav a {
   transition: color 0.3s ease;
 }
 
-nav a:hover {
+body > header nav a:any-link:is(:hover, :focus-visible),
+nav.pagination a:any-link:is(:hover, :focus-visible),
+nav.post-navigation a:any-link:is(:hover, :focus-visible) {
   color: var(--link-hover-color);
 }
 
-nav a:visited {
-  color: var(--link-visited-color);
-}
-
-nav a[aria-current="page"] {
+body > header nav a[aria-current="page"] {
   color: var(--link-color);
 }
 
@@ -400,9 +418,11 @@ h6 {
 /* Hgroup typography */
 
 hgroup h1 {
+  font-family: var(--font-family-display);
   font-size: var(--font-size-3xl);
   line-height: var(--line-height-3xl);
   font-weight: var(--font-weight-thin);
+  text-transform: uppercase;
   margin: 0;
 }
 
@@ -411,6 +431,7 @@ hgroup p {
   font-size: var(--font-size-xs);
   line-height: var(--line-height-xs);
   font-style: italic;
+  color: var(--text-color-light);
 }
 
 header h1 + p {
@@ -419,12 +440,15 @@ header h1 + p {
 
 /* Article headings */
 article h1 {
+  font-family: var(--font-family-display);
   margin: 0;
   font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-normal);
 }
 
 /* Main content headings */
 main > h1 {
+  font-family: var(--font-family-display);
   margin: 0;
 }
 
@@ -520,7 +544,7 @@ pre code {
 
 /* Inline code from markdown `backticks` (not fenced blocks) */
 :not(pre) > code {
-  background-color: color-mix(in oklch, var(--text-color) 9%, var(--content-background-color));
+  background-color: var(--background-color);
   padding: 0.12em 0.4em;
   border-radius: 0.2em;
   box-decoration-break: clone;
@@ -551,10 +575,40 @@ a:active {
   color: var(--link-active-color);
 }
 
-/* Unclassed links use current color */
+/* Unclassed links in prose use text color at rest (not nav/chrome — see header nav rules) */
 a:not([class]) {
   text-decoration-skip-ink: auto;
-  color: currentColor;
+}
+
+/* Hgroup — neutral at rest, accent on hover */
+hgroup h1 a:any-link {
+  color: var(--text-color);
+}
+
+hgroup h1 a:is(:hover, :focus-visible) {
+  color: var(--link-color);
+}
+
+/* Content links: neutral unvisited, visited tint at rest, accent on hover/focus */
+article:not(.link-item) section a:not([class]):link {
+  color: var(--text-color);
+}
+
+article:not(.link-item) section a:not([class]):visited {
+  color: var(--link-visited-color);
+}
+
+article:not(.link-item) section a:not([class]):is(:hover, :focus-visible) {
+  color: var(--link-color);
+}
+
+/* Article title — same as body links (not accent at rest) */
+article:not(.link-item) h1 a:any-link {
+  color: var(--text-color);
+}
+
+article:not(.link-item) h1 a:is(:hover, :focus-visible) {
+  color: var(--link-color);
 }
 
 /* Content links always underlined (articles and full-width pages) */
@@ -572,18 +626,24 @@ article h1 a:hover {
   text-decoration: underline;
 }
 
-/* Hgroup links keep link-color even when visited */
-hgroup h1 a:visited,
-hgroup p {
+/* === COMPONENTS === */
+
+/* Remaindered links — muted row, accent title link */
+article.link-item {
+  margin-bottom: 0;
+  color: var(--text-color-light);
+}
+
+article.link-item section a:link {
   color: var(--link-color);
 }
 
-/* === COMPONENTS === */
-
-/* Link items */
-article.link-item {
-  margin-bottom: 0;
+article.link-item section a:visited {
   color: var(--link-visited-color);
+}
+
+article.link-item section a:is(:hover, :focus-visible) {
+  color: var(--link-color);
 }
 
 article.link-item section,
@@ -602,7 +662,7 @@ main[data-tags*="page"]::after {
   display: block;
   width: 0.625rem;
   height: 0.625rem;
-  background-color: var(--text-color-light);
+  background-color: var(--token-color);
   border-radius: 2px;
   margin: var(--spacing-sm) 0 0 0;
 }
@@ -928,15 +988,16 @@ header a.skip:focus {
 /* Styles for OG images rendered via renderFile in ogimages.njk (scoped to .og-image-rendered) */
 
 .og-image-rendered {
-  /* Override colors to force light theme for OG image preview */
-  --text-color: oklch(28.5% 0 0deg);
-  --text-color-light: oklch(46.8% 0 0deg);
-  --background-color: oklch(87.7% 0.0097 140.5deg);
+  /* Force light theme for OG preview — light halves from jonplummer.css :root (keep in sync) */
+  --text-color: oklch(29.6% 0.01 260.71deg);
+  --text-color-light: oklch(49.1% 0.0142 259.82deg);
+  --border-color: oklch(89.3% 0.0105 261.79deg);
+  --background-color: oklch(96.4% 0.0058 264.53deg);
   --content-background-color: oklch(100% 0 0deg);
-  --link-color: oklch(58.6% 0.191 27.4deg); /* darkened to meet WCAG AA 4.5:1 */
-  --link-hover-color: oklch(57.683% 0.1348 59.17deg); /* darkened to meet WCAG AA 4.5:1 */
-  --link-visited-color: oklch(42.2% 0.0332 63.2deg);
-  --link-active-color: oklch(48.055% 0.1152 154.58deg);
+  --link-color: oklch(58.6% 0.1911 27.41deg);
+  --link-hover-color: oklch(57.7% 0.1348 59.17deg);
+  --link-visited-color: oklch(42.6% 0.0148 259.82deg);
+  --link-active-color: oklch(48.1% 0.1152 154.58deg);
   
   box-sizing: border-box;
   margin: 0;
@@ -980,14 +1041,16 @@ header a.skip:focus {
     flex-wrap: wrap;
 
     & h1, & > div:first-child {
+      font-family: var(--font-family-display);
       font-size: 6rem;
       line-height: var(--line-height-3xl);
       font-weight: var(--font-weight-thin);
       letter-spacing: var(--letter-spacing-tight);
-      color: var(--link-color);
+      text-transform: uppercase;
+      color: var(--text-color);
 
       & a {
-        color: var(--link-color) !important;
+        color: var(--text-color) !important;
         text-decoration: none;
       }
     }
@@ -996,15 +1059,16 @@ header a.skip:focus {
       font-size: 1.5rem;
       line-height: var(--line-height-xs);
       font-style: italic;
-      color: var(--link-color);
+      color: var(--text-color-light);
     }
   }
 
   & .og-title {
+    font-family: var(--font-family-display);
     font-size: 3.5rem;
     line-height: var(--line-height-2xl);
     font-weight: var(--font-weight-semibold);
-    letter-spacing: var(--letter-spacing-tight);
+    letter-spacing: var(--letter-spacing-normal);
     text-wrap: balance;
   }
 
@@ -1015,7 +1079,6 @@ header a.skip:focus {
 
   & .og-date {
     font-size: 1.5rem;
-    font-style: italic;
   }
 }
 

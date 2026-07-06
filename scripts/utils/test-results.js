@@ -254,6 +254,7 @@ const TEST_EMOJIS = {
   'og-images': '📸',
   'rss': '📡',
   'portfolio-notes': '📎',
+  'deploy-assets': '📦',
   'seo': '📈',
   'deploy': '🚀',
   'security': '🛡️',
@@ -292,6 +293,7 @@ function getTestDisplayName(testType) {
     'rss': 'RSS Feed',
     'portfolio-notes': 'Portfolio notes parsing',
     'og-images': 'OG Images',
+    'deploy-assets': 'Deploy Assets',
     'deploy': 'Deploy',
     'security': 'Security Audit'
   };
@@ -319,6 +321,7 @@ function getTestDescription(testType) {
     'css': 'CSS lint (Stylelint)',
     'rss': 'RSS feed validation',
     'portfolio-notes': 'Portfolio speaker-notes text parsing',
+    'deploy-assets': 'Fonts and deploy-critical _site/ assets',
     'deploy': 'Deployment connectivity',
     'indexnow': 'IndexNow configuration',
     'security': 'Security audit'

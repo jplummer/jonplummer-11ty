@@ -1,31 +1,11 @@
 <section class="card font-tool-card" aria-label="Font stacks">
-  <p class="tool-note">Uses the same index-shaped markup as the live home page. Colors and type scale come from <code>jonplummer.css</code> (your OS light/dark choice). Stacks: <a href="https://modernfontstacks.com" target="_blank" rel="noopener noreferrer">Modern Font Stacks</a>.</p>
+  <p class="tool-note">Home-page preview at live type scale and revision colors from <code>jonplummer.css</code>. Try <strong>Archivo</strong> (whole site) or <strong>Big Shoulders Display</strong> + <strong>Public Sans</strong> (title vs rest). Exploratory faces load from self-hosted WOFF2 on this page only — not Google CDN. Installed stacks: <a href="https://modernfontstacks.com" target="_blank" rel="noopener noreferrer">Modern Font Stacks</a>.</p>
   <div class="tool-controls" role="group" aria-label="Font stack selection">
     <div class="tool-selects">
       <div class="tool-field">
-        <label for="font-heading-stack">Headings (<code>h1</code>–<code>h4</code>)</label>
+        <label for="font-heading-stack">Headings (<code>h1</code>–<code>h4</code>, or site title only)</label>
         <select id="font-heading-stack" name="font-heading-stack">
-    <option value="system-ui" selected>System UI</option>
-    <option value="transitional">Transitional</option>
-    <option value="old-style">Old Style</option>
-    <option value="humanist">Humanist</option>
-    <option value="geometric-humanist">Geometric Humanist</option>
-    <option value="classical-humanist">Classical Humanist</option>
-    <option value="neo-grotesque">Neo-Grotesque</option>
-    <option value="monospace-slab-serif">Monospace Slab Serif</option>
-    <option value="monospace-code">Monospace Code</option>
-    <option value="industrial">Industrial</option>
-    <option value="rounded-sans">Rounded Sans</option>
-    <option value="slab-serif">Slab Serif</option>
-    <option value="antique">Antique</option>
-    <option value="didone">Didone</option>
-    <option value="handwritten">Handwritten</option>
-        </select>
-      </div>
-      <div class="tool-field">
-        <label for="font-body-stack">Everything else</label>
-        <select id="font-body-stack" name="font-body-stack">
-    <option value="same-as-headings" selected>Same as headings</option>
+    <optgroup label="Installed (system fonts)">
     <option value="system-ui">System UI</option>
     <option value="transitional">Transitional</option>
     <option value="old-style">Old Style</option>
@@ -41,17 +21,51 @@
     <option value="antique">Antique</option>
     <option value="didone">Didone</option>
     <option value="handwritten">Handwritten</option>
+    </optgroup>
+    <optgroup label="Exploratory (self-hosted WOFF2)">
+    <option value="archivo-variable">Archivo (variable, whole site)</option>
+    <option value="big-shoulders-display">Big Shoulders Display (site title)</option>
+    <option value="big-shoulders-display-titles" selected>Big Shoulders Display (site + post titles)</option>
+    <option value="public-sans">Public Sans</option>
+    </optgroup>
+        </select>
+      </div>
+      <div class="tool-field">
+        <label for="font-body-stack">Everything else</label>
+        <select id="font-body-stack" name="font-body-stack">
+    <option value="same-as-headings">Same as headings</option>
+    <optgroup label="Installed (system fonts)">
+    <option value="system-ui">System UI</option>
+    <option value="transitional">Transitional</option>
+    <option value="old-style">Old Style</option>
+    <option value="humanist">Humanist</option>
+    <option value="geometric-humanist">Geometric Humanist</option>
+    <option value="classical-humanist">Classical Humanist</option>
+    <option value="neo-grotesque">Neo-Grotesque</option>
+    <option value="monospace-slab-serif">Monospace Slab Serif</option>
+    <option value="monospace-code">Monospace Code</option>
+    <option value="industrial">Industrial</option>
+    <option value="rounded-sans">Rounded Sans</option>
+    <option value="slab-serif">Slab Serif</option>
+    <option value="antique">Antique</option>
+    <option value="didone">Didone</option>
+    <option value="handwritten">Handwritten</option>
+    </optgroup>
+    <optgroup label="Exploratory (self-hosted WOFF2)">
+    <option value="archivo-variable">Archivo (variable, whole site)</option>
+    <option value="public-sans" selected>Public Sans</option>
+    </optgroup>
         </select>
       </div>
     </div>
   </div>
   <div class="font-preview-lane">
   <div class="theme-root home-preview" id="font-preview-root">
-        <div class="jp-page" id="font-preview-jp" style="font-family: system-ui, sans-serif">
+        <div class="jp-page" id="font-preview-jp" style="font-family: &quot;Public Sans&quot;, sans-serif">
           <header aria-label="Preview: site header">
             <a class="skip" href="#font-preview-main">Skip to content</a>
             <hgroup>
-              <h1 style="font-family: system-ui, sans-serif"><a href="#" rel="home">Jon Plummer</a></h1>
+              <h1 style="font-family: &quot;Big Shoulders&quot;, sans-serif"><a href="#" rel="home">Jon Plummer</a></h1>
               <p>Today I Learned</p>
             </hgroup>
             <nav aria-label="Preview: primary navigation">
@@ -67,7 +81,7 @@
             <h2 class="sr-only" id="font-preview-main-heading">Preview: main column</h2>
             <article>
               <header aria-label="Preview: article title">
-                <h1 style="font-family: system-ui, sans-serif"><a href="#" rel="bookmark">What we owe junior designers in review</a></h1>
+                <h1 style="font-family: &quot;Big Shoulders&quot;, sans-serif"><a href="#" rel="bookmark">What we owe junior designers in review</a></h1>
               </header>
               <section>
                 <p>Feedback works when it is <a href="#">specific</a> and <a href="#" class="sim-visited">grounded in examples</a>. <strong>Kind</strong> delivery helps the second sentence read like a real lede.</p>
@@ -101,22 +115,24 @@
   </div>
   <details class="copy-block">
     <summary>Example CSS</summary>
-    <pre class="code"><code id="font-css-code">/* Tokens + hooks — order is for copying, not matching this site’s CSS file layout. */
+    <pre class="code"><code id="font-css-code">/* Self-hosted WOFF2 required — see src/assets/css/font-lab-exploratory.css for @font-face. */
+/* Site title + article h1 on --font-family-display; h2–h4 use body stack. */
 /* code/pre: UA styles use monospace; --font-family-mono sets it explicitly (not the body stack). */
-
 :root {
-  --font-family: system-ui, sans-serif;
+  --font-family: &quot;Public Sans&quot;, sans-serif;
+  --font-family-display: &quot;Big Shoulders&quot;, sans-serif;
   --font-family-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
 }
-
 body {
   font-family: var(--font-family);
 }
-
+hgroup h1, article h1 {
+  font-family: var(--font-family-display);
+}
 code, pre, kbd, samp {
   font-family: var(--font-family-mono);
 }</code></pre>
   </details>
-  <script type="application/json" id="font-stacks-json">[{"id":"system-ui","name":"System UI","family":"system-ui, sans-serif"},{"id":"transitional","name":"Transitional","family":"Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif"},{"id":"old-style","name":"Old Style","family":"'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif"},{"id":"humanist","name":"Humanist","family":"Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif"},{"id":"geometric-humanist","name":"Geometric Humanist","family":"Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif"},{"id":"classical-humanist","name":"Classical Humanist","family":"Optima, Candara, 'Noto Sans', source-sans-pro, sans-serif"},{"id":"neo-grotesque","name":"Neo-Grotesque","family":"Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif"},{"id":"monospace-slab-serif","name":"Monospace Slab Serif","family":"'Nimbus Mono PS', 'Courier New', monospace"},{"id":"monospace-code","name":"Monospace Code","family":"ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace"},{"id":"industrial","name":"Industrial","family":"Bahnschrift, 'DIN Alternate', 'Franklin Gothic Medium', 'Nimbus Sans Narrow', sans-serif-condensed, sans-serif"},{"id":"rounded-sans","name":"Rounded Sans","family":"ui-rounded, 'Hiragino Maru Gothic ProN', Quicksand, Comfortaa, Manjari, 'Arial Rounded MT', 'Arial Rounded MT Bold', Calibri, source-sans-pro, sans-serif"},{"id":"slab-serif","name":"Slab Serif","family":"Rockwell, 'Rockwell Nova', 'Roboto Slab', 'DejaVu Serif', 'Sitka Small', serif"},{"id":"antique","name":"Antique","family":"Superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia, serif"},{"id":"didone","name":"Didone","family":"Didot, 'Bodoni MT', 'Noto Serif Display', 'URW Palladio L', P052, Sylfaen, serif"},{"id":"handwritten","name":"Handwritten","family":"'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive"}]</script>
+  <script type="application/json" id="font-stacks-json">[{"id":"system-ui","name":"System UI","family":"system-ui, sans-serif","group":"installed","headingScope":"all-headings","webFont":false,"bodyEligible":true},{"id":"transitional","name":"Transitional","family":"Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif","group":"installed","headingScope":"all-headings","webFont":false,"bodyEligible":true},{"id":"old-style","name":"Old Style","family":"'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif","group":"installed","headingScope":"all-headings","webFont":false,"bodyEligible":true},{"id":"humanist","name":"Humanist","family":"Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif","group":"installed","headingScope":"all-headings","webFont":false,"bodyEligible":true},{"id":"geometric-humanist","name":"Geometric Humanist","family":"Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif","group":"installed","headingScope":"all-headings","webFont":false,"bodyEligible":true},{"id":"classical-humanist","name":"Classical Humanist","family":"Optima, Candara, 'Noto Sans', source-sans-pro, sans-serif","group":"installed","headingScope":"all-headings","webFont":false,"bodyEligible":true},{"id":"neo-grotesque","name":"Neo-Grotesque","family":"Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif","group":"installed","headingScope":"all-headings","webFont":false,"bodyEligible":true},{"id":"monospace-slab-serif","name":"Monospace Slab Serif","family":"'Nimbus Mono PS', 'Courier New', monospace","group":"installed","headingScope":"all-headings","webFont":false,"bodyEligible":true},{"id":"monospace-code","name":"Monospace Code","family":"ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace","group":"installed","headingScope":"all-headings","webFont":false,"bodyEligible":true},{"id":"industrial","name":"Industrial","family":"Bahnschrift, 'DIN Alternate', 'Franklin Gothic Medium', 'Nimbus Sans Narrow', sans-serif-condensed, sans-serif","group":"installed","headingScope":"all-headings","webFont":false,"bodyEligible":true},{"id":"rounded-sans","name":"Rounded Sans","family":"ui-rounded, 'Hiragino Maru Gothic ProN', Quicksand, Comfortaa, Manjari, 'Arial Rounded MT', 'Arial Rounded MT Bold', Calibri, source-sans-pro, sans-serif","group":"installed","headingScope":"all-headings","webFont":false,"bodyEligible":true},{"id":"slab-serif","name":"Slab Serif","family":"Rockwell, 'Rockwell Nova', 'Roboto Slab', 'DejaVu Serif', 'Sitka Small', serif","group":"installed","headingScope":"all-headings","webFont":false,"bodyEligible":true},{"id":"antique","name":"Antique","family":"Superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia, serif","group":"installed","headingScope":"all-headings","webFont":false,"bodyEligible":true},{"id":"didone","name":"Didone","family":"Didot, 'Bodoni MT', 'Noto Serif Display', 'URW Palladio L', P052, Sylfaen, serif","group":"installed","headingScope":"all-headings","webFont":false,"bodyEligible":true},{"id":"handwritten","name":"Handwritten","family":"'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive","group":"installed","headingScope":"all-headings","webFont":false,"bodyEligible":true},{"id":"archivo-variable","name":"Archivo (variable, whole site)","family":"\"Archivo\", sans-serif","group":"exploratory","headingScope":"all-headings","webFont":true,"bodyEligible":true},{"id":"big-shoulders-display","name":"Big Shoulders Display (site title)","family":"\"Big Shoulders\", sans-serif","group":"exploratory","headingScope":"hgroup-only","webFont":true,"bodyEligible":false},{"id":"big-shoulders-display-titles","name":"Big Shoulders Display (site + post titles)","family":"\"Big Shoulders\", sans-serif","group":"exploratory","headingScope":"h1-titles","webFont":true,"bodyEligible":false},{"id":"public-sans","name":"Public Sans","family":"\"Public Sans\", sans-serif","group":"exploratory","headingScope":"all-headings","webFont":true,"bodyEligible":true}]</script>
   <script src="/assets/js/font-lab-card.js"></script>
 </section>

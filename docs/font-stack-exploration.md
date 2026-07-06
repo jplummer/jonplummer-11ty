@@ -7,8 +7,19 @@ Try [Modern Font Stacks](https://modernfontstacks.com) against the **real** site
 ## Workflow
 
 1. **Generate** — `pnpm run font-gallery`.
-2. **Preview** — Open `scripts/font-explore/output/index.html` **from the repo** so the relative link to `jonplummer.css` resolves (`file://` is fine; embedded JSON keeps selects working).
+2. **Preview** — Open **`/type/`** on the dev server (or `scripts/font-explore/output/index.html` from the repo for file://).
 3. **Ship** — Copy stack strings into `src/assets/css/jonplummer.css` per [Shipping a pair](#shipping-a-pair). Run `pnpm run test css` (and `pnpm run test fast` if you touched more than tokens).
+
+### Exploratory stacks on `/type/`
+
+Self-hosted **latin wght** WOFF2 under `src/assets/fonts/lab/` (from `@fontsource-variable/*`, OFL). **`font-lab-exploratory.css`** registers `@font-face` on `/type/` only.
+
+| Direction | Headings select | Body select |
+|-----------|-----------------|-------------|
+| **Archivo** (whole site) | Archivo | Same as headings |
+| **Big Shoulders + Public Sans** | Big Shoulders Display (site title **or** site + post titles) | Public Sans |
+
+**Big Shoulders** “site title” applies to **`hgroup h1`** only; **“site + post titles”** also styles **`article h1`**. **`h2`–`h4`** stay on the body stack.
 
 ## Commands
 

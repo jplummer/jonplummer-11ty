@@ -2,4 +2,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="max-image-preview:large">
 <meta name="generator" content="{{ eleventy.generator }}">
+{%- include "head/critical.njk" %}
+<link rel="preload" href="{{ page.outputPath | rootRelativePathPrefix }}assets/fonts/lab/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="{{ page.outputPath | rootRelativePathPrefix }}assets/fonts/lab/big-shoulders-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="{{ page.outputPath | rootRelativePathPrefix }}assets/css/jonplummer.css">
