@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-07-06
+
+- Ship cool-chrome palette and Public Sans / Big Shoulders typography.
+
 ## 2026-07-02
 
 - Refine Monotasker portfolio copy in How it was built.
