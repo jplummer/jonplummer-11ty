@@ -24,7 +24,6 @@
 /* === CSS CUSTOM PROPERTIES ===*/
 :root {
   /* Layout */
-  --gutter: 2rem;
   --max-width: 66rem;
   --breakpoint-single-column: 54rem; /* custom properties don't work in a media query, alas */
 
@@ -55,17 +54,17 @@
   --letter-spacing-tight: -0.025em;
   --letter-spacing-normal: normal;
   --letter-spacing-loose: 0.025em;
+  --letter-spacing-display-tight: -0.04em;
 
-  /* Spacing - based on baseline grid (8px/0.5rem unit) */
-  --baseline-unit: 0.5rem; /* 8px - finer control for baseline grid */
-  --spacing-xs: 0.5rem; /* 1 baseline */
-  --spacing-sm: 1rem; /* 2 baselines */
-  --spacing-md: 1.5rem; /* 3 baselines */
-  --spacing-lg: 2rem; /* 4 baselines */
-  --spacing-xl: 2.5rem; /* 5 baselines */
+  /* Spacing — multiples of --baseline-unit (8px at 16px root). Layout snap only; type rhythm stays modular. */
+  --baseline-unit: 0.5rem;
+  --spacing-xs: var(--baseline-unit);
+  --spacing-sm: calc(2 * var(--baseline-unit));
+  --spacing-md: calc(3 * var(--baseline-unit));
+  --spacing-lg: calc(4 * var(--baseline-unit));
+  --spacing-xl: calc(5 * var(--baseline-unit));
+  --gutter: calc(4 * var(--baseline-unit));
   --spacing-ex: 5ex;
-
-  /* Colors — revision 2026 (cool chrome, accent on controls). APCA-tuned OKLCH; light-dark picks by color scheme. */
 
   color-scheme: light dark;
   --text-color: light-dark(oklch(29.6% 0.01 260.71deg), oklch(93% 0.01 260.71deg));
@@ -161,6 +160,7 @@ textarea:not([rows]) {
 }
 
 /* === LAYOUT & STRUCTURE === */
+/* Shell padding, article gaps, and nav spacing use --spacing-* / --gutter (baseline multiples). */
 
 /* Main layout containers */
 body>header, body>main, body>footer {
@@ -423,6 +423,7 @@ hgroup h1 {
   line-height: var(--line-height-3xl);
   font-weight: var(--font-weight-thin);
   text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-display-tight);
   margin: 0;
 }
 
@@ -848,7 +849,7 @@ header a.skip:focus {
   width: auto;
   height: auto;
   background-color: var(--content-background-color);
-  padding: 1rem;
+  padding: var(--spacing-sm);
   z-index: 100;
 }
 
@@ -962,13 +963,13 @@ header a.skip:focus {
 .og-images-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
+  gap: var(--gutter);
   margin: var(--spacing-lg) 0;
 }
 
 .og-images-grid-item {
   border: 1px solid var(--text-color-light);
-  padding: 1rem;
+  padding: var(--spacing-sm);
   background: var(--content-background-color);
 }
 
@@ -976,7 +977,7 @@ header a.skip:focus {
   width: 100%;
   height: auto;
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--baseline-unit);
 }
 
 .og-images-grid-item code {

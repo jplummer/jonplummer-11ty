@@ -1,0 +1,116 @@
+---
+layout: base.njk
+title: /masthead
+description: Masthead scale and baseline mark exploration for Phase 3 — compare options before changing production CSS.
+permalink: /masthead/
+tags: page
+ogImage: /assets/images/og/masthead.png
+---
+<link rel="stylesheet" href="/assets/css/masthead-preview.css">
+<script src="/assets/js/masthead-preview.js" defer></script>
+
+<div class="masthead-preview-page">
+  <p class="masthead-preview-lede">Phase 3 preview. Production masthead uses <code>--letter-spacing-display-tight</code> (−0.04em). The select can compare against the previous −0.06em preview.</p>
+
+  <section aria-labelledby="masthead-context-heading">
+    <h2 id="masthead-context-heading">In context</h2>
+
+    <div class="masthead-context-panel">
+      <label for="masthead-context-select">Site header (live on this page)</label>
+      <select id="masthead-context-select" aria-describedby="masthead-context-hint">
+        <option value="live">Live — 3xl / thin / display-tight (−0.04em)</option>
+        <option value="3xl-thin-tight">3xl / thin / tighter (−0.06em) — preview only</option>
+        <option value="2xl-semibold-tight">2xl / semibold / tight (−0.025em) — less hero</option>
+      </select>
+      <p id="masthead-context-hint" class="masthead-preview-lede">Scroll up to see the header after changing. Choice persists for this tab until you close it.</p>
+    </div>
+
+    <div class="masthead-context-feed">
+      {% include "partials/masthead-preview-feed.njk" %}
+    </div>
+  </section>
+
+  <section aria-labelledby="masthead-scale-heading">
+    <h2 id="masthead-scale-heading">Isolated strips</h2>
+    <p class="masthead-preview-lede">Header-only crops for side-by-side scale comparison (nav + masthead only).</p>
+
+    {% set strips = [
+      { variant: "current", label: "<strong>Live</strong> — <code>3xl</code> / thin / <code>−0.04em</code>" },
+      { variant: "3xl-thin-tight", label: "<code>3xl</code> / thin / tighter (<code>−0.06em</code>, was previous preview)" },
+      { variant: "2xl-semibold-tight", label: "<code>2xl</code> / semibold / tight tracking" },
+      { variant: "2xl-thin", label: "<code>2xl</code> / thin" },
+      { variant: "xl-thin", label: "<code>xl</code> / thin — most restrained" }
+    ] %}
+    {% for strip in strips %}
+      {% set variant = strip.variant %}
+      {% set label = strip.label %}
+      {% include "partials/masthead-preview-strip.njk" %}
+    {% endfor %}
+  </section>
+
+  <section aria-labelledby="baseline-unit-heading">
+    <h2 id="baseline-unit-heading">Baseline unit</h2>
+    <p class="masthead-preview-lede"><code>--baseline-unit</code> is <code>0.5rem</code> (8px at 16px root). Spacing tokens are multiples of this; the live end mark is <code>0.625rem</code> (10px) — slightly off-grid.</p>
+
+    <div class="baseline-ruler-wrap">
+      <ol class="baseline-ruler" aria-hidden="true">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ol>
+      <p class="baseline-ruler-note">Each column is one baseline. Taller columns show 2×, 3× … 8× unit height — a vertical scale, not decoration for its own sake.</p>
+    </div>
+
+    <div class="baseline-grid-demo">
+      <p>Body text on a visible 8px horizontal grid (preview only — would not ship site-wide). Cap height and line box should sit on or near these lines when rhythm is tuned.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="baseline-marks-heading">
+    <h2 id="baseline-marks-heading">End marks — baseline-aligned</h2>
+    <p class="masthead-preview-lede">If a reticle proves the grid, it should use <code>var(--baseline-unit)</code> or simple multiples — same vocabulary as spacing tokens.</p>
+
+    <div class="baseline-mark-grid">
+      <figure class="baseline-mark-card">
+        <p>Sample paragraph ending here.</p>
+        <span class="baseline-mark baseline-mark-square-live" aria-hidden="true"></span>
+        <figcaption><strong>Live</strong> — 0.625rem square (10px, off-grid)</figcaption>
+      </figure>
+
+      <figure class="baseline-mark-card">
+        <p>Sample paragraph ending here.</p>
+        <span class="baseline-mark baseline-mark-square-unit" aria-hidden="true"></span>
+        <figcaption>1× baseline square — snaps to grid</figcaption>
+      </figure>
+
+      <figure class="baseline-mark-card">
+        <p>Sample paragraph ending here.</p>
+        <span class="baseline-mark baseline-mark-crosshair" aria-hidden="true"></span>
+        <figcaption>Crosshair — 1× unit registration mark</figcaption>
+      </figure>
+
+      <figure class="baseline-mark-card">
+        <p>Sample paragraph ending here.</p>
+        <span class="baseline-mark baseline-mark-corner" aria-hidden="true"></span>
+        <figcaption>Corner bracket — 1× unit L</figcaption>
+      </figure>
+
+      <figure class="baseline-mark-card">
+        <p>Sample paragraph ending here.</p>
+        <span class="baseline-mark baseline-mark-tick-rail" aria-hidden="true"></span>
+        <figcaption>Tick rail — square + 2× horizontal measure</figcaption>
+      </figure>
+
+      <figure class="baseline-mark-card">
+        <p>Sample paragraph ending here.</p>
+        <span class="baseline-mark baseline-mark-stack" aria-hidden="true"><span></span><span></span><span></span></span>
+        <figcaption>Stack — three 1px rules, 1 baseline apart</figcaption>
+      </figure>
+    </div>
+  </section>
+</div>

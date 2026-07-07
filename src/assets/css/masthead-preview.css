@@ -1,0 +1,399 @@
+/* /masthead/ — Phase 3 exploration (masthead scale + baseline marks). Not linked in main nav. */
+
+.masthead-preview-page {
+  display: grid;
+  gap: var(--spacing-lg);
+}
+
+.masthead-preview-page > section {
+  display: grid;
+  gap: var(--spacing-md);
+}
+
+.masthead-preview-page h2 {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-lg);
+}
+
+.masthead-preview-lede {
+  margin: 0;
+  max-width: 42rem;
+  color: var(--text-color-light);
+}
+
+/* Chrome strip — mini site header on content band */
+.masthead-preview-strip {
+  margin: 0;
+  display: grid;
+  gap: var(--spacing-xs);
+}
+
+.masthead-preview-strip figcaption {
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-xs);
+  color: var(--text-color-light);
+}
+
+.masthead-preview-strip figcaption code {
+  font-size: 0.9375em;
+}
+
+.masthead-preview-chrome {
+  padding: var(--spacing-sm) var(--gutter);
+  background-color: var(--content-background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+}
+
+.masthead-preview-chrome header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  background: transparent;
+}
+
+.masthead-preview-chrome nav {
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-xs);
+}
+
+.masthead-preview-chrome nav ul {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.masthead-preview-chrome nav li {
+  margin: 0;
+}
+
+.masthead-preview-chrome nav a:any-link {
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-xs);
+  text-decoration: none;
+  color: var(--link-color);
+}
+
+.masthead-preview-chrome nav a:any-link:is(:hover, :focus-visible) {
+  color: var(--link-hover-color);
+}
+
+.masthead-preview-chrome hgroup h1 a:any-link {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.masthead-preview-chrome hgroup h1 a:is(:hover, :focus-visible) {
+  color: var(--text-color);
+}
+
+.masthead-preview-chrome hgroup h1 {
+  font-family: var(--font-family-display);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.masthead-preview-chrome hgroup p {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-xs);
+  font-style: italic;
+  color: var(--text-color-light);
+}
+
+.masthead-preview-chrome hgroup {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+/* In-context preview — overrides real site header on /masthead/ only */
+html[data-masthead-context="3xl-thin-tight"] body > header hgroup h1 {
+  font-size: var(--font-size-3xl);
+  line-height: var(--line-height-3xl);
+  font-weight: var(--font-weight-thin);
+  letter-spacing: -0.06em;
+}
+
+html[data-masthead-context="2xl-semibold-tight"] body > header hgroup h1 {
+  font-size: var(--font-size-2xl);
+  line-height: var(--line-height-2xl);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.masthead-context-panel {
+  display: grid;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: color-mix(in oklch, var(--background-color) 40%, var(--content-background-color));
+}
+
+.masthead-context-panel label {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.masthead-context-panel select {
+  max-width: 28rem;
+  font-family: var(--font-family);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-xs);
+  padding: var(--spacing-xs);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--content-background-color);
+  color: var(--text-color);
+}
+
+.masthead-context-feed {
+  display: grid;
+  gap: 0;
+}
+
+.masthead-context-feed .pagination {
+  margin-top: var(--spacing-md);
+}
+
+.masthead-preview-chrome[data-masthead="3xl-thin-tight"] hgroup h1 {
+  font-size: var(--font-size-3xl);
+  line-height: var(--line-height-3xl);
+  font-weight: var(--font-weight-thin);
+  letter-spacing: -0.06em;
+}
+
+/* Masthead scale variants (isolated strips) */
+.masthead-preview-chrome[data-masthead="current"] hgroup h1 {
+  font-size: var(--font-size-3xl);
+  line-height: var(--line-height-3xl);
+  font-weight: var(--font-weight-thin);
+  letter-spacing: var(--letter-spacing-display-tight);
+}
+
+.masthead-preview-chrome[data-masthead="2xl-thin"] hgroup h1 {
+  font-size: var(--font-size-2xl);
+  line-height: var(--line-height-2xl);
+  font-weight: var(--font-weight-thin);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+.masthead-preview-chrome[data-masthead="2xl-semibold"] hgroup h1 {
+  font-size: var(--font-size-2xl);
+  line-height: var(--line-height-2xl);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+.masthead-preview-chrome[data-masthead="xl-thin"] hgroup h1 {
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-xl);
+  font-weight: var(--font-weight-thin);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+.masthead-preview-chrome[data-masthead="2xl-semibold-tight"] hgroup h1 {
+  font-size: var(--font-size-2xl);
+  line-height: var(--line-height-2xl);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+/* Baseline ruler */
+.baseline-ruler-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--spacing-md);
+}
+
+.baseline-ruler {
+  display: flex;
+  align-items: flex-end;
+  gap: 0;
+  height: calc(var(--baseline-unit) * 8);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.baseline-ruler li {
+  width: var(--baseline-unit);
+  border-left: 1px solid var(--border-color);
+  background-color: color-mix(in oklch, var(--token-color) 35%, transparent);
+}
+
+.baseline-ruler li:nth-child(1) { height: var(--baseline-unit); }
+.baseline-ruler li:nth-child(2) { height: calc(var(--baseline-unit) * 2); }
+.baseline-ruler li:nth-child(3) { height: calc(var(--baseline-unit) * 3); }
+.baseline-ruler li:nth-child(4) { height: calc(var(--baseline-unit) * 4); }
+.baseline-ruler li:nth-child(5) { height: calc(var(--baseline-unit) * 5); }
+.baseline-ruler li:nth-child(6) { height: calc(var(--baseline-unit) * 6); }
+.baseline-ruler li:nth-child(7) { height: calc(var(--baseline-unit) * 7); }
+.baseline-ruler li:nth-child(8) { height: calc(var(--baseline-unit) * 8); }
+
+.baseline-ruler-note {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-xs);
+  color: var(--text-color-light);
+  max-width: 20rem;
+}
+
+/* Text block with visible baseline grid (preview only) */
+.baseline-grid-demo {
+  position: relative;
+  padding: var(--spacing-sm);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent calc(var(--baseline-unit) - 1px),
+    color-mix(in oklch, var(--border-color) 55%, transparent) calc(var(--baseline-unit) - 1px),
+    color-mix(in oklch, var(--border-color) 55%, transparent) var(--baseline-unit)
+  );
+}
+
+.baseline-grid-demo p {
+  margin: 0;
+  max-width: 36rem;
+}
+
+/* End-of-text marks — baseline-aligned experiments */
+.baseline-mark-grid {
+  display: grid;
+  gap: var(--spacing-md);
+}
+
+.baseline-mark-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--spacing-sm);
+  align-items: end;
+  padding: var(--spacing-sm);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+}
+
+.baseline-mark-card p {
+  margin: 0;
+}
+
+.baseline-mark-card figcaption {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-xs);
+  color: var(--text-color-light);
+}
+
+.baseline-mark {
+  flex-shrink: 0;
+  color: var(--token-color);
+}
+
+/* Live EOF: 0.625rem — not on 8px grid */
+.baseline-mark-square-live {
+  width: 0.625rem;
+  height: 0.625rem;
+  background-color: currentColor;
+  border-radius: 2px;
+}
+
+/* One baseline unit (8px @ 16px root) */
+.baseline-mark-square-unit {
+  width: var(--baseline-unit);
+  height: var(--baseline-unit);
+  background-color: currentColor;
+  border-radius: 1px;
+}
+
+.baseline-mark-crosshair {
+  position: relative;
+  width: var(--baseline-unit);
+  height: var(--baseline-unit);
+}
+
+.baseline-mark-crosshair::before,
+.baseline-mark-crosshair::after {
+  content: "";
+  position: absolute;
+  background-color: currentColor;
+}
+
+.baseline-mark-crosshair::before {
+  left: 50%;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  transform: translateX(-50%);
+}
+
+.baseline-mark-crosshair::after {
+  top: 50%;
+  left: 0;
+  height: 1px;
+  width: 100%;
+  transform: translateY(-50%);
+}
+
+.baseline-mark-corner {
+  width: var(--baseline-unit);
+  height: var(--baseline-unit);
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+}
+
+.baseline-mark-tick-rail {
+  position: relative;
+  width: calc(var(--baseline-unit) * 3);
+  height: var(--baseline-unit);
+}
+
+.baseline-mark-tick-rail::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: var(--baseline-unit);
+  height: var(--baseline-unit);
+  background-color: currentColor;
+  border-radius: 1px;
+}
+
+.baseline-mark-tick-rail::after {
+  content: "";
+  position: absolute;
+  right: var(--baseline-unit);
+  top: calc(var(--baseline-unit) / 2);
+  width: calc(var(--baseline-unit) * 2);
+  height: 1px;
+  background-color: currentColor;
+  transform: translateY(-50%);
+}
+
+.baseline-mark-stack {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--baseline-unit) - 1px);
+}
+
+.baseline-mark-stack span {
+  display: block;
+  width: var(--baseline-unit);
+  height: 1px;
+  background-color: currentColor;
+}
