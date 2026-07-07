@@ -3,6 +3,8 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 ## 2026-07-06
 
 - Ship cool-chrome palette and Public Sans / Big Shoulders typography.
+- Purge changed URLs from Cloudflare cache after deploy.
+- Phase 3: masthead tracking, baseline spacing tokens, and /masthead/ preview.
 
 ## 2026-07-02
 
@@ -557,4 +559,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-07-06
+Last deployed on 2026-07-07
