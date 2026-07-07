@@ -33,7 +33,7 @@ Recommended process for deploying changes with an up-to-date changelog:
 - `pnpm run test` - List available test types
 - `pnpm run validate` - Quick HTML validity check (shortcut for `pnpm run test html`)
 - `pnpm run test fast` - Run fast tests (excludes slow tests like a11y)
-  - Runs: `html` → `links` → `wisdom` → `internal-links` → `frontmatter` → `markdown` → `spell` → `seo` → `og-images` → `color-contrast` → `css` → `rss` → `portfolio-notes` → `deploy-assets` → `indexnow`
+  - Runs: `html` → `links` → `wisdom` → `internal-links` → `frontmatter` → `markdown` → `spell` → `seo` → `og-images` → `color-contrast` → `css` → `rss` → `portfolio-notes` → `deploy-assets` → `cloudflare-purge` → `indexnow`
 - `pnpm run test all` - Run all tests in sequence (includes slow tests)
   - Runs: everything in `test fast` → `a11y`
 - `pnpm run test [type]` - Run a specific test type
@@ -44,7 +44,7 @@ Recommended process for deploying changes with an up-to-date changelog:
 ### 🪂 Deployment
 
 - `pnpm run deploy` - Deploy site to host via rsync
-  - Runs: `changelog` → `build` (source checks + OG images + Eleventy + output checks) → rsync → IndexNow
+  - Runs: `changelog` → `build` (source checks + OG images + Eleventy + output checks) → rsync → Cloudflare purge (changed URLs) → IndexNow
 - `pnpm run deploy --dry-run` - Test deployment without actually deploying (runs all checks and shows what would be synced)
 
 ### 🪶 Content Authoring
@@ -89,8 +89,9 @@ The deploy script performs these steps in order:
 1. **Regenerates changelog** from git history
 2. **Builds the site** via `pnpm run build` — runs all source checks, generates OG images, runs Eleventy, then runs all output checks
 3. **Deploys via rsync** - uses `--dry-run` flag when `--dry-run` option is used
-4. **Submits IndexNow** notification for search engine indexing - skipped with `--dry-run`
-5. **Commits and pushes changelog** if it was updated - skipped with `--dry-run`
+4. **Purges Cloudflare cache** for rsync-changed URLs only (skipped if credentials unset; previewed on dry-run)
+5. **Submits IndexNow** notification for search engine indexing - skipped with `--dry-run`
+6. **Commits and pushes changelog** if it was updated - skipped with `--dry-run`
 
 **Note:** Links from NotePlan should be imported *before* committing (`pnpm run import-links`), not during deployment. This lets you review and test links locally before they go live.
 
@@ -112,6 +113,17 @@ This is useful for:
 - Verifying the deployment process works end-to-end
 - Checking what files would be changed on the server
 - Testing configuration changes
+
+#### Cloudflare cache purge (optional)
+
+After rsync, deploy purges **only changed URLs** from Cloudflare edge cache (parsed from rsync `--itemize-changes`). Set in `.env`:
+
+```
+CLOUDFLARE_ZONE_ID=your-zone-id
+CLOUDFLARE_API_TOKEN=your-api-token
+```
+
+Create an API token with **Zone → Cache Purge → Purge** permission for the site zone. If unset, deploy skips purge and prints a note. Set `CLOUDFLARE_PURGE=0` to disable when credentials are present. `pnpm run deploy --dry-run` lists URLs that would be purged without calling the API.
 
 
 ### 🗃️ Changelog Generation

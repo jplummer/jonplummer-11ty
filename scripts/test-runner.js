@@ -23,6 +23,7 @@ const testTypes = {
   'rss': 'rss-feed.js',
   'portfolio-notes': 'portfolio-notes.js',
   'deploy-assets': 'deploy-assets.js',
+  'cloudflare-purge': 'cloudflare-purge.js',
   'deploy': 'deploy.js',
   'indexnow': 'indexnow.js',
   'security': { file: 'security-audit.js', dir: 'security' }
@@ -45,6 +46,7 @@ const fastTests = [
   'rss',
   'portfolio-notes',
   'deploy-assets',
+  'cloudflare-purge',
   'indexnow'
 ];
 
@@ -64,6 +66,7 @@ const allTests = [
   'rss',
   'portfolio-notes',
   'deploy-assets',
+  'cloudflare-purge',
   'indexnow',
   'a11y'
 ];
@@ -77,7 +80,7 @@ function listTests() {
   const { getTestDescription } = require('./utils/test-results');
   
   // Only show primary names
-  const primaryNames = ['html', 'links', 'wisdom', 'internal-links', 'frontmatter', 'markdown', 'spell', 'seo', 'og-images', 'a11y', 'color-contrast', 'css', 'rss', 'portfolio-notes', 'deploy-assets', 'deploy', 'indexnow', 'security'];
+  const primaryNames = ['html', 'links', 'wisdom', 'internal-links', 'frontmatter', 'markdown', 'spell', 'seo', 'og-images', 'a11y', 'color-contrast', 'css', 'rss', 'portfolio-notes', 'deploy-assets', 'cloudflare-purge', 'deploy', 'indexnow', 'security'];
   
   primaryNames.forEach(type => {
     const isInAll = allTests.includes(type);

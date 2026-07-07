@@ -10,6 +10,7 @@
  * - rsync must be installed
  * - SSH access to remote server (passwordless SSH key authentication)
  * - .env file with DEPLOY_HOST, DEPLOY_USERNAME, DEPLOY_REMOTE_PATH
+ * - Optional: CLOUDFLARE_ZONE_ID + CLOUDFLARE_API_TOKEN to purge changed URLs post-deploy
  * 
  * Options:
  * - --dry-run: Run all checks and show what would be deployed, but don't actually deploy
@@ -139,6 +140,7 @@ async function deploy(config, siteDomain, dryRun) {
     const rsyncCommand = [
       'rsync',
       '-az', // Archive mode, compress
+      '--itemize-changes', // List changed paths for Cloudflare selective purge
       '--delete', // Delete files on remote that don't exist locally
       '--exclude=.DS_Store', // Exclude macOS metadata files
       '--exclude=Thumbs.db', // Exclude Windows thumbnail files
@@ -231,7 +233,7 @@ async function deploy(config, siteDomain, dryRun) {
             console.log(`\n✅ 🚀 Deploy: completed`);
             console.log(`   🌐 Site live at: https://${siteDomain}`);
           }
-          resolve();
+          resolve({ stdout: stdoutData, stderr: stderrData });
         } else {
           console.error('\n❌ Deployment failed:');
           console.error(`   Exit code: ${code}`);
@@ -257,6 +259,52 @@ async function deploy(config, siteDomain, dryRun) {
     console.error('\n❌ Deployment failed:');
     console.error(`   ${error.message}`);
     process.exit(1);
+  }
+}
+
+function logCloudflarePurgeResult(purgeResult, { dryRun }) {
+  if (purgeResult.skipped && purgeResult.reason === 'not-configured') {
+    console.log('ℹ️  ☁️  Cloudflare purge: skipped (set CLOUDFLARE_ZONE_ID + CLOUDFLARE_API_TOKEN in .env)\n');
+    return;
+  }
+
+  if (purgeResult.skipped && purgeResult.reason === 'no-changes') {
+    console.log('✅ ☁️  Cloudflare purge: nothing to purge (rsync transferred no files)\n');
+    return;
+  }
+
+  const prefix = dryRun ? '☁️  Cloudflare purge (dry-run): would purge' : '✅ ☁️  Cloudflare purge:';
+  if (dryRun) {
+    console.log(`${prefix} ${purgeResult.urls.length} URL(s)`);
+  } else {
+    console.log(`${prefix} ${purgeResult.purged} URL(s) in ${purgeResult.batches} batch(es)`);
+  }
+
+  const urls = purgeResult.urls;
+  const show = urls.length <= 8 ? urls : urls.slice(0, 5).concat([`… and ${urls.length - 5} more`]);
+  for (const url of show) {
+    console.log(`   ${url}`);
+  }
+  console.log('');
+}
+
+async function purgeCloudflareAfterDeploy(rsyncOutput, siteDomain, dryRun) {
+  const {
+    purgeChangedDeployFiles,
+    isCloudflarePurgeConfigured,
+  } = require('../utils/cloudflare-purge');
+
+  if (!dryRun && !isCloudflarePurgeConfigured()) {
+    logCloudflarePurgeResult({ skipped: true, reason: 'not-configured' }, { dryRun: false });
+    return;
+  }
+
+  try {
+    const purgeResult = await purgeChangedDeployFiles(rsyncOutput, siteDomain, { dryRun });
+    logCloudflarePurgeResult(purgeResult, { dryRun });
+  } catch (error) {
+    console.log('⚠️  ☁️  Cloudflare purge: failed (deployment succeeded)');
+    console.warn(`   ${error.message}\n`);
   }
 }
 
@@ -342,8 +390,10 @@ async function deploy(config, siteDomain, dryRun) {
   }
   
   try {
-    await deploy(config, siteDomain, dryRun);
-    
+    const { stdout: rsyncOutput } = await deploy(config, siteDomain, dryRun);
+
+    await purgeCloudflareAfterDeploy(rsyncOutput, siteDomain, dryRun);
+
     // Notify IndexNow after successful deployment (only if not dry-run)
     if (!dryRun) {
       try {

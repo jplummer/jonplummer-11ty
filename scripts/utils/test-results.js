@@ -255,6 +255,7 @@ const TEST_EMOJIS = {
   'rss': '📡',
   'portfolio-notes': '📎',
   'deploy-assets': '📦',
+  'cloudflare-purge': '☁️',
   'seo': '📈',
   'deploy': '🚀',
   'security': '🛡️',
@@ -294,6 +295,7 @@ function getTestDisplayName(testType) {
     'portfolio-notes': 'Portfolio notes parsing',
     'og-images': 'OG Images',
     'deploy-assets': 'Deploy Assets',
+    'cloudflare-purge': 'Cloudflare Purge',
     'deploy': 'Deploy',
     'security': 'Security Audit'
   };
@@ -322,6 +324,7 @@ function getTestDescription(testType) {
     'rss': 'RSS feed validation',
     'portfolio-notes': 'Portfolio speaker-notes text parsing',
     'deploy-assets': 'Fonts and deploy-critical _site/ assets',
+    'cloudflare-purge': 'Rsync itemize → Cloudflare purge URL mapping',
     'deploy': 'Deployment connectivity',
     'indexnow': 'IndexNow configuration',
     'security': 'Security audit'

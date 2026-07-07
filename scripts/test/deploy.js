@@ -44,6 +44,14 @@ if (fs.existsSync(deployScriptPath)) {
     console.log('❌ Deploy rsync must not exclude assets/fonts/ (self-hosted WOFF2 required)');
     process.exit(1);
   }
+  const hasCloudflarePurge =
+    deployContent.includes('cloudflare-purge') &&
+    deployContent.includes('--itemize-changes') &&
+    deployContent.includes('purgeCloudflareAfterDeploy');
+  if (!hasCloudflarePurge) {
+    console.log('❌ Deploy script missing Cloudflare selective purge integration');
+    process.exit(1);
+  }
 }
 
 // Load environment variables

@@ -23,7 +23,7 @@ This project includes a suite of validation tests covering content structure, HT
 
 ### Test Categories
 
-**Fast Tests:** `html`, `links`, `wisdom`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `portfolio-notes`, `deploy-assets`, `indexnow`
+**Fast Tests:** `html`, `links`, `wisdom`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `portfolio-notes`, `deploy-assets`, `cloudflare-purge`, `indexnow`
 
 **Slow Tests:** `a11y` (launches browser)
 
@@ -84,6 +84,10 @@ Runs fixture assertions against `parseNotesContent()` in `scripts/utils/portfoli
 ### deploy-assets.js
 
 After `pnpm run build`, verifies `_site/` contains self-hosted fonts (WOFF2 under `assets/fonts/lab/`, `@font-face` in `jonplummer.css`), font preloads, inline critical shell in `<head>`, and that `scripts/deploy/deploy.js` does not rsync-exclude `assets/fonts/`.
+
+### cloudflare-purge.js
+
+Unit checks for `scripts/utils/cloudflare-purge.js`: rsync `--itemize-changes` parsing and `_site/` path → public URL mapping used by post-deploy selective purge.
 
 ## HTML Output Tests
 
