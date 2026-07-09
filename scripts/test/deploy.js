@@ -23,36 +23,10 @@ const { loadDotenvSilently } = require('../utils/env-utils');
 
 console.log('🔍 Testing rsync deployment connectivity...\n');
 
-// Test 0: Deploy script contains changelog commit/push logic (regression guard)
-const deployScriptPath = path.join(__dirname, '..', 'deploy', 'deploy.js');
-if (fs.existsSync(deployScriptPath)) {
-  const deployContent = fs.readFileSync(deployScriptPath, 'utf8');
-  const hasChangelogCommitLogic =
-    deployContent.includes('changelogChanged') &&
-    deployContent.includes('git add CHANGELOG.md') &&
-    deployContent.includes('changelog: update') &&
-    deployContent.includes('git push');
-  if (!hasChangelogCommitLogic) {
-    console.log('❌ Deploy script missing changelog commit/push logic');
-    process.exit(1);
-  }
-  if (deployContent.includes('--exclude=color/')) {
-    console.log('❌ Deploy rsync must not exclude color/ (/color/ is a normal page)');
-    process.exit(1);
-  }
-  if (deployContent.includes('--exclude=assets/fonts')) {
-    console.log('❌ Deploy rsync must not exclude assets/fonts/ (self-hosted WOFF2 required)');
-    process.exit(1);
-  }
-  const hasCloudflarePurge =
-    deployContent.includes('cloudflare-purge') &&
-    deployContent.includes('--itemize-changes') &&
-    deployContent.includes('purgeCloudflareAfterDeploy');
-  if (!hasCloudflarePurge) {
-    console.log('❌ Deploy script missing Cloudflare selective purge integration');
-    process.exit(1);
-  }
-}
+// Regression guards for scripts/deploy/deploy.js (rsync excludes, changelog
+// commit logic, Cloudflare purge wiring) live in `pnpm run test deploy-guards`
+// — this script only covers live connectivity, which needs real credentials
+// and network and can't run automatically.
 
 // Load environment variables
 if (fs.existsSync('.env')) {

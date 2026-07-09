@@ -2,29 +2,26 @@
 
 /**
  * Test Changed Files
- * 
+ *
  * Runs authoring-related tests on files changed since last commit.
- * Tests: spell, frontmatter, markdown, links, seo
+ * Test list comes from CONTENT_CHANGED_TESTS (scripts/utils/test-runner-helper.js) —
+ * the single source of truth for which content-authoring tests support --changed.
  */
 
 const { execSync } = require('child_process');
 const path = require('path');
 const { getChangedFilesSinceHead } = require('./utils/test-helpers');
+const { CONTENT_CHANGED_TESTS } = require('./utils/test-runner-helper');
 
 // Map test type names to script file names
-const testScriptMap = {
-  'spell': 'spell',
-  'frontmatter': 'frontmatter',
-  'markdown': 'markdown',
-  'links': 'links-yaml',
-  'wisdom': 'wisdom-yaml',
-  'seo': 'seo-meta'
-};
+const testScriptMap = Object.fromEntries(
+  CONTENT_CHANGED_TESTS.map(({ name, scriptName }) => [name, scriptName])
+);
 
 function getChangedFiles() {
   return getChangedFilesSinceHead().filter(file => {
     const ext = path.extname(file).toLowerCase();
-    return ['.md', '.yaml', '.yml'].includes(ext) && file.startsWith('src/');
+    return ['.md', '.yaml', '.yml', '.css'].includes(ext) && file.startsWith('src/');
   });
 }
 
@@ -59,25 +56,22 @@ function runTest(testName, useChanged = false) {
 // Main function
 function main() {
   const changedFiles = getChangedFiles();
-  
+
   if (changedFiles.length === 0) {
-    console.log('✅ No markdown or YAML files changed since last commit');
+    console.log('✅ No markdown, YAML, or CSS files changed since last commit');
     process.exit(0);
   }
-  
+
   console.log(`\n📝 Checking ${changedFiles.length} changed file(s):`);
   changedFiles.forEach(file => console.log(`   ${file}`));
   console.log('');
-  
-  const tests = [
-    { name: 'spell', useChanged: true, scope: 'changed files only' },
-    { name: 'frontmatter', useChanged: true, scope: 'changed files only' },
-    { name: 'markdown', useChanged: true, scope: 'changed files only' },
-    { name: 'links', useChanged: true, scope: 'changed files only' },
-    { name: 'wisdom', useChanged: true, scope: 'changed files only' },
-    { name: 'seo', useChanged: true, scope: 'changed files only (if markdown files changed)' }
-  ];
-  
+
+  const tests = CONTENT_CHANGED_TESTS.map(({ name }) => ({
+    name,
+    useChanged: true,
+    scope: 'changed files only'
+  }));
+
   let allPassed = true;
   const results = [];
   

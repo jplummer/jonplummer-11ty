@@ -256,6 +256,7 @@ const TEST_EMOJIS = {
   'portfolio-notes': '📎',
   'deploy-assets': '📦',
   'cloudflare-purge': '☁️',
+  'deploy-guards': '🛟',
   'seo': '📈',
   'deploy': '🚀',
   'security': '🛡️',
@@ -296,6 +297,7 @@ function getTestDisplayName(testType) {
     'og-images': 'OG Images',
     'deploy-assets': 'Deploy Assets',
     'cloudflare-purge': 'Cloudflare Purge',
+    'deploy-guards': 'Deploy Guards',
     'deploy': 'Deploy',
     'security': 'Security Audit'
   };
@@ -325,6 +327,7 @@ function getTestDescription(testType) {
     'portfolio-notes': 'Portfolio speaker-notes text parsing',
     'deploy-assets': 'Fonts and deploy-critical _site/ assets',
     'cloudflare-purge': 'Rsync itemize → Cloudflare purge URL mapping',
+    'deploy-guards': 'deploy.js regression guards (rsync excludes, changelog, purge wiring)',
     'deploy': 'Deployment connectivity',
     'indexnow': 'IndexNow configuration',
     'security': 'Security audit'

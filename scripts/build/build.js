@@ -4,11 +4,12 @@ const { execSync } = require('child_process');
 
 const PRE_BUILD_TESTS = [
   'markdown', 'frontmatter', 'spell', 'css',
-  'links', 'wisdom', 'portfolio-notes', 'color-contrast',
+  'links', 'wisdom', 'color-contrast',
 ];
 
 const POST_BUILD_TESTS = [
   'html', 'internal-links', 'og-images', 'seo', 'rss', 'indexnow',
+  'deploy-assets',
 ];
 
 function run(command, errorLabel) {

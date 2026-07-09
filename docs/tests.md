@@ -2,7 +2,11 @@
 
 ## Overview
 
-This project includes a suite of validation tests covering content structure, HTML output, SEO metadata, accessibility, and deployment readiness. Tests are grouped as "fast" (for frequent, quick checks) and "slow" (for in-depth checks run occasionally).
+This project includes a suite of validation tests covering content structure, HTML output, SEO metadata, accessibility, and deployment readiness, plus a separate suite of unit tests for our own tooling code. The split reflects three different questions:
+
+- **Fast tests** (`pnpm run test fast`): is what I authored/changed fit to build, and is the built output fit to ship? Split further into pre-build content checks and post-build output checks by `scripts/build/build.js`.
+- **Unit tests** (`pnpm run test unit`): does our own tooling code (parsers, deploy helpers) still behave correctly? Not tied to any authored content or build output — run on demand whenever `scripts/utils/`, `scripts/deploy/`, or content parsers change.
+- **Slow tests** (`a11y`) and **infrastructure tests** (`deploy`, `security`): occasional/manual checks that need a browser, live network, or credentials.
 
 ## Test Execution
 
@@ -10,6 +14,7 @@ This project includes a suite of validation tests covering content structure, HT
 - `pnpm run test [type]` - Run a specific test type (checks all files)
 - `pnpm run test fast` - Run all fast tests (excludes slow tests like a11y)
 - `pnpm run test all` - Run all tests including slow ones
+- `pnpm run test unit` - Run all unit tests of our own tooling code
 - `pnpm run test changed` - Run authoring tests on files changed since last commit
 - `pnpm run validate` - Quick HTML validity check (shortcut for `pnpm run test html`)
 
@@ -23,7 +28,9 @@ This project includes a suite of validation tests covering content structure, HT
 
 ### Test Categories
 
-**Fast Tests:** `html`, `links`, `wisdom`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `portfolio-notes`, `deploy-assets`, `cloudflare-purge`, `indexnow`
+**Fast Tests:** `html`, `links`, `wisdom`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `deploy-assets`, `indexnow`
+
+**Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards` — see [Unit Tests](#unit-tests) below
 
 **Slow Tests:** `a11y` (launches browser)
 
@@ -77,21 +84,13 @@ Runs [Stylelint](https://stylelint.io) on `src/**/*.css` using `.stylelintrc.jso
 
 Reads `light-dark()` (and legacy dark `:root`) color pairs from `src/assets/css/jonplummer.css`, parses hex or `oklch()` as **raw** values, then computes APCA **Lc** twice: after culori **`toGamut('rgb')`** with **apca-w3** `sRGBtoY`, and after **`toGamut('p3')`** with **`displayP3toY`**. **Pass/fail** (exit code) uses the **sRGB** path only (same thresholds as before). **Warnings** cover large sRGB-vs-P3 Lc divergence (while sRGB still meets minimum) and P3 below minimum while sRGB passes. Shared helpers live in `scripts/utils/apca-dual.js`.
 
-### portfolio-notes.js
-
-Runs fixture assertions against `parseNotesContent()` in `scripts/utils/portfolio-notes.js` (numbered lines including empty slides, `Slide N:` / `N)` variants, blank-line blocks). Guards regression for `convert-pdf-pages-with-notes` and `convert-presentation-portfolio`. With `--changed`, skips if neither the parser nor this test file changed since the last commit.
-
-### deploy-assets.js
-
-After `pnpm run build`, verifies `_site/` contains self-hosted fonts (WOFF2 under `assets/fonts/lab/`, `@font-face` in `jonplummer.css`), font preloads, inline critical shell in `<head>`, and that `scripts/deploy/deploy.js` does not rsync-exclude `assets/fonts/`.
-
-### cloudflare-purge.js
-
-Unit checks for `scripts/utils/cloudflare-purge.js`: rsync `--itemize-changes` parsing and `_site/` path → public URL mapping used by post-deploy selective purge.
-
 ## HTML Output Tests
 
 Tests that validate built HTML files in `_site/` directory. **Requires:** `pnpm run build` first.
+
+### deploy-assets.js
+
+After `pnpm run build`, verifies `_site/` contains self-hosted fonts (WOFF2 under `assets/fonts/lab/`, `@font-face` in `jonplummer.css`), font preloads, and inline critical shell in `<head>`. Runs automatically as part of `build.js`'s post-build phase. (Whether `scripts/deploy/deploy.js` itself excludes `assets/fonts/` from rsync is checked separately by `deploy-guards.js` — see [Unit Tests](#unit-tests).)
 
 ### html.js
 
@@ -121,6 +120,22 @@ Tests HTML files for accessibility violations using `axe-core` via Puppeteer. Te
 
 **Note:** Slow test (launches browser for each page).
 
+## Unit Tests
+
+Tests of our own tooling code (parsers, deploy helpers) — not authored content or build output. No `_site/` or network dependency, so they run fast and can run any time. Not part of `build.js` or `deploy.js`; run them on demand with `pnpm run test unit` whenever you touch `scripts/utils/`, `scripts/deploy/`, or content parsers under `scripts/content/`.
+
+### portfolio-notes.js
+
+Runs fixture assertions against `parseNotesContent()` in `scripts/utils/portfolio-notes.js` (numbered lines including empty slides, `Slide N:` / `N)` variants, blank-line blocks). Guards regression for `convert-pdf-pages-with-notes` and `convert-presentation-portfolio`. With `--changed`, skips if neither the parser nor this test file changed since the last commit — this checks whether the *parser code* changed, not authored content, which is why it lives here rather than in `pnpm run test changed`.
+
+### cloudflare-purge.js
+
+Unit checks for `scripts/utils/cloudflare-purge.js`: rsync `--itemize-changes` parsing and `_site/` path → public URL mapping used by post-deploy selective purge.
+
+### deploy-guards.js
+
+Static regression guards for `scripts/deploy/deploy.js`'s source — no network or `_site/` dependency. Checks: rsync doesn't exclude `color/` or `assets/fonts/`, the changelog commit logic is present, and the Cloudflare selective-purge integration is wired up. Each check traces to a real past incident (accidentally excluding `/color/` or fonts from rsync, breaking the changelog auto-commit). Live connectivity checks (SSH, rsync upload, `.env`) are a separate, manual-only test — see `deploy.js` below.
+
 ## Infrastructure Tests
 
 ### deploy.js
@@ -139,13 +154,13 @@ Performs security and maintenance checks: `pnpm audit`, `pnpm outdated`, Node.js
 
 ### test-changed.js
 
-Runs authoring tests on files changed since last commit: `spell`, `frontmatter`, `markdown`, `links` (if changed), `seo` (if markdown changed).
+Runs content-authoring tests on files changed since last commit. Test list comes from `CONTENT_CHANGED_TESTS` in `scripts/utils/test-runner-helper.js` — the single source of truth, kept in sync with each test script's actual `--changed` support (currently `spell`, `frontmatter`, `markdown`, `links`, `wisdom`, `css`, `seo`). Unit tests like `portfolio-notes` are deliberately excluded — they detect whether *tooling code* changed, not authored content; run `pnpm run test unit` for those.
 
 ## Deployment Integration
 
-The deployment script automatically runs: `markdown` and `frontmatter` (pre-build), `og-images` (post-build). Can be skipped with `--skip-checks` (not recommended).
+`pnpm run deploy` runs `pnpm run build` in full — all of `build.js`'s pre-build content checks, OG image generation, Eleventy, and post-build output checks (including `deploy-assets`). It does not run the `unit` suite; if you've touched deploy tooling, run `pnpm run test unit` yourself first.
 
-**Changelog commit on deploy:** When the changelog is updated during deploy, the script commits and pushes it (skipped with `--dry-run`). To verify manually: make a content commit, run `pnpm run deploy` (not dry-run), then check that a second commit "changelog: update" was created and pushed. The deploy test suite includes a structural check that the deploy script contains this logic.
+**Changelog and push on deploy:** the script regenerates `CHANGELOG.md` before building; if it changed, deploy commits it after a successful deploy. Either way — changelog changed or not — deploy always runs `git push` afterward (skipped with `--dry-run`), so locally committed work never gets stranded unpushed. To verify manually: make a content commit, run `pnpm run deploy` (not dry-run), then check that a "changelog: update" commit (if any) and your own commit both landed on remote. `deploy-guards.js` (see [Unit Tests](#unit-tests)) statically checks that this commit/push logic is still present in `deploy.js`'s source.
 
 ## Test Architecture
 

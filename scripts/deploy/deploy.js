@@ -405,17 +405,26 @@ async function purgeCloudflareAfterDeploy(rsyncOutput, siteDomain, dryRun) {
         console.warn(`   ${error.message}\n`);
       }
 
-      // Commit and push changelog if it was updated (keeps repo in sync)
+      // Commit changelog if it was updated (keeps repo in sync)
       if (changelogChanged) {
         try {
           execSync('git add CHANGELOG.md', { cwd: process.cwd(), stdio: 'pipe' });
           execSync('git commit -m "changelog: update"', { cwd: process.cwd(), stdio: 'pipe' });
-          execSync('git push', { cwd: process.cwd(), stdio: 'inherit' });
-          console.log('✅ 📋 Changelog: committed and pushed\n');
+          console.log('✅ 📋 Changelog: committed\n');
         } catch (error) {
-          console.log('⚠️  📋 Changelog: could not commit/push (deployment succeeded)');
+          console.log('⚠️  📋 Changelog: could not commit (deployment succeeded)');
           console.warn(`   ${error.message}\n`);
         }
+      }
+
+      // Always push after a successful deploy — not just when the changelog
+      // changed — so locally committed work never gets stranded unpushed.
+      try {
+        execSync('git push', { cwd: process.cwd(), stdio: 'inherit' });
+        console.log('✅ 📤 Pushed to remote\n');
+      } catch (error) {
+        console.log('⚠️  📤 Push failed (deployment succeeded) — push manually');
+        console.warn(`   ${error.message}\n`);
       }
     }
   } catch (error) {

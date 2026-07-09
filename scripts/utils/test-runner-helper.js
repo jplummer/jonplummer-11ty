@@ -15,6 +15,27 @@
 const { createTestResult, outputResult, formatVerbose } = require('./test-results');
 
 /**
+ * Content-authoring tests that support `--changed`-aware filtering by
+ * content file (via getChangedFilesFn/shouldSkipFn in their runTest() call).
+ * Single source of truth for scripts/test-changed.js — keep in sync with
+ * each test script's actual --changed support, not with build.js's
+ * PRE_BUILD_TESTS (which includes color-contrast, with no --changed support,
+ * and excludes seo, which is a post-build test but does support --changed).
+ * Excludes portfolio-notes: it supports --changed too, but to detect whether
+ * its own parser code changed, not whether content changed — that's a unit
+ * test (see scripts/test-runner.js's unitTests), not an authoring check.
+ */
+const CONTENT_CHANGED_TESTS = [
+  { name: 'spell', scriptName: 'spell' },
+  { name: 'frontmatter', scriptName: 'frontmatter' },
+  { name: 'markdown', scriptName: 'markdown' },
+  { name: 'links', scriptName: 'links-yaml' },
+  { name: 'wisdom', scriptName: 'wisdom-yaml' },
+  { name: 'css', scriptName: 'css' },
+  { name: 'seo', scriptName: 'seo-meta' },
+];
+
+/**
  * Check if --changed flag is provided
  * @returns {boolean} True if --changed flag is present
  */
@@ -125,6 +146,7 @@ module.exports = {
   checkChangedFlag,
   exitWithEmptyResult,
   outputAndExit,
-  runTest
+  runTest,
+  CONTENT_CHANGED_TESTS
 };
 

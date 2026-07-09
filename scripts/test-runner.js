@@ -24,6 +24,7 @@ const testTypes = {
   'portfolio-notes': 'portfolio-notes.js',
   'deploy-assets': 'deploy-assets.js',
   'cloudflare-purge': 'cloudflare-purge.js',
+  'deploy-guards': 'deploy-guards.js',
   'deploy': 'deploy.js',
   'indexnow': 'indexnow.js',
   'security': { file: 'security-audit.js', dir: 'security' }
@@ -31,6 +32,8 @@ const testTypes = {
 
 // Fast tests (excludes slow tests like a11y)
 // Suitable for pre-commit hooks or frequent validation
+// Content-authoring and built-output checks only — unit tests of our own
+// tooling code (parsers, deploy helpers) live in `unitTests` below instead.
 const fastTests = [
   'html',
   'links',
@@ -44,9 +47,7 @@ const fastTests = [
   'color-contrast',
   'css',
   'rss',
-  'portfolio-notes',
   'deploy-assets',
-  'cloudflare-purge',
   'indexnow'
 ];
 
@@ -64,11 +65,18 @@ const allTests = [
   'color-contrast',
   'css',
   'rss',
-  'portfolio-notes',
   'deploy-assets',
-  'cloudflare-purge',
   'indexnow',
   'a11y'
+];
+
+// Unit tests of our own tooling code (parsers, deploy helpers) — not tied to
+// authored content or build output. Run on demand with `pnpm run test unit`
+// whenever scripts/utils/, scripts/deploy/, or content parsers change.
+const unitTests = [
+  'portfolio-notes',
+  'cloudflare-purge',
+  'deploy-guards'
 ];
 
 // Tests that don't use JSON output — use inherited stdout so output isn't buffered and re-written (avoids duplicate output)
@@ -80,14 +88,16 @@ function listTests() {
   const { getTestDescription } = require('./utils/test-results');
   
   // Only show primary names
-  const primaryNames = ['html', 'links', 'wisdom', 'internal-links', 'frontmatter', 'markdown', 'spell', 'seo', 'og-images', 'a11y', 'color-contrast', 'css', 'rss', 'portfolio-notes', 'deploy-assets', 'cloudflare-purge', 'deploy', 'indexnow', 'security'];
-  
+  const primaryNames = ['html', 'links', 'wisdom', 'internal-links', 'frontmatter', 'markdown', 'spell', 'seo', 'og-images', 'a11y', 'color-contrast', 'css', 'rss', 'portfolio-notes', 'deploy-assets', 'cloudflare-purge', 'deploy-guards', 'deploy', 'indexnow', 'security'];
+
   primaryNames.forEach(type => {
     const isInAll = allTests.includes(type);
     const isInFast = fastTests.includes(type);
+    const isInUnit = unitTests.includes(type);
     let note = '';
     if (isInFast) note = ' (included in "test fast" and "test all")';
     else if (isInAll) note = ' (included in "test all")';
+    else if (isInUnit) note = ' (included in "test unit")';
     const description = getTestDescription(type);
     const descText = description ? ` - ${description}` : '';
     console.log(`  ${type}${descText}${note}`);
@@ -95,6 +105,7 @@ function listTests() {
   console.log('\nUsage: pnpm run test [type]');
   console.log('       pnpm run test fast   (runs fast tests: ' + fastTests.join(', ') + ')');
   console.log('       pnpm run test all    (runs all tests: ' + allTests.join(', ') + ')');
+  console.log('       pnpm run test unit   (runs unit tests: ' + unitTests.join(', ') + ')');
 }
 
 function runTest(testType, showStatus = false, compact = false, formatOptions = {}) {
@@ -384,9 +395,9 @@ async function runFastTests() {
 
 async function runAllTests() {
   console.log('Running all tests...\n');
-  
+
   const results = [];
-  
+
   for (let i = 0; i < allTests.length; i++) {
     const testType = allTests[i];
     const result = await runTest(testType, true, true); // compact = true for group runs
@@ -394,6 +405,25 @@ async function runAllTests() {
     results.push(result);
     // Single newline between tests (except after last test)
     if (i < allTests.length - 1) {
+      console.log('');
+    }
+  }
+  const allPassed = printOverallSummary(results);
+  process.exit(allPassed ? 0 : 1);
+}
+
+async function runUnitTests() {
+  console.log('Running unit tests...\n');
+
+  const results = [];
+
+  for (let i = 0; i < unitTests.length; i++) {
+    const testType = unitTests[i];
+    const result = await runTest(testType, true, true); // compact = true for group runs
+    result.emoji = getTestEmoji(testType);
+    results.push(result);
+    // Single newline between tests (except after last test)
+    if (i < unitTests.length - 1) {
       console.log('');
     }
   }
@@ -438,7 +468,13 @@ async function main() {
     // runAllTests handles its own exit
     return;
   }
-  
+
+  if (testType === 'unit') {
+    await runUnitTests();
+    // runUnitTests handles its own exit
+    return;
+  }
+
   if (testType === 'changed') {
     // Alias for test-changed.js script
     const { spawn } = require('child_process');

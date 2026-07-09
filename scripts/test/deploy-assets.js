@@ -92,17 +92,6 @@ async function validate(result) {
     }
   }
 
-  const deployScript = path.join(process.cwd(), 'scripts', 'deploy', 'deploy.js');
-  if (fs.existsSync(deployScript)) {
-    const deployContent = fs.readFileSync(deployScript, 'utf8');
-    if (deployContent.includes('--exclude=assets/fonts')) {
-      addIssue(fileObj, {
-        severity: 'error',
-        type: 'deploy-assets',
-        message: 'Deploy rsync must not exclude assets/fonts/'
-      });
-    }
-  }
 }
 
 runTest({
