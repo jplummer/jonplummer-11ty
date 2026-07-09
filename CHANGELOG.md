@@ -1,5 +1,10 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-07-08
+
+- Add Vision Is Not Magic post, Public Sans webfont reference, and new links
+- Bump js-yaml and markdown-it dependency versions
+
 ## 2026-07-07
 
 - Fix duplicate nav landmark labels on /masthead/ preview strips.
