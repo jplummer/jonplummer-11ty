@@ -51,7 +51,7 @@
     "culori": "^4.0.2",
     "gray-matter": "4.0.3",
     "html-validate": "^10.17.0",
-    "js-yaml": "^4.2.0",
+    "js-yaml": "^4.3.0",
     "luxon": "^3.7.2",
     "markdownlint-cli2": "^0.22.1",
     "nunjucks": "^3.2.4",
@@ -61,6 +61,6 @@
   },
   "dependencies": {
     "dotenv": "^17.4.2",
-    "markdown-it": "^14.2.0"
+    "markdown-it": "^14.3.0"
   }
 }
