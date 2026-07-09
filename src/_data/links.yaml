@@ -1,3 +1,31 @@
+2026-07-09:
+  - url: "https://bencallahan.com/product-craft-in-the-age-of-ai-and-design-systems"
+    title: What is product craft in the age of AI and design systems? – Ben Callahan
+    description: "\"It comes down to this incredibly frustrating reality: everyone says they want to build things right until they have to choose between high quality and speed to market. I’ve racked my brain on this one. All of my clients are asking their design system teams to move faster. All of those teams want to slow down because 'quality takes time.'\""
+  - url: "https://jeffgothelf.com/blog/how-to-prioritize-your-backlog-when-effort-is-no-longer-the-constraint/?__readwiseLocation="
+    title: How to prioritize your backlog when effort is no longer the constraint – Jeff Gothelf
+    description: How to know when to prototype and test, when to ship an MVP, when to just build, and critically, when to ignore an idea.
+  - url: "https://uxdesign.cc/figma-just-made-your-design-system-debt-everyones-problem-now-use-it-2e9ecb6272bf?utm_source=substack&utm_medium=email"
+    title: Figma just made your design system debt everyone’s problem. Now use it. – Dolphia
+    description: "\"Stop pitching the design system as craft[…] Start pitching it as the dependency under every AI feature leadership just got excited about at the keynote. The agent, the code handoff, the production editing: none of it works on a broken system. That is not a design argument. That is a delivery argument, and delivery is a language the roadmap room already speaks.\" (This has been true since AI coding agents appeared on the scene, but it's even more the case now.)"
+  - url: "https://marcelochaman.ca/s/design-engineering"
+    title: Design Engineering – Marcelo Chaman
+    description: "\"A design engineer could likely hold their own as a designer, or an engineer. They might not be exceptional as either, but they are exceptional because they have both abilities. That combination matters more as software becomes easier to produce. When anyone can build the thing, the version that feels best wins, and people with strong taste and the ability to ship have more leverage than ever.\""
+
+2026-07-07:
+  - url: "https://www.geoffreylitt.com/2026/07/02/understanding-is-the-new-bottleneck.html"
+    title: Understanding is the new bottleneck – Geoffrey Litt
+    description: "\"How do we build this human understanding when we're working with AI and moving fast? Well, turns out this is not the first time anyone has ever thought about how to communicate understanding. I think we can look to education as an inspiration. Can we steal the best ideas ever invented for education and apply them to this problem?\""
+  - url: "https://mandy.dev/posts/design-systems-ai/"
+    title: Design Systems Are No Longer Optional – Mandy Michael
+    description: "\"Now that AI is generating most of your UI your design system is no longer a consistency tool it's now the main source of truth a model can generate against. Whether that stays accurate is now a more consequential question than it used to be.\""
+  - url: "https://www.poyo.co/note/20260525T094605/"
+    title: "Two LLM UI Patterns That Aren't Chat – Javier Fernández Poyo"
+    description: "\"Chat is still the default LLM interface, and for most cases that's fine. Agentic harnesses are still built around a single linear conversation at their core. Some LLM tasks are better represented as structured context than as messages. This post looks at two patterns: comparison as a table, and exploration as a tree.\""
+  - url: "https://jasoncyr.substack.com/p/design-teams-in-the-agentic-era?utm_source=substack&utm_medium=email"
+    title: Design Teams in the Agentic Era – Jason Cyr
+    description: "\"Someone on your team is running seven agents simultaneously, shipping at a pace that makes your upstream process look like it’s standing still. And yet we still need to figure out what we’re solving, align with product and engineering, wrestle ambiguity into something buildable. That work didn’t change.\""
+
 2026-06-02:
   - url: "https://uxdesign.cc/designing-for-ai-means-designing-like-its-1999-da9c53d24644"
     title: Designing for AI means designing like it’s 1999 – Patrick Neeman

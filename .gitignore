@@ -44,3 +44,6 @@ scripts/content/.venv/
 *.tmp
 *.orig
 .temp-eleventy-clone/
+
+# Understand Anything knowledge graph (local analysis artifact)
+.understand-anything/
