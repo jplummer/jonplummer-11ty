@@ -25,9 +25,7 @@ I chose simple, reliable tools that require little maintenance.
 The Eleventy configuration is organized into modules for maintainability:
 
 - `.eleventy.js`: Main configuration file (orchestrates all modules)
-- `eleventy/config/`: Configuration modules (plugins, filters, shortcodes, passthrough, events, preprocessors)
-- `eleventy/filters/`: Filter functions
-- `eleventy/shortcodes/`: Shortcode functions
+- `eleventy/config/`: Configuration modules (plugins, filters, shortcodes, passthrough, events, preprocessors, transforms)
 - `eleventy/utils/`: Utilities (CSS extraction, date formatting, markdown rendering)
 
 ## Features
@@ -60,9 +58,9 @@ The Eleventy configuration is organized into modules for maintainability:
 
 If you want to see how the code works:
 
-1. Install: `npm install`
-2. Run: `npm run dev` (starts local server at `localhost:8080`)
-3. Build: `npm run build` (creates the final site folder)
+1. Install: `pnpm install`
+2. Run: `pnpm run dev` (starts local server at `localhost:8080`)
+3. Build: `pnpm run build` (creates the final site folder)
 
 ## 🤖 For AI Agents
 
