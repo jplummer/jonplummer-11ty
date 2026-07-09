@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-07-07
+
+- Fix duplicate nav landmark labels on /masthead/ preview strips.
+
 ## 2026-07-06
 
 - Ship cool-chrome palette and Public Sans / Big Shoulders typography.
@@ -559,4 +563,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-07-07
+Last deployed on 2026-07-09
