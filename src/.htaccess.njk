@@ -46,10 +46,12 @@ Options -Indexes
     # Permissions policy - restrict certain browser features
     Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
     
-    # Content Security Policy — script only from same origin (gallery JS is /assets/js/color-gallery-embed.js).
+    # Content Security Policy — script only from same origin (gallery JS is /assets/js/color-gallery-embed.js),
+    # plus Cloudflare's edge-injected Web Analytics beacon (static.cloudflareinsights.com), which is not in our
+    # source and is added by the Cloudflare proxy on every page — it also needs connect-src to report data.
     # style-src needs 'unsafe-inline' so the color gallery works: per-preview tokens use style="" on .theme-root
     # and the runtime sets styles via setAttribute (static HTML has no server nonce/hashes). Dev server omits CSP.
-    Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'self';"
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://cloudflareinsights.com; frame-ancestors 'self';"
 </IfModule>
 
 # Enable compression (if mod_deflate is available)

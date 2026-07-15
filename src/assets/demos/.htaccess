@@ -1,0 +1,8 @@
+# Looser CSP for self-contained CDN-based demos (React/Babel/Tailwind from CDN
+# plus Google Fonts). Overrides the site-wide policy from the root .htaccess
+# for this directory only — demos load their runtime from CDNs and use inline
+# <script> blocks (including Babel's in-browser JSX transform output), which
+# the site-wide 'self'-only script-src blocks.
+<IfModule mod_headers.c>
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self'; frame-ancestors 'self';"
+</IfModule>
