@@ -18,7 +18,7 @@ Shared memory file for both Cursor and Claude Code agents. When you encounter a 
 - Docs: `docs/commands.md`, `docs/authoring.md`, `docs/tests.md`, `docs/ideas.md`; exploration write-ups: `docs/color-theme-exploration.md` & `docs/font-stack-exploration.md` each have a **Companion tooling** section; quick links under Maintenance in `docs/commands.md`
 - `docs/ideas.md` is the task tracker — has Selected, Future, Maybe Don't, and Done sections (mostly plain bullets; occasional `**REMINDER (YYYY-MM-DD)**` rows in Done)
 - Eleventy config is modularized in `eleventy/config/` (filters, plugins, events, etc.) and `eleventy/utils/` (markdown, date, CSS utilities)
-- `eleventy/config/transforms.js` is intentionally empty — figure wrapping moved to markdown-it plugin at parse time
+- `eleventy/config/transforms.js` — figure→`<figure>` is markdown-it; lightbox PE links via `figure-lightbox-links` transform (`eleventy/utils/figure-lightbox-transform.js`). Shared dialog in `base.njk` + `/assets/js/figure-lightbox.js`. Spec/plan: `docs/superpowers/specs/2026-07-16-figure-lightbox-design.md`, `docs/superpowers/plans/2026-07-16-figure-lightbox.md`.
 - Cross-document view transitions: `@view-transition { navigation: auto; }` in `src/assets/css/jonplummer.css`; `navigation: none` under `prefers-reduced-motion: reduce`. **`/color/`** loads **`color-gallery-embed.css`** after **`jonplummer.css`**; **`SITE_EMBED_EXTRA_CSS`** appends **`@view-transition { navigation: none; }`** so leaving the heavy embed uses a normal navigation (Chrome was unreliable for utility links like **`/type/`**). **`.utility-sibling-nav`** uses **`position: relative; z-index: 2`** so links stay above the embed if paint order overlaps.
 
 ### Command relationships
