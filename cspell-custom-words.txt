@@ -189,6 +189,7 @@ automatable
 Babycakes
 carb
 centricity
+coachable
 dayenu
 deadlift
 deadlifts
@@ -210,6 +211,7 @@ informationally
 inspectable
 interoperation
 janky
+judgements
 kaizen
 lowball
 mentee

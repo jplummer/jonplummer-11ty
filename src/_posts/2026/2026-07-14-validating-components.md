@@ -14,11 +14,11 @@ There are three topics here:
 
 1. testing components and patterns to demonstrate their fitness and find problems to fix
 2. preventing errors when authoring components
-3. preventing errors when building things that use components
+3. preventing errors when building things that use those components
 
 In re the first, I've seen usability or accessibility problems surface that could be traced to a component and then fixed there, but I've not found a way to validate components out of context. You can put a bunch of components on a plausibly-constructed page and run `axe-core` over it to get some light accessibility auditing of those components, but that doesn't cover a ton, it just rules out egregious mistakes.
 
-You might have better luck testing *patterns* rather than *components* because you have natural context for the interaction: a larger assembly such as a file upload widget, with its various behaviors and states, can be put into a testable workflow (or just observed in a real workflow in the wild) and its problems detected and sorted out at the pattern and component level.
+You might have better luck testing *patterns* rather than *components* because a pattern has a natural context for the interaction: a larger assembly such as a file upload widget, with its various behaviors and states, can be put into a testable workflow (or just observed in a real workflow in the wild) and its problems detected and sorted out at the pattern and component level.
 
 Second, if you are worried about catching mistakes when *authoring* new components, contracts might be your friend – for example, every `INPUT` element should have label association, error association, focus-visible, touch target size, zoom/reflow, etc. and an agent skill could be written to watch for those things when a PR hits the design system in code.
 
