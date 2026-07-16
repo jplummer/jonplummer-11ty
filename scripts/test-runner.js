@@ -27,6 +27,7 @@ const testTypes = {
   'deploy-guards': 'deploy-guards.js',
   'deploy': 'deploy.js',
   'indexnow': 'indexnow.js',
+  'figure-lightbox': 'figure-lightbox.js',
   'security': { file: 'security-audit.js', dir: 'security' }
 };
 
@@ -76,7 +77,8 @@ const allTests = [
 const unitTests = [
   'portfolio-notes',
   'cloudflare-purge',
-  'deploy-guards'
+  'deploy-guards',
+  'figure-lightbox'
 ];
 
 // Tests that don't use JSON output — use inherited stdout so output isn't buffered and re-written (avoids duplicate output)
