@@ -1,22 +1,26 @@
 /**
  * Eleventy configuration: Transform registration
- * 
- * Called from `.eleventy.js` during Eleventy initialization.
- * Registers all HTML transforms that post-process template output.
  *
- * Figure wrapping is now handled by the markdown-it-figure plugin
- * at the markdown parsing stage, so no HTML transforms are currently needed.
+ * Called from `.eleventy.js` during Eleventy initialization.
+ * Registers HTML transforms that post-process template output.
+ *
+ * Figure → <figure> wrapping is handled by markdown-it-figure at parse time.
+ * Lightbox progressive-enhancement links run here after image optimization
+ * has produced <picture>/srcset (this module is registered after plugins).
  */
+
+const { applyFigureLightboxLinks } = require('../utils/figure-lightbox-transform');
 
 /**
  * Registers Eleventy transforms.
- * 
+ *
  * @param {object} eleventyConfig - Eleventy configuration object
  */
 function configureTransforms(eleventyConfig) {
-  // No transforms currently registered.
-  // Figure wrapping moved to markdown-it-figure plugin (parse-time).
+  eleventyConfig.addTransform('figure-lightbox-links', function (content, outputPath) {
+    if (!outputPath || !outputPath.endsWith('.html')) return content;
+    return applyFigureLightboxLinks(content);
+  });
 }
 
 module.exports = configureTransforms;
-

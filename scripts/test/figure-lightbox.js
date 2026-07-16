@@ -5,17 +5,23 @@ const {
   largestUrlFromSrcset,
   largestUrlFromAttributes,
 } = require('../../eleventy/utils/largest-srcset-url');
+const { applyFigureLightboxLinks } = require('../../eleventy/utils/figure-lightbox-transform');
 const { addFile, addIssue } = require('../utils/test-results');
 const { runTest } = require('../utils/test-runner-helper');
 
 function runUnitAssertions(result) {
   const fileObj = addFile(result, 'eleventy/utils/largest-srcset-url.js', 'largest-srcset-url.js');
+  const transformFile = addFile(
+    result,
+    'eleventy/utils/figure-lightbox-transform.js',
+    'figure-lightbox-transform.js'
+  );
 
-  function check(name, fn) {
+  function check(file, name, fn) {
     try {
       fn();
     } catch (err) {
-      addIssue(fileObj, {
+      addIssue(file, {
         type: 'figure-lightbox-unit',
         message: `${name}: ${err.message}`,
         ruleId: 'figure-lightbox-unit',
@@ -23,19 +29,19 @@ function runUnitAssertions(result) {
     }
   }
 
-  check('picks largest w descriptor', () => {
+  check(fileObj, 'picks largest w descriptor', () => {
     assert.strictEqual(
       largestUrlFromSrcset('/a-400.webp 400w, /a-1600.webp 1600w, /a-800.webp 800w'),
       '/a-1600.webp'
     );
   });
 
-  check('returns null for empty srcset', () => {
+  check(fileObj, 'returns null for empty srcset', () => {
     assert.strictEqual(largestUrlFromSrcset(''), null);
     assert.strictEqual(largestUrlFromSrcset(null), null);
   });
 
-  check('prefers widest source srcset over img src', () => {
+  check(fileObj, 'prefers widest source srcset over img src', () => {
     assert.strictEqual(
       largestUrlFromAttributes({
         src: '/fallback.jpeg',
@@ -46,11 +52,44 @@ function runUnitAssertions(result) {
     );
   });
 
-  check('falls back to src when no srcset', () => {
+  check(fileObj, 'falls back to src when no srcset', () => {
     assert.strictEqual(
       largestUrlFromAttributes({ src: '/only.jpeg', srcset: '', sourceSrcsets: [] }),
       '/only.jpeg'
     );
+  });
+
+  check(transformFile, 'wraps picture in main figure with largest href', () => {
+    const input = `
+      <main>
+        <figure>
+          <picture>
+            <source srcset="/a-400.webp 400w, /a-1600.webp 1600w" type="image/webp">
+            <img src="/a-800.jpeg" srcset="/a-800.jpeg 800w" alt="Diagram">
+          </picture>
+          <figcaption>A diagram</figcaption>
+        </figure>
+      </main>`;
+    const out = applyFigureLightboxLinks(input);
+    assert.match(out, /class="figure-lightbox-trigger"/);
+    assert.match(out, /href="\/a-1600\.webp"/);
+    assert.match(out, /<a class="figure-lightbox-trigger"[^>]*>\s*<picture>/);
+  });
+
+  check(transformFile, 'skips masthead-preview-strip', () => {
+    const input = `<main><figure class="masthead-preview-strip"><img src="/x.png" alt=""></figure></main>`;
+    const out = applyFigureLightboxLinks(input);
+    assert.doesNotMatch(out, /figure-lightbox-trigger/);
+  });
+
+  check(transformFile, 'is idempotent', () => {
+    const input = `
+      <main><figure>
+        <picture><img src="/a.jpeg" srcset="/a-1600.jpeg 1600w" alt=""></picture>
+      </figure></main>`;
+    const once = applyFigureLightboxLinks(input);
+    const twice = applyFigureLightboxLinks(once);
+    assert.strictEqual(once, twice);
   });
 }
 
