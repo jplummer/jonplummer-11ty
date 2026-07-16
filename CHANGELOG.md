@@ -1,5 +1,12 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-07-15
+
+- Allow CDN scripts and Cloudflare beacon through site CSP
+- Add "Danielle asks about validating components" post
+- Small wording fixes across three posts
+- Add Invoca IA vision portfolio post
+
 ## 2026-07-08
 
 - Add Vision Is Not Magic post, Public Sans webfont reference, and new links
@@ -568,4 +575,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-07-15
+Last deployed on 2026-07-16
