@@ -69,5 +69,15 @@
 <footer aria-label="Site footer">
     {% include "components/license.njk" %}
 </footer>
+<dialog id="figure-lightbox" class="figure-lightbox" aria-label="Enlarged image">
+    <form method="dialog" class="figure-lightbox-chrome">
+        <button type="submit" id="figure-lightbox-close" class="figure-lightbox-close" value="close" aria-label="Close">Close</button>
+    </form>
+    <button type="button" id="figure-lightbox-prev" class="figure-lightbox-prev" aria-label="Previous image">Previous</button>
+    <button type="button" id="figure-lightbox-next" class="figure-lightbox-next" aria-label="Next image">Next</button>
+    <img id="figure-lightbox-image" alt="">
+    <p id="figure-lightbox-caption" class="figure-lightbox-caption" hidden></p>
+</dialog>
+<script src="/assets/js/figure-lightbox.js" defer></script>
 </body>
 </html>

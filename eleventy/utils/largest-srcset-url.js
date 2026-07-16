@@ -27,12 +27,13 @@ function largestUrlFromSrcset(srcset) {
  */
 function largestUrlFromAttributes(attrs) {
   const candidates = [];
-  const fromImg = largestUrlFromSrcset(attrs.srcset);
-  if (fromImg) candidates.push({ url: fromImg, w: widthFromSrcset(attrs.srcset, fromImg) });
+  // Prefer <source> candidates (often webp) when widths tie with img srcset.
   for (const ss of attrs.sourceSrcsets || []) {
     const url = largestUrlFromSrcset(ss);
     if (url) candidates.push({ url, w: widthFromSrcset(ss, url) });
   }
+  const fromImg = largestUrlFromSrcset(attrs.srcset);
+  if (fromImg) candidates.push({ url: fromImg, w: widthFromSrcset(attrs.srcset, fromImg) });
   if (candidates.length) {
     candidates.sort((a, b) => b.w - a.w);
     return candidates[0].url;
