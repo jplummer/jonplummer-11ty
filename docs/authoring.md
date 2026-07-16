@@ -228,6 +228,7 @@ The image will be automatically:
 - Optimized in multiple sizes (WebP and JPEG formats)
 - Wrapped in a `<figure>` element with `<picture>` for responsive images
 - Lazy-loaded for better performance
+- Linked for progressive enhancement so readers can open a near-fullscreen lightbox (or the large image URL without JavaScript)
 
 ### Example
 

@@ -798,7 +798,7 @@ article.portfolio-detail {
 }
 
 .figure-lightbox::backdrop {
-  background-color: oklch(0% 0 0 / 0.72);
+  background-color: oklch(0% 0 0deg / 72%);
 }
 
 .figure-lightbox-chrome {
@@ -863,6 +863,10 @@ article.portfolio-detail {
   font-style: italic;
   max-width: 40rem;
   text-wrap: pretty;
+}
+
+.figure-lightbox-caption:empty {
+  display: none;
 }
 
 a.figure-lightbox-trigger {

@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 const assert = require('assert');
+const fs = require('fs');
+const path = require('path');
 const {
   largestUrlFromSrcset,
   largestUrlFromAttributes,
@@ -93,12 +95,60 @@ function runUnitAssertions(result) {
   });
 }
 
+function runSmokeAssertions(result) {
+  const siteRoot = path.join(__dirname, '../../_site');
+  if (!fs.existsSync(siteRoot)) return;
+
+  const smokeFile = addFile(result, '_site', 'figure-lightbox-smoke');
+  const sampleCandidates = [
+    '2026/03/06/invoca-ia-vision/index.html',
+    '2026/02/20/call-review-console/index.html',
+    '2025/08/07/field-guide-to-problem-statements/index.html',
+  ];
+
+  let html = null;
+  let used = null;
+  for (const rel of sampleCandidates) {
+    const full = path.join(siteRoot, rel);
+    if (fs.existsSync(full)) {
+      html = fs.readFileSync(full, 'utf8');
+      used = rel;
+      break;
+    }
+  }
+
+  if (!html) return;
+
+  if (!html.includes('/assets/js/figure-lightbox.js')) {
+    addIssue(smokeFile, {
+      type: 'figure-lightbox-smoke',
+      message: `${used}: missing figure-lightbox.js script tag`,
+      ruleId: 'figure-lightbox-script',
+    });
+  }
+  if (!html.includes('id="figure-lightbox"')) {
+    addIssue(smokeFile, {
+      type: 'figure-lightbox-smoke',
+      message: `${used}: missing #figure-lightbox dialog`,
+      ruleId: 'figure-lightbox-dialog',
+    });
+  }
+  if (!html.includes('figure-lightbox-trigger')) {
+    addIssue(smokeFile, {
+      type: 'figure-lightbox-smoke',
+      message: `${used}: expected at least one figure-lightbox-trigger`,
+      ruleId: 'figure-lightbox-trigger',
+    });
+  }
+}
+
 runTest({
   testType: 'figure-lightbox',
   testName: 'Figure lightbox',
   requiresSite: false,
   validateFn: async (result) => {
     runUnitAssertions(result);
+    runSmokeAssertions(result);
   },
 }).catch((err) => {
   console.error(err);

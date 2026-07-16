@@ -30,10 +30,8 @@
     var text = cap ? cap.textContent.trim() : '';
     if (text) {
       captionEl.textContent = text;
-      captionEl.hidden = false;
     } else {
       captionEl.textContent = '';
-      captionEl.hidden = true;
     }
 
     prevBtn.disabled = index <= 0;
