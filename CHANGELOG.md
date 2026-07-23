@@ -1,5 +1,16 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-07-16
+
+- Add largest-srcset helper for figure lightbox
+- Wrap content figures in lightbox trigger links
+- Add figure lightbox dialog and script
+- Smoke-check figure lightbox in built HTML
+- Figure lightbox layout and portfolio trigger grid
+- Add figure lightbox design spec
+- Add figure lightbox implementation plan
+- Add Call review console portfolio post
+
 ## 2026-07-15
 
 - Allow CDN scripts and Cloudflare beacon through site CSP
@@ -575,4 +586,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-07-16
+Last deployed on 2026-07-23
