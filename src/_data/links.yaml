@@ -1,3 +1,35 @@
+2026-07-24:
+  - url: "https://thoughts.unfinishe.com/p/this-moment-were-in-ep-3"
+    title: This Moment We’re In, Ep. 3 – Jorge Arango
+    description: "\"AI as a thinking tool – i.e., a medium that allows teams to frame problems, explore possibility spaces, and inform organizational strategy. This includes improving research operations and lowering the cost of producing high-fidelity prototypes. This isn’t just the same kind of work, faster. The ability to move faster changes what kind of work can be done. Designers explore solution spaces by making – 'make to think.' AI lets that happen at a different level.\""
+  - url: "https://uxdesign.cc/while-everyone-talks-about-ai-design-is-gaining-power-a6fd0db3f0a2"
+    title: While everyone talks about AI, design is gaining power – Karolina Rojek
+    description: "\"While everyone is focused on models, benchmarks, and the race to build AI faster, some of the world’s largest technology companies are making a different bet: they’re elevating design.\""
+  - url: "https://specification.website"
+    title: The Website Specification – Joost de Valk
+    description: "Perhaps the beginning of common (technical) quality standards for websites? \"The Website Specification is an attempt to answer one question:*regardless of the stack you build on, what should a good website do?* Not a framework. Not a guide. A spec – what is required, what is recommended, and what to avoid.\""
+  - url: "https://www.ideo.com/iq"
+    title: IDEO IQ 2026 Report
+    description: "\"For our inaugural *IDEO Innovation Quotient* (*IDEO IQ*) report, we surveyed leaders from 100 of the world's largest companies and mapped five core cultural behaviors against real business outcomes. The results? In a world of rapid technological change, the behaviors associated with design and creativity set the conditions that support lasting growth.\""
+  - url: "https://www.ui-skills.com"
+    title: "UI Skills for Design Engineers | Interface Office"
+    description: "\"UI Skills is a collection of design-engineering skills to help humans and agents create better interfaces.\""
+  - url: "http://accidental-taxonomist.blogspot.com/2026/06/generative-ai-and-taxonomies-for.html"
+    title: Generative AI and Taxonomies for Finding Information – Heather Hedden
+    description: LLMs benefit from good taxonomies, and can be used to generate draft taxonomies that help humans and agents alike.
+  - url: "https://buzzusborne.com/writing/discovery-delivery/"
+    title: Discovery vs Delivery – Buzz Usborne
+    description: "\"When involved in discovery, AI is the participant in the group that says *“yes”* to everything with breathless enthusiasm, but rarely produces ideas that change the conversation… that generate smiles. Which is why, during discovery, the relationship needs to flip: not human-in-the-loop, but AI-in-the-loop.\""
+  - url: "https://adi.bio/reality"
+    title: Punch Yourself in the Face with Reality – Aditya Anand
+    description: "\"I have seen way too many startup founders delude themselves into building more and more for months without a single conversation with a real user. The builders and the technical people really struggle with this. If all you know is how to build, and you just use AI as an excuse to keep building more and more and more, you are just procrastinating and avoiding reality.\""
+  - url: "https://hbr.org/2026/06/ai-adoption-is-overloading-your-middle-managers"
+    title: AI Adoption Is Overloading Your Middle Managers – Julia Shin and Sandra J. Sucher
+    description: "\"Rather than surveying broad attitudes, we asked people at each level how they were actually using AI, what support they received, and where the friction was. Our research suggests where AI adoption actually succeeds or fails: the middle layer of management.\""
+  - url: "https://thoughts.unfinishe.com/p/after-forty-years-still-no-silver"
+    title: After Forty Years, Still No Silver Bullet – Jorge Arango
+    description: "\"What will the system do? How will it serve strategic objectives? How will it enable better judgment and allow people to derive meaning from data? These aren’t implementation questions, they’re design questions. Somebody must define the “construct of interlocking concepts” that define the system, aiming for good fit between the system and the context it serves. LLMs can help, but they can’t replace human understanding and judgment, at least not yet.\""
+
 2026-07-09:
   - url: "https://bencallahan.com/product-craft-in-the-age-of-ai-and-design-systems"
     title: What is product craft in the age of AI and design systems? – Ben Callahan
