@@ -8,7 +8,7 @@ const { largestUrlFromAttributes } = require('./largest-srcset-url');
  */
 function applyFigureLightboxLinks(html) {
   if (!html || !html.includes('<figure')) return html;
-  const $ = cheerio.load(html, { decodeEntities: false }, false);
+  const $ = cheerio.load(html, { decodeEntities: false });
   if (!$('main').length) return html;
 
   $('main figure').each((_, el) => {

@@ -20,6 +20,18 @@ async function validate(result) {
     // Add file to result
     const fileObj = addFile(result, file, relativePath);
 
+    // html-validate's doctype-html rule only checks the case/form of a doctype
+    // that's already present — it doesn't flag a fully missing one. A transform
+    // bug once stripped <!doctype html> (and <html>/<head>) from every portfolio
+    // page and nothing caught it until axe's html-has-lang check, days later.
+    if (!/^\s*<!doctype html>/i.test(content)) {
+      addIssue(fileObj, {
+        type: 'missing-doctype',
+        message: 'Missing <!doctype html> at the start of the document',
+        ruleId: 'doctype-required'
+      });
+    }
+
     if (!report.valid) {
       report.results.forEach(resultItem => {
         resultItem.messages.forEach(msg => {
