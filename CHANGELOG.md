@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-07-24
+
+- Restore doctype/html/head on portfolio pages, add doctype test guard
+
 ## 2026-07-16
 
 - Add largest-srcset helper for figure lightbox
