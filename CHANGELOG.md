@@ -3,6 +3,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 ## 2026-07-24
 
 - Restore doctype/html/head on portfolio pages, add doctype test guard
+- Add "the complaints that wouldn't go away" post, register specification.website MCP
 
 ## 2026-07-16
 
@@ -590,4 +591,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-07-24
+Last deployed on 2026-07-27
