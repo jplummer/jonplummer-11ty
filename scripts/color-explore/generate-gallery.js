@@ -1254,7 +1254,7 @@ function renderHomePreview(cssVarsInline, schemeLabel, previewUid) {
           <header aria-label="Preview ${lab} · ${uid} · site header">
             <hgroup>
               <h1><a href="#" rel="home">Jon Plummer</a></h1>
-              <p>Today I Learned</p>
+              <p>Making ideas tangible</p>
             </hgroup>
             <nav aria-label="Preview ${lab} · ${uid} · primary navigation">
               <ul>

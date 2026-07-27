@@ -1,3 +1,38 @@
+2026-07-27:
+  - url: "https://uxdesign.cc/steal-this-ux-framework-from-dubais-most-over-the-top-hotel-0b14f71e46e5?sk=8f89ea7cb8e3831a30b6ccdb5518bc28&utm_source=substack&utm_medium=email"
+    title: Steal this UX framework from Dubai’s most over-the-top hotel – Slava Polonski
+    description: I love the practice of noticing good physical experiences and bringing the implied principles to digital experiences. As always, you can learn a lot by paying attention, outside of your usual medium, to how others demonstrate thoughtfulness toward the people they serve.
+  - url: "https://medium.com/design-bootcamp/the-case-for-monochrome-data-visualization-53d2c90c6eb8"
+    title: The Case for Monochrome Data Visualization – Kay
+    description: "Color is just one of the seven \"retinal variables\" for differentiating values or categories. It grabs attention but must be used judiciously. And there's a case to be made that monochrome visualizations can lead to clean and uninterrupted reading when done well."
+  - url: "https://uxdesign.cc/designing-with-web-standards-the-playbook-for-this-ai-moment-92394884dc0d"
+    title: "Designing with web standards: The playbook for this AI moment – Patrik Neeman"
+    description: "\"The web got semantic markup because designers agreed on what a heading, a list, and a link meant before the tools decided for them. Do the same for AI interfaces now: agree on what “show your work,” “cite your source,” and “I am not sure” should look and behave like, as reusable components rather than one-off features. The same discipline belongs a layer down, in how a skill is described, discovered, and combined, so capabilities compose instead of colliding. If you keep a component library, this is where shared AI patterns belong.\""
+  - url: "https://www.philmorton.co/a-side-project-is-the-fastest-way-to-upskill-in-the-age-of-ai/"
+    title: A side project is the fastest way to upskill in the age of AI – Phil Morton
+    description: "\"What I’m suggesting goes a step further: use tools like Claude Code, Codex or Cursor to build the real thing and do more of it yourself. When you’re working a little closer to the metal, then you learn more. Lovable is nothing like how products get built commercially, whereas using Claude Code to build an iOS app is. Tools that do everything for you aren’t going to teach you much.\""
+  - url: "https://unsung.aresluna.org/creativity-is-fundamentally-not-an-efficiency-problem/"
+    title: Creativity is fundamentally not an efficiency problem – Marchin Wichary
+    description: "\"Paul Cantrell: 'Creative work keeps taking roughly the same amount of human labor/attention/care, even as new technologies accelerate or remove things that used to take time. This is because creativity is fundamentally not an efficiency problem; process is not just the means of producing output, but rather a labor vessel that holds the near-invisible work that is truly important.'\""
+  - url: "https://blog.jim-nielsen.com/2026/make-it-work-make-it-good/"
+    title: Make It Work vs. Make It Good – Jim Nielsen
+    description: "\"…sometimes it’s like, good job, you made a bear ride a unicycle. Not really what bears are supposed to do – and they’ll probably never be good at it – but it’s novel and functioning! However, the task of making something *good* – of arriving at a solution that is obvious – is often met with a kind of ambivalence, like 'Nice work…I guess? Seems obvious tbh.' That’s the work of design: to make something so good, it’s obvious. But there’s often little acclaim for the obvious because, well, it’s so obvious (in hindsight).\""
+  - url: "https://jeffgothelf.com/blog/how-to-prioritize-your-backlog-when-effort-is-no-longer-the-constraint/"
+    title: How to prioritize your backlog when effort is no longer the constraint – Jeff Gothelf
+    description: How to know when to prototype and test, when to ship an MVP, when to just build, and critically, when to ignore an idea.
+  - url: "https://unsung.aresluna.org/subtle-line-between-animations-that-help-and-animations-that-hurt/"
+    title: “Subtle line between animations that help and animations that hurt” – Marchin Wichary
+    description: "Animation can be a quality of life improvement for your software, provided you don't get it wrong. And numerous other small opportunities to make the experience better also exist."
+  - url: "https://bitsplitting.org/2026/04/01/the-beginning-of-programming-as-well-know-it/"
+    title: The Beginning of Programming as We’ll Know It –Daniel Jalkut
+    description: "\"But for now, real programmers will always win. Why? Because we are uniquely positioned to harness *most* of the power of AI while augmenting it with human taste, wisdom, and caution, among other qualities that an AI is thus far incapable of possessing.\""
+  - url: "https://www.chrbutler.com/craft-is-untouchable"
+    title: Craft is Untouchable – Christopher Butler
+    description: "\"Structure still communicates before content. Visual hierarchy still guides attention. Negative space still creates rhythm. These principles don’t vanish because I’m working through AI rather than directly manipulating pixels.\""
+  - url: "https://blog.mozilla.ai/when-shipping-becomes-too-easy/"
+    title: When Shipping Software Becomes Too Easy – Julie Belião
+    description: "\"If shipping becomes frictionless, the real scarcity moves elsewhere: clarity of intent, product judgment, and long-term coherence. Product management becomes less about leading and coordinating work and more about protecting direction.\""
+
 2026-07-24:
   - url: "https://thoughts.unfinishe.com/p/this-moment-were-in-ep-3"
     title: This Moment We’re In, Ep. 3 – Jorge Arango

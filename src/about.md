@@ -1,7 +1,7 @@
 ---
 title: /about
 description: Jon Plummer is a UX design leader and mentor with experience at Invoca, Cayuse, Belkin, and Medtronic. Learn about his design leadership philosophy and career.
-date: 2026-04-12T00:00:00.000Z
+date: 2026-07-27T00:00:00.000-07:00
 layout: base.njk
 tags: page
 permalink: /about/
@@ -9,17 +9,21 @@ ogImage: /assets/images/og/about.png
 ---
 (updated {{ date | postDate }})
 
-I speak the languages of design, engineering, and business.
+Most companies say they care about customers. Their products rarely show it. I build ones that do – thoughtful enough that people notice, trust, and recommend them.
 
-That's been useful everywhere I've worked — but it matters most right now, when the most common mistake in AI product development is assuming that powerful models reduce the need for clear, coordinated interfaces. They don't. Agentic AI shifts complexity from direct manipulation toward understanding, verification, and correction. That demands interfaces that are simpler, not more elaborate, and experiences that work without training.
+I speak the languages of design, engineering, and business. That's been useful everywhere I've worked — but it matters most right now, when the most common mistake in AI product development is assuming that powerful models reduce the need for clear, coordinated, carefully constructed interfaces. They don't. Agentic AI means less direct manipulation, not none. Trust still comes from inspection and correction – from being able to poke around in the system and believe it, not just take its word for it. That demands interfaces that are simpler, not more elaborate, and experiences that work without training. The hardest part of a design is proving the vision is sound, then making sure that reasoning survives all the way to what ships; real customer discovery is what makes both possible.
 
 I wrote about this in [Toward Coordinated Experience](https://jonplummer.com/2025/07/27/toward-coordinated-experience/), and it's the thread that runs through a lot of what I write here.
 
+That focus on discovery isn't theoretical. I trained as a social worker and an anthropologist before I became a designer, and the habit never left: understand people before you propose anything for them.
+
 Most recently I was Director of User Experience at Invoca, where I led a design team through an AI product transformation. Before that: Cayuse, Concentric Sky, and eleven years at Belkin, where I rose from Senior Designer to Senior Director and built the UX function for Linksys and Wemo from scratch. Along the way I picked up 20+ patents, an IDSA Silver award, and a lot of hard-won opinions about how design actually earns trust in engineering- and product-led organizations.
+
+I don't just have opinions about AI. At Invoca, that transformation included SMS and voice-based virtual agents, as well as the Call Review Console and AI Scorecard. These tools  put to work inside real cusotmer conversations, cutting Customer Success Manager caseload by a fifth and helping open Contact Centers as a new customer segment. Outside work, I vibe-code hobby projects and publish them on GitHub, including a project template that packages agent configuration for tools like Cursor and Claude Code.
 
 I develop designers who can hold a point of view and defend it, not just execute one. I get there by asking them the questions they should be asking, helping them find their own way to an answer. But I'm not hands-off: when the situation calls for a direct read, I give one. I interpret, I instruct, I push back. The goal is people who can think well under pressure and make good calls without being managed through every decision.
 
-Outside work I'm a deep dabbler — jazz piano, 3D printing and amateur industrial design, home improvement, vibe-coding, cooking. The common threads are improving what's before me and making ideas tangible. I keep my hands in the tools at work and at home so I can show people the ropes and learn along with them.
+Outside work I'm a deep dabbler – jazz piano, 3D printing and amateur industrial design, home improvement, cooking. The common threads are making ideas tangible and improving what's before me. I keep my hands in the tools at work and at home so I can show people the ropes and learn along with them.
 
 I mentor at [Designed.org](https://designed.org) and [tupu.io](https://tupu.io). See more via [my LinkedIn profile](https://linkedin.com/in/jplummer) and message me there if you have something to say, or reach me at [jon@jonplummer.com](mailto:jon@jonplummer.com?Subject=I%20visited%20jonplummer.com/about).
 

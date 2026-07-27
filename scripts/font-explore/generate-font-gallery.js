@@ -95,7 +95,7 @@ function siteHomePreviewFragment({
             <a class="skip" href="#font-preview-main">Skip to content</a>
             <hgroup>
               <h1${hStyle}><a href="#" rel="home">Jon Plummer</a></h1>
-              <p>Today I Learned</p>
+              <p>Making ideas tangible</p>
             </hgroup>
             <nav aria-label="Preview: primary navigation">
               <ul>

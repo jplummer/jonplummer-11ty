@@ -7,7 +7,7 @@ eleventyExcludeFromCollections: true
     <channel>
         <title>Jon Plummer</title>
         <link>{{ site.url }}</link>
-        <description>Today I Learned - Personal blog about work, life, and learning</description>
+        <description>Making ideas tangible - Personal blog about work, life, and learning</description>
         <language>en-US</language>
         {# Use the newest post's publication date (not modification time) to avoid triggering RSS readers on metadata updates #}
         {% set newestPost = collections.post | reverse | first %}
