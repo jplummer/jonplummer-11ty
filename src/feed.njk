@@ -5,9 +5,9 @@ eleventyExcludeFromCollections: true
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
-        <title>Jon Plummer</title>
+        <title>{{ site.author }}</title>
         <link>{{ site.url }}</link>
-        <description>Making ideas tangible - Personal blog about work, life, and learning</description>
+        <description>{{ site.tagline }} - Personal blog about work, life, and learning</description>
         <language>en-US</language>
         {# Use the newest post's publication date (not modification time) to avoid triggering RSS readers on metadata updates #}
         {% set newestPost = collections.post | reverse | first %}

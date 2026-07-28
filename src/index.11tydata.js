@@ -45,7 +45,7 @@ module.exports = {
       // Format date range
       const dateRange = formatDateRange(oldestDate, newestDate);
       
-      return `${dateRange} – Jon Plummer – Making ideas tangible`;
+      return `${dateRange} – ${data.site.title}`;
     }
   }
 };

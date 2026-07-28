@@ -13,6 +13,7 @@ Shared memory file for both Cursor and Claude Code agents. When you encounter a 
 ### Project structure
 - Root **`.eleventyignore`** excludes templates from the build (e.g. `src/style-exercise.njk` while that URL is retired).
 - Eleventy (11ty) personal blog with Nunjucks templates
+- **Site branding** — `src/_data/site.js`: **`author`**, **`tagline`**, derived **`title`** (`author – tagline`). Consumers use one field; never concatenate locally. Colon form dropped. Spec: `docs/superpowers/specs/2026-07-27-site-branding-design.md`. Unit: `pnpm run test site-branding`. Color/font gallery generators `require` the same module; committed embed HTML still contains the literal as output. **`renderFile` for `og-image-body.njk` must pass `site: site`**. **`site.js`** is in OG **`OG_SHARED_DEPS`**.
 - Agent instructions live in `.cursor/rules/*.mdc` (Cursor) and `CLAUDE.md` (Claude Code)
 - CLAUDE.md uses `@` imports to pull in cursor rules and docs — avoids duplication
 - Docs: `docs/commands.md`, `docs/authoring.md`, `docs/tests.md`, `docs/ideas.md`; exploration write-ups: `docs/color-theme-exploration.md` & `docs/font-stack-exploration.md` each have a **Companion tooling** section; quick links under Maintenance in `docs/commands.md`

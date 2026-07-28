@@ -8,7 +8,7 @@
     {%- elif title %}
         {%- set computedTitleValue = title %}
     {%- else %}
-        {%- set computedTitleValue = 'Jon Plummer – Making ideas tangible' %}
+        {%- set computedTitleValue = site.title %}
     {%- endif %}
     {# Truncate OG title to 95 characters if too long #}
     {%- if computedTitleValue | length > 95 %}
@@ -18,13 +18,13 @@
     {%- endif %}
     {%- set isPaginatedPage = pagination and pagination.pageNumber > 0 %}
     {%- if isPaginatedPage %}
-        {%- set computedDescriptionValue = "Page " + pagination.pageNumber + " of Jon Plummer's UX leadership blog. Insights on design leadership, product development, and team management." %}
-        {%- set ogImageAltValue = "Page " + pagination.pageNumber + " of Jon Plummer's UX design blog" %}
+        {%- set computedDescriptionValue = "Page " + pagination.pageNumber + " of " + site.author + "'s UX leadership blog. Insights on design leadership, product development, and team management." %}
+        {%- set ogImageAltValue = "Page " + pagination.pageNumber + " of " + site.author + "'s UX design blog" %}
     {%- else %}
         {%- if description %}
             {%- set computedDescriptionValue = description %}
         {%- else %}
-            {%- set computedDescriptionValue = 'Jon Plummer is a UX design leader and mentor. Read his thoughts on design, leadership, and product development.' %}
+            {%- set computedDescriptionValue = site.author + ' is a UX design leader and mentor. Read his thoughts on design, leadership, and product development.' %}
         {%- endif %}
         {%- if description %}
             {%- set ogImageAltValue = computedTitleValue + " - " + description %}
@@ -51,8 +51,8 @@
 <header>
     <a class="skip" href="#main">Skip to content</a>
     <hgroup>
-        <h1><a href="/" rel="home">Jon Plummer</a></h1>
-        <p>Making ideas tangible</p>
+        <h1><a href="/" rel="home">{{ site.author }}</a></h1>
+        <p>{{ site.tagline }}</p>
     </hgroup>
     {% include "components/nav.njk" %}
 </header>

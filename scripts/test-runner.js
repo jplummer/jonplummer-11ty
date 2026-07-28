@@ -28,6 +28,7 @@ const testTypes = {
   'deploy': 'deploy.js',
   'indexnow': 'indexnow.js',
   'figure-lightbox': 'figure-lightbox.js',
+  'site-branding': 'site-branding.js',
   'security': { file: 'security-audit.js', dir: 'security' }
 };
 
@@ -78,7 +79,8 @@ const unitTests = [
   'portfolio-notes',
   'cloudflare-purge',
   'deploy-guards',
-  'figure-lightbox'
+  'figure-lightbox',
+  'site-branding'
 ];
 
 // Tests that don't use JSON output — use inherited stdout so output isn't buffered and re-written (avoids duplicate output)
@@ -90,7 +92,7 @@ function listTests() {
   const { getTestDescription } = require('./utils/test-results');
   
   // Only show primary names
-  const primaryNames = ['html', 'links', 'wisdom', 'internal-links', 'frontmatter', 'markdown', 'spell', 'seo', 'og-images', 'a11y', 'color-contrast', 'css', 'rss', 'portfolio-notes', 'deploy-assets', 'cloudflare-purge', 'deploy-guards', 'deploy', 'indexnow', 'security'];
+  const primaryNames = ['html', 'links', 'wisdom', 'internal-links', 'frontmatter', 'markdown', 'spell', 'seo', 'og-images', 'a11y', 'color-contrast', 'css', 'rss', 'portfolio-notes', 'deploy-assets', 'cloudflare-purge', 'deploy-guards', 'site-branding', 'deploy', 'indexnow', 'security'];
 
   primaryNames.forEach(type => {
     const isInAll = allTests.includes(type);

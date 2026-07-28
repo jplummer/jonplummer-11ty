@@ -257,6 +257,7 @@ const TEST_EMOJIS = {
   'deploy-assets': '📦',
   'cloudflare-purge': '☁️',
   'deploy-guards': '🛟',
+  'site-branding': '🏷️',
   'seo': '📈',
   'deploy': '🚀',
   'security': '🛡️',
@@ -298,6 +299,7 @@ function getTestDisplayName(testType) {
     'deploy-assets': 'Deploy Assets',
     'cloudflare-purge': 'Cloudflare Purge',
     'deploy-guards': 'Deploy Guards',
+    'site-branding': 'Site Branding',
     'deploy': 'Deploy',
     'security': 'Security Audit'
   };
@@ -328,6 +330,7 @@ function getTestDescription(testType) {
     'deploy-assets': 'Fonts and deploy-critical _site/ assets',
     'cloudflare-purge': 'Rsync itemize → Cloudflare purge URL mapping',
     'deploy-guards': 'deploy.js regression guards (rsync excludes, changelog, purge wiring)',
+    'site-branding': 'site.js author/tagline/title contract and no hardcoded tagline',
     'deploy': 'Deployment connectivity',
     'indexnow': 'IndexNow configuration',
     'security': 'Security audit'

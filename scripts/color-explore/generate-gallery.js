@@ -28,6 +28,7 @@ const path = require('path');
 const { buildTerminalPresetThemes } = require('./terminal-presets.js');
 const { absApcaLcSrgb, absApcaLcP3 } = require('../utils/apca-dual');
 const { parse, converter } = require('culori');
+const site = require('../../src/_data/site.js')();
 
 const toOklch = converter('oklch');
 
@@ -1253,8 +1254,8 @@ function renderHomePreview(cssVarsInline, schemeLabel, previewUid) {
         <div class="jp-page">
           <header aria-label="Preview ${lab} · ${uid} · site header">
             <hgroup>
-              <h1><a href="#" rel="home">Jon Plummer</a></h1>
-              <p>Making ideas tangible</p>
+              <h1><a href="#" rel="home">${escapeHtml(site.author)}</a></h1>
+              <p>${escapeHtml(site.tagline)}</p>
             </hgroup>
             <nav aria-label="Preview ${lab} · ${uid} · primary navigation">
               <ul>
@@ -1292,7 +1293,7 @@ function renderHomePreview(cssVarsInline, schemeLabel, previewUid) {
             </nav>
           </section>
           <footer aria-label="Preview ${lab} · ${uid} · site footer">
-            <p class="license">Copyright 2026 Jon Plummer</p>
+            <p class="license">Copyright 2026 ${escapeHtml(site.author)}</p>
           </footer>
         </div>
       </div>

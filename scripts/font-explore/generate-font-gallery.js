@@ -21,6 +21,7 @@ const {
   LAB_DEFAULT_BODY_STACK_ID
 } = require('./exploratory-font-stacks.js');
 const { formatFontLabPasteCss } = require('./font-lab-paste-css.js');
+const site = require('../../src/_data/site.js')();
 
 const OUT_DIR = path.join(__dirname, 'output');
 const FONT_LAB_SCOPED_CSS = path.join(
@@ -94,8 +95,8 @@ function siteHomePreviewFragment({
           <header aria-label="Preview: site header">
             <a class="skip" href="#font-preview-main">Skip to content</a>
             <hgroup>
-              <h1${hStyle}><a href="#" rel="home">Jon Plummer</a></h1>
-              <p>Making ideas tangible</p>
+              <h1${hStyle}><a href="#" rel="home">${escapeHtml(site.author)}</a></h1>
+              <p>${escapeHtml(site.tagline)}</p>
             </hgroup>
             <nav aria-label="Preview: primary navigation">
               <ul>
@@ -133,7 +134,7 @@ function siteHomePreviewFragment({
             </nav>
           </section>
           <footer aria-label="Preview: site footer">
-            <p class="license">Copyright 2026 Jon Plummer</p>
+            <p class="license">Copyright 2026 ${escapeHtml(site.author)}</p>
           </footer>
         </div>
         <div class="swatch-legend" aria-hidden="true">

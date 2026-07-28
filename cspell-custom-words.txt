@@ -79,9 +79,11 @@ WORFS
 writeback
 writebacks
 WSIX
+VUCA
 
 # Proper Names (People)
 Abrahams
+Arango
 Ausiello
 Bain
 Belião
@@ -122,7 +124,9 @@ Imperato
 Itamar
 Jaemi
 jamiem
+Joost
 juliangautier
+Karolina
 Karri
 Keegan
 Kohler
@@ -142,14 +146,17 @@ Pandya
 Panagiotidi
 Pidkuiko
 Pitre
+Polonski
 Rahman
 Rapoport
+Rojek
 Salamon
 Samutin
 Sattell
 Seigler
 Sevier
 Shreya
+Slava
 Ström
 swyx
 Sydorenko
@@ -181,6 +188,15 @@ Mitev
 Neeman
 Bouabdallah
 Rodenbeck
+Valk
+Hedden
+Usborne
+Aditya
+Anand
+Sucher
+Dolphia
+Chaman
+Litt
 
 # Other Valid Terms
 allyship
@@ -257,6 +273,7 @@ undoable
 unergonomic
 unmoderated
 unmodulated
+upskill
 vibed
 vivere
 writeups

@@ -5,9 +5,9 @@ eleventyExcludeFromCollections: true
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
-        <title>Jon Plummer - Collected wisdom</title>
+        <title>{{ site.author }} - Collected wisdom</title>
         <link>{{ site.url }}/wisdom/</link>
-        <description>Short notes and observations from Jon Plummer</description>
+        <description>Short notes and observations from {{ site.author }}</description>
         <language>en-US</language>
         <lastBuildDate>{% if wisdom.entries.length %}{{ wisdom.entries[0].added | dateToRfc3339 }}{% else %}{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}{% endif %}</lastBuildDate>
         {% for entry in wisdom.entries %}

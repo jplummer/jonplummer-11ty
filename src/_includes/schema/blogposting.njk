@@ -7,12 +7,12 @@
   "dateModified": "{{ date | dateToRfc3339 }}",
   "author": {
     "@type": "Person",
-    "name": "Jon Plummer",
+    "name": "{{ site.author }}",
     "url": "{{ site.url }}/about/"
   },
   "publisher": {
     "@type": "Person",
-    "name": "Jon Plummer",
+    "name": "{{ site.author }}",
     "url": "{{ site.url }}"
   },
   "url": "{{ site.url }}{{ page.url }}",

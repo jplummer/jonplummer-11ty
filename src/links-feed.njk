@@ -5,9 +5,9 @@ eleventyExcludeFromCollections: true
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
-        <title>Jon Plummer - Links</title>
+        <title>{{ site.author }} - Links</title>
         <link>{{ site.url }}</link>
-        <description>Links from Jon Plummer's blog</description>
+        <description>Links from {{ site.author }}'s blog</description>
         <language>en-US</language>
         {% set merged = collections.post | reverse | limit(20) | mergePostsAndLinks(links, 0) %}
         {% set firstItem = merged | first %}

@@ -44,7 +44,8 @@ const OG_SHARED_DEPS = [
   path.join(process.cwd(), 'src', '_includes', 'og-image-body.njk'),
   path.join(process.cwd(), 'src', 'assets', 'css', 'jonplummer.css'),
   path.join(process.cwd(), 'src', 'assets', 'css', 'fonts.css'),
-  path.join(process.cwd(), 'eleventy', 'utils', 'css-utils.js')
+  path.join(process.cwd(), 'eleventy', 'utils', 'css-utils.js'),
+  path.join(process.cwd(), 'src', '_data', 'site.js')
 ];
 
 function sharedOgDepsNewerThan(ogImageStat) {
@@ -107,7 +108,8 @@ async function renderOgImageHtml(pageData) {
     date: dateObj,
     cssCustomProperties: cssCustomProperties,
     productionFontFaces: productionFontFaces,
-    lightThemeColorOverrides: lightThemeColorOverrides
+    lightThemeColorOverrides: lightThemeColorOverrides,
+    site: require('../../src/_data/site.js')()
   });
 }
 
