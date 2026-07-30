@@ -7,7 +7,7 @@ coverImage: 2022/12/DashboardOnline.png
 description: "Complete redesign of the Linksys app, improving ratings from below 3 stars to 4.5 stars through new information architecture and performance improvements."
 ogImage: /assets/images/og/portfolio.png
 ---
-At one point the Linksys app, meant to offer people setup, control, and monitoring of their Linksys networks at home, was rated below three stars on the iTunes Store and had a lifetime rating of 3.3 on the Google Play Store. A new information architecture, a fresh coat of paint, and many performance and interactivity improvements brought it to 4.5 stars on iTunes and a 4.1 lifetime on Google, helped by a judicious amount of review solicitation.
+The Linksys app was just firmware settings dropped into mobile menus — no better an experience than the web UI, arranged around the network's internal structure instead of what someone actually came to do: check status, fix a device, set a rule. It was rated below three stars on the iTunes Store and had a 3.3 lifetime average on Google Play. I rebuilt the information architecture and visuals around real user tasks, backed it with real performance work under the hood, and asked happy customers to review it. Ratings moved to 4.5 on iTunes and 4.1 on Google Play.
 
 {% portraitGrid %}
 
