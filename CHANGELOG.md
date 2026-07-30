@@ -3,6 +3,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 ## 2026-07-27
 
 - Update site tagline to Making ideas tangible
+- Centralize site branding in site.js and fix spelling typos
 
 ## 2026-07-24
 
@@ -595,4 +596,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-07-28
+Last deployed on 2026-07-30
