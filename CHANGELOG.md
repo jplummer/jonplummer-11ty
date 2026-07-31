@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-07-31
+
+- Update About recommendations, July 31 links, and people names in the spell dictionary.
+
 ## 2026-07-30
 
 - Add craft post and tighten WeMo and Linksys openings.
