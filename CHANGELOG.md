@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-07-30
+
+- Add craft post and tighten WeMo and Linksys openings.
+
 ## 2026-07-27
 
 - Update site tagline to Making ideas tangible
@@ -596,4 +600,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-07-30
+Last deployed on 2026-07-31
