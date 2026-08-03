@@ -810,17 +810,27 @@ article.portfolio-detail {
 }
 
 .figure-lightbox-prev,
+.figure-lightbox-next,
+.figure-lightbox-close {
+  display: grid;
+  place-items: center;
+  inline-size: var(--spacing-xl);
+  block-size: var(--spacing-xl);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--baseline-unit);
+  background-color: color-mix(in oklch, var(--background-color) 88%, transparent);
+  cursor: pointer;
+}
+
+.figure-lightbox-prev,
 .figure-lightbox-next {
   position: absolute;
   top: 50%;
   z-index: 1;
   transform: translateY(-50%);
-  margin: 0;
-  padding: 0.25rem 0.5rem;
-  border: 0;
-  background: transparent;
   color: var(--text-color-light);
-  cursor: pointer;
 }
 
 .figure-lightbox-prev:disabled,
@@ -838,12 +848,13 @@ article.portfolio-detail {
 }
 
 .figure-lightbox-close {
-  margin: 0;
-  padding: 0.25rem 0.5rem;
-  border: 1px solid var(--border-color);
-  background-color: var(--background-color);
   color: var(--text-color);
-  cursor: pointer;
+}
+
+.figure-lightbox-icon {
+  display: block;
+  inline-size: var(--spacing-md);
+  block-size: var(--spacing-md);
 }
 
 .figure-lightbox img {

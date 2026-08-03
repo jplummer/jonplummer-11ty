@@ -71,10 +71,22 @@
 </footer>
 <dialog id="figure-lightbox" class="figure-lightbox" aria-label="Enlarged image">
     <form method="dialog" class="figure-lightbox-chrome">
-        <button type="submit" id="figure-lightbox-close" class="figure-lightbox-close" value="close" aria-label="Close">Close</button>
+        <button type="submit" id="figure-lightbox-close" class="figure-lightbox-close" value="close" aria-label="Close" title="Close (Esc)">
+            <svg class="figure-lightbox-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
+                <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+            </svg>
+        </button>
     </form>
-    <button type="button" id="figure-lightbox-prev" class="figure-lightbox-prev" aria-label="Previous image">Previous</button>
-    <button type="button" id="figure-lightbox-next" class="figure-lightbox-next" aria-label="Next image">Next</button>
+    <button type="button" id="figure-lightbox-prev" class="figure-lightbox-prev" aria-label="Previous image" title="Previous image (←)">
+        <svg class="figure-lightbox-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
+            <path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+    <button type="button" id="figure-lightbox-next" class="figure-lightbox-next" aria-label="Next image" title="Next image (→)">
+        <svg class="figure-lightbox-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
+            <path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
     <img id="figure-lightbox-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
     <p id="figure-lightbox-caption" class="figure-lightbox-caption"></p>
 </dialog>
