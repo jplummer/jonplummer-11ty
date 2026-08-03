@@ -19,13 +19,13 @@ That focus on discovery isn't theoretical. I trained as a social worker and an a
 
 Most recently I was Director of User Experience at Invoca, where I led a design team through an AI product transformation. Before that: Cayuse, Concentric Sky, and eleven years at Belkin, where I rose from Senior Designer to Senior Director and built the UX function for Linksys and Wemo from scratch. Along the way I picked up 20+ patents, an IDSA Silver award, and a lot of hard-won opinions about how design actually earns trust in engineering- and product-led organizations.
 
-I don't just have opinions about AI. At Invoca, that transformation included SMS and voice-based virtual agents, as well as the Call Review Console and AI Scorecard. These tools  put to work inside real customer conversations, cutting Customer Success Manager caseload by a fifth and helping open Contact Centers as a new customer segment. Outside work, I vibe-code hobby projects and publish them on GitHub, including a project template that packages agent configuration for tools like Cursor and Claude Code.
+I don't just have opinions about AI. At Invoca, that transformation included SMS and voice-based virtual agents, as well as the Call Review Console and AI Scorecard. These tools  put to work inside real customer conversations, cutting Customer Success Manager caseload by a fifth and helping open Contact Centers as a new customer segment.
 
 I develop designers who can hold a point of view and defend it, not just execute one. I get there by asking them the questions they should be asking, helping them find their own way to an answer. But I'm not hands-off: when the situation calls for a direct read, I give one. I interpret, I instruct, I push back. The goal is people who can think well under pressure and make good calls without being managed through every decision.
 
-Outside work I'm a deep dabbler – jazz piano, 3D printing and amateur industrial design, home improvement, cooking. The common threads are making ideas tangible and improving what's before me. I keep my hands in the tools at work and at home so I can show people the ropes and learn along with them.
+Outside work I'm a deep dabbler – jazz piano, 3D printing and amateur industrial design, home improvement, cooking. The common threads are making ideas tangible and improving what's before me. I keep my hands in the tools at work and at home so I can show people the ropes and learn along with them. I vibe-code hobby projects and publish them on GitHub, including a project template that packages agent configuration for tools like Cursor and Claude Code. I keep a running account of what I'm building at [/now](https://jonplummer.com/now).
 
-I mentor at [Designed.org](https://designed.org) and [tupu.io](https://tupu.io). See more via [my LinkedIn profile](https://linkedin.com/in/jplummer) and message me there if you have something to say, or reach me at [jon@jonplummer.com](mailto:jon@jonplummer.com?Subject=I%20visited%20jonplummer.com/about).
+I mentor at [Designed.org](https://designed.org) and [tupu.io](https://tupu.io). See more via [my LinkedIn profile](https://linkedin.com/in/jplummer) and message me there if you have something to say, or reach me at [jon@jonplummer.com](mailto:jon@jonplummer.com?subject=I%20visited%20jonplummer.com%2Fabout%20and%20have%20this%20to%20say%3A).
 
 * * *
 
@@ -51,6 +51,28 @@ The Call Review Console: He helped build an all-in-one interface for Quality Man
 
 Jon is naturally curious, asks incredible questions, and doesn't require hand-holding or pre-packaged requirements to deliver value. He meets teams where they are, and I’d jump at the chance to work with him again without hesitation.
 
+### **Nick Burwell**, Vice President of Architecture, Invoca
+
+I worked with Jon for several years, partnering on large, cross-cutting initiatives where UX and architecture had to move together.
+
+A few examples stand out. He led our first concept sprint at Invoca, which yielded a validated product concept that we put into practice and shipped to customers — our AI Messaging Agent. We also collaborated on our customer-facing data dictionary: Jon took customer interviews, feedback, and platform usage data, and using AI-powered synthesis and rapid prototyping, built a clear vision of where to head and the architectural steps to get there. Along the way, he advocated for an improved information architecture across the entire platform.
+
+Jon leads with questions rather than answers, and prefers to lead by showing rather than telling. He was big on building trust across teams and peers, which I appreciated. He's a steady leader who stays even-keeled when things get tense, and genuinely cares about the people he leads and the customer experience.
+
+I really enjoyed working with Jon, his passion and expertise for product design speak for themselves.
+
+### **Samuel Reynolds**, Senior Technical Product Manager, Invoca
+
+I worked with Jon for several years at Invoca, partnering across Design, Engineering, and Product on initiatives where customer insight and architecture had to move together.
+
+My biggest impression of Jon is his emphasis on understanding the customer point of view and factoring that into our discovery and development process. Jon had a huge role in defining how Invoca approaches customer problem statements – he gave company-wide presentations on framing pain points clearly and without bias, then turned that work into a shareable Skill so any PM or project owner could start discovery with a strong customer point of view already built in. That internalized customer understanding helps build taste: it gives you the judgment to make fast decisions with confidence that you're solving real problems, not just shipping features. That matters even more now, with the pace of AI-powered development pushing teams to move faster.
+
+That same rigor carried into how he ran our navigation and information architecture overhaul: he led the user feedback sessions, owned the product brief, and used AI-powered prototyping in Chromatic to generate multiple design variations quickly, building momentum in our weekly project syncs. What would have historically taken months to explore started converging almost immediately – his prototyping accelerated the entire exploration process for a long-term, visionary initiative, and kept our SDLC moving without losing rigor along the way.
+
+Jon is also a strong mentor – he creates time for the people in his org and helps build a real sense of accountability, anchored in openly sharing his own experiences. That generosity with feedback made him easy to learn from and collaborate with.
+
+Jon is who you want framing the problem, prototyping the solution, and keeping a team honest through the process. He raised the bar for how our team worked, and I'd welcome the chance to work with him again.
+
 ### **Brittany Choy**, Senior User Experience Designer, Invoca
 
 I worked as a UX Designer for Jon at Invoca, where I eventually grew to be a Sr. UX Designer under his attentive and caring leadership.
@@ -63,7 +85,7 @@ In uncertain situations, whether navigating changing priorities or the rapidly e
 
 In short, Jon expertly leads with confidence and compassion, and I always appreciated his genuine investment in both my career and personal growth. I would gladly work with Jon again.
 
-### **Adam Smith-Kipnis**, Senior UX Designer, Invoca
+### **Adam Smith-Kipnis**, Senior User Experience Designer, Invoca
 
 I had the privilege of working with Jon Plummer as my manager at Invoca. Jon is the kind of design leader who makes the people around him more thoughtful, and the work itself better for it.
 
@@ -74,16 +96,6 @@ Second, Jon communicates candidly, in ways that take courage. He'll tell you wha
 Third, Jon invests in his team's development. He understood my aspirations, coached on specific growth areas, and advocated for trajectories within real organizational constraints. He brings decades of cross-industry pattern recognition and shares it generously.
 
 Above all, Jon brings genuine commitment to the craft of design and the practice of leadership. Any team would be fortunate to have him.
-
-### **Nick Burwell**, Vice President of Architecture, Invoca
-
-I worked with Jon for several years, partnering on large, cross-cutting initiatives where UX and architecture had to move together.
-
-A few examples stand out. He led our first concept sprint at Invoca, which yielded a validated product concept that we put into practice and shipped to customers — our AI Messaging Agent. We also collaborated on our customer-facing data dictionary: Jon took customer interviews, feedback, and platform usage data, and using AI-powered synthesis and rapid prototyping, built a clear vision of where to head and the architectural steps to get there. Along the way, he advocated for an improved information architecture across the entire platform.
-
-Jon leads with questions rather than answers, and prefers to lead by showing rather than telling. He was big on building trust across teams and peers, which I appreciated. He's a steady leader who stays even-keeled when things get tense, and genuinely cares about the people he leads and the customer experience.
-
-I really enjoyed working with Jon, his passion and expertise for product design speak for themselves.
 
 ### **Suzanne Hopkins**, Director of Product Management, Cayuse
 

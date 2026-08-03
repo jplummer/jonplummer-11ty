@@ -1,7 +1,15 @@
+2026-08-03:
+  - url: "https://www.thoughtfulapes.com/fire-weather-on-why-techs-worst-rated-managers-are-not-the-problem/"
+    title: "Fire Weather: On why tech’s worst-rated managers are not the problem – Caitlin Steele"
+    description: "\"Designers and researchers are, in the report’s words, at the epicentre of AI anxiety across the board: \\“Among designers, 63% feel ‘overwhelmed by the pace of change’ and 61% feel ‘tired’, the highest of any role.\\” Sixty-one percent feel the comp squeeze directly, the most of any discipline. Designers and researchers report the lowest willingness of anyone to recommend their field.\""
+  - url: "https://www.youtube.com/watch?v=Ira28fgSF7M"
+    title: "The Lost Discipline of the Alarm: What Notification Design Forgot – Saleh Kayyali"
+    description: "\"Notification design has a problem it did not invent and has never named. The problem is alarms: which signals deserve to interrupt a person, and which should be kept quiet. And it was diagnosed, with a whole discipline built around it, long before a single app ever buzzed in your pocket, in oil refineries, nuclear control rooms and hospital wards.\""
+
 2026-07-31:
   - url: "https://uxdesign.cc/the-aggressively-mediocre-fight-ed47b3f9f8f4?sk=4d7ea5ca7989687d012a1c6901e1c198&utm_source=substack&utm_medium=email"
     title: The aggressively mediocre fight – Chris R. Becker
-    description: "– \"What if we focused on quality and attempted to move far beyond mediocre?\""
+    description: "\"What if we focused on quality and attempted to move far beyond mediocre?\""
   - url: "https://unsung.aresluna.org/what-it-says-on-the-tin"
     title: What it says on the tin – Marcin Wichary
     description: "A tiny and very helpful example of thoughtfulness in email design: putting the confirmation code in the subject line AND the body."
