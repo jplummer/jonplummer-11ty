@@ -207,7 +207,7 @@ Wroblewski
 Xiao
 Zhou
 
-# Other Valid Terms
+# Other Valid Terms and Variants
 allyship
 approvable
 automatable
@@ -223,6 +223,7 @@ deprioritized
 descope
 duckburg
 endedness
+epicentre
 explainability
 feelsgoodman
 fingerstick
