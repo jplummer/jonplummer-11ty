@@ -4,6 +4,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 - Update about, now, and links with new content and testimonials
 - Update dependencies to resolve security audit findings
+- SVG lightbox controls with hover shortcuts
 - Add epicentre to custom dictionary
 
 ## 2026-07-31
