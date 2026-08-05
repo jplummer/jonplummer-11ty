@@ -19,10 +19,10 @@ A skunkworks project to make a wearable remote for an insulin pump and glucose s
 *Analysis of LCD segment counts showing the constraints and possibilities of the limited-segment display driver.*
 
 ![MiniMed watch crown control for accessing settings](/assets/images/2022/12/001.1_idle_-_interrupted_signal.jpg)
-*Just as you pull the crown of an analog watch to set the time, we could pull the crown of this hybrid watch to access various settings.*
+*This digital crown concept predates Apple Watch by eight years. The idea didn't come from a smartwatch; it came from asking what the physical vocabulary of an analog watch could do for a segment-limited LCD. Just as pulling the crown puts you in a "set" mode on an analog watch, and pushing it back in "saves" your work, we could enter and exit a "set" mode for a variety of functions with this same gesture.*
 
 ![MiniMed watch alarm review screen](/assets/images/2022/12/001.2_alarm_review_-_off.jpg)
-*Just as you pull the crown of an analog watch to set the time, we could pull the crown of this hybrid watch to access various settings. use the button to find the proper mode, pull the crown to enter the setting mode, rotate the crown to adjust, push the button to toggle, push crown back in to save.*
+*Push the button to find the mode, pull the crown to enter setting mode, rotate to adjust, push to toggle, push back in to save — five steps mapped onto a control people already knew how to use.*
 
 In 2006 this was a fairly radical thought, especially the digital crown and repurposing existing analog watch behaviors for everyday control.
 

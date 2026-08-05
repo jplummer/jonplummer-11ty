@@ -16,7 +16,7 @@ Since getting started I've:
 - built and shipped
   - an iOS app to fetch a single task from an iOS Reminders list to avoid the paradox of choice ([Monotasker](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://apps.apple.com/us/app/monotasker/id6770424713&ved=2ahUKEwiB4ojV_YSWAxUbODQIHdq-EnMQFnoECBMQAQ&usg=AOvVaw1gFBdEGIQqmq7gjSqUNXfp), available on the Apple App Store now)
   - [this site](https://github.com/jplummer/jonplummer-11ty), converted from WordPress to 11ty, adding scads of tests, authoring helps, and other features (little link posts, collected wisdom repository, this page, etc.), along with lowering its Ahrefs error rate to zero and warnings only to those I don't care about
-  - a semi-vibed [drop-in file/folder navigator](https://github.com/jplummer/lister-php) in PHP for my personal file pile site, further refined as I found more uses for it
+  - a [drop-in file/folder navigator](https://github.com/jplummer/lister-php) in semi-vibed PHP for my personal file pile site, further refined as I found more uses for it
   - a book map tool that my wife can edit and export to show on her personal website
   - a [privacy-focused URL-shortener](https://github.com/jplummer/prvt) that makes the smallest QR codes it can
 - in progress
@@ -26,7 +26,7 @@ Since getting started I've:
 - started but waiting for attention
   - a MacOS menu bar clock that counts down to your statistical life expectancy (memento mori) or up from your date of birth (memento vivere)
   - a project to build a site to showcase tee shirt designs
-  - written a MacOS service that points out the words you've used in a selected passage of text that aren't in the ten thousand most common English words
+  - a MacOS service that points out the words you've used in a selected passage of text that aren't in the ten thousand most common English words
 - not started
   - an eInk display that fetches the front page of the newspaper every morning. If I can find a display and a way to drive it this is now a project I can accomplish on my own as an amateur.
   - a little device that prints the morning's calendar and tasks when you get to work in the morning, based on a cheapo thermal printer I scored second-hand
@@ -35,9 +35,7 @@ More to come. The barrier between software itch and software scratch is narrowin
 
 In each of these my long-lapsed front-end web coding experience has been helpful: I have a notion of how a thing could be implemented and I can notice several code smells, but lack facility with the most current frameworks. But a little instruction, a little negotiation, a little correction, and working software is the result. Most of the time.
 
-Both of these hobbies are attractive because they bring design quickly into reality where you can try it, benefit from it, and improve it. Since this time last year I've designed and printed ≥35 personally-designed projects and innumerable pre-designed items.
-
-Interesting and exciting times.
+Both of these hobbies are attractive because they bring design quickly into reality where you can try it, benefit from it, and improve it. Interesting and exciting times.
 
 At work I ~~am~~ *was* also experimenting:
 

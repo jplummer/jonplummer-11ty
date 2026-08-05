@@ -20,7 +20,7 @@ Wemo started as a single idea done well: a plug-in switch and a motion sensor yo
 *Main WeMo app interface showing device status and controls, redesigned for iOS 7 with a cleaner, flatter aesthetic.*
 
 ![WeMo app I Want feature screen for natural language device control](/assets/images/2022/12/ios7_iwant_iphone5-577x1024.png)
-*The "I Want" feature allowing users to control devices using natural language commands like "turn on the lights" or "make it warmer."*
+*"I want to…" framed the feature as a request, not a settings screen, but underneath it's a structured picker: control a switch by time, sunset, or motion, or get notified on motion or power draw. The conversational label did the work of making four conditional-logic options (which would later expand) feel like a sentence you'd say out loud, not a rules engine.*
 
 ![WeMo app I Want feature expanded view with more options](/assets/images/2022/12/ios7_iwant2_iphone5-577x1024.png)
 *Expanded view of the I Want feature showing time and sunrise/set settings.*

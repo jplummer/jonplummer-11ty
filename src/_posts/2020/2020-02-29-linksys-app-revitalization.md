@@ -18,10 +18,10 @@ The Linksys app was just firmware settings dropped into mobile menus — no bett
 *Detailed view of a single connected device, showing connection status, bandwidth usage, and device-specific controls.*
 
 ![Linksys app device list showing all connected devices](/assets/images/2022/12/DeviceList-576x1024.png)
-*Complete list of all devices connected to the network, with status indicators and quick access to device details.*
+*Each row stacks three signals into one icon cluster — a device-type glyph, a small badge for ethernet versus Wi-Fi, and a lock icon for anything with restricted access — so a glance tells you what a device is, how it's connected, and if it is subject to any rules before you tap anything.*
 
 ![Linksys app swipe actions pattern for device management](/assets/images/2022/12/deviceprioritizationdelete-576x1024.png)
-*Swipe actions are a useful mobile pattern.*
+*Removing a prioritized device used to mean drilling into a settings screen most people never found. A swipe surfaces Remove and Cancel right on the row, in reach of a thumb, with no confirmation dialog blocking the one action people came to do.*
 
 ![Linksys app device prioritization main screen](/assets/images/2022/12/DevicePrioritizationHome@2x-576x1024.png)
 *Device prioritization feature allowing users to give specific devices higher bandwidth priority for gaming, streaming, or work.*

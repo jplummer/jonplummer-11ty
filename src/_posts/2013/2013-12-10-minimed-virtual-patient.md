@@ -16,7 +16,7 @@ As a demonstration and educational tool, and to preview to executives anticipate
 *Physician interface overlay showing additional controls and information available when reviewing patient data in healthcare provider mode.*
 
 ![MiniMed virtual patient application physician view with patient data](/assets/images/2022/12/be_hcp.png)
-*Physician view displaying three days of patient glucose data, insulin doses, and meal markers, allowing adjustments to pump settings to improve care.*
+*Physician view displaying three days of patient glucose data, insulin doses, and meal markers, allowing adjustments to pump settings to improve care. The three panels — glucose curve, carbohydrates, insulin delivery — share one time axis, so a spike and the meal that caused it sit in the same eyeline instead of two screens a clinician has to hold in memory. The patient isn't abstract, either: "Meghan, 34," quoted at the bottom of the screen "I'll do anything for the health of my baby," Give the physician someone to empathize with.*
 
 ![MiniMed virtual patient application patient mode interface](/assets/images/2022/12/be_patient.png)
 *Patient mode interface allowing users to simulate being a diabetic patient, selecting meals and insulin dosages over two days to see blood glucose responses.*
