@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-08-05
+
+- Sharpen portfolio figure captions and trim now
+
 ## 2026-08-03
 
 - Update about, now, and links with new content and testimonials
