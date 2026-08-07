@@ -2,6 +2,19 @@
 
 ## ☑️ Selected
 
+- Craft / polish (demonstrate craft)
+  - Portfolio grid styling — especially link underlines that need not show until hover/focus
+  - Further refinement of the logo / logotype / tagline lockup
+  - Alternate taglines?
+  - Color scheme refinement, especially dark
+  - Outlandish alternative stylesheet?
+  - Icons, lightbox controls, and end-of-post tokens as a system
+  - Credit relationship to the face sketch on the colophon
+  - Subtle texture in overflow background (light mode)?
+  - Audit focus behavior and keyboard navigation
+  - Accessibility check and stats for the colophon
+  - Maybe drop italics in the few places we use them?
+
 - Portfolio
   - Presentation-to-portfolio automation (in progress — see notes below)
     - **Status**: Local **PDF + `.pptx`** path shipped (`pnpm run convert-presentation`); cloud fetch (Drive / Graph) not built yet
