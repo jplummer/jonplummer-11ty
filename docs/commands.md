@@ -43,7 +43,7 @@ Recommended process for deploying changes with an up-to-date changelog:
 ### 🪂 Deployment
 
 - `pnpm run deploy` - Deploy site to host via rsync
-  - Runs: `changelog` → `build` (source checks + OG images + Eleventy + output checks) → rsync → Cloudflare purge (changed URLs) → IndexNow
+  - Runs: `changelog` → `build` (source checks + OG images + Eleventy + output checks) → rsync → Cloudflare purge (content-hash diff) → IndexNow
 - `pnpm run deploy --dry-run` - Test deployment without actually deploying (runs all checks and shows what would be synced)
 
 ### 🪶 Content Authoring
@@ -88,7 +88,7 @@ The deploy script performs these steps in order:
 1. **Regenerates changelog** from git history
 2. **Builds the site** via `pnpm run build` — runs all source checks, generates OG images, runs Eleventy, then runs all output checks
 3. **Deploys via rsync** - uses `--dry-run` flag when `--dry-run` option is used
-4. **Purges Cloudflare cache** for rsync-changed URLs only (skipped if credentials unset; previewed on dry-run)
+4. **Purges Cloudflare cache** for content-changed URLs only (SHA-256 diff vs local manifest; skipped if credentials unset; previewed on dry-run)
 5. **Submits IndexNow** notification for search engine indexing - skipped with `--dry-run`
 6. **Commits changelog** if it was updated, then **always pushes to remote** - skipped with `--dry-run`
 
@@ -115,14 +115,22 @@ This is useful for:
 
 #### Cloudflare cache purge (optional)
 
-After rsync, deploy purges **only changed URLs** from Cloudflare edge cache (parsed from rsync `--itemize-changes`). Set in `.env`:
+After rsync, deploy purges **only URLs whose built content changed** from Cloudflare edge cache. The purge list comes from a **local content-hash manifest**, not from rsync's transfer list — rsync may still upload files with new mtimes even when bytes are unchanged.
+
+Deploy walks `_site/`, SHA-256-hashes each file, and diffs against `.cache/deploy-content-manifest.json` (gitignored). Changed, added, and deleted paths map to apex URLs on `SITE_DOMAIN` (default `jonplummer.com`). Non-public artifacts such as `.htaccess` are skipped.
+
+Set in `.env`:
 
 ```
 CLOUDFLARE_ZONE_ID=your-zone-id
 CLOUDFLARE_API_TOKEN=your-api-token
 ```
 
-Create an API token with **Zone → Cache Purge → Purge** permission for the site zone. If unset, deploy skips purge and prints a note. Set `CLOUDFLARE_PURGE=0` to disable when credentials are present. `pnpm run deploy --dry-run` lists URLs that would be purged without calling the API.
+Create an API token with **Zone → Cache Purge → Purge** permission for the site zone. If unset, deploy skips purge and prints a note. Set `CLOUDFLARE_PURGE=0` to disable when credentials are present.
+
+**First deploy after this feature** (or after clearing `.cache/`): no baseline manifest exists yet — deploy establishes the manifest but **does not purge** that run. The next deploy diffs against it. For an immediate full edge refresh, use the Cloudflare dashboard or set `CLOUDFLARE_PURGE_FORCE_CONTENT=1` for one run (treats all current `_site` files as changed).
+
+`pnpm run deploy --dry-run` lists URLs that would be purged without calling the API and does not write the manifest.
 
 
 ### 🗃️ Changelog Generation

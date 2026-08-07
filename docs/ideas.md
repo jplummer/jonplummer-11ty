@@ -31,6 +31,10 @@
 
 ## 🔮 Future Consideration
 
+### Deploy / Cloudflare
+
+- **Rsync transfer volume via content-hash manifest** — After content-hash Cloudflare purge ships (`docs/superpowers/specs/2026-08-06-content-hash-cloudflare-purge-design.md` + plan), revisit using the **same local `_site` path→SHA-256 manifest** to limit what rsync uploads (skip byte-identical HTML despite new mtimes). Out of scope for the purge-only iteration; only if transfer size/time still hurts.
+
 ### Utility / lab pages (color, type, OG) — “hidden in public”
 
 - **Shared UX pattern**: Color explorer and type explorer both target the **same full-page, full-size preview popout** idea (a dedicated **exercise page** that stresses site tokens and typography—not one “real” post that tries to cover everything). **`/color/`** already has **smaller in-page previews** in the gallery; **`/type/`** already embeds **`fontLabCard`** on the canonical page. Remaining gap vs color: optional **full-page type rehearsal** / popout parity (see **`/style-exercise/`** → **`/color/`** below).
