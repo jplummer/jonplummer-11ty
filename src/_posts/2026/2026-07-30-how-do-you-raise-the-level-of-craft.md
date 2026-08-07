@@ -6,7 +6,7 @@ tags: post
 description: Raising craft isn't one fix – diagnose where quality stalls, intervene sized to your confidence, and repeat as the bottlenecks move.
 ogImage: /assets/images/og/2026-07-30-how-do-you-raise-the-level-of-craft.png
 ---
-I flubbed an interview question the other day. Not because I have a wrong answer, exactly, but because I gave a truthful answer that was too narrow, possibly not suited to the company, and not representative of what I *would* do were I hired.
+I flubbed an interview question the other day. Not because I gave a wrong answer, exactly, but because I gave a truthful answer that was too narrow, possibly not suited to the company, and not representative of what I *would* do were I hired.
 
 ## The fateful question
 
