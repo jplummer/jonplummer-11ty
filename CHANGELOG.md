@@ -3,6 +3,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 ## 2026-08-06
 
 - JP mark lockup on header and OG images
+- Valid header hgroup markup and readable mark asset
 
 ## 2026-08-05
 
