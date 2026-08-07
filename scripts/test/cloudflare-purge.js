@@ -91,7 +91,11 @@ runTest({
     fs.writeFileSync(path.join(siteA, '.htaccess'), 'Deny\n');
 
     const manA = buildContentManifest(siteA);
-    if (!manA.files['index.html'] || !manA.files['assets/css/jonplummer.css']) {
+    if (
+      !manA.files['index.html'] ||
+      !manA.files['assets/css/jonplummer.css'] ||
+      !manA.files['.htaccess']
+    ) {
       addIssue(fileObj, {
         severity: 'error',
         type: 'cloudflare-purge-manifest',
