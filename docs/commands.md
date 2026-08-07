@@ -66,6 +66,7 @@ See [noteplan-import.md](noteplan-import.md) for complete workflow documentation
 - `pnpm run color-gallery` - Generate APCA-aware theme gallery (HTML + JSON) under `scripts/color-explore/output/` **and** refresh the `/color/` embed files in `src/` (same defaults as Eleventy). Use this for **CLI flags** (`--hue-sweep`, `--random`, etc.); **`pnpm run build`** / **`dev`** already run the embed step via `eleventy.before` — see [color-theme-exploration.md](color-theme-exploration.md)
 - Color theme **tooling** (gallery output, `/color/` page, `node scripts/utils/suggest-colors.js`, `pnpm run test color-contrast`) — summarized in [color-theme-exploration.md § Companion tooling](color-theme-exploration.md#companion-tooling)
 - `pnpm run font-gallery` - Generate single-card font lab (headings vs body stacks, live site scale/colors) under `scripts/font-explore/output/` — see [font-stack-exploration.md](font-stack-exploration.md)
+- `pnpm run colophon-sketch` - Colophon portrait remap lab (light vs dark side-by-side) under `scripts/colophon-sketch/output/`; add `-- --export` to write site `-light.png` / `-dark.png` from the current export recipe
 - Font stack **tooling** (gallery output, generator paths, CSS lint after shipping) — [font-stack-exploration.md § Companion tooling](font-stack-exploration.md#companion-tooling)
 
 ---

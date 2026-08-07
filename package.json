@@ -25,6 +25,7 @@
     "security-audit": "node scripts/security/security-audit.js",
     "color-gallery": "node scripts/color-explore/generate-gallery.js",
     "font-gallery": "node scripts/font-explore/generate-font-gallery.js",
+    "colophon-sketch": "node scripts/colophon-sketch/generate-lab.js",
     "lint:css": "stylelint \"src/**/*.css\"",
     "fix:markdown": "markdownlint-cli2 --fix \"src/**/*.md\""
   },

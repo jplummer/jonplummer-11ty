@@ -37,6 +37,9 @@ scripts/color-explore/output/
 # Font stack exploration (generated; see docs/font-stack-exploration.md)
 scripts/font-explore/output/
 
+# Colophon sketch remap lab (generated)
+scripts/colophon-sketch/output/
+
 # Portfolio deck conversion (python-pptx venv; pnpm run setup-deck-python)
 scripts/content/.venv/
 
