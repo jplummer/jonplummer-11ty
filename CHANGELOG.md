@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-08-06
+
+- JP mark lockup on header and OG images
+
 ## 2026-08-05
 
 - Sharpen portfolio figure captions and trim now
@@ -615,4 +619,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-08-05
+Last deployed on 2026-08-07
