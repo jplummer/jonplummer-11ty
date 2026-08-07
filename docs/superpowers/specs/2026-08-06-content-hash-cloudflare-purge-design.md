@@ -30,7 +30,8 @@ Eleventy rewrites most HTML each build (new mtimes). rsync `-az` then reports hu
    - Load previous manifest from `.cache/deploy-content-manifest.json` (already covered by `.gitignore` `.cache/`).
    - Walk `_site`, SHA-256 each file (local only; full tree measured ~2.5s / ~566 MB on this machine).
    - Changed = hash differs; added = new path; deleted = in old manifest, missing from `_site`.
-   - Map paths → public URLs via existing `deployPathToUrl` (apex `SITE_DOMAIN` / `jonplummer.com`).
+   - **Purge set (normal mode):** `changed` ∪ `deleted` only. Skip **`added`** — a brand-new URL was never at the edge (content-addressed `_site/img/…`, new posts). Same-path regenerations (e.g. OG PNGs) are `changed` and still purge. Force mode still includes all current keys (+ deleted).
+   - Map purge paths → public URLs via existing `deployPathToUrl` (apex `SITE_DOMAIN` / `jonplummer.com`).
    - Skip non-public deploy artifacts that should not be purge URLs (at least `.htaccess`).
 4. Call existing batched Cloudflare `purge_cache` API (unless skipped — see failure table).
 5. Write the new manifest only when appropriate:

@@ -271,12 +271,12 @@ runTest({
       forceContent: false,
     });
     const diffModeSorted = [...diffMode.paths].sort();
-    // changed: b (hash differs); added: c; deleted: d
-    if (JSON.stringify(diffModeSorted) !== JSON.stringify(['b', 'c', 'd'])) {
+    // changed: b (hash differs); deleted: d — added `c` must NOT be purged
+    if (JSON.stringify(diffModeSorted) !== JSON.stringify(['b', 'd'])) {
       addIssue(fileObj, {
         severity: 'error',
         type: 'collect-purge-paths-diff',
-        message: `expected changed+added+deleted, got ${JSON.stringify(diffMode)}`,
+        message: `expected changed+deleted (no added), got ${JSON.stringify(diffMode)}`,
       });
     }
 

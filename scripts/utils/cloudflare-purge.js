@@ -222,8 +222,11 @@ function collectPurgePaths(previous, current, options = {}) {
     return { mode: 'force', paths: [...paths] };
   }
 
-  const { changed, added, deleted } = diffContentManifests(previous, current);
-  const paths = new Set([...changed, ...added, ...deleted]);
+  const { changed, deleted } = diffContentManifests(previous, current);
+  // Skip `added`: nothing was ever cached under a brand-new URL (Eleventy
+  // content-addressed img/, new posts, etc.). Still purge `changed` (same
+  // path, new bytes — e.g. regenerated OG PNGs) and `deleted` (stale edge).
+  const paths = new Set([...changed, ...deleted]);
   return { mode: 'diff', paths: [...paths] };
 }
 

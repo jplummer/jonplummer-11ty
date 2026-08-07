@@ -117,7 +117,7 @@ This is useful for:
 
 After rsync, deploy purges **only URLs whose built content changed** from Cloudflare edge cache. The purge list comes from a **local content-hash manifest**, not from rsync's transfer list — rsync may still upload files with new mtimes even when bytes are unchanged.
 
-Deploy walks `_site/`, SHA-256-hashes each file, and diffs against `.cache/deploy-content-manifest.json` (gitignored). Changed, added, and deleted paths map to apex URLs on `SITE_DOMAIN` (default `jonplummer.com`). Non-public artifacts such as `.htaccess` are skipped.
+Deploy walks `_site/`, SHA-256-hashes each file, and diffs against `.cache/deploy-content-manifest.json` (gitignored). **Changed** and **deleted** paths map to apex URLs on `SITE_DOMAIN` (default `jonplummer.com`). **Added** paths are not purged (nothing was cached under a new URL yet); they still enter the manifest for later diffs. Regenerated assets that keep the same path (e.g. OG PNGs) count as changed and are purged. Non-public artifacts such as `.htaccess` are skipped.
 
 Set in `.env`:
 
