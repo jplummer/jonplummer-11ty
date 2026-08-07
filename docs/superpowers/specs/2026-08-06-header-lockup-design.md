@@ -31,7 +31,7 @@ Rejected: scoped selectors only (B); inline SVG for token theming (C).
 | Path | Change |
 |---|---|
 | `src/assets/images/jp-mark.svg` | Add — tight viewBox to ink (`50 50 500 500`); light `#2a2a2a` / dark `#e0e0e0` fills |
-| `src/_includes/base.njk` | Mark link + `.site-title-stack` wrapping existing h1 + tagline |
+| `src/_includes/base.njk` | `.site-lockup` wrapping mark link + `hgroup` (h1 + tagline only — valid hgroup content) |
 | `src/assets/css/jonplummer.css` | `--font-size-logotype`; split `header` / `hgroup` layout; logotype + stack spacing |
 
 Source asset (outside repo, approved for use as-is):
@@ -43,34 +43,35 @@ Source asset (outside repo, approved for use as-is):
 ```html
 <header>
     <a class="skip" href="#main">Skip to content</a>
-    <hgroup>
-        <a href="/" rel="home" class="site-mark-link">
+    <div class="site-lockup">
+        <a href="/" rel="home" class="site-mark-link" aria-label="{{ site.author }} home">
             <img class="site-mark" src="/assets/images/jp-mark.svg" alt="" width="52" height="52" eleventy:ignore>
         </a>
-        <div class="site-title-stack">
+        <hgroup>
             <h1><a href="/" rel="home">{{ site.author }}</a></h1>
             <p>{{ site.tagline }}</p>
-        </div>
-    </hgroup>
+        </hgroup>
+    </div>
     {% include "components/nav.njk" %}
 </header>
 ```
 
+Mark link uses `aria-label` (decorative `alt=""`) so WCAG H30 is satisfied without duplicating the adjacent h1 for screen readers. `hgroup` only contains heading + `p` (html-validate content model).
 ## CSS summary
 
 - Token: `--font-size-logotype: 2.25rem` near other `--font-size-*` (deliberately off the modular scale).
 - Optical lockup tokens (literals, not live `±1px` calcs) — cap→baseline across two fonts + `<img>` isn’t native CSS layout:
   - `--site-lockup-stack-gap: 6.2px` — space between logotype and tagline
   - `--site-lockup-cap-nudge: 2.2px` — mark top below h1 em top (Big Shoulders capital ink)
-  - `--site-lockup-inline-nudge: 3px` — `margin-inline-start` on `body > header hgroup` vs main column
+  - `--site-lockup-inline-nudge: 3px` — `margin-inline-start` on `.site-lockup` vs main column
   - `--site-lockup-tagline-ascent: 0.9375` — Public Sans italic ascent/em for baseline math in mark height
-- `header`: flex, baseline, gap, wrap, `justify-content: space-between` (fold the old standalone rule into this block).
-- `hgroup`: flex, **flex-start** (not center), gap, wrap.
-- `.site-mark-link` / `.site-mark`: block; mark link `flex-shrink: 0`; mark sized so ink top ≈ logotype capital ink and ink bottom ≈ tagline alphabetic baseline.
+- `hgroup`: flex baseline (galleries / other uses); **`.site-lockup`** is the header flex row (mark + title stack).
+- `.site-lockup hgroup { display: block }` so logotype stacks above tagline.
+- `.site-mark-link` / `.site-mark`: block; mark link `flex-shrink: 0` + `aria-label`; mark sized so ink top ≈ logotype capital ink and ink bottom ≈ tagline alphabetic baseline.
 - Mark `<img>` must include **`eleventy:ignore`** so the image transform does not rasterize the SVG (would drop `prefers-color-scheme` fills).
 - SVG `viewBox="50 50 500 500"` — tight to bar ink (no padding).
 - `hgroup h1`: display family, logotype size, `line-height: 1`, Semibold, uppercase, normal letter-spacing.
-- Tagline: `.site-title-stack p { margin-top: var(--site-lockup-stack-gap) }` (replaces `header h1 + p`).
+- Tagline: `.site-lockup hgroup p { margin-top: var(--site-lockup-stack-gap) }`.
 - Leave `hgroup h1 a:any-link` / hover-focus rules alone.
 
 ## Verification

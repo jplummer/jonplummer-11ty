@@ -50,15 +50,15 @@
 <body>
 <header>
     <a class="skip" href="#main">Skip to content</a>
-    <hgroup>
-        <a href="/" rel="home" class="site-mark-link">
+    <div class="site-lockup">
+        <a href="/" rel="home" class="site-mark-link" aria-label="{{ site.author }} home">
             <img class="site-mark" src="/assets/images/jp-mark.svg" alt="" width="52" height="52" eleventy:ignore>
         </a>
-        <div class="site-title-stack">
+        <hgroup>
             <h1><a href="/" rel="home">{{ site.author }}</a></h1>
             <p>{{ site.tagline }}</p>
-        </div>
-    </hgroup>
+        </hgroup>
+    </div>
     {% include "components/nav.njk" %}
 </header>
 

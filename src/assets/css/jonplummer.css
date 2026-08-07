@@ -195,13 +195,22 @@ header {
 
 hgroup {
   display: flex;
-  align-items: flex-start;
+  align-items: baseline;
   gap: var(--spacing-sm);
   flex-wrap: wrap;
 }
 
-body > header hgroup {
+.site-lockup {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
   margin-inline-start: var(--site-lockup-inline-nudge);
+}
+
+/* Title + tagline stack beside the mark (not a flex row like other hgroups) */
+.site-lockup hgroup {
+  display: block;
 }
 
 .site-mark-link {
@@ -473,7 +482,7 @@ hgroup p {
   color: var(--text-color-light);
 }
 
-.site-title-stack p {
+.site-lockup hgroup p {
   margin-top: var(--site-lockup-stack-gap);
 }
 
