@@ -8,6 +8,79 @@
 const CF_API = 'https://api.cloudflare.com/client/v4';
 const PURGE_BATCH_SIZE = 30;
 
+const crypto = require('crypto');
+const fs = require('fs');
+const path = require('path');
+
+const DEFAULT_MANIFEST_REL = path.join('.cache', 'deploy-content-manifest.json');
+
+function defaultManifestPath(cwd = process.cwd()) {
+  return path.join(cwd, DEFAULT_MANIFEST_REL);
+}
+
+function hashFile(absPath) {
+  const hash = crypto.createHash('sha256');
+  hash.update(fs.readFileSync(absPath));
+  return hash.digest('hex');
+}
+
+function walkFiles(dir, root, out) {
+  for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+    const abs = path.join(dir, ent.name);
+    if (ent.isDirectory()) walkFiles(abs, root, out);
+    else if (ent.isFile()) {
+      const rel = path.relative(root, abs).replace(/\\/g, '/');
+      out[rel] = hashFile(abs);
+    }
+  }
+}
+
+function buildContentManifest(siteRoot) {
+  const files = {};
+  walkFiles(siteRoot, siteRoot, files);
+  return {
+    version: 1,
+    generatedAt: new Date().toISOString(),
+    files,
+  };
+}
+
+function loadContentManifest(manifestPath) {
+  if (!fs.existsSync(manifestPath)) return null;
+  return JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+}
+
+function saveContentManifest(manifestPath, manifest) {
+  fs.mkdirSync(path.dirname(manifestPath), { recursive: true });
+  fs.writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`, 'utf8');
+}
+
+function diffContentManifests(previous, current) {
+  const prev = (previous && previous.files) || {};
+  const curr = (current && current.files) || {};
+  const changed = [];
+  const added = [];
+  const deleted = [];
+  for (const p of Object.keys(curr)) {
+    if (!(p in prev)) added.push(p);
+    else if (prev[p] !== curr[p]) changed.push(p);
+  }
+  for (const p of Object.keys(prev)) {
+    if (!(p in curr)) deleted.push(p);
+  }
+  return { changed, added, deleted };
+}
+
+function shouldPurgeDeployPath(relativePath) {
+  const clean = relativePath.replace(/\\/g, '/').replace(/^\.\//, '');
+  if (clean === '.htaccess' || clean.endsWith('/.htaccess')) return false;
+  return true;
+}
+
+function pathsToPurgeUrls(paths, siteDomain) {
+  return paths.filter(shouldPurgeDeployPath).map((p) => deployPathToUrl(p, siteDomain));
+}
+
 /**
  * @param {string} output rsync stdout/stderr with --itemize-changes
  * @returns {string[]} site-relative paths (e.g. assets/css/jonplummer.css)
@@ -140,4 +213,13 @@ module.exports = {
   purgeCloudflareUrls,
   isCloudflarePurgeConfigured,
   purgeChangedDeployFiles,
+  defaultManifestPath,
+  MANIFEST_PATH: DEFAULT_MANIFEST_REL,
+  hashFile,
+  buildContentManifest,
+  loadContentManifest,
+  saveContentManifest,
+  diffContentManifests,
+  shouldPurgeDeployPath,
+  pathsToPurgeUrls,
 };
