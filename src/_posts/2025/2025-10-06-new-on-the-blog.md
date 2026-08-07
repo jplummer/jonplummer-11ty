@@ -10,4 +10,4 @@ I've taken some belated inspiration from [Jason Kottke](https://kottke.org/) and
 
 There are a lot of links recently; I hope to keep it to a dull roar but the design world is changing so quickly that there's a lot to learn about.
 
-Full posts appear in an RSS feed, found as before at [https://jonplummer.com/feed.xml](https://jonplummer.com/feed.xml), and links now appear in their own feed at [https://jonplummer.com/links-feed.xml](https://jonplummer.com/links-feed.xml). Enjoy!
+Full posts appear in an RSS feed, found as before at [/feed.xml](/feed.xml), and links now appear in their own feed at [/links-feed.xml](/links-feed.xml). Enjoy!

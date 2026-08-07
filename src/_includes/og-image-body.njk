@@ -16,8 +16,8 @@
 -#}
 <div class="og-content">
     <div class="og-hgroup">
-      <div><a href="/">{{ site.author }}</a></div>
-      <p>{{ site.tagline }}</p>
+      <img class="og-mark" src="{{ ogMarkSrc | default('/assets/images/jp-mark.svg') }}" alt="" width="50" height="50" eleventy:ignore>
+      <div class="og-logotype"><a href="/">{{ site.author }}</a></div>
     </div>
     <div class="og-title">{{ title }}</div>
     {% if description %}

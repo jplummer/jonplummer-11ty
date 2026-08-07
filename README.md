@@ -8,9 +8,11 @@ The web should be fast, accessible, and resilient. This site is built with those
 - Performance: The site should load instantly.
 - Accessibility: The site should be accessible to all browsers and all visitors.
 
+See `docs/design-and-craft-principles.md` for the reasoning behind specific visual and interaction decisions.
+
 ## Why It's Fast
 
-Every page is pre-built as a plain HTML file at build time, not generated on-demand when someone visits. There's no JavaScript to parse or execute in the browser. There are no external dependencies; it uses system fonts and loads nothing from external servers. And the markup is reasonably slight, consisting of semantic HTML and vanilla CSS. This means smaller files, faster parsing, and natural accessibility without a lot of ARIA attributes or workarounds.
+Every page is pre-built as a plain HTML file at build time, not generated on-demand when someone visits. Almost none of it needs JavaScript – the handful of interactions that do, like the portfolio lightbox, are the exception, not the rule, and the rest of the site works without it. There are no external dependencies; fonts are self-hosted and nothing loads from external servers. And the markup is reasonably slight, consisting of semantic HTML and vanilla CSS. This means smaller files, faster parsing, and natural accessibility without a lot of ARIA attributes or workarounds.
 
 ## How It's Built
 
@@ -38,7 +40,7 @@ The Eleventy configuration is organized into modules for maintainability:
   - Schema.org structured data (BlogPosting, Person, WebSite)
   - Auto-generated Open Graph images (1200×630px) for all posts and pages
   - Sitemap generation for search engines
-  - No specific attention for garbage platforms like Facebook and Xitter, open standards only
+  - Open standards for social sharing, not special-casing for X or Meta
 - Automated Testing: Comprehensive test suite that checks:
   - HTML validity and structure
   - Links YAML structure and format
@@ -71,7 +73,7 @@ Project rules live in `.cursor/rules/*.mdc`. These are Cursor's native format bu
 Both Cursor and Claude Code are configured to load these rules:
 
 - **Cursor** reads `.cursor/rules/*.mdc` directly via `alwaysApply: true` in each file's frontmatter.
-- **Claude Code** reads them via `@` imports in `CLAUDE.md`, which also imports `docs/commands.md`, `docs/authoring.md`, and `docs/tests.md`.
+- **Claude Code** reads them via `@` imports in `CLAUDE.md`, which also imports `docs/commands.md`, `docs/authoring.md`, `docs/tests.md`, and `docs/design-and-craft-principles.md`.
 
 **Shared memory**: `.cursor/rules/memory.mdc` is a shared file where both agents record learnings across sessions. Both are instructed to write to this file. Claude Code's own `MEMORY.md` is a pointer that imports `memory.mdc` to avoid duplication.
 

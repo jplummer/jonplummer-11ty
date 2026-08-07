@@ -9,7 +9,7 @@ ogImage: /assets/images/og/portfolio.png
 ---
 In early October I was asked to give an eight-to-ten-minute presentation summing up the year for UX. A tall order, but I embraced blazing through the content to alight briefly on things I though the general company audience should know about UX and how we were trying to help.
 
-With most of our work going toward rewrites that had not yet launched there was little to say about outcomes, so I followed a rapid tour of our outputs with a couple of quick demos and an invitation to view my upcoming Cayuse Connect Conference talk about [UX philosophy and practice](https://jonplummer.com/2022/11/01/conference-talk-ux-philosophy/).
+With most of our work going toward rewrites that had not yet launched there was little to say about outcomes, so I followed a rapid tour of our outputs with a couple of quick demos and an invitation to view my upcoming Cayuse Connect Conference talk about [UX philosophy and practice](/2022/11/01/conference-talk-ux-philosophy/).
 
 ![quick-ux-accomplishments-2022-10-05 page 1](/assets/images/2022/10/quick-ux-accomplishments-2022-10-05-page-1.png)
 *Page 1: I’m Jon Plummer, I’m the director of user experience, I use he/him pronouns, and I’m here to show you a little bit about what the UX team has been up to. I’m going to race through this. My habit of NOT reading the slides should help.*

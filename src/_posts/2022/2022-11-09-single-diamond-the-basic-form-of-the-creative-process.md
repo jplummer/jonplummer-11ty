@@ -25,7 +25,7 @@ One of the reasons that the double diamond fails to satisfy is that it expresses
 - expresses the informative first phase, the research inherent to "discover," as an expansion, which it might only accidentally contain,
 - skips a step where you select among the available solutions in an informed way to get to where you can actually work on and ship one of them.
 
-I happen to think of a UX process in [three horizons](https://jonplummer.com/2022/10/22/the-bones-of-my-emerging-philosophy-of-ux-research-and-design/) or phases. (Already we are off the double diamond.) Each of these contains some learning and some making. The learning might inform us (not necessarily expansion) or it might help us select (contraction). The making might be generative (expansion) or it might be adding specificity (contraction). So in each phase there's some expansion and contraction going on, each pair making a _single_ diamond.
+I happen to think of a UX process in [three horizons](/2022/10/22/the-bones-of-my-emerging-philosophy-of-ux-research-and-design/) or phases. (Already we are off the double diamond.) Each of these contains some learning and some making. The learning might inform us (not necessarily expansion) or it might help us select (contraction). The making might be generative (expansion) or it might be adding specificity (contraction). So in each phase there's some expansion and contraction going on, each pair making a _single_ diamond.
 
 ![The single expansion of "generate" and contraction of "select" is preceded by an "inform" phase.](/assets/images/2022/11/Single-diamond.png)
 

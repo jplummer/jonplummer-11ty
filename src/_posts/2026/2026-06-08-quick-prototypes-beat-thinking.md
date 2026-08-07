@@ -18,7 +18,7 @@ Rejected options stay hidden until you click `Reveal rejected options`. The favo
 
 Building a dozen working variants took less time than the initial team discussion would have taken to schedule, and rejecting half of them was nearly instant. More importantly, team members and customers could try them, and engineers could see the underlying code. People could type the same Display Name into every card and feel which behavior was helpful while being the least surprising. And in doing so they could have their assumptions tested.
 
-(You'll note that this is the [single diamond](https://jonplummer.com/2022/11/09/single-diamond-the-basic-form-of-the-creative-process/) creative process happening with the help of AI: generate, evaluate, repeat as needed.)
+(You'll note that this is the [single diamond](/2022/11/09/single-diamond-the-basic-form-of-the-creative-process/) creative process happening with the help of AI: generate, evaluate, repeat as needed.)
 
 ## The interactive demo
 

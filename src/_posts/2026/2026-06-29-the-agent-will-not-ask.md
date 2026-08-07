@@ -10,13 +10,13 @@ When a developer doesn't know which button variant to use for a destructive acti
 
 An agent composing UI on the fly isn't going to ask. It works from what you give it – component names, tokens, usage rules – and produces something. If your design system is thin or doesn't match the code, it produces something that might work, but looks and feels like it came from a different product.
 
-The usual case for a design system – consistency, faster development, better handoffs – is strong. But agent-composed UI adds new pressure: the agent has to infer what a designer would decide and a developer would implement. Which component for which context. What token to use to signal danger. The gap a designer or developer bridges with judgment, an agent bridges with documentation – or doesn't bridge at all.
+The usual case for a design system is strong: consistency, faster development, better handoffs. But agent-composed UI adds new pressure: the agent has to infer what a designer would decide and a developer would ask about. Which component for which context. What token or variant to use to signal danger. The gap a designer or developer bridges with judgment, an agent bridges with the help of documentation – or doesn't bridge at all.
 
-Design systems built for human teams often have gaps. Naming that made sense to whoever set it up. Usage guidance that lives in one person's head or feels like common sense. Tokens named by value – color-red-50 – when an agent needs a name that tells it the role: color-action-destructive.
+Design systems built for human teams often have gaps. Naming that made sense to whoever set it up. Usage guidance that lives in one person's head or feels like common sense. Primitive tokens named by appearance – `color-red-50` – when an agent needs a name that tells it the role: `color-action-destructive`.
 
 Humans are good at inferring intent; agents take you literally.
 
-What agents need is exactly what developers have always needed: components with clear, semantic names; tokens named for their role; usage guidelines that match the code; usability and accessibility baked into components and patterns.
+What agents need is exactly what developers have always needed: components with clear, semantic names; tokens named for their role; usage guidelines that lead you to choose the right code; usability and accessibility baked into components and patterns.
 
 If your design system is a Figma file and tribal knowledge, an agent will show you why that's not enough. If it's well-documented and semantically named, an agent can compose something that feels like part of your product.
 

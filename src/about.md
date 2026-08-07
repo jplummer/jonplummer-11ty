@@ -13,7 +13,7 @@ Most companies say they care about customers. Their products rarely show it. I b
 
 I speak the languages of design, engineering, and business. That's been useful everywhere I've worked — but it matters most right now, when the most common mistake in AI product development is assuming that powerful models reduce the need for clear, coordinated, carefully constructed interfaces. They don't. Agentic AI means less direct manipulation, not none. Trust still comes from inspection and correction – from being able to poke around in the system and believe it, not just take its word for it. That demands interfaces that are simpler, not more elaborate, and experiences that work without training. The hardest part of a design is proving the vision is sound, then making sure that reasoning survives all the way to what ships; real customer discovery is what makes both possible.
 
-I wrote about this in [Toward Coordinated Experience](https://jonplummer.com/2025/07/27/toward-coordinated-experience/), and it's the thread that runs through a lot of what I write here.
+I wrote about this in [Toward Coordinated Experience](/2025/07/27/toward-coordinated-experience/), and it's the thread that runs through a lot of what I write here.
 
 That focus on discovery isn't theoretical. I trained as a social worker and an anthropologist before I became a designer, and the habit never left: understand people before you propose anything for them.
 
@@ -23,7 +23,7 @@ I don't just have opinions about AI. At Invoca, that transformation included SMS
 
 I develop designers who can hold a point of view and defend it, not just execute one. I get there by asking them the questions they should be asking, helping them find their own way to an answer. But I'm not hands-off: when the situation calls for a direct read, I give one. I interpret, I instruct, I push back. The goal is people who can think well under pressure and make good calls without being managed through every decision.
 
-Outside work I'm a deep dabbler – jazz piano, 3D printing and amateur industrial design, home improvement, cooking. The common threads are making ideas tangible and improving what's before me. I keep my hands in the tools at work and at home so I can show people the ropes and learn along with them. I vibe-code hobby projects and publish them on GitHub, including a project template that packages agent configuration for tools like Cursor and Claude Code. I keep a running account of what I'm building at [/now](https://jonplummer.com/now).
+Outside work I'm a deep dabbler – jazz piano, 3D printing and amateur industrial design, home improvement, cooking. The common threads are making ideas tangible and improving what's before me. I keep my hands in the tools at work and at home so I can show people the ropes and learn along with them. I vibe-code hobby projects and publish them on GitHub, including a project template that packages agent configuration for tools like Cursor and Claude Code. I keep a running account of what I'm building at [/now](/now).
 
 I mentor at [Designed.org](https://designed.org) and [tupu.io](https://tupu.io). See more via [my LinkedIn profile](https://linkedin.com/in/jplummer) and message me there if you have something to say, or reach me at [jon@jonplummer.com](mailto:jon@jonplummer.com?subject=I%20visited%20jonplummer.com%2Fabout%20and%20have%20this%20to%20say%3A).
 

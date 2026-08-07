@@ -51,8 +51,13 @@
 <header>
     <a class="skip" href="#main">Skip to content</a>
     <hgroup>
-        <h1><a href="/" rel="home">{{ site.author }}</a></h1>
-        <p>{{ site.tagline }}</p>
+        <a href="/" rel="home" class="site-mark-link">
+            <img class="site-mark" src="/assets/images/jp-mark.svg" alt="" width="52" height="52" eleventy:ignore>
+        </a>
+        <div class="site-title-stack">
+            <h1><a href="/" rel="home">{{ site.author }}</a></h1>
+            <p>{{ site.tagline }}</p>
+        </div>
     </hgroup>
     {% include "components/nav.njk" %}
 </header>

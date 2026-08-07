@@ -24,8 +24,11 @@ ogImage: /assets/images/og/technologies.png
     - **[@11ty/eleventy-plugin-rss](https://www.npmjs.com/package/@11ty/eleventy-plugin-rss)**: Generates RSS/XML feeds from collections
     - **[@11ty/eleventy-plugin-syntaxhighlight](https://www.npmjs.com/package/@11ty/eleventy-plugin-syntaxhighlight)**: Adds syntax highlighting for code blocks
     - **[@11ty/eleventy-img](https://www.11ty.dev/docs/plugins/image/)**: Image optimization plugin that generates responsive images in multiple formats (WebP, JPEG) and sizes
+  - Frontmatter parsing:
+    - **[gray-matter](https://github.com/jonschlinkert/gray-matter)**: Parses YAML frontmatter in posts and pages (same parser Eleventy uses internally)
 - **[Node.js](https://nodejs.org/)**
   - JavaScript runtime for running build scripts, test scripts, and deployment scripts
+  - Package manager: **[pnpm](https://pnpm.io/)**
   - Module system: **CommonJS** (uses `require()` and `module.exports`)
   - Built-in modules used:
     - **[fs](https://nodejs.org/api/fs.html)**: File system operations
@@ -46,6 +49,10 @@ ogImage: /assets/images/og/technologies.png
   - **[cspell](https://cspell.org/)**: Spell checker used by test-spell.js to validate spelling in markdown and YAML files
   - **[markdownlint-cli2](https://github.com/DavidAnson/markdownlint-cli2)**: Markdown linter used by test-markdown.js to validate markdown syntax and formatting
   - **[cheerio](https://cheerio.js.org/)**: Server-side HTML manipulation library used in transforms and test scripts for parsing and modifying HTML
+  - **[stylelint](https://stylelint.io/)** + **[stylelint-config-standard](https://github.com/stylelint/stylelint-config-standard)**: Lints `src/**/*.css` for syntax and style consistency
+  - **[apca-w3](https://github.com/Myndex/apca-w3)** + **[culori](https://culorijs.org/)**: Computes APCA contrast (Lc) for color tokens, in both sRGB and P3 gamuts, used by test-color-contrast.js
+- **Fonts**
+  - **[@fontsource-variable/public-sans](https://fontsource.org/fonts/public-sans)**, **[@fontsource-variable/big-shoulders](https://fontsource.org/fonts/big-shoulders)**, **[@fontsource-variable/archivo](https://fontsource.org/fonts/archivo)**: Self-hosted variable-weight WOFF2 fonts; Public Sans and Big Shoulders ship on the live site, Archivo is exploratory (used on `/type/`)
 - **Deployment**
   - **[dotenv](https://github.com/motdotla/dotenv)**: Loads environment variables from .env file for deployment scripts
   - **[rsync](https://rsync.samba.org/)**: File synchronization for deployment (must be installed on system)

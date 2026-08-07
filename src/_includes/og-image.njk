@@ -14,7 +14,7 @@
   Structure:
   - body: Fixed 1200x630px container with cool outer field
   - .og-content: White content area with 4rem padding
-  - .og-hgroup: Author name (neutral) and site tagline (muted)
+  - .og-hgroup: Mark + Semibold logotype (no tagline)
   - .og-title: Post title (matches article h1 styling)
   - .og-description: Optional post description
   - .og-date: Optional formatted post date
@@ -58,6 +58,7 @@
     body {
       width: 1200px;
       height: 630px;
+      color-scheme: light;
       font-family: var(--font-family);
       font-size: 1.5rem;
       line-height: var(--line-height);
@@ -79,36 +80,33 @@
       gap: var(--spacing-sm);
     }
     
-    /* Author name and tagline grouping */
+    /* Mark + Semibold logotype (0.9 × og-title, same ratio as live logotype / article h1) */
     .og-hgroup {
       display: flex;
-      align-items: baseline;
+      align-items: center;
       gap: var(--spacing-sm);
       flex-wrap: wrap;
-    }
-    
-    /* Author name styling (matches site header) */
-    .og-hgroup > div {
+      margin-bottom: var(--spacing-xs);
       font-family: var(--font-family-display);
-      font-size: 6rem;
-      line-height: var(--line-height-3xl);
-      font-weight: var(--font-weight-thin);
-      letter-spacing: var(--letter-spacing-tight);
+      font-size: 3.15rem;
+      line-height: 1;
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--letter-spacing-normal);
       text-transform: uppercase;
       color: var(--text-color);
     }
-    
-    .og-hgroup > div a {
+
+    .og-mark {
+      display: block;
+      flex-shrink: 0;
+      height: 1cap;
+      width: auto;
+      margin-top: -2px;
+    }
+
+    .og-logotype a {
       color: var(--text-color) !important;
       text-decoration: none;
-    }
-    
-    /* Site tagline */
-    .og-hgroup p {
-      font-size: 1.5rem;
-      line-height: var(--line-height-xs);
-      font-style: italic;
-      color: var(--text-color-light);
     }
     
     /* Post title (matches article h1 styling) */

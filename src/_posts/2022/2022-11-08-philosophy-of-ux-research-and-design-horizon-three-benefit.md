@@ -49,4 +49,4 @@ To do this we have a handful of **learn** activities and a handful of **make** a
 
 At the end of this you'll have one or more high-scoring benefits and likely will already have gathered some ideas about how you might deliver each one. You're ready for horizon two, concept.
 
-You can see that this phase is an example of a [single diamond creative process](https://jonplummer.com/2022/11/09/single-diamond-the-basic-form-of-the-creative-process/), where we inform ourselves, generate multiple possibilities, then winnow down the possibilities into a select few that we think will be especially good.
+You can see that this phase is an example of a [single diamond creative process](2022/11/09/single-diamond-the-basic-form-of-the-creative-process/), where we inform ourselves, generate multiple possibilities, then winnow down the possibilities into a select few that we think will be especially good.

@@ -44,6 +44,7 @@ const OG_SHARED_DEPS = [
   path.join(process.cwd(), 'src', '_includes', 'og-image-body.njk'),
   path.join(process.cwd(), 'src', 'assets', 'css', 'jonplummer.css'),
   path.join(process.cwd(), 'src', 'assets', 'css', 'fonts.css'),
+  path.join(process.cwd(), 'src', 'assets', 'images', 'jp-mark.svg'),
   path.join(process.cwd(), 'eleventy', 'utils', 'css-utils.js'),
   path.join(process.cwd(), 'src', '_data', 'site.js')
 ];
@@ -102,6 +103,13 @@ async function renderOgImageHtml(pageData) {
   const productionFontFaces = extractProductionFontFacesForInline();
   const lightThemeColorOverrides = extractLightThemeColorOverrides();
 
+  // Puppeteer setContent cannot load file:// <img> URLs (request fails, naturalWidth 0).
+  // Embed the mark as a data URI for PNG generation; /ogimages/ preview keeps the HTTP path.
+  const markSvg = fs.readFileSync(
+    path.join(process.cwd(), 'src', 'assets', 'images', 'jp-mark.svg')
+  );
+  const ogMarkSrc = `data:image/svg+xml;base64,${markSvg.toString('base64')}`;
+
   return nunjucksEnv.renderString(template, {
     title: pageData.title,
     description: pageData.description || null,
@@ -109,6 +117,7 @@ async function renderOgImageHtml(pageData) {
     cssCustomProperties: cssCustomProperties,
     productionFontFaces: productionFontFaces,
     lightThemeColorOverrides: lightThemeColorOverrides,
+    ogMarkSrc,
     site: require('../../src/_data/site.js')()
   });
 }
@@ -133,15 +142,27 @@ async function generateOgImage(html, outputPath) {
       deviceScaleFactor: 1
     });
     
+    await page.emulateMediaFeatures([
+      { name: 'prefers-color-scheme', value: 'light' }
+    ]);
+
     await page.setContent(html, {
-      waitUntil: 'domcontentloaded'
+      waitUntil: 'load'
     });
 
     const fontsReady = await page.evaluate(async () => {
       await document.fonts.ready;
+      const mark = document.querySelector('.og-mark');
+      if (mark && !mark.complete) {
+        await new Promise((resolve, reject) => {
+          mark.onload = resolve;
+          mark.onerror = () => reject(new Error('OG mark failed to load'));
+        });
+      }
       return {
         display: document.fonts.check('600 3.5rem "Big Shoulders"'),
-        body: document.fonts.check('1.5rem "Public Sans"')
+        body: document.fonts.check('1.5rem "Public Sans"'),
+        markLoaded: Boolean(mark && mark.complete && mark.naturalWidth > 0)
       };
     });
 
@@ -149,6 +170,10 @@ async function generateOgImage(html, outputPath) {
       throw new Error(
         `OG webfonts not loaded (Big Shoulders: ${fontsReady.display}, Public Sans: ${fontsReady.body})`
       );
+    }
+
+    if (!fontsReady.markLoaded) {
+      throw new Error('OG mark image failed to load (naturalWidth was 0)');
     }
     
     await page.screenshot({

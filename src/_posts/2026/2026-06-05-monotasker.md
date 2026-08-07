@@ -33,7 +33,7 @@ The first screen is the real app. An onboarding card – same gradient, same sti
 
 The checkbox in the upper-left corner of a task card is the gesture the entire app runs on. The first time you use it, it asks for access to Reminders. Every time after that, it marks a task complete. There's nothing to re-learn, nothing to try to remember for later. Arrival and understanding happen at the same time.
 
-I've written more about this in [Don't show me the lobby](https://jonplummer.com/2026/05/24/dont-show-me-the-lobby/).
+I've written more about this in [Don't show me the lobby](/2026/05/24/dont-show-me-the-lobby/).
 
 ## The shuffle mechanic
 

@@ -42,6 +42,16 @@
   --font-size-xl: 2rem; --line-height-xl: 1.2; /* ratio: 2.0 */
   --font-size-2xl: 2.5rem; --line-height-2xl: 1.2; /* ratio: 2.5 */
   --font-size-3xl: 4rem; --line-height-3xl: 1.2; /* ratio: 4.0 */
+  --font-size-logotype: 2.25rem; /* 36px — one-off for the header lockup, deliberately off the modular scale */
+  /*
+    Header lockup optical tokens (settled 2026-08-06). Cap→baseline isn’t a CSS
+    layout feature across two fonts + an image; these encode the tuned lockup.
+    stack-gap / cap-nudge: final literals after ±1px eye passes (not live calcs).
+  */
+  --site-lockup-stack-gap: 6.2px;
+  --site-lockup-cap-nudge: 2.2px;
+  --site-lockup-inline-nudge: 3px;
+  --site-lockup-tagline-ascent: 0.9375; /* Public Sans italic fontBoundingBoxAscent / em */
   --line-height-tight: 1.1;
 
   /* Font weights */
@@ -79,7 +89,7 @@
   --token-color: color-mix(in oklch, var(--text-color) 28%, var(--content-background-color));
 
   /* Icons — overlapping window outlines (single path), for CSS mask-image */
-  --icon-new-tab-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 12 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 1H11V7' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M1 5h6v6H1z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --icon-new-tab-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 12 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 1H11V7' fill='none' stroke='white' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'/%3E%3Cpath d='M1 5h6v6H1z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='miter'/%3E%3C/svg%3E");
 }
 
 /* Cross-document view transitions (MPA): same-origin navigations from in-page links.
@@ -175,16 +185,44 @@ body>footer {
 }
 
 /* Header layout with hgroup and navigation */
-header,
-hgroup {
+header {
   display: flex;
   align-items: baseline;
   gap: var(--spacing-sm);
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-header {
-  justify-content: space-between;
+hgroup {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+body > header hgroup {
+  margin-inline-start: var(--site-lockup-inline-nudge);
+}
+
+.site-mark-link {
+  display: block;
+  flex-shrink: 0;
+  line-height: 0;
+}
+
+.site-mark {
+  display: block;
+  width: auto;
+  /* Top aligns to logotype capital ink; bottom to tagline alphabetic baseline */
+  margin-top: var(--site-lockup-cap-nudge);
+  height: calc(
+    var(--font-size-logotype)
+    - var(--site-lockup-cap-nudge)
+    + var(--site-lockup-stack-gap)
+    + ((var(--line-height-xs) - 1) / 2 * var(--font-size-xs))
+    + (var(--site-lockup-tagline-ascent) * var(--font-size-xs))
+  );
+  aspect-ratio: 1;
 }
 
 /* Article grid layout */
@@ -419,11 +457,11 @@ h6 {
 
 hgroup h1 {
   font-family: var(--font-family-display);
-  font-size: var(--font-size-3xl);
-  line-height: var(--line-height-3xl);
-  font-weight: var(--font-weight-thin);
+  font-size: var(--font-size-logotype);
+  line-height: 1;
+  font-weight: var(--font-weight-semibold);
   text-transform: uppercase;
-  letter-spacing: var(--letter-spacing-display-tight);
+  letter-spacing: var(--letter-spacing-normal);
   margin: 0;
 }
 
@@ -435,8 +473,8 @@ hgroup p {
   color: var(--text-color-light);
 }
 
-header h1 + p {
-  margin-top: 0rem;
+.site-title-stack p {
+  margin-top: var(--site-lockup-stack-gap);
 }
 
 /* Article headings */
@@ -664,7 +702,6 @@ main[data-tags*="page"]::after {
   width: 0.625rem;
   height: 0.625rem;
   background-color: var(--token-color);
-  border-radius: 2px;
   margin: var(--spacing-sm) 0 0 0;
 }
 
@@ -941,6 +978,29 @@ article.portfolio-item p.portfolio-item-description {
   margin-top: var(--spacing-xs);
 }
 
+/* Colophon signature — small image, full-width caption beside it, not squeezed into its column */
+.colophon-signature {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin: var(--spacing-lg) 0 0;
+}
+
+.colophon-signature img {
+  display: block;
+  width: 120px;
+  height: auto;
+  flex-shrink: 0;
+  border: 0;
+}
+
+.colophon-signature figcaption {
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-xs);
+  font-style: italic;
+  color: var(--text-color-light);
+}
+
 
 /* === UTILITIES === */
 
@@ -1103,6 +1163,7 @@ header a.skip:focus {
 
 .og-image-rendered {
   /* Force light theme for OG preview — light halves from jonplummer.css :root (keep in sync) */
+  color-scheme: light;
   --text-color: oklch(29.6% 0.01 260.71deg);
   --text-color-light: oklch(49.1% 0.0142 259.82deg);
   --border-color: oklch(89.3% 0.0105 261.79deg);
@@ -1148,33 +1209,33 @@ header a.skip:focus {
     gap: var(--spacing-sm);
   }
 
+  /* Mark + Semibold logotype (0.9 × .og-title; same ratio as live logotype / article h1) */
   & .og-hgroup {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     gap: var(--spacing-sm);
     flex-wrap: wrap;
+    margin-bottom: var(--spacing-xs);
+    font-family: var(--font-family-display);
+    font-size: 3.15rem;
+    line-height: 1;
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--letter-spacing-normal);
+    text-transform: uppercase;
+    color: var(--text-color);
+  }
 
-    & h1, & > div:first-child {
-      font-family: var(--font-family-display);
-      font-size: 6rem;
-      line-height: var(--line-height-3xl);
-      font-weight: var(--font-weight-thin);
-      letter-spacing: var(--letter-spacing-tight);
-      text-transform: uppercase;
-      color: var(--text-color);
+  & .og-mark {
+    display: block;
+    flex-shrink: 0;
+    height: 1cap;
+    width: auto;
+    margin-top: -2px;
+  }
 
-      & a {
-        color: var(--text-color) !important;
-        text-decoration: none;
-      }
-    }
-
-    & p {
-      font-size: 1.5rem;
-      line-height: var(--line-height-xs);
-      font-style: italic;
-      color: var(--text-color-light);
-    }
+  & .og-logotype a {
+    color: var(--text-color) !important;
+    text-decoration: none;
   }
 
   & .og-title {

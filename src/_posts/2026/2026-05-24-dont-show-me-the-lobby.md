@@ -35,7 +35,7 @@ Why it works: that card and its checkbox are the centerpiece of the app. Not a m
 
 ## The bigger idea
 
-I've written before about [coordinated experience](https://jonplummer.com/2025/07/27/toward-coordinated-experience/) – the idea that a well-designed system guides users through a task completely, without asking them to do work the system could do for them. Onboarding is the same problem one level up. Most onboarding asks users to remember what the tutorial explained, then go find those things once they arrive.
+I've written before about [coordinated experience](/2025/07/27/toward-coordinated-experience/) – the idea that a well-designed system guides users through a task completely, without asking them to do work the system could do for them. Onboarding is the same problem one level up. Most onboarding asks users to remember what the tutorial explained, then go find those things once they arrive.
 
 Putting users inside the interface from the first tap removes that work. The permission dialog isn't something that happens before the app – it's something that happens naturally at the right time. The empty state is the real experience, waiting for input.
 
