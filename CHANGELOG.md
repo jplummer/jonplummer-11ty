@@ -4,6 +4,10 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 - Local content-hash helpers for Cloudflare purge diffs
 - Assert .htaccess in manifest test
+- Purge Cloudflare from local _site content hashes
+- Content-hash Cloudflare purge behavior and later rsync note
+- Harden Cloudflare purge manifest loading and deploy-guards invariant
+- Skip Cloudflare purge for newly added deploy paths
 
 ## 2026-08-06
 
