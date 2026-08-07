@@ -1,7 +1,14 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-08-07
+
+- Local content-hash helpers for Cloudflare purge diffs
+- Assert .htaccess in manifest test
+
 ## 2026-08-06
 
+- Safari-safe mark, 404 root-absolute assets, transparent colophon sketch
+- Tweak craft post opening wording
 - JP mark lockup on header and OG images
 - Valid header hgroup markup and readable mark asset
 
