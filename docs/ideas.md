@@ -33,11 +33,10 @@
 ### Deploy / Cloudflare
 
 - **Rsync transfer volume via content-hash manifest** — Content-hash **Cloudflare purge** shipped (2026-08; see DONE). Still open: reuse the same local `_site` path→SHA-256 manifest (`.cache/deploy-content-manifest.json`) to **limit rsync uploads** (skip byte-identical HTML despite new mtimes) if transfer size/time still hurts. Spec/plan: `docs/superpowers/specs/2026-08-06-content-hash-cloudflare-purge-design.md`.
-- **Favicons from JP mark** — Deferred when header/OG lockup shipped; optional later if mark geometry should drive favicon set.
 
 ### Brand / chrome
 
-- (none open — header lockup, Safari-safe mark, 404 asset roots, colophon sketch: see DONE)
+- (none open — header lockup, Safari-safe mark, 404 asset roots, colophon sketch, favicons from mark geometry: see DONE)
 
 ### Utility / lab pages (color, type, OG) — “hidden in public”
 
@@ -114,7 +113,7 @@
 ## DONE
 
 - **Content-hash Cloudflare purge** (2026-08-07) — Local `_site` SHA-256 vs `.cache/deploy-content-manifest.json`; purge **changed ∪ deleted** only (skip **added** — new URLs never cached; same-path OG regen still purges). Credentials in `.env`; apex host. Spec/plan under `docs/superpowers/`. Later: rsync volume via same manifest (Future → Deploy).
-- **JP mark header + OG lockup** (2026-08-06) — Mark + Semibold logotype; valid `.site-lockup` / `hgroup`; OG mark+wordmark (data-URI for Puppeteer). Specs: header-lockup + og-lockup.
+- **JP mark header + OG lockup** (2026-08-06) — Mark + Semibold logotype; valid `.site-lockup` / `hgroup`; OG mark+wordmark (data-URI for Puppeteer). Favicons already use mark geometry. Specs: header-lockup + og-lockup.
 - **Safari-safe mark, 404 root-absolute assets, colophon sketch invert** (2026-08-06) — Inline SVG `currentColor` for header mark; ErrorDocument-safe absolute asset hrefs; transparent Rob Ullman PNG + `filter: invert(1)` in dark. Spec: `2026-08-06-mark-404-colophon-polish-design.md`.
 - Reinvestigate color scheme (2026-03-28)
   - Live theme tokens use **OKLCH** in `src/assets/css/jonplummer.css` (`light-dark(oklch(...), ...)`). Gallery pipeline, `/color/`, `suggest-colors.js`, and contrast checking are documented in [color-theme-exploration.md](color-theme-exploration.md) and the Maintenance bullets in [commands.md](commands.md).
