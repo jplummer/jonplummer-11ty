@@ -16,6 +16,8 @@
  * 3. Formatting - Format results for different output modes (compact, verbose, build)
  */
 
+const fs = require('fs');
+
 // ============================================================================
 // Section 1: Result Building
 // ============================================================================
@@ -207,28 +209,18 @@ function finalizeTestResult(result) {
 }
 
 /**
- * Output result as JSON with markers for test runner to detect
+ * Output result as JSON with markers for test runner to detect.
+ * Uses writeSync so process.exit() cannot truncate a large piped write
+ * (async stdout.write + exit dropped the SEO payload after ~64KB).
  * @param {Object} result - Test result object
  * @returns {void}
  */
 function outputResult(result) {
   finalizeTestResult(result);
-  // Write everything in one operation to ensure markers and JSON are in same buffer
-  const jsonStr = JSON.stringify(result, null, 2);
-  const output = '__TEST_JSON_START__\n' + jsonStr + '\n__TEST_JSON_END__\n';
-  
-  // Write everything at once - for piped stdout, this should work fine
-  // If the output is very large, Node.js will handle buffering automatically
-  process.stdout.write(output);
-  
-  // Explicitly flush stdout to ensure all data is written before process exits
-  if (process.stdout.flushSync) {
-    try {
-      process.stdout.flushSync();
-    } catch (e) {
-      // flushSync might not be available in all Node versions
-    }
-  }
+  // Compact JSON — pretty-print made SEO results huge for no benefit to the runner
+  const jsonStr = JSON.stringify(result);
+  const output = `__TEST_JSON_START__\n${jsonStr}\n__TEST_JSON_END__\n`;
+  fs.writeSync(process.stdout.fd, output);
 }
 
 // ============================================================================
@@ -259,6 +251,7 @@ const TEST_EMOJIS = {
   'deploy-guards': '🛟',
   'site-branding': '🏷️',
   'error-document-assets': '📄',
+  'test-json-pipe': '🧪',
   'seo': '📈',
   'deploy': '🚀',
   'security': '🛡️',
@@ -302,6 +295,7 @@ function getTestDisplayName(testType) {
     'deploy-guards': 'Deploy Guards',
     'site-branding': 'Site Branding',
     'error-document-assets': 'ErrorDocument 404 assets',
+    'test-json-pipe': 'Test JSON pipe',
     'deploy': 'Deploy',
     'security': 'Security Audit'
   };
@@ -334,6 +328,7 @@ function getTestDescription(testType) {
     'deploy-guards': 'deploy.js regression guards (rsync excludes, changelog, purge wiring)',
     'site-branding': 'site.js author/tagline/title contract and no hardcoded tagline',
     'error-document-assets': '404.html root-absolute CSS/font/favicon hrefs for ErrorDocument',
+    'test-json-pipe': 'Large TEST_RUNNER JSON survives piped stdout before exit',
     'deploy': 'Deployment connectivity',
     'indexnow': 'IndexNow configuration',
     'security': 'Security audit'

@@ -30,6 +30,7 @@ const testTypes = {
   'figure-lightbox': 'figure-lightbox.js',
   'site-branding': 'site-branding.js',
   'error-document-assets': 'error-document-assets.js',
+  'test-json-pipe': 'test-json-pipe.js',
   'security': { file: 'security-audit.js', dir: 'security' }
 };
 
@@ -83,7 +84,8 @@ const unitTests = [
   'cloudflare-purge',
   'deploy-guards',
   'figure-lightbox',
-  'site-branding'
+  'site-branding',
+  'test-json-pipe'
 ];
 
 // Tests that don't use JSON output — use inherited stdout so output isn't buffered and re-written (avoids duplicate output)
@@ -95,7 +97,7 @@ function listTests() {
   const { getTestDescription } = require('./utils/test-results');
   
   // Only show primary names
-  const primaryNames = ['html', 'links', 'wisdom', 'internal-links', 'frontmatter', 'markdown', 'spell', 'seo', 'og-images', 'a11y', 'color-contrast', 'css', 'rss', 'portfolio-notes', 'deploy-assets', 'cloudflare-purge', 'deploy-guards', 'site-branding', 'error-document-assets', 'deploy', 'indexnow', 'security'];
+  const primaryNames = ['html', 'links', 'wisdom', 'internal-links', 'frontmatter', 'markdown', 'spell', 'seo', 'og-images', 'a11y', 'color-contrast', 'css', 'rss', 'portfolio-notes', 'deploy-assets', 'cloudflare-purge', 'deploy-guards', 'site-branding', 'error-document-assets', 'test-json-pipe', 'deploy', 'indexnow', 'security'];
 
   primaryNames.forEach(type => {
     const isInAll = allTests.includes(type);
@@ -210,6 +212,11 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
       const hasStartMarker = stdoutData.includes('__TEST_JSON_START__');
       const hasEndMarker = stdoutData.includes('__TEST_JSON_END__');
       const hasJsonMarkers = hasStartMarker && hasEndMarker;
+
+      if (hasStartMarker && !hasEndMarker) {
+        console.error(`Warning: Truncated test JSON from ${testType} (start marker without end — stdout likely cut off before exit)`);
+        console.error(`  Captured ${stdoutData.length} bytes`);
+      }
       
       if (hasJsonMarkers) {
         // Mark as JSON format immediately to suppress raw output
@@ -345,8 +352,12 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
           }
         }
       } else {
-        // No JSON format detected
-        if (!showStatus && stdoutData && stdoutData.trim().length > 0) {
+        // No complete JSON format detected — never dump partial/raw IPC payloads
+        if (hasStartMarker) {
+          process.stdout.write(`\r\x1b[K`);
+          const summaryString = buildSummaryString(finalSummary);
+          process.stdout.write(`${resultIcon} ${emoji} ${displayName}: ${summaryString || 'failed to parse results'}\n`);
+        } else if (!showStatus && stdoutData && stdoutData.trim().length > 0) {
           // Individual run with non-JSON output - pass it through (buffered)
           process.stdout.write(`\r\x1b[K${stdoutData}`);
         } else if (!showStatus && !useInheritStdout) {
