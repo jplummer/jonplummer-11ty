@@ -14,8 +14,7 @@
     - **Still manual / fallback**: paste notes into a text file if someone skips `.pptx`; Google Apps Script → Doc is deprioritized vs python-pptx on exported PPTX.
     - **Notes parser** (`portfolio-notes.js`): numbered (`1: …`, `Slide 1: …`, empty `2:`  allowed), blank-line–separated blocks, sequential one-per-line when not numbered
     - **Next steps** (implementation order):
-      - Python: extract notes from `.pptx` → temp notes file (validate slide count vs PDF page count)
-      - Orchestrator: local `(pdf, pptx) + datePath` → python → `convert-pdf-pages-with-notes`
+      - ~~Python: extract notes from `.pptx`~~ / ~~local orchestrator~~ — **shipped** (`convert-presentation`)
       - Google: OAuth + export PDF + PPTX by file ID or Slides URL
       - Microsoft: Graph download PPTX + Office PDF export script
       - Optional: batch input file (one URL or path per line; extend if two columns needed)
@@ -33,7 +32,12 @@
 
 ### Deploy / Cloudflare
 
-- **Rsync transfer volume via content-hash manifest** — After content-hash Cloudflare purge ships (`docs/superpowers/specs/2026-08-06-content-hash-cloudflare-purge-design.md` + plan), revisit using the **same local `_site` path→SHA-256 manifest** to limit what rsync uploads (skip byte-identical HTML despite new mtimes). Out of scope for the purge-only iteration; only if transfer size/time still hurts.
+- **Rsync transfer volume via content-hash manifest** — Content-hash **Cloudflare purge** shipped (2026-08; see DONE). Still open: reuse the same local `_site` path→SHA-256 manifest (`.cache/deploy-content-manifest.json`) to **limit rsync uploads** (skip byte-identical HTML despite new mtimes) if transfer size/time still hurts. Spec/plan: `docs/superpowers/specs/2026-08-06-content-hash-cloudflare-purge-design.md`.
+- **Favicons from JP mark** — Deferred when header/OG lockup shipped; optional later if mark geometry should drive favicon set.
+
+### Brand / chrome
+
+- (none open — header lockup, Safari-safe mark, 404 asset roots, colophon sketch: see DONE)
 
 ### Utility / lab pages (color, type, OG) — “hidden in public”
 
@@ -55,7 +59,7 @@
   - Fluid typography with clamp() for smooth scaling across breakpoints (see [https://modern-css.com/fluid-typography-without-media-queries/](https://modern-css.com/fluid-typography-without-media-queries/))
   - Fluid spacing with clamp() for gutter/spacing tokens
   - Container queries for portfolio grid (respond to container width instead of viewport)
-  - View transitions for smooth page-to-page navigation
+  - View transitions for smooth page-to-page navigation — **shipped** (MPA `@view-transition { navigation: auto }` in `jonplummer.css`; reduced-motion + heavy embeds disable)
   - color-mix() to derive hover/active colors from base colors (pairs with oklch)
 - **Alternate color schemes** and how to trigger them
   - According to build/deploy day?
@@ -109,6 +113,9 @@
 
 ## DONE
 
+- **Content-hash Cloudflare purge** (2026-08-07) — Local `_site` SHA-256 vs `.cache/deploy-content-manifest.json`; purge **changed ∪ deleted** only (skip **added** — new URLs never cached; same-path OG regen still purges). Credentials in `.env`; apex host. Spec/plan under `docs/superpowers/`. Later: rsync volume via same manifest (Future → Deploy).
+- **JP mark header + OG lockup** (2026-08-06) — Mark + Semibold logotype; valid `.site-lockup` / `hgroup`; OG mark+wordmark (data-URI for Puppeteer). Specs: header-lockup + og-lockup.
+- **Safari-safe mark, 404 root-absolute assets, colophon sketch invert** (2026-08-06) — Inline SVG `currentColor` for header mark; ErrorDocument-safe absolute asset hrefs; transparent Rob Ullman PNG + `filter: invert(1)` in dark. Spec: `2026-08-06-mark-404-colophon-polish-design.md`.
 - Reinvestigate color scheme (2026-03-28)
   - Live theme tokens use **OKLCH** in `src/assets/css/jonplummer.css` (`light-dark(oklch(...), ...)`). Gallery pipeline, `/color/`, `suggest-colors.js`, and contrast checking are documented in [color-theme-exploration.md](color-theme-exploration.md) and the Maintenance bullets in [commands.md](commands.md).
   - Archived intent: extra color inspiration (gallery, terminals, wild presets); OKLCH as the authoring space ([vivid colors / gamut](https://modern-css.com/vivid-colors-beyond-srgb/) as reference). **Canceled / deferred:** accessibility-test-script upgrades per [accessibility-test-limitations](archive/accessibility-test-limitations.md).
