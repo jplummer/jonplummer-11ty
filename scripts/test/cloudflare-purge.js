@@ -14,6 +14,9 @@ const {
   diffContentManifests,
   shouldPurgeDeployPath,
   pathsToPurgeUrls,
+  collectPurgePaths,
+  purgeChangedDeployContent,
+  saveContentManifest,
 } = require('../utils/cloudflare-purge');
 const { addFile, addIssue } = require('../utils/test-results');
 const { runTest } = require('../utils/test-runner-helper');
@@ -21,7 +24,7 @@ const { runTest } = require('../utils/test-runner-helper');
 runTest({
   testType: 'cloudflare-purge',
   testName: 'Cloudflare purge helpers',
-  validateFn: (result) => {
+  validateFn: async (result) => {
     const fileObj = addFile(result, 'scripts/utils/cloudflare-purge.js');
 
     const sample = [
@@ -141,5 +144,149 @@ runTest({
     }
 
     fs.rmSync(tmp, { recursive: true, force: true });
+
+    // --- collectPurgePaths ---
+
+    const currentManifest = { version: 1, generatedAt: 'x', files: { a: '1', b: '2', c: '3' } };
+    const previousManifest = {
+      version: 1,
+      generatedAt: 'x',
+      files: { a: '1', b: 'old-b', d: '4' },
+    };
+
+    const noBaseline = collectPurgePaths(null, currentManifest, { forceContent: false });
+    if (noBaseline.mode !== 'no-baseline' || noBaseline.paths.length !== 0) {
+      addIssue(fileObj, {
+        severity: 'error',
+        type: 'collect-purge-paths-no-baseline',
+        message: `expected no-baseline with empty paths, got ${JSON.stringify(noBaseline)}`,
+      });
+    }
+
+    const noPreviousForced = collectPurgePaths(null, currentManifest, { forceContent: true });
+    const noPreviousForcedSorted = [...noPreviousForced.paths].sort();
+    if (JSON.stringify(noPreviousForcedSorted) !== JSON.stringify(['a', 'b', 'c'])) {
+      addIssue(fileObj, {
+        severity: 'error',
+        type: 'collect-purge-paths-force-no-previous',
+        message: `expected all current keys, got ${JSON.stringify(noPreviousForced)}`,
+      });
+    }
+
+    const previousForced = collectPurgePaths(previousManifest, currentManifest, {
+      forceContent: true,
+    });
+    const previousForcedSorted = [...previousForced.paths].sort();
+    if (JSON.stringify(previousForcedSorted) !== JSON.stringify(['a', 'b', 'c', 'd'])) {
+      addIssue(fileObj, {
+        severity: 'error',
+        type: 'collect-purge-paths-force-with-previous',
+        message: `expected current keys plus deleted, got ${JSON.stringify(previousForced)}`,
+      });
+    }
+
+    const diffMode = collectPurgePaths(previousManifest, currentManifest, {
+      forceContent: false,
+    });
+    const diffModeSorted = [...diffMode.paths].sort();
+    // changed: b (hash differs); added: c; deleted: d
+    if (JSON.stringify(diffModeSorted) !== JSON.stringify(['b', 'c', 'd'])) {
+      addIssue(fileObj, {
+        severity: 'error',
+        type: 'collect-purge-paths-diff',
+        message: `expected changed+added+deleted, got ${JSON.stringify(diffMode)}`,
+      });
+    }
+
+    // --- purgeChangedDeployContent (no-network paths only) ---
+
+    const tmp2 = fs.mkdtempSync(path.join(os.tmpdir(), 'cf-purge-orchestrate-'));
+    const siteB = path.join(tmp2, 'site');
+    const manifestPath = path.join(tmp2, 'manifest.json');
+    fs.mkdirSync(siteB, { recursive: true });
+    fs.writeFileSync(path.join(siteB, 'index.html'), '<html>one</html>\n');
+
+    {
+      // not configured
+      const notConfigured = await purgeChangedDeployContent(siteB, 'jonplummer.com', {
+        manifestPath,
+        env: {},
+      });
+      if (notConfigured.skipped !== true || notConfigured.reason !== 'not-configured' || notConfigured.writeManifest !== false) {
+        addIssue(fileObj, {
+          severity: 'error',
+          type: 'purge-changed-deploy-content-not-configured',
+          message: `expected not-configured skip, got ${JSON.stringify(notConfigured)}`,
+        });
+      }
+
+      const configuredEnv = { CLOUDFLARE_ZONE_ID: 'zone', CLOUDFLARE_API_TOKEN: 'token' };
+
+      // no baseline (configured, but manifest file missing)
+      const noBaselineResult = await purgeChangedDeployContent(siteB, 'jonplummer.com', {
+        manifestPath,
+        env: configuredEnv,
+      });
+      if (
+        noBaselineResult.skipped !== true ||
+        noBaselineResult.reason !== 'no-baseline' ||
+        noBaselineResult.writeManifest !== true ||
+        !noBaselineResult.currentManifest
+      ) {
+        addIssue(fileObj, {
+          severity: 'error',
+          type: 'purge-changed-deploy-content-no-baseline',
+          message: `expected no-baseline skip with writeManifest true, got ${JSON.stringify({
+            ...noBaselineResult,
+            currentManifest: undefined,
+          })}`,
+        });
+      }
+
+      // Establish baseline, then re-run with unchanged content → no-changes
+      saveContentManifest(manifestPath, noBaselineResult.currentManifest);
+      const noChangesResult = await purgeChangedDeployContent(siteB, 'jonplummer.com', {
+        manifestPath,
+        env: configuredEnv,
+      });
+      if (
+        noChangesResult.skipped !== true ||
+        noChangesResult.reason !== 'no-changes' ||
+        noChangesResult.writeManifest !== true
+      ) {
+        addIssue(fileObj, {
+          severity: 'error',
+          type: 'purge-changed-deploy-content-no-changes',
+          message: `expected no-changes skip with writeManifest true, got ${JSON.stringify({
+            ...noChangesResult,
+            currentManifest: undefined,
+          })}`,
+        });
+      }
+
+      // Change content, dry-run → would-purge list, no manifest write
+      fs.writeFileSync(path.join(siteB, 'index.html'), '<html>two</html>\n');
+      const dryRunResult = await purgeChangedDeployContent(siteB, 'jonplummer.com', {
+        manifestPath,
+        dryRun: true,
+        env: {},
+      });
+      if (
+        dryRunResult.dryRun !== true ||
+        dryRunResult.writeManifest !== false ||
+        !dryRunResult.urls.includes('https://jonplummer.com/')
+      ) {
+        addIssue(fileObj, {
+          severity: 'error',
+          type: 'purge-changed-deploy-content-dry-run',
+          message: `expected dry-run would-purge result, got ${JSON.stringify({
+            ...dryRunResult,
+            currentManifest: undefined,
+          })}`,
+        });
+      }
+
+      fs.rmSync(tmp2, { recursive: true, force: true });
+    }
   },
 });

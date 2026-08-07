@@ -268,12 +268,19 @@ function logCloudflarePurgeResult(purgeResult, { dryRun }) {
     return;
   }
 
-  if (purgeResult.skipped && purgeResult.reason === 'no-changes') {
-    console.log('✅ ☁️  Cloudflare purge: nothing to purge (rsync transferred no files)\n');
+  if (purgeResult.skipped && purgeResult.reason === 'no-baseline') {
+    console.log('ℹ️  ☁️  Cloudflare purge: no baseline manifest yet — establishing one now, nothing purged this run\n');
     return;
   }
 
-  const prefix = dryRun ? '☁️  Cloudflare purge (dry-run): would purge' : '✅ ☁️  Cloudflare purge:';
+  if (purgeResult.skipped && purgeResult.reason === 'no-changes') {
+    console.log('✅ ☁️  Cloudflare purge: nothing to purge (content unchanged)\n');
+    return;
+  }
+
+  const prefix = dryRun
+    ? '☁️  Cloudflare purge (dry-run, from content hash): would purge'
+    : '✅ ☁️  Cloudflare purge (from content hash):';
   if (dryRun) {
     console.log(`${prefix} ${purgeResult.urls.length} URL(s)`);
   } else {
@@ -288,23 +295,30 @@ function logCloudflarePurgeResult(purgeResult, { dryRun }) {
   console.log('');
 }
 
-async function purgeCloudflareAfterDeploy(rsyncOutput, siteDomain, dryRun) {
+async function purgeCloudflareAfterDeploy(siteDomain, dryRun) {
   const {
-    purgeChangedDeployFiles,
+    purgeChangedDeployContent,
+    saveContentManifest,
+    defaultManifestPath,
     isCloudflarePurgeConfigured,
   } = require('../utils/cloudflare-purge');
 
+  // dry-run still computes would-purge even without creds (same as today's list behavior)
   if (!dryRun && !isCloudflarePurgeConfigured()) {
     logCloudflarePurgeResult({ skipped: true, reason: 'not-configured' }, { dryRun: false });
     return;
   }
 
   try {
-    const purgeResult = await purgeChangedDeployFiles(rsyncOutput, siteDomain, { dryRun });
+    const purgeResult = await purgeChangedDeployContent('./_site', siteDomain, { dryRun });
     logCloudflarePurgeResult(purgeResult, { dryRun });
+    if (purgeResult.writeManifest && purgeResult.currentManifest) {
+      saveContentManifest(defaultManifestPath(), purgeResult.currentManifest);
+    }
   } catch (error) {
     console.log('⚠️  ☁️  Cloudflare purge: failed (deployment succeeded)');
     console.warn(`   ${error.message}\n`);
+    // do not write manifest
   }
 }
 
@@ -390,9 +404,9 @@ async function purgeCloudflareAfterDeploy(rsyncOutput, siteDomain, dryRun) {
   }
   
   try {
-    const { stdout: rsyncOutput } = await deploy(config, siteDomain, dryRun);
+    await deploy(config, siteDomain, dryRun);
 
-    await purgeCloudflareAfterDeploy(rsyncOutput, siteDomain, dryRun);
+    await purgeCloudflareAfterDeploy(siteDomain, dryRun);
 
     // Notify IndexNow after successful deployment (only if not dry-run)
     if (!dryRun) {

@@ -180,6 +180,108 @@ function isCloudflarePurgeConfigured(env = process.env) {
 }
 
 /**
+ * Decide which _site-relative paths need purging given the previous and
+ * current content manifests.
+ * @param {object|null} previous previous manifest (or null when no baseline)
+ * @param {object} current current manifest (from buildContentManifest)
+ * @param {{ forceContent?: boolean }} [options]
+ * @returns {{ mode: 'no-baseline' | 'force' | 'diff', paths: string[] }}
+ */
+function collectPurgePaths(previous, current, options = {}) {
+  const forceContent = Boolean(options.forceContent);
+  const currentFiles = (current && current.files) || {};
+
+  if (!previous) {
+    if (forceContent) {
+      return { mode: 'force', paths: Object.keys(currentFiles) };
+    }
+    return { mode: 'no-baseline', paths: [] };
+  }
+
+  if (forceContent) {
+    const { deleted } = diffContentManifests(previous, current);
+    const paths = new Set([...Object.keys(currentFiles), ...deleted]);
+    return { mode: 'force', paths: [...paths] };
+  }
+
+  const { changed, added, deleted } = diffContentManifests(previous, current);
+  const paths = new Set([...changed, ...added, ...deleted]);
+  return { mode: 'diff', paths: [...paths] };
+}
+
+/**
+ * Purge Cloudflare for _site paths whose local content hash changed since
+ * the last deploy. Source of truth is the local content manifest, not rsync
+ * itemize output.
+ * @param {string} siteRoot absolute path to built _site directory
+ * @param {string} siteDomain public site domain (e.g. jonplummer.com)
+ * @param {{ dryRun?: boolean, zoneId?: string, apiToken?: string, manifestPath?: string, env?: NodeJS.ProcessEnv, forceContent?: boolean }} [options]
+ */
+async function purgeChangedDeployContent(siteRoot, siteDomain, options = {}) {
+  const env = options.env || process.env;
+  const manifestPath = options.manifestPath || defaultManifestPath();
+  const dryRun = Boolean(options.dryRun);
+  const forceContent =
+    Boolean(options.forceContent) ||
+    env.CLOUDFLARE_PURGE_FORCE_CONTENT === '1' ||
+    env.CLOUDFLARE_PURGE_FORCE_CONTENT === 'true';
+
+  const currentManifest = buildContentManifest(siteRoot);
+  const previous = loadContentManifest(manifestPath);
+
+  if (!dryRun && !isCloudflarePurgeConfigured(env)) {
+    return {
+      skipped: true,
+      reason: 'not-configured',
+      paths: [],
+      urls: [],
+      purged: 0,
+      batches: 0,
+      writeManifest: false,
+      currentManifest,
+    };
+  }
+
+  const { mode, paths } = collectPurgePaths(previous, currentManifest, { forceContent });
+  const urls = pathsToPurgeUrls(paths, siteDomain);
+
+  if (mode === 'no-baseline') {
+    return {
+      skipped: true,
+      reason: 'no-baseline',
+      paths: [],
+      urls: [],
+      purged: 0,
+      batches: 0,
+      writeManifest: !dryRun,
+      currentManifest,
+    };
+  }
+
+  if (urls.length === 0) {
+    return {
+      skipped: true,
+      reason: 'no-changes',
+      paths: [],
+      urls: [],
+      purged: 0,
+      batches: 0,
+      writeManifest: !dryRun,
+      currentManifest,
+    };
+  }
+
+  if (dryRun) {
+    return { dryRun: true, paths, urls, purged: 0, batches: 0, writeManifest: false, currentManifest };
+  }
+
+  const zoneId = options.zoneId || env.CLOUDFLARE_ZONE_ID;
+  const apiToken = options.apiToken || env.CLOUDFLARE_API_TOKEN;
+  const result = await purgeCloudflareUrls(urls, { zoneId, apiToken });
+  return { ...result, paths, urls, writeManifest: true, currentManifest };
+}
+
+/**
  * @param {string} rsyncOutput
  * @param {string} siteDomain
  * @param {{ dryRun?: boolean, zoneId?: string, apiToken?: string }} [options]
@@ -222,4 +324,6 @@ module.exports = {
   diffContentManifests,
   shouldPurgeDeployPath,
   pathsToPurgeUrls,
+  collectPurgePaths,
+  purgeChangedDeployContent,
 };
