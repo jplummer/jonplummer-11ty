@@ -7,7 +7,10 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Purge Cloudflare from local _site content hashes
 - Content-hash Cloudflare purge behavior and later rsync note
 - Harden Cloudflare purge manifest loading and deploy-guards invariant
+- Refresh ideas.md for recent brand and Cloudflare purge work
+- Colophon sketch light/dark remaps without invert
 - Skip Cloudflare purge for newly added deploy paths
+- Mark favicons-from-logo as already done in ideas.md
 
 ## 2026-08-06
 
