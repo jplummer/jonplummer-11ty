@@ -1,3 +1,6 @@
-<link rel="icon" href="{{ page.outputPath | rootRelativePathPrefix }}favicon.ico" sizes="32x32">
-<link rel="icon" href="{{ page.outputPath | rootRelativePathPrefix }}assets/images/icon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="{{ page.outputPath | rootRelativePathPrefix }}assets/images/apple-touch-icon.png">
+{#- Same fix as head/meta_basic.njk: the 404 page is served at arbitrary fake URLs,
+    so its asset paths need to be root-absolute, not relative to page.outputPath. #}
+{%- set assetPrefix = "/" if permalink == "/404.html" else (page.outputPath | rootRelativePathPrefix) -%}
+<link rel="icon" href="{{ assetPrefix }}favicon.ico" sizes="32x32">
+<link rel="icon" href="{{ assetPrefix }}assets/images/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="{{ assetPrefix }}assets/images/apple-touch-icon.png">

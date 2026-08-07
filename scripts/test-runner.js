@@ -29,6 +29,7 @@ const testTypes = {
   'indexnow': 'indexnow.js',
   'figure-lightbox': 'figure-lightbox.js',
   'site-branding': 'site-branding.js',
+  'error-document-assets': 'error-document-assets.js',
   'security': { file: 'security-audit.js', dir: 'security' }
 };
 
@@ -50,7 +51,8 @@ const fastTests = [
   'css',
   'rss',
   'deploy-assets',
-  'indexnow'
+  'indexnow',
+  'error-document-assets'
 ];
 
 // Tests to run for "test all" (includes all tests, including slow ones)
@@ -69,6 +71,7 @@ const allTests = [
   'rss',
   'deploy-assets',
   'indexnow',
+  'error-document-assets',
   'a11y'
 ];
 
@@ -92,7 +95,7 @@ function listTests() {
   const { getTestDescription } = require('./utils/test-results');
   
   // Only show primary names
-  const primaryNames = ['html', 'links', 'wisdom', 'internal-links', 'frontmatter', 'markdown', 'spell', 'seo', 'og-images', 'a11y', 'color-contrast', 'css', 'rss', 'portfolio-notes', 'deploy-assets', 'cloudflare-purge', 'deploy-guards', 'site-branding', 'deploy', 'indexnow', 'security'];
+  const primaryNames = ['html', 'links', 'wisdom', 'internal-links', 'frontmatter', 'markdown', 'spell', 'seo', 'og-images', 'a11y', 'color-contrast', 'css', 'rss', 'portfolio-notes', 'deploy-assets', 'cloudflare-purge', 'deploy-guards', 'site-branding', 'error-document-assets', 'deploy', 'indexnow', 'security'];
 
   primaryNames.forEach(type => {
     const isInAll = allTests.includes(type);

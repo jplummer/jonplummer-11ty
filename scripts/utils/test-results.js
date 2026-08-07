@@ -258,6 +258,7 @@ const TEST_EMOJIS = {
   'cloudflare-purge': '☁️',
   'deploy-guards': '🛟',
   'site-branding': '🏷️',
+  'error-document-assets': '📄',
   'seo': '📈',
   'deploy': '🚀',
   'security': '🛡️',
@@ -300,6 +301,7 @@ function getTestDisplayName(testType) {
     'cloudflare-purge': 'Cloudflare Purge',
     'deploy-guards': 'Deploy Guards',
     'site-branding': 'Site Branding',
+    'error-document-assets': 'ErrorDocument 404 assets',
     'deploy': 'Deploy',
     'security': 'Security Audit'
   };
@@ -331,6 +333,7 @@ function getTestDescription(testType) {
     'cloudflare-purge': 'Rsync itemize → Cloudflare purge URL mapping',
     'deploy-guards': 'deploy.js regression guards (rsync excludes, changelog, purge wiring)',
     'site-branding': 'site.js author/tagline/title contract and no hardcoded tagline',
+    'error-document-assets': '404.html root-absolute CSS/font/favicon hrefs for ErrorDocument',
     'deploy': 'Deployment connectivity',
     'indexnow': 'IndexNow configuration',
     'security': 'Security audit'

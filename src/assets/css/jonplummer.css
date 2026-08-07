@@ -221,6 +221,7 @@ hgroup {
 
 .site-mark {
   display: block;
+  color: var(--text-color);
   width: auto;
   /* Top aligns to logotype capital ink; bottom to tagline alphabetic baseline */
   margin-top: var(--site-lockup-cap-nudge);
@@ -1001,6 +1002,12 @@ article.portfolio-item p.portfolio-item-description {
   height: auto;
   flex-shrink: 0;
   border: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .colophon-signature img {
+    filter: invert(1);
+  }
 }
 
 .colophon-signature figcaption {
