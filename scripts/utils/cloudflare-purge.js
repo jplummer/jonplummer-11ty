@@ -2,7 +2,11 @@
 
 /**
  * Purge changed deploy paths from Cloudflare edge cache.
- * Parses rsync --itemize-changes output and calls the zone purge_cache API.
+ * Source of truth is a local SHA-256 content-hash manifest of `_site`
+ * (see `buildContentManifest` / `diffContentManifests`), diffed against the
+ * previous deploy's manifest and mapped to public URLs. `parseRsyncItemizedChanges`
+ * remains for parsing rsync's `--itemize-changes` output (deploy logs only —
+ * it is not the purge source).
  */
 
 const CF_API = 'https://api.cloudflare.com/client/v4';
@@ -47,7 +51,21 @@ function buildContentManifest(siteRoot) {
 
 function loadContentManifest(manifestPath) {
   if (!fs.existsSync(manifestPath)) return null;
-  return JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+
+  let parsed;
+  try {
+    parsed = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+  } catch {
+    return null;
+  }
+
+  if (!parsed || parsed.version !== 1) return null;
+
+  const { files } = parsed;
+  const isPlainObject = typeof files === 'object' && files !== null && !Array.isArray(files);
+  if (!isPlainObject || Object.keys(files).length === 0) return null;
+
+  return parsed;
 }
 
 function saveContentManifest(manifestPath, manifest) {
@@ -281,40 +299,11 @@ async function purgeChangedDeployContent(siteRoot, siteDomain, options = {}) {
   return { ...result, paths, urls, writeManifest: true, currentManifest };
 }
 
-/**
- * @param {string} rsyncOutput
- * @param {string} siteDomain
- * @param {{ dryRun?: boolean, zoneId?: string, apiToken?: string }} [options]
- */
-async function purgeChangedDeployFiles(rsyncOutput, siteDomain, options = {}) {
-  const paths = parseRsyncItemizedChanges(rsyncOutput);
-  const urls = paths.map((p) => deployPathToUrl(p, siteDomain));
-
-  if (paths.length === 0) {
-    return { skipped: true, reason: 'no-changes', paths, urls, purged: 0, batches: 0 };
-  }
-
-  if (options.dryRun) {
-    return { dryRun: true, paths, urls, purged: 0, batches: 0 };
-  }
-
-  const zoneId = options.zoneId || process.env.CLOUDFLARE_ZONE_ID;
-  const apiToken = options.apiToken || process.env.CLOUDFLARE_API_TOKEN;
-
-  if (!zoneId || !apiToken) {
-    return { skipped: true, reason: 'not-configured', paths, urls, purged: 0, batches: 0 };
-  }
-
-  const result = await purgeCloudflareUrls(urls, { zoneId, apiToken });
-  return { ...result, paths, urls };
-}
-
 module.exports = {
   parseRsyncItemizedChanges,
   deployPathToUrl,
   purgeCloudflareUrls,
   isCloudflarePurgeConfigured,
-  purgeChangedDeployFiles,
   defaultManifestPath,
   MANIFEST_PATH: DEFAULT_MANIFEST_REL,
   hashFile,

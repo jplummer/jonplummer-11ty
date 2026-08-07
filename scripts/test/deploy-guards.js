@@ -57,7 +57,8 @@ async function validate(result) {
 
   const hasCloudflarePurge =
     deployContent.includes('cloudflare-purge') &&
-    deployContent.includes('--itemize-changes') &&
+    deployContent.includes('purgeChangedDeployContent') &&
+    deployContent.includes('saveContentManifest') &&
     deployContent.includes('purgeCloudflareAfterDeploy');
   if (!hasCloudflarePurge) {
     addIssue(fileObj, {

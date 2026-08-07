@@ -140,7 +140,7 @@ async function deploy(config, siteDomain, dryRun) {
     const rsyncCommand = [
       'rsync',
       '-az', // Archive mode, compress
-      '--itemize-changes', // List changed paths for Cloudflare selective purge
+      '--itemize-changes', // List changed paths for deploy logs (purge uses content-hash manifest)
       '--delete', // Delete files on remote that don't exist locally
       '--exclude=.DS_Store', // Exclude macOS metadata files
       '--exclude=Thumbs.db', // Exclude Windows thumbnail files
@@ -295,7 +295,7 @@ function logCloudflarePurgeResult(purgeResult, { dryRun }) {
   console.log('');
 }
 
-async function purgeCloudflareAfterDeploy(siteDomain, dryRun) {
+async function purgeCloudflareAfterDeploy(siteDomain, dryRun, localPath) {
   const {
     purgeChangedDeployContent,
     saveContentManifest,
@@ -310,7 +310,7 @@ async function purgeCloudflareAfterDeploy(siteDomain, dryRun) {
   }
 
   try {
-    const purgeResult = await purgeChangedDeployContent('./_site', siteDomain, { dryRun });
+    const purgeResult = await purgeChangedDeployContent(localPath, siteDomain, { dryRun });
     logCloudflarePurgeResult(purgeResult, { dryRun });
     if (purgeResult.writeManifest && purgeResult.currentManifest) {
       saveContentManifest(defaultManifestPath(), purgeResult.currentManifest);
@@ -406,7 +406,7 @@ async function purgeCloudflareAfterDeploy(siteDomain, dryRun) {
   try {
     await deploy(config, siteDomain, dryRun);
 
-    await purgeCloudflareAfterDeploy(siteDomain, dryRun);
+    await purgeCloudflareAfterDeploy(siteDomain, dryRun, config.localPath);
 
     // Notify IndexNow after successful deployment (only if not dry-run)
     if (!dryRun) {

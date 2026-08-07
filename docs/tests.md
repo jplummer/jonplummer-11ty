@@ -130,7 +130,7 @@ Runs fixture assertions against `parseNotesContent()` in `scripts/utils/portfoli
 
 ### cloudflare-purge.js
 
-Unit checks for `scripts/utils/cloudflare-purge.js`: rsync `--itemize-changes` parsing and `_site/` path → public URL mapping used by post-deploy selective purge.
+Unit checks for `scripts/utils/cloudflare-purge.js`: local SHA-256 content-manifest diffing (changed/added/deleted), `_site/` path → public URL mapping, and `purgeChangedDeployContent` orchestration (no-baseline / no-changes / dry-run) used by post-deploy selective purge. Rsync `--itemize-changes` parsing (`parseRsyncItemizedChanges`) is still covered but is deploy-log tooling, not the purge source.
 
 ### deploy-guards.js
 

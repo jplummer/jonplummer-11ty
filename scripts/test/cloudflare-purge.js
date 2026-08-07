@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 
 /**
- * Unit checks for Cloudflare purge helpers (rsync itemize → public URLs).
+ * Unit checks for Cloudflare purge helpers: local content-hash manifest
+ * diffing, `_site/` path → public URL mapping, and purge orchestration.
+ * `parseRsyncItemizedChanges` (rsync `--itemize-changes` parsing) is deploy-log
+ * tooling only, not the purge source, but is still covered here.
  */
 
 const fs = require('fs');
@@ -16,6 +19,7 @@ const {
   pathsToPurgeUrls,
   collectPurgePaths,
   purgeChangedDeployContent,
+  loadContentManifest,
   saveContentManifest,
 } = require('../utils/cloudflare-purge');
 const { addFile, addIssue } = require('../utils/test-results');
@@ -144,6 +148,84 @@ runTest({
     }
 
     fs.rmSync(tmp, { recursive: true, force: true });
+
+    // --- loadContentManifest robustness ---
+
+    const tmpManifests = fs.mkdtempSync(path.join(os.tmpdir(), 'cf-purge-manifest-'));
+
+    const missingPath = path.join(tmpManifests, 'missing.json');
+    if (loadContentManifest(missingPath) !== null) {
+      addIssue(fileObj, {
+        severity: 'error',
+        type: 'load-content-manifest-missing',
+        message: 'expected null for a missing manifest file',
+      });
+    }
+
+    const corruptPath = path.join(tmpManifests, 'corrupt.json');
+    fs.writeFileSync(corruptPath, '{ not valid json', 'utf8');
+    if (loadContentManifest(corruptPath) !== null) {
+      addIssue(fileObj, {
+        severity: 'error',
+        type: 'load-content-manifest-corrupt',
+        message: 'expected null for corrupt JSON',
+      });
+    }
+
+    const noFilesKeyPath = path.join(tmpManifests, 'no-files-key.json');
+    fs.writeFileSync(noFilesKeyPath, JSON.stringify({ version: 1, generatedAt: 'x' }), 'utf8');
+    if (loadContentManifest(noFilesKeyPath) !== null) {
+      addIssue(fileObj, {
+        severity: 'error',
+        type: 'load-content-manifest-no-files',
+        message: 'expected null when files key is missing',
+      });
+    }
+
+    const emptyFilesPath = path.join(tmpManifests, 'empty-files.json');
+    fs.writeFileSync(
+      emptyFilesPath,
+      JSON.stringify({ version: 1, generatedAt: 'x', files: {} }),
+      'utf8'
+    );
+    if (loadContentManifest(emptyFilesPath) !== null) {
+      addIssue(fileObj, {
+        severity: 'error',
+        type: 'load-content-manifest-empty-files',
+        message: 'expected null for an empty files map (do not treat as a real baseline)',
+      });
+    }
+
+    const wrongVersionPath = path.join(tmpManifests, 'wrong-version.json');
+    fs.writeFileSync(
+      wrongVersionPath,
+      JSON.stringify({ version: 2, generatedAt: 'x', files: { a: '1' } }),
+      'utf8'
+    );
+    if (loadContentManifest(wrongVersionPath) !== null) {
+      addIssue(fileObj, {
+        severity: 'error',
+        type: 'load-content-manifest-wrong-version',
+        message: 'expected null for an unsupported manifest version',
+      });
+    }
+
+    const validPath = path.join(tmpManifests, 'valid.json');
+    fs.writeFileSync(
+      validPath,
+      JSON.stringify({ version: 1, generatedAt: 'x', files: { a: '1' } }),
+      'utf8'
+    );
+    const validManifest = loadContentManifest(validPath);
+    if (!validManifest || validManifest.files.a !== '1') {
+      addIssue(fileObj, {
+        severity: 'error',
+        type: 'load-content-manifest-valid',
+        message: `expected a valid manifest to load, got ${JSON.stringify(validManifest)}`,
+      });
+    }
+
+    fs.rmSync(tmpManifests, { recursive: true, force: true });
 
     // --- collectPurgePaths ---
 
