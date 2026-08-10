@@ -3,7 +3,7 @@
 ## ☑️ Selected
 
 - Craft / polish (demonstrate craft)
-  - Portfolio grid styling — especially link underlines that need not show until hover/focus
+  - Portfolio grid styling — ~~link underlines only on hover/focus~~ (shipped); further grid polish still open
   - Further refinement of the logo / logotype / tagline lockup
   - Alternate taglines?
   - Color scheme refinement, especially dark

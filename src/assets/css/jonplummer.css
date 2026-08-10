@@ -963,6 +963,15 @@ article.portfolio-item {
   margin-bottom: var(--spacing-lg);
 }
 
+/* Grid cards: no rest underline (unlike prose); underline on hover/focus */
+article.portfolio-item a {
+  text-decoration: none;
+}
+
+article.portfolio-item a:is(:hover, :focus-visible) {
+  text-decoration: underline;
+}
+
 article.portfolio-item img {
   width: 100%;
   height: auto;
