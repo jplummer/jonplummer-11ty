@@ -30,7 +30,7 @@ This project includes a suite of validation tests covering content structure, HT
 
 **Fast Tests:** `html`, `links`, `wisdom`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `deploy-assets`, `indexnow`, `error-document-assets`, `trailing-slash-links`
 
-**Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `figure-lightbox`, `site-branding`, `test-json-pipe` — see [Unit Tests](#unit-tests) below
+**Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `figure-lightbox`, `site-branding`, `preview-site-lockup`, `test-json-pipe` — see [Unit Tests](#unit-tests) below
 
 **Slow Tests:** `a11y` (launches browser)
 
@@ -139,6 +139,10 @@ Unit checks for `scripts/utils/cloudflare-purge.js`: local SHA-256 content-manif
 ### deploy-guards.js
 
 Static regression guards for `scripts/deploy/deploy.js`'s source — no network or `_site/` dependency. Checks: rsync doesn't exclude `color/` or `assets/fonts/`, the changelog commit logic is present, and the Cloudflare selective-purge integration is wired up. Each check traces to a real past incident (accidentally excluding `/color/` or fonts from rsync, breaking the changelog auto-commit). Live connectivity checks (SSH, rsync upload, `.env`) are a separate, manual-only test — see `deploy.js` below.
+
+### preview-site-lockup.js
+
+Unit checks for `scripts/utils/preview-site-lockup.js`: build-time `.site-lockup` HTML for `/color/` and `/type/` mini-page previews (mark SVG geometry, author link, optional tagline, HTML escaping). No `_site/` dependency.
 
 ## Infrastructure Tests
 

@@ -29,6 +29,7 @@ const testTypes = {
   'indexnow': 'indexnow.js',
   'figure-lightbox': 'figure-lightbox.js',
   'site-branding': 'site-branding.js',
+  'preview-site-lockup': 'preview-site-lockup.js',
   'error-document-assets': 'error-document-assets.js',
   'trailing-slash-links': 'trailing-slash-links.js',
   'test-json-pipe': 'test-json-pipe.js',
@@ -88,6 +89,7 @@ const unitTests = [
   'deploy-guards',
   'figure-lightbox',
   'site-branding',
+  'preview-site-lockup',
   'test-json-pipe'
 ];
 
@@ -100,7 +102,7 @@ function listTests() {
   const { getTestDescription } = require('./utils/test-results');
   
   // Only show primary names
-  const primaryNames = ['html', 'links', 'wisdom', 'internal-links', 'frontmatter', 'markdown', 'spell', 'seo', 'og-images', 'a11y', 'color-contrast', 'css', 'rss', 'portfolio-notes', 'deploy-assets', 'cloudflare-purge', 'deploy-guards', 'site-branding', 'error-document-assets', 'trailing-slash-links', 'test-json-pipe', 'deploy', 'indexnow', 'security'];
+  const primaryNames = ['html', 'links', 'wisdom', 'internal-links', 'frontmatter', 'markdown', 'spell', 'seo', 'og-images', 'a11y', 'color-contrast', 'css', 'rss', 'portfolio-notes', 'deploy-assets', 'cloudflare-purge', 'deploy-guards', 'site-branding', 'preview-site-lockup', 'error-document-assets', 'trailing-slash-links', 'test-json-pipe', 'deploy', 'indexnow', 'security'];
 
   primaryNames.forEach(type => {
     const isInAll = allTests.includes(type);
