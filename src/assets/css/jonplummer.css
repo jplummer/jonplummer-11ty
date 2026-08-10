@@ -92,8 +92,11 @@
   /* Icons — CSS mask-image data URIs */
   /* New-tab: solid sharp window + NE L (in-system; was stroke outline, visually inverted) */
   --icon-new-tab-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 12 12' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='1' y='5' width='6' height='6' fill='white'/%3E%3Crect x='5' y='1' width='6' height='2' fill='white'/%3E%3Crect x='9' y='1' width='2' height='6' fill='white'/%3E%3C/svg%3E");
-  /* Disclosure caret: filled right triangle, right angle at tip; path centered so centroid = box center */
+  /* Disclosure caret: filled right triangle (disclose-in-place only) */
   --icon-disclosure-caret-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M 10 6 L 4 0 L 4 12 Z' fill='white'/%3E%3C/svg%3E");
+  /* Nav caret: open chevron, tip right — stroke + square caps (same flavor as close ×) */
+  /* Open stroke chevron; tip exactly 90° (|Δx|=|Δy| arms) — same angle family as disclosure */
+  --icon-nav-caret-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 12 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 2L9 6L5 10' fill='none' stroke='white' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'/%3E%3C/svg%3E");
   /* Close: two strokes with square caps (blunt, perpendicular to each stroke) */
   --icon-close-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 12 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2.5 2.5L9.5 9.5' fill='none' stroke='white' stroke-width='2' stroke-linecap='square'/%3E%3Cpath d='M9.5 2.5L2.5 9.5' fill='none' stroke='white' stroke-width='2' stroke-linecap='square'/%3E%3C/svg%3E");
 }
@@ -402,22 +405,67 @@ body > header nav a[aria-current="page"] {
 nav.post-navigation,
 nav.pagination {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  gap: var(--spacing-md);
 }
 
 nav.post-navigation {
   justify-content: space-between;
 }
 
-/* Navigation prev/next positioning */
+/* Open nav carets (paging) — not the filled disclosure triangle */
+nav.post-navigation a.prev,
+nav.pagination a.prev,
+nav.post-navigation a.next,
+nav.pagination a.next {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  max-width: calc((100% - var(--spacing-md)) / 2);
+}
+
 nav.post-navigation a.prev,
 nav.pagination a.prev {
   margin-inline-end: auto;
+  padding-inline-start: calc(10px + 0.35em);
 }
 
 nav.post-navigation a.next,
 nav.pagination a.next {
   margin-inline-start: auto;
+  padding-inline-end: calc(10px + 0.35em);
+  text-align: end;
+}
+
+nav.post-navigation a.prev::before,
+nav.pagination a.prev::before,
+nav.post-navigation a.next::after,
+nav.pagination a.next::after {
+  content: '';
+  position: absolute;
+  top: calc((1lh - 10px) / 2);
+  width: 10px;
+  height: 10px;
+  background-color: currentColor;
+  -webkit-mask-image: var(--icon-nav-caret-mask);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+  mask-image: var(--icon-nav-caret-mask);
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+}
+
+nav.post-navigation a.prev::before,
+nav.pagination a.prev::before {
+  left: 0;
+  transform: scaleX(-1);
+}
+
+nav.post-navigation a.next::after,
+nav.pagination a.next::after {
+  right: 0;
 }
 
 /* === TYPOGRAPHY === */
@@ -1030,8 +1078,8 @@ article.portfolio-detail {
 
 .figure-lightbox-icon-next,
 .figure-lightbox-icon-prev {
-  -webkit-mask-image: var(--icon-disclosure-caret-mask);
-  mask-image: var(--icon-disclosure-caret-mask);
+  -webkit-mask-image: var(--icon-nav-caret-mask);
+  mask-image: var(--icon-nav-caret-mask);
 }
 
 .figure-lightbox-icon-prev {
