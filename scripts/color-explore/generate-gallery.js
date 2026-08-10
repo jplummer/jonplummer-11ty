@@ -2781,6 +2781,12 @@ function renderHtml(visibleSections, meta, options = {}) {
       font-size: var(--font-size-logotype);
       line-height: 1;
     }
+    /* /color/ and /type/ are tags:page — main[data-tags*="page"] a underlines all links;
+       real header is outside main, so neutralize chrome underlines in the facsimile */
+    .theme-root.home-preview .jp-page > header .site-lockup a:any-link,
+    .theme-root.home-preview .jp-page > header nav a:any-link {
+      text-decoration: none;
+    }
     .theme-root.home-preview .jp-page > header,
     .theme-root.home-preview .jp-page > .gallery-preview-main,
     .theme-root.home-preview .jp-page > footer {
