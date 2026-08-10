@@ -10,7 +10,7 @@ Last year I wrote about [a first batch of "hidden" pages](/2025/11/20/the-hidden
 
 ## 1. /type
 
-[/type/](/type)
+[/type/](/type/)
 
 A single home-page-shaped preview at the correct type scale from `jonplummer.css`, with two menus: one for headings (`h1`–`h4`) and one for everything else. Font stacks come from [Modern Font Stacks](https://modernfontstacks.com); these stacks are nice because they rely on fonts that ship with the popular operating systems. The first option on the body menu keeps body text on the heading stack until you pick a specific second stack. There is a collapsible block of example CSS you can copy when you like a pairing.
 
@@ -20,7 +20,7 @@ When I think of changing `--font-family` or heading tokens in CSS, I have a plac
 
 ## 2. /color
 
-[/color/](/color)
+[/color/](/color/)
 
 An embedded color theme gallery: smaller and rougher home layout previews, wired to live `light-dark()` tokens. The heavy lifting is OKLCH builds, harmony and preset cards, and APCA-minded checks.
 
@@ -30,7 +30,7 @@ Shipping palettes is still manual work in `jonplummer.css`, but comparing candid
 
 ## 3. /ogimages
 
-[/ogimages/](/ogimages)
+[/ogimages/](/ogimages/)
 
 A preview of the Open Graph image template: rendered examples with different titles and descriptions, plus a grid of the generated PNGs cached in `src/assets/images/og/`.
 

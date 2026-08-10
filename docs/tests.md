@@ -28,7 +28,7 @@ This project includes a suite of validation tests covering content structure, HT
 
 ### Test Categories
 
-**Fast Tests:** `html`, `links`, `wisdom`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `deploy-assets`, `indexnow`, `error-document-assets`
+**Fast Tests:** `html`, `links`, `wisdom`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `deploy-assets`, `indexnow`, `error-document-assets`, `trailing-slash-links`
 
 **Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `figure-lightbox`, `site-branding`, `test-json-pipe` — see [Unit Tests](#unit-tests) below
 
@@ -99,6 +99,10 @@ Validates HTML files for structural correctness, syntax errors, and deprecated e
 ### internal-links.js
 
 Validates that all internal links point to existing pages or anchors. Checks file links and anchor links (`#id`). Skips external/email/phone links.
+
+### trailing-slash-links.js
+
+Scans `src/**/*.{md,njk,html}` for root-absolute internal links that omit a trailing slash on directory-style paths (e.g. `/colophon` instead of `/colophon/`). Apache 301s those to the slashed URL; Ahrefs reports each linking page as a redirect issue. File URLs with an extension (e.g. `/feed.xml`) are allowed. Does not need `_site/`.
 
 ### og-images.js
 

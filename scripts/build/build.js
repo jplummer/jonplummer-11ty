@@ -4,7 +4,7 @@ const { execSync } = require('child_process');
 
 const PRE_BUILD_TESTS = [
   'markdown', 'frontmatter', 'spell', 'css',
-  'links', 'wisdom', 'color-contrast',
+  'links', 'wisdom', 'color-contrast', 'trailing-slash-links',
 ];
 
 const POST_BUILD_TESTS = [

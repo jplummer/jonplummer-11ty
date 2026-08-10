@@ -45,7 +45,7 @@ At work I ~~am~~ *was* also experimenting:
 - theming React pages
 - some information and data architecture challenges that deserve attention as we move from a technology-led to a more customer-centered product approach
 
-…but I was let go at the beginning of June. It's a relief in a way to trade that job for the new job of finding the new job. I'm looking for work and pursuing a handful of design/development projects (see above) to keep my hand in. More on the professional version of me at [/about](/about).
+…but I was let go at the beginning of June. It's a relief in a way to trade that job for the new job of finding the new job. I'm looking for work and pursuing a handful of design/development projects (see above) to keep my hand in. More on the professional version of me at [/about](/about/).
 
 It's an exciting time. And things are changing too fast to keep up! So don't keep up, just keep going, keep learning, keep experimenting.
 

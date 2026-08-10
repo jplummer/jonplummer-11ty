@@ -8,7 +8,7 @@ ogImage: /assets/images/og/2026-03-28-collected-wisdom-on-the-site.png
 ---
 I have been capturing links on this site for a bit, and I still write longer posts when something needs room to breathe. In between, I also accumulate short notes: a paragraph or two, a quote with context, a reminder to myself that does not warrant a full article.
 
-Those now live under [Collected wisdom](/wisdom). Each entry is tagged (for example everything tagged [#product](/wisdom/tags/product)), and ordered by when I added it. I am not showing dates on the page itself; they are there in the data for sorting and for the feed.
+Those now live under [Collected wisdom](/wisdom/). Each entry is tagged (for example everything tagged [#product](/wisdom/tags/product/)), and ordered by when I added it. I am not showing dates on the page itself; they are there in the data for sorting and for the feed.
 
 There is a dedicated RSS feed at [`/wisdom-feed.xml`](/wisdom-feed.xml) (also linked in the `<head>` on most pages), separate from the main blog and link feeds, so you can subscribe to just this stream if you want.
 

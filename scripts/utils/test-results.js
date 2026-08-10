@@ -251,6 +251,7 @@ const TEST_EMOJIS = {
   'deploy-guards': '🛟',
   'site-branding': '🏷️',
   'error-document-assets': '📄',
+  'trailing-slash-links': '↪️',
   'test-json-pipe': '🧪',
   'seo': '📈',
   'deploy': '🚀',
@@ -295,6 +296,7 @@ function getTestDisplayName(testType) {
     'deploy-guards': 'Deploy Guards',
     'site-branding': 'Site Branding',
     'error-document-assets': 'ErrorDocument 404 assets',
+    'trailing-slash-links': 'Trailing-slash directory links',
     'test-json-pipe': 'Test JSON pipe',
     'deploy': 'Deploy',
     'security': 'Security Audit'
@@ -328,6 +330,7 @@ function getTestDescription(testType) {
     'deploy-guards': 'deploy.js regression guards (rsync excludes, changelog, purge wiring)',
     'site-branding': 'site.js author/tagline/title contract and no hardcoded tagline',
     'error-document-assets': '404.html root-absolute CSS/font/favicon hrefs for ErrorDocument',
+    'trailing-slash-links': 'Internal directory links must include trailing slash (avoid 301 noise)',
     'test-json-pipe': 'Large TEST_RUNNER JSON survives piped stdout before exit',
     'deploy': 'Deployment connectivity',
     'indexnow': 'IndexNow configuration',
