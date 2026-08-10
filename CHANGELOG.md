@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-08-10
+
+- Use trailing slashes on directory-style internal links
+
 ## 2026-08-07
 
 - Local content-hash helpers for Cloudflare purge diffs
@@ -9,8 +13,11 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Harden Cloudflare purge manifest loading and deploy-guards invariant
 - Refresh ideas.md for recent brand and Cloudflare purge work
 - Colophon sketch light/dark remaps without invert
+- Keep large test JSON intact over piped stdout
 - Skip Cloudflare purge for newly added deploy paths
 - Mark favicons-from-logo as already done in ideas.md
+- Add craft/polish items to Selected in ideas.md
+- Footer /colophon label and craft post copy edits
 
 ## 2026-08-06
 
@@ -634,4 +641,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-08-07
+Last deployed on 2026-08-10
