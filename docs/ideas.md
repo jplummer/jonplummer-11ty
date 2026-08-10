@@ -10,9 +10,9 @@
   - Outlandish alternative stylesheet?
   - Icons, lightbox controls, and end-of-post tokens as a system
     - **Construction:** solid, sharp, right angles (squares / rectangles / right-triangle carets with the right angle at the tip)
-    - **Inventory:** JP mark (+ favicons/OG) · EOF square · disclosure caret · new-tab (needs fill + 180° to NE) · lightbox (out of system today: rounded chrome + round stroke caps; colors TBD) · pagination (text today → reuse carets later) · Show/Hide (keep words, add caret)
+    - **Inventory:** JP mark (+ favicons/OG) · EOF square · disclosure caret · ~~new-tab~~ (shipped: solid sharp NE) · lightbox (out of system today: rounded chrome + round stroke caps; colors TBD) · pagination (text today → reuse carets later) · Show/Hide (keep words, add caret)
     - **Close:** × or incised square (not a caret)
-    - **Sequence:** ~~shared triangle + Show/Hide caret~~ (shipped: `--icon-disclosure-caret-mask`, gallery centroid path, article `details` Show/Hide) → new-tab anytime → lightbox (hard think) → pagination
+    - **Sequence:** ~~shared triangle + Show/Hide caret~~ (shipped: `--icon-disclosure-caret-mask`, gallery centroid path, article `details` Show/Hide) → ~~new-tab~~ (shipped) → lightbox (hard think) → pagination
     - **Also later:** drop `/masthead/` (lab page; not linked from nav)
   - Credit relationship to the face sketch on the colophon
   - Subtle texture in overflow background (light mode)?
