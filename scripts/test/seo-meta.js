@@ -125,7 +125,6 @@ const EXCLUDED_SHORT_TITLES = [
   '/now',
   '/ogimages',
   '/type',
-  '/masthead',
   'Goal Manager identity (2001)',
   'CareLink Pro main interface',
   'Linksys app revitalization',

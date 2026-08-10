@@ -78,12 +78,6 @@ function runUnitAssertions(result) {
     assert.match(out, /<a class="figure-lightbox-trigger"[^>]*>\s*<picture>/);
   });
 
-  check(transformFile, 'skips masthead-preview-strip', () => {
-    const input = `<main><figure class="masthead-preview-strip"><img src="/x.png" alt=""></figure></main>`;
-    const out = applyFigureLightboxLinks(input);
-    assert.doesNotMatch(out, /figure-lightbox-trigger/);
-  });
-
   check(transformFile, 'is idempotent', () => {
     const input = `
       <main><figure>

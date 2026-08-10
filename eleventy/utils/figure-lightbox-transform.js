@@ -13,7 +13,6 @@ function applyFigureLightboxLinks(html) {
 
   $('main figure').each((_, el) => {
     const $figure = $(el);
-    if ($figure.hasClass('masthead-preview-strip')) return;
     if ($figure.closest('.color-gallery-embed, .og-images-grid, [data-lightbox="off"]').length) {
       return;
     }

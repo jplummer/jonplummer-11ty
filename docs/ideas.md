@@ -13,7 +13,6 @@
     - **Inventory:** JP mark (+ favicons/OG) · EOF square · disclosure caret · ~~new-tab~~ (shipped: solid sharp NE) · lightbox (out of system today: rounded chrome + round stroke caps; colors TBD) · pagination (text today → reuse carets later) · Show/Hide (keep words, add caret)
     - **Close:** × or incised square (not a caret)
     - **Sequence:** ~~shared triangle + Show/Hide caret~~ (shipped: `--icon-disclosure-caret-mask`, gallery centroid path, article `details` Show/Hide) → ~~new-tab~~ (shipped) → lightbox (hard think) → pagination
-    - **Also later:** drop `/masthead/` (lab page; not linked from nav)
   - Credit relationship to the face sketch on the colophon
   - Subtle texture in overflow background (light mode)?
   - Audit focus behavior and keyboard navigation
@@ -55,7 +54,6 @@
 ### Brand / chrome
 
 - **Icon system** (Selected → Craft / polish) — solid/sharp/right-angle vocabulary; shared disclosure caret in progress; new-tab + lightbox + pagination follow. Shipped earlier: header lockup, Safari-safe mark, 404 asset roots, colophon sketch, favicons from mark geometry (DONE).
-- Drop `/masthead/` when convenient (Phase 3 lab; not in main nav)
 
 ### Utility / lab pages (color, type, OG) — “hidden in public”
 
@@ -131,6 +129,7 @@
 
 ## DONE
 
+- Drop `/masthead/` Phase 3 lab with no redirect unless a 404 is needed later (2026-08-10)
 - **Content-hash Cloudflare purge** (2026-08-07) — Local `_site` SHA-256 vs `.cache/deploy-content-manifest.json`; purge **changed ∪ deleted** only (skip **added** — new URLs never cached; same-path OG regen still purges). Credentials in `.env`; apex host. Spec/plan under `docs/superpowers/`. Later: rsync volume via same manifest (Future → Deploy).
 - **JP mark header + OG lockup** (2026-08-06) — Mark + Semibold logotype; valid `.site-lockup` / `hgroup`; OG mark+wordmark (data-URI for Puppeteer). Favicons already use mark geometry. Specs: header-lockup + og-lockup.
 - **Safari-safe mark, 404 root-absolute assets, colophon sketch invert** (2026-08-06) — Inline SVG `currentColor` for header mark; ErrorDocument-safe absolute asset hrefs; transparent Rob Ullman PNG + `filter: invert(1)` in dark. Spec: `2026-08-06-mark-404-colophon-polish-design.md`.
