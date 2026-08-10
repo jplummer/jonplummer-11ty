@@ -27,6 +27,7 @@ const fs = require('fs');
 const path = require('path');
 const { buildTerminalPresetThemes } = require('./terminal-presets.js');
 const { absApcaLcSrgb, absApcaLcP3 } = require('../utils/apca-dual');
+const { renderPreviewSiteLockup } = require('../utils/preview-site-lockup');
 const { parse, converter } = require('culori');
 const site = require('../../src/_data/site.js')();
 
@@ -1253,10 +1254,7 @@ function renderHomePreview(cssVarsInline, schemeLabel, previewUid) {
       <div class="theme-root home-preview" style="${escapeHtml(cssVarsInline)}">
         <div class="jp-page">
           <header aria-label="Preview ${lab} · ${uid} · site header">
-            <hgroup>
-              <h1><a href="#" rel="home">${escapeHtml(site.author)}</a></h1>
-              <p>${escapeHtml(site.tagline)}</p>
-            </hgroup>
+            ${renderPreviewSiteLockup({ author: site.author })}
             <nav aria-label="Preview ${lab} · ${uid} · primary navigation">
               <ul>
                 <li><a href="#">/about</a></li>
@@ -2760,6 +2758,28 @@ function renderHtml(visibleSections, meta, options = {}) {
       border: 1px solid color-mix(in srgb, var(--border-color) 70%, transparent);
       box-shadow: 0 1px 8px rgba(0,0,0,0.12);
       padding: 0.55rem 1.1rem 0.65rem;
+    }
+    /* Facsimile lockup: production classes, card-scaled; no tagline in default markup */
+    .theme-root.home-preview {
+      --font-size-logotype: 1.125rem;
+      --site-lockup-cap-nudge: 0px;
+      --site-lockup-inline-nudge: 0px;
+      --site-lockup-stack-gap: 0px;
+      --site-lockup-tagline-baseline-nudge: 0px;
+    }
+    .theme-root.home-preview .site-lockup {
+      margin-inline-start: 0;
+      gap: 0.35rem;
+      flex-wrap: nowrap;
+    }
+    .theme-root.home-preview .site-mark {
+      margin-top: 0;
+      /* Without tagline, match logotype cap height instead of full stack math */
+      height: var(--font-size-logotype);
+    }
+    .theme-root.home-preview .site-lockup hgroup h1 {
+      font-size: var(--font-size-logotype);
+      line-height: 1;
     }
     .theme-root.home-preview .jp-page > header,
     .theme-root.home-preview .jp-page > .gallery-preview-main,

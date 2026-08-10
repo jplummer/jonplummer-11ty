@@ -7,8 +7,31 @@
   box-sizing: border-box;
 }
 
+/* Facsimile lockup: production classes, card-scaled; no tagline in default markup */
 .theme-root.home-preview {
   width: 100%;
+  --font-size-logotype: 1.125rem;
+  --site-lockup-cap-nudge: 0px;
+  --site-lockup-inline-nudge: 0px;
+  --site-lockup-stack-gap: 0px;
+  --site-lockup-tagline-baseline-nudge: 0px;
+}
+
+.theme-root.home-preview .site-lockup {
+  margin-inline-start: 0;
+  gap: 0.35rem;
+  flex-wrap: nowrap;
+}
+
+.theme-root.home-preview .site-mark {
+  margin-top: 0;
+  /* Without tagline, match logotype cap height instead of full stack math */
+  height: var(--font-size-logotype);
+}
+
+.theme-root.home-preview .site-lockup hgroup h1 {
+  font-size: var(--font-size-logotype);
+  line-height: 1;
 }
 
 .theme-root.home-preview .jp-page {

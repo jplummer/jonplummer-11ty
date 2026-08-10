@@ -443,6 +443,28 @@
       box-shadow: 0 1px 8px rgba(0,0,0,0.12);
       padding: 0.55rem 1.1rem 0.65rem;
     }
+    /* Facsimile lockup: production classes, card-scaled; no tagline in default markup */
+    .theme-root.home-preview {
+      --font-size-logotype: 1.125rem;
+      --site-lockup-cap-nudge: 0px;
+      --site-lockup-inline-nudge: 0px;
+      --site-lockup-stack-gap: 0px;
+      --site-lockup-tagline-baseline-nudge: 0px;
+    }
+    .theme-root.home-preview .site-lockup {
+      margin-inline-start: 0;
+      gap: 0.35rem;
+      flex-wrap: nowrap;
+    }
+    .theme-root.home-preview .site-mark {
+      margin-top: 0;
+      /* Without tagline, match logotype cap height instead of full stack math */
+      height: var(--font-size-logotype);
+    }
+    .theme-root.home-preview .site-lockup hgroup h1 {
+      font-size: var(--font-size-logotype);
+      line-height: 1;
+    }
     .theme-root.home-preview .jp-page > header,
     .theme-root.home-preview .jp-page > .gallery-preview-main,
     .theme-root.home-preview .jp-page > footer {

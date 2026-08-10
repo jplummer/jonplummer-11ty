@@ -21,6 +21,7 @@ const {
   LAB_DEFAULT_BODY_STACK_ID
 } = require('./exploratory-font-stacks.js');
 const { formatFontLabPasteCss } = require('./font-lab-paste-css.js');
+const { renderPreviewSiteLockup } = require('../utils/preview-site-lockup');
 const site = require('../../src/_data/site.js')();
 
 const OUT_DIR = path.join(__dirname, 'output');
@@ -94,10 +95,7 @@ function siteHomePreviewFragment({
         <div class="jp-page"${jpIdAttr}${jpStyleAttr}>
           <header aria-label="Preview: site header">
             <a class="skip" href="#font-preview-main">Skip to content</a>
-            <hgroup>
-              <h1${hStyle}><a href="#" rel="home">${escapeHtml(site.author)}</a></h1>
-              <p>${escapeHtml(site.tagline)}</p>
-            </hgroup>
+            ${renderPreviewSiteLockup({ author: site.author })}
             <nav aria-label="Preview: primary navigation">
               <ul>
                 <li><a href="#">/about</a></li>
