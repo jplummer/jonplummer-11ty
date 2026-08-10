@@ -3,8 +3,6 @@
 ## ☑️ Selected
 
 - Craft / polish (demonstrate craft)
-  - Portfolio grid styling — ~~link underlines only on hover/focus~~ · ~~subtle thumbnail stroke~~ · ~~one link for thumb+title~~ (shipped); further grid polish still open
-  - Further refinement of the logo / logotype / tagline lockup — ~~tagline baseline vs mark bottom~~ (shipped, `--site-lockup-tagline-baseline-nudge`); further lockup polish still open
   - Alternate taglines?
   - Color scheme refinement, especially dark
   - Outlandish alternative stylesheet?
@@ -12,7 +10,6 @@
   - Subtle texture in overflow background (light mode)?
   - Audit focus behavior and keyboard navigation
   - Accessibility check and stats for the colophon
-  - Maybe drop italics in the few places we use them?
 
 - Portfolio
   - Presentation-to-portfolio automation (in progress — see notes below)
@@ -120,6 +117,9 @@
 
 ## DONE
 
+- Drop needless chrome italics on tagline + footer license (2026-08-10) — Captions, blockquotes, colophon sketch credit keep italic.
+- ~~Portfolio grid styling~~ (2026-08-10) — Hover underlines, thumb stroke, one thumb+title link, Monotasker `object-position: center 20%`.
+- ~~Logo / logotype / tagline lockup~~ (2026-08-10) — Tagline baseline nudge vs mark bottom (`--site-lockup-tagline-baseline-nudge`).
 - **Icon system** (2026-08-10) — Solid/sharp/right-angle vocabulary across JP mark, EOF square, filled disclosure caret (disclose-in-place + Show/Hide + `.site-disclosure`), open nav caret (exact 90° tip; pagination/post-nav/lightbox), new-tab, lightbox close × (square caps). Color/type preview facsimiles drop unicode arrows so CSS carets aren’t doubled. Spec: `2026-08-10-lightbox-icon-system-design.md`.
 - Drop `/masthead/` Phase 3 lab with no redirect unless a 404 is needed later (2026-08-10)
 - **Content-hash Cloudflare purge** (2026-08-07) — Local `_site` SHA-256 vs `.cache/deploy-content-manifest.json`; purge **changed ∪ deleted** only (skip **added** — new URLs never cached; same-path OG regen still purges). Credentials in `.env`; apex host. Spec/plan under `docs/superpowers/`. Later: rsync volume via same manifest (Future → Deploy).

@@ -51,7 +51,7 @@
   --site-lockup-stack-gap: 6.2px;
   --site-lockup-cap-nudge: 2.2px;
   --site-lockup-inline-nudge: 3px;
-  --site-lockup-tagline-ascent: 0.9375; /* Public Sans italic fontBoundingBoxAscent / em */
+  --site-lockup-tagline-ascent: 0.9375; /* Public Sans fontBoundingBoxAscent / em (was italic; roman may need eye re-tune) */
   --site-lockup-tagline-baseline-nudge: 2.5px; /* eye-tune; tagline margin only */
   --line-height-tight: 1.1;
 
@@ -532,7 +532,6 @@ hgroup p {
   margin: 0;
   font-size: var(--font-size-xs);
   line-height: var(--line-height-xs);
-  font-style: italic;
   color: var(--text-color-light);
 }
 
@@ -721,9 +720,13 @@ footer p {
 
 .license {
   text-align: right;
-  font-style: italic;
   margin: 0;
   font-weight: 300;
+}
+
+/* Optical gap: en dash + leading slash of /colophon otherwise reads as tight */
+.license a {
+  padding-inline-start: 0.1em;
 }
 
 /* Code blocks */
