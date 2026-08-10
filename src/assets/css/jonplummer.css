@@ -45,11 +45,14 @@
     Header lockup optical tokens (settled 2026-08-06). Cap→baseline isn’t a CSS
     layout feature across two fonts + an image; these encode the tuned lockup.
     stack-gap / cap-nudge: final literals after ±1px eye passes (not live calcs).
+    tagline-baseline-nudge: extra margin on the tagline only (not mark height) so
+    the alphabetic baseline can meet the mark bottom without growing the mark.
   */
   --site-lockup-stack-gap: 6.2px;
   --site-lockup-cap-nudge: 2.2px;
   --site-lockup-inline-nudge: 3px;
   --site-lockup-tagline-ascent: 0.9375; /* Public Sans italic fontBoundingBoxAscent / em */
+  --site-lockup-tagline-baseline-nudge: 2.5px; /* eye-tune; tagline margin only */
   --line-height-tight: 1.1;
 
   /* Font weights */
@@ -481,7 +484,9 @@ hgroup p {
 }
 
 .site-lockup hgroup p {
-  margin-top: var(--site-lockup-stack-gap);
+  margin-top: calc(
+    var(--site-lockup-stack-gap) + var(--site-lockup-tagline-baseline-nudge)
+  );
 }
 
 /* Article headings */

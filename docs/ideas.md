@@ -4,7 +4,7 @@
 
 - Craft / polish (demonstrate craft)
   - Portfolio grid styling — ~~link underlines only on hover/focus~~ (shipped); further grid polish still open
-  - Further refinement of the logo / logotype / tagline lockup
+  - Further refinement of the logo / logotype / tagline lockup — ~~tagline baseline vs mark bottom~~ (shipped, `--site-lockup-tagline-baseline-nudge`); further lockup polish still open
   - Alternate taglines?
   - Color scheme refinement, especially dark
   - Outlandish alternative stylesheet?
