@@ -161,14 +161,14 @@ async function generateOgImage(html, outputPath) {
       }
       return {
         display: document.fonts.check('600 3.5rem "Big Shoulders"'),
-        body: document.fonts.check('1.5rem "Public Sans"'),
+        body: document.fonts.check('1.5rem "Libre Franklin"'),
         markLoaded: Boolean(mark && mark.complete && mark.naturalWidth > 0)
       };
     });
 
     if (!fontsReady.display || !fontsReady.body) {
       throw new Error(
-        `OG webfonts not loaded (Big Shoulders: ${fontsReady.display}, Public Sans: ${fontsReady.body})`
+        `OG webfonts not loaded (Big Shoulders: ${fontsReady.display}, Libre Franklin: ${fontsReady.body})`
       );
     }
 

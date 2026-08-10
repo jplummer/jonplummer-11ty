@@ -17,7 +17,8 @@ Self-hosted **latin wght** WOFF2 under `src/assets/fonts/lab/` (from `@fontsourc
 | Direction | Headings select | Body select |
 |-----------|-----------------|-------------|
 | **Archivo** (whole site) | Archivo | Same as headings |
-| **Big Shoulders + Public Sans** | Big Shoulders Display (site title **or** site + post titles) | Public Sans |
+| **Big Shoulders + Libre Franklin** (production) | Big Shoulders Display (site title **or** site + post titles) | Libre Franklin |
+| **Big Shoulders + body alternatives** | Same Big Shoulders options | Public Sans, Source Sans 3, or IBM Plex Sans |
 
 **Big Shoulders** “site title” applies to **`hgroup h1`** only; **“site + post titles”** also styles **`article h1`**. **`h2`–`h4`** stay on the body stack.
 

@@ -56,12 +56,39 @@ const EXPLORATORY_FONT_STACKS = [
     headingScope: 'all-headings',
     bodyEligible: true,
     webFont: true
+  },
+  {
+    id: 'libre-franklin',
+    name: 'Libre Franklin',
+    family: '"Libre Franklin", sans-serif',
+    group: 'exploratory',
+    headingScope: 'all-headings',
+    bodyEligible: true,
+    webFont: true
+  },
+  {
+    id: 'source-sans-3',
+    name: 'Source Sans 3',
+    family: '"Source Sans 3", sans-serif',
+    group: 'exploratory',
+    headingScope: 'all-headings',
+    bodyEligible: true,
+    webFont: true
+  },
+  {
+    id: 'ibm-plex-sans',
+    name: 'IBM Plex Sans',
+    family: '"IBM Plex Sans", sans-serif',
+    group: 'exploratory',
+    headingScope: 'all-headings',
+    bodyEligible: true,
+    webFont: true
   }
 ];
 
-/** Lab card opens on production pairing (Public Sans body + Big Shoulders on h1 titles). */
+/** Lab card opens on production pairing (Libre Franklin body + Big Shoulders on h1 titles). */
 const LAB_DEFAULT_HEADING_STACK_ID = 'big-shoulders-display-titles';
-const LAB_DEFAULT_BODY_STACK_ID = 'public-sans';
+const LAB_DEFAULT_BODY_STACK_ID = 'libre-franklin';
 
 module.exports = {
   EXPLORATORY_FONT_STACKS,

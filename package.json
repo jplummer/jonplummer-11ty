@@ -61,6 +61,9 @@
     "stylelint-config-standard": "^40.0.0"
   },
   "dependencies": {
+    "@fontsource-variable/ibm-plex-sans": "^5.3.0",
+    "@fontsource-variable/libre-franklin": "^5.3.0",
+    "@fontsource-variable/source-sans-3": "^5.3.0",
     "dotenv": "^17.4.2",
     "markdown-it": "^14.3.0"
   }

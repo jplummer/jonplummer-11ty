@@ -112,7 +112,7 @@ function siteHomePreviewFragment({
                 <h1${hStyle}><a href="#" rel="bookmark">What we owe junior designers in review</a></h1>
               </header>
               <section>
-                <p>Feedback works when it is <a href="#">specific</a> and <a href="#" class="sim-visited">grounded in examples</a>. <strong>Kind</strong> delivery helps the second sentence read like a real lede.</p>
+                <p>Feedback works when it is <a href="#">specific</a> and <a href="#" class="sim-visited">grounded in examples</a>. <strong>Kind</strong> delivery helps the second sentence read like a real lede. Spaced en dash check: parenthetical – comment.</p>
                 <pre><code>const tone = 'curious';</code></pre>
               </section>
               <footer aria-label="Preview: article footer">
@@ -302,7 +302,7 @@ function renderFontLabCard(options = {}) {
   });
 
   return `<section class="card font-tool-card" aria-label="Font stacks">
-  <p class="tool-note">Home-page preview at live type scale and revision colors from <code>jonplummer.css</code>. Try <strong>Archivo</strong> (whole site) or <strong>Big Shoulders Display</strong> + <strong>Public Sans</strong> (title vs rest). Exploratory faces load from self-hosted WOFF2 on this page only — not Google CDN. Installed stacks: <a href="https://modernfontstacks.com" target="_blank" rel="noopener noreferrer">Modern Font Stacks</a>.</p>
+  <p class="tool-note">Home-page preview at live type scale and revision colors from <code>jonplummer.css</code>. Production body is <strong>Libre Franklin</strong> with <strong>Big Shoulders Display</strong> titles; also try <strong>Archivo</strong>, <strong>Public Sans</strong>, <strong>Source Sans 3</strong>, <strong>IBM Plex Sans</strong>. Exploratory faces load from self-hosted WOFF2 on this page only — not Google CDN. Installed stacks: <a href="https://modernfontstacks.com" target="_blank" rel="noopener noreferrer">Modern Font Stacks</a>.</p>
   <div class="tool-controls" role="group" aria-label="Font stack selection">
     <div class="tool-selects">
       <div class="tool-field">

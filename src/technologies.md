@@ -52,7 +52,7 @@ ogImage: /assets/images/og/technologies.png
   - **[stylelint](https://stylelint.io/)** + **[stylelint-config-standard](https://github.com/stylelint/stylelint-config-standard)**: Lints `src/**/*.css` for syntax and style consistency
   - **[apca-w3](https://github.com/Myndex/apca-w3)** + **[culori](https://culorijs.org/)**: Computes APCA contrast (Lc) for color tokens, in both sRGB and P3 gamuts, used by test-color-contrast.js
 - **Fonts**
-  - **[@fontsource-variable/public-sans](https://fontsource.org/fonts/public-sans)**, **[@fontsource-variable/big-shoulders](https://fontsource.org/fonts/big-shoulders)**, **[@fontsource-variable/archivo](https://fontsource.org/fonts/archivo)**: Self-hosted variable-weight WOFF2 fonts; Public Sans and Big Shoulders ship on the live site, Archivo is exploratory (used on `/type/`)
+  - **[@fontsource-variable/libre-franklin](https://fontsource.org/fonts/libre-franklin)**, **[@fontsource-variable/big-shoulders](https://fontsource.org/fonts/big-shoulders)**, **[@fontsource-variable/archivo](https://fontsource.org/fonts/archivo)**, **[@fontsource-variable/public-sans](https://fontsource.org/fonts/public-sans)**, **[@fontsource-variable/source-sans-3](https://fontsource.org/fonts/source-sans-3)**, **[@fontsource-variable/ibm-plex-sans](https://fontsource.org/fonts/ibm-plex-sans)**: Self-hosted variable-weight WOFF2 fonts; Libre Franklin and Big Shoulders ship on the live site; Archivo, Public Sans, Source Sans 3, and IBM Plex Sans are exploratory on `/type/`
 - **Deployment**
   - **[dotenv](https://github.com/motdotla/dotenv)**: Loads environment variables from .env file for deployment scripts
   - **[rsync](https://rsync.samba.org/)**: File synchronization for deployment (must be installed on system)

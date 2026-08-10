@@ -93,7 +93,7 @@ const MODERN_FONT_STACKS = [
   }
 ];
 
-/** Installed stack closest to pre–Public Sans production (system UI). Live body is exploratory `public-sans`. */
+/** Installed stack closest to pre–webfont production (system UI). Live body is exploratory `libre-franklin`. */
 const SITE_DEFAULT_STACK_ID = 'system-ui';
 
 module.exports = {

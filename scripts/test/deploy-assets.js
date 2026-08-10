@@ -14,7 +14,7 @@ const SITE_DIR = path.join(process.cwd(), '_site');
 
 const REQUIRED_FILES = [
   'assets/css/jonplummer.css',
-  'assets/fonts/lab/public-sans-latin-wght-normal.woff2',
+  'assets/fonts/lab/libre-franklin-latin-wght-normal.woff2',
   'assets/fonts/lab/big-shoulders-latin-wght-normal.woff2'
 ];
 
@@ -50,11 +50,11 @@ async function validate(result) {
   const jonplummerCss = path.join(SITE_DIR, 'assets/css/jonplummer.css');
   if (fs.existsSync(jonplummerCss)) {
     const css = fs.readFileSync(jonplummerCss, 'utf8');
-    if (!css.includes('@font-face') || !css.includes('"Public Sans"')) {
+    if (!css.includes('@font-face') || !css.includes('"Libre Franklin"')) {
       addIssue(fileObj, {
         severity: 'error',
         type: 'deploy-assets',
-        message: 'jonplummer.css missing @font-face for Public Sans'
+        message: 'jonplummer.css missing @font-face for Libre Franklin'
       });
     }
   }
@@ -76,11 +76,11 @@ async function validate(result) {
         message: 'index.html missing link to assets/css/jonplummer.css'
       });
     }
-    if (!html.includes('public-sans-latin-wght-normal.woff2')) {
+    if (!html.includes('libre-franklin-latin-wght-normal.woff2')) {
       addIssue(fileObj, {
         severity: 'error',
         type: 'deploy-assets',
-        message: 'index.html missing preload for Public Sans WOFF2'
+        message: 'index.html missing preload for Libre Franklin WOFF2'
       });
     }
     if (!html.includes('big-shoulders-latin-wght-normal.woff2')) {
