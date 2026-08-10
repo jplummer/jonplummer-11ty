@@ -6,7 +6,6 @@
   - Alternate taglines?
   - Color scheme refinement, especially dark
   - Outlandish alternative stylesheet?
-  - Credit relationship to the face sketch on the colophon
   - Subtle texture in overflow background (light mode)?
   - Audit focus behavior and keyboard navigation
   - Accessibility check and stats for the colophon
@@ -117,7 +116,8 @@
 
 ## DONE
 
-- Drop needless chrome italics on tagline + footer license (2026-08-10) — Captions, blockquotes, colophon sketch credit keep italic.
+- Colophon sketch credit as quiet image credit (2026-08-10) — Under sketch; roman; `--font-size-2xs` / license-quiet color; not a peer label beside the portrait.
+- Drop needless chrome italics on tagline + footer license (2026-08-10) — Captions, blockquotes keep italic.
 - ~~Portfolio grid styling~~ (2026-08-10) — Hover underlines, thumb stroke, one thumb+title link, Monotasker `object-position: center 20%`.
 - ~~Logo / logotype / tagline lockup~~ (2026-08-10) — Tagline baseline nudge vs mark bottom (`--site-lockup-tagline-baseline-nudge`).
 - **Icon system** (2026-08-10) — Solid/sharp/right-angle vocabulary across JP mark, EOF square, filled disclosure caret (disclose-in-place + Show/Hide + `.site-disclosure`), open nav caret (exact 90° tip; pagination/post-nav/lightbox), new-tab, lightbox close × (square caps). Color/type preview facsimiles drop unicode arrows so CSS carets aren’t doubled. Spec: `2026-08-10-lightbox-icon-system-design.md`.

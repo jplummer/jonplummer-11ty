@@ -33,6 +33,7 @@
   --text-size: 16px;
   --line-height: 1.5;
   --paragraph-spacing: calc(var(--line-height) * 1em);
+  --font-size-2xs: 0.875rem; --line-height-2xs: 1.4286; /* ratio: 0.875 — one step below base for quiet chrome (credits) */
   --font-size-xs: 1rem; --line-height-xs: 1.5; /* base: 1.0 */
   --font-size-sm: 1.125rem; --line-height-sm: 1.3334; /* ratio: 1.125 */
   --font-size-md: 1.25rem; --line-height-md: 1.2; /* ratio: 1.25 */
@@ -1203,11 +1204,12 @@ article.portfolio-item p.portfolio-item-description {
   margin-top: var(--spacing-xs);
 }
 
-/* Colophon signature — small image, full-width caption beside it, not squeezed into its column */
+/* Colophon signature — sketch first; credit under it like a quiet image credit */
 .colophon-signature {
   display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-xs);
   margin: var(--spacing-lg) 0 0;
 }
 
@@ -1224,10 +1226,10 @@ article.portfolio-item p.portfolio-item-description {
 }
 
 .colophon-signature figcaption {
-  font-size: var(--font-size-xs);
-  line-height: var(--line-height-xs);
-  font-style: italic;
-  color: var(--text-color-light);
+  font-size: var(--font-size-2xs);
+  line-height: var(--line-height-2xs);
+  font-weight: 300;
+  color: var(--link-visited-color); /* same quiet chrome as .license */
 }
 
 
