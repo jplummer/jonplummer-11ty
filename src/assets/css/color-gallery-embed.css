@@ -56,7 +56,9 @@
     .color-gallery-embed .tokens summary::-webkit-details-marker {
       display: none;
     }
-    /* Isosceles right triangle: 90° at tip; closed → tip right, open → rotate 90° → tip down */
+    /* Isosceles right triangle: 90° at tip; closed → tip right, open → rotate 90° → tip down.
+       Path M 10 6 L 4 0 L 4 12 Z keeps centroid at box center (keep in sync with
+       --icon-disclosure-caret-mask in jonplummer.css). */
     .color-gallery-embed .gallery-section-summary::before,
     .color-gallery-embed .tokens summary::before {
       content: '';
@@ -67,16 +69,16 @@
       height: 10px;
       display: block;
       background-color: color-mix(in oklch, var(--text-color-light) 85%, var(--content-background-color));
-      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M 12 6 L 6 0 L 6 12 Z' fill='white'/%3E%3C/svg%3E");
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M 10 6 L 4 0 L 4 12 Z' fill='white'/%3E%3C/svg%3E");
       -webkit-mask-repeat: no-repeat;
       -webkit-mask-position: center;
       -webkit-mask-size: contain;
-      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M 12 6 L 6 0 L 6 12 Z' fill='white'/%3E%3C/svg%3E");
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M 10 6 L 4 0 L 4 12 Z' fill='white'/%3E%3C/svg%3E");
       mask-repeat: no-repeat;
       mask-position: center;
       mask-size: contain;
       transition: transform 0.18s ease;
-      /* Center pivot keeps the rotated triangle inside the square box. */
+      /* Centroid = box center (path above); MacOS-style rotate around triangle center. */
       transform-origin: 50% 50%;
     }
     .color-gallery-embed .gallery-section-details[open] > .gallery-section-summary::before,

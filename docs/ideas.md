@@ -9,6 +9,11 @@
   - Color scheme refinement, especially dark
   - Outlandish alternative stylesheet?
   - Icons, lightbox controls, and end-of-post tokens as a system
+    - **Construction:** solid, sharp, right angles (squares / rectangles / right-triangle carets with the right angle at the tip)
+    - **Inventory:** JP mark (+ favicons/OG) · EOF square · disclosure caret · new-tab (needs fill + 180° to NE) · lightbox (out of system today: rounded chrome + round stroke caps; colors TBD) · pagination (text today → reuse carets later) · Show/Hide (keep words, add caret)
+    - **Close:** × or incised square (not a caret)
+    - **Sequence:** ~~shared triangle + Show/Hide caret~~ (shipped: `--icon-disclosure-caret-mask`, gallery centroid path, article `details` Show/Hide) → new-tab anytime → lightbox (hard think) → pagination
+    - **Also later:** drop `/masthead/` (lab page; not linked from nav)
   - Credit relationship to the face sketch on the colophon
   - Subtle texture in overflow background (light mode)?
   - Audit focus behavior and keyboard navigation
@@ -49,7 +54,8 @@
 
 ### Brand / chrome
 
-- (none open — header lockup, Safari-safe mark, 404 asset roots, colophon sketch, favicons from mark geometry: see DONE)
+- **Icon system** (Selected → Craft / polish) — solid/sharp/right-angle vocabulary; shared disclosure caret in progress; new-tab + lightbox + pagination follow. Shipped earlier: header lockup, Safari-safe mark, 404 asset roots, colophon sketch, favicons from mark geometry (DONE).
+- Drop `/masthead/` when convenient (Phase 3 lab; not in main nav)
 
 ### Utility / lab pages (color, type, OG) — “hidden in public”
 

@@ -329,7 +329,7 @@ ${renderBodySelectOptions(stacks, bodySelectValue)}
     headingStyle: `font-family: ${head.family}`
   })}
   </div>
-  <details class="copy-block">
+  <details class="copy-block site-disclosure">
     <summary>Example CSS</summary>
     <pre class="code"><code id="font-css-code">${escapeHtml(cssBlock)}</code></pre>
   </details>
@@ -428,20 +428,47 @@ ${readScopedCss()}
       cursor: pointer;
       font-size: 0.85rem;
       color: #ccc;
-      list-style: revert;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      user-select: none;
     }
-    .font-gallery-ui .copy-block summary::after { content: none !important; }
-    .font-gallery-ui details.copy-block[open] > summary::after { content: none !important; }
+    .font-gallery-ui .copy-block summary::-webkit-details-marker { display: none; }
+    /* Keep path in sync with --icon-disclosure-caret-mask in jonplummer.css */
+    .font-gallery-ui .copy-block summary::before {
+      content: '';
+      flex-shrink: 0;
+      width: 10px;
+      height: 10px;
+      display: block;
+      background-color: #ccc;
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M 10 6 L 4 0 L 4 12 Z' fill='white'/%3E%3C/svg%3E");
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      -webkit-mask-size: contain;
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M 10 6 L 4 0 L 4 12 Z' fill='white'/%3E%3C/svg%3E");
+      mask-repeat: no-repeat;
+      mask-position: center;
+      mask-size: contain;
+      transition: transform 0.18s ease;
+      transform-origin: 50% 50%;
+    }
+    .font-gallery-ui details.copy-block[open] > summary::before { transform: rotate(90deg); }
+    .font-gallery-ui .copy-block summary::after { content: none; }
     .font-gallery-ui .code {
-      font-size: 0.72rem;
+      font-size: 0.65rem;
       overflow: auto;
-      max-height: 14rem;
+      max-height: 12rem;
       background: #111;
       padding: 0.5rem;
       border-radius: 4px;
       color: #ddd;
       border: 1px solid #333;
       margin: 0.5rem 0 0;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      word-break: normal;
     }
   </style>
 </head>

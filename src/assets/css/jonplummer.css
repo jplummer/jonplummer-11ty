@@ -89,8 +89,11 @@
   --link-active-color: light-dark(oklch(48.1% 0.1152 154.58deg), oklch(76.1% 0.1152 154.58deg));
   --token-color: color-mix(in oklch, var(--text-color) 28%, var(--content-background-color));
 
-  /* Icons — overlapping window outlines (single path), for CSS mask-image */
+  /* Icons — CSS mask-image data URIs */
+  /* New-tab: overlapping window outlines (stroke; fill + 180° NE pending icon-system pass) */
   --icon-new-tab-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 12 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 1H11V7' fill='none' stroke='white' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'/%3E%3Cpath d='M1 5h6v6H1z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='miter'/%3E%3C/svg%3E");
+  /* Disclosure caret: filled right triangle, right angle at tip; path centered so centroid = box center */
+  --icon-disclosure-caret-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M 10 6 L 4 0 L 4 12 Z' fill='white'/%3E%3C/svg%3E");
 }
 
 /* Cross-document view transitions (MPA): same-origin navigations from in-page links. Unsupported browsers ignore @view-transition. */
@@ -517,34 +520,133 @@ blockquote {
   border-left: 2px solid var(--border-color);
 }
 
-/* Content warnings (details/summary) */
-details {
+/* Content warnings (details/summary) — Show/Hide + disclosure caret */
+article details {
   margin: var(--spacing-lg) 0;
 }
 
-summary {
+article details > summary {
   cursor: default;
   list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35em;
 }
 
-summary::-webkit-details-marker {
+article details > summary::-webkit-details-marker {
   display: none;
 }
 
-summary::after {
+/* Caret after teaser, before Show/Hide (flex order) */
+article details > summary::before {
+  content: '';
+  flex-shrink: 0;
+  order: 2;
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  vertical-align: baseline;
+  background-color: var(--link-color);
+  -webkit-mask-image: var(--icon-disclosure-caret-mask);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+  mask-image: var(--icon-disclosure-caret-mask);
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  transition: transform 0.18s ease;
+  transform-origin: 50% 50%;
+}
+
+article details[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+article details > summary::after {
   content: "Show text";
-  margin-left: 0.25em;
+  order: 3;
   color: var(--link-color);
   cursor: pointer;
   text-decoration: underline;
 }
 
-summary:hover::after {
+article details > summary:hover::after {
   color: var(--link-hover-color);
 }
 
-details[open] > summary::after {
+article details[open] > summary::after {
   content: "Hide text";
+}
+
+article details > summary:hover::before {
+  background-color: var(--link-hover-color);
+}
+
+/*
+  Shared lab disclosure (View CSS tokens / Example CSS): same summary + caret + code
+  panel sizing on /color/ and /type/. Markup: details.site-disclosure
+*/
+.site-disclosure {
+  margin-top: 0.75rem;
+}
+
+.site-disclosure > summary {
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: var(--text-color-light);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  user-select: none;
+}
+
+.site-disclosure > summary::-webkit-details-marker {
+  display: none;
+}
+
+.site-disclosure > summary::before {
+  content: '';
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  display: block;
+  background-color: color-mix(in oklch, var(--text-color-light) 85%, var(--content-background-color));
+  -webkit-mask-image: var(--icon-disclosure-caret-mask);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+  mask-image: var(--icon-disclosure-caret-mask);
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  transition: transform 0.18s ease;
+  transform-origin: 50% 50%;
+}
+
+.site-disclosure[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+.site-disclosure > summary::after {
+  content: none;
+}
+
+.site-disclosure .code {
+  font-size: 0.65rem;
+  overflow: auto;
+  max-height: 12rem;
+  background: var(--gallery-code-bg, var(--background-color));
+  padding: 0.5rem;
+  border-radius: 4px;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  margin: 0.5rem 0 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: normal;
 }
 
 /* Horizontal rules */

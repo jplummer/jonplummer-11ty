@@ -1533,7 +1533,7 @@ function renderVariantComboCard(t, siteEmbed = false, sec = null) {
     ${renderHomePreview(sl0, 'Light', `${t.id}-L`)}
     ${renderHomePreview(sd0, 'Dark', `${t.id}-D`)}
   </div>
-  <details class="tokens">
+  <details class="tokens site-disclosure">
     <summary>View CSS tokens</summary>
     <pre class="code ${preClass}">${escapeHtml(
       tokensToJonplummerPasteBlock(
@@ -1562,7 +1562,7 @@ function renderVariantComboCard(t, siteEmbed = false, sec = null) {
     ${renderHomePreview(sl0, 'Light', `${t.id}-L`)}
     ${renderHomePreview(sd0, 'Dark', `${t.id}-D`)}
   </div>
-  <details class="tokens">
+  <details class="tokens site-disclosure">
     <summary>View CSS tokens</summary>
     <pre class="code ${preClass}">${escapeHtml(
       tokensToJonplummerPasteBlock(
@@ -1673,7 +1673,7 @@ function renderHarmonyLabCard(t, siteEmbed = false, sec = null) {
     ${renderHomePreview(sl0, 'Light', 'harmony-lab-L')}
     ${renderHomePreview(sd0, 'Dark', 'harmony-lab-D')}
   </div>
-  <details class="tokens">
+  <details class="tokens site-disclosure">
     <summary>View CSS tokens</summary>
     <pre class="code harmony-lab-tokens-pre">${initialTokensPre}</pre>
   </details>`;
@@ -1745,7 +1745,7 @@ function renderCard(t, failed, siteEmbed = false, sec = null) {
     ${renderHomePreview(sl, 'Light', `${t.id}-L`)}
     ${renderHomePreview(sd, 'Dark', `${t.id}-D`)}
   </div>
-  <details class="tokens">
+  <details class="tokens site-disclosure">
     <summary>View CSS tokens</summary>
     <pre class="code">${escapeHtml(tokensToJonplummerPasteBlock(t.light, t.dark, galleryCardPasteSummary(t, sec)))}</pre>
   </details>
@@ -1763,7 +1763,7 @@ function renderCard(t, failed, siteEmbed = false, sec = null) {
     ${renderHomePreview(sl, 'Light', `${t.id}-L`)}
     ${renderHomePreview(sd, 'Dark', `${t.id}-D`)}
   </div>
-  <details class="tokens">
+  <details class="tokens site-disclosure">
     <summary>View CSS tokens</summary>
     <pre class="code">${escapeHtml(tokensToJonplummerPasteBlock(t.light, t.dark, galleryCardPasteSummary(t, sec)))}</pre>
   </details>
@@ -2374,7 +2374,9 @@ function renderHtml(visibleSections, meta, options = {}) {
     .gallery-ui .tokens summary::-webkit-details-marker {
       display: none;
     }
-    /* Isosceles right triangle: 90° at tip; closed → tip right, open → rotate 90° → tip down */
+    /* Isosceles right triangle: 90° at tip; closed → tip right, open → rotate 90° → tip down.
+       Path M 10 6 L 4 0 L 4 12 Z keeps centroid at box center (keep in sync with
+       --icon-disclosure-caret-mask in jonplummer.css). */
     .gallery-ui .gallery-section-summary::before,
     .gallery-ui .tokens summary::before {
       content: '';
@@ -2385,16 +2387,16 @@ function renderHtml(visibleSections, meta, options = {}) {
       height: 10px;
       display: block;
       background-color: color-mix(in oklch, var(--text-color-light) 85%, var(--content-background-color));
-      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M 12 6 L 6 0 L 6 12 Z' fill='white'/%3E%3C/svg%3E");
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M 10 6 L 4 0 L 4 12 Z' fill='white'/%3E%3C/svg%3E");
       -webkit-mask-repeat: no-repeat;
       -webkit-mask-position: center;
       -webkit-mask-size: contain;
-      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M 12 6 L 6 0 L 6 12 Z' fill='white'/%3E%3C/svg%3E");
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M 10 6 L 4 0 L 4 12 Z' fill='white'/%3E%3C/svg%3E");
       mask-repeat: no-repeat;
       mask-position: center;
       mask-size: contain;
       transition: transform 0.18s ease;
-      /* Center pivot keeps the rotated triangle inside the square box. */
+      /* Centroid = box center (path above); MacOS-style rotate around triangle center. */
       transform-origin: 50% 50%;
     }
     .gallery-ui .gallery-section-details[open] > .gallery-section-summary::before,

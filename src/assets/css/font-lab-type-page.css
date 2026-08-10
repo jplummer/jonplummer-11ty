@@ -71,37 +71,6 @@
   font-size: var(--font-size-sm);
 }
 
-.type-tool-page .copy-block {
-  margin-top: var(--spacing-md);
-}
-
-.type-tool-page .copy-block summary {
-  cursor: pointer;
-  font-size: var(--font-size-sm);
-  color: var(--text-color-light);
-  list-style: revert;
-}
-
-.type-tool-page .copy-block summary::after {
-  content: none !important;
-}
-
-.type-tool-page details.copy-block[open] > summary::after {
-  content: none !important;
-}
-
-.type-tool-page .code {
-  font-size: var(--font-size-xs);
-  overflow: auto;
-  max-height: 14rem;
-  background: var(--background-color);
-  padding: var(--spacing-sm);
-  border-radius: 4px;
-  color: var(--text-color);
-  border: 1px solid var(--border-color);
-  margin: var(--spacing-sm) 0 0;
-}
-
 .type-tool-missing {
   margin: 0;
   padding: 0;
