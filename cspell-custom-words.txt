@@ -7,6 +7,7 @@ ADPList
 Advate
 Advoy
 Ahrefs
+Archivo
 Badgr
 Belkin
 Baudu
@@ -197,6 +198,7 @@ Tamkin
 Tane
 Temkin
 Tempkin
+Ullman
 Usborne
 Vadim
 Valk
@@ -229,6 +231,7 @@ feelsgoodman
 fingerstick
 fingersticks
 gapless
+greyscale
 hackathon
 handwaving
 hintable
@@ -239,6 +242,7 @@ interoperation
 janky
 judgements
 kaizen
+lightbox
 lowball
 mentee
 mentees
@@ -286,6 +290,7 @@ unmodulated
 upskill
 vibed
 vivere
+wordmark
 writeups
 Xer's
 Xers
