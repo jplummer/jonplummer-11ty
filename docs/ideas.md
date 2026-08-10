@@ -8,11 +8,6 @@
   - Alternate taglines?
   - Color scheme refinement, especially dark
   - Outlandish alternative stylesheet?
-  - Icons, lightbox controls, and end-of-post tokens as a system
-    - **Construction:** solid, sharp, right angles (squares / rectangles / right-triangle carets with the right angle at the tip)
-    - **Inventory:** JP mark (+ favicons/OG) · EOF square · filled disclosure caret · open nav caret (stroke, ×-flavor) · ~~new-tab~~ · ~~lightbox~~ · ~~pagination~~ · Show/Hide
-    - **Close:** ~~×~~ — strokes with square caps (lightbox)
-    - **Sequence:** icon system pass largely shipped (disclose = filled triangle; page/prev-next = open caret)
   - Credit relationship to the face sketch on the colophon
   - Subtle texture in overflow background (light mode)?
   - Audit focus behavior and keyboard navigation
@@ -50,10 +45,6 @@
 ### Deploy / Cloudflare
 
 - **Rsync transfer volume via content-hash manifest** — Content-hash **Cloudflare purge** shipped (2026-08; see DONE). Still open: reuse the same local `_site` path→SHA-256 manifest (`.cache/deploy-content-manifest.json`) to **limit rsync uploads** (skip byte-identical HTML despite new mtimes) if transfer size/time still hurts. Spec/plan: `docs/superpowers/specs/2026-08-06-content-hash-cloudflare-purge-design.md`.
-
-### Brand / chrome
-
-- **Icon system** (Selected → Craft / polish) — solid/sharp/right-angle vocabulary; shared disclosure caret in progress; new-tab + lightbox + pagination follow. Shipped earlier: header lockup, Safari-safe mark, 404 asset roots, colophon sketch, favicons from mark geometry (DONE).
 
 ### Utility / lab pages (color, type, OG) — “hidden in public”
 
@@ -129,6 +120,7 @@
 
 ## DONE
 
+- **Icon system** (2026-08-10) — Solid/sharp/right-angle vocabulary across JP mark, EOF square, filled disclosure caret (disclose-in-place + Show/Hide + `.site-disclosure`), open nav caret (exact 90° tip; pagination/post-nav/lightbox), new-tab, lightbox close × (square caps). Color/type preview facsimiles drop unicode arrows so CSS carets aren’t doubled. Spec: `2026-08-10-lightbox-icon-system-design.md`.
 - Drop `/masthead/` Phase 3 lab with no redirect unless a 404 is needed later (2026-08-10)
 - **Content-hash Cloudflare purge** (2026-08-07) — Local `_site` SHA-256 vs `.cache/deploy-content-manifest.json`; purge **changed ∪ deleted** only (skip **added** — new URLs never cached; same-path OG regen still purges). Credentials in `.env`; apex host. Spec/plan under `docs/superpowers/`. Later: rsync volume via same manifest (Future → Deploy).
 - **JP mark header + OG lockup** (2026-08-06) — Mark + Semibold logotype; valid `.site-lockup` / `hgroup`; OG mark+wordmark (data-URI for Puppeteer). Favicons already use mark geometry. Specs: header-lockup + og-lockup.

@@ -1286,8 +1286,8 @@ function renderHomePreview(cssVarsInline, schemeLabel, previewUid) {
               </section>
             </article>
             <nav class="pagination" aria-label="Preview ${lab} · ${uid} · pagination">
-              <a class="prev" href="#">← Older posts</a>
-              <a class="next" href="#">Newer posts →</a>
+              <a class="prev" href="#">Older posts</a>
+              <a class="next" href="#">Newer posts</a>
             </nav>
           </section>
           <footer aria-label="Preview ${lab} · ${uid} · site footer">
