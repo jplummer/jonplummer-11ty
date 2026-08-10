@@ -2,7 +2,15 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 ## 2026-08-10
 
-- Use trailing slashes on directory-style internal links
+- Add build-time preview site-lockup helper
+- Use scaled site-lockup in color and type previews
+- Polish portfolio grid thumbs, link, and Monotasker crop
+- Styling refinements: 10 commits
+- Documentation updates: 3 commits
+- Retire /masthead/ Phase 3 lab
+- Sync preview pagination carets; archive icon system
+- No rest underline on color/type preview lockups
+- Add Archivo, Ullman, greyscale, lightbox, wordmark
 
 ## 2026-08-07
 
