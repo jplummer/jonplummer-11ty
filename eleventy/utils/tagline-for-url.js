@@ -1,3 +1,5 @@
+const { execSync } = require('child_process');
+
 /**
  * Deterministic tagline pick from a URL (browse variety, no client JS).
  * Same URL + same pool (+ same salt for home) → same line across rebuilds.
@@ -26,4 +28,19 @@ function pickTaglineForUrl(taglines, url, salt) {
   return taglines[idx];
 }
 
-module.exports = { pickTaglineForUrl };
+/**
+ * @returns {string} Current HEAD SHA, or '' if git is unavailable.
+ */
+function getGitHeadSha() {
+  try {
+    return execSync('git rev-parse HEAD', {
+      encoding: 'utf8',
+      cwd: process.cwd(),
+      stdio: ['ignore', 'pipe', 'ignore'],
+    }).trim();
+  } catch (err) {
+    return '';
+  }
+}
+
+module.exports = { pickTaglineForUrl, getGitHeadSha };

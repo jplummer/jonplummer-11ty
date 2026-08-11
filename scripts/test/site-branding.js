@@ -138,6 +138,12 @@ function runUnitAssertions(result) {
     assert.ok(site.taglines.includes('Evidence over ego'));
   });
 
+  check(siteFile, 'getGitHeadSha returns a sha in this repo', () => {
+    const { getGitHeadSha } = require('../../eleventy/utils/tagline-for-url');
+    const sha = getGitHeadSha();
+    assert.ok(/^[0-9a-f]{40}$/i.test(sha), `expected full sha, got ${JSON.stringify(sha)}`);
+  });
+
   check(siteFile, 'base lockup uses taglineForPage', () => {
     const base = fs.readFileSync(path.join(ROOT, 'src/_includes/base.njk'), 'utf8');
     assert.ok(
