@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
 /**
- * Guards generateOgImageFilename(): date-only front matter must use calendar
- * YYYY-MM-DD parts, not `new Date('YYYY-MM-DD')` (UTC midnight → local-day shift).
+ * Guards generateOgImageFilename(): post PNG names follow the source
+ * YYYY-MM-DD-* filename so UTC midnight / date-only front matter cannot
+ * shift the calendar day or double-prefix the slug.
  */
 
 const assert = require('assert');
@@ -12,6 +13,7 @@ const { addFile, addIssue } = require('../utils/test-results');
 const { runTest } = require('../utils/test-runner-helper');
 
 const POST = path.join('src', '_posts', '2026', '2026-08-12-care-has-to-show-up-in-the-product.md');
+const CRITIQUE = path.join('src', '_posts', '2025', '2025-12-31-engaging-in-critique.md');
 
 function runUnitAssertions(result) {
   const file = addFile(result, 'scripts/utils/og-image-filename.js', 'og-image-filename');
@@ -28,12 +30,20 @@ function runUnitAssertions(result) {
     }
   }
 
-  check('date-only string keeps calendar day in filename', () => {
+  check('dated post filename wins over date-only front matter', () => {
     const name = generateOgImageFilename({ tags: ['post'], date: '2026-08-12' }, POST);
     assert.strictEqual(name, '2026-08-12-care-has-to-show-up-in-the-product.png');
   });
 
-  check('ISO timestamp with offset uses local calendar components', () => {
+  check('dated post filename wins over UTC midnight ISO front matter', () => {
+    const name = generateOgImageFilename(
+      { tags: ['post'], date: '2025-12-31T00:00:00.000Z' },
+      CRITIQUE
+    );
+    assert.strictEqual(name, '2025-12-31-engaging-in-critique.png');
+  });
+
+  check('dated post filename wins over offset timestamp front matter', () => {
     const name = generateOgImageFilename(
       { tags: ['post'], date: '2026-08-12T12:00:00-07:00' },
       POST
