@@ -1423,6 +1423,7 @@ header a.skip:focus {
 .og-image-rendered {
   /* Force light theme for OG preview — light halves from jonplummer.css :root (keep in sync) */
   color-scheme: light;
+  --og-type-scale: 1.6; /* live rem tokens × scale; keeps logotype/title at 0.9 */
   --text-color: oklch(29.6% 0.01 260.71deg);
   --text-color-light: oklch(49.1% 0.0142 259.82deg);
   --border-color: oklch(89.3% 0.0105 261.79deg);
@@ -1439,14 +1440,15 @@ header a.skip:focus {
   width: 1200px;
   height: 630px;
   font-family: var(--font-family);
-  font-size: 1.5rem;
+  font-size: calc(var(--font-size-base) * var(--og-type-scale));
   line-height: var(--line-height);
   letter-spacing: var(--letter-spacing-normal);
   color: var(--text-color);
-  background-color: var(--background-color);
+  /* One sheet — no outer mat; same soft field as the live page */
+  background-color: var(--content-background-color);
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: stretch;
+  align-items: flex-start;
 
   & * {
     box-sizing: border-box;
@@ -1461,22 +1463,21 @@ header a.skip:focus {
 
   & .og-content {
     width: 100%;
-    background-color: var(--content-background-color);
     padding: 4rem;
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-sm);
+    gap: 0;
   }
 
-  /* Mark + Semibold logotype (0.9 × .og-title; same ratio as live logotype / article h1) */
+  /* Mark + Semibold logotype — live --font-size-logotype × scale */
   & .og-hgroup {
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
     flex-wrap: wrap;
-    margin-bottom: var(--spacing-xs);
+    margin-bottom: var(--spacing-3xl);
     font-family: var(--font-family-display);
-    font-size: 3.15rem;
+    font-size: calc(var(--font-size-logotype) * var(--og-type-scale));
     line-height: 1;
     font-weight: var(--font-weight-semibold);
     letter-spacing: var(--letter-spacing-normal);
@@ -1499,20 +1500,28 @@ header a.skip:focus {
 
   & .og-title {
     font-family: var(--font-family-display);
-    font-size: 3.5rem;
+    font-size: calc(var(--font-size-2xl) * var(--og-type-scale));
     line-height: var(--line-height-2xl);
     font-weight: var(--font-weight-semibold);
     letter-spacing: var(--letter-spacing-normal);
     text-wrap: balance;
+    margin-bottom: var(--spacing-sm);
   }
 
   & .og-description {
-    font-size: 1.75rem;
+    font-size: calc(var(--font-size-base) * var(--og-type-scale));
+    line-height: var(--line-height-base);
     max-width: 90%;
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-color);
   }
 
   & .og-date {
-    font-size: 1.5rem;
+    /* Matches site `footer p` (article .posted-on inherits that rule) */
+    font-size: calc(var(--font-size-quiet) * var(--og-type-scale));
+    line-height: var(--line-height-quiet);
+    font-weight: var(--font-weight-light);
+    color: var(--text-color-light);
   }
 }
 

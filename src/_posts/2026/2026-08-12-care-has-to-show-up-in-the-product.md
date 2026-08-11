@@ -2,7 +2,6 @@
 title: Care has to show up in the product
 layout: layouts/single_post.njk
 date: "2026-08-12"
-draft: true
 tags: post
 description: "If attention to detail isn't visible in what you ship, it's hard to claim you care about the details. Designers: make intentional roughness obvious. Leaders: refuse 'too small to matter.'"
 ogImage: /assets/images/og/2026-08-12-care-has-to-show-up-in-the-product.png

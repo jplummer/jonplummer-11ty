@@ -12,12 +12,12 @@
   Preview this template at: http://localhost:8080/ogimages/
   
   Structure:
-  - body: Fixed 1200x630px container with cool outer field
-  - .og-content: White content area with 4rem padding
-  - .og-hgroup: Mark + Semibold logotype (no tagline)
-  - .og-title: Post title (matches article h1 styling)
+  - body: Fixed 1200x630px one-sheet soft field (no mat), top-aligned
+  - .og-content: Full-bleed content with padding
+  - .og-hgroup: Mark + Semibold logotype (live logotype × --og-type-scale; no tagline)
+  - .og-title: Post title (live h1 × --og-type-scale)
   - .og-description: Optional post description
-  - .og-date: Optional formatted post date
+  - .og-date: Optional post date (quiet size/ink/weight — same as site footer p / .posted-on)
   
   Variables:
   - title: Post title (required)
@@ -56,39 +56,40 @@
     
     /* Fixed dimensions for Open Graph image standard (1200x630px) */
     body {
+      --og-type-scale: 1.6; /* live rem tokens × scale; keeps logotype/title at 0.9 */
       width: 1200px;
       height: 630px;
       color-scheme: light;
       font-family: var(--font-family);
-      font-size: 1.5rem;
+      font-size: calc(var(--font-size-base) * var(--og-type-scale));
       line-height: var(--line-height);
       letter-spacing: var(--letter-spacing-normal);
       color: var(--text-color);
-      background-color: var(--background-color);
+      /* One sheet — no outer mat; same soft field as the live page */
+      background-color: var(--content-background-color);
       display: flex;
-      justify-content: center;
-      align-items: center;
+      justify-content: stretch;
+      align-items: flex-start;
     }
     
-    /* White content area with padding */
     .og-content {
       width: 100%;
-      background-color: var(--content-background-color);
       padding: 4rem;
       display: flex;
       flex-direction: column;
-      gap: var(--spacing-sm);
+      gap: 0;
     }
     
-    /* Mark + Semibold logotype (0.9 × og-title, same ratio as live logotype / article h1) */
+    /* Mark + Semibold logotype — live --font-size-logotype × scale */
     .og-hgroup {
       display: flex;
       align-items: center;
       gap: var(--spacing-sm);
       flex-wrap: wrap;
-      margin-bottom: var(--spacing-xs);
+      /* Site-like air under lockup before the title (header → content) */
+      margin-bottom: var(--spacing-3xl);
       font-family: var(--font-family-display);
-      font-size: 3.15rem;
+      font-size: calc(var(--font-size-logotype) * var(--og-type-scale));
       line-height: 1;
       font-weight: var(--font-weight-semibold);
       letter-spacing: var(--letter-spacing-normal);
@@ -109,25 +110,31 @@
       text-decoration: none;
     }
     
-    /* Post title (matches article h1 styling) */
+    /* Title — live article h1 (--font-size-2xl) × scale */
     .og-title {
       font-family: var(--font-family-display);
-      font-size: 3.5rem;
+      font-size: calc(var(--font-size-2xl) * var(--og-type-scale));
       line-height: var(--line-height-2xl);
       font-weight: var(--font-weight-semibold);
       letter-spacing: var(--letter-spacing-normal);
       text-wrap: balance;
+      margin-bottom: var(--spacing-sm);
     }
     
-    /* Post description */
     .og-description {
-      font-size: 1.75rem;
+      font-size: calc(var(--font-size-base) * var(--og-type-scale));
+      line-height: var(--line-height-base);
       max-width: 90%;
+      margin-bottom: var(--spacing-sm);
+      color: var(--text-color);
     }
     
-    /* Post date */
     .og-date {
-      font-size: 1.5rem;
+      /* Matches site `footer p` (article .posted-on inherits that rule) */
+      font-size: calc(var(--font-size-quiet) * var(--og-type-scale));
+      line-height: var(--line-height-quiet);
+      font-weight: var(--font-weight-light);
+      color: var(--text-color-light);
     }
   </style>
 </head>
