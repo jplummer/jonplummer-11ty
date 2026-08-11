@@ -93,7 +93,9 @@ const LIGHT_THEME_COLOR_VARS = [
 ];
 
 /**
- * Extracts light-scheme color values from :root `light-dark()` tokens for forced-light contexts (OG PNGs).
+ * Extracts light-scheme color values from :root for forced-light contexts (OG PNGs).
+ * Accepts `light-dark(light, dark)` (emits the light value) or `var(--other)` aliases
+ * onto those colors (three-color link model: hover/active → accent, visited → quiet).
  *
  * @returns {string} `:root { … }` block with light-only values
  */
@@ -102,10 +104,19 @@ function extractLightThemeColorOverrides() {
   const lines = [];
 
   for (const varName of LIGHT_THEME_COLOR_VARS) {
-    const re = new RegExp(`--${varName}:\\s*light-dark\\(\\s*([^,]+?)\\s*,\\s*[^)]+\\)`);
-    const match = rootBlock.match(re);
-    if (match) {
-      lines.push(`  --${varName}: ${match[1].trim()};`);
+    const lightDarkRe = new RegExp(
+      `--${varName}:\\s*light-dark\\(\\s*([^,]+?)\\s*,\\s*[^)]+\\)`
+    );
+    const lightDarkMatch = rootBlock.match(lightDarkRe);
+    if (lightDarkMatch) {
+      lines.push(`  --${varName}: ${lightDarkMatch[1].trim()};`);
+      continue;
+    }
+
+    const aliasRe = new RegExp(`--${varName}:\\s*(var\\(--[a-z0-9-]+\\))`);
+    const aliasMatch = rootBlock.match(aliasRe);
+    if (aliasMatch) {
+      lines.push(`  --${varName}: ${aliasMatch[1]};`);
     }
   }
 
