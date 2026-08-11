@@ -1,15 +1,33 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-08-11
+
+- Fix /now/ project status labels for parallel structure.
+- Fix escaped curly quotes in links.yaml and guard against them.
+- Prefer en dashes over em dashes in site content.
+- Orient the new-tab pop-out icon with window NE and L SW.
+- Add remaindered links for 2026-08-11.
+- Draft post: care has to show up in the product.
+- Styling refinements: 5 commits
+- Correct typo in breakpoint comment (reasonable).
+- Archive finished craft items in ideas.md
+- Note lockup optical tokens stay px under browser zoom
+
 ## 2026-08-10
 
 - Add build-time preview site-lockup helper
 - Use scaled site-lockup in color and type previews
 - Polish portfolio grid thumbs, link, and Monotasker crop
-- Styling refinements: 10 commits
-- Documentation updates: 3 commits
+- Rotate lockup taglines per page at build time
+- Polish colophon wording on the mark-derived icon system.
+- One-sheet field, spacing ladder, and license section-align
+- Tighten post demo iframe to fixed 42rem height.
+- Styling refinements: 12 commits
+- Documentation updates: 4 commits
 - Retire /masthead/ Phase 3 lab
 - Sync preview pagination carets; archive icon system
 - No rest underline on color/type preview lockups
+- Space in Learn to build, build to learn tagline
 - Add Archivo, Ullman, greyscale, lightbox, wordmark
 
 ## 2026-08-07
@@ -649,4 +667,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-08-10
+Last deployed on 2026-08-11
