@@ -3,11 +3,16 @@
 ## ☑️ Selected
 
 - Craft / polish (demonstrate craft)
-  - Color scheme refinement, especially dark
-  - Outlandish alternative stylesheet?
-  - Subtle texture in overflow background (light mode)?
-  - Audit focus behavior and keyboard navigation
-  - Accessibility check and stats for the colophon
+  - **Goal**: Make spareness read as intentional craft, not default blankness. Color is already pared-down; skip ornament (texture / alternate stylesheets stay in Future → Craft atmosphere). Vertical alignment is already in good shape — don’t chase “stronger grid” as a separate track unless something new looks off.
+  - **Order of work** (do not reorder casually):
+    1. ~~**Margins + vertical spacing**~~ — **Done (2026-08-10):** one-sheet field; spacing ladder through `--spacing-4xl`; `--gutter` inline-only; below-only craft beats; license ↔ section align (flush on `tags: page`). **Optional later:** widen L/R via gutter / max-width.
+    2. **Font weights** — Audit live use of thin / semibold / bold / black; aim for a small reading palette (e.g. regular body + one title weight + quiet chrome) and demote extras that don’t earn a role.
+    3. **Text greys / blacks** — Audit roles that use `--text-color`, `--text-color-light`, `--link-visited-color`, and any one-off mixes; collapse toward a short set of intentional ink levels (body, quiet chrome, links) rather than a scatter of near-blacks and greys.
+    4. **Type steps on the reading surface** (after spacing + weight) — Prefer few live sizes in posts/chrome even if the token scale stays rich.
+    5. **Color scheme refinement, especially dark** — Keep as craft signal once spacing/weight/ink are settled (or earlier if dark specifically feels wrong).
+    6. **Audit focus behavior and keyboard navigation**
+    7. **Accessibility check and stats for the colophon** — Clarify or drop once a real pass is done (site contrast/a11y tests already cover a lot).
+  - **Out of scope for this track**: overflow texture, outlandish alternate stylesheet (Future → Craft atmosphere).
 
 - Portfolio
   - Presentation-to-portfolio automation (in progress — see notes below)
@@ -51,6 +56,11 @@
 - **Quality bar for these pages**: Relaxed **SEO** expectations; **thumbnail accessibility** not a priority early on. **Production must not 404** for intentional visitors (build/CI should ensure artifacts exist or the page degrades gracefully with clear copy).
 - **Deferred — authoring vs visitors “creating” schemes** (was interview Q5): Whether scheme tweaks are **author-only** (edit data, redeploy) vs **visitor-editable with persistence** is **out of scope until** this area stabilizes; revisit when the browse + popout story exists.
 - **Color gallery — custom pickers**: Bring back the former `/color/` **custom hex color controls** (apply / reset) **inside** the generated color gallery UI so ad-hoc experiments do not require leaving the one canonical `/color/` page.
+
+### Craft atmosphere (deferred)
+
+- Outlandish alternative stylesheet?
+- Subtle texture in overflow background (light mode)?
 
 ### 🖍 Also…
 
@@ -115,6 +125,7 @@
 
 ## DONE
 
+- **One-sheet layout + spacing ladder + license align** (2026-08-10) — Dropped outer mat (`html`/`body` `--content-background-color`; header/main/footer transparent). Spacing `--xs`…`--4xl`; `--gutter` = `--spacing-lg` for **inline only**; shell `padding-block` uses `--spacing-lg`. Below-only craft: header `--4xl`, posts `--3xl`, link-cluster seam `--2xl`. License left-aligns to article `section` column except on `tags: page` (incl. `/portfolio/` index). Optional later: widen measure via gutter/max-width. Semantic spacing aliases deferred.
 - Per-page lockup tagline rotation (2026-08-10) — Pool in `site.taglines`; header uses `page.url | taglineForPage` (deterministic hash). Canonical `site.tagline` / `site.title` unchanged for `<title>`, OG, feeds.
 - Colophon sketch credit as quiet image credit (2026-08-10) — Under sketch; roman; `--font-size-2xs` / license-quiet color; not a peer label beside the portrait.
 - Drop needless chrome italics on tagline + footer license (2026-08-10) — Captions, blockquotes keep italic.
@@ -124,7 +135,7 @@
 - Drop `/masthead/` Phase 3 lab with no redirect unless a 404 is needed later (2026-08-10)
 - **Content-hash Cloudflare purge** (2026-08-07) — Local `_site` SHA-256 vs `.cache/deploy-content-manifest.json`; purge **changed ∪ deleted** only (skip **added** — new URLs never cached; same-path OG regen still purges). Credentials in `.env`; apex host. Spec/plan under `docs/superpowers/`. Later: rsync volume via same manifest (Future → Deploy).
 - **JP mark header + OG lockup** (2026-08-06) — Mark + Semibold logotype; valid `.site-lockup` / `hgroup`; OG mark+wordmark (data-URI for Puppeteer). Favicons already use mark geometry. Specs: header-lockup + og-lockup.
-- **Safari-safe mark, 404 root-absolute assets, colophon sketch invert** (2026-08-06) — Inline SVG `currentColor` for header mark; ErrorDocument-safe absolute asset hrefs; transparent Rob Ullman PNG + `filter: invert(1)` in dark. Spec: `2026-08-06-mark-404-colophon-polish-design.md`.
+- **Safari-safe mark, 404 root-absolute assets, colophon sketch theming** (2026-08-06; sketch path revised) — Inline SVG `currentColor` for header mark; ErrorDocument-safe absolute asset hrefs. Colophon portrait: light/dark PNGs via `<picture>` (no CSS invert; dark from lab `soft-white-fill-dimmer`). Spec: `2026-08-06-mark-404-colophon-polish-design.md` (invert was the original 3A sketch; live approach supersedes that part).
 - Reinvestigate color scheme (2026-03-28)
   - Live theme tokens use **OKLCH** in `src/assets/css/jonplummer.css` (`light-dark(oklch(...), ...)`). Gallery pipeline, `/color/`, `suggest-colors.js`, and contrast checking are documented in [color-theme-exploration.md](color-theme-exploration.md) and the Maintenance bullets in [commands.md](commands.md).
   - Archived intent: extra color inspiration (gallery, terminals, wild presets); OKLCH as the authoring space ([vivid colors / gamut](https://modern-css.com/vivid-colors-beyond-srgb/) as reference). **Canceled / deferred:** accessibility-test-script upgrades per [accessibility-test-limitations](archive/accessibility-test-limitations.md).

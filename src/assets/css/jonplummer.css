@@ -68,14 +68,18 @@
   --letter-spacing-loose: 0.025em;
   --letter-spacing-display-tight: -0.04em;
 
-  /* Spacing — multiples of --baseline-unit (8px at 16px root). Layout snap only; type rhythm stays modular. */
+  /* Spacing — multiples of --baseline-unit (8px at 16px root). Layout snap only; type rhythm stays modular.
+     --spacing-* is the size ladder (axis-agnostic). --gutter is horizontal framing only (shell inset, column gap). */
   --baseline-unit: 0.5rem;
   --spacing-xs: var(--baseline-unit);
   --spacing-sm: calc(2 * var(--baseline-unit));
   --spacing-md: calc(3 * var(--baseline-unit));
   --spacing-lg: calc(4 * var(--baseline-unit));
   --spacing-xl: calc(5 * var(--baseline-unit));
-  --gutter: calc(4 * var(--baseline-unit));
+  --spacing-2xl: calc(6 * var(--baseline-unit));
+  --spacing-3xl: calc(7 * var(--baseline-unit));
+  --spacing-4xl: calc(8 * var(--baseline-unit));
+  --gutter: var(--spacing-lg); /* inline framing — not for padding-block */
   --spacing-ex: 5ex;
 
   color-scheme: light dark;
@@ -125,6 +129,8 @@ html {
   -moz-text-size-adjust: none;
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
+  /* One sheet continues into overscroll / gutter chrome */
+  background-color: var(--content-background-color);
 }
 
 /* Remove default margin in favour of better control in authored CSS */
@@ -148,7 +154,8 @@ body {
   line-height: var(--line-height);
   letter-spacing: var(--letter-spacing-normal);
   color: var(--text-color);
-  background-color: var(--background-color);
+  /* One sheet: same field as header/main/footer (no outer mat) */
+  background-color: var(--content-background-color);
   scrollbar-gutter: stable;
 }
 
@@ -181,16 +188,19 @@ textarea:not([rows]) {
 /* === LAYOUT & STRUCTURE === */
 /* Shell padding, article gaps, and nav spacing use --spacing-* / --gutter (baseline multiples). */
 
-/* Main layout containers */
+/* Main layout containers — transparent bands; page field is html/body only.
+   Gutter is inline only; block padding uses the spacing ladder. */
 body>header, body>main, body>footer {
   margin: 0 auto;
-  padding: var(--gutter);
+  padding-inline: var(--gutter);
+  padding-block: var(--spacing-lg);
   max-width: var(--max-width);
-  background-color: var(--content-background-color);
+  background-color: transparent;
 }
 
-body>footer {
-  padding-top: 0;
+/* Extra air under the site header (shared by index + single post) */
+body > header {
+  padding-bottom: var(--spacing-4xl);
 }
 
 /* Header layout with hgroup and navigation */
@@ -253,7 +263,25 @@ article {
     "b c";
   gap: 0 var(--gutter);
   margin: 0;
-  padding-bottom: var(--spacing-xl);
+  padding-bottom: 0;
+}
+
+/* Posts: air below the block only (no padding-top — keeps index-with-links and single posts aligned) */
+article:not(.link-item) {
+  padding-bottom: var(--spacing-3xl);
+}
+
+/* Remaindered links: dense stack — rhythm between links stays tight */
+article.link-item {
+  padding-top: 0;
+  padding-bottom: var(--spacing-sm);
+  color: var(--text-color-light);
+}
+
+/* Air below the last link in a cluster (before a post or pagination) */
+article.link-item + article:not(.link-item),
+article.link-item + nav.pagination {
+  margin-top: var(--spacing-2xl);
 }
 
 /* Article grid areas */
@@ -720,9 +748,24 @@ footer p {
 }
 
 .license {
-  text-align: right;
+  text-align: left;
   margin: 0;
   font-weight: 300;
+}
+
+/*
+  Trial (easy revert): align license with article `section` column on grids that use
+  1fr | gutter | 2fr. Full-width `tags: page` mains keep flush-left (same as prose).
+  Index has no data-tags; posts/portfolio/wisdom omit `page` → indent.
+*/
+main:not([data-tags*="page"]) ~ footer .license {
+  margin-inline-start: calc((100% - var(--gutter)) / 3 + var(--gutter));
+}
+
+@media (width <= 54rem) {
+  main:not([data-tags*="page"]) ~ footer .license {
+    margin-inline-start: 0;
+  }
 }
 
 /* Code blocks */
@@ -831,11 +874,6 @@ article h1 a:hover {
 /* === COMPONENTS === */
 
 /* Remaindered links — muted row, accent title link */
-article.link-item {
-  margin-bottom: 0;
-  color: var(--text-color-light);
-}
-
 article.link-item section a:link {
   color: var(--link-color);
 }

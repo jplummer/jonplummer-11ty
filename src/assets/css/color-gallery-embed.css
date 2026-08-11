@@ -429,13 +429,12 @@
       --line-height: 1.45;
     }
     /*
-      On the live site, body uses --background-color; header/main/footer bands use
-      --content-background-color. Side gutters only appear when the viewport is wider
-      than --max-width — padding here forces the same frame in narrow preview columns.
+      Live site is one sheet (--content-background-color on body and bands).
+      Preview card chrome (border/radius/shadow) stays; field matches the reading surface.
     */
     .theme-root.home-preview .jp-page {
       margin: 0;
-      background-color: var(--background-color);
+      background-color: var(--content-background-color);
       color: var(--text-color);
       overflow: hidden;
       border-radius: 6px;

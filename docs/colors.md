@@ -8,8 +8,8 @@ Cool chrome, accent on controls only (neutral masthead, hybrid body links). APCA
 
 ### Light mode
 
-- Background (outer field): `#f1f3f7` — `oklch(96.4% 0.0058 264.53deg)`
-- Content background: `#fff`
+- Background (outer field token `--background-color`): `#f1f3f7` — `oklch(96.4% 0.0058 264.53deg)` — still used for code panels, lightbox chrome, gallery mixes; **not** the body mat (body is one sheet with content background as of 2026-08)
+- Content background: `#fff` — also the live page field (`body` + header/main/footer)
 - Text: `#2a2d32` — `oklch(29.6% 0.01 260.71deg)`
 - Text light: `#5c6169` — `oklch(49.1% 0.0142 259.82deg)`
 - Border: `#d8dce3` — `oklch(89.3% 0.0105 261.79deg)`
@@ -21,8 +21,8 @@ Cool chrome, accent on controls only (neutral masthead, hybrid body links). APCA
 
 ### Dark mode
 
-- Background (outer field): `oklch(10% 0.0058 264.53deg)`
-- Content background: `oklch(22% 0 0deg)` (extra separation vs outer field)
+- Background (token `--background-color`): `oklch(10% 0.0058 264.53deg)` — same non-body uses as light; not a surrounding mat
+- Content background: `oklch(22% 0 0deg)` — live page field
 - Text: `oklch(93% 0.01 260.71deg)`
 - Text light: `oklch(78% 0.0142 259.82deg)`
 - Border: `oklch(38% 0.0105 261.79deg)`
