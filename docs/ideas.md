@@ -3,7 +3,6 @@
 ## ☑️ Selected
 
 - Craft / polish (demonstrate craft)
-  - Alternate taglines?
   - Color scheme refinement, especially dark
   - Outlandish alternative stylesheet?
   - Subtle texture in overflow background (light mode)?
@@ -116,6 +115,7 @@
 
 ## DONE
 
+- Per-page lockup tagline rotation (2026-08-10) — Pool in `site.taglines`; header uses `page.url | taglineForPage` (deterministic hash). Canonical `site.tagline` / `site.title` unchanged for `<title>`, OG, feeds.
 - Colophon sketch credit as quiet image credit (2026-08-10) — Under sketch; roman; `--font-size-2xs` / license-quiet color; not a peer label beside the portrait.
 - Drop needless chrome italics on tagline + footer license (2026-08-10) — Captions, blockquotes keep italic.
 - ~~Portfolio grid styling~~ (2026-08-10) — Hover underlines, thumb stroke, one thumb+title link, Monotasker `object-position: center 20%`.

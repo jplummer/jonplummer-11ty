@@ -10,6 +10,8 @@ const path = require("path");
 const { normalizeDate, formatPostDate, formatDateRange } = require("../utils/date-utils");
 const { extractCssCustomProperties } = require("../utils/css-utils");
 const { mergePostsAndLinks } = require("../utils/merge-posts-links");
+const { pickTaglineForUrl } = require("../utils/tagline-for-url");
+const siteData = require("../../src/_data/site.js")();
 
 /**
  * Registers all Eleventy filters.
@@ -92,7 +94,10 @@ function configureFilters(eleventyConfig, md) {
   // Add custom filter to merge posts and links chronologically
   eleventyConfig.addFilter("mergePostsAndLinks", mergePostsAndLinks);
 
-
+  // Lockup tagline: deterministic per page.url (browse variety; no client JS)
+  eleventyConfig.addFilter("taglineForPage", (pageUrl) =>
+    pickTaglineForUrl(siteData.taglines, pageUrl)
+  );
 }
 
 module.exports = configureFilters;

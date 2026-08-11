@@ -108,7 +108,7 @@ ogImage: /assets/images/og/index.png
         <div class="og-content">
           <hgroup class="og-hgroup">
             <h1><a href="/">{{ site.author }}</a></h1>
-            <p>{{ site.tagline }}</p>
+            <p>{{ page.url | taglineForPage }}</p>
           </hgroup>
           <h1 class="og-title">Sample OG title</h1>
           <p class="og-description">Sample OG description for scheme checks.</p>

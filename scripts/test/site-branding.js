@@ -65,13 +65,46 @@ function runUnitAssertions(result) {
     }
   }
 
-  check(siteFile, 'exports author, tagline, derived title', () => {
+  check(siteFile, 'exports author, tagline, taglines, derived title', () => {
     const site = require(SITE_JS)();
     assert.strictEqual(typeof site.author, 'string');
     assert.ok(site.author.length > 0, 'author empty');
     assert.strictEqual(typeof site.tagline, 'string');
     assert.ok(site.tagline.length > 0, 'tagline empty');
+    assert.ok(Array.isArray(site.taglines), 'taglines not an array');
+    assert.ok(site.taglines.length > 1, 'taglines pool too small');
+    assert.ok(
+      site.taglines.every((t) => typeof t === 'string' && t.length > 0),
+      'taglines must be non-empty strings'
+    );
+    assert.ok(
+      site.taglines.includes(site.tagline),
+      'canonical tagline must appear in taglines pool'
+    );
     assert.strictEqual(site.title, `${site.author} – ${site.tagline}`);
+  });
+
+  check(siteFile, 'taglineForPage is stable per URL', () => {
+    const { pickTaglineForUrl } = require('../../eleventy/utils/tagline-for-url');
+    const site = require(SITE_JS)();
+    const a = pickTaglineForUrl(site.taglines, '/about/');
+    const b = pickTaglineForUrl(site.taglines, '/about/');
+    const home = pickTaglineForUrl(site.taglines, '/');
+    assert.strictEqual(a, b, 'same URL must pick the same tagline');
+    assert.ok(site.taglines.includes(a), 'picked tagline not in pool');
+    assert.ok(site.taglines.includes(home), 'home tagline not in pool');
+  });
+
+  check(siteFile, 'base lockup uses taglineForPage', () => {
+    const base = fs.readFileSync(path.join(ROOT, 'src/_includes/base.njk'), 'utf8');
+    assert.ok(
+      base.includes('taglineForPage'),
+      'base.njk lockup should use page.url | taglineForPage'
+    );
+    assert.ok(
+      !/site\.tagline/.test(base.split('site-lockup')[1]?.split('</header>')[0] || ''),
+      'lockup should not use site.tagline (canonical is for title/feeds)'
+    );
   });
 
   const scanTargets = [];

@@ -56,7 +56,7 @@
         </a>
         <hgroup>
             <h1><a href="/" rel="home">{{ site.author }}</a></h1>
-            <p>{{ site.tagline }}</p>
+            <p>{{ page.url | taglineForPage }}</p>
         </hgroup>
     </div>
     {% include "components/nav.njk" %}
