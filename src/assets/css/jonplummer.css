@@ -340,7 +340,7 @@ article footer {
 .post-demo-embed-frame {
   display: block;
   width: 100%;
-  min-height: 70vh;
+  height: 42rem; /* collapsed crop: controls + favorite + peek of next card */
   border: 0;
 }
 
