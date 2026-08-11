@@ -5,13 +5,9 @@
 - Craft / polish (demonstrate craft)
   - **Goal**: Make spareness read as intentional craft, not default blankness. Color is already pared-down; skip ornament (texture / alternate stylesheets stay in Future → Craft atmosphere). Vertical alignment is already in good shape — don’t chase “stronger grid” as a separate track unless something new looks off.
   - **Order of work** (do not reorder casually):
-    1. ~~**Margins + vertical spacing**~~ — **Done (2026-08-10):** one-sheet field; spacing ladder through `--spacing-4xl`; `--gutter` inline-only; below-only craft beats; license ↔ section align (flush on `tags: page`). **Optional later:** widen L/R via gutter / max-width.
-    2. ~~**Type sizes + weights**~~ — **Done (2026-08-10):** lean reading ladder — `--font-size-quiet` / `--font-size-base` / h3–h1 / `--font-size-logotype`; weights light / semibold / bold; no h4–h6; no dead size/weight tokens. Demo pop-out left-aligned.
-    3. ~~**Text greys / blacks**~~ — **Done (2026-08-10):** quiet ink; visited aliases quiet; borders on `--border-color`; `strong` → semibold. Link *interaction* finished in (5). Plan: `docs/superpowers/plans/2026-08-10-ink-ladder-quiet-merge.md`.
-    4. ~~**Type steps on the reading surface**~~ — Folded into (2).
-    5. ~~**Accent / hover (esp. dark)**~~ — **Done (2026-08-11):** three lived colors (ink / quiet / accent); buckets nav accent→ink, reading ink→accent + visited quiet, controls ink→accent, quiet chrome quiet→ink; dark accent `oklch(75.9% 0.1444 18deg)` (cooler denser red; soft APCA ~Lc 56, contrast craft floor min 55); `/color/` generate/APCA/paste aligned.
-    6. **Audit focus behavior and keyboard navigation**
-    7. **Accessibility check and stats for the colophon** — Clarify or drop once a real pass is done (site contrast/a11y tests already cover a lot).
+    1. **Audit focus behavior and keyboard navigation**
+    2. **Accessibility check and stats for the colophon** — Clarify or drop once a real pass is done (site contrast/a11y tests already cover a lot).
+  - **Shipped earlier in this track** (see DONE): one-sheet + spacing; lean type ladder; ink quiet-merge; three-color links + dark accent. **Optional later:** widen L/R via gutter / max-width.
   - **Out of scope for this track**: overflow texture, outlandish alternate stylesheet (Future → Craft atmosphere).
 
 - Portfolio
@@ -61,6 +57,7 @@
 
 - Outlandish alternative stylesheet?
 - Subtle texture in overflow background (light mode)?
+- **Header lockup optical tokens → rem** (low priority, 2026-08-11) — Left as eye-tuned `px`; browser zoom is fine. Revisit rem conversion only if root-font-size / text-only zoom alignment becomes worth re-tuning. Notes in `jonplummer.css` + `2026-08-06-header-lockup-design.md`.
 
 ### 🖍 Also…
 
@@ -71,7 +68,6 @@
   - Fluid typography with clamp() for smooth scaling across breakpoints (see [https://modern-css.com/fluid-typography-without-media-queries/](https://modern-css.com/fluid-typography-without-media-queries/))
   - Fluid spacing with clamp() for gutter/spacing tokens
   - Container queries for portfolio grid (respond to container width instead of viewport)
-  - View transitions for smooth page-to-page navigation — **shipped** (MPA `@view-transition { navigation: auto }` in `jonplummer.css`; reduced-motion + heavy embeds disable)
   - color-mix() to derive hover/active colors from base colors (pairs with oklch)
 - **Alternate color schemes** and how to trigger them
   - According to build/deploy day?
@@ -125,12 +121,11 @@
 
 ## DONE
 
-- **Ink ladder quiet-merge** (2026-08-10) — One quiet ink (`--text-color-light`) for dim chrome + license/colophon; `--link-visited-color: var(--text-color-light)`; `hr`/OG borders use `--border-color`; `strong`/`b` semibold. Contrast parser resolves simple `var(--token)` aliases. Link buckets finished under three-color pass. Plan: `2026-08-10-ink-ladder-quiet-merge.md`.
 - **Three-color links + dark accent** (2026-08-11) — Lived ink / quiet / accent only: nav accent→ink; reading ink→accent + visited quiet; controls ink→accent; quiet chrome quiet→ink; logotype ink→accent; EOF square quiet. Dark accent `oklch(75.9% 0.1444 18deg)` (`#ff888e`) — cooler denser red vs pale brass; soft APCA ~Lc 56 (contrast test craft floor min 55 for that pair). `/color/` generate/APCA/paste aliases aligned; site default dark accent synced in gallery.
-
+- **Ink ladder quiet-merge** (2026-08-10) — One quiet ink (`--text-color-light`) for dim chrome + license/colophon; `--link-visited-color: var(--text-color-light)`; `hr`/OG borders use `--border-color`; `strong`/`b` semibold. Contrast parser resolves simple `var(--token)` aliases. Link buckets finished under three-color pass. Plan: `2026-08-10-ink-ladder-quiet-merge.md`.
 - **Lean type ladder** (2026-08-10) — Reading tokens: `--font-size-quiet` (light — license, credits, lab disclosures), `--font-size-base` (body + post `code`/`pre`), `--font-size-lg/xl/2xl` (h3/h2/h1), `--font-size-logotype`. Weights: light / semibold / bold only. Dropped h4–h6 rules and unused `xs`/`sm`/`md`/`2xs`/`3xl` / thin / black tokens. About recommender names plain `###`. Demo pop-out left-aligned.
-
-- **One-sheet layout + spacing ladder + license align** (2026-08-10) — Dropped outer mat (`html`/`body` `--content-background-color`; header/main/footer transparent). Spacing `--xs`…`--4xl`; `--gutter` = `--spacing-lg` for **inline only**; shell `padding-block` uses `--spacing-lg`. Below-only craft: header `--4xl`, posts `--3xl`, link-cluster seam `--2xl`. License left-aligns to article `section` column except on `tags: page` (incl. `/portfolio/` index). Optional later: widen measure via gutter/max-width. Semantic spacing aliases deferred.
+- **One-sheet layout + spacing ladder + license align** (2026-08-10) — Dropped outer mat (`html`/`body` `--content-background-color`; header/main/footer transparent). Light field `oklch(98% 0 0deg)` (`#f8f8f8`). Spacing `--xs`…`--4xl`; `--gutter` = `--spacing-lg` for **inline only**; shell `padding-block` uses `--spacing-lg`. Below-only craft: header `--4xl`, posts `--3xl`, link-cluster seam `--2xl`. License left-aligns to article `section` column except on `tags: page` (incl. `/portfolio/` index). Optional later: widen measure via gutter/max-width. Semantic spacing aliases deferred.
+- **MPA view transitions** (2026-08) — `@view-transition { navigation: auto }` in `jonplummer.css`; `navigation: none` under `prefers-reduced-motion` and on heavy `/color/` embed leave.
 - Per-page lockup tagline rotation (2026-08-10) — Pool in `site.taglines`; header uses `page.url | taglineForPage` (deterministic hash). Canonical `site.tagline` / `site.title` unchanged for `<title>`, OG, feeds.
 - Colophon sketch credit as quiet image credit (2026-08-10) — Under sketch; roman; `--font-size-quiet` / license-quiet color; not a peer label beside the portrait.
 - Drop needless chrome italics on tagline + footer license (2026-08-10) — Captions, blockquotes keep italic.
