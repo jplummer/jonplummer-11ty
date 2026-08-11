@@ -7,9 +7,9 @@
   - **Order of work** (do not reorder casually):
     1. ~~**Margins + vertical spacing**~~ — **Done (2026-08-10):** one-sheet field; spacing ladder through `--spacing-4xl`; `--gutter` inline-only; below-only craft beats; license ↔ section align (flush on `tags: page`). **Optional later:** widen L/R via gutter / max-width.
     2. ~~**Type sizes + weights**~~ — **Done (2026-08-10):** lean reading ladder — `--font-size-quiet` / `--font-size-base` / h3–h1 / `--font-size-logotype`; weights light / semibold / bold; no h4–h6; no dead size/weight tokens. Demo pop-out left-aligned.
-    3. **Text greys / blacks** — Audit roles that use `--text-color`, `--text-color-light`, `--link-visited-color`, and any one-off mixes; collapse toward a short set of intentional ink levels (body, quiet chrome, links) rather than a scatter of near-blacks and greys.
+    3. ~~**Text greys / blacks**~~ — **Done (2026-08-10):** quiet ink; visited aliases quiet; borders on `--border-color`; page+post hybrid links; `strong` → semibold; lived `:active` → hover. Plan: `docs/superpowers/plans/2026-08-10-ink-ladder-quiet-merge.md`.
     4. ~~**Type steps on the reading surface**~~ — Folded into (2).
-    5. **Color scheme refinement, especially dark** — Keep as craft signal once type/ink are settled (or earlier if dark specifically feels wrong).
+    5. **Accent / hover (esp. dark)** — Sharpen brass dark accent; visual trials. **Include:** remaindered `.link-item` titles are accent at rest and hover to the same `--link-color` (no-op) — either quieter at-rest (ink/quiet) or a real hover step (`--link-hover-color`), decided with the accent pass.
     6. **Audit focus behavior and keyboard navigation**
     7. **Accessibility check and stats for the colophon** — Clarify or drop once a real pass is done (site contrast/a11y tests already cover a lot).
   - **Out of scope for this track**: overflow texture, outlandish alternate stylesheet (Future → Craft atmosphere).
@@ -124,6 +124,8 @@
 ---
 
 ## DONE
+
+- **Ink ladder quiet-merge** (2026-08-10) — One quiet ink (`--text-color-light`) for dim chrome + license/colophon; `--link-visited-color: var(--text-color-light)`; `hr`/OG borders use `--border-color`; posts + `tags: page` hybrid links with `:any-link` hover; `strong`/`b` semibold; lived `:active` → hover. Contrast parser resolves simple `var(--token)` aliases. Remaindered accent hover no-op deferred to accent pass. Plan: `2026-08-10-ink-ladder-quiet-merge.md`.
 
 - **Lean type ladder** (2026-08-10) — Reading tokens: `--font-size-quiet` (light — license, credits, lab disclosures), `--font-size-base` (body + post `code`/`pre`), `--font-size-lg/xl/2xl` (h3/h2/h1), `--font-size-logotype`. Weights: light / semibold / bold only. Dropped h4–h6 rules and unused `xs`/`sm`/`md`/`2xs`/`3xl` / thin / black tokens. About recommender names plain `###`. Demo pop-out left-aligned.
 

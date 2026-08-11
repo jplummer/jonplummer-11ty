@@ -536,7 +536,7 @@
     .theme-root.home-preview.revision-placement-preview .jp-page hgroup h1 a:any-link {
       color: var(--text-color);
     }
-    .theme-root.home-preview.revision-placement-preview .jp-page hgroup h1 a:is(:hover, :focus-visible) {
+    .theme-root.home-preview.revision-placement-preview .jp-page hgroup h1 a:any-link:is(:hover, :focus-visible) {
       color: var(--link-color);
     }
     .theme-root.home-preview.revision-placement-preview .jp-page article:not(.link-item) section a:not([class]):link {
@@ -545,7 +545,7 @@
     .theme-root.home-preview.revision-placement-preview .jp-page article:not(.link-item) section a:not([class]):visited {
       color: var(--link-visited-color);
     }
-    .theme-root.home-preview.revision-placement-preview .jp-page article:not(.link-item) section a:not([class]):is(:hover, :focus-visible) {
+    .theme-root.home-preview.revision-placement-preview .jp-page article:not(.link-item) section a:not([class]):any-link:is(:hover, :focus-visible) {
       color: var(--link-color);
     }
     .theme-root.home-preview.revision-placement-preview .jp-page article.link-item section a:link {
@@ -554,7 +554,7 @@
     .theme-root.home-preview.revision-placement-preview .jp-page article.link-item section a:visited {
       color: var(--link-visited-color);
     }
-    .theme-root.home-preview.revision-placement-preview .jp-page article.link-item section a:is(:hover, :focus-visible) {
+    .theme-root.home-preview.revision-placement-preview .jp-page article.link-item section a:any-link:is(:hover, :focus-visible) {
       color: var(--link-color);
     }
     .theme-root.home-preview.revision-placement-preview .jp-page article:not(.link-item) section::after {

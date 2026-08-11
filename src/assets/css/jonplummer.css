@@ -81,13 +81,14 @@
 
   color-scheme: light dark;
   --text-color: light-dark(oklch(29.6% 0.01 260.71deg), oklch(93% 0.01 260.71deg));
-  --text-color-light: light-dark(oklch(49.1% 0.0142 259.82deg), oklch(78% 0.0142 259.82deg));
+  --text-color-light: light-dark(oklch(49.1% 0.0142 259.82deg), oklch(78% 0.0142 259.82deg)); /* quiet ink */
   --border-color: light-dark(oklch(89.3% 0.0105 261.79deg), oklch(38% 0.0105 261.79deg));
   --background-color: light-dark(oklch(96.4% 0.0058 264.53deg), oklch(10% 0.0058 264.53deg));
   --content-background-color: light-dark(oklch(100% 0 0deg), oklch(22% 0 0deg));
   --link-color: light-dark(oklch(58.6% 0.1911 27.41deg), oklch(86.6% 0.1911 27.41deg));
   --link-hover-color: light-dark(oklch(57.7% 0.1348 59.17deg), oklch(85.7% 0.1348 59.17deg));
-  --link-visited-color: light-dark(oklch(42.6% 0.0148 259.82deg), oklch(77.8% 0.0148 259.82deg));
+  --link-visited-color: var(--text-color-light); /* quiet; export name kept for gallery / :visited */
+  /* Lived :active uses hover; token kept for gallery paste / DR packs */
   --link-active-color: light-dark(oklch(48.1% 0.1152 154.58deg), oklch(76.1% 0.1152 154.58deg));
   --token-color: color-mix(in oklch, var(--text-color) 28%, var(--content-background-color));
 
@@ -520,6 +521,11 @@ h3 {
   line-height: var(--line-height-lg);
 }
 
+/* Body emphasis — Libre Franklin 700 reads heavy next to regular; use semibold */
+strong, b {
+  font-weight: var(--font-weight-semibold);
+}
+
 /* Hgroup typography */
 
 hgroup h1 {
@@ -707,9 +713,8 @@ article details > summary:hover::before {
 
 /* Horizontal rules */
 hr {
-  border-top: 1px solid var(--text-color-light);
+  border-top: 1px solid var(--border-color);
   margin: var(--spacing-lg) 0;
-  opacity: 0.5;
 }
 
 /* Form elements typography */
@@ -724,7 +729,7 @@ footer p,
   font-size: var(--font-size-quiet);
   line-height: var(--line-height-quiet);
   font-weight: var(--font-weight-light);
-  color: var(--link-visited-color);
+  color: var(--text-color-light);
 }
 
 .license {
@@ -777,16 +782,15 @@ pre code {
 
 /* === LINKS === */
 
-/* Base link styles */
+/* Base link styles — chrome (nav, etc.) uses accent at rest; prose overrides below */
 a {
   text-decoration: none;
   color: var(--link-color);
   transition: color 0.3s ease;
 }
 
-a:hover,
-a:focus,
-article section a:hover {
+/* :any-link so :visited + :hover is not beaten by a later a:visited rule */
+a:any-link:is(:hover, :focus-visible) {
   color: var(--link-hover-color);
   text-decoration: underline;
 }
@@ -795,8 +799,9 @@ a:visited {
   color: var(--link-visited-color);
 }
 
+/* Press state: same as hover (green active token is gallery/export only) */
 a:active {
-  color: var(--link-active-color);
+  color: var(--link-hover-color);
 }
 
 /* Unclassed links in prose use text color at rest (not nav/chrome — see header nav rules) */
@@ -809,20 +814,26 @@ hgroup h1 a:any-link {
   color: var(--text-color);
 }
 
-hgroup h1 a:is(:hover, :focus-visible) {
+hgroup h1 a:any-link:is(:hover, :focus-visible) {
   color: var(--link-color);
 }
 
-/* Content links: neutral unvisited, visited tint at rest, accent on hover/focus */
-article:not(.link-item) section a:not([class]):link {
+/*
+  Content links (posts + tags:page): ink at rest, quiet when visited,
+  accent on hover/focus (same hybrid for /about/, /technologies/, …).
+*/
+article:not(.link-item) section a:not([class]):link,
+main[data-tags*="page"] a:not([class]):link {
   color: var(--text-color);
 }
 
-article:not(.link-item) section a:not([class]):visited {
+article:not(.link-item) section a:not([class]):visited,
+main[data-tags*="page"] a:not([class]):visited {
   color: var(--link-visited-color);
 }
 
-article:not(.link-item) section a:not([class]):is(:hover, :focus-visible) {
+article:not(.link-item) section a:not([class]):any-link:is(:hover, :focus-visible),
+main[data-tags*="page"] a:not([class]):any-link:is(:hover, :focus-visible) {
   color: var(--link-color);
 }
 
@@ -831,7 +842,7 @@ article:not(.link-item) h1 a:any-link {
   color: var(--text-color);
 }
 
-article:not(.link-item) h1 a:is(:hover, :focus-visible) {
+article:not(.link-item) h1 a:any-link:is(:hover, :focus-visible) {
   color: var(--link-color);
 }
 
@@ -846,7 +857,7 @@ article h1 a {
   text-decoration: none;
 }
 
-article h1 a:hover {
+article h1 a:any-link:is(:hover, :focus-visible) {
   text-decoration: underline;
 }
 
@@ -861,7 +872,7 @@ article.link-item section a:visited {
   color: var(--link-visited-color);
 }
 
-article.link-item section a:is(:hover, :focus-visible) {
+article.link-item section a:any-link:is(:hover, :focus-visible) {
   color: var(--link-color);
 }
 
@@ -1360,7 +1371,7 @@ header a.skip:focus {
   width: 600px;
   height: 315px;
   overflow: hidden;
-  border: 1px solid var(--text-color-light);
+  border: 1px solid var(--border-color);
   background: oklch(100% 0 0deg);
 }
 
@@ -1377,7 +1388,7 @@ header a.skip:focus {
 }
 
 .og-images-grid-item {
-  border: 1px solid var(--text-color-light);
+  border: 1px solid var(--border-color);
   padding: var(--spacing-sm);
   background: var(--content-background-color);
 }
@@ -1407,7 +1418,7 @@ header a.skip:focus {
   --content-background-color: oklch(100% 0 0deg);
   --link-color: oklch(58.6% 0.1911 27.41deg);
   --link-hover-color: oklch(57.7% 0.1348 59.17deg);
-  --link-visited-color: oklch(42.6% 0.0148 259.82deg);
+  --link-visited-color: var(--text-color-light);
   --link-active-color: oklch(48.1% 0.1152 154.58deg);
   
   box-sizing: border-box;
@@ -1506,7 +1517,7 @@ header a.skip:focus {
     --content-background-color: oklch(100% 0 0deg);
     --link-color: oklch(28.5% 0 0deg);
     --link-hover-color: oklch(28.5% 0 0deg);
-    --link-visited-color: oklch(28.5% 0 0deg);
+    --link-visited-color: var(--text-color-light);
     --link-active-color: oklch(28.5% 0 0deg);
   }
 

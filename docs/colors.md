@@ -11,12 +11,12 @@ Cool chrome, accent on controls only (neutral masthead, hybrid body links). APCA
 - Background (outer field token `--background-color`): `#f1f3f7` — `oklch(96.4% 0.0058 264.53deg)` — still used for code panels, lightbox chrome, gallery mixes; **not** the body mat (body is one sheet with content background as of 2026-08)
 - Content background: `#fff` — also the live page field (`body` + header/main/footer)
 - Text: `#2a2d32` — `oklch(29.6% 0.01 260.71deg)`
-- Text light: `#5c6169` — `oklch(49.1% 0.0142 259.82deg)`
+- Text light: `#5c6169` — `oklch(49.1% 0.0142 259.82deg)` (quiet ink: tagline, captions, license, disclosures)
 - Border: `#d8dce3` — `oklch(89.3% 0.0105 261.79deg)`
 - Link: `#d63d36` — `oklch(58.6% 0.1911 27.41deg)` (APCA-tuned red)
 - Link hover: `#b26205` — `oklch(57.7% 0.1348 59.17deg)`
-- Link visited: `#4a4f57` — cool grey, `oklch(42.6% 0.0148 259.82deg)`
-- Link active: `#0d703f` — `oklch(48.1% 0.1152 154.58deg)`
+- Link visited: `var(--text-color-light)` (quiet) — export name `--link-visited-color` kept for gallery / `:visited`
+- Link active: token still defined for gallery paste / DR packs; **lived** `:active` uses `--link-hover-color` (press flash was never visible with green)
 - End-of-post token (`--token-color`): neutral mix of text + content background (not accent)
 
 ### Dark mode
@@ -26,14 +26,16 @@ Cool chrome, accent on controls only (neutral masthead, hybrid body links). APCA
 - Text: `oklch(93% 0.01 260.71deg)`
 - Text light: `oklch(78% 0.0142 259.82deg)`
 - Border: `oklch(38% 0.0105 261.79deg)`
-- Links: lightened accent pair; visited stays cool grey family
+- Links: lightened accent pair; visited = quiet (`--text-color-light`)
 
 ### Placement rules (summary)
 
 - **Masthead** (`hgroup`): neutral text; hover → accent
 - **Header nav + pagination**: accent at rest; hover → orange-brown
-- **Article body links**: body text at rest; visited tint; hover/focus → accent
-- **Remaindered links** (`.link-item`): muted row; title accent at rest
+- **Article / page body links**: body text at rest; visited = quiet; hover/focus → accent (`:any-link` so visited still hovers)
+- **Remaindered links** (`.link-item`): muted row (quiet); title accent at rest; hover → accent
+- **Quiet chrome** (license, colophon credit, tagline, captions, disclosures): `--text-color-light`
+- **Borders / rules**: `--border-color` (not quiet ink)
 
 See `docs/color-theme-exploration.md` for gallery tooling and APCA workflow.
 

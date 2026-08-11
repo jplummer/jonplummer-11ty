@@ -76,6 +76,18 @@ function parseCSSColors(cssFilePath) {
         }
       }
     }
+
+    // Resolve simple aliases: --foo: var(--bar); (same light/dark as the target)
+    const aliasRe = /--([a-z-]+):\s*var\(\s*--([a-z-]+)\s*\)\s*;/g;
+    for (const match of rootContent.matchAll(aliasRe)) {
+      const [, varName, targetName] = match;
+      if (colors.light[targetName] && !colors.light[varName]) {
+        colors.light[varName] = colors.light[targetName];
+      }
+      if (colors.dark[targetName] && !colors.dark[varName]) {
+        colors.dark[varName] = colors.dark[targetName];
+      }
+    }
   }
   
   // Also check legacy @media (prefers-color-scheme: dark) block

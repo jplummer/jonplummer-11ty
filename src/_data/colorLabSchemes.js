@@ -12,7 +12,7 @@ const presets = {
     '--content-background-color': '#fff',
     '--link-color': '#d63d36',
     '--link-hover-color': '#b26205',
-    '--link-visited-color': '#4a4f57',
+    '--link-visited-color': '#5c6169',
     '--link-active-color': '#0d703f',
     '--border-color': '#d8dce3'
   },
