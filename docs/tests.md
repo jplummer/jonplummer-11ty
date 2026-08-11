@@ -30,7 +30,7 @@ This project includes a suite of validation tests covering content structure, HT
 
 **Fast Tests:** `html`, `links`, `wisdom`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `deploy-assets`, `indexnow`, `error-document-assets`, `trailing-slash-links`
 
-**Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `figure-lightbox`, `site-branding`, `preview-site-lockup`, `light-theme-colors`, `test-json-pipe` — see [Unit Tests](#unit-tests) below
+**Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `figure-lightbox`, `site-branding`, `preview-site-lockup`, `light-theme-colors`, `og-image-filename`, `test-json-pipe` — see [Unit Tests](#unit-tests) below
 
 **Slow Tests:** `a11y` (launches browser)
 
@@ -147,6 +147,10 @@ Unit checks for `scripts/utils/preview-site-lockup.js`: build-time `.site-lockup
 ### light-theme-colors.js
 
 Unit checks for `extractLightThemeColorOverrides()` in `eleventy/utils/css-utils.js`: OG screenshots need forced-light `:root` colors. Asserts all required tokens extract (lived `light-dark()` colors plus `var()` aliases for hover/visited/active). No `_site/` dependency.
+
+### og-image-filename.js
+
+Unit checks for `generateOgImageFilename()` in `scripts/utils/og-image-filename.js`: date-only front matter (`YYYY-MM-DD`) must use calendar parts so local timezone does not shift the day (and double-prefix the slug). No `_site/` dependency.
 
 ## Infrastructure Tests
 

@@ -5,7 +5,7 @@ date: "2026-06-03"
 tags:
   - post
 description: The job of the designer is in flux. So is the job of the design leader.
-ogImage: /assets/images/og/2026-06-02-2026-06-03-designers-who-ship.png
+ogImage: /assets/images/og/2026-06-03-designers-who-ship.png
 ---
 Last month I shipped [an iOS app](https://apps.apple.com/app/monotasker/id6770424713). I designed it, wrote the code (with the help of Claude), got it through App Store review, and published a blog post about what it taught me about designing a solid onboarding experience. I'm a UX director by title. I did it because I could, and because it solved a problem I have in a novel way that I think will be useful.
 

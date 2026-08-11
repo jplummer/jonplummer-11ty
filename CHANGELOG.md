@@ -10,6 +10,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Draft post: care has to show up in the product.
 - Styling refinements: 5 commits
 - Correct typo in breakpoint comment (reasonable).
+- Accept var() aliases in OG light theme color extraction
 - Archive finished craft items in ideas.md
 - Note lockup optical tokens stay px under browser zoom
 

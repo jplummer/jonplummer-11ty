@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2026-01-10"
 tags: post
 description: Van Neistat asks if his impulse to change his process to make his YouTube channel more valuable is selling out. It's not.
-ogImage: /assets/images/og/2026-01-09-2026-01-10-my-response-to-van-neistat.png
+ogImage: /assets/images/og/2026-01-10-my-response-to-van-neistat.png
 ---
 In his [recent Patreon post](https://www.patreon.com/posts/seeking-your-on-147841347), [Van Neistat asks](https://www.youtube.com/watch?v=nqCYWkg0kI4) if changing his process so that he can produce more videos to raise engagement and thus revenue is somehow "selling out" or a betrayal of his audience. In the video he seems to struggle with the all-too-common ideas that
 

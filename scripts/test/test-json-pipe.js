@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 
 /**
- * Guards test-runner IPC: large JSON over a pipe must include both markers
- * (regression: process.exit before stdout drained truncated SEO output ~64KB).
+ * Guards test-runner IPC: large JSON over a pipe must include both markers.
+ * Regressions covered:
+ * - async stdout.write + process.exit() before drain (~64KB truncated)
+ * - single fs.writeSync on non-blocking pipe (partial write, end marker dropped)
  */
 
 const { spawn } = require('child_process');
@@ -42,13 +44,17 @@ async function validate(result) {
       'missing __TEST_JSON_START__'
     );
     assert.ok(
+      stdoutData.length > 65536,
+      `fixture must exceed pipe buffer (got ${stdoutData.length} bytes)`
+    );
+    assert.ok(
       stdoutData.includes('__TEST_JSON_END__'),
       `missing __TEST_JSON_END__ (got ${stdoutData.length} bytes — likely truncated)`
     );
     const start = stdoutData.indexOf('__TEST_JSON_START__') + '__TEST_JSON_START__'.length;
     const end = stdoutData.indexOf('__TEST_JSON_END__');
     const parsed = JSON.parse(stdoutData.slice(start, end).trim());
-    assert.ok(parsed.files && parsed.files.length >= 400, 'expected large files array');
+    assert.ok(parsed.files && parsed.files.length >= 800, 'expected large files array');
   } catch (err) {
     addIssue(fileObj, {
       type: 'test-json-pipe',

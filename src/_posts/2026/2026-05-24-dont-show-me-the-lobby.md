@@ -5,7 +5,7 @@ date: "2026-05-24"
 tags:
   - post
 description: Why Monotasker skips the lobby and drops you straight into the work.
-ogImage: /assets/images/og/2026-05-23-2026-05-24-dont-show-me-the-lobby.png
+ogImage: /assets/images/og/2026-05-24-dont-show-me-the-lobby.png
 ---
 The first thing you do in [Monotasker](https://apps.apple.com/app/monotasker/id6770424713) is tap a checkbox. No tutorial, no tour. And no permissions granted yet. Just the thing you'll tap every time you use the app.
 

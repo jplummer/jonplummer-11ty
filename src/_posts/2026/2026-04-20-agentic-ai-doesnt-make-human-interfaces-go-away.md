@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2026-04-20"
 tags: post
 description: "Why agentic systems still need clear human-facing design: responsibility, trust, and usability do not disappear when automation gets smarter."
-ogImage: /assets/images/og/2026-04-19-2026-04-20-agentic-ai-doesnt-make-human-interfaces-go-away.png
+ogImage: /assets/images/og/2026-04-20-agentic-ai-doesnt-make-human-interfaces-go-away.png
 ---
 The case for human interfaces becoming obsolete is getting more sophisticated. It used to be "AI will do everything" – easy to dismiss. Now it sounds like [Matt Webb's recent piece on headless architecture](https://interconnected.org/home/2026/04/18/headless): services need to expose their capabilities as CLI tools and APIs for AI agents, making the visual front-end "sacrificial" – encountered once or twice to get the vibe, then handed off to an agent who never needs to see it. That's a more interesting argument.
 

@@ -7,10 +7,18 @@ const path = require('path');
  */
 function generateOgImageFilename(pageData, filePath) {
   if (pageData.tags && pageData.tags.includes('post') && pageData.date) {
-    const date = new Date(pageData.date);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
+    let year;
+    let month;
+    let day;
+    if (typeof pageData.date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(pageData.date)) {
+      // Date-only strings parse as UTC midnight; use calendar parts to avoid local-day shift
+      [year, month, day] = pageData.date.split('-');
+    } else {
+      const date = pageData.date instanceof Date ? pageData.date : new Date(pageData.date);
+      year = String(date.getFullYear());
+      month = String(date.getMonth() + 1).padStart(2, '0');
+      day = String(date.getDate()).padStart(2, '0');
+    }
     let slug = path.basename(filePath, path.extname(filePath));
     const datePrefix = `${year}-${month}-${day}-`;
     if (slug.startsWith(datePrefix)) {

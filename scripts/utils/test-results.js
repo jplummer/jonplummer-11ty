@@ -209,9 +209,55 @@ function finalizeTestResult(result) {
 }
 
 /**
+ * Write all bytes to fd, retrying partial writes / EAGAIN.
+ * Piped stdout is often non-blocking: a single writeSync fills the ~64KB
+ * pipe buffer and returns early, dropping the rest (and the end marker).
+ * @param {number} fd
+ * @param {string|Buffer} data
+ * @returns {void}
+ */
+function writeSyncAll(fd, data) {
+  const buf = Buffer.isBuffer(data) ? data : Buffer.from(data);
+  let offset = 0;
+  let spins = 0;
+  while (offset < buf.length) {
+    try {
+      const written = fs.writeSync(fd, buf, offset, buf.length - offset);
+      if (written === 0) {
+        spins += 1;
+        if (spins > 100000) {
+          throw new Error(`writeSyncAll: no progress after ${spins} spins at offset ${offset}`);
+        }
+        // Brief busy-wait so the parent can drain the pipe
+        const start = process.hrtime.bigint();
+        while (process.hrtime.bigint() - start < 1000000n) {
+          /* 1ms */
+        }
+        continue;
+      }
+      offset += written;
+      spins = 0;
+    } catch (err) {
+      if (err.code === 'EAGAIN' || err.code === 'EWOULDBLOCK') {
+        spins += 1;
+        if (spins > 100000) {
+          throw err;
+        }
+        const start = process.hrtime.bigint();
+        while (process.hrtime.bigint() - start < 1000000n) {
+          /* 1ms */
+        }
+        continue;
+      }
+      throw err;
+    }
+  }
+}
+
+/**
  * Output result as JSON with markers for test runner to detect.
- * Uses writeSync so process.exit() cannot truncate a large piped write
- * (async stdout.write + exit dropped the SEO payload after ~64KB).
+ * Sync write so process.exit() cannot race an async drain; loops until the
+ * full payload is written (non-blocking pipes only accept ~64KB per write).
  * @param {Object} result - Test result object
  * @returns {void}
  */
@@ -220,7 +266,11 @@ function outputResult(result) {
   // Compact JSON — pretty-print made SEO results huge for no benefit to the runner
   const jsonStr = JSON.stringify(result);
   const output = `__TEST_JSON_START__\n${jsonStr}\n__TEST_JSON_END__\n`;
-  fs.writeSync(process.stdout.fd, output);
+  // Prefer blocking stdout when available (one write completes); loop still required as fallback
+  if (process.stdout._handle && typeof process.stdout._handle.setBlocking === 'function') {
+    process.stdout._handle.setBlocking(true);
+  }
+  writeSyncAll(process.stdout.fd, output);
 }
 
 // ============================================================================
@@ -252,6 +302,7 @@ const TEST_EMOJIS = {
   'site-branding': '🏷️',
   'preview-site-lockup': '🖼️',
   'light-theme-colors': '🎨',
+  'og-image-filename': '🗂️',
   'error-document-assets': '📄',
   'trailing-slash-links': '↪️',
   'test-json-pipe': '🧪',
@@ -299,6 +350,7 @@ function getTestDisplayName(testType) {
     'site-branding': 'Site Branding',
     'preview-site-lockup': 'Preview Site Lockup',
     'light-theme-colors': 'Light Theme Colors',
+    'og-image-filename': 'OG Image Filename',
     'error-document-assets': 'ErrorDocument 404 assets',
     'trailing-slash-links': 'Trailing-slash directory links',
     'test-json-pipe': 'Test JSON pipe',
@@ -335,9 +387,10 @@ function getTestDescription(testType) {
     'site-branding': 'site.js author/tagline/title contract and no hardcoded tagline',
     'preview-site-lockup': 'build-time facsimile .site-lockup HTML for color/type previews',
     'light-theme-colors': 'OG forced-light color extraction from :root (light-dark + var aliases)',
+    'og-image-filename': 'OG PNG basename from post date (date-only calendar-safe)',
     'error-document-assets': '404.html root-absolute CSS/font/favicon hrefs for ErrorDocument',
     'trailing-slash-links': 'Internal directory links must include trailing slash (avoid 301 noise)',
-    'test-json-pipe': 'Large TEST_RUNNER JSON survives piped stdout before exit',
+    'test-json-pipe': 'Large TEST_RUNNER JSON survives piped stdout (partial write + drain)',
     'deploy': 'Deployment connectivity',
     'indexnow': 'IndexNow configuration',
     'security': 'Security audit'

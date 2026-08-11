@@ -1427,7 +1427,7 @@ header a.skip:focus {
   --text-color-light: oklch(49.1% 0.0142 259.82deg);
   --border-color: oklch(89.3% 0.0105 261.79deg);
   --background-color: oklch(96.4% 0.0058 264.53deg);
-  --content-background-color: oklch(100% 0 0deg);
+  --content-background-color: oklch(98% 0 0deg);
   --link-color: oklch(58.6% 0.1911 27.41deg);
   --link-hover-color: var(--link-color);
   --link-visited-color: var(--text-color-light);
