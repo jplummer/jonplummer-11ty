@@ -258,7 +258,8 @@ function buildColorPairs(colors) {
       category: 'Link on content background',
       foreground: colors.dark['link-color'],
       background: colors.dark['content-background-color'],
-      minLc: 60,
+      // Craft floor: denser dark accent (~Lc 56) beats pale brass; still warn vs preferred 75
+      minLc: 55,
       preferredLc: 75,
       fontSize: '16px'
     });

@@ -24,7 +24,7 @@ Export/lab aliases (same three colors on the live site and in `/color/` paste): 
 - Text: `oklch(93% 0.01 260.71deg)`
 - Text light: `oklch(78% 0.0142 259.82deg)`
 - Border: `oklch(38% 0.0105 261.79deg)`
-- Links: lightened accent; visited / quiet chrome use quiet ink
+- Links: cooler denser red `oklch(75.9% 0.1444 18deg)` (`#ff888e`) — same family as light accent, not a pale brass lift of the light hue; APCA on content field is soft (~Lc 56, below preferred 75 / min 60) by choice for nav weight
 
 ### Placement rules (summary)
 

@@ -33,7 +33,7 @@
   --text-size: 16px; /* legacy alias; prefer --font-size-base */
   --line-height: 1.5;
   --paragraph-spacing: calc(var(--line-height) * 1em);
-  /* Lean type ladder (reading surface). Logotype stays off-scale. */
+  /* Lean type ladder (reading surface). Logotype is off-scale. */
   --font-size-quiet: 0.875rem; --line-height-quiet: 1.4286; /* license, credits, utility disclosures */
   --font-size-base: 1rem; --line-height-base: 1.5; /* body + post code/pre */
   --font-size-lg: 1.5rem; --line-height-lg: 1.2; /* h3 */
@@ -46,6 +46,10 @@
     stack-gap / cap-nudge: final literals after ±1px eye passes (not live calcs).
     tagline-baseline-nudge: extra margin on the tagline only (not mark height) so
     the alphabetic baseline can meet the mark bottom without growing the mark.
+    Keep as eye-tuned px (not rem): full-page browser zoom scales CSS px with rem,
+    so the lockup stays proportional. Mixing looks fragile but is fine for Cmd+/-.
+    Drift only if root font-size changes (user default text / text-only zoom) while
+    these stay absolute — low priority; revisit rem later if that matters.
   */
   --site-lockup-stack-gap: 6.2px;
   --site-lockup-cap-nudge: 2.2px;
@@ -60,10 +64,10 @@
   --font-weight-bold: 700;
 
   /* Letter spacing */
+  --letter-spacing-display-tight: -0.04em;
   --letter-spacing-tight: -0.025em;
   --letter-spacing-normal: normal;
   --letter-spacing-loose: 0.025em;
-  --letter-spacing-display-tight: -0.04em;
 
   /* Spacing — multiples of --baseline-unit (8px at 16px root). Layout snap only; type rhythm stays modular.
      --spacing-* is the size ladder (axis-agnostic). --gutter is horizontal framing only (shell inset, column gap). */
@@ -85,7 +89,7 @@
   --border-color: light-dark(oklch(89.3% 0.0105 261.79deg), oklch(38% 0.0105 261.79deg));
   --background-color: light-dark(oklch(96.4% 0.0058 264.53deg), oklch(10% 0.0058 264.53deg));
   --content-background-color: light-dark(oklch(100% 0 0deg), oklch(22% 0 0deg));
-  --link-color: light-dark(oklch(58.6% 0.1911 27.41deg), oklch(86.6% 0.1911 27.41deg)); /* accent */
+  --link-color: light-dark(oklch(58.6% 0.1911 27.41deg), oklch(75.9% 0.1444 18deg)); /* accent; dark = cooler denser red (in-gamut; Lc soft vs preferred) */
   /* Export/lab names — site UI uses ink / quiet / accent only (no distinct brown/green) */
   --link-hover-color: var(--link-color);
   --link-visited-color: var(--text-color-light);

@@ -98,7 +98,7 @@ function synthesizeDarkCompanionForDr(light) {
   return dark;
 }
 
-/** Site default dark pair: extra outer-field vs content-band separation (light pair unchanged). */
+/** Site default dark pair: field separation + lived dark accent (matches jonplummer.css). */
 function adjustSiteDefaultDark(dark) {
   const bg = dark['background-color'];
   const content = dark['content-background-color'];
@@ -108,6 +108,9 @@ function adjustSiteDefaultDark(dark) {
   if (content && content.mode === 'oklch') {
     dark['content-background-color'] = { ...content, l: 0.22 };
   }
+  // Cooler denser red — keep in sync with :root --link-color dark half in jonplummer.css
+  dark['link-color'] = { mode: 'oklch', l: 0.759, c: 0.1444, h: 18 };
+  applyThreeColorLinkRoles(dark);
   return dark;
 }
 
