@@ -24,7 +24,7 @@
 :root {
   /* Layout */
   --max-width: 66rem;
-  --breakpoint-single-column: 54rem; /* custom properties don't work in a media query, alas – these are for reference and future use. 54 and 66rem are reaosnable outer boundaries for a comfortable reading measure between 2 and 2.5 alphabets wide */
+  --breakpoint-single-column: 54rem; /* custom properties don't work in a media query, alas – these are for reference and future use. 54 and 66rem are reasonable outer boundaries for a comfortable reading measure between 2 and 2.5 alphabets wide */
 
   /* Typography */
   /* Modular type scale based on 1rem (16px) base – see: https://webtypography.net/3.1.1 */
