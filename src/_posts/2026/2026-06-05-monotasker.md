@@ -7,7 +7,7 @@ coverImage: 2026/06/onboarding.png
 description: "My first iOS app crushes the paradox of choice."
 ogImage: /assets/images/og/portfolio.png
 ---
-My personal project list had become daunting. 30 active items, all legitimate, none obviously more important than the others. Open the list, feel the weight of it, close it, do something else. The list was accurate and demoralizing.
+My personal project list had become daunting. 30 active items, all legitimate, none obviously more important than the others. I'd open the list, see how long it is, and do something else. The list was accurate but its length was demoralizing.
 
 The fix was simple: show me one thing. Pick it at random. Keep showing it until I decide it's done.
 
@@ -19,7 +19,7 @@ That's the entire product.
 
 ![One task. That's it.](/assets/images/2026/06/taskFocus.png)
 
-The randomization is deliberate. Looking at the list can trigger avoidance – any of the 30 items would do, but choosing between them is what stalls you. Randomization, and hiding the other tasks, sidesteps the stall.
+The randomization is deliberate. Looking at a long list can trigger avoidance – any of the 30 items would do, but choosing between them is what stalls you. Randomization, and hiding the other tasks, makes the choice automatic.
 
 ## The first screen is the real app
 
@@ -41,7 +41,7 @@ Not every random task is right for right now. If it's raining and the app gives 
 
 ![A rejected task gets shuffled back into the stack.](/assets/images/2026/06/shuffle.png)
 
-A shuffle icon at the bottom of the card handles this. Tapping it visibly returns the current card to the stack – not discarded, just back in the deck. That distinction matters; the app is giving you a new draw, and the one you passed on isn't lost. The list stays random. You're not building a cherry-picked queue of convenient tasks.
+A shuffle icon at the bottom of the card handles this. Tapping it puts the current card back in the deck rather than discarding it. That distinction matters; the app is giving you a new draw, and the one you passed on isn't lost. The list stays random. You're not building a cherry-picked queue of convenient tasks.
 
 ## How it was built
 

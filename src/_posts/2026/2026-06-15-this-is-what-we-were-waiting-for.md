@@ -8,7 +8,7 @@ ogImage: /assets/images/og/2026-06-15-this-is-what-we-were-waiting-for.png
 ---
 There's a story going around that AI is squeezing designers out. That faster build cycles mean less room for design process. That when anyone can generate a working UI in an afternoon, the UX role shrinks to quality control at best.
 
-I've heard this from hiring managers who are genuinely uncertain what shape their teams should take. I've heard it from UX people trying to figure out how their process and expectations need to change, and mourning (a little) a way of working that's going away – even if they didn't love it. It's a reasonable worry given what's visibly happening. But the mourning isn't.
+I've heard this from hiring managers who are genuinely uncertain what shape their teams should take. I've heard it from UX people trying to figure out how their process and expectations need to change, and mourning (a little) a way of working that's going away – even if they didn't love it. It's a reasonable worry given what's visibly happening. But the mourning isn't necessary.
 
 The software development lifecycle is changing in ways that can make UX more useful, more capable, and more directly powerful than at any point in the discipline's history. The question is whether UX people, and the organizations that employ them, will change how they work to capture what's now possible.
 
@@ -36,7 +36,7 @@ UX people complained about these effects constantly, and rightly. They were driv
 
 ## What changed
 
-Build got fast. Not a little faster, dramatically faster, and still accelerating. AI-assisted development means that a senior engineer who used to take two weeks to implement a complex feature might take two days. A designer with moderate technical fluency and good AI tooling can prototype a working interaction in an afternoon that would have taken a week of engineering time a few years ago. Entire interactive patterns that once required careful negotiation between design and engineering can now be generated, revised, and iterated on in hours.
+Build got fast; dramatically faster, and still accelerating. AI-assisted development means that a senior engineer who used to take two weeks to implement a complex feature might take two days. A designer with moderate technical fluency and good AI tooling can prototype a working interaction in an afternoon that would have taken a week of engineering time a few years ago. Entire interactive patterns that once required careful negotiation between design and engineering can now be generated, revised, and iterated on in hours.
 
 Since building is fast, the defensive posture that the old model required starts to relax. You can design something, build it quickly, find out it's 70% right, throw out the 30% that isn't working, and rebuild it without quite the level of sunk-cost pain as before. The pressure to negotiate away the small things that make something actually good – the things that would have been dismissed as gold plating – can finally lift. The "that's too fancy" argument loses its teeth when the fancy thing can be demonstrated in a prototype that took a designer an afternoon.
 
@@ -66,7 +66,7 @@ Some of that time is available now. A UX team that was spending 50% of its capac
 
 Every UX practitioner has quality tickets they filed that never got fixed.
 
-In the old model, UX owned the design, engineering owned the implementation. Quality lived in the gap between them, and UX's primary tool for trying to close that gap was the bug report. You saw a problem, you filed a ticket, the ticket went into a backlog, the backlog got triaged. Your ticket competed with features, infrastructure work, and other bugs for priority. A lot of the time – especially for small usability issues, accessibility problems, and polish details – your ticket lost. The thing that you caught before launch just sat there for two years until old tickets were cleaned up, then it was forgotten. Sometimes you'd finally get it fixed, only to see the same class of problem introduced somewhere else the following sprint.
+In the old model, UX owned the design, engineering owned the implementation, and where they didn't match, UX's primary tool for trying to fix implementation issues was the bug report. You saw a problem, you filed a ticket, the ticket went into a backlog, the backlog got triaged. Your ticket competed with features, infrastructure work, and other bugs for priority. A lot of the time – especially for small usability issues, accessibility problems, and polish details – your ticket stayed in the backlog. The thing that you caught before launch just sat there for two years until old tickets were cleaned up, then it was remembered and deleted. Sometimes you'd finally get it fixed only to see the same class of problem introduced somewhere else later.
 
 When UX practitioners have AI tools that lower the barrier to working in code, this changes. If you know enough to open a codebase, find the relevant component, make a targeted change, and submit a pull request, you can fix things yourself. The label that's been confusing users for eight months? Fix it in the code, write a clear commit message, open a PR. The color contrast issue that keeps showing up in accessibility audits? Find it in the design system, correct it, ship it. The microinteraction that's been janky since launch? Tweak the animation timing, test it, merge it. Fed up with a site-wide spacing inconsistency? Fix it once in the component, watch it propagate everywhere.
 
@@ -82,13 +82,13 @@ There's a special payoff here for mature products. Long-lived platforms accumula
 
 ### Pushing for more
 
-UX people have long been trained to scope things down. Pick the MVP. Defer the nice-to-haves. Don't design things that won't get built. That discipline made sense when engineering time was the scarce resource. When a feature that used to take three weeks takes three days, the calculation changes. Ideas that used to die as "too fancy" deserve a second look. Not because they got simpler, but because building them got fast.
+UX people have long been asked to scope things down. Pick the MVP, defer the nice-to-haves. Don't design things that won't get built. That discipline made sense when engineering time was the scarce resource. When a feature that used to take three weeks takes three days, the calculation changes. Ideas that used to die as "too fancy" can get a second look because  building them became quicker.
 
 ## The speed problem
 
-Let's acknowledge a real fear: that as engineering moves faster, designers and PMs get left behind. Not fired, necessarily. Bypassed. The engineer who commercializes a PM's rough prototype, skipping design entirely and delivering something half-baked to customers. The PM who has already decided what the customer needs and doesn't make room for the designer's input, because coordination has a cost and certainty feels faster. The engineer who ships a passion project into production on their own. The organization that claims to be metrics-driven but can't find the time to do the research or agree on the measures.
+Let's acknowledge a real fear: that as engineering moves faster, designers and PMs get left behind. Not fired, necessarily. Bypassed. The engineer who commercializes a PM's rough prototype, skipping design entirely and delivering something half-baked to customers. The PM who has already decided what the customer needs and doesn't make room for the designer's input, because coordination has a cost and cosplaying certainty feels speedy. The engineer who ships a passion project into production on their own. The organization that claims to be metrics-driven but can't find the time to do the research or agree on the measures.
 
-These happen more often than we'd like to admit. As shipping velocity increases they'll become more common, or more tempting.
+These happen more often than we'd like to admit. As shipping velocity increases they'll become more common or more tempting.
 
 UX doesn't need to get faster at the things it has always done – to produce Figma files more quickly, to run usability tests on a tighter timeline, to write shorter specs. UX needs to contribute to the pace in different ways. A designer who can drop a working prototype into a conversation before the PM locks in a decision is fast. A designer who can fix a quality issue in the codebase the same afternoon they notice it is fast. A designer who can roll out a design system improvement across the whole product in one PR is fast. None of that looks like the old version of UX speed. All of it keeps UX in the room.
 

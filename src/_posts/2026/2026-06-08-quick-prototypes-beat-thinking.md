@@ -12,7 +12,7 @@ In the old way of working, a designer would think about the possibilities, propo
 
 ## What I did instead
 
-I asked an AI coding agent to build a behavior test bed: twelve concrete implementations of the same two fields, side by side, plus a thirteenth card for the behavior I ended up suggesting. Same validation rules everywhere. Same transform options (preserve case, lowercase, snake_case, camelCase). Each card wires up the Display Name field to API Name differently; always update, update only if blank, sticky while matching, suggest-don’t-fill, explicit lock toggle, debounced update, and so on.
+I asked an AI coding agent to build a behavior test bed: twelve concrete implementations of the same two fields, side by side, plus a thirteenth card for the behavior I ended up suggesting. Same validation rules everywhere. Same transform options (preserve case, lowercase, snake_case, camelCase). Each card wires up the Display Name field to API Name differently; always update, update only if blank, sticky while matching, suggest-don't-fill, explicit lock toggle, debounced update, and so on.
 
 Rejected options stay hidden until you click `Reveal rejected options`. The favorite sits on top. Every card has reset, hide, debug state, and shared config at the bottom of the page.
 
@@ -41,7 +41,7 @@ The favorite combines live auto-update while you type, severing the link when Di
 
 * Speed: fifteen minutes with an agent produced twelve working behaviors, not a slide with a flowchart, ready to show to customers.
 * Reach: we explored debouncing, explicit locks, suggestion-only patterns, and sticky matching – ideas that rarely survive a whiteboard session intact. There was no "sounds fancy" or "that's too difficult" getting in the way early.
-* Documentation: the HTML *is* the spec. Each option is a named object with a one-line description and setup code. configuration, validation, and transform logic live in one place. When an engineer goes to implement the selected behavior, they are not translating a paragraph or squinting at a mockup; they are reading the prototype.
+* Documentation: the HTML *is* the spec. Each option is a named object with a one-line description and setup code. Configuration, validation, and transform logic live in one place. When an engineer goes to implement the selected behavior, they are not translating a paragraph or squinting at a mockup; they are reading the prototype.
 * Honest comparison: side-by-side beats “imagine option seven.” The reveal/hide UI also records the decision process: here is what we tried, here is what we kept.
 
 ## When to use this method
