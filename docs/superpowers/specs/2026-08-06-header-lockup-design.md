@@ -65,6 +65,7 @@ Mark link uses `aria-label` (decorative `alt=""`) so WCAG H30 is satisfied witho
   - `--site-lockup-cap-nudge: 2.2px` — mark top below h1 em top (Big Shoulders capital ink)
   - `--site-lockup-inline-nudge: 3px` — `margin-inline-start` on `.site-lockup` vs main column
   - `--site-lockup-tagline-ascent: 0.9375` — Public Sans italic ascent/em for baseline math in mark height
+  - **Units decision (2026-08-11):** leave these as `px`. Full-page browser zoom scales CSS `px` with `rem`, so the tuned lockup stays proportional under Cmd/Ctrl +/-. Mixing `px` nudges with `rem` type looks fragile on paper but is not a browser-zoom bug. Real drift only if root font-size changes (user default text / text-only zoom) while nudges stay absolute — low priority; revisit `rem` later if that matters.
 - `hgroup`: flex baseline (galleries / other uses); **`.site-lockup`** is the header flex row (mark + title stack).
 - `.site-lockup hgroup { display: block }` so logotype stacks above tagline.
 - `.site-mark-link` / `.site-mark`: block; mark link `flex-shrink: 0` + `aria-label`; mark sized so ink top ≈ logotype capital ink and ink bottom ≈ tagline alphabetic baseline.
@@ -84,3 +85,4 @@ Automated: `pnpm run test css`, `pnpm run test frontmatter`; optionally `pnpm ru
 
 - Align OG `.og-hgroup` with the settled live header.
 - Favicons from the mark if desired later.
+- Optional: convert optical nudge tokens from `px` → `rem` if root-font-size / text-only zoom tracking becomes worth the re-tune (see Future in `docs/ideas.md`).
