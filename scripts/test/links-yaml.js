@@ -22,6 +22,15 @@ function validateDescription(description) {
     return { valid: false, error: 'Description must be a string if provided' };
   }
 
+  // In double-quoted YAML, \\“ becomes a literal backslash + curly quote on the site.
+  // Nest quotes with \" for ASCII " and bare “…” for curly — never \\“ / \\”.
+  if (/\\[“”]/.test(description)) {
+    return {
+      valid: false,
+      error: 'Description contains a backslash before a curly quote (\\\\“ or \\\\”). Use bare “…” inside the YAML string; only ASCII " needs \\".'
+    };
+  }
+
   return { valid: true };
 }
 
