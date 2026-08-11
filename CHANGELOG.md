@@ -8,11 +8,19 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Orient the new-tab pop-out icon with window NE and L SW.
 - Add remaindered links for 2026-08-11.
 - Draft post: care has to show up in the product.
+- Sync OG images to soft content field and fix date-only PNG names.
+- Fix remaining date-only OG filename for engaging-in-critique.
+- Prefer post filenames for OG PNG basenames.
+- Restyle OG images as one-sheet cards matching live type.
+- Document home tagline deploy-salt design.
+- Plan home tagline deploy salt; note pool-growth reshuffle.
+- Add home-only tagline salt support and expand pool.
+- Wire git HEAD salt into taglineForPage for home only.
+- Document home tagline deploy salt behavior.
 - Styling refinements: 5 commits
 - Correct typo in breakpoint comment (reasonable).
 - Accept var() aliases in OG light theme color extraction
-- Archive finished craft items in ideas.md
-- Note lockup optical tokens stay px under browser zoom
+- Documentation updates: 3 commits
 
 ## 2026-08-10
 
