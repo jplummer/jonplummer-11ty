@@ -21,6 +21,7 @@ Salting every URL with a deploy/commit value would reshape the lockup on nearly 
 - Salting `/about/` or any path other than `/`.
 - Changing OG / feed / document-title copy.
 - Forcing rotation on redeploy of the same `HEAD` (same commit → same home line).
+- Split browse/home pools or sticky front-matter taglines (rejected as needless complexity).
 
 ## Behavior
 
@@ -32,6 +33,8 @@ Keep the existing six; append:
 - `Evidence over ego`
 
 Canonical `tagline` remains `Making ideas tangible` and must stay in the pool.
+
+**One pool for all URLs.** Growing the pool changes `% length` for every page, so that deploy intentionally reshuffles lockups sitewide once. That is accepted: pool growth is rare; ongoing deploy-to-deploy churn stays home-only via salt. Do not add split-pool or “sticky at creation” machinery unless that one-time cost becomes a real problem.
 
 ### Pick rule (`eleventy/utils/tagline-for-url.js`)
 
@@ -51,7 +54,8 @@ Same 32-bit string hash as today (`hash * 31 + charCode`, then `Math.abs(hash) %
 
 ## Consequences
 
-- A new commit that ships can change **only** the home lockup line (plus any pages whose content actually changed). Content-hash purge blast from salt alone stays ~one URL.
+- A new commit that ships can change **only** the home lockup line from salt (plus any pages whose content actually changed). Content-hash purge blast from salt alone stays ~one URL.
+- Shipping a **longer or reordered pool** reshuffles lockups on (potentially) every page for that one deploy — expected and OK.
 - Local `pnpm run build` / `--watch` on the same `HEAD` keep a stable home tagline.
 - Expanding the pool past six usually splits `/` vs `/about/` even when home is unsalted; salted home further decouples them across deploys.
 
@@ -67,5 +71,6 @@ Extend `pnpm run test site-branding` (or the unit covering `pickTaglineForUrl`):
 
 ## Out of scope follow-ups
 
-- More pool lines later.
+- More pool lines later (expect one-time full lockup reshuffle when length/order changes).
 - Optional `TAGLINE_SALT` env override for forced reshuffle without a new commit.
+- Split browse vs home pools / front-matter sticky taglines (only if purge cost from pool growth becomes painful).
