@@ -30,18 +30,16 @@
   /* Modular type scale based on 1rem (16px) base – see: https://webtypography.net/3.1.1 */
   --font-family: "Libre Franklin", sans-serif;
   --font-family-display: "Big Shoulders", sans-serif;
-  --text-size: 16px;
+  --text-size: 16px; /* legacy alias; prefer --font-size-base */
   --line-height: 1.5;
   --paragraph-spacing: calc(var(--line-height) * 1em);
-  --font-size-2xs: 0.875rem; --line-height-2xs: 1.4286; /* ratio: 0.875 — one step below base for quiet chrome (credits) */
-  --font-size-xs: 1rem; --line-height-xs: 1.5; /* base: 1.0 */
-  --font-size-sm: 1.125rem; --line-height-sm: 1.3334; /* ratio: 1.125 */
-  --font-size-md: 1.25rem; --line-height-md: 1.2; /* ratio: 1.25 */
-  --font-size-lg: 1.5rem; --line-height-lg: 1.2; /* ratio: 1.5 */
-  --font-size-xl: 2rem; --line-height-xl: 1.2; /* ratio: 2.0 */
-  --font-size-2xl: 2.5rem; --line-height-2xl: 1.2; /* ratio: 2.5 */
-  --font-size-3xl: 4rem; --line-height-3xl: 1.2; /* ratio: 4.0 */
-  --font-size-logotype: 2.25rem; /* 36px — one-off for the header lockup, deliberately off the modular scale  to bridge the gap between the modular scale and the logo itself */
+  /* Lean type ladder (reading surface). Logotype stays off-scale. */
+  --font-size-quiet: 0.875rem; --line-height-quiet: 1.4286; /* license, credits, utility disclosures */
+  --font-size-base: 1rem; --line-height-base: 1.5; /* body + post code/pre */
+  --font-size-lg: 1.5rem; --line-height-lg: 1.2; /* h3 */
+  --font-size-xl: 2rem; --line-height-xl: 1.2; /* h2 */
+  --font-size-2xl: 2.5rem; --line-height-2xl: 1.2; /* h1 */
+  --font-size-logotype: 2.25rem; /* header lockup only */
   /*
     Header lockup optical tokens (settled 2026-08-06). Cap→baseline isn’t a CSS
     layout feature across two fonts + an image; these encode the tuned lockup.
@@ -56,11 +54,10 @@
   --site-lockup-tagline-baseline-nudge: 2.5px; /* eye-tune; tagline margin only */
   --line-height-tight: 1.1;
 
-  /* Font weights */
-  --font-weight-thin: 100;
+  /* Font weights — light (quiet chrome), semibold (lockup), bold (headings) */
+  --font-weight-light: 300;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
-  --font-weight-black: 900;
 
   /* Letter spacing */
   --letter-spacing-tight: -0.025em;
@@ -134,7 +131,7 @@ html {
 }
 
 /* Remove default margin in favour of better control in authored CSS */
-body, h1, h2, h3, h4, p,
+body, h1, h2, h3, p,
 figure, blockquote, dl, dd, section {
   margin-block-end: 0;
 }
@@ -248,8 +245,8 @@ hgroup {
     var(--font-size-logotype)
     - var(--site-lockup-cap-nudge)
     + var(--site-lockup-stack-gap)
-    + ((var(--line-height-xs) - 1) / 2 * var(--font-size-xs))
-    + (var(--site-lockup-tagline-ascent) * var(--font-size-xs))
+    + ((var(--line-height-base) - 1) / 2 * var(--font-size-base))
+    + (var(--site-lockup-tagline-ascent) * var(--font-size-base))
   );
   aspect-ratio: 1;
 }
@@ -301,7 +298,7 @@ article footer {
 /* Embedded interactive demo (iframe + pop-out link) */
 .post-demo-popout {
   margin: 0 0 var(--spacing-xs);
-  text-align: right;
+  text-align: left;
 }
 
 .post-demo-popout a {
@@ -413,8 +410,8 @@ nav li {
 body > header nav a:any-link,
 nav.pagination a:any-link,
 nav.post-navigation a:any-link {
-  font-size: var(--font-size-xs);
-  line-height: var(--line-height-xs);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
   text-decoration: none;
   color: var(--link-color);
   transition: color 0.3s ease;
@@ -500,17 +497,11 @@ nav.pagination a.next::after {
 /* === TYPOGRAPHY === */
 
 /* Headings */
-h1, h2, h3, h4 {
+/* Headings — h1–h3 only (no h4–h6 in content; YAGNI) */
+h1, h2, h3 {
   margin: var(--spacing-md) 0 0.25rem 0;
   text-wrap: balance;
-}
-
-/* Unified heading styles */
-h1, h2, h3, h4, h5, h6 {
   letter-spacing: var(--letter-spacing-tight);
-}
-
-h1, h2, h3, h4, h5 {
   font-weight: var(--font-weight-bold);
 }
 
@@ -529,22 +520,6 @@ h3 {
   line-height: var(--line-height-lg);
 }
 
-h4 {
-  font-size: var(--font-size-md);
-  line-height: var(--line-height-md);
-}
-
-h5 {
-  font-size: var(--font-size-sm);
-  line-height: var(--line-height-sm);
-}
-
-h6 {
-  font-size: var(--font-size-xs);
-  line-height: var(--line-height-xs);
-  font-weight: var(--font-weight-black);
-}
-
 /* Hgroup typography */
 
 hgroup h1 {
@@ -559,8 +534,8 @@ hgroup h1 {
 
 hgroup p {
   margin: 0;
-  font-size: var(--font-size-xs);
-  line-height: var(--line-height-xs);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
   color: var(--text-color-light);
 }
 
@@ -672,7 +647,9 @@ article details > summary:hover::before {
 
 .site-disclosure > summary {
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: var(--font-size-quiet);
+  line-height: var(--line-height-quiet);
+  font-weight: var(--font-weight-light);
   color: var(--text-color-light);
   list-style: none;
   display: flex;
@@ -713,7 +690,8 @@ article details > summary:hover::before {
 }
 
 .site-disclosure .code {
-  font-size: 0.65rem;
+  font-size: var(--font-size-quiet);
+  line-height: var(--line-height-quiet);
   overflow: auto;
   max-height: 12rem;
   background: var(--gallery-code-bg, var(--background-color));
@@ -739,18 +717,19 @@ button, input, label {
   line-height: var(--line-height-tight);
 }
 
-/* License typography and colors */
+/* Quiet chrome — license, credits, utility disclosures (not post code/pre) */
 .license,
-footer p {
-  font-size: var(--font-size-xs);
-  line-height: var(--line-height-xs);
+footer p,
+.colophon-signature figcaption {
+  font-size: var(--font-size-quiet);
+  line-height: var(--line-height-quiet);
+  font-weight: var(--font-weight-light);
   color: var(--link-visited-color);
 }
 
 .license {
   text-align: left;
   margin: 0;
-  font-weight: 300;
 }
 
 /*
@@ -770,8 +749,8 @@ main:not([data-tags*="page"]) ~ footer .license {
 
 /* Code blocks */
 code, pre {
-  font-size: var(--font-size-xs);
-  line-height: var(--line-height-xs);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
 }
 
 pre {
@@ -932,7 +911,7 @@ article.portfolio-detail {
     }
 
     /* Grid gap handles spacing between grid items */
-    & > :is(p, ul, ol, h1, h2, h3, h4, h5, h6) {
+    & > :is(p, ul, ol, h1, h2, h3) {
       margin-block: 0;
     }
 
@@ -970,8 +949,8 @@ article.portfolio-detail {
       /* Captions align with the text column */
       & figcaption {
         margin-top: var(--spacing-xs);
-        font-size: var(--font-size-xs);
-        line-height: var(--line-height-xs);
+        font-size: var(--font-size-base);
+        line-height: var(--line-height-base);
         color: var(--text-color-light);
         font-style: italic;
         grid-column: 2;
@@ -1010,8 +989,8 @@ article.portfolio-detail {
 
         & figcaption {
           margin-top: var(--spacing-xs);
-          font-size: var(--font-size-xs);
-          line-height: var(--line-height-xs);
+          font-size: var(--font-size-base);
+          line-height: var(--line-height-base);
           color: var(--text-color-light);
           font-style: italic;
           padding-left: 0;
@@ -1139,8 +1118,8 @@ article.portfolio-detail {
 
 .figure-lightbox-caption {
   margin: var(--spacing-xs) auto 0;
-  font-size: var(--font-size-xs);
-  line-height: var(--line-height-xs);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
   color: var(--text-color-light);
   font-style: italic;
   max-width: 40rem;
@@ -1222,16 +1201,16 @@ article.portfolio-item#monotasker img {
 }
 
 article.portfolio-item > a p {
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-base);
   font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-sm);
+  line-height: var(--line-height-base);
   margin: 0;
 }
 
 article.portfolio-item p.portfolio-item-description {
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-base);
   font-weight: normal;
-  line-height: var(--line-height-xs);
+  line-height: var(--line-height-base);
   color: var(--text-color-light);
   margin: 0;
   margin-top: var(--spacing-xs);
@@ -1256,13 +1235,6 @@ article.portfolio-item p.portfolio-item-description {
   width: 120px;
   height: auto;
   border: 0;
-}
-
-.colophon-signature figcaption {
-  font-size: var(--font-size-2xs);
-  line-height: var(--line-height-2xs);
-  font-weight: 300;
-  color: var(--link-visited-color); /* same quiet chrome as .license */
 }
 
 
@@ -1310,7 +1282,7 @@ header a.skip:focus {
   list-style: none;
   margin: 0;
   padding: 0;
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-base);
   color: var(--text-color-light);
 }
 
@@ -1371,7 +1343,7 @@ header a.skip:focus {
 }
 
 .og-preview-item h3 {
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-lg);
   margin-bottom: var(--spacing-sm);
   color: var(--text-color);
 }
@@ -1418,7 +1390,7 @@ header a.skip:focus {
 }
 
 .og-images-grid-item code {
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-base);
   word-break: break-all;
 }
 
@@ -1622,7 +1594,7 @@ header a.skip:focus {
   }
 
   /* Typography adjustments for print */
-  h1, h2, h3, h4, h5, h6 {
+  h1, h2, h3 {
     page-break-after: avoid;
     page-break-inside: avoid;
   }
@@ -1640,11 +1612,6 @@ header a.skip:focus {
   h3 {
     font-size: 12pt;
     margin-top: 0.75rem;
-  }
-
-  h4, h5, h6 {
-    font-size: 11pt;
-    margin-top: 0.5rem;
   }
 
   p {

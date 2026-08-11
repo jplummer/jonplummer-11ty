@@ -17,15 +17,15 @@
 }
 
 .type-tool-page .tool-note {
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-base);
   color: var(--text-color-light);
-  line-height: var(--line-height-md);
+  line-height: var(--line-height-base);
   margin: 0 0 var(--spacing-md);
   max-width: 50rem;
 }
 
 .type-tool-page .tool-note code {
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-quiet);
 }
 
 .type-tool-page .tool-controls {
@@ -52,7 +52,7 @@
 }
 
 .type-tool-page .tool-field label {
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-quiet);
   color: var(--text-color-light);
 }
 
@@ -68,7 +68,7 @@
   border: none;
   background: var(--content-background-color);
   color: var(--text-color);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-base);
 }
 
 .type-tool-missing {

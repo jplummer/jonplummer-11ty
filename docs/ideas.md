@@ -6,10 +6,10 @@
   - **Goal**: Make spareness read as intentional craft, not default blankness. Color is already pared-down; skip ornament (texture / alternate stylesheets stay in Future → Craft atmosphere). Vertical alignment is already in good shape — don’t chase “stronger grid” as a separate track unless something new looks off.
   - **Order of work** (do not reorder casually):
     1. ~~**Margins + vertical spacing**~~ — **Done (2026-08-10):** one-sheet field; spacing ladder through `--spacing-4xl`; `--gutter` inline-only; below-only craft beats; license ↔ section align (flush on `tags: page`). **Optional later:** widen L/R via gutter / max-width.
-    2. **Font weights** — Audit live use of thin / semibold / bold / black; aim for a small reading palette (e.g. regular body + one title weight + quiet chrome) and demote extras that don’t earn a role.
+    2. ~~**Type sizes + weights**~~ — **Done (2026-08-10):** lean reading ladder — `--font-size-quiet` / `--font-size-base` / h3–h1 / `--font-size-logotype`; weights light / semibold / bold; no h4–h6; no dead size/weight tokens. Demo pop-out left-aligned.
     3. **Text greys / blacks** — Audit roles that use `--text-color`, `--text-color-light`, `--link-visited-color`, and any one-off mixes; collapse toward a short set of intentional ink levels (body, quiet chrome, links) rather than a scatter of near-blacks and greys.
-    4. **Type steps on the reading surface** (after spacing + weight) — Prefer few live sizes in posts/chrome even if the token scale stays rich.
-    5. **Color scheme refinement, especially dark** — Keep as craft signal once spacing/weight/ink are settled (or earlier if dark specifically feels wrong).
+    4. ~~**Type steps on the reading surface**~~ — Folded into (2).
+    5. **Color scheme refinement, especially dark** — Keep as craft signal once type/ink are settled (or earlier if dark specifically feels wrong).
     6. **Audit focus behavior and keyboard navigation**
     7. **Accessibility check and stats for the colophon** — Clarify or drop once a real pass is done (site contrast/a11y tests already cover a lot).
   - **Out of scope for this track**: overflow texture, outlandish alternate stylesheet (Future → Craft atmosphere).
@@ -125,9 +125,11 @@
 
 ## DONE
 
+- **Lean type ladder** (2026-08-10) — Reading tokens: `--font-size-quiet` (light — license, credits, lab disclosures), `--font-size-base` (body + post `code`/`pre`), `--font-size-lg/xl/2xl` (h3/h2/h1), `--font-size-logotype`. Weights: light / semibold / bold only. Dropped h4–h6 rules and unused `xs`/`sm`/`md`/`2xs`/`3xl` / thin / black tokens. About recommender names plain `###`. Demo pop-out left-aligned.
+
 - **One-sheet layout + spacing ladder + license align** (2026-08-10) — Dropped outer mat (`html`/`body` `--content-background-color`; header/main/footer transparent). Spacing `--xs`…`--4xl`; `--gutter` = `--spacing-lg` for **inline only**; shell `padding-block` uses `--spacing-lg`. Below-only craft: header `--4xl`, posts `--3xl`, link-cluster seam `--2xl`. License left-aligns to article `section` column except on `tags: page` (incl. `/portfolio/` index). Optional later: widen measure via gutter/max-width. Semantic spacing aliases deferred.
 - Per-page lockup tagline rotation (2026-08-10) — Pool in `site.taglines`; header uses `page.url | taglineForPage` (deterministic hash). Canonical `site.tagline` / `site.title` unchanged for `<title>`, OG, feeds.
-- Colophon sketch credit as quiet image credit (2026-08-10) — Under sketch; roman; `--font-size-2xs` / license-quiet color; not a peer label beside the portrait.
+- Colophon sketch credit as quiet image credit (2026-08-10) — Under sketch; roman; `--font-size-quiet` / license-quiet color; not a peer label beside the portrait.
 - Drop needless chrome italics on tagline + footer license (2026-08-10) — Captions, blockquotes keep italic.
 - ~~Portfolio grid styling~~ (2026-08-10) — Hover underlines, thumb stroke, one thumb+title link, Monotasker `object-position: center 20%`.
 - ~~Logo / logotype / tagline lockup~~ (2026-08-10) — Tagline baseline nudge vs mark bottom (`--site-lockup-tagline-baseline-nudge`).

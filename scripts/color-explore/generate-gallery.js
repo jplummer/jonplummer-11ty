@@ -2335,7 +2335,7 @@ function renderHtml(visibleSections, meta, options = {}) {
       --gallery-panel-bg: color-mix(in oklch, var(--content-background-color) 88%, var(--text-color) 12%);
       --gallery-code-bg: color-mix(in oklch, var(--content-background-color) 78%, var(--text-color) 22%);
     }
-    .gallery-ui h2.page-title { margin-top: 0; font-size: var(--font-size-md); font-weight: var(--font-weight-semibold); }
+    .gallery-ui h2.page-title { margin-top: 0; font-size: var(--font-size-base); font-weight: var(--font-weight-semibold); }
     .gallery-ui .sr-only {
       position: absolute;
       width: 1px;
@@ -2721,18 +2721,16 @@ function renderHtml(visibleSections, meta, options = {}) {
       width: 100%;
       /* Bands use full jp-page width (avoid var(--max-width) from site :root / 66rem). */
       --max-width: none;
-      --font-size-3xl: 1.35rem;
-      --line-height-3xl: 1.15;
       --font-size-2xl: 1.125rem;
       --line-height-2xl: 1.22;
       --font-size-xl: 1.05rem;
       --line-height-xl: 1.2;
       --font-size-lg: 1rem;
       --line-height-lg: 1.25;
-      --font-size-md: 0.9375rem;
-      --line-height-md: 1.3;
-      --font-size-xs: 0.7rem;
-      --line-height-xs: 1.35;
+      --font-size-base: 0.7rem;
+      --line-height-base: 1.35;
+      --font-size-quiet: 0.65rem;
+      --line-height-quiet: 1.35;
       --gutter: 0.65rem;
       --spacing-xs: 0.35rem;
       --spacing-sm: 0.5rem;

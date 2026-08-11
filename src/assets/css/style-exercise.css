@@ -8,9 +8,9 @@
 
 .style-exercise-page .style-exercise-lede {
   margin-bottom: var(--spacing-xl);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-base);
   color: var(--text-color-light);
-  line-height: var(--line-height-md);
+  line-height: var(--line-height-base);
 }
 
 .style-exercise-page .color-test-content {
@@ -53,7 +53,7 @@
 .style-exercise-page .style-exercise-cta {
   display: inline-block;
   padding: var(--spacing-sm) var(--spacing-md);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-base);
   cursor: pointer;
   background: var(--link-color);
   color: var(--content-background-color);

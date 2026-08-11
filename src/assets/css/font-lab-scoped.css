@@ -57,8 +57,8 @@
   flex-wrap: wrap;
   gap: 0.45rem 0.75rem;
   margin-top: var(--spacing-sm);
-  font-size: var(--font-size-xs);
-  line-height: var(--line-height-xs);
+  font-size: var(--font-size-quiet);
+  line-height: var(--line-height-quiet);
   color: var(--text-color-light);
 }
 

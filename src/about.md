@@ -31,7 +31,7 @@ I mentor at [Designed.org](https://designed.org) and [tupu.io](https://tupu.io).
 
 ## Recommendations
 
-### **Danny Peck**, Principal Software Engineer, Invoca
+### Danny Peck, Principal Software Engineer, Invoca
 
 Jon brings a rare combination of design leadership and technical curiosity that makes him uniquely effective in guiding teams through the AI-agent transformation. At Invoca, he's been instrumental in bridging the gap between agentic tooling and human-centered product thinking, from facilitating our AI Voice Agents concept sprint (driving cross-functional alignment across eng, PM, and UX in days) to actively building his own Product Brief starter skill for AI-assisted workflows and championing "thin slice" MVP thinking tailored to our new strategic direction.
 
@@ -39,7 +39,7 @@ What sets Jon apart is his willingness to get hands dirty. He doesn't just theor
 
 His high thoughtfulness shows in how he frames problems: not "how do we automate this?" but "what's the complete experience?", ensuring AI acceleration doesn't sacrifice craft. He's the collaborative, pragmatic leader you want steering an AI-driven SDLC transition.
 
-### **Brandon McCarty**, Vice President of Sales Engineering, Invoca
+### Brandon McCarty, Vice President of Sales Engineering, Invoca
 
 I collaborated with Jon at Invoca on several complex customer challenges. As a leader of Sales Engineering teams, I often see the disconnect between what customers think they want and what they actually need to drive business outcomes. Jon was always the person who could dig under the hood, analyze raw customer friction, and figure out the true underlying solution.
 
@@ -51,7 +51,7 @@ The Call Review Console: He helped build an all-in-one interface for Quality Man
 
 Jon is naturally curious, asks incredible questions, and doesn't require hand-holding or pre-packaged requirements to deliver value. He meets teams where they are, and I’d jump at the chance to work with him again without hesitation.
 
-### **Nick Burwell**, Vice President of Architecture, Invoca
+### Nick Burwell, Vice President of Architecture, Invoca
 
 I worked with Jon for several years, partnering on large, cross-cutting initiatives where UX and architecture had to move together.
 
@@ -61,7 +61,7 @@ Jon leads with questions rather than answers, and prefers to lead by showing rat
 
 I really enjoyed working with Jon, his passion and expertise for product design speak for themselves.
 
-### **Samuel Reynolds**, Senior Technical Product Manager, Invoca
+### Samuel Reynolds, Senior Technical Product Manager, Invoca
 
 I worked with Jon for several years at Invoca, partnering across Design, Engineering, and Product on initiatives where customer insight and architecture had to move together.
 
@@ -73,7 +73,7 @@ Jon is also a strong mentor – he creates time for the people in his org and he
 
 Jon is who you want framing the problem, prototyping the solution, and keeping a team honest through the process. He raised the bar for how our team worked, and I'd welcome the chance to work with him again.
 
-### **Brittany Choy**, Senior User Experience Designer, Invoca
+### Brittany Choy, Senior User Experience Designer, Invoca
 
 I worked as a UX Designer for Jon at Invoca, where I eventually grew to be a Sr. UX Designer under his attentive and caring leadership.
 
@@ -85,7 +85,7 @@ In uncertain situations, whether navigating changing priorities or the rapidly e
 
 In short, Jon expertly leads with confidence and compassion, and I always appreciated his genuine investment in both my career and personal growth. I would gladly work with Jon again.
 
-### **Adam Smith-Kipnis**, Senior User Experience Designer, Invoca
+### Adam Smith-Kipnis, Senior User Experience Designer, Invoca
 
 I had the privilege of working with Jon Plummer as my manager at Invoca. Jon is the kind of design leader who makes the people around him more thoughtful, and the work itself better for it.
 
@@ -97,7 +97,7 @@ Third, Jon invests in his team's development. He understood my aspirations, coac
 
 Above all, Jon brings genuine commitment to the craft of design and the practice of leadership. Any team would be fortunate to have him.
 
-### **Suzanne Hopkins**, Director of Product Management, Cayuse
+### Suzanne Hopkins, Director of Product Management, Cayuse
 
 Upon joining our team, Jon immediately made significant improvements to our team by building the framework for a design library. His logical thinking and pragmatic approach to process improvements and design were foundational in building a scalable framework for our team of Product Managers and UX designers.
 
@@ -105,7 +105,7 @@ Jon also puts inclusion and team happiness at the core of building his team. He 
 
 In short, Jon is a strong, compassionate leader who is an asset to any leadership team. I welcome any opportunity to work with Jon in the future.
 
-### **Jamie Bolton**, UX Design Manager, Linksys
+### Jamie Bolton, UX Design Manager, Linksys
 
 Jon is a steady leader. I worked as a UX Designer for Jon at Belkin. At that time, Jon led the UX department for 3 brands, Belkin, Linksys, and Wemo.
 
