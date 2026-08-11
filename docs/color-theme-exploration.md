@@ -2,7 +2,7 @@
 
 ## Goal
 
-Generate **many** candidate light/dark palettes (wider than hand-picked “safe” choices), **filter** them with the same APCA mindset as `pnpm run test color-contrast`, then **refine** a shortlist (gallery + `**/color/`** for comparison) and ship **2–4** solid themes in `src/assets/css/jonplummer.css`.
+Generate **many** candidate light/dark palettes (wider than hand-picked “safe” choices), **filter** them with the same APCA mindset as `pnpm run test color-contrast` (lived pairs: ink / quiet / accent), then **refine** a shortlist (gallery + `**/color/`** for comparison) and ship **2–4** solid themes in `src/assets/css/jonplummer.css`. Gallery paste matches the site three-color model: invent accent only; `--link-hover-color` / `--link-active-color` and `--link-visited-color` paste as `var(--link-color)` / `var(--text-color-light)`.
 
 ## Baby plan (pipeline)
 

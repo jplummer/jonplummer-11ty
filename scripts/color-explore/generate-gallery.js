@@ -204,6 +204,45 @@ const JONPLUMMER_PASTE_KEYS = [
   'link-active-color'
 ];
 
+/**
+ * Site three-color model: hover/active alias accent; visited aliases quiet.
+ * Paste emits `var(...)` for these (matches lived `jonplummer.css`).
+ */
+const JONPLUMMER_PASTE_ALIASES = {
+  'link-hover-color': '--link-color',
+  'link-visited-color': '--text-color-light',
+  'link-active-color': '--link-color'
+};
+
+/** Clone an in-memory OKLCH token object. */
+function cloneOklchToken(c) {
+  if (!c || typeof c !== 'object') return c;
+  return {
+    mode: c.mode || 'oklch',
+    l: c.l,
+    c: c.c ?? 0,
+    h: typeof c.h === 'number' && !Number.isNaN(c.h) ? c.h : 0
+  };
+}
+
+/**
+ * Lived interactive roles: accent (`link-color`), quiet (`text-color-light`), ink (`text-color`).
+ * Export names hover/active → accent; visited → quiet.
+ */
+function applyThreeColorLinkRoles(theme) {
+  if (!theme || typeof theme !== 'object') return theme;
+  const accent = theme['link-color'];
+  const quiet = theme['text-color-light'];
+  if (accent) {
+    theme['link-hover-color'] = cloneOklchToken(accent);
+    theme['link-active-color'] = cloneOklchToken(accent);
+  }
+  if (quiet) {
+    theme['link-visited-color'] = cloneOklchToken(quiet);
+  }
+  return theme;
+}
+
 /** Safe for a single-line CSS comment body (escapes a literal asterisk-slash close). */
 function sanitizePasteCommentText(s) {
   return String(s ?? '')
@@ -234,7 +273,7 @@ function tuningSlidersForRecipe(recipeId) {
 function pasteHeaderLines(selectionLead) {
   const lead = sanitizePasteCommentText(selectionLead) || 'Color gallery';
   return [
-    `  /* ${lead}: OKLCH (sRGB gamut), exported from this gallery build (APCA-tuned to ≥ ${MIN_LC} Lc on the sRGB path). light-dark(light, dark) picks the value matching the user's color scheme. */`,
+    `  /* ${lead}: OKLCH (sRGB gamut), exported from this gallery build (APCA-tuned to ≥ ${MIN_LC} Lc on the sRGB path). Lived roles are ink / quiet / accent; hover+active and visited paste as var() aliases. light-dark(light, dark) picks the value matching the user's color scheme. */`,
     '  color-scheme: light dark;'
   ];
 }
@@ -296,6 +335,11 @@ function oklchToJonplummerCss(color) {
 function tokensToJonplummerPasteBlock(lightObj, darkObj, selectionLead) {
   const lines = [...pasteHeaderLines(selectionLead)];
   for (const key of JONPLUMMER_PASTE_KEYS) {
+    const aliasTarget = JONPLUMMER_PASTE_ALIASES[key];
+    if (aliasTarget) {
+      lines.push(`  --${key}: var(${aliasTarget});`);
+      continue;
+    }
     const a = lightObj[key];
     const b = darkObj[key];
     if (!a || !b) continue;
@@ -344,22 +388,19 @@ const SITE_EMBED_EXTRA_CSS = `
 }
 `.trim();
 
-/** Same pairs as scripts/test/color-contrast.js (min Lc 60). */
+/**
+ * Lived APCA pairs (ink / quiet / accent on fields). Hover/active/visited alias those
+ * three after {@link applyThreeColorLinkRoles}, so they are not nudged separately.
+ */
 const PAIRS = [
   { mode: 'light', fg: 'text-color', bg: 'content-background-color' },
   { mode: 'light', fg: 'text-color', bg: 'background-color' },
   { mode: 'light', fg: 'text-color-light', bg: 'content-background-color' },
   { mode: 'light', fg: 'link-color', bg: 'content-background-color' },
-  { mode: 'light', fg: 'link-hover-color', bg: 'content-background-color' },
-  { mode: 'light', fg: 'link-visited-color', bg: 'content-background-color' },
-  { mode: 'light', fg: 'link-active-color', bg: 'content-background-color' },
   { mode: 'dark', fg: 'text-color', bg: 'content-background-color' },
   { mode: 'dark', fg: 'text-color', bg: 'background-color' },
   { mode: 'dark', fg: 'text-color-light', bg: 'content-background-color' },
-  { mode: 'dark', fg: 'link-color', bg: 'content-background-color' },
-  { mode: 'dark', fg: 'link-hover-color', bg: 'content-background-color' },
-  { mode: 'dark', fg: 'link-visited-color', bg: 'content-background-color' },
-  { mode: 'dark', fg: 'link-active-color', bg: 'content-background-color' }
+  { mode: 'dark', fg: 'link-color', bg: 'content-background-color' }
 ];
 
 function argvFlag(name) {
@@ -501,6 +542,7 @@ function nudgeThemeMode(theme, mode) {
     }
     if (!changed) break;
   }
+  applyThreeColorLinkRoles(theme);
 }
 
 function worstLc(theme, mode) {
@@ -529,7 +571,7 @@ function gray(l) {
   return o(l, 0, 0);
 }
 
-/** Achromatic ramps only (chroma 0). APCA nudging may pull links slightly off-gray. */
+/** Achromatic ramps only (chroma 0). Hover/visited/active filled by three-color roles after nudge. */
 function buildBlackWhiteThemes() {
   return [
     {
@@ -542,10 +584,7 @@ function buildBlackWhiteThemes() {
         'text-color': gray(0.06),
         'text-color-light': gray(0.4),
         'border-color': gray(0.82),
-        'link-color': gray(0.1),
-        'link-hover-color': gray(0.02),
-        'link-visited-color': gray(0.32),
-        'link-active-color': gray(0.16)
+        'link-color': gray(0.1)
       },
       dark: {
         'content-background-color': gray(0.2),
@@ -553,10 +592,7 @@ function buildBlackWhiteThemes() {
         'text-color': gray(0.96),
         'text-color-light': gray(0.7),
         'border-color': gray(0.38),
-        'link-color': gray(0.9),
-        'link-hover-color': gray(0.98),
-        'link-visited-color': gray(0.74),
-        'link-active-color': gray(0.84)
+        'link-color': gray(0.9)
       }
     },
     {
@@ -569,10 +605,7 @@ function buildBlackWhiteThemes() {
         'text-color': gray(0.12),
         'text-color-light': gray(0.42),
         'border-color': gray(0.72),
-        'link-color': gray(0.08),
-        'link-hover-color': gray(0.02),
-        'link-visited-color': gray(0.35),
-        'link-active-color': gray(0.2)
+        'link-color': gray(0.08)
       },
       dark: {
         'content-background-color': gray(0.24),
@@ -580,10 +613,7 @@ function buildBlackWhiteThemes() {
         'text-color': gray(0.93),
         'text-color-light': gray(0.68),
         'border-color': gray(0.42),
-        'link-color': gray(0.86),
-        'link-hover-color': gray(0.96),
-        'link-visited-color': gray(0.72),
-        'link-active-color': gray(0.8)
+        'link-color': gray(0.86)
       }
     },
     {
@@ -596,10 +626,7 @@ function buildBlackWhiteThemes() {
         'text-color': gray(0.02),
         'text-color-light': gray(0.35),
         'border-color': gray(0.55),
-        'link-color': gray(0.05),
-        'link-hover-color': gray(0),
-        'link-visited-color': gray(0.25),
-        'link-active-color': gray(0.12)
+        'link-color': gray(0.05)
       },
       dark: {
         'content-background-color': gray(0.14),
@@ -607,10 +634,7 @@ function buildBlackWhiteThemes() {
         'text-color': gray(1),
         'text-color-light': gray(0.78),
         'border-color': gray(0.32),
-        'link-color': gray(0.94),
-        'link-hover-color': gray(1),
-        'link-visited-color': gray(0.7),
-        'link-active-color': gray(0.88)
+        'link-color': gray(0.94)
       }
     }
   ];
@@ -1001,10 +1025,7 @@ function buildRawThemes(hues, mono, options = {}) {
       'text-color': ok(0.22, cText, h, mono),
       'text-color-light': ok(0.42, cText, h, mono),
       'border-color': ok(0.8, cBg * 0.6, h, mono),
-      'link-color': ok(0.5, cAcc, h, mono),
-      'link-hover-color': ok(0.44, cAcc, (h + 38) % 360, mono),
-      'link-visited-color': ok(0.38, cAcc * 0.55, (h - 42 + 360) % 360, mono),
-      'link-active-color': ok(0.48, cAcc * 0.9, (h + 145) % 360, mono)
+      'link-color': ok(0.5, cAcc, h, mono)
     };
 
     const dark = {
@@ -1013,11 +1034,10 @@ function buildRawThemes(hues, mono, options = {}) {
       'text-color': ok(0.93, cText * 0.5, h, mono),
       'text-color-light': ok(0.78, cText * 0.7, h, mono),
       'border-color': ok(0.4, cBg * 1.2, h, mono),
-      'link-color': ok(0.76, cAcc * 0.75, h, mono),
-      'link-hover-color': ok(0.82, cAcc * 0.65, (h + 38) % 360, mono),
-      'link-visited-color': ok(0.72, cAcc * 0.45, (h - 42 + 360) % 360, mono),
-      'link-active-color': ok(0.78, cAcc * 0.7, (h + 145) % 360, mono)
+      'link-color': ok(0.76, cAcc * 0.75, h, mono)
     };
+    applyThreeColorLinkRoles(light);
+    applyThreeColorLinkRoles(dark);
 
     themes.push({
       id: mono ? `mono-${Math.round(h)}` : `hue-${Math.round(h)}`,
@@ -1037,7 +1057,9 @@ function H(h, delta) {
 
 /**
  * Classic harmony families at base hue h (browser slider rotates all oklch hues later).
- * Neutrals sit on h; link states use recipe-specific hue offsets.
+ * Neutrals sit on h; accent (`link-color`) uses the recipe’s primary offset. Hover/active/
+ * visited are applied later via {@link applyThreeColorLinkRoles} (accent / quiet).
+ * Runtime `linkDeltas` still returns extra spokes for the hue-wheel markers only.
  *
  * @param {object} [opts]
  * @param {number} [opts.analogousSpread] — ±degrees for adjacent (analogous) flank (default 28, clamped 6–55).
@@ -1056,17 +1078,14 @@ function buildHarmonySchemes(hBase, opts = {}) {
   const cAcc = 0.19;
   const d = (deg) => H(h, deg);
 
-  function pair(linkD, hoverD, visitedD, activeD) {
+  function pair(linkD) {
     const light = {
       'content-background-color': ok(0.994, cBg * 0.4, d(0), false),
       'background-color': ok(0.91, cBg * 1.1, d(0), false),
       'text-color': ok(0.22, cText, d(0), false),
       'text-color-light': ok(0.42, cText, d(0), false),
       'border-color': ok(0.8, cBg * 0.6, d(0), false),
-      'link-color': ok(0.5, cAcc, d(linkD), false),
-      'link-hover-color': ok(0.44, cAcc * 0.95, d(hoverD), false),
-      'link-visited-color': ok(0.38, cAcc * 0.55, d(visitedD), false),
-      'link-active-color': ok(0.48, cAcc * 0.88, d(activeD), false)
+      'link-color': ok(0.5, cAcc, d(linkD), false)
     };
     const dark = {
       'content-background-color': ok(0.27, cBg * 1.8, d(0), false),
@@ -1074,11 +1093,10 @@ function buildHarmonySchemes(hBase, opts = {}) {
       'text-color': ok(0.93, cText * 0.5, d(0), false),
       'text-color-light': ok(0.78, cText * 0.7, d(0), false),
       'border-color': ok(0.4, cBg * 1.2, d(0), false),
-      'link-color': ok(0.76, cAcc * 0.75, d(linkD), false),
-      'link-hover-color': ok(0.82, cAcc * 0.7, d(hoverD), false),
-      'link-visited-color': ok(0.72, cAcc * 0.45, d(visitedD), false),
-      'link-active-color': ok(0.78, cAcc * 0.75, d(activeD), false)
+      'link-color': ok(0.76, cAcc * 0.75, d(linkD), false)
     };
+    applyThreeColorLinkRoles(light);
+    applyThreeColorLinkRoles(dark);
     return { light, dark };
   }
 
@@ -1086,61 +1104,47 @@ function buildHarmonySchemes(hBase, opts = {}) {
     {
       id: 'harmony-monochromatic',
       label: 'Monochromatic',
-      build: () => pair(0, 0, 0, 0)
+      build: () => pair(0)
     },
     {
       id: 'harmony-analogous',
       label: 'Adjacent (analogous)',
-      build: () => {
-        const flank = Math.round(0.857 * A);
-        return pair(A, A + flank, -flank, Math.round(1.429 * A));
-      }
+      build: () => pair(A)
     },
     {
       id: 'harmony-triadic',
       label: 'Triadic',
-      build: () => pair(120, 240, 120, 240)
+      build: () => pair(120)
     },
     {
       id: 'harmony-tetradic',
       label: 'Tetradic (square)',
-      build: () => pair(90, 180, 270, 135)
+      build: () => pair(90)
     },
     {
       id: 'harmony-skewed-triadic',
       label: 'Skewed triadic',
-      build: () => {
-        const a1 = 120 - K;
-        const a2 = 240 - K;
-        return pair(a1, a2, a1, a2);
-      }
+      build: () => pair(120 - K)
     },
     {
       id: 'harmony-skewed-tetradic',
       label: 'Skewed tetradic',
-      build: () => pair(90 - K, 180 - K, 270 - K, 135 - K)
+      build: () => pair(90 - K)
     },
     {
       id: 'harmony-complementary',
       label: 'Complementary',
-      build: () => pair(180, 204, 156, 192)
+      build: () => pair(180)
     },
     {
       id: 'harmony-split-complementary',
       label: 'Split complementary',
-      build: () =>
-        pair(180 - S, 180 + S, 180 - S - 4, 180 + S - 12)
+      build: () => pair(180 - S)
     },
     {
       id: 'harmony-skewed-split-complementary',
       label: 'Skewed split complementary',
-      build: () =>
-        pair(
-          180 - S + hk,
-          180 + S + hk,
-          180 - S + hk - 4,
-          180 + S + hk - 4
-        )
+      build: () => pair(180 - S + hk)
     }
   ];
 
@@ -1829,6 +1833,7 @@ function galleryEmbedRuntimeScriptJs() {
   return `(function () {
   var MIN_LC = ${MIN_LC};
   var JONPLUMMER_PASTE_KEYS = ${JSON.stringify(JONPLUMMER_PASTE_KEYS)};
+  var JONPLUMMER_PASTE_ALIASES = ${JSON.stringify(JONPLUMMER_PASTE_ALIASES)};
   ${tuningSlidersForRecipeStr}
   function pasteCommentLinesFromLead(lead) {
     return [
@@ -1836,7 +1841,7 @@ function galleryEmbedRuntimeScriptJs() {
         lead +
         ": OKLCH (sRGB gamut), exported from this gallery build (APCA-tuned to ≥ " +
         MIN_LC +
-        " Lc on the sRGB path). light-dark(light, dark) picks the value matching the user's color scheme. */",
+        " Lc on the sRGB path). Lived roles are ink / quiet / accent; hover+active and visited paste as var() aliases. light-dark(light, dark) picks the value matching the user's color scheme. */",
       '  color-scheme: light dark;'
     ];
   }
@@ -2065,12 +2070,11 @@ function galleryEmbedRuntimeScriptJs() {
       'text-color-light',
       'border-color'
     ];
+    /* Lived chip: accent only. hover/visited/active are paste aliases, not separate hues. */
     var LINK_KEYS_ORDER = [
-      ['link-color', 'link'],
-      ['link-hover-color', 'hover'],
-      ['link-visited-color', 'visited'],
-      ['link-active-color', 'active']
+      ['link-color', 'link']
     ];
+    var PASTE_ALIASES = JONPLUMMER_PASTE_ALIASES;
 
     function clampDeg(value, min, max, fb) {
       var n = Number(value);
@@ -2090,6 +2094,8 @@ function galleryEmbedRuntimeScriptJs() {
     }
 
     function linkDeltas(recipeId, A, S, K) {
+      /* Recipe spokes for the hue wheel. Lived accent uses link only; hover/visited/active
+         deltas are markers, not separate CSS roles (see buildSide / three-color paste). */
       var hk = K;
       var flank = Math.round(0.857 * A);
       switch (recipeId) {
@@ -2162,13 +2168,17 @@ function galleryEmbedRuntimeScriptJs() {
         if (!pair) return;
         parts.push('--' + k + ': ' + oklchCss(pair[0], pair[1], hub));
       });
-      LINK_KEYS_ORDER.forEach(function (item) {
-        var k = item[0];
-        var dk = item[1];
-        var pair = lcMap[k];
-        if (!pair) return;
-        parts.push('--' + k + ': ' + oklchCss(pair[0], pair[1], normHue(hub + d[dk])));
-      });
+      var linkPair = lcMap['link-color'];
+      if (linkPair) {
+        var accent = oklchCss(linkPair[0], linkPair[1], normHue(hub + d.link));
+        parts.push('--link-color: ' + accent);
+        parts.push('--link-hover-color: ' + accent);
+        parts.push('--link-active-color: ' + accent);
+      }
+      var quietPair = lcMap['text-color-light'];
+      if (quietPair) {
+        parts.push('--link-visited-color: ' + oklchCss(quietPair[0], quietPair[1], hub));
+      }
       return parts.join('; ');
     }
 
@@ -2203,6 +2213,10 @@ function galleryEmbedRuntimeScriptJs() {
       var lead = harmonyPasteSelectionLead(String(recipeLabel || ''), baseH, rotDeg, recipeId, A, S, K);
       var lines = pasteCommentLinesFromLead(lead).slice();
       JONPLUMMER_PASTE_KEYS.forEach(function (k) {
+        if (PASTE_ALIASES[k]) {
+          lines.push('  --' + k + ': var(' + PASTE_ALIASES[k] + ');');
+          return;
+        }
         var lk = null;
         var dk = null;
         if (NEUTRAL_KEYS.indexOf(k) >= 0) {
@@ -2212,19 +2226,12 @@ function galleryEmbedRuntimeScriptJs() {
             lk = oklchJonplummer(pl[0], pl[1], hub);
             dk = oklchJonplummer(pd[0], pd[1], hub);
           }
-        } else {
-          var delta = 0;
-          for (var li = 0; li < LINK_KEYS_ORDER.length; li++) {
-            if (LINK_KEYS_ORDER[li][0] === k) {
-              delta = d[LINK_KEYS_ORDER[li][1]];
-              break;
-            }
-          }
+        } else if (k === 'link-color') {
           var pl2 = recLight[k];
           var pd2 = recDark[k];
           if (pl2 && pd2) {
-            lk = oklchJonplummer(pl2[0], pl2[1], normHue(hub + delta));
-            dk = oklchJonplummer(pd2[0], pd2[1], normHue(hub + delta));
+            lk = oklchJonplummer(pl2[0], pl2[1], normHue(hub + d.link));
+            dk = oklchJonplummer(pd2[0], pd2[1], normHue(hub + d.link));
           }
         }
         if (lk && dk) {

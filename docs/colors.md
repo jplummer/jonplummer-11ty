@@ -6,7 +6,7 @@ Live tokens live in `src/assets/css/jonplummer.css` (`:root` with `light-dark()`
 
 Cool chrome; lived interactive colors are **ink** (`--text-color`), **quiet** (`--text-color-light`), and **accent** (`--link-color`). APCA-tuned OKLCH; `light-dark()` picks light vs dark.
 
-Export/lab aliases (same three colors on the live site): `--link-hover-color` / `--link-active-color` → accent; `--link-visited-color` → quiet. Exploratory gallery themes (DR / wild / terminal / harmony) may still invent distinct hover / visited / active.
+Export/lab aliases (same three colors on the live site and in `/color/` paste): `--link-hover-color` / `--link-active-color` → `var(--link-color)`; `--link-visited-color` → `var(--text-color-light)`. Gallery generators invent **accent** only; APCA nudge/filter uses ink / quiet / accent pairs. Exploratory hue-wheel markers may still show extra recipe spokes that are not separate CSS roles.
 
 ### Light mode
 

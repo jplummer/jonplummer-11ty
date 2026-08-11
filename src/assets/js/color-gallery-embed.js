@@ -2,6 +2,7 @@
 (function () {
   var MIN_LC = 60;
   var JONPLUMMER_PASTE_KEYS = ["text-color","text-color-light","border-color","background-color","content-background-color","link-color","link-hover-color","link-visited-color","link-active-color"];
+  var JONPLUMMER_PASTE_ALIASES = {"link-hover-color":"--link-color","link-visited-color":"--text-color-light","link-active-color":"--link-color"};
   function tuningSlidersForRecipe(recipeId) {
   return {
     a: recipeId === 'harmony-analogous',
@@ -20,7 +21,7 @@
         lead +
         ": OKLCH (sRGB gamut), exported from this gallery build (APCA-tuned to ≥ " +
         MIN_LC +
-        " Lc on the sRGB path). light-dark(light, dark) picks the value matching the user's color scheme. */",
+        " Lc on the sRGB path). Lived roles are ink / quiet / accent; hover+active and visited paste as var() aliases. light-dark(light, dark) picks the value matching the user's color scheme. */",
       '  color-scheme: light dark;'
     ];
   }
@@ -249,12 +250,11 @@
       'text-color-light',
       'border-color'
     ];
+    /* Lived chip: accent only. hover/visited/active are paste aliases, not separate hues. */
     var LINK_KEYS_ORDER = [
-      ['link-color', 'link'],
-      ['link-hover-color', 'hover'],
-      ['link-visited-color', 'visited'],
-      ['link-active-color', 'active']
+      ['link-color', 'link']
     ];
+    var PASTE_ALIASES = JONPLUMMER_PASTE_ALIASES;
 
     function clampDeg(value, min, max, fb) {
       var n = Number(value);
@@ -274,6 +274,8 @@
     }
 
     function linkDeltas(recipeId, A, S, K) {
+      /* Recipe spokes for the hue wheel. Lived accent uses link only; hover/visited/active
+         deltas are markers, not separate CSS roles (see buildSide / three-color paste). */
       var hk = K;
       var flank = Math.round(0.857 * A);
       switch (recipeId) {
@@ -346,13 +348,17 @@
         if (!pair) return;
         parts.push('--' + k + ': ' + oklchCss(pair[0], pair[1], hub));
       });
-      LINK_KEYS_ORDER.forEach(function (item) {
-        var k = item[0];
-        var dk = item[1];
-        var pair = lcMap[k];
-        if (!pair) return;
-        parts.push('--' + k + ': ' + oklchCss(pair[0], pair[1], normHue(hub + d[dk])));
-      });
+      var linkPair = lcMap['link-color'];
+      if (linkPair) {
+        var accent = oklchCss(linkPair[0], linkPair[1], normHue(hub + d.link));
+        parts.push('--link-color: ' + accent);
+        parts.push('--link-hover-color: ' + accent);
+        parts.push('--link-active-color: ' + accent);
+      }
+      var quietPair = lcMap['text-color-light'];
+      if (quietPair) {
+        parts.push('--link-visited-color: ' + oklchCss(quietPair[0], quietPair[1], hub));
+      }
       return parts.join('; ');
     }
 
@@ -387,6 +393,10 @@
       var lead = harmonyPasteSelectionLead(String(recipeLabel || ''), baseH, rotDeg, recipeId, A, S, K);
       var lines = pasteCommentLinesFromLead(lead).slice();
       JONPLUMMER_PASTE_KEYS.forEach(function (k) {
+        if (PASTE_ALIASES[k]) {
+          lines.push('  --' + k + ': var(' + PASTE_ALIASES[k] + ');');
+          return;
+        }
         var lk = null;
         var dk = null;
         if (NEUTRAL_KEYS.indexOf(k) >= 0) {
@@ -396,19 +406,12 @@
             lk = oklchJonplummer(pl[0], pl[1], hub);
             dk = oklchJonplummer(pd[0], pd[1], hub);
           }
-        } else {
-          var delta = 0;
-          for (var li = 0; li < LINK_KEYS_ORDER.length; li++) {
-            if (LINK_KEYS_ORDER[li][0] === k) {
-              delta = d[LINK_KEYS_ORDER[li][1]];
-              break;
-            }
-          }
+        } else if (k === 'link-color') {
           var pl2 = recLight[k];
           var pd2 = recDark[k];
           if (pl2 && pd2) {
-            lk = oklchJonplummer(pl2[0], pl2[1], normHue(hub + delta));
-            dk = oklchJonplummer(pd2[0], pd2[1], normHue(hub + delta));
+            lk = oklchJonplummer(pl2[0], pl2[1], normHue(hub + d.link));
+            dk = oklchJonplummer(pd2[0], pd2[1], normHue(hub + d.link));
           }
         }
         if (lk && dk) {
