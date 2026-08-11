@@ -19,15 +19,15 @@ Since getting started I've:
   - a [drop-in file/folder navigator](https://github.com/jplummer/lister-php) in semi-vibed PHP for my personal file pile site, further refined as I found more uses for it
   - a book map tool that my wife can edit and export to show on her personal website
   - a [privacy-focused URL-shortener](https://github.com/jplummer/prvt) that makes the smallest QR codes it can
-- in progress
+- made real progress on
   - an iOS app that points at ISS, Hubble, Webb, celestial bodies, and the seven wonders of the world (which are all DOWN from most places on the earth, of course) (Pointer-AR, coming soon to the Apple App Store)…
   - …that's in service of a *physical* pointer (a stationary robot?) that points at the ISS all the time, no matter where it is; parts for my first prototype are on the way; this might become a printable kit where I supply the BOM, STL files, and instructions for assembly so a hobbyist can put their own together
   - an IR time-of-flight sensor that will light up when I've pulled the car into the garage just far enough; this will probably become a printable kit as well
-- started but waiting for attention
+- started and paused
   - a MacOS menu bar clock that counts down to your statistical life expectancy (memento mori) or up from your date of birth (memento vivere)
   - a project to build a site to showcase tee shirt designs
   - a MacOS service that points out the words you've used in a selected passage of text that aren't in the ten thousand most common English words
-- not started
+- considered
   - an eInk display that fetches the front page of the newspaper every morning. If I can find a display and a way to drive it this is now a project I can accomplish on my own as an amateur.
   - a little device that prints the morning's calendar and tasks when you get to work in the morning, based on a cheapo thermal printer I scored second-hand
 
