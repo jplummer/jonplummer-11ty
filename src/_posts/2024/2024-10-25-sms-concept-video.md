@@ -15,7 +15,7 @@ I ran a concept sprint that arrived at this simple workflow: when someone calls 
 
 The trickiest part of an SMS AI agent concept demo is communicating the experience. We don't own the interface. Invoca controls the *conversation* – the workflow, the content, the timing – but the *visual presentation* belongs to Apple or Google. The Messages app looks exactly like it always has. It's the smoothness of the offer, the handoff to SMS, and the handoff back to phone, that are going to make the concept work well or feel clunky.
 
-This makes static mockups useless. A Figma frame of a Messages-style chat interface would invite feedback on design details we have no control over. Meanwhile, everyone on the planet thinks they already understand SMS – "it's just texting" — which means stakeholders come in with strong assumptions and low curiosity about what we actually needed to evaluate: does the conversation flow feel right? Is this something that would be pleasant to use? Is the timing believable? Would the effort to build this pay off?
+This makes static mockups useless. A Figma frame of a Messages-style chat interface would invite feedback on design details we have no control over. Meanwhile, everyone on the planet thinks they already understand SMS – "it's just texting" – which means stakeholders come in with strong assumptions and low curiosity about what we actually needed to evaluate: does the conversation flow feel right? Is this something that would be pleasant to use? Is the timing believable? Would the effort to build this pay off?
 
 We knew that customers liked our demo from the concept sprint, but executives, sales staff, and customer success managers needed a little something more to gain confidence in the idea.
 

@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2026-05-14T12:00:00-07:00"
 tags:
   - post
-description: Facilitation principles, phase-by-phase tips, and common pitfalls for running a Concept Sprint — the harder-to-document stuff that makes it work.
+description: Facilitation principles, phase-by-phase tips, and common pitfalls for running a Concept Sprint – the harder-to-document stuff that makes it work.
 ogImage: /assets/images/og/2026-05-14-concept-sprint-facilitation-tips.png
 ---
 These notes assume you've read the process documentation. What follows is the harder-to-document stuff: the principles, the traps, and the moves.
@@ -15,25 +15,25 @@ Your job is to be a warm, trusted guide with enough authority to keep things mov
 
 A few principles worth internalizing before you walk in the door:
 
-1. The most effective instructions describe the desired behavior as natural and inevitable. "As we listen to these presentations, we'll inevitably notice things customers struggle with or opportunities worth capturing — these stickies are here to capture those." The behavior is obvious and expected.
+1. The most effective instructions describe the desired behavior as natural and inevitable. "As we listen to these presentations, we'll inevitably notice things customers struggle with or opportunities worth capturing – these stickies are here to capture those." The behavior is obvious and expected.
 2. Give the reason with the instruction. People follow instructions better when they understand why. "Because we want to be able to cluster these later, we're going to write one idea per note" is more effective than "write one idea per note."
 3. Use "we" language. "We're going to write our problems down one per sticky note" is an invitation. "You need to write one idea per sticky" is a command.
 4. Model what you want. When you notice a customer problem during Immersion, say so and write it down. Ask clarifying questions, especially when others are not. The facilitator should never appear to be sitting back.
 5. Coach the room, not the individual. When someone needs a gentle push, ask whether the instruction would benefit everyone. If it would, speak it into the room rather than at the person.
-6. Contribute where you can, but hold your ideas lightly. Never be so invested in your own ideas that you exert undue influence on any phase. Contribute where it helps: generating ideas, noticing problems, reframing benefits, demo prep, pitch prep, note-taking during validation, and synthesis afterward. Don't take on anything critical during the build phase — you'll have too much else to do.
+6. Contribute where you can, but hold your ideas lightly. Never be so invested in your own ideas that you exert undue influence on any phase. Contribute where it helps: generating ideas, noticing problems, reframing benefits, demo prep, pitch prep, note-taking during validation, and synthesis afterward. Don't take on anything critical during the build phase – you'll have too much else to do.
 7. Let the schedule apply the pressure, not you. Name what needs to happen next and expect the group to participate.
-8. Celebrate little successes. The sprint has natural high points — a cluster that everyone recognizes, a concept that makes the room light up, a customer who gets visibly excited. Name these moments. Bring snacks.
+8. Celebrate little successes. The sprint has natural high points – a cluster that everyone recognizes, a concept that makes the room light up, a customer who gets visibly excited. Name these moments. Bring snacks.
 
 ## Immersion
 
-Steep the group in domain knowledge — product, customers, competition, market — deeply enough that they notice problems and generate benefits from a place of understanding.
+Steep the group in domain knowledge – product, customers, competition, market – deeply enough that they notice problems and generate benefits from a place of understanding.
 
-Before the first speaker, prime the room. Don't just introduce the speaker and step back. Set the group's job first: "We have a handful of people here to tell us about [topic]. They are [who they are] and they'll cover [areas]. Our job while they're talking is to notice customer problems we might solve or benefits we might deliver. We'll write those down as we go — one per sticky — and ask clarifying questions whenever something's unclear." This frames Immersion as active work, not a lecture.
+Before the first speaker, prime the room. Don't just introduce the speaker and step back. Set the group's job first: "We have a handful of people here to tell us about [topic]. They are [who they are] and they'll cover [areas]. Our job while they're talking is to notice customer problems we might solve or benefits we might deliver. We'll write those down as we go – one per sticky – and ask clarifying questions whenever something's unclear." This frames Immersion as active work, not a lecture.
 
 Pitfalls to watch for:
 
-- Pre-reads that are too long, too vague, or too internal. Good pre-reads are customer- and competitor-informed, concise, and scannable — research, interviews, data.
-- Speakers who arrive with conclusions rather than information. When you notice this happening, reframe it for the room: "This person has been deep in this space and may have opinions — our job is to learn what they know, so we can find our way to a great concept." You're not correcting the speaker; you're setting the group's posture.
+- Pre-reads that are too long, too vague, or too internal. Good pre-reads are customer- and competitor-informed, concise, and scannable – research, interviews, data.
+- Speakers who arrive with conclusions rather than information. When you notice this happening, reframe it for the room: "This person has been deep in this space and may have opinions – our job is to learn what they know, so we can find our way to a great concept." You're not correcting the speaker; you're setting the group's posture.
 - Participants going heads-down on laptops. Banish laptops for this phase; there's time in the schedule for people to be in touch with the office. Model active listening yourself: "That sounds like a real problem; I'm writing that down."
 - Too much internal content. The most common Immersion mistake is over-indexing on internal perspective and under-indexing on customer and market realities.
 
@@ -66,10 +66,10 @@ Ask the group: "How would a customer know that the problems in each of these the
 Pitfalls to watch for:
 
 - Benefits expressed as product features. Push toward customer outcomes: what does the customer feel, accomplish, or avoid? "Faster reporting" is a feature. "Always knowing what's working before the budget meeting" is a benefit.
-- Safe choices. Score on value to the customer and relevance to the business — how credible would we be delivering this, and is it strategically aligned? A benefit customers would love but that we're poorly positioned to deliver is less attractive than one where we have genuine standing. If there's a known constraint (e.g., a mandate to use a specific technology), score against that too.
+- Safe choices. Score on value to the customer and relevance to the business – how credible would we be delivering this, and is it strategically aligned? A benefit customers would love but that we're poorly positioned to deliver is less attractive than one where we have genuine standing. If there's a known constraint (e.g., a mandate to use a specific technology), score against that too.
 - Picking the comfortable cluster. Name it, ask what a customer would say if told the problem was solved, and remind the group that we'll learn more by getting out of our comfort zone.
 
-Problems and benefits are not one-to-one. A single problem may spawn many benefits; a single benefit may cover multiple problems. The latter is often especially attractive strategically — worth saying out loud when the group is close to a decision.
+Problems and benefits are not one-to-one. A single problem may spawn many benefits; a single benefit may cover multiple problems. The latter is often especially attractive strategically – worth saying out loud when the group is close to a decision.
 
 _Carry the selected problem/benefit set forward as the brief for concept generation. Write it where everyone can see it._
 
@@ -85,7 +85,7 @@ For the quick: ask them to sketch another way of delivering the same benefit, as
 
 On participant dynamics:
 
-- Engineers are the most likely to critique ideas at the wrong moment. Invoke the ground rules if needed — the gallery walk is for questions, not evaluation.
+- Engineers are the most likely to critique ideas at the wrong moment. Invoke the ground rules if needed – the gallery walk is for questions, not evaluation.
 - Senior leaders and architects are the most likely to resist sketching. Normalize "making marks on paper" for the whole team. It doesn't have to be pretty.
 - Some people will zoom out and try to synthesize everything into something lofty or abstract. Redirect them toward specifics: the scene, the people, the sequence.
 
@@ -97,7 +97,7 @@ _Concept selection is where the sprint pivots from divergence to convergence._
 
 ## Building (Phase 5)
 
-Produce a demo that expresses the problem, the benefit, and the concept — real enough for a customer to react to honestly.
+Produce a demo that expresses the problem, the benefit, and the concept – real enough for a customer to react to honestly.
 
 The enemy of the build phase is the person who wants to plan it. Building needs to be active and free-form. Negotiating scope and content during the build is fine; stopping to schedule it is not. Identify the planner early and redirect them to making. Everyone should be busy and collaborating.
 
@@ -107,7 +107,7 @@ The most common build failure is a demo too long to fit a 30-minute customer ses
 
 Keep the session structure firmly in mind: problem expression/validation, benefit expression, concept demo, follow-up questions. All four must be ready before the first customer arrives.
 
-_The build phase ends when the demo is strong enough to show or we run out of time — not when it's perfect._
+_The build phase ends when the demo is strong enough to show or we run out of time – not when it's perfect._
 
 ## Customer Validation (Phase 6a)
 

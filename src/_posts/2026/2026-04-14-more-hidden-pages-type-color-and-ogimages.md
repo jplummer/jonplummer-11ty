@@ -3,7 +3,7 @@ title: "More hidden pages: /type, /color, and /ogimages"
 layout: layouts/single_post.njk
 date: "2026-04-14T12:00:00-07:00"
 tags: post
-description: "A follow-up to the hidden-pages tour: three lab-style URLs for font stacks, OKLCH color themes, and Open Graph previews—public, not in the main nav, built with Eleventy."
+description: "A follow-up to the hidden-pages tour: three lab-style URLs for font stacks, OKLCH color themes, and Open Graph previews – public, not in the main nav, built with Eleventy."
 ogImage: /assets/images/og/2026-04-14-more-hidden-pages-type-color-and-ogimages.png
 ---
 Last year I wrote about [a first batch of "hidden" pages](/2025/11/20/the-hidden-pages-of-this-site/) on this site – RSS feeds, a technologies list, the changelog, etc. Those are mostly about *consuming* or *documenting* the project. Here are three more URLs in the same spirit: they are not in the main navigation, but they are not secret. They are small labs for *playing with* how the site looks when shared or read, still in the "everything is inspectable" vein.
@@ -44,4 +44,4 @@ Social cards are easy to break with a long title or a missing description. This 
 
 ---
 
-Together, `/type`, `/color`, and `/ogimages` use `tags: page` with the shared layout—the same arrangement as `/changelog` and `/technologies`. They are included in `collections.page` (for example `sitemap.xml`). They still do not appear in `/feed.xml` or `/links-feed.xml`, because those feeds list `collections.post` or the curated links, not static pages. The changelog and technologies URLs behave the same way. If you are poking at how this site is put together, start with the [earlier hidden-pages post](/2025/11/20/the-hidden-pages-of-this-site/) for feeds and docs, then add these three when you decide to play with type, color, or social image generation.
+Together, `/type`, `/color`, and `/ogimages` use `tags: page` with the shared layout – the same arrangement as `/changelog` and `/technologies`. They are included in `collections.page` (for example `sitemap.xml`). They still do not appear in `/feed.xml` or `/links-feed.xml`, because those feeds list `collections.post` or the curated links, not static pages. The changelog and technologies URLs behave the same way. If you are poking at how this site is put together, start with the [earlier hidden-pages post](/2025/11/20/the-hidden-pages-of-this-site/) for feeds and docs, then add these three when you decide to play with type, color, or social image generation.

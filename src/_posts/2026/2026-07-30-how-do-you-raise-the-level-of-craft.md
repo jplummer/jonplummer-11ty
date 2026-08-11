@@ -16,21 +16,21 @@ It's simple, full of possible directions to pursue. I should have asked about th
 
 There was no shared definition of quality – ask three people what "good" meant here and you'd get three different, equally defensible answers. There was no agreed bar for how much was enough – whatever shipped fastest won, no matter what anyone said they wanted. And there was no way to repeatably prioritize – no shared sense of which craft fights were worth having this cycle and which could wait. We either fought over everything or let all of it slide, depending on the scrum team's habits.
 
-So I worked on the "product trio" partnership — closer collaboration among product, design, and engineering; shared ownership of what "done" meant; engineering at the table from the beginning. It helped a lot, both times.
+So I worked on the "product trio" partnership – closer collaboration among product, design, and engineering; shared ownership of what "done" meant; engineering at the table from the beginning. It helped a lot, both times.
 
 ## But that's not me
 
-It sounds pretty good, but I did myself a disservice with this answer because it didn't reflect what I would actually do if hired. I explained a fix instead of a process — and a fix that would only apply if the obstacle to craft is the same one I bumped into last time.
+It sounds pretty good, but I did myself a disservice with this answer because it didn't reflect what I would actually do if hired. I explained a fix instead of a process – and a fix that would only apply if the obstacle to craft is the same one I bumped into last time.
 
 Obstacles to craft can appear in several parts of the development lifecycle. Poor partnership between design and engineering is just one potential cause; the actual job in a new org begins with finding out where craft is stalled before reaching for an intervention.
 
 ## The better answer – diagnose, intervene, repeat
 
-Diagnosis starts with evidence. Find an actual place quality went missing: a specific screen, a specific release, a specific moment where what shipped doesn't match what was designed or what the team is capable of. List the ways in which we're disappointed with the results, be it fit and finish, workflow, error handling, accessibility, etc. Then work backward: which failure modes explain how we arrived at those results? Often more than one failure mode is operating. The job isn't picking a favorite, it's figuring out which one is doing the most damage right now, in this org, at this moment — because that ranking is what tells you where to spend your first move.
+Diagnosis starts with evidence. Find an actual place quality went missing: a specific screen, a specific release, a specific moment where what shipped doesn't match what was designed or what the team is capable of. List the ways in which we're disappointed with the results, be it fit and finish, workflow, error handling, accessibility, etc. Then work backward: which failure modes explain how we arrived at those results? Often more than one failure mode is operating. The job isn't picking a favorite, it's figuring out which one is doing the most damage right now, in this org, at this moment – because that ranking is what tells you where to spend your first move.
 
 This is the step I skipped in the interview. I didn't bother to investigate. I leapt past the diagnosis.
 
-Intervention comes after diagnosis, and it should be sized to match your confidence in that diagnosis. A lightweight version of the fix — one critique session, one prototype-first spec, one metric added to a dashboard — tells you whether you found the right cause before you commit more budget, headcount, or political capital to a bigger structural move. And it needs a real signal attached, something witnessable, not just vibes.
+Intervention comes after diagnosis, and it should be sized to match your confidence in that diagnosis. A lightweight version of the fix – one critique session, one prototype-first spec, one metric added to a dashboard – tells you whether you found the right cause before you commit more budget, headcount, or political capital to a bigger structural move. And it needs a real signal attached, something witnessable, not just vibes.
 
 ## Failure modes
 
@@ -78,6 +78,6 @@ and, of course
 
 Opening a bottleneck helps, and it reveals the next bottleneck. You might have an overall low level of designer craft, but raising it doesn't get fully realized in the product; this tells you that there's another obstacle after the obvious one you went after. This is true for any process you might work on. Speeding up the slowest operation in an assembly line helps, and it reveals the next-slowest operation, the next focus of intervention.
 
-Then repeat — not as a formality, but because as you work on the process, and as business conditions change, the diagnosis doesn't hold still. People turn over and take the tacit parts of the quality standard with them. Reorgs sever ownership. Growth outpaces whatever onboarding used to establish the bar. The causes recombine. Sometimes the same one comes back, sometimes a new one takes its place. Raising craft once is a project. Keeping it raised is the same discipline I've written about before under a different name — goal maintenance.
+Then repeat – not as a formality, but because as you work on the process, and as business conditions change, the diagnosis doesn't hold still. People turn over and take the tacit parts of the quality standard with them. Reorgs sever ownership. Growth outpaces whatever onboarding used to establish the bar. The causes recombine. Sometimes the same one comes back, sometimes a new one takes its place. Raising craft once is a project. Keeping it raised is the same discipline I've written about before under a different name – goal maintenance.
 
 I should have said that. Instead I told a story about the wrong question.

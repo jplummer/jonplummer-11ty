@@ -24,5 +24,5 @@ ogImage: /assets/images/og/portfolio.png
 *Patient profile view displaying demographic information, diabetes type, and key patient characteristics relevant to care management.*
 
 ![CareLink Pro pick a door interface for patient selection](/assets/images/2022/12/pick_a_door-1024x794.png)
-*Classic "pick a door" interface — two big icon buttons, New Patient or Open Patient, with a live "Guide Me" tips panel orienting you to the software. It's straight out of the Windows XP school of software chrome. I would not do it this way today, but the instinct underneath it — don't make someone read a manual to find the first click — was right.*
+*Classic "pick a door" interface – two big icon buttons, New Patient or Open Patient, with a live "Guide Me" tips panel orienting you to the software. It's straight out of the Windows XP school of software chrome. I would not do it this way today, but the instinct underneath it – don't make someone read a manual to find the first click – was right.*
 

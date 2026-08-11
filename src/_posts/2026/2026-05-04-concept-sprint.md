@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2026-05-04T12:00:00-07:00"
 tags:
   - post
-description: "A week-long facilitated workshop: immerse in the domain, cluster problems and benefits, sketch and converge on one concept, validate with customers, and pitch executives—with scheduling notes and ground rules."
+description: "A week-long facilitated workshop: immerse in the domain, cluster problems and benefits, sketch and converge on one concept, validate with customers, and pitch executives – with scheduling notes and ground rules."
 ogImage: /assets/images/og/2026-05-04-concept-sprint.png
 ---
 A Concept Sprint is a short, usually week-long, in-person exercise meant to accelerate high-level exploration of a new area of development, a significant problem, or a strategic initiative. A blended team – product, design, architecture, engineering, marketing, and any truly relevant business stakeholders – generates a high-value product concept, validates it with live customers, and produces a pitch covering the problem, benefit, concept, and rough cost and timeframe to deliver a first version. The team works through seven phases led by a facilitator, book-ended by a welcome and a wrap-up. Below are my general instructions and guidelines, arrived at after running several of these at multiple companies.
@@ -17,7 +17,7 @@ The Welcome is a short orientation for participants before Immersion begins. The
 
 - **Purpose:** Why we're here, what a Concept Sprint is, and what we're hoping to walk away with at the end of the week.
 - **Ground rules:** The behavioral norms that will govern the week, especially the generation and categorization phases. (See Ground rules below.)
-- **Assumptions and known constraints:** Anything the group is taking as given before we start — for example, a strategic directive to explore a particular technology, a market segment we are or aren't targeting, or a business constraint that will shape what's in scope.
+- **Assumptions and known constraints:** Anything the group is taking as given before we start – for example, a strategic directive to explore a particular technology, a market segment we are or aren't targeting, or a business constraint that will shape what's in scope.
 
 The Welcome should be brief. Participants are eager to get into the material, and the most important orientation happens through doing, not explaining. Get through it crisply and move into Immersion.
 
@@ -67,7 +67,7 @@ Each cluster is evaluated on two or three dimensions:
 2. How **relevant** is it to the business – how credible would we be as the company delivering it, how strategically-aligned is it, etc. A high-value benefit that we're poorly positioned to offer is a less attractive target than one where we have genuine standing or takes us in a direction we want to go.
 3. If the sprint is operating under a **known constraint** (for example, an assumption that the concept will use a particular technology), clusters may also be scored on how well they fit that constraint.
 
-Problems and benefits are evaluated separately because the relationship between them is not one-to-one — a single problem may spawn many benefits, and a single benefit may cover multiple problems. The latter is often especially attractive strategically, suggesting a concept with broad impact.
+Problems and benefits are evaluated separately because the relationship between them is not one-to-one – a single problem may spawn many benefits, and a single benefit may cover multiple problems. The latter is often especially attractive strategically, suggesting a concept with broad impact.
 
 Use dot voting to help the team converge if needed.
 
@@ -75,13 +75,13 @@ Use dot voting to help the team converge if needed.
 
 Supplies: fine-point markers, letter paper, whiteboard and markers, computers and a good internet connection
 
-Before concept generation begins, the group selects a problem/benefit pair to work against — typically comprising top-scoring candidates from phases 2 and 3. This target helps the group generate specific ideas that might reinforce each other, and maintains focus during the build phase. That said, a concept that also addresses additional problems or delivers additional benefits is not penalized for it; ambition is welcome as long as the concept is buildable and coherent.
+Before concept generation begins, the group selects a problem/benefit pair to work against – typically comprising top-scoring candidates from phases 2 and 3. This target helps the group generate specific ideas that might reinforce each other, and maintains focus during the build phase. That said, a concept that also addresses additional problems or delivers additional benefits is not penalized for it; ambition is welcome as long as the concept is buildable and coherent.
 
 Each participant then independently sketches **one or more specific concepts**: each a product idea or approach that delivers the chosen benefit to a specific customer facing the chosen problem. These sketches should express the experience of specific people operating the product concept. This is not the time to be abstract.
 
 Sketches need not be polished – the goal is to make the idea tangible enough to share and discuss. Some participants may be reluctant to draw, so we typically encourage them to "make marks on paper" to express their ideas. The facilitator should time-box this work to keep energy high and prevent over-refinement.
 
-When everyone has sketched, the group conducts a gallery walk: each author narrates their own concepts while the group listens and asks questions. The group and facilitator should both push toward specificity — the group by asking clarifying questions, the facilitator by reminding participants that specific ideas are more valuable to the group than impressive-sounding ones, and that abstract things are hard to build and evaluate.
+When everyone has sketched, the group conducts a gallery walk: each author narrates their own concepts while the group listens and asks questions. The group and facilitator should both push toward specificity – the group by asking clarifying questions, the facilitator by reminding participants that specific ideas are more valuable to the group than impressive-sounding ones, and that abstract things are hard to build and evaluate.
 
 A second sketching pass is sometimes useful, for example if concepts weren't specific enough, or the group wants to remix what they've seen.
 
@@ -107,9 +107,9 @@ Building and validation prep together constitute the longest sustained work peri
 
 Supplies: customers, computers and a good internet connection
 
-Customer validation sessions are run by a small subset of the group — typically a presenter, someone operating the demo, and a note-taker. The rest of the sprint participants are welcome to observe quietly; engineers and architects will often use this time to decamp and begin implementation planning in parallel (see 6b Implementation Planning).
+Customer validation sessions are run by a small subset of the group – typically a presenter, someone operating the demo, and a note-taker. The rest of the sprint participants are welcome to observe quietly; engineers and architects will often use this time to decamp and begin implementation planning in parallel (see 6b Implementation Planning).
 
-Each session follows a loose sequence: the presenter establishes context by describing the problem, then asks the customer whether they recognize that problem in their own business. This is not a rhetorical question — the answer is genuinely informative, and customers who don't recognize the problem are telling us something important. The presenter then describes the benefit the concept is intended to deliver, and the team runs the demo.
+Each session follows a loose sequence: the presenter establishes context by describing the problem, then asks the customer whether they recognize that problem in their own business. This is not a rhetorical question – the answer is genuinely informative, and customers who don't recognize the problem are telling us something important. The presenter then describes the benefit the concept is intended to deliver, and the team runs the demo.
 
 Customers should be told at the outset that the team values their honest reaction and that it is out of respect for their thinking that they were invited. This gives them permission to be candid.
 
@@ -138,11 +138,11 @@ The central questions are:
 
 - What is in the MVP, and what do we deliberately leave for later?
 - What is the right sequence? What do we need to build first to unlock everything else?
-- What does the technical approach look like at a high level — what are the key architectural decisions or investments?
+- What does the technical approach look like at a high level – what are the key architectural decisions or investments?
 - Roughly how much effort does this represent?
 - What risks and unknowns will need to be sorted before or during implementation?
 
-This is not a sprint plan or a commitment. It is a first-order answer to "could we do this, and roughly how" — the kind of grounded estimate that gives leadership something real to weigh when they see the pitch. T-shirt sizes and a sequence/schedule sketch on a whiteboard are fine. The goal is to arrive at pitch preparation with enough implementation shape that the concept doesn't feel like a dream, and enough honesty about risks and unknowns that it doesn't feel like a fantasy.
+This is not a sprint plan or a commitment. It is a first-order answer to "could we do this, and roughly how" – the kind of grounded estimate that gives leadership something real to weigh when they see the pitch. T-shirt sizes and a sequence/schedule sketch on a whiteboard are fine. The goal is to arrive at pitch preparation with enough implementation shape that the concept doesn't feel like a dream, and enough honesty about risks and unknowns that it doesn't feel like a fantasy.
 
 Note: this process was designed before AI-assisted coding dramatically changed what a small team can build in a short time. The implementation planning conversation should take that into account; what once required a large team or a long runway may no longer, though new constraints may emerge in their place.
 
@@ -176,7 +176,7 @@ A retrospective can happen another time if needed. The goal here is to close the
 
 A concept sprint is logistically demanding and the schedule is unforgiving. Two external dependencies anchor the entire week: **immersion speakers** and **customer validation sessions**. Both must be locked in well before the sprint begins, because everything else is scheduled around them.
 
-**Customer validation is the primary constraint.** Once customers are scheduled, the rest of the sprint works backward from those sessions — each phase must be complete before the next can begin, so slippage anywhere cascades into build time. Aim for five to ten customers in closely-arranged half-hour slots, expect attrition, and overbook. Assign one person to own customer scheduling weeks in advance; they will likely still be wrangling participants up until demo time.
+**Customer validation is the primary constraint.** Once customers are scheduled, the rest of the sprint works backward from those sessions – each phase must be complete before the next can begin, so slippage anywhere cascades into build time. Aim for five to ten customers in closely-arranged half-hour slots, expect attrition, and overbook. Assign one person to own customer scheduling weeks in advance; they will likely still be wrangling participants up until demo time.
 
 **The build phase is the long pole.** Protect it aggressively. This was especially true before AI-assisted coding changed what a small team could accomplish quickly; even so, building something specific and demo-worthy takes real time. Phases 2 and 3 can move at whatever speed the group needs, but the facilitator should be watching the clock.
 

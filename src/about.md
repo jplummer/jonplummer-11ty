@@ -11,7 +11,7 @@ ogImage: /assets/images/og/about.png
 
 Most companies say they care about customers. Their products rarely show it. I build ones that do – thoughtful enough that people notice, trust, and recommend them.
 
-I speak the languages of design, engineering, and business. That's been useful everywhere I've worked — but it matters most right now, when the most common mistake in AI product development is assuming that powerful models reduce the need for clear, coordinated, carefully constructed interfaces. They don't. Agentic AI means less direct manipulation, not none. Trust still comes from inspection and correction – from being able to poke around in the system and believe it, not just take its word for it. That demands interfaces that are simpler, not more elaborate, and experiences that work without training. The hardest part of a design is proving the vision is sound, then making sure that reasoning survives all the way to what ships; real customer discovery is what makes both possible.
+I speak the languages of design, engineering, and business. That's been useful everywhere I've worked – but it matters most right now, when the most common mistake in AI product development is assuming that powerful models reduce the need for clear, coordinated, carefully constructed interfaces. They don't. Agentic AI means less direct manipulation, not none. Trust still comes from inspection and correction – from being able to poke around in the system and believe it, not just take its word for it. That demands interfaces that are simpler, not more elaborate, and experiences that work without training. The hardest part of a design is proving the vision is sound, then making sure that reasoning survives all the way to what ships; real customer discovery is what makes both possible.
 
 I wrote about this in [Toward Coordinated Experience](/2025/07/27/toward-coordinated-experience/), and it's the thread that runs through a lot of what I write here.
 
@@ -47,7 +47,7 @@ He consistently brought valuable outside experience to the table and turned cust
 
 The Enhanced Data Dictionary: Jon helped transform deep customer confusion around data into a solution that ultimately scaled actionable insights across our entire customer base.
 
-The Call Review Console: He helped build an all-in-one interface for Quality Management—a net-new product line for both Invoca and our clients. It served as the launchpad for every new QM customer's journey and continued to be leveraged as the solution evolved.
+The Call Review Console: He helped build an all-in-one interface for Quality Management – a net-new product line for both Invoca and our clients. It served as the launchpad for every new QM customer's journey and continued to be leveraged as the solution evolved.
 
 Jon is naturally curious, asks incredible questions, and doesn't require hand-holding or pre-packaged requirements to deliver value. He meets teams where they are, and I’d jump at the chance to work with him again without hesitation.
 
@@ -55,7 +55,7 @@ Jon is naturally curious, asks incredible questions, and doesn't require hand-ho
 
 I worked with Jon for several years, partnering on large, cross-cutting initiatives where UX and architecture had to move together.
 
-A few examples stand out. He led our first concept sprint at Invoca, which yielded a validated product concept that we put into practice and shipped to customers — our AI Messaging Agent. We also collaborated on our customer-facing data dictionary: Jon took customer interviews, feedback, and platform usage data, and using AI-powered synthesis and rapid prototyping, built a clear vision of where to head and the architectural steps to get there. Along the way, he advocated for an improved information architecture across the entire platform.
+A few examples stand out. He led our first concept sprint at Invoca, which yielded a validated product concept that we put into practice and shipped to customers – our AI Messaging Agent. We also collaborated on our customer-facing data dictionary: Jon took customer interviews, feedback, and platform usage data, and using AI-powered synthesis and rapid prototyping, built a clear vision of where to head and the architectural steps to get there. Along the way, he advocated for an improved information architecture across the entire platform.
 
 Jon leads with questions rather than answers, and prefers to lead by showing rather than telling. He was big on building trust across teams and peers, which I appreciated. He's a steady leader who stays even-keeled when things get tense, and genuinely cares about the people he leads and the customer experience.
 

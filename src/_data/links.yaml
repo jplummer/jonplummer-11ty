@@ -124,10 +124,10 @@
 2026-06-02:
   - url: "https://uxdesign.cc/designing-for-ai-means-designing-like-its-1999-da9c53d24644"
     title: Designing for AI means designing like it’s 1999 – Patrick Neeman
-    description: "\"The tools are remarkable; the ground under them is soft, shifting like a tech quicksand. That isn’t a complaint. It’s an invitation. The conventions that will eventually feel obvious — the ones the next generation of designers inherit without thinking about them — don’t exist yet.\""
+    description: "\"The tools are remarkable; the ground under them is soft, shifting like a tech quicksand. That isn’t a complaint. It’s an invitation. The conventions that will eventually feel obvious – the ones the next generation of designers inherit without thinking about them – don’t exist yet.\""
   - url: "https://uxdesign.cc/designing-how-designers-master-ai-642d8751d945"
     title: Designing how designers master AI – Amber Bouabdallah
-    description: "\"…In the post-mortem survey she wrote that what she valued in these sessions was 'a window into someone’s thinking.' That phrase is the whole finding. When everyone uses the same buttons, watching a colleague work is informative but not revelatory. When mastery is personal — when the same tool produces wildly different work depending on who’s wielding it — watching someone use it well becomes a window into how they think. You’re not watching someone operate software. You’re watching them think exponentially.\""
+    description: "\"…In the post-mortem survey she wrote that what she valued in these sessions was 'a window into someone’s thinking.' That phrase is the whole finding. When everyone uses the same buttons, watching a colleague work is informative but not revelatory. When mastery is personal – when the same tool produces wildly different work depending on who’s wielding it – watching someone use it well becomes a window into how they think. You’re not watching someone operate software. You’re watching them think exponentially.\""
 
 2026-06-01:
   - url: "https://www.harvarddesignmagazine.org/articles/ai-as-a-design-medium-rodenbeck/"
@@ -151,7 +151,7 @@
 
 2026-05-16:
   - url: "https://crookedtimber.org/2026/05/12/the-text-is-not-the-product/"
-    title: The text is not the product — Lisa Herzog
+    title: The text is not the product – Lisa Herzog
     description: "Generative AI makes it easy to produce scads of text. But simply producing text is not the point, in many cases – creating meaning, communicating ideas, is. So let's remember that production is cheap and and volume is no signifier of effort, anymore. Focus on the reason we are producing the text in the first place."
   - url: "https://unsung.aresluna.org/subtle-line-between-animations-that-help-and-animations-that-hurt/?__readwiseLocation="
     title: “Subtle line between animations that help and animations that hurt” – Marchin Wichary
@@ -228,7 +228,7 @@
     description: "\"While handling complex reasoning tasks, the accuracy [can go down](https://useai.substack.com/p/beyond-prompts-why-context-management) by as much as 70%. But lots of designers still treat AI like a black box: dump in requirements, hope for magic, refine endlessly when it doesn’t work. The problem isn’t “bad prompting,” it’s not giving AI the information it needs to think clearly.\""
   - url: "https://www.smashingmagazine.com/2026/03/modal-separate-page-ux-decision-tree/"
     title: "Modal vs. Separate Page: UX Decision Tree – Vitaly Friedman"
-    description: "\"How do we choose between **showing a modal** to users, and when do we navigate them to a separate, new page? And does it matter at all? Actually, it does. The decision influences users’ flow, their context, their ability to look up details, and with it **error frequency and task completion**. Both options can be disruptive and frustrating — at the wrong time, and at the wrong place."
+    description: "\"How do we choose between **showing a modal** to users, and when do we navigate them to a separate, new page? And does it matter at all? Actually, it does. The decision influences users’ flow, their context, their ability to look up details, and with it **error frequency and task completion**. Both options can be disruptive and frustrating – at the wrong time, and at the wrong place."
   - url: "https://www.linkedin.com/pulse/design-tech-report-2026-from-ux-ax-john-maeda-3elrc/"
     title: "Design in Tech Report 2026: From UX to AX – John Maeda"
     description: "\"This year’s Design in Tech Report is about a major shift for designers. We are moving from**UX to AX**: from user experience to agentic experience. In the UX era, designers focused on helping people do things. We designed flows, screens, menus, and paths. We helped users move through software step by step. In the AX era, that changes. Agents can now act on a user’s behalf. So the design problem shifts. It is no longer just, “How do I help someone do this?” It becomes, “How do I help someone know whether it was done well?”\""
@@ -270,10 +270,10 @@
     description: "\"Welcome to the beginning of the Software Industrial Revolution. Just like the first Industrial Revolution, this will change the world in profound and unexpected ways. But unlike the first Industrial Revolution, this one won't take decades. It might not even take years.”"
   - url: "https://leadership.garden/ai-the-work-moved/"
     title: "The Work Moved: What the AI Coding Debate Actually Agrees On – Csaba Okrona"
-    description: "\"AI agents generate 98% more PRs but reviews take 91% longer. The work didn't disappear — it moved. A synthesis of eight perspectives on where it actually went.”"
+    description: "\"AI agents generate 98% more PRs but reviews take 91% longer. The work didn't disappear – it moved. A synthesis of eight perspectives on where it actually went.”"
   - url: "https://www.natemeyvis.com/on-cognitive-debt/"
     title: On cognitive debt – Nate Meyvis
-    description: "\"'Cognitive debt' […] describes an important phenomenon that is much to be avoided. It is absolutely happening with AI-driven codebases—the links above have examples, and I've felt it in my own projects. […] I suspect, however, that […w]hen you control for the size and scope of the project, cognitive debt tends to be at least as bad, and usually worse, in pre-AI codebases than in AI codebases…\""
+    description: "\"'Cognitive debt' […] describes an important phenomenon that is much to be avoided. It is absolutely happening with AI-driven codebases – the links above have examples, and I've felt it in my own projects. […] I suspect, however, that […w]hen you control for the size and scope of the project, cognitive debt tends to be at least as bad, and usually worse, in pre-AI codebases than in AI codebases…\""
 
 2026-02-19:
   - url: "https://modern-css.com/"
@@ -315,7 +315,7 @@
 2026-01-19:
   - url: "https://every.to/guides/agent-native"
     title: Agent-native Architectures – Dan Shipper and Claude
-    description: "\"You can build applications where features aren't code you write—they're outcomes you describe, achieved by an agent with tools, operating in a loop until the outcome is reached. This opens up a new field: software that works the way Claude Code works, applied to categories far beyond coding.\""
+    description: "\"You can build applications where features aren't code you write – they're outcomes you describe, achieved by an agent with tools, operating in a loop until the outcome is reached. This opens up a new field: software that works the way Claude Code works, applied to categories far beyond coding.\""
 
 2026-01-18:
   - url: "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents"
@@ -444,12 +444,12 @@
 2025-11-01:
   - url: "https://noahpenza.com/blog/this-site-is-very-quick-it-uses-ssg-and-isr/"
     title: This site is very quick, it uses SSG and ISR – Noah Penza
-    description: "\"I'm not a fan of waiting. We spend enough time doing it every day — waiting in traffic, for videos to buffer, for Excel to open. Wherever possible, I do everything I can to minimize those wait times. It simply offers a far superior experience for the end-user to have components show in an instant, rather than rely on spinners and skeletons. That's why I chose to implement Static Site Generation (SSG) with Incremental Static Regeneration (ISR) for this website.\" THIS site also uses SSG. I don't have much need for ISR as there's no server-side generation in my case."
+    description: "\"I'm not a fan of waiting. We spend enough time doing it every day – waiting in traffic, for videos to buffer, for Excel to open. Wherever possible, I do everything I can to minimize those wait times. It simply offers a far superior experience for the end-user to have components show in an instant, rather than rely on spinners and skeletons. That's why I chose to implement Static Site Generation (SSG) with Incremental Static Regeneration (ISR) for this website.\" THIS site also uses SSG. I don't have much need for ISR as there's no server-side generation in my case."
 
 2025-10-31:
   - url: "https://itamargilad.com/okr-faq/"
     title: "FAQ: OKR Not Working in My Company – Itamar Gilad"
-    description: "\"Objectives and Key Results (OKR) is one of the most common processes in the industry, and yet, despite 50 years of history, it’s the one companies struggle with the most. This problem is most evident when talking with product people and product leaders — the same challenges and frustrations come up again and again.\""
+    description: "\"Objectives and Key Results (OKR) is one of the most common processes in the industry, and yet, despite 50 years of history, it’s the one companies struggle with the most. This problem is most evident when talking with product people and product leaders – the same challenges and frustrations come up again and again.\""
   - url: "https://www.uxforai.com/p/the-new-ai-inclusive-ux-process"
     title: The new AI-inclusive UX process – Greg Nudelman
     description: "\"AI is like nothing we’ve ever done before. It demands a new level of rapid, flexible, user-centered thinking and rapid adjustment, neatly expressed in this new process diagram.\""
@@ -486,7 +486,7 @@
 2025-10-05:
   - url: "https://matthewstrom.com/writing/decentralizing-quality/"
     title: Decentralizing quality – Why moving judgment to the edges wins in the long run – Matt Ström-Awn
-    description: "Everyone agrees quality matters, but we can't agree on what it is — or who gets to decide"
+    description: "Everyone agrees quality matters, but we can't agree on what it is – or who gets to decide"
   - url: "https://archive.is/6Rd2i"
     title: Building trust in opaque systems – why the better AI gets at conversation, the worse we get at questioning it – Fabrizia Ausiello
     description: "\"How do we know when to trust what someone tells us? In person conversations give us many subtle cues we might pick up on, but when they happen with AI system designed to sound perfectly human, we lose any sort of frame of reference we may have.\""
@@ -558,7 +558,7 @@
     description: A chat between designers and engineers can result in sleight-of-hand that seems nicer/fancier than the constraints would suggest
   - url: "https://www.smashingmagazine.com/2025/08/beyond-hype-what-ai-can-do-product-design/"
     title: "Beyond the hype: what AI can really do for product design – Nikita Samutin"
-    description: "\"AI tools are improving fast, but it's still not clear how they fit into a real product design workflow. Nikita Samutin walks through four core stages — from analytics and ideation to prototyping and visual design — to show where AI fits and where it doesn't, illustrated with real-world examples\""
+    description: "\"AI tools are improving fast, but it's still not clear how they fit into a real product design workflow. Nikita Samutin walks through four core stages – from analytics and ideation to prototyping and visual design – to show where AI fits and where it doesn't, illustrated with real-world examples\""
   - url: "https://www.youtube.com/watch?v=bBtTu-QfW2Q"
     title: "Video: How to master Cursor Chat to build features with control – Ian Nuttall"
     description: "\"Chat with an LLM right in the sidebar, with one click apply of code changes, or running terminal commands\""
@@ -573,7 +573,7 @@
     description: "\"How we design and deliver products is changing; how research plays is following suit. Our environment is complex, and evolving. AI's role in design, product, research, and engineering is accelerating. New practices are shifting the boundaries between our functions\""
   - url: "https://www.getstark.co/blog/wcag-vs-eaa/"
     title: "WCAG vs EAA: understanding where WCAG stops and the EAA starts – Team Stark"
-    description: "\"Many teams believe that meeting WCAG standards means their digital products are compliant with the European Accessibility Act (EAA). Using a clear comparison grounded in EN 301 549 and EN 17161, we extensively detail what's in and out of scope—and why organizations need to operationalize accessibility like they do privacy and security\""
+    description: "\"Many teams believe that meeting WCAG standards means their digital products are compliant with the European Accessibility Act (EAA). Using a clear comparison grounded in EN 301 549 and EN 17161, we extensively detail what's in and out of scope – and why organizations need to operationalize accessibility like they do privacy and security\""
   - url: "https://webinars.zeroheight.com/register/zeroheight-ds-live-tj-pitre-context-based-design-systems-preparing-for-an-ai-driven-future"
     title: "Video: DS live: context-based design systems: preparing for an AI-driven future – TJ Pitre"
     description: "\"Design systems aren't just about consistency anymore, they're becoming the connective tissue between people, tools, and intelligent agents\""

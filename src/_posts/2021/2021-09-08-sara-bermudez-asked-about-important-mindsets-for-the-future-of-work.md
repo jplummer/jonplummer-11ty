@@ -30,6 +30,6 @@ So I elaborated a bit:
 >
 > 4) Think in scenarios: _who_ arrives in _what_ situation, _when_ and _where_, with _which_ need or goal to address or accomplish, and _what_ can the system (or organization, etc.) offer them?
 >
-> Note that most of these thoughts require a _positive wording_ of the situation or aim rather than a _negative wording_. This might be the key skill, broadly useful but not sufficient on its own. You'll see this in health fields when practitioners take a wellness perspective—rather than cease some harmful behavior like smoking, they'll talk about replacing the habits associated with smoking with healthier rituals, moving nicotine delivery to a less-harmful medium where it can be managed, etc.
+> Note that most of these thoughts require a _positive wording_ of the situation or aim rather than a _negative wording_. This might be the key skill, broadly useful but not sufficient on its own. You'll see this in health fields when practitioners take a wellness perspective – rather than cease some harmful behavior like smoking, they'll talk about replacing the habits associated with smoking with healthier rituals, moving nicotine delivery to a less-harmful medium where it can be managed, etc.
 
 There are many other good comments there.

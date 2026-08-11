@@ -3,7 +3,7 @@ title: The "hidden" pages of jonplummer.com
 layout: layouts/single_post.njk
 date: 2025-11-20T20:00:00.000Z
 tags: post
-description: A tour of the utility pages of this site – RSS feeds, documentation, sitemaps—and how they're generated. These hidden pages reflect the view source ethos of the web.
+description: A tour of the utility pages of this site – RSS feeds, documentation, sitemaps – and how they're generated. These hidden pages reflect the view source ethos of the web.
 ogImage: /assets/images/og/2025-11-20-the-hidden-pages-of-this-site.png
 ---
 This site has a handful of "hidden" pages. They aren't secret but they don't live in the main navigation; they serve utility functions rather than human browsing habits. Making them public and giving them URLs is a nod to the "view source" ethos of the web. Everything is here, everything is inspectable, and everything is open.
@@ -26,7 +26,7 @@ If you use a feed reader (like NetNewsWire, Feedly, or Readwise Reader), this is
 
 [/links-feed.xml](/links-feed.xml)
 
-A specialized feed for the "found links"—the interesting articles, tools, and videos I find around the web that don't warrant a full blog post but are worth sharing.
+A specialized feed for the "found links" – the interesting articles, tools, and videos I find around the web that don't warrant a full blog post but are worth sharing.
 
 ### How the links feed is generated
 

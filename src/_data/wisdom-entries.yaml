@@ -1,4 +1,4 @@
-# Collected wisdom — short notes, ordered by `added` in the feed (newest first).
+# Collected wisdom – short notes, ordered by `added` in the feed (newest first).
 # Required per entry: added (YYYY-MM-DD), tags (array), body (multiline string, markdown OK).
 # Tags: lowercase slug-style [a-z0-9-]+ (same rules as entry slugs).
 # Optional: slug (lowercase a-z0-9-_). If omitted, a stable id is derived from the body for anchors and RSS.
@@ -507,34 +507,34 @@ entries:
       - Waiting for an upstream process to deliver, or for a machine to finish processing, or for a supporting function to be completed, or for an interrupted worker to get back to work…
 
       **Mura (inconsistency)**
-      - Confusion — missing or misinformation. Confusing goals and metrics.
+      - Confusion – missing or misinformation. Confusing goals and metrics.
 
       **Muri (unreasonableness)**
       - Unsafe or unergonomic work conditions
-      - Underutilized human potential — skills, talents, and creativity
+      - Underutilized human potential – skills, talents, and creativity
       - Demands out of scale with capabilities
   - added: '2026-03-23'
     tags:
       - kaizen
     body: |-
-      Rule 1 — Clearly specify all activities (standardize work)
+      Rule 1 – Clearly specify all activities (standardize work)
       - Content (what is being done?)
       - Sequence (in what order?)
       - Timing (how long should it take?)
       - Outcome (what clearly defined measurable results are expected?)
 
-      Rule 2 — Clearly define all connections to every customer and supplier (no ambiguity)
+      Rule 2 – Clearly define all connections to every customer and supplier (no ambiguity)
       - Direct (no intermediary between)
       - Yes or No answers (no "maybe")
 
-      Rule 3 — Clearly define all pathways (organize for uninterrupted flow)
+      Rule 3 – Clearly define all pathways (organize for uninterrupted flow)
       - Simple (with as few steps and people as possible)
       - Direct steps to deliver the requested product or service
       - Clearly defined standard work and job instructions
 
-      Rule 4 — Continuously improve (develop leaders who can apply the scientific method to improve anything)
+      Rule 4 – Continuously improve (develop leaders who can apply the scientific method to improve anything)
       - Direct response to any problem that arises
-      - By those doing the work — as close to the problem as possible
+      - By those doing the work – as close to the problem as possible
       - Whenever possible, start as an experiment
       - Supported by a coach
   - added: '2026-03-23'
@@ -549,19 +549,19 @@ entries:
   - added: '2026-03-23'
     tags:
       - experience
-    body: Every experience needs a theme — an organizing principle that helps us choose what to do with every part of the experience.
+    body: Every experience needs a theme – an organizing principle that helps us choose what to do with every part of the experience.
   - added: '2026-03-23'
     tags:
       - product
-    body: Customers don't want choice — they want the one thing that they want.
+    body: Customers don't want choice – they want the one thing that they want.
   - added: '2026-03-23'
     tags:
       - product
-    body: You are what you charge for — how do you get paid for the experience, for the time customers spend with you? Admission? Membership? What am I actually buying?
+    body: You are what you charge for – how do you get paid for the experience, for the time customers spend with you? Admission? Membership? What am I actually buying?
   - added: '2026-03-23'
     tags:
       - experience
-    body: Engagement is essential to a successful experience. Engage as many senses as possible — and what you can't engage, evoke.
+    body: Engagement is essential to a successful experience. Engage as many senses as possible – and what you can't engage, evoke.
   - added: '2026-03-23'
     tags:
       - experience
@@ -571,9 +571,9 @@ entries:
       - experience
     body: |-
       One interface to rule them all. Be strict about hierarchy; the primary read must be chosen and adhered to, and there should be no more than four reads or layers on a given screen, in general. A "main event" screen has mostly one thing to do, maximum three. It is the most branded part of the experience, usually.
-      - Main event — most user time is spent here — 1–3 reads, most branded
-      - Secondary screen — 4+ reads
-      - Deep screen — ~12 reads, more standard
+      - Main event – most user time is spent here – 1–3 reads, most branded
+      - Secondary screen – 4+ reads
+      - Deep screen – ~12 reads, more standard
   - added: '2026-03-23'
     tags:
       - simplicity
@@ -592,7 +592,7 @@ entries:
       - Detect, detect and ask, reframe questions
       - Don't ask things the user isn't prepared to answer
       - Reduce physical operations when they can be done wrong unknowingly
-      - Make it easy to do the right thing — a straightforward path to success
+      - Make it easy to do the right thing – a straightforward path to success
       - Be less confusing than before
       - Make it clear when it is right, that it has worked, that they did a good job
       - Don't complain; rather guide (or do it for them, automate)
@@ -633,7 +633,7 @@ entries:
   - added: '2026-03-23'
     tags:
       - clarity
-    body: '"I find users react very positively when things are clear and understandable. That''s what particularly bothers me today — the arbitrariness and thoughtlessness with which so many things are produced and brought to market. Not only in the sector of consumer goods, but in architecture and advertising." – Dieter Rams'
+    body: '"I find users react very positively when things are clear and understandable. That''s what particularly bothers me today – the arbitrariness and thoughtlessness with which so many things are produced and brought to market. Not only in the sector of consumer goods, but in architecture and advertising." – Dieter Rams'
   - added: '2026-03-23'
     tags:
       - clarity
@@ -645,7 +645,7 @@ entries:
   - added: '2026-03-23'
     tags:
       - product
-    body: Do not take orders — do not become a hired robot — rather than making a sandwich ask about the feeling of hunger and offer possibilities of satisfaction.
+    body: Do not take orders – do not become a hired robot – rather than making a sandwich ask about the feeling of hunger and offer possibilities of satisfaction.
   - added: '2026-03-23'
     tags:
       - design
@@ -670,7 +670,7 @@ entries:
   - added: '2026-03-23'
     tags:
       - research
-    body: There's something we didn't cover when talking about the "5 whys" that should be mentioned. One of the things that can happen when you do the "5 whys" technique (some people call it "7 whys") is that you can get a leap to a very abstract level that doesn't actually illuminate anything; the person you're talking to takes your questioning as an intellectual challenge and makes a broad statement that encompasses the topic you're talking about but is too vague to really get a handle on. Usually this statement would fail to communicate much of interest to a person not directly involved in the conversation, which is the clearest sign of its weakness. An analog of this is the vague job title or business description that doesn't tell you what is actually done. "I'm an analog solutions provider." The trick in these situations is to bring the discussion back down toward specifics by asking an investigatory question, such as "what makes that special," "what makes that necessary," "why do I want that," "what would it be like to have this" — to bring the umbrella term back to something an individual person would experience. Sometimes you need a few "what" questions to drop down to a useful level again.
+    body: There's something we didn't cover when talking about the "5 whys" that should be mentioned. One of the things that can happen when you do the "5 whys" technique (some people call it "7 whys") is that you can get a leap to a very abstract level that doesn't actually illuminate anything; the person you're talking to takes your questioning as an intellectual challenge and makes a broad statement that encompasses the topic you're talking about but is too vague to really get a handle on. Usually this statement would fail to communicate much of interest to a person not directly involved in the conversation, which is the clearest sign of its weakness. An analog of this is the vague job title or business description that doesn't tell you what is actually done. "I'm an analog solutions provider." The trick in these situations is to bring the discussion back down toward specifics by asking an investigatory question, such as "what makes that special," "what makes that necessary," "why do I want that," "what would it be like to have this" – to bring the umbrella term back to something an individual person would experience. Sometimes you need a few "what" questions to drop down to a useful level again.
   - added: '2026-03-23'
     tags:
       - product
@@ -683,7 +683,7 @@ entries:
   - added: '2026-03-23'
     tags:
       - experience
-    body: No loose parts! If there must be a loose part, give me somewhere to keep it — otherwise you are asking me to make a decision about maybe throwing away something I just bought.
+    body: No loose parts! If there must be a loose part, give me somewhere to keep it – otherwise you are asking me to make a decision about maybe throwing away something I just bought.
   - added: '2026-03-23'
     tags:
       - simplicity
@@ -717,7 +717,7 @@ entries:
   - added: '2026-03-23'
     tags:
       - strategy
-    body: '"There''s a natural bias against the creative and emotional that serves us poorly — the rational should also be subject to emotional/psychological evaluation, because logic is not sufficient." – Rory Sutherland'
+    body: '"There''s a natural bias against the creative and emotional that serves us poorly – the rational should also be subject to emotional/psychological evaluation, because logic is not sufficient." – Rory Sutherland'
   - added: '2026-03-23'
     tags:
       - strategy
@@ -757,7 +757,7 @@ entries:
   - added: '2026-03-23'
     tags:
       - product
-    body: Consider emotion at every phase — often in setup the emotional job is to support user confidence in the product and in their own action.
+    body: Consider emotion at every phase – often in setup the emotional job is to support user confidence in the product and in their own action.
   - added: '2026-03-23'
     tags:
       - design
@@ -775,12 +775,12 @@ entries:
   - added: '2026-03-23'
     tags:
       - design
-    body: Design the centerpiece (epicenter) first rather than starting from the known — starting from the known boxes around your core offering can result in a donut, where everything is solid but the reason we are here.
+    body: Design the centerpiece (epicenter) first rather than starting from the known – starting from the known boxes around your core offering can result in a donut, where everything is solid but the reason we are here.
   - added: '2026-03-23'
     tags:
       - strategy
     body: |-
-      Don't "pick a door" — design for the situation.
+      Don't "pick a door" – design for the situation.
       - Easy = fast + obvious
       - Performance = credible + reliable
       - Exciting = delightful + surprise
@@ -883,7 +883,7 @@ entries:
       - The blinking red button. Brightness. Contrast. Shape. Separateness / salience. Gathering attention.
       - The finger approaches. Touch. Feeling of material. Light leakage around finger. Surface resistance.
       - Depress button. Traveling resistance. Smoothness.
-      - "Click" — coincident: tactile signal of activation, auditory signal of activation, visual feedback change at the same instant (blinking stops) — waiting for button UP will cause confusion.
+      - "Click" – coincident: tactile signal of activation, auditory signal of activation, visual feedback change at the same instant (blinking stops) – waiting for button UP will cause confusion.
       - Perception and action
   - added: '2026-03-23'
     tags:
@@ -892,8 +892,8 @@ entries:
       Stimulus
       - t0 Sound
       - t0 Pressure
-      - t1 Heat — directional, ambient, change, physically present (forms of "remote touch")
-      - t2 Scent — non-directional, ambient, slow gradient, emotionally powerful
+      - t1 Heat – directional, ambient, change, physically present (forms of "remote touch")
+      - t2 Scent – non-directional, ambient, slow gradient, emotionally powerful
       **Orienting impulse**
 
       Sum of stimuli crosses danger/noxious/interest threshold, causes orienting impulse to directional stimuli. It is easiest to orient to stimuli that are strong, continuous, or periodic (rather than randomly occurring). Quickly periodic stimuli are powerful but can be strident or noxious.
@@ -963,7 +963,7 @@ entries:
       - Informativeness of presentation
       - Does presentation lead into setup
 
-      Getting it set up — physical
+      Getting it set up – physical
       - Length of process
       - Intelligibility of process/instructions
       - Items falling to hand at the right time? Having to hunt for items?
@@ -971,7 +971,7 @@ entries:
       - Anything cumbersome or difficult? Anything unexpectedly easy or pleasant?
       - Is it clear what to do next?
 
-      Getting it set up — software
+      Getting it set up – software
       - Length of process
       - Intelligibility of process/instructions
       - Appropriateness of needed information/decisions during setup
@@ -1160,7 +1160,7 @@ entries:
       - strategy
     body: |-
       Consistency and persistence
-      "They came out of nowhere" is really "they started working on this a long time ago" — it takes a long time to produce an overnight success.
+      "They came out of nowhere" is really "they started working on this a long time ago" – it takes a long time to produce an overnight success.
   - added: '2026-03-23'
     tags:
       - process
@@ -1194,7 +1194,7 @@ entries:
 
       On a scale from perfect to total crap, the manager looks for results to fall between "minimally acceptable" and "too good for the ROI" while the designer looks for results to fall between "good enough" and "diminishing returns."
 
-      But "minimally acceptable" is below "good enough" — so we must establish the "good enough" floor. The target zone is between "good enough" and "too good for the ROI", biased high in that zone.
+      But "minimally acceptable" is below "good enough" – so we must establish the "good enough" floor. The target zone is between "good enough" and "too good for the ROI", biased high in that zone.
   - added: '2026-03-23'
     tags:
       - product
@@ -1208,8 +1208,8 @@ entries:
     body: |-
       Design everything
       Simplicity is a tactic (not a goal, not a strategy)
-      Content — structure — elegance
-      Predictability — flexibility — accountability — professionalism
+      Content – structure – elegance
+      Predictability – flexibility – accountability – professionalism
       In groups or business you are what you seem to be
       Skills, expertise, values, wills and wants; what distinguishes you from others?
   - added: '2026-03-23'
@@ -1223,7 +1223,7 @@ entries:
   - added: '2026-03-23'
     tags:
       - process
-    body: Three people need to know exactly what the product is and does — PM, tech lead, UX person.
+    body: Three people need to know exactly what the product is and does – PM, tech lead, UX person.
   - added: '2026-03-23'
     tags:
       - process
@@ -1232,16 +1232,16 @@ entries:
     tags:
       - product
     body: |-
-      Marty Cagan — product and UX
+      Marty Cagan – product and UX
       1. The job of the PM is to discover a product that is valuable, usable, and feasible
       2. Product discovery is a collaboration between the PM, interaction designer, and software architect (trio)
       3. Engineering is important and difficult, but user experience design is even more important and usually more difficult
-      4. Engineers are typically very poor at user experience design — engineers think in terms of implementation models, but users think in terms of conceptual models
+      4. Engineers are typically very poor at user experience design – engineers think in terms of implementation models, but users think in terms of conceptual models
       5. User experience design means interaction design, visual design, and industrial design
       6. Functionality (product requirements) and user experience design are inherently intertwined
       7. Product ideas must be tested, early and often, on actual target users in order to come up with a product that is valuable and usable
       8. We need a high-fidelity prototype so we can quickly, easily, and frequently test our ideas on real users using a realistic user experience
-      9. The job of the PM is to identify the minimal possible product that meets the objectives — valuable, usable, and feasible — minimizing both time to market and user complexity
+      9. The job of the PM is to identify the minimal possible product that meets the objectives – valuable, usable, and feasible – minimizing both time to market and user complexity
       10. Once this minimal successful product has been discovered and validated, it is not something that can be delivered piecemeal with the same results
   - added: '2026-03-23'
     tags:
@@ -1315,4 +1315,4 @@ entries:
   - added: '2026-03-15'
     tags:
       - clarity
-    body: If the next reader cannot follow your reasoning in five minutes, the system is not yet clear enough — even when the code works.
+    body: If the next reader cannot follow your reasoning in five minutes, the system is not yet clear enough – even when the code works.

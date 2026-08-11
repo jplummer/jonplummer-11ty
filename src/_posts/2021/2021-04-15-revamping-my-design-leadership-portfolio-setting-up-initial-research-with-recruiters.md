@@ -32,6 +32,6 @@ But of course these are not the sorts of questions I can usefully ask directly; 
 
 This sort of question will ideally not be too much to answer, and spark a little conversation that will help me know what to keep or play up in my profile, what to give more emphasis, and where I've left gaps. But first I must get them to engage, so I'll contact them via LinkedIn with a simple message:
 
-> Hi, \[name\]. I've decided to turn my design research powers on my portfolio and resume. I'd love to ask you a few questions, since we recently discussed a position. If you are willing, I promise to make it easy and not take up too much of your time. Yes? Thanks, —Jon
+> Hi, \[name\]. I've decided to turn my design research powers on my portfolio and resume. I'd love to ask you a few questions, since we recently discussed a position. If you are willing, I promise to make it easy and not take up too much of your time. Yes? Thanks, – Jon
 
 Next up: understanding the results.

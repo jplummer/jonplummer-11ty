@@ -14,7 +14,7 @@ I recently complained to the directors and project managers about meeting invita
 - without a sense of what a person might be expected to do in a meeting, or
 - without a sense of what person might need to do to prepare for a meeting.
 
-It turns out that, generally, the project managers aren't to blame here. The VPs and directors are to blame more than we should be, but especially the populace—most folks are not that great about helping the folks they invite to a meeting be ready for that meeting.
+It turns out that, generally, the project managers aren't to blame here. The VPs and directors are to blame more than we should be, but especially the populace – most folks are not that great about helping the folks they invite to a meeting be ready for that meeting.
 
 This is a thing that design folks can be especially good at. We're accustomed to thinking about others and their needs. All we need to do is remember to think about these at the moment we are scheduling the meeting.
 

@@ -12,7 +12,7 @@ It turns out that, aside from some large businesses that have a very specific fo
 
 It took me a long time to figure this out. I finally pinned someone down while I was early at Belkin and fairly interrogated them about the "business case" that seemed so daunting throughout my career, and learned that there's not really much to it. _You_ could bash together a business case for whatever without too much trouble, I bet.
 
-Sure, there's the matter of _benefit_—that's a bit of business jargon that refers to the desirable result of doing a thing, said in a way that doesn't depend on how it is achieved. For example, we would like to have a more inclusive workplace. There are lots of things we could do to get there. Improving the inclusion of underrepresented groups in our hiring pipeline is one tactic we might use to help achieve that benefit.
+Sure, there's the matter of _benefit_ – that's a bit of business jargon that refers to the desirable result of doing a thing, said in a way that doesn't depend on how it is achieved. For example, we would like to have a more inclusive workplace. There are lots of things we could do to get there. Improving the inclusion of underrepresented groups in our hiring pipeline is one tactic we might use to help achieve that benefit.
 
 So this business about benefit, time, cost, etc. is correct, and really about expressing a problem, a benefit to counter the problem, and then offering possible methods and their costs that will help achieve the benefit.
 
@@ -24,7 +24,7 @@ I wrote a little memory jogger to help build these. It's not much to look at; I'
 >
 > There’s also (alternative solution) It’s better than the other (because) It’s worse than the other (because) It will cost us (how much) to get started (in treasure, people, space, equipment, etc.) In the first (timeframe) it will yield (result), based on (the similar experience of others) Ideal for us is if it ramps to producing (result) Other opportunities it might create include (stretch) Etc.
 
-Any part of this you can’t answer can be answered with the help of folks in your organization, folks you know or learn about via working the network, or can be left asked but unanswered. You'll need to talk to these people anyhow to gather support for your proposal, so you might as well include them early—involving people in creating the future that they will be part of is really the only good way to create buy-in.
+Any part of this you can’t answer can be answered with the help of folks in your organization, folks you know or learn about via working the network, or can be left asked but unanswered. You'll need to talk to these people anyhow to gather support for your proposal, so you might as well include them early – involving people in creating the future that they will be part of is really the only good way to create buy-in.
 
 Recently I've started to knock this sort of thing together into a little proposal format. It doesn't match the above exactly, but you'll recognize the themes.
 

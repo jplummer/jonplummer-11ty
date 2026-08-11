@@ -16,8 +16,8 @@ It's not exactly a problem to merely check the contrast level between RGB values
 
 I think I want two luminance outcomes for the same token pair (text and background), at least while I am exploring themes:
 
-1. **Wide-gamut-mapped** — Map the same OKLCH colors to a wider display-referred gamut, such as [Display P3](https://www.w3.org/TR/css-color-4/#predefined-display-p3), compute `Y` with the matching luminance function, then `Lc`. This answers "if the wider chroma actually reaches the eye on a capable display, what does APCA say the contrast ratio is?"
-2. **sRGB-mapped** — After gamut mapping to sRGB, compute `Y` (and then `Lc`) the way the current stack already does. This answers "on a typical sRGB-limited path, are we still okay?"
+1. **Wide-gamut-mapped** – Map the same OKLCH colors to a wider display-referred gamut, such as [Display P3](https://www.w3.org/TR/css-color-4/#predefined-display-p3), compute `Y` with the matching luminance function, then `Lc`. This answers "if the wider chroma actually reaches the eye on a capable display, what does APCA say the contrast ratio is?"
+2. **sRGB-mapped** – After gamut mapping to sRGB, compute `Y` (and then `Lc`) the way the current stack already does. This answers "on a typical sRGB-limited path, are we still okay?"
 
 ## Which wide space?
 

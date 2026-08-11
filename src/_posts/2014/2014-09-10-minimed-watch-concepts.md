@@ -22,7 +22,7 @@ A skunkworks project to make a wearable remote for an insulin pump and glucose s
 *This digital crown concept predates Apple Watch by eight years. The idea didn't come from a smartwatch; it came from asking what the physical vocabulary of an analog watch could do for a segment-limited LCD. Just as pulling the crown puts you in a "set" mode on an analog watch, and pushing it back in "saves" your work, we could enter and exit a "set" mode for a variety of functions with this same gesture.*
 
 ![MiniMed watch alarm review screen](/assets/images/2022/12/001.2_alarm_review_-_off.jpg)
-*Push the button to find the mode, pull the crown to enter setting mode, rotate to adjust, push to toggle, push back in to save — five steps mapped onto a control people already knew how to use.*
+*Push the button to find the mode, pull the crown to enter setting mode, rotate to adjust, push to toggle, push back in to save – five steps mapped onto a control people already knew how to use.*
 
 In 2006 this was a fairly radical thought, especially the digital crown and repurposing existing analog watch behaviors for everyday control.
 

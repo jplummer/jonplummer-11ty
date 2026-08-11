@@ -94,9 +94,9 @@ Post-launch we kept improving Call Review Console, allowing people to
 
 Initial customer response was enthusiastic, with key customers reporting that they were able to spend less time and deliver higher-quality feedback to their call center agents. Usage of the original list view dropped to less than half. Sales engineers reported a lift of 12% that they largely attribute to Call Review Console, though this is anecdotal and there are many confounds. Over the year and a half following Call Review Console's initial launch, sales to contact center customers grew from ~$4MM to $12MM+ ARR.
 
-*I've been loving the beta and now my agents know where they stand, hint hint.*<br>*—Call Center Leader at a national automotive retailer*
+*I've been loving the beta and now my agents know where they stand, hint hint.*<br>*– Call Center Leader at a national automotive retailer*
 
-*Oh my. Gimme a minute to soak it in. This is nice.*<br>*—QM Manager at a major health network*
+*Oh my. Gimme a minute to soak it in. This is nice.*<br>*– QM Manager at a major health network*
 
 ## Why this kind of interface matters
 

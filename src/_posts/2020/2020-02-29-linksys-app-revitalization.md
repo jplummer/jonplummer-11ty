@@ -7,7 +7,7 @@ coverImage: 2022/12/DashboardOnline.png
 description: "Complete redesign of the Linksys app, improving ratings from below 3 stars to 4.5 stars through new information architecture and performance improvements."
 ogImage: /assets/images/og/portfolio.png
 ---
-The Linksys app was just firmware settings dropped into mobile menus — no better an experience than the web UI, arranged around the network's internal structure instead of what someone actually came to do: check status, fix a device, set a rule. It was rated below three stars on the iTunes Store and had a 3.3 lifetime average on Google Play. I rebuilt the information architecture and visuals around real user tasks, backed it with real performance work under the hood, and asked happy customers to review it. Ratings moved to 4.5 on iTunes and 4.1 on Google Play.
+The Linksys app was just firmware settings dropped into mobile menus – no better an experience than the web UI, arranged around the network's internal structure instead of what someone actually came to do: check status, fix a device, set a rule. It was rated below three stars on the iTunes Store and had a 3.3 lifetime average on Google Play. I rebuilt the information architecture and visuals around real user tasks, backed it with real performance work under the hood, and asked happy customers to review it. Ratings moved to 4.5 on iTunes and 4.1 on Google Play.
 
 {% portraitGrid %}
 
@@ -18,7 +18,7 @@ The Linksys app was just firmware settings dropped into mobile menus — no bett
 *Detailed view of a single connected device, showing connection status, bandwidth usage, and device-specific controls.*
 
 ![Linksys app device list showing all connected devices](/assets/images/2022/12/DeviceList-576x1024.png)
-*Each row stacks three signals into one icon cluster — a device-type glyph, a small badge for ethernet versus Wi-Fi, and a lock icon for anything with restricted access — so a glance tells you what a device is, how it's connected, and if it is subject to any rules before you tap anything.*
+*Each row stacks three signals into one icon cluster – a device-type glyph, a small badge for ethernet versus Wi-Fi, and a lock icon for anything with restricted access – so a glance tells you what a device is, how it's connected, and if it is subject to any rules before you tap anything.*
 
 ![Linksys app swipe actions pattern for device management](/assets/images/2022/12/deviceprioritizationdelete-576x1024.png)
 *Removing a prioritized device used to mean drilling into a settings screen most people never found. A swipe surfaces Remove and Cancel right on the row, in reach of a thumb, with no confirmation dialog blocking the one action people came to do.*

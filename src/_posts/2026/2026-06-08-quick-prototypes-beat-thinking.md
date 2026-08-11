@@ -30,7 +30,7 @@ Try typing in a Display Name on a few cards. Touch the transform radio buttons. 
   <iframe
     class="post-demo-embed-frame"
     src="/assets/demos/auto-api-name/index.html"
-    title="Auto API name behavior test bed — twelve field-sync behaviors plus a favorite"
+    title="Auto API name behavior test bed – twelve field-sync behaviors plus a favorite"
     loading="lazy"
   ></iframe>
 </div>
@@ -46,6 +46,6 @@ The favorite combines live auto-update while you type, severing the link when Di
 
 ## When to use this method
 
-It fits small, fuzzy interaction decisions where the cost of being wrong is low but the surprise factor is high and quality matters — linked fields, undo behavior, empty states, confirmation timing. It does not replace research or accessibility review. It replaces guessing.
+It fits small, fuzzy interaction decisions where the cost of being wrong is low but the surprise factor is high and quality matters – linked fields, undo behavior, empty states, confirmation timing. It does not replace research or accessibility review. It replaces guessing.
 
 Next time you feel a spec meeting circling the same opinions, make a test bed instead. Generate breadth first. Pick and refine second. Leave a good artifact so the next person understands why.

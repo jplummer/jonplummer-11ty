@@ -39,7 +39,7 @@ The Velop Whole-Home Wi-Fi System is a collection of identical routers that work
 *The bundle may have more nodes; now is the time to set up the next one.*
 
 ![Velop app placement guidance for additional nodes](/assets/images/2022/12/SET_260-576x1024.png)
-*Placement of additional nodes was a key challenge in early product testing. A little guidance goes a long way: the screen prepares you to place an additional node with a picture instead of a number. The cutaway illustration of a house, kitchen to entry, with a coverage bubble over each spot a node might go and the bubbles overlapping just enough. "Wherever you want coverage, but within range of another node" is the whole rule — the overlap in the drawing makes that concrete.*
+*Placement of additional nodes was a key challenge in early product testing. A little guidance goes a long way: the screen prepares you to place an additional node with a picture instead of a number. The cutaway illustration of a house, kitchen to entry, with a coverage bubble over each spot a node might go and the bubbles overlapping just enough. "Wherever you want coverage, but within range of another node" is the whole rule – the overlap in the drawing makes that concrete.*
 
 {% endportraitGrid %}
 

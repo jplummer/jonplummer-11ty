@@ -9,7 +9,7 @@ ogImage: /assets/images/og/portfolio.png
 ---
 2013 IDEA Finalist, 2013 Silver UX Award
 
-Wemo started as a single idea done well: a plug-in switch and a motion sensor you could see and control from your phone, from anywhere. It grew fast — Insight, a light switch, LED lighting, a heater, humidifier, slow-cooker, a dimmer, and eventually Wemo Mini. Growth came easier than discipline. Not every addition served the core idea equally well, and it showed.
+Wemo started as a single idea done well: a plug-in switch and a motion sensor you could see and control from your phone, from anywhere. It grew fast – Insight, a light switch, LED lighting, a heater, humidifier, slow-cooker, a dimmer, and eventually Wemo Mini. Growth came easier than discipline. Not every addition served the core idea equally well, and it showed.
 
 ![WeMo app main device list screen with all connected devices](/assets/images/2022/12/devices_withhand-1024x761.png)
 *Main device list screen displaying all connected WeMo devices with their current on/off status and quick controls.*

@@ -30,7 +30,7 @@ Mr. Bias wanted folks to look over his new portfolio, and I was happy to help. H
 >
 > So I'm watching for signs of people being interested in these topics, doing them, and hopefully doing them well or progressively better. Happily all of these things are expressible or at least hintable in an online portfolio such as yours.
 >
-> Your writeup for Pay the Poet is straightforward and sensible, but it leaves me wanting a little bit more re the above items, especially what you (or the team) learned. I think this is mainly because you have some fairly uninformative statements in there such as "Poets love the Instagram UI." This is a bit of a "so what"—what do they love about the UI? Emotionally, functionally, etc.? You do mention that they are used to Instagram's upload interface, which is specific. Specificity, plainly spoken, is your friend here.
+> Your writeup for Pay the Poet is straightforward and sensible, but it leaves me wanting a little bit more re the above items, especially what you (or the team) learned. I think this is mainly because you have some fairly uninformative statements in there such as "Poets love the Instagram UI." This is a bit of a "so what" – what do they love about the UI? Emotionally, functionally, etc.? You do mention that they are used to Instagram's upload interface, which is specific. Specificity, plainly spoken, is your friend here.
 >
 > Another, "PayPal is a popular and secure method of payment that users trust" hints that there's more there, but you don't go further. What other payment vehicles did you ask about? Is anything important beyond trust?
 >
@@ -38,7 +38,7 @@ Mr. Bias wanted folks to look over his new portfolio, and I was happy to help. H
 >
 > On the other hand, there's a whole line of inquiry that could be useful to discuss coming off of "Poets want exposure and a means to build a following." This is the sort of meaty starting point for an interesting app + service. Right after that you say "Poets want to be able to connect with fans and those who seek to book them." I like this one too. I wonder if you have more to say about these.
 >
-> Take care with statements like "after our first stand-up, we decided to create a screener survey which informed us what type of digital product to create"—a survey never tells you want to do, but that's what you are saying here. My guess is that your interpretation of the survey results gave you clues about the way forward that you then needed to explore, yes? Probably not answers _per se_.
+> Take care with statements like "after our first stand-up, we decided to create a screener survey which informed us what type of digital product to create" – a survey never tells you want to do, but that's what you are saying here. My guess is that your interpretation of the survey results gave you clues about the way forward that you then needed to explore, yes? Probably not answers _per se_.
 >
 > I like the "How Might We"s and wonder what more you might say about them that's specific.
 >
