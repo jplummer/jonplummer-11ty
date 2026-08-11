@@ -88,7 +88,7 @@
   --text-color-light: light-dark(oklch(49.1% 0.0142 259.82deg), oklch(78% 0.0142 259.82deg)); /* quiet ink */
   --border-color: light-dark(oklch(89.3% 0.0105 261.79deg), oklch(38% 0.0105 261.79deg));
   --background-color: light-dark(oklch(96.4% 0.0058 264.53deg), oklch(10% 0.0058 264.53deg));
-  --content-background-color: light-dark(oklch(100% 0 0deg), oklch(22% 0 0deg));
+  --content-background-color: light-dark(oklch(98% 0 0deg), oklch(22% 0 0deg));
   --link-color: light-dark(oklch(58.6% 0.1911 27.41deg), oklch(75.9% 0.1444 18deg)); /* accent; dark = cooler denser red (in-gamut; Lc soft vs preferred) */
   /* Export/lab names — site UI uses ink / quiet / accent only (no distinct brown/green) */
   --link-hover-color: var(--link-color);

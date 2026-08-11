@@ -9,7 +9,7 @@ const presets = {
     '--text-color': '#2a2d32',
     '--text-color-light': '#5c6169',
     '--background-color': '#f1f3f7',
-    '--content-background-color': '#fff',
+    '--content-background-color': '#f8f8f8',
     '--link-color': '#d63d36',
     '--link-hover-color': '#d63d36',
     '--link-visited-color': '#5c6169',

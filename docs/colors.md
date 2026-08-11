@@ -11,7 +11,7 @@ Export/lab aliases (same three colors on the live site and in `/color/` paste): 
 ### Light mode
 
 - Background (outer field token `--background-color`): `#f1f3f7` — `oklch(96.4% 0.0058 264.53deg)` — still used for code panels, lightbox chrome, gallery mixes; **not** the body mat (body is one sheet with content background as of 2026-08)
-- Content background: `#fff` — also the live page field (`body` + header/main/footer)
+- Content background: `#f8f8f8` — `oklch(98% 0 0deg)` — also the live page field (`body` + header/main/footer)
 - Text: `#2a2d32` — `oklch(29.6% 0.01 260.71deg)`
 - Text light: `#5c6169` — `oklch(49.1% 0.0142 259.82deg)` (quiet ink: tagline, captions, license, disclosures, visited, EOF square)
 - Border: `#d8dce3` — `oklch(89.3% 0.0105 261.79deg)`
