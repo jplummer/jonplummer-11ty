@@ -21,7 +21,7 @@ module.exports = function() {
     'Study people, ship software',
     'Listen before making',
     'Build from understanding',
-    'Learn to build, build tolearn',
+    'Learn to build, build to learn',
   ];
   const title = `${author} – ${tagline}`;
 
