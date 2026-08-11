@@ -86,11 +86,10 @@
   --background-color: light-dark(oklch(96.4% 0.0058 264.53deg), oklch(10% 0.0058 264.53deg));
   --content-background-color: light-dark(oklch(100% 0 0deg), oklch(22% 0 0deg));
   --link-color: light-dark(oklch(58.6% 0.1911 27.41deg), oklch(86.6% 0.1911 27.41deg)); /* accent */
-  --link-hover-color: light-dark(oklch(57.7% 0.1348 59.17deg), oklch(85.7% 0.1348 59.17deg)); /* gallery/export only — lived UI uses ink/accent */
-  --link-visited-color: var(--text-color-light); /* quiet; export name kept for gallery / :visited */
-  /* Gallery/export only — lived :active uses accent */
-  --link-active-color: light-dark(oklch(48.1% 0.1152 154.58deg), oklch(76.1% 0.1152 154.58deg));
-  --token-color: var(--text-color-light); /* end-of-post square — quiet ink */
+  /* Export/lab names — site UI uses ink / quiet / accent only (no distinct brown/green) */
+  --link-hover-color: var(--link-color);
+  --link-visited-color: var(--text-color-light);
+  --link-active-color: var(--link-color);
 
   /* Icons — CSS mask-image data URIs */
   /* New-tab: solid sharp window NE + SW L (in-system; was stroke outline, visually inverted) */
@@ -806,7 +805,7 @@ pre code {
 /* === LINKS ===
    Three lived colors: ink (--text-color), quiet (--text-color-light), accent (--link-color).
    Buckets: nav (accent→ink); reading (ink→accent, visited quiet); controls (ink→accent);
-   quiet chrome (quiet→ink). --link-hover-color is gallery/export only.
+   quiet chrome (quiet→ink). Export aliases --link-hover/visited/active map onto these three.
 */
 
 /* Reading default */
@@ -817,16 +816,12 @@ a {
 }
 
 a:visited {
-  color: var(--link-visited-color);
+  color: var(--text-color-light);
 }
 
-a:any-link:is(:hover, :focus-visible) {
+a:any-link:is(:hover, :focus-visible, :active) {
   color: var(--link-color);
   text-decoration: underline;
-}
-
-a:active {
-  color: var(--link-color);
 }
 
 a:not([class]) {
@@ -878,7 +873,7 @@ article.link-item section a:link {
 }
 
 article.link-item section a:visited {
-  color: var(--link-visited-color);
+  color: var(--text-color-light);
 }
 
 article.link-item section a:any-link:is(:hover, :focus-visible) {
@@ -901,7 +896,7 @@ main[data-tags*="page"]::after {
   display: block;
   width: 0.625rem;
   height: 0.625rem;
-  background-color: var(--token-color);
+  background-color: var(--text-color-light);
   margin: var(--spacing-sm) 0 0 0;
 }
 
@@ -1430,9 +1425,9 @@ header a.skip:focus {
   --background-color: oklch(96.4% 0.0058 264.53deg);
   --content-background-color: oklch(100% 0 0deg);
   --link-color: oklch(58.6% 0.1911 27.41deg);
-  --link-hover-color: oklch(57.7% 0.1348 59.17deg);
+  --link-hover-color: var(--link-color);
   --link-visited-color: var(--text-color-light);
-  --link-active-color: oklch(48.1% 0.1152 154.58deg);
+  --link-active-color: var(--link-color);
   
   box-sizing: border-box;
   margin: 0;
@@ -1529,9 +1524,9 @@ header a.skip:focus {
     --background-color: oklch(100% 0 0deg);
     --content-background-color: oklch(100% 0 0deg);
     --link-color: oklch(28.5% 0 0deg);
-    --link-hover-color: oklch(28.5% 0 0deg);
+    --link-hover-color: var(--link-color);
     --link-visited-color: var(--text-color-light);
-    --link-active-color: oklch(28.5% 0 0deg);
+    --link-active-color: var(--link-color);
   }
 
   /* Page setup for letter/A4 */

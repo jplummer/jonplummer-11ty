@@ -43,7 +43,7 @@
 }
 
 .style-exercise-page a.visited {
-  color: var(--link-visited-color);
+  color: var(--text-color-light);
 }
 
 .style-exercise-page .color-preview-actions {

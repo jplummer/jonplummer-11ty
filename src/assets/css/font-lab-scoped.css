@@ -101,5 +101,5 @@
 }
 
 .theme-root.home-preview a.sim-visited {
-  color: var(--link-visited-color);
+  color: var(--text-color-light);
 }

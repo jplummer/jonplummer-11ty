@@ -167,7 +167,11 @@ function buildColorPairs(colors) {
     });
   }
   
-  if (colors.light['link-hover-color'] && colors.light['content-background-color']) {
+  if (
+    colors.light['link-hover-color'] &&
+    colors.light['content-background-color'] &&
+    colors.light['link-hover-color'] !== colors.light['link-color']
+  ) {
     pairs.push({
       mode: 'light',
       category: 'Link hover on white',
@@ -179,7 +183,11 @@ function buildColorPairs(colors) {
     });
   }
   
-  if (colors.light['link-visited-color'] && colors.light['content-background-color']) {
+  if (
+    colors.light['link-visited-color'] &&
+    colors.light['content-background-color'] &&
+    colors.light['link-visited-color'] !== colors.light['text-color-light']
+  ) {
     pairs.push({
       mode: 'light',
       category: 'Link visited on white',
@@ -191,7 +199,11 @@ function buildColorPairs(colors) {
     });
   }
   
-  if (colors.light['link-active-color'] && colors.light['content-background-color']) {
+  if (
+    colors.light['link-active-color'] &&
+    colors.light['content-background-color'] &&
+    colors.light['link-active-color'] !== colors.light['link-color']
+  ) {
     pairs.push({
       mode: 'light',
       category: 'Link active on white',
@@ -252,7 +264,11 @@ function buildColorPairs(colors) {
     });
   }
   
-  if (colors.dark['link-hover-color'] && colors.dark['content-background-color']) {
+  if (
+    colors.dark['link-hover-color'] &&
+    colors.dark['content-background-color'] &&
+    colors.dark['link-hover-color'] !== colors.dark['link-color']
+  ) {
     pairs.push({
       mode: 'dark',
       category: 'Link hover on content background',
@@ -264,7 +280,11 @@ function buildColorPairs(colors) {
     });
   }
   
-  if (colors.dark['link-visited-color'] && colors.dark['content-background-color']) {
+  if (
+    colors.dark['link-visited-color'] &&
+    colors.dark['content-background-color'] &&
+    colors.dark['link-visited-color'] !== colors.dark['text-color-light']
+  ) {
     pairs.push({
       mode: 'dark',
       category: 'Link visited on content background',
@@ -276,7 +296,11 @@ function buildColorPairs(colors) {
     });
   }
   
-  if (colors.dark['link-active-color'] && colors.dark['content-background-color']) {
+  if (
+    colors.dark['link-active-color'] &&
+    colors.dark['content-background-color'] &&
+    colors.dark['link-active-color'] !== colors.dark['link-color']
+  ) {
     pairs.push({
       mode: 'dark',
       category: 'Link active on content background',

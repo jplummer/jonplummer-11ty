@@ -11,9 +11,9 @@ const presets = {
     '--background-color': '#f1f3f7',
     '--content-background-color': '#fff',
     '--link-color': '#d63d36',
-    '--link-hover-color': '#b26205',
+    '--link-hover-color': '#d63d36',
     '--link-visited-color': '#5c6169',
-    '--link-active-color': '#0d703f',
+    '--link-active-color': '#d63d36',
     '--border-color': '#d8dce3'
   },
   DR01: {

@@ -4,20 +4,18 @@ Live tokens live in `src/assets/css/jonplummer.css` (`:root` with `light-dark()`
 
 ## Site palette (revision 2026)
 
-Cool chrome; lived interactive colors are **ink** (`--text-color`), **quiet** (`--text-color-light`), and **accent** (`--link-color`). `--link-hover-color` / `--link-active-color` remain for gallery export only. APCA-tuned OKLCH; `light-dark()` picks light vs dark.
+Cool chrome; lived interactive colors are **ink** (`--text-color`), **quiet** (`--text-color-light`), and **accent** (`--link-color`). APCA-tuned OKLCH; `light-dark()` picks light vs dark.
+
+Export/lab aliases (same three colors on the live site): `--link-hover-color` / `--link-active-color` → accent; `--link-visited-color` → quiet. Exploratory gallery themes (DR / wild / terminal / harmony) may still invent distinct hover / visited / active.
 
 ### Light mode
 
 - Background (outer field token `--background-color`): `#f1f3f7` — `oklch(96.4% 0.0058 264.53deg)` — still used for code panels, lightbox chrome, gallery mixes; **not** the body mat (body is one sheet with content background as of 2026-08)
 - Content background: `#fff` — also the live page field (`body` + header/main/footer)
 - Text: `#2a2d32` — `oklch(29.6% 0.01 260.71deg)`
-- Text light: `#5c6169` — `oklch(49.1% 0.0142 259.82deg)` (quiet ink: tagline, captions, license, disclosures)
+- Text light: `#5c6169` — `oklch(49.1% 0.0142 259.82deg)` (quiet ink: tagline, captions, license, disclosures, visited, EOF square)
 - Border: `#d8dce3` — `oklch(89.3% 0.0105 261.79deg)`
 - Link: `#d63d36` — `oklch(58.6% 0.1911 27.41deg)` (accent)
-- Link hover (gallery/export only): `#b26205` — lived UI does not use this
-- Link visited: `var(--text-color-light)` (quiet)
-- Link active (gallery/export only): green token; lived `:active` uses accent
-- End-of-post token (`--token-color`): quiet ink (`var(--text-color-light)`)
 
 ### Dark mode
 
@@ -26,7 +24,7 @@ Cool chrome; lived interactive colors are **ink** (`--text-color`), **quiet** (`
 - Text: `oklch(93% 0.01 260.71deg)`
 - Text light: `oklch(78% 0.0142 259.82deg)`
 - Border: `oklch(38% 0.0105 261.79deg)`
-- Links: lightened accent pair; visited = quiet (`--text-color-light`)
+- Links: lightened accent; visited / quiet chrome use quiet ink
 
 ### Placement rules (summary)
 
@@ -37,6 +35,7 @@ Lived colors only: **ink**, **quiet**, **accent**.
 - **Controls** (Show/Hide, demo pop-out, lightbox buttons): ink → hover accent; no visited treatment
 - **Quiet chrome** (license/`/colophon`, lab `.site-disclosure`): quiet → hover ink; no visited treatment
 - **Logotype / mark**: ink → hover accent
+- **EOF square**: quiet ink (`--text-color-light`)
 
 See `docs/color-theme-exploration.md` for gallery tooling and APCA workflow.
 

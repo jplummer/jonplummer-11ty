@@ -2825,12 +2825,9 @@ function renderHtml(visibleSections, meta, options = {}) {
     }
 
     /*
-      Site default: accent on links/controls only — neutral masthead, hybrid links,
-      neutral end token (never accent on decoration). Toggled when dr-combo selects default (site).
+      Site default three-color placement (ink / quiet / accent).
+      Toggled when dr-combo selects default (site).
     */
-    .theme-root.home-preview.revision-placement-preview {
-      --token-color: var(--text-color-light);
-    }
     .theme-root.home-preview.revision-placement-preview .jp-page hgroup h1,
     .theme-root.home-preview.revision-placement-preview .jp-page hgroup h1 a,
     .theme-root.home-preview.revision-placement-preview .jp-page hgroup h1 a:visited {
@@ -2859,7 +2856,7 @@ function renderHtml(visibleSections, meta, options = {}) {
       color: var(--text-color);
     }
     .theme-root.home-preview.revision-placement-preview .jp-page article:not(.link-item) section a:not([class]):visited {
-      color: var(--link-visited-color);
+      color: var(--text-color-light);
     }
     .theme-root.home-preview.revision-placement-preview .jp-page article:not(.link-item) section a:not([class]):any-link:is(:hover, :focus-visible) {
       color: var(--link-color);
@@ -2868,13 +2865,13 @@ function renderHtml(visibleSections, meta, options = {}) {
       color: var(--text-color);
     }
     .theme-root.home-preview.revision-placement-preview .jp-page article.link-item section a:visited {
-      color: var(--link-visited-color);
+      color: var(--text-color-light);
     }
     .theme-root.home-preview.revision-placement-preview .jp-page article.link-item section a:any-link:is(:hover, :focus-visible) {
       color: var(--link-color);
     }
     .theme-root.home-preview.revision-placement-preview .jp-page article:not(.link-item) section::after {
-      background-color: var(--token-color, var(--border-color));
+      background-color: var(--text-color-light);
     }
   </style>
 </head>
