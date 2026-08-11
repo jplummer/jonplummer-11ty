@@ -2829,7 +2829,7 @@ function renderHtml(visibleSections, meta, options = {}) {
       neutral end token (never accent on decoration). Toggled when dr-combo selects default (site).
     */
     .theme-root.home-preview.revision-placement-preview {
-      --token-color: color-mix(in oklch, var(--text-color) 28%, var(--content-background-color));
+      --token-color: var(--text-color-light);
     }
     .theme-root.home-preview.revision-placement-preview .jp-page hgroup h1,
     .theme-root.home-preview.revision-placement-preview .jp-page hgroup h1 a,
@@ -2840,14 +2840,14 @@ function renderHtml(visibleSections, meta, options = {}) {
     .theme-root.home-preview.revision-placement-preview .jp-page hgroup p {
       color: var(--text-color-light);
     }
-    /* Nav + pagination: accent at rest for :link and :visited */
+    /* Nav + pagination: accent → ink */
     .theme-root.home-preview.revision-placement-preview .jp-page > header nav a:any-link,
     .theme-root.home-preview.revision-placement-preview .jp-page nav.pagination a:any-link {
       color: var(--link-color);
     }
     .theme-root.home-preview.revision-placement-preview .jp-page > header nav a:any-link:is(:hover, :focus-visible),
     .theme-root.home-preview.revision-placement-preview .jp-page nav.pagination a:any-link:is(:hover, :focus-visible) {
-      color: var(--link-hover-color);
+      color: var(--text-color);
     }
     .theme-root.home-preview.revision-placement-preview .jp-page hgroup h1 a:any-link {
       color: var(--text-color);
@@ -2865,7 +2865,7 @@ function renderHtml(visibleSections, meta, options = {}) {
       color: var(--link-color);
     }
     .theme-root.home-preview.revision-placement-preview .jp-page article.link-item section a:link {
-      color: var(--link-color);
+      color: var(--text-color);
     }
     .theme-root.home-preview.revision-placement-preview .jp-page article.link-item section a:visited {
       color: var(--link-visited-color);

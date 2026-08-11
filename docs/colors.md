@@ -4,7 +4,7 @@ Live tokens live in `src/assets/css/jonplummer.css` (`:root` with `light-dark()`
 
 ## Site palette (revision 2026)
 
-Cool chrome, accent on controls only (neutral masthead, hybrid body links). APCA-tuned OKLCH; `light-dark()` picks light vs dark.
+Cool chrome; lived interactive colors are **ink** (`--text-color`), **quiet** (`--text-color-light`), and **accent** (`--link-color`). `--link-hover-color` / `--link-active-color` remain for gallery export only. APCA-tuned OKLCH; `light-dark()` picks light vs dark.
 
 ### Light mode
 
@@ -13,11 +13,11 @@ Cool chrome, accent on controls only (neutral masthead, hybrid body links). APCA
 - Text: `#2a2d32` — `oklch(29.6% 0.01 260.71deg)`
 - Text light: `#5c6169` — `oklch(49.1% 0.0142 259.82deg)` (quiet ink: tagline, captions, license, disclosures)
 - Border: `#d8dce3` — `oklch(89.3% 0.0105 261.79deg)`
-- Link: `#d63d36` — `oklch(58.6% 0.1911 27.41deg)` (APCA-tuned red)
-- Link hover: `#b26205` — `oklch(57.7% 0.1348 59.17deg)`
-- Link visited: `var(--text-color-light)` (quiet) — export name `--link-visited-color` kept for gallery / `:visited`
-- Link active: token still defined for gallery paste / DR packs; **lived** `:active` uses `--link-hover-color` (press flash was never visible with green)
-- End-of-post token (`--token-color`): neutral mix of text + content background (not accent)
+- Link: `#d63d36` — `oklch(58.6% 0.1911 27.41deg)` (accent)
+- Link hover (gallery/export only): `#b26205` — lived UI does not use this
+- Link visited: `var(--text-color-light)` (quiet)
+- Link active (gallery/export only): green token; lived `:active` uses accent
+- End-of-post token (`--token-color`): quiet ink (`var(--text-color-light)`)
 
 ### Dark mode
 
@@ -30,12 +30,13 @@ Cool chrome, accent on controls only (neutral masthead, hybrid body links). APCA
 
 ### Placement rules (summary)
 
-- **Masthead** (`hgroup`): neutral text; hover → accent
-- **Header nav + pagination**: accent at rest; hover → orange-brown
-- **Article / page body links**: body text at rest; visited = quiet; hover/focus → accent (`:any-link` so visited still hovers)
-- **Remaindered links** (`.link-item`): muted row (quiet); title accent at rest; hover → accent
-- **Quiet chrome** (license, colophon credit, tagline, captions, disclosures): `--text-color-light`
-- **Borders / rules**: `--border-color` (not quiet ink)
+Lived colors only: **ink**, **quiet**, **accent**.
+
+- **Nav** (header, pagination, post-nav, utility sibling): accent → hover **ink**; no visited treatment
+- **Reading** (post/page body, link-posts, portfolio cards): ink → hover accent; visited **quiet**; underlined
+- **Controls** (Show/Hide, demo pop-out, lightbox buttons): ink → hover accent; no visited treatment
+- **Quiet chrome** (license/`/colophon`, lab `.site-disclosure`): quiet → hover ink; no visited treatment
+- **Logotype / mark**: ink → hover accent
 
 See `docs/color-theme-exploration.md` for gallery tooling and APCA workflow.
 

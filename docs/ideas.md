@@ -9,7 +9,7 @@
     2. ~~**Type sizes + weights**~~ — **Done (2026-08-10):** lean reading ladder — `--font-size-quiet` / `--font-size-base` / h3–h1 / `--font-size-logotype`; weights light / semibold / bold; no h4–h6; no dead size/weight tokens. Demo pop-out left-aligned.
     3. ~~**Text greys / blacks**~~ — **Done (2026-08-10):** quiet ink; visited aliases quiet; borders on `--border-color`; page+post hybrid links; `strong` → semibold; lived `:active` → hover. Plan: `docs/superpowers/plans/2026-08-10-ink-ladder-quiet-merge.md`.
     4. ~~**Type steps on the reading surface**~~ — Folded into (2).
-    5. **Accent / hover (esp. dark)** — Sharpen brass dark accent; visual trials. **Include:** remaindered `.link-item` titles are accent at rest and hover to the same `--link-color` (no-op) — either quieter at-rest (ink/quiet) or a real hover step (`--link-hover-color`), decided with the accent pass.
+    5. **Accent / hover (esp. dark)** — **In progress (2026-08-11):** three lived colors (ink / quiet / accent). Buckets: nav accent→ink; reading ink→accent + visited quiet; controls ink→accent; quiet chrome quiet→ink. Brown `--link-hover-color` gallery-only. **Still open:** sharpen dark accent (brass).
     6. **Audit focus behavior and keyboard navigation**
     7. **Accessibility check and stats for the colophon** — Clarify or drop once a real pass is done (site contrast/a11y tests already cover a lot).
   - **Out of scope for this track**: overflow texture, outlandish alternate stylesheet (Future → Craft atmosphere).

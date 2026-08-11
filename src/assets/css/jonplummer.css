@@ -85,12 +85,12 @@
   --border-color: light-dark(oklch(89.3% 0.0105 261.79deg), oklch(38% 0.0105 261.79deg));
   --background-color: light-dark(oklch(96.4% 0.0058 264.53deg), oklch(10% 0.0058 264.53deg));
   --content-background-color: light-dark(oklch(100% 0 0deg), oklch(22% 0 0deg));
-  --link-color: light-dark(oklch(58.6% 0.1911 27.41deg), oklch(86.6% 0.1911 27.41deg));
-  --link-hover-color: light-dark(oklch(57.7% 0.1348 59.17deg), oklch(85.7% 0.1348 59.17deg));
+  --link-color: light-dark(oklch(58.6% 0.1911 27.41deg), oklch(86.6% 0.1911 27.41deg)); /* accent */
+  --link-hover-color: light-dark(oklch(57.7% 0.1348 59.17deg), oklch(85.7% 0.1348 59.17deg)); /* gallery/export only — lived UI uses ink/accent */
   --link-visited-color: var(--text-color-light); /* quiet; export name kept for gallery / :visited */
-  /* Lived :active uses hover; token kept for gallery paste / DR packs */
+  /* Gallery/export only — lived :active uses accent */
   --link-active-color: light-dark(oklch(48.1% 0.1152 154.58deg), oklch(76.1% 0.1152 154.58deg));
-  --token-color: color-mix(in oklch, var(--text-color) 28%, var(--content-background-color));
+  --token-color: var(--text-color-light); /* end-of-post square — quiet ink */
 
   /* Icons — CSS mask-image data URIs */
   /* New-tab: solid sharp window NE + SW L (in-system; was stroke outline, visually inverted) */
@@ -296,18 +296,18 @@ article footer {
   grid-area: b;
 }
 
-/* Embedded interactive demo (iframe + pop-out link) */
+/* Embedded interactive demo (iframe + pop-out link) — controls: ink → accent */
 .post-demo-popout {
   margin: 0 0 var(--spacing-xs);
   text-align: left;
 }
 
-.post-demo-popout a {
-  color: var(--text-color-light);
+.post-demo-popout a:any-link {
+  color: var(--text-color);
   transition: color 0.3s ease;
 }
 
-.post-demo-popout a:is(:hover, :focus-visible) {
+.post-demo-popout a:any-link:is(:hover, :focus-visible) {
   color: var(--link-color);
 }
 
@@ -407,7 +407,7 @@ nav li {
   margin: 0;
 }
 
-/* Navigation typography and colors — accent at rest for :link and :visited */
+/* Navigation — accent at rest; hover → ink; no visited treatment */
 body > header nav a:any-link,
 nav.pagination a:any-link,
 nav.post-navigation a:any-link {
@@ -421,7 +421,8 @@ nav.post-navigation a:any-link {
 body > header nav a:any-link:is(:hover, :focus-visible),
 nav.pagination a:any-link:is(:hover, :focus-visible),
 nav.post-navigation a:any-link:is(:hover, :focus-visible) {
-  color: var(--link-hover-color);
+  color: var(--text-color);
+  text-decoration: underline;
 }
 
 body > header nav a[aria-current="page"] {
@@ -597,7 +598,7 @@ article details > summary::-webkit-details-marker {
   display: none;
 }
 
-/* Caret after teaser, before Show/Hide (flex order) */
+/* Caret after teaser, before Show/Hide (flex order) — controls: ink → accent */
 article details > summary::before {
   content: '';
   flex-shrink: 0;
@@ -606,7 +607,7 @@ article details > summary::before {
   height: 10px;
   display: inline-block;
   vertical-align: baseline;
-  background-color: var(--link-color);
+  background-color: var(--text-color);
   -webkit-mask-image: var(--icon-disclosure-caret-mask);
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center;
@@ -615,7 +616,7 @@ article details > summary::before {
   mask-repeat: no-repeat;
   mask-position: center;
   mask-size: contain;
-  transition: transform 0.18s ease;
+  transition: transform 0.18s ease, background-color 0.3s ease;
   transform-origin: 50% 50%;
 }
 
@@ -626,13 +627,14 @@ article details[open] > summary::before {
 article details > summary::after {
   content: "Show text";
   order: 3;
-  color: var(--link-color);
+  color: var(--text-color);
   cursor: pointer;
   text-decoration: underline;
+  transition: color 0.3s ease;
 }
 
 article details > summary:hover::after {
-  color: var(--link-hover-color);
+  color: var(--link-color);
 }
 
 article details[open] > summary::after {
@@ -640,7 +642,7 @@ article details[open] > summary::after {
 }
 
 article details > summary:hover::before {
-  background-color: var(--link-hover-color);
+  background-color: var(--link-color);
 }
 
 /*
@@ -662,6 +664,11 @@ article details > summary:hover::before {
   align-items: center;
   gap: 0.4rem;
   user-select: none;
+  transition: color 0.3s ease;
+}
+
+.site-disclosure > summary:is(:hover, :focus-visible) {
+  color: var(--text-color);
 }
 
 .site-disclosure > summary::-webkit-details-marker {
@@ -683,8 +690,12 @@ article details > summary:hover::before {
   mask-repeat: no-repeat;
   mask-position: center;
   mask-size: contain;
-  transition: transform 0.18s ease;
+  transition: transform 0.18s ease, background-color 0.3s ease;
   transform-origin: 50% 50%;
+}
+
+.site-disclosure > summary:is(:hover, :focus-visible)::before {
+  background-color: var(--text-color);
 }
 
 .site-disclosure[open] > summary::before {
@@ -722,7 +733,7 @@ button, input, label {
   line-height: var(--line-height-tight);
 }
 
-/* Quiet chrome — license, credits, utility disclosures (not post code/pre) */
+/* Quiet chrome — license, credits (not post code/pre) */
 .license,
 footer p,
 .colophon-signature figcaption {
@@ -730,6 +741,18 @@ footer p,
   line-height: var(--line-height-quiet);
   font-weight: var(--font-weight-light);
   color: var(--text-color-light);
+}
+
+/* Quiet links (colophon): quiet → ink; no visited treatment */
+.license a:any-link,
+footer p a:any-link {
+  color: var(--text-color-light);
+  text-decoration: underline;
+}
+
+.license a:any-link:is(:hover, :focus-visible),
+footer p a:any-link:is(:hover, :focus-visible) {
+  color: var(--text-color);
 }
 
 .license {
@@ -780,36 +803,37 @@ pre code {
   -webkit-box-decoration-break: clone;
 }
 
-/* === LINKS === */
+/* === LINKS ===
+   Three lived colors: ink (--text-color), quiet (--text-color-light), accent (--link-color).
+   Buckets: nav (accent→ink); reading (ink→accent, visited quiet); controls (ink→accent);
+   quiet chrome (quiet→ink). --link-hover-color is gallery/export only.
+*/
 
-/* Base link styles — chrome (nav, etc.) uses accent at rest; prose overrides below */
+/* Reading default */
 a {
   text-decoration: none;
-  color: var(--link-color);
+  color: var(--text-color);
   transition: color 0.3s ease;
-}
-
-/* :any-link so :visited + :hover is not beaten by a later a:visited rule */
-a:any-link:is(:hover, :focus-visible) {
-  color: var(--link-hover-color);
-  text-decoration: underline;
 }
 
 a:visited {
   color: var(--link-visited-color);
 }
 
-/* Press state: same as hover (green active token is gallery/export only) */
-a:active {
-  color: var(--link-hover-color);
+a:any-link:is(:hover, :focus-visible) {
+  color: var(--link-color);
+  text-decoration: underline;
 }
 
-/* Unclassed links in prose use text color at rest (not nav/chrome — see header nav rules) */
+a:active {
+  color: var(--link-color);
+}
+
 a:not([class]) {
   text-decoration-skip-ink: auto;
 }
 
-/* Hgroup — neutral at rest, accent on hover */
+/* Logotype — ink → accent (same motion as reading; no visited quiet on the wordmark) */
 hgroup h1 a:any-link {
   color: var(--text-color);
 }
@@ -818,41 +842,13 @@ hgroup h1 a:any-link:is(:hover, :focus-visible) {
   color: var(--link-color);
 }
 
-/*
-  Content links (posts + tags:page): ink at rest, quiet when visited,
-  accent on hover/focus (same hybrid for /about/, /technologies/, …).
-*/
-article:not(.link-item) section a:not([class]):link,
-main[data-tags*="page"] a:not([class]):link {
-  color: var(--text-color);
-}
-
-article:not(.link-item) section a:not([class]):visited,
-main[data-tags*="page"] a:not([class]):visited {
-  color: var(--link-visited-color);
-}
-
-article:not(.link-item) section a:not([class]):any-link:is(:hover, :focus-visible),
-main[data-tags*="page"] a:not([class]):any-link:is(:hover, :focus-visible) {
-  color: var(--link-color);
-}
-
-/* Article title — same as body links (not accent at rest) */
-article:not(.link-item) h1 a:any-link {
-  color: var(--text-color);
-}
-
-article:not(.link-item) h1 a:any-link:is(:hover, :focus-visible) {
-  color: var(--link-color);
-}
-
-/* Content links always underlined (articles and full-width pages) */
+/* Reading underlines in articles + full-width pages */
 article a,
 main[data-tags*="page"] a {
   text-decoration: underline;
 }
 
-/* Article h1 links exception */
+/* Article title — underline only on hover */
 article h1 a {
   text-decoration: none;
 }
@@ -861,11 +857,24 @@ article h1 a:any-link:is(:hover, :focus-visible) {
   text-decoration: underline;
 }
 
+/* Title links: no visited quiet (stay ink like logotype); hover accent */
+article:not(.link-item) h1 a:any-link {
+  color: var(--text-color);
+}
+
+article:not(.link-item) h1 a:visited {
+  color: var(--text-color);
+}
+
+article:not(.link-item) h1 a:any-link:is(:hover, :focus-visible) {
+  color: var(--link-color);
+}
+
 /* === COMPONENTS === */
 
-/* Remaindered links — muted row, accent title link */
+/* Remaindered links — reading bucket (row mute; title ink → accent; visited quiet) */
 article.link-item section a:link {
-  color: var(--link-color);
+  color: var(--text-color);
 }
 
 article.link-item section a:visited {
@@ -1297,8 +1306,12 @@ header a.skip:focus {
   color: var(--text-color-light);
 }
 
-.utility-sibling-nav-list a {
+.utility-sibling-nav-list a:any-link {
   color: var(--link-color);
+}
+
+.utility-sibling-nav-list a:any-link:is(:hover, :focus-visible) {
+  color: var(--text-color);
 }
 
 .utility-sibling-nav-current {
