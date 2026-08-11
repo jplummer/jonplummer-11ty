@@ -26,13 +26,13 @@ This site looks spare. That's on purpose, not by default. Sparse isn't the same 
 - **Motion is functional, not decorative** – a one-time view-transition on navigation, short hover transitions, nothing else. All of it is off under reduced-motion settings.
 - **Dark mode follows your system setting** – no toggle to find, remember, or leave in the wrong state.
 - **There's a real print stylesheet** – greyscale, correct page margins, link URLs printed out in full. Try it on a post.
-- **The mark hides my initials in four rectangles** – a stem and a foot for the J, a stem and a bowl for the P.
-- **There's no loading state to design** – nothing to wait for, since the HTML is already there when the page arrives.
+- **The mark hides my initials in four rectangles** – a stem and a foot for the J, a stem and a bowl for the P. Disclosure carets, lightbox controls, and pagination arrows are solid, sharp, right-angled shapes related to that mark.
+- **There's no loading state to design** – nothing to wait for, since the HTML is already there when the page is requested.
 - **Old URLs still work** – corrected post dates and slug changes get server-side redirects, not broken links.
 
-I used AI to build a lot of this, but not by having agents do the work directly. When the site needed to move off WordPress, Cursor and I wrote and tested a migration script, then ran it and checked what came out – we didn't just ask an agent to migrate the site, we built and verified the thing that did. Same with spelling: cspell and a test script catch typos on every build now, because we built that, instead of asking an agent to proofread once. Accessibility checks, redirects, pre-deploy validation – same pattern. Everything here is software Cursor helped me build, running every time, not a task it did for me once. Nothing shipped without me reading it, running it, and rejecting what wasn't right.
+I used AI to build a lot of this, but not by having agents do the work directly. When the site needed to move off WordPress, Cursor and I wrote and tested a migration script, then ran it and checked what came out – we didn't just ask an agent to migrate the site, we built and verified the thing that did. Same with spelling: cspell and a test script catch typos on every build now, because we built the routine instead of asking an agent to proofread once. Accessibility checks, redirects, pre-deploy validation all follow the same pattern. Everything here is software Cursor or Claude helped me build, running as needed, rather than a token-hungry task it did for me once. Nothing shipped without me reading it, running it, refining it, and rejecting what wasn't right.
 
-No analytics, no trackers, no cookies, no social media widgets – I don't know who's reading this, and that's fine. I just count visits, pageviews, and referrers.
+There are no trackers, no cookies, no social media widgets – I don't know who's reading this, and that's fine. I just count visits, pageviews, and referrers.
 
 I'm considering a short series on how specific pieces of this came together – the type system, the color and token pipeline, and what it took to rebuild this site with an AI-assisted 11ty workflow. Each one will get linked here as it's published.
 
