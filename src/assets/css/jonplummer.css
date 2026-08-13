@@ -1204,6 +1204,7 @@ article.portfolio-item a > picture,
 article.portfolio-item a > img {
   border: 1px solid var(--border-color);
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 article.portfolio-item img {
@@ -1212,11 +1213,9 @@ article.portfolio-item img {
   height: auto;
   aspect-ratio: 16/9; /* Optional: Keeps images uniform */
   object-fit: cover;
-}
-
-/* Tall phone cover: bias crop toward the top of the screenshot */
-article.portfolio-item#monotasker img {
-  object-position: center 20%;
+  object-position: var(--cover-object-position, center);
+  transform-origin: var(--cover-object-position, center);
+  scale: var(--cover-zoom, 1);
 }
 
 article.portfolio-item > a p {

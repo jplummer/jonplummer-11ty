@@ -9,7 +9,7 @@ const PRE_BUILD_TESTS = [
 
 const POST_BUILD_TESTS = [
   'html', 'internal-links', 'og-images', 'seo', 'rss', 'indexnow',
-  'deploy-assets',
+  'deploy-assets', 'portfolio-cover-crop',
 ];
 
 function run(command, errorLabel) {

@@ -4,6 +4,7 @@ layout: layouts/portfolio_detail.njk
 date: "2025-06-05"
 tags: portfolio
 coverImage: 2026/06/onboarding.png
+coverPosition: center 20%
 description: "My first iOS app crushes the paradox of choice."
 ogImage: /assets/images/og/portfolio.png
 ---

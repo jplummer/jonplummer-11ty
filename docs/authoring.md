@@ -39,6 +39,9 @@ Run `pnpm run test wisdom` after editing. Unexpected fields are rejected.
 
 - **`description`** - Meta description (20-300 chars recommended, warnings only if outside range). Defaults to title if omitted.
 - **`ogImage`** - OG image path. Use `auto` or omit to auto-generate. Format: `/assets/images/og/YYYY-MM-DD-post-slug.png`
+- **`coverImage`** - Portfolio grid thumbnail path relative to `src/assets/images/` (e.g. `2026/06/onboarding.png`). Used only by `portfolio_list_item.njk`.
+- **`coverPosition`** - Portfolio grid crop focal point. CSS `object-position` syntax: one or two tokens from `center` / `top` / `bottom` / `left` / `right` and percentages (e.g. `center 20%`). Omit for center. Does not affect the detail-page figure.
+- **`coverZoom`** - Portfolio grid crop zoom. Unitless number from 1 to 3 (`1` = default cover scale, `1.25` = tighter crop). Omit for 1. Same 16:9 card size; detail page unchanged.
 - **`permalink`** - Custom URL structure
 - **`eleventyExcludeFromCollections`** - Set to `true` to exclude
 - **`draft`** - Set to `true` to mark as draft. Drafts are excluded from production builds but visible in dev mode.

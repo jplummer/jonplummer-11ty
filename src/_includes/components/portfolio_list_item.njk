@@ -1,5 +1,5 @@
 {# purpose: portfolio list item component #}
-<article class="portfolio-item" id="{{ post.fileSlug }}">
+<article class="portfolio-item" id="{{ post.fileSlug }}"{% if post.data.coverPosition or post.data.coverZoom %} style="{% if post.data.coverPosition %}--cover-object-position: {{ post.data.coverPosition }};{% endif %}{% if post.data.coverPosition and post.data.coverZoom %} {% endif %}{% if post.data.coverZoom %}--cover-zoom: {{ post.data.coverZoom }};{% endif %}"{% endif %}>
     <a href="{{ post.url }}" rel="bookmark">
         <img src="/assets/images/{{ post.data.coverImage }}" alt="{{ post.data.title | default('Portfolio item') }}">
         <p>{{ post.data.title | smartquotes | striptags }}</p>

@@ -305,6 +305,7 @@ const TEST_EMOJIS = {
   'og-image-filename': '🗂️',
   'error-document-assets': '📄',
   'trailing-slash-links': '↪️',
+  'portfolio-cover-crop': '📐',
   'test-json-pipe': '🧪',
   'seo': '📈',
   'deploy': '🚀',
@@ -353,6 +354,7 @@ function getTestDisplayName(testType) {
     'og-image-filename': 'OG Image Filename',
     'error-document-assets': 'ErrorDocument 404 assets',
     'trailing-slash-links': 'Trailing-slash directory links',
+    'portfolio-cover-crop': 'Portfolio cover crop',
     'test-json-pipe': 'Test JSON pipe',
     'deploy': 'Deploy',
     'security': 'Security Audit'
@@ -390,6 +392,7 @@ function getTestDescription(testType) {
     'og-image-filename': 'OG PNG basename from post date (date-only calendar-safe)',
     'error-document-assets': '404.html root-absolute CSS/font/favicon hrefs for ErrorDocument',
     'trailing-slash-links': 'Internal directory links must include trailing slash (avoid 301 noise)',
+    'portfolio-cover-crop': 'Grid coverPosition/coverZoom allowlist, CSS vars, Monotasker HTML',
     'test-json-pipe': 'Large TEST_RUNNER JSON survives piped stdout (partial write + drain)',
     'deploy': 'Deployment connectivity',
     'indexnow': 'IndexNow configuration',

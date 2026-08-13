@@ -34,6 +34,7 @@ const testTypes = {
   'og-image-filename': 'og-image-filename.js',
   'error-document-assets': 'error-document-assets.js',
   'trailing-slash-links': 'trailing-slash-links.js',
+  'portfolio-cover-crop': 'portfolio-cover-crop.js',
   'test-json-pipe': 'test-json-pipe.js',
   'security': { file: 'security-audit.js', dir: 'security' }
 };
@@ -58,7 +59,8 @@ const fastTests = [
   'deploy-assets',
   'indexnow',
   'error-document-assets',
-  'trailing-slash-links'
+  'trailing-slash-links',
+  'portfolio-cover-crop'
 ];
 
 // Tests to run for "test all" (includes all tests, including slow ones)
@@ -79,6 +81,7 @@ const allTests = [
   'indexnow',
   'error-document-assets',
   'trailing-slash-links',
+  'portfolio-cover-crop',
   'a11y'
 ];
 
@@ -106,7 +109,7 @@ function listTests() {
   const { getTestDescription } = require('./utils/test-results');
   
   // Only show primary names
-  const primaryNames = ['html', 'links', 'wisdom', 'internal-links', 'frontmatter', 'markdown', 'spell', 'seo', 'og-images', 'a11y', 'color-contrast', 'css', 'rss', 'portfolio-notes', 'deploy-assets', 'cloudflare-purge', 'deploy-guards', 'site-branding', 'preview-site-lockup', 'light-theme-colors', 'og-image-filename', 'error-document-assets', 'trailing-slash-links', 'test-json-pipe', 'deploy', 'indexnow', 'security'];
+  const primaryNames = ['html', 'links', 'wisdom', 'internal-links', 'frontmatter', 'markdown', 'spell', 'seo', 'og-images', 'a11y', 'color-contrast', 'css', 'rss', 'portfolio-notes', 'deploy-assets', 'cloudflare-purge', 'deploy-guards', 'site-branding', 'preview-site-lockup', 'light-theme-colors', 'og-image-filename', 'error-document-assets', 'trailing-slash-links', 'portfolio-cover-crop', 'test-json-pipe', 'deploy', 'indexnow', 'security'];
 
   primaryNames.forEach(type => {
     const isInAll = allTests.includes(type);

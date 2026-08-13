@@ -3,6 +3,9 @@
 ## ☑️ Selected
 
 - Craft / polish (demonstrate craft)
+  - Address crops and appropriateness of thumbnails in portfolio
+    - **Shipped (2026-08-13):** `coverPosition` / `coverZoom` front matter for grid crop; Monotasker migrated off `#monotasker` CSS.
+  - Re-export GoalManager and find past work for same
   - **Goal**: Make spareness read as intentional craft, not default blankness. Color is already pared-down; skip ornament (texture / alternate stylesheets stay in Future → Craft atmosphere). Vertical alignment is already in good shape — don’t chase “stronger grid” as a separate track unless something new looks off.
   - **Order of work** (do not reorder casually):
     1. **Audit focus behavior and keyboard navigation**

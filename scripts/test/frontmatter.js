@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
-const { validateDate, validateSlug } = require('../utils/validation-utils');
+const { validateDate, validateSlug, validateCoverPosition, validateCoverZoom } = require('../utils/validation-utils');
 const { getChangedFilesSinceHead, getMarkdownFiles, readFile } = require('../utils/test-helpers');
 const { parseFrontMatter, parseMarkdownFrontMatter } = require('../utils/frontmatter-utils');
 const { addFile, addIssue, addWarning, addGlobalIssue } = require('../utils/test-results');
@@ -80,7 +80,7 @@ function validateRequiredFields(frontMatter, filePath) {
     }
   }
 
-  // Optional fields - no validation needed (SEO checks are handled by seo-meta.js)
+  // Optional fields — SEO length is seo-meta.js; cover crop is below
 
   // Check for duplicate slugs
   if (frontMatter.slug) {
@@ -88,7 +88,26 @@ function validateRequiredFields(frontMatter, filePath) {
     // This would need to be checked across all files - we'll do this separately
   }
 
+  issues.push(...validateCoverCropFields(frontMatter));
+
   return { issues, warnings };
+}
+
+function validateCoverCropFields(frontMatter) {
+  const issues = [];
+  if (frontMatter.coverPosition !== undefined) {
+    const check = validateCoverPosition(frontMatter.coverPosition);
+    if (!check.valid) {
+      issues.push(`coverPosition: ${check.error}`);
+    }
+  }
+  if (frontMatter.coverZoom !== undefined) {
+    const check = validateCoverZoom(frontMatter.coverZoom);
+    if (!check.valid) {
+      issues.push(`coverZoom: ${check.error}`);
+    }
+  }
+  return issues;
 }
 
 /**
@@ -128,6 +147,8 @@ function validateRootSrcMarkdownFields(frontMatter, filePath) {
       }
     }
   }
+
+  issues.push(...validateCoverCropFields(frontMatter));
 
   return { issues, warnings };
 }

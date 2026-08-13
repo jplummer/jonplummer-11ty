@@ -28,7 +28,7 @@ This project includes a suite of validation tests covering content structure, HT
 
 ### Test Categories
 
-**Fast Tests:** `html`, `links`, `wisdom`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `deploy-assets`, `indexnow`, `error-document-assets`, `trailing-slash-links`
+**Fast Tests:** `html`, `links`, `wisdom`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `deploy-assets`, `indexnow`, `error-document-assets`, `trailing-slash-links`, `portfolio-cover-crop`
 
 **Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `figure-lightbox`, `site-branding`, `preview-site-lockup`, `light-theme-colors`, `og-image-filename`, `test-json-pipe` — see [Unit Tests](#unit-tests) below
 
@@ -46,7 +46,7 @@ Validates markdown under `src/_posts/` (posts) and every top-level `src/*.md` te
 
 Post markdown is parsed with **gray-matter** (same stack as Eleventy), not the regex-based `parseFrontMatter()` used elsewhere for simple delimiter splitting. A small regression guard asserts that a `## title:` line without a closing `---` delimiter fails parse the way the build would.
 
-**Checks (posts):** Required fields (`title`, `date`, `slug` from path or front matter), date/slug format validation, file naming convention (`YYYY/YYYY-MM-DD-slug.md`), duplicate slugs.
+**Checks (posts):** Required fields (`title`, `date`, `slug` from path or front matter), date/slug format validation, file naming convention (`YYYY/YYYY-MM-DD-slug.md`), duplicate slugs. Optional `coverPosition` / `coverZoom` must match the portfolio grid allowlists when present.
 
 **Checks (top-level `src/*.md`):** Parse succeeds; required `title`; `date` except on `404.md` / `500.md`.
 
@@ -79,6 +79,10 @@ Validates `src/_data/wisdom-entries.yaml` for the Collected wisdom section (`/wi
 Runs [Stylelint](https://stylelint.io) on `src/**/*.css` using `.stylelintrc.json` (extends `stylelint-config-standard` with project-specific rule overrides for modern CSS, print styles, and layout-specificity ordering).
 
 **Note:** With `--changed`, exits successfully if no `src/**/*.css` files changed since last commit.
+
+### portfolio-cover-crop.js
+
+Guards portfolio grid thumbnail crop authoring: `validateCoverPosition` / `validateCoverZoom` allowlists, `jonplummer.css` custom properties (no per-slug `object-position` rules), `portfolio_list_item.njk` wiring, Monotasker `coverPosition: center 20%`, and — when `_site/portfolio/index.html` exists — that card’s inline `--cover-object-position`. Included in `test fast` and in `scripts/build/build.js` post-build.
 
 ### color-contrast.js
 

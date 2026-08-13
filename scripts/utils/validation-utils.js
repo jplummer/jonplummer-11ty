@@ -183,11 +183,57 @@ function validateSlug(slug, minLength = 3, maxLength = 250) {
   return { valid: true };
 }
 
+const COVER_POSITION_TOKEN = '(?:center|top|bottom|left|right|\\d+(?:\\.\\d+)?%)';
+const COVER_POSITION_RE = new RegExp(
+  `^${COVER_POSITION_TOKEN}(?:\\s+${COVER_POSITION_TOKEN})?$`
+);
+
+/**
+ * CSS object-position for portfolio grid covers. Call only when the field is present.
+ * @param {unknown} value
+ * @returns {{ valid: boolean, error?: string }}
+ */
+function validateCoverPosition(value) {
+  if (typeof value !== 'string') {
+    return { valid: false, error: 'coverPosition must be a string' };
+  }
+  const trimmed = value.trim();
+  if (!COVER_POSITION_RE.test(trimmed)) {
+    return {
+      valid: false,
+      error: 'coverPosition must be CSS object-position (keywords center/top/bottom/left/right and/or percentages, one or two tokens)'
+    };
+  }
+  return { valid: true };
+}
+
+/**
+ * Unitless zoom 1–3 for portfolio grid covers. Call only when the field is present.
+ * @param {unknown} value
+ * @returns {{ valid: boolean, error?: string }}
+ */
+function validateCoverZoom(value) {
+  let n;
+  if (typeof value === 'number') {
+    n = value;
+  } else if (typeof value === 'string' && value.trim() !== '') {
+    n = Number(value);
+  } else {
+    return { valid: false, error: 'coverZoom must be a number from 1 to 3' };
+  }
+  if (!Number.isFinite(n) || n < 1 || n > 3) {
+    return { valid: false, error: 'coverZoom must be a number from 1 to 3' };
+  }
+  return { valid: true };
+}
+
 module.exports = {
   validateTitle,
   validateMetaDescription,
   validateUrl,
   validateDate,
-  validateSlug
+  validateSlug,
+  validateCoverPosition,
+  validateCoverZoom
 };
 
