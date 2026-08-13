@@ -1,5 +1,12 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-08-13
+
+- Add portfolio coverPosition and coverZoom front matter.
+- Tune portfolio grid cover crops.
+- Pad Goal Manager logo to 16:9 for the portfolio grid.
+- Tighten colophon craft notes and add a drift-audit point.
+
 ## 2026-08-11
 
 - Fix /now/ project status labels for parallel structure.
@@ -17,6 +24,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Add home-only tagline salt support and expand pool.
 - Wire git HEAD salt into taglineForPage for home only.
 - Document home tagline deploy salt behavior.
+- Polish prose across recent 2026 posts.
 - Styling refinements: 5 commits
 - Correct typo in breakpoint comment (reasonable).
 - Accept var() aliases in OG light theme color extraction
@@ -676,4 +684,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-08-11
+Last deployed on 2026-08-13
