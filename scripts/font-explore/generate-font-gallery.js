@@ -9,7 +9,7 @@
  *   pnpm run font-gallery
  *
  * @see https://modernfontstacks.com
- * @see docs/font-stack-exploration.md
+ * @see docs/designs/font-stack-exploration.md
  */
 
 const fs = require('fs');

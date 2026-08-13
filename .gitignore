@@ -31,10 +31,10 @@ Thumbs.db
 !.cursor/rules/
 !.cursor/rules/**
 
-# Color exploration (generated; see docs/color-theme-exploration.md)
+# Color exploration (generated; see docs/designs/color-theme-exploration.md)
 scripts/color-explore/output/
 
-# Font stack exploration (generated; see docs/font-stack-exploration.md)
+# Font stack exploration (generated; see docs/designs/font-stack-exploration.md)
 scripts/font-explore/output/
 
 # Colophon sketch remap lab (generated)
@@ -50,3 +50,6 @@ scripts/content/.venv/
 
 # Understand Anything knowledge graph (local analysis artifact)
 .understand-anything/
+
+# Scratch space for ad-hoc agent reports (local only; see docs/designs/)
+docs/designs/scratch/

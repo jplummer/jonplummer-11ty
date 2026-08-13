@@ -1,6 +1,6 @@
 /**
  * DR + default color presets for the gallery and any future full-page color lab (single source of truth).
- * @see docs/colors.md
+ * @see docs/designs/colors.md
  */
 'use strict';
 

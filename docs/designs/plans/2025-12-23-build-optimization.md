@@ -1,5 +1,7 @@
 # Build Process Optimization Plans
 
+**Status:** unexecuted investigation plan, written 2025-12-23 and set aside as outdated on 2026-01-05. Kept for the reasoning, not as a to-do list — verify against current `scripts/` before acting on any step. Moved here from `docs/archive/` on 2026-08-13.
+
 This document contains detailed plans for simplifying and optimizing the build process, addressing concerns about complexity and potential issues.
 
 ## 1. Event Listener Cleanup Simplification

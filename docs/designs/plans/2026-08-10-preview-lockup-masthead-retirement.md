@@ -8,7 +8,7 @@
 
 **Tech Stack:** Node CommonJS, existing gallery generators, `jonplummer.css` tokens, `scripts/test/*` harness (`runTest` / `outputAndExit`).
 
-**Spec:** `docs/superpowers/specs/2026-08-10-preview-lockup-masthead-retirement-design.md`
+**Spec:** `docs/designs/specs/2026-08-10-preview-lockup-masthead-retirement-design.md`
 
 ## Global Constraints
 
@@ -226,7 +226,7 @@ Expected: PASS (0 issues)
 ```bash
 git add scripts/utils/preview-site-lockup.js scripts/test/preview-site-lockup.js \
   scripts/test-runner.js scripts/utils/test-results.js docs/tests.md \
-  docs/superpowers/plans/2026-08-10-preview-lockup-masthead-retirement.md
+  docs/designs/plans/2026-08-10-preview-lockup-masthead-retirement.md
 git commit -m "$(cat <<'EOF'
 feat: add build-time preview site-lockup helper
 

@@ -15,7 +15,7 @@
  *   node scripts/color-explore/generate-gallery.js --analogous-spread 36 --split-spread 32 --harmony-skew 8
  *   (Harmony: one “Harmony lab” card in HTML; themes.json still has one entry per recipe.)
  *
- * See docs/color-theme-exploration.md
+ * See docs/designs/color-theme-exploration.md
  *
  * Live `/color/` embed (`src/_includes/partials/color-gallery-embed-inner.html` +
  * `src/assets/css/color-gallery-embed.css`) is refreshed at each Eleventy build via

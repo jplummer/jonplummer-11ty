@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Add the JP mark beside a Semibold logotype in the site header per `docs/superpowers/specs/2026-08-06-header-lockup-design.md`.
+**Goal:** Add the JP mark beside a Semibold logotype in the site header per `docs/designs/specs/2026-08-06-header-lockup-design.md`.
 
 **Architecture:** Copy the approved SVG into `src/assets/images/`, update `base.njk` masthead markup (two home links: mark + title), and adjust `jonplummer.css` layout/typography tokens. Leave OG and favicons unchanged.
 

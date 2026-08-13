@@ -37,7 +37,7 @@ Lived colors only: **ink**, **quiet**, **accent**.
 - **Logotype / mark**: ink → hover accent
 - **EOF square**: quiet ink (`--text-color-light`)
 
-See `docs/color-theme-exploration.md` for gallery tooling and APCA workflow.
+See `docs/designs/color-theme-exploration.md` for gallery tooling and APCA workflow.
 
 ---
 

@@ -8,7 +8,7 @@
 
 **Tech Stack:** Node.js CommonJS (`fs`, `path`, `crypto`), existing `scripts/utils/cloudflare-purge.js` + `scripts/deploy/deploy.js`, `pnpm run test cloudflare-purge`.
 
-**Spec:** `docs/superpowers/specs/2026-08-06-content-hash-cloudflare-purge-design.md`
+**Spec:** `docs/designs/specs/2026-08-06-content-hash-cloudflare-purge-design.md`
 
 ## Global Constraints
 
@@ -428,7 +428,7 @@ EOF
 
 **Files:**
 - Modify: `docs/commands.md` (Cloudflare cache purge section)
-- Modify: `docs/superpowers/specs/2026-08-06-content-hash-cloudflare-purge-design.md` (status already approved)
+- Modify: `docs/designs/specs/2026-08-06-content-hash-cloudflare-purge-design.md` (status already approved)
 - Modify: `.cursor/rules/memory.mdc` (short deploy note)
 - Verify: `docs/ideas.md` Future deploy bullet present
 
@@ -441,7 +441,7 @@ Replace the “changed URLs from rsync itemize” wording with content-hash mani
 - [ ] **Step 3: Commit**
 
 ```bash
-git add docs/commands.md docs/ideas.md docs/superpowers/specs/2026-08-06-content-hash-cloudflare-purge-design.md .cursor/rules/memory.mdc docs/superpowers/plans/2026-08-06-content-hash-cloudflare-purge.md
+git add docs/commands.md docs/ideas.md docs/designs/specs/2026-08-06-content-hash-cloudflare-purge-design.md .cursor/rules/memory.mdc docs/designs/plans/2026-08-06-content-hash-cloudflare-purge.md
 git commit -m "$(cat <<'EOF'
 docs: content-hash Cloudflare purge behavior and later rsync note
 

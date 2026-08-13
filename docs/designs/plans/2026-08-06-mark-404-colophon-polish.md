@@ -4,7 +4,7 @@
 
 **Goal:** Safari-safe header mark via CSS tokens; root-absolute 404 assets; transparent colophon sketch with dark invert.
 
-**Architecture:** Spec `docs/superpowers/specs/2026-08-06-mark-404-colophon-polish-design.md` (3A colophon). Do not commit the spec unless asked.
+**Architecture:** Spec `docs/designs/specs/2026-08-06-mark-404-colophon-polish-design.md` (3A colophon). Do not commit the spec unless asked.
 
 **Tech Stack:** Nunjucks, `jonplummer.css`, Node one-off for PNG alpha, existing `scripts/test/*` harness.
 

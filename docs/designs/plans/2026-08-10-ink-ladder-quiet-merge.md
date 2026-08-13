@@ -6,7 +6,7 @@
 
 **Architecture:** Conceptual roles are **ink** (`--text-color`), **quiet** (`--text-color-light` for now), **visited** (alias or 1-step quieter), **border/field** (structure). Accent (`--link-color` / hover) is out of scope for this plan — Phase B later. Active green is YAGNI for lived UI; handle only in post-acceptance cleanup if desired.
 
-**Tech Stack:** `jonplummer.css` tokens + consumers; `docs/colors.md`; contrast via `pnpm run test color-contrast`; eye-check on live pages.
+**Tech Stack:** `jonplummer.css` tokens + consumers; `docs/designs/colors.md`; contrast via `pnpm run test color-contrast`; eye-check on live pages.
 
 ## Global Constraints
 

@@ -8,7 +8,7 @@
 
 **Tech Stack:** Nunjucks, `jonplummer.css`, CommonJS validation in `scripts/utils/validation-utils.js`, `pnpm run test frontmatter` + new `pnpm run test portfolio-cover-crop`.
 
-**Spec:** `docs/superpowers/specs/2026-08-13-portfolio-cover-position-design.md`
+**Spec:** `docs/designs/specs/2026-08-13-portfolio-cover-position-design.md`
 
 ## Global Constraints
 

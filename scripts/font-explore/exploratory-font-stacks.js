@@ -2,7 +2,7 @@
  * Self-hosted WOFF2 stacks for /type/ lab (subset latin, font-display: swap).
  * Files live in src/assets/fonts/lab/ — OFL licenses via @fontsource-variable packages.
  *
- * @see docs/font-stack-exploration.md
+ * @see docs/designs/font-stack-exploration.md
  */
 
 /** @typedef {'exploratory'} FontStackGroup */

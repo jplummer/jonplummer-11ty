@@ -32,7 +32,7 @@ Recommended process for deploying changes with an up-to-date changelog:
 - `pnpm run test` - List available test types
 - `pnpm run validate` - Quick HTML validity check (shortcut for `pnpm run test html`)
 - `pnpm run test fast` - Run fast tests (excludes slow tests like a11y)
-  - Runs: `html` → `links` → `wisdom` → `internal-links` → `frontmatter` → `markdown` → `spell` → `seo` → `og-images` → `color-contrast` → `css` → `rss` → `portfolio-notes` → `deploy-assets` → `cloudflare-purge` → `indexnow` → `portfolio-cover-crop`
+  - Runs: `html` → `links` → `wisdom` → `internal-links` → `frontmatter` → `markdown` → `spell` → `seo` → `og-images` → `color-contrast` → `css` → `rss` → `portfolio-notes` → `deploy-assets` → `cloudflare-purge` → `portfolio-cover-crop`
 - `pnpm run test all` - Run all tests in sequence (includes slow tests)
   - Runs: everything in `test fast` → `a11y`
 - `pnpm run test [type]` - Run a specific test type
@@ -63,11 +63,12 @@ See [noteplan-import.md](noteplan-import.md) for complete workflow documentation
 - `pnpm run convert-pdf-with-notes` - PDF + hand-authored notes file → same output as above (notes not read from pptx)
 - `pnpm run generate-og-images` - Generate Open Graph images for posts and pages (auto: `deploy`, `dev`)
 - `pnpm run security-audit` - Run security audit and maintenance checks
-- `pnpm run color-gallery` - Generate APCA-aware theme gallery (HTML + JSON) under `scripts/color-explore/output/` **and** refresh the `/color/` embed files in `src/` (same defaults as Eleventy). Use this for **CLI flags** (`--hue-sweep`, `--random`, etc.); **`pnpm run build`** / **`dev`** already run the embed step via `eleventy.before` — see [color-theme-exploration.md](color-theme-exploration.md)
-- Color theme **tooling** (gallery output, `/color/` page, `node scripts/utils/suggest-colors.js`, `pnpm run test color-contrast`) — summarized in [color-theme-exploration.md § Companion tooling](color-theme-exploration.md#companion-tooling)
-- `pnpm run font-gallery` - Generate single-card font lab (headings vs body stacks, live site scale/colors) under `scripts/font-explore/output/` — see [font-stack-exploration.md](font-stack-exploration.md)
+- `pnpm run indexnow-catch-up` - One-off: submit every current indexable page to IndexNow, ignoring the local content-hash manifest (`.cache/indexnow-content-manifest.json`). Use after a gap in normal notifications (e.g. clearing a backlog); a regular `pnpm run deploy` only submits pages that changed since the last deploy. Add `-- --dry-run` to preview the URL list without submitting. To rotate the IndexNow key: generate a new 8–128 char alphanumeric string, write it to `src/<thatstring>.txt` (delete the old key file), and update `INDEXNOW_API_KEY` in `.env` to match — `keyLocation` is derived from the env var at request time, so no code change is needed.
+- `pnpm run color-gallery` - Generate APCA-aware theme gallery (HTML + JSON) under `scripts/color-explore/output/` **and** refresh the `/color/` embed files in `src/` (same defaults as Eleventy). Use this for **CLI flags** (`--hue-sweep`, `--random`, etc.); **`pnpm run build`** / **`dev`** already run the embed step via `eleventy.before` — see [color-theme-exploration.md](designs/color-theme-exploration.md)
+- Color theme **tooling** (gallery output, `/color/` page, `node scripts/utils/suggest-colors.js`, `pnpm run test color-contrast`) — summarized in [color-theme-exploration.md § Companion tooling](designs/color-theme-exploration.md#companion-tooling)
+- `pnpm run font-gallery` - Generate single-card font lab (headings vs body stacks, live site scale/colors) under `scripts/font-explore/output/` — see [font-stack-exploration.md](designs/font-stack-exploration.md)
 - `pnpm run colophon-sketch` - Colophon portrait remap lab (light vs dark side-by-side) under `scripts/colophon-sketch/output/`; add `-- --export` to write site `-light.png` / `-dark.png` from the current export recipe
-- Font stack **tooling** (gallery output, generator paths, CSS lint after shipping) — [font-stack-exploration.md § Companion tooling](font-stack-exploration.md#companion-tooling)
+- Font stack **tooling** (gallery output, generator paths, CSS lint after shipping) — [font-stack-exploration.md § Companion tooling](designs/font-stack-exploration.md#companion-tooling)
 
 ---
 
@@ -90,7 +91,7 @@ The deploy script performs these steps in order:
 2. **Builds the site** via `pnpm run build` — runs all source checks, generates OG images, runs Eleventy, then runs all output checks
 3. **Deploys via rsync** - uses `--dry-run` flag when `--dry-run` option is used
 4. **Purges Cloudflare cache** for content-changed URLs only (SHA-256 diff vs local manifest; skipped if credentials unset; previewed on dry-run)
-5. **Submits IndexNow** notification for search engine indexing - skipped with `--dry-run`
+5. **Submits IndexNow** notification for search engine indexing (content-hash diff vs local manifest; missing API key or nothing changed both print a message rather than staying silent) - computes and prints the URL list on `--dry-run` but does not submit or write state
 6. **Commits changelog** if it was updated, then **always pushes to remote** - skipped with `--dry-run`
 
 **Note:** Links from NotePlan should be imported *before* committing (`pnpm run import-links`), not during deployment. This lets you review and test links locally before they go live.

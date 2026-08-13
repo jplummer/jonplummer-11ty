@@ -28,7 +28,7 @@
 | `docs/ideas.md` | Note home deploy-salt behavior |
 | `.cursor/rules/memory.mdc` | Short gotcha: salt only `/`; pool length change = one-time full reshuffle |
 
-**Spec:** `docs/superpowers/specs/2026-08-11-home-tagline-deploy-salt-design.md`
+**Spec:** `docs/designs/specs/2026-08-11-home-tagline-deploy-salt-design.md`
 
 ---
 
