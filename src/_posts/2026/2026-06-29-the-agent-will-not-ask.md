@@ -14,7 +14,7 @@ The usual case for a design system is strong: consistency, faster development, b
 
 Design systems built for human teams often have missing pieces. Inconsistent naming, missing usage guidance, primitive tokens named by appearance (`color-red-50`) when an agent needs a name that tells it the role (`color-action-destructive`), an over-reliance on common sense that the agent doesn't have – any of these can derail the agent's otherwise pretty good work.
 
-Humans are good at readin gbetween the lines; agents take you literally.
+Humans are good at reading between the lines; agents take you literally.
 
 What agents need is exactly what developers have always needed: components with clear, semantic names; tokens named for their role; usage guidelines that lead you to choose the right code; usability and accessibility baked into components and patterns.
 

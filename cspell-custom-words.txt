@@ -33,6 +33,7 @@ RISD
 Savioke
 Squarespace
 Velop
+Webflow
 WeMo
 Whitespectre
 Yippy
@@ -144,6 +145,7 @@ Joost
 juliangautier
 Karolina
 Karri
+Kayyali
 Keegan
 Kipnis
 Kohler
@@ -182,6 +184,7 @@ Rodenbeck
 Rojek
 Rosala
 Salamon
+Saleh
 Samutin
 Sattell
 Seigler
@@ -217,6 +220,7 @@ Babycakes
 carb
 centricity
 coachable
+cosplaying
 dayenu
 deadlift
 deadlifts
@@ -235,6 +239,7 @@ greyscale
 hackathon
 handwaving
 hintable
+homogenisation
 honeydo
 informationally
 inspectable
