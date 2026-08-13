@@ -6,6 +6,14 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Tune portfolio grid cover crops.
 - Pad Goal Manager logo to 16:9 for the portfolio grid.
 - Tighten colophon craft notes and add a drift-audit point.
+- Give portfolio thumbs a step more air above titles.
+- Fix light-mode flash in inline critical CSS
+- Consolidate findSourceFile/isRedirectPage into shared source-file-utils
+- Remove six pieces of verified dead code
+- Unify the test roster into a single manifest
+- Log complexity-reduction ideas from the three-agent audit
+- Reorganize docs: designs/ for design records, drop dead files
+- Archive ideas.md done items; simplify IndexNow; guard design-docs location
 
 ## 2026-08-11
 
