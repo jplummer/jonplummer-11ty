@@ -50,7 +50,9 @@ const TESTS = [
   { id: 'cloudflare-purge', script: 'cloudflare-purge.js', groups: ['unit'] },
   { id: 'deploy-guards', script: 'deploy-guards.js', groups: ['unit'] },
   { id: 'deploy', script: 'deploy.js', groups: [], nonJson: true },
-  { id: 'indexnow', script: 'indexnow.js', groups: ['fast', 'post'] },
+  // Not a build-output check: indexnow.js is a pure unit test of selection
+  // logic (fixture manifests), no _site/ dependency.
+  { id: 'indexnow', script: 'indexnow.js', groups: ['unit'] },
   { id: 'figure-lightbox', script: 'figure-lightbox.js', groups: ['unit'], listInHelp: false },
   { id: 'site-branding', script: 'site-branding.js', groups: ['unit'] },
   { id: 'preview-site-lockup', script: 'preview-site-lockup.js', groups: ['unit'] },
@@ -61,6 +63,10 @@ const TESTS = [
   // what this checks — it guards the static 404.html asset hrefs).
   { id: 'error-document-assets', script: 'error-document-assets.js', groups: ['fast'] },
   { id: 'trailing-slash-links', script: 'trailing-slash-links.js', groups: ['fast', 'pre'] },
+  // Guards the docs/designs/ structure against superpowers skills that still
+  // hardcode docs/superpowers/ (their SKILL.md files live in a plugin cache we
+  // can't durably edit — see .cursor/rules/memory.mdc).
+  { id: 'design-docs-location', script: 'design-docs-location.js', groups: ['fast', 'pre'] },
   { id: 'portfolio-cover-crop', script: 'portfolio-cover-crop.js', groups: ['fast', 'post'] },
   { id: 'test-json-pipe', script: 'test-json-pipe.js', groups: ['unit'] },
   { id: 'security', script: { file: 'security-audit.js', dir: 'security' }, groups: [], nonJson: true },

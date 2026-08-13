@@ -311,7 +311,8 @@ const TEST_EMOJIS = {
   'seo': '📈',
   'deploy': '🚀',
   'security': '🛡️',
-  'indexnow': '📣'
+  'indexnow': '📣',
+  'design-docs-location': '🗃️'
 };
 
 /**
@@ -358,6 +359,7 @@ function getTestDisplayName(testType) {
     'trailing-slash-links': 'Trailing-slash directory links',
     'portfolio-cover-crop': 'Portfolio cover crop',
     'test-json-pipe': 'Test JSON pipe',
+    'design-docs-location': 'Design docs location',
     'deploy': 'Deploy',
     'security': 'Security Audit'
   };
@@ -397,6 +399,7 @@ function getTestDescription(testType) {
     'trailing-slash-links': 'Internal directory links must include trailing slash (avoid 301 noise)',
     'portfolio-cover-crop': 'Grid coverPosition/coverZoom allowlist, CSS vars, Monotasker HTML',
     'test-json-pipe': 'Large TEST_RUNNER JSON survives piped stdout (partial write + drain)',
+    'design-docs-location': 'Plans/specs stay in docs/designs/ (superpowers skills hardcode docs/superpowers/)',
     'deploy': 'Deployment connectivity',
     'indexnow': 'IndexNow configuration',
     'security': 'Security audit'

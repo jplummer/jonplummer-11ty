@@ -408,17 +408,18 @@ async function purgeCloudflareAfterDeploy(siteDomain, dryRun, localPath) {
 
     await purgeCloudflareAfterDeploy(siteDomain, dryRun, config.localPath);
 
-    // Notify IndexNow after successful deployment (only if not dry-run)
-    if (!dryRun) {
-      try {
-        const { processIndexNow } = require('../utils/indexnow');
-        await processIndexNow({ quiet: false });
-      } catch (error) {
-        // Don't fail deployment if IndexNow fails
-        console.log('⚠️  🔍 IndexNow: notification failed (deployment succeeded)');
-        console.warn(`   ${error.message}\n`);
-      }
+    // Notify IndexNow — runs even on --dry-run so it prints what it would
+    // submit; dryRun itself is what stops it from POSTing or writing state.
+    try {
+      const { processIndexNow } = require('../utils/indexnow');
+      await processIndexNow({ siteRoot: config.localPath, siteDomain, dryRun });
+    } catch (error) {
+      // Don't fail deployment if IndexNow fails
+      console.log('⚠️  🔍 IndexNow: notification failed (deployment succeeded)');
+      console.warn(`   ${error.message}\n`);
+    }
 
+    if (!dryRun) {
       // Commit changelog if it was updated (keeps repo in sync)
       if (changelogChanged) {
         try {

@@ -1,426 +1,189 @@
 #!/usr/bin/env node
 
 /**
- * IndexNow Utility
- * 
- * Notifies search engines via IndexNow protocol when significant content changes occur.
- * Only notifies for:
- * - New posts (Added files in src/_posts/)
- * - Index page changes (src/index.njk)
- * - Static page changes (src/about.md, src/now.md, src/changelog.md, src/readme.md, src/technologies.md)
+ * IndexNow notification.
+ * Detects changed public pages from a local SHA-256 content-hash manifest of
+ * `_site` — the same technique `scripts/utils/cloudflare-purge.js` uses for
+ * Cloudflare purging — instead of parsing git diffs (the old approach
+ * re-implemented Eleventy's permalink rules by hand and got them wrong,
+ * silently submitting nothing on most deploys).
+ *
+ * Keeps its own state file (`.cache/indexnow-content-manifest.json`),
+ * separate from Cloudflare's, so IndexNow works whether or not Cloudflare
+ * purging is configured, and so it isn't diffing against a manifest that
+ * deploy.js already advanced to "now" before IndexNow runs.
  */
 
-const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
-const https = require('https');
-const { parseFrontMatter } = require('./frontmatter-utils');
+const {
+  buildContentManifest,
+  diffContentManifests,
+  loadContentManifest,
+  saveContentManifest,
+  deployPathToUrl,
+} = require('./cloudflare-purge');
 const { loadDotenvSilently } = require('./env-utils');
 
-// Load environment variables
 if (fs.existsSync('.env')) {
   loadDotenvSilently();
 }
 
-const STATE_FILE = path.join(process.cwd(), '.indexnow-state.json');
-const STATIC_PAGES = ['about.md', 'now.md', 'changelog.md', 'readme.md', 'technologies.md'];
+const INDEXNOW_ENDPOINT = 'https://api.indexnow.org/indexnow';
+const MANIFEST_REL = path.join('.cache', 'indexnow-content-manifest.json');
 
-/**
- * Get current git commit hash
- */
-function getCurrentCommitHash() {
-  try {
-    return execSync('git rev-parse HEAD', { encoding: 'utf8', cwd: process.cwd() }).trim();
-  } catch (error) {
-    return null;
-  }
+function defaultIndexNowManifestPath(cwd = process.cwd()) {
+  return path.join(cwd, MANIFEST_REL);
 }
 
 /**
- * Get files changed in the last commit
- * Returns only Added files (for new posts) and Modified files (for index/static pages)
+ * Pages worth telling a search engine about. Excludes error documents and
+ * paginated index pages (`page/N/index.html`), which churn on every publish
+ * and are noise, not new content.
  */
-function getChangedFiles() {
-  try {
-    // Check if there's a previous commit to compare against
-    let hasPreviousCommit = false;
-    try {
-      execSync('git rev-parse HEAD~1', { encoding: 'utf8', cwd: process.cwd(), stdio: 'pipe' });
-      hasPreviousCommit = true;
-    } catch (error) {
-      // No previous commit, this is the first commit
-      hasPreviousCommit = false;
-    }
-    
-    if (!hasPreviousCommit) {
-      // First commit: compare HEAD to empty tree
-      const addedOutput = execSync('git diff --name-only --diff-filter=A --root HEAD', {
-        encoding: 'utf8',
-        cwd: process.cwd()
-      });
-      const modifiedOutput = execSync('git diff --name-only --diff-filter=M --root HEAD', {
-        encoding: 'utf8',
-        cwd: process.cwd()
-      });
-      
-      const addedFiles = addedOutput.trim().split('\n').filter(line => line.trim());
-      const modifiedFiles = modifiedOutput.trim().split('\n').filter(line => line.trim());
-      
-      return {
-        added: addedFiles,
-        modified: modifiedFiles
-      };
-    }
-    
-    // Compare last commit to previous commit
-    const addedOutput = execSync('git diff --name-only --diff-filter=A HEAD~1 HEAD', {
-      encoding: 'utf8',
-      cwd: process.cwd()
-    });
-    
-    const modifiedOutput = execSync('git diff --name-only --diff-filter=M HEAD~1 HEAD', {
-      encoding: 'utf8',
-      cwd: process.cwd()
-    });
-    
-    const addedFiles = addedOutput.trim().split('\n').filter(line => line.trim());
-    const modifiedFiles = modifiedOutput.trim().split('\n').filter(line => line.trim());
-    
-    return {
-      added: addedFiles,
-      modified: modifiedFiles
-    };
-  } catch (error) {
-    // If git command fails, return empty arrays
-    return { added: [], modified: [] };
-  }
+function isIndexableHtmlPath(relativePath) {
+  const clean = relativePath.replace(/\\/g, '/').replace(/^\.\//, '');
+  if (!clean.endsWith('.html')) return false;
+  if (clean === '404.html' || clean === '500.html') return false;
+  if (/^page\/\d+\/index\.html$/.test(clean)) return false;
+  return true;
 }
 
 /**
- * Check if a file is a new post
+ * Pure selection: which URLs changed since the previous manifest.
+ * Returns [] when there is no previous manifest — a missing baseline means
+ * "establish one," not "everything is new" (diffing against an empty
+ * manifest would otherwise report every current file as added).
  */
-function isNewPost(filePath) {
-  return filePath.startsWith('src/_posts/') && filePath.endsWith('.md');
+function selectIndexNowUrls({ previousManifest, currentManifest, siteDomain }) {
+  if (!previousManifest) {
+    return [];
+  }
+  const { added, changed } = diffContentManifests(previousManifest, currentManifest);
+  return [...added, ...changed]
+    .filter(isIndexableHtmlPath)
+    .map((p) => deployPathToUrl(p, siteDomain));
 }
 
 /**
- * Check if a file is the index page
+ * Pure selection for catch-up submission: every indexable page currently
+ * live, regardless of manifest history. Used to clear a backlog once —
+ * normal deploys always use selectIndexNowUrls (delta only).
  */
-function isIndexPage(filePath) {
-  return filePath === 'src/index.njk';
+function selectAllIndexNowUrls({ currentManifest, siteDomain }) {
+  const files = (currentManifest && currentManifest.files) || {};
+  return Object.keys(files)
+    .filter(isIndexableHtmlPath)
+    .map((p) => deployPathToUrl(p, siteDomain));
 }
 
-/**
- * Check if a file is a static page
- */
-function isStaticPage(filePath) {
-  if (!filePath.startsWith('src/') || filePath.startsWith('src/_posts/') || filePath.startsWith('src/_includes/') || filePath.startsWith('src/_data/')) {
-    return false;
-  }
-  
-  const filename = path.basename(filePath);
-  return STATIC_PAGES.includes(filename);
-}
-
-/**
- * Map source file to URL
- */
-function mapSourceFileToUrl(filePath) {
-  const normalizedPath = filePath.replace(/\\/g, '/');
-  
-  // New posts: src/_posts/YYYY/YYYY-MM-DD-slug.md -> /YYYY/MM/DD/slug/
-  if (normalizedPath.startsWith('src/_posts/')) {
-    const postMatch = normalizedPath.match(/src\/_posts\/(\d{4})\/(\d{4})-(\d{2})-(\d{2})-([^/]+)\.md$/);
-    if (postMatch) {
-      const [, year, yearFromFilename, month, day, slug] = postMatch;
-      return `/${yearFromFilename}/${month}/${day}/${slug}/`;
-    }
-  }
-  
-  // Index page: src/index.njk -> /
-  if (normalizedPath === 'src/index.njk') {
-    return '/';
-  }
-  
-  // Static pages: read permalink from frontmatter
-  if (isStaticPage(normalizedPath)) {
-    try {
-      const fullPath = path.resolve(process.cwd(), normalizedPath);
-      if (fs.existsSync(fullPath)) {
-        const content = fs.readFileSync(fullPath, 'utf8');
-        const { frontMatter } = parseFrontMatter(content);
-        if (frontMatter && frontMatter.permalink) {
-          return frontMatter.permalink;
-        }
-      }
-    } catch (error) {
-      // If we can't read the file, fall back to filename-based URL
-    }
-    
-    // Fallback: use filename
-    const filename = path.basename(normalizedPath, '.md');
-    return `/${filename}/`;
-  }
-  
-  return null;
-}
-
-/**
- * Load state file
- */
-function loadState() {
-  if (!fs.existsSync(STATE_FILE)) {
-    return { lastCommit: null, notifiedUrls: {} };
-  }
-  
-  try {
-    const content = fs.readFileSync(STATE_FILE, 'utf8');
-    return JSON.parse(content);
-  } catch (error) {
-    return { lastCommit: null, notifiedUrls: {} };
-  }
-}
-
-/**
- * Save state file
- */
-function saveState(state) {
-  fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2), 'utf8');
-}
-
-/**
- * Get site URL from site data
- */
-function getSiteUrl() {
-  try {
-    const siteData = require('../../src/_data/site.js');
-    const site = siteData();
-    return site.url;
-  } catch (error) {
-    return process.env.SITE_DOMAIN ? `https://${process.env.SITE_DOMAIN}` : 'https://jonplummer.com';
-  }
-}
-
-/**
- * Send IndexNow notification
- */
-function notifyIndexNow(urls, apiKey, options = {}) {
-  const { dryRun = false } = options;
-  
-  return new Promise((resolve, reject) => {
-    if (urls.length === 0) {
-      resolve({ success: true, notified: 0 });
-      return;
-    }
-    
-    const payload = JSON.stringify({
-      host: new URL(getSiteUrl()).hostname,
+async function submitToIndexNow({ urls, siteDomain, apiKey }) {
+  const keyLocation = `https://${siteDomain}/${apiKey}.txt`;
+  const response = await fetch(INDEXNOW_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      host: siteDomain,
       key: apiKey,
-      keyLocation: `${getSiteUrl()}/${apiKey}.txt`,
-      urlList: urls.map(url => `${getSiteUrl()}${url}`)
-    });
-    
-    // In dry-run mode, just return success without actually sending
-    if (dryRun) {
-      resolve({ success: true, notified: urls.length, statusCode: 200, dryRun: true, payload: JSON.parse(payload) });
-      return;
-    }
-    
-    const requestOptions = {
-      hostname: 'api.indexnow.org',
-      port: 443,
-      path: '/IndexNow',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(payload)
-      }
-    };
-    
-    const req = https.request(requestOptions, (res) => {
-      let data = '';
-      
-      res.on('data', (chunk) => {
-        data += chunk;
-      });
-      
-      res.on('end', () => {
-        if (res.statusCode === 200 || res.statusCode === 202) {
-          resolve({ success: true, notified: urls.length, statusCode: res.statusCode });
-        } else {
-          reject(new Error(`IndexNow API returned status ${res.statusCode}: ${data}`));
-        }
-      });
-    });
-    
-    req.on('error', (error) => {
-      reject(error);
-    });
-    
-    req.write(payload);
-    req.end();
+      keyLocation,
+      urlList: urls,
+    }),
   });
+
+  if (response.status !== 200 && response.status !== 202) {
+    const body = await response.text().catch(() => '');
+    throw new Error(`IndexNow API returned ${response.status}: ${body}`);
+  }
+
+  return response.status;
 }
 
 /**
- * Main function to process changes and notify IndexNow
+ * @param {Object} options
+ * @param {string} options.siteRoot - path to the built site (e.g. `_site/`)
+ * @param {string} options.siteDomain - bare public domain (e.g. `jonplummer.com`)
+ * @param {boolean} [options.dryRun] - compute and print the URL list, submit nothing
+ * @param {boolean} [options.catchUp] - submit every indexable page currently live,
+ *   ignoring manifest history (one-off backlog submission, not a normal deploy path)
  */
-async function processIndexNow(options = {}) {
-  const { quiet = false, dryRun = false } = options;
-  
-  // Check for API key
+async function processIndexNow({ siteRoot, siteDomain, dryRun = false, catchUp = false } = {}) {
   const apiKey = process.env.INDEXNOW_API_KEY;
   if (!apiKey) {
-    if (!quiet) {
-      console.log('⚠️  🔍 IndexNow: API key not found (INDEXNOW_API_KEY not set)');
-      console.log('   Skipping IndexNow notification.\n');
-    }
-    return { notified: 0, skipped: true, reason: 'no_api_key' };
+    console.log('⚠️  🔍 IndexNow: API key not found (INDEXNOW_API_KEY not set) — skipping');
+    return { skipped: true, reason: 'no_api_key' };
   }
-  
-  // Get current commit
-  const currentCommit = getCurrentCommitHash();
-  if (!currentCommit) {
-    if (!quiet) {
-      console.log('⚠️  🔍 IndexNow: Could not determine git commit hash');
-      console.log('   Skipping IndexNow notification.\n');
+
+  const manifestPath = defaultIndexNowManifestPath();
+  const currentManifest = buildContentManifest(siteRoot);
+  const previousManifest = loadContentManifest(manifestPath);
+  const isBaselineRun = !catchUp && !previousManifest;
+
+  const urls = catchUp
+    ? selectAllIndexNowUrls({ currentManifest, siteDomain })
+    : selectIndexNowUrls({ previousManifest, currentManifest, siteDomain });
+
+  if (dryRun) {
+    if (catchUp) {
+      console.log(`🧪 🔍 IndexNow (catch-up, dry run): would submit ${urls.length} URL${urls.length === 1 ? '' : 's'}`);
+    } else if (isBaselineRun) {
+      console.log('🧪 🔍 IndexNow: no previous manifest — dry run would establish a baseline and submit nothing');
+    } else if (urls.length === 0) {
+      console.log('🧪 🔍 IndexNow: dry run — nothing to submit');
+    } else {
+      console.log(`🧪 🔍 IndexNow: dry run — would submit ${urls.length} URL${urls.length === 1 ? '' : 's'}`);
     }
-    return { notified: 0, skipped: true, reason: 'no_commit' };
+    urls.forEach((url) => console.log(`   ${url}`));
+    return { dryRun: true, urls, baseline: isBaselineRun };
   }
-  
-  // Load state
-  const state = loadState();
-  
-  // Check if we've already notified for this commit
-  if (state.lastCommit === currentCommit && state.notifiedUrls[currentCommit]) {
-    if (!quiet) {
-      console.log('✅ 🔍 IndexNow: already notified for this commit\n');
-    }
-    return { notified: 0, skipped: true, reason: 'already_notified' };
+
+  if (isBaselineRun) {
+    saveContentManifest(manifestPath, currentManifest);
+    console.log('✅ 🔍 IndexNow: no previous manifest — baseline established, submitted nothing');
+    return { baseline: true, submitted: 0 };
   }
-  
-  // Get changed files
-  const { added, modified } = getChangedFiles();
-  
-  // Filter for significant changes
-  const significantFiles = [];
-  
-  // New posts (Added files)
-  for (const file of added) {
-    if (isNewPost(file)) {
-      significantFiles.push(file);
-    }
+
+  if (urls.length === 0) {
+    saveContentManifest(manifestPath, currentManifest);
+    console.log('✅ 🔍 IndexNow: nothing to submit');
+    return { submitted: 0 };
   }
-  
-  // Index page changes (Modified)
-  for (const file of modified) {
-    if (isIndexPage(file) || isStaticPage(file)) {
-      significantFiles.push(file);
-    }
+
+  const status = await submitToIndexNow({ urls, siteDomain, apiKey });
+  saveContentManifest(manifestPath, currentManifest);
+  console.log(`✅ 🔍 IndexNow: submitted ${urls.length} URL${urls.length === 1 ? '' : 's'} (HTTP ${status})`);
+  if (urls.length <= 5) {
+    urls.forEach((url) => console.log(`   ${url}`));
   }
-  
-  if (significantFiles.length === 0) {
-    if (!quiet) {
-      console.log('✅ 🔍 IndexNow: no significant changes detected\n');
-    }
-    // Still update state to record we checked this commit
-    state.lastCommit = currentCommit;
-    if (!state.notifiedUrls[currentCommit]) {
-      state.notifiedUrls[currentCommit] = [];
-    }
-    saveState(state);
-    return { notified: 0, skipped: true, reason: 'no_significant_changes' };
-  }
-  
-  // Map files to URLs
-  const urls = [];
-  for (const file of significantFiles) {
-    const url = mapSourceFileToUrl(file);
-    if (url) {
-      urls.push(url);
-    }
-  }
-  
-  // Remove duplicates
-  const uniqueUrls = [...new Set(urls)];
-  
-  // Check if we've already notified these URLs for this commit
-  const alreadyNotified = state.notifiedUrls[currentCommit] || [];
-  const newUrls = uniqueUrls.filter(url => !alreadyNotified.includes(url));
-  
-  if (newUrls.length === 0) {
-    if (!quiet) {
-      console.log('✅ 🔍 IndexNow: all URLs already notified for this commit\n');
-    }
-    return { notified: 0, skipped: true, reason: 'urls_already_notified' };
-  }
-  
-  // Notify IndexNow
-  try {
-    const result = await notifyIndexNow(newUrls, apiKey, { dryRun });
-    
-    // Only update state if not dry-run
-    if (!dryRun) {
-      state.lastCommit = currentCommit;
-      if (!state.notifiedUrls[currentCommit]) {
-        state.notifiedUrls[currentCommit] = [];
-      }
-      state.notifiedUrls[currentCommit].push(...newUrls);
-      
-      // Clean up old commit entries (keep last 10 commits)
-      const commitHashes = Object.keys(state.notifiedUrls).sort();
-      if (commitHashes.length > 10) {
-        const toRemove = commitHashes.slice(0, commitHashes.length - 10);
-        for (const commit of toRemove) {
-          delete state.notifiedUrls[commit];
-        }
-      }
-      
-      saveState(state);
-    }
-    
-    if (!quiet) {
-      if (dryRun) {
-        console.log(`🧪 🔍 IndexNow: DRY RUN - would notify ${newUrls.length} URL${newUrls.length === 1 ? '' : 's'}`);
-        if (newUrls.length <= 5) {
-          newUrls.forEach(url => console.log(`   ${getSiteUrl()}${url}`));
-        }
-        console.log(`   Payload:`, JSON.stringify(result.payload, null, 2));
-        console.log('');
-      } else {
-        console.log(`✅ 🔍 IndexNow: notified ${newUrls.length} URL${newUrls.length === 1 ? '' : 's'}`);
-        if (newUrls.length <= 5) {
-          newUrls.forEach(url => console.log(`   ${getSiteUrl()}${url}`));
-        }
-        console.log('');
-      }
-    }
-    
-    return { notified: newUrls.length, urls: newUrls, success: true, dryRun };
-  } catch (error) {
-    if (!quiet) {
-      console.log(`❌ 🔍 IndexNow: notification failed`);
-      console.error(`   ${error.message}\n`);
-    }
-    return { notified: 0, error: error.message, success: false };
-  }
+  return { submitted: urls.length, status, urls };
 }
 
-// Allow running as standalone script
+// Allow running as a standalone script, e.g. `node scripts/utils/indexnow.js --catch-up`
 if (require.main === module) {
-  const quiet = process.argv.includes('--quiet');
-  const dryRun = process.argv.includes('--dry-run') || process.argv.includes('--test');
-  processIndexNow({ quiet, dryRun })
-    .then(result => {
-      if (result.error && !dryRun) {
-        process.exit(1);
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error.message);
+  (async () => {
+    const args = process.argv.slice(2);
+    const dryRun = args.includes('--dry-run');
+    const catchUp = args.includes('--catch-up');
+    const siteDomain = process.env.SITE_DOMAIN || 'jonplummer.com';
+    const siteRoot = path.join(process.cwd(), '_site');
+
+    if (!fs.existsSync(siteRoot)) {
+      console.error(`❌ IndexNow: ${siteRoot} not found — run \`pnpm run build\` first`);
       process.exit(1);
-    });
+    }
+
+    try {
+      await processIndexNow({ siteRoot, siteDomain, dryRun, catchUp });
+    } catch (error) {
+      console.error(`❌ IndexNow failed: ${error.message}`);
+      process.exit(1);
+    }
+  })();
 }
 
-module.exports = { processIndexNow };
-
+module.exports = {
+  processIndexNow,
+  selectIndexNowUrls,
+  selectAllIndexNowUrls,
+  isIndexableHtmlPath,
+  defaultIndexNowManifestPath,
+};

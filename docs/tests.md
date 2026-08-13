@@ -34,9 +34,9 @@ This project includes a suite of validation tests covering content structure, HT
 
 _Derived from [`scripts/test-manifest.js`](../scripts/test-manifest.js) — see [The test manifest](#the-test-manifest)._
 
-**Fast Tests:** `html`, `links`, `wisdom`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `deploy-assets`, `indexnow`, `error-document-assets`, `trailing-slash-links`, `portfolio-cover-crop`
+**Fast Tests:** `html`, `links`, `wisdom`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `deploy-assets`, `error-document-assets`, `trailing-slash-links`, `design-docs-location`, `portfolio-cover-crop`
 
-**Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `figure-lightbox`, `site-branding`, `preview-site-lockup`, `light-theme-colors`, `og-image-filename`, `source-file-utils`, `test-json-pipe` — see [Unit Tests](#unit-tests) below
+**Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `indexnow`, `figure-lightbox`, `site-branding`, `preview-site-lockup`, `light-theme-colors`, `og-image-filename`, `source-file-utils`, `test-json-pipe` — see [Unit Tests](#unit-tests) below
 
 **Slow Tests:** `a11y` (launches browser)
 
@@ -114,6 +114,10 @@ Validates that all internal links point to existing pages or anchors. Checks fil
 
 Scans `src/**/*.{md,njk,html}` for root-absolute internal links that omit a trailing slash on directory-style paths (e.g. `/colophon` instead of `/colophon/`). Apache 301s those to the slashed URL; Ahrefs reports each linking page as a redirect issue. File URLs with an extension (e.g. `/feed.xml`) are allowed. Does not need `_site/`.
 
+### design-docs-location.js
+
+Guards the `docs/designs/` structure. Fails if the retired `docs/superpowers/` directory exists (the superpowers `writing-plans` / `brainstorming` skills still name that path, and their `SKILL.md` files ship from a plugin cache that can't be durably edited — see `CLAUDE.md` § Design records), if anything under the gitignored `docs/designs/scratch/` is tracked, or if `docs/designs/specs/` or `plans/` goes missing. Does not check for the old path in prose — the files that document this override have to name it. Does not need `_site/`.
+
 ### og-images.js
 
 Validates that all HTML pages have appropriate Open Graph images. Missing `og:image` (ERROR), default image on non-index pages (ERROR), skips redirect pages.
@@ -149,6 +153,10 @@ Unit checks for `scripts/utils/cloudflare-purge.js`: local SHA-256 content-manif
 ### deploy-guards.js
 
 Static regression guards for `scripts/deploy/deploy.js`'s source — no network or `_site/` dependency. Checks: rsync doesn't exclude `color/` or `assets/fonts/`, the changelog commit logic is present, and the Cloudflare selective-purge integration is wired up. Each check traces to a real past incident (accidentally excluding `/color/` or fonts from rsync, breaking the changelog auto-commit). Live connectivity checks (SSH, rsync upload, `.env`) are a separate, manual-only test — see `deploy.js` below.
+
+### indexnow.js
+
+Pure unit checks for the URL-selection logic in `scripts/utils/indexnow.js`, against fixture manifests — no network, no filesystem. Covers `isIndexableHtmlPath` (drops `404.html`, `500.html`, `page/N/index.html`, and non-`.html` paths) and `selectIndexNowUrls` (added-only, changed-only, added+changed together, deleted excluded, no-previous-manifest → empty list, and URL mapping via `deployPathToUrl`). Reuses `scripts/utils/cloudflare-purge.js`'s content-hash manifest helpers (`buildContentManifest`, `diffContentManifests`, `loadContentManifest`, `saveContentManifest`, `deployPathToUrl`) but keeps its own state file, `.cache/indexnow-content-manifest.json`, separate from Cloudflare's — Cloudflare's manifest is already advanced to "now" by the time IndexNow runs during a deploy, which would make a shared file always diff to zero. Replaced a prior git-diff-based implementation (re-implemented Eleventy's permalink rules by hand and got them wrong) and its test, which validated plumbing but let real detection failures pass silently.
 
 ### preview-site-lockup.js
 
