@@ -168,9 +168,8 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
     const env = { ...process.env };
     env.TEST_RUNNER = 'true'; // Tell tests to output JSON, not formatted text
     if (compact) {
-      env.TEST_COMPACT_MODE = 'true';
     }
-    
+
     // Capture stdout to detect JSON output, but pass through stderr for progress
     // Non-JSON tests (deploy, security) use inherited stdout so output appears once, not buffered and re-written
     let stdoutData = '';

@@ -4,9 +4,7 @@
  * Purge changed deploy paths from Cloudflare edge cache.
  * Source of truth is a local SHA-256 content-hash manifest of `_site`
  * (see `buildContentManifest` / `diffContentManifests`), diffed against the
- * previous deploy's manifest and mapped to public URLs. `parseRsyncItemizedChanges`
- * remains for parsing rsync's `--itemize-changes` output (deploy logs only —
- * it is not the purge source).
+ * previous deploy's manifest and mapped to public URLs.
  */
 
 const CF_API = 'https://api.cloudflare.com/client/v4';
@@ -97,39 +95,6 @@ function shouldPurgeDeployPath(relativePath) {
 
 function pathsToPurgeUrls(paths, siteDomain) {
   return paths.filter(shouldPurgeDeployPath).map((p) => deployPathToUrl(p, siteDomain));
-}
-
-/**
- * @param {string} output rsync stdout/stderr with --itemize-changes
- * @returns {string[]} site-relative paths (e.g. assets/css/jonplummer.css)
- */
-function parseRsyncItemizedChanges(output) {
-  const paths = new Set();
-
-  for (const line of output.split('\n')) {
-    const trimmed = line.trimEnd();
-    if (!trimmed) continue;
-
-    if (trimmed.startsWith('*deleting')) {
-      const path = trimmed.slice('*deleting'.length).trim();
-      if (path) paths.add(path);
-      continue;
-    }
-
-    const spaceIdx = trimmed.indexOf(' ');
-    if (spaceIdx <= 0) continue;
-
-    const prefix = trimmed.slice(0, spaceIdx);
-    const path = trimmed.slice(spaceIdx + 1).trim();
-    if (!path || path === './') continue;
-
-    const op = prefix[0];
-    const type = prefix[1];
-    if (type !== 'f') continue;
-    if (op === '>' || op === '<') paths.add(path);
-  }
-
-  return [...paths];
 }
 
 /**
@@ -303,7 +268,6 @@ async function purgeChangedDeployContent(siteRoot, siteDomain, options = {}) {
 }
 
 module.exports = {
-  parseRsyncItemizedChanges,
   deployPathToUrl,
   purgeCloudflareUrls,
   isCloudflarePurgeConfigured,

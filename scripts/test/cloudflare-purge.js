@@ -3,15 +3,12 @@
 /**
  * Unit checks for Cloudflare purge helpers: local content-hash manifest
  * diffing, `_site/` path → public URL mapping, and purge orchestration.
- * `parseRsyncItemizedChanges` (rsync `--itemize-changes` parsing) is deploy-log
- * tooling only, not the purge source, but is still covered here.
  */
 
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const {
-  parseRsyncItemizedChanges,
   deployPathToUrl,
   buildContentManifest,
   diffContentManifests,
@@ -30,23 +27,6 @@ runTest({
   testName: 'Cloudflare purge helpers',
   validateFn: async (result) => {
     const fileObj = addFile(result, 'scripts/utils/cloudflare-purge.js');
-
-    const sample = [
-      '>f+++++++ assets/css/jonplummer.css',
-      '>f..t..g. about/index.html',
-      '.d..t..g. ./',
-      '*deleting   old-page/index.html',
-      '',
-    ].join('\n');
-
-    const paths = parseRsyncItemizedChanges(sample);
-    if (paths.length !== 3) {
-      addIssue(fileObj, {
-        severity: 'error',
-        type: 'cloudflare-purge-parse',
-        message: `expected 3 changed paths, got ${paths.length}: ${paths.join(', ')}`,
-      });
-    }
 
     const cssUrl = deployPathToUrl('assets/css/jonplummer.css', 'jonplummer.com');
     if (cssUrl !== 'https://jonplummer.com/assets/css/jonplummer.css') {

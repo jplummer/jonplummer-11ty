@@ -23,7 +23,6 @@ if (fs.existsSync('.env')) {
 }
 
 const STATE_FILE = path.join(process.cwd(), '.indexnow-state.json');
-const INDEXNOW_ENDPOINT = 'https://api.indexnow.org/IndexNow';
 const STATIC_PAGES = ['about.md', 'now.md', 'changelog.md', 'readme.md', 'technologies.md'];
 
 /**

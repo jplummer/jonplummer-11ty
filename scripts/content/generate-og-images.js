@@ -29,16 +29,6 @@ nunjucksEnv.addFilter('postDate', (dateObj) => {
 
 // Front matter parsing and reconstruction now use shared utilities
 
-// Generate hash of source data for incremental generation
-function generateDataHash(pageData) {
-  const dataString = JSON.stringify({
-    title: pageData.title,
-    description: pageData.description,
-    date: pageData.date
-  });
-  return Buffer.from(dataString).toString('base64').substring(0, 16);
-}
-
 const OG_SHARED_DEPS = [
   path.join(process.cwd(), 'src', '_includes', 'og-image.njk'),
   path.join(process.cwd(), 'src', '_includes', 'og-image-body.njk'),

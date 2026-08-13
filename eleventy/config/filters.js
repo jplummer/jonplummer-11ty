@@ -7,8 +7,7 @@
  */
 
 const path = require("path");
-const { normalizeDate, formatPostDate, formatDateRange } = require("../utils/date-utils");
-const { extractCssCustomProperties } = require("../utils/css-utils");
+const { normalizeDate, formatPostDate } = require("../utils/date-utils");
 const { mergePostsAndLinks } = require("../utils/merge-posts-links");
 const { pickTaglineForUrl, getGitHeadSha } = require("../utils/tagline-for-url");
 const siteData = require("../../src/_data/site.js")();
@@ -51,9 +50,6 @@ function configureFilters(eleventyConfig, md) {
 
   // add postDate filter
   eleventyConfig.addFilter("postDate", formatPostDate);
-  
-  // add dateRange filter
-  eleventyConfig.addFilter("dateRange", formatDateRange);
 
   // Override dateToRfc3339 as a plugin to ensure it runs AFTER the RSS plugin registers its filter
   // Plugins run in a second configuration stage, so we must use a plugin wrapper to override
@@ -87,9 +83,6 @@ function configureFilters(eleventyConfig, md) {
     // This converts straight quotes to smart quotes without other markdown processing
     return md.renderInline(String(content));
   });
-
-  // Extract CSS custom properties from main stylesheet (for OG image preview)
-  eleventyConfig.addFilter("extractCssCustomProperties", extractCssCustomProperties);
 
   // Add custom filter to merge posts and links chronologically
   eleventyConfig.addFilter("mergePostsAndLinks", mergePostsAndLinks);
