@@ -1192,7 +1192,7 @@ article.portfolio-item {
 article.portfolio-item > a {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xs);
+  gap: var(--spacing-sm);
   text-decoration: none;
 }
 
