@@ -14,6 +14,8 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Log complexity-reduction ideas from the three-agent audit
 - Reorganize docs: designs/ for design records, drop dead files
 - Archive ideas.md done items; simplify IndexNow; guard design-docs location
+- Quiet deploy output by default; --verbose restores rsync detail
+- Correct override wording: superpowers skills default, don't hardcode
 
 ## 2026-08-11
 
