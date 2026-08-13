@@ -1,16 +1,10 @@
 #!/usr/bin/env node
 
 const { execSync } = require('child_process');
+const { getTestsByGroup } = require('../test-manifest');
 
-const PRE_BUILD_TESTS = [
-  'markdown', 'frontmatter', 'spell', 'css',
-  'links', 'wisdom', 'color-contrast', 'trailing-slash-links',
-];
-
-const POST_BUILD_TESTS = [
-  'html', 'internal-links', 'og-images', 'seo', 'rss', 'indexnow',
-  'deploy-assets', 'portfolio-cover-crop',
-];
+const PRE_BUILD_TESTS = getTestsByGroup('pre').map((t) => t.id);
+const POST_BUILD_TESTS = getTestsByGroup('post').map((t) => t.id);
 
 function run(command, errorLabel) {
   try {

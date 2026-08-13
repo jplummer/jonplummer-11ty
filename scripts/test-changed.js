@@ -4,19 +4,16 @@
  * Test Changed Files
  *
  * Runs authoring-related tests on files changed since last commit.
- * Test list comes from CONTENT_CHANGED_TESTS (scripts/utils/test-runner-helper.js) —
+ * Test list comes from the 'changed' group in scripts/test-manifest.js —
  * the single source of truth for which content-authoring tests support --changed.
  */
 
 const { execSync } = require('child_process');
 const path = require('path');
 const { getChangedFilesSinceHead } = require('./utils/test-helpers');
-const { CONTENT_CHANGED_TESTS } = require('./utils/test-runner-helper');
+const { getTestsByGroup, getTestScriptBasename } = require('./test-manifest');
 
-// Map test type names to script file names
-const testScriptMap = Object.fromEntries(
-  CONTENT_CHANGED_TESTS.map(({ name, scriptName }) => [name, scriptName])
-);
+const CHANGED_TESTS = getTestsByGroup('changed');
 
 function getChangedFiles() {
   return getChangedFilesSinceHead().filter(file => {
@@ -31,7 +28,7 @@ function runTest(testName, useChanged = false) {
     let command;
     if (useChanged) {
       // Map test name to script file name
-      const scriptName = testScriptMap[testName] || testName;
+      const scriptName = getTestScriptBasename(testName) || testName;
       // Run test directly with --changed flag for formatted output
       command = `node scripts/test/${scriptName}.js --changed`;
     } else {
@@ -66,8 +63,8 @@ function main() {
   changedFiles.forEach(file => console.log(`   ${file}`));
   console.log('');
 
-  const tests = CONTENT_CHANGED_TESTS.map(({ name }) => ({
-    name,
+  const tests = CHANGED_TESTS.map(({ id }) => ({
+    name: id,
     useChanged: true,
     scope: 'changed files only'
   }));

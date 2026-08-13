@@ -4,147 +4,44 @@ const { spawn } = require('child_process');
 const path = require('path');
 const { printOverallSummary, getTestEmoji, getTestDisplayName, formatVerbose, formatBuild } = require('./utils/test-results');
 const { SPINNER_FRAMES } = require('./utils/spinner-utils');
-
-// Map test types to their script files
-// Format: 'test-name': { file: 'script.js', dir: 'test' } or 'test-name': 'script.js' (defaults to 'test' dir)
-const testTypes = {
-  'html': 'html.js',
-  'links': 'links-yaml.js',
-  'wisdom': 'wisdom-yaml.js',
-  'internal-links': 'internal-links.js',
-  'frontmatter': 'frontmatter.js',
-  'markdown': 'markdown.js',
-  'spell': 'spell.js',
-  'seo': 'seo-meta.js',
-  'og-images': 'og-images.js',
-  'a11y': 'accessibility.js',
-  'color-contrast': 'color-contrast.js',
-  'css': 'css.js',
-  'rss': 'rss-feed.js',
-  'portfolio-notes': 'portfolio-notes.js',
-  'deploy-assets': 'deploy-assets.js',
-  'cloudflare-purge': 'cloudflare-purge.js',
-  'deploy-guards': 'deploy-guards.js',
-  'deploy': 'deploy.js',
-  'indexnow': 'indexnow.js',
-  'figure-lightbox': 'figure-lightbox.js',
-  'site-branding': 'site-branding.js',
-  'preview-site-lockup': 'preview-site-lockup.js',
-  'light-theme-colors': 'light-theme-colors.js',
-  'og-image-filename': 'og-image-filename.js',
-  'source-file-utils': 'source-file-utils.js',
-  'error-document-assets': 'error-document-assets.js',
-  'trailing-slash-links': 'trailing-slash-links.js',
-  'portfolio-cover-crop': 'portfolio-cover-crop.js',
-  'test-json-pipe': 'test-json-pipe.js',
-  'security': { file: 'security-audit.js', dir: 'security' }
-};
-
-// Fast tests (excludes slow tests like a11y)
-// Suitable for pre-commit hooks or frequent validation
-// Content-authoring and built-output checks only — unit tests of our own
-// tooling code (parsers, deploy helpers) live in `unitTests` below instead.
-const fastTests = [
-  'html',
-  'links',
-  'wisdom',
-  'internal-links',
-  'frontmatter',
-  'markdown',
-  'spell',
-  'seo',
-  'og-images',
-  'color-contrast',
-  'css',
-  'rss',
-  'deploy-assets',
-  'indexnow',
-  'error-document-assets',
-  'trailing-slash-links',
-  'portfolio-cover-crop'
-];
-
-// Tests to run for "test all" (includes all tests, including slow ones)
-const allTests = [
-  'html',
-  'links',
-  'wisdom',
-  'internal-links',
-  'frontmatter',
-  'markdown',
-  'spell',
-  'seo',
-  'og-images',
-  'color-contrast',
-  'css',
-  'rss',
-  'deploy-assets',
-  'indexnow',
-  'error-document-assets',
-  'trailing-slash-links',
-  'portfolio-cover-crop',
-  'a11y'
-];
-
-// Unit tests of our own tooling code (parsers, deploy helpers) — not tied to
-// authored content or build output. Run on demand with `pnpm run test unit`
-// whenever scripts/utils/, scripts/deploy/, or content parsers change.
-const unitTests = [
-  'portfolio-notes',
-  'cloudflare-purge',
-  'deploy-guards',
-  'figure-lightbox',
-  'site-branding',
-  'preview-site-lockup',
-  'light-theme-colors',
-  'og-image-filename',
-  'source-file-utils',
-  'test-json-pipe'
-];
+const manifest = require('./test-manifest');
 
 // Tests that don't use JSON output — use inherited stdout so output isn't buffered and re-written (avoids duplicate output)
-const nonJsonTests = ['deploy', 'security'];
+const nonJsonTests = manifest.getNonJsonTestIds();
 
 function listTests() {
   console.log('Available test types:\n');
-  
-  const { getTestDescription } = require('./utils/test-results');
-  
-  // Only show primary names
-  const primaryNames = ['html', 'links', 'wisdom', 'internal-links', 'frontmatter', 'markdown', 'spell', 'seo', 'og-images', 'a11y', 'color-contrast', 'css', 'rss', 'portfolio-notes', 'deploy-assets', 'cloudflare-purge', 'deploy-guards', 'site-branding', 'preview-site-lockup', 'light-theme-colors', 'og-image-filename', 'source-file-utils', 'error-document-assets', 'trailing-slash-links', 'portfolio-cover-crop', 'test-json-pipe', 'deploy', 'indexnow', 'security'];
 
-  primaryNames.forEach(type => {
-    const isInAll = allTests.includes(type);
-    const isInFast = fastTests.includes(type);
-    const isInUnit = unitTests.includes(type);
+  const { getTestDescription } = require('./utils/test-results');
+
+  const fastIds = manifest.getTestsByGroup('fast').map(t => t.id);
+  const allIds = manifest.getTestsByGroup('all').map(t => t.id);
+  const unitIds = manifest.getTestsByGroup('unit').map(t => t.id);
+
+  manifest.getHelpListedTests().forEach(({ id }) => {
+    const isInAll = allIds.includes(id);
+    const isInFast = fastIds.includes(id);
+    const isInUnit = unitIds.includes(id);
     let note = '';
     if (isInFast) note = ' (included in "test fast" and "test all")';
     else if (isInAll) note = ' (included in "test all")';
     else if (isInUnit) note = ' (included in "test unit")';
-    const description = getTestDescription(type);
+    const description = getTestDescription(id);
     const descText = description ? ` - ${description}` : '';
-    console.log(`  ${type}${descText}${note}`);
+    console.log(`  ${id}${descText}${note}`);
   });
   console.log('\nUsage: pnpm run test [type]');
-  console.log('       pnpm run test fast   (runs fast tests: ' + fastTests.join(', ') + ')');
-  console.log('       pnpm run test all    (runs all tests: ' + allTests.join(', ') + ')');
-  console.log('       pnpm run test unit   (runs unit tests: ' + unitTests.join(', ') + ')');
+  console.log('       pnpm run test fast   (runs fast tests: ' + fastIds.join(', ') + ')');
+  console.log('       pnpm run test all    (runs all tests: ' + allIds.join(', ') + ')');
+  console.log('       pnpm run test unit   (runs unit tests: ' + unitIds.join(', ') + ')');
 }
 
 function runTest(testType, showStatus = false, compact = false, formatOptions = {}) {
-  const testConfig = testTypes[testType];
-  if (!testConfig) {
+  const scriptPath = manifest.getTestScriptPath(testType);
+  if (!scriptPath) {
     throw new Error(`Unknown test type: ${testType}`);
   }
-  
-  // Handle both string (defaults to 'test' dir) and object (specifies dir) formats
-  let scriptPath;
-  if (typeof testConfig === 'string') {
-    scriptPath = path.join(__dirname, 'test', testConfig);
-  } else {
-    scriptPath = path.join(__dirname, testConfig.dir, testConfig.file);
-  }
-  
+
   return new Promise((resolve, reject) => {
     let spinnerInterval = null;
     let statusLine = '';
@@ -405,56 +302,18 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
   });
 }
 
-async function runFastTests() {
-  console.log('Running fast tests...\n');
-  
+async function runTestGroup(label, ids) {
+  console.log(`Running ${label} tests...\n`);
+
   const results = [];
-  
-  for (let i = 0; i < fastTests.length; i++) {
-    const testType = fastTests[i];
+
+  for (let i = 0; i < ids.length; i++) {
+    const testType = ids[i];
     const result = await runTest(testType, true, true); // compact = true for group runs
     result.emoji = getTestEmoji(testType);
     results.push(result);
     // Single newline between tests (except after last test)
-    if (i < fastTests.length - 1) {
-      console.log('');
-    }
-  }
-  const allPassed = printOverallSummary(results);
-  process.exit(allPassed ? 0 : 1);
-}
-
-async function runAllTests() {
-  console.log('Running all tests...\n');
-
-  const results = [];
-
-  for (let i = 0; i < allTests.length; i++) {
-    const testType = allTests[i];
-    const result = await runTest(testType, true, true); // compact = true for group runs
-    result.emoji = getTestEmoji(testType);
-    results.push(result);
-    // Single newline between tests (except after last test)
-    if (i < allTests.length - 1) {
-      console.log('');
-    }
-  }
-  const allPassed = printOverallSummary(results);
-  process.exit(allPassed ? 0 : 1);
-}
-
-async function runUnitTests() {
-  console.log('Running unit tests...\n');
-
-  const results = [];
-
-  for (let i = 0; i < unitTests.length; i++) {
-    const testType = unitTests[i];
-    const result = await runTest(testType, true, true); // compact = true for group runs
-    result.emoji = getTestEmoji(testType);
-    results.push(result);
-    // Single newline between tests (except after last test)
-    if (i < unitTests.length - 1) {
+    if (i < ids.length - 1) {
       console.log('');
     }
   }
@@ -489,20 +348,20 @@ async function main() {
   }
   
   if (testType === 'fast') {
-    await runFastTests();
-    // runFastTests handles its own exit
+    await runTestGroup('fast', manifest.getTestsByGroup('fast').map(t => t.id));
+    // runTestGroup handles its own exit
     return;
   }
-  
+
   if (testType === 'all') {
-    await runAllTests();
-    // runAllTests handles its own exit
+    await runTestGroup('all', manifest.getTestsByGroup('all').map(t => t.id));
+    // runTestGroup handles its own exit
     return;
   }
 
   if (testType === 'unit') {
-    await runUnitTests();
-    // runUnitTests handles its own exit
+    await runTestGroup('unit', manifest.getTestsByGroup('unit').map(t => t.id));
+    // runTestGroup handles its own exit
     return;
   }
 
@@ -520,7 +379,7 @@ async function main() {
     return;
   }
   
-  if (!testTypes[testType]) {
+  if (!manifest.getTest(testType)) {
     console.error(`❌ Unknown test type: ${testType}\n`);
     listTests();
     process.exit(1);

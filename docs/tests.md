@@ -8,6 +8,10 @@ This project includes a suite of validation tests covering content structure, HT
 - **Unit tests** (`pnpm run test unit`): does our own tooling code (parsers, deploy helpers) still behave correctly? Not tied to any authored content or build output — run on demand whenever `scripts/utils/`, `scripts/deploy/`, or content parsers change.
 - **Slow tests** (`a11y`) and **infrastructure tests** (`deploy`, `security`): occasional/manual checks that need a browser, live network, or credentials.
 
+## The test manifest
+
+[`scripts/test-manifest.js`](../scripts/test-manifest.js) is the single source of truth for which tests exist, which script runs them, and which groups (`fast`, `pre`, `post`, `unit`, `changed`) and flags (`slow`, `nonJson`, `listInHelp`) they carry. `scripts/test-runner.js`, `scripts/build/build.js`, and `scripts/test-changed.js` all derive their lists from it instead of keeping separate copies — the category lists in this doc are a human-readable view of the manifest, not an independent source. To add a new test: add one entry to the `TESTS` array in `scripts/test-manifest.js` with the right `groups`, and it's automatically wired into `pnpm run test <id>`, `test fast`/`all`/`unit`/`changed` (as applicable), and the build phases — no other file needs editing. The manifest self-checks its own consistency (unknown script paths, `unit`/`fast` overlap, `changed` tests without real `--changed` support, etc.) every time it's loaded, so a broken roster fails loudly instead of drifting silently.
+
 ## Test Execution
 
 - `pnpm run test` - List available test types
@@ -27,6 +31,8 @@ This project includes a suite of validation tests covering content structure, HT
 - `security`: Can also use `pnpm run security-audit`
 
 ### Test Categories
+
+_Derived from [`scripts/test-manifest.js`](../scripts/test-manifest.js) — see [The test manifest](#the-test-manifest)._
 
 **Fast Tests:** `html`, `links`, `wisdom`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `deploy-assets`, `indexnow`, `error-document-assets`, `trailing-slash-links`, `portfolio-cover-crop`
 
@@ -178,7 +184,7 @@ Performs security and maintenance checks: `pnpm audit`, `pnpm outdated`, Node.js
 
 ### test-changed.js
 
-Runs content-authoring tests on files changed since last commit. Test list comes from `CONTENT_CHANGED_TESTS` in `scripts/utils/test-runner-helper.js` — the single source of truth, kept in sync with each test script's actual `--changed` support (currently `spell`, `frontmatter`, `markdown`, `links`, `wisdom`, `css`, `seo`). Unit tests like `portfolio-notes` are deliberately excluded — they detect whether *tooling code* changed, not authored content; run `pnpm run test unit` for those.
+Runs content-authoring tests on files changed since last commit. Test list comes from the `changed` group in [`scripts/test-manifest.js`](#the-test-manifest) (currently `spell`, `frontmatter`, `markdown`, `links`, `wisdom`, `css`, `seo`). Unit tests like `portfolio-notes` are deliberately excluded — they detect whether *tooling code* changed, not authored content; run `pnpm run test unit` for those.
 
 ## Deployment Integration
 
