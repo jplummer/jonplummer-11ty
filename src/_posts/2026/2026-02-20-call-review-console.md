@@ -4,6 +4,8 @@ layout: layouts/portfolio_detail.njk
 date: "2026-02-20T12:00:00-08:00"
 tags: portfolio
 coverImage: 2026/02/New_Calls_List.png
+coverPosition: 72% 30%
+coverZoom: 1.1
 description: Call center quality managers couldn't find the right calls to use to coach their agents. We fixed that.
 ogImage: /assets/images/og/portfolio.png
 ---

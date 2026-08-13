@@ -4,6 +4,7 @@ layout: layouts/portfolio_detail.njk
 date: "2025-10-25"
 tags: portfolio
 coverImage: 2024/10/cko-sms-concept-video-8-still.png
+coverPosition: center top
 description: "Demo video of Invoca's SMS agent concept"
 ogImage: /assets/images/og/portfolio.png
 ---

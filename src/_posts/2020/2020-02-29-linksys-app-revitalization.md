@@ -4,6 +4,7 @@ layout: layouts/portfolio_detail.njk
 date: "2020-02-29T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/12/DashboardOnline.png
+coverPosition: center 52%
 description: "Complete redesign of the Linksys app, improving ratings from below 3 stars to 4.5 stars through new information architecture and performance improvements."
 ogImage: /assets/images/og/portfolio.png
 ---

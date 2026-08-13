@@ -4,6 +4,8 @@ layout: layouts/portfolio_detail.njk
 date: "2021-06-01T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/12/Screenshot2022-11-11at3.30.55PM.png
+coverPosition: center 14%
+coverZoom: 1.2
 description: Acceptance criteria document for WGU design system patterns, speeding development and testing by providing clear specifications for developers and QA.
 ogImage: /assets/images/og/portfolio.png
 ---

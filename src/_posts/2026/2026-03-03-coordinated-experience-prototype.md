@@ -4,6 +4,8 @@ layout: layouts/portfolio_detail.njk
 date: "2026-03-03T12:00:00-08:00"
 tags: portfolio
 coverImage: 2026/03/All-Classifiers-with-Draft.png
+coverPosition: 20% 24%
+coverZoom: 1.4
 description: "To make the Invoca classifier selection and report-building experience a coordinated one, new interactive patterns must be introduced."
 ogImage: /assets/images/og/portfolio.png
 ---

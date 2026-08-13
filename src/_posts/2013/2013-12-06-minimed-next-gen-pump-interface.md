@@ -4,6 +4,7 @@ layout: layouts/portfolio_detail.njk
 date: "2013-12-06T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/12/1_status.gif
+coverPosition: center top
 description: "Interaction design for a next-generation insulin pump interface, featuring enhanced LCD screens, bolus status tracking, and improved usability testing."
 ogImage: /assets/images/og/portfolio.png
 ---

@@ -4,6 +4,7 @@ layout: layouts/portfolio_detail.njk
 date: "2013-12-05T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/12/advoy_flags.png
+coverPosition: center top
 description: "Web applications and email templates for Baxter BioScience, including the Advoy app with country selection, bilingual interfaces, and dashboard designs."
 ogImage: /assets/images/og/portfolio.png
 ---

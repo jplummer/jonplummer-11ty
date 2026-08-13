@@ -4,6 +4,8 @@ layout: layouts/portfolio_detail.njk
 date: "2013-12-08T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/12/sensor.png
+coverPosition: left 5%
+coverZoom: 1.2
 description: "Research-driven report designs for CareLink Pro that answer key clinical questions, showing patient behavior and results together for endocrinologists."
 ogImage: /assets/images/og/portfolio.png
 ---

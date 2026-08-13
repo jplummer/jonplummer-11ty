@@ -4,6 +4,7 @@ layout: layouts/portfolio_detail.njk
 date: "2020-07-03T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/12/SET_103.jpg
+coverPosition: center 16%
 description: "Velop mesh WiFi system design featuring app-based setup, node detection, placement guidance, and network visualization for whole-home coverage."
 ogImage: /assets/images/og/portfolio.png
 ---

@@ -4,6 +4,8 @@ layout: layouts/portfolio_detail.njk
 date: "2013-12-10T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/12/be_hcp.png
+coverPosition: center 17%
+coverZoom: 1.01
 description: "Windows application simulating diabetic patients for education and demonstration, allowing users to experience care from physician or patient perspectives."
 ogImage: /assets/images/og/portfolio.png
 ---

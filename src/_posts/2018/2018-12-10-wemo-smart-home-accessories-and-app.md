@@ -4,6 +4,7 @@ layout: layouts/portfolio_detail.njk
 date: "2018-12-10T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/12/devices_withhand.png
+coverPosition: center 32%
 description: "WeMo smart home products and app for remote control of switches, lights, and devices, with natural language commands and automation."
 ogImage: /assets/images/og/portfolio.png
 ---

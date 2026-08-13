@@ -4,6 +4,8 @@ layout: layouts/portfolio_detail.njk
 date: "2026-03-06T12:00:00-08:00"
 tags: portfolio
 coverImage: 2026/03/Potential-IA-Tree.png
+coverPosition: right top
+coverZoom: 1.32
 description: "A project to help customers select classifiers revealed a new direction for the information architecture in general."
 ogImage: /assets/images/og/portfolio.png
 ---

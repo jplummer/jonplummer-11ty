@@ -4,6 +4,7 @@ layout: layouts/portfolio_detail.njk
 date: "2014-09-10T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/12/001.1_idle_-_interrupted_signal.jpg
+coverPosition: center 47%
 description: "Skunkworks project exploring a wearable watch remote for insulin pumps and glucose sensors, using limited-segment LCD displays and digital crown controls."
 ogImage: /assets/images/og/portfolio.png
 ---

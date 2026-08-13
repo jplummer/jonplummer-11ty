@@ -4,6 +4,7 @@ layout: layouts/portfolio_detail.njk
 date: "2001-12-11T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/12/mcr0a.gif
+coverPosition: center top
 description: "Clean, sparse website redesign for Mann Consulting featuring randomly selected main graphics, a proto-blog, and focused pages to encourage contact."
 ogImage: /assets/images/og/portfolio.png
 ---
