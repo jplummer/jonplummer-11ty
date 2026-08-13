@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 
 /**
- * The superpowers writing-plans / brainstorming skills hardcode
- * docs/superpowers/ as the destination for plans and specs. This project keeps
- * them in docs/designs/, and the override lives in CLAUDE.md +
- * .cursor/rules/memory.mdc rather than in the skills themselves, because those
- * ship from a plugin cache keyed by commit SHA (Cursor) and version (Claude)
- * where edits are discarded on the next update.
+ * The superpowers writing-plans / brainstorming skills default to
+ * docs/superpowers/ for plans and specs, and both defer to user preference for
+ * the location. This project's preference is docs/designs/, stated in CLAUDE.md
+ * and .cursor/rules/memory.mdc — not in the skills, whose SKILL.md files ship
+ * from a plugin cache keyed by commit SHA (Cursor) and version (Claude) where
+ * edits are discarded on the next update.
  *
- * That override is persuasion, not enforcement, so this test is the backstop:
- * a skill that writes to the old path fails the build here instead of quietly
- * splitting the design record across two directories for months.
+ * A stated preference is persuasion, not enforcement, so this test is the
+ * backstop: a skill that writes to the old path fails the build here instead of
+ * quietly splitting the design record across two directories for months.
  */
 
 const fs = require('fs');

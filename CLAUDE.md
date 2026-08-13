@@ -12,7 +12,7 @@ Personal blog built with Eleventy (11ty) and Nunjucks templates.
 
 Write plans to `docs/designs/plans/YYYY-MM-DD-<feature>.md` and specs to `docs/designs/specs/YYYY-MM-DD-<topic>-design.md`. Ad-hoc reports and audits go in `docs/designs/scratch/`, which is gitignored.
 
-The superpowers `writing-plans` and `brainstorming` skills name `docs/superpowers/` instead. This instruction overrides them — which is what superpowers' own precedence rule asks for, since user instructions take priority over skills. The skills can't be corrected at the source: their `SKILL.md` files ship from a plugin cache keyed by commit SHA and version, so edits there are discarded on the next update. `pnpm run test design-docs-location` fails if `docs/superpowers/` comes back.
+The superpowers `writing-plans` and `brainstorming` skills default to `docs/superpowers/`, and both say user preferences override that default. This section is that preference — no conflict to resolve. Don't try to fix it in the skills instead: their `SKILL.md` files ship from a plugin cache keyed by commit SHA and version, so edits there are discarded on the next update. `pnpm run test design-docs-location` fails if `docs/superpowers/` comes back.
 
 ## Efficiency
 
