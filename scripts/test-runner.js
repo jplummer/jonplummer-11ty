@@ -32,6 +32,7 @@ const testTypes = {
   'preview-site-lockup': 'preview-site-lockup.js',
   'light-theme-colors': 'light-theme-colors.js',
   'og-image-filename': 'og-image-filename.js',
+  'source-file-utils': 'source-file-utils.js',
   'error-document-assets': 'error-document-assets.js',
   'trailing-slash-links': 'trailing-slash-links.js',
   'portfolio-cover-crop': 'portfolio-cover-crop.js',
@@ -97,6 +98,7 @@ const unitTests = [
   'preview-site-lockup',
   'light-theme-colors',
   'og-image-filename',
+  'source-file-utils',
   'test-json-pipe'
 ];
 
@@ -109,7 +111,7 @@ function listTests() {
   const { getTestDescription } = require('./utils/test-results');
   
   // Only show primary names
-  const primaryNames = ['html', 'links', 'wisdom', 'internal-links', 'frontmatter', 'markdown', 'spell', 'seo', 'og-images', 'a11y', 'color-contrast', 'css', 'rss', 'portfolio-notes', 'deploy-assets', 'cloudflare-purge', 'deploy-guards', 'site-branding', 'preview-site-lockup', 'light-theme-colors', 'og-image-filename', 'error-document-assets', 'trailing-slash-links', 'portfolio-cover-crop', 'test-json-pipe', 'deploy', 'indexnow', 'security'];
+  const primaryNames = ['html', 'links', 'wisdom', 'internal-links', 'frontmatter', 'markdown', 'spell', 'seo', 'og-images', 'a11y', 'color-contrast', 'css', 'rss', 'portfolio-notes', 'deploy-assets', 'cloudflare-purge', 'deploy-guards', 'site-branding', 'preview-site-lockup', 'light-theme-colors', 'og-image-filename', 'source-file-utils', 'error-document-assets', 'trailing-slash-links', 'portfolio-cover-crop', 'test-json-pipe', 'deploy', 'indexnow', 'security'];
 
   primaryNames.forEach(type => {
     const isInAll = allTests.includes(type);

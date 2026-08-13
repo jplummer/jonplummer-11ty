@@ -30,7 +30,7 @@ This project includes a suite of validation tests covering content structure, HT
 
 **Fast Tests:** `html`, `links`, `wisdom`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `deploy-assets`, `indexnow`, `error-document-assets`, `trailing-slash-links`, `portfolio-cover-crop`
 
-**Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `figure-lightbox`, `site-branding`, `preview-site-lockup`, `light-theme-colors`, `og-image-filename`, `test-json-pipe` — see [Unit Tests](#unit-tests) below
+**Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `figure-lightbox`, `site-branding`, `preview-site-lockup`, `light-theme-colors`, `og-image-filename`, `source-file-utils`, `test-json-pipe` — see [Unit Tests](#unit-tests) below
 
 **Slow Tests:** `a11y` (launches browser)
 
@@ -155,6 +155,10 @@ Unit checks for `extractLightThemeColorOverrides()` in `eleventy/utils/css-utils
 ### og-image-filename.js
 
 Unit checks for `generateOgImageFilename()` in `scripts/utils/og-image-filename.js`: date-only front matter (`YYYY-MM-DD`) must use calendar parts so local timezone does not shift the day (and double-prefix the slug). No `_site/` dependency.
+
+### source-file-utils.js
+
+Unit checks for `findSourceFile()` / `isRedirectPage()` in `scripts/utils/source-file-utils.js`, shared by `og-images.js` and `seo-meta.js` to resolve a built HTML path back to its source file: direct matches (`about.html` → `src/about.md`), the root index, permalink subdirectories (`ogimages/index.html` → `src/ogimages.njk`), post permalinks (`YYYY/MM/DD/slug/index.html` → `src/_posts/YYYY/YYYY-MM-DD-slug.md`, picked dynamically from an existing post so the fixture doesn't pin a slug that might later be renamed), and redirect-page detection (`data-redirect-url` attribute, meta refresh). Guards a past regression: the two test scripts carried separate copies of this logic and had drifted — `seo-meta.js`'s copy lacked the post-permalink block, so `test seo --changed` silently skipped every blog post. No `_site/` dependency.
 
 ## Infrastructure Tests
 
