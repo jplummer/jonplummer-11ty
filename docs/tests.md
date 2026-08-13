@@ -152,7 +152,7 @@ Unit checks for `scripts/utils/cloudflare-purge.js`: local SHA-256 content-manif
 
 ### deploy-guards.js
 
-Static regression guards for `scripts/deploy/deploy.js`'s source — no network or `_site/` dependency. Checks: rsync doesn't exclude `color/` or `assets/fonts/`, the changelog commit logic is present, and the Cloudflare selective-purge integration is wired up. Each check traces to a real past incident (accidentally excluding `/color/` or fonts from rsync, breaking the changelog auto-commit). Live connectivity checks (SSH, rsync upload, `.env`) are a separate, manual-only test — see `deploy.js` below.
+Regression guards for the deploy script — no network or `_site/` dependency. Two kinds of check: assertions against the rsync argv built by `scripts/utils/deploy-rsync.js`, and static string checks on `scripts/deploy/deploy.js`'s source for logic that can't be called (the file deploys on require). Checks: rsync doesn't exclude `color/` or `assets/fonts/`; a default deploy passes neither `--itemize-changes` nor `--stats` while `--verbose` and `--dry-run` pass both; `--dry-run` carries rsync's own `--dry-run`; the changelog commit logic is present; and the Cloudflare selective-purge integration is wired up. Each check traces to a real past incident (accidentally excluding `/color/` or fonts from rsync, breaking the changelog auto-commit, and a deploy whose itemized listing overflowed the terminal). Live connectivity checks (SSH, rsync upload, `.env`) are a separate, manual-only test — see `deploy.js` below.
 
 ### indexnow.js
 

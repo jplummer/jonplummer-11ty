@@ -45,6 +45,7 @@ Recommended process for deploying changes with an up-to-date changelog:
 - `pnpm run deploy` - Deploy site to host via rsync
   - Runs: `changelog` → `build` (source checks + OG images + Eleventy + output checks) → rsync → Cloudflare purge (content-hash diff) → IndexNow
 - `pnpm run deploy --dry-run` - Test deployment without actually deploying (runs all checks and shows what would be synced)
+- `pnpm run deploy --verbose` - Same deploy, plus rsync's per-file listing and transfer statistics. Off by default: every build rewrites `_site/`, so rsync re-uploads nearly every file and the listing runs to thousands of lines. Failures and rsync warnings print without the flag.
 
 ### 🪶 Content Authoring
 
@@ -80,8 +81,9 @@ See [tests.md](tests.md) for detailed test documentation.
 
 - `pnpm run deploy` - Deploy site via rsync (simplified script)
 - `pnpm run deploy --dry-run` - Test deployment without actually deploying. Runs all checks and shows what would be synced via rsync's dry-run mode.
+- `pnpm run deploy --verbose` - Adds rsync's per-file listing and transfer statistics to a real deploy (see [Deployment](#-deployment) above for why that's opt-in).
 
-Prior complex deployment scripts were moved to `scripts/deploy/backup/`. The current script shows rsync's native output and handles errors simply.
+Prior complex deployment scripts were moved to `scripts/deploy/backup/`. rsync arguments are built in `scripts/utils/deploy-rsync.js` so `pnpm run test deploy-guards` can assert them; errors are handled simply and rsync's own messages pass through.
 
 #### Deployment Process
 
@@ -89,7 +91,7 @@ The deploy script performs these steps in order:
 
 1. **Regenerates changelog** from git history
 2. **Builds the site** via `pnpm run build` — runs all source checks, generates OG images, runs Eleventy, then runs all output checks
-3. **Deploys via rsync** - uses `--dry-run` flag when `--dry-run` option is used
+3. **Deploys via rsync** - uses `--dry-run` flag when `--dry-run` option is used. Normal runs print only the result line; `--verbose` (or `--dry-run`) adds `--itemize-changes` and `--stats`, and a non-zero exit prints the full output regardless
 4. **Purges Cloudflare cache** for content-changed URLs only (SHA-256 diff vs local manifest; skipped if credentials unset; previewed on dry-run)
 5. **Submits IndexNow** notification for search engine indexing (content-hash diff vs local manifest; missing API key or nothing changed both print a message rather than staying silent) - computes and prints the URL list on `--dry-run` but does not submit or write state
 6. **Commits changelog** if it was updated, then **always pushes to remote** - skipped with `--dry-run`

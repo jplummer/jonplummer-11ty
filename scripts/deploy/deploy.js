@@ -14,6 +14,10 @@
  * 
  * Options:
  * - --dry-run: Run all checks and show what would be deployed, but don't actually deploy
+ * - --verbose: Show rsync's per-file listing and transfer statistics. Off by
+ *   default because a normal deploy re-uploads every file the build touched,
+ *   which is thousands of lines; the Cloudflare purge step reports what actually
+ *   changed. Failures and rsync warnings print either way.
  */
 
 const { execSync, spawn } = require('child_process');
@@ -21,6 +25,7 @@ const fs = require('fs');
 const path = require('path');
 const { loadDotenvSilently } = require('../utils/env-utils');
 const { SPINNER_FRAMES } = require('../utils/spinner-utils');
+const { buildRsyncArgs } = require('../utils/deploy-rsync');
 
 
 // Check if rsync is available
@@ -124,7 +129,7 @@ function runWithSpinner(command, message, options = {}) {
   });
 }
 
-async function deploy(config, siteDomain, dryRun) {
+async function deploy(config, siteDomain, dryRun, verbose = false) {
   try {
     // Check prerequisites
     if (!checkRsync()) {
@@ -137,26 +142,14 @@ async function deploy(config, siteDomain, dryRun) {
     }
 
     // Build rsync command (SSH key authentication is automatic)
-    const rsyncCommand = [
-      'rsync',
-      '-az', // Archive mode, compress
-      '--itemize-changes', // List changed paths for deploy logs (purge uses content-hash manifest)
-      '--delete', // Delete files on remote that don't exist locally
-      '--exclude=.DS_Store', // Exclude macOS metadata files
-      '--exclude=Thumbs.db', // Exclude Windows thumbnail files
-      '--exclude=*.tmp', // Exclude temporary files
-      '--stats', // Show transfer statistics summary (includes "Number of files transferred: 0" when nothing changes)
-      '--human-readable', // Show sizes in human-readable format
-    ];
-
-    // Add --dry-run flag if in dry-run mode
-    if (dryRun) {
-      rsyncCommand.push('--dry-run');
-      rsyncCommand.push('-v'); // Verbose output for dry-run
-    }
-
-    rsyncCommand.push(`${config.localPath}`); // Source directory
-    rsyncCommand.push(`${config.username}@${config.host}:${config.remotePath}`); // Destination
+    const rsyncCommand = buildRsyncArgs({
+      localPath: config.localPath,
+      username: config.username,
+      host: config.host,
+      remotePath: config.remotePath,
+      dryRun,
+      verbose,
+    });
 
     // Safety check: NEVER deploy if dryRun is true, even if rsync flag is missing
     if (dryRun && !rsyncCommand.includes('--dry-run')) {
@@ -207,19 +200,23 @@ async function deploy(config, siteDomain, dryRun) {
         // Clear spinner line
         process.stdout.write('\r' + ' '.repeat(50) + '\r');
         
-        // Display buffered output
+        // Display buffered output. A quiet deploy withholds rsync's listing —
+        // it's thousands of mtime-only lines — but a failure shows everything,
+        // and rsync's warnings on stderr always print.
+        const showListing = dryRun || verbose || code !== 0;
+
         if (dryRun) {
           console.log('📋 rsync dry-run output (no files will be transferred):');
           console.log('─'.repeat(60));
         }
-        
-        if (stdoutData) {
+
+        if (stdoutData && showListing) {
           process.stdout.write(stdoutData);
         }
         if (stderrData) {
           process.stderr.write(stderrData);
         }
-        
+
         if (dryRun) {
           console.log('─'.repeat(60));
         }
@@ -326,11 +323,13 @@ async function purgeCloudflareAfterDeploy(siteDomain, dryRun, localPath) {
 (async () => {
   // Check for command-line flags
   const dryRun = process.argv.includes('--dry-run');
+  const verbose = process.argv.includes('--verbose');
 
   // Debug: Log received arguments (helpful for troubleshooting)
   if (process.env.DEBUG_DEPLOY) {
     console.log('Debug: process.argv =', process.argv);
     console.log('Debug: dryRun =', dryRun);
+    console.log('Debug: verbose =', verbose);
     console.log('');
   }
 
@@ -404,7 +403,7 @@ async function purgeCloudflareAfterDeploy(siteDomain, dryRun, localPath) {
   }
   
   try {
-    await deploy(config, siteDomain, dryRun);
+    await deploy(config, siteDomain, dryRun, verbose);
 
     await purgeCloudflareAfterDeploy(siteDomain, dryRun, config.localPath);
 
