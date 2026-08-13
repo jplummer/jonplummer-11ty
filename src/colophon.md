@@ -19,16 +19,20 @@ None of that is decorative; it's all meant to make the site fast to load and eas
 
 This site looks spare. That's on purpose, not by default. Sparse isn't the same as undone – here's some of what's actually been decided, even where it doesn't show at a glance.
 
-- **Type is a modular scale from one base size and one ratio** – new sizes stay proportional, nobody's picking pixel values by eye.
-- **Headings and paragraphs use balanced and pretty text-wrapping** – no awkward one-word line breaks, no ragged last lines.
+- **Type is a modular scale from one base size and one ratio** – new sizes stay proportional. Nobody's picking pixel values by eye.
 - **Layout runs on an eight-pixel grid** – spacing is never a guess.
 - **Responsive breakpoints are chosen by reading measure, not device width** – the layout changes when a line gets too long to read comfortably, not at an arbitrary screen size.
 - **Motion is functional, not decorative** – a one-time view-transition on navigation, short hover transitions, nothing else. All of it is off under reduced-motion settings.
+- **Headings and paragraphs use balanced and pretty text-wrapping** – no awkward one-word line breaks, no ragged last lines.
 - **Dark mode follows your system setting** – no toggle to find, remember, or leave in the wrong state.
 - **There's a real print stylesheet** – greyscale, correct page margins, link URLs printed out in full. Try it on a post.
-- **The mark hides my initials in four rectangles** – a stem and a foot for the J, a stem and a bowl for the P. Disclosure carets, lightbox controls, and pagination arrows are solid, sharp, right-angled shapes related to that mark.
-- **There's no loading state to design** – nothing to wait for, since the HTML is already there when the page is requested.
-- **Old URLs still work** – corrected post dates and slug changes get server-side redirects, not broken links.
+- **The mark hides my initials in four rectangles** – a stem and a foot for the J, a stem and a bowl for the P. Disclosure handles, lightbox controls, and pagination arrows are solid, sharp, right-angled shapes related to that mark.
+- **There's no loading state to design** – there's nothing to wait for since the HTML is already there when the page is requested.
+- **Old URLs still work** – corrected post dates and slug changes get server-side redirects, not broken links. If I need to move something or correct a date the old path will still work via a "301 Moved Permanently." Nothing gets lost.
+
+And perhaps most importantly,
+
+- **I periodically audit the system for drift and pull it back in** – link and type colors and type sizes both got tightened up recently because inconsistencies had crept in and link hover/focus behavior was becoming incoherent. A system needs upkeep, not just an initial pass.
 
 I used AI to build a lot of this, but not by having agents do the work directly. When the site needed to move off WordPress, Cursor and I wrote and tested a migration script, then ran it and checked what came out – we didn't just ask an agent to migrate the site, we built and verified the thing that did. Same with spelling: cspell and a test script catch typos on every build now, because we built the routine instead of asking an agent to proofread once. Accessibility checks, redirects, pre-deploy validation all follow the same pattern. Everything here is software Cursor or Claude helped me build, running as needed, rather than a token-hungry task it did for me once. Nothing shipped without me reading it, running it, refining it, and rejecting what wasn't right.
 
