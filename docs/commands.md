@@ -85,6 +85,16 @@ See [tests.md](tests.md) for detailed test documentation.
 
 Prior complex deployment scripts were moved to `scripts/deploy/backup/`. rsync arguments are built in `scripts/utils/deploy-rsync.js` so `pnpm run test deploy-guards` can assert them; errors are handled simply and rsync's own messages pass through.
 
+#### Build first, or just deploy?
+
+Run one or the other, never `pnpm run build && pnpm run deploy`. Deploy runs the same `scripts/build/build.js` and aborts before rsync if it fails, so building first adds no safety — only a second full build.
+
+- **Ready to ship** - `pnpm run deploy` on its own.
+- **Not sure yet** - `pnpm run build` on its own. Same checks, nothing leaves the machine.
+- **Want the full rehearsal** - `pnpm run deploy --dry-run`. Adds the real rsync comparison and the exact Cloudflare purge and IndexNow URL lists, without deploying, committing, or pushing.
+
+Deploy has no `--skip-build` flag, and shouldn't get one: its inputs include the git HEAD SHA (the home-page tagline is salted with it) and `CHANGELOG.md`, which deploy regenerates as its own first step. A stale-output check that misses an input would ship the wrong bytes silently, and skipping the build would also skip the pre- and post-build tests that gate the deploy.
+
 #### Deployment Process
 
 The deploy script performs these steps in order:
