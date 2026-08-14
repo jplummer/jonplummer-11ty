@@ -5,7 +5,7 @@
 
 ## Problem
 
-Focus and keyboard evaluation is the laborious part of an accessibility audit, and the labor is what degrades the result. Checking it properly means tabbing through every page, watching where the ring goes, noticing when it disappears behind something or stops matching the reading order, opening each interactive thing and confirming you can get back out — by hand, one stop at a time, with no artifact at the end except notes. That cost is why this part of an audit gets a shallow pass, gets sampled instead of covered, or gets skipped and asserted. The problem to solve is the tedium, not a missing test.
+Focus and keyboard evaluation is a laborious part of an accessibility audit, and the labor is what degrades the result. Checking it properly means tabbing through every page, watching where the ring goes, noticing when it disappears behind something or stops matching the reading order, opening each interactive thing and confirming you can get back out — by hand, one stop at a time, with no artifact at the end except notes. That cost is why this part of an audit gets a shallow pass, gets sampled instead of covered, or gets skipped and asserted. The problem to solve is the tedium, not a missing test.
 
 Automation does not currently fill the gap. `pnpm run test a11y` runs axe-core over every built page in light and dark, but axe evaluates static markup: it does not press Tab, does not know what order focus moves in, and cannot tell whether a focused element looks any different from an unfocused one. `pnpm run test color-contrast` checks token pairs in `jonplummer.css`, not focus indicators. This is not a shortcoming of axe — no static analyzer can answer these questions.
 
