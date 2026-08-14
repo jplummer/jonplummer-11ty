@@ -123,7 +123,138 @@ const pressTab = async (page, reverse) => {
   await page.keyboard.up('Shift');
 };
 
-const sweepDirection = async (page, reverse, maxStops) => {
+/**
+ * Compares two base64 PNGs inside the browser using canvas. Done in-page
+ * rather than in Node so the tool needs no PNG-decoding dependency.
+ *
+ * ACT rule oj04fd expects "at least one device pixel inside the scrolling
+ * area of the viewport whose HSL color value is different when the element
+ * is focused from when it is not", so comparison is on HSL, and any
+ * difference counts.
+ */
+const diffScreenshotsInPage = async (page, focusedB64, unfocusedB64) => page.evaluate(
+  async (focusedData, unfocusedData) => {
+    const load = async (data) => {
+      const response = await fetch(`data:image/png;base64,${data}`);
+      const blob = await response.blob();
+      return createImageBitmap(blob);
+    };
+
+    const [a, b] = await Promise.all([load(focusedData), load(unfocusedData)]);
+    const width = Math.min(a.width, b.width);
+    const height = Math.min(a.height, b.height);
+
+    const draw = (bitmap) => {
+      const canvas = new OffscreenCanvas(width, height);
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(bitmap, 0, 0);
+      return ctx.getImageData(0, 0, width, height).data;
+    };
+
+    const dataA = draw(a);
+    const dataB = draw(b);
+
+    const toHsl = (r, g, bl) => {
+      const rn = r / 255;
+      const gn = g / 255;
+      const bn = bl / 255;
+      const max = Math.max(rn, gn, bn);
+      const min = Math.min(rn, gn, bn);
+      const l = (max + min) / 2;
+      if (max === min) return [0, 0, l];
+      const d = max - min;
+      const s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      let h;
+      if (max === rn) h = ((gn - bn) / d + (gn < bn ? 6 : 0)) / 6;
+      else if (max === gn) h = ((bn - rn) / d + 2) / 6;
+      else h = ((rn - gn) / d + 4) / 6;
+      return [h, s, l];
+    };
+
+    let differingPixels = 0;
+    let minX = Infinity;
+    let minY = Infinity;
+    let maxX = -Infinity;
+    let maxY = -Infinity;
+
+    for (let i = 0; i < dataA.length; i += 4) {
+      const hslA = toHsl(dataA[i], dataA[i + 1], dataA[i + 2]);
+      const hslB = toHsl(dataB[i], dataB[i + 1], dataB[i + 2]);
+      if (hslA[0] !== hslB[0] || hslA[1] !== hslB[1] || hslA[2] !== hslB[2]) {
+        differingPixels += 1;
+        const pixelIndex = i / 4;
+        const x = pixelIndex % width;
+        const y = Math.floor(pixelIndex / width);
+        if (x < minX) minX = x;
+        if (y < minY) minY = y;
+        if (x > maxX) maxX = x;
+        if (y > maxY) maxY = y;
+      }
+    }
+
+    return {
+      differingPixels,
+      totalPixels: width * height,
+      changeRegion: differingPixels > 0 ? { minX, minY, maxX, maxY } : null,
+    };
+  },
+  focusedB64,
+  unfocusedB64,
+);
+
+// ACT oj04fd treats an element that loses focus within a second as not
+// focusable, so evidence is sampled only after focus has settled.
+const FOCUS_DWELL_MS = 1000;
+
+const readFocusStyles = async (page) => page.evaluate(() => {
+  const el = document.activeElement;
+  if (!el) return null;
+  const s = window.getComputedStyle(el);
+  return {
+    outline: `${s.outlineWidth} ${s.outlineStyle} ${s.outlineColor}`,
+    boxShadow: s.boxShadow,
+    textDecorationLine: s.textDecorationLine,
+    color: s.color,
+    backgroundColor: s.backgroundColor,
+    border: `${s.borderWidth} ${s.borderStyle} ${s.borderColor}`,
+  };
+});
+
+/**
+ * Captures focused and unfocused viewport states at an identical scroll
+ * position. Blurring does not scroll, so the pair is directly comparable.
+ * The element is re-focused afterwards so the sweep can continue from here.
+ */
+const measureFocusVisibility = async (page) => {
+  await new Promise((resolve) => setTimeout(resolve, FOCUS_DWELL_MS));
+
+  const focusedStyles = await readFocusStyles(page);
+  const focusedShot = await page.screenshot({ encoding: 'base64' });
+
+  const handle = await page.evaluateHandle(() => {
+    const el = document.activeElement;
+    if (el && el.blur) el.blur();
+    return el;
+  });
+
+  const unfocusedStyles = await readFocusStyles(page);
+  const unfocusedShot = await page.screenshot({ encoding: 'base64' });
+
+  const element = handle.asElement();
+  if (element) {
+    await element.focus();
+  }
+  await handle.dispose();
+
+  const diff = await diffScreenshotsInPage(page, focusedShot, unfocusedShot);
+
+  return {
+    ...diff,
+    styles: { focused: focusedStyles, unfocused: unfocusedStyles },
+  };
+};
+
+const sweepDirection = async (page, reverse, maxStops, measureVisibility) => {
   const stops = [];
   const seen = new Set();
 
@@ -147,6 +278,10 @@ const sweepDirection = async (page, reverse, maxStops) => {
     seen.add(identity);
     const accessible = await readAccessibleInfo(page);
     stops.push({ ordinal: stops.length + 1, ...descriptor, ...accessible });
+
+    if (measureVisibility) {
+      stops[stops.length - 1].focusVisibility = await measureFocusVisibility(page);
+    }
   }
 
   return stops;
@@ -154,9 +289,9 @@ const sweepDirection = async (page, reverse, maxStops) => {
 
 const sweepPage = async (page, options = {}) => {
   const maxStops = options.maxStops || 200;
-  const forward = await sweepDirection(page, false, maxStops);
-  const reverse = await sweepDirection(page, true, maxStops);
+  const forward = await sweepDirection(page, false, maxStops, Boolean(options.measureVisibility));
+  const reverse = await sweepDirection(page, true, maxStops, false);
   return { forward, reverse };
 };
 
-module.exports = { sweepPage, describeActiveElement };
+module.exports = { sweepPage, describeActiveElement, measureFocusVisibility };

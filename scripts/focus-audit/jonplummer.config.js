@@ -19,8 +19,10 @@ const structuredSample = [
   { path: '/colophon/', why: 'page layout, sketch, footer' },
   { path: '/about/', why: 'page layout, prose links' },
   { path: '/404.html', why: 'error document, root-absolute assets' },
-  { path: '/color/', why: 'sanity pass only' },
-  { path: '/type/', why: 'sanity pass only' },
+  // The experimental utility pages get a reachability sweep only. Per-stop
+  // focus measurement costs a second each, and /color/ alone has ~166 stops.
+  { path: '/color/', why: 'sanity pass only', sanityOnly: true },
+  { path: '/type/', why: 'sanity pass only', sanityOnly: true },
 ];
 
 module.exports = {

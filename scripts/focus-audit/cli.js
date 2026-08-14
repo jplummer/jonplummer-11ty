@@ -112,13 +112,18 @@ const main = async () => {
   const allSelected = [...pages.structured, ...pages.random];
   const results = [];
 
+  const sanityOnlyPaths = new Set(
+    config.structuredSample.filter((entry) => entry.sanityOnly).map((entry) => entry.path),
+  );
+
   for (const pagePath of allSelected) {
+    const measureVisibility = !sanityOnlyPaths.has(pagePath);
     const tab = await browser.newPage();
     await tab.setViewport({ width: 1280, height: 900 });
     await tab.goto(new URL(pagePath, args.baseUrl).href, { waitUntil: 'domcontentloaded' });
-    const sweep = await sweepPage(tab);
+    const sweep = await sweepPage(tab, { measureVisibility });
     results.push({ path: pagePath, sweep });
-    console.log(`${pagePath}: ${sweep.forward.length} forward stops, ${sweep.reverse.length} reverse`);
+    console.log(`${pagePath}: ${sweep.forward.length} forward stops, ${sweep.reverse.length} reverse${measureVisibility ? '' : ' (sweep only)'}`);
     await tab.close();
   }
 
