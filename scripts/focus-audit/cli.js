@@ -4,6 +4,7 @@
 const path = require('path');
 const puppeteer = require('puppeteer');
 const { sweepPage } = require('./collect');
+const { runScenario } = require('./scenarios');
 
 /**
  * Draw the WCAG-EM 2.0 Step 3.2 random sample. Its purpose is to test whether
@@ -126,6 +127,21 @@ const main = async () => {
     console.log(`${pagePath}: ${sweep.forward.length} forward stops, ${sweep.reverse.length} reverse${measureVisibility ? '' : ' (sweep only)'}`);
     await tab.close();
   }
+
+  const scenarioResults = [];
+  for (const scenario of config.scenarios) {
+    const tab = await browser.newPage();
+    await tab.setViewport({ width: 1280, height: 900 });
+    scenarioResults.push(await runScenario(tab, scenario, args.baseUrl));
+    await tab.close();
+  }
+
+  console.log('');
+  scenarioResults.forEach((result) => {
+    const failures = result.steps.filter((s) => !s.ok);
+    console.log(`${result.id}: ${failures.length === 0 ? 'all steps ok' : `${failures.length} failed`}`);
+    failures.forEach((f) => console.log(`  ${f.note} — focus was on ${f.activeElement ? f.activeElement.selector : 'nothing'}`));
+  });
 
   await browser.close();
 };
