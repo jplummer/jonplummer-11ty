@@ -16,6 +16,10 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Archive ideas.md done items; simplify IndexNow; guard design-docs location
 - Quiet deploy output by default; --verbose restores rsync detail
 - Correct override wording: superpowers skills default, don't hardcode
+- Fix typo in agent design-system post; add five dictionary words
+- Hash _site once per deploy; guard the two manifest cursors
+- Print a completion timestamp at the end of build and deploy
+- Document the build-vs-deploy choice: run one, not both
 
 ## 2026-08-11
 
@@ -694,4 +698,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-08-13
+Last deployed on 2026-08-14
