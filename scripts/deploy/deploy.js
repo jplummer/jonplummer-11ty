@@ -26,6 +26,9 @@ const path = require('path');
 const { loadDotenvSilently } = require('../utils/env-utils');
 const { SPINNER_FRAMES } = require('../utils/spinner-utils');
 const { buildRsyncArgs } = require('../utils/deploy-rsync');
+const { formatRunFinishedLine } = require('../utils/run-timing');
+
+const startedAt = Date.now();
 
 
 // Check if rsync is available
@@ -395,6 +398,7 @@ async function purgeCloudflareAfterDeploy(siteDomain, dryRun, localPath, current
     execSync('pnpm run build', { stdio: 'inherit', shell: true });
   } catch {
     console.error('\n❌ 🏗️  Build failed. Aborting deployment.\n');
+    console.log(formatRunFinishedLine('Deploy failed', startedAt));
     process.exit(1);
   }
 
@@ -455,7 +459,11 @@ async function purgeCloudflareAfterDeploy(siteDomain, dryRun, localPath, current
         console.warn(`   ${error.message}\n`);
       }
     }
+
+    const finishLabel = dryRun ? 'Deploy (dry-run) finished' : 'Deploy finished';
+    console.log(formatRunFinishedLine(finishLabel, startedAt));
   } catch (error) {
+    console.log(formatRunFinishedLine('Deploy failed', startedAt));
     process.exit(1);
   }
 })();

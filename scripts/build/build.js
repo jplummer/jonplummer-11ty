@@ -2,15 +2,19 @@
 
 const { execSync } = require('child_process');
 const { getTestsByGroup } = require('../test-manifest');
+const { formatRunFinishedLine } = require('../utils/run-timing');
 
 const PRE_BUILD_TESTS = getTestsByGroup('pre').map((t) => t.id);
 const POST_BUILD_TESTS = getTestsByGroup('post').map((t) => t.id);
+
+const startedAt = Date.now();
 
 function run(command, errorLabel) {
   try {
     execSync(command, { stdio: 'inherit', shell: true });
   } catch {
     if (errorLabel) console.error(`\n❌ ${errorLabel}\n`);
+    console.log(formatRunFinishedLine('Build failed', startedAt));
     process.exit(1);
   }
 }
@@ -29,3 +33,5 @@ console.log('✅ 🏗️  Build: completed\n');
 for (const test of POST_BUILD_TESTS) {
   run(`node scripts/test-runner.js ${test} --format build`);
 }
+
+console.log(formatRunFinishedLine('Build finished', startedAt));

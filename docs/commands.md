@@ -95,6 +95,7 @@ The deploy script performs these steps in order:
 4. **Purges Cloudflare cache** for content-changed URLs only (SHA-256 diff vs local manifest; skipped if credentials unset; previewed on dry-run)
 5. **Submits IndexNow** notification for search engine indexing (content-hash diff vs local manifest; missing API key or nothing changed both print a message rather than staying silent) - computes and prints the URL list on `--dry-run` but does not submit or write state
 6. **Commits changelog** if it was updated, then **always pushes to remote** - skipped with `--dry-run`
+7. **Prints a closing timestamp** - `🕒 Deploy finished Thu, Aug 13, 9:33 PM (1m 47s)`, so a scrolled-back terminal still says when the site went out; failures print `Deploy failed` with the same clock and elapsed. `pnpm run build` prints its own line the same way, which appears mid-deploy as a sub-total. Formatting lives in `scripts/utils/run-timing.js`.
 
 **Note:** Links from NotePlan should be imported *before* committing (`pnpm run import-links`), not during deployment. This lets you review and test links locally before they go live.
 
