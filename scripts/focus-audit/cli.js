@@ -2,6 +2,8 @@
 'use strict';
 
 const path = require('path');
+const puppeteer = require('puppeteer');
+const { sweepPage } = require('./collect');
 
 /**
  * Draw the WCAG-EM 2.0 Step 3.2 random sample. Its purpose is to test whether
@@ -104,6 +106,23 @@ const main = async () => {
   });
   console.log(`\nRandom sample (${pages.random.length}):`);
   pages.random.forEach((p) => console.log(`  ${p}`));
+  console.log('');
+
+  const browser = await puppeteer.launch({ headless: true });
+  const allSelected = [...pages.structured, ...pages.random];
+  const results = [];
+
+  for (const pagePath of allSelected) {
+    const tab = await browser.newPage();
+    await tab.setViewport({ width: 1280, height: 900 });
+    await tab.goto(new URL(pagePath, args.baseUrl).href, { waitUntil: 'domcontentloaded' });
+    const sweep = await sweepPage(tab);
+    results.push({ path: pagePath, sweep });
+    console.log(`${pagePath}: ${sweep.forward.length} forward stops, ${sweep.reverse.length} reverse`);
+    await tab.close();
+  }
+
+  await browser.close();
 };
 
 if (require.main === module) {
