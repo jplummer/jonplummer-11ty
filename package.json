@@ -27,6 +27,7 @@
     "color-gallery": "node scripts/color-explore/generate-gallery.js",
     "font-gallery": "node scripts/font-explore/generate-font-gallery.js",
     "colophon-sketch": "node scripts/colophon-sketch/generate-lab.js",
+    "focus-audit": "node scripts/focus-audit/cli.js",
     "lint:css": "stylelint \"src/**/*.css\"",
     "fix:markdown": "markdownlint-cli2 --fix \"src/**/*.md\""
   },
