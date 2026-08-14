@@ -53,6 +53,9 @@ const TESTS = [
   // Not a build-output check: indexnow.js is a pure unit test of selection
   // logic (fixture manifests), no _site/ dependency.
   { id: 'indexnow', script: 'indexnow.js', groups: ['unit'] },
+  // Guards the two .cache cursors against being merged or cross-contaminated:
+  // runs deploy.js's composition (one shared hash walk) with stubbed fetch.
+  { id: 'manifest-cursors', script: 'manifest-cursors.js', groups: ['unit'] },
   { id: 'figure-lightbox', script: 'figure-lightbox.js', groups: ['unit'], listInHelp: false },
   { id: 'site-branding', script: 'site-branding.js', groups: ['unit'] },
   { id: 'preview-site-lockup', script: 'preview-site-lockup.js', groups: ['unit'] },

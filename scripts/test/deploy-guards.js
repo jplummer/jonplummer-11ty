@@ -134,6 +134,31 @@ async function validate(result) {
     });
   }
 
+  // One hash walk of _site, shared by Cloudflare purge and IndexNow. Counting
+  // call sites is the point: a second buildContentManifest() call would mean
+  // the tree is hashed twice again, which is invisible at runtime because both
+  // walks produce correct (just redundant) results. scripts/test/manifest-cursors.js
+  // covers the runtime half; this catches the refactor.
+  const manifestWalkCount = (deployContent.match(/buildContentManifest\(/g) || []).length;
+  if (manifestWalkCount !== 1) {
+    addIssue(fileObj, {
+      severity: 'error',
+      type: 'deploy-guards',
+      message: `Deploy script must hash _site exactly once and share the manifest, found ${manifestWalkCount} buildContentManifest() call(s)`,
+    });
+  }
+
+  const sharesManifestWithBothConsumers =
+    /purgeChangedDeployContent\([^)]*\{[^}]*currentManifest/.test(deployContent) &&
+    /processIndexNow\(\{[^}]*currentManifest/.test(deployContent);
+  if (!sharesManifestWithBothConsumers) {
+    addIssue(fileObj, {
+      severity: 'error',
+      type: 'deploy-guards',
+      message: 'Deploy script must pass currentManifest to both purgeChangedDeployContent and processIndexNow',
+    });
+  }
+
   // The quiet default is only real if deploy.js uses the shared builder and
   // still offers a way to get the detail back.
   const usesSharedRsyncArgs =

@@ -348,6 +348,33 @@ runTest({
         });
       }
 
+      // Injected currentManifest must be used verbatim. siteRoot is deliberately
+      // bogus: if the tree were walked anyway this call would throw, so success
+      // proves deploy.js's single shared hash walk is honored.
+      const injected = {
+        version: 1,
+        generatedAt: 'x',
+        files: { 'index.html': 'injected-hash', 'about/index.html': 'injected-hash' },
+      };
+      const injectedResult = await purgeChangedDeployContent(
+        path.join(tmp2, 'does-not-exist'),
+        'jonplummer.com',
+        { manifestPath, dryRun: true, env: {}, currentManifest: injected }
+      );
+      if (
+        injectedResult.currentManifest !== injected ||
+        !injectedResult.urls.includes('https://jonplummer.com/')
+      ) {
+        addIssue(fileObj, {
+          severity: 'error',
+          type: 'purge-changed-deploy-content-injected-manifest',
+          message: `expected the injected manifest to drive the diff, got ${JSON.stringify({
+            ...injectedResult,
+            currentManifest: undefined,
+          })}`,
+        });
+      }
+
       fs.rmSync(tmp2, { recursive: true, force: true });
     }
   },

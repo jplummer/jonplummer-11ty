@@ -201,7 +201,9 @@ function collectPurgePaths(previous, current, options = {}) {
  * itemize output.
  * @param {string} siteRoot absolute path to built _site directory
  * @param {string} siteDomain public site domain (e.g. jonplummer.com)
- * @param {{ dryRun?: boolean, zoneId?: string, apiToken?: string, manifestPath?: string, env?: NodeJS.ProcessEnv, forceContent?: boolean }} [options]
+ * @param {{ dryRun?: boolean, zoneId?: string, apiToken?: string, manifestPath?: string, env?: NodeJS.ProcessEnv, forceContent?: boolean, currentManifest?: object }} [options]
+ *   `currentManifest` lets a caller that already hashed `_site` (deploy.js
+ *   builds one snapshot and shares it with IndexNow) skip a second walk.
  */
 async function purgeChangedDeployContent(siteRoot, siteDomain, options = {}) {
   const env = options.env || process.env;
@@ -212,7 +214,7 @@ async function purgeChangedDeployContent(siteRoot, siteDomain, options = {}) {
     env.CLOUDFLARE_PURGE_FORCE_CONTENT === '1' ||
     env.CLOUDFLARE_PURGE_FORCE_CONTENT === 'true';
 
-  const currentManifest = buildContentManifest(siteRoot);
+  const currentManifest = options.currentManifest || buildContentManifest(siteRoot);
   const previous = loadContentManifest(manifestPath);
 
   if (!dryRun && !isCloudflarePurgeConfigured(env)) {

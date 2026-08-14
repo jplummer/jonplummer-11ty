@@ -2,17 +2,22 @@
 
 /**
  * Unit checks for IndexNow URL selection: local content-hash manifest diff
- * → indexable-page filter → public URL mapping. Pure unit test, no network,
- * no filesystem — fixture manifests only. The previous version of this test
- * validated plumbing (env vars, git commands) but let real problems pass —
- * several checks ended in `return true; // Not a failure, just informational`,
- * which is why it stayed green through 16 deploys that submitted zero URLs.
+ * → indexable-page filter → public URL mapping. No network; selection runs on
+ * fixture manifests, and the one orchestration check uses a temp state file.
+ * The previous version of this test validated plumbing (env vars, git commands)
+ * but let real problems pass — several checks ended in
+ * `return true; // Not a failure, just informational`, which is why it stayed
+ * green through 16 deploys that submitted zero URLs.
  */
 
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
 const {
   selectIndexNowUrls,
   selectAllIndexNowUrls,
   isIndexableHtmlPath,
+  processIndexNow,
 } = require('../utils/indexnow');
 const { addFile, addIssue } = require('../utils/test-results');
 const { runTest } = require('../utils/test-runner-helper');
@@ -200,5 +205,51 @@ runTest({
       selectAllIndexNowUrls({ currentManifest: current, siteDomain }),
       ['https://jonplummer.com/', 'https://jonplummer.com/about/']
     );
+
+    // --- processIndexNow: injected manifest, separate state file ---
+
+    // siteRoot is deliberately bogus: if processIndexNow walked the tree instead
+    // of using the manifest deploy.js already built, this would throw.
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'indexnow-'));
+    const statePath = path.join(tmp, 'indexnow-content-manifest.json');
+    const previousState = manifest({ 'index.html': 'old' });
+    fs.writeFileSync(statePath, `${JSON.stringify(previousState, null, 2)}\n`, 'utf8');
+
+    const previousKey = process.env.INDEXNOW_API_KEY;
+    process.env.INDEXNOW_API_KEY = 'test-key-not-used-in-dry-run';
+    const originalLog = console.log;
+    console.log = () => {};
+    let injectedResult;
+    try {
+      injectedResult = await processIndexNow({
+        siteRoot: path.join(tmp, 'does-not-exist'),
+        siteDomain,
+        dryRun: true,
+        currentManifest: manifest({ 'index.html': 'new', 'about/index.html': 'added' }),
+        manifestPath: statePath,
+      });
+    } finally {
+      console.log = originalLog;
+      if (previousKey === undefined) delete process.env.INDEXNOW_API_KEY;
+      else process.env.INDEXNOW_API_KEY = previousKey;
+    }
+
+    assertUrlsEqual(fileObj, 'injected manifest', injectedResult.urls || [], [
+      'https://jonplummer.com/',
+      'https://jonplummer.com/about/',
+    ]);
+
+    // A dry run must not advance the cursor — that is what keeps this state
+    // file independent of Cloudflare's, which deploy.js writes earlier.
+    const stateAfter = fs.readFileSync(statePath, 'utf8');
+    if (JSON.parse(stateAfter).files['index.html'] !== 'old') {
+      addIssue(fileObj, {
+        severity: 'error',
+        type: 'indexnow-state-write',
+        message: 'dry run must not overwrite the IndexNow state file',
+      });
+    }
+
+    fs.rmSync(tmp, { recursive: true, force: true });
   },
 });

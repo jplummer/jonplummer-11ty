@@ -9,9 +9,17 @@
  * silently submitting nothing on most deploys).
  *
  * Keeps its own state file (`.cache/indexnow-content-manifest.json`),
- * separate from Cloudflare's, so IndexNow works whether or not Cloudflare
- * purging is configured, and so it isn't diffing against a manifest that
- * deploy.js already advanced to "now" before IndexNow runs.
+ * separate from Cloudflare's. The two files look redundant — after a healthy
+ * deploy they hold the same snapshot — but they are independent cursors:
+ * "last state submitted to IndexNow" and "last state purged from the edge".
+ * Each advances only when its own consumer succeeds, and each consumer can be
+ * disabled on its own (`CLOUDFLARE_PURGE=0`, or a missing INDEXNOW_API_KEY).
+ * Sharing one file would let either one's failure or absence rewrite the
+ * other's retry state: with purging switched off, nothing would ever advance
+ * the shared cursor, so IndexNow would resubmit a growing set every deploy.
+ *
+ * The `_site` hash walk is shared even though the state is not — deploy.js
+ * builds one manifest and passes it to both consumers.
  */
 
 const fs = require('fs');
@@ -105,16 +113,26 @@ async function submitToIndexNow({ urls, siteDomain, apiKey }) {
  * @param {boolean} [options.dryRun] - compute and print the URL list, submit nothing
  * @param {boolean} [options.catchUp] - submit every indexable page currently live,
  *   ignoring manifest history (one-off backlog submission, not a normal deploy path)
+ * @param {object} [options.currentManifest] - pre-built manifest of `siteRoot`, so a
+ *   caller that already hashed the tree (deploy.js) doesn't pay for a second walk
+ * @param {string} [options.manifestPath] - override the state file location (tests)
  */
-async function processIndexNow({ siteRoot, siteDomain, dryRun = false, catchUp = false } = {}) {
+async function processIndexNow({
+  siteRoot,
+  siteDomain,
+  dryRun = false,
+  catchUp = false,
+  currentManifest: injectedManifest = null,
+  manifestPath: manifestPathOverride = null,
+} = {}) {
   const apiKey = process.env.INDEXNOW_API_KEY;
   if (!apiKey) {
     console.log('⚠️  🔍 IndexNow: API key not found (INDEXNOW_API_KEY not set) — skipping');
     return { skipped: true, reason: 'no_api_key' };
   }
 
-  const manifestPath = defaultIndexNowManifestPath();
-  const currentManifest = buildContentManifest(siteRoot);
+  const manifestPath = manifestPathOverride || defaultIndexNowManifestPath();
+  const currentManifest = injectedManifest || buildContentManifest(siteRoot);
   const previousManifest = loadContentManifest(manifestPath);
   const isBaselineRun = !catchUp && !previousManifest;
 

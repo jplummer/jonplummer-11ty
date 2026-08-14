@@ -292,7 +292,7 @@ function logCloudflarePurgeResult(purgeResult, { dryRun }) {
   console.log('');
 }
 
-async function purgeCloudflareAfterDeploy(siteDomain, dryRun, localPath) {
+async function purgeCloudflareAfterDeploy(siteDomain, dryRun, localPath, currentManifest) {
   const {
     purgeChangedDeployContent,
     saveContentManifest,
@@ -307,7 +307,10 @@ async function purgeCloudflareAfterDeploy(siteDomain, dryRun, localPath) {
   }
 
   try {
-    const purgeResult = await purgeChangedDeployContent(localPath, siteDomain, { dryRun });
+    const purgeResult = await purgeChangedDeployContent(localPath, siteDomain, {
+      dryRun,
+      currentManifest,
+    });
     logCloudflarePurgeResult(purgeResult, { dryRun });
     if (purgeResult.writeManifest && purgeResult.currentManifest) {
       saveContentManifest(defaultManifestPath(), purgeResult.currentManifest);
@@ -405,13 +408,24 @@ async function purgeCloudflareAfterDeploy(siteDomain, dryRun, localPath) {
   try {
     await deploy(config, siteDomain, dryRun, verbose);
 
-    await purgeCloudflareAfterDeploy(siteDomain, dryRun, config.localPath);
+    // One hash walk of the deployed tree, shared by both consumers below.
+    // They still keep separate state files (see scripts/utils/indexnow.js) —
+    // only the snapshot is shared, not the cursor.
+    const { buildContentManifest } = require('../utils/cloudflare-purge');
+    const deployedManifest = buildContentManifest(config.localPath);
+
+    await purgeCloudflareAfterDeploy(siteDomain, dryRun, config.localPath, deployedManifest);
 
     // Notify IndexNow — runs even on --dry-run so it prints what it would
     // submit; dryRun itself is what stops it from POSTing or writing state.
     try {
       const { processIndexNow } = require('../utils/indexnow');
-      await processIndexNow({ siteRoot: config.localPath, siteDomain, dryRun });
+      await processIndexNow({
+        siteRoot: config.localPath,
+        siteDomain,
+        dryRun,
+        currentManifest: deployedManifest,
+      });
     } catch (error) {
       // Don't fail deployment if IndexNow fails
       console.log('⚠️  🔍 IndexNow: notification failed (deployment succeeded)');
