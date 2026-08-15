@@ -6,6 +6,7 @@ const path = require('path');
 const puppeteer = require('puppeteer');
 const { evaluatePage, evaluateScenario } = require('./evaluate');
 const { buildReport } = require('./earl');
+const { renderMarkdown } = require('./report');
 const { sweepPage } = require('./collect');
 const { runScenario } = require('./scenarios');
 
@@ -174,6 +175,10 @@ const main = async () => {
 
   fs.writeFileSync(jsonPath, `${JSON.stringify(earl, null, 2)}\n`);
   console.log(`\nEvidence written to ${jsonPath}`);
+
+  const mdPath = path.join(outputDir, `${runDate}-focus-keyboard-audit.md`);
+  fs.writeFileSync(mdPath, renderMarkdown(earl));
+  console.log(`Report written to ${mdPath}`);
 
   await browser.close();
 };
