@@ -64,6 +64,7 @@ See [noteplan-import.md](noteplan-import.md) for complete workflow documentation
 - `pnpm run convert-pdf-with-notes` - PDF + hand-authored notes file → same output as above (notes not read from pptx)
 - `pnpm run generate-og-images` - Generate Open Graph images for posts and pages (auto: `deploy`, `dev`)
 - `pnpm run security-audit` - Run security audit and maintenance checks
+- `pnpm run focus-audit` - Audit focus visibility and keyboard navigation against a running site (see [Focus and keyboard audit](#-focus-and-keyboard-audit)). Not part of `pnpm run test` — it needs a served site and takes about ten minutes
 - `pnpm run indexnow-catch-up` - One-off: submit every current indexable page to IndexNow, ignoring the local content-hash manifest (`.cache/indexnow-content-manifest.json`). Use after a gap in normal notifications (e.g. clearing a backlog); a regular `pnpm run deploy` only submits pages that changed since the last deploy. Add `-- --dry-run` to preview the URL list without submitting. To rotate the IndexNow key: generate a new 8–128 char alphanumeric string, write it to `src/<thatstring>.txt` (delete the old key file), and update `INDEXNOW_API_KEY` in `.env` to match — `keyLocation` is derived from the env var at request time, so no code change is needed.
 - `pnpm run color-gallery` - Generate APCA-aware theme gallery (HTML + JSON) under `scripts/color-explore/output/` **and** refresh the `/color/` embed files in `src/` (same defaults as Eleventy). Use this for **CLI flags** (`--hue-sweep`, `--random`, etc.); **`pnpm run build`** / **`dev`** already run the embed step via `eleventy.before` — see [color-theme-exploration.md](designs/color-theme-exploration.md)
 - Color theme **tooling** (gallery output, `/color/` page, `node scripts/utils/suggest-colors.js`, `pnpm run test color-contrast`) — summarized in [color-theme-exploration.md § Companion tooling](designs/color-theme-exploration.md#companion-tooling)
@@ -294,6 +295,67 @@ You can also preview generated images in other ways:
 
 To customize the OG image design, edit `src/_includes/og-image.njk`. The template uses your site's CSS custom properties, so changes to colors, typography, and spacing will automatically be reflected in the generated images.
 
+### ♿ Focus and Keyboard Audit
+
+- `pnpm run focus-audit -- --base-url http://localhost:8080` - Sweep the keyboard focus order and run scripted component scenarios
+
+This mechanizes the laborious parts of a manual accessibility audit: tabbing through
+every page twice, screenshotting each stop, and comparing what changed. It is not a
+test in `pnpm run test` — it needs a served site, takes about ten minutes, and its
+output needs human judgment rather than a pass/fail exit code.
+
+#### Prerequisites
+
+A running site. Either `pnpm run dev` (port 8080) or any static server over `_site/`.
+`file://` will not work — the scenarios exercise JavaScript that CSP and module
+loading only permit over HTTP.
+
+#### What it does
+
+For each sampled page it Tabs forward to the end and backward to the start, and at
+every stop records the accessible name and role, the element rectangle, whether the
+element is clipped or off-screen, its position in document order, and the computed
+focus styles. It then screenshots the page unfocused and focused, and compares the
+two in HSL, per [ACT rule `oj04fd`](https://www.w3.org/WAI/standards-guidelines/act/rules/oj04fd/),
+to establish that focusing the element visibly changed something.
+
+Beyond the sweep, `scripts/focus-audit/jonplummer.config.js` defines scenarios that
+drive individual components — the skip link, the figure lightbox, the content-warning
+disclosure — and assert where focus lands after each keystroke.
+
+#### Page selection
+
+Sampling follows [WCAG-EM 2.0](https://www.w3.org/TR/WCAG-EM/) Step 3: a structured
+sample of one page per distinct template, plus a random 10% drawn from `sitemap.xml`.
+Pass `--seed <n>` to reproduce a previous run's random sample; the seed is recorded in
+the output. Two pages are marked `sanityOnly` in the config — `/color/` and `/type/`
+have so many controls that measuring visibility at each one would dominate the run, so
+they get the sweep without the screenshots.
+
+#### Output
+
+Two files in `docs/designs/scratch/` (gitignored), dated by run:
+
+- `YYYY-MM-DD-focus-keyboard-audit.json` — [EARL 1.0](https://www.w3.org/WAI/standards-guidelines/act/report/earl/)
+  serialized as JSON-LD. The standard format, so other accessibility tooling can read
+  it, and so runs diff against each other.
+- `YYYY-MM-DD-focus-keyboard-audit.md` — the same evidence grouped by WCAG success
+  criterion, for reading.
+
+Outcomes use EARL's vocabulary. `earl:cantTell` means the tool could not decide and a
+person or agent needs to rule on the evidence — divergence between focus order and
+visual order, for instance, is often correct.
+
+**A passing outcome is not a conformance claim.** ACT rules are informative, and ACT's
+own mapping says all-passed means "needs further testing", never "supports". The
+report deliberately emits no VPAT conformance levels; those are attestations for a
+person to make.
+
+#### Portability
+
+Everything except `jonplummer.config.js` is site-agnostic. To audit a different site,
+write a new config with its own structured sample and scenarios and pass its base URL.
+
 ### 🛡️ Security Audit
 
 - `pnpm run security-audit` - Run security audit and maintenance checks
@@ -357,6 +419,15 @@ See `scripts/security/security-audit.js` header comments for the complete list o
 ## ♻️ Periodic Maintenance
 
 These tasks should be performed regularly, not as one-time work items.
+
+### Focus and Keyboard Audit
+
+- **Frequency**: After changes to navigation, interactive components, or focus styling; otherwise a few times a year
+- **Command**: `pnpm run focus-audit -- --base-url http://localhost:8080` (with `pnpm run dev` running)
+- **Tasks**:
+  - Read the markdown report's Failures section first, then Needs judgment
+  - Rule on each `earl:cantTell` using the recorded evidence
+  - Move confirmed defects into [ideas.md](ideas.md)
 
 ### Security Audit
 
