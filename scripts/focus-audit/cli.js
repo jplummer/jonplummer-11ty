@@ -1,8 +1,11 @@
 #!/usr/bin/env node
 'use strict';
 
+const fs = require('fs');
 const path = require('path');
 const puppeteer = require('puppeteer');
+const { evaluatePage, evaluateScenario } = require('./evaluate');
+const { buildReport } = require('./earl');
 const { sweepPage } = require('./collect');
 const { runScenario } = require('./scenarios');
 
@@ -142,6 +145,35 @@ const main = async () => {
     console.log(`${result.id}: ${failures.length === 0 ? 'all steps ok' : `${failures.length} failed`}`);
     failures.forEach((f) => console.log(`  ${f.note} — focus was on ${f.activeElement ? f.activeElement.selector : 'nothing'}`));
   });
+
+  const subjects = results.map((result) => ({
+    source: new URL(result.path, args.baseUrl).href,
+    assertions: evaluatePage(result),
+  }));
+
+  scenarioResults.forEach((result) => {
+    subjects.push({
+      source: new URL(result.path, args.baseUrl).href,
+      assertions: evaluateScenario(result),
+    });
+  });
+
+  const runDate = new Date().toISOString().slice(0, 10);
+  const outputDir = path.join(__dirname, '..', '..', 'docs', 'designs', 'scratch');
+  fs.mkdirSync(outputDir, { recursive: true });
+  const jsonPath = path.join(outputDir, `${runDate}-focus-keyboard-audit.json`);
+
+  const earl = buildReport(subjects, {
+    baseUrl: args.baseUrl,
+    seed,
+    structuredSample: pages.structured,
+    randomSample: pages.random,
+    completeProcesses: 'none — this site has no multi-step flow',
+    generatedAt: new Date().toISOString(),
+  });
+
+  fs.writeFileSync(jsonPath, `${JSON.stringify(earl, null, 2)}\n`);
+  console.log(`\nEvidence written to ${jsonPath}`);
 
   await browser.close();
 };
