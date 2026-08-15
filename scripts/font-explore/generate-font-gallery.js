@@ -79,6 +79,12 @@ function stackById(id, stacks) {
 /**
  * Index-shaped slice — same structure as color gallery `renderHomePreview`; colors from
  * global :root (no token overrides here). Bands mimic `body > header|main|footer`.
+ *
+ * `inert` because this is a picture of the site, not the site: every link inside is a
+ * dead `href="#"`, so without it the facsimile donates a dozen tab stops that do
+ * nothing. The copied skip link was the worst of them — focusing it moved it to the
+ * document's top-left, outside this container's `overflow: hidden`, where it was
+ * clipped and invisible. Found by `pnpm run focus-audit` (2026-08-15).
  */
 function siteHomePreviewFragment({
   rootId,
@@ -91,10 +97,9 @@ function siteHomePreviewFragment({
   const jpStyleAttr = jpStyle ? ` style="${escapeHtml(jpStyle)}"` : '';
   const hStyle = headingStyle ? ` style="${escapeHtml(headingStyle)}"` : '';
 
-  return `<div class="theme-root home-preview"${rootIdAttr}>
+  return `<div class="theme-root home-preview"${rootIdAttr} inert>
         <div class="jp-page"${jpIdAttr}${jpStyleAttr}>
           <header aria-label="Preview: site header">
-            <a class="skip" href="#font-preview-main">Skip to content</a>
             ${renderPreviewSiteLockup({ author: site.author })}
             <nav aria-label="Preview: primary navigation">
               <ul>
