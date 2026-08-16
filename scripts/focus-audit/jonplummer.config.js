@@ -61,7 +61,7 @@ const scenarios = [
   },
   {
     id: 'lightbox-next-button',
-    title: 'Next button remains operable or hands focus on when disabled',
+    title: 'Next button stays focused when it becomes unavailable at the last image',
     path: '/2026/02/20/call-review-console/',
     steps: [
       { action: 'click', selector: 'a.figure-lightbox-trigger' },
@@ -69,7 +69,7 @@ const scenarios = [
       { action: 'click', selector: '#figure-lightbox-next' },
       { action: 'click', selector: '#figure-lightbox-next' },
       { action: 'click', selector: '#figure-lightbox-next' },
-      { action: 'expectFocus', selector: '#figure-lightbox-next', description: 'focus survives the Next button becoming disabled at the last image' },
+      { action: 'expectFocus', selector: '#figure-lightbox-next', description: 'focus survives the Next button becoming unavailable at the last image' },
     ],
   },
   {

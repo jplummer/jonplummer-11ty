@@ -34,8 +34,20 @@
       captionEl.textContent = '';
     }
 
-    prevBtn.disabled = index <= 0;
-    nextBtn.disabled = index >= list.length - 1;
+    // aria-disabled keeps the control in the tab order so focus does not
+    // evaporate when the last (or first) image is reached. showFigureAt
+    // already no-ops out of range, so a click or arrow key on an unavailable
+    // button does nothing.
+    if (index <= 0) {
+      prevBtn.setAttribute('aria-disabled', 'true');
+    } else {
+      prevBtn.removeAttribute('aria-disabled');
+    }
+    if (index >= list.length - 1) {
+      nextBtn.setAttribute('aria-disabled', 'true');
+    } else {
+      nextBtn.removeAttribute('aria-disabled');
+    }
     dialog.dataset.index = String(index);
 
     if (!dialog.open) dialog.showModal();
