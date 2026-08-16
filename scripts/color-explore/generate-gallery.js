@@ -1251,14 +1251,21 @@ function varsToInlineStyle(tokens) {
     .join('; ');
 }
 
-/** Slice of index layout: base.njk header + post + link-item + pagination (see src/index.njk). */
+/**
+ * Slice of index layout: base.njk header + post + link-item + pagination (see src/index.njk).
+ *
+ * `inert` because this is a picture of the site, not the site: every link inside is a
+ * dead `href="#"`. Without it, twelve facsimiles donated ~144 tab stops on `/color/`
+ * (found by `pnpm run focus-audit`, 2026-08-15). Same treatment as the `/type/`
+ * facsimile in `scripts/font-explore/generate-font-gallery.js`.
+ */
 function renderHomePreview(cssVarsInline, schemeLabel, previewUid) {
   const uid = escapeHtml(previewDomId(previewUid));
   const lab = escapeHtml(schemeLabel);
   return `
     <div class="preview-column">
       <span class="col-label">${lab}</span>
-      <div class="theme-root home-preview" style="${escapeHtml(cssVarsInline)}">
+      <div class="theme-root home-preview" style="${escapeHtml(cssVarsInline)}" inert>
         <div class="jp-page">
           <header aria-label="Preview ${lab} · ${uid} · site header">
             ${renderPreviewSiteLockup({ author: site.author })}
