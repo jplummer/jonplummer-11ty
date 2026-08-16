@@ -176,6 +176,17 @@ input, button, textarea, select {
   font-size: inherit;
 }
 
+/*
+  Form controls: site accent instead of the UA blue ring. Links already speak
+  focus as accent recolor; a 2px outline in --link-color is the same language
+  for elements that cannot underline. Used on /color/ and /type/ labs today.
+*/
+select:focus-visible,
+input[type="range"]:focus-visible {
+  outline: 2px solid var(--link-color);
+  outline-offset: 2px;
+}
+
 /* Make sure textareas without a rows attribute are not tiny */
 textarea:not([rows]) {
   min-height: 10em;
@@ -1075,18 +1086,18 @@ article.portfolio-detail {
   transform: translateY(-50%);
 }
 
-.figure-lightbox-prev:disabled,
-.figure-lightbox-next:disabled {
+.figure-lightbox-prev[aria-disabled="true"],
+.figure-lightbox-next[aria-disabled="true"] {
   cursor: default;
 }
 
-.figure-lightbox-prev:disabled .figure-lightbox-icon,
-.figure-lightbox-next:disabled .figure-lightbox-icon {
+.figure-lightbox-prev[aria-disabled="true"] .figure-lightbox-icon,
+.figure-lightbox-next[aria-disabled="true"] .figure-lightbox-icon {
   opacity: 0.35;
 }
 
-.figure-lightbox-prev:disabled:is(:hover, :focus-visible),
-.figure-lightbox-next:disabled:is(:hover, :focus-visible) {
+.figure-lightbox-prev[aria-disabled="true"]:is(:hover, :focus-visible),
+.figure-lightbox-next[aria-disabled="true"]:is(:hover, :focus-visible) {
   color: var(--text-color);
 }
 
