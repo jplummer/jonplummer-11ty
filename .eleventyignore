@@ -1,2 +1,5 @@
 # Not published yet; `/style-exercise/` redirects to `/color/` (see redirects.yaml).
 src/style-exercise.njk
+
+# Google Search Console HTML files: passthrough as /google….html (see passthrough.js).
+src/google*.html

@@ -33,6 +33,10 @@ function configurePassthrough(eleventyConfig) {
   // This allows IndexNow verification via key file at domain root
   eleventyConfig.addPassthroughCopy({ "src/*.txt": "." });
 
+  // Google Search Console HTML-tag files must stay at /google….html.
+  // Listed in `.eleventyignore` so they are not pretty-URL'd to /google…/.
+  eleventyConfig.addPassthroughCopy({ "src/google*.html": "." });
+
   // Watch for changes in assets
   eleventyConfig.addWatchTarget("src/assets");
 
