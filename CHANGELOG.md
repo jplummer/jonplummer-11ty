@@ -1,5 +1,31 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-08-16
+
+- Make the /color/ preview facsimiles inert
+- Keep lightbox arrow focus with aria-disabled
+- Use site accent for select and range focus rings
+- Share one accent focus ring across controls
+- Add Google Search Console verification file at site root
+- Skip Google verification HTML in page validators
+
+## 2026-08-15
+
+- Make the /type/ preview facsimile inert
+
+## 2026-08-14
+
+- Spec focus/keyboard audit tooling on published a11y standards
+- Plan focus/keyboard audit tooling implementation
+- Add focus-audit CLI with WCAG-EM structured and random sampling
+- Collect forward and reverse tab stops with accessible names
+- Measure focus visibility by HSL viewport diff per ACT oj04fd
+- Soften the focus audit problem statement to "a laborious part"
+- Add declarative scenario engine for skip link, lightbox, disclosure
+- Emit EARL JSON-LD assertions tagged with WCAG criteria and ACT rule ids
+- Render focus audit evidence as markdown grouped by success criterion
+- Document focus audit command and triage first-run findings
+
 ## 2026-08-13
 
 - Add portfolio coverPosition and coverZoom front matter.
@@ -698,4 +724,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-08-14
+Last deployed on 2026-08-17
