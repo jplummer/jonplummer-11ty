@@ -104,7 +104,7 @@ After `pnpm run build`, verifies `_site/` contains self-hosted fonts (WOFF2 unde
 
 ### html.js
 
-Validates HTML files for structural correctness, syntax errors, and deprecated elements using `html-validate`.
+Validates HTML files for structural correctness, syntax errors, and deprecated elements using `html-validate`. Also requires a leading `<!doctype html>` (html-validate's own doctype rule only checks form, not presence). Skips Google Search Console verification files (`google*.html` at the site root) — those are one-line tokens, not documents.
 
 ### internal-links.js
 

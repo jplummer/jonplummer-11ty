@@ -4,6 +4,15 @@ const fs = require('fs');
 const path = require('path');
 
 /**
+ * Google Search Console HTML-file verification. The payload is a one-line
+ * token, not a document, so HTML/SEO/a11y checks must not treat it as a page.
+ * GSC names these `google<hex>.html` at the site root.
+ */
+function isGoogleSiteVerificationHtml(filename) {
+  return /^google[a-z0-9]+\.html$/i.test(filename);
+}
+
+/**
  * Find all HTML files in a directory recursively
  * @param {string} dir - Directory to search
  * @returns {string[]} Array of HTML file paths
@@ -18,7 +27,7 @@ function findHtmlFiles(dir) {
     
     if (stat.isDirectory()) {
       files.push(...findHtmlFiles(fullPath));
-    } else if (item.endsWith('.html')) {
+    } else if (item.endsWith('.html') && !isGoogleSiteVerificationHtml(item)) {
       files.push(fullPath);
     }
   }
@@ -79,5 +88,6 @@ function findFilesByExtension(dir, extensions) {
 module.exports = {
   findHtmlFiles,
   findMarkdownFiles,
-  findFilesByExtension
+  findFilesByExtension,
+  isGoogleSiteVerificationHtml
 };
