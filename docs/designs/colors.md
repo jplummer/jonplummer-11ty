@@ -8,6 +8,8 @@ Cool chrome; lived interactive colors are **ink** (`--text-color`), **quiet** (`
 
 Export/lab aliases (same three colors on the live site and in `/color/` paste): `--link-hover-color` / `--link-active-color` → `var(--link-color)`; `--link-visited-color` → `var(--text-color-light)`. Gallery generators invent **accent** only; APCA nudge/filter uses ink / quiet / accent pairs. Exploratory hue-wheel markers may still show extra recipe spokes that are not separate CSS roles.
 
+Control focus uses the same accent: `--focus-ring-color` → `var(--link-color)`, `--focus-ring-width` `2px`, `--focus-ring-offset` `2px`. Applied to buttons, form controls, summaries, and the skip link. Links keep accent recolor + underline and do not take the ring.
+
 ### Light mode
 
 - Background (outer field token `--background-color`): `#f1f3f7` — `oklch(96.4% 0.0058 264.53deg)` — still used for code panels, lightbox chrome, gallery mixes; **not** the body mat (body is one sheet with content background as of 2026-08)

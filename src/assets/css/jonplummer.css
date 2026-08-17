@@ -94,6 +94,10 @@
   --link-hover-color: var(--link-color);
   --link-visited-color: var(--text-color-light);
   --link-active-color: var(--link-color);
+  /* Control focus ring — not used on links (those stay accent recolor + underline) */
+  --focus-ring-color: var(--link-color);
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
 
   /* Icons — CSS mask-image data URIs */
   /* New-tab: solid sharp window NE + SW L (in-system; was stroke outline, visually inverted) */
@@ -177,14 +181,18 @@ input, button, textarea, select {
 }
 
 /*
-  Form controls: site accent instead of the UA blue ring. Links already speak
-  focus as accent recolor; a 2px outline in --link-color is the same language
-  for elements that cannot underline. Used on /color/ and /type/ labs today.
+  Shared focus ring for controls. Links keep accent recolor + underline (the
+  three-color reading model) and do not take this outline. :focus-visible so
+  a mouse click does not draw a ring; the skip link uses :focus because it
+  has to become visible to be useful.
 */
+button:focus-visible,
 select:focus-visible,
-input[type="range"]:focus-visible {
-  outline: 2px solid var(--link-color);
-  outline-offset: 2px;
+input:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
 }
 
 /* Make sure textareas without a rows attribute are not tiny */
@@ -647,7 +655,7 @@ article details > summary::after {
   transition: color 0.3s ease;
 }
 
-article details > summary:hover::after {
+article details > summary:is(:hover, :focus-visible)::after {
   color: var(--link-color);
 }
 
@@ -655,7 +663,7 @@ article details[open] > summary::after {
   content: "Hide text";
 }
 
-article details > summary:hover::before {
+article details > summary:is(:hover, :focus-visible)::before {
   background-color: var(--link-color);
 }
 
@@ -837,6 +845,13 @@ a:visited {
 a:any-link:is(:hover, :focus-visible, :active) {
   color: var(--link-color);
   text-decoration: underline;
+}
+
+/* Links already signal focus via accent + underline; kill the UA ring so it
+   does not sit beside the control family as a second, bluer outline. Skip
+   link keeps the shared ring via header a.skip:focus below. */
+a:focus-visible {
+  outline: none;
 }
 
 a:not([class]) {
@@ -1289,6 +1304,8 @@ header a.skip:focus {
   background-color: var(--content-background-color);
   padding: var(--spacing-sm);
   z-index: 100;
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
 }
 
 /* === HIDDEN UTILITY PAGES === */
