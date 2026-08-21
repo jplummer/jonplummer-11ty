@@ -52,10 +52,11 @@ No markup changes beyond removing the `/wisdom` `<li>`.
 ### Footer nav (new `components/footer_nav.njk`)
 
 New include, added to `base.njk`'s `<footer>` alongside the existing
-`license.njk`. Two labeled groups:
+`license.njk`. Three labeled groups:
 
-- **Content**: `/wisdom`, `/colophon`, `/changelog`, `/technologies`
-  (`/friends` joins this group when it ships — not part of this change)
+- **Also read**: `/wisdom` (`/friends` and `/sides` join this group when
+  they ship — not part of this change)
+- **How this site works**: `/colophon`, `/changelog`, `/technologies`
 - **Labs**: `/color`, `/type`
 
 `/sides` and `/friends` are **not** added yet — both are unbuilt or not yet
@@ -71,9 +72,14 @@ Markup:
 ```html
 <nav class="footer-nav" aria-label="More on this site">
   <div class="footer-nav-group">
-    <h2>Content</h2>
+    <h2>Also read</h2>
     <ul>
       <li><a href="/wisdom/">/wisdom</a></li>
+    </ul>
+  </div>
+  <div class="footer-nav-group">
+    <h2>How this site works</h2>
+    <ul>
       <li><a href="/colophon/">/colophon</a></li>
       <li><a href="/changelog/">/changelog</a></li>
       <li><a href="/technologies/">/technologies</a></li>
@@ -94,7 +100,7 @@ Current-page handling follows the existing `nav.njk` pattern
 
 ### Data source
 
-A small `src/_data/footerNav.js` exporting the two groups as
+A small `src/_data/footerNav.js` exporting the three groups as
 `{ label, items: [{ url, label }] }`, mirroring the shape (not the file) of
 `utilityPages.siblings`. The include loops over `footerNav` rather than
 hardcoding the list inline, so adding `/friends` or `/sides` later is a
@@ -103,17 +109,17 @@ one-line data change, no template edit.
 ### `license.njk`
 
 Left as-is. Its `/colophon` link duplicates the one now in the footer nav's
-Content group — that's an acceptable small redundancy (copyright line reads
-naturally with the link inline) rather than a reason to restructure the
-license line.
+"How this site works" group — that's an acceptable small redundancy
+(copyright line reads naturally with the link inline) rather than a reason
+to restructure the license line.
 
 ### Styling
 
 New rules in `jonplummer.css` for `.footer-nav`, `.footer-nav-group`,
-`.footer-nav-group h2`: two-column or stacked group layout (viewport
-permitting), small type consistent with the existing footer/license
-treatment. No new custom properties expected — reuse existing spacing/type
-tokens.
+`.footer-nav-group h2`: a row of three columns on wider viewports, stacking
+to one column on narrow ones, small type consistent with the existing
+footer/license treatment. No new custom properties expected — reuse
+existing spacing/type tokens.
 
 ### Testing
 
