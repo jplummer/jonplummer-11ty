@@ -17,6 +17,9 @@ redirects:
   - from: /type/gallery/
     to: /type/
 
+  - from: /uses/
+    to: /technologies/
+
   # Date corrections and URL changes
   - from: /2022/04/17/empathy-for-the-leader-whose-company-is-being-acquired/
     to: /2022/04/16/empathy-for-the-leader-whose-company-is-being-acquired/

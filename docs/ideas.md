@@ -71,6 +71,7 @@ Prioritized by **side-effect surface** — complexity that can produce a silentl
 
 ### 🖍 Also…
 
+- Add jonplummer.com to [https://github.com/wesbos/awesome-uses/](https://github.com/wesbos/awesome-uses/) — `/uses/` now redirects to `/technologies/` (2026-08-21) so it lines up with the list's convention.
 - [https://kagi.com/search?q=contemporary+blog+styling+2026](https://kagi.com/search?q=contemporary+blog+styling+2026) ?
 - [https://github.com/steipete/agent-rules](https://github.com/steipete/agent-rules) ?
 - [https://github.com/Invoca/prompt-library](https://github.com/Invoca/prompt-library) ?
