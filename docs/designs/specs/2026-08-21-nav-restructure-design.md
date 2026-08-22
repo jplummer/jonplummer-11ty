@@ -15,10 +15,18 @@ nav.
 
 Several pages already exist outside the header nav with no footer presence
 either: `/colophon`, `/changelog`, `/technologies`, `/color`, `/type`.
-`/color` and `/type` cross-link each other via
-`components/utility_sibling_nav.njk` ("hidden utility pages, below site
-header, not main nav"), which stays as-is — that's page-to-page navigation
-between labs, not site-wide.
+
+`components/utility_sibling_nav.njk` (a cross-link list for "hidden
+utility pages, below site header, not main nav") is *not* currently
+rendered on `/color` or `/type` — despite an earlier draft of this spec
+claiming otherwise. It's only included on `src/style-exercise.njk`, which
+is itself excluded from the build (gated via `.eleventyignore`, pending
+its return). Once `/color` and `/type` are reachable from every page via
+the footer's Labs group, that component's premise (that they're otherwise
+undiscoverable) stops holding — including for `style-exercise` whenever
+it returns. That cleanup is out of scope for this spec, though, since the
+component only touches a currently-disabled page; it can be addressed
+separately when `style-exercise` actually comes back.
 
 ## Goal
 
@@ -180,7 +188,9 @@ site, post-deploy) lands on `/`.
 - No dropdown/JS-driven menu — footer nav is always visible, same posture as
   `license.njk` today.
 - No mobile-specific collapse behavior.
-- No changes to `utility_sibling_nav.njk` or its cross-linking between
-  `/color` and `/type`.
+- No changes to `utility_sibling_nav.njk` or `utilityPages.js` — it isn't
+  rendered anywhere live today (only on the disabled `style-exercise.njk`),
+  so removing it is deferred to whenever `style-exercise` returns, not
+  bundled into this spec.
 - Adding `/sides` and `/friends` to the footer data — each happens as a
   one-line change when that page ships, not part of this spec.
