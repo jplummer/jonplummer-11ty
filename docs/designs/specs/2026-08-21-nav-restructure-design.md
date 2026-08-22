@@ -99,8 +99,8 @@ New include, added to `base.njk`'s `<footer>` alongside the existing
 
 `/sides` and `/friends` are **not** added yet — both are unbuilt or not yet
 built as of this spec. Adding a link to a page that doesn't exist would fail
-`internal-links` and `seo` tests. Each gets a one-line addition to the
-relevant array when it ships.
+`internal-links` and `seo` tests. Each gets a one-line `<li>` added to
+"Also read" in `footer_nav.njk` when it ships.
 
 `style-exercise` stays excluded — it's already gated out of the build via
 `.eleventyignore` pending its return.
@@ -144,14 +144,6 @@ Markup:
 
 Current-page handling follows the existing `nav.njk` pattern
 (`aria-current="page"` when `page.url` matches).
-
-### Data source
-
-A small `src/_data/footerNav.js` exporting the four groups as
-`{ label, items: [{ url, label }] }`, mirroring the shape (not the file) of
-`utilityPages.siblings`. The include loops over `footerNav` rather than
-hardcoding the list inline, so adding `/friends` or `/sides` later is a
-one-line data change, no template edit.
 
 ### `license.njk`
 
