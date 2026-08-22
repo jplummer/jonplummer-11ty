@@ -765,15 +765,17 @@ footer p,
   color: var(--text-color-light);
 }
 
-/* Quiet links (colophon): quiet → ink; no visited treatment */
+/* Quiet links (colophon, footer nav): quiet → ink; no visited treatment */
 .license a:any-link,
-footer p a:any-link {
+footer p a:any-link,
+.footer-nav a:any-link {
   color: var(--text-color-light);
   text-decoration: underline;
 }
 
 .license a:any-link:is(:hover, :focus-visible),
-footer p a:any-link:is(:hover, :focus-visible) {
+footer p a:any-link:is(:hover, :focus-visible),
+.footer-nav a:any-link:is(:hover, :focus-visible) {
   color: var(--text-color);
 }
 
@@ -782,17 +784,63 @@ footer p a:any-link:is(:hover, :focus-visible) {
   margin: 0;
 }
 
+/* Footer nav — grouped links above the copyright line */
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-lg) var(--gutter);
+  margin: 0 0 var(--spacing-md);
+}
+
+.footer-nav-group {
+  flex: 1 1 10rem;
+  min-width: 10rem;
+}
+
+.footer-nav-group h2 {
+  font-size: var(--font-size-quiet);
+  line-height: var(--line-height-quiet);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-color-light);
+  margin: 0 0 var(--spacing-sm);
+}
+
+.footer-nav-group ul {
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-nav-group li {
+  margin: 0 0 0.25rem;
+}
+
+.footer-nav a[aria-current="page"] {
+  color: var(--text-color-light);
+  text-decoration: none;
+}
+
+@media (width <= 54rem) {
+  .footer-nav {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+}
+
 /*
-  Trial (easy revert): align license with article `section` column on grids that use
-  1fr | gutter | 2fr. Full-width `tags: page` mains keep flush-left (same as prose).
-  Index has no data-tags; posts/portfolio/wisdom omit `page` → indent.
+  Trial (easy revert): align footer (nav + license) with article `section` column on
+  grids that use 1fr | gutter | 2fr. Full-width `tags: page` mains keep flush-left
+  (same as prose). Index has no data-tags; posts/portfolio/wisdom omit `page` → indent.
 */
-main:not([data-tags*="page"]) ~ footer .license {
+main:not([data-tags*="page"]) ~ footer .license,
+main:not([data-tags*="page"]) ~ footer .footer-nav {
   margin-inline-start: calc((100% - var(--gutter)) / 3 + var(--gutter));
 }
 
 @media (width <= 54rem) {
-  main:not([data-tags*="page"]) ~ footer .license {
+  main:not([data-tags*="page"]) ~ footer .license,
+  main:not([data-tags*="page"]) ~ footer .footer-nav {
     margin-inline-start: 0;
   }
 }
