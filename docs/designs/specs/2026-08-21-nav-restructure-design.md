@@ -26,34 +26,64 @@ Split navigation into two tiers:
 
 - **Header**: the small set of primary destinations, unchanged from what a
   visitor needs to find first.
-- **Footer**: a grouped, more complete nav for everything else — content
-  pages and lab/utility pages.
+- **Footer**: a complete site map, grouped — the same primary destinations
+  repeated for discoverability, plus everything else (content pages and
+  lab/utility pages).
 
 This is a prerequisite for adding `/friends` — the new page's nav placement
 depends on this restructure landing first.
 
 ## Design
 
+### The `/home` slug and redirect
+
+Every other nav label reads as a real, typeable URL (`/about`, `/now`,
+`/wisdom`, `/colophon`...). The current conditional home link breaks that
+pattern: it's labeled `/index` — developer jargon that's never matched a
+real route — while its `href` goes to `/`.
+
+This spec replaces `/index` with `/home` everywhere it appears (header and
+the new footer group below), and adds a matching redirect so the label is
+genuinely reachable:
+
+```yaml
+# src/_data/redirects.yaml
+- from: /home/
+  to: /
+```
+
+Same pattern as the existing `/uses/ → /technologies/` entry. The nav
+links themselves still point straight to `/` — not through `/home/` — same
+principle as `/uses/` redirecting to `/technologies/` without the footer
+ever linking to `/uses/` directly. Linking through your own redirect adds a
+needless hop, and `seo.js` skips redirect pages entirely, so they're never
+the correct link target.
+
 ### Header (`components/nav.njk`)
 
 Trim to 4 destinations (5 including the conditional home link):
 
-- `/` (only rendered when `page.url != "/"`, as today)
+- `/` (only rendered when `page.url != "/"`, as today), labeled `/home`
 - `/about`
 - `/now`
 - `/portfolio`
 
 `/wisdom` drops out of the header — it's not being updated regularly and
 isn't a destination on its own terms per current judgment. It moves to the
-footer's Content group instead.
+footer's "Also read" group instead.
 
-No markup changes beyond removing the `/wisdom` `<li>`.
+Markup changes: remove the `/wisdom` `<li>`, relabel the conditional home
+link's text from `/index` to `/home`.
 
 ### Footer nav (new `components/footer_nav.njk`)
 
 New include, added to `base.njk`'s `<footer>` alongside the existing
-`license.njk`. Three labeled groups:
+`license.njk`. Four labeled groups:
 
+- **Start here**: `/home`, `/about`, `/now`, `/portfolio` — mirrors the
+  header exactly, always all four (no conditional omission of `/home` the
+  way the header does; the footer is a complete map regardless of which
+  page you're on)
 - **Also read**: `/wisdom` (`/friends` and `/sides` join this group when
   they ship — not part of this change)
 - **How this site works**: `/colophon`, `/changelog`, `/technologies`
@@ -71,6 +101,15 @@ Markup:
 
 ```html
 <nav class="footer-nav" aria-label="More on this site">
+  <div class="footer-nav-group">
+    <h2>Start here</h2>
+    <ul>
+      <li><a href="/">/home</a></li>
+      <li><a href="/about/">/about</a></li>
+      <li><a href="/now/">/now</a></li>
+      <li><a href="/portfolio/">/portfolio</a></li>
+    </ul>
+  </div>
   <div class="footer-nav-group">
     <h2>Also read</h2>
     <ul>
@@ -100,7 +139,7 @@ Current-page handling follows the existing `nav.njk` pattern
 
 ### Data source
 
-A small `src/_data/footerNav.js` exporting the three groups as
+A small `src/_data/footerNav.js` exporting the four groups as
 `{ label, items: [{ url, label }] }`, mirroring the shape (not the file) of
 `utilityPages.siblings`. The include loops over `footerNav` rather than
 hardcoding the list inline, so adding `/friends` or `/sides` later is a
@@ -116,7 +155,7 @@ to restructure the license line.
 ### Styling
 
 New rules in `jonplummer.css` for `.footer-nav`, `.footer-nav-group`,
-`.footer-nav-group h2`: a row of three columns on wider viewports, stacking
+`.footer-nav-group h2`: a row of four columns on wider viewports, stacking
 to one column on narrow ones, small type consistent with the existing
 footer/license treatment. No new custom properties expected — reuse
 existing spacing/type tokens.
@@ -131,6 +170,10 @@ Covered entirely by the existing fast suite, no new test script:
 - `color-contrast` — footer nav text/links meet contrast minimums
 - `css` / `lint:css` — new footer-nav rules
 - `a11y` (slow suite) — grouped nav landmarks, heading structure
+
+Manual check: after `pnpm run build`, confirm `/home/` appears as a
+`Redirect 301` rule in `_site/.htaccess` and that visiting it (on the live
+site, post-deploy) lands on `/`.
 
 ### Explicitly out of scope
 
