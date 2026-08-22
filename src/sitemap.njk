@@ -56,14 +56,6 @@ eleventyExcludeFromCollections: true
     <priority>0.7</priority>
   </url>
 
-  {# Side projects legal page #}
-  <url>
-    <loc>{{ site.url }}/sides/legal/</loc>
-    <lastmod>{{ collections.sideproject | getNewestCollectionItemDate | dateToRfc3339 }}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-
   {# All blog posts #}
   {% for post in collections.post %}
   <url>
