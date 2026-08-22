@@ -92,15 +92,17 @@ the nav reads first, the copyright line comes last. Four labeled groups:
   header exactly, always all four (no conditional omission of `/home` the
   way the header does; the footer is a complete map regardless of which
   page you're on)
-- **Also read**: `/wisdom` (`/friends` and `/sides` join this group when
-  they ship — not part of this change)
+- **Also read**: `/sides`, `/wisdom`, alphabetical (`/friends` will slot in
+  first — f < s < w — whenever it ships)
 - **How this site works**: `/colophon`, `/changelog`, `/technologies`
 - **Labs**: `/color`, `/type`
 
-`/sides` and `/friends` are **not** added yet — both are unbuilt or not yet
-built as of this spec. Adding a link to a page that doesn't exist would fail
-`internal-links` and `seo` tests. Each gets a one-line `<li>` added to
-"Also read" in `footer_nav.njk` when it ships.
+`/sides` shipped in a separate session partway through this work and was
+folded in here rather than left stranded in the header (see the spec's
+original assumption below, now superseded). `/friends` is still **not**
+added — it's unbuilt as of this spec, and linking a page that doesn't
+exist would fail `internal-links` and `seo` tests. It gets a one-line
+`<li>` added to "Also read", alphabetically positioned, when it ships.
 
 `style-exercise` stays excluded — it's already gated out of the build via
 `.eleventyignore` pending its return.
@@ -121,6 +123,7 @@ Markup:
   <div class="footer-nav-group">
     <h2>Also read</h2>
     <ul>
+      <li><a href="/sides/">/sides</a></li>
       <li><a href="/wisdom/">/wisdom</a></li>
     </ul>
   </div>
@@ -143,7 +146,13 @@ Markup:
 ```
 
 Current-page handling follows the existing `nav.njk` pattern
-(`aria-current="page"` when `page.url` matches).
+(`aria-current="page"` when `page.url` matches). Unlike the header — where
+links aren't underlined at rest, so dropping the underline for the current
+page signals nothing extra — footer links **are** underlined at rest
+(existing "quiet chrome" convention). So the footer's current-page link
+keeps its underline and instead shifts to full-ink (`--text-color`) rather
+than the muted (`--text-color-light`) other links use: staying in the
+footer's own visual system rather than copying the header's.
 
 ### `license.njk`
 
@@ -159,12 +168,48 @@ to one column on narrow ones, small type consistent with the existing
 footer/license treatment. No new custom properties expected — reuse
 existing spacing/type tokens.
 
-The existing `main:not([data-tags*="page"]) ~ footer .license` selector
-(and its `@media (width <= 54rem)` reset) is broadened to
-`main:not([data-tags*="page"]) ~ footer .license, main:not([data-tags*="page"]) ~ footer .footer-nav`
-so the new nav picks up the same indent-on-blog-layouts,
-flush-on-full-width behavior `.license` already has — see scope note
-below.
+**Superseded from the original version of this spec**: an earlier version
+of this section broadened the existing `.license` indent selector (a
+"Trial (easy revert)" rule that aligned the footer with the article column
+on blog/post/portfolio pages, staying flush-left on full-width `page`
+pages) to also cover `.footer-nav`. Live review after implementation
+found that page-type-dependent alignment "always seemed a little odd" —
+so instead, the footer is now **always full-bleed and flush**, regardless
+of page type, and that indent rule is deleted outright rather than
+extended. This also resolves the open question logged in `docs/ideas.md`
+about full-width `page` layouts vs. the blog-post column — the footer no
+longer participates in that distinction at all.
+
+**Full-bleed footer, centered content column**: `header`/`main` keep
+their existing centered `max-width` column (`jonplummer.css` "Main layout
+containers" rule); `footer` is excluded from that rule and goes edge to
+edge instead, so its background can span the full viewport width.
+`.footer-nav` and `.license` each re-apply the same `max-width` /
+`padding-inline` / `margin-inline: auto` centering directly, so footer
+content still lines up with the page above it.
+
+**Sticky-bottom footer**: `body` becomes a flex column
+(`display: flex; flex-direction: column; min-height: 100vh`) with
+`body > main { flex: 1 0 auto; }` absorbing leftover space, so on a short
+page the footer still sits at the bottom of the viewport rather than
+riding up under the content. This surfaced a flexbox interaction worth
+documenting: a flex item with `width: auto` and *bounded* intrinsic
+content (like `header`'s logo + title + nav, ~626px) has its auto margins
+pre-empt cross-axis stretch and shrinks to content width instead of
+filling to `max-width` — while `main`'s unbounded flowing text happened to
+fill anyway, masking the bug until `header` was inspected directly.
+Explicit `width: 100%` on both `header` and `main` sidesteps this.
+
+**Color break**: `body > footer` gets
+`background-color: color-mix(in oklch, var(--content-background-color) 99%, black 1%)`
+— a very subtle (~1%) darkening off whatever's actually painted behind
+`header`/`main` (`--content-background-color`, set on `body` itself; not
+`--background-color`, a different token used elsewhere for cards/sections
+that is *not* what's visually adjacent to the footer — mixing from the
+wrong token was caught via live computed-style comparison before this
+landed, and would have produced a footer several times darker than
+intended). No new custom property — matches an existing `color-mix()`
+idiom already used elsewhere in this file.
 
 ### Testing
 
@@ -190,16 +235,6 @@ site, post-deploy) lands on `/`.
   rendered anywhere live today (only on the disabled `style-exercise.njk`),
   so removing it is deferred to whenever `style-exercise` returns, not
   bundled into this spec.
-- Adding `/sides` and `/friends` to the footer data — each happens as a
-  one-line change when that page ships, not part of this spec.
-- No change to the underlying logic of the existing `.license` inline-start
-  alignment rule (`jonplummer.css`, marked "Trial (easy revert)") — it
-  indents the footer on non-`page`-tagged mains (blog index, posts,
-  portfolio) to align with the article's 2fr column, and stays flush-left
-  on full-width `page` mains. The selector is broadened to cover
-  `.footer-nav` too, so the nav and the copyright line align consistently
-  as one footer block, same rule, same trigger — this is applying existing
-  behavior to new markup, not a new design decision. Whether full-width
-  `page` layouts should instead adopt the indented, blog-post-style column
-  themselves is a separate open question — logged in `docs/ideas.md`, not
-  decided here.
+- Adding `/friends` to the footer data — a one-line change when it ships.
+- No sitewide change to how `header`/`main` are centered — only `footer`'s
+  containment model changes (full-bleed vs. centered-column).
