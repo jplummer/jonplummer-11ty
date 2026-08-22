@@ -85,8 +85,8 @@ link's text from `/index` to `/home`.
 
 ### Footer nav (new `components/footer_nav.njk`)
 
-New include, added to `base.njk`'s `<footer>` alongside the existing
-`license.njk`. Four labeled groups:
+New include, added to `base.njk`'s `<footer>` **before** `license.njk` —
+the nav reads first, the copyright line comes last. Four labeled groups:
 
 - **Start here**: `/home`, `/about`, `/now`, `/portfolio` — mirrors the
   header exactly, always all four (no conditional omission of `/home` the
@@ -147,10 +147,9 @@ Current-page handling follows the existing `nav.njk` pattern
 
 ### `license.njk`
 
-Left as-is. Its `/colophon` link duplicates the one now in the footer nav's
-"How this site works" group — that's an acceptable small redundancy
-(copyright line reads naturally with the link inline) rather than a reason
-to restructure the license line.
+Drop the inline `/colophon` link — it's now redundant with the one in the
+footer nav's "How this site works" group, sitting right above it. Simplify
+to plain text: `Copyright {% year %} {{ site.author }}`.
 
 ### Styling
 
@@ -159,6 +158,13 @@ New rules in `jonplummer.css` for `.footer-nav`, `.footer-nav-group`,
 to one column on narrow ones, small type consistent with the existing
 footer/license treatment. No new custom properties expected — reuse
 existing spacing/type tokens.
+
+The existing `main:not([data-tags*="page"]) ~ footer .license` selector
+(and its `@media (width <= 54rem)` reset) is broadened to
+`main:not([data-tags*="page"]) ~ footer .license, main:not([data-tags*="page"]) ~ footer .footer-nav`
+so the new nav picks up the same indent-on-blog-layouts,
+flush-on-full-width behavior `.license` already has — see scope note
+below.
 
 ### Testing
 
@@ -186,3 +192,14 @@ site, post-deploy) lands on `/`.
   bundled into this spec.
 - Adding `/sides` and `/friends` to the footer data — each happens as a
   one-line change when that page ships, not part of this spec.
+- No change to the underlying logic of the existing `.license` inline-start
+  alignment rule (`jonplummer.css`, marked "Trial (easy revert)") — it
+  indents the footer on non-`page`-tagged mains (blog index, posts,
+  portfolio) to align with the article's 2fr column, and stays flush-left
+  on full-width `page` mains. The selector is broadened to cover
+  `.footer-nav` too, so the nav and the copyright line align consistently
+  as one footer block, same rule, same trigger — this is applying existing
+  behavior to new markup, not a new design decision. Whether full-width
+  `page` layouts should instead adopt the indented, blog-post-style column
+  themselves is a separate open question — logged in `docs/ideas.md`, not
+  decided here.

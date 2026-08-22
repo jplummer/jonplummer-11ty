@@ -63,6 +63,15 @@ Prioritized by **side-effect surface** — complexity that can produce a silentl
 - **OG pipeline cleanup** — **`scripts/content/generate-og-images.js`** (~450 lines) runs outside Eleventy with its own Nunjucks env + duplicated **`postDate`** filter (lines 15–26); also triggered from **`eleventy.beforeWatch`** in **`events.js`**. **Plan (incremental)**: delete dead **`generateDataHash()`** if still present; share filter source with Eleventy (RenderPlugin or require from **`eleventy/config/filters.js`** date helpers); consider dropping dev-watch regen for every save (mtime/`--force` only). **Out of scope for this entry**: replacing Puppeteer with static SVG — large fidelity tradeoff. Verify: **`pnpm run generate-og-images`**, **`pnpm run test og-images`**, deploy OG step unchanged.
 - **IndexNow — simplify or remove (don't fix in place)** — ~860 lines across **`scripts/utils/indexnow.js`** + **`scripts/test/indexnow.js`**: git-diff filters, **`.indexnow-state.json`**, hand-rolled permalink mapping, static-page allowlist. Runs on every deploy + in **`test fast`**. Marginal on a personal blog that already ships **`sitemap.xml`** and RSS. Either **(A) replace** with one post-deploy sitemap submit, or **(B) remove** from deploy, tests, and docs.
 
+### Nav / footer
+
+- **`/friends` page (low priority)** (2026-08-21) — Blogroll-style page at `/friends/` linking to people Jon likes and admires, one name + link + short sentence each. Like `/now/`, states when it was last updated and links "slashfriends.org" (https://slashfriends.org) and "Nick Gray" (https://nickgray.net). Likely a single `.md` file, same shape as `now.md`. Open sub-task: identify which friends have their own still-active websites — start by trawling a LinkedIn connections export. Depends on the nav restructure (spec `docs/designs/specs/2026-08-21-nav-restructure-design.md`) landing first, which reserves its spot in the footer's "Also read" group.
+- **Full-width `page` layouts vs. blog-post column alignment** (2026-08-21) — Noticed while building the footer nav: `jonplummer.css`'s `.license` alignment rule (marked "Trial (easy revert)") indents the footer to match the article's 2fr column on blog index/post/portfolio pages, but stays flush-left on full-width `tags: page` pages (`/about/`, `/now/`, `/color/`, `/type/`, etc.) — always seemed a little odd. Worth considering whether most full-width pages should adopt the indented, blog-post-style column instead, except `/color/` and `/type/` which don't work well outside full-width. Undecided; not part of the nav restructure spec.
+
+### Side projects (`/sides/`)
+
+- **Build-time changelog fetch** (2026-08-21) — `/sides/<slug>/` links out to each project's GitHub `CHANGELOG.md`/Releases for now (zero build machinery). Once a project is in active-enough development that visitors would benefit from seeing recent changes without leaving the site, pull the repo's changelog at build time and render it on the page instead of just linking. Revisit when Pointer-AR or another project's pace makes the link-out feel thin.
+
 ### Craft atmosphere (deferred)
 
 - Outlandish alternative stylesheet?
