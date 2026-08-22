@@ -1,0 +1,17 @@
+---
+layout: base.njk
+title: Side projects
+description: Small apps and hardware I design and build on my own time, mostly with AI-assisted development, and put out in case anyone else finds them useful.
+permalink: /sides/
+tags: page
+ogImage: /assets/images/og/sides.png
+---
+<p>Apps and gadgets I design and build on my own time, mostly with AI-assisted development. Some are shipped, some are stalled, some are still parts on a workbench. The design story behind each one, when there is one, lives in the <a href="/portfolio/">portfolio</a>; this is just the practical stuff – what it does, where to get it, how to reach me. Privacy and terms for everything here: <a href="/sides/legal/">/sides/legal</a>.</p>
+
+<ul class="sides-grid">
+{% for item in collections.sideproject | reverse %}
+    <li>
+        {% include "components/side_list_item.njk" %}
+    </li>
+{% endfor %}
+</ul>

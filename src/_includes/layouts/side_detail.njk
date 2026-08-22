@@ -1,0 +1,37 @@
+---
+layout: base.njk
+purpose: individual side project page
+---
+
+<article class="side-detail">
+    <header>
+        <h1>{{ title | smartquotes | safe }}</h1>
+        {% if status %}<p class="side-status">{{ status }}</p>{% endif %}
+    </header>
+    <section>
+        {{ content | safe }}
+    </section>
+    <aside class="side-links" aria-label="Project links">
+        <ul>
+            {% if appStoreUrl %}
+            <li><a href="{{ appStoreUrl }}">View on the App Store</a></li>
+            {% endif %}
+            {% if githubUrl %}
+            <li><a href="{{ githubUrl }}">Source on GitHub</a></li>
+            <li><a href="{{ githubUrl }}/issues">Report an issue or leave feedback</a></li>
+            {% else %}
+            <li><a href="mailto:jon@jonplummer.com?subject=About%20{{ title | urlencode }}">Email feedback</a></li>
+            {% endif %}
+            {% if portfolioPost %}
+            <li><a href="{{ portfolioPost }}">Read the design story</a></li>
+            {% endif %}
+            <li><a href="/sides/legal/">Privacy and terms</a></li>
+        </ul>
+    </aside>
+</article>
+
+{% set collection = collections.sideproject %}
+{% set currentPage = page %}
+{% set itemLabel = "project" %}
+{% set navLabel = "Side project navigation" %}
+{% include "components/collection_navigation.njk" %}

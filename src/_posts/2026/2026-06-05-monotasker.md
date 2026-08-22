@@ -54,4 +54,4 @@ This is the same approach I use when prototyping for professional work: I'm flue
 
 A lot of additional effort went to animation, visual polish, and accessibility. Getting text scaling right, so the layout holds when a user has chosen a large font, took real iteration. Making the app sensible to VoiceOver users required repeated manual testing on a device; there's no substitute for it. Making dark mode distinct from light mode and nice on its own is not just a matter of flipping brightness values. These are some of the details where an app goes from "it's fine" to "this is nice," and they don't surface in a spec. You find them by using the thing.
 
-[Monotasker is available on the App Store](https://apps.apple.com/us/app/monotasker/id6770424713).
+[Monotasker is available on the App Store](https://apps.apple.com/us/app/monotasker/id6770424713). For the app itself – what it does, privacy, feedback – see [its page at /sides](/sides/monotasker/).

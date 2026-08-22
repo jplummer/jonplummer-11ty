@@ -40,6 +40,7 @@ Yippy
 
 # Technical Terms & Acronyms
 agentic
+sideproject
 APCA
 DTMF
 DURSL

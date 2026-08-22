@@ -48,6 +48,22 @@ eleventyExcludeFromCollections: true
     <priority>0.8</priority>
   </url>
 
+  {# Side projects index #}
+  <url>
+    <loc>{{ site.url }}/sides/</loc>
+    <lastmod>{{ collections.sideproject | getNewestCollectionItemDate | dateToRfc3339 }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  {# Side projects legal page #}
+  <url>
+    <loc>{{ site.url }}/sides/legal/</loc>
+    <lastmod>{{ collections.sideproject | getNewestCollectionItemDate | dateToRfc3339 }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
   {# All blog posts #}
   {% for post in collections.post %}
   <url>
@@ -65,6 +81,16 @@ eleventyExcludeFromCollections: true
     <lastmod>{{ item.date | dateToRfc3339 }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  {% endfor %}
+
+  {# All side projects #}
+  {% for item in collections.sideproject %}
+  <url>
+    <loc>{{ site.url }}{{ item.url }}</loc>
+    <lastmod>{{ item.date | dateToRfc3339 }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   {% endfor %}
 

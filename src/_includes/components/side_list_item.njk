@@ -1,0 +1,15 @@
+{# purpose: side project list item component #}
+<article class="side-item" id="{{ item.fileSlug }}"{% if item.data.coverPosition or item.data.coverZoom %} style="{% if item.data.coverPosition %}--cover-object-position: {{ item.data.coverPosition }};{% endif %}{% if item.data.coverPosition and item.data.coverZoom %} {% endif %}{% if item.data.coverZoom %}--cover-zoom: {{ item.data.coverZoom }};{% endif %}"{% endif %}>
+    <a href="{{ item.url }}" rel="bookmark">
+        {% if item.data.coverImage %}
+        <img src="/assets/images/{{ item.data.coverImage }}" alt="">
+        {% endif %}
+        <p>{{ item.data.title | smartquotes | striptags }}</p>
+    </a>
+    {% if item.data.status %}
+    <p class="side-item-status">{{ item.data.status }}</p>
+    {% endif %}
+    {% if item.data.description %}
+    <p class="side-item-description">{{ item.data.description | smartquotes | striptags }}</p>
+    {% endif %}
+</article>
