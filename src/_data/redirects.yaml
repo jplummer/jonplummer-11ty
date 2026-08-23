@@ -20,6 +20,10 @@ redirects:
   - from: /uses/
     to: /technologies/
 
+  # Canonical URL aliases
+  - from: /home/
+    to: /
+
   # Date corrections and URL changes
   - from: /2022/04/17/empathy-for-the-leader-whose-company-is-being-acquired/
     to: /2022/04/16/empathy-for-the-leader-whose-company-is-being-acquired/

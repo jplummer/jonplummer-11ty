@@ -1,0 +1,35 @@
+{# purpose: footer sitemap navigation, grouped #}
+<nav class="footer-nav" aria-label="More on this site">
+    <div class="footer-nav-group">
+        <h2>Start here</h2>
+        <ul>
+            <li><a href="/"{% if page.url == "/" %} aria-current="page"{% endif %}>/home</a></li>
+            <li><a href="/about/"{% if page.url == "/about/" %} aria-current="page"{% endif %}>/about</a></li>
+            <li><a href="/now/"{% if page.url == "/now/" %} aria-current="page"{% endif %}>/now</a></li>
+            <li><a href="/portfolio/"{% if page.url == "/portfolio/" %} aria-current="page"{% endif %}>/portfolio</a></li>
+        </ul>
+    </div>
+    <div class="footer-nav-group">
+        <h2>Also read</h2>
+        <ul>
+            <li><a href="/friends/"{% if page.url == "/friends/" %} aria-current="page"{% endif %}>/friends</a></li>
+            <li><a href="/sides/"{% if page.url.indexOf('/sides') === 0 %} aria-current="page"{% endif %}>/sides</a></li>
+            <li><a href="/wisdom/"{% if page.url.indexOf('/wisdom') === 0 %} aria-current="page"{% endif %}>/wisdom</a></li>
+        </ul>
+    </div>
+    <div class="footer-nav-group">
+        <h2>How this site works</h2>
+        <ul>
+            <li><a href="/colophon/"{% if page.url == "/colophon/" %} aria-current="page"{% endif %}>/colophon</a></li>
+            <li><a href="/changelog/"{% if page.url == "/changelog/" %} aria-current="page"{% endif %}>/changelog</a></li>
+            <li><a href="/technologies/"{% if page.url == "/technologies/" %} aria-current="page"{% endif %}>/technologies</a></li>
+        </ul>
+    </div>
+    <div class="footer-nav-group">
+        <h2>Labs</h2>
+        <ul>
+            <li><a href="/color/"{% if page.url == "/color/" %} aria-current="page"{% endif %}>/color</a></li>
+            <li><a href="/type/"{% if page.url == "/type/" %} aria-current="page"{% endif %}>/type</a></li>
+        </ul>
+    </div>
+</nav>

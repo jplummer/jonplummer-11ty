@@ -149,10 +149,12 @@ ul[role='list'], ol[role='list'] {
   list-style: none;
 }
 
-/* Take up the entire height of the viewport */
+/* Take up the entire height of the viewport; sticky footer via flex column */
 body {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
-  margin: 0; 
+  margin: 0;
   padding: 0;
   font-family: var(--font-family);
   font-size: var(--text-size);
@@ -209,13 +211,38 @@ textarea:not([rows]) {
 /* Shell padding, article gaps, and nav spacing use --spacing-* / --gutter (baseline multiples). */
 
 /* Main layout containers — transparent bands; page field is html/body only.
-   Gutter is inline only; block padding uses the spacing ladder. */
-body>header, body>main, body>footer {
+   Gutter is inline only; block padding uses the spacing ladder.
+   footer is excluded here — it goes full-bleed; see body > footer below.
+   width: 100% is required here: as flex items of body (flex column), auto
+   margins pre-empt cross-axis stretch per spec, so a width:auto item with
+   bounded intrinsic content (header's logo+title+nav) would shrink to fit
+   instead of filling to max-width — explicit width sidesteps that. */
+body>header, body>main {
+  width: 100%;
   margin: 0 auto;
   padding-inline: var(--gutter);
   padding-block: var(--spacing-lg);
   max-width: var(--max-width);
   background-color: transparent;
+}
+
+/* main absorbs remaining space in the flex column so a short page's footer
+   still pins to the bottom of the viewport instead of riding up under it. */
+body > main {
+  flex: 1 0 auto;
+}
+
+/* footer is full-bleed (no max-width/centering) so its background can span
+   the whole viewport width; .footer-nav and .license re-apply the centered
+   content column below. */
+body > footer {
+  width: 100%;
+  margin: 0;
+  padding-inline: 0;
+  padding-block: var(--spacing-lg);
+  max-width: none;
+  flex-shrink: 0;
+  background-color: color-mix(in oklch, var(--content-background-color) 99%, black 1%);
 }
 
 /* Extra air under the site header (shared by index + single post) */
@@ -765,35 +792,72 @@ footer p,
   color: var(--text-color-light);
 }
 
-/* Quiet links (colophon): quiet → ink; no visited treatment */
+/* Quiet links (colophon, footer nav): quiet → ink; no visited treatment */
 .license a:any-link,
-footer p a:any-link {
+footer p a:any-link,
+.footer-nav a:any-link {
   color: var(--text-color-light);
   text-decoration: underline;
 }
 
 .license a:any-link:is(:hover, :focus-visible),
-footer p a:any-link:is(:hover, :focus-visible) {
+footer p a:any-link:is(:hover, :focus-visible),
+.footer-nav a:any-link:is(:hover, :focus-visible) {
   color: var(--text-color);
 }
 
 .license {
   text-align: left;
-  margin: 0;
+  margin: 0 auto;
+  max-width: var(--max-width);
+  padding-inline: var(--gutter);
 }
 
-/*
-  Trial (easy revert): align license with article `section` column on grids that use
-  1fr | gutter | 2fr. Full-width `tags: page` mains keep flush-left (same as prose).
-  Index has no data-tags; posts/portfolio/wisdom omit `page` → indent.
-*/
-main:not([data-tags*="page"]) ~ footer .license {
-  margin-inline-start: calc((100% - var(--gutter)) / 3 + var(--gutter));
+/* Footer nav — grouped links above the copyright line. footer itself is
+   full-bleed (see body > footer); this re-applies the centered content
+   column so the nav lines up with header/main above it. */
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-lg) var(--gutter);
+  margin: 0 auto var(--spacing-md);
+  max-width: var(--max-width);
+  padding-inline: var(--gutter);
+}
+
+.footer-nav-group {
+  flex: 1 1 10rem;
+  min-width: 10rem;
+}
+
+.footer-nav-group h2 {
+  font-size: var(--font-size-quiet);
+  line-height: var(--line-height-quiet);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-color-light);
+  margin: 0 0 var(--spacing-sm);
+}
+
+.footer-nav-group ul {
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-nav-group li {
+  margin: 0 0 0.25rem;
+}
+
+.footer-nav a[aria-current="page"] {
+  color: var(--text-color);
+  text-decoration: underline;
 }
 
 @media (width <= 54rem) {
-  main:not([data-tags*="page"]) ~ footer .license {
-    margin-inline-start: 0;
+  .footer-nav {
+    flex-direction: column;
+    gap: var(--spacing-md);
   }
 }
 
