@@ -10,7 +10,7 @@ Two changes to the site today: the nav split into a leaner header and a full foo
 
 ## A leaner header, a fuller footer
 
-The header nav had grown into a flat list of everything. I trimmed it to the four destinations I actually want someone to find first: `/home`, `/about`, `/now`, `/portfolio`. The `/home` link is conditional – if you are at home I don't show it. The links there also remind you how to access those pages directly. 
+The header nav had grown into a flat list of everything. I trimmed it to the four destinations I actually want someone to find first: `/home`, `/about`, `/now`, `/portfolio`. The `/home` link is conditional – if you are at home I don't show it. The links there also remind you how to access those pages directly.
 
 Everything else moved to the footer, which used to be one line – copyright and a link to `/colophon`. It's now a real site map, grouped into four sections: **Start here** repeats the header, **Also read** covers `/wisdom` and the new `/sides` below, **How this site works** has `/colophon`, `/changelog`, and `/technologies`, and **Labs** has `/color` and `/type`. Nothing got deleted – `/wisdom` just moved from the header to the footer, since it's not something I expect people to check from every page the way they might `/about` or `/now`.
 

@@ -817,17 +817,12 @@ footer p a:any-link:is(:hover, :focus-visible),
    full-bleed (see body > footer); this re-applies the centered content
    column so the nav lines up with header/main above it. */
 .footer-nav {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
   gap: var(--spacing-lg) var(--gutter);
   margin: 0 auto var(--spacing-md);
   max-width: var(--max-width);
   padding-inline: var(--gutter);
-}
-
-.footer-nav-group {
-  flex: 1 1 10rem;
-  min-width: 10rem;
 }
 
 .footer-nav-group h2 {
@@ -852,13 +847,6 @@ footer p a:any-link:is(:hover, :focus-visible),
 .footer-nav a[aria-current="page"] {
   color: var(--text-color);
   text-decoration: underline;
-}
-
-@media (width <= 54rem) {
-  .footer-nav {
-    flex-direction: column;
-    gap: var(--spacing-md);
-  }
 }
 
 /* Code blocks */
