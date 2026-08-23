@@ -12,6 +12,7 @@
     <div class="footer-nav-group">
         <h2>Also read</h2>
         <ul>
+            <li><a href="/friends/"{% if page.url == "/friends/" %} aria-current="page"{% endif %}>/friends</a></li>
             <li><a href="/sides/"{% if page.url.indexOf('/sides') === 0 %} aria-current="page"{% endif %}>/sides</a></li>
             <li><a href="/wisdom/"{% if page.url.indexOf('/wisdom') === 0 %} aria-current="page"{% endif %}>/wisdom</a></li>
         </ul>
