@@ -32,7 +32,7 @@ Don't want to be on this list? Tell me and I'll take you off. Think you belong h
 - [Louis Elfman](https://www.instagram.com/louiselfman/) — Longtime connection, currently between things.
 - [Megan Fister](https://steadyhousehold.com/full-story/) — Founder of Steady Household.
 - [Miki Markovich](https://mikimarkovich.com) — Content and creative strategist at Obie Companies.
-- [Nancy Mayer Allan](https://www.nancymayerallan.com/) — Co-designer at ALMA SPACES.
+- [Nancy Mayer Allan](https://www.nancymayerallan.com/) — Artist and interior designer.
 - [Nate Kraft](https://www.linkedin.com/in/natekraft/) — Chief product officer at Enginuity Power Systems.
 - [Nicholas Brosas](https://nickbrosas.com) — UX designer at Amazon.
 - [Peter Merholz](https://petermerholz.com) — Design leadership voice, co-host of the Finding Our Way podcast.

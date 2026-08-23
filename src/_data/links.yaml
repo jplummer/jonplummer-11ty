@@ -1,3 +1,25 @@
+2026-08-23:
+  - url: "https://uxdesign.cc/rethinking-design-leadership-with-swarms-and-flocks-9298db8c59d2"
+    title: Rethinking design leadership with swarms and flocks – Darren Yeo
+    description: "\"If we pair that fluid intelligence with the raw endurance of migrating Canada Geese, we get a far better model for running design teams: Structured Emergence.\""
+  - url: "https://hbr.org/2026/05/why-effective-leaders-get-branded-as-problems"
+    title: Why Effective Leaders Get Branded as Problems – Luis Velasquez
+    description: "\"…Anna took the feedback seriously, she adjusted her approach, but nothing changed. That is when I was brought in. A few stakeholder interviews later, something became clear: Her decisiveness wasn’t the problem. Her company had normalized over-consensus. Speed wasn’t valued; it was treated as recklessness, and urgency as inflexibility. Her decisiveness didn’t create friction.  It exposed it.\""
+  - url: "https://sive.rs/fit"
+    title: Building without predicting – Derek Sivers
+    description: "\"It starts with a maxim: All buildings are predictions; all predictions are wrong. How do you build without predicting? Defer decisions. Start using what’s there. Discover actual needs. When you catch yourself thinking “We’ll need this,” stop and say, “Let’s find out what we really need.”\""
+
+2026-08-19:
+  - url: "https://blog.mozilla.org/ux/2026/08/let-your-designs-fail-for-the-right-reasons/"
+    title: Let your designs fail for the right reasons – Aarjav Pandya
+    description: Aarjav points out that you can learn more from usability testing when prototypes are more complete and less simulated, and AI-powered prototyping gets us there much more easily that wiring screens in Figma or poring over Axure.
+  - url: "https://www.nytimes.com/2026/08/08/opinion/socialist-wave-democratic-party.html"
+    title: Socialists Are Winning Because They Listen to People – Tressie McMillan Cottom
+    description: Funny, it’s the same for businesses. You should be seeking and responding to real customer knowledge, delivering benefits those customers need, and showing that you’ve done so. This seems to be in short supply, politics or no.
+  - url: "https://uxdesign.cc/design-md-the-one-standard-file-carries-your-visual-identity-for-humans-and-agents-9058d5b39d9b?utm_source=substack&utm_medium=email"
+    title: "Design.md: the one standard file carries your visual identity, for humans and agents – Patrick Neeman"
+    description: "\"In April 2026, Google Labs made the DESIGN.md format open source. This is the start of agent standards, the plain-text files a model reads as contracts: README.md for how code runs, DESIGN.md for how a brand looks. This piece walks you through writing your own, from the first color token to the audit you run against your live site. A chat window and a brand you know are enough to start.\""
+
 2026-08-11:
   - url: "https://www.youtube.com/watch?v=vlsH_HbSrSE"
     title: Do We Have Too Many Settings? – Saleh Kayyali
