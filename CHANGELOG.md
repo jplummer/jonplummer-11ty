@@ -1,5 +1,33 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-08-22
+
+- Add /friends page
+- Merge branch 'worktree-nav-restructure'
+- Import links, note writing-style feedback, publish datto draft
+- Add "Not every touchpoint deserves the best" post
+
+## 2026-08-21
+
+- Add redirect from /uses/ to /technologies/
+- Add fourth footer group mirroring header, rename /index to /home
+- Correct utility_sibling_nav claim, keep it out of scope
+- Drop footerNav.js data file, hardcode links in the include
+- Drop redundant colophon link, log footer alignment + /friends ideas
+- Add /sides/ section for side projects
+- Add /home/ redirect to /
+- Trim header nav to 4 destinations, relabel /index to /home
+- Drop redundant /colophon link from license.njk
+- Add grouped footer nav
+- Make footer full-width, sticky-bottom, with a subtle color break
+- Order "Also read" alphabetically
+- Update spec for full-width footer, /sides, current-link fix
+- Add /sides section for side projects, with per-project privacy and terms
+- Drop redundant self-link to Privacy and terms on side project pages
+- Add footer nav layout, extend footer alignment rule
+- Documentation updates: 3 commits
+- Consider About Ideas Now participation
+
 ## 2026-08-16
 
 - Make the /color/ preview facsimiles inert
@@ -724,4 +752,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-08-19
+Last deployed on 2026-08-23
