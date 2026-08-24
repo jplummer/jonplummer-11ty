@@ -5,6 +5,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Add plated favicon rasters, footer /ogimages link, and ideas updates.
 - Tighten /friends meta description to match the list criteria.
 - Regenerate /friends/ OG image after meta description update.
+- Update Joey Bruckner’s /friends blurb to current role.
 
 ## 2026-08-23
 
