@@ -63,6 +63,8 @@ It ensures that the documentation in the code repository and the "about this pro
 
 A chronological list of changes, fixes, and updates to the site's codebase and content.
 
+*Editor's note: this page now appears in the site footer.*
+
 ### How the changelog is generated
 
 Identical to the readme strategy, the `src/changelog.md` file includes the root `CHANGELOG.md` using the `readFile` filter. This keeps the project history transparent and accessible without me having to update two different files. Every time I commit a change and build the site, the latest commit message gets summarized and added to the changelog.
@@ -76,6 +78,8 @@ If you're wondering when a specific feature was added or if I've fixed a bug you
 [/technologies/](/technologies/)
 
 A detailed breakdown of the building blocks: Eleventy, Node.js, specific plugins, and testing tools.
+
+*Editor's note: this page now appears in the site footer.*
 
 ### How the technologies list is generated
 

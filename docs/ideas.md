@@ -4,25 +4,13 @@
 
 - Craft / polish (demonstrate craft)
   - **Goal**: Make spareness read as intentional craft, not default blankness. Color is already pared-down; skip ornament (texture / alternate stylesheets stay in Future → Craft atmosphere). Vertical alignment is already in good shape — don’t chase “stronger grid” as a separate track unless something new looks off.
-  - **Order of work** (do not reorder casually):
-    1. **Audit focus behavior and keyboard navigation** — tooling built and first run done (2026-08-15). `pnpm run focus-audit`; spec `docs/designs/specs/2026-08-13-focus-keyboard-audit-design.md`, plan `docs/designs/plans/2026-08-14-focus-keyboard-audit.md`, usage in [commands.md](commands.md#-focus-and-keyboard-audit). Findings below are the remaining work.
-    2. **Accessibility check and stats for the colophon** — Clarify or drop once a real pass is done (site contrast/a11y tests already cover a lot).
-  - **Focus / keyboard findings** (first audit, 2026-08-15, seed 1, 1422 assertions over 13 pages):
-    - **Fixed 2026-08-16 — `/type/` and `/color/` preview facsimiles are `inert`.** `/type/` had a live skip link plus a dozen dead `href="#"` tab stops; `/color/` had twelve facsimiles and ~144 of 172 tab stops. Same construct, same fix. Generators: `scripts/font-explore/generate-font-gallery.js`, `scripts/color-explore/generate-gallery.js`.
-    - **Fixed 2026-08-16 — lightbox arrows use `aria-disabled` instead of `disabled`.** Native `disabled` dropped focus at the first/last figure. Bounds check in `showFigureAt` already no-ops; CSS `:disabled` selectors swapped to `[aria-disabled="true"]` so the existing hover/focus rules can match. 2.4.3.
-    - **Fixed 2026-08-16 — shared control focus ring.** Tokens `--focus-ring-color` / `--focus-ring-width` / `--focus-ring-offset` (accent, 2px, 2px). Applied on `:focus-visible` to `button`, `select`, `input`, `textarea`, `summary`; skip link uses the same ring on `:focus`. Links stay accent recolor + underline. Content-warning `<summary>` now matches hover on `:focus-visible` as well.
-    - **Known gap — `/color/` and `/type/` still get no automated focus-visibility evidence.** Both are marked `sanityOnly` (sweep without screenshots) because their control counts would dominate the run. A subset-sampling option would let the audit cover them.
-    - **Follow-up — hover-vs-focus affordance rule.** Compare the hover state against the focus state, not just focus against rest, to catch affordances offered to the mouse but withheld from the keyboard. Costs a third screenshot and a second diff per stop (roughly 9 → 12 minutes).
   - **Optional later:** widen L/R via gutter / max-width.
   - **Out of scope for this track**: overflow texture, outlandish alternate stylesheet (Future → Craft atmosphere).
 
 - Portfolio
-  - Presentation-to-portfolio — cloud fetch not built yet (local PDF + `.pptx` path in DONE)
-    - Google: OAuth + export PDF + PPTX by file ID or Slides URL
-    - Microsoft: Graph download PPTX + Office PDF export script
-    - Optional: batch input file (one URL or path per line)
-    - Open: e2e on a real deck (each cloud path); Office automation fragility on macOS
-    - Docs: [commands.md](commands.md#-pdf-page-conversion)
+  - **Wemo** — Add visuals to the existing portfolio piece.
+  - **Datto Secure Edge** — Finish the portfolio item (currently `draft: true`); add visuals and publish.
+  - **Side projects** — Stronger portfolio write-ups and at least one key image per project (Monotasker exists; others linked from `/sides/` are still thin).
   - Look through /talks (current and old) for more talks, and evaluate for inclusion
     - Talks from Belkin
     - Small artifacts from Belkin
@@ -31,6 +19,10 @@
     - Talks from Cayuse
 
 ## 🔮 Future Consideration
+
+### Portfolio (deferred)
+
+- **Presentation-to-portfolio automation (deprioritized 2026-08-24)** — Local PDF + `.pptx` path is DONE. Cloud fetch (Google OAuth + export PDF/PPTX, Microsoft Graph download + Office PDF export, optional batch input file) and e2e on real decks can wait. Docs: [commands.md](commands.md#-pdf-page-conversion).
 
 ### Deploy / Cloudflare
 
@@ -85,7 +77,6 @@ Prioritized by **side-effect surface** — complexity that can produce a silentl
 
 ### 🖍 Also…
 
-- Add jonplummer.com to [https://github.com/wesbos/awesome-uses/](https://github.com/wesbos/awesome-uses/) — `/uses/` now redirects to `/technologies/` (2026-08-21) so it lines up with the list's convention.
 - Consider whether to participate in [https://aboutideasnow.com/](https://aboutideasnow.com/) (2026-08-21).
 - [https://kagi.com/search?q=contemporary+blog+styling+2026](https://kagi.com/search?q=contemporary+blog+styling+2026) ?
 - [https://github.com/steipete/agent-rules](https://github.com/steipete/agent-rules) ?
@@ -118,6 +109,7 @@ Prioritized by **side-effect surface** — complexity that can produce a silentl
 
 ## MAYBE LET'S DON'T DO THESE
 
+- **Colophon accessibility stats** — Site contrast (`test color-contrast`) and axe markup pass (`test a11y`) already cover the colophon; a separate colophon-specific accessibility page or stats block isn't worth building (canceled 2026-08-24).
 - Performance/regressions — static text-first site; not worth a dedicated monitoring/regression stack for now
   - Lighthouse CLI ?
   - Automate/integrate ahrefs somehow ?
@@ -147,8 +139,9 @@ Prioritized by **side-effect surface** — complexity that can produce a silentl
 
 ## DONE
 
+- **Focus and keyboard navigation audit** (2026-08-15 through 2026-08-24) — Portable Puppeteer audit: `pnpm run focus-audit`; spec `docs/designs/specs/2026-08-13-focus-keyboard-audit-design.md`, plan `docs/designs/plans/2026-08-14-focus-keyboard-audit.md`, usage in [commands.md](commands.md#-focus-and-keyboard-audit). First run (seed 1): 1422 assertions over 13 pages. Shipped fixes: `/type/` and `/color/` preview facsimiles `inert`; lightbox arrows `aria-disabled` instead of `disabled`; shared control focus ring (`--focus-ring-*` on button/select/input/textarea/summary + skip link). Accepted gaps: `/color/` and `/type/` stay `sanityOnly` (control count); hover-vs-focus affordance rule deferred. Deliberate audit tooling — not in `test fast`.
 - **Portfolio grid thumbs** (2026-08-13) — Optional `coverPosition` / `coverZoom` front matter; tuned on most existing posts (images unchanged except Goal Manager re-export to 16:9). More air above title (`--spacing-sm` thumb→title gap). One thumb+title link, hover underline, thumb stroke. Spec: `docs/designs/plans/2026-08-13-portfolio-cover-crop.md`. Guard: `pnpm run test portfolio-cover-crop`.
-- **Presentation-to-portfolio (local PDF + PPTX)** — `pnpm run convert-presentation`; python-pptx notes via `extract-pptx-notes.py`; parser in `portfolio-notes.js`. Cloud fetch still open (Selected → Portfolio).
+- **Presentation-to-portfolio (local PDF + PPTX)** — `pnpm run convert-presentation`; python-pptx notes via `extract-pptx-notes.py`; parser in `portfolio-notes.js`. Cloud fetch deferred (Future → Portfolio).
 - **OG one-sheet cards + PNG basename rules** (2026-08-11) — OG HTML/PNGs match live one-sheet field and type scale (`--og-type-scale` from logotype/title/body tokens); soft content field; post PNG basenames from source `YYYY-MM-DD-*` filenames (not UTC-shifted front-matter dates). Light-theme extract accepts `var()` aliases. Guard: `pnpm run test og-image-filename`.
 - **Libre Franklin body** (2026-08-10) — Replaced Public Sans (en-dash/space kerning bug). `@font-face` in `jonplummer.css`; `fonts.css` kept for OG extract. Spec notes in `docs/designs/font-stack-exploration.md`.
 - **Three-color links + dark accent** (2026-08-11) — Lived ink / quiet / accent only: nav accent→ink; reading ink→accent + visited quiet; controls ink→accent; quiet chrome quiet→ink; logotype ink→accent; EOF square quiet. Dark accent `oklch(75.9% 0.1444 18deg)` (`#ff888e`) — cooler denser red vs pale brass; soft APCA ~Lc 56 (contrast test craft floor min 55 for that pair). `/color/` generate/APCA/paste aliases aligned; site default dark accent synced in gallery.

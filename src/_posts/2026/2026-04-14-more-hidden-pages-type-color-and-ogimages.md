@@ -8,6 +8,8 @@ ogImage: /assets/images/og/2026-04-14-more-hidden-pages-type-color-and-ogimages.
 ---
 Last year I wrote about [a first batch of "hidden" pages](/2025/11/20/the-hidden-pages-of-this-site/) on this site – RSS feeds, a technologies list, the changelog, etc. Those are mostly about *consuming* or *documenting* the project. Here are three more URLs in the same spirit: they are not in the main navigation, but they are not secret. They are small labs for *playing with* how the site looks when shared or read, still in the "everything is inspectable" vein.
 
+*Editor's note: the below pages now appear in the site footer.*
+
 ## 1. /type
 
 [/type/](/type/)

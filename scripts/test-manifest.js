@@ -65,6 +65,9 @@ const TESTS = [
   // fast-only: not part of either build.js phase (build's own output isn't
   // what this checks — it guards the static 404.html asset hrefs).
   { id: 'error-document-assets', script: 'error-document-assets.js', groups: ['fast'] },
+  // Plated favicon.ico / apple-touch-icon.png for third-party <img> scrapers;
+  // icon.svg (tabs) must stay unplated. No _site needed.
+  { id: 'favicon-rasters', script: 'favicon-rasters.js', groups: ['fast', 'pre'] },
   { id: 'trailing-slash-links', script: 'trailing-slash-links.js', groups: ['fast', 'pre'] },
   // Guards the docs/designs/ structure against superpowers skills that still
   // hardcode docs/superpowers/ (their SKILL.md files live in a plugin cache we

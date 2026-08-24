@@ -70,6 +70,7 @@ See [noteplan-import.md](noteplan-import.md) for complete workflow documentation
 - Color theme **tooling** (gallery output, `/color/` page, `node scripts/utils/suggest-colors.js`, `pnpm run test color-contrast`) — summarized in [color-theme-exploration.md § Companion tooling](designs/color-theme-exploration.md#companion-tooling)
 - `pnpm run font-gallery` - Generate single-card font lab (headings vs body stacks, live site scale/colors) under `scripts/font-explore/output/` — see [font-stack-exploration.md](designs/font-stack-exploration.md)
 - `pnpm run colophon-sketch` - Colophon portrait remap lab (light vs dark side-by-side) under `scripts/colophon-sketch/output/`; add `-- --export` to write site `-light.png` / `-dark.png` from the current export recipe
+- `pnpm run generate-favicon-rasters` - Rebuild `favicon.ico` and `apple-touch-icon.png` from `icon-raster.svg` (light content field for third-party `<img>` scrapers; does not change tab `icon.svg`)
 - Font stack **tooling** (gallery output, generator paths, CSS lint after shipping) — [font-stack-exploration.md § Companion tooling](designs/font-stack-exploration.md#companion-tooling)
 
 ---

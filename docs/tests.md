@@ -34,7 +34,7 @@ This project includes a suite of validation tests covering content structure, HT
 
 _Derived from [`scripts/test-manifest.js`](../scripts/test-manifest.js) — see [The test manifest](#the-test-manifest)._
 
-**Fast Tests:** `html`, `links`, `wisdom`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `deploy-assets`, `error-document-assets`, `trailing-slash-links`, `design-docs-location`, `portfolio-cover-crop`
+**Fast Tests:** `html`, `links`, `wisdom`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `deploy-assets`, `error-document-assets`, `favicon-rasters`, `trailing-slash-links`, `design-docs-location`, `portfolio-cover-crop`
 
 **Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `indexnow`, `manifest-cursors`, `figure-lightbox`, `site-branding`, `preview-site-lockup`, `light-theme-colors`, `og-image-filename`, `source-file-utils`, `test-json-pipe` — see [Unit Tests](#unit-tests) below
 
@@ -89,6 +89,10 @@ Runs [Stylelint](https://stylelint.io) on `src/**/*.css` using `.stylelintrc.jso
 ### portfolio-cover-crop.js
 
 Guards portfolio grid thumbnail crop authoring: `validateCoverPosition` / `validateCoverZoom` allowlists, `jonplummer.css` custom properties (no per-slug `object-position` rules), `portfolio_list_item.njk` wiring, Monotasker `coverPosition: center 20%`, and — when `_site/portfolio/index.html` exists — that card’s inline `--cover-object-position`. Included in `test fast` and in `scripts/build/build.js` post-build.
+
+### favicon-rasters.js
+
+Guards the scraper-facing rasters: `favicon.ico` and `apple-touch-icon.png` must sit on a light content field (`#fafafa`) with a dark mark; `icon.svg` must stay unplated and still theme with `prefers-color-scheme`. Source of the rasters is `icon-raster.svg` (not linked in HTML). Included in `test fast` and in `scripts/build/build.js` pre-build. Regenerate with `pnpm run generate-favicon-rasters`.
 
 ### color-contrast.js
 

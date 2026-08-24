@@ -6,7 +6,7 @@
  * Centralized here to make it easy to experiment with different spinner styles.
  */
 
-const SPINNER_FRAMES = ['◤', '⟋', '◢', ' '];
+const SPINNER_FRAMES = ['🌑', '🌒', '🌓', '🌔', '🌕', '🌖', '🌗', '🌘'];
 
 module.exports = {
   SPINNER_FRAMES
@@ -30,7 +30,11 @@ module.exports = {
 // Circles
 // const CIRCLE_RING = ['○', '◎', '◉', '●', '◉', '◎'];
 // const CIRCLE_PULSE = ['·', '•', '●', '•'];
-// const CIRCLE_FLIP = ['◠', '⊙', '◡', ' '];
+// const CIRCLE_FLIP = ['◠', '◯', '◡', ' '];
+// const CIRCLE_FLIP2 = ['◯', '◒', '●', '◓'];
+
+// Arcs
+// const ARC_SPIN = ['◜', '◝', '◞', '◟'];
 
 // Squares
 // const SQUARE_SPIN_HORIZ = ['□', '◧', '■', '◨'];
@@ -59,18 +63,14 @@ module.exports = {
 
 // I Ching
 // const ICHING_SPIN_1 = ['☱', '☲', '☴'];
-// const ICHING_SPIN_2 = ['☰', '☱', '☳', '☶', '☴', '☱', '☲', '☴'];
+// const ICHING_SPIN_2 = ['☱', '☳', '☶', '☴', '☱', '☲', '☴'];
+// const ICHING_SPIN_3 = ['☱', '☳', '☷', '☶', '☴'];
 // const ICHING_ALL = ['☰', '☱', '☲', '☳', '☴', '☵', '☶', '☷'];
 
 // Geometric morphing
 // const DIAMOND_PULSE = ['◇', '◈', '◆', '◈'];
 // const DIAMOND_SPIN = ['◇', '⟐', '◆', '⟐'];
 // const HEXAGON_MORPH = ['⬡', '⬢', '⬡', '⬡'];
-// const SHIELD_PULSE = ['⛨', '⛩', '⛨', ' '];
-
-// Weather/nature
-// const WAVE = ['〰', '∿', '≈', '∿'];
-// const WIND = ['𝄞', '𝄡', '𝄢', '𝄡'];
 
 // Typography
 // const ELLIPSIS = ['.  ', '.. ', '...', ' ..', '  .', '   '];

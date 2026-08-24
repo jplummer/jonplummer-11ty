@@ -1,3 +1,14 @@
+2026-08-24:
+  - url: "https://craigmod.com/essays/software_bonkers/"
+    title: Software Bonkers – Craig Mod
+    description: "\"I’ve always been opinionated about how software should work. Mainly, it should be fast. The bounds of it should be “knowable.” The contract you have with it should be “sane” (i.e., you just own it). But I’m busy, and I’m an OK-but-not-great coder. So all of these software opinions largely stayed locked in my noggin. Then, a year ago, Claude Code appeared.\""
+  - url: "https://gist.github.com/petervandijck/6bf8e70da6dbc09f4d150990dd861101?utm_source=substack&utm_medium=email"
+    title: ux.md – Peter VanDijck
+    description: "An example of Peter's UX.md document format that captures (and makes avalable to humans and agents alike) goals, personas, problem to solve, and UX principles for his Sputnik Intelligence product."
+  - url: "https://www.dsebastien.net/design-md-specification/"
+    title: DESIGN.md Specification – Sébastien Dubois
+    description: "\"DESIGN.md is an open Apache-2.0 format specification from Google Labs for describing a design system to coding agents in a single, version-controllable file. It pairs machine-readable design tokens in YAML front matter with human-readable design rationale in markdown prose, so an LLM can apply visual identity correctly instead of defaulting to generic UI.\""
+
 2026-08-23:
   - url: "https://uxdesign.cc/rethinking-design-leadership-with-swarms-and-flocks-9298db8c59d2"
     title: Rethinking design leadership with swarms and flocks – Darren Yeo

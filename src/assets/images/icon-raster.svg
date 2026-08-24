@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Raster-only source (favicon.ico, apple-touch-icon.png). Not linked in HTML.
+     Field is light content background oklch(98% 0 0deg) = #fafafa.
+     Mark is light-mode icon.svg fill. Geometry matches icon.svg. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+	<rect width="600" height="600" fill="#fafafa"/>
+	<g fill="#2a2d32">
+		<rect x="450" y="50" width="100" height="400"/>
+		<rect x="50" y="450" width="100" height="100"/>
+		<rect x="183" y="50" width="100" height="500"/>
+		<rect x="317" y="50" width="100" height="500"/>
+	</g>
+</svg>

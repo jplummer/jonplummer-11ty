@@ -11,9 +11,9 @@ description: A work-from-home network gateway with two lights and two audiences 
 ---
 ## The situation
 
-Imagine bringing your work laptop home and connecting to your corporate network and to its VPN, merely by selecting your corporate network from your WiFi menu. That's the idea behind the Datto Secure Edge AP421. It was an especially relevant idea while were were all quarantined during the initial waves of COVID-19.
+Imagine bringing your work laptop home and connecting to your corporate network via VPN merely by selecting your corporate network name from your WiFi menu. That's the idea behind the Datto Secure Edge AP421. It was an especially relevant idea while were were all quarantined during the initial waves of COVID-19.
 
-An MSP, the IT company a business hires to manage its network, sends the device to an employee's home, and from that point on it has to serve two different groups at once: the employee who plugged it in wants an easy, reliable setup and fast access to their work, and the MSP who's actually responsible for it working wants it to work and to be easily able to fix things when it goes wrong.
+An MSP (Managed Services Provider), the IT company a business hires to manage its network, sends the device to an employee's home, and from that point on it has to serve two different groups at once: the employee who plugged it in wants an easy, reliable setup and fast access to their work, and the MSP who's actually responsible for it working wants it to work and to be easily able to fix things when it goes wrong.
 
 At Concentric Sky, I led the design of the AP421's setup and authentication flow for Datto: the LED behavioral key, the state diagram that reconciles all four setup modes, the authentication and session logic that ties the device to Datto's network, and a full redline of the printed setup guide. The job was making sure the device's lights, its captive portal, and its companion app all told the same story about the same system.
 
