@@ -1,10 +1,17 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-08-23
+
+- Redirect bare /uses to /technologies/ as well as /uses/
+- Drop the comma from the leaner-nav post title
+- Rewrite /friends intro and tighten the list
+
 ## 2026-08-22
 
 - Add /friends page
 - Merge branch 'worktree-nav-restructure'
 - Import links, note writing-style feedback, publish datto draft
+- Smooth footer nav column reflow instead of hard 4-to-1 collapse
 - Add "Not every touchpoint deserves the best" post
 
 ## 2026-08-21
@@ -752,4 +759,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-08-23
+Last deployed on 2026-08-24
