@@ -3,6 +3,8 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 ## 2026-08-24
 
 - Add plated favicon rasters, footer /ogimages link, and ideas updates.
+- Tighten /friends meta description to match the list criteria.
+- Regenerate /friends/ OG image after meta description update.
 
 ## 2026-08-23
 
