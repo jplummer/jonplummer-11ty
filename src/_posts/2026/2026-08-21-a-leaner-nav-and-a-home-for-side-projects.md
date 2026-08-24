@@ -1,5 +1,5 @@
 ---
-title: "New on the blog: a leaner top nav, and a home for side projects"
+title: "New on the blog: a leaner top nav and a home for side projects"
 layout: layouts/single_post.njk
 date: "2026-08-21"
 tags: post
