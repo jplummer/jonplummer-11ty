@@ -17,7 +17,11 @@ redirects:
   - from: /type/gallery/
     to: /type/
 
+  # Apache Redirect is prefix-based: /uses/ does not match /uses, and listing
+  # /uses first would turn /uses/ into /technologies//. Slashed form first.
   - from: /uses/
+    to: /technologies/
+  - from: /uses
     to: /technologies/
 
   # Canonical URL aliases
