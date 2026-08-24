@@ -25,7 +25,7 @@ Don't want to be on this list? Tell me and I'll take you off. Think you belong h
 - [Jaemi Aoh](https://jaemiaoh.portfolio.site/) – Creative director at Beaumont.
 - [Jake Rowe](https://jakerowedesigns.com) – Senior UX designer I worked with at Invoca.
 - [Jean-Paul Bondy](https://jbondy.com) – Director of product design at Pixel Pushers.
-- [Joey Bruckner](https://joeybruckner.com) – Consultant at Instructure.
+- [Joey Bruckner](https://joeybruckner.com) – Lead Project Manager at ICF and Airbnb superhost, don't let the out-of-date resume fool you.
 - [Julie Power Pantiskas](https://www.flavorofcalifornia.com/) – CEO of The Flavor of California.
 - [Kathryn Petek](https://www.shannonwilson.com/people/188252) – VP and geotechnical engineer at Shannon & Wilson.
 - [Linda Wanczyk](https://lindawanczyk.com) – Design consultant and artist running her own studio, Linda Wanczyk Design.
