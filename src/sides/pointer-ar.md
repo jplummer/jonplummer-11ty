@@ -6,6 +6,7 @@ layout: layouts/side_detail.njk
 tags: sideproject
 permalink: /sides/pointer-ar/
 status: In development
+githubUrl: https://github.com/jplummer/pointer-ar
 ogImage: /assets/images/og/sides.png
 ---
 Pointer-AR uses your phone's camera, compass, and location to show you exactly where to look for the ISS, Hubble, the James Webb Space Telescope, the planets, and the Seven Wonders of the World – all of which are below the horizon from most places on Earth most of the time, which is most of the point.
