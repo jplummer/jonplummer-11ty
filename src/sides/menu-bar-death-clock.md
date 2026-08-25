@@ -6,6 +6,7 @@ layout: layouts/side_detail.njk
 tags: sideproject
 permalink: /sides/menu-bar-death-clock/
 status: Paused
+githubUrl: https://github.com/jplummer/death-clock-menu-bar
 ogImage: /assets/images/og/sides.png
 ---
 A small macOS menu bar app that counts down to your statistical life expectancy (memento mori) or up from your date of birth (memento vivere), sitting quietly in the menu bar the whole time.
@@ -18,4 +19,4 @@ Started, then set aside for other projects. The name is a placeholder – it'll 
 
 The menu bar death clock makes no network connections at all today. A later version may download public actuarial tables to improve its life-expectancy estimate – a one-way download of public data, not a transmission of anything about you. It doesn't run ads, sell data, or share data with third parties, and it isn't directed at children or intended for anyone under 13.
 
-This is a personal project, paused, offered as-is, without warranty of any kind. There's no public repository yet, so no license terms to point to – that'll change if and when it ships. I may pick it back up, change it, or leave it as-is indefinitely.
+This is a personal project, paused, offered as-is, without warranty of any kind. Source is on GitHub under the [PolyForm Noncommercial License 1.0.0](https://github.com/jplummer/death-clock-menu-bar/blob/main/LICENSE) – see the repository for current terms. I may pick it back up, change it, or leave it as-is indefinitely.
