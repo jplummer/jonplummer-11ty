@@ -6,6 +6,8 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Tighten /friends meta description to match the list criteria.
 - Regenerate /friends/ OG image after meta description update.
 - Update Joey Bruckner’s /friends blurb to current role.
+- Add GitHub source and issues links to Pointer-AR.
+- Add death-clock GitHub links and name PolyForm on both sides pages.
 
 ## 2026-08-23
 
@@ -766,4 +768,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-08-24
+Last deployed on 2026-08-27
