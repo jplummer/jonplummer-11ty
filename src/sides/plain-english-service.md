@@ -1,7 +1,7 @@
 ---
 title: Plain English service
 description: A macOS Service that flags uncommon words in selected text, inspired by Randall Munroe's Thing Explainer and the Up-Goer Five word list.
-date: 2026-08-21
+date: 2026-08-01
 layout: layouts/side_detail.njk
 tags: sideproject
 permalink: /sides/plain-english-service/

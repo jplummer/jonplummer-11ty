@@ -7,7 +7,7 @@ tags: page
 permalink: /friends/
 ogImage: /assets/images/og/friends.png
 ---
-Updated {{ date | postDate }}. Inspired by [slashfriends.org](https://slashfriends.org) and [Nick Gray](https://nickgray.net), this is a growing list of people I like and admire, all of whom I've worked with in some way. Long ago I had lists of "heroes" and "villains" on my site – hereoes were people I admired from afar, and villains were friends. People are the real world-wide-web, after all. As it turns out, the heroes list is impossible to maintain and the villains list is never complete.
+Updated {{ date | postDate }}. Inspired by [slashfriends.org](https://slashfriends.org) and [Nick Gray](https://nickgray.net), this is a growing list of people I like and admire, all of whom I've worked with in some way. Long ago I had lists of "heroes" and "villains" on my site – heroes were people I admired from afar, and villains were friends. People are the real world-wide-web, after all. As it turns out, the heroes list is impossible to maintain and the villains list is never complete.
 
 Don't want to be on this list? Tell me and I'll take you off. Think you belong here and I missed you, or got your link wrong? Let me know where to find your best online.
 
@@ -29,7 +29,7 @@ Don't want to be on this list? Tell me and I'll take you off. Think you belong h
 - [Julie Power Pantiskas](https://www.flavorofcalifornia.com/) – CEO of The Flavor of California.
 - [Kathryn Petek](https://www.shannonwilson.com/people/188252) – VP and geotechnical engineer at Shannon & Wilson.
 - [Linda Wanczyk](https://lindawanczyk.com) – Design consultant and artist running her own studio, Linda Wanczyk Design.
-- [Louis Elfman](https://www.instagram.com/louiselfman/) – Longtime connection, currently considering whether to make his next project about phtography or about tea.
+- [Louis Elfman](https://www.instagram.com/louiselfman/) – Longtime connection, currently considering whether to make his next project about photography or about tea.
 - [Megan Fister](https://steadyhousehold.com/full-story/) – Founder of Steady Household.
 - [Miki Markovich](https://mikimarkovich.com) – Content and creative strategist at Obie Companies.
 - [Nancy Mayer Allan](https://www.nancymayerallan.com/) – Artist and interior designer.

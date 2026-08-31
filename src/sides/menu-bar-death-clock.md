@@ -1,7 +1,7 @@
 ---
 title: Menu bar death clock
 description: A macOS menu bar app that counts down to your statistical life expectancy, or up from your date of birth. Name still TBD.
-date: 2026-08-21
+date: 2026-08-02
 layout: layouts/side_detail.njk
 tags: sideproject
 permalink: /sides/menu-bar-death-clock/

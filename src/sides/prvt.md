@@ -1,15 +1,19 @@
 ---
 title: prvt
 description: A self-hosted, privacy-first URL shortener that makes small QR codes for print and forgets every link once its lifetime expires.
-date: 2026-08-21
+date: 2026-08-18
 layout: layouts/side_detail.njk
 tags: sideproject
 permalink: /sides/prvt/
-status: Self-hosted, in personal use
+coverImage: 2026/08/prvt.png
+coverPosition: center 15%
+status: In personal use
 githubUrl: https://github.com/jplummer/prvt
 ogImage: /assets/images/og/sides.png
 ---
-prvt turns a long URL into a short one that self-destructs after a lifetime you set, from a day to four weeks – no click tracking, no analytics, no log of who followed the link. It keeps short URLs in QR alphanumeric mode, which produces the smallest possible printed QR codes.
+![Shorten a URL, make a QR code, no tracking.](/assets/images/2026/08/prvt.png)
+
+prvt turns a long URL into a short one that self-destructs after a lifetime you set, from a day to four weeks – no click tracking, no analytics, no log of who followed the link. It uses caps and numerals to keep short URLs in "QR alphanumeric" mode, which produces the smallest possible and easiest-to-reproduce printed QR codes.
 
 It runs on Cloudflare Workers and KV, and it's meant to be self-hosted rather than used as a shared public service – see the repo for setup instructions.
 

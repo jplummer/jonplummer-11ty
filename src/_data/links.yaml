@@ -1,10 +1,15 @@
+2026-08-27:
+  - url: "https://claude.com/blog/the-ai-native-sdlc-playbook"
+    title: The AI-Native SDLC playbook – Louis Claxton
+    description: "\"Each stage ends by writing one to version control (including `intent.md`, `spec.md`, `plan.md`, the diff and its tests, the PR with its review findings, and the incident record) and the next stage begins by reading it. For the early stages, .md files are the predominant artifact because a product owner and an agent can both read and act on the same file. From Build onward, the artifact is code and its records. The chain of commits is also the audit trail: who asked for what, what the agent produced, and who approved it.\""
+
 2026-08-24:
   - url: "https://craigmod.com/essays/software_bonkers/"
     title: Software Bonkers – Craig Mod
     description: "\"I’ve always been opinionated about how software should work. Mainly, it should be fast. The bounds of it should be “knowable.” The contract you have with it should be “sane” (i.e., you just own it). But I’m busy, and I’m an OK-but-not-great coder. So all of these software opinions largely stayed locked in my noggin. Then, a year ago, Claude Code appeared.\""
   - url: "https://gist.github.com/petervandijck/6bf8e70da6dbc09f4d150990dd861101?utm_source=substack&utm_medium=email"
     title: ux.md – Peter VanDijck
-    description: "An example of Peter's UX.md document format that captures (and makes avalable to humans and agents alike) goals, personas, problem to solve, and UX principles for his Sputnik Intelligence product."
+    description: "An example of Peter's UX.md document format that captures (and makes available to humans and agents alike) goals, personas, problem to solve, and UX principles for his Sputnik Intelligence product."
   - url: "https://www.dsebastien.net/design-md-specification/"
     title: DESIGN.md Specification – Sébastien Dubois
     description: "\"DESIGN.md is an open Apache-2.0 format specification from Google Labs for describing a design system to coding agents in a single, version-controllable file. It pairs machine-readable design tokens in YAML front matter with human-readable design rationale in markdown prose, so an LLM can apply visual identity correctly instead of defaulting to generic UI.\""

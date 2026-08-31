@@ -3,11 +3,13 @@
 # One word per line
 
 # Company/Product Names
+Adafruit
 ADPList
 Advate
 Advoy
 Ahrefs
 Archivo
+Axure
 Badgr
 Belkin
 Baudu
@@ -15,18 +17,25 @@ Cayuse
 Datto
 Duolingo
 Ecosia
+Enginuity
 Feedly
 Fixit
 Forrester
 Glassdoor
 IDSA
+IIIMPACT
 Instagram
 Instructure
 Invoca
 Invocans
 Kagi
 Linksys
+MOCA
 Monotasker
+Nabu
+Obie
+Phyn
+prvt
 Qualtrics
 Readwise
 RISD
@@ -42,6 +51,7 @@ Yippy
 agentic
 sideproject
 APCA
+CIRCUITPY
 DTMF
 DURSL
 Genchi
@@ -52,6 +62,7 @@ Muri
 OKLCH
 ogimages
 chatbots
+circup
 cursorrules
 dataviz
 edtech
@@ -68,8 +79,11 @@ luxon
 microcredential
 Mbps
 mvps
+neopixel
 obligatoes
 popout
+PSRAM
+Qwiic
 roadmapping
 SDLC
 Storyboarding
@@ -85,6 +99,7 @@ WSIX
 VUCA
 
 # Proper Names (People)
+Aarjav
 Abrahams
 Addy
 Aditya
@@ -105,8 +120,10 @@ Cagan
 Chaman
 Chenxin
 Choy
+Claxton
 Coenen
 Cotterill
+Cottom
 Crockford
 Crumlish
 Demchenko
@@ -163,6 +180,7 @@ Meyvis
 Millhouse
 Mitev
 Motista
+Munroe
 Naeem
 Neeman
 Neistat
@@ -187,11 +205,13 @@ Rosala
 Salamon
 Saleh
 Samutin
+Sébastien
 Sattell
 Seigler
 Sevier
 Shen
 Shreya
+Sivers
 Slava
 Ström
 Sucher
@@ -202,11 +222,13 @@ Tamkin
 Tane
 Temkin
 Tempkin
+Tressie
 Ullman
 Usborne
 Vadim
 Valk
 Vanbrabant
+Wanczyk
 Wichary
 Willison
 Wroblewski
@@ -214,14 +236,17 @@ Xiao
 Zhou
 
 # Other Valid Terms and Variants
+affordances
 allyship
 approvable
 automatable
 Babycakes
+blogroll
 carb
 centricity
 coachable
 cosplaying
+crowdsource
 dayenu
 deadlift
 deadlifts
@@ -236,6 +261,7 @@ feelsgoodman
 fingerstick
 fingersticks
 gapless
+geotechnical
 greyscale
 hackathon
 handwaving
@@ -249,6 +275,7 @@ janky
 judgements
 kaizen
 lightbox
+likey
 lowball
 mentee
 mentees
@@ -284,6 +311,8 @@ statusing
 stillgotit
 strat
 subgoals
+superhost
+touchpoint
 touchpoints
 threeish
 Traversability
@@ -291,6 +320,7 @@ ultramarathoners
 underdelivering
 undoable
 unergonomic
+unmetabolized
 unmoderated
 unmodulated
 upskill

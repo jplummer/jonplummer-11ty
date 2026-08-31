@@ -6,11 +6,15 @@ layout: layouts/side_detail.njk
 tags: sideproject
 permalink: /sides/monotasker/
 status: Available on the App Store
+coverImage: 2026/06/onboarding.png
+coverPosition: center 20%
 appStoreUrl: https://apps.apple.com/us/app/monotasker/id6770424713
 githubUrl: https://github.com/jplummer/monotasker
 portfolioPost: /2025/06/05/monotasker/
 ogImage: /assets/images/og/sides.png
 ---
+![One task. That's it.](/assets/images/2026/06/taskFocus.png)
+
 Monotasker connects to your iOS Reminders and shows you a single task, picked at random from the list of your choice. Complete it, or shuffle for a different one. That's the whole app.
 
 It's built for the moment a long list stops being useful and starts being a reason to avoid opening it. Monotasker doesn't ask you to sort, prioritize, or plan – it just hands you one thing to do next.
