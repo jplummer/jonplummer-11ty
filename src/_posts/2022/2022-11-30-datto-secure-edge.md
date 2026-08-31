@@ -27,13 +27,15 @@ The obvious mistake would be treating all of those failure states the same way. 
 
 If we try to cram all of this startup information onto one light, whoever's looking at the unit either can't tell what to do, or gets told to fix something they have no power over. Getting the state diagram right meant keeping user-addressable and MSP-addressable failures visibly distinct, so the four-blink vocabulary could actually be used to determine what went wrong.
 
-![Making LED behavior simple and clear is a challenge with a limited vocabulary. The best LEDs can do for the end-user is to support what they are seeing in other interfaces, and to be clear enough to be described accurately during a support call.](/assets/images/2022/11/datto-setup-state-diagram.png)
+![LED behavioral specification](/assets/images/2022/11/datto-setup-state-diagram.png)
+*Making LED behavior simple and clear is a challenge with a limited vocabulary. The best LEDs can do for the end-user is to support what they are seeing in other interfaces, and to be clear enough to be described accurately during a support call.*
 
 ## Where hardware meets a login screen
 
 The primary challenge is making an intelligible and straightforward setup workflow that people working from home can accomplish. The device's physical behavior, software experience, quick start guide, user knowledge, and MSP pre-work all need to mesh together to. And the physical and software behavior need to support each other to foster user confidence and understanding during the setup process. If they come apart, user confidence will be dashed, and they will never believe in the system.
 
-![Simple is often complicated under the hood. But this is because when we make something simple we are taking workload away from the user and putting it into the product. If done well this also reduces the level of knowledge required by the user and reduces opportunities to make mistakes.](/assets/images/2022/11/datto-workflow-intermediate.png)
+![Setup and daily-use workflows, combined](/assets/images/2022/11/datto-workflow-intermediate.png)
+*Simple is often complicated under the hood. But this is because when we make something simple we are taking workload away from the user and putting it into the product. If done well this also reduces the level of knowledge required by the user and reduces opportunities to make mistakes.*
 
 The setup and authentication flow is where the physical device and the software experience have to agree with each other. An MSP always pre-assigns the AP421 to a corporate network, and not to a person. That ordering matters: the device has to be associated with a network before any individual's login means anything, so the setup flow runs through two separate checks: device association, then user authentication. The lights have to be able to represent both states independently.
 
@@ -43,23 +45,27 @@ One open tension we flagged rather than resolved outright: whether to broadcast 
 
 Later we learned that we couldn't trust the MSP to pre-configure all of the devices, so we had to revise the workflow to allow users given an org code to enter it into the captive portal if need be. This is not ideal, but also incredibly common; as organizations got close to the launch date the pressure to cut corners and ship quickly grows rapidly.
 
-![A strong underlying logic isn't distorted very much by twist and turns late in the project – in this case, not having the org code preconfigured is an easy extension to the user workflow, and additional logic helps a second device respond correctly in the presence of the first.](/assets/images/2022/11/datto-workflow-revised.png)
+![Setup and daily-use workflows, combined, with late-breaking logic changes](/assets/images/2022/11/datto-workflow-revised.png)
+*A strong underlying logic isn't distorted very much by twist and turns late in the project – in this case, not having the org code preconfigured is an easy extension to the user workflow, and additional logic helps a second device respond correctly in the presence of the first.*
 
 ## Simple is as simple does
 
 If the workflow takes decisions off of the user's plate, the underlying software experience can appear simple, but there are still plenty of states to define. In networking there are also plenty of wait states to handle. And, critically, the setup experience, ideally done once, needs to hand off smoothly into the day-to-day experience.
 
-![There are only a handful of user tasks in setup – if not wired, join a wireless network; authenticate to the corporate network; change to the corporate network and get to work. But each of these has a handful of failure modes. Making the happy path simple and speeds most people through the process. Demonstrating success at the end supports user confidence.](/assets/images/2022/11/datto-wires-setup.png)
+![Setup wireframes](/assets/images/2022/11/datto-wires-setup.png)
+*There are only a handful of user tasks in setup – if not wired, join a wireless network; authenticate to the corporate network; change to the corporate network and get to work. But each of these has a handful of failure modes. Making the happy path simple and speeds most people through the process. Demonstrating success at the end supports user confidence.*
 
-![Visibly linking the hardware and software together reassures users that the system knows what is going on. Using a captive portal to ask for re-authentication prevents users from having to notice a problem and remember what to do about it.](/assets/images/2022/11/datto-wires-daily.png)
+![Daily use wireframes](/assets/images/2022/11/datto-wires-daily.png)
+*Visibly linking the hardware and software together reassures users that the system knows what is going on. Using a captive portal to ask for re-authentication prevents users from having to notice a problem and remember what to do about it.*
 
 ## Mockups are not enough
 
 Coordinated experience doesn't stop at the screen. It has to survive into the printed guide in the box, or the story falls apart at the one point of contact most people actually read. Reviewing Datto's quick setup guide surfaced two kinds of catches.
 
-![If the device and software take work away from the user, then all the QSG needs to do is help them plug it in and then direct attention to the software experience to complete setup.](/assets/images/2022/11/datto-qsg.png)
+![Quick start guide](/assets/images/2022/11/datto-qsg.png)
+*If the device and software take work away from the user, then all the QSG needs to do is help them plug it in and then direct attention to the software experience to complete setup.*
 
-The first was tone: unnecessary capitalization, an instruction to wait for a light that would turn solid before the user could do anything else useful anyway, so the instruction was better cut than followed. Small things, but they're the difference between a guide that sounds like a person wrote it and one that sounds like it came out of a legal template.
+The first was polish: unnecessary capitalization, an instruction to wait for a light that would turn solid before the user could react anyway, so the instruction was better cut than kept. Small things, but they're the difference between a guide that sounds like a person wrote it and one that sounds like it came out of a technical template.
 
 The second was a compliance catch: California law requires consumer networking devices to ship secured, with a unique password, not a shared default. That requirement has to show up in what the setup card actually says the device's credentials are. Missing it doesn't make the copy worse. It makes the product noncompliant in one state.
 

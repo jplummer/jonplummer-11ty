@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-08-31
+
+- Publish the regulated-prototyping post, rewrite Datto Secure Edge, and add /sides covers.
+
 ## 2026-08-24
 
 - Add plated favicon rasters, footer /ogimages link, and ideas updates.
