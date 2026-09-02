@@ -1,8 +1,15 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-09-02
+
+- Pack incomplete portrait-grid rows to the right.
+- Remove unused Datto LED responsibility figure.
+- Rewrite the WeMo portfolio piece with the setup, rules, and partnership story.
+
 ## 2026-08-31
 
 - Publish the regulated-prototyping post, rewrite Datto Secure Edge, and add /sides covers.
+- Add Belkin hardware-behavior portfolio samples and split Datto figure captions.
 
 ## 2026-08-24
 
@@ -772,4 +779,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-08-31
+Last deployed on 2026-09-02
