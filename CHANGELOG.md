@@ -5,6 +5,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Pack incomplete portrait-grid rows to the right.
 - Remove unused Datto LED responsibility figure.
 - Rewrite the WeMo portfolio piece with the setup, rules, and partnership story.
+- Rewrite the Belkin router out-of-box piece around box, guide, and software.
 
 ## 2026-08-31
 
@@ -779,4 +780,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-09-02
+Last deployed on 2026-09-03
