@@ -64,7 +64,7 @@ The following summer we assessed the candidates. Not a delivery plan – an eval
 
 No row is complete, and none of them could have been. The firmware interface has an X at "connect to router" for the obvious reason that you have to reach the router before you can see it. The printed guide is at its strongest on wiring, where a picture of a plug beats anything on a screen. Whatever we shipped was going to be a combination, and the board is how we chose which combination.
 
-In practice it settled into the same three every time. The box and the quick install guide, which were always there, plus one piece of software: the CD at first, then the router's own web interface, then an app. The software channel is the one that kept changing.
+In practice it settled into the same three every time. The box and the quick install guide, which were always there, plus one piece of software: the CD at first, then the router's own web interface, later an app. The software channel is the one that kept changing.
 
 ## What we required of it
 
