@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-09-03
+
+- Publish the EDIT framework portfolio piece and Simple is really post.
+
 ## 2026-09-02
 
 - Pack incomplete portrait-grid rows to the right.
