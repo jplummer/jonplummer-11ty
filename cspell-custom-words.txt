@@ -8,6 +8,7 @@ ADPList
 Advate
 Advoy
 Ahrefs
+Alexa
 Archivo
 Axure
 Badgr
@@ -33,6 +34,7 @@ Linksys
 MOCA
 Monotasker
 Nabu
+Netgear
 Obie
 Phyn
 prvt
@@ -44,8 +46,10 @@ Squarespace
 Velop
 Webflow
 WeMo
+Wemos
 Whitespectre
 Yippy
+Zigbee
 
 # Technical Terms & Acronyms
 agentic
@@ -81,6 +85,9 @@ Mbps
 mvps
 neopixel
 obligatoes
+packout
+packouts
+poka
 popout
 PSRAM
 Qwiic
@@ -175,6 +182,7 @@ Litt
 Lorin
 Marchin
 Marcin
+Marcotte
 Matheus
 Meyvis
 Millhouse
@@ -288,6 +296,7 @@ negging
 offsites
 Omakase
 Omiyage
+Oooh
 operationalization
 partialize
 partializing
@@ -319,6 +328,7 @@ Traversability
 ultramarathoners
 underdelivering
 undoable
+unconfigured
 unergonomic
 unmetabolized
 unmoderated
