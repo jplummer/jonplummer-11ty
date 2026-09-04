@@ -225,10 +225,16 @@ async function processFile(filePath, options = {}) {
   // True only when front matter had no ogImage key (not `auto`, not a manual path)
   const hadMissingOgImageKey = !frontMatter.ogImage;
   
-  // Skip if manually set ogImage exists AND image file exists (only skip if both are true)
-  // If force is true, regenerate everything regardless
-  // If ogImage is set but file doesn't exist, we need to generate it
-  if (!force && frontMatter.ogImage && frontMatter.ogImage !== 'auto') {
+  // Skip only a genuine manual override: an ogImage pointing somewhere other than
+  // the path we derive for this file. A value equal to ogImageUrl is one we wrote
+  // ourselves on a previous run (see the frontmatter write below), so it must fall
+  // through to needsRegeneration() or nothing would ever be refreshed after its
+  // first generation. If force is true, regenerate regardless. If the override's
+  // file doesn't exist, generate it below.
+  const isManualOverride =
+    frontMatter.ogImage && frontMatter.ogImage !== 'auto' && frontMatter.ogImage !== ogImageUrl;
+
+  if (!force && isManualOverride) {
     // Check if the file actually exists - if not, we need to generate it
     if (fs.existsSync(ogImagePath)) {
       return { updated: false, skipped: true, reason: 'Manual ogImage set and file exists' };
