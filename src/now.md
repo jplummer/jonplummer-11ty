@@ -11,7 +11,7 @@ ogImage: /assets/images/og/now.png
 
 ## Looking for work
 
-I was let go from Invoca at the beginning of June. It's a relief in a way to trade that job for the new job of finding the new job. So I'm looking for work, and pursuing a handful of design and development projects to keep my hand in. More on the professional version of me at [/about](/about/).
+I was let go from Invoca at the beginning of June. In a way it's a relief to trade that job for the new job of finding the next job. So I'm looking for work, and pursuing a handful of design and development projects to keep my hand in (though I'd likely do them anyway). More on the professional version of me at [/about](/about/).
 
 The last stretch of my time at Invoca ran along the same line as those projects: AI-powered design tools against our existing design system, prototyping in code, bringing AI workflow agent ideas to the platform, theming React pages, and a set of information and data architecture challenges that deserved attention as the product moved from technology-led to customer-centered. The tooling half of that was surfing the chaos, a posture I don't generally favor. The architecture half is the work I'd most like more of.
 
@@ -19,7 +19,7 @@ The last stretch of my time at Invoca ran along the same line as those projects:
 
 We finally moved into our new house about two-and-a-third years ago and are loving it. It's holding up to the weather perfectly, though there are improvements we'll need to make. It's a California design transplanted into Oregon, so a couple of exterior doors will need more rain protection, and when the humidity is high (much of the fall and winter) the garage needs more ventilation. A house is a boat that can't sink, full of projects, never completed.
 
-The girl (really, the young woman) is busy with dance and college, and just started an intensive year-long ballet training program in the midwest. She has found the laundry, the grocery store, the bus, can get to and fro, and is (successfully) lobbying for a car. Adulting! This means we are probably successful parents.
+The girl (really, the young woman) is busy with dance and college, and just started an intensive year-long ballet training program in the Midwest. She has found the laundry, the grocery store, the bus, can get to and fro, and is (successfully) lobbying for a car. Adulting! This means we are probably successful parents.
 
 The lady is busy copy-editing and writing book reviews for the newspaper. It's an incredible amount of work. I don't know how she does it.
 
