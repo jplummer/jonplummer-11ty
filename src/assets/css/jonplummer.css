@@ -1259,8 +1259,9 @@ a.figure-lightbox-trigger img {
   cursor: zoom-in;
 }
 
-/* Portfolio Grid */
-ul.portfolio-grid {
+/* Portfolio and side-project grids: one card pattern under two class names.
+   Selectors are joined with :is() so a crop or hover tweak lands once. */
+ul:is(.portfolio-grid, .sides-grid) {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--gutter);
@@ -1269,19 +1270,19 @@ ul.portfolio-grid {
 }
 
 @media (width >= 40rem) {
-  ul.portfolio-grid {
+  ul:is(.portfolio-grid, .sides-grid) {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (width >= 60rem) {
-  ul.portfolio-grid {
+  ul:is(.portfolio-grid, .sides-grid) {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-/* Portfolio Item Override */
-article.portfolio-item {
+/* Card Override */
+article:is(.portfolio-item, .side-item) {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xs);
@@ -1290,25 +1291,25 @@ article.portfolio-item {
 }
 
 /* One link for thumbnail + title: underline title whenever the card link is hovered/focused */
-article.portfolio-item > a {
+article:is(.portfolio-item, .side-item) > a {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
   text-decoration: none;
 }
 
-article.portfolio-item > a:is(:hover, :focus-visible) p {
+article:is(.portfolio-item, .side-item) > a:is(:hover, :focus-visible) p {
   text-decoration: underline;
 }
 
-article.portfolio-item a > picture,
-article.portfolio-item a > img {
+article:is(.portfolio-item, .side-item) a > picture,
+article:is(.portfolio-item, .side-item) a > img {
   border: 1px solid var(--border-color);
   box-sizing: border-box;
   overflow: hidden;
 }
 
-article.portfolio-item img {
+article:is(.portfolio-item, .side-item) img {
   display: block;
   width: 100%;
   height: auto;
@@ -1319,88 +1320,28 @@ article.portfolio-item img {
   scale: var(--cover-zoom, 1);
 }
 
-article.portfolio-item > a p {
+article:is(.portfolio-item, .side-item) > a p {
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-base);
   margin: 0;
 }
 
-article.portfolio-item p.portfolio-item-description {
+p:is(.portfolio-item-description, .side-item-description) {
   font-size: var(--font-size-base);
   font-weight: normal;
   line-height: var(--line-height-base);
   color: var(--text-color-light);
   margin: 0;
+}
+
+/* Portfolio has no status line between title and description; add that gap back */
+article.portfolio-item p.portfolio-item-description {
   margin-top: var(--spacing-xs);
 }
 
-/* Side projects grid */
-ul.sides-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--gutter);
-  padding: 0;
-  list-style: none;
-}
-
-@media (width >= 40rem) {
-  ul.sides-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (width >= 60rem) {
-  ul.sides-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-article.side-item {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xs);
-  padding-bottom: 0;
-  margin-bottom: var(--spacing-lg);
-}
-
-article.side-item > a {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-  text-decoration: none;
-}
-
-article.side-item > a:is(:hover, :focus-visible) p {
-  text-decoration: underline;
-}
-
-article.side-item a > picture,
-article.side-item a > img {
-  border: 1px solid var(--border-color);
-  box-sizing: border-box;
-  overflow: hidden;
-}
-
-article.side-item img {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16/9;
-  object-fit: cover;
-  object-position: var(--cover-object-position, center);
-  transform-origin: var(--cover-object-position, center);
-  scale: var(--cover-zoom, 1);
-}
-
-article.side-item > a p {
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-base);
-  margin: 0;
-}
-
-p.side-item-status {
+/* Quiet uppercase status label: side-project card and detail page */
+p:is(.side-item-status, .side-status) {
   font-size: var(--font-size-quiet);
   font-weight: normal;
   line-height: var(--line-height-quiet);
@@ -1410,28 +1351,14 @@ p.side-item-status {
   letter-spacing: 0.04em;
 }
 
-p.side-item-description {
-  font-size: var(--font-size-base);
-  font-weight: normal;
-  line-height: var(--line-height-base);
-  color: var(--text-color-light);
-  margin: 0;
+p.side-status {
+  margin-bottom: var(--spacing-md);
 }
 
 /* Side project detail page — opt out of the generic article grid (header/footer/section
    areas); this layout has an extra aside the grid has no slot for, so it flows normally. */
 article.side-detail {
   display: block;
-}
-
-p.side-status {
-  font-size: var(--font-size-quiet);
-  line-height: var(--line-height-quiet);
-  font-weight: normal;
-  color: var(--text-color-light);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  margin: 0 0 var(--spacing-md);
 }
 
 aside.side-links {

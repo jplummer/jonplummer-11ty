@@ -90,7 +90,7 @@ function validateCssSource(result) {
     }
   }
 
-  if (!/article\.portfolio-item a > picture[\s\S]*overflow:\s*hidden/.test(css)) {
+  if (!/article:is\(\.portfolio-item, \.side-item\) a > picture[\s\S]*overflow:\s*hidden/.test(css)) {
     addIssue(fileObj, {
       type: 'portfolio-cover-crop',
       message: 'picture/img cover wrapper must set overflow: hidden',
