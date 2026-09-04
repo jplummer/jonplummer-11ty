@@ -12,6 +12,8 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Archive shipped portfolio and /friends items in ideas.md
 - Fix the 404's stale post list and cut its redundant links
 - Reorganize /now/ and link its projects to sides/
+- Tighten two lines on /now/
+- Regenerate OG images when their source changes
 
 ## 2026-09-03
 
