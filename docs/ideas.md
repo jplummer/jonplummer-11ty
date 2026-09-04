@@ -2,7 +2,19 @@
 
 ## ☑️ Selected
 
-- Craft / polish (demonstrate craft)
+- Side project pages — two things that clear the `sides/` bar and have no page there (2026-09-04)
+  - **This site** — running, public, [source on GitHub](https://github.com/jplummer/jonplummer-11ty), and the most elaborate thing on the `now/` list: test suite, link posts, collected wisdom, OG pipeline, color and font labs. It is also the one project a visitor is already standing inside. Needs `src/sides/jonplummer-11ty.md` with `status`, `githubUrl`, a `coverImage`, and terms, same shape as the others. **Divide the labor with [`/colophon/`](../src/colophon.md)** so the two pages aren't about the same thing twice: the `sides/` page carries the practical stuff its siblings carry – what it does, status, source, terms – and links to `/colophon/` for the why, which is where the type, color, grid, and small-decisions material already lives and where the planned series about building the site is meant to be indexed. Then `src/now.md`'s "this site" bullet can follow the same pattern as Lister and prvt: name on the `sides/` page, GitHub as "(source)". Its "other features" link already points at `/colophon/`.
+  - **Book map tool** — built for my wife to edit and export for her personal website; **not actually in use**, so say so in `status` rather than implying it is. The one project here that can be *previewed on its own page* — an embedded live sample or exported map beats a screenshot. Confirm with her before publishing anything of hers.
+  - Both are already referenced in [`src/now.md`](../src/now.md); link them from there once the pages exist.
+
+- Ideas list at the bottom of `sides/` — a durable home for unstarted ideas (2026-09-04)
+  - **Why**: the unstarted ideas are signal about appetite, not inventory — the shape of problem that reliably catches me (physical objects that display one fact; small devices that do one thing at a time). `now/` throws that away every time it's rewritten, and a stub page in `sides/` for something with nothing to show would devalue the entries that are real. A short list under the built things reads as appetite rather than as a to-do list I'm failing.
+  - **Where**: bottom of `src/sides/index.njk`, below the `.sides-grid`. Prose or a plain list, no per-project pages, no `sideproject` tag (it must not enter `collections.sideproject` or the grid).
+  - **What moves there** from `src/now.md`'s "Still just ideas" paragraph: tee shirt design showcase site; eInk display that fetches the newspaper front page each morning; thermal-printer device that prints the morning's calendar and tasks. The physical ISS pointer stays with [Pointer-AR](../src/sides/pointer-ar.md) — it's the same project, not an idle idea.
+  - **Two conditions, or it goes bad**: date each entry, so the list ages visibly and a shipped idea can say how long it waited; prune anything sitting a year without moving — delete, don't archive. The list's value is being short enough to read.
+  - **Done already (2026-09-04)**: `now/`'s four status buckets are gone, and the unstarted ideas are one short "Still just ideas" paragraph rather than bullets carrying the same visual weight as Monotasker. Moving them off `now/` entirely is what's left.
+
+- Craft/polish (demonstrate craft)
   - **Goal**: Make spareness read as intentional craft, not default blankness. Color is already pared-down; skip ornament (texture / alternate stylesheets stay in Future → Craft atmosphere). Vertical alignment is already in good shape — don’t chase “stronger grid” as a separate track unless something new looks off.
   - **Optional later:** widen L/R via gutter / max-width.
   - **Out of scope for this track**: overflow texture, outlandish alternate stylesheet (Future → Craft atmosphere).
