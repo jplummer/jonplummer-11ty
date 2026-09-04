@@ -139,7 +139,7 @@ Posts use `/assets/images/og/YYYY-MM-DD-post-slug.png`. Pages use the permalink-
 
 ### Preview
 
-Preview at `http://localhost:8080/ogimages/`, or open `_site/ogimages/index.html` from disk after a build — styles resolve there too (relative asset URLs).
+Preview at `http://localhost:8080/ogimages/` with `pnpm run dev` running. Opening the built file from disk does not work: asset URLs are root-absolute site-wide (see [commands.md](commands.md#-open-graph-image-generation)), so `file://` resolves them against your filesystem root.
 
 For technical details on generation, see [commands.md](commands.md#-open-graph-image-generation).
 

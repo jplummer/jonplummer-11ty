@@ -3,14 +3,10 @@
 <meta name="robots" content="max-image-preview:large">
 <meta name="generator" content="{{ eleventy.generator }}">
 {%- include "head/critical.njk" %}
-{#- The 404 page is served by the webserver's ErrorDocument handling at whatever
-    deep, nonexistent URL the visitor requested — never at its own real output path
-    (/404.html) the way every other page is. rootRelativePathPrefix computes a
-    file://-safe relative prefix from page.outputPath, which is correct everywhere
-    except here: relative to the fake URL the browser shows, those paths 404 (in
-    practice, 503, since the edge can't resolve them either). Force root-absolute
-    for this one page instead. #}
-{%- set assetPrefix = "/" if permalink == "/404.html" else (page.outputPath | rootRelativePathPrefix) -%}
-<link rel="preload" href="{{ assetPrefix }}assets/fonts/lab/libre-franklin-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="{{ assetPrefix }}assets/fonts/lab/big-shoulders-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="{{ assetPrefix }}assets/css/jonplummer.css">
+{#- Asset hrefs are root-absolute, never relative to page.outputPath. ErrorDocument
+    pages (404, 500) are served by the webserver at whatever URL failed, not at their
+    own output path, so a file-relative path would resolve against that failing URL
+    and 404 in turn. Guarded by `pnpm run test error-document-assets`. -#}
+<link rel="preload" href="/assets/fonts/lab/libre-franklin-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="/assets/fonts/lab/big-shoulders-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="/assets/css/jonplummer.css">

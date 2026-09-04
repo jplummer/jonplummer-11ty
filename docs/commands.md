@@ -277,12 +277,12 @@ The `--force` flag will:
 
 #### Previewing Images
 
-**Preview the template at: `http://localhost:8080/ogimages/`** — or open `_site/ogimages/index.html` from disk after a build; the main stylesheet and favicons use **relative** URLs so `file://` works at any output depth.
+**Preview the template at: `http://localhost:8080/ogimages/`** (needs `pnpm run dev`). Opening `_site/ogimages/index.html` from disk does **not** work. Asset URLs are **root-absolute** everywhere, because ErrorDocument pages (`404.html`, `500.html`) are served at whatever URL failed and a file-relative path would resolve against that URL instead. Guarded by `pnpm run test error-document-assets`.
 
 This preview page shows:
 - Live examples of the OG image template with sample data
 - A gallery of all generated OG images
-- Links to the **color** and **font** static preview HTML under `scripts/` (relative links work when you open `_site/ogimages/index.html` from disk after `pnpm run build`; with dev-only browsing, open those files from the repo instead)
+- The **color** and **font** static previews live under `scripts/*/output/` and are opened from the repo directly (they are self-contained, so `file://` is fine for those)
 
 You can also preview generated images in other ways:
 

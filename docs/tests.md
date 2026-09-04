@@ -128,6 +128,12 @@ Scans `src/**/*.{md,njk,html}` for root-absolute internal links that omit a trai
 
 Guards the `docs/designs/` structure. Fails if the retired `docs/superpowers/` directory exists (the superpowers `writing-plans` / `brainstorming` skills default to that path and defer to user preference for it — see `CLAUDE.md` § Design records), if anything under the gitignored `docs/designs/scratch/` is tracked, or if `docs/designs/specs/` or `plans/` goes missing. Does not check for the old path in prose — the files that document this override have to name it. Does not need `_site/`.
 
+### error-document-assets.js
+
+Checks that the built `404.html` **and** `500.html` reference the stylesheet, font preloads, and all three favicons with root-absolute hrefs. Apache serves an ErrorDocument at whatever URL failed rather than at the page's own output path, so a file-relative href resolves against that failing URL and 404s in turn. Also reads `_site/.htaccess` and fails if it declares an `ErrorDocument` target that `ERROR_PAGES` does not cover, so adding one to the template cannot silently skip the check.
+
+`500.html` was unchecked until 2026-09-04 and had shipped relative hrefs the whole time. The site-wide asset rule is root-absolute (a former `rootRelativePathPrefix` filter made them relative for `file://` browsing that never fully worked), so these pages are no longer a special case — they are the reason the rule exists.
+
 ### og-images.js
 
 Validates that all HTML pages have appropriate Open Graph images. Missing `og:image` (ERROR), default image on non-index pages (ERROR), skips redirect pages.
