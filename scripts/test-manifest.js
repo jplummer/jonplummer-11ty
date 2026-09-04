@@ -69,6 +69,10 @@ const TESTS = [
   // icon.svg (tabs) must stay unplated. No _site needed.
   { id: 'favicon-rasters', script: 'favicon-rasters.js', groups: ['fast', 'pre'] },
   { id: 'trailing-slash-links', script: 'trailing-slash-links.js', groups: ['fast', 'pre'] },
+  // The inline first-paint shell duplicates jonplummer.css tokens by necessity
+  // (the stylesheet it covers for has not loaded). Drift shipped once, in Aug
+  // 2026, and is invisible except on a cold first paint. No _site needed.
+  { id: 'critical-css', script: 'critical-css.js', groups: ['fast', 'pre'] },
   // Guards the docs/designs/ structure against superpowers skills that still
   // hardcode docs/superpowers/ (their SKILL.md files live in a plugin cache we
   // can't durably edit — see .cursor/rules/memory.mdc).

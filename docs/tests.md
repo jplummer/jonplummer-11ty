@@ -34,7 +34,7 @@ This project includes a suite of validation tests covering content structure, HT
 
 _Derived from [`scripts/test-manifest.js`](../scripts/test-manifest.js) — see [The test manifest](#the-test-manifest)._
 
-**Fast Tests:** `html`, `links`, `wisdom`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `deploy-assets`, `error-document-assets`, `favicon-rasters`, `trailing-slash-links`, `design-docs-location`, `portfolio-cover-crop`
+**Fast Tests:** `html`, `links`, `wisdom`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `deploy-assets`, `error-document-assets`, `favicon-rasters`, `trailing-slash-links`, `critical-css`, `design-docs-location`, `portfolio-cover-crop`
 
 **Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `indexnow`, `manifest-cursors`, `figure-lightbox`, `site-branding`, `preview-site-lockup`, `light-theme-colors`, `og-image-filename`, `source-file-utils`, `test-json-pipe` — see [Unit Tests](#unit-tests) below
 
@@ -93,6 +93,12 @@ Guards portfolio grid thumbnail crop authoring: `validateCoverPosition` / `valid
 ### favicon-rasters.js
 
 Guards the scraper-facing rasters: `favicon.ico` and `apple-touch-icon.png` must sit on a light content field (`#fafafa`) with a dark mark; `icon.svg` must stay unplated and still theme with `prefers-color-scheme`. Source of the rasters is `icon-raster.svg` (not linked in HTML). Included in `test fast` and in `scripts/build/build.js` pre-build. Regenerate with `pnpm run generate-favicon-rasters`.
+
+### critical-css.js
+
+Guards the inline first-paint shell in `src/_includes/head/critical.njk` against the `:root` tokens in `jonplummer.css`. The shell must hardcode those values (it covers for a stylesheet that has not loaded), so five pairs are compared token-to-declaration: body `background-color` vs `--content-background-color`, body `color` vs `--text-color`, body `font-family` vs `--font-family`, the heading rule's `font-family` vs `--font-family-display`, and `color-scheme`. Reuses `extractCssCustomProperties()` from `eleventy/utils/css-utils.js` (the same parser the OG pipeline uses). A pair whose declaration or token cannot be found **fails** rather than being skipped, so restructuring either file surfaces here instead of silently disabling the check. Included in `test fast` and in `scripts/build/build.js` pre-build; needs no `_site/`.
+
+**Why it exists:** on 2026-08-11, `d3a2c0bc` softened the light page field to `oklch(98%)` and updated five files but not the shell. For two days every cold light-mode load flashed pure white before the stylesheet darkened it — the exact flash the shell prevents — until `43b968b4` caught it by eye. Drift is invisible in built HTML, invisible on repeat visits (cached CSS), and shows only on a first paint.
 
 ### color-contrast.js
 
