@@ -157,8 +157,7 @@ function configureEvents(eleventyConfig) {
       .filter(file => {
         const isPost = file.includes('_posts/') && (file.endsWith('.md') || file.endsWith('.njk'));
         const isPage = file.includes('src/') && !file.includes('_posts/') && !file.includes('_includes/') && !file.includes('_data/') && !file.includes('assets/') && (file.endsWith('.md') || file.endsWith('.njk'));
-        const isPortfolioPage = file.endsWith('portfolio.njk') || file.endsWith('portfolio.md');
-        return (isPost || isPage || isPortfolioPage);
+        return isPost || isPage;
       })
       .filter(file => {
         // Only process files that actually exist

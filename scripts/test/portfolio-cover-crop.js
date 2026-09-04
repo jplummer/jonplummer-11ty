@@ -5,6 +5,7 @@
  * template wiring, and (when built) Monotasker HTML.
  */
 
+const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
 const { validateCoverPosition, validateCoverZoom } = require('../utils/validation-utils');
@@ -22,12 +23,6 @@ function check(fileObj, label, fn) {
       message: `${label}: ${err.message}`,
       ruleId: 'portfolio-cover-crop',
     });
-  }
-}
-
-function assert(condition, message) {
-  if (!condition) {
-    throw new Error(message);
   }
 }
 

@@ -10,11 +10,9 @@
 <meta property="article:published_time" content="{{ date | dateToRfc3339 }}">
 <meta property="article:author" content="{{ site.author }}">
 <meta property="article:section" content="Blog">
-{%- if tags %}
 {%- for tag in tags %}
 {%- if tag != 'post' %}
 <meta property="article:tag" content="{{ tag }}">
 {%- endif %}
 {%- endfor %}
-{%- endif %}
 {%- endif %}
