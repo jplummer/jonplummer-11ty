@@ -1,5 +1,18 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-09-04
+
+- Align captioned post figures with the text column and share italic caption type with portfolio.
+- Add Belkin and Wemo post vocabulary to the spelling dictionary.
+- Share one card pattern between the portfolio and side-project grids
+- Remove the utility sibling nav's CSS and dangling include
+- Remove four pieces that misstate how the site works
+- Guard the inline first-paint shell against stylesheet drift
+- Make asset URLs root-absolute everywhere; check both error pages
+- Archive shipped portfolio and /friends items in ideas.md
+- Fix the 404's stale post list and cut its redundant links
+- Reorganize /now/ and link its projects to sides/
+
 ## 2026-09-03
 
 - Publish the EDIT framework portfolio piece and Simple is really post.
@@ -784,4 +797,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-09-03
+Last deployed on 2026-09-04
