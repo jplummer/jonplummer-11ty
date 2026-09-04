@@ -98,7 +98,43 @@ function populateFromStylelintOutput(result, stdout, stderr) {
   }
 }
 
+const JONPLUMMER_CSS = path.join(ROOT, 'src', 'assets', 'css', 'jonplummer.css');
+
+// Captioned post images become <figure>. UA stylesheets still apply
+// margin-inline: 40px unless we zero it; the grouped reset only clears
+// margin-block-end. A top-level `figure {` (not a nested `& figure`) is
+// what blog posts get.
+function assertFigureInlineMarginReset(result) {
+  const css = fs.readFileSync(JONPLUMMER_CSS, 'utf8');
+  const fileObj = addFile(result, JONPLUMMER_CSS, 'jonplummer.css');
+  if (!/^\s*figure\s*\{[^}]*margin-inline:\s*0/m.test(css)) {
+    addIssue(fileObj, {
+      type: 'figure-margin-inline',
+      message:
+        'Top-level figure { margin-inline: 0 } is required so captioned post images align with the text column (UA default is 40px)',
+      ruleId: 'figure-margin-inline',
+    });
+  }
+}
+
+// Caption type (italic, quiet color) used to live only under
+// article.portfolio-detail, so blog-post figcaptions stayed roman.
+function assertArticleFigcaptionType(result) {
+  const css = fs.readFileSync(JONPLUMMER_CSS, 'utf8');
+  const fileObj = addFile(result, JONPLUMMER_CSS, 'jonplummer.css');
+  if (!/article\s+figure\s+figcaption\s*\{[^}]*font-style:\s*italic/s.test(css)) {
+    addIssue(fileObj, {
+      type: 'figure-caption-type',
+      message:
+        'article figure figcaption must set font-style: italic so blog captions match portfolio',
+      ruleId: 'figure-caption-type',
+    });
+  }
+}
+
 function validate(result, options) {
+  assertFigureInlineMarginReset(result);
+  assertArticleFigcaptionType(result);
   const { useChanged, files } = options || {};
   const styleArgs =
     useChanged && files && files.length > 0

@@ -82,7 +82,7 @@ Validates `src/_data/wisdom-entries.yaml` for the Collected wisdom section (`/wi
 
 ### css.js
 
-Runs [Stylelint](https://stylelint.io) on `src/**/*.css` using `.stylelintrc.json` (extends `stylelint-config-standard` with project-specific rule overrides for modern CSS, print styles, and layout-specificity ordering).
+Runs [Stylelint](https://stylelint.io) on `src/**/*.css` using `.stylelintrc.json` (extends `stylelint-config-standard` with project-specific rule overrides for modern CSS, print styles, and layout-specificity ordering). Also guards a top-level `figure { margin-inline: 0 }` so captioned blog images are not inset by the UA 40px figure margin, and `article figure figcaption` italic so blog captions match portfolio.
 
 **Note:** With `--changed`, exits successfully if no `src/**/*.css` files changed since last commit.
 

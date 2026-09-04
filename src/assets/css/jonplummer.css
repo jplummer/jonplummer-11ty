@@ -144,6 +144,12 @@ figure, blockquote, dl, dd, section {
   margin-block-end: 0;
 }
 
+/* UA figure { margin-inline: 40px } indents captioned post images off the
+   text column. Keep block-start; paragraphs also have margin-block-end: 0. */
+figure {
+  margin-inline: 0;
+}
+
 /* Remove list styles on ul, ol elements with a list role */
 ul[role='list'], ol[role='list'] {
   list-style: none;
@@ -343,6 +349,16 @@ article section {
 
 article footer {
   grid-area: b;
+}
+
+/* Captioned markdown images: italic quiet credit, same on blog and portfolio.
+   Portfolio keeps grid-column on figcaption separately. */
+article figure figcaption {
+  margin-top: var(--spacing-xs);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--text-color-light);
+  font-style: italic;
 }
 
 /* Embedded interactive demo (iframe + pop-out link) — controls: ink → accent */
@@ -1043,13 +1059,8 @@ article.portfolio-detail {
         display: block;
       }
 
-      /* Captions align with the text column */
+      /* Captions sit in the text column of the subgrid */
       & figcaption {
-        margin-top: var(--spacing-xs);
-        font-size: var(--font-size-base);
-        line-height: var(--line-height-base);
-        color: var(--text-color-light);
-        font-style: italic;
         grid-column: 2;
 
         @media (width <= 54rem) {
@@ -1102,11 +1113,6 @@ article.portfolio-detail {
         }
 
         & figcaption {
-          margin-top: var(--spacing-xs);
-          font-size: var(--font-size-base);
-          line-height: var(--line-height-base);
-          color: var(--text-color-light);
-          font-style: italic;
           padding-left: 0;
         }
       }
