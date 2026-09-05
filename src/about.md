@@ -1,7 +1,7 @@
 ---
 title: /about
 description: Jon Plummer is a UX design leader and mentor with experience at Invoca, Cayuse, Belkin, and Medtronic. Learn about his design leadership philosophy and career.
-date: 2026-07-27T00:00:00.000-07:00
+date: 2026-09-04T00:00:00.000-07:00
 layout: base.njk
 tags: page
 permalink: /about/
@@ -19,11 +19,13 @@ That focus on discovery isn't theoretical. I trained as a social worker and an a
 
 Most recently I was Director of User Experience at Invoca, where I led a design team through an AI product transformation. Before that: Cayuse, Concentric Sky, and eleven years at Belkin, where I rose from Senior Designer to Senior Director and built the UX function for Linksys and Wemo from scratch. Along the way I picked up 20+ patents, an IDSA Silver award, and a lot of hard-won opinions about how design actually earns trust in engineering- and product-led organizations.
 
-I don't just have opinions about AI. At Invoca, that transformation included SMS and voice-based virtual agents, as well as the Call Review Console and AI Scorecard. These tools  put to work inside real customer conversations, cutting Customer Success Manager caseload by a fifth and helping open Contact Centers as a new customer segment.
+I'm looking for my next role – design leadership where the work is deciding what to build, and making sure the reasoning survives all the way to what ships.
+
+I don't just have opinions about AI. At Invoca, that transformation included SMS and voice-based virtual agents, as well as the Call Review Console and AI Scorecard. These tools were put to work inside real customer conversations, cutting Customer Success Manager caseload by a fifth and helping open Contact Centers as a new customer segment. And outside of work I ship what I build – [side projects](/sides/), source included.
 
 I develop designers who can hold a point of view and defend it, not just execute one. I get there by asking them the questions they should be asking, helping them find their own way to an answer. But I'm not hands-off: when the situation calls for a direct read, I give one. I interpret, I instruct, I push back. The goal is people who can think well under pressure and make good calls without being managed through every decision.
 
-Outside work I'm a deep dabbler – jazz piano, 3D printing and amateur industrial design, home improvement, cooking. The common threads are making ideas tangible and improving what's before me. I keep my hands in the tools at work and at home so I can show people the ropes and learn along with them. I vibe-code hobby projects and publish them on GitHub, including a project template that packages agent configuration for tools like Cursor and Claude Code. I keep a running account of what I'm building at [/now](/now/).
+Outside of work: jazz piano, 3d printing and amateur industrial design, home improvement, cooking. The common threads are making ideas tangible and improving what's before me. I keep my hands in the tools at work and at home so I can show people the ropes and learn along with them. I design hobby software projects, specify them closely, steer agents through building them, and read everything before it ships – then publish them on GitHub. The ones with something to show are at [side projects](/sides/); a running account of what I'm building is at [/now](/now/).
 
 I mentor at [Designed.org](https://designed.org) and [tupu.io](https://tupu.io). See more via [my LinkedIn profile](https://linkedin.com/in/jplummer) and message me there if you have something to say, or reach me at [jon@jonplummer.com](mailto:jon@jonplummer.com?subject=I%20visited%20jonplummer.com%2Fabout%20and%20have%20this%20to%20say%3A).
 
