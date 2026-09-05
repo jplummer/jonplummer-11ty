@@ -14,6 +14,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Reorganize /now/ and link its projects to sides/
 - Tighten two lines on /now/
 - Regenerate OG images when their source changes
+- Compress the XML feeds and sitemap
 
 ## 2026-09-03
 
@@ -799,4 +800,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-09-04
+Last deployed on 2026-09-05
