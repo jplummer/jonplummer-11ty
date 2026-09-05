@@ -15,6 +15,8 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Tighten two lines on /now/
 - Regenerate OG images when their source changes
 - Compress the XML feeds and sitemap
+- Queue a sides/ page for dotagents
+- Say on /about/ that I'm looking, and point it at sides/
 
 ## 2026-09-03
 
