@@ -57,6 +57,9 @@ const TESTS = [
   // runs deploy.js's composition (one shared hash walk) with stubbed fetch.
   { id: 'manifest-cursors', script: 'manifest-cursors.js', groups: ['unit'] },
   { id: 'figure-lightbox', script: 'figure-lightbox.js', groups: ['unit'], listInHelp: false },
+  // Matcher behind the /404 "did you mean" list. Requires the browser file
+  // directly, so there is no second copy of the scoring logic to drift.
+  { id: '404-suggest', script: '404-suggest.js', groups: ['unit'] },
   { id: 'site-branding', script: 'site-branding.js', groups: ['unit'] },
   { id: 'preview-site-lockup', script: 'preview-site-lockup.js', groups: ['unit'] },
   { id: 'light-theme-colors', script: 'light-theme-colors.js', groups: ['unit'] },

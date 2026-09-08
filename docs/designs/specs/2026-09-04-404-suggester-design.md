@@ -88,21 +88,34 @@ the leading and trailing slash, strip a trailing `.html`, and collapse every run
 non-alphanumeric characters to a single hyphen. This is what makes a missing
 trailing slash and a `%20` in the path cost nothing.
 
-Scoring is two rules. If a candidate's normalized path starts with the normalized
-failed path, and the failed path is at least eight characters, it scores 0.95 —
-this is truncation, and it is the case we can be most confident about. Otherwise
-the score is the Dice coefficient over character trigrams: twice the count of
-shared trigrams divided by the total count in both. Dice lands between zero and
-one, so the threshold is an interpretable number rather than a magic constant, and
-a single dropped character only destroys the three trigrams that touch it.
+Scoring is three rules. If a candidate's normalized path starts with the
+normalized failed path, and the failed path is at least eight characters, it
+scores 0.95 — this is truncation, the case we can be most confident about. The
+eight-character floor keeps a two-character path from matching a third of the
+site. Otherwise the score is the better of two similarities.
+
+The first is the Dice coefficient over character trigrams: twice the count of
+shared trigrams over the total in both. The second is optimal string alignment —
+Levenshtein plus adjacent transpositions — expressed as `1 - distance / longest`,
+and skipped outright when the shorter string is under half the longer, where it
+cannot score well and the prefix rule already owns the case.
+
+Both are needed, and tuning is what proved it. Trigrams alone separated long
+paths beautifully and short ones not at all: measured against the real 259-entry
+index, the lowest true positive was `/nwo/` → `/now/` at 0.250 while the highest
+false positive was `/index.php` → `/sides/prvt/` at 0.222. No threshold fits a
+gap that thin. Short page names are exactly what people mistype by hand, and
+trigrams go blind on them — `abuot` and `about` share almost no trigrams, scoring
+0.333. Edit distance is strongest precisely there, scoring the same pair 0.800.
+Taking the better of the two moved the lowest true positive to 0.667 and the
+highest false positive to 0.417.
 
 `rankCandidates(failedPath, index, options)` returns the highest-scoring entries
-above `threshold`, at most `limit`, ordered best first. Starting values are
-`threshold: 0.45` and `limit: 3`, to be tuned against the test cases rather than
-defended as chosen.
+above `threshold`, at most `limit`, ordered best first, with shorter URLs breaking
+ties. Settled values are `threshold: 0.55` — the middle of that measured gap —
+and `limit: 3`.
 
-The eight-character floor on the prefix rule keeps a two-character path from
-matching a third of the site.
+Ranking 259 candidates costs about 3ms, once, on a page nobody wants to reach.
 
 ### The page: `src/404.md`
 
@@ -145,10 +158,11 @@ in the test, so it has no `_site` dependency and belongs in `unit` rather than
 
 We have almost no real 404s to learn from — traffic is low — so the cases are real
 site URLs put through the mutations this feature targets, and the test says so
-plainly. One truncated post URL. One with a character dropped mid-slug. One with
-two characters transposed. One directory path missing its trailing slash. One
-path with no relationship to anything on the site, asserting an empty result:
-refusing to guess is behavior worth pinning, not an absence of behavior.
+plainly. Truncated post URLs, characters dropped mid-slug, transpositions in both long
+post slugs and short page names, and a directory path missing its trailing slash.
+Then the refusals, which are behavior worth pinning rather than an absence of it:
+nonsense paths, and the bot-probe paths that actually reach a site like this —
+`/wp-admin/`, `/xmlrpc.php`, `/admin/login/`, `/cgi-bin/`, `/login/`, `/search/`.
 
 Separately, one assertion added to `scripts/test/error-document-assets.js`, which
 already exists to check that error-page assets resolve: `404.html` must reference
@@ -169,8 +183,9 @@ deferred item in `docs/ideas.md`. No attempt at WordPress-era URL recovery. If t
 index grows past roughly ten times its current size, the question of fetching it
 rather than shipping it inline is worth reopening; at 7.4KB gzipped it is not.
 
-## Open question
+## The threshold
 
-The threshold is a judgment call and the first number is a guess. The unit test is
-what makes tuning it deliberate: changing 0.45 should require changing an assertion
-and looking at what that costs.
+Settled at 0.55 by measurement rather than taste, and the unit test is what keeps
+it honest: raising it to 0.90 drops three true positives, lowering it to 0.20
+admits `/wp-admin/`, `/login/` and friends. Changing the number means changing an
+assertion and looking at what that costs.

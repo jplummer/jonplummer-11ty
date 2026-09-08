@@ -296,6 +296,7 @@ const TEST_EMOJIS = {
   'og-images': '📸',
   'rss': '📡',
   'portfolio-notes': '📎',
+  '404-suggest': '🧭',
   'deploy-assets': '📦',
   'cloudflare-purge': '☁️',
   'deploy-guards': '🛟',
