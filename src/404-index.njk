@@ -1,0 +1,43 @@
+---
+permalink: /assets/js/404-index.js
+eleventyExcludeFromCollections: true
+---
+{#-
+  Destination index for /assets/js/404-suggest.js on the 404 page.
+
+  Every reachable destination except the /page/N/ pagination routes, which
+  nobody links to directly, and the two error pages themselves.
+
+  Unlike sitemap.njk this does not hardcode /portfolio/, /wisdom/ or /sides/:
+  all three are templates tagged `page`, so collections.page already has them.
+  (sitemap.njk hardcodes them anyway and emits four duplicate <loc> entries as
+  a result.) Wisdom tag pages come from wisdom.allTags rather than from
+  collections.page, which holds only the first page of a paginated template.
+
+  Titles are raw front matter rather than `smartquotes | striptags` as in every
+  other list on the site. The browser inserts these with textContent, and
+  markdown-it escapes &, <, > and " into entities that would show literally.
+
+  Pairs rather than objects: 260-odd repetitions of {"url":...,"title":...}
+  buys nothing. `dump` emits valid JSON; `safe` keeps autoescape off its quotes.
+-#}
+window.jp404Index=[
+["/",{{ "Home" | dump | safe }}],
+{%- for page in collections.page %}
+{%- if page.data.purpose != "404" and page.data.purpose != "500" and not page.url.startsWith("/wisdom/tags/") %}
+[{{ page.url | dump | safe }},{{ page.data.title | dump | safe }}],
+{%- endif %}
+{%- endfor %}
+{%- for tag in wisdom.allTags %}
+[{{ ("/wisdom/tags/" + tag + "/") | dump | safe }},{{ ("Collected wisdom – #" + tag) | dump | safe }}],
+{%- endfor %}
+{%- for post in collections.post %}
+[{{ post.url | dump | safe }},{{ post.data.title | dump | safe }}],
+{%- endfor %}
+{%- for item in collections.portfolio %}
+[{{ item.url | dump | safe }},{{ item.data.title | dump | safe }}],
+{%- endfor %}
+{%- for item in collections.sideproject %}
+[{{ item.url | dump | safe }},{{ item.data.title | dump | safe }}],
+{%- endfor %}
+];
