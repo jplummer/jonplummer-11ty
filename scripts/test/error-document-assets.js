@@ -72,6 +72,44 @@ function checkPage(result, pageName) {
     }
     assertRootAbsolute(fileObj, pageName, label, match[1]);
   }
+
+  if (pageName === '404.html') {
+    checkSuggesterScripts(fileObj, pageName, html);
+  }
+}
+
+/**
+ * The suggester's two scripts are subject to the same rule as every other
+ * asset on this page: an ErrorDocument is served at the URL that failed, so a
+ * relative src would resolve against that URL and 404 in turn. Both files also
+ * have to exist, since a missing one fails silently in the browser and the
+ * page simply never shows a suggestion.
+ */
+const SUGGESTER_SCRIPTS = ['/assets/js/404-index.js', '/assets/js/404-suggest.js'];
+
+function checkSuggesterScripts(fileObj, pageName, html) {
+  for (const src of SUGGESTER_SCRIPTS) {
+    const re = new RegExp('<script[^>]*src="([^"]*' + src.split('/').pop() + ')"', 'i');
+    const match = html.match(re);
+    if (!match) {
+      addIssue(fileObj, {
+        type: 'error-document-assets',
+        message: `${pageName}: expected a <script src> for ${src}`,
+        ruleId: 'error-document-suggester-scripts',
+      });
+      continue;
+    }
+    assertRootAbsolute(fileObj, pageName, `suggester script ${src}`, match[1]);
+
+    const built = path.join(ROOT, '_site', src.replace(/^\//, ''));
+    if (!fs.existsSync(built)) {
+      addIssue(fileObj, {
+        type: 'error-document-assets',
+        message: `${pageName} references ${src} but _site${src} does not exist`,
+        ruleId: 'error-document-suggester-scripts',
+      });
+    }
+  }
 }
 
 /**

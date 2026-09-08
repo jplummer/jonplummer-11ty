@@ -175,7 +175,6 @@
 
     if (!matches.length) {
       heading.textContent = 'Nothing here looks close to that address';
-      host.hidden = false;
       return;
     }
 
@@ -190,7 +189,6 @@
       list.appendChild(li);
     }
     host.appendChild(list);
-    host.hidden = false;
   }
 
   if (document.readyState === 'loading') {
