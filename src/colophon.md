@@ -11,7 +11,7 @@ ogImage: /assets/images/og/colophon.png
 
 This site is built with Eleventy, Nunjucks, and plain-text markdown files, kept in github. Every page is pre-built at deploy time – nothing renders on demand, and almost nothing needs JavaScript to work. This makes the site fast and cheap to serve and easy to cache. The exceptions, like the portfolio lightbox, are sparing and deliberate.
 
-Type is [Libre Franklin](https://github.com/googlefonts/Libre-Franklin) for reading and [Big Shoulders](https://design.chicago.gov/typography/) for the wordmark and headings, both self-hosted as variable fonts, nothing loaded from anyone else's server. Color is authored in OKLCH and checked against APCA contrast targets automatically, in both light mode and dark, for every token – accessibility isn't a pass at the end, it's a constraint the palette is built inside of from the start. Layout runs on an eight-pixel grid, with a reading measure chosen for comfort, not density. Responsive breakpoints are chosen for favorable measures rather than device-specific dimensions.
+Type is [Libre Franklin](https://github.com/googlefonts/Libre-Franklin) for reading and [Big Shoulders](https://design.chicago.gov/typography/) for the wordmark and the top-level titles, both self-hosted as variable fonts, nothing loaded from anyone else's server. Everything from h2 down stays on Libre Franklin. Color is authored in OKLCH and checked against APCA contrast targets automatically, light mode and dark, for every text-and-background pair the palette actually uses – accessibility isn't a pass at the end, it's a constraint the palette is built inside of from the start. Layout runs on an eight-pixel grid, with a reading measure chosen for comfort, not density. Responsive breakpoints are chosen for favorable measures rather than device-specific dimensions.
 
 None of that is decorative; it's all meant to make the site fast to load and easy to read. It's related to the argument I make about software generally: powerful tools don't reduce the need for careful, coordinated interfaces. They raise the bar for what careful means.
 
@@ -19,8 +19,8 @@ None of that is decorative; it's all meant to make the site fast to load and eas
 
 This site looks spare. That's on purpose, not by default. Sparse isn't the same as undone – here's some of what's actually been decided, even where it doesn't show at a glance.
 
-- **Type is a modular scale from one base size and one ratio** – new sizes stay proportional. Nobody's picking pixel values by eye.
-- **Layout runs on an eight-pixel grid** – spacing is never a guess.
+- **Type is a short list of round rem sizes, each with a job** – 0.875 for utility text, 1 for reading, and 1.5, 2, and 2.5 for headings, each carrying its own line height. (The wordmark has a size of its own, because a lockup answers to the mark rather than to the text around it.) The list stays short because every size I add is another thing to place, maintain, and keep in tune with the rest. You can't save time, you can only do less.
+- **Spacing sits on an eight-pixel grid, and type comes close** – every margin and gap is a multiple of eight. Body text lands on the grid exactly, at a 24-pixel line box, and so does the page title at 48. The middle headings are set tighter because they read better that way, and they fall between lines. Near a baseline grid, without the contortions of enforcing one.
 - **Responsive breakpoints are chosen by reading measure, not device width** – the layout changes when a line gets too long to read comfortably, not at an arbitrary screen size.
 - **Motion is functional, not decorative** – a one-time view-transition on navigation, short hover transitions, nothing else. All of it is off under reduced-motion settings.
 - **Headings and paragraphs use balanced and pretty text-wrapping** – no awkward one-word line breaks, no ragged last lines.
