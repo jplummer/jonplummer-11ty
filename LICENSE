@@ -48,9 +48,10 @@ EXCEPTIONS
 ----------
 
 The drawn portrait of Jon Plummer
-(src/assets/images/jon-sketch-by-rob-ullman-light.png and -dark.png) is
-copyright Robert Ullman, used here with permission. It is not covered by
-either license above and may not be reused.
+(src/assets/images/jon-sketch-by-rob-ullman-light.png and -dark.png) is the
+work of Robert Ullman, commissioned and paid for by Jon Plummer, who publishes
+it on this site. It is not Jon Plummer's to license onward. It falls outside
+both licenses above and may not be reused.
 
 Fonts under src/assets/fonts/ are third-party works distributed under the
 SIL Open Font License; see their own upstream licenses.
