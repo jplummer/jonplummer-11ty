@@ -369,6 +369,9 @@
       const card = document.createElement('div');
       card.className = isFeatured ? 'card featured' : 'card';
       card.dataset.scheme = scheme.n;
+      // Unique per card so each label points at its own input. The featured card
+      // repeats a scheme that also appears in the grid, so it needs its own key.
+      const cardId = isFeatured ? 'featured' : `s${scheme.n}`;
 
       const lockBtnHTML = scheme.n === 8
         ? `<button class="lock-btn" type="button">🔗 Linked</button>` : '';
@@ -402,13 +405,13 @@
         </div>
         <div class="card-desc">${scheme.desc}</div>
         <div class="field">
-          <label>Display Name</label>
-          <input type="text" class="display" autocomplete="off" />
+          <label for="display-${cardId}">Display Name</label>
+          <input type="text" id="display-${cardId}" class="display" autocomplete="off" />
         </div>
         <div class="field">
-          <label>API Name</label>
+          <label for="api-${cardId}">API Name</label>
           <div class="field-row">
-            <input type="text" class="api" autocomplete="off" spellcheck="false" />
+            <input type="text" id="api-${cardId}" class="api" autocomplete="off" spellcheck="false" />
             ${generateHTML}${lockBtnHTML}
           </div>
           ${suggestHTML}

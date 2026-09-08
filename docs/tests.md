@@ -152,6 +152,8 @@ Validates SEO metadata: title tags (10-200 chars), meta descriptions (20-300 cha
 
 Tests HTML files for accessibility violations using `axe-core` via Puppeteer. Tests each page in light mode (full WCAG compliance) and dark mode (color contrast only). Skips redirect pages.
 
+A short `EXCLUDED_PATHS` list at the top of the script names pages the sweep does not audit, each with its reason, and the run prints them back under **Not audited** so an exclusion stays a decision rather than a silence. Only one page is on it today: the captured React prototype at `assets/demos/data-dictionary/data-dictionary.html`, which pulls React, Babel, and Tailwind from CDNs and renders its whole UI after `DOMContentLoaded`. The script loads pages with `waitUntil: 'domcontentloaded'`, so axe measured a half-mounted DOM there and the two color-mode passes disagreed with each other run to run (558 orphaned nodes in one, 557 and an extra `landmark-one-main` in the other). That prototype is an artifact of the work the post discusses, not something the site's templates produce. The other demo under `assets/demos/` is plain HTML and is audited normally.
+
 **Note:** Slow test (launches browser for each page).
 
 ## Unit Tests

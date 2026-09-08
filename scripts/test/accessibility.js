@@ -7,6 +7,26 @@ const axeCore = require('axe-core');
 const { findHtmlFiles } = require('../utils/file-utils');
 const { createTestResult, addFile, addIssue, addWarning, addCustomSection, outputResult } = require('../utils/test-results');
 
+// Pages this sweep deliberately does not audit, each with its reason. These are
+// captured prototypes published alongside the posts that discuss them, not pages
+// the site's own templates produce — see docs/tests.md.
+const EXCLUDED_PATHS = [
+  {
+    path: 'assets/demos/data-dictionary/data-dictionary.html',
+    reason: 'Captured React prototype: renders entirely from CDN scripts after DOMContentLoaded, so axe measures a half-mounted DOM and the count differs run to run.'
+  }
+];
+
+// _site-relative path of a built file, with Windows separators normalized
+function siteRelativePath(file) {
+  return path.relative('./_site', file).replace(/\\/g, '/');
+}
+
+function isExcluded(file) {
+  const relativePath = siteRelativePath(file);
+  return EXCLUDED_PATHS.some(entry => entry.path === relativePath);
+}
+
 // Format axe-core violations for display
 function formatViolations(violations) {
   const issues = [];
@@ -324,7 +344,7 @@ async function validateAccessibility() {
     process.exit(1);
   }
   
-  const allHtmlFiles = findHtmlFiles(siteDir);
+  const allHtmlFiles = findHtmlFiles(siteDir).filter(file => !isExcluded(file));
   
   // Get HTML files to test (all or filtered by --changed)
   const htmlFiles = getHtmlFilesToTest(useChanged, allHtmlFiles);
@@ -385,6 +405,13 @@ async function validateAccessibility() {
     filesWithViolations: darkModeStats.filesWithViolations,
     incomplete: darkModeStats.incomplete
   });
+  
+  // Name what was skipped, so an exclusion stays a decision rather than a silence
+  if (EXCLUDED_PATHS.length > 0) {
+    addCustomSection(result, '⏭️  Not audited', Object.fromEntries(
+      EXCLUDED_PATHS.map(entry => [entry.path, entry.reason])
+    ));
+  }
   
   // Output JSON result (formatter will handle display - compact for group runs, verbose for individual)
   outputResult(result);
