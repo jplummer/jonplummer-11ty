@@ -74,7 +74,7 @@ Prioritized by **side-effect surface** — complexity that can produce a silentl
 
 ### Error pages (`/404`, `/500`)
 
-- **"Did you mean" suggester on `/404`** (2026-09-04) — Nearly every 404 is a near-miss: a truncated URL, an old date-slug, a path typed from memory. Apache serves the ErrorDocument at whatever URL failed, so `location.pathname` holds the failed path in the browser. Build a small JSON index of every page's URL and title (roughly 295 pages, ~20KB raw), fuzzy-match the failed path against it from a same-origin script, and show the two or three closest hits above the recent-posts list. Degrades to the current page with JavaScript off. CSP already permits this (`script-src 'self'`, `connect-src 'self'` in `src/.htaccess.njk`); follow the same-origin script pattern in `src/assets/js/font-lab-card.js`, which exists because inline `<script>` is blocked. Interim substitute now shipping: the page asks the visitor to report the broken link by email.
+- **Duplicate `<loc>` entries in `sitemap.xml`** (2026-09-07) — `src/sitemap.njk` hardcodes `/portfolio/`, `/wisdom/` and `/sides/` and loops `wisdom.allTags`, but all of those are templates tagged `page`, so `collections.page` already carries them. The result is four duplicate URLs in the sitemap: those three plus `/wisdom/tags/clarity/` (a paginated template contributes only its first page to a collection, which is why exactly one tag page doubles). Harmless but untidy, and search engines dedupe it. `src/404-index.njk` builds the same destination list without the duplication and can serve as the model. Found while building the 404 suggester.
 - **Inform 404 handling with real logs (deferred 2026-09-04)** — Volume is too low to be worth wiring up. Revisit if misses grow enough to cluster. Ahrefs is connected and its site audit reports 404s; check `src/_data/redirects.yaml` first, since a repeated real miss is better solved by a redirect than by a guess.
 
 ### Side projects (`/sides/`)
@@ -155,6 +155,8 @@ Prioritized by **side-effect surface** — complexity that can produce a silentl
 ---
 
 ## DONE
+
+- "Did you mean" suggester on /404 (2026-09-07) — trigram + edit-distance matcher over a generated destination index; spec in `docs/designs/specs/2026-09-04-404-suggester-design.md`
 
 - **`/sides/` pages for this site and Usage-Chan** (2026-09-07) — `src/sides/jonplummer-11ty.md` covers the build as a side project: the tests that came from real failures (`color-contrast`'s dual-gamut split, `critical-css` shell drift, `error-document-assets`, `design-docs-location`), the two independent deploy cursors, the `/color/` and `/type/` labs, and rem breakpoints. Labor divided with [`/colophon/`](../src/colophon.md) as planned — practical material here, the why there. Cover is the "Care has to show up in the product" post at 1600px light with the same post on a phone in dark laid over it (`2026/09/jonplummer-11ty-cover.jpg`), shot with Puppeteer and composited with sharp. `src/sides/usage-chan.md` shipped alongside it. Cross-links from `now.md` are the remaining piece — tracked under Future → Side projects.
 - **Split repo license** (2026-09-07) — `LICENSE` covers code under MIT (scripts, `eleventy/`, templates, CSS) and content under CC BY-NC 4.0 (posts, portfolio, page copy, images, the mark). Robert Ullman's colophon portrait is carved out of both: commissioned and paid for, published here, not licensed onward. Fonts defer to their own OFL terms. GitHub won't auto-detect a split file; accepted.
