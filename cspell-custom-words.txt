@@ -15,6 +15,7 @@ Badgr
 Belkin
 Baudu
 Cayuse
+Clawdmeter
 Datto
 Duolingo
 Ecosia
@@ -80,6 +81,7 @@ jtbd
 Juneteenth
 linkification
 luxon
+microcontroller
 microcredential
 Mbps
 mvps
@@ -244,6 +246,7 @@ Xiao
 Zhou
 
 # Other Valid Terms and Variants
+Adulting
 affordances
 allyship
 approvable
@@ -340,3 +343,4 @@ wordmark
 writeups
 Xer's
 Xers
+jonplummer
