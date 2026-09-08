@@ -1,5 +1,11 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-09-07
+
+- Add Usage-Chan and jonplummer-11ty sides pages
+- Add a split MIT/content license for the repo
+- Write up the 404 suggester design
+
 ## 2026-09-04
 
 - Align captioned post figures with the text column and share italic caption type with portfolio.
