@@ -4,7 +4,7 @@ Personal blog built with Eleventy (11ty) and Nunjucks templates.
 
 ## Key principles
 
-- Assume Eleventy works correctly — most issues are misunderstandings
+- Assume Eleventy works correctly until proven otherwise — most Eleventy issues are misunderstandings
 - Testing is required for every change
 - Ask before implementing custom JavaScript workarounds
 

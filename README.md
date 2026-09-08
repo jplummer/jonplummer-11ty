@@ -12,7 +12,7 @@ See `docs/design-and-craft-principles.md` for the reasoning behind specific visu
 
 ## Why It's Fast
 
-Every page is pre-built as a plain HTML file at build time, not generated on-demand when someone visits. Almost none of it needs JavaScript – the handful of interactions that do, like the portfolio lightbox, are the exception, not the rule, and the rest of the site works without it. There are no external dependencies; fonts are self-hosted and nothing loads from external servers. And the markup is reasonably slight, consisting of semantic HTML and vanilla CSS. This means smaller files, faster parsing, and natural accessibility without a lot of ARIA attributes or workarounds.
+Every page is pre-built as a plain HTML file at build time, not generated on-demand when someone visits. Almost none of it needs JavaScript – the handful of interactions that do, like the portfolio lightbox and the 404 suggester, are the exception, not the rule, and the rest of the site works without it. There are no external dependencies; fonts are self-hosted and nothing loads from external servers. And the markup is reasonably slight, consisting of semantic HTML and vanilla CSS. This means smaller files, faster parsing, and natural accessibility without a lot of ARIA attributes or workarounds.
 
 ## How It's Built
 
