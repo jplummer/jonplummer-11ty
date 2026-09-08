@@ -137,15 +137,40 @@ With JavaScript off, the div stays hidden and the page is exactly what shipped i
 
 ## Copy
 
-When at least one candidate clears the threshold, a heading reading "Did you mean
-one of these?" above a list of linked titles.
+Three states, because a lone strong match and a field of maybes deserve different
+treatment.
 
-When none do: "Nothing on the site looks close to that address."
+When one candidate is clearly ahead, the page states it rather than offering it:
+"You probably want *About*." When several are plausible, a heading — "Did you mean
+this?" for one, "Did you mean one of these?" for more — above a list of linked
+titles. When nothing clears the threshold: "Nothing here looks close to that
+address."
 
-That second line only ever renders when the matcher actually ran, so it reports a
-real result rather than implying one. The existing invitation to report a broken
-link stays at the foot of the page either way — a visitor who was sent here by a
-bad link is still the only person who knows what they clicked.
+That last line only ever renders when the matcher actually ran, so it reports a
+real result rather than implying one. The invitation to report a broken link stays
+at the foot of the page in every state — a visitor sent here by a bad link is
+still the only person who knows what they clicked.
+
+### What counts as clearly ahead
+
+Score alone cannot answer this, and the reason is the prefix rule. It gives a flat
+0.95 to every candidate beneath a truncated path, so `/wisdom/tags/` ties twelve
+tag pages at the top and the tie-break picks one on URL length — arbitrary. A gate
+on score would have stated that guess with confidence.
+
+What separates a real correction is that nothing else comes close: `/abuot/` beats
+its runner-up by 0.578, `/colophn/` by 0.304. So `isConfident()` requires both a
+top score of at least 0.75 and, when there is more than one hit, a gap of at least
+0.25 to second place. `/nwo/` → `/now/` at 0.667 is a real match but not a
+confident one, and correctly lands in the list rather than the statement.
+
+This was considered as a gate for redirecting automatically instead of stating the
+match. Rejected: the evidence is about twenty synthetic cases rather than real
+traffic, an unannounced navigation is what WCAG 3.2.5 is about, and a wrong guess
+would strand someone with no explanation. Stating the match costs one click and
+never does that. If it is ever revisited, the shape is a cancellable delay using
+`location.replace()`, not a silent bounce — `replace` because otherwise the 404
+stays in history and Back re-triggers the redirect.
 
 ## Testing
 

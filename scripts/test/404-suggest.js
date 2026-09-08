@@ -18,6 +18,7 @@ const {
   diceCoefficient,
   editSimilarity,
   rankCandidates,
+  isConfident,
 } = require('../../src/assets/js/404-suggest.js');
 const { addFile, addIssue } = require('../utils/test-results');
 const { runTest } = require('../utils/test-runner-helper');
@@ -31,6 +32,8 @@ const INDEX = [
   ['/portfolio/', 'Portfolio – UX design and leadership work and projects'],
   ['/wisdom/', 'Collected wisdom'],
   ['/wisdom/tags/clarity/', 'Collected wisdom – #clarity'],
+  ['/wisdom/tags/craft/', 'Collected wisdom – #craft'],
+  ['/wisdom/tags/design/', 'Collected wisdom – #design'],
   ['/sides/monotasker/', 'Monotasker'],
   ['/2026/08/12/care-has-to-show-up-in-the-product/', 'Care has to show up in the product'],
   ['/2026/08/20/not-every-touchpoint-deserves-the-best/', 'Not every touchpoint deserves the best'],
@@ -149,6 +152,34 @@ function runUnitAssertions(result) {
 
   check(file, 'an empty index returns nothing', () => {
     assert.deepStrictEqual(rankCandidates('/colophon', []), []);
+  });
+
+  /* Score alone cannot say whether a match is unambiguous. The prefix rule
+   * gives a flat 0.95 to everything beneath a truncated path, so a common
+   * prefix ties several candidates and the tie-break picks one arbitrarily. */
+  check(file, 'a lone strong match is confident', () => {
+    assert.ok(isConfident(rankCandidates('/abuot/', INDEX)));
+    assert.ok(isConfident(rankCandidates('/colophn/', INDEX)));
+    assert.ok(isConfident(rankCandidates('/2026/08/12/care-has-to', INDEX)));
+  });
+
+  check(file, 'a tie under a common prefix is not confident', () => {
+    const hits = rankCandidates('/wisdom/tags/', INDEX);
+    assert.ok(hits.length > 1, 'expected the prefix rule to tie several tag pages');
+    assert.strictEqual(hits[0].score, hits[1].score, 'expected a genuine tie');
+    assert.strictEqual(isConfident(hits), false);
+  });
+
+  check(file, 'a weak lone match is not confident', () => {
+    const hits = rankCandidates('/nwo/', INDEX);
+    assert.strictEqual(hits.length, 1);
+    assert.ok(hits[0].score < 0.75, 'expected a match that clears the threshold but not the bar');
+    assert.strictEqual(isConfident(hits), false);
+  });
+
+  check(file, 'no match is never confident', () => {
+    assert.strictEqual(isConfident(rankCandidates('/asdfgh/', INDEX)), false);
+    assert.strictEqual(isConfident([]), false);
   });
 
   check(file, 'never returns more than the limit', () => {

@@ -19,6 +19,8 @@
   var LIMIT = 3;
   var PREFIX_FLOOR = 8;
   var PREFIX_SCORE = 0.95;
+  var CONFIDENT_SCORE = 0.75;
+  var CONFIDENT_GAP = 0.25;
 
   /* Lowercase, drop the leading and trailing slash and any .html, and collapse
    * every run of non-alphanumerics to one hyphen. Makes a missing trailing
@@ -148,14 +150,33 @@
     return scored.slice(0, limit);
   }
 
+  /* One clear winner, or a field of maybes?
+   *
+   * Score alone cannot tell them apart. The prefix rule gives a flat 0.95 to
+   * every candidate beneath a truncated path, so "/wisdom/tags/" ties twelve
+   * tag pages at the top and the tie-break picks one on URL length alone -
+   * arbitrary. What separates a real correction is that nothing else comes
+   * close: "/abuot/" beats its runner-up by 0.578, "/colophn/" by 0.304.
+   *
+   * So confidence needs both a high score and daylight beneath it. */
+  function isConfident(hits) {
+    if (!hits || !hits.length) return false;
+    if (hits[0].score < CONFIDENT_SCORE) return false;
+    if (hits.length === 1) return true;
+    return hits[0].score - hits[1].score >= CONFIDENT_GAP;
+  }
+
   var api = {
     normalizePath: normalizePath,
+    isConfident: isConfident,
     diceCoefficient: diceCoefficient,
     editSimilarity: editSimilarity,
     rankCandidates: rankCandidates,
     THRESHOLD: THRESHOLD,
     LIMIT: LIMIT,
     PREFIX_FLOOR: PREFIX_FLOOR,
+    CONFIDENT_SCORE: CONFIDENT_SCORE,
+    CONFIDENT_GAP: CONFIDENT_GAP,
   };
 
   if (typeof module !== 'undefined' && module.exports) {
@@ -170,25 +191,47 @@
     if (!host) return;
 
     var matches = rankCandidates(root.location.pathname, root.jp404Index || []);
-    var heading = document.createElement('h2');
-    host.appendChild(heading);
 
     if (!matches.length) {
-      heading.textContent = 'Nothing here looks close to that address';
+      host.appendChild(sentence('Nothing here looks close to that address.'));
       return;
     }
 
-    heading.textContent = matches.length === 1 ? 'Did you mean this?' : 'Did you mean one of these?';
+    /* One clear winner gets stated, not offered. A field of maybes gets
+     * offered, because picking for the visitor would be picking at random. */
+    if (isConfident(matches)) {
+      var lead = sentence('You probably want ');
+      lead.appendChild(link(matches[0]));
+      lead.appendChild(document.createTextNode('.'));
+      host.appendChild(lead);
+      return;
+    }
+
+    var heading = document.createElement('h2');
+    heading.textContent =
+      matches.length === 1 ? 'Did you mean this?' : 'Did you mean one of these?';
+    host.appendChild(heading);
+
     var list = document.createElement('ul');
     for (var i = 0; i < matches.length; i++) {
       var li = document.createElement('li');
-      var a = document.createElement('a');
-      a.href = matches[i].url;
-      a.textContent = matches[i].title;
-      li.appendChild(a);
+      li.appendChild(link(matches[i]));
       list.appendChild(li);
     }
     host.appendChild(list);
+  }
+
+  function sentence(text) {
+    var p = document.createElement('p');
+    p.textContent = text;
+    return p;
+  }
+
+  function link(hit) {
+    var a = document.createElement('a');
+    a.href = hit.url;
+    a.textContent = hit.title;
+    return a;
   }
 
   if (document.readyState === 'loading') {
