@@ -34,14 +34,14 @@ function getChangedMarkdownFiles() {
     .filter(file => fs.existsSync(file));
 }
 
-// Titles to exclude from "too short" validation
+// Titles to exclude from "too short" validation.
+//
+// The six path-style page titles that used to live here - '/about', '/now' and
+// friends - are gone: those pages carry real names now. That list had already
+// drifted, which is part of why the convention went. '/colophon' and '/friends'
+// were never added and warned on every run. Prefer lengthening a title to
+// adding an entry here.
 const EXCLUDED_SHORT_TITLES = [
-  '/about',
-  '/changelog',
-  '/color',
-  '/now',
-  '/ogimages',
-  '/type',
   'Goal Manager identity (2001)',
   'CareLink Pro main interface',
   'Linksys app revitalization',

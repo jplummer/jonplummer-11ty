@@ -1,5 +1,5 @@
 ---
-title: /now
+title: Now – what I'm up to
 description: What Jon Plummer is up to now – looking for work, family, and a pile of side projects in various states of done. Updated regularly.
 date: 2026-09-04T00:00:00.000Z
 layout: base.njk

@@ -1,5 +1,5 @@
 ---
-title: /friends
+title: Friends – some folks I know and like who are on the web
 description: People Jon Plummer likes and admires – a growing blogroll-style list, all of whom I've worked with in some way.
 date: 2026-08-24T00:00:00.000Z
 layout: base.njk
