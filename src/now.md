@@ -32,7 +32,7 @@ Four of them have my attention right now:
 - [Pointer-AR](/sides/pointer-ar/), an iOS app that points at ISS, Hubble, Webb, celestial bodies, and the seven wonders of the world (which are all DOWN from most places on the earth, of course), coming to the App Store before long
 - the *physical* pointer that app is in service of: a stationary robot that points at the ISS all the time, no matter where it is. Parts for the first prototype are on the way, and it might become a printable kit where I supply the BOM, STL files, and instructions so a hobbyist can put their own together
 - [Parker](/sides/parker/), an IR time-of-flight sensor that lights up when I've pulled the car into the garage just far enough, and probably will become a printable kit as well
-- New: Usage-Chan, a Claude usage monitor running on a Stack-Chan CoreS3 that had been sitting idle, inspired by [claude-usage-stick](https://github.com/oauramos/claude-usage-stick) and others.
+- New: [Usage-Chan](/sides/usage-chan/), a Claude usage monitor running on a Stack-Chan CoreS3 that had been sitting idle, inspired by [claude-usage-stick](https://github.com/oauramos/claude-usage-stick) and others
 
 Look at that list and a pattern appears – I keep building physical objects that display one fact, small devices that do one thing at a time.
 
@@ -45,7 +45,7 @@ Both the 3d-printing and AI-assisted software development (with bonus hardware) 
 Four more are done enough that you can go poke at them:
 
 - [Monotasker](/sides/monotasker/), an iOS app that hands you a single task from an iOS Reminders list to avoid the paradox of choice, on the [Apple App Store](https://apps.apple.com/us/app/monotasker/id6770424713) now
-- [this site](https://github.com/jplummer/jonplummer-11ty), converted from WordPress to 11ty and now containing scads of tests, authoring helps, and [other features](/colophon/)
+- [this site](/sides/jonplummer-11ty/), converted from WordPress to 11ty and now containing scads of tests, authoring helps, and [other features](/colophon/) ([source](https://github.com/jplummer/jonplummer-11ty))
 - a [drop-in file and folder navigator](/sides/lister-php/) in semi-vibe-coded PHP for my personal file pile site
 - a [privacy-focused URL shortener](/sides/prvt/) that makes the smallest QR codes it can
 
