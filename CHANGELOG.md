@@ -1,10 +1,33 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-09-09
+
+- Give side projects a common set of statuses
+- Add the wcag-audit side project page
+- Mark the plain English service paused
+
+## 2026-09-08
+
+- Fix a11y violations on the portfolio grid and the API-name demo
+- State the match on /404 when one is clearly ahead
+- Give the utility pages real titles
+- Unwrap LICENSE, and three small corrections
+
 ## 2026-09-07
 
 - Add Usage-Chan and jonplummer-11ty sides pages
 - Add a split MIT/content license for the repo
 - Write up the 404 suggester design
+- Say plainly that the Ullman portrait isn't mine to license onward
+- Correct the jonplummer-11ty page against the code, and give it a cover
+- Fix three claims on /colophon/ that the CSS doesn't support
+- Point /now/ at the new sides pages and close out the ideas item
+- Record that main is the working branch here
+- Clear the five Dependabot alerts with a dependency refresh
+- Generate a destination index for the 404 suggester
+- Add the 404 suggester's matcher and its unit test
+- Show "did you mean" suggestions on the 404 page
+- Close the 404 suggester item and record a sitemap bug
 
 ## 2026-09-04
 
@@ -808,4 +831,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-09-08
+Last deployed on 2026-09-09
