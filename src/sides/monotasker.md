@@ -5,7 +5,7 @@ date: 2026-08-21
 layout: layouts/side_detail.njk
 tags: sideproject
 permalink: /sides/monotasker/
-status: Available on the App Store
+status: Released
 coverImage: 2026/06/onboarding.png
 coverPosition: center 20%
 appStoreUrl: https://apps.apple.com/us/app/monotasker/id6770424713

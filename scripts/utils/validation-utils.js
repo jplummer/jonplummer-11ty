@@ -227,6 +227,34 @@ function validateCoverZoom(value) {
   return { valid: true };
 }
 
+/**
+ * Side-project lifecycle status (`src/sides/*.md`).
+ *
+ * One controlled word per stage, because the label is rendered as a quiet
+ * uppercase line on both the card and the detail page and only reads as a set
+ * if the set is small. The distinction that matters to a reader is whether they
+ * can have the thing, so `Self-hosted` (runs, but you would deploy it) is kept
+ * separate from `Released` (you can just go get it). Venue detail — which app
+ * store, which host — lives in the description and the appStoreUrl/githubUrl
+ * links, not here.
+ */
+const SIDE_STATUSES = [
+  'In development',
+  'Paused',
+  'Self-hosted',
+  'Released'
+];
+
+function validateSideStatus(value) {
+  if (typeof value !== 'string' || !SIDE_STATUSES.includes(value)) {
+    return {
+      valid: false,
+      error: `status must be one of: ${SIDE_STATUSES.join(', ')}`
+    };
+  }
+  return { valid: true };
+}
+
 module.exports = {
   validateTitle,
   validateMetaDescription,
@@ -234,6 +262,8 @@ module.exports = {
   validateDate,
   validateSlug,
   validateCoverPosition,
-  validateCoverZoom
+  validateCoverZoom,
+  validateSideStatus,
+  SIDE_STATUSES
 };
 

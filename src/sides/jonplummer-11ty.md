@@ -5,7 +5,7 @@ date: 2026-09-07
 layout: layouts/side_detail.njk
 tags: sideproject
 permalink: /sides/jonplummer-11ty/
-status: Running this site
+status: Self-hosted
 coverImage: 2026/09/jonplummer-11ty-cover.jpg
 githubUrl: https://github.com/jplummer/jonplummer-11ty
 ogImage: /assets/images/og/sides.png

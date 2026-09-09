@@ -5,7 +5,7 @@ date: 2026-09-07
 layout: layouts/side_detail.njk
 tags: sideproject
 permalink: /sides/usage-chan/
-status: in development
+status: In development
 coverImage: 2026/09/usage-chan-desk.jpg
 githubUrl: https://github.com/jplummer/usage-chan
 ogImage: /assets/images/og/sides.png

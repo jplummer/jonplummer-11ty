@@ -42,6 +42,7 @@ Run `pnpm run test wisdom` after editing. Unexpected fields are rejected.
 - **`coverImage`** - Portfolio grid thumbnail path relative to `src/assets/images/` (e.g. `2026/06/onboarding.png`). Used only by `portfolio_list_item.njk`.
 - **`coverPosition`** - Portfolio grid crop focal point. CSS `object-position` syntax: one or two tokens from `center` / `top` / `bottom` / `left` / `right` and percentages (e.g. `center 20%`). Omit for center. Does not affect the detail-page figure.
 - **`coverZoom`** - Portfolio grid crop zoom. Unitless number from 1 to 3 (`1` = default cover scale, `1.25` = tighter crop). Omit for 1. Same 16:9 card size; detail page unchanged.
+- **`status`** - Side projects only (`src/sides/*.md`). One of exactly four stage words: `In development`, `Paused`, `Self-hosted`, `Released`. Rendered as a quiet uppercase label on the card and the detail page, so it stays short enough to read as a set. `Self-hosted` means it runs but you would deploy it yourself; `Released` means you can just go get it. Which app store or which host belongs in the description and the `appStoreUrl` / `githubUrl` links, not in the status. Enforced by `pnpm run test frontmatter`; the list lives in `SIDE_STATUSES` in `scripts/utils/validation-utils.js`.
 - **`permalink`** - Custom URL structure
 - **`eleventyExcludeFromCollections`** - Set to `true` to exclude
 - **`draft`** - Set to `true` to mark as draft. Drafts are excluded from production builds but visible in dev mode.

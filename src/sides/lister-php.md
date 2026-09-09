@@ -6,7 +6,7 @@ layout: layouts/side_detail.njk
 tags: sideproject
 permalink: /sides/lister-php/
 coverImage: 2026/08/lister.png
-status: Running at misc.jonplummer.com
+status: Self-hosted
 githubUrl: https://github.com/jplummer/lister-php
 ogImage: /assets/images/og/sides.png
 ---

@@ -7,7 +7,7 @@ tags: sideproject
 permalink: /sides/prvt/
 coverImage: 2026/08/prvt.png
 coverPosition: center 15%
-status: In personal use
+status: Self-hosted
 githubUrl: https://github.com/jplummer/prvt
 ogImage: /assets/images/og/sides.png
 ---

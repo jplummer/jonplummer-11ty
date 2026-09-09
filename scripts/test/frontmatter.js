@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
-const { validateDate, validateSlug, validateCoverPosition, validateCoverZoom } = require('../utils/validation-utils');
+const { validateDate, validateSlug, validateCoverPosition, validateCoverZoom, validateSideStatus } = require('../utils/validation-utils');
 const { getChangedFilesSinceHead, getMarkdownFiles, readFile } = require('../utils/test-helpers');
 const { parseFrontMatter, parseMarkdownFrontMatter } = require('../utils/frontmatter-utils');
 const { addFile, addIssue, addWarning, addGlobalIssue } = require('../utils/test-results');
@@ -163,6 +163,38 @@ function getAllRootSrcMarkdownPaths() {
     .map(name => path.join(srcDir, name));
 }
 
+/**
+ * Side projects under `src/sides/`. `status` is a controlled vocabulary so the
+ * quiet uppercase label reads as a set across the cards; see SIDE_STATUSES.
+ */
+function validateSideFields(frontMatter) {
+  const issues = [];
+  if (frontMatter.status !== undefined) {
+    const check = validateSideStatus(frontMatter.status);
+    if (!check.valid) {
+      issues.push(`status: ${check.error} (got "${frontMatter.status}")`);
+    }
+  }
+  issues.push(...validateCoverCropFields(frontMatter));
+  return issues;
+}
+
+function getAllSideMarkdownPaths() {
+  const sidesDir = './src/sides';
+  if (!fs.existsSync(sidesDir)) {
+    return [];
+  }
+  return fs.readdirSync(sidesDir)
+    .filter(name => name.endsWith('.md'))
+    .map(name => path.join(sidesDir, name));
+}
+
+function getChangedSideMarkdownPaths() {
+  return getChangedFilesSinceHead()
+    .filter(file => path.extname(file).toLowerCase() === '.md' && path.dirname(file) === 'src/sides')
+    .filter(file => fs.existsSync(file));
+}
+
 function getChangedRootSrcMarkdownPaths() {
   return getChangedFilesSinceHead()
     .filter(file => path.extname(file).toLowerCase() === '.md' && path.dirname(file) === 'src')
@@ -292,12 +324,15 @@ function validate(result, options) {
   // Posts under `_posts/`, plus top-level `src/*.md` (same scope as IndexNow static pages + `500.md`)
   let postMarkdownFiles;
   let rootMarkdownFiles;
+  let sideMarkdownFiles;
   if (useChanged) {
     postMarkdownFiles = getChangedFiles();
     rootMarkdownFiles = getChangedRootSrcMarkdownPaths();
+    sideMarkdownFiles = getChangedSideMarkdownPaths();
   } else {
     postMarkdownFiles = getMarkdownFiles(postsDir);
     rootMarkdownFiles = getAllRootSrcMarkdownPaths();
+    sideMarkdownFiles = getAllSideMarkdownPaths();
   }
 
   const markdownFiles = postMarkdownFiles.filter(file => {
@@ -427,6 +462,37 @@ function validate(result, options) {
       addWarning(fileObj, {
         type: 'frontmatter-field',
         message: warning
+      });
+    });
+  }
+
+  for (const file of sideMarkdownFiles) {
+    const relativePath = path.relative('./src', file);
+    const content = readFile(file);
+    const { frontMatter, error } = parseMarkdownFrontMatter(content);
+
+    const fileObj = addFile(result, file, relativePath);
+
+    if (error) {
+      addIssue(fileObj, {
+        type: 'frontmatter-parse',
+        message: `Front matter parsing error: ${error}`
+      });
+      continue;
+    }
+
+    if (!frontMatter) {
+      addIssue(fileObj, {
+        type: 'frontmatter-missing',
+        message: 'No front matter found'
+      });
+      continue;
+    }
+
+    validateSideFields(frontMatter).forEach(issue => {
+      addIssue(fileObj, {
+        type: 'frontmatter-field',
+        message: issue
       });
     });
   }
