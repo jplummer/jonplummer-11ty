@@ -5,13 +5,13 @@ date: 2026-08-01
 layout: layouts/side_detail.njk
 tags: sideproject
 permalink: /sides/plain-english-service/
-status: In development
+status: Paused
 githubUrl: https://github.com/jplummer/plain-english-service
 ogImage: /assets/images/og/sides.png
 ---
 Select text anywhere on macOS, run "Find Uncommon Words" from the Services menu, and it checks every word against a combined dictionary of the 10,000 most common English words plus conversational vocabulary from TV and movie scripts. What's left is the uncommon stuff – jargon, names, anything outside plain English.
 
-It works today, but only by building and running it from Xcode. Packaging it as something you can just install is still ahead.
+It works today, but only by building and running it from Xcode. Packaging it as something you can just install is still ahead, as is improving how it explains its results.
 
 <h2 id="privacy-and-terms">Privacy and terms</h2>
 
