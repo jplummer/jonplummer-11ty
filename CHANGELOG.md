@@ -5,6 +5,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Give side projects a common set of statuses
 - Add the wcag-audit side project page
 - Mark the plain English service paused
+- Draft a post announcing the 404 suggester
 
 ## 2026-09-08
 
