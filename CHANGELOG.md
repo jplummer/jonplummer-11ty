@@ -6,6 +6,9 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Add the Book Map side project page
 - Pending copy edits, refreshed demo and OG image, ignore local Claude settings
 - Allow unpkg stylesheets in the demos CSP
+- Copy edits on five 2026 posts; archive the book map idea
+- Regenerate the OG image for the quality-moves description change
+- Link the book map from /now/
 
 ## 2026-09-09
 
