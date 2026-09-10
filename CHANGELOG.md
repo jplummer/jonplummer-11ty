@@ -5,6 +5,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Allow "Ready to deploy" as a side project status
 - Add the Book Map side project page
 - Pending copy edits, refreshed demo and OG image, ignore local Claude settings
+- Allow unpkg stylesheets in the demos CSP
 
 ## 2026-09-09
 
