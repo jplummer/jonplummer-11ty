@@ -9,13 +9,6 @@
   - Once that page exists, `about.md` can carry one clause in the "I don't just have opinions about AI" paragraph — a design leader whose own agent configuration is public and current is a specific, checkable claim, and a better version of the "including a project template that packages agent configuration…" phrase that came out of the hobbies sentence.
   - Both are already referenced in [`src/now.md`](../src/now.md) or [`src/about.md`](../src/about.md); link them from there once the pages exist.
 
-- Ideas list at the bottom of `sides/` — a durable home for unstarted ideas (2026-09-04)
-  - **Why**: the unstarted ideas are signal about appetite, not inventory — the shape of problem that reliably catches me (physical objects that display one fact; small devices that do one thing at a time). `now/` throws that away every time it's rewritten, and a stub page in `sides/` for something with nothing to show would devalue the entries that are real. A short list under the built things reads as appetite rather than as a to-do list I'm failing.
-  - **Where**: bottom of `src/sides/index.njk`, below the `.sides-grid`. Prose or a plain list, no per-project pages, no `sideproject` tag (it must not enter `collections.sideproject` or the grid).
-  - **What moves there** from `src/now.md`'s "Still just ideas" paragraph: tee shirt design showcase site; eInk display that fetches the newspaper front page each morning; thermal-printer device that prints the morning's calendar and tasks. The physical ISS pointer stays with [Pointer-AR](../src/sides/pointer-ar.md) — it's the same project, not an idle idea.
-  - **Two conditions, or it goes bad**: date each entry, so the list ages visibly and a shipped idea can say how long it waited; prune anything sitting a year without moving — delete, don't archive. The list's value is being short enough to read.
-  - **Done already (2026-09-04)**: `now/`'s four status buckets are gone, and the unstarted ideas are one short "Still just ideas" paragraph rather than bullets carrying the same visual weight as Monotasker. Moving them off `now/` entirely is what's left.
-
 - Craft/polish (demonstrate craft)
   - **Goal**: Make spareness read as intentional craft, not default blankness. Color is already pared-down; skip ornament (texture / alternate stylesheets stay in Future → Craft atmosphere). Vertical alignment is already in good shape — don’t chase “stronger grid” as a separate track unless something new looks off.
   - **Optional later:** widen L/R via gutter / max-width.
@@ -155,6 +148,8 @@ Prioritized by **side-effect surface** — complexity that can produce a silentl
 ---
 
 ## DONE
+
+- **Ideas list at the bottom of `/sides/`** (2026-09-09) — Eleven unstarted ideas now live under the `.sides-grid` in `src/sides/index.njk`, authored as markdown inside a `{% set %}` block and rendered through the existing `markdown` filter, so adding one is typing a `-`. No data file, no `sideproject` tag, nothing enters the grid. Dates were dropped by choice; the pruning condition survives as the closing line ("The ones that sit here too long get deleted") rather than as visible ages. `now.md`'s "Still just ideas" heading and paragraph are gone, replaced by one sentence pointing at the bottom of the same page. The ISS pointer stayed with `pointer-ar.md`.
 
 - "Did you mean" suggester on /404 (2026-09-07) — trigram + edit-distance matcher over a generated destination index; spec in `docs/designs/specs/2026-09-04-404-suggester-design.md`
 

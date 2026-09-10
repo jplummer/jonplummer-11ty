@@ -15,3 +15,24 @@ ogImage: /assets/images/og/sides.png
     </li>
 {% endfor %}
 </ul>
+
+{% set sideIdeas %}
+## Still just ideas
+
+None of these exist. They're here because the pattern is worth noticing: physical objects that display one fact, small devices that do one thing at a time.
+
+- An e-ink display that hangs on the wall and fetches the front page of today's newspaper.
+- A display that hangs on a window and identifies the planes going by, if you're standing in the right spot.
+- A routine that runs OSMnx and PySRTM together to make a printable diorama of wherever you are.
+- A display that shows which birds are audible right now.
+- A synthesizer built on the M5Stack Cardputer.
+- A little printer that prepares you for your day.
+- A clock that counts down to the end of the current meeting, warming toward red as the end approaches.
+- A physical button that Spotify-likes whatever is playing.
+- A "stingray" detector, to notice when your cell tower is being spoofed and your connection quietly downgraded.
+- A site to show off tee shirt designs.
+- A URL compressor, as distinguished from a database-backed shortener.
+
+Some of these will move up the page; others that sit here too long may get deleted.
+{% endset %}
+{{ sideIdeas | markdown | safe }}

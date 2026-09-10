@@ -51,10 +51,8 @@ Four more are done enough that you can go poke at them:
 
 Three others are built but sitting still: a book map tool my wife can edit and export for her own site, which isn't in use yet; a [MacOS menu bar clock](/sides/menu-bar-death-clock/) that counts down to your statistical life expectancy (memento mori) or up from your date of birth (memento vivere); and a [MacOS service](/sides/plain-english-service/) that points out the words you've used in a passage that aren't in the ten thousand most common English words. All of them are discussed at [side projects](/sides/), or will be soon.
 
-## Still just ideas
+Ideas I haven't started yet sit at the bottom of that same page. More to come – the barrier between software itch and software scratch is narrowing all the time.
 
-An eInk display that fetches the front page of the newspaper every morning. A little device that prints the morning's calendar and tasks on a cheapo thermal printer I scored second-hand. A site to show off tee shirt designs. A URL compressor (as distinguished from a database-backed shortener). More to come – the barrier between software itch and software scratch is narrowing all the time.
-
-It's an exciting time. And things are changing too fast to keep up! So don't keep up, just keep going, keep learning, keep experimenting.
+It's exciting, and things are changing too fast to keep up! So don't keep up, just keep going, keep learning, keep experimenting.
 
 May your autumn be ICE-free.
