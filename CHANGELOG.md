@@ -1,5 +1,11 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-09-10
+
+- Allow "Ready to deploy" as a side project status
+- Add the Book Map side project page
+- Pending copy edits, refreshed demo and OG image, ignore local Claude settings
+
 ## 2026-09-09
 
 - Give side projects a common set of statuses
