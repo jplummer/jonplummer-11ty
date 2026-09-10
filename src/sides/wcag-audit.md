@@ -1,6 +1,6 @@
 ---
 title: wcag-audit
-description: A tool that checks a page against all 87 WCAG 2.2 criteria and traces every verdict to a named W3C rule, not a plain pass or fail.
+description: A tool that checks a page against all 87 WCAG 2.2 criteria and, for each one, names the W3C rule behind the verdict.
 date: 2026-08-09
 layout: layouts/side_detail.njk
 tags: sideproject
@@ -17,7 +17,7 @@ wcag-audit uses [axe-core](https://github.com/dequelabs/axe-core) to check a pag
 
 Yes, it's ugly. Pretty will come later.
 
-28 isn't very many; there are 87 WCAG success criteria. But most of those require some sort of human judgement. I'd like to get to where we can check all 87, even in a rudimentary way, with the help of AI, but I'm starting small. And the 28 that get any automated check are graded partially – a clean axe-core run means axe found nothing, not that the page is good.
+28 isn't very many; there are 87 WCAG success criteria. But most of those require some sort of human judgement. I'd like to get to where we can check all 87, even in a rudimentary way, with the help of AI, but I'm starting small. And the 28 that get any automated check are graded partially – a clean axe-core run means axe found nothing. That's a weaker claim than "the page is good."
 
 ## How it works
 
@@ -32,13 +32,13 @@ The first real test: the W3C's own [demo page](https://www.w3.org/WAI/demos/bad/
 ![The W3C's own "before" demo page, and four of the seven different axe rules it fails on – contrast, missing alt text, an unlabeled nav link, an unlabeled menu.](/assets/images/2026/09/wcag-audit-demo-snap.jpg)
 *Seven rules fired on W3C's sample inaccessible page - contrast, missing alt text, unlabeled links, unlabeled form controls, missing landmarks, etc.*
 
-Then I pointed it at this site and it found five failures of its own: the low-contrast red-on-gray pairing on the nav links and the paging navigation that I mentioned above. Critically, this is reported on as one problem rather than each individual instance being a separate finding. The idea here is to make it clear what problems you might sort out by fixing your design system or pattern library versus what might require more local attention.
+Then I pointed it at this site and it found five failures of its own: the low-contrast red-on-gray pairing on the nav links and the paging navigation that I mentioned above. Critically, this gets reported as one problem, with every instance rolled into it. The idea is to make it clear what problems you might sort out by fixing your design system or pattern library versus what might require more local attention.
 
 [Target size](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html) and [focus visibility](https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance.html) now get measured directly from a fresh pass over every clickable element's geometry instead of being guessed from a screenshot. That helped with five of six criteria that I was stuck on. The remaining one, when a focus ring is drawn with box-shadow instead of outline, which can't be read from computed style, still needs a person. The report now points this out.
 
 ## What's next
 
-Phase one, still in work, evaluates one page. Later phases, in design now, will cover a whole site: sampling pages by template, clustering findings that repeat across pages, and working toward [Accessibility Conformance Report (ACR)](https://www.itic.org/policy/accessibility/vpat)-style output. How much of that sampling still needs a person's judgment, rather than a verdict inherited from a matching page, is an open question.
+Phase one, still in work, evaluates one page. Later phases, in design now, will cover a whole site: sampling pages by template, clustering findings that repeat across pages, and working toward [Accessibility Conformance Report (ACR)](https://www.itic.org/policy/accessibility/vpat)-style output. How much of that sampling can borrow a verdict from a matching page, and how much still needs a person's judgment, is an open question.
 
 The registry format, the evidence schema, and what's deliberately out of scope for phase one are in the repo's README and design docs.
 

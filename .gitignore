@@ -23,6 +23,7 @@ Thumbs.db
 # Editors
 .vscode/
 .idea/
+.claude/settings.local.json
 *.swp
 *.swo
 .cursor-workspace

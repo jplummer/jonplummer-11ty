@@ -384,7 +384,7 @@
     
     <!-- Combined Style Panel (preview mode only) -->
     <div class="style-panel" id="stylePanel">
-        <button class="panel-toggle" onclick="togglePanel()">
+        <button type="button" class="panel-toggle" onclick="togglePanel()">
             <span>Map & Pin Styles</span>
             <span class="toggle-icon">▼</span>
         </button>
@@ -394,39 +394,39 @@
             <div class="panel-section">
                 <h3>Pin Styles</h3>
                 <div class="pin-grid">
-            <button class="pin-btn" data-pin="default" onclick="switchPinStyle('default')">Blue Pin</button>
-            <button class="pin-btn active" data-pin="burgundy_circle" onclick="switchPinStyle('burgundy_circle')">Burgundy Circle</button>
-            <button class="pin-btn" data-pin="black_circle" onclick="switchPinStyle('black_circle')">Black Circle</button>
-            <button class="pin-btn" data-pin="small_burgundy_pin" onclick="switchPinStyle('small_burgundy_pin')">Burgundy Drop</button>
-            <button class="pin-btn" data-pin="small_orange_pin" onclick="switchPinStyle('small_orange_pin')">Orange Drop</button>
-            <button class="pin-btn" data-pin="pushpin_emoji" onclick="switchPinStyle('pushpin_emoji')">Pushpin 📌</button>
+            <button type="button" class="pin-btn" data-pin="default" onclick="switchPinStyle('default')">Blue Pin</button>
+            <button type="button" class="pin-btn active" data-pin="burgundy_circle" onclick="switchPinStyle('burgundy_circle')">Burgundy Circle</button>
+            <button type="button" class="pin-btn" data-pin="black_circle" onclick="switchPinStyle('black_circle')">Black Circle</button>
+            <button type="button" class="pin-btn" data-pin="small_burgundy_pin" onclick="switchPinStyle('small_burgundy_pin')">Burgundy Drop</button>
+            <button type="button" class="pin-btn" data-pin="small_orange_pin" onclick="switchPinStyle('small_orange_pin')">Orange Drop</button>
+            <button type="button" class="pin-btn" data-pin="pushpin_emoji" onclick="switchPinStyle('pushpin_emoji')">Pushpin 📌</button>
                 </div>
             </div>
             
             <div class="panel-section">
                 <h3>Map Tiles</h3>
                 <div class="style-grid">
-            <button class="style-btn active" data-style="watercolor" onclick="switchStyle('watercolor')">Watercolor</button>
-            <button class="style-btn" data-style="alidade_smooth" onclick="switchStyle('alidade_smooth')">Alidade</button>
-            <button class="style-btn" data-style="alidade_smooth_dark" onclick="switchStyle('alidade_smooth_dark')">Alidade Dark</button>
-            <button class="style-btn" data-style="alidade_bright" onclick="switchStyle('alidade_bright')">Alidade Bright</button>
-            <button class="style-btn" data-style="alidade_satellite" onclick="switchStyle('alidade_satellite')">Stadia Satellite</button>
-            <button class="style-btn" data-style="toner" onclick="switchStyle('toner')">Toner</button>
-            <button class="style-btn" data-style="toner_lite" onclick="switchStyle('toner_lite')">Toner Lite</button>
-            <button class="style-btn" data-style="toner_background" onclick="switchStyle('toner_background')">Toner BG</button>
-            <button class="style-btn" data-style="terrain" onclick="switchStyle('terrain')">Terrain</button>
-            <button class="style-btn" data-style="terrain_background" onclick="switchStyle('terrain_background')">Terrain BG</button>
-            <button class="style-btn" data-style="outdoors" onclick="switchStyle('outdoors')">Outdoors</button>
-            <button class="style-btn" data-style="osm_bright" onclick="switchStyle('osm_bright')">OSM Bright</button>
-            <button class="style-btn" data-style="osm" onclick="switchStyle('osm')">OSM</button>
-            <button class="style-btn" data-style="osm_de" onclick="switchStyle('osm_de')">OSM DE</button>
-            <button class="style-btn" data-style="humanitarian" onclick="switchStyle('humanitarian')">HOT</button>
-            <button class="style-btn" data-style="cyclosm" onclick="switchStyle('cyclosm')">CyclOSM</button>
-            <button class="style-btn" data-style="opentopomap" onclick="switchStyle('opentopomap')">TopoMap</button>
-            <button class="style-btn" data-style="esri_world" onclick="switchStyle('esri_world')">Esri Satellite</button>
-            <button class="style-btn" data-style="esri_world_street" onclick="switchStyle('esri_world_street')">Esri Street</button>
-            <button class="style-btn" data-style="esri_world_topo" onclick="switchStyle('esri_world_topo')">Esri Topo</button>
-            <button class="style-btn" data-style="esri_natgeo" onclick="switchStyle('esri_natgeo')">Nat Geo</button>
+            <button type="button" class="style-btn active" data-style="watercolor" onclick="switchStyle('watercolor')">Watercolor</button>
+            <button type="button" class="style-btn" data-style="alidade_smooth" onclick="switchStyle('alidade_smooth')">Alidade</button>
+            <button type="button" class="style-btn" data-style="alidade_smooth_dark" onclick="switchStyle('alidade_smooth_dark')">Alidade Dark</button>
+            <button type="button" class="style-btn" data-style="alidade_bright" onclick="switchStyle('alidade_bright')">Alidade Bright</button>
+            <button type="button" class="style-btn" data-style="alidade_satellite" onclick="switchStyle('alidade_satellite')">Stadia Satellite</button>
+            <button type="button" class="style-btn" data-style="toner" onclick="switchStyle('toner')">Toner</button>
+            <button type="button" class="style-btn" data-style="toner_lite" onclick="switchStyle('toner_lite')">Toner Lite</button>
+            <button type="button" class="style-btn" data-style="toner_background" onclick="switchStyle('toner_background')">Toner BG</button>
+            <button type="button" class="style-btn" data-style="terrain" onclick="switchStyle('terrain')">Terrain</button>
+            <button type="button" class="style-btn" data-style="terrain_background" onclick="switchStyle('terrain_background')">Terrain BG</button>
+            <button type="button" class="style-btn" data-style="outdoors" onclick="switchStyle('outdoors')">Outdoors</button>
+            <button type="button" class="style-btn" data-style="osm_bright" onclick="switchStyle('osm_bright')">OSM Bright</button>
+            <button type="button" class="style-btn" data-style="osm" onclick="switchStyle('osm')">OSM</button>
+            <button type="button" class="style-btn" data-style="osm_de" onclick="switchStyle('osm_de')">OSM DE</button>
+            <button type="button" class="style-btn" data-style="humanitarian" onclick="switchStyle('humanitarian')">HOT</button>
+            <button type="button" class="style-btn" data-style="cyclosm" onclick="switchStyle('cyclosm')">CyclOSM</button>
+            <button type="button" class="style-btn" data-style="opentopomap" onclick="switchStyle('opentopomap')">TopoMap</button>
+            <button type="button" class="style-btn" data-style="esri_world" onclick="switchStyle('esri_world')">Esri Satellite</button>
+            <button type="button" class="style-btn" data-style="esri_world_street" onclick="switchStyle('esri_world_street')">Esri Street</button>
+            <button type="button" class="style-btn" data-style="esri_world_topo" onclick="switchStyle('esri_world_topo')">Esri Topo</button>
+            <button type="button" class="style-btn" data-style="esri_natgeo" onclick="switchStyle('esri_natgeo')">Nat Geo</button>
                 </div>
             </div>
 
