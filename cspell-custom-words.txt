@@ -349,3 +349,11 @@ TCEA
 Mollick
 abuot
 CNET
+Réunion
+erindouglass
+bookmap
+geocodes
+Nominatim
+CARTO
+basemap
+venv

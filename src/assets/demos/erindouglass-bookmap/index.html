@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Locations Map</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Custom CSS -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        
+        #map {
+            width: 100%;
+            height: 100vh;
+        }
+        
+        .leaflet-popup-close-button {
+            top: 6px !important;
+            right: 6px !important;
+        }
+        
+        .book-popup {
+            display: flex;
+            gap: 12px;
+            min-width: 250px;
+            max-width: 350px;
+        }
+        
+        .book-popup .book-cover {
+            width: 80px;
+            height: auto;
+            flex-shrink: 0;
+            border-radius: 4px;
+            align-self: flex-start;
+        }
+        
+        .book-popup .book-details {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            flex-grow: 1;
+        }
+        
+        .book-popup .genre {
+            font-size: 10pt;
+            color: #888;
+            margin: 0 0 2px 0;
+            font-style: italic;
+        }
+        
+        .book-popup h3 {
+            font-size: 16pt;
+            margin: 0;
+            color: #000;
+            line-height: 1.1;
+        }
+        
+        .book-popup .author {
+            font-size: 16pt;
+            color: #000;
+            margin: 0;
+            line-height: 1.1;
+        }
+        
+        .book-popup .location {
+            font-size: 10pt;
+            color: #888;
+            margin: 2px 0 0 0;
+        }
+        
+        .book-popup .review-link {
+            font-size: 10pt;
+            color: #007bff;
+            text-decoration: none;
+            margin-top: auto;
+            display: inline-block;
+            align-self: flex-end;
+        }
+        
+        .book-popup .review-link::after {
+            content: ' →';
+        }
+        
+        .book-popup .review-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Offscreen marker indicators */
+        .offscreen-indicator {
+            position: absolute;
+            background-color: rgba(0, 123, 255, 0.9);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            pointer-events: none;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            display: none;
+            white-space: nowrap;
+        }
+        
+        .offscreen-indicator.visible {
+            display: block;
+        }
+        
+        .offscreen-indicator::before {
+            content: '→';
+            margin-right: 4px;
+        }
+        
+        .offscreen-indicator.north {
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .offscreen-indicator.north::before {
+            content: '↑';
+        }
+        
+        .offscreen-indicator.south {
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .offscreen-indicator.south::before {
+            content: '↓';
+        }
+        
+        .offscreen-indicator.east {
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+        }
+        
+        .offscreen-indicator.west {
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+        }
+        
+        .offscreen-indicator.west::before {
+            content: '←';
+        }
+        
+        .offscreen-indicator.northeast {
+            top: 20px;
+            right: 20px;
+        }
+        
+        .offscreen-indicator.northeast::before {
+            content: '↗';
+        }
+        
+        .offscreen-indicator.northwest {
+            top: 20px;
+            left: 20px;
+        }
+        
+        .offscreen-indicator.northwest::before {
+            content: '↖';
+        }
+        
+        .offscreen-indicator.southeast {
+            bottom: 20px;
+            right: 20px;
+        }
+        
+        .offscreen-indicator.southeast::before {
+            content: '↘';
+        }
+        
+        .offscreen-indicator.southwest {
+            bottom: 20px;
+            left: 20px;
+        }
+        
+        .offscreen-indicator.southwest::before {
+            content: '↙';
+        }
+        
+        /* Custom pin styles */
+        .custom-pin {
+            background: transparent;
+            border: none;
+        }
+        
+        .custom-pin .pin-content {
+            width: 20px;
+            height: 32px;
+            position: relative;
+        }
+        
+        .custom-pin .pin-content::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            left: 0;
+            top: 0;
+        }
+        
+        .custom-pin .pin-content::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: white;
+            left: 6px;
+            top: 6px;
+        }
+        
+        .burgundy-pin .pin-content::before {
+            background: #8B2635;
+            border: 2px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        
+        .orange-pin .pin-content::before {
+            background: #D2691E;
+            border: 2px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        
+        .emoji-icon-marker {
+            background: transparent;
+            border: none;
+            text-align: center;
+        }
+        
+        .emoji-icon-marker .emoji-icon {
+            font-size: 24px;
+            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.4));
+        }
+        
+        
+        
+        /* Combined style chooser panel (preview mode only) */
+        .style-panel {
+            position: fixed;
+            top: 8px;
+            right: 8px;
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            z-index: 1000;
+            max-width: 240px;
+            transition: all 0.3s ease;
+        }
+        
+        .style-panel.collapsed .panel-content {
+            display: none;
+        }
+        
+        @media (max-width: 700px) {
+            .style-panel {
+                max-width: calc(100% - 16px);
+            }
+            
+            .style-panel:not(.collapsed) .panel-content {
+                max-height: 60vh;
+                overflow-y: auto;
+            }
+        }
+        
+        .panel-toggle {
+            padding: 6px 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+            width: 100%;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+        }
+        
+        .panel-toggle:hover {
+            background: #0056b3;
+        }
+        
+        .toggle-icon {
+            font-size: 10px;
+            transition: transform 0.3s;
+        }
+        
+        .style-panel.collapsed .toggle-icon {
+            transform: rotate(180deg);
+        }
+        
+        .panel-content {
+            padding: 8px;
+        }
+        
+        .panel-section {
+            margin-bottom: 10px;
+        }
+        
+        .panel-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .panel-section h3 {
+            margin: 0 0 5px 0;
+            font-size: 10px;
+            color: #666;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .note {
+            font-size: 8px;
+            color: #999;
+            margin-bottom: 8px;
+            font-style: italic;
+            text-align: center;
+        }
+        
+        .style-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 3px;
+        }
+        
+        .pin-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+        
+        .style-btn,
+        .pin-btn {
+            padding: 5px 3px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 9px;
+            transition: all 0.2s;
+            text-align: center;
+            line-height: 1.2;
+        }
+        
+        .style-btn:hover,
+        .pin-btn:hover {
+            border-color: #007bff;
+            background: #f8f9fa;
+        }
+        
+        .style-btn.active,
+        .pin-btn.active {
+            border-color: #007bff;
+            background: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    
+    <!-- Combined Style Panel (preview mode only) -->
+    <div class="style-panel" id="stylePanel">
+        <button class="panel-toggle" onclick="togglePanel()">
+            <span>Map & Pin Styles</span>
+            <span class="toggle-icon">▼</span>
+        </button>
+        <div class="panel-content">
+            <p class="note">Preview only - not included in production</p>
+            
+            <div class="panel-section">
+                <h3>Pin Styles</h3>
+                <div class="pin-grid">
+            <button class="pin-btn" data-pin="default" onclick="switchPinStyle('default')">Blue Pin</button>
+            <button class="pin-btn active" data-pin="burgundy_circle" onclick="switchPinStyle('burgundy_circle')">Burgundy Circle</button>
+            <button class="pin-btn" data-pin="black_circle" onclick="switchPinStyle('black_circle')">Black Circle</button>
+            <button class="pin-btn" data-pin="small_burgundy_pin" onclick="switchPinStyle('small_burgundy_pin')">Burgundy Drop</button>
+            <button class="pin-btn" data-pin="small_orange_pin" onclick="switchPinStyle('small_orange_pin')">Orange Drop</button>
+            <button class="pin-btn" data-pin="pushpin_emoji" onclick="switchPinStyle('pushpin_emoji')">Pushpin 📌</button>
+                </div>
+            </div>
+            
+            <div class="panel-section">
+                <h3>Map Tiles</h3>
+                <div class="style-grid">
+            <button class="style-btn active" data-style="watercolor" onclick="switchStyle('watercolor')">Watercolor</button>
+            <button class="style-btn" data-style="alidade_smooth" onclick="switchStyle('alidade_smooth')">Alidade</button>
+            <button class="style-btn" data-style="alidade_smooth_dark" onclick="switchStyle('alidade_smooth_dark')">Alidade Dark</button>
+            <button class="style-btn" data-style="alidade_bright" onclick="switchStyle('alidade_bright')">Alidade Bright</button>
+            <button class="style-btn" data-style="alidade_satellite" onclick="switchStyle('alidade_satellite')">Stadia Satellite</button>
+            <button class="style-btn" data-style="toner" onclick="switchStyle('toner')">Toner</button>
+            <button class="style-btn" data-style="toner_lite" onclick="switchStyle('toner_lite')">Toner Lite</button>
+            <button class="style-btn" data-style="toner_background" onclick="switchStyle('toner_background')">Toner BG</button>
+            <button class="style-btn" data-style="terrain" onclick="switchStyle('terrain')">Terrain</button>
+            <button class="style-btn" data-style="terrain_background" onclick="switchStyle('terrain_background')">Terrain BG</button>
+            <button class="style-btn" data-style="outdoors" onclick="switchStyle('outdoors')">Outdoors</button>
+            <button class="style-btn" data-style="osm_bright" onclick="switchStyle('osm_bright')">OSM Bright</button>
+            <button class="style-btn" data-style="osm" onclick="switchStyle('osm')">OSM</button>
+            <button class="style-btn" data-style="osm_de" onclick="switchStyle('osm_de')">OSM DE</button>
+            <button class="style-btn" data-style="humanitarian" onclick="switchStyle('humanitarian')">HOT</button>
+            <button class="style-btn" data-style="cyclosm" onclick="switchStyle('cyclosm')">CyclOSM</button>
+            <button class="style-btn" data-style="opentopomap" onclick="switchStyle('opentopomap')">TopoMap</button>
+            <button class="style-btn" data-style="esri_world" onclick="switchStyle('esri_world')">Esri Satellite</button>
+            <button class="style-btn" data-style="esri_world_street" onclick="switchStyle('esri_world_street')">Esri Street</button>
+            <button class="style-btn" data-style="esri_world_topo" onclick="switchStyle('esri_world_topo')">Esri Topo</button>
+            <button class="style-btn" data-style="esri_natgeo" onclick="switchStyle('esri_natgeo')">Nat Geo</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- Map initialization -->
+    <script>
+
+    // Initialize map (temporary view, will be adjusted to fit markers)
+    const map = L.map('map');
+    
+    // Define available tile layers
+    const tileLayers = {
+        'osm': {
+            url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            options: { maxZoom: 19 }
+        },
+        'humanitarian': {
+            url: 'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a>',
+            options: { maxZoom: 19 }
+        },
+        'terrain': {
+            url: 'https://tiles.stadiamaps.com/tiles/stamen_terrain/{z}/{x}/{y}{r}.png',
+            attribution: '&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            options: { maxZoom: 18 }
+        },
+        'toner': {
+            url: 'https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}{r}.png',
+            attribution: '&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            options: { maxZoom: 20 }
+        },
+        'watercolor': {
+            url: 'https://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}.jpg',
+            attribution: '&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            options: { maxZoom: 16 }
+        },
+        'alidade_smooth': {
+            url: 'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png',
+            attribution: '&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            options: { maxZoom: 20 }
+        },
+        'alidade_smooth_dark': {
+            url: 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
+            attribution: '&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            options: { maxZoom: 20 }
+        },
+        'osm_bright': {
+            url: 'https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png',
+            attribution: '&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            options: { maxZoom: 20 }
+        },
+        'alidade_bright': {
+            url: 'https://tiles.stadiamaps.com/tiles/alidade_bright/{z}/{x}/{y}{r}.png',
+            attribution: '&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            options: { maxZoom: 20 }
+        },
+        'toner_labels': {
+            url: 'https://tiles.stadiamaps.com/tiles/stamen_toner_labels/{z}/{x}/{y}{r}.png',
+            attribution: '&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            options: { maxZoom: 20 }
+        },
+        'terrain_background': {
+            url: 'https://tiles.stadiamaps.com/tiles/stamen_terrain_background/{z}/{x}/{y}{r}.png',
+            attribution: '&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            options: { maxZoom: 18 }
+        },
+        'terrain_labels': {
+            url: 'https://tiles.stadiamaps.com/tiles/stamen_terrain_labels/{z}/{x}/{y}{r}.png',
+            attribution: '&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            options: { maxZoom: 18 }
+        },
+        'terrain_lines': {
+            url: 'https://tiles.stadiamaps.com/tiles/stamen_terrain_lines/{z}/{x}/{y}{r}.png',
+            attribution: '&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            options: { maxZoom: 18 }
+        },
+        // Measured 2026-09-10: satellite answers 200 from localhost and 403 with an
+        // "Upgrade for Access" tile from jonplummer.com, while every other Stadia
+        // style answers 200 from localhost, a registered domain, and an unregistered
+        // one alike. It is the only style where Stadia actually enforces, so if it
+        // comes back grey on a live site the account or property needs attention.
+        'alidade_satellite': {
+            url: 'https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.jpg',
+            attribution: '&copy; CNES, Distribution Airbus DS, &copy; Airbus DS, &copy; PlanetObserver (Contains Copernicus Data) | &copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            options: { maxZoom: 20 }
+        },
+        'outdoors': {
+            url: 'https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png',
+            attribution: '&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            options: { maxZoom: 20 }
+        },
+        'opentopomap': {
+            url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a>',
+            options: { maxZoom: 17 }
+        },
+        'cyclosm': {
+            url: 'https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png',
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Map style: &copy; <a href="https://www.cyclosm.org">CyclOSM</a>',
+            options: { maxZoom: 20 }
+        },
+        'esri_world': {
+            url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+            attribution: '&copy; <a href="https://www.esri.com/">Esri</a>, Maxar, Earthstar Geographics, and the GIS User Community',
+            options: { maxZoom: 19 }
+        },
+        'toner_lite': {
+            url: 'https://tiles.stadiamaps.com/tiles/stamen_toner_lite/{z}/{x}/{y}{r}.png',
+            attribution: '&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            options: { maxZoom: 20 }
+        },
+        'osm_de': {
+            url: 'https://{s}.tile.openstreetmap.de/{z}/{x}/{y}.png',
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            options: { maxZoom: 18 }
+        },
+        'toner_background': {
+            url: 'https://tiles.stadiamaps.com/tiles/stamen_toner_background/{z}/{x}/{y}{r}.png',
+            attribution: '&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            options: { maxZoom: 20 }
+        },
+        'toner_lines': {
+            url: 'https://tiles.stadiamaps.com/tiles/stamen_toner_lines/{z}/{x}/{y}{r}.png',
+            attribution: '&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            options: { maxZoom: 20 }
+        },
+        'esri_world_street': {
+            url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
+            attribution: '&copy; <a href="https://www.esri.com/">Esri</a>',
+            options: { maxZoom: 19 }
+        },
+        'esri_world_topo': {
+            url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
+            attribution: '&copy; <a href="https://www.esri.com/">Esri</a>',
+            options: { maxZoom: 19 }
+        },
+        'esri_natgeo': {
+            url: 'https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}',
+            attribution: '&copy; <a href="https://www.esri.com/">Esri</a>, National Geographic',
+            options: { maxZoom: 16 }
+        }
+        // Additional providers (require API keys):
+        // Mapbox: https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}
+        // Thunderforest: https://{s}.tile.thunderforest.com/{style}/{z}/{x}/{y}.png?apikey={apikey}
+        // Maptiler: https://api.maptiler.com/maps/{style}/256/{z}/{x}/{y}.png?key={key}
+    };
+    
+    // Start with configured default style
+    let currentLayer = 'watercolor';
+    let activeLayer = L.tileLayer(tileLayers[currentLayer].url, {
+        attribution: tileLayers[currentLayer].attribution,
+        ...tileLayers[currentLayer].options
+    }).addTo(map);
+    
+    // Map style switcher function (preview mode only)
+    window.switchStyle = function(styleName) {
+        if (tileLayers[styleName]) {
+            map.removeLayer(activeLayer);
+            currentLayer = styleName;
+            activeLayer = L.tileLayer(tileLayers[currentLayer].url, {
+                attribution: tileLayers[currentLayer].attribution,
+                ...tileLayers[currentLayer].options
+            }).addTo(map);
+            
+            // Update active button
+            document.querySelectorAll('.style-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-style="${styleName}"]`).classList.add('active');
+        }
+    };
+    
+    // Pin style switcher function (preview mode only)
+    window.switchPinStyle = function(styleName) {
+        if (pinStyles[styleName]) {
+            currentPinStyle = styleName;
+            
+            // Clear and recreate markers
+            markerLayer.clearLayers();
+            
+            markerDataStore.forEach(stored => {
+                const marker = pinStyles[currentPinStyle].createMarker(stored.lat, stored.lng);
+                marker.bindPopup(createPopupContent(stored.markerData));
+                marker.addTo(markerLayer);
+            });
+            
+            // Update active button
+            document.querySelectorAll('.pin-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-pin="${styleName}"]`).classList.add('active');
+            
+            // Update offscreen indicators
+            setTimeout(updateOffscreenIndicators, 100);
+        }
+    };
+    
+    // Panel toggle function (preview mode only)
+    window.togglePanel = function() {
+        const panel = document.getElementById('stylePanel');
+        panel.classList.toggle('collapsed');
+    };
+
+    // On a narrow screen the open panel covers most of the map, so start it
+    // collapsed there and let the reader open it. Only applies before the reader
+    // has touched it; once they toggle it, their choice stands.
+    (function () {
+        const panel = document.getElementById('stylePanel');
+        if (panel && window.matchMedia('(max-width: 700px)').matches) {
+            panel.classList.add('collapsed');
+        }
+    })();
+    
+    // Book data
+    const booksData = [
+    {
+        "title": "Super Natural",
+        "locations": [
+            {
+                "name": "Antarctica",
+                "lat": -72.8438691,
+                "lng": 0.0
+            },
+            {
+                "name": "Sahara Desert",
+                "lat": 22.25,
+                "lng": 9.8
+            }
+        ],
+        "author": "Alex Riley",
+        "cover": "https://books.google.com/books?vid=ISBN9781324079187&printsec=frontcover&img=1&zoom=1",
+        "review": "https://www.csmonitor.com/Books/Author-Q-As/2025/0926/super-natural-alex-riley",
+        "year": 2025,
+        "genre": "Science"
+    },
+    {
+        "title": "Monopoly X",
+        "locations": [
+            {
+                "name": "Germany",
+                "lat": 51.1638175,
+                "lng": 10.4478313
+            }
+        ],
+        "author": "Philip E. Orbanes",
+        "cover": "https://books.google.com/books?vid=ISBN9780063425132&printsec=frontcover&img=1&zoom=1",
+        "review": "https://www.csmonitor.com/Books/Author-Q-As/2025/0725/monopoly-x-philip-orbanes-world-war-2",
+        "year": 2025,
+        "genre": "History"
+    },
+    {
+        "title": "The Rarest Fruit",
+        "locations": [
+            {
+                "name": "R\u00e9union Island",
+                "lat": -21.1307379,
+                "lng": 55.5364801
+            }
+        ],
+        "author": "Ga\u00eblle B\u00e9lem",
+        "cover": "https://books.google.com/books?vid=ISBN9798889660996&printsec=frontcover&img=1&zoom=1",
+        "review": "https://www.csmonitor.com/Books/Book-Reviews/2025/0710/black-botanist-edmond-albius-19th-century",
+        "year": 2025,
+        "genre": "Historical Fiction"
+    },
+    {
+        "title": "Amity",
+        "locations": [
+            {
+                "name": "Louisiana, USA",
+                "lat": 30.8703881,
+                "lng": -92.007126
+            },
+            {
+                "name": "Mexico",
+                "lat": 23.6585116,
+                "lng": -102.0077097
+            }
+        ],
+        "author": "Nathan Harris",
+        "cover": "https://books.google.com/books?vid=ISBN9780316456241&printsec=frontcover&img=1&zoom=1",
+        "review": "https://www.csmonitor.com/Books/Book-Reviews/2025/1126/black-western-amity-nathan-harris",
+        "year": 2025,
+        "genre": "Historical Fiction"
+    },
+    {
+        "title": "Cloud Cuckoo Land",
+        "locations": [
+            {
+                "name": "Constantinople",
+                "lat": 41.006381,
+                "lng": 28.9758715
+            },
+            {
+                "name": "Idaho, USA",
+                "lat": 43.6447642,
+                "lng": -114.015407
+            }
+        ],
+        "author": "Anthony Doerr",
+        "cover": "https://covers.openlibrary.org/b/isbn/9781982168438-L.jpg",
+        "review": "https://www.csmonitor.com/Books/Book-Reviews/2021/0928/Cosmic-puzzle-pieces-come-together-in-masterly-Cloud-Cuckoo-Land",
+        "year": 2021,
+        "genre": "Historical Fiction"
+    },
+    {
+        "title": "Properties of Thirst",
+        "locations": [
+            {
+                "name": "California, USA",
+                "lat": 36.7014631,
+                "lng": -118.755997
+            }
+        ],
+        "author": "Marianne Wiggins",
+        "cover": "https://covers.openlibrary.org/b/isbn/9781416571261-L.jpg",
+        "review": "https://www.csmonitor.com/Books/Book-Reviews/2022/1013/Manzanar-camp-novel-explores-moral-culpability-during-World-War-II",
+        "year": 2022,
+        "genre": "Historical Fiction"
+    },
+    {
+        "title": "The Rose Code",
+        "locations": [
+            {
+                "name": "Bletchley Park, England",
+                "lat": 51.9974937,
+                "lng": -0.7410593
+            }
+        ],
+        "author": "Kate Quinn",
+        "cover": "https://covers.openlibrary.org/b/isbn/9780063059412-L.jpg",
+        "review": "https://www.csmonitor.com/Books/Book-Reviews/2021/0825/Life-in-wartime-Women-dominate-a-quartet-of-World-War-II-novels",
+        "year": 2021,
+        "genre": "Historical Fiction"
+    },
+    {
+        "title": "The Forest of Vanishing Stars",
+        "locations": [
+            {
+                "name": "Nalibocka Forest, Belarus",
+                "lat": 53.88444,
+                "lng": 26.4425
+            }
+        ],
+        "author": "Kristin Harmel",
+        "cover": "https://covers.openlibrary.org/b/isbn/9781982158934-L.jpg",
+        "review": "https://www.csmonitor.com/Books/Book-Reviews/2021/0825/Life-in-wartime-Women-dominate-a-quartet-of-World-War-II-novels",
+        "year": 2021,
+        "genre": "Historical Fiction"
+    },
+    {
+        "title": "The Woman With the Blue Star",
+        "locations": [
+            {
+                "name": "Krak\u00f3w, Poland",
+                "lat": 50.0469432,
+                "lng": 19.9971534
+            }
+        ],
+        "author": "Pam Jenoff",
+        "cover": "https://covers.openlibrary.org/b/isbn/9780778311546-L.jpg",
+        "review": "https://www.csmonitor.com/Books/Book-Reviews/2021/0825/Life-in-wartime-Women-dominate-a-quartet-of-World-War-II-novels",
+        "year": 2021,
+        "genre": "Historical Fiction"
+    },
+    {
+        "title": "The Riviera House",
+        "locations": [
+            {
+                "name": "Paris, France",
+                "lat": 48.8588897,
+                "lng": 2.320041
+            },
+            {
+                "name": "French Riviera, France",
+                "lat": 43.9525507,
+                "lng": 7.4794283
+            }
+        ],
+        "author": "Natasha Lester",
+        "cover": "https://covers.openlibrary.org/b/isbn/9781538717318-L.jpg",
+        "review": "https://www.csmonitor.com/Books/Book-Reviews/2021/0825/Life-in-wartime-Women-dominate-a-quartet-of-World-War-II-novels",
+        "year": 2021,
+        "genre": "Historical Fiction"
+    },
+    {
+        "title": "Endling",
+        "locations": [
+            {
+                "name": "Ukraine",
+                "lat": 49.4871968,
+                "lng": 31.2718321
+            }
+        ],
+        "author": "Maria Reva",
+        "cover": "https://covers.openlibrary.org/b/isbn/9780385545310-L.jpg",
+        "review": "https://www.csmonitor.com/Books/Book-Reviews/2025/0605/endling-debut-novel-maria-reva",
+        "year": 2025,
+        "genre": "Fiction"
+    },
+    {
+        "title": "The Art Spy",
+        "locations": [
+            {
+                "name": "Paris, France",
+                "lat": 48.8588897,
+                "lng": 2.320041
+            }
+        ],
+        "author": "Michelle Young",
+        "cover": "https://books.google.com/books?vid=ISBN9780063295896&printsec=frontcover&img=1&zoom=1",
+        "review": "https://www.csmonitor.com/Books/Author-Q-As/2025/0529/michelle-young-the-art-spy-second-world-war",
+        "year": 2025,
+        "genre": "Biography"
+    },
+    {
+        "title": "The Dream Hotel",
+        "locations": [
+            {
+                "name": "United States",
+                "lat": 39.7837304,
+                "lng": -100.445882
+            }
+        ],
+        "author": "Laila Lalami",
+        "cover": "https://books.google.com/books?vid=ISBN9780593317600&printsec=frontcover&img=1&zoom=1",
+        "review": "https://www.csmonitor.com/Books/Author-Q-As/2025/0314/laila-lalami-the-dream-hotel",
+        "year": 2025,
+        "genre": "Fiction"
+    },
+    {
+        "title": "Ingenious: A Biography of Benjamin Franklin, Scientist",
+        "locations": [
+            {
+                "name": "Philadelphia, Pennsylvania, USA",
+                "lat": 39.9527237,
+                "lng": -75.1635262
+            }
+        ],
+        "author": "Richard Munson",
+        "cover": "https://covers.openlibrary.org/b/isbn/9780393882230-L.jpg",
+        "review": "https://www.csmonitor.com/Books/Author-Q-As/2025/0110/richard-munson-ingenious-benjamin-franklin",
+        "year": 2024,
+        "genre": "Biography"
+    },
+    {
+        "title": "Polostan",
+        "locations": [
+            {
+                "name": "Ukraine",
+                "lat": 49.4871968,
+                "lng": 31.2718321
+            },
+            {
+                "name": "Montana, USA",
+                "lat": 47.3752671,
+                "lng": -109.638757
+            }
+        ],
+        "author": "Neal Stephenson",
+        "cover": "https://covers.openlibrary.org/b/isbn/9780062334497-L.jpg",
+        "review": "https://www.csmonitor.com/Books/Author-Q-As/2024/1205/neal-stephenson-polostan-novel",
+        "year": 2024,
+        "genre": "Historical Fiction"
+    },
+    {
+        "title": "Frederick Douglass: A Novel",
+        "locations": [
+            {
+                "name": "United States",
+                "lat": 39.7837304,
+                "lng": -100.445882
+            }
+        ],
+        "author": "Sidney Morrison",
+        "cover": "https://covers.openlibrary.org/b/isbn/9780998825793-L.jpg",
+        "review": "https://www.csmonitor.com/Books/Book-Reviews/2024/0731/frederick-douglass-novel-sidney-morrison",
+        "year": 2024,
+        "genre": "Historical Fiction"
+    },
+    {
+        "title": "The General and Julia",
+        "locations": [
+            {
+                "name": "United States",
+                "lat": 39.7837304,
+                "lng": -100.445882
+            }
+        ],
+        "author": "Jon Clinch",
+        "cover": "https://covers.openlibrary.org/b/isbn/9781668009789-L.jpg",
+        "review": "https://www.csmonitor.com/Books/2024/0103/A-novelist-envisions-the-last-days-of-Ulysses-S.-Grant",
+        "year": 2023,
+        "genre": "Historical Fiction"
+    },
+    {
+        "title": "The Heaven & Earth Grocery Store",
+        "locations": [
+            {
+                "name": "Pennsylvania, USA",
+                "lat": 40.9699889,
+                "lng": -77.7278831
+            }
+        ],
+        "author": "James McBride",
+        "cover": "https://covers.openlibrary.org/b/isbn/9780593422946-L.jpg",
+        "review": "https://www.csmonitor.com/Books/Book-Reviews/2023/1012/The-Heaven-Earth-Grocery-Store-weaves-a-tale-of-love-and-community",
+        "year": 2023,
+        "genre": "Fiction"
+    },
+    {
+        "title": "Daughter of the Dragon",
+        "locations": [
+            {
+                "name": "Los Angeles, California, USA",
+                "lat": 34.0536909,
+                "lng": -118.242766
+            },
+            {
+                "name": "Hollywood, California, USA",
+                "lat": 34.0980031,
+                "lng": -118.329523
+            }
+        ],
+        "author": "Yunte Huang",
+        "cover": "https://covers.openlibrary.org/b/isbn/9781631495809-L.jpg",
+        "review": "https://www.csmonitor.com/Books/Book-Reviews/2023/1012/Anna-May-Wong-blazed-a-trail-for-Asian-actors-in-Hollywood",
+        "year": 2023,
+        "genre": "Biography"
+    },
+    {
+        "title": "Parallel Lines",
+        "locations": [
+            {
+                "name": "Jerusalem, Israel",
+                "lat": 31.7788472,
+                "lng": 35.2257856
+            }
+        ],
+        "author": "Ruth Marks Eglash",
+        "cover": "https://covers.openlibrary.org/b/isbn/9781685132163-L.jpg",
+        "review": "https://www.csmonitor.com/Books/Author-Q-As/2023/0921/To-explain-Jerusalem-s-conflicts-she-wrote-a-young-adult-novel",
+        "year": 2023,
+        "genre": "Young Adult Fiction"
+    },
+    {
+        "title": "The Last Dance",
+        "locations": [
+            {
+                "name": "United Kingdom",
+                "lat": 54.7023545,
+                "lng": -3.2765753
+            }
+        ],
+        "author": "Mark Billingham",
+        "cover": "https://covers.openlibrary.org/b/isbn/9780802161949-L.jpg",
+        "review": "https://www.csmonitor.com/Books/Book-Reviews/2023/0811/Two-to-tango-Mark-Billingham-mystery-explores-partnership",
+        "year": 2023,
+        "genre": "Mystery"
+    },
+    {
+        "title": "The Covenant of Water",
+        "locations": [
+            {
+                "name": "Kerala, India",
+                "lat": 10.3528744,
+                "lng": 76.5120396
+            }
+        ],
+        "author": "Abraham Verghese",
+        "cover": "https://covers.openlibrary.org/b/isbn/9780802162175-L.jpg",
+        "review": "https://www.csmonitor.com/Books/2023/0717/In-a-land-shaped-by-water-a-family-tale-of-persistence",
+        "year": 2023,
+        "genre": "Fiction"
+    },
+    {
+        "title": "Birnam Wood",
+        "locations": [
+            {
+                "name": "New Zealand",
+                "lat": -41.5000831,
+                "lng": 172.8344077
+            }
+        ],
+        "author": "Eleanor Catton",
+        "cover": "https://covers.openlibrary.org/b/isbn/9780374110338-L.jpg",
+        "review": "https://www.csmonitor.com/Books/2023/0607/Eleanor-Catton-talks-about-Birnam-Wood-and-the-seduction-of-certainty",
+        "year": 2023,
+        "genre": "Fiction"
+    },
+    {
+        "title": "Getting out of Saigon",
+        "locations": [
+            {
+                "name": "Ho Chi Minh City, Vietnam",
+                "lat": 10.7755254,
+                "lng": 106.7021047
+            }
+        ],
+        "author": "Ralph White",
+        "cover": "https://covers.openlibrary.org/b/isbn/9781982195175-L.jpg",
+        "review": "https://www.csmonitor.com/Books/Author-Q-As/2023/0517/A-daring-escape-How-an-American-banker-rescued-113-Vietnamese-civilians",
+        "year": 2023,
+        "genre": "Memoir"
+    },
+    {
+        "title": "Cold People",
+        "locations": [
+            {
+                "name": "Antarctica",
+                "lat": -72.8438691,
+                "lng": 0.0
+            }
+        ],
+        "author": "Tom Rob Smith",
+        "cover": "https://covers.openlibrary.org/b/isbn/9781982198404-L.jpg",
+        "review": "https://www.csmonitor.com/Books/Book-Reviews/2023/0410/Sci-fi-novel-Cold-People-explores-ethics-of-human-bioengineering",
+        "year": 2023,
+        "genre": "Science Fiction"
+    },
+    {
+        "title": "Roses, in the Mouth of a Lion",
+        "locations": [
+            {
+                "name": "Queens, New York, USA",
+                "lat": 40.7135078,
+                "lng": -73.8283132
+            }
+        ],
+        "author": "Bushra Rehman",
+        "cover": "https://covers.openlibrary.org/b/isbn/9781250834782-L.jpg",
+        "review": "https://www.csmonitor.com/Books/Book-Reviews/2023/0221/Coming-of-age-novel-overflows-with-humor-heartache-and-honesty",
+        "year": 2022,
+        "genre": "Fiction"
+    },
+    {
+        "title": "Master Slave Husband Wife",
+        "locations": [
+            {
+                "name": "Georgia, USA",
+                "lat": 32.3293809,
+                "lng": -83.1137366
+            }
+        ],
+        "author": "Ilyon Woo",
+        "cover": "https://books.google.com/books?vid=ISBN9781501191060&printsec=frontcover&img=1&zoom=1",
+        "review": "https://www.csmonitor.com/Books/Author-Q-As/2023/0213/A-daring-escape-from-slavery-and-the-love-story-behind-it",
+        "year": 2024,
+        "genre": "History"
+    },
+    {
+        "title": "The Consequences",
+        "locations": [
+            {
+                "name": "California, USA",
+                "lat": 36.7014631,
+                "lng": -118.755997
+            },
+            {
+                "name": "Mexico",
+                "lat": 23.6585116,
+                "lng": -102.0077097
+            }
+        ],
+        "author": "Manuel Mu\u00f1oz",
+        "cover": "https://covers.openlibrary.org/b/isbn/9781644452066-L.jpg",
+        "review": "https://www.csmonitor.com/Books/Book-Reviews/2023/0105/The-uneasy-inbetweenness-of-lives-that-cross-borders",
+        "year": 2022,
+        "genre": "Short Stories"
+    },
+    {
+        "title": "Blackwater Falls",
+        "locations": [
+            {
+                "name": "Colorado, USA",
+                "lat": 38.7251776,
+                "lng": -105.607716
+            }
+        ],
+        "author": "Ausma Zehanat Khan",
+        "cover": "https://covers.openlibrary.org/b/isbn/9781250822383-L.jpg",
+        "review": "https://www.csmonitor.com/Books/2022/1215/Blackwater-Falls-is-a-whodunit-that-goes-below-the-surface",
+        "year": 2022,
+        "genre": "Mystery"
+    },
+    {
+        "title": "Lessons",
+        "locations": [
+            {
+                "name": "United Kingdom",
+                "lat": 54.7023545,
+                "lng": -3.2765753
+            }
+        ],
+        "author": "Ian McEwan",
+        "cover": "https://covers.openlibrary.org/b/isbn/9780593535202-L.jpg",
+        "review": "https://www.csmonitor.com/Books/Book-Reviews/2022/1122/Ian-McEwan-s-Lessons-explores-complex-emotional-terrain",
+        "year": 2022,
+        "genre": "Fiction"
+    },
+    {
+        "title": "The Wall",
+        "locations": [
+            {
+                "name": "Bavaria, Germany",
+                "lat": 48.9467562,
+                "lng": 11.4038717
+            }
+        ],
+        "author": "Marlen Haushofer",
+        "cover": "https://books.google.com/books?vid=ISBN9780811231947&printsec=frontcover&img=1&zoom=1",
+        "review": "https://www.csmonitor.com/Books/Book-Reviews/2022/0727/Survival-tale-The-Wall-pits-a-woman-against-strange-forces",
+        "year": 2022,
+        "genre": "Fiction"
+    },
+    {
+        "title": "Iona Iverson's Rules for Commuting",
+        "locations": [
+            {
+                "name": "London, England",
+                "lat": 51.5074456,
+                "lng": -0.1277653
+            }
+        ],
+        "author": "Clare Pooley",
+        "cover": "https://covers.openlibrary.org/b/isbn/9781984878649-L.jpg",
+        "review": "https://www.csmonitor.com/Books/Book-Reviews/2022/0606/Facades-are-dropped-and-judgments-suspended-on-a-commuter-train",
+        "year": 2022,
+        "genre": "Fiction"
+    },
+    {
+        "title": "The Great Passion",
+        "locations": [
+            {
+                "name": "Leipzig, Germany",
+                "lat": 51.3406321,
+                "lng": 12.3747329
+            }
+        ],
+        "author": "James Runcie",
+        "cover": "https://covers.openlibrary.org/b/isbn/9781635570670-L.jpg",
+        "review": "https://www.csmonitor.com/Books/Book-Reviews/2022/0429/A-novel-envisions-what-it-would-be-like-to-study-with-Bach",
+        "year": 2022,
+        "genre": "Historical Fiction"
+    },
+    {
+        "title": "Lessons in Chemistry",
+        "locations": [
+            {
+                "name": "United States",
+                "lat": 39.7837304,
+                "lng": -100.445882
+            },
+            {
+                "name": "Southern California",
+                "lat": 33.9510011,
+                "lng": -118.2062682
+            }
+        ],
+        "author": "Bonnie Garmus",
+        "cover": "https://covers.openlibrary.org/b/isbn/9780385547345-L.jpg",
+        "review": "https://www.csmonitor.com/Books/2022/0408/Lessons-in-Chemistry-catalyzes-science-cooking-and-humor",
+        "year": 2022,
+        "genre": "Fiction"
+    },
+    {
+        "title": "Our American Friend",
+        "locations": [
+            {
+                "name": "United States",
+                "lat": 39.7837304,
+                "lng": -100.445882
+            },
+            {
+                "name": "Russia",
+                "lat": 64.6863136,
+                "lng": 97.7453061
+            }
+        ],
+        "author": "Anna Pitoniak",
+        "cover": "https://books.google.com/books?vid=ISBN9781982158965&printsec=frontcover&img=1&zoom=1",
+        "review": "https://www.csmonitor.com/Books/Book-Reviews/2022/0328/Whispers-lies-and-coercion-fail-to-vanquish-truth",
+        "year": 2023,
+        "genre": "Thriller"
+    },
+    {
+        "title": "Thank You, Mr. Nixon",
+        "locations": [
+            {
+                "name": "United States",
+                "lat": 39.7837304,
+                "lng": -100.445882
+            },
+            {
+                "name": "China",
+                "lat": 35.000074,
+                "lng": 104.999927
+            }
+        ],
+        "author": "Gish Jen",
+        "cover": "https://covers.openlibrary.org/b/isbn/9780593319895-L.jpg",
+        "review": "https://www.csmonitor.com/Books/Book-Reviews/2022/0204/Thank-You-Mr.-Nixon-and-other-tales-of-the-Chinese-diaspora",
+        "year": 2022,
+        "genre": "Short Stories"
+    },
+    {
+        "title": "State of Terror",
+        "locations": [
+            {
+                "name": "United States",
+                "lat": 39.7837304,
+                "lng": -100.445882
+            }
+        ],
+        "author": "Hillary Rodham Clinton and Louise Penny",
+        "cover": "https://covers.openlibrary.org/b/isbn/9781982173678-L.jpg",
+        "review": "https://www.csmonitor.com/Books/Book-Reviews/2021/1110/Clinton-and-Penny-s-State-of-Terror-catapults-a-powerful-woman-into-risk-taking",
+        "year": 2021,
+        "genre": "Thriller"
+    },
+    {
+        "title": "Emily's House",
+        "locations": [
+            {
+                "name": "Amherst, Massachusetts, USA",
+                "lat": 42.3731948,
+                "lng": -72.5198761
+            }
+        ],
+        "author": "Amy Belding Brown",
+        "cover": "https://covers.openlibrary.org/b/isbn/9780593199633-L.jpg",
+        "review": "https://www.csmonitor.com/Books/Book-Reviews/2021/1012/In-the-novel-Emily-s-House-the-Dickinsons-Irish-maid-speaks-her-mind",
+        "year": 2021,
+        "genre": "Historical Fiction"
+    },
+    {
+        "title": "The Lincoln Highway",
+        "locations": [
+            {
+                "name": "United States",
+                "lat": 39.7837304,
+                "lng": -100.445882
+            },
+            {
+                "name": "Nebraska",
+                "lat": 41.7370229,
+                "lng": -99.5873816
+            },
+            {
+                "name": "New York City",
+                "lat": 40.7127281,
+                "lng": -74.0060152
+            }
+        ],
+        "author": "Amor Towles",
+        "cover": "https://covers.openlibrary.org/b/isbn/9780735222359-L.jpg",
+        "review": "https://www.csmonitor.com/Books/2021/1005/Amor-Towles-creates-an-American-road-trip-of-epic-proportions",
+        "year": 2021,
+        "genre": "Fiction"
+    },
+    {
+        "title": "All the Lonely People",
+        "locations": [
+            {
+                "name": "England",
+                "lat": 52.5310214,
+                "lng": -1.2649062
+            }
+        ],
+        "author": "Mike Gayle",
+        "cover": "https://covers.openlibrary.org/b/isbn/9781538720165-L.jpg",
+        "review": "https://www.csmonitor.com/Books/Book-Reviews/2021/0921/Warmhearted-All-the-Lonely-People-strikes-at-isolation",
+        "year": 2021,
+        "genre": "Fiction"
+    },
+    {
+        "title": "Early Morning Riser",
+        "locations": [
+            {
+                "name": "Boyne City, Michigan, USA",
+                "lat": 45.216675,
+                "lng": -85.013942
+            }
+        ],
+        "author": "Katherine Heiny",
+        "cover": "https://covers.openlibrary.org/b/isbn/9780525659341-L.jpg",
+        "review": "https://www.csmonitor.com/Books/Book-Reviews/2021/0621/Romantic-entanglements-bring-humor-and-heartache-to-small-town",
+        "year": 2021,
+        "genre": "Fiction"
+    },
+    {
+        "title": "The Phone Booth at the Edge of the World",
+        "locations": [
+            {
+                "name": "Japan",
+                "lat": 36.5748441,
+                "lng": 139.2394179
+            }
+        ],
+        "author": "Laura Imai Messina",
+        "cover": "https://covers.openlibrary.org/b/isbn/9781419754302-L.jpg",
+        "review": "https://www.csmonitor.com/Books/Book-Reviews/2021/0309/Japan-tsunami-aftermath-provides-the-setting-for-this-quiet-wise-novel",
+        "year": 2021,
+        "genre": "Fiction"
+    },
+    {
+        "title": "When Women Were Dragons",
+        "locations": [
+            {
+                "name": "United States",
+                "lat": 39.7837304,
+                "lng": -100.445882
+            }
+        ],
+        "author": "Kelly Barnhill",
+        "cover": "https://covers.openlibrary.org/b/isbn/9780385548229-L.jpg",
+        "review": "https://www.csmonitor.com/Books/Book-Reviews/2022/0616/When-Women-Were-Dragons-imagines-a-fiery-response-to-female-suppression",
+        "year": 2022,
+        "genre": "Fantasy"
+    },
+    {
+        "title": "I Must Betray You",
+        "locations": [
+            {
+                "name": "Romania",
+                "lat": 45.9852129,
+                "lng": 24.6859225
+            }
+        ],
+        "author": "Ruta Sepetys",
+        "cover": "https://covers.openlibrary.org/b/isbn/9781984836038-L.jpg",
+        "review": "https://www.csmonitor.com/Books/Book-Reviews/2022/0328/Whispers-lies-and-coercion-fail-to-vanquish-truth",
+        "year": 2022,
+        "genre": "Historical Fiction"
+    }
+];
+    
+    // Define pin styles
+    const pinStyles = {
+        'default': {
+            name: 'Default Blue',
+            createMarker: (lat, lng) => L.marker([lat, lng])
+        },
+        'burgundy_circle': {
+            name: 'Burgundy Circles',
+            createMarker: (lat, lng) => L.circleMarker([lat, lng], {
+                radius: 8,
+                fillColor: '#8B2635',
+                color: '#fff',
+                weight: 2,
+                opacity: 1,
+                fillOpacity: 0.8
+            })
+        },
+        'black_circle': {
+            name: 'Black Circles',
+            createMarker: (lat, lng) => L.circleMarker([lat, lng], {
+                radius: 8,
+                fillColor: '#2c3e50',
+                color: '#fff',
+                weight: 2,
+                opacity: 1,
+                fillOpacity: 0.9
+            })
+        },
+        'small_burgundy_pin': {
+            name: 'Small Burgundy Pin',
+            createMarker: (lat, lng) => {
+                const icon = L.divIcon({
+                    className: 'custom-pin burgundy-pin',
+                    html: '<div class="pin-content"></div>',
+                    iconSize: [20, 32],
+                    iconAnchor: [10, 32],
+                    popupAnchor: [0, -32]
+                });
+                return L.marker([lat, lng], { icon: icon });
+            }
+        },
+        'small_orange_pin': {
+            name: 'Small Orange Pin',
+            createMarker: (lat, lng) => {
+                const icon = L.divIcon({
+                    className: 'custom-pin orange-pin',
+                    html: '<div class="pin-content"></div>',
+                    iconSize: [20, 32],
+                    iconAnchor: [10, 32],
+                    popupAnchor: [0, -32]
+                });
+                return L.marker([lat, lng], { icon: icon });
+            }
+        },
+        'pushpin_emoji': {
+            name: 'Pushpin Emoji',
+            createMarker: (lat, lng) => {
+                const icon = L.divIcon({
+                    className: 'emoji-icon-marker',
+                    html: '<div class="emoji-icon">📌</div>',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 15],
+                    popupAnchor: [0, -15]
+                });
+                return L.marker([lat, lng], { icon: icon });
+            }
+        }
+    };
+    
+    // Current pin style
+    let currentPinStyle = 'burgundy_circle';
+    
+    // Store marker data for recreation
+    let markerDataStore = [];
+    let markerLayer = L.layerGroup().addTo(map);
+    
+    // Function to create popup content
+    function createPopupContent(markerData) {
+        let popupContent = '<div class="book-popup">';
+        
+        if (markerData.book.cover) {
+            popupContent += `<img src="${markerData.book.cover}" alt="${markerData.book.title}" class="book-cover" />`;
+        }
+        
+        popupContent += '<div class="book-details">';
+        
+        if (markerData.book.genre) {
+            popupContent += `<p class="genre">${markerData.book.genre}</p>`;
+        }
+        
+        popupContent += `<h3>${markerData.book.title}</h3>`;
+        
+        if (markerData.book.author) {
+            popupContent += `<p class="author">${markerData.book.author}</p>`;
+        }
+        
+        popupContent += `<p class="location">${markerData.location.name}</p>`;
+        
+        if (markerData.book.review) {
+            popupContent += `<a href="${markerData.book.review}" target="_blank" class="review-link">Read Erin's review</a>`;
+        }
+        
+        popupContent += '</div>';
+        popupContent += '</div>';
+        return popupContent;
+    }
+    
+    // Function to create all markers with current style
+    function createMarkers() {
+        // Clear existing markers
+        markerLayer.clearLayers();
+        
+        // Collect all markers with their data
+        const allMarkers = [];
+        booksData.forEach(book => {
+            book.locations.forEach(location => {
+                allMarkers.push({
+                    book: book,
+                    location: location,
+                    lat: location.lat,
+                    lng: location.lng
+                });
+            });
+        });
+        
+        // Detect duplicate coordinates and apply offset
+        const coordCounts = {};
+        const coordOffsets = {};
+        
+        // Count occurrences of each coordinate
+        allMarkers.forEach(marker => {
+            const key = `${marker.lat},${marker.lng}`;
+            coordCounts[key] = (coordCounts[key] || 0) + 1;
+            coordOffsets[key] = 0;
+        });
+        
+        // Create markers with offset for duplicates
+        const bounds = [];
+        markerDataStore = [];
+        
+        allMarkers.forEach(markerData => {
+            const key = `${markerData.lat},${markerData.lng}`;
+            let lat = markerData.lat;
+            let lng = markerData.lng;
+            
+            // If this coordinate has duplicates, apply a jittery offset
+            if (coordCounts[key] > 1) {
+                const index = coordOffsets[key];
+                const total = coordCounts[key];
+                
+                // Base angle distributed around circle, plus random jitter
+                const baseAngle = (index / total) * 2 * Math.PI;
+                const angleJitter = (Math.random() - 0.5) * Math.PI / 2; // ±45° jitter
+                const angle = baseAngle + angleJitter;
+                
+                // Distance with randomness: 120-280km range
+                const baseOffset = 2.0; // ~200km
+                const distJitter = (Math.random() - 0.5) * 1.6; // ±80km variation
+                const offsetDist = baseOffset + distJitter;
+                
+                lat += offsetDist * Math.cos(angle);
+                lng += offsetDist * Math.sin(angle);
+                
+                coordOffsets[key]++;
+            }
+            
+            // Store for later recreation
+            markerDataStore.push({
+                markerData: markerData,
+                lat: lat,
+                lng: lng
+            });
+            
+            // Create marker with current style
+            const marker = pinStyles[currentPinStyle].createMarker(lat, lng);
+            marker.bindPopup(createPopupContent(markerData));
+            marker.addTo(markerLayer);
+            
+            bounds.push([lat, lng]);
+        });
+        
+        return bounds;
+    }
+    
+    // Initial marker creation
+    const bounds = createMarkers();
+    
+    // Set the opening view by fitting the bulk of the pins.
+    //
+    // A fixed centre and zoom used to do this job, which worked on a wide screen
+    // and failed on a narrow one: the same zoom 3 that frames the pins on a laptop
+    // leaves most of them off both edges of a phone. fitBounds measures the
+    // viewport, so the same call frames the books at either shape.
+    //
+    // It fits the middle 90% of pins rather than all of them. One book set in
+    // Antarctica would otherwise drag the map out to a whole-world view, which is
+    // the problem the fixed zoom was introduced to avoid. The off-screen
+    // indicators account for whatever falls outside. maxZoom holds a wide screen
+    // at the zoom level it had before.
+    if (bounds.length > 0) {
+        const percentile = (values, p) => {
+            const sorted = [...values].sort((a, b) => a - b);
+            const i = Math.round((sorted.length - 1) * p);
+            return sorted[Math.min(sorted.length - 1, Math.max(0, i))];
+        };
+        const lats = bounds.map(b => b[0]);
+        const lngs = bounds.map(b => b[1]);
+        const southWest = [percentile(lats, 0.05), percentile(lngs, 0.05)];
+        const northEast = [percentile(lats, 0.95), percentile(lngs, 0.95)];
+        
+        // Leaflet has no tiles above or below the world, so any zoom where the
+        // world is shorter than the viewport leaves grey bands at top and bottom.
+        // Find the zoom that still fills the height and refuse to go below it,
+        // both here and when the reader zooms out by hand.
+        const worldFillZoom = Math.max(0, Math.ceil(Math.log2(map.getSize().y / 256)));
+        map.setMinZoom(worldFillZoom);
+        
+        map.fitBounds([southWest, northEast], { maxZoom: 3, padding: [24, 24] });
+    }
+    
+    // Create offscreen marker indicators
+    const directions = ['north', 'south', 'east', 'west', 'northeast', 'northwest', 'southeast', 'southwest'];
+    const indicators = {};
+    
+    directions.forEach(dir => {
+        const indicator = document.createElement('div');
+        indicator.className = `offscreen-indicator ${dir}`;
+        indicator.id = `indicator-${dir}`;
+        document.getElementById('map').appendChild(indicator);
+        indicators[dir] = indicator;
+    });
+    
+    // Store all marker positions for offscreen tracking
+    const allMarkerPositions = bounds.map(pos => ({ lat: pos[0], lng: pos[1] }));
+    
+    // Function to update offscreen indicators
+    function updateOffscreenIndicators() {
+        const mapBounds = map.getBounds();
+        const counts = {
+            north: 0, south: 0, east: 0, west: 0,
+            northeast: 0, northwest: 0, southeast: 0, southwest: 0
+        };
+        
+        allMarkerPositions.forEach(pos => {
+            if (!mapBounds.contains([pos.lat, pos.lng])) {
+                const isNorth = pos.lat > mapBounds.getNorth();
+                const isSouth = pos.lat < mapBounds.getSouth();
+                const isEast = pos.lng > mapBounds.getEast();
+                const isWest = pos.lng < mapBounds.getWest();
+                
+                // Determine direction
+                if (isNorth && isEast) counts.northeast++;
+                else if (isNorth && isWest) counts.northwest++;
+                else if (isSouth && isEast) counts.southeast++;
+                else if (isSouth && isWest) counts.southwest++;
+                else if (isNorth) counts.north++;
+                else if (isSouth) counts.south++;
+                else if (isEast) counts.east++;
+                else if (isWest) counts.west++;
+            }
+        });
+        
+        // Update indicator visibility and text
+        Object.keys(counts).forEach(dir => {
+            const indicator = indicators[dir];
+            if (counts[dir] > 0) {
+                indicator.textContent = counts[dir];
+                indicator.classList.add('visible');
+            } else {
+                indicator.classList.remove('visible');
+            }
+        });
+    }
+    
+    // Update indicators on map movement
+    map.on('moveend', updateOffscreenIndicators);
+    map.on('zoomend', updateOffscreenIndicators);
+    
+    // Initial update after a delay (to let map settle)
+    setTimeout(updateOffscreenIndicators, 200);
+    
+    </script>
+</body>
+</html>
