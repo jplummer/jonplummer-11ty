@@ -234,13 +234,15 @@ function validateCoverZoom(value) {
  * uppercase line on both the card and the detail page and only reads as a set
  * if the set is small. The distinction that matters to a reader is whether they
  * can have the thing, so `Self-hosted` (runs, but you would deploy it) is kept
- * separate from `Released` (you can just go get it). Venue detail — which app
- * store, which host — lives in the description and the appStoreUrl/githubUrl
- * links, not here.
+ * separate from `Released` (you can just go get it). `Ready to deploy` sits a
+ * step earlier again: finished and working, but nobody is running it yet, not
+ * even me. Venue detail — which app store, which host — lives in the description
+ * and the appStoreUrl/githubUrl links, not here.
  */
 const SIDE_STATUSES = [
   'In development',
   'Paused',
+  'Ready to deploy',
   'Self-hosted',
   'Released'
 ];
