@@ -3,6 +3,12 @@
 # for this directory only — demos load their runtime from CDNs and use inline
 # <script> blocks (including Babel's in-browser JSX transform output), which
 # the site-wide 'self'-only script-src blocks.
+#
+# style-src needs unpkg.com too, not just script-src: the Book Map demo loads
+# Leaflet's stylesheet from there. Blocking it fails quietly and strangely —
+# the map's JS still runs, so tiles load but land in the wrong places, markers
+# never become visible, and the container overflows into scrollbars. It looks
+# like a broken map rather than a blocked stylesheet.
 <IfModule mod_headers.c>
-    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self'; frame-ancestors 'self';"
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self'; frame-ancestors 'self';"
 </IfModule>
