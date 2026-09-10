@@ -3,7 +3,6 @@ title: "New on the blog: the 404 page guesses what you meant"
 layout: layouts/single_post.njk
 date: "2026-09-09"
 tags: post
-draft: true
 description: The 404 page now reads the address that failed, compares it against every real page on the site, and offers the closest few – or says plainly that nothing is close.
 ogImage: /assets/images/og/2026-09-09-the-404-page-guesses-now.png
 ---
@@ -19,7 +18,7 @@ Now the page tries to make sense of what was entered. A small script compares th
 
 That third one is important: sometimes the system isn't confident and shouldn't pretend to be. A page that always produces a guess teaches you to distrust the guesses.
 
-Matching uses two similarity measures. Character trigrams distinguish long post slugs beautifully. Edit distance helps with short page names. `abuot` and `about` share almost no trigrams, but their edit distance is strong Taking the better of the two, plus a rule that treats a truncated path as a prefix, gives us a nice wide scale of match coefficients. The best false match I tested scored 0.417, so I don't call us confident until 0.55. Raise that threshold and good matches drop out, lower it and `/wp-admin/` starts getting suggestions.
+Matching uses two similarity measures. Character trigrams distinguish long post slugs beautifully. Edit distance helps with short page names. `abuot` and `about` share almost no trigrams, but their edit distance is strong. Taking the better of the two, plus a rule that treats a truncated path as a prefix, gives us a nice wide scale of match coefficients. The best false match I tested scored 0.417, so I don't call us confident until 0.55. Raise that threshold and good matches drop out, lower it and `/wp-admin/` starts getting suggestions.
 
 I considered redirecting automatically when the match is especially good, but decided against it. Unannounced navigation is the sort of thing [WCAG 3.2.5](https://www.w3.org/WAI/WCAG22/Understanding/change-on-request.html) is about, and a wrong guess would take you somewhere unintended with no explanation.
 
