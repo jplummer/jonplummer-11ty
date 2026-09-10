@@ -49,7 +49,7 @@ Four more are done enough that you can go poke at them:
 - a [drop-in file and folder navigator](/sides/lister-php/) in semi-vibe-coded PHP for my personal file pile site
 - a [privacy-focused URL shortener](/sides/prvt/) that makes the smallest QR codes it can
 
-Three others are built but sitting still: a book map tool my wife can edit and export for her own site, which isn't in use yet; a [MacOS menu bar clock](/sides/menu-bar-death-clock/) that counts down to your statistical life expectancy (memento mori) or up from your date of birth (memento vivere); and a [MacOS service](/sides/plain-english-service/) that points out the words you've used in a passage that aren't in the ten thousand most common English words. All of them are discussed at [side projects](/sides/), or will be soon.
+Three others are built but sitting still: a [book map tool](/sides/book-map/) my wife can edit and export for her own site, which isn't in use yet; a [MacOS menu bar clock](/sides/menu-bar-death-clock/) that counts down to your statistical life expectancy (memento mori) or up from your date of birth (memento vivere); and a [MacOS service](/sides/plain-english-service/) that points out the words you've used in a passage that aren't in the ten thousand most common English words. All of them are discussed at [side projects](/sides/).
 
 Ideas I haven't started yet sit at the bottom of that same page. More to come – the barrier between software itch and software scratch is narrowing all the time.
 
