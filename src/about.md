@@ -17,7 +17,7 @@ I wrote about this in [Toward Coordinated Experience](/2025/07/27/toward-coordin
 
 That focus on discovery isn't theoretical. I trained as a social worker and an anthropologist before I became a designer, and the habit never left: understand people before you propose anything for them.
 
-Most recently I was Director of User Experience at Invoca, where I led a design team through an AI product transformation. Before that: Cayuse, Concentric Sky, and eleven years at Belkin, where I rose from Senior Designer to Senior Director and built the UX function for Linksys and Wemo from scratch. Along the way I picked up 20+ patents, an IDSA Silver award, and a lot of hard-won opinions about how design actually earns trust in engineering- and product-led organizations.
+Most recently I was Director of User Experience at Invoca, where I led a design team through an AI product transformation. Before that: Cayuse, Concentric Sky, and eleven years at Belkin, where I rose from Senior Designer to Senior Director and built the UX function for Linksys and Wemo from scratch. Along the way I picked up 20+ patents, a couple of IDSA and CES awards, and a lot of hard-won opinions about how design actually earns trust in engineering- and product-led organizations.
 
 I'm looking for my next role – design leadership where the work is deciding what to build, and making sure the reasoning survives all the way to what ships.
 
@@ -119,9 +119,17 @@ We worked in a highly technical industry, and while it was difficult at times to
 
 ## Awards
 
-- **International Design Excellence Awards, Finalist** Issued by Industrial Designers Society of America (IDSA), Aug 2013, for WeMo iOS app
-- **User Experience Award: Silver** for Best Consumer Device Issued by User Experience Awards, May 2013, for WeMo by Belkin
-- **International Design Excellence Awards, Silver** Issued by Industrial Designers Society of America (IDSA), Sep 2012, for Belkin Next Generation Router Family
+- **International Design Excellence Award: Bronze** Issued by Industrial Designers Society of America (IDSA), 2015, for the Wemo Insight Switch
+- **International Design Excellence Award: Bronze** Issued by Industrial Designers Society of America (IDSA), 2012, for the Belkin LiveAction Camera Grip & Remote
+- **User Experience Award: Silver** for Best Consumer Device, Issued by User Experience Awards, 2013, for Wemo
+- **CES Innovation Award** Issued by the Consumer Technology Association, 2019, for the Wemo 3-Way Light Switch
+- **CES Innovation Award** Issued by the Consumer Technology Association, 2018 and 2019, for the Linksys and Belkin mesh routing portfolios
+- **TWICE Picks Award** Issued by TWICE, 2018 and 2019, for the Linksys and Belkin mesh routing portfolios
+- **Best of CES** Issued by CNET, 2011, for the Belkin router family
+- **TechAwards Circle: Gold** 2013 and 2014, for Belkin Tablet Stage
+- **Cool Tool Award Finalist** Issued by EdTech Digest, 2013 and 2014, for Belkin Tablet Stage
+- **Top 40 Ed-Tech Service** Issued by eSchool News, 2013 and 2014, for Belkin Tablet Stage
+- **20 Hottest EdTech Products** Issued by TCEA, 2013 and 2014, for Belkin Tablet Stage
 
 ## Patents
 
