@@ -6,6 +6,10 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Add the wcag-audit side project page
 - Mark the plain English service paused
 - Draft a post announcing the 404 suggester
+- Add an ideas list to the bottom of side projects
+- Publish the 404 suggester post and add a link
+- Correct the awards list on about/
+- Regenerate the sides OG image
 
 ## 2026-09-08
 
@@ -832,4 +836,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-09-09
+Last deployed on 2026-09-10
