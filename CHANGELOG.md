@@ -1,5 +1,10 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-09-11
+
+- Link earlier posts and sources from 2026 essays
+- Tighten side-project copy
+
 ## 2026-09-10
 
 - Allow "Ready to deploy" as a side project status
