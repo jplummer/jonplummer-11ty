@@ -9,11 +9,11 @@ status: Paused
 githubUrl: https://github.com/jplummer/death-clock-menu-bar
 ogImage: /assets/images/og/sides.png
 ---
-A small macOS menu bar app that counts down to your statistical life expectancy (memento mori) or up from your date of birth (memento vivere), sitting quietly in the menu bar the whole time.
+A small macOS menu bar app counts down to your statistical life expectancy ([memento mori](https://en.wikipedia.org/wiki/Memento_mori)) or up from your date of birth ([memento vivere](https://citewise.net/memento-vivere-meaning/)), sitting quietly in the menu bar the whole time.
 
-The current build uses a fixed life-expectancy estimate. A planned improvement is downloading public actuarial tables to sharpen that estimate based on age, sex, and country.
+The current build uses a fixed life-expectancy estimate, based on your age and sex. Later it might download public actuarial tables to sharpen that estimate based on age, sex, and country.
 
-Started, then set aside for other projects. The name is a placeholder – it'll get a real one before it ships anywhere public.
+I started this but set it aside to work on other projects. The name is a placeholder – it'll get a better one before it feels shippable.
 
 <h2 id="privacy-and-terms">Privacy and terms</h2>
 

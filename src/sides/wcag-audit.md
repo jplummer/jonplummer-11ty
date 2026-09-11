@@ -1,6 +1,6 @@
 ---
 title: wcag-audit
-description: A tool that checks a page against all 87 WCAG 2.2 criteria and, for each one, names the W3C rule behind the verdict.
+description: A tool that checks a page against WCAG 2.2 criteria and names the W3C rule behind the verdict.
 date: 2026-08-09
 layout: layouts/side_detail.njk
 tags: sideproject
@@ -30,11 +30,11 @@ Yes, it's ugly. Pretty will come later.
 The first real test: the W3C's own [demo page](https://www.w3.org/WAI/demos/bad/before/home.html), broken on purpose, to check the pipeline against a known answer. The full run came back 23 fail, 26 pass, 33 not-applicable, and five needs-review across the 87 criteria, with 75 findings – matching axe's own report, plus things axe doesn't check.
 
 ![The W3C's own "before" demo page, and four of the seven different axe rules it fails on – contrast, missing alt text, an unlabeled nav link, an unlabeled menu.](/assets/images/2026/09/wcag-audit-demo-snap.jpg)
-*Seven rules fired on W3C's sample inaccessible page - contrast, missing alt text, unlabeled links, unlabeled form controls, missing landmarks, etc.*
+*Seven rules fired on W3C's sample inaccessible page – contrast, missing alt text, unlabeled links, unlabeled form controls, missing landmarks, etc.*
 
-Then I pointed it at this site and it found five failures of its own: the low-contrast red-on-gray pairing on the nav links and the paging navigation that I mentioned above. Critically, this gets reported as one problem, with every instance rolled into it. The idea is to make it clear what problems you might sort out by fixing your design system or pattern library versus what might require more local attention.
+Then I pointed it at this site and it found the borderline low-contrast red-on-gray pairing on the nav links and the paging navigation in the picture above. This gets reported as just one problem, with every instance rolled into it, to make it clear what problems you might sort out by fixing your design system or pattern library versus what might require more specific attention.
 
-[Target size](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html) and [focus visibility](https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance.html) now get measured directly from a fresh pass over every clickable element's geometry instead of being guessed from a screenshot. That helped with five of six criteria that I was stuck on. The remaining one, when a focus ring is drawn with box-shadow instead of outline, which can't be read from computed style, still needs a person. The report now points this out.
+[Target size](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html) and [focus visibility](https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance.html) now get measured directly from a fresh pass over every clickable element's geometry instead of being guessed from a screenshot. That helped with five of six criteria that I was stuck on. The remaining one, when a focus ring is drawn with box-shadow instead of outline, still needs a person because it can't be read from computed style. The report now points this out.
 
 ## What's next
 

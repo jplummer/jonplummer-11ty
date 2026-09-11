@@ -17,7 +17,7 @@ The printed world map was already full of information – borders, cities, label
 
 Start with the user – she's smart but not a developer, so the data needs to be kept in a format she can confidently edit. She has a personal website on Squarespace, so whatever I make needs to drop into that environment with minimal difficulty. And the list is growing every month – we need a way to extend and regenerate the map that's pretty easy to do. Also, I wanted to know what it's like to build on somebody else's mapping service when you're directing an agent through it instead of writing it yourself.
 
-So the data is a YAML file rather than JSON or something more picky. Each book gets a title, an author, an ISBN, a link to Erin's review, and one or more place names. Run the build script and place names are into coordinates, cover art is fetched, overlapping pins are scattered, and one HTML file is produced that she can put on her site. Adding a book is five lines and one command.
+So the data is a YAML file rather than JSON or something more picky. Each book gets a title, an author, an ISBN, a link to Erin's review, and one or more place names. Run the build script and coordinates are found for those places, cover art is fetched, overlapping pins are scattered, and one HTML file is produced that she can put on her site. Adding a book is five lines and one command.
 
 From there it's a matter of style, and the styles are offered by Stadia Maps. We're small fry, so the free tier – 200,000 credits a month, non-commercial only – works fine.
 
@@ -34,27 +34,25 @@ From there it's a matter of style, and the styles are offered by Stadia Maps. We
   ></iframe>
 </div>
 
-That's the real thing as of this writing, with 44 books across 56 places. Every pin has an on-click overlay with the book image, title, genre, author, location, and a link to the review. That makes the map an index. Arrows around the edge let you know how many pins are off-screen in that direction.
+That's the real thing as of this writing, with 44 books and 56 places. Every pin has an on-click overlay with the book image, title, genre, author, location, and a link to the review. That makes the map an index. Arrows around the edge let you know how many pins are off-screen in that direction.
 
-The panel on the right is how we explore style. Every free tile and pin style redraws the map live. Try a few and watch what happens.
+The panel on the right is how we explore style. Every free tile and pin style redraws the map live. Try a few!
 
 ## How it works
 
-`books.yaml` is the whole input. The build script geocodes each place name through [Nominatim](https://nominatim.org/) and caches what comes back, so a second build skips the lookup and the one-request-per-second wait that goes with it. ISBNs pull title, author, year, and genre from the [Google Books API](https://developers.google.com/books); covers come from [Open Library](https://openlibrary.org/dev/docs/api/covers), falling back to Google Books for the roughly one book in five Open Library has no artwork for. The book data ends up baked into the output as JSON, and the map drawing it is [Leaflet](https://leafletjs.com/).
+`books.yaml` contains the list of books and the style settings. The build script geocodes each place name through [Nominatim](https://nominatim.org/) and caches what comes back, so a second build skips the lookup and the one-request-per-second wait that goes with it. ISBNs are used to pull title, author, year, and genre from the [Google Books API](https://developers.google.com/books); covers come from [Open Library](https://openlibrary.org/dev/docs/api/covers), falling back to Google Books for the roughly one book in five Open Library doesn't have artwork for. The book data ends up as JSON for [Leaflet](https://leafletjs.com/) to draw.
 
-A build writes two files. `index.html` is the clean one for her site. `preview.html` is the one above: the same map plus the style picker. Pick a combination there, write the two names into `books.yaml`, rebuild, and the clean file comes out looking like what you chose.
+A build writes two files. `index.html` is the clean one for her site. `preview.html` is the one above: the same map plus the style picker. Pick a combination there, write the two names into `books.yaml`, rebuild, and the index comes out looking like what you chose.
 
-That panel made the initial demo and picking the "watercolor" style easy. I walked Erin through the styles, saving watercolor for last because I was fairly sure it was the one. (After 26 years of marriage you'd hope I'd guess right.)
-
-Watercolor works in part because it carries no type and no hard borders, so it stays behind the dots and lets the clustering come forward. Alidade and Toner Lite do the same job in colder, more technical colors. Satellite and Nat Geo have the paper map's problem again – both are beautiful, but on both the dots have to fight for your attention.
+That panel made the initial demo and picking the "watercolor" style easy. I walked Erin through the styles, saving watercolor for last because I was fairly sure it was the one. (After 26 years of marriage you'd hope I'd guess right.) Watercolor works in part because it carries no type and no hard borders, so it stays behind the dots and lets the clustering come forward. Alidade and Toner Lite do the same job in colder, more technical colors. Satellite and Nat Geo have the paper map's problem again – both are beautiful, but on both the dots have to fight for your attention.
 
 The map opens by fitting the middle 90% of the pins rather than all of them, because one book set in Antarctica drags the view out to the whole globe. Fitting instead of fixing a zoom is what lets it survive a phone – the same call that frames the books on a laptop frames them on a narrow screen, and the counted arrows account for whatever falls off the edge. There's a floor under it: Leaflet has no tiles above or below the world, so zooming out past the point where the world fills the window leaves grey bands top and bottom, and the map won't go there.
 
-## Map tiles, and what breaks in public
+## Map tiles and what can go wrong
 
 The default style, [Stamen Watercolor](https://stadiamaps.com/stamen/), comes from [Stadia Maps](https://stadiamaps.com/), and Stadia wants to know who's using their service. A request with no key and no referring domain comes back HTTP/401, and the map draws ugly tiles complaining that you're not authorized.
 
-There's no API key anywhere in this project, which took a little arranging. Anything shipped to a public page is readable, so a key in the HTML is a key you've handed out. [Domain authentication](https://docs.stadiamaps.com/authentication/) does the same job without one: register a domain in the Stadia dashboard and browser requests from pages on it are allowed on their own. jonplummer.com is registered, which is why the map above isn't shouting at you. Erin's domain needs the same entry before it draws there. Locally there's nothing to configure – Stadia accepts unauthenticated requests from localhost, so serving the folder is enough to click through every style.
+There's no API key anywhere in this project, which took a little arranging. Anything shipped to a public page is readable, so a key in the HTML is no longer a secret. [Domain authentication](https://docs.stadiamaps.com/authentication/) does the same job without one: register a domain in the Stadia dashboard and browser requests from pages on it are allowed on their own. jonplummer.com is registered, which is why the map above isn't shouting at you. Erin's domain needs the same entry before the map is made live there. While developing there's nothing to configure – Stadia accepts unauthenticated requests from localhost, so serving the folder is enough to click through every style.
 
 CARTO's Positron and Voyager styles were in that panel until recently. They still answer every tile request with HTTP/200 and a good-looking PNG, but with "API KEY REQUIRED" printed diagonally across it. They're gone now, six styles lighter.
 
@@ -62,29 +60,21 @@ What's left needs an account but not much of one. Stadia's Alidade Smooth is the
 
 ## Where the covers come from
 
-The covers took four tries. They started as image files in the repo, one per book, which meant a folder to maintain and 44 things to keep in step with the YAML, and more to come. Then Google Books, which has a static link you can build from an ISBN alone: no API call, no key, no files. Then Open Library, on the grounds that its covers came back cleanly from a web server where the Google ones had been fussy. But these services have their own foibles.
+The covers started as image files in the repo, one per book, which meant a folder to maintain, 44 things to keep in step with the YAML, and more to come. Then Google Books, which has a static link you can build from an ISBN alone. Then Open Library, because its covers came back cleanly from a web server where the Google ones had been fussy. But these services have their own foibles.
 
-Open Library has artwork for 35 of the current 44 books. For the other nine it returns HTTP 200 and a 43-byte transparent GIF, one pixel square. A seeming success that renders as nothing. The popup laid itself out around a cover that wasn't there, but looked like a mistake.
+Open Library has artwork for 35 of the current 44 books. For the other nine it returns HTTP/200 and a 43-byte transparent GIF, one pixel square, a seeming success that renders as nothing. This reminds us that a status code isn't enough to know you're getting what you expect from a service. Open Library's covers endpoint takes a `?default=false` parameter meant to HTTP/404 when there's no artwork, but it is broken and answers 404 for every ISBN, whether it has it or not. Instead you have to use their [Books API](https://openlibrary.org/dev/docs/api/books), where a missing cover is an explicit null. So that's what the enrichment script uses now, falling back to the Google Books link for anything it can't get from Open Library.
 
-This reminds us that a status code isn't enough to know you're getting what you expect from a service: CARTO hands back a real image with a watermark burned into it; Open Library hands back a real image that's a single transparent pixel, both return HTTP/200.
-
-The obvious check is also wrong. Open Library's covers endpoint takes a `?default=false` parameter meant to 404 when there's no artwork, and it answers 404 for every ISBN, present or absent. The question that works has to be put to their [Books API](https://openlibrary.org/dev/docs/api/books) instead, where a missing cover is an explicit null. So that's what the enrichment script asks now, falling back to the Google Books link for the nine – which has all nine.
-
-Which lands the covers about where they started, minus the local files: two sources, one preferred, checked at the moment a book is added.
-
-None of that survives volume. Both sources are hotlinks, so every visitor's browser fetches 44 images from two companies under no obligation to keep serving them, and neither promises a given ISBN still resolves next year. At 44 books nobody minds. At a few hundred, on a page with real traffic, the polite thing is to fetch each cover once and serve copies from wherever the map lives. That's also where it stops being a technical question: a cached cover is a copy of someone's book jacket sitting on your server, and Open Library and Google Books have different terms about that.
+If the list were a lot bigger or I expected a lot of visitors I wouldn't be able to do it this way. Both sources are hotlinks, so every visitor's browser fetches 44 images from two companies under no obligation to keep serving them. At a few books nobody minds; at a few hundred, on a page with real traffic, the polite thing would be to fetch each cover once and serve cached copies from wherever the map is served instead.
 
 ## What I'd change
 
-Two books set in the same city would sit on top of each other by default, so the script pushes duplicates apart by 120 to 280 kilometers in a random direction. That keeps both pins clickable but puts a book set in Paris out near Rouen. Fanning them out by a few pixels at the current zoom would be more expressive of the real location, but this arrangement is fine for now. Leaflet's marker clustering, which collapses pins that share a location into one numbered dot, obscured the richness of the data set – hence the scatter.
+Two books set in the same city would have pins that sit on top of each other by default, which looks like one pin. So the script pushes duplicates apart by 120 to 280 kilometers in a random direction. That keeps both pins clickable but puts a book set in Paris out near Rouen. Fanning them out by a few pixels at the current zoom would be more expressive of the real location, but this arrangement is fine for now. Leaflet's default marker clustering, which collapses pins that share a location into one numbered dot, made the large number of pins seem like only a few – hence the scatter.
 
-The cluster over the plains states isn't a literary trend. Those are books whose entry says only "United States," which geocodes to the middle of the country and then gets jittered as any other cluster does. A more specific place name would fix each one, and the enrichment script can propose them from Wikipedia, but I'll leave that detail to someone else.
-
-The offsets are random and drawn fresh on each load, so pins land in slightly different places every time. This is a little odd once you notice it, but harmless.
+The cluster over the plains states isn't a literary trend. Those are books whose entry says only "United States," which geocodes to the middle of the country and then gets jittered as any other cluster does. A more specific place name would fix each one, and the enrichment script can propose them from Wikipedia, but I'll leave that detail to someone else. The offsets are random and drawn fresh on each load, so pins land in slightly different places every time. This is a little odd once you notice it, but harmless.
 
 This isn't quite plug-and-play yet. Putting the file on Squarespace really is easy, but getting a fresh file still means a terminal, a Python environment, and a command, which is light development effort. So the arrangement we've landed on is that Erin will edit the book list and I will run the build and hand her the result. That's fine between the two of us, and easy enough – a build that ran on a schedule on a server somewhere, or a script she could double-click, would take it out of my hands entirely. Maybe someday.
 
-The output isn't self-contained. Leaflet loads from a CDN, tiles come from Stadia, covers come from Open Library and Google Books – four network dependencies inside one HTML file. Fine for now, but fragile, and untenable with any real traffic.
+The output isn't self-contained. Leaflet loads from a CDN, tiles come from Stadia, covers come from Open Library and Google Books – four external services called inside one HTML file. Fine for now, but fragile, and untenable with any real traffic.
 
 ## Repo content
 

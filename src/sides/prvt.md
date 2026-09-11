@@ -11,11 +11,11 @@ status: Self-hosted
 githubUrl: https://github.com/jplummer/prvt
 ogImage: /assets/images/og/sides.png
 ---
-![Shorten a URL, make a QR code, no tracking.](/assets/images/2026/08/prvt.png)
+![Shorten a URL and make a QR code, with privacy in mind.](/assets/images/2026/08/prvt.png)
 
-prvt turns a long URL into a short one that self-destructs after a lifetime you set, from a day to four weeks – no click tracking, no analytics, no log of who followed the link. It uses caps and numerals to keep short URLs in "QR alphanumeric" mode, which produces the smallest possible and easiest-to-reproduce printed QR codes.
+prvt turns a long URL into a short one that self-destructs after a time you set, from a day to four weeks, without tracking you or the people who follow the link. It uses capital letters and numerals to keep shortened URLs in [QR alphanumeric mode](https://en.wikipedia.org/wiki/QR_code#Encoding), which produces the smallest possible (and thus easiest-to-reproduce) printed QR codes.
 
-It runs on Cloudflare Workers and KV, and it's meant to be self-hosted rather than used as a shared public service – see the repo for setup instructions.
+It runs on [Cloudflare Workers KV](https://developers.cloudflare.com/kv/), and it's meant to be self-hosted rather than used as a shared public service – see the repo for setup instructions.
 
 <h2 id="privacy-and-terms">Privacy and terms</h2>
 

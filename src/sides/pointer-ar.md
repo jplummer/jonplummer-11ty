@@ -13,11 +13,11 @@ ogImage: /assets/images/og/sides.png
 ---
 ![A virtual arrow, overlaid on real life, pointing at a thing](/assets/images/2026/08/pointer-ar.png)
 
-Pointer-AR uses your phone's camera, compass, and location to show you exactly where to look for the ISS, Hubble, the James Webb Space Telescope, the planets, and the Seven Wonders of the World – all of which are below the horizon from most places on Earth most of the time, which is most of the point.
+Pointer-AR uses your phone's camera, compass, and location to show you exactly where to look for the ISS, Hubble, the James Webb Space Telescope, the planets, and the Seven Wonders of the World. It's funny to be reminded that most terrestrial landmarks are down from where you are and that Mecca is in an unexpected direction.
 
-It's also the software half of a larger project: a physical, motorized pointer that tracks the ISS continuously, no phone required. Parts for the first prototype are on order. If that works out, it may become a kit – bill of materials, printable parts, and assembly instructions – for anyone who wants to build their own.
+It's also the software proof of concept for a larger project: a stationary robotic pointer that tracks the ISS continuously, no phone required. Parts for the first prototype are on order. If that works out, it may become a kit – bill of materials, printable parts, and assembly instructions – for anyone who wants to build their own.
 
-Not yet available. Details land here as it gets closer.
+Pointer-AR is not yet on the App Store. I'll update this page when it is.
 
 <h2 id="privacy-and-terms">Privacy and terms</h2>
 
