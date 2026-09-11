@@ -20,13 +20,13 @@ If you have your brand traits in mind, and have listed the touchpoints, you're r
 
 ## Four questions
 
-Does this touchpoint matter to our brand? Some moments are low-stakes or don't happen at moments of truth; nailing them won't change anyone's impression, no matter how well you do it.
+**Does this touchpoint matter to our brand?** Some moments are low-stakes or don't happen at moments of truth; nailing them won't change anyone's impression, no matter how well you do it.
 
-Is this a useful place to prove a brand trait? Not every touchpoint is a natural vehicle. Force a trait somewhere it doesn't belong and it can fall flat.
+**Is this a useful place to prove a brand trait?** Not every touchpoint is a natural vehicle. Force a trait somewhere it doesn't belong and it can fall flat.
 
-Can we do better than others here? That is to say, is this an opportunity to be distinctive? If excellence at a touchpoint is already table stakes across the category, merely doing well it doesn't get you credit for anything special. But if others are phoning it in at this moment, that might be an opportunity for you.
+**Can we do better than others here?** That is to say, is this an opportunity to be distinctive? If excellence at a touchpoint is already table stakes across the category, merely doing well it doesn't get you credit for anything special. But if others are phoning it in at this moment, that might be an opportunity for you.
 
-And only then: does the customer's typical feeling here need to be changed? If so, to what? Most touchpoints already carry some baseline emotional response, whether anyone designed for it or not. Router setup, unimproved, feels like a chore heading toward a support call. That's the feeling ISP detection and a printed card were built to address.
+And only then: **does the customer's typical feeling here need to be changed?** If so, to what? Most touchpoints already carry some baseline emotional response, whether anyone designed for it or not. Router setup, unimproved, feels like a chore heading toward a support call. That's the feeling ISP detection and a printed card were built to address.
 
 Once you've picked the handful of touchpoints worth the investment, the rest is the normal design process: generate ideas, let [the trio](/2022/09/11/product-trio/) pick what's feasible and the customer pick what's appealing, and ship it. Then [write down what you chose](/2015/07/30/belkin-edit-experience-framework/) so you can do it again later.
 
