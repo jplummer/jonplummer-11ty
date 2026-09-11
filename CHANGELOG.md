@@ -4,6 +4,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 - Link earlier posts and sources from 2026 essays
 - Tighten side-project copy
+- Publish the discovery interview training post and bold the four questions in the touchpoint essay.
 
 ## 2026-09-10
 
