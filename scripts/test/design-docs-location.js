@@ -4,7 +4,7 @@
  * The superpowers writing-plans / brainstorming skills default to
  * docs/superpowers/ for plans and specs, and both defer to user preference for
  * the location. This project's preference is docs/designs/, stated in CLAUDE.md
- * and .cursor/rules/memory.mdc — not in the skills, whose SKILL.md files ship
+ * and docs/agent-memory.md — not in the skills, whose SKILL.md files ship
  * from a plugin cache keyed by commit SHA (Cursor) and version (Claude) where
  * edits are discarded on the next update.
  *
@@ -24,7 +24,7 @@ const RETIRED_DIR = 'docs/superpowers';
 const SCRATCH_DIR = 'docs/designs/scratch';
 const RULE_ID = 'design-docs-location';
 
-// Directories the structure promises exist (see memory.mdc § Project structure).
+// Directories the structure promises exist (see docs/agent-memory.md § Project structure).
 const REQUIRED_DIRS = ['docs/designs/specs', 'docs/designs/plans'];
 
 /**

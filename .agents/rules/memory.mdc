@@ -1,0 +1,15 @@
+---
+description: Where agent memory lives and when to read it
+globs: []
+alwaysApply: true
+---
+
+## Agent Memory
+
+Learnings from past sessions live in `docs/agent-memory.md`, not here. This rule stays short on purpose – it loads into every session, and the memory file does not.
+
+- **Before changing the build, tests, deploy, or scripts**, read the Gotchas section of `docs/agent-memory.md`.
+- **Before a task that touches an area you haven't worked in**, skim the matching section there (project structure, command relationships, workflow preferences, writing style, DRY decisions, what worked).
+- **At the end of every task session**, append new learnings to `docs/agent-memory.md` under the relevant heading. Don't ask – just do it. If nothing was learned, skip silently. Keep entries concise; remove entries that turn out to be wrong.
+
+Do not add learnings to this file.

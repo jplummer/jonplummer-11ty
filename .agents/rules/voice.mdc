@@ -1,0 +1,234 @@
+---
+description: Writing voice and rules – generated from ~/.agents/writing-rules.md, do not edit
+globs: ['**/*.md']
+alwaysApply: true
+---
+
+<!-- GENERATED FILE. Source: ~/.agents/writing-rules.md (dotagents repo).
+     Regenerate with: ~/Projects/project-template/bin/sync-voice.sh <project>
+     Edits here are lost on the next sync. Edit the source instead. -->
+
+# Writing Rules
+
+## The core principles
+
+> "Lots of people raise formality, and thus indirectness, when they should use plainer language. Fewer and common words make for the most direct writing."
+
+Formal contexts call for clarity. Plain words, short sentences, no padding. A proposal addressed to an executive should be *more* direct than a Slack message, not less.
+
+> There's nothing I hate more than pretty words that don't actually say anything, or glance off of the substantive core.
+
+Be specific and clear, even if it takes more words to get there. Jargon, cliche, and businessspeak reflect half-formed thoughts; avoid these in favor of naming the thing in plan language.
+
+Every sentence must earn its place with something specific. If a sentence could appear in any document, about any topic, cut it or fix it. Vagueness is deadly.
+
+## Voice
+
+- Start in the middle of things. No throat-clearing, no "In this document, I will..."
+- Specific over vague. "Eleven years at Belkin" not "many years of experience." "410 lbs" not "a heavy lift."
+- Active voice as the default. Passive when the actor genuinely doesn't matter.
+- Short declarative sentences. Trust the full stop.
+- Anecdote → insight is a reliable structure for explanatory writing.
+- First person is fine. Use the active voice. "I think" is honest. "It is believed that" is cowardly.
+- Exclamation points are allowed in casual/personal writing. Use them when something actually warrants them.
+- Parentheticals work for asides, qualifications, or a wry note, but they accumulate. One per paragraph is probably the ceiling. If it could be its own sentence, make it one.
+- Fragments work for emphasis. Use them. The problem is the rhetorical triplet — three consecutive fragments as a device ("Fast. Focused. Intentional."). Use the right number of things.
+- Contractions are natural. Use them.
+- "We" language is inclusive. Prefer it over "you must" in instructional writing.
+- When describing a quality or intention, name the mechanism, not the adjective. "Customer-responsive, quick and thoughtful" hands readers nothing to hold. What does it mean in practice? That's the sentence.
+- Prefer the conversational word over the clinical or precise one when meaning is the same. "Tweak" beats "fix." "Believe" beats "trust" (when used abstractly). "Just as a person does" beats an impersonal construction. Writing in a personal, direct register means making these micro-choices consistently.
+- In opinion pieces, give the argument you care most about the most room. If a paragraph represents your core point — not a cite, not a setup, your actual view — expand it. Don't compress what matters. Readers read what you wrote; they can't see what you cut.
+
+## Tone for internal comms
+
+- Blend company context with personal framing when cascading leadership messages. Leads with the "why" before the "what."
+- Creates psychological safety without being soft on expectations. Starts conversations rather than closing them.
+- When your team is part of a cross-functional problem, name the shared failure honestly, then assign your team's specific piece of it. Don't make them spectators critiquing a peer team.
+- Closing lines should tell the reader what kind of room to expect, not what disposition to bring. "Open mind" is a disposition; "come with something prepared" is a behavioral signal.
+- Pre-reads should be scannable. Target 400–700 words.
+
+
+## Formatting
+
+Context-dependent — prose first, structure only when it genuinely helps.
+
+- Short messages and casual writing demand prose, no headers, no bullets unless listing is the actual point.
+- Long documents and guides need headers and bullets to guide the reader, especially when the content is genuinely list-like or the reader needs to scan.
+- Use bold sparingly and for genuinely critical information, not for decoration.
+- Use space en dash space – like this – not crunched, and not em dashes. Before reaching for one, consider breaking the sentence, using a colon, or using a semicolon.
+- Don't use inline-header vertical lists (the pattern where every item is **Bold label:** followed by text). More broadly: bullets without surrounding prose lose your voice. If you can't write one sentence before and one after a list, the list probably isn't ready.
+- After a list, say what the items add up to. Don't let structure replace the argument.
+- The right number of things is the right number — not the rhetorically tidy number.
+
+## Punctuation
+
+- Oxford comma: always. ("red, white, and blue")
+- Numbers: spell out one through nine; numerals from 10 up.
+- En dash with spaces on both sides – like this – not crunched, not em dashes.
+- Standard double quotation marks for quotes; single for quotes within quotes.
+- Semicolons for joining independent clauses. En dashes for sharp interruptions or true asides — and sparingly.
+- Parallelism in series: if you use "how" before the first item, use it before all items, or restructure.
+
+## Phrases and patterns to avoid
+
+### Design-world clichés
+
+- **"surface" as a verb** — "This surfaces the question," "design both surfaces." It's everywhere in design discourse, which is exactly why it reads as lazy. Use "reveals," "exposes," "makes visible," or restructure.
+
+### Empty assertion
+
+- **"X is real"** — "The external context is real." Asserts a condition without naming what makes it true. Just say the thing.
+
+### False binaries
+
+- **"It's Y, not X"** and **"Not X, but Y"** — Usually there's a more precise way to say it. Just say it, don't make a weak contrast meterly for effect.
+
+### Preambles and throat-clearing
+
+"I've been thinking about…", "I wanted to…", "I've been meaning to…" Cut them. Start with the substance.
+
+### Corporate / meeting culture
+
+- leverage *(as a verb — "we can leverage this")*
+- circle back
+- reach out *(just "contact" or "ask")*
+- moving forward / going forward
+- stakeholders *(usually means "people")*
+- ensure *(usually means "make sure" or "check")*
+- utilize *(means "use")*
+- commence *(means "start")*
+
+### Filler and hedging
+
+- very, really, quite, literally *(empty intensifiers)*
+- currently *(usually redundant — if it's true now, just say so)*
+- genuinely, honestly, straightforward *(used as emphasis words, not substantive)*
+- as a matter of fact
+- in fact
+- that said
+- it is noted that / it is evident that / it is well known that / it is a fact that / it has been found that / it has long been known that / it may be said that / it is possible that
+- in my opinion *(just make the claim)*
+- allegedly *(unless you mean it in the legal sense)*
+- type of *(usually vague filler)*
+
+### Throat-clearing phrases
+
+- It is important to note that... *(just say the thing)*
+- It is interesting to note that... *(ditto)*
+- It is our opinion that... *(just say "we think")*
+
+### Deadwood — use the simpler word
+
+| Deadwood                               | Use instead                  |
+| -------------------------------------- | ---------------------------- |
+| after the conclusion of                | after                        |
+| advance warning                        | warning                      |
+| advance planning                       | planning                     |
+| add an additional                      | add                          |
+| add up                                 | add                          |
+| added bonus                            | bonus                        |
+| a majority of                          | most                         |
+| a sufficient amount of                 | enough                       |
+| according to our data                  | we find                      |
+| accordingly                            | therefore / so               |
+| affirmative yes                        | yes                          |
+| aid and abet                           | abet                         |
+| all-time record                        | record                       |
+| along the lines of                     | like                         |
+| anonymous stranger                     | stranger                     |
+| armed gunman                           | gunman                       |
+| ascertain the location of              | find                         |
+| ask a question                         | ask                          |
+| at the present time                    | now                          |
+| at this point in time                  | now                          |
+| at such time as                        | when                         |
+| be in a position to                    | can                          |
+| by a factor of two                     | twice / double               |
+| by means of                            | by                           |
+| come to a conclusion                   | conclude                     |
+| continue on                            | continue                     |
+| depreciate in value                    | depreciate                   |
+| despite the fact that                  | although                     |
+| drop down                              | drop                         |
+| due to the fact that                   | because                      |
+| during the time that                   | while                        |
+| equally as well                        | as well                      |
+| fewer in number                        | fewer                        |
+| for the purpose of                     | for                          |
+| for the reason that                    | because                      |
+| give consideration to                  | consider                     |
+| give indication of                     | show / suggest               |
+| happen to be / happens to be           | am / is / are                |
+| has been proved to be / is found to be | is                           |
+| in a number of                         | several / many               |
+| in all cases                           | always                       |
+| in case                                | if                           |
+| in close proximity to                  | near                         |
+| in excess of                           | more than                    |
+| in large measure                       | largely                      |
+| in many cases                          | often                        |
+| in most cases                          | usually                      |
+| in no case                             | never                        |
+| in order to                            | to                           |
+| in some cases                          | sometimes                    |
+| in the amount of                       | for                          |
+| in the case of / in this case          | for / here                   |
+| in the event that                      | if                           |
+| in the field of                        | in                           |
+| in the near future                     | soon                         |
+| in terms of                            | *(restructure the sentence)* |
+| in the vicinity of                     | near                         |
+| in view of the fact that               | because / since              |
+| is capable of                          | can                          |
+| it is interesting to note that         | note that                    |
+| make inquiry regarding                 | ask about                    |
+| manner in which                        | how                          |
+| notwithstanding the fact that          | although                     |
+| on the basis of                        | from / because / by          |
+| on the order of                        | about / approximately        |
+| present in greater abundance           | more abundant                |
+| prior to                               | before                       |
+| provided that                          | if                           |
+| put an end to                          | end                          |
+| reach a conclusion                     | conclude                     |
+| serves the function of being           | is                           |
+| subsequent to                          | after                        |
+| the question as to                     | whether                      |
+| the reason is because                  | because                      |
+| there can be little doubt that         | probably                     |
+| unknown suspect                        | suspect                      |
+| utilize / utilization                  | use                          |
+| very unique                            | unique                       |
+| with reference to                      | about                        |
+| with the exception that                | except that                  |
+
+
+## Writing about software
+
+Never use these words — they're meaningless in product and technical writing: *powerful*, *flexible*, *simple*, *easy*.
+
+## AI tells to avoid
+
+These are patterns that make writing sound like it came out of a language model. Avoid them even — especially — when the writing is actually AI-assisted.
+
+### Vocabulary (words that cluster in AI output)
+
+Do not use these without good reason: *additionally* (especially to open a sentence), *align with*, *bolstered*, *crucial*, *delve*, *emphasizing*, *enduring*, *enhance*, *fostering*, *garner*, *highlight* (as a verb), *interplay*, *intricate/intricacies*, *key* (as an adjective), *landscape* (abstract), *meticulous/meticulously*, *pivotal*, *robust*, *showcase*, *tapestry* (abstract), *testament*, *underscore* (as a verb), *valuable*, *vibrant*.
+
+### Structural habits
+
+- AI loves exactly three examples or reasons. Use three when three is right; otherwise don't.
+- "Not just X, but also Y" is a cliché construction. Find a more direct way to say it.
+- Don't reach for synonyms just to avoid repeating a word. Repetition is better than forced variation.
+- Don't puff up importance: skip "represents a pivotal moment," "reflects broader trends," "stands as a testament to," "underscores its enduring significance." Just say what happened.
+- Don't format every paragraph as a bold label followed by explanation. That's not writing, it's a slide deck.
+
+### Conversational tics
+
+- Don't open with "Great question!" or "Certainly!"
+- Don't say "Let's explore..." or "Let's dive in..."
+- Don't say "It's worth noting that..."
+- Don't close with "I hope this helps!" or offer to answer follow-up questions as a formality.
+- Don't add knowledge-cutoff disclaimers unless directly asked.
+- Avoid the triple denial hook, a la "no fluff. no theory. just results"
+- Avoid the contrast formula, a la "this isn't about speed, it's about clarity"

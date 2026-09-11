@@ -1,0 +1,17 @@
+---
+description: Content authoring guidelines and standards
+globs: ['src/_posts/**/*.md', 'src/**/*.md']
+alwaysApply: true
+---
+
+## Content Guidelines
+
+- Write clear, engaging titles.
+- Use descriptive image filenames.
+- Include meta descriptions for SEO (50-160 characters).
+- Use proper markdown syntax.
+
+## Prose
+
+- Voice, tone, and word choice follow `voice.mdc` in this directory. It is generated from `~/.agents/writing-rules.md` – edit the source, not the copy.
+- Don't shorten, flatten, or restructure prose to make it "scannable." Paragraph length, sentence length, asides, and hedges are the author's choices. Leave them.

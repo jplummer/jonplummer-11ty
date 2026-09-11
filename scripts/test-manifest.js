@@ -78,7 +78,7 @@ const TESTS = [
   { id: 'critical-css', script: 'critical-css.js', groups: ['fast', 'pre'] },
   // Guards the docs/designs/ structure against superpowers skills that still
   // hardcode docs/superpowers/ (their SKILL.md files live in a plugin cache we
-  // can't durably edit — see .cursor/rules/memory.mdc).
+  // can't durably edit — see docs/agent-memory.md).
   { id: 'design-docs-location', script: 'design-docs-location.js', groups: ['fast', 'pre'] },
   { id: 'portfolio-cover-crop', script: 'portfolio-cover-crop.js', groups: ['fast', 'post'] },
   { id: 'test-json-pipe', script: 'test-json-pipe.js', groups: ['unit'] },

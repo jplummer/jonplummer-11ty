@@ -1,14 +1,9 @@
----
-description: Persistent memory for learnings across sessions
-globs: []
-alwaysApply: true
----
+# Agent memory
 
-## Agent Memory
+Learnings accumulated by Cursor and Claude Code agents while working on this repo. Moved here from `.agents/rules/memory.mdc` on 2026-09-11 so it isn't loaded into every session; the rule file now points here.
 
-Shared memory file for both Cursor and Claude Code agents. When you encounter a mistake that could recur, or learn something important about this project, append it to this file under the relevant heading below. Keep entries concise. Remove entries that turn out to be wrong or outdated.
+When you encounter a mistake that could recur, or learn something important about this project, append it under the relevant heading. Keep entries concise. Remove entries that turn out to be wrong or outdated. Read the **Gotchas** section before changing the build, tests, deploy, or scripts.
 
-**At the end of every task session, update this file** with any new learnings before your final response. Don't ask — just do it. If nothing was learned, skip silently.
 
 ### Project structure
 - **`docs/designs/`** (renamed from `docs/superpowers/` 2026-08-13) — why the site looks and works as it does: dated **`specs/`** (design docs) + **`plans/`** (implementation plans), plus standing write-ups **`colors.md`**, **`color-theme-exploration.md`**, **`font-stack-exploration.md`**. **`scratch/`** is gitignored — ad-hoc agent reports (e.g. the 2026-08-13 `complexity-*.md` audits) go there and are local-only, so `ideas.md` citing them is expected to dangle in a clone. `docs/` top level stays operational (**`commands.md`**, **`tests.md`**, **`authoring.md`**, **`ideas.md`**, **`cspell-patterns.md`**, **`noteplan-import.md`**, **`date-timezone-handling.md`**, **`templates/`**); **`docs/archive/`** keeps genuinely superseded material.

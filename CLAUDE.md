@@ -38,14 +38,14 @@ Agent commands live in `.claude/commands/`. Claude Code can invoke them as slash
 
 ## Rules
 
-@.cursor/rules/eleventy.mdc
-@.cursor/rules/eleventy-debugging.mdc
-@.cursor/rules/testing.mdc
-@.cursor/rules/web-frontend.mdc
-@.cursor/rules/javascript.mdc
-@.cursor/rules/markdown.mdc
-@.cursor/rules/content.mdc
-@.cursor/rules/memory.mdc
+@.agents/rules/eleventy.mdc
+@.agents/rules/eleventy-debugging.mdc
+@.agents/rules/testing.mdc
+@.agents/rules/web-frontend.mdc
+@.agents/rules/javascript.mdc
+@.agents/rules/markdown.mdc
+@.agents/rules/content.mdc
+@.agents/rules/memory.mdc
 
 ## Reference docs
 
