@@ -12,7 +12,7 @@ What is in your heart doesn't count. Values on a slide don't count. A team that 
 
 ## Designers: make intentional roughness clear
 
-There's an uncanny valley between rough-on-purpose (we're moving fast, expressing concepts, have time to clean up after we make some big decisions) and rough-from-neglect (we're moving fast, shipping under deadline, maybe this isn't that big a deal, maybe we'll fix it later). Is this prototype obviously unfinished, or does someone think it's done?
+There's an uncanny valley between rough-on-purpose (we're moving fast, expressing concepts, have time to clean up after we make some big decisions) and rough-from-neglect (we're moving fast, shipping under deadline, maybe this isn't that big a deal, maybe we'll fix it later). Is this prototype [obviously unfinished](/2023/07/29/quality-part-two/), or is someone going to think it's done?
 
 Intentional roughness is fine. Unclear roughness isn't. If a design is meant to be provisional, say so in a way a product manager or engineer can't miss: what's settled, what's placeholder, what you'll return to. When that signal is missing, people guess. Some will treat draft work as final. Others will treat finished work as optional. Neither helps. And if I can't tell that your "final" is final, it isn't.
 
@@ -30,6 +30,6 @@ Pressure to ship is ever-present, and letting a few small things through can be 
 
 If the product doesn't show attention to detail, ask your designers to name the details – the short list of things that, if fixed, would make care visible.
 
-If they can't produce that list yet, that's a capability to build and an expectation to set. Attention to detail is often visible in portfolios, but the story doesn't end there. Hire for it and expect it to be a habit. People who attend to detail show it in the work and in the list of improvements they'd make if they had the time.
+If they can't produce that list yet, that's a capability to build and an expectation to set. Attention to detail is often visible in portfolios, but the story doesn't end there. [Hire for it](/2022/10/29/tightening-up-my-hiring-process-for-ux-practitioners/) and expect it to be a habit. People who attend to detail show it in the work and in the list of improvements they'd make if they had the time.
 
 If they *can* name the details and the product still doesn't show them, the blockage is elsewhere – process, incentives, partnership, or ownership. I've written about diagnosing that [elsewhere](/2026/07/30/how-do-you-raise-the-level-of-craft/). The point here is simple: care is a behavior visible in what ships. Talk alone is not evidence.

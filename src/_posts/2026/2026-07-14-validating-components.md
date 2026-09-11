@@ -16,7 +16,7 @@ There are three topics here:
 2. preventing errors when authoring components
 3. preventing errors when building things that use those components
 
-In re the first, I've seen usability or accessibility problems surface that could be traced to a component and then fixed there, but I've not found a way to validate components out of context. You can put a bunch of components on a plausibly-constructed page and run `axe-core` over it to get some light accessibility auditing of those components, but that doesn't cover a ton, it just rules out egregious mistakes.
+In re the first, I've seen usability or accessibility problems surface that could be traced to a component and then fixed there, but I've not found a way to validate components out of context. You can put a bunch of components on a plausibly-constructed page and run [`axe-core`](https://github.com/dequelabs/axe-core) over it to get some light accessibility auditing of those components, but that doesn't cover a ton, it just rules out egregious mistakes.
 
 You might have better luck testing *patterns* rather than *components* because a pattern has a natural context for the interaction: a larger assembly such as a file upload widget, with its various behaviors and states, can be put into a testable workflow (or just observed in a real workflow in the wild) and its problems detected and sorted out at the pattern and component level.
 

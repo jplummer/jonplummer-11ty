@@ -30,7 +30,7 @@ Diagnosis starts with evidence. Find a place quality went missing: a specific sc
 
 This is the step I skipped in the interview. I didn't bother to investigate. I leapt past the diagnosis.
 
-Intervention comes after diagnosis, and it should be sized to match your confidence in that diagnosis. A lightweight version of the fix – one critique session, a prototype-first spec, a new metric added to a dashboard – tells you whether you found the right cause before you commit more budget, headcount, or political capital to a bigger structural move. And it needs a real signal attached, something witnessable, not just vibes.
+Intervention comes after diagnosis, and it should be sized to match your confidence in that diagnosis. A [lightweight version of the fix](/2022/06/29/a-quick-structure-for-piloting-a-change/) – one critique session, a prototype-first spec, a new metric added to a dashboard – tells you whether you found the right cause before you commit more budget, headcount, or political capital to a bigger structural move. And it needs a real signal attached, something witnessable, not just vibes.
 
 ## Failure modes
 
@@ -82,8 +82,8 @@ Some of these are useful in multiple failure modes; there's not a clean 1:1 mapp
 
 ## Repeat?
 
-Opening a bottleneck helps, and it reveals the next bottleneck. You might have an overall low level of designer craft, but raising it doesn't get fully realized in the product; this tells you that there's another obstacle after the obvious one you went after. This is true for any process you might work on. Speeding up the slowest operation in an assembly line helps, and it reveals the next-slowest operation, the next focus of intervention.
+Opening a bottleneck helps, and it [reveals the next bottleneck](https://en.wikipedia.org/wiki/Theory_of_constraints). You might have an overall low level of designer craft, but raising it doesn't get fully realized in the product; this tells you that there's another obstacle after the obvious one you went after. This is true for any process you might work on. Speeding up the slowest operation in an assembly line helps, and it reveals the next-slowest operation, the next focus of intervention.
 
-Then repeat – not as a formality, but because as you work on the process, and as business conditions change, the diagnosis doesn't hold still. People turn over and take the tacit parts of the quality standard with them. Reorgs sever ownership. Growth outpaces whatever onboarding used to establish the bar. The causes recombine. Sometimes the same one comes back, sometimes a new one takes its place. Raising craft once is a project. Keeping it raised is the same discipline I've written about before under a different name – goal maintenance.
+Then repeat – not as a formality, but because as you work on the process, and as business conditions change, the diagnosis doesn't hold still. People turn over and take the tacit parts of the quality standard with them. Reorgs sever ownership. Growth outpaces whatever onboarding used to establish the bar. The causes recombine. Sometimes the same one comes back, sometimes a new one takes its place. Raising craft once is a project. Keeping it raised is the same discipline [I've written about before](/2026/07/09/vision-is-not-magic/) under a different name – goal maintenance.
 
 I should have said that. Instead I told a story about the wrong question.

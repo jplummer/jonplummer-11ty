@@ -6,7 +6,7 @@ tags: post
 description: When a developer doesn't know which button variant to use for a destructive action, they can ask. An agent won't.
 ogImage: /assets/images/og/2026-06-29-the-agent-will-not-ask.png
 ---
-When a developer isn't sure which button variant to use for a destructive action, they can ask. They can search Slack, check Storybook, peek into the codebase, or ask someone nearby.
+When a developer isn't sure which button variant to use for a destructive action, they can ask. They can search Slack, check [Storybook](https://storybook.js.org), peek into the codebase, or ask someone nearby.
 
 An agent composing UI on the fly isn't going to ask. It's going to work from what you give it – component names, tokens, usage rules – and produce something. If your design system is thin or doesn't match the code, it will make something that might work, but will look and feel like it came from a different product.
 

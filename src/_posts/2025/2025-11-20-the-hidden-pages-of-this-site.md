@@ -40,7 +40,7 @@ If you only want the curated list of cool stuff I find and not my long-form ramb
 
 [/readme/](/readme/)
 
-This is the "About This Site" page's technical cousin. It renders the actual `README.md` file from the project's root directory. I produced it because GitHub expects one, and the source code for this site is on GitHub.
+This is the "About This Site" page's technical cousin. It renders the actual `README.md` file from the project's root directory. I produced it because GitHub expects one, and the [source code for this site](https://github.com/jplummer/jonplummer-11ty) is on GitHub.
 
 ### How the readme is generated
 

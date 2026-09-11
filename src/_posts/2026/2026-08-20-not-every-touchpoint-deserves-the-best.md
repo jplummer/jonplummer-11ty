@@ -8,7 +8,7 @@ ogImage: /assets/images/og/2026-08-20-not-every-touchpoint-deserves-the-best.png
 ---
 [Care has to show up in the product](https://jonplummer.com/2026/08/12/care-has-to-show-up-in-the-product/), I argued last time. But showing up everywhere, equally, isn't tenable. Your effort will be spread thin until it reads as barely competent instead of anything anyone remembers. If you want people to learn something specific about you from their experience, you have to choose that on purpose, then decide exactly where to prove it.
 
-Apple wanted AirPort to feel smooth. So they gave it a zero-draft glossy tower shape, put ball bearings in the ethernet ports – a detail almost nobody consciously noticed – and had the setup app find the new device and offer it to you before you'd asked. Belkin wanted its routers to feel easy. So the router detected your ISP connection type instead of making you guess between cable and different flavors of DSL, came with cables already plugged in to avoid mistakes, and included a printed card with a working, unique network name and password already on it.
+Apple wanted AirPort to feel smooth. So they gave it a zero-draft glossy tower shape, put ball bearings in the ethernet ports – a detail almost nobody consciously noticed – and had the setup app find the new device and offer it to you before you'd asked. Belkin wanted its routers to feel easy. So the router detected your ISP connection type instead of making you guess between cable and different flavors of DSL, [came with cables already plugged in](/2016/03/21/belkin-router-out-of-box/) to avoid mistakes, and included a printed card with a working, unique network name and password already on it.
 
 Different brand qualities, different companies, disparate mechanisms – software, physical form, packaging, assembly, pre-configuration. Each brand chose a trait to reinforce, then chose touchpoints where they could prove it.
 
@@ -28,6 +28,6 @@ Can we do better than others here? That is to say, is this an opportunity to be 
 
 And only then: does the customer's typical feeling here need to be changed? If so, to what? Most touchpoints already carry some baseline emotional response, whether anyone designed for it or not. Router setup, unimproved, feels like a chore heading toward a support call. That's the feeling ISP detection and a printed card were built to address.
 
-Once you've picked the handful of touchpoints worth the investment, the rest is the normal design process: generate ideas, let the trio pick what's feasible and the customer pick what's appealing, and ship it. Then write down what you chose so you can do it again later.
+Once you've picked the handful of touchpoints worth the investment, the rest is the normal design process: generate ideas, let [the trio](/2022/09/11/product-trio/) pick what's feasible and the customer pick what's appealing, and ship it. Then [write down what you chose](/2015/07/30/belkin-edit-experience-framework/) so you can do it again later.
 
 Craft can fail anywhere. Care has to be visible to count. But which qualities people learn to associate with you – those are choices, made a few times, in the right places, on purpose.

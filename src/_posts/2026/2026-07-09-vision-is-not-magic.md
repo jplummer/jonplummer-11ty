@@ -6,11 +6,11 @@ tags: post
 description: Vision doesn't need to be sharp. It needs to survive contact with reality – and someone has to keep checking that it still does.
 ogImage: /assets/images/og/2026-07-09-vision-is-not-magic.png
 ---
-Ideas are cheap. Every designer I've managed has had three interesting ideas by mid-morning. If your org's problem is "we don't have enough ideas," that's easy to fix: creativity is a muscle, and a muscle needs reps. Generate a lot of ideas, including bad ones, and the good ones show up more often. That part is readily trainable.
+Ideas are cheap. Every designer I've managed has had three interesting ideas by mid-morning. If your org's problem is "we don't have enough ideas," that's easy to fix: creativity is a muscle, and a muscle needs reps. [Generate a lot of ideas](/2022/11/09/single-diamond-the-basic-form-of-the-creative-process/), including bad ones, and the good ones show up more often. That part is readily trainable.
 
 The hard parts are choosing which idea to build, and then faithfully building it.
 
-Choosing well requires something most orgs are worse at than they think: clear thinking about what success means, and keeping that clarity during the twists and turns of the project. I call it goal maintenance. It's not glamorous; it's also where I've watched more visions die than in the idea stage, because a few months into the project the team had lost their grip on why the idea was chosen in the first place. Every debate about the product turned into a fight about what was easy for engineering or design, and not about what the customer actually needed.
+Choosing well requires something most orgs are worse at than they think: [clear thinking about what success means](/2021/01/29/how-to-be-strategic/), and keeping that clarity during the twists and turns of the project. I call it goal maintenance. It's not glamorous; it's also where I've watched more visions die than in the idea stage, because a few months into the project the team had lost their grip on why the idea was chosen in the first place. Every debate about the product turned into a fight about what was easy for engineering or design, and not about what the customer actually needed.
 
 Nobody kills a well-chosen idea with one bad call. They kill it with a hundred small, locally reasonable ones – a scope cut here, a shortcut there, a little bit of tech or experience debt – that each look harmless and, together, push the built thing away from what it was supposed to be.
 
