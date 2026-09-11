@@ -9,6 +9,8 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Copy edits on five 2026 posts; archive the book map idea
 - Regenerate the OG image for the quality-moves description change
 - Link the book map from /now/
+- Migrate to .agents layout; generated voice.mdc; move agent memory to docs/
+- Correct how dotagents loads into this repo
 
 ## 2026-09-09
 
@@ -846,4 +848,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-09-10
+Last deployed on 2026-09-11
