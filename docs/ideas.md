@@ -15,12 +15,12 @@
 
 - Portfolio
   - **Side projects** — The remaining portfolio gap. Covers exist for Lister PHP, Monotasker, Parker, Pointer-AR, and PRVT; **Menu Bar Death Clock** and **Plain English Service** still have no `coverImage` and no image in the body. Write-ups stay thin — roughly 230–310 words each apart from Parker — so the work is a stronger piece per project, not just one more image.
-  - Look through /talks (current and old) for more talks, and evaluate for inclusion
-    - Talks from Belkin
+  - Look through /talks (current and old) for more talks, and evaluate for inclusion. Status per Jon, 2026-09-11:
+    - **Cayuse — basically done.** The two "discovery interview training" decks published as one portfolio piece (see DONE); Cayuse Connect 2022 conference slides (recovered in the project folder) are essentially covered too.
+    - **Invoca — swept.**
+    - Talks from Belkin — partially swept, real work remains
     - Small artifacts from Belkin
-    - Talks from Invoca
-    - Talks from CSky
-    - Talks from Cayuse — first one down 2026-09-11: the two "discovery interview training" decks published as one portfolio piece (see DONE). Cayuse Connect 2022 conference slides are recovered in the project folder but still unevaluated.
+    - **Talks from CSky (Concentric Sky) — worth a look.** Genuinely thin in the portfolio already, but Jon doesn't retain many files from there and the company no longer exists, so source material is scattered; may take real digging to find anything usable.
 
 ## 🔮 Future Consideration
 
