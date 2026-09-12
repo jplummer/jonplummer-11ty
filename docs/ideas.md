@@ -20,7 +20,7 @@
     - Small artifacts from Belkin
     - Talks from Invoca
     - Talks from CSky
-    - Talks from Cayuse
+    - Talks from Cayuse — first one down 2026-09-11: the two "discovery interview training" decks published as one portfolio piece (see DONE). Cayuse Connect 2022 conference slides are recovered in the project folder but still unevaluated.
 
 ## 🔮 Future Consideration
 
@@ -147,6 +147,8 @@ Prioritized by **side-effect surface** — complexity that can produce a silentl
 ---
 
 ## DONE
+
+- **Discovery interview training portfolio piece** (2026-09-11) — `src/_posts/2022/2022-05-13-discovery-interview-training.md` combines the two May 2022 Cayuse product-team training decks (session one: why discovery, the research question, and the topic list; session two: scheduling, structure, and running the interview) into one piece: 43 captioned slides, a merged PDF, three-paragraph intro. Cover `2022/05/discovery-interview-training-page-26.png`. Deployed live at /2022/05/13/discovery-interview-training/ (date is an ordering device, not the real authoring date). Site-only, not cross-posted to LinkedIn. First entry closed on the Selected → Portfolio "Look through /talks" item — Belkin, Invoca, CSky, and the Cayuse Connect 2022 conference slides (already recovered in `site/cayuse-connect-2022-talks/`) are still unevaluated.
 
 - **Book Map side project page** (2026-09-10) — `src/sides/book-map.md` covers the map built for Erin's book reviews: YAML in, one HTML file out, geocoding through Nominatim with a cache, covers from Open Library falling back to Google Books, Leaflet drawing it. The page carries the real map as a live embed plus an open-in-new-tab link (`src/assets/demos/erindouglass-bookmap/`), which is what the idea asked for instead of a screenshot. Tile licensing was rechecked before publishing: Stadia domain authentication rather than a shipped API key, and CARTO's Positron and Voyager styles dropped because they now stamp "API KEY REQUIRED" across otherwise-fine tiles. `status: Ready to deploy` (a new allowed value, 6436b6f1) says plainly that it is not yet in use on her site. Cover `2026/09/book-map.jpg`.
 
