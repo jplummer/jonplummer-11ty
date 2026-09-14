@@ -36,7 +36,7 @@ _Derived from [`scripts/test-manifest.js`](../scripts/test-manifest.js) — see 
 
 **Fast Tests:** `html`, `links`, `wisdom`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `deploy-assets`, `error-document-assets`, `favicon-rasters`, `trailing-slash-links`, `critical-css`, `design-docs-location`, `portfolio-cover-crop`
 
-**Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `indexnow`, `manifest-cursors`, `figure-lightbox`, `site-branding`, `preview-site-lockup`, `light-theme-colors`, `og-image-filename`, `source-file-utils`, `test-json-pipe` — see [Unit Tests](#unit-tests) below
+**Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `indexnow`, `manifest-cursors`, `figure-lightbox`, `site-branding`, `preview-site-lockup`, `light-theme-colors`, `og-image-filename`, `changelog-format`, `source-file-utils`, `test-json-pipe` — see [Unit Tests](#unit-tests) below
 
 **Slow Tests:** `a11y` (launches browser)
 
@@ -195,6 +195,10 @@ Unit checks for `extractLightThemeColorOverrides()` in `eleventy/utils/css-utils
 ### og-image-filename.js
 
 Unit checks for `generateOgImageFilename()` in `scripts/utils/og-image-filename.js`: date-only front matter (`YYYY-MM-DD`) must use calendar parts so local timezone does not shift the day (and double-prefix the slug). No `_site/` dependency.
+
+### changelog-format.js
+
+Unit checks for `wrapFilenames()` in `scripts/utils/changelog-format.js`, used by `generate-changelog.js`. Bare filenames like `ideas.md` are wrapped in backticks so markdown-it's linkify does not treat `.md` as Moldova's TLD (`https://ideas.md`). Also wraps other source extensions as code, leaves slash-prefixed paths and URLs alone, and asserts the generator still calls the helper. No `_site/` dependency.
 
 ### source-file-utils.js
 

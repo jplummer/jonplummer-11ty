@@ -11,6 +11,7 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const { SPINNER_FRAMES } = require('../utils/spinner-utils');
+const { wrapFilenames } = require('../utils/changelog-format');
 
 const CHANGELOG_PATH = path.join(__dirname, '../../CHANGELOG.md');
 
@@ -350,10 +351,12 @@ try {
     // Combine similar commits on the same day
     const combinedCommits = combineSimilarCommits(commitsByDate[date]);
 
-    // Add each commit message as a bullet point
-    // Escape HTML to prevent tags from being interpreted as HTML
+    // Add each commit message as a bullet point.
+    // Wrap filenames in backticks so markdown-it linkify does not turn
+    // ideas.md into https://ideas.md (.md is Moldova's TLD).
+    // Escape HTML to prevent tags from being interpreted as HTML.
     for (const message of combinedCommits) {
-      changelog += `- ${escapeHtml(message)}\n`;
+      changelog += `- ${escapeHtml(wrapFilenames(message))}\n`;
     }
 
     changelog += '\n';

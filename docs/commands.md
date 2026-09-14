@@ -154,7 +154,7 @@ Create an API token with **Zone → Cache Purge → Purge** permission for the s
 
 - `pnpm run changelog` - Generate CHANGELOG.md from git commit history
 
-The changelog is automatically generated from the git commit history, organized by date (newest first). It includes all commits from the beginning of the project and follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format.
+The changelog is automatically generated from the git commit history, organized by date (newest first). It includes all commits from the beginning of the project and follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format. Filenames in commit messages (`ideas.md`, `deploy.js`) are wrapped in backticks so they render as code instead of auto-links — `.md` is Moldova's TLD, and markdown-it would otherwise turn `ideas.md` into `https://ideas.md`.
 
 The changelog is automatically regenerated before each deployment. When it changes, the deploy script commits it; either way, deploy always pushes to remote afterward so the repo stays in sync and nothing you committed locally is left unpushed. You can also run this command manually whenever you want to update it.
 

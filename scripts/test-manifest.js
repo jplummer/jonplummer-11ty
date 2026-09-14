@@ -64,6 +64,7 @@ const TESTS = [
   { id: 'preview-site-lockup', script: 'preview-site-lockup.js', groups: ['unit'] },
   { id: 'light-theme-colors', script: 'light-theme-colors.js', groups: ['unit'] },
   { id: 'og-image-filename', script: 'og-image-filename.js', groups: ['unit'] },
+  { id: 'changelog-format', script: 'changelog-format.js', groups: ['unit'] },
   { id: 'source-file-utils', script: 'source-file-utils.js', groups: ['unit'] },
   // fast-only: not part of either build.js phase (build's own output isn't
   // what this checks — it guards the static 404.html asset hrefs).
