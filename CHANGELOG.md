@@ -1,10 +1,16 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-09-12
+
+- Close the discovery interview training talks-sweep entry in ideas.md
+- Update talks-sweep status per Jon: Invoca swept, Belkin partial, Cayuse basically done, CSky worth a look
+
 ## 2026-09-11
 
 - Link earlier posts and sources from 2026 essays
 - Tighten side-project copy
 - Publish the discovery interview training post and bold the four questions in the touchpoint essay.
+- Note the extract-zip and smol-toml Dependabot dismissals in agent memory.
 
 ## 2026-09-10
 
@@ -854,4 +860,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-09-11
+Last deployed on 2026-09-14
