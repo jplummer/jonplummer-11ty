@@ -2,7 +2,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 ## 2026-09-12
 
-- Close the discovery interview training talks-sweep entry in ideas.md
+- Close the discovery interview training talks-sweep entry in `ideas.md`
 - Update talks-sweep status per Jon: Invoca swept, Belkin partial, Cayuse basically done, CSky worth a look
 
 ## 2026-09-11
@@ -67,7 +67,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Remove four pieces that misstate how the site works
 - Guard the inline first-paint shell against stylesheet drift
 - Make asset URLs root-absolute everywhere; check both error pages
-- Archive shipped portfolio and /friends items in ideas.md
+- Archive shipped portfolio and /friends items in `ideas.md`
 - Fix the 404's stale post list and cut its redundant links
 - Reorganize /now/ and link its projects to sides/
 - Tighten two lines on /now/
@@ -120,12 +120,12 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Add redirect from /uses/ to /technologies/
 - Add fourth footer group mirroring header, rename /index to /home
 - Correct utility_sibling_nav claim, keep it out of scope
-- Drop footerNav.js data file, hardcode links in the include
+- Drop `footerNav.js` data file, hardcode links in the include
 - Drop redundant colophon link, log footer alignment + /friends ideas
 - Add /sides/ section for side projects
 - Add /home/ redirect to /
 - Trim header nav to 4 destinations, relabel /index to /home
-- Drop redundant /colophon link from license.njk
+- Drop redundant /colophon link from `license.njk`
 - Add grouped footer nav
 - Make footer full-width, sticky-bottom, with a subtle color break
 - Order "Also read" alphabetically
@@ -175,7 +175,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Unify the test roster into a single manifest
 - Log complexity-reduction ideas from the three-agent audit
 - Reorganize docs: designs/ for design records, drop dead files
-- Archive ideas.md done items; simplify IndexNow; guard design-docs location
+- Archive `ideas.md` done items; simplify IndexNow; guard design-docs location
 - Quiet deploy output by default; --verbose restores rsync detail
 - Correct override wording: superpowers skills default, don't hardcode
 - Fix typo in agent design-system post; add five dictionary words
@@ -186,7 +186,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 ## 2026-08-11
 
 - Fix /now/ project status labels for parallel structure.
-- Fix escaped curly quotes in links.yaml and guard against them.
+- Fix escaped curly quotes in `links.yaml` and guard against them.
 - Prefer en dashes over em dashes in site content.
 - Orient the new-tab pop-out icon with window NE and L SW.
 - Add remaindered links for 2026-08-11.
@@ -230,12 +230,12 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Purge Cloudflare from local _site content hashes
 - Content-hash Cloudflare purge behavior and later rsync note
 - Harden Cloudflare purge manifest loading and deploy-guards invariant
-- Refresh ideas.md for recent brand and Cloudflare purge work
+- Refresh `ideas.md` for recent brand and Cloudflare purge work
 - Colophon sketch light/dark remaps without invert
 - Keep large test JSON intact over piped stdout
 - Skip Cloudflare purge for newly added deploy paths
-- Mark favicons-from-logo as already done in ideas.md
-- Add craft/polish items to Selected in ideas.md
+- Mark favicons-from-logo as already done in `ideas.md`
+- Add craft/polish items to Selected in `ideas.md`
 - Footer /colophon label and craft post copy edits
 
 ## 2026-08-06
@@ -267,7 +267,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 ## 2026-07-27
 
 - Update site tagline to Making ideas tangible
-- Centralize site branding in site.js and fix spelling typos
+- Centralize site branding in `site.js` and fix spelling typos
 
 ## 2026-07-24
 
@@ -323,7 +323,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 ## 2026-06-26
 
 - Orchestrate build with pre/post test pipeline
-- Delegate build tests to build.js, remove --skip-checks
+- Delegate build tests to `build.js`, remove --skip-checks
 - Add Monotasker portfolio post, MIME types, build pipeline docs
 
 ## 2026-06-24
@@ -354,7 +354,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 ## 2026-05-24
 
-- Add post; remove deprecated pnpm.overrides from package.json
+- Add post; remove deprecated pnpm.overrides from `package.json`
 
 ## 2026-05-15
 
@@ -368,7 +368,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 ## 2026-05-03
 
 - Fix static-page frontmatter checks; open browser once on dev serve
-- Add draft Concept Sprint post; clarify batch-change guidance in CLAUDE.md
+- Add draft Concept Sprint post; clarify batch-change guidance in `CLAUDE.md`
 
 ## 2026-04-25
 
@@ -399,7 +399,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 ## 2026-04-12
 
-- Rename color-test.njk to color.njk and og-image-preview.njk to ogimages.njk.
+- Rename `color-test.njk` to `color.njk` and `og-image-preview.njk` to `ogimages.njk`.
 - Feat(utility): color gallery embed, /type lab, sibling nav, and build hook
 
 ## 2026-04-11
@@ -411,7 +411,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 - Refresh About copy and ideas tracker
 - Tidy ideas tracker and executive prototype post
-- Update agent memory for ideas.md list style
+- Update agent memory for `ideas.md` list style
 - Bump dev tooling (RSS plugin, cspell, xmldom, markdownlint)
 
 ## 2026-04-03
@@ -423,7 +423,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 - Add dual sRGB/P3 APCA checks, draft OKLCH post, inline code style
 - Feat(css): cross-document view transitions
-- Keep collected wisdom in wisdom-entries.yaml; document data cascade
+- Keep collected wisdom in `wisdom-entries.yaml`; document data cascade
 
 ## 2026-03-28
 
@@ -454,7 +454,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 ## 2026-03-13
 
-- Move mergePostsAndLinks to eleventy/utils/merge-posts-links.js
+- Move mergePostsAndLinks to eleventy/utils/merge`-posts-links.js`
 - Tighten article spacing on narrow viewports
 - Bump devDependencies: cspell, html-validate, puppeteer
 - Import-links: show only new links and duplicate count
@@ -491,7 +491,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 ## 2026-02-14
 
-- Fix security audit: update CSP check for .htaccess.njk template, override markdown-it to resolve ReDoS vulnerability
+- Fix security audit: update CSP check for .`htaccess.njk` template, override markdown-it to resolve ReDoS vulnerability
 - DRY up duplicated code across scripts and templates
 - Remove unused CSS tokens; update ideas and pnpm overrides
 - Update agent memory, ideas tracker, and pnpm overrides
@@ -510,19 +510,19 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 ## 2026-02-08
 
-- Add CLAUDE.md with references to existing project rules and docs
+- Add `CLAUDE.md` with references to existing project rules and docs
 - Add agent memory rule and document command relationships
 
 ## 2026-01-22
 
 - Fix spelling and SEO validation warnings
-- Fix YAML apostrophe escaping in links.yaml
+- Fix YAML apostrophe escaping in `links.yaml`
 - Integrate link import into deployment workflow
 
 ## 2026-01-21
 
 - Add NotePlan link import workflow, remove GitHub form approach
-- Document NotePlan import workflow in commands.md and authoring.md
+- Document NotePlan import workflow in `commands.md` and `authoring.md`
 
 ## 2026-01-19
 
@@ -544,20 +544,20 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Remove unused test utilities and fix redundancies
 - Remove archived migration scripts
 - Migrate to Cursor .cursor/rules/ structure and clean up documentation
-- Update ideas.md: mark cursor rules reorganization and deadwood exploration as complete
+- Update `ideas.md`: mark cursor rules reorganization and deadwood exploration as complete
 
 ## 2026-01-10
 
 - Improve spell check: add ignore patterns, custom words, and better output
 - Add new post and update various files
-- Update pnpm-lock.yaml
+- Update `pnpm-lock.yaml`
 - Add test:changed script for authoring validation
 - Add --changed flag support to all authoring tests
 
 ## 2026-01-06
 
 - Remove unused to-ico dependency and reorganize Eleventy docs
-- Update pnpm-lock.yaml after removing to-ico
+- Update `pnpm-lock.yaml` after removing to-ico
 - Update about page with current date and Badgr link
 
 ## 2026-01-05
@@ -645,7 +645,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 - Fix horizontal scrollbar on narrow viewports for articles with code blocks
 - Switch drafts from folder-based to frontmatter-based
-- Modularize .eleventy.js configuration
+- Modularize .`eleventy.js` configuration
 - Unify exit handling and summary printing across all scripts
 - Add date range titles to paginated pages
 
@@ -661,7 +661,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 - Add SITE_DOMAIN environment variable for centralized domain configuration
 - Security audit improvements and deployment fixes
-- Add security-audit-report.md to .gitignore
+- Add `security-audit-report.md` to .gitignore
 - Reduce security audit scope for static site
 - Enable smart quotes in markdown and titles
 - Refactor test suite and fix nested anchor issue
@@ -717,20 +717,20 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Implement responsive portfolio grid layout
 - Add blog post about hidden site pages
 - General site updates and content cleanup
-- Add humans.txt and AI-blocking robots.txt
+- Add `humans.txt` and AI-blocking `robots.txt`
 - Standardize all portfolio images to use HTML &lt;figure&gt; syntax
 - Deduplicate .gitignore entries
 - Move .htaccess to src/ so it gets copied to build
 - Ignore docs/ folder instead of deprecated _misc/
-- Add links to technologies in technologies.md
+- Add links to technologies in `technologies.md`
 
 ## 2025-11-16
 
-- Add new post about AI-assisted coding and move technologies.md to root
+- Add new post about AI-assisted coding and move `technologies.md` to root
 
 ## 2025-11-15
 
-- Add links.yaml validation script and update color scheme to DR10
+- Add `links.yaml` validation script and update color scheme to DR10
 - Add new post and update content
 - Add schema.org structured data for SEO (Person, WebSite, BlogPosting)
 - Add SEO meta descriptions to all posts and organize content scripts
@@ -742,7 +742,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 - Update link rendering to show newest links on page 1
 - Fix nested paragraphs in link descriptions
-- Fix YAML formatting in links.yaml and add YAML validation to tests
+- Fix YAML formatting in `links.yaml` and add YAML validation to tests
 - Add _site to .gitignore and remove from git tracking
 - Simplify link checking scripts and update notes formatting
 - Update data structure and templates
@@ -755,14 +755,14 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Clean up defunct capabilities and improve naming consistency
 - Add security headers to .htaccess
 - Add 404 and 500 error pages with permalinks
-- Reorganize documentation: move color ideas to notes.md
+- Reorganize documentation: move color ideas to `notes.md`
 
 ## 2025-10-08
 
 - New post, cleanup scripts
 - Script modularity
 - Simpler deployment script
-- Update links.json
+- Update `links.json`
 
 ## 2025-10-06
 
@@ -774,7 +774,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Implemented remaindered links feature
 - Fixed post dates on individual post pages
 - Fix feed issues
-- Update deploy.js
+- Update `deploy.js`
 - More tweaks to deploy scripts
 - Vertical rhythm
 - Sitemap generation
