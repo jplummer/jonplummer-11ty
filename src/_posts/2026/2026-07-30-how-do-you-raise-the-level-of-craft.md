@@ -16,7 +16,7 @@ It's simple, full of possible directions to pursue. I should have asked about th
 
 There was no shared definition of quality – ask three people what "good" meant here and you'd get three different, equally defensible answers. There was no agreed bar for how much was enough – whatever shipped fastest won, no matter what anyone said they wanted. And there was no way to repeatably prioritize – no shared sense of which craft fights were worth having this cycle and which could wait. We either fought over everything or let all of it slide, depending on the scrum team's habits.
 
-So I worked on the "product trio" partnership – closer collaboration among product, design, and engineering; shared ownership of what "done" meant; engineering at the table from the beginning. It helped a lot, both times.
+So I worked on the "[product trio](/2022/09/11/product-trio/)" partnership – closer collaboration among product, design, and engineering; shared ownership of what "done" meant; engineering at the table from the beginning. It helped a lot, both times.
 
 ## But that's not me
 
@@ -61,8 +61,8 @@ Intervention comes after diagnosis, and it should be sized to match your confide
 Some of these are useful in multiple failure modes; there's not a clean 1:1 mapping.
 
 * Skill-building
-  * Critique – borrow the group's brains, praise good examples, coach the group to raise the floor
-  * Coaching, training, pairing – targets individuals to raise their skill level and that of the group
+  * [Critique](/2023/01/12/whither-critique/) – borrow the group's brains, praise good examples, coach the group to raise the floor
+  * [Coaching, training, pairing](/2023/06/28/group-coaching-vs-individual-feedback/) – targets individuals to raise their skill level and that of the group
   * Hiring bar and process – slower, reduces your need for remedial training but not maintenance or standards
 * Making quality visible in work processes
   * A written, concrete quality standard, with real examples instead of adjectives

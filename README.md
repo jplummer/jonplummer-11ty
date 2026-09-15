@@ -17,8 +17,8 @@ Every page is pre-built as a plain HTML file at build time, not generated on-dem
 I chose simple, reliable tools that require little maintenance.
 
 - [Eleventy](https://www.11ty.dev/): A tool that turns my text files into web pages.
-- Nunjucks: A simple way to organize page layouts.
-- Git: Keeps a history of every change I make.
+- [Nunjucks](https://mozilla.github.io/nunjucks/): A simple way to organize page layouts.
+- [Git](https://git-scm.com) and [GitHub](https://github.com): Keeps a history of every change I make.
 
 ### Project Structure
 
@@ -66,14 +66,12 @@ If you want to see how the code works:
 
 ### Instructions and memory
 
-Project rules live in `.cursor/rules/*.mdc`. These are Cursor's native format but the content is plain markdown (after a short YAML frontmatter block), so any tool can read them.
+Project rules live in `.agents/rules/*.mdc`. The `.mdc` format is Cursor's, but the content is plain markdown after a short YAML frontmatter block, so any tool can read them. Each tool reaches the same files through its own entry point:
 
-Both Cursor and Claude Code are configured to load these rules:
+- **Cursor** reads `.cursor/rules/`, which is a symlink to `.agents/rules/`. Every rule carries `alwaysApply: true` in its frontmatter.
+- **Claude Code** reads `CLAUDE.md`, which imports the rules by `@` path along with `docs/commands.md`, `docs/authoring.md`, `docs/tests.md`, and `docs/designs/font-stack-exploration.md`. Slash commands come from `.claude/commands/`, a symlink to `.agents/commands/`.
 
-- **Cursor** reads `.cursor/rules/*.mdc` directly via `alwaysApply: true` in each file's frontmatter.
-- **Claude Code** reads them via `@` imports in `CLAUDE.md`, which also imports `docs/commands.md`, `docs/authoring.md`, `docs/tests.md`, and `docs/design-and-craft-principles.md`.
-
-**Shared memory**: `.cursor/rules/memory.mdc` is a shared file where both agents record learnings across sessions. Both are instructed to write to this file. Claude Code's own `MEMORY.md` is a pointer that imports `memory.mdc` to avoid duplication.
+**Shared memory**: learnings from past sessions live in `docs/agent-memory.md`. Both agents are instructed to read the relevant section before working in an unfamiliar area and to append what they learn. `.agents/rules/memory.mdc` is a short pointer to that file, so the memory itself isn't loaded into every session.
 
 ### When debugging unexpected behavior
 

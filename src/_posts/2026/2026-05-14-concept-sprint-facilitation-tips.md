@@ -16,7 +16,7 @@ Your job is to be a warm, trusted guide with enough authority to keep things mov
 A few principles worth internalizing before you walk in the door:
 
 1. The most effective instructions describe the desired behavior as natural and inevitable. "As we listen to these presentations, we'll inevitably notice things customers struggle with or opportunities worth capturing – these stickies are here to capture those." The behavior is obvious and expected.
-2. Give the reason with the instruction. People follow instructions better when they understand why. "Because we want to be able to cluster these later, we're going to write one idea per note" is more effective than "write one idea per note."
+2. [Give the reason with the instruction](/2022/11/04/communications-providing-both-context-and-instructions/). People follow instructions better when they understand why. "Because we want to be able to cluster these later, we're going to write one idea per note" is more effective than "write one idea per note."
 3. Use "we" language. "We're going to write our problems down one per sticky note" is an invitation. "You need to write one idea per sticky" is a command.
 4. Model what you want. When you notice a customer problem during Immersion, say so and write it down. Ask clarifying questions, especially when others are not. The facilitator should never appear to be sitting back.
 5. Coach the room, not the individual. When someone needs a gentle push, ask whether the instruction would benefit everyone. If it would, speak it into the room rather than at the person.
@@ -121,7 +121,7 @@ Customers downplay their objections. When you sense a real concern being softene
 
 Between sessions, when there's a gap of 20 minutes or more, use it. What are we learning? Is there anything to adjust in the framing or the demo? The demo can be refined between sessions if feedback warrants it, especially after recurring feedback.
 
-When a session is deflating, remind the team that a skeptical customer is valid data and a bad session or two doesn't invalidate the concept. After a difficult session, ask: what specifically did this customer object to, and what does that tell us about the concept, the framing, or the customer fit?
+When a session is deflating, remind the team that a skeptical customer is valid data and a session or two of negative feedback doesn't invalidate the concept. After a difficult session, ask: what specifically did this customer object to, and what does that tell us about the concept, the framing, or the customer fit?
 
 Sync with the implementation planning team whenever there's a long gap and at the end of the day. Often the people in 6b finish first and can rejoin the validation team. Before pitch prep begins, make sure both teams have presented their findings to each other.
 
@@ -134,7 +134,7 @@ T-shirt sizes and a whiteboard fish chart are the right output. The most common 
 Pitfalls to watch for:
 
 - Over-cutting. In the drive toward a lean MVP, teams sometimes scope down until the concept no longer delivers meaningful value. The test: would a customer be pleased by it? If not, you've cut too far.
-- Not deferring enough. A good MVP delivers the core benefit clearly; everything else is a future iteration.
+- Not deferring enough scope. A good MVP delivers the core benefit clearly; everything else is a future iteration.
 - Despairing of risks rather than naming them. When the team sees a hard problem or unknown, the instinct can be to treat it as a blocker. The job in 6b is to name risks, not solve them, so leadership knows what needs to be sorted and the team knows where to focus first.
 - Forgetting existing capabilities. Ask explicitly: what do we already have that we can use or adapt? Existing platform capabilities, APIs, and infrastructure can dramatically accelerate delivery and change what belongs in the MVP.
 

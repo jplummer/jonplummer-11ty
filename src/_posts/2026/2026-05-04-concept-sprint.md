@@ -186,7 +186,7 @@ A concept sprint is logistically demanding and the schedule is unforgiving. Two 
 
 ## Ground rules
 
-These rules apply throughout the sprint, but especially during the generation and categorization phases. They are loosely based on IDEO's brainstorming ground rules.
+These rules apply throughout the sprint, but especially during the generation and categorization phases. They are loosely based on [IDEO's brainstorming ground rules](https://www.ideou.com/blogs/inspiration/7-simple-rules-of-brainstorming).
 
 - **Defer judgment.** During generation, there are no bad ideas. Evaluation comes in the categorization and evaluation phases, not during generation.
 - **One idea per sticky note/page.** This makes clustering and voting possible, and prevents one note from doing too much work.

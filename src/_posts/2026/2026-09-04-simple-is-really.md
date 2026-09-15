@@ -18,9 +18,9 @@ Four months on, that line hadn't changed a thing. Everyone agreed with it, but n
 
 I had to argue two things, in order.
 
-The first was whether simplicity is a goal at all. Most people took it as one, and I don't think it is. A goal is more specific than that. Pursuing simplicity will improve some goals and do nothing for others, and it isn't an unalloyed good on its own – you can simplify a product right past the thing that made it worth having. Simplicity is a tactic. You reach for it in service of something, and you should be able to say what.
+The first was whether simplicity is a *goal* at all. Most people took it as one, and I don't think it is. A goal is more specific than that. Pursuing simplicity will improve some goals and do nothing for others, and it isn't an unalloyed good on its own – you can simplify a product right past the thing that made it worth having. Simplicity feels like a principle, but it's really a *tactic*, a tool. You reach for it in service of some goal, and you need to be able to say what that goal is.
 
-The second: when I pressed on *how* you'd bring simplicity to a system that is necessarily complex, nobody could say, which made the case for me. To produce simplicity you must submerge complexity, but until you have specific tactics you can use to do that, it's a guessing game.
+The second: when I pressed on *how* you'd bring simplicity to a system that is necessarily complex, nobody could say. To produce simplicity you must submerge complexity, but until you have specific ideas about how you might do that, it's a guessing game.
 
 That surprised me. These were academy-trained industrial designers, very good at what they did, and I had assumed the vocabulary for this was common ground. Naming how simplicity gets produced turns out to be a different skill from having sound instincts about it.
 
@@ -33,7 +33,7 @@ To make a complex system appear simple, put the complexity below the surface so 
 
 This is why *looks* is underlined on that board. Simple is as simple does, and what it does may well be complicated. The impression of simplicity is what you're trying to produce.
 
-The rest of the board explains how to deliver that impression. It moves quickly. It says what's happening in familiar words. It puts one thing in front of you at a time. It asks few questions, and never a technical one it could work out on its own. When something goes wrong it automates around the problem or guides the person through it, rather than telling them they did something wrong. It shows plainly that a thing worked. And it arranges the work so there are fewer chances to go wrong.
+The rest of the board explains how to deliver that impression: It moves quickly. It says what's happening in familiar words. It puts one thing in front of you at a time. It asks few questions, and never a technical one it could work out on its own. When something goes wrong it automates around the problem or guides the person through it, rather than telling them they did something wrong. It shows plainly that a thing worked. And it arranges the work so there are fewer chances to go wrong. (Example: [Belkin router setup](/2016/03/21/belkin-router-out-of-box/))
 
 Each of those was already in the framework. It began [as a grid](/2015/07/30/belkin-edit-experience-framework/), with the four qualities down the side, the stages of somebody's life with the product across the top, and in each cell what that quality looks like at that moment. "Minimize decisions" and "obvious first step" were Interactive at setup and first use. "Smart defaults" and "minimize pitfalls" were Thoughtful at the same stage. "Get out of the way" was Thoughtful at start up.
 
@@ -41,6 +41,6 @@ So the November board didn't invent anything; it collected. Those lines lived in
 
 A few smaller arguments arose and petered out, but people came around. I could tell by what they brought to reviews. Before, the note was "simplify this," which anyone can say without knowing much about the product. After, advice was specific; fewer decisions here, a better default there, guide instead of complain in this error.
 
-I keep coming back to this because agentic software is the most complicated thing we have ever asked people to supervise, and our default response is to put a text box in front of people and hope that the agent can talk them into trusting and being comfortable. Submerging complexity is exactly the right job, and harder when the system acts on its own. Pre-configuration, defaults, progressive disclosure, sequencing, automation – the same means, working now on something that claims to be working on your behalf.
+[I keep coming back to this](/2026/04/20/agentic-ai-doesnt-make-human-interfaces-go-away/) because agentic software is the most complicated thing we have ever asked people to supervise, and our default response is to put a text box in front of people and hope that the agent can talk them into trusting and being comfortable. Submerging complexity is exactly the right job, and harder when the system acts on its own. Pre-configuration, defaults, progressive disclosure, sequencing, automation – the same means, working now on something that claims to be working on your behalf.
 
 Nothing on the page marked "Keep It Simple" as the weak one – it read like the other fifteen. The difficulty showed up only when somebody tried to use it. A check I run now on any set of principles, mine included; which of these principles is actually affecting our behavior?

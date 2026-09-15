@@ -27,7 +27,7 @@ Evidence of your design choices matters too: in a regulated environment, design 
 
 ## Pushing formative and summative closer together
 
-Human factors engineering under [IEC 62366](https://www.iso.org/standard/63179.html) already draws this distinction. Formative studies happen early and inform the design, while summative testing checks that the built object, is actually something users can work with safely.
+Human factors engineering under [IEC 62366](https://www.iso.org/standard/63179.html) and [FDA guidance](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/applying-human-factors-and-usability-engineering-medical-devices) already draw this distinction. Formative studies happen early and inform the design, while summative testing checks that the built object, is actually something users can work with safely.
 
 Formative studies have always existed; the problem was what you could put in front of someone. Formative work done with a prototype that barely functions doesn't get you very far. You run the sessions, you collect your observations, and you often can’t tell whether you learned about the design or about the limitations of the prototype. Ideally you are pretty sure you'll sail through summative because your formative results were strong, but the farther your prototypes are from reality the less similar those results are. A thin prototype gives you thin measurements, and the specification relies on those measurements. Whatever you got wrong stays hidden until summative testing. So summative accidentally becomes the first real test – validation doing the work of learning, at the latest and most expensive moment.
 

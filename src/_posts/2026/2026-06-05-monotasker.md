@@ -8,9 +8,9 @@ coverPosition: center 20%
 description: "My first iOS app crushes the paradox of choice."
 ogImage: /assets/images/og/portfolio.png
 ---
-My personal project list had become daunting. 30 active items, all legitimate, none obviously more important than the others. I'd open the list, see how long it is, and do something else. The list was accurate but its length was demoralizing.
+My personal project list had become daunting: 30 active items, all legitimate, none obviously more important than the others. I'd open the list, see how long it is, and go do something else. The list was accurate but its length was demoralizing.
 
-The fix was simple: show me one thing. Pick it at random. Keep showing it until I decide it's done.
+The fix was simple: [show me one thing](https://en.wikipedia.org/wiki/The_Paradox_of_Choice). Pick it at random. Keep showing it until I decide it's done.
 
 ## The app
 
@@ -52,6 +52,6 @@ I directed the development using Claude and Cursor rather than writing Swift mys
 
 This is the same approach I use when prototyping for professional work: I'm fluent enough in code to specify precisely what I want, steer direction, and catch errors, and it's helpful to have the agent asking me questions as we go. The judgment stays mine. The keystrokes don't have to.
 
-A lot of additional effort went to animation, visual polish, and accessibility. Getting text scaling right, so the layout holds when a user has chosen a large font, took real iteration. Making the app sensible to VoiceOver users required repeated manual testing on a device; there's no substitute for it. Making dark mode distinct from light mode and nice on its own is not just a matter of flipping brightness values. These are some of the details where an app goes from "it's fine" to "this is nice," and they don't surface in a spec. You find them by using the thing.
+A lot of additional effort went to animation, visual polish, and accessibility. [Getting text scaling right](https://developer.apple.com/design/human-interface-guidelines/typography), so the layout holds when a user has chosen a large font, took real iteration. Making the app [sensible to VoiceOver users](https://developer.apple.com/design/human-interface-guidelines/accessibility) required repeated manual testing on a device; there's no substitute for it. Making dark mode distinct from light mode and nice on its own is not just a matter of flipping brightness values. These are some of the details where an app goes from "it's fine" to "this is nice," and they are hard to spec in advance. You find them by using the thing.
 
 [Monotasker is available on the App Store](https://apps.apple.com/us/app/monotasker/id6770424713). For the app itself – what it does, privacy, feedback – see [its page at /sides](/sides/monotasker/).

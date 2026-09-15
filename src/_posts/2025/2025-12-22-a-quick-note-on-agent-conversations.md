@@ -6,7 +6,7 @@ tags: post
 description: When setting up your agent to converse with a user, think about what would speed the conversation to a happy conclusion most naturally.
 ogImage: /assets/images/og/2025-12-22-a-quick-note-on-agent-conversations.png
 ---
-Conversational design has become an important topic of late, and at work we've been chewing on this for a few different conversation channels and purposes. Familiar old principles from consumer electronics setup and other experiences are coming up anew, such as
+Conversational design has become an important topic of late, and at work we've been chewing on this for a few different conversation channels and purposes. Familiar old principles from [consumer electronics setup](/2016/03/21/belkin-router-out-of-box/) and other experiences are coming up anew, such as
 
 - **Don't ask if you don't have to.** Detect and test, detect and confirm, infer and confirm, offer the most common option, and only if forced just ask without offering.
 - **Only ask questions the user is prepared to answer.** There's little point in asking if you won't get a confident answer; find another way to learn the needed information.

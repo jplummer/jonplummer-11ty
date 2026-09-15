@@ -16,11 +16,11 @@ This is the lifeblood for those of us who still believe in the open web and subs
 
 ### How the RSS feed is generated
 
-It's built using a Nunjucks template (`feed.njk`) that iterates over the `collections.post` collection in 11ty. It outputs XML compliant with the RSS 2.0 specification. I use the `eleventy-plugin-rss` to help with some of the formatting, ensuring dates and absolute URLs are handled correctly.
+It's built using a Nunjucks template (`feed.njk`) that iterates over the `collections.post` collection in 11ty. It outputs XML compliant with the [RSS 2.0 specification](https://www.rssboard.org/rss-specification). I use `eleventy-plugin-rss` to help with some of the formatting, ensuring dates and absolute URLs are handled correctly.
 
 ### Why an RSS feed
 
-If you use a feed reader (like NetNewsWire, Feedly, or Readwise Reader), this is how you get my updates without checking the site manually. It's the "subscribe" button of the decentralized web.
+If you use a feed reader (like [NetNewsWire](https://netnewswire.com), [Feedly](https://feedly.com/news-reader), or [Readwise Reader](https://readwise.io)), this is how you get my updates without checking the site manually. It's the "subscribe" button of the decentralized web.
 
 ## 2. The links feed
 
@@ -97,7 +97,7 @@ A map of the site for search engines.
 
 ### How the sitemap is generated
 
-A Nunjucks template (`sitemap.njk`) iterates through all the collections (`post`, `portfolio`, `page`) and outputs an XML file that follows the sitemap protocol. It includes last-modified dates so crawlers know when to come back.
+A Nunjucks template (`sitemap.njk`) iterates through all the collections (`post`, `portfolio`, `page`) and outputs an XML file that follows the [sitemap protocol](https://www.sitemaps.org). It includes last-modified dates so crawlers know when to come back.
 
 ### Why a sitemap
 

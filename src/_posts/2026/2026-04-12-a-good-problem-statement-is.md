@@ -6,7 +6,7 @@ tags: post
 description: "What makes a strong problem statement: factual, specific, real, open to solutions, and you van tell when progress is made."
 ogImage: /assets/images/og/2026-04-12-a-good-problem-statement-is.png
 ---
-A good problem statement is
+A [good problem statement](/2025/08/07/field-guide-to-problem-statements/) is
 
 - **Factual**: based on actual customer knowledge
 - **Specific**: we can name

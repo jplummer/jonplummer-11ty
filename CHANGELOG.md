@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-09-13
+
+- Add 14 September 2026 links
+
 ## 2026-09-12
 
 - Close the discovery interview training talks-sweep entry in `ideas.md`
@@ -860,4 +864,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-09-14
+Last deployed on 2026-09-15

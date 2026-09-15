@@ -6,7 +6,7 @@ tags: post
 description: Topics you might bring up in critique are the same as you might investigate when starting a project. The rest come from hearing about the work.
 ogImage: /assets/images/og/2025-12-31-engaging-in-critique.png
 ---
-A designer recently pointed out that they were quiet in critique because they weren't sure what to talk about or how to engage with the material being presented. They noted that several others always seem to have something useful or interesting to say in critique, and asked for ways to be helpful.
+A designer recently pointed out that they were quiet in [critique](/2023/01/12/whither-critique/) because they weren't sure what to talk about or how to engage with the material being presented. They noted that several others always seem to have something useful or interesting to say in critique, and asked for ways to be helpful.
 
 The good news is that the presenter should give you some good raw material to work with. At the beginning of their presentation they should quickly mention
 
