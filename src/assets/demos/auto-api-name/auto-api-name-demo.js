@@ -1,5 +1,5 @@
 // ====================================================================
-    // CONFIG — Edit these to change validation rules everywhere.
+    // CONFIG – Edit these to change validation rules everywhere.
     // ====================================================================
     const CONFIG = {
       // Allowed characters in a final API name (whole-string match)
@@ -105,7 +105,7 @@
     }
 
     // ====================================================================
-    // SCHEMES — each wires up one card's behavior.
+    // SCHEMES – each wires up one card's behavior.
     // ====================================================================
     const schemes = [
       {
@@ -229,7 +229,7 @@
         n: 7,
         chip: 'Also interesting',
         name: 'Suggest, don’t fill',
-        desc: 'API Name stays untouched. A suggestion appears below — click Accept (or press Enter while in API Name) to take it.',
+        desc: 'API Name stays untouched. A suggestion appears below – click Accept (or press Enter while in API Name) to take it.',
         setup(card) {
           const { display, api } = getInputs(card);
           const setStatus = makeStatus(card);
@@ -265,7 +265,7 @@
       {
         n: 8,
         name: 'Explicit lock toggle',
-        desc: 'Linked by default — click the lock to unlink. Linked = live auto-update; Unlinked = ignore Display Name changes.',
+        desc: 'Linked by default – click the lock to unlink. Linked = live auto-update; Unlinked = ignore Display Name changes.',
         setup(card) {
           const { display, api } = getInputs(card);
           const setStatus = makeStatus(card);
@@ -324,7 +324,7 @@
       {
         n: 11,
         name: 'First-keystroke seed',
-        desc: 'API Name is set from the first keystroke in Display Name — and only then. Never updates again.',
+        desc: 'API Name is set from the first keystroke in Display Name – and only then. Never updates again.',
         setup(card) {
           const { display, api } = getInputs(card);
           const setStatus = makeStatus(card);
@@ -434,7 +434,7 @@
     }
 
     // ====================================================================
-    // FAVORITE — combined scheme that sits above the comparison grid:
+    // FAVORITE – combined scheme that sits above the comparison grid:
     //   • Auto-update while typing in Display Name
     //   • Display Name blur → severs the link
     //   • Editing API Name → severs the link
