@@ -20,4 +20,4 @@ What agents need is exactly what developers have always needed: components with 
 
 If your design system is a Figma file and tribal knowledge, an agent will show you why that's not enough. If it's well-documented and semantically named, an agent can compose something that feels like part of your product.
 
-Nothing about this is new work. You just have a new user for your design system, and it's not going to work around the gaps the way a person would.
+Nothing about this is new work. You have a new user for your design system, and it's not going to work around the gaps the way a person would.

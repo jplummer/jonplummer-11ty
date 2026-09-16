@@ -28,4 +28,4 @@ None of this is an argument for forcing users through rigid prescribed workflows
 
 Interfaces are becoming harder to design well, not less necessary. The object model has to be right for both interaction types. The visible informational layer has to foster trust. The inspection and correction paths have to exist. Since users will operate the human interfaces less often, they need to rely less on training and recall, and rely more on recognition. And someone still has to understand the users well enough to know what value looks like and design toward it.
 
-The cost of knowing what to build didn't get smaller. Neither did the cost of helping people trust and use what you built. That's the product management and design work. AI didn't wave it away. It just made it more important to get right.
+Knowing what to build didn't become cheaper. Neither did helping people trust and use what you built. That's product management and design work that AI didn't wave away. AI made it more important to get those right.

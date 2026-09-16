@@ -102,6 +102,6 @@ Initial customer response was enthusiastic, with key customers reporting that th
 
 ## Why this kind of interface matters
 
-Call review is, at its core, a verification interface. A manager is checking what the system observed – an AI-analyzed conversation – and deciding whether it's right. the machine is helping them, and they are helping the machine.
+Call review is, at its core, a verification interface. A manager is checking what the system observed – an AI-analyzed conversation – and deciding whether it's right. The machine is helping them, and they are helping the machine.
 
 As AI takes on more of the observation layer in enterprise software, the interfaces that let humans check, score, and act on what AI found become critical. Getting that design right is the challenge we were solving at Invoca. It's one that's only going to get more common.

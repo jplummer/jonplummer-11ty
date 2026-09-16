@@ -30,4 +30,4 @@ And only then: **does the customer's typical feeling here need to be changed?** 
 
 Once you've picked the handful of touchpoints worth the investment, the rest is the normal design process: generate ideas, let [the trio](/2022/09/11/product-trio/) pick what's feasible and the customer pick what's appealing, and ship it. Then [write down what you chose](/2015/07/30/belkin-edit-experience-framework/) so you can do it again later.
 
-Craft can fail anywhere. Care has to be visible to count. But which qualities people learn to associate with you – those are choices, made a few times, in the right places, on purpose.
+Craft can fail anywhere. Care has to be visible to count. The qualities people learn to associate with your brand are choices, made a few times, in the right places, on purpose.
