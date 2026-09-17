@@ -11,9 +11,19 @@ ogImage: /assets/images/og/sides.png
 ---
 A small macOS menu bar app counts down to your statistical life expectancy ([memento mori](https://en.wikipedia.org/wiki/Memento_mori)) or up from your date of birth ([memento vivere](https://citewise.net/memento-vivere-meaning/)), sitting quietly in the menu bar the whole time.
 
-The current build uses a fixed life-expectancy estimate, based on your age and sex. Later it might download public actuarial tables to sharpen that estimate based on age, sex, and country.
+## Why the menu bar
 
-I started this but set it aside to work on other projects. The name is a placeholder – it'll get a better one before it feels shippable.
+A death clock needs to be ever-present; the idea only works as ambient information, the way a wall clock works but on a longer time horizon. macOS's menu bar is the closest thing to that: always visible, never in the way, gone the moment you stop looking at it. A widget would work but would get stuck behind things and still need to be checked, even though it would be always-open.
+
+## One number, two readings
+
+Countdown and count-up are the same idea told two ways: one measures what's left, the other what's already spent. I built both because I wasn't sure which framing would actually change how I used a day. So far neither has, but count-up is more comforting and optimistic.
+
+## Status
+
+The current build uses a fixed US life-expectancy estimate based on age and sex. A later version might download public actuarial tables to sharpen that estimate by age, sex, and country.
+
+I started this, then set it aside for other projects. The name is a placeholder – it'll get a better one before it feels shippable.
 
 <h2 id="privacy-and-terms">Privacy and terms</h2>
 
