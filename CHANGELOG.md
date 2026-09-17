@@ -1,5 +1,20 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-09-17
+
+- Add why and status copy to the death clock and Plain English sides.
+- Commit regenerated OG images after the em dash copy pass.
+
+## 2026-09-16
+
+- Tighten copy in eight posts.
+- Swap lab and demo copy from em dashes to en dashes.
+- Stop color and type lab generators from emitting em dashes.
+
+## 2026-09-15
+
+- Wire links through older posts and fix the hrefs that failed internal-links.
+
 ## 2026-09-13
 
 - Add 14 September 2026 links
@@ -864,4 +879,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-09-15
+Last deployed on 2026-09-17
