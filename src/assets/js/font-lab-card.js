@@ -5,7 +5,7 @@ function formatFontLabPasteCss(bodyFamily, headingFamily, options) {
   var monoStack =
     "ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace";
   var webNote = options.webFont
-    ? '/* Self-hosted WOFF2 required — see src/assets/css/font-lab-exploratory.css for @font-face. */'
+    ? '/* Self-hosted WOFF2 required – see src/assets/css/font-lab-exploratory.css for @font-face. */'
     : '';
 
   if (headingScope === 'hgroup-only') {
@@ -71,7 +71,7 @@ function formatFontLabPasteCss(bodyFamily, headingFamily, options) {
   if (bodyFamily === headingFamily) {
     return [
       webNote,
-      '/* Tokens + hooks — order is for copying, not matching this site’s CSS file layout. */',
+      '/* Tokens + hooks – order is for copying, not matching this site’s CSS file layout. */',
       '/* code/pre: UA styles use monospace; --font-family-mono sets it explicitly (not the body stack). */',
       '',
       ':root {',

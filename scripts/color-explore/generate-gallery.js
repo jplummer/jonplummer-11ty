@@ -284,11 +284,11 @@ function pasteHeaderLines(selectionLead) {
 function variantComboPasteSummary(kind, cardLabel, variantRadioLabel) {
   const card = sanitizePasteCommentText(cardLabel);
   const choice = sanitizePasteCommentText(variantRadioLabel);
-  if (kind === 'bw-combo') return `${card} — preset ${choice}`;
-  if (kind === 'dr-combo') return `${card} — site preset ${choice}`;
-  if (kind === 'wild-combo') return `${card} — scheme ${choice}`;
-  if (kind === 'terminal-combo') return `${card} — scheme ${choice}`;
-  return `${card} — ${choice}`;
+  if (kind === 'bw-combo') return `${card} – preset ${choice}`;
+  if (kind === 'dr-combo') return `${card} – site preset ${choice}`;
+  if (kind === 'wild-combo') return `${card} – scheme ${choice}`;
+  if (kind === 'terminal-combo') return `${card} – scheme ${choice}`;
+  return `${card} – ${choice}`;
 }
 
 function harmonyLabStaticPasteLead(payload, recipe) {
@@ -303,14 +303,14 @@ function harmonyLabStaticPasteLead(payload, recipe) {
   if (vis.a) bits.push(`analogous spread ${td.analogousSpread}°`);
   if (vis.s) bits.push(`split spread ${td.splitSpread}°`);
   if (vis.k) bits.push(`harmony skew ${td.harmonySkew}°`);
-  return `Harmony lab — ${bits.join(' · ')}`;
+  return `Harmony lab – ${bits.join(' · ')}`;
 }
 
 /** Hue-pack / single-theme cards: section title + card label + optional hue-slider note. */
 function galleryCardPasteSummary(t, sec) {
   const secTitle = sec && sec.title ? sanitizePasteCommentText(sec.title) : '';
   const card = sanitizePasteCommentText(t.label);
-  const base = [secTitle, card].filter(Boolean).join(' — ');
+  const base = [secTitle, card].filter(Boolean).join(' – ');
   if (t._hueSlider) {
     return `${base} · preview hue rotation +0° (Copy tokens = APCA-tuned build snapshot)`;
   }
@@ -1295,7 +1295,7 @@ function renderHomePreview(cssVarsInline, schemeLabel, previewUid) {
             <article class="link-item">
               <section>
                 <p>
-                  <a href="#">How product trios survive reorgs</a><span class="link-description"> — remaindered link blurb.</span>
+                  <a href="#">How product trios survive reorgs</a><span class="link-description"> – remaindered link blurb.</span>
                 </p>
               </section>
             </article>
@@ -2214,7 +2214,7 @@ function galleryEmbedRuntimeScriptJs() {
       if (vis.a) bits.push('analogous spread ' + Math.round(A) + '°');
       if (vis.s) bits.push('split spread ' + Math.round(S) + '°');
       if (vis.k) bits.push('harmony skew ' + Math.round(K) + '°');
-      return 'Harmony lab — ' + bits.join(' · ');
+      return 'Harmony lab – ' + bits.join(' · ');
     }
 
     function jonplummerPasteFromRecipe(recLight, recDark, baseH, rotDeg, recipeId, recipeLabel, A, S, K) {
@@ -2322,7 +2322,7 @@ function renderHtml(visibleSections, meta, options = {}) {
     : `  <!-- Regenerate: pnpm run color-gallery -->
   <h2 class="page-title">Color theme gallery</h2>
   <p class="meta">${escapeHtml(meta)}</p>
-  <p class="meta" style="margin-top:-0.75rem">Previews load <code>src/assets/css/jonplummer.css</code> via a relative URL — open this file from the repo (<code>scripts/color-explore/output/index.html</code>) so styles resolve. Each block heading toggles expand/collapse. Live gallery: <a href="https://jonplummer.com/color/">/color</a>. Other tools: <a href="../../font-explore/output/index.html">Font stack output</a> · <a href="https://jonplummer.com/type/">/type</a> · <a href="https://jonplummer.com/ogimages/">/ogimages</a>.</p>
+  <p class="meta" style="margin-top:-0.75rem">Previews load <code>src/assets/css/jonplummer.css</code> via a relative URL – open this file from the repo (<code>scripts/color-explore/output/index.html</code>) so styles resolve. Each block heading toggles expand/collapse. Live gallery: <a href="https://jonplummer.com/color/">/color</a>. Other tools: <a href="../../font-explore/output/index.html">Font stack output</a> · <a href="https://jonplummer.com/type/">/type</a> · <a href="https://jonplummer.com/ogimages/">/ogimages</a>.</p>
 `;
   return `<!DOCTYPE html>
 <html lang="en" class="gallery-ui">

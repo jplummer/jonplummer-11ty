@@ -384,7 +384,7 @@
       if (vis.a) bits.push('analogous spread ' + Math.round(A) + '°');
       if (vis.s) bits.push('split spread ' + Math.round(S) + '°');
       if (vis.k) bits.push('harmony skew ' + Math.round(K) + '°');
-      return 'Harmony lab — ' + bits.join(' · ');
+      return 'Harmony lab – ' + bits.join(' · ');
     }
 
     function jonplummerPasteFromRecipe(recLight, recDark, baseH, rotDeg, recipeId, recipeLabel, A, S, K) {

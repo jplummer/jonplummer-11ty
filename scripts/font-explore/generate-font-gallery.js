@@ -127,7 +127,7 @@ function siteHomePreviewFragment({
             <article class="link-item">
               <section>
                 <p>
-                  <a href="#">How product trios survive reorgs</a><span class="link-description"> — remaindered link blurb.</span>
+                  <a href="#">How product trios survive reorgs</a><span class="link-description"> – remaindered link blurb.</span>
                 </p>
               </section>
             </article>
@@ -307,7 +307,7 @@ function renderFontLabCard(options = {}) {
   });
 
   return `<section class="card font-tool-card" aria-label="Font stacks">
-  <p class="tool-note">Home-page preview at live type scale and revision colors from <code>jonplummer.css</code>. Production body is <strong>Libre Franklin</strong> with <strong>Big Shoulders Display</strong> titles; also try <strong>Archivo</strong>, <strong>Public Sans</strong>, <strong>Source Sans 3</strong>, <strong>IBM Plex Sans</strong>. Exploratory faces load from self-hosted WOFF2 on this page only — not Google CDN. Installed stacks: <a href="https://modernfontstacks.com" target="_blank" rel="noopener noreferrer">Modern Font Stacks</a>.</p>
+  <p class="tool-note">Home-page preview at live type scale and revision colors from <code>jonplummer.css</code>. Production body is <strong>Libre Franklin</strong> with <strong>Big Shoulders Display</strong> titles; also try <strong>Archivo</strong>, <strong>Public Sans</strong>, <strong>Source Sans 3</strong>, <strong>IBM Plex Sans</strong>. Exploratory faces load from self-hosted WOFF2 on this page only – not Google CDN. Installed stacks: <a href="https://modernfontstacks.com" target="_blank" rel="noopener noreferrer">Modern Font Stacks</a>.</p>
   <div class="tool-controls" role="group" aria-label="Font stack selection">
     <div class="tool-selects">
       <div class="tool-field">
