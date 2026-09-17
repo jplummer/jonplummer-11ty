@@ -13,9 +13,23 @@ ogImage: /assets/images/og/sides.png
 ---
 ![Shorten a URL and make a QR code, with privacy in mind.](/assets/images/2026/08/prvt.png)
 
-prvt turns a long URL into a short one that self-destructs after a time you set, from a day to four weeks, without tracking you or the people who follow the link. It uses capital letters and numerals to keep shortened URLs in [QR alphanumeric mode](https://en.wikipedia.org/wiki/QR_code#Encoding), which produces the smallest possible (and thus easiest-to-reproduce) printed QR codes.
+prvt turns a long URL into a short one that self-destructs after a time you set, without tracking you or the people who follow the link. Paste a URL, pick a lifetime, and it hands back a short link and a QR code you can download as SVG or PNG – no account, no dashboard, nothing to sign up for.
 
-It runs on [Cloudflare Workers KV](https://developers.cloudflare.com/kv/), and it's meant to be self-hosted rather than used as a shared public service – see the repo for setup instructions.
+## Why it forgets
+
+The slug-to-destination mapping lives in [Cloudflare Workers KV](https://developers.cloudflare.com/kv/) with an expiration set at creation time; KV deletes it automatically with no trace left behind. Nothing else gets stored either – not who created a link, not who followed it, not how many times, not a single request header. For an incoming link the Worker reads a slug, looks it up, and redirects; that's the entire job. A separate 90-day "cooling off" record keeps an expired slug from being handed to someone else right away, so a link you bookmarked once won't quietly start pointing somewhere new.
+
+## Why alphanumeric, not just short
+
+Shortened URLs use only capital letters and numerals, which lets the QR code be generated in [alphanumeric mode](https://en.wikipedia.org/wiki/QR_code#Encoding), roughly 40% more efficient than mixed-case text. The printed code comes out smaller (less detailed) and easier to scan and reproduce.
+
+## Why AGPL, not MIT
+
+MIT would let anyone take this, run it as a hosted service, and give their users no way to check what it's actually doing with their links. AGPL requires that the source be published. For a tool that exists as an alternative to commercial shorteners that monetize click data, handing out the code without that obligation would have missed the point.
+
+## Status
+
+This runs on [Cloudflare Workers KV](https://developers.cloudflare.com/kv/), self-hosted rather than run as a shared service – clone the repo, fill in your own KV namespace and secrets, `wrangler deploy`.
 
 <h2 id="privacy-and-terms">Privacy and terms</h2>
 

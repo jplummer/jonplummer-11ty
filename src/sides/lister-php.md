@@ -14,7 +14,21 @@ ogImage: /assets/images/og/sides.png
 
 Lister renders a clean directory listing for a folder of files – no database or CMS. It exists because I wanted somewhere to drop a file and share a link without standing up anything heavier.
 
-It's built for low-traffic, personal file sharing. You can set a flag to log IP addresses to block bots from hammering on the site, but that's light protection rather than hosting-grade rate limiting.
+## What actually gets uploaded
+
+Just three things: `index.php`, `.htaccess`, and the `lister/` directory. Inside that directory, `api.php` handles expanding a folder without a full page reload, `preview.php` shows a modal preview of a text file or PDF without downloading it, and an optional `admin.php` covers the few security settings discussed below. File-type icons come from Google's Material Symbols, matched to extensions via [dyne/file-extension-list](https://github.com/dyne/file-extension-list) instead of a list I'd have to maintain by hand. (I started with emoji but they were too playful.) Drop a README into your folder and it renders inline below the file listing, via [Parsedown](https://github.com/erusev/parsedown).
+
+## What it won't show you
+
+Lister hides your own dotfiles, OS cruft (`.DS_Store`, `Thumbs.db`), and anything that looks like a secret – `.env`, `private.key`, `id_rsa` and its siblings, `known_hosts`, `*.pem`. If you drop a folder onto a server having forgotten what's in it, this helps keep a stray credentials file from becoming a public listing.
+
+## Why the guardrail, not real rate limiting
+
+It's tricky to do a lot of anti-abuse work with a drag-and-drop installation. Limited throttling is on by default: 30 requests a minute per IP, a five-minute timeout, and a log entry if you go beyond that. It's meant for a quiet personal site and not engineered to survive real abuse – if you expect heavy traffic your host's own controls are the right tool, and the above can be switched off with one config flag. When on, a bare `curl` gets rejected as a bot; testing locally means a real browser or spoofing a User-Agent.
+
+## Status
+
+It's running today at [misc.jonplummer.com](https://misc.jonplummer.com/), needs PHP 8.x and Apache with `mod_php`, and ships with deploy and teardown scripts for anyone comfortable driving them from a terminal – though dragging three files into a folder is the whole install for everyone else.
 
 <h2 id="privacy-and-terms">Privacy and terms</h2>
 
