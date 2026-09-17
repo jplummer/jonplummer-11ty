@@ -17,7 +17,7 @@ ogImage: /assets/images/og/sides.png
 
 An infrared Time-of-Flight sensor, an indicator light, and a button tell you when your car is in the right spot in the garage. No more tennis ball on a string.
 
-I'm thinking this might eventually be a MakerWorld crowdsource project, and one markedly simpler than the [ISS pointer bot](/sides/pointer-ar/) idea.
+I'm thinking this might eventually be a [MakerWorld](https://makerworld.com/) crowdsource project, and one markedly simpler than the [ISS pointer bot](/sides/pointer-ar/) idea.
 
 ## How it works
 

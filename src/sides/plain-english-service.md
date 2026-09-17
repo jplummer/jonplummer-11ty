@@ -13,11 +13,11 @@ Select text anywhere on macOS, run "Find Uncommon Words" from the Services menu,
 
 ## Why a Service, not an app
 
-A macOS Service runs alongside whatever you're already writing in – Mail, a Google Doc in Safari, a Word file – no separate window, no copy-paste into a checker. Select the text, run the command, done. That matters because jargon gets caught where you're actually writing it, not in a tool you have to remember to open later.
+A macOS Service runs alongside whatever you're already writing in – Mail, a Google Doc in Safari, a Word file – no separate window, no copy-paste into a checker. Select the text, run the command, see the results. That matters because jargon gets caught where you're actually writing it, not in a tool you have to remember to open later.
 
 ## Why word lists, not a readability score
 
-Most plain-language tools score a whole passage – sentence length, syllable count, the Fog index, the Flesch-Kincaid grade level. That tells you a paragraph is hard to read without telling you what made it hard. Checking word by word against a frequency list does the opposite: it can't judge whether your sentences hang together, but it can point at "utilize" or "leverage" directly and let you reconsider the actual word.
+Most plain-language tools score a whole passage – sentence length, syllable count, the [Fog index](https://en.wikipedia.org/wiki/Gunning_fog_index), the [Flesch-Kincaid grade level](https://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_tests). That tells you a paragraph is hard to read without telling you what made it hard. Checking word by word against a frequency list does the opposite: it can't judge whether your sentences hang together, but it can point at "utilize" or "leverage" directly and let you reconsider the actual word.
 
 ## Status
 

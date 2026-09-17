@@ -21,7 +21,7 @@ Countdown and count-up are the same idea told two ways: one measures what's left
 
 ## Status
 
-The current build uses a fixed US life-expectancy estimate based on age and sex. A later version might download public actuarial tables to sharpen that estimate by age, sex, and country.
+The current build uses a fixed US life-expectancy estimate based on age and sex. A later version might download [public actuarial tables](https://www.ssa.gov/oact/STATS/table4c6.html) to sharpen that estimate by age, sex, and country.
 
 I started this, then set it aside for other projects. The name is a placeholder – it'll get a better one before it feels shippable.
 

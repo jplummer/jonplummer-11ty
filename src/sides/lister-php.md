@@ -16,7 +16,7 @@ Lister renders a clean directory listing for a folder of files – no database o
 
 ## What actually gets uploaded
 
-Just three things: `index.php`, `.htaccess`, and the `lister/` directory. Inside that directory, `api.php` handles expanding a folder without a full page reload, `preview.php` shows a modal preview of a text file or PDF without downloading it, and an optional `admin.php` covers the few security settings discussed below. File-type icons come from Google's Material Symbols, matched to extensions via [dyne/file-extension-list](https://github.com/dyne/file-extension-list) instead of a list I'd have to maintain by hand. (I started with emoji but they were too playful.) Drop a README into your folder and it renders inline below the file listing, via [Parsedown](https://github.com/erusev/parsedown).
+Just three things: `index.php`, `.htaccess`, and the `lister/` directory. Inside that directory, `api.php` handles expanding a folder without a full page reload, `preview.php` shows a modal preview of a text file or PDF without downloading it, and an optional `admin.php` covers the few security settings discussed below. File-type icons come from Google's [Material Symbols](https://fonts.google.com/icons), matched to extensions via [dyne/file-extension-list](https://github.com/dyne/file-extension-list) instead of a list I'd have to maintain by hand. (I started with emoji but they were too playful.) Drop a README into your folder and it renders inline below the file listing, via [Parsedown](https://github.com/erusev/parsedown).
 
 ## What it won't show you
 
