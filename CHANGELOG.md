@@ -4,6 +4,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 - Add why and status copy to the death clock and Plain English sides.
 - Commit regenerated OG images after the em dash copy pass.
+- Add why and status copy to the Lister and prvt sides.
 
 ## 2026-09-16
 
