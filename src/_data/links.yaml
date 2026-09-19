@@ -1,3 +1,17 @@
+2026-09-19:
+  - url: "https://lucadidomenico.studio/en/blog/delete-claude-md-every-6-months"
+    title: "Delete your CLAUDE.md every 6 months: Boris Cherny’s advice – Luca Di Domenico"
+    description: The creator of Claude Code notes that improving models obviate many of the matches we write into CLAUDE.md, so instructions should at least be pruned aggressively as models improve.
+  - url: "https://www.doc.cc/articles/the-algorithmic-atelier"
+    title: The algorithmic atelier – Joshua Leigh
+    description: "\"The most persistent argument against GenAI is that it removes the skill of the artist, allowing an amateur to produce high-quality work without the arduous training traditionally associated with mastery. Yet, the history of the Old Masters suggests that ‘skill’ has always been a fluid concept, frequently augmented by hidden technical aids.\""
+  - url: "https://gregrobison.medium.com/fooled-by-fakes-how-the-toupee-fallacy-blinds-us-to-high-quality-ai-content-a41e6b16b998"
+    title: "Fooled by Fakes: How the Toupee Fallacy Blinds Us to High-Quality AI Content – Greg Robinson"
+    description: "\"We think “all toupees look fake” because we only spot the obvious, poorly-made ones while the convincing ones fool us entirely. We also underestimate the quality and prevalence of AI-generated content because our perception is skewed toward the obvious failures.\""
+  - url: "https://jeffgothelf.com/blog/dont-let-ai-automate-the-mess-out-of-product-development/"
+    title: "Don't let AI automate the mess out of product development – Jeff Gothelf"
+    description: "\"We want to make surgical cuts to the things that can truly be automated rather than amputating whole chunks of work that have value within them.\""
+
 2026-09-14:
   - url: "https://simonsinek.com/podcast/episodes/the-ai-skills-nobody-is-teaching-and-everyone-needs-with-ai-expert-ethan-mollick-01kv6wt7xe7h83hz0te447pv6f"
     title: "Podcast: The AI Skills Nobody is Teaching (And Everyone Needs) with AI Expert Ethan Mollick – Simon Sinek"
