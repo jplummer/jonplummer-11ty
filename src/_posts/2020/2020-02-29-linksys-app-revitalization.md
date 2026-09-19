@@ -5,10 +5,10 @@ date: "2020-02-29T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/12/DashboardOnline.png
 coverPosition: center 52%
-description: "Complete redesign of the Linksys app, improving ratings from below 3 stars to 4.5 stars through new information architecture and performance improvements."
+description: "Complete redesign of the Linksys app, lifting its Google Play rating from 2.2 to 4.3 and its App Store rating from 3.1 to 4.7 through new information architecture and performance improvements."
 ogImage: /assets/images/og/portfolio.png
 ---
-The Linksys app was just firmware settings dropped into mobile menus – no better an experience than the web UI, arranged around the network's internal structure instead of what someone actually came to do: check status, fix a device, set a rule. It was rated below three stars on the iTunes Store and had a 3.3 lifetime average on Google Play. I rebuilt the information architecture and visuals around real user tasks, backed it with real performance work under the hood, and asked happy customers to review it. Ratings moved to 4.5 on iTunes and 4.1 on Google Play.
+The Linksys app was just firmware settings dropped into mobile menus – no better an experience than the web UI, arranged around the network's internal structure instead of what someone actually came to do: check status, fix a device, set a rule. It was rated 2.2 stars on Google Play and 3.1 on the App Store. I rebuilt the information architecture and visuals around real user tasks, backed it with real performance work under the hood, and asked happy customers to review it. Ratings moved to 4.3 on Google Play and 4.7 on the App Store.
 
 {% portraitGrid %}
 
