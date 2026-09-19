@@ -1,5 +1,12 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-09-19
+
+- Correct the Linksys app rating figures
+- Agent-memory: Cowork file-mode 403 gotcha, no-build-in-VM note, demos CSP, pptx-only presentation pipeline
+- Fix run-together word in "Designers who ship"
+- Add links for 2026-09-19
+
 ## 2026-09-17
 
 - Add why and status copy to the death clock and Plain English sides.
@@ -881,4 +888,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-09-18
+Last deployed on 2026-09-19
