@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2026-09-04"
 tags:
   - post
-description: One guideline in a framework we built at Belkin was not adopted at first. Making "Keep It Simple" usable meant arguing that simplicity is a tactic, and then showing how you submerge complexity rather than remove it.
+description: One guideline in our Belkin framework wasn't adopted at first. Making "Keep It Simple" usable meant arguing that simplicity is a tactic, then showing how to submerge complexity rather than remove it.
 ogImage: /assets/images/og/2026-09-04-simple-is-really.png
 ---
 In 2012 we published a design framework at Belkin. Sixteen guidelines, four each under Enticing, Delightful, Interactive, and Thoughtful, plus a scorecard so you could sit down with a product and grade it. [I've written up how it was built.](/2015/07/30/belkin-edit-experience-framework/)

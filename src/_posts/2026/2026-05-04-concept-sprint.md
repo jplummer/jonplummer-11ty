@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2026-05-04T12:00:00-07:00"
 tags:
   - post
-description: "A week-long facilitated workshop: immerse in the domain, cluster problems and benefits, sketch and converge on one concept, validate with customers, and pitch executives – with scheduling notes and ground rules."
+description: "A week-long workshop: immerse in the domain, cluster problems and benefits, converge on one concept, test it with customers, and pitch executives – with scheduling notes and ground rules."
 ogImage: /assets/images/og/2026-05-04-concept-sprint.png
 ---
 A Concept Sprint is a short, usually week-long, in-person exercise meant to accelerate high-level exploration of a new area of development, a significant problem, or a strategic initiative. A blended team – product, design, architecture, engineering, marketing, and any truly relevant business stakeholders – generates a high-value product concept, validates it with live customers, and produces a pitch covering the problem, benefit, concept, and rough cost and timeframe to deliver a first version. The team works through seven phases led by a facilitator, book-ended by a welcome and a wrap-up. Below are my general instructions and guidelines, arrived at after running several of these at multiple companies.

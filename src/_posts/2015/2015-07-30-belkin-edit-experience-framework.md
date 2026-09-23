@@ -5,7 +5,7 @@ date: "2015-07-30T12:00:00-08:00"
 tags: portfolio
 coverImage: 2026/09/edit-qualities.jpg
 coverPosition: center center
-description: "Belkin's brand statements couldn't tell a designer what to do. EDIT turned four experience qualities into behaviors at each stage of a person's time with a product, and shipped as a one-page guideline, a poster, and a scorecard you could grade experiences against."
+description: "Belkin's brand statements couldn't tell a designer what to do. EDIT turned four experience qualities into behaviors at each stage of a person's time with a product, with a scorecard to grade against."
 ogImage: /assets/images/og/portfolio.png
 ---
 ## The situation

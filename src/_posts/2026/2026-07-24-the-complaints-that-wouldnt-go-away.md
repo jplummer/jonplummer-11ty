@@ -3,7 +3,7 @@ title: The complaints that wouldn't go away
 layout: layouts/single_post.njk
 date: "2026-07-24T12:00:00-07:00"
 tags: post
-description: Design system compliance at Invoca was real and rising. The complaints about people not following it didn't move. An audit and a controlled test revealed why, and it matters twice as much now that agents are writing the UI.
+description: Invoca's design system compliance was rising, but complaints about people ignoring it didn't move. An audit and a controlled test showed why, and it matters twice as much now that agents write the UI.
 ogImage: /assets/images/og/2026-07-24-the-complaints-that-wouldnt-go-away.png
 ---
 Building is easy, taste is hard. That line's been going around design and engineering circles for a while now, and it's true – for a team. A single designer with good instincts can make fast, sound "taste" calls all day. But a team can't run efficiently on one person's taste, and it can't run on group vibes; it needs a standard people can actually check their work against. I watched a design team, with an established design system, prove their compliance with it was real and rising, and still be dissatisfied by the results. Fixing that took an investigation.
