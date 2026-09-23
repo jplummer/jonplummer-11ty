@@ -4,6 +4,8 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 - Invert selected text against the page field.
 - Fix transposed words in discovery interview training.
+- Tighten four post descriptions and regenerate OG images.
+- Add side-project context to page titles and revise Usage-Chan.
 
 ## 2026-09-22
 
