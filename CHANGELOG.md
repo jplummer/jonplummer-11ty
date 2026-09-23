@@ -2,8 +2,12 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 ## 2026-09-22
 
-- Expand the Usage-Chan side: the vertical layout, extra usage, the simulator, device fonts in Figma, the icon pipeline, the control column, smoke, the PIN keypad, and working with Claude, plus seven new screenshots
-- Tighten the side-project ideas list
+- Expand Usage-Chan write-up with UI screenshots and layout notes.
+
+## 2026-09-21
+
+- Add "Value turns up where the data leads" to the tagline pool
+- Regenerate 15 OG images
 
 ## 2026-09-19
 
@@ -893,4 +897,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-09-19
+Last deployed on 2026-09-23
