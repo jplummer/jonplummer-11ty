@@ -132,9 +132,31 @@ function assertArticleFigcaptionType(result) {
   }
 }
 
+// Selection inverts the sheet. The pair is the same one body already uses,
+// so contrast holds without a new color-contrast case.
+function assertSelectionInvertsSheet(result) {
+  const css = fs.readFileSync(JONPLUMMER_CSS, 'utf8');
+  const fileObj = addFile(result, JONPLUMMER_CSS, 'jonplummer.css');
+  const rule = /::selection\s*\{([^}]*)\}/;
+  const match = css.match(rule);
+  const block = match ? match[1] : '';
+  const swaps =
+    /color:\s*var\(--content-background-color\)/.test(block) &&
+    /background-color:\s*var\(--text-color\)/.test(block);
+  if (!swaps) {
+    addIssue(fileObj, {
+      type: 'selection-invert',
+      message:
+        '::selection must set color to --content-background-color and background-color to --text-color',
+      ruleId: 'selection-invert',
+    });
+  }
+}
+
 function validate(result, options) {
   assertFigureInlineMarginReset(result);
   assertArticleFigcaptionType(result);
+  assertSelectionInvertsSheet(result);
   const { useChanged, files } = options || {};
   const styleArgs =
     useChanged && files && files.length > 0

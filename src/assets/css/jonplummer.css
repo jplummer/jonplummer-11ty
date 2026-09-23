@@ -172,6 +172,12 @@ body {
   scrollbar-gutter: stable;
 }
 
+/* Selected text swaps the body pair: ink becomes the field, the sheet becomes the ink. */
+::selection {
+  color: var(--content-background-color);
+  background-color: var(--text-color);
+}
+
 /* Make images easier to work with */
 img, picture {
   max-width: 100%;
