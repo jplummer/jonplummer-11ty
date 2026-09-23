@@ -1,5 +1,10 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-09-23
+
+- Invert selected text against the page field.
+- Fix transposed words in discovery interview training.
+
 ## 2026-09-22
 
 - Expand Usage-Chan write-up with UI screenshots and layout notes.
