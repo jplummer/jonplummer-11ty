@@ -363,3 +363,7 @@ basemap
 venv
 Drucker
 unsatisfyingly
+Qwen
+Lovyan
+GFX
+rasterizer

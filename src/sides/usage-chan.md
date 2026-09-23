@@ -65,7 +65,7 @@ I also stopped working in Figma's default 2x layout and moved to 1x. Pixel art a
 
 The first icons were rebuilt by Claude from my vectors in Figma: read a curve's radius, guess where the lines go, render it, diff it against the real thing, adjust, repeat. The WiFi glyph took four rounds of numerical fitting and still landed two percent off. This wasn't smart or efficient; these are pictures, and a picture's natural form on a device like this is a bitmap. So it falls to me to design the things and have Claude export and use them directly.
 
-The new workflow is that [`tools/icons2c.py`](https://github.com/jplummer/usage-chan/blob/main/tools/icons2c.py) asks for PNGs from Figma and writes the C header and the simulator's data from one set of bits. [`tools/verify-icons.js`](https://github.com/jplummer/usage-chan/blob/main/tools/verify-icons.js) renders a real dashboard, lifts each icon off of the layout, and compares it against its PNG – checking that there are zero differing pixels, across every icon. These run when [`tools/fetch-icons.sh`](https://github.com/jplummer/usage-chan/blob/main/tools/fetch-icons.sh) pulls the frames over Figma's REST API. I edit the frame, run the command, and build. This *is* efficient.
+The new workflow is that [`tools/icons2c.py`](https://github.com/jplummer/usage-chan/blob/main/tools/icons2c.py) asks for PNGs from Figma and writes the C header and the simulator's data from one set of bits. [`tools/verify-icons.js`](https://github.com/jplummer/usage-chan/blob/main/tools/verify-icons.js) renders a real dashboard, lifts each icon off of the layout, and compares it against its PNG – checking that there are zero differing pixels, across every icon, so the simulator (and thus the device) reproduces the layout faithfully: the right icon for each state, in the right place. These run when [`tools/fetch-icons.sh`](https://github.com/jplummer/usage-chan/blob/main/tools/fetch-icons.sh) pulls the frames over Figma's REST API. I edit the frame, run the command, and build. This *is* efficient.
 
 Three things I learned from this:
 
@@ -114,7 +114,7 @@ I built all of this pairing with [Claude Code](https://code.claude.com/docs), an
 
 It isn't a frictionless process. Claude told me `fontTools` was installed when it had checked the wrong place. It told me to read a serial log that we hadn't built yet. It made two arguments for leaving a design alone that served Claude's convenience, not the user's.
 
-I'm in charge of what the screen is for, what the bar means, which of two treatments to keep. What changed is how cheap it became to build the apparatus for inspecting the options and simulating the conditions the UI would have to handle. I'd never have hand-written as detailed a simulator, certainly would not have thought to generate the fonts, and an icon verifier would have felt like overkill on a project this size. That verifier caught two regressions before we changed the workflow to obviate it.
+I'm in charge of what the screen is for, what the bar means, which of two treatments to keep. Building an apparatus for trying the options and simulating the conditions the UI has to handle costs little now, which makes iterating faster and makes me more confident in my choices. I'd never have hand-written as detailed a simulator, certainly would not have thought to generate the fonts, and an icon verifier would have felt like overkill on a project this size.
 
 ## Status
 
