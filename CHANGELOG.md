@@ -1,5 +1,10 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-09-22
+
+- Expand the Usage-Chan side: the vertical layout, extra usage, the simulator, device fonts in Figma, the icon pipeline, the control column, smoke, the PIN keypad, and working with Claude, plus seven new screenshots
+- Tighten the side-project ideas list
+
 ## 2026-09-19
 
 - Correct the Linksys app rating figures
