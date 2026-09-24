@@ -34,12 +34,15 @@
     imgEl.src = trigger.getAttribute('href');
     imgEl.alt = pageImg ? (pageImg.getAttribute('alt') || '') : '';
 
+    // Copy the caption's nodes, not just its text, so links and emphasis
+    // survive. Leave the slot truly empty when there's no caption text, so
+    // the :empty rule in the CSS hides it.
     var cap = figure && figure.querySelector('figcaption');
-    var text = cap ? cap.textContent.trim() : '';
-    if (text) {
-      captionEl.textContent = text;
-    } else {
-      captionEl.textContent = '';
+    captionEl.replaceChildren();
+    if (cap && cap.textContent.trim()) {
+      Array.prototype.forEach.call(cap.childNodes, function (node) {
+        captionEl.appendChild(node.cloneNode(true));
+      });
     }
 
     // aria-disabled keeps the control in the tab order so focus does not
