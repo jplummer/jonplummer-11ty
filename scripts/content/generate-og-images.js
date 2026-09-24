@@ -10,6 +10,12 @@ const { parseFrontMatter, reconstructFile } = require('../utils/frontmatter-util
 const { isPost } = require('../utils/content-utils');
 const { extractCssCustomProperties, extractProductionFontFacesForInline, extractLightThemeColorOverrides } = require('../../eleventy/utils/css-utils');
 const { generateOgImageFilename } = require('../utils/og-image-filename');
+const {
+  computeOgSharedFingerprint,
+  defaultFingerprintPath,
+  readStoredFingerprint,
+  writeStoredFingerprint,
+} = require('../utils/og-shared-fingerprint');
 
 // Configure Nunjucks environment
 const nunjucksEnv = new nunjucks.Environment(
@@ -29,26 +35,9 @@ nunjucksEnv.addFilter('postDate', (dateObj) => {
 
 // Front matter parsing and reconstruction now use shared utilities
 
-const OG_SHARED_DEPS = [
-  path.join(process.cwd(), 'src', '_includes', 'og-image.njk'),
-  path.join(process.cwd(), 'src', '_includes', 'og-image-body.njk'),
-  path.join(process.cwd(), 'src', 'assets', 'css', 'jonplummer.css'),
-  path.join(process.cwd(), 'src', 'assets', 'css', 'fonts.css'),
-  path.join(process.cwd(), 'src', 'assets', 'images', 'jp-mark.svg'),
-  path.join(process.cwd(), 'eleventy', 'utils', 'css-utils.js'),
-  path.join(process.cwd(), 'src', '_data', 'site.js')
-];
-
-function sharedOgDepsNewerThan(ogImageStat) {
-  return OG_SHARED_DEPS.some((depPath) => {
-    if (!fs.existsSync(depPath)) {
-      return false;
-    }
-    return fs.statSync(depPath).mtime > ogImageStat.mtime;
-  });
-}
-
-// Check if OG image needs regeneration
+// Per-image check only. Changes to what every image shares (tokens, fonts,
+// templates, render code) are caught once per run by the shared fingerprint
+// in generateOgImages(), which forces a full regeneration.
 function needsRegeneration(ogImagePath, pageData, filePath) {
   // If OG image doesn't exist, need to generate
   if (!fs.existsSync(ogImagePath)) {
@@ -64,11 +53,6 @@ function needsRegeneration(ogImagePath, pageData, filePath) {
     return true;
   }
 
-  // Template, shared partial, site CSS, or font/CSS utils changed
-  if (sharedOgDepsNewerThan(ogImageStat)) {
-    return true;
-  }
-  
   // Also check if frontmatter has ogImage but it doesn't match expected path
   if (pageData.ogImage && pageData.ogImage !== 'auto') {
     const expectedPath = `/assets/images/og/${generateOgImageFilename(pageData, filePath)}`;
@@ -349,15 +333,28 @@ async function generateOgImages(options = {}) {
     frontmatterOgImageSyncedFiles: []
   };
   
+  // Shared fingerprint: tokens, fonts, templates, mark, site data, render code.
+  // Missing (first run, fresh machine): record it and keep the existing PNGs,
+  // which were rendered from the inputs committed alongside them.
+  const fingerprintPath = defaultFingerprintPath();
+  const currentFingerprint = computeOgSharedFingerprint();
+  const storedFingerprint = readStoredFingerprint(fingerprintPath);
+  const sharedChanged = storedFingerprint !== null && storedFingerprint !== currentFingerprint;
+  if (storedFingerprint === null) {
+    console.log('  ℹ️  OG shared fingerprint recorded for the first time; existing images kept');
+  } else if (sharedChanged) {
+    console.log('  ℹ️  OG tokens, fonts, templates, or render code changed; regenerating all OG images');
+  }
+
   for (const file of markdownFiles) {
     const relativePath = path.relative(process.cwd(), file);
-    
+
     if (!quiet) {
       console.log(`Processing: ${relativePath}`);
     }
-    
+
     try {
-      const result = await processFile(file, { force });
+      const result = await processFile(file, { force: force || sharedChanged });
       
       if (result.updated) {
         if (result.imageGenerated) {
@@ -412,6 +409,12 @@ async function generateOgImages(options = {}) {
     console.log(`   Errors: ${results.errors}`);
   }
   
+  // Only record the fingerprint after a clean run, so a partial failure
+  // retries the full regeneration next time.
+  if (results.errors === 0) {
+    writeStoredFingerprint(fingerprintPath, currentFingerprint);
+  }
+
   if (results.errors > 0) {
     if (quiet) {
       process.exit(1);

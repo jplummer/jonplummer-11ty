@@ -259,6 +259,7 @@ pnpm run generate-og-images
 The script will:
 - Generate images for posts and pages that don't have them
 - Regenerate images if the source file (title, description, date) has changed
+- Regenerate **all** images when the shared fingerprint changes: design tokens (`:root`) or light-theme colors in `jonplummer.css`, font faces, the card templates, the JP mark, site data, or the render code itself (`generate-og-images.js`, `css-utils.js`). Other CSS rules don't count, so layout or lightbox edits no longer re-render every card. The fingerprint lives in `.cache/og-shared-fingerprint.json`; if it's missing, the first run records it and keeps the existing images. Code: `scripts/utils/og-shared-fingerprint.js`.
 - Regenerate images if `ogImage` is set in frontmatter but the image file doesn't exist
 - Skip images that are up to date (incremental generation - typically <1 second if all up-to-date)
 - Skip portfolio items (individual portfolio pieces don't need OG images)
@@ -273,7 +274,7 @@ pnpm run generate-og-images -- --force
 The `--force` flag will:
 - Regenerate all images, even if they exist and are up to date
 - Override the skip logic for manually set `ogImage` values
-- Useful when you've updated the `og-image.njk` template or CSS styling
+- Rarely needed now that template, token, and render-code changes are caught automatically; the main remaining case is a Puppeteer/Chromium upgrade that changes how cards render
 
 #### Previewing Images
 
