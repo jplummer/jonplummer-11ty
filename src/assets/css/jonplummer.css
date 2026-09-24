@@ -1140,6 +1140,12 @@ article.portfolio-detail {
   overflow: auto;
 }
 
+/* Browsers without <dialog> support don't hide a closed dialog, and the
+   fixed positioning above would cover the page. Hide it ourselves. */
+.figure-lightbox:not([open]) {
+  display: none;
+}
+
 .figure-lightbox::backdrop {
   background-color: oklch(0% 0 0deg / 72%);
 }
@@ -1261,8 +1267,12 @@ a.figure-lightbox-trigger {
   text-decoration: none;
 }
 
-a.figure-lightbox-trigger img {
-  cursor: zoom-in;
+/* The lightbox only opens on wide screens (figure-lightbox.js uses the same
+   54rem line); below it a tap opens the full image, so keep the pointer. */
+@media (width > 54rem) {
+  a.figure-lightbox-trigger img {
+    cursor: zoom-in;
+  }
 }
 
 /* Portfolio and side-project grids: one card pattern under two class names.

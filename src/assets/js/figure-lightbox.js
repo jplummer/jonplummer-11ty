@@ -1,6 +1,8 @@
 (function () {
   var dialog = document.getElementById('figure-lightbox');
-  if (!dialog) return;
+  // Without <dialog> support, leave the trigger links alone so they open
+  // the large image directly.
+  if (!dialog || typeof dialog.showModal !== 'function') return;
 
   var imgEl = document.getElementById('figure-lightbox-image');
   var captionEl = document.getElementById('figure-lightbox-caption');
@@ -16,6 +18,12 @@
   function figureFor(trigger) {
     return trigger.closest('figure');
   }
+
+  // One rule per screen, not per image: wide screens always get the
+  // lightbox; narrow ones never do, and a tap follows the link to the full
+  // image for pinch-zoom. 54rem is where the layout already goes to a single
+  // column; keep it in step with the cursor rule in jonplummer.css.
+  var wideScreen = window.matchMedia('(width > 54rem)');
 
   function showFigureAt(index) {
     var list = triggers();
@@ -63,6 +71,7 @@
     if (event.defaultPrevented) return;
     if (event.button !== 0) return;
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    if (!wideScreen.matches) return;
     event.preventDefault();
     var list = triggers();
     var index = list.indexOf(trigger);

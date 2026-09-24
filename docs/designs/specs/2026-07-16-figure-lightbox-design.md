@@ -65,9 +65,17 @@ Escape (native dialog), backdrop click, and close control. Focus returns per dia
 
 Figure media is wrapped in `<a href="{largeImageUrl}">` so no-JS users (and open-in-new-tab) still get the large image. With JS, the click is intercepted and the dialog opens instead.
 
+### When the lightbox opens (added 2026-09-24)
+
+One rule per screen, not per image. Above 54rem, every figure opens the lightbox. At 54rem and below, where the layout goes to a single column, no figure does: the click isn't intercepted, and the link opens the full image for pinch-zoom, as it would without JS. The JS (`matchMedia('(width > 54rem)')`) and the CSS cursor rule share that line; change both together.
+
+A per-image rule came first: open only if the lightbox would show the image at least 1.25× larger. It was dropped the same day. Figures on the same page behaved differently for reasons the reader couldn't see, which felt broken. The measurements behind the choice: on a 390px phone, the lightbox never showed an image at least 1.25× larger; at 1440×900, it did for most figures.
+
+If `<dialog>` isn't supported (no `showModal`), the script exits and the links work as plain links. A closed dialog is hidden in CSS (`:not([open])`), so it never covers the page in those browsers. Details and measurements: `docs/designs/scratch/2026-09-24-lightbox-degradation.md` (gitignored).
+
 ### Discoverability
 
-Lightboxable figure images use a `zoom-in` cursor (or equivalent).
+Figure images use a `zoom-in` cursor above 54rem, where the lightbox opens. Below that, the link keeps its normal pointer.
 
 ### Motion
 
