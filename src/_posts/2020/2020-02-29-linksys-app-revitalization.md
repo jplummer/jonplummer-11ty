@@ -8,7 +8,9 @@ coverPosition: center 52%
 description: "Complete redesign of the Linksys app, lifting its Google Play rating from 2.2 to 4.3 and its App Store rating from 3.1 to 4.7 through new information architecture and performance improvements."
 ogImage: /assets/images/og/portfolio.png
 ---
-The Linksys app was just firmware settings dropped into mobile menus – no better an experience than the web UI, arranged around the network's internal structure instead of what someone actually came to do: check status, fix a device, set a rule. It was rated 2.2 stars on Google Play and 3.1 on the App Store. I rebuilt the information architecture and visuals around real user tasks, backed it with real performance work under the hood, and asked happy customers to review it. Ratings moved to 4.3 on Google Play and 4.7 on the App Store.
+The Linksys app was initially just firmware settings dropped into mobile menus – no better an experience than the web UI, arranged around the network's internal structure instead of what someone actually came to do: check status, fix a device, set a rule. It was rated 2.2 stars on Google Play and 3.1 on the App Store. I rebuilt the information architecture and visuals around real user tasks, backed it with real performance work under the hood, and asked happy customers to review it. Ratings moved to 4.3 on Google Play and 4.7 on the App Store.
+
+Velop, the Linksys mesh router system, arrived while this work was underway, and its setup went into the same app. Before Velop, router setup was available in the app but the app was not required. With Velop the app was the only way in, which raised the stakes on everything above. The [Velop whole-home WiFi system](/2020/07/03/velop-whole-home-wifi-system/) has its own page.
 
 {% portraitGrid %}
 
