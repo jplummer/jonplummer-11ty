@@ -1,5 +1,13 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-09-24
+
+- Open the figure lightbox only above 54rem, and skip it without dialog support.
+- Convert the two Connect 2022 conference talks into portfolio items.
+- Connect the Linksys app and Velop portfolio pages.
+- Regenerate four OG images.
+- Note that eleventyComputed functions first run against a Proxy.
+
 ## 2026-09-23
 
 - Invert selected text against the page field.
