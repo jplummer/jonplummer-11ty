@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-09-30
+
+- Publish "Arguing with the agent" and point mentor links at profile pages.
+
 ## 2026-09-24
 
 - Open the figure lightbox only above 54rem, and skip it without dialog support.
@@ -7,6 +11,8 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Connect the Linksys app and Velop portfolio pages.
 - Regenerate four OG images.
 - Note that eleventyComputed functions first run against a Proxy.
+- Regenerate OG images from a fingerprint of their inputs, not file dates.
+- Keep links and emphasis in lightbox captions.
 
 ## 2026-09-23
 
@@ -912,4 +918,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-09-24
+Last deployed on 2026-10-01
