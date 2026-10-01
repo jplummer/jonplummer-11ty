@@ -3,6 +3,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 ## 2026-09-30
 
 - Publish "Arguing with the agent" and point mentor links at profile pages.
+- Regenerate the About OG image after the mentor-link edit.
 
 ## 2026-09-24
 
