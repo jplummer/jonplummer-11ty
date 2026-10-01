@@ -27,7 +27,7 @@ I develop designers who can hold a point of view and defend it, not just execute
 
 Outside of work: jazz piano, 3d printing and amateur industrial design, home improvement, cooking. The common threads are making ideas tangible and improving what's before me. I keep my hands in the tools at work and at home so I can show people the ropes and learn along with them. I design hobby software projects, specify them closely, steer agents through building them, and read everything before it ships – then publish them on GitHub. The ones with something to show are at [side projects](/sides/); a running account of what I'm building is at [/now](/now/).
 
-I mentor at [Designed.org](https://designed.org) and [tupu.io](https://tupu.io). See more via [my LinkedIn profile](https://linkedin.com/in/jplummer) and message me there if you have something to say, or reach me at [jon@jonplummer.com](mailto:jon@jonplummer.com?subject=I%20visited%20jonplummer.com%2Fabout%20and%20have%20this%20to%20say%3A).
+I mentor at [Designed.org](https://designed.org/mentors/jplummer) and [tupu.io](https://www.tupu.io/bios/jon/). See more via [my LinkedIn profile](https://linkedin.com/in/jplummer) and message me there if you have something to say, or reach me at [jon@jonplummer.com](mailto:jon@jonplummer.com?subject=I%20visited%20jonplummer.com%2Fabout%20and%20have%20this%20to%20say%3A).
 
 * * *
 
