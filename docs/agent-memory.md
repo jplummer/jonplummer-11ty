@@ -65,10 +65,15 @@ When you encounter a mistake that could recur, or learn something important abou
 - User uses both Cursor and Claude Code — this file is the shared memory for both
 - When modifying docs, check for stale cross-references across all doc files
 
+### Credentials
+- **Patent count (2026-10-02)** — 18 families, not "20+" and not "patents pending." The list is the Google Patents search with inventor names Jon Robertsen Plummer / Jon R Plummer / Jon Plummer and assignees Medtronic MiniMed and Belkin, deduped by family (no `&dups=language`; that view is 64). Owner: `~/.agents/about-me.md`. Live resume copies: `~/Documents/EVA/resume/2026-09/superset-resume.md` and `Jon-Plummer-resume.docx`. Do not "correct" the 2022 Invoca interview slide ("filed for over twenty patents") — that is what the slide said. `inventor=Jon+Plummer` alone misses the other name forms.
+
 ### Writing style (blog posts, announcements)
 - **No "Claude tells"** — watch for launch/deploy jargon like "landed" describing a shipped change; flag and avoid.
 - **Don't over-dramatize before/after** — a "used to have nothing but X" framing must be literally true; check the actual prior state before writing it (caught: footer had copyright *and* a `/colophon` link, not just copyright).
 - **First-person intent is fine** — the site serves Jon's goals, so "I want people to find X first" is legitimate voice, not something to launder into reader-need hedging.
+- **Person JSON-LD (2026-10-02)** — `src/_includes/schema/person.njk` is included only on `/about/` (`head/schema.njk`). `worksFor` is current employment. Invoca was removed while he is looking; jobTitle is "UX design leader". `seo` allows `worksFor` again once `src/about.md` no longer contains "I'm looking for my next role" — add the employer and delete that sentence together. Home `website.njk` does not claim an employer.
+- **/about and /now links (2026-10-02)** — link the case study the sentence already names. On `/about`: Wemo, Call Review Console. On `/now`: information architecture and the data dictionary, in the "architecture half" sentence. A second essay next to Toward Coordinated Experience was declined as a reading list.
 
 ### DRY decisions
 - **Wisdom data (2026-03)**: `src/_data/wisdom-entries.yaml` + `wisdom.js` + `wisdom-build.js`; duplicate YAML parse accepted for authoring next to `links.yaml`; `test wisdom` asserts build + `getGlobalData().wisdom` vs disk.

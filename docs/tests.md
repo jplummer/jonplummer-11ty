@@ -144,9 +144,9 @@ Validates RSS/XML feed files for proper structure, required elements, and feed h
 
 ### seo.js
 
-Validates SEO metadata: title tags (10-200 chars), meta descriptions (20-300 chars), Open Graph tags, heading hierarchy (H1 required, no skipped levels), duplicate titles, canonical URL, language attribute. Skips redirects, blog pagination URLs, and error pages (404/500).
+Validates SEO metadata: title tags (10-200 chars), meta descriptions (20-300 chars), Open Graph tags, heading hierarchy (H1 required, no skipped levels), duplicate titles, canonical URL, language attribute. Skips redirects, blog pagination URLs, and error pages (404/500). Also reads `src/_includes/schema/person.njk` against `src/about.md`. `worksFor` is a current employer, so the schema may include it. The test fails only when the schema names one while the about page still says "I'm looking for my next role." Take that sentence off the page in the same change that adds the employer.
 
-**Note:** With `--changed`, only checks if markdown files changed (skips if only links.yaml changed).
+**Note:** With `--changed`, runs when markdown or `src/_includes/schema/` changed (skips if only links.yaml changed). The person-schema check still runs in that mode, including when the only change is the schema include.
 
 ### a11y.js
 

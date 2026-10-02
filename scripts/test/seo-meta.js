@@ -207,9 +207,34 @@ function checkDuplicateTitles(files) {
   return duplicates;
 }
 
+// worksFor means a current employer. It is allowed once about.md no longer says
+// he is looking. While that sentence is on the page, the schema must not name one.
+function checkPersonSchema(result) {
+  const aboutPath = path.resolve(process.cwd(), 'src/about.md');
+  const aboutBody = fs.readFileSync(aboutPath, 'utf8').replace(/^---[\s\S]*?---/, '');
+  const looking = aboutBody.includes("I'm looking for my next role");
+  if (!looking) {
+    return;
+  }
+
+  const schemaPath = path.resolve(process.cwd(), 'src/_includes/schema/person.njk');
+  const schema = fs.readFileSync(schemaPath, 'utf8');
+  if (!/"worksFor"\s*:/.test(schema)) {
+    return;
+  }
+
+  const fileObj = addFile(result, schemaPath, 'src/_includes/schema/person.njk');
+  addIssue(fileObj, {
+    type: 'person-schema',
+    message: 'Person schema includes worksFor while about.md still says "I\'m looking for my next role." worksFor is a current employer. When there is one, name them in the schema and take that sentence off the about page in the same change.'
+  });
+}
+
 // Main SEO validation
 function validate(result, options) {
   const { useChanged } = options;
+
+  checkPersonSchema(result);
   
   let htmlFiles = getHtmlFiles();
   
@@ -366,7 +391,13 @@ runTest({
   requiresSite: true,
   validateFn: validate,
   shouldSkipFn: () => {
-    return checkChangedFlag() && !hasMarkdownFilesChanged();
+    if (!checkChangedFlag()) {
+      return false;
+    }
+    const schemaChanged = getChangedFiles().some(file =>
+      file.replace(/\\/g, '/').includes('src/_includes/schema/')
+    );
+    return !hasMarkdownFilesChanged() && !schemaChanged;
   },
-  skipMessage: '✅ No markdown files changed for SEO check (links.yaml changes don\'t affect page SEO)'
+  skipMessage: '✅ No markdown or person-schema files changed for SEO check (links.yaml changes don\'t affect page SEO)'
 });

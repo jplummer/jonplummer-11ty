@@ -1,7 +1,7 @@
 ---
 title: About Jon Plummer
 description: Jon Plummer is a UX design leader and mentor with experience at Invoca, Cayuse, Belkin, and Medtronic. Learn about his design leadership philosophy and career.
-date: 2026-09-04T00:00:00.000-07:00
+date: 2026-10-02T12:00:00-07:00
 layout: base.njk
 tags: page
 permalink: /about/
@@ -17,11 +17,11 @@ I wrote about this in [Toward Coordinated Experience](/2025/07/27/toward-coordin
 
 That focus on discovery isn't theoretical. I trained as a social worker and an anthropologist before I became a designer, and the habit never left: understand people before you propose anything for them.
 
-Most recently I was Director of User Experience at Invoca, where I led a design team through an AI product transformation. Before that: Cayuse, Concentric Sky, and eleven years at Belkin, where I rose from Senior Designer to Senior Director and built the centralized UX team behind Linksys and Wemo. Along the way I picked up 20+ patents, a handful of IDSA and CES awards, and a lot of hard-won opinions about how design actually earns trust in engineering- and product-led organizations.
+Most recently I was Director of User Experience at Invoca, where I led a design team through an AI product transformation. Before that: Cayuse, Concentric Sky, and eleven years at Belkin, where I rose from Senior Designer to Senior Director and built the centralized UX team behind Linksys and [Wemo](/2018/12/10/wemo-smart-home-accessories-and-app/). Along the way I picked up [18 patent families](https://patents.google.com/?inventor=Jon+Robertsen+Plummer,Jon+Plummer,Jon+R+Plummer&assignee=Medtronic+Minimed%2c+Inc,Medtronic+MiniMed%2c+Inc.%2c+Northridge,Belkin+International%2c+Inc,Belkin+Corporation,Belkin+Components&num=100&sort=old), a handful of IDSA and CES awards, and a lot of hard-won opinions about how design actually earns trust in engineering- and product-led organizations.
 
 I'm looking for my next role – design leadership where the work is deciding what to build, and making sure the reasoning survives all the way to what ships.
 
-I don't just have opinions about AI. At Invoca, that transformation included SMS and voice-based virtual agents, as well as the Call Review Console and AI Scorecard. These tools were put to work inside real customer conversations, cutting Customer Success Manager caseload by a fifth and helping open Contact Centers as a new customer segment. And outside of work I ship what I build – [side projects](/sides/), source included.
+I don't just have *opinions* about AI. At Invoca, that transformation included SMS and voice-based virtual agents, as well as the [Call Review Console](/2026/02/20/call-review-console/) and AI Scorecard. These tools were put to work inside real customer conversations, cutting Customer Success Manager caseload by a fifth and helping open Contact Centers as a new customer segment. And outside of work I ship what I build – [side projects](/sides/), source included.
 
 I develop designers who can hold a point of view and defend it, not just execute one. I get there by asking them the questions they should be asking, helping them find their own way to an answer. But I'm not hands-off: when the situation calls for a direct read, I give one. I interpret, I instruct, I push back. The goal is people who can think well under pressure and make good calls without being managed through every decision.
 
@@ -133,16 +133,16 @@ We worked in a highly technical industry, and while it was difficult at times to
 
 ## Patents
 
-- [Self-healing networking device systems and related methods](https://www.google.com/patents/US8499072)
-- [Control of video camera with privacy feedback](https://www.google.com/patents/US9179105)
-- [Virtual patient software system for educating and treating individuals with diabetes](https://www.google.com/patents/US20060272652)
-- [Therapy management system](https://google.com/patents/US20070033074A1)
-- [Grouping of networking devices](https://google.com/patents/US20160043962A1)
-- [Light switch controlling light source via wireless transmission](https://google.com/patents/US20150382436A1)
-- [Controlling settings and attributes related to operation of devices in a network](https://google.com/patents/US20150319046A1)
-- [Video camera with privacy](https://google.com/patents/US20160105598A1)
-- [Networking connection systems and related methods](https://google.com/patents/US20110026205A1)
-- [Systems and methods for interaction with an IoT device](https://google.com/patents/US20160226732A1)
-- [Crowd-sourced location determination](https://google.com/patents/US20160165570A1)
+- [Self-healing networking device systems and related methods](https://patents.google.com/patent/US8499072/en)
+- [Control of video camera with privacy feedback](https://patents.google.com/patent/US9179105/en)
+- [Virtual patient software system for educating and treating individuals with diabetes](https://patents.google.com/patent/US20060272652/en)
+- [Therapy management system](https://patents.google.com/patent/US20070033074A1/en)
+- [Grouping of networking devices](https://patents.google.com/patent/US20160043962A1/en)
+- [Light switch controlling light source via wireless transmission](https://patents.google.com/patent/US20150382436A1/en)
+- [Controlling settings and attributes related to operation of devices in a network](https://patents.google.com/patent/US20150319046A1/en)
+- [Video camera with privacy](https://patents.google.com/patent/US20160105598A1/en)
+- [Networking connection systems and related methods](https://patents.google.com/patent/US20110026205A1/en)
+- [Systems and methods for interaction with an IoT device](https://patents.google.com/patent/US20160226732A1/en)
+- [Crowd-sourced location determination](https://patents.google.com/patent/US20160165570A1/en)
 
-…and more patents pending in networking and IoT.
+The full list is on [Google Patents](https://patents.google.com/?inventor=Jon+Robertsen+Plummer,Jon+Plummer,Jon+R+Plummer&assignee=Medtronic+Minimed%2c+Inc,Medtronic+MiniMed%2c+Inc.%2c+Northridge,Belkin+International%2c+Inc,Belkin+Corporation,Belkin+Components&num=100&sort=old).
