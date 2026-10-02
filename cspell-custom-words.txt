@@ -135,6 +135,7 @@ Claxton
 Coenen
 Cotterill
 Cottom
+Cris
 Crockford
 Crumlish
 Demchenko
@@ -242,6 +243,7 @@ Usborne
 Vadim
 Valk
 Vanbrabant
+Voss
 Wanczyk
 Wichary
 Willison
@@ -268,6 +270,7 @@ deadlifts
 deprioritize
 deprioritized
 descope
+Designless
 duckburg
 endedness
 epicentre
@@ -312,6 +315,8 @@ recommendability
 Reimagining
 reimagining
 reinvigorated
+retarget
+Retarget
 reviewee
 roadmapping
 rosh
@@ -320,6 +325,8 @@ scrummy
 screwless
 sevenish
 shortcutting
+shortlink
+shortlinks
 situationally
 Skunkworks
 skunkworks

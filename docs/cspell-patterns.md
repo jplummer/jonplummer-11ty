@@ -22,18 +22,26 @@ This document explains what each regex pattern in `cspell.json`'s `ignoreRegExpL
 6. **Nunjucks shortcodes**: `/{%[^%]+%}/g`
    - Ignores Nunjucks template shortcode syntax: `{% portraitGrid %}`, `{% endportraitGrid %}`, etc.
 
-7. **YAML frontmatter absolute paths**: `/^[a-z]+:\\s*\\/[^\\n]+$/gm`
+7. **Nunjucks mustache**: `/{{[^}]+}}/g`
+   - Ignores `{{ … }}` template expressions
+
+8. **YAML frontmatter absolute paths**: `/^[a-z]+:\\s*\\/[^\\n]+$/gm`
    - Ignores YAML keys with absolute paths: `key: /path/to/file`
 
-8. **YAML frontmatter relative paths with file extensions**: `/^[a-z]+:\\s*[^\\n]*\\/[^\\n]*\\.(png|jpg|jpeg|gif|svg|webp|pdf|mp4|webm|ogg)$/gmi`
+9. **YAML frontmatter relative paths with file extensions**: `/^[a-z]+:\\s*[^\\n]*\\/[^\\n]*\\.(png|jpg|jpeg|gif|svg|webp|pdf|mp4|webm|ogg)$/gmi`
    - Ignores YAML keys with relative paths ending in file extensions: `key: path/to/image.png`
 
-9. **YAML frontmatter slugs**: `/^slug:\\s*[^\\n]+$/gmi`
-   - Ignores slug values in YAML frontmatter: `slug: some-slug-value`
+10. **YAML frontmatter slugs**: `/^slug:\\s*[^\\n]+$/gmi`
+    - Ignores slug values in YAML frontmatter: `slug: some-slug-value`
 
-10. **YAML double-quoted string values**: `/:\\s*\"[^\"]*\"/g`
+11. **YAML double-quoted string values**: `/:\\s*\"[^\"]*\"/g`
     - Ignores double-quoted YAML string values: `key: "value"`
 
-11. **YAML single-quoted string values**: `/:\\s*'(?:[^']|'')*'/g`
+12. **YAML single-quoted string values**: `/:\\s*'(?:[^']|'')*'/g`
     - Ignores single-quoted YAML string values, handling doubled apostrophes: `key: 'it''s value'`
 
+## Overrides (YAML only)
+
+Comment lines are ignored only for `**/*.{yaml,yml}` so markdown ATX headings (`# Title`) stay spellchecked:
+
+- **YAML comment lines**: `/^\\s*#.*$/gm`

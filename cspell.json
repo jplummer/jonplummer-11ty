@@ -36,6 +36,14 @@
     "/:\\s*'(?:[^']|'')*'/g",
     "/\\b\\w+''[a-z]+\\b/g"
   ],
+  "overrides": [
+    {
+      "filename": "**/*.{yaml,yml}",
+      "ignoreRegExpList": [
+        "/^\\s*#.*$/gm"
+      ]
+    }
+  ],
   "flagWords": [],
   "enableFiletypes": [
     "markdown",
