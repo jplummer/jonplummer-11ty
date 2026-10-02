@@ -305,3 +305,28 @@ The redirect section in `.htaccess` is auto-generated and should not be edited m
 - URL structure migrations
 - Any permanent URL change preserving old links
 - Addressing high-volume 404 errors when the resource exists
+
+## Short links (QR / print)
+
+Permanent two-character links at `HTTPS://JONPLUMMER.COM/XX` for printed matter and QR codes. Uppercase-only payloads encode denser in QR alphanumeric mode.
+
+### Rules
+
+- Slug: exactly two characters from A–Z and 2–9, excluding O and I (and digits 0/1)
+- Redirects are **302** (retargetable; browsers do not cache them forever like 301s)
+- Never delete a row; never reuse a slug. Retarget `to`, or set `retired: true` and point at `https://jonplummer.com/`
+- Destinations must be absolute `https://` URLs (this site or elsewhere)
+- Unlisted: no public index page
+
+### Add or look up a link
+
+```bash
+pnpm run shortlink find https://jonplummer.com/about/   # reverse lookup first
+pnpm run shortlink add https://jonplummer.com/about/ --note "cards 2026"
+pnpm run shortlink get AB
+pnpm run shortlink qr AB --out ./tmp-qr   # SVG + PNG, full uppercase URL
+```
+
+Or edit `src/_data/shortlinks.yaml` directly. Rebuild, then deploy — `.htaccess` RewriteRules are generated at build time. Deploy purges shortlink URLs from Cloudflare when `.htaccess` changes, then smoke-checks live 302s.
+
+Canary slug **`JP`** → home is reserved for deploy smoke; do not retire it.

@@ -32,7 +32,7 @@ Recommended process for deploying changes with an up-to-date changelog:
 - `pnpm run test` - List available test types
 - `pnpm run validate` - Quick HTML validity check (shortcut for `pnpm run test html`)
 - `pnpm run test fast` - Run fast tests (excludes slow tests like a11y)
-  - Runs: `html` → `links` → `wisdom` → `internal-links` → `frontmatter` → `markdown` → `spell` → `seo` → `og-images` → `color-contrast` → `css` → `rss` → `portfolio-notes` → `deploy-assets` → `cloudflare-purge` → `portfolio-cover-crop`
+  - Runs: `html` → `links` → `wisdom` → `shortlinks` → `internal-links` → `frontmatter` → `markdown` → `spell` → `seo` → `og-images` → `color-contrast` → `css` → `rss` → `portfolio-notes` → `deploy-assets` → `cloudflare-purge` → `portfolio-cover-crop`
 - `pnpm run test all` - Run all tests in sequence (includes slow tests)
   - Runs: everything in `test fast` → `a11y`
 - `pnpm run test [type]` - Run a specific test type
@@ -52,6 +52,7 @@ Recommended process for deploying changes with an up-to-date changelog:
 - `pnpm run import-links` - Import links from NotePlan to links.yaml (auto: `deploy`)
 - `pnpm run import-links --clear` - Import and clear NotePlan note
 - `pnpm run import-links --date=2025-12-25` - Import with specific date
+- `pnpm run shortlink get|find|add|qr` - Permanent QR/print short links (`src/_data/shortlinks.yaml` → `.htaccess` 302s). Prefer `find` before `add`. See [authoring.md § Short links](authoring.md#short-links-qr--print).
 
 See [noteplan-import.md](noteplan-import.md) for complete workflow documentation.
 
@@ -134,7 +135,7 @@ This is useful for:
 
 After rsync, deploy purges **only URLs whose built content changed** from Cloudflare edge cache. The purge list comes from a **local content-hash manifest**, not from rsync's transfer list — rsync may still upload files with new mtimes even when bytes are unchanged.
 
-Deploy walks `_site/`, SHA-256-hashes each file, and diffs against `.cache/deploy-content-manifest.json` (gitignored). **Changed** and **deleted** paths map to apex URLs on `SITE_DOMAIN` (default `jonplummer.com`). **Added** paths are not purged (nothing was cached under a new URL yet); they still enter the manifest for later diffs. Regenerated assets that keep the same path (e.g. OG PNGs) count as changed and are purged. Non-public artifacts such as `.htaccess` are skipped.
+Deploy walks `_site/`, SHA-256-hashes each file, and diffs against `.cache/deploy-content-manifest.json` (gitignored). **Changed** and **deleted** paths map to apex URLs on `SITE_DOMAIN` (default `jonplummer.com`). **Added** paths are not purged (nothing was cached under a new URL yet); they still enter the manifest for later diffs. Regenerated assets that keep the same path (e.g. OG PNGs) count as changed and are purged. Non-public artifacts such as `.htaccess` are skipped **as purge targets**, but when `.htaccess` **content** changes, deploy also purges every shortlink URL (upper/lower, with/without trailing slash) so retargeted QR/print links are not stuck on a cached 302.
 
 Set in `.env`:
 
@@ -148,6 +149,8 @@ Create an API token with **Zone → Cache Purge → Purge** permission for the s
 **First deploy after this feature** (or after clearing `.cache/`): no baseline manifest exists yet — deploy establishes the manifest but **does not purge** that run. The next deploy diffs against it. For an immediate full edge refresh, use the Cloudflare dashboard or set `CLOUDFLARE_PURGE_FORCE_CONTENT=1` for one run (treats all current `_site` files as changed).
 
 `pnpm run deploy --dry-run` lists URLs that would be purged without calling the API and does not write the manifest.
+
+After purge, deploy **smoke-checks** every shortlink (and one lowercase variant): expects HTTP 302 with `Location` matching `src/_data/shortlinks.yaml`. Failure fails the deploy. Dry-run prints the checklist without fetching.
 
 
 ### 🗃️ Changelog Generation

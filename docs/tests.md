@@ -80,6 +80,10 @@ Validates `src/_data/wisdom-entries.yaml` for the Collected wisdom section (`/wi
 
 **Note:** With `--changed`, skips if `src/_data/wisdom-entries.yaml`, `src/_data/wisdom.js`, `wisdom-build.js`, or `wisdom-entries-path.js` under the paths above hasn't changed.
 
+### shortlinks.js
+
+Validates `src/_data/shortlinks.yaml` (slug alphabet, uniqueness, absolute https destinations, retired → home) and, when `_site/.htaccess` exists, checks that each RewriteRule is present and appears before the wisdom-tag rule. Warns on duplicate destinations. Included in `test fast` and in both pre-build and post-build phases. Live 302 checks run in **deploy**, not here.
+
 ### css.js
 
 Runs [Stylelint](https://stylelint.io) on `src/**/*.css` using `.stylelintrc.json` (extends `stylelint-config-standard` with project-specific rule overrides for modern CSS, print styles, and layout-specificity ordering). Also guards a top-level `figure { margin-inline: 0 }` so captioned blog images are not inset by the UA 40px figure margin, and `article figure figcaption` italic so blog captions match portfolio.

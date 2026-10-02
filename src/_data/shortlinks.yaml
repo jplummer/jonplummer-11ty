@@ -1,0 +1,14 @@
+# Permanent short links for QR / print
+# Slugs: exactly two chars from A–Z and 2–9, excluding O and I (and digit 0/1).
+# Never delete a row; never reuse a slug. Retarget with a new `to`, or set
+# retired: true and point `to` at https://jonplummer.com/
+# Destinations must be absolute https URLs.
+#
+# Edit this file or use: pnpm run shortlink add|get|find|qr
+
+shortlinks:
+  # Deploy / live-smoke canary — do not retire or retarget without updating deploy checks
+  - slug: JP
+    to: https://jonplummer.com/
+    note: Deploy smoke canary
+    created: "2026-10-02"

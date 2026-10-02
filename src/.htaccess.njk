@@ -90,10 +90,18 @@ Redirect 301 {{ redirect.from }} {{ redirect.to }}
 {%- endfor %}
 # End redirects
 
-# Wisdom: requests for tag URLs with no built page → /wisdom/ (e.g. retired tags)
+# Short links + wisdom (mod_rewrite)
+# Short links: generated from src/_data/shortlinks.yaml — do not edit manually.
+# Must come before other RewriteRules. 302 so printed/QR targets can be retargeted.
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteBase /
+# Begin shortlinks
+{% for link in shortlinks.shortlinks %}
+RewriteRule ^{{ link.slug }}/?$ {{ link.to }} [R=302,NC,L]
+{%- endfor %}
+# End shortlinks
+# Wisdom: requests for tag URLs with no built page → /wisdom/ (e.g. retired tags)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^wisdom/tags/[a-z0-9-]+/?$ /wisdom/ [R=301,L]

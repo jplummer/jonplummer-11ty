@@ -375,6 +375,57 @@ runTest({
         });
       }
 
+      // .htaccess-only change must purge shortlink apex URLs (htaccess itself is skipped)
+      const siteC = path.join(tmp2, 'site-htaccess');
+      const manifestC = path.join(tmp2, 'manifest-htaccess.json');
+      fs.mkdirSync(siteC, { recursive: true });
+      fs.writeFileSync(path.join(siteC, 'index.html'), '<html>stable</html>\n');
+      fs.writeFileSync(path.join(siteC, '.htaccess'), 'RewriteRule ^JP/?$ https://jonplummer.com/ [R=302,NC,L]\n');
+      const baselineC = buildContentManifest(siteC);
+      saveContentManifest(manifestC, baselineC);
+      fs.writeFileSync(
+        path.join(siteC, '.htaccess'),
+        'RewriteRule ^JP/?$ https://jonplummer.com/about/ [R=302,NC,L]\n'
+      );
+      const shortlinkFixture = [{ slug: 'JP', to: 'https://jonplummer.com/about/' }];
+      const htaccessPurge = await purgeChangedDeployContent(siteC, 'jonplummer.com', {
+        manifestPath: manifestC,
+        dryRun: true,
+        env: {},
+        shortlinks: shortlinkFixture,
+      });
+      const expectedShort = [
+        'https://jonplummer.com/JP',
+        'https://jonplummer.com/JP/',
+        'https://jonplummer.com/jp',
+        'https://jonplummer.com/jp/',
+      ];
+      const missingShort = expectedShort.filter((u) => !htaccessPurge.urls.includes(u));
+      if (missingShort.length || htaccessPurge.urls.some((u) => u.includes('.htaccess'))) {
+        addIssue(fileObj, {
+          severity: 'error',
+          type: 'purge-shortlinks-on-htaccess-change',
+          message: `expected shortlink purge URLs after .htaccess change; missing=${missingShort.join(', ') || 'none'}; urls=${htaccessPurge.urls.join(', ')}`,
+        });
+      }
+
+      // Content-only change (htaccess unchanged) must not add shortlink URLs
+      saveContentManifest(manifestC, buildContentManifest(siteC));
+      fs.writeFileSync(path.join(siteC, 'index.html'), '<html>changed</html>\n');
+      const contentOnly = await purgeChangedDeployContent(siteC, 'jonplummer.com', {
+        manifestPath: manifestC,
+        dryRun: true,
+        env: {},
+        shortlinks: shortlinkFixture,
+      });
+      if (expectedShort.some((u) => contentOnly.urls.includes(u))) {
+        addIssue(fileObj, {
+          severity: 'error',
+          type: 'purge-shortlinks-content-only',
+          message: `shortlink URLs must not purge when only HTML changed: ${contentOnly.urls.join(', ')}`,
+        });
+      }
+
       fs.rmSync(tmp2, { recursive: true, force: true });
     }
   },

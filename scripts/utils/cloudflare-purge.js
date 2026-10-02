@@ -201,9 +201,10 @@ function collectPurgePaths(previous, current, options = {}) {
  * itemize output.
  * @param {string} siteRoot absolute path to built _site directory
  * @param {string} siteDomain public site domain (e.g. jonplummer.com)
- * @param {{ dryRun?: boolean, zoneId?: string, apiToken?: string, manifestPath?: string, env?: NodeJS.ProcessEnv, forceContent?: boolean, currentManifest?: object }} [options]
+ * @param {{ dryRun?: boolean, zoneId?: string, apiToken?: string, manifestPath?: string, env?: NodeJS.ProcessEnv, forceContent?: boolean, currentManifest?: object, shortlinks?: object[] }} [options]
  *   `currentManifest` lets a caller that already hashed `_site` (deploy.js
  *   builds one snapshot and shares it with IndexNow) skip a second walk.
+ *   `shortlinks` injects entries for purge-URL generation (tests); default loads YAML.
  */
 async function purgeChangedDeployContent(siteRoot, siteDomain, options = {}) {
   const env = options.env || process.env;
@@ -231,7 +232,7 @@ async function purgeChangedDeployContent(siteRoot, siteDomain, options = {}) {
   }
 
   const { mode, paths } = collectPurgePaths(previous, currentManifest, { forceContent });
-  const urls = pathsToPurgeUrls(paths, siteDomain);
+  let urls = pathsToPurgeUrls(paths, siteDomain);
 
   if (mode === 'no-baseline') {
     return {
@@ -244,6 +245,14 @@ async function purgeChangedDeployContent(siteRoot, siteDomain, options = {}) {
       writeManifest: !dryRun,
       currentManifest,
     };
+  }
+
+  // .htaccess is never itself a purge URL, but when its bytes change the shortlink
+  // RewriteRules may have retargeted — purge those apex URLs explicitly.
+  if (htaccessContentChanged(previous, currentManifest, { forceContent: forceContent || mode === 'force' })) {
+    const { shortlinkPurgeUrls } = require('./shortlinks');
+    const shortUrls = shortlinkPurgeUrls(siteDomain, options.shortlinks);
+    urls = [...new Set([...urls, ...shortUrls])];
   }
 
   if (urls.length === 0) {
@@ -269,6 +278,19 @@ async function purgeChangedDeployContent(siteRoot, siteDomain, options = {}) {
   return { ...result, paths, urls, writeManifest: true, currentManifest };
 }
 
+/**
+ * True when `.htaccess` hash changed (or force), so shortlink edge URLs need purge.
+ * @param {object|null} previous
+ * @param {object} current
+ * @param {{ forceContent?: boolean }} [options]
+ */
+function htaccessContentChanged(previous, current, options = {}) {
+  if (options.forceContent) return true;
+  if (!previous || !current) return false;
+  const diff = diffContentManifests(previous, current);
+  return diff.changed.includes('.htaccess') || diff.added.includes('.htaccess');
+}
+
 module.exports = {
   deployPathToUrl,
   purgeCloudflareUrls,
@@ -283,5 +305,6 @@ module.exports = {
   shouldPurgeDeployPath,
   pathsToPurgeUrls,
   collectPurgePaths,
+  htaccessContentChanged,
   purgeChangedDeployContent,
 };

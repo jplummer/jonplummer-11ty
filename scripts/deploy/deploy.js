@@ -27,8 +27,103 @@ const { loadDotenvSilently } = require('../utils/env-utils');
 const { SPINNER_FRAMES } = require('../utils/spinner-utils');
 const { buildRsyncArgs } = require('../utils/deploy-rsync');
 const { formatRunFinishedLine } = require('../utils/run-timing');
+const {
+  loadShortlinksFile,
+} = require('../utils/shortlinks');
 
 const startedAt = Date.now();
+
+/**
+ * Normalize Location for comparison (trailing slash on path only).
+ */
+function normalizeLocation(url) {
+  try {
+    const u = new URL(url);
+    let pathname = u.pathname;
+    if (pathname.length > 1 && pathname.endsWith('/')) {
+      pathname = pathname.slice(0, -1);
+    }
+    return `${u.protocol}//${u.host}${pathname}${u.search}${u.hash}`;
+  } catch {
+    return url;
+  }
+}
+
+/**
+ * Live smoke: each shortlink must 302 to its configured destination.
+ * Runs after Cloudflare purge so retargets are visible at the edge.
+ */
+async function smokeTestShortlinks(siteDomain, { dryRun = false } = {}) {
+  let entries;
+  try {
+    entries = loadShortlinksFile();
+  } catch (error) {
+    console.log('⚠️  🔗 Shortlinks smoke: skipped (could not load data)');
+    console.warn(`   ${error.message}\n`);
+    return { ok: true, skipped: true };
+  }
+
+  if (!entries.length) {
+    console.log('ℹ️  🔗 Shortlinks smoke: no entries\n');
+    return { ok: true, skipped: true };
+  }
+
+  if (dryRun) {
+    console.log(`🧪 🔗 Shortlinks smoke (dry-run): would check ${entries.length} slug(s)`);
+    for (const e of entries) {
+      console.log(`   /${e.slug} → ${e.to}`);
+    }
+    console.log('');
+    return { ok: true, dryRun: true };
+  }
+
+  const failures = [];
+  const base = `https://${siteDomain.replace(/\/$/, '')}`;
+
+  for (const entry of entries) {
+    const url = `${base}/${entry.slug}`;
+    try {
+      const res = await fetch(url, { method: 'GET', redirect: 'manual' });
+      const location = res.headers.get('location') || '';
+      if (res.status !== 302) {
+        failures.push(`${url}: expected 302, got ${res.status}`);
+        continue;
+      }
+      if (normalizeLocation(location) !== normalizeLocation(entry.to)) {
+        failures.push(`${url}: expected Location ${entry.to}, got ${location || '(none)'}`);
+      }
+    } catch (error) {
+      failures.push(`${url}: ${error.message}`);
+    }
+  }
+
+  // Lowercase canary — QR is uppercase; typing from print may not be
+  const canary = entries.find((e) => e.slug === 'JP') || entries[0];
+  if (canary) {
+    const lowerUrl = `${base}/${canary.slug.toLowerCase()}`;
+    try {
+      const res = await fetch(lowerUrl, { method: 'GET', redirect: 'manual' });
+      const location = res.headers.get('location') || '';
+      if (res.status !== 302 || normalizeLocation(location) !== normalizeLocation(canary.to)) {
+        failures.push(
+          `${lowerUrl} (lowercase): expected 302 → ${canary.to}, got ${res.status} → ${location || '(none)'}`
+        );
+      }
+    } catch (error) {
+      failures.push(`${lowerUrl} (lowercase): ${error.message}`);
+    }
+  }
+
+  if (failures.length) {
+    console.log('❌ 🔗 Shortlinks smoke: failed');
+    for (const f of failures) console.log(`   ${f}`);
+    console.log('');
+    return { ok: false, failures };
+  }
+
+  console.log(`✅ 🔗 Shortlinks smoke: ${entries.length} slug(s) + lowercase ok\n`);
+  return { ok: true };
+}
 
 
 // Check if rsync is available
@@ -419,6 +514,13 @@ async function purgeCloudflareAfterDeploy(siteDomain, dryRun, localPath, current
     const deployedManifest = buildContentManifest(config.localPath);
 
     await purgeCloudflareAfterDeploy(siteDomain, dryRun, config.localPath, deployedManifest);
+
+    const shortlinkSmoke = await smokeTestShortlinks(siteDomain, { dryRun });
+    if (!dryRun && shortlinkSmoke && shortlinkSmoke.ok === false) {
+      console.error('❌ Shortlink live check failed after deploy. Fix .htaccess/shortlinks or CF cache, then re-deploy.\n');
+      console.log(formatRunFinishedLine('Deploy failed', startedAt));
+      process.exit(1);
+    }
 
     // Notify IndexNow — runs even on --dry-run so it prints what it would
     // submit; dryRun itself is what stops it from POSTing or writing state.

@@ -29,6 +29,7 @@
     "colophon-sketch": "node scripts/colophon-sketch/generate-lab.js",
     "generate-favicon-rasters": "node scripts/content/generate-favicon-rasters.js",
     "focus-audit": "node scripts/focus-audit/cli.js",
+    "shortlink": "node scripts/content/shortlink.js",
     "lint:css": "stylelint \"src/**/*.css\"",
     "fix:markdown": "markdownlint-cli2 --fix \"src/**/*.md\""
   },
@@ -60,6 +61,7 @@
     "markdownlint-cli2": "^0.22.1",
     "nunjucks": "^3.2.4",
     "puppeteer": "^24.43.1",
+    "qrcode": "^1.5.4",
     "stylelint": "^17.15.0",
     "stylelint-config-standard": "^40.0.0"
   },
