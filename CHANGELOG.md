@@ -1,5 +1,14 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-10-02
+
+- Update /about and /now for October, and stop the person schema from naming Invoca as a current employer.
+- Add links for 2026-10-01.
+- Add permanent QR/print short links via generated .htaccess 302s.
+- Stop spellcheck from flagging YAML comments and shortlink jargon.
+- Fix Patrick Neeman's name in the 2026-10-01 links title.
+- Regenerate About and Now OG images after the October page updates.
+
 ## 2026-09-30
 
 - Publish "Arguing with the agent" and point mentor links at profile pages.
@@ -919,4 +928,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-10-01
+Last deployed on 2026-10-02
