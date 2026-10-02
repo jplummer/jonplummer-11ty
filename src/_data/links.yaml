@@ -1,3 +1,26 @@
+2026-10-01:
+  - url: "https://uxdesign.cc/five-eras-of-ux-design-and-the-lessons-to-keep-in-the-ai-era-d76a548747a9"
+    title: Five eras of UX design and the lessons to keep in the AI era – Patric Neeman
+    description: "UX practice has changed materially, but the underlying lesson the AI era teaches is the same as it ever was: designing the system is the core job, while designing the screens (or bolting on a chat window, these days) is what most people tend to do."
+  - url: "https://uxdesign.cc/for-the-designless-0d3e7936a70c"
+    title: For the Designless – Joshua Leigh –
+    description: "\"AI has not changed what a designer does. It has changed who can now attempt to do it themselves. 'Who can now attempt it' is not one group, though. It’s three, and the current debate around AI usage is weaker for not differentiating between the different needs of these groups.\""
+  - url: "https://seldo.com/posts/we-are-all-product-engineers-now/?ref=sidebar"
+    title: We are all Product Engineers now – Laurie Voss
+    description: "\"Has the cost of creating software really collapsed? Can I prove that? If the cost of actually producing code goes to zero, what parts of the job of 'software developer' really remain? Where, in fact, is the entire industry of software going in the next decade?\""
+  - url: "https://uxdesign.cc/dont-let-ai-build-a-winchester-mystery-house-2cb59ec05a73"
+    title: Don’t let AI build a Winchester Mystery House – Patrick Neeman
+    description: Cheap building can easily lead to a crazy quilt of incoherent software. Thoughtful system design and curation is critical so you can take advantage of rapid construction. (Is Neeman becoming my favorite?)
+  - url: "https://crisdobbins.substack.com/p/what-does-it-mean-to-be-design-led"
+    title: What does it mean to be design-led now? – Cris Dobbins
+    description: "\"I created a detailed visual user journey, worked through the different users and states, designed the edge cases, wrote supporting documentation, and made some wireframes. Then I handed all of it to an engineer to build. The engineer took my documents, diagrams, and wireframes and put them into the prompt. And I remember having this moment of: wait. I just wrote the prompt.\""
+  - url: "https://www.lukew.com/ff/entry.asp?2162"
+    title: "Ask LukeW: Less Walls of Text – Luke Wroblewski"
+    description: "\"A persistent attribute of AI-powered applications is their propensity to generate text: lots and lots of text. Text requires scanning and scrolling for the useful bits and too much of it gets pretty monotonous pretty quick.\""
+  - url: "https://www.oneusefulthing.org/p/the-overhang"
+    title: The Overhang – Ethan Mollick
+    description: "\"…I think we will need to focus on the individual traits we have that remain useful even as AI abilities improve. You are not trying to compete with AI in producing outputs, that is a losing game. Instead, you want to use your human advantages as basis of working with AI to do things that neither of you could do alone.\""
+
 2026-09-19:
   - url: "https://lucadidomenico.studio/en/blog/delete-claude-md-every-6-months"
     title: "Delete your CLAUDE.md every 6 months: Boris Cherny’s advice – Luca Di Domenico"
