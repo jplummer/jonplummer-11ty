@@ -145,12 +145,18 @@ runTest({
       const htObj = addFile(result, htaccessPath);
       const ht = fs.readFileSync(htaccessPath, 'utf8');
       const hasShortlinksBlock = ht.includes('# Begin shortlinks');
+      // The pre-build phase runs before Eleventy rewrites _site/, so a shortlink added since the
+      // last build is missing from .htaccess by definition. Treat an .htaccess older than the data
+      // file as stale; the post-build phase sees the fresh file and checks every rule.
+      const builtBeforeDataChanged =
+        fs.statSync(htaccessPath).mtimeMs < fs.statSync(SHORTLINKS_PATH).mtimeMs;
 
-      if (!hasShortlinksBlock) {
+      if (!hasShortlinksBlock || builtBeforeDataChanged) {
         addWarning(htObj, {
           type: 'shortlinks-htaccess-stale',
-          message:
-            '_site/.htaccess has no shortlinks block yet (stale build). Rebuild to emit RewriteRules.',
+          message: hasShortlinksBlock
+            ? '_site/.htaccess predates shortlinks.yaml (stale build). Rebuild to emit RewriteRules.'
+            : '_site/.htaccess has no shortlinks block yet (stale build). Rebuild to emit RewriteRules.',
         });
       } else {
         const wisdomIdx = ht.indexOf('RewriteRule ^wisdom/tags/');

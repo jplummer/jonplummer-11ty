@@ -82,7 +82,7 @@ Validates `src/_data/wisdom-entries.yaml` for the Collected wisdom section (`/wi
 
 ### shortlinks.js
 
-Validates `src/_data/shortlinks.yaml` (slug alphabet, uniqueness, absolute https destinations, retired → home) and, when `_site/.htaccess` exists, checks that each RewriteRule is present and appears before the wisdom-tag rule. Warns on duplicate destinations. Included in `test fast` and in both pre-build and post-build phases. Live 302 checks run in **deploy**, not here.
+Validates `src/_data/shortlinks.yaml` (slug alphabet, uniqueness, absolute https destinations, retired → home) and, when `_site/.htaccess` exists, checks that each RewriteRule is present and appears before the wisdom-tag rule. Warns on duplicate destinations. Included in `test fast` and in both pre-build and post-build phases. An `.htaccess` older than `shortlinks.yaml` is a stale build and only warns, because the pre-build phase runs before Eleventy rewrites `_site/`; the post-build phase checks the fresh file and errors on any missing rule. Live 302 checks run in **deploy**, not here.
 
 ### css.js
 

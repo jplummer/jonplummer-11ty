@@ -12,3 +12,21 @@ shortlinks:
     to: https://jonplummer.com/
     note: Deploy smoke canary
     created: "2026-10-02"
+  - slug: AA
+    to: https://jonplummer.com/2026/07/24/the-complaints-that-wouldnt-go-away/
+    created: "2026-10-02"
+    note: >-
+      Business card back: People read between the lines. Agents take you literally. Retargeted
+      2026-10-02 from the-agent-will-not-ask to the post with Invoca proof.
+  - slug: AB
+    to: https://jonplummer.com/2026/07/09/vision-is-not-magic/
+    created: "2026-10-02"
+    note: 'Business card back: It takes a hundred locally reasonable calls to kill a good idea.'
+  - slug: AC
+    to: https://jonplummer.com/2022/05/13/discovery-interview-training/
+    created: "2026-10-02"
+    note: 'Business card back: I''d rather you interview customers a little badly than not at all.'
+  - slug: ME
+    to: https://jonplummer.com/about/
+    created: "2026-10-02"
+    note: 'Business card back: general card, links to About'
