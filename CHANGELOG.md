@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-10-05
+
+- Add the business-card short links, and warn instead of failing when .htaccess is stale.
+
 ## 2026-10-02
 
 - Update /about and /now for October, and stop the person schema from naming Invoca as a current employer.
@@ -928,4 +932,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-10-02
+Last deployed on 2026-10-06
