@@ -23,13 +23,13 @@ Nearly every app has a lobby standing between you and what you came for. Or a to
 
 ## One interface, not two
 
-The onboarding design I made for Monotasker starts with a single principle: get users into the real interface and have them use it, as fast as pleasantly possible. The centerpiece of Monotasker is a stack of Post-It-style cards, each one with a single task on it and a checkbox. Every onboarding screen uses that same display, the app's actual interfaces and visual language – the gradient background, the same card, the same typography and controls. There is no separate UI derived from the marketing of the product.
+The onboarding design I made for Monotasker starts with a basic principle: get users into the real interface and have them use it, as fast as pleasantly possible. The centerpiece is a stack of Post-It-style cards, each one with a single task on it and a checkbox. Every onboarding screen uses that same display, the app's actual interfaces and visual language – the gradient background, the same card, the same typography and controls. There is no separate UI derived from marketing the product.
 
 When you open the app for the first time you see a card. Once you check the box, grant permission, and land on your first real task, its checkbox appears in the same place, doing the same thing. There's nothing to re-learn.
 
 ## The bigger idea
 
-I've written before about [coordinated experience](/2025/07/27/toward-coordinated-experience/) – the idea that a well-designed system guides users through a task completely, without asking them to do work the system could do for them. Onboarding is the same problem one level up. Putting users inside the interface from the first moment removes that work. The permission dialog isn't something that happens before the app – it's something that happens naturally at the right time.
+I've written before about [coordinated experience](/2025/07/27/toward-coordinated-experience/) – the idea that a well-designed system guides users through a task completely, without asking them to do work the system could do for them. Onboarding is the same problem; putting users inside the interface from the first moment removes some of that work. The permission dialog happens naturally as you operate the app.
 
 Resist the impulse to design a special onboarding mode with its own visual language: use the real thing, and trust the interface to explain itself.
 

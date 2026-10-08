@@ -61,7 +61,7 @@ When we learned that our transcript quality was high enough that we could introd
 ![Call Review Console](/assets/images/2026/02/New_Calls_List_2.png)
 *The centerpiece of Call Review Console is a call list with prominent filters and metadata for each call. (Right column reserved for a future playlist feature.)*
 
-The old call list squeezed the list and spent most page real estate on the details of a single call. Since the new list view focused solely on richer list items, we needed a new call detail page. Here managers would review the transcripts see how the scorecard was scored, correct those judgements if needed, listen to the call, make comments, etc. All of these capabilities were available in the original call list, but many were buried or otherwise not obvious.
+The old call list squeezed the list and spent most page real estate on the details of a single call. Since the new list view focused solely on richer list items, we needed a new call detail page. Here managers would review the transcripts see how the scorecard was scored, correct those judgments if needed, listen to the call, make comments, etc. All of these capabilities were available in the original call list, but many were buried or otherwise not obvious.
 
 ![Call Review Console](/assets/images/2026/02/Call_Detail.png)
 *A new Call Detail view focused user attention on the individual call they had chosen to review, brought them the relevant scorecards and signals, and allowed them to comment.*

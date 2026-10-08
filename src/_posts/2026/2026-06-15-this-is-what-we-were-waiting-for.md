@@ -3,14 +3,14 @@ title: This is what we were waiting for
 layout: layouts/single_post.njk
 date: "2026-06-15T12:00:00-07:00"
 tags: post
-description: There's a story going around that AI is squeezing designers out. But UX can emerge from this moment more useful and powerful than ever.
+description: There's a story going around that AI is squeezing designers out, but UX can emerge from this moment more connected to customers, their teams, and the product.
 ogImage: /assets/images/og/2026-06-15-this-is-what-we-were-waiting-for.png
 ---
 There's scuttlebutt that AI is squeezing designers out. That faster build cycles mean less room for design process. That when anyone can generate a working UI in an afternoon, the UX role shrinks to quality control at best.
 
-I've heard this from hiring managers who are genuinely uncertain what shape their teams should take. I've heard it from UX people trying to figure out how their process and expectations need to change, and mourning a way of working that's going away – even if they didn't love it to begin with. It's a reasonable worry given what's visibly happening, but the mourning isn't necessary.
+I've heard this from hiring managers who are uncertain what shape their teams should take. I've heard it from UX people trying to figure out how their process and expectations need to change, and mourning a way of working that's going away – even if they didn't love it to begin with. It's a reasonable worry given what's visibly happening, but the mourning isn't necessary.
 
-The software development lifecycle is changing in ways that can make UX more useful, more capable, and more directly powerful than at any point in the discipline's history. The question is whether UX people, and the organizations that employ them, will change how they work to enjoy what's now possible.
+The software development lifecycle is changing in ways that can make UX more useful, more capable, and more directly useful than at any point in the discipline's history. The question is whether UX people, and the organizations that employ them, will change how they work to enjoy what's now possible.
 
 ## Where UX used to live in the development cycle
 
@@ -48,9 +48,9 @@ What is going away is the need for the handoff overhead: the detailed specs, the
 
 ### Prototypes instead of specs
 
-The most visible shift is in what UX now produces. A spec was a description of a thing. A prototype *is* the thing – or close enough that the difference is small. When a working prototype and a shipped feature are days apart rather than a month apart, the prototype becomes the center of team discussion and often the most efficient path to implementation.
+The most visible shift is in what UX now produces. A spec was a description of a thing. A prototype *is* the thing – or close enough that the differences are small. When a working prototype and a shipped feature are days apart rather than a month or a quarter apart, the prototype becomes the center of team discussion and often the most efficient path to implementation.
 
-A prototype closes the interpretation gap. A spec says "on hover, the button shifts to this darker shade of the primary color." A prototype shows exactly what that looks like, in context, in motion, in the actual browser. There's far less to interpret, so the chance for drift between design intent and implementation shrinks dramatically.
+A prototype closes the interpretation gap. A spec says "on hover, the button shifts to this darker shade of the primary color." A prototype shows exactly what that looks like, in context, in motion, in the browser or app. There's far less to interpret, so the chance for drift between design intent and implementation shrinks dramatically.
 
 A prototype also sells to customers, executives, and engineers alike in ways a spec could not. [I built a prototype a while back](/2026/06/08/quick-prototypes-beat-thinking/) that proposed automatically filling in one field based on what a user was entering into another. In the old regime that idea would have had a hard time. I would have had to specify exactly what the behavior should be across every edge case before anyone would consider building it, and the complexity of that spec would have made it feel expensive before anyone had seen it work – the negotiation and assumed implementation difficulty would have scotched the benefit. Instead, I built a simple prototype, showed a good clean behavior, and let people experience the "oh, that's helpful" feeling directly. I also showed a handful of alternative approaches I'd built and discarded – which would have been too costly to do under the old model. It made my thinking visible and showed that I'd explored the space and arrived at a good answer, rather than just asserting that the answer was right. We didn't "logic" ourselves into a spec, or skip it entirely out of cost fears; we iterated into a happy interaction design and implementation.
 
@@ -62,25 +62,25 @@ The prototype was also less precious than a spec in a specific and useful way. A
 
 The hours that used to go into writing specifications can go somewhere better. Customer contact is the highest-leverage activity in UX: it's where you learn whether your understanding of the user's problem is accurate, where you find out what you got wrong, where you discover the unexpected needs that become the next round of benefits and concepts. Most UX teams have less of it than they want. The constraint was time, and a lot of that time was going into documentation.
 
-Some of that time is available now. A UX team that was spending 50% of its capacity on specs can put some of that time into customer interviews, lightweight concept tests, and usability sessions with real users. The quality of the design work gets better because it's grounded in greater understanding of the people it's for. And the prototypes that come out of that understanding can be validated with customers directly, not as pictures of functionality but as things that work well enough to touch and operate.
+Some of that time is available now. A UX team that was spending half of its capacity on specs can put some of that time into customer interviews, lightweight concept tests, and usability sessions with real users. The quality of the design work gets better because it's grounded in greater understanding of the people it's for. And the prototypes that come out of that understanding can be validated with customers directly, not as pictures of functionality but as things that work well enough to touch and operate.
 
 ### Owning quality rather than requesting it
 
-In the old model, UX owned the design, engineering owned the implementation, and where they didn't match, UX's primary tool for trying to fix implementation issues was the bug report. You saw a problem, you filed a ticket, the ticket went into a backlog, the backlog got triaged. Your ticket competed with features, infrastructure work, and other bugs for priority, and a lot of the time – especially for small usability issues, accessibility problems, and polish details – your ticket stayed in the backlog forever. The thing that you caught before launch just sat there for two years until old tickets were cleaned up, then it was deleted. Or sometimes you'd finally get it fixed only to realize that that same problem had cropped up in other places in the meantime, uncaught.
+In the old model, UX owned the design, engineering owned the implementation, and where they didn't match, UX's primary tool for trying to fix implementation issues was the bug report. You saw a problem, filed a ticket, the ticket went into a backlog, the backlog got triaged. Your ticket competed with features, infrastructure work, and other bugs for priority, and a lot of the time – especially for small usability issues, accessibility problems, and polish details – your ticket stayed in the backlog forever. The thing that you caught before launch just sat there for two years until old tickets were cleaned up, then it was deleted. Or sometimes you'd finally get it fixed only to realize that that same problem had cropped up in other places in the meantime.
 
-When UX practitioners have AI tools that lower the barrier to working in code, this changes. If you know enough to open a codebase, find the relevant component, make a targeted change, and submit a pull request, you can fix things yourself. The label that's been confusing users for eight months? Fix it in the code, write a clear commit message, open a PR. The contrast issue that keeps showing up in accessibility audits? Find it in the design system, correct it, ship it. The microinteraction that's been janky since launch? Tweak the animation timing, test it, merge it. Fed up with a site-wide spacing inconsistency? Fix it once in the component, watch it propagate everywhere.
+When UX practitioners have AI tools that lower the barrier to working in code, this changes. If you know enough to open a codebase, find the relevant component, make a targeted change, and submit a pull request, you can fix things yourself. The label that's been confusing users for eight months? You can fix it in the code, write a clear commit message, open a PR, have it reviewed and deployed. The contrast issue that keeps showing up in accessibility audits? You can find it in the design system, correct it, and ship it. The microinteraction that's been janky since launch? You can tweak the animation timing, test it, and merge it. Fed up with a site-wide spacing inconsistency? You can fix it once in the component, then watch it propagate everywhere.
 
-UX people move from quality advocates to quality actors, from people who describe problems and hope they get fixed to people who see problems and fix them.
+UX people move from quality *advocates* to quality *actors*, from people who describe problems and hope they get fixed to people who see problems and fix them.
 
 ### The design system as infrastructure you control
 
-A powerful example of this shift is at the design system level. A well-maintained design system, whose source of truth lives in code, is a high-leverage place for a UX person to work. Changes to the design system propagate through the system. Improve focus state behavior for a component or a page template and you've improved accessibility for every keyboard user at once. Add a microinteraction to the card component and it's in every card in the product after one deploy. It turns quality from a struggle or a campaign into ongoing improvement.
+An example of this shift is at the design system level. A well-maintained design system, whose source of truth lives in code, is a high-leverage place for a UX person to work. Changes to the design system propagate through the system. Improve focus state behavior for a component or a page template and you've improved accessibility for every keyboard user at once. Add a microinteraction to the card component and it's in every card in the product after one deploy. It turns quality from a struggle or a campaign into ongoing improvement.
 
-This is also the real answer to the accessibility problem. Accessibility that lives in a spec is only as good as the implementation that follows it. Accessibility that lives in the design system in code – in the components themselves, in the tokens, in the patterns – ships correctly every time the component is used. UX people who own the design system in code aren't hoping accessibility gets implemented right – they're making it structurally harder to implement wrong.
+This is also the answer to the accessibility problem. Accessibility that lives in a spec is only as good as the implementation that follows it. Accessibility that lives in the design system in code – in the components themselves, in the tokens, in the patterns – ships correctly every time the component is used. UX people who own the design system in code aren't hoping accessibility gets implemented right – they're making it structurally harder to implement wrong.
 
 There's a special payoff here for mature products. Long-lived platforms accumulate experience debt the same way they accumulate technical debt: interactions that were "good enough for now" when they were built, interfaces pre-dating the design system, inconsistencies that everyone noticed but nobody could justify fixing. When building was expensive, retiring that debt was a luxury that rarely made the cut. When building is fast, it becomes doable. Teams using the design system faithfully can work through years of accumulated drift systematically, shipping improvements continuously rather than waiting for a redesign.
 
-(And rather than going through the pain of a redesign when you finally can't avoid one, you can evolve the design system right under user's noses, accomplishing your brand refresh through an evolution rather than a big bang.)
+(And rather than going through the pain of a redesign when you finally can't avoid one, you can evolve the design system right under users' noses, accomplishing your brand refresh through an evolution rather than a big bang.)
 
 ### Pushing for more
 
@@ -88,7 +88,7 @@ UX people have long been asked to scope things down. Pick the [MVP](/2023/11/17/
 
 ## The speed problem
 
-Let's acknowledge a real fear: that as engineering moves faster, designers and PMs get left behind. Not fired, necessarily, but bypassed. The engineer who commercializes a PM's rough prototype, skipping design entirely and delivering something half-baked to customers. The PM who has already decided what the customer needs and doesn't make room for the designer's input, because coordination has a cost and cosplaying certainty feels speedy. The engineer who ships a passion project into production on their own. The organization that claims to be metrics-driven but can't find the time to do the research or agree on the measures.
+Let's acknowledge our fear: that as engineering moves faster, designers and PMs get left behind. Not fired, necessarily, but bypassed. The engineer who commercializes a PM's rough prototype, skipping design entirely and delivering something half-baked to customers. The PM who has already decided what the customer needs and doesn't make room for the designer's input, because coordination has a cost and cosplaying certainty feels speedy. The engineer who ships a passion project into production on their own. The organization that claims to be metrics-driven but can't find the time to do the research or agree on the measures.
 
 These happen more often than we'd like to admit. As shipping velocity increases they'll become more common or more tempting.
 
@@ -98,31 +98,51 @@ UX doesn't need to get faster at the things it has always done – to produce Fi
 
 The reasonable objection to most of what I've described is that it assumes UX practitioners have technical skills that many do not. That's fair. "Just learn to code" has always been lazy advice – and as development environments have grown more complex the barrier to learning to code has been going up, not down.
 
-What's different now is the on-ramp. AI coding tools – Cursor, Claude, GitHub Copilot and their successors – mean that a designer who learns the basics of how their codebase is structured can do meaningful work in it without being an experienced engineer. You don't need to know how to architect a system; you need an engineering pal who can help you set up your local build environment, and you need to know enough to find the right file, make a targeted change, and understand what broke if something goes wrong. That is much easier than it used to be, and it will get easier still.
+What's different now is the on-ramp. AI coding tools – Cursor, Claude, Copilot, and their successors – mean that a designer who learns the basics of how their codebase is structured can do meaningful work in it without being an experienced engineer. You don't need to know how to architect a system; you need an engineering pal who can help you set up your local build environment, and you need to know enough to find the right file, make a targeted change, and understand what broke if something goes wrong. That is much easier than it used to be, and it will get easier still.
 
-More importantly, working in code with AI assistance helps build technical fluency when you are starting from nothing. The AI explains what it's doing. You learn the patterns, you ask questions. You develop a mental model of the codebase, of what's hard and what's easy, of how your design decisions interact with engineering. Designers who work this way don't just pick up some CSS – they gain a fundamentally different relationship to the medium they are now designing in. Greater fluency makes every future conversation with an engineer more productive, every future design decision better informed.
+On the other hand, the new tools and working environment are unfamiliar, working with an agent can be unpredictable, and your ability to estimate what it'll take to get your work done will need to be re-learned. This is uncomfortable. That engineer that didn't know enough about the new technology to guess how long it would take to do their work? Now that's you. It's not forever.
+
+Importantly, working in code with AI assistance helps build technical fluency when you are starting from nothing. The AI explains what it's doing. You learn the patterns, you ask questions. You develop a mental model of the codebase, of what's hard and what's easy, of how your design decisions interact with engineering. Designers who work this way don't just pick up some CSS – they gain a fundamentally different relationship to the medium they are now designing in. Greater fluency makes every future conversation with an engineer more productive, every future design decision better informed.
+
+## Where the pressure is coming from
+
+I've helped designers and their development teams through this transition. And to a person they either found a piece of the new way of working that excited them, and dove into that, or they felt at sea and asked for general advice about adapting.
+
+To understand the new environment we discussed how the expectations and perceptions of their team members were changing, as well as the messages coming from senior leadership.
+
+Engineers, excited by their new tools and the ability to produce a lot of code very quickly, are racing ahead to make things they are asked for and close pet problems that have been lingering for ages. Moving quickly is intoxicating; some engineers are happy to spend a little of that speed to reconnect with their team members and collaborate more; others feel the rest of the team have become an obstacle, preferring to make decisions on their own and leave the team behind.
+
+Product managers, now with expectations from leadership that AI will change both their way of working and their product, are struggling to produce enough work to satisfy the newly increased engineering capacity their teams now have. So they are barking instructions as fast as they can.
+
+Senior leaders are seeing this speed differential and wanting the entire organization to match, believing that orgs that fail to spin up together will be left behind by more nimble competitors. They recognize that this puts a lot of pressure on product and design to somehow maintain direction, quality, customer connection, and strategic relevance. But their impulse is not to make space for these – it's to demand that we adapt, that we find new ways to keep going in the right direction more quickly. And they assume that the point of attack will be any activity we do now that is time-consuming.
+
+These are the new expectations and new conditions in which designers need to contribute: move faster, maintain quality, feed engineers and their agents, don't make anyone slow down. Failing that, a designer is in danger of being worked around – ignored by engineers who have already shipped and moved on to the next problem, sidelined by product managers feeling the pressure to make snap judgments.
+
+There's some inherent conflict here – connecting with customers takes time. But good decisions can only be made accidentally without customer contact, and a designer should be adept at explaining how what they learned from customers has informed the prototype. Leadership has always tried to clamp down on the hours spent in research, partly because they didn't really see the research strongly and directly informing the product.
 
 ## What this means if you're a demoralized UX person
 
-If you're a UX practitioner who's been feeling like AI is making your role smaller, it's time to adapt – and I think you'll be happier once you do.
+This change in duties and tools might feel like a threat to your identity as a designer – your expertise in Figma or what have you is suddenly less valuable, and doing your thinking there can feel slow and indirect compared to working with an agent in code. And working with an agent in code can also feel like squinting through a pinhole at the product you are trying to make. You used to be able to say how long it would take you to define a handful of views in Figma, but now the moves and jargon are unfamiliar; it's hard to express to the team what you think you should be doing.
 
-The things that are getting harder – maybe disappearing – are the things that were frustrating anyway: the spec nobody read quite right, the accessibility ticket that sat in the backlog for three sprints, the "that's too fancy" fight you couldn't win, the feeling of being on the outside of decisions, taking orders, delivering work, watching it get implemented imperfectly, filing feedback, and starting over.
+It's time to adapt – and I think you'll be happier once you do.
 
-What's opening up is the opposite: being in the room where the decisions get made because you're the one with the prototype. Now you can fix the things that bothered you. Now you can have your hands on the layer where quality is actually shown to the user. Now you can spend time with customers instead of in specifications. Now you can contribute to the pace rather than be outrun by it.
+The things that are maybe disappearing are the things that were frustrating anyway: the spec nobody read quite right, the careful details you pored over that the rest of the team missed, the accessibility ticket that sat in the backlog for three sprints, the "that's too fancy" fight you couldn't win, the feeling of being on the outside of decisions, taking orders, delivering work, watching it get implemented imperfectly, filing feedback, and starting over.
+
+What's opening up is the opposite: being in the room where the decisions get made because you're the one with customer knowledge expressed in the prototype. The ability to fix the things that bothered you. The ability to directly touch the layer where quality is actually shown to the user. The opportunity to prioritize time with customers over time in spec documents. Now you can contribute to the pace rather than be outrun by it.
 
 The job that was supposed to be about understanding customers and creating great experiences – and that spent too much time on paperwork and pleading – has a path back to what it should have been.
 
-## What this asks of UX leaders
+## If you are a design leader, here's how to help
 
-All of this is available, but none of it is automatic. Our expectations of the UX people we support and their peers need to adapt as well.
+All of these improvements are available, but none of them are automatic. Our expectations of the UX people we support and their peers need to adapt as well. The design teams that will capture these opportunities have leaders who understand that new conditions and new ideas of success demand new behaviors. This requires us to build [designers who ship](/2026/06/03/designers-who-ship/), by:
 
-The teams that will capture these opportunities have UX leaders who understand that new conditions and new ideas of success demand new behaviors. This requires:
-
-- building teams with technical fluency or raising the fluency of existing teams
+- building teams with technical fluency and raising the fluency of existing teams
 - shifting capacity away from documentation and toward customer contact and working prototypes
 - establishing UX ownership of the design system in code as a strategic priority
 - coaching UX practitioners to see themselves as people who build and fix things, and helping organizations understand what that makes possible
 
-The design leaders that keep running the old model – that value UX for the Figma files and the spec documents, that still think "design is done, now we build" – will watch their designers get routed around and eventually questioned; not because UX became less valuable, but because the leaders didn't help UX become what it should be.
+The design leaders that keep running the old model – that value UX for the Figma files and the spec documents, that still think "design is done, now we build" – will watch their designers get routed around and eventually questioned; not because UX became less valuable, but because the leaders didn't help UX become what it was meant to be all along.
+
+The designer's job in this moment is to find what's exciting to them in this new way of working, and while doing so to remember that the aim is and always has been to bring customer and user knowledge to the team and the work. Getting customer knowledge into the product should feel more direct if we're doing it right. And the design leader's job is to help the designers find their excitement and renew their connection to customers, then hang a lantern on the happy results of that adaptation.
 
 We were made for this!

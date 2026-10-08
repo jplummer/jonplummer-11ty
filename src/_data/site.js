@@ -17,14 +17,14 @@ module.exports = function() {
   // Lockup rotation pool (header only) — pick via page.url | taglineForPage.
   const taglines = [
     'Making ideas tangible',
-    'Understand, then build',
-    'Study people, ship software',
-    'Listen before making',
+    'Prove it, then ship it',
     'Build from understanding',
-    'Learn to build, build to learn',
+    'Three functions, one team',
+    'Teach rather than tell',
     'Care shows up in the product',
-    'Evidence over ego',
     'Value turns up where the data leads',
+    'Learn to build, build to learn',
+    'Zoom out, then zoom in',
   ];
   const title = `${author} – ${tagline}`;
 

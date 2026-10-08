@@ -60,13 +60,15 @@ If the workflow takes decisions off of the user's plate, the underlying software
 
 ## Mockups are not enough
 
-Coordinated experience doesn't stop at the screen. It has to survive into the printed guide in the box, or the story falls apart at the one point of contact most people actually read. Reviewing Datto's quick setup guide surfaced two kinds of catches.
+Coordinated experience doesn't stop at the screen. It has to extend into the printed guide in the box, and ideally the hardware itself, or the story falls apart right at the beginning. Reviewing Datto's quick setup guide surfaced two kinds of catches.
 
 ![Quick start guide](/assets/images/2022/11/datto-qsg.png)
-*If the device and software take work away from the user, then all the QSG needs to do is help them plug it in and then direct attention to the software experience to complete setup.*
+*If the device and software take work away from the user, then all the Quick Start Guide needs to do is help them plug it in and then direct attention to the software experience to complete setup.*
 
 The first was polish: unnecessary capitalization, an instruction to wait for a light that would turn solid before the user could react anyway, so the instruction was better cut than kept. Small things, but they're the difference between a guide that sounds like a person wrote it and one that sounds like it came out of a technical template.
 
-The second was a compliance catch: California law requires consumer networking devices to ship secured, with a unique password, not a shared default. That requirement has to show up in what the setup card actually says the device's credentials are. Missing it doesn't make the copy worse. It makes the product noncompliant in one state.
+The second was a compliance catch: California law requires consumer networking devices to ship secured, with a unique password, not a shared default. That requirement means the setup card has to say what the device's credentials are, or the user will have a hard time getting started. Missing it doesn't make the copy worse. It makes the product noncompliant and prevents the user from succeeding.
 
-We also pushed for a short, memorable setup URL, so a household member without the printed card in hand still had a way in. A QR code provided yet another way for people to recognize how to get started. Coordinating an experience across hardware, portal, and app is one problem. Making sure all three still agree with each other after they've been printed on paper and can't be quietly patched is a different, harder version of the same problem.
+We also pushed for a short, memorable setup URL, so a household member without the printed card in hand could recognize it in the WiFi menu on their phone. A QR code provided another way for people to recognize how to get started. 
+
+Coordinating an experience across hardware, portal, and app is one problem. Making sure all three still agree with each other after they've been printed on paper and can't be quietly patched is a different, harder version of the same problem.
