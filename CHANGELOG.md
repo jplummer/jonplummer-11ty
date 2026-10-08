@@ -1,5 +1,10 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-10-08
+
+- Revise several posts and the header taglines, and stop allowing the British plural of judgment.
+- OG fingerprint: hash only the site fields the card reads, so header tagline edits don't regenerate every image
+
 ## 2026-10-05
 
 - Add the business-card short links, and warn instead of failing when .htaccess is stale.
@@ -932,4 +937,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-10-06
+Last deployed on 2026-10-08
