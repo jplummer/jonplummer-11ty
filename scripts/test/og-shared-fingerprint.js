@@ -12,6 +12,8 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const {
+  OG_SITE_FIELDS,
+  SHARED_CONTENT_FILES,
   computeOgSharedFingerprint,
   readStoredFingerprint,
   writeStoredFingerprint,
@@ -90,6 +92,32 @@ function runUnitAssertions(result) {
     const before = computeOgSharedFingerprint(dir);
     edit(dir, 'src/_includes/og-image.njk', (njk) => `${njk}\n<!-- test -->\n`);
     assert.notStrictEqual(computeOgSharedFingerprint(dir), before);
+  });
+
+  check('ignores site.js fields the card never reads', (dir) => {
+    const before = computeOgSharedFingerprint(dir);
+    edit(dir, 'src/_data/site.js', (js) =>
+      js.replace('const taglines = [', "const taglines = [\n    'Fingerprint test tagline',")
+    );
+    assert.strictEqual(computeOgSharedFingerprint(dir), before);
+  });
+
+  check('changes when a site field the card reads changes', (dir) => {
+    const before = computeOgSharedFingerprint(dir);
+    edit(dir, 'src/_data/site.js', (js) =>
+      js.replace("const author = 'Jon Plummer';", "const author = 'Jon Plummer Test';")
+    );
+    assert.notStrictEqual(computeOgSharedFingerprint(dir), before);
+  });
+
+  check('every site field the card templates read is fingerprinted', () => {
+    const used = new Set();
+    for (const rel of SHARED_CONTENT_FILES.filter((f) => f.endsWith('.njk'))) {
+      const njk = fs.readFileSync(path.join(ROOT, rel), 'utf8');
+      for (const m of njk.matchAll(/\bsite\.(\w+)/g)) used.add(m[1]);
+    }
+    const missing = [...used].filter((key) => !OG_SITE_FIELDS.includes(key));
+    assert.deepStrictEqual(missing, [], `add to OG_SITE_FIELDS: ${missing.join(', ')}`);
   });
 
   check('stored value round-trips; missing file reads as null', (dir) => {

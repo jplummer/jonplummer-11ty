@@ -7,6 +7,10 @@
  *
  * The CSS goes in as the extractors' output, not as the whole file, so rules
  * the card never sees (layout, lightbox, grids) don't trigger a full rerender.
+ * Site data works the same way: only the fields in OG_SITE_FIELDS go in, so
+ * editing the header tagline pool (2026-10-08 regenerated all 120 images for
+ * nothing) doesn't touch the cards. The og-shared-fingerprint test fails if a
+ * card template reads a site field that isn't listed here.
  */
 
 const crypto = require('crypto');
@@ -24,6 +28,10 @@ const SHARED_CONTENT_FILES = [
   'src/_includes/og-image-body.njk',
   'src/assets/images/jp-mark.svg',
 ];
+
+// The site.js fields the card reads. Add a field here when a card template
+// starts using it.
+const OG_SITE_FIELDS = ['author'];
 
 // The render code. Editing either one regenerates every image.
 const RENDER_CODE_FILES = [
@@ -53,7 +61,9 @@ function collectOgSharedInputs(cwd = process.cwd()) {
 
     const sitePath = path.join(cwd, 'src', '_data', 'site.js');
     delete require.cache[require.resolve(sitePath)];
-    parts.push(['site', JSON.stringify(require(sitePath)())]);
+    const site = require(sitePath)();
+    const ogSite = Object.fromEntries(OG_SITE_FIELDS.map((key) => [key, site[key]]));
+    parts.push(['site', JSON.stringify(ogSite)]);
 
     for (const abs of RENDER_CODE_FILES) {
       parts.push([path.basename(abs), fs.readFileSync(abs, 'utf8')]);
@@ -104,6 +114,8 @@ function writeStoredFingerprint(filePath, fingerprint) {
 }
 
 module.exports = {
+  OG_SITE_FIELDS,
+  SHARED_CONTENT_FILES,
   collectOgSharedInputs,
   computeOgSharedFingerprint,
   defaultFingerprintPath,
