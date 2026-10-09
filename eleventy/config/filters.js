@@ -6,7 +6,7 @@
  * markdown processing, and data manipulation filters.
  */
 
-const { normalizeDate, formatPostDate } = require("../utils/date-utils");
+const { normalizeDate, formatPostDate, formatPostDateAttr } = require("../utils/date-utils");
 const { mergePostsAndLinks } = require("../utils/merge-posts-links");
 const { pickTaglineForUrl, getGitHeadSha } = require("../utils/tagline-for-url");
 const siteData = require("../../src/_data/site.js")();
@@ -24,8 +24,9 @@ function configureFilters(eleventyConfig, md) {
     return array.slice(0, limit);
   });
 
-  // add postDate filter
+  // add postDate filter (always America/Los_Angeles — matches permalinks)
   eleventyConfig.addFilter("postDate", formatPostDate);
+  eleventyConfig.addFilter("postDateAttr", formatPostDateAttr);
 
   // Override dateToRfc3339 as a plugin to ensure it runs AFTER the RSS plugin registers its filter
   // Plugins run in a second configuration stage, so we must use a plugin wrapper to override

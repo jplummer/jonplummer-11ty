@@ -4,11 +4,11 @@ const fs = require('fs');
 const path = require('path');
 const puppeteer = require('puppeteer');
 const nunjucks = require('nunjucks');
-const { DateTime } = require('luxon');
 const { findMarkdownFiles, findFilesByExtension } = require('../utils/file-utils');
 const { parseFrontMatter, reconstructFile } = require('../utils/frontmatter-utils');
 const { isPost } = require('../utils/content-utils');
 const { extractCssCustomProperties, extractProductionFontFacesForInline, extractLightThemeColorOverrides } = require('../../eleventy/utils/css-utils');
+const { formatPostDate } = require('../../eleventy/utils/date-utils');
 const { generateOgImageFilename } = require('../utils/og-image-filename');
 const {
   computeOgSharedFingerprint,
@@ -25,11 +25,8 @@ const nunjucksEnv = new nunjucks.Environment(
   ])
 );
 
-// Add postDate filter (from Eleventy config)
-nunjucksEnv.addFilter('postDate', (dateObj) => {
-  const date = dateObj instanceof Date ? dateObj : new Date(dateObj);
-  return DateTime.fromJSDate(date).toLocaleString(DateTime.DATE_MED);
-});
+// Same postDate filter as Eleventy (America/Los_Angeles calendar day)
+nunjucksEnv.addFilter('postDate', formatPostDate);
 
 
 

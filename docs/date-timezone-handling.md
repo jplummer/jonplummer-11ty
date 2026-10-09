@@ -12,6 +12,10 @@ date: "2025-10-08"
 
 `pnpm run test frontmatter` rejects unquoted YAML dates sitewide, and for blog posts (`tags: post`) requires the front-matter calendar day to match the filename day. Portfolio items may keep a different front-matter date (those layouts do not show the date).
 
+On-page `postDate` / `postDateAttr` always format in America/Los_Angeles (same zone as permalinks). Never rely on `new Date("YYYY-MM-DD")` — that is UTC midnight and shows the previous day in Pacific.
+
+If an older unquoted UTC-midnight timestamp already published on the previous LA day, keep that live URL: rename the filename, `date`, and OG basename to the published day. Do not 301 away from it.
+
 Full ISO with offset (`"2025-10-08T12:00:00-07:00"`) still parses for older posts. Do not use it for new work; it adds a DST offset to remember and is not needed for display or URLs.
 
 ## Load-bearing build behavior
