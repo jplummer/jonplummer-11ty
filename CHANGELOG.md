@@ -4,6 +4,8 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 - Revise several posts and the header taglines, and stop allowing the British plural of judgment.
 - OG fingerprint: hash only the site fields the card reads, so header tagline edits don't regenerate every image
+- Publish many little diamonds, add a Scott Jenson link, and refresh OG images.
+- Standardize on quoted date-only front matter and guard it in tests.
 
 ## 2026-10-05
 
