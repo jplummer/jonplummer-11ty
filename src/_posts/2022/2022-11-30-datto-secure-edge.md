@@ -69,6 +69,6 @@ The first was polish: unnecessary capitalization, an instruction to wait for a l
 
 The second was a compliance catch: California law requires consumer networking devices to ship secured, with a unique password, not a shared default. That requirement means the setup card has to say what the device's credentials are, or the user will have a hard time getting started. Missing it doesn't make the copy worse. It makes the product noncompliant and prevents the user from succeeding.
 
-We also pushed for a short, memorable setup URL, so a household member without the printed card in hand could recognize it in the WiFi menu on their phone. A QR code provided another way for people to recognize how to get started. 
+We also pushed for a short, memorable setup URL, so a household member without the printed card in hand could recognize it in the WiFi menu on their phone. A QR code provided another way for people to recognize how to get started.
 
 Coordinating an experience across hardware, portal, and app is one problem. Making sure all three still agree with each other after they've been printed on paper and can't be quietly patched is a different, harder version of the same problem.

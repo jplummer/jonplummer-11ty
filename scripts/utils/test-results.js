@@ -291,6 +291,7 @@ const TEST_EMOJIS = {
   'internal-links': '🔗',
   'links': '📌',
   'wisdom': '🦉',
+  'shortlinks': '🔁',
   'markdown': '✍️ ',
   'spell': '🧙',
   'og-images': '📸',
