@@ -1,5 +1,11 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-10-09
+
+- Format post dates in America/Los_Angeles so date-only front matter matches the URL day.
+- Fix typo in many little diamonds (avilable → available).
+- Align engaging-in-critique front matter with its live Dec 30 URL.
+
 ## 2026-10-08
 
 - Revise several posts and the header taglines, and stop allowing the British plural of judgment.
