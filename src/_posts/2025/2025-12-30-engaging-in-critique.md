@@ -1,10 +1,10 @@
 ---
 title: Engaging with the material presented in critique
 layout: layouts/single_post.njk
-date: "2025-12-31"
+date: "2025-12-30"
 tags: post
 description: Topics you might bring up in critique are the same as you might investigate when starting a project. The rest come from hearing about the work.
-ogImage: /assets/images/og/2025-12-31-engaging-in-critique.png
+ogImage: /assets/images/og/2025-12-30-engaging-in-critique.png
 ---
 A designer recently pointed out that they were quiet in [critique](/2023/01/12/whither-critique/) because they weren't sure what to talk about or how to engage with the material being presented. They noted that several others always seem to have something useful or interesting to say in critique, and asked for ways to be helpful.
 

@@ -13,7 +13,7 @@ const { addFile, addIssue } = require('../utils/test-results');
 const { runTest } = require('../utils/test-runner-helper');
 
 const POST = path.join('src', '_posts', '2026', '2026-08-12-care-has-to-show-up-in-the-product.md');
-const CRITIQUE = path.join('src', '_posts', '2025', '2025-12-31-engaging-in-critique.md');
+const CRITIQUE = path.join('src', '_posts', '2025', '2025-12-30-engaging-in-critique.md');
 
 function runUnitAssertions(result) {
   const file = addFile(result, 'scripts/utils/og-image-filename.js', 'og-image-filename');
@@ -37,10 +37,10 @@ function runUnitAssertions(result) {
 
   check('dated post filename wins over UTC midnight ISO front matter', () => {
     const name = generateOgImageFilename(
-      { tags: ['post'], date: '2025-12-31T00:00:00.000Z' },
+      { tags: ['post'], date: '2025-12-30T00:00:00.000Z' },
       CRITIQUE
     );
-    assert.strictEqual(name, '2025-12-31-engaging-in-critique.png');
+    assert.strictEqual(name, '2025-12-30-engaging-in-critique.png');
   });
 
   check('dated post filename wins over offset timestamp front matter', () => {
