@@ -1,7 +1,7 @@
 ---
 title: wcag-audit
 description: A tool that checks a page against WCAG 2.2 criteria and names the W3C rule behind the verdict.
-date: 2026-08-09
+date: "2026-08-09"
 layout: layouts/side_detail.njk
 tags: sideproject
 permalink: /sides/wcag-audit/

@@ -1,7 +1,7 @@
 ---
 title: A quick note on agent conversations
 layout: layouts/single_post.njk
-date: 2025-12-22T20:00:00.000Z
+date: "2025-12-22"
 tags: post
 description: When setting up your agent to converse with a user, think about what would speed the conversation to a happy conclusion most naturally.
 ogImage: /assets/images/og/2025-12-22-a-quick-note-on-agent-conversations.png

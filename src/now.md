@@ -1,7 +1,7 @@
 ---
 title: Now – what I'm up to
 description: What Jon Plummer is up to now – looking for work, family, and a pile of side projects in various states of done. Updated regularly.
-date: 2026-10-02T12:00:00-07:00
+date: "2026-10-02"
 layout: base.njk
 tags: page
 permalink: /now/

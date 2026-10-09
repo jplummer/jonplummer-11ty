@@ -1,7 +1,7 @@
 ---
 title: Pointer-AR
 description: An iOS augmented-reality app that points your phone at the ISS, Hubble, Webb, planets, and the Seven Wonders of the World, wherever on Earth they actually are.
-date: 2026-08-20
+date: "2026-08-20"
 layout: layouts/side_detail.njk
 tags: sideproject
 permalink: /sides/pointer-ar/

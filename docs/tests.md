@@ -48,13 +48,15 @@ Tests that validate source files (markdown, YAML) before build.
 
 ### frontmatter.js
 
-Validates markdown under `src/_posts/` (posts) and every top-level `src/*.md` template (static pages and error templates such as `404.md`). Also validates YAML data files in `src/_data/`.
+Validates markdown under `src/_posts/` (posts), `src/sides/`, and every top-level `src/*.md` template (static pages and error templates such as `404.md`). Also validates YAML data files in `src/_data/`.
 
-Post markdown is parsed with **gray-matter** (same stack as Eleventy), not the regex-based `parseFrontMatter()` used elsewhere for simple delimiter splitting. A small regression guard asserts that a `## title:` line without a closing `---` delimiter fails parse the way the build would.
+Post markdown is parsed with **gray-matter** (same stack as Eleventy), not the regex-based `parseFrontMatter()` used elsewhere for simple delimiter splitting. Regression guards cover broken `## title:` parse failure, rejection of unquoted YAML `Date` timestamps, blog filename/date match, and allowing portfolio date≠filename.
 
-**Checks (posts):** Required fields (`title`, `date`, `slug` from path or front matter), date/slug format validation, file naming convention (`YYYY/YYYY-MM-DD-slug.md`), duplicate slugs. Optional `coverPosition` / `coverZoom` must match the portfolio grid allowlists when present.
+**Checks (posts):** Required fields (`title`, `date`, `slug` from path or front matter), date/slug format validation, file naming convention (`YYYY/YYYY-MM-DD-slug.md`), duplicate slugs. `date` must be a quoted string (rejects JS `Date` from unquoted YAML). Blog posts (`tags` includes `post`) must have front-matter calendar day equal to the filename `YYYY-MM-DD`; portfolio may diverge on purpose. Optional `coverPosition` / `coverZoom` must match the portfolio grid allowlists when present.
 
-**Checks (top-level `src/*.md`):** Parse succeeds; required `title`; `date` except on `404.md` / `500.md`.
+**Checks (top-level `src/*.md`):** Parse succeeds; required `title`; `date` except on `404.md` / `500.md` (quoted string, same Date-object rejection as posts).
+
+**Checks (`src/sides/`):** `status` vocabulary when present; `date` if present must be a quoted string (same Date-object rejection).
 
 **Checks (data):** YAML data file syntax.
 

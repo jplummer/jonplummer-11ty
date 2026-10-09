@@ -1,7 +1,7 @@
 ---
 title: Parker
 description: A DIY garage parking sensor built around an infrared time-of-flight sensor, lighting up when the car is pulled in just far enough.
-date: 2026-08-19
+date: "2026-08-19"
 layout: layouts/side_detail.njk
 tags: sideproject
 permalink: /sides/parker/

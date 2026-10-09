@@ -1,7 +1,7 @@
 ---
 title: The "hidden" pages of jonplummer.com
 layout: layouts/single_post.njk
-date: 2025-11-20T20:00:00.000Z
+date: "2025-11-20"
 tags: post
 description: A tour of the utility pages of this site – RSS feeds, documentation, sitemaps – and how they're generated. These hidden pages reflect the view source ethos of the web.
 ogImage: /assets/images/og/2025-11-20-the-hidden-pages-of-this-site.png

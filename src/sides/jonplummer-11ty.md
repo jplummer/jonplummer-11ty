@@ -1,7 +1,7 @@
 ---
 title: jonplummer-11ty
 description: The Eleventy build behind this site, and the test suite and deploy pipeline that help me catch mistakes before they are public – a static site with as much tooling around it as content in it.
-date: 2026-09-07
+date: "2026-09-07"
 layout: layouts/side_detail.njk
 tags: sideproject
 permalink: /sides/jonplummer-11ty/

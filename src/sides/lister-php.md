@@ -1,7 +1,7 @@
 ---
 title: Lister
 description: A self-hosted PHP directory listing app, no database or CMS required, that I run at misc.jonplummer.com.
-date: 2026-08-03
+date: "2026-08-03"
 layout: layouts/side_detail.njk
 tags: sideproject
 permalink: /sides/lister-php/

@@ -1,7 +1,7 @@
 ---
 title: Colophon – how it's made
 description: How this site is built, and where I've written about that topic.
-date: 2026-08-10T00:00:00.000Z
+date: "2026-08-10"
 layout: base.njk
 tags: page
 permalink: /colophon/

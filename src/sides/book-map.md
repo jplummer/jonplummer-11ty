@@ -1,7 +1,7 @@
 ---
 title: Book Map
 description: A map of where reviewed books are set, generated from a plain text file and built so the basemap gets out of the way and the clustering comes forward.
-date: 2026-09-10
+date: "2026-09-10"
 layout: layouts/side_detail.njk
 tags: sideproject
 permalink: /sides/book-map/

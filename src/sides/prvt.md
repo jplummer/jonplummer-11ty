@@ -1,7 +1,7 @@
 ---
 title: prvt
 description: A self-hosted, privacy-first URL shortener that makes small QR codes for print and forgets every link once its lifetime expires.
-date: 2026-08-18
+date: "2026-08-18"
 layout: layouts/side_detail.njk
 tags: sideproject
 permalink: /sides/prvt/

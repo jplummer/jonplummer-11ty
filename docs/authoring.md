@@ -29,10 +29,13 @@ Run `pnpm run test wisdom` after editing. Unexpected fields are rejected.
 
 - **`layout`** - Template to use (e.g., `single_post.njk`)
 - **`title`** - Page title
-- **`date`** - Publication date (posts only). Can be:
-  - Full format: `"YYYY-MM-DDTHH:mm:ss-HH:mm"` (e.g., `"2025-10-08T12:00:00-08:00"`)
-  - Date-only format: `"YYYY-MM-DD"` (e.g., `"2025-10-08"`) - assumes PST/PDT
-  - See [Date and Timezone Handling](date-timezone-handling.md) for details
+- **`date`** - Publication date (posts only). Use quoted date-only, matching the filename day:
+
+  ```yaml
+  date: "2025-10-08"
+  ```
+
+  Always quote it. Unquoted YAML dates become `Date` objects and can disagree with the URL calendar day. Parsed as America/Los_Angeles midnight. `pnpm run test frontmatter` enforces quoting, and for blog posts (`tags: post`) that the day matches the filename. See [Date and Timezone Handling](date-timezone-handling.md).
 - **`tags`** - Array including `post`. Additional tags become `article:tag` meta tags.
 
 ### Optional

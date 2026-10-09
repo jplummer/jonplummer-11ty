@@ -1,7 +1,7 @@
 ---
 title: Post title here
 layout: layouts/single_post.njk
-date: "YYYY-MM-DDTHH:mm:ss-HH:mm"  # or "YYYY-MM-DD" for date-only (assumes PST/PDT)
+date: "YYYY-MM-DD"  # quoted; must match filename day; America/Los_Angeles
 tags: post
 description: "Meta description for SEO (20-300 characters recommended, warnings only if outside range)"
 ogImage: /assets/images/og/YYYY-MM-DD-post-slug.png
@@ -53,7 +53,7 @@ The following SEO and social media meta tags are automatically generated for all
 ---
 title: Design Quality Expectations for Product Teams
 layout: layouts/single_post.njk
-date: "2023-02-02T12:00:00-08:00"
+date: "2023-02-02"
 tags: 
   - post
   - design

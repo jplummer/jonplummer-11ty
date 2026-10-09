@@ -1,7 +1,7 @@
 ---
 title: Monotasker
 description: An iOS app that shows you one Reminder at a time, picked at random, so a long list stops being a reason to avoid it.
-date: 2026-08-21
+date: "2026-08-21"
 layout: layouts/side_detail.njk
 tags: sideproject
 permalink: /sides/monotasker/

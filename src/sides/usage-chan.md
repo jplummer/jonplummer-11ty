@@ -1,7 +1,7 @@
 ---
 title: Usage-Chan
 description: A Stack-Chan desk robot repurposed to show live Claude usage against the five-hour and seven-day rate-limit windows, pulled straight from the API's own response headers.
-date: 2026-09-07
+date: "2026-09-07"
 layout: layouts/side_detail.njk
 tags: sideproject
 permalink: /sides/usage-chan/

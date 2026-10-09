@@ -1,7 +1,7 @@
 ---
 title: Engaging with the material presented in critique
 layout: layouts/single_post.njk
-date: 2025-12-31T00:00:00.000Z
+date: "2025-12-31"
 tags: post
 description: Topics you might bring up in critique are the same as you might investigate when starting a project. The rest come from hearing about the work.
 ogImage: /assets/images/og/2025-12-31-engaging-in-critique.png

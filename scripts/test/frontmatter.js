@@ -15,6 +15,36 @@ const { runTest, checkChangedFlag } = require('../utils/test-runner-helper');
 // Focuses on structure validation (YAML syntax, required fields, formats)
 // SEO-specific checks (title/description length) are handled by seo-meta.js
 
+/**
+ * Tags may be a bare string (`tags: post`) or a YAML list.
+ * @param {object} frontMatter
+ * @param {string} tag
+ * @returns {boolean}
+ */
+function hasTag(frontMatter, tag) {
+  const tags = frontMatter.tags;
+  if (tags == null) {
+    return false;
+  }
+  if (Array.isArray(tags)) {
+    return tags.includes(tag);
+  }
+  return tags === tag;
+}
+
+/**
+ * Calendar day from a front-matter date string (date-only or ISO with time).
+ * @param {string} dateValue
+ * @returns {string|null} YYYY-MM-DD or null
+ */
+function calendarDayFromDateString(dateValue) {
+  if (typeof dateValue !== 'string' || !dateValue) {
+    return null;
+  }
+  const day = dateValue.includes('T') ? dateValue.split('T')[0] : dateValue;
+  return /^\d{4}-\d{2}-\d{2}$/.test(day) ? day : null;
+}
+
 // Check for required fields
 function validateRequiredFields(frontMatter, filePath) {
   const issues = [];
@@ -47,22 +77,35 @@ function validateRequiredFields(frontMatter, filePath) {
   }
 
   if (frontMatter.date) {
-    // Extract YYYY-MM-DD from ISO date strings (e.g., "2025-11-20T20:00:00.000Z" -> "2025-11-20")
-    // Also handle Date objects by converting to string first
-    let dateToValidate = frontMatter.date;
-    if (dateToValidate instanceof Date) {
-      dateToValidate = dateToValidate.toISOString().split('T')[0];
-    } else if (typeof dateToValidate === 'string') {
-      if (dateToValidate.includes('T')) {
-        dateToValidate = dateToValidate.split('T')[0];
+    // Unquoted YAML dates become JS Date objects; evening UTC clock faces can
+    // disagree with the LA permalink day. Require a quoted string instead.
+    if (frontMatter.date instanceof Date) {
+      issues.push(
+        'Date: must be a quoted string (e.g. "YYYY-MM-DD"), not an unquoted YAML timestamp'
+      );
+    } else if (typeof frontMatter.date === 'string') {
+      const dateToValidate = calendarDayFromDateString(frontMatter.date);
+      if (!dateToValidate) {
+        issues.push('Date: must be YYYY-MM-DD or an ISO datetime string starting with YYYY-MM-DD');
+      } else {
+        const dateCheck = validateDate(dateToValidate);
+        if (!dateCheck.valid) {
+          issues.push(`Date: ${dateCheck.error}`);
+        } else if (
+          hasTag(frontMatter, 'post') &&
+          fileNameCheck.valid &&
+          fileNameCheck.expectedDate &&
+          dateToValidate !== fileNameCheck.expectedDate
+        ) {
+          // Blog posts show the date next to a /YYYY/MM/DD/ URL. Portfolio and
+          // sides may intentionally diverge (date not shown on those layouts).
+          issues.push(
+            `Date: blog post front matter day (${dateToValidate}) must match filename day (${fileNameCheck.expectedDate})`
+          );
+        }
       }
     } else {
-      issues.push(`Date: Date must be a string or Date object`);
-      return { issues, warnings };
-    }
-    const dateCheck = validateDate(dateToValidate);
-    if (!dateCheck.valid) {
-      issues.push(`Date: ${dateCheck.error}`);
+      issues.push('Date: must be a quoted string (e.g. "YYYY-MM-DD")');
     }
   }
 
@@ -129,22 +172,22 @@ function validateRootSrcMarkdownFields(frontMatter, filePath) {
   if (!skipDate) {
     if (!frontMatter.date) {
       issues.push('Missing required field: date');
-    } else {
-      let dateToValidate = frontMatter.date;
-      if (dateToValidate instanceof Date) {
-        dateToValidate = dateToValidate.toISOString().split('T')[0];
-      } else if (typeof dateToValidate === 'string') {
-        if (dateToValidate.includes('T')) {
-          dateToValidate = dateToValidate.split('T')[0];
-        }
+    } else if (frontMatter.date instanceof Date) {
+      issues.push(
+        'Date: must be a quoted string (e.g. "YYYY-MM-DD"), not an unquoted YAML timestamp'
+      );
+    } else if (typeof frontMatter.date === 'string') {
+      const dateToValidate = calendarDayFromDateString(frontMatter.date);
+      if (!dateToValidate) {
+        issues.push('Date: must be YYYY-MM-DD or an ISO datetime string starting with YYYY-MM-DD');
       } else {
-        issues.push('Date: Date must be a string or Date object');
-        return { issues, warnings };
+        const dateCheck = validateDate(dateToValidate);
+        if (!dateCheck.valid) {
+          issues.push(`Date: ${dateCheck.error}`);
+        }
       }
-      const dateCheck = validateDate(dateToValidate);
-      if (!dateCheck.valid) {
-        issues.push(`Date: ${dateCheck.error}`);
-      }
+    } else {
+      issues.push('Date: must be a quoted string (e.g. "YYYY-MM-DD")');
     }
   }
 
@@ -173,6 +216,25 @@ function validateSideFields(frontMatter) {
     const check = validateSideStatus(frontMatter.status);
     if (!check.valid) {
       issues.push(`status: ${check.error} (got "${frontMatter.status}")`);
+    }
+  }
+  if (frontMatter.date !== undefined) {
+    if (frontMatter.date instanceof Date) {
+      issues.push(
+        'Date: must be a quoted string (e.g. "YYYY-MM-DD"), not an unquoted YAML timestamp'
+      );
+    } else if (typeof frontMatter.date === 'string') {
+      const dateToValidate = calendarDayFromDateString(frontMatter.date);
+      if (!dateToValidate) {
+        issues.push('Date: must be YYYY-MM-DD or an ISO datetime string starting with YYYY-MM-DD');
+      } else {
+        const dateCheck = validateDate(dateToValidate);
+        if (!dateCheck.valid) {
+          issues.push(`Date: ${dateCheck.error}`);
+        }
+      }
+    } else {
+      issues.push('Date: must be a quoted string (e.g. "YYYY-MM-DD")');
     }
   }
   issues.push(...validateCoverCropFields(frontMatter));
@@ -214,12 +276,13 @@ function validateFileName(filePath) {
     return { valid: false, error: 'File not in expected directory structure (YYYY/YYYY-MM-DD-slug.md)' };
   }
 
-  // Extract expected slug from filename (remove .md extension)
+  // Extract expected slug and calendar day from filename (remove .md extension)
   const fileNameWithoutExt = fileName.replace('.md', '');
-  const slugMatch = fileNameWithoutExt.match(/^\d{4}-\d{2}-\d{2}-(.+)$/);
-  const expectedSlug = slugMatch ? slugMatch[1] : null;
+  const slugMatch = fileNameWithoutExt.match(/^(\d{4}-\d{2}-\d{2})-(.+)$/);
+  const expectedDate = slugMatch ? slugMatch[1] : null;
+  const expectedSlug = slugMatch ? slugMatch[2] : null;
 
-  return { valid: true, expectedSlug };
+  return { valid: true, expectedSlug, expectedDate };
 }
 
 // Validate YAML data files
@@ -274,7 +337,7 @@ function assertPostFrontmatterParserRegressionGuard() {
     '',
     '## title: Broken',
     'layout: layouts/single_post.njk',
-    'date: 2025-11-20T20:00:00.000Z',
+    'date: "2025-11-20"',
     'tags: post',
     '',
     'Body',
@@ -290,7 +353,7 @@ function assertPostFrontmatterParserRegressionGuard() {
     '---',
     'title: Ok',
     'layout: layouts/single_post.njk',
-    'date: 2025-11-20T20:00:00.000Z',
+    'date: "2025-11-20"',
     'tags: post',
     '---',
     'Hello',
@@ -301,11 +364,62 @@ function assertPostFrontmatterParserRegressionGuard() {
   }
 }
 
+/**
+ * Unquoted YAML timestamps and blog filename/date drift must fail field checks.
+ * Portfolio may keep filename day ≠ front-matter day (date not shown on that layout).
+ */
+function assertPostDateAuthoringRegressionGuard() {
+  const samplePath = path.join('src', '_posts', '2025', '2025-11-20-example.md');
+
+  const unquoted = validateRequiredFields(
+    {
+      title: 'Unquoted',
+      date: new Date('2025-11-20T20:00:00.000Z'),
+      tags: 'post'
+    },
+    samplePath
+  );
+  if (!unquoted.issues.some((msg) => msg.includes('quoted string'))) {
+    throw new Error(
+      'frontmatter regression: expected Date object (unquoted YAML timestamp) to fail date validation'
+    );
+  }
+
+  const blogMismatch = validateRequiredFields(
+    {
+      title: 'Mismatch',
+      date: '2025-11-21',
+      tags: 'post'
+    },
+    samplePath
+  );
+  if (!blogMismatch.issues.some((msg) => msg.includes('must match filename day'))) {
+    throw new Error(
+      'frontmatter regression: expected blog post date≠filename day to fail'
+    );
+  }
+
+  const portfolioMismatch = validateRequiredFields(
+    {
+      title: 'Portfolio',
+      date: '2024-01-01',
+      tags: 'portfolio'
+    },
+    samplePath
+  );
+  if (portfolioMismatch.issues.some((msg) => msg.includes('must match filename day'))) {
+    throw new Error(
+      'frontmatter regression: portfolio date≠filename day must be allowed'
+    );
+  }
+}
+
 // Main validation function
 function validate(result, options) {
   const { useChanged } = options;
 
   assertPostFrontmatterParserRegressionGuard();
+  assertPostDateAuthoringRegressionGuard();
 
   // Validate YAML data files first
   const yamlValidation = validateYamlDataFiles(result);
