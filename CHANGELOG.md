@@ -5,6 +5,8 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Format post dates in America/Los_Angeles so date-only front matter matches the URL day.
 - Fix typo in many little diamonds (avilable → available).
 - Align engaging-in-critique front matter with its live Dec 30 URL.
+- Ship dark OG cards under /assets/images/og/v2/.
+- State the Tablet Stage awards as a group, and add the findability plan.
 
 ## 2026-10-08
 
@@ -945,4 +947,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-10-09
+Last deployed on 2026-10-10
