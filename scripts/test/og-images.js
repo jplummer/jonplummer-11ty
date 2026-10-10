@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const path = require('path');
 const { extractMetaTags } = require('../utils/html-utils');
 const { getHtmlFiles, getRelativePath, readFile } = require('../utils/test-helpers');
 const { addFile, addIssue } = require('../utils/test-results');
@@ -38,7 +39,8 @@ function isNonPublicFile(relativePath) {
 }
 
 // Default OG image path (allowed for paginated indexes and main index)
-const DEFAULT_OG_IMAGE = '/assets/images/og/index.png';
+const { OG_DEFAULT_IMAGE_FILENAME, ogImageUrl } = require('../utils/og-image-filename');
+const DEFAULT_OG_IMAGE = ogImageUrl(OG_DEFAULT_IMAGE_FILENAME);
 
 // Check if a page is a paginated index or main index
 function isAllowedDefaultImagePage(relativePath) {
@@ -92,12 +94,19 @@ function validateOgImage(content, relativePath, filePath) {
     }
   }
   
+  // The image itself must ship. The home page's card was deleted in 2025 and
+  // og:image 404'd for months with every check here passing.
+  const builtImage = path.join('_site', decodeURIComponent(ogImagePath).replace(/^\/+/, ''));
+  if (ogImagePath.startsWith('/') && !fs.existsSync(builtImage)) {
+    issues.push(`OG image not found in _site: ${ogImagePath}`);
+  }
+
   const isAllowedDefault = isAllowedDefaultImagePage(relativePath);
   const isDefaultImage = ogImagePath === DEFAULT_OG_IMAGE;
   
   // If it's a paginated index or main index, default image is allowed
   if (isAllowedDefault && isDefaultImage) {
-    return { issues: [], ogImage: ogImagePath };
+    return { issues, ogImage: ogImagePath };
   }
   
   // If it's not an allowed page and uses default image, check if it's explicitly set
@@ -177,6 +186,8 @@ function validate(result) {
         let issueType = 'og-image-missing';
         if (issue.includes('default OG image')) {
           issueType = 'og-image-default';
+        } else if (issue.includes('not found in _site')) {
+          issueType = 'og-image-file-missing';
         }
         
         addIssue(fileObj, {

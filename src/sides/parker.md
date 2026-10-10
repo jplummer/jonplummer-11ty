@@ -10,7 +10,7 @@ coverPosition: 55% 47%
 coverZoom: 2
 status: In development
 githubUrl: https://github.com/jplummer/parker
-ogImage: /assets/images/og/sides.png
+ogImage: /assets/images/og/v2/sides-parker.png
 ---
 ![A couple small circuit boards taped to the garage shelving.](/assets/images/2026/08/parker-prototype.jpg)
 *A couple boards taped to the garage shelving. It works!*

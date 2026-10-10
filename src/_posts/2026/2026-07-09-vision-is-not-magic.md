@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2026-07-09T12:00:00-07:00"
 tags: post
 description: Vision doesn't need to be sharp. It needs to survive contact with reality – and someone has to keep checking that it still does.
-ogImage: /assets/images/og/2026-07-09-vision-is-not-magic.png
+ogImage: /assets/images/og/v2/2026-07-09-vision-is-not-magic.png
 ---
 Ideas are cheap. Every designer I've managed has had three interesting ideas by mid-morning. If your org's problem is "we don't have enough ideas," that's easy to fix: creativity is a muscle, and a muscle needs reps. [Generate a lot of ideas](/2022/11/09/single-diamond-the-basic-form-of-the-creative-process/), including bad ones, and the good ones show up more often. That part is readily trainable.
 

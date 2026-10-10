@@ -5,7 +5,7 @@ date: "2022-11-01T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/11/conference-talk-prioritizing-accessibility-page-12.png
 description: "Connect by Cayuse 2022 talk on moving accessibility from audit-and-fix to designing it in through the design system, and why we said no to overlays."
-ogImage: /assets/images/og/2022-11-01-conference-talk-prioritizing-accessibility.png
+ogImage: /assets/images/og/v2/2022-11-01-conference-talk-prioritizing-accessibility.png
 ---
 Connect by Cayuse is the company's annual customer conference, held online in October 2022. This was my Day 3 session, co-presented with Heather Ward, the product manager responsible for initiatives that cut across products, including accessibility. Our customers – universities and research institutions – have a legal duty to give their staff accessible tools, which makes our accessibility status their problem. The talk reports on that status and on how we were changing the practices behind it.
 

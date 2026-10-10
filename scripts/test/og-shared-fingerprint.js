@@ -29,6 +29,8 @@ const FIXTURE_FILES = [
   'src/assets/fonts/lab/libre-franklin-latin-wght-normal.woff2',
   'src/_includes/og-image.njk',
   'src/_includes/og-image-body.njk',
+  'src/assets/css/og-card.css',
+  'src/assets/js/og-card-fit.js',
   'src/assets/images/jp-mark.svg',
   'src/_data/site.js',
 ];
@@ -91,6 +93,18 @@ function runUnitAssertions(result) {
   check('changes when the card template changes', (dir) => {
     const before = computeOgSharedFingerprint(dir);
     edit(dir, 'src/_includes/og-image.njk', (njk) => `${njk}\n<!-- test -->\n`);
+    assert.notStrictEqual(computeOgSharedFingerprint(dir), before);
+  });
+
+  check('changes when the card styles change', (dir) => {
+    const before = computeOgSharedFingerprint(dir);
+    edit(dir, 'src/assets/css/og-card.css', (css) => `${css}\n/* test */\n`);
+    assert.notStrictEqual(computeOgSharedFingerprint(dir), before);
+  });
+
+  check('changes when the fit script changes', (dir) => {
+    const before = computeOgSharedFingerprint(dir);
+    edit(dir, 'src/assets/js/og-card-fit.js', (js) => `${js}\n// test\n`);
     assert.notStrictEqual(computeOgSharedFingerprint(dir), before);
   });
 

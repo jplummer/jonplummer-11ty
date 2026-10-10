@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2026-08-12"
 tags: post
 description: "If attention to detail isn't visible in what you ship, it's hard to claim you care about the details. Designers: make intentional roughness obvious. Leaders: refuse 'too small to matter.'"
-ogImage: /assets/images/og/2026-08-12-care-has-to-show-up-in-the-product.png
+ogImage: /assets/images/og/v2/2026-08-12-care-has-to-show-up-in-the-product.png
 ---
 If attention to detail isn't visible in your product, it's hard to say you care about the details.
 

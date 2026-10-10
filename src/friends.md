@@ -5,7 +5,7 @@ date: "2026-08-24"
 layout: base.njk
 tags: page
 permalink: /friends/
-ogImage: /assets/images/og/friends.png
+ogImage: /assets/images/og/v2/friends.png
 ---
 Updated {{ date | postDate }}. Inspired by [slashfriends.org](https://slashfriends.org) and [Nick Gray](https://nickgray.net), this is a growing list of people I like and admire, all of whom I've worked with in some way. Long ago I had lists of "heroes" and "villains" on my site – heroes were people I admired from afar, and villains were friends. People are the real world-wide-web, after all. As it turns out, the heroes list is impossible to maintain and the villains list is never complete.
 

@@ -6,10 +6,15 @@ const puppeteer = require('puppeteer');
 const nunjucks = require('nunjucks');
 const { findMarkdownFiles, findFilesByExtension } = require('../utils/file-utils');
 const { parseFrontMatter, reconstructFile } = require('../utils/frontmatter-utils');
-const { isPost } = require('../utils/content-utils');
-const { extractCssCustomProperties, extractProductionFontFacesForInline, extractLightThemeColorOverrides } = require('../../eleventy/utils/css-utils');
+const { extractCssCustomProperties, extractProductionFontFacesForInline } = require('../../eleventy/utils/css-utils');
 const { formatPostDate } = require('../../eleventy/utils/date-utils');
-const { generateOgImageFilename } = require('../utils/og-image-filename');
+const {
+  OG_DEFAULT_IMAGE_FILENAME,
+  generateOgImageFilename,
+  ogImageDiskDir,
+  ogImageUrl,
+} = require('../utils/og-image-filename');
+const { ogCardKind, ogCardLabel } = require('../utils/og-card');
 const {
   computeOgSharedFingerprint,
   defaultFingerprintPath,
@@ -52,7 +57,7 @@ function needsRegeneration(ogImagePath, pageData, filePath) {
 
   // Also check if frontmatter has ogImage but it doesn't match expected path
   if (pageData.ogImage && pageData.ogImage !== 'auto') {
-    const expectedPath = `/assets/images/og/${generateOgImageFilename(pageData, filePath)}`;
+    const expectedPath = ogImageUrl(generateOgImageFilename(pageData, filePath));
     if (pageData.ogImage !== expectedPath) {
       return true;
     }
@@ -61,40 +66,41 @@ function needsRegeneration(ogImagePath, pageData, filePath) {
   return false;
 }
 
-// Render OG image HTML
-async function renderOgImageHtml(pageData) {
+// Render the card document for one image.
+// card: { title, label?, labelIsPath? } – see og-image-body.njk
+async function renderOgImageHtml(card) {
   const templatePath = path.join(process.cwd(), 'src', '_includes', 'og-image.njk');
   const template = fs.readFileSync(templatePath, 'utf8');
-  
-  // Pass date object - template will format it using postDate filter
-  const dateObj = pageData.date ? (pageData.date instanceof Date ? pageData.date : new Date(pageData.date)) : null;
-  
-  // Extract CSS custom properties from main stylesheet
-  const cssCustomProperties = extractCssCustomProperties();
-  const productionFontFaces = extractProductionFontFacesForInline();
-  const lightThemeColorOverrides = extractLightThemeColorOverrides();
 
-  // Puppeteer setContent cannot load file:// <img> URLs (request fails, naturalWidth 0).
-  // Embed the mark as a data URI for PNG generation; /ogimages/ preview keeps the HTTP path.
-  const markSvg = fs.readFileSync(
-    path.join(process.cwd(), 'src', 'assets', 'images', 'jp-mark.svg')
+  const ogCardCss = fs.readFileSync(
+    path.join(process.cwd(), 'src', 'assets', 'css', 'og-card.css'),
+    'utf8'
   );
-  const ogMarkSrc = `data:image/svg+xml;base64,${markSvg.toString('base64')}`;
+  const ogFitScript = fs.readFileSync(
+    path.join(process.cwd(), 'src', 'assets', 'js', 'og-card-fit.js'),
+    'utf8'
+  );
 
   return nunjucksEnv.renderString(template, {
-    title: pageData.title,
-    description: pageData.description || null,
-    date: dateObj,
-    cssCustomProperties: cssCustomProperties,
-    productionFontFaces: productionFontFaces,
-    lightThemeColorOverrides: lightThemeColorOverrides,
-    ogMarkSrc,
+    title: card.title,
+    label: card.label || null,
+    labelIsPath: Boolean(card.labelIsPath),
+    cssCustomProperties: extractCssCustomProperties(),
+    // The site's faces are font-display: optional – if a face isn't ready in
+    // ~100ms, Chrome keeps the fallback for the life of the page, and
+    // document.fonts.check() still passes. Half of a full run came out in
+    // the fallback before this. A screenshot can wait.
+    productionFontFaces: extractProductionFontFacesForInline().replace(
+      /font-display:\s*[a-z-]+/g,
+      'font-display: block'
+    ),
+    ogCardCss,
+    ogFitScript,
     site: require('../../src/_data/site.js')()
   });
 }
 
-// Generate OG image using Puppeteer
-async function generateOgImage(html, outputPath) {
+function launchBrowser() {
   const launchOptions = {
     headless: true,
     args: ['--no-sandbox', '--disable-setuid-sandbox']
@@ -102,51 +108,59 @@ async function generateOgImage(html, outputPath) {
   if (process.env.PUPPETEER_EXECUTABLE_PATH) {
     launchOptions.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
   }
+  return puppeteer.launch(launchOptions);
+}
 
-  const browser = await puppeteer.launch(launchOptions);
-  
+// Screenshot one card. Pass a browser to reuse it across a run; without one,
+// a browser is launched and closed for this image (dev watch does that).
+async function generateOgImage(html, outputPath, sharedBrowser = null) {
+  const browser = sharedBrowser || (await launchBrowser());
+  const page = await browser.newPage();
+
   try {
-    const page = await browser.newPage();
     await page.setViewport({
       width: 1200,
       height: 630,
       deviceScaleFactor: 1
     });
-    
-    await page.emulateMediaFeatures([
-      { name: 'prefers-color-scheme', value: 'light' }
-    ]);
 
     await page.setContent(html, {
       waitUntil: 'load'
     });
 
-    const fontsReady = await page.evaluate(async () => {
-      await document.fonts.ready;
-      const mark = document.querySelector('.og-mark');
-      if (mark && !mark.complete) {
-        await new Promise((resolve, reject) => {
-          mark.onload = resolve;
-          mark.onerror = () => reject(new Error('OG mark failed to load'));
-        });
-      }
-      return {
-        display: document.fonts.check('600 3.5rem "Big Shoulders"'),
-        body: document.fonts.check('1.5rem "Libre Franklin"'),
-        markLoaded: Boolean(mark && mark.complete && mark.naturalWidth > 0)
-      };
+    // og-card-fit.js waits for fonts, fits the title, then sets data-og-fit
+    await page.waitForFunction(() => document.documentElement.dataset.ogFit === 'done', {
+      timeout: 15000
     });
 
-    if (!fontsReady.display || !fontsReady.body) {
-      throw new Error(
-        `OG webfonts not loaded (Big Shoulders: ${fontsReady.display}, Libre Franklin: ${fontsReady.body})`
-      );
+    // document.fonts.check() passes even when the page is stuck on the
+    // fallback, so measure instead: each card font must set a sample
+    // differently from the generic family it falls back to.
+    const fallbackFonts = await page.evaluate(() => {
+      const probe = (font) => {
+        const s = document.createElement('span');
+        s.textContent = 'Jon Plummer makes ideas tangible';
+        s.style.cssText = `font: ${font}; white-space: nowrap; position: absolute; visibility: hidden;`;
+        document.body.append(s);
+        const w = s.getBoundingClientRect().width;
+        s.remove();
+        return w;
+      };
+      return ['.og-title', '.og-label', '.og-byline']
+        .map((sel) => document.querySelector(sel))
+        .filter(Boolean)
+        .filter((el) => {
+          const cs = getComputedStyle(el);
+          const generic = cs.fontFamily.split(',').pop().trim();
+          return probe(`${cs.fontWeight} 100px ${cs.fontFamily}`) === probe(`${cs.fontWeight} 100px ${generic}`);
+        })
+        .map((el) => getComputedStyle(el).fontFamily);
+    });
+
+    if (fallbackFonts.length > 0) {
+      throw new Error(`OG card rendered in a fallback font: ${fallbackFonts.join('; ')}`);
     }
 
-    if (!fontsReady.markLoaded) {
-      throw new Error('OG mark image failed to load (naturalWidth was 0)');
-    }
-    
     await page.screenshot({
       path: outputPath,
       type: 'png',
@@ -157,14 +171,17 @@ async function generateOgImage(html, outputPath) {
         height: 630
       }
     });
+    // Deployed files must be world-readable
+    fs.chmodSync(outputPath, 0o644);
   } finally {
-    await browser.close();
+    await page.close();
+    if (!sharedBrowser) await browser.close();
   }
 }
 
 // Process a single file
 async function processFile(filePath, options = {}) {
-  const { force = false } = options;
+  const { force = false, browser = null } = options;
   const content = fs.readFileSync(filePath, 'utf8');
   const { frontMatter, content: body, error } = parseFrontMatter(content);
   
@@ -176,44 +193,34 @@ async function processFile(filePath, options = {}) {
     return { updated: false, skipped: true, reason: 'No frontmatter' };
   }
   
-  // Skip if it's a portfolio item (not the portfolio page itself)
-  if (frontMatter.tags && frontMatter.tags.includes('portfolio') && 
-      !filePath.endsWith('portfolio.njk') && 
-      !filePath.endsWith('portfolio.md')) {
-    return { updated: false, skipped: true, reason: 'Portfolio item (skipping)' };
-  }
-  
-  // Determine if this is a post or page
-  const isPage = frontMatter.tags && frontMatter.tags.includes('page');
-  const isPortfolioPage = filePath.endsWith('portfolio.njk') || filePath.endsWith('portfolio.md');
-  
-  // Only process posts, pages, and portfolio page
-  if (!isPost(frontMatter) && !isPage && !isPortfolioPage) {
-    return { updated: false, skipped: true, reason: 'Not a post or page' };
+  // Posts, portfolio pieces, side projects, and pages get a card of their own.
+  // Paginated templates share the default card (see og-card.js).
+  const kind = ogCardKind(frontMatter);
+  if (!kind) {
+    return {
+      updated: false,
+      skipped: true,
+      reason: frontMatter.pagination ? 'Pagination template (shares the default card)' : 'Not a post, portfolio piece, side project, or page'
+    };
   }
 
-  // One template file emits many URLs; filename would be wrong — use shared ogImage (e.g. index.png)
-  if (frontMatter.pagination) {
-    return { updated: false, skipped: true, reason: 'Pagination template (skipped)' };
-  }
-  
   // Generate OG image filename
   const ogImageFilename = generateOgImageFilename(frontMatter, filePath);
-  const ogImageDir = path.join(process.cwd(), 'src', 'assets', 'images', 'og');
+  const ogImageDir = ogImageDiskDir();
   const ogImagePath = path.join(ogImageDir, ogImageFilename);
-  const ogImageUrl = `/assets/images/og/${ogImageFilename}`;
+  const ogImageUrlPath = ogImageUrl(ogImageFilename);
   
   // True only when front matter had no ogImage key (not `auto`, not a manual path)
   const hadMissingOgImageKey = !frontMatter.ogImage;
   
   // Skip only a genuine manual override: an ogImage pointing somewhere other than
-  // the path we derive for this file. A value equal to ogImageUrl is one we wrote
+  // the path we derive for this file. A value equal to ogImageUrlPath is one we wrote
   // ourselves on a previous run (see the frontmatter write below), so it must fall
   // through to needsRegeneration() or nothing would ever be refreshed after its
   // first generation. If force is true, regenerate regardless. If the override's
   // file doesn't exist, generate it below.
   const isManualOverride =
-    frontMatter.ogImage && frontMatter.ogImage !== 'auto' && frontMatter.ogImage !== ogImageUrl;
+    frontMatter.ogImage && frontMatter.ogImage !== 'auto' && frontMatter.ogImage !== ogImageUrlPath;
 
   if (!force && isManualOverride) {
     // Check if the file actually exists - if not, we need to generate it
@@ -232,7 +239,7 @@ async function processFile(filePath, options = {}) {
   if (!force && !needsRegeneration(ogImagePath, frontMatter, filePath) && fs.existsSync(ogImagePath)) {
     // Still update frontmatter if ogImage is missing
     if (!frontMatter.ogImage) {
-      frontMatter.ogImage = ogImageUrl;
+      frontMatter.ogImage = ogImageUrlPath;
       const newContent = reconstructFile(content, frontMatter, body);
       fs.writeFileSync(filePath, newContent, 'utf8');
       return {
@@ -247,17 +254,24 @@ async function processFile(filePath, options = {}) {
   }
   
   // Render HTML
-  const html = await renderOgImageHtml(frontMatter);
-  
+  const label = ogCardLabel(frontMatter, filePath);
+  const html = await renderOgImageHtml({
+    title: frontMatter.title,
+    label: label && label.text,
+    labelIsPath: label && label.isPath
+  });
+
   // Generate image
-  await generateOgImage(html, ogImagePath);
+  // options.browser may be a shared browser or a function that returns one
+  const sharedBrowser = typeof browser === 'function' ? await browser() : browser;
+  await generateOgImage(html, ogImagePath, sharedBrowser);
   
   // Update frontmatter only when ogImage path changes (avoids dev watch full rebuilds on PNG-only regen)
   const needsFrontmatterWrite =
-    !frontMatter.ogImage || frontMatter.ogImage !== ogImageUrl;
+    !frontMatter.ogImage || frontMatter.ogImage !== ogImageUrlPath;
 
   if (needsFrontmatterWrite) {
-    frontMatter.ogImage = ogImageUrl;
+    frontMatter.ogImage = ogImageUrlPath;
     const newContent = reconstructFile(content, frontMatter, body);
     fs.writeFileSync(filePath, newContent, 'utf8');
   }
@@ -269,6 +283,19 @@ async function processFile(filePath, options = {}) {
     frontmatterOgImageSynced: false,
     filePath: filePath
   };
+}
+
+// The shared fallback card – home page, paginated indexes, wisdom tag pages,
+// and base.njk's default. Those templates emit many URLs, so the card is
+// rendered from site data rather than from one page's front matter.
+async function generateDefaultCard({ force = false, browser = null } = {}) {
+  const outputPath = path.join(ogImageDiskDir(), OG_DEFAULT_IMAGE_FILENAME);
+  if (!force && fs.existsSync(outputPath)) return false;
+  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+  const site = require('../../src/_data/site.js')();
+  const html = await renderOgImageHtml({ title: site.tagline, label: '/', labelIsPath: true });
+  await generateOgImage(html, outputPath, browser);
+  return true;
 }
 
 // Main function - can be called programmatically or from CLI
@@ -343,6 +370,27 @@ async function generateOgImages(options = {}) {
     console.log('  ℹ️  OG tokens, fonts, templates, or render code changed; regenerating all OG images');
   }
 
+  // One browser for the whole run, launched only if something needs rendering
+  let browser = null;
+  const getBrowser = async () => {
+    if (!browser) browser = await launchBrowser();
+    return browser;
+  };
+  const runForce = force || sharedChanged;
+
+  const defaultCardPath = path.join(ogImageDiskDir(), OG_DEFAULT_IMAGE_FILENAME);
+  if (runForce || !fs.existsSync(defaultCardPath)) {
+    try {
+      await generateDefaultCard({ force: true, browser: await getBrowser() });
+      console.log(`  ✅ Generated: default card (${OG_DEFAULT_IMAGE_FILENAME})`);
+      results.imagesGenerated++;
+      results.generatedFiles.push(OG_DEFAULT_IMAGE_FILENAME);
+    } catch (error) {
+      console.error(`  ❌ Error (default card): ${error.message}`);
+      results.errors++;
+    }
+  }
+
   for (const file of markdownFiles) {
     const relativePath = path.relative(process.cwd(), file);
 
@@ -351,7 +399,7 @@ async function generateOgImages(options = {}) {
     }
 
     try {
-      const result = await processFile(file, { force: force || sharedChanged });
+      const result = await processFile(file, { force: runForce, browser: getBrowser });
       
       if (result.updated) {
         if (result.imageGenerated) {
@@ -389,6 +437,8 @@ async function generateOgImages(options = {}) {
     }
   }
   
+  if (browser) await browser.close();
+
   const filesChecked = markdownFiles.length;
 
   if (quiet) {
@@ -448,5 +498,5 @@ if (require.main === module) {
   });
 }
 
-module.exports = { generateOgImages, processFile, generateOgImage, renderOgImageHtml };
+module.exports = { generateOgImages, generateDefaultCard, processFile, generateOgImage, renderOgImageHtml };
 

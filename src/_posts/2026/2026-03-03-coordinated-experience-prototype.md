@@ -7,7 +7,7 @@ coverImage: 2026/03/All-Classifiers-with-Draft.png
 coverPosition: 20% 24%
 coverZoom: 1.4
 description: "To make the Invoca classifier selection and report-building experience a coordinated one, new interactive patterns must be introduced."
-ogImage: /assets/images/og/portfolio.png
+ogImage: /assets/images/og/v2/2026-03-03-coordinated-experience-prototype.png
 ---
 To make the Invoca classifier selection and report-building experience a [coordinated experience](/2025/07/27/toward-coordinated-experience/), new interactive patterns must be introduced. The demo below presents a common workflow, setting up a report, but enhances that workflow significantly by introducing several needed but missing interactive patterns, including:
 

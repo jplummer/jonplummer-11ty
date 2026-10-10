@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2026-02-21T12:00:00-08:00"
 tags: post
 description: Watching AI coding agents work is oddly satisfying. But writing? That needs to stay mine.
-ogImage: /assets/images/og/2026-02-21-its-fun-to-watch-the-agent-work.png
+ogImage: /assets/images/og/v2/2026-02-21-its-fun-to-watch-the-agent-work.png
 ---
 This site is a place for me to write. But now that it is working well I've found that I spend more time than I probably should finding little things for the [coding agents](/2025/11/16/my-recent-experience-vibe-coding/) to chew on. I enjoy watching them work, second-guessing their choices, discussing my wishes with them as they toil away.
 

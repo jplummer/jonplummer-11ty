@@ -1500,6 +1500,26 @@ header a.skip:focus {
   height: 630px;
 }
 
+/* Card at LinkedIn's feed size (128×67 CSS px) beside the half-size view */
+.og-preview-pair {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  align-items: flex-start;
+}
+
+.og-preview-feed {
+  width: 128px;
+  height: 67px;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.og-preview-feed-scaled {
+  transform: scale(calc(128 / 1200));
+  transform-origin: top left;
+}
+
 .og-images-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -1523,114 +1543,6 @@ header a.skip:focus {
 .og-images-grid-item code {
   font-size: var(--font-size-base);
   word-break: break-all;
-}
-
-/* === OG IMAGE RENDERED STYLES === */
-/* Styles for OG images rendered via renderFile in ogimages.njk (scoped to .og-image-rendered) */
-
-.og-image-rendered {
-  /* Force light theme for OG preview — light halves from jonplummer.css :root (keep in sync) */
-  color-scheme: light;
-  --og-type-scale: 1.6; /* live rem tokens × scale; keeps logotype/title at 0.9 */
-  --text-color: oklch(29.6% 0.01 260.71deg);
-  --text-color-light: oklch(49.1% 0.0142 259.82deg);
-  --border-color: oklch(89.3% 0.0105 261.79deg);
-  --background-color: oklch(96.4% 0.0058 264.53deg);
-  --content-background-color: oklch(98% 0 0deg);
-  --link-color: oklch(58.6% 0.1911 27.41deg);
-  --link-hover-color: var(--link-color);
-  --link-visited-color: var(--text-color-light);
-  --link-active-color: var(--link-color);
-  
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  width: 1200px;
-  height: 630px;
-  font-family: var(--font-family);
-  font-size: calc(var(--font-size-base) * var(--og-type-scale));
-  line-height: var(--line-height);
-  letter-spacing: var(--letter-spacing-normal);
-  color: var(--text-color);
-  /* One sheet — no outer mat; same soft field as the live page */
-  background-color: var(--content-background-color);
-  display: flex;
-  justify-content: stretch;
-  align-items: flex-start;
-
-  & * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  & a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  & .og-content {
-    width: 100%;
-    padding: 4rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  /* Mark + Semibold logotype — live --font-size-logotype × scale */
-  & .og-hgroup {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    flex-wrap: wrap;
-    margin-bottom: var(--spacing-3xl);
-    font-family: var(--font-family-display);
-    font-size: calc(var(--font-size-logotype) * var(--og-type-scale));
-    line-height: 1;
-    font-weight: var(--font-weight-semibold);
-    letter-spacing: var(--letter-spacing-normal);
-    text-transform: uppercase;
-    color: var(--text-color);
-  }
-
-  & .og-mark {
-    display: block;
-    flex-shrink: 0;
-    height: 1cap;
-    width: auto;
-    margin-top: -2px;
-  }
-
-  & .og-logotype a {
-    color: var(--text-color) !important;
-    text-decoration: none;
-  }
-
-  & .og-title {
-    font-family: var(--font-family-display);
-    font-size: calc(var(--font-size-2xl) * var(--og-type-scale));
-    line-height: var(--line-height-2xl);
-    font-weight: var(--font-weight-semibold);
-    letter-spacing: var(--letter-spacing-normal);
-    text-wrap: balance;
-    margin-bottom: var(--spacing-sm);
-  }
-
-  & .og-description {
-    font-size: calc(var(--font-size-base) * var(--og-type-scale));
-    line-height: var(--line-height-base);
-    max-width: 90%;
-    margin-bottom: var(--spacing-sm);
-    color: var(--text-color);
-  }
-
-  & .og-date {
-    /* Matches site `footer p` (article .posted-on inherits that rule) */
-    font-size: calc(var(--font-size-quiet) * var(--og-type-scale));
-    line-height: var(--line-height-quiet);
-    font-weight: var(--font-weight-light);
-    color: var(--text-color-light);
-  }
 }
 
 /* === PRINT STYLES === */

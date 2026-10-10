@@ -5,7 +5,7 @@ date: "2025-02-06"
 tags: portfolio
 coverImage: 2025/02/what-even-is-a-concept-sprint-page-1.png
 description: "Discussion of a recent concept sprint, the concept it produced, and customer feedback on it."
-ogImage: /assets/images/og/portfolio.png
+ogImage: /assets/images/og/v2/2025-02-06-what-even-is-a-concept-sprint.png
 ---
 Invoca had been discussing an AI-powered SMS agent for months. But what should it do? What use case would be appealing to our customers for our first foray into conversational agents?
 

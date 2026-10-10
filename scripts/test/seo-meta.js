@@ -230,6 +230,22 @@ function checkPersonSchema(result) {
   });
 }
 
+// Structured data is hand-written JSON inside Nunjucks templates, where one
+// trailing comma breaks it with no build error. Every JSON-LD block must parse.
+function checkJsonLd(content, fileObj) {
+  const blocks = content.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g);
+  for (const [, body] of blocks) {
+    try {
+      JSON.parse(body);
+    } catch (err) {
+      addIssue(fileObj, {
+        type: 'json-ld-invalid',
+        message: `JSON-LD block does not parse: ${err.message}`
+      });
+    }
+  }
+}
+
 // Main SEO validation
 function validate(result, options) {
   const { useChanged } = options;
@@ -289,6 +305,9 @@ function validate(result, options) {
     
     // Add file to result
     const fileObj = addFile(result, file, relativePath);
+
+    // JSON-LD must parse (always checked)
+    checkJsonLd(content, fileObj);
     
     // Basic title check (always required, but length validation skipped for redirects)
     if (!metaTags.title) {

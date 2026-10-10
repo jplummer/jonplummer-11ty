@@ -9,7 +9,7 @@ status: Ready to deploy
 coverImage: 2026/09/book-map.jpg
 coverPosition: center 40%
 githubUrl: https://github.com/jplummer/erindouglass-bookmap
-ogImage: /assets/images/og/sides.png
+ogImage: /assets/images/og/v2/sides-book-map.png
 ---
 My wife, [Erin Douglass](https://erindouglass.com), reviews books. At some point she started marking where they were set on a world map, for her own curiosity – Antarctica, Réunion Island, a Louisiana bayou, wartime Germany.
 

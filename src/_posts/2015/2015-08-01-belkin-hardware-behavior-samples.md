@@ -5,7 +5,7 @@ date: "2015-08-01T12:00:00-08:00"
 tags: portfolio
 coverImage: 2015/08/belkin-wps-states.png
 description: "A few ways we evaluated and specified hardware behavior at Belkin. None of these were in practice before I arrived."
-ogImage: /assets/images/og/portfolio.png
+ogImage: /assets/images/og/v2/2015-08-01-belkin-hardware-behavior-samples.png
 ---
 At Belkin it was critically important to evaluate and specify hardware behavior clearly so that product management, UX, industrial design, electrical engineering, firmware, and original device manufacturers could agree on and faithfully reproduce the intended behavior. Over the years I introduced practices standard elsewhere and developed new ways of expressing these behaviors for different audiences. Below are a handful of samples from different projects.
 

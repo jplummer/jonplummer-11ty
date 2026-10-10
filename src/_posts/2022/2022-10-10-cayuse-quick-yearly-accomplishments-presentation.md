@@ -5,7 +5,7 @@ date: "2022-10-10T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/10/quick-ux-accomplishments-2022-10-05-page-22.png
 description: Eight-to-ten-minute company-wide presentation summarizing UX team accomplishments for 2022, including demos and an invitation to a conference talk.
-ogImage: /assets/images/og/portfolio.png
+ogImage: /assets/images/og/v2/2022-10-10-cayuse-quick-yearly-accomplishments-presentation.png
 ---
 In early October I was asked to give an eight-to-ten-minute presentation summing up the year for UX. A tall order, but I embraced blazing through the content to alight briefly on things I though the general company audience should know about UX and how we were trying to help.
 

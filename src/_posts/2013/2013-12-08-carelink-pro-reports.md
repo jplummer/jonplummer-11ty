@@ -7,7 +7,7 @@ coverImage: 2022/12/sensor.png
 coverPosition: left 5%
 coverZoom: 1.2
 description: "Research-driven report designs for CareLink Pro that answer key clinical questions, showing patient behavior and results together for endocrinologists."
-ogImage: /assets/images/og/portfolio.png
+ogImage: /assets/images/og/v2/2013-12-08-carelink-pro-reports.png
 ---
 A patient with an insulin pump and a glucose monitor has health data positively streaming off of them, yet endocrinologists typically struggled with the reports they were given, often relying on cruder measures to make behavioral recommendations and rough adjustments to pump settings between quarterly visits. Direct research with five endocrinology offices, which later became a lead user program with two doctors in one office, helped us create a new set of reports aimed squarely at answering key clinical questions and showing patient behavior and results together.
 

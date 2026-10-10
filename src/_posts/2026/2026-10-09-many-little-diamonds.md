@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2026-10-09"
 tags: post
 description: The double diamond design process never quite worked. Real projects have single diamonds everywhere.
-ogImage: /assets/images/og/2026-10-09-many-little-diamonds.png
+ogImage: /assets/images/og/v2/2026-10-09-many-little-diamonds.png
 ---
 I've long felt that the double-diamond design process was poorly explained, and my attempts to explain it to engineering-led organizations were typically met with cries of "waterfall!" Never mind that "waterfall" specifically means big design up front, with a design lock gating implementation. "Waterfall" has become an easy epithet for any process with a sequence.
 

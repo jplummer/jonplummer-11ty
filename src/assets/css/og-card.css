@@ -1,0 +1,111 @@
+/*
+  OG card – 1200×630, built to read at LinkedIn's 128×72 feed size.
+  Spec: docs/designs/specs/2026-10-09-og-dark-card-design.md
+
+  One copy of these styles, used two ways:
+  - scripts/content/generate-og-images.js inlines it for the PNGs
+  - /ogimages/ and /style-exercise/ link it
+  Nothing on a content page loads it.
+
+  Colors come from the site's light-dark() tokens; color-scheme: dark on the
+  card resolves them to their dark halves whatever the page around it is.
+*/
+
+.og-card {
+  --og-pad-x: 80px;
+  --og-pad-top: 72px;
+  --og-pad-bottom: 72px;
+  --og-hang: 160px; /* cap top of the title's first line, from the card top */
+  --og-title-bottom: 140px; /* title box bottom: byline cap height + a 44px gap above it */
+  --og-title-max: 168px; /* og-card-fit.js steps the title down from here… */
+  --og-title-min: 96px; /* …to here, then truncates at a word */
+  --og-label-size: 38px;
+  --og-byline-size: 34px;
+
+  color-scheme: dark;
+  position: relative;
+  box-sizing: border-box;
+  width: 1200px;
+  height: 630px;
+  overflow: hidden;
+  background-color: var(--content-background-color);
+  color: var(--text-color);
+  -webkit-font-smoothing: antialiased;
+  text-align: start;
+
+  & * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* text-box trims each line box to cap height and baseline, so positions
+     below are where the ink starts and ends */
+  & .og-label,
+  & .og-title,
+  & .og-byline {
+    text-box: trim-both cap alphabetic;
+  }
+
+  /* Type of piece – accent, as nav links are at rest */
+  & .og-label {
+    position: absolute;
+    top: var(--og-pad-top);
+    left: var(--og-pad-x);
+    font-family: var(--font-family);
+    font-size: var(--og-label-size);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1;
+    color: var(--link-color);
+    white-space: nowrap;
+  }
+
+  /* Pages show their nav-style path (/about) a step lighter */
+  & .og-label-path {
+    font-weight: 500;
+  }
+
+  & .og-title-box {
+    position: absolute;
+    inset: var(--og-hang) var(--og-pad-x) var(--og-title-bottom);
+  }
+
+  & .og-title {
+    font-family: var(--font-family-display);
+    font-size: var(--og-title-max);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.02;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
+    color: var(--text-color);
+  }
+
+  /* og-card-fit.js wraps hyphenated words so they never break at the hyphen */
+  & .og-nowrap {
+    white-space: nowrap;
+  }
+
+  & .og-byline {
+    position: absolute;
+    bottom: var(--og-pad-bottom);
+    left: var(--og-pad-x);
+    font-family: var(--font-family-display);
+    font-size: var(--og-byline-size);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--text-color-light);
+    white-space: nowrap;
+  }
+
+  /* One cap height tall, sitting on the baseline: the mark's ink matches the
+     flat capitals top and bottom */
+  & .og-mark {
+    display: inline-block;
+    height: 1cap;
+    width: auto;
+    margin-right: 0.28em;
+    vertical-align: baseline;
+    fill: currentcolor;
+  }
+}

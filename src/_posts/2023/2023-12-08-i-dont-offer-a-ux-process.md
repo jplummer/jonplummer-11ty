@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2023-12-08T12:00:00-08:00"
 tags: post
 description: My current employer has a product management process, an engineering process, a design process, and more. But I don't offer a "UX process" – that's intentional and beneficial.
-ogImage: /assets/images/og/2023-12-08-i-dont-offer-a-ux-process.png
+ogImage: /assets/images/og/v2/2023-12-08-i-dont-offer-a-ux-process.png
 ---
 My current employer is much like others in that it has a product management process, an engineering process, a design process, a customer onboarding process, a customer support process, etc.
 

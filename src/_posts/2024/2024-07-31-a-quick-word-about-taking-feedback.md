@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2024-07-31T12:00:00-08:00"
 tags: post
 description: When receiving feedback on a design or other work the important thing is to see the intent behind the feedback and address that, rather than take the specific
-ogImage: /assets/images/og/2024-07-31-a-quick-word-about-taking-feedback.png
+ogImage: /assets/images/og/v2/2024-07-31-a-quick-word-about-taking-feedback.png
 ---
 When receiving feedback on a design or other work the important thing is to see the _intent_ behind the feedback and address that, rather than take the _specific_ advice or try to _appease_ the feedback-giver.
 

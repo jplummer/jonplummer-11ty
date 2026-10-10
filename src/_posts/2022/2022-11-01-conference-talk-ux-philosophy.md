@@ -5,7 +5,7 @@ date: "2022-11-01T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/11/conference-talk-ux-philosophy-page-12.png
 description: "Connect by Cayuse 2022 talk on how the UX team worked – three horizons, the tools we'd introduced, and why I'd rather innovate in the process than in the interface."
-ogImage: /assets/images/og/2022-11-01-conference-talk-ux-philosophy.png
+ogImage: /assets/images/og/v2/2022-11-01-conference-talk-ux-philosophy.png
 ---
 Connect by Cayuse is the company's annual customer conference, held online in October 2022. This was my Day 1 session: 30 minutes on how the UX design team approached its work, what we'd added to our practice over the prior year, and a few positions I hold about design that customers might not expect from a vendor. The audience was research administrators and the people who buy and run Cayuse software, so the talk stays away from design jargon and leans on examples.
 

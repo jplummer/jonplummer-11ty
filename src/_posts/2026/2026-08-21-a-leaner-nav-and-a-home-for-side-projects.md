@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2026-08-21"
 tags: post
 description: The header nav is down to four destinations, the footer is now a full site map, and side projects like Monotasker and Pointer-AR have a home at /sides.
-ogImage: /assets/images/og/2026-08-21-a-leaner-nav-and-a-home-for-side-projects.png
+ogImage: /assets/images/og/v2/2026-08-21-a-leaner-nav-and-a-home-for-side-projects.png
 ---
 Two changes to the site today: the nav split into a leaner header and a full footer map, and side projects got a home of their own.
 

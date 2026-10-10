@@ -6,7 +6,7 @@ tags: portfolio
 coverImage: 2022/12/SET_103.jpg
 coverPosition: center 16%
 description: "Velop mesh WiFi system design featuring app-based setup, node detection, placement guidance, and network visualization for whole-home coverage."
-ogImage: /assets/images/og/portfolio.png
+ogImage: /assets/images/og/v2/2020-07-03-velop-whole-home-wifi-system.png
 ---
 The Velop Whole-Home Wi-Fi System is a collection of identical routers that work together to behave as a single virtual device, blanketing your home in fast and strong Wi-Fi coverage without the usual degradation in speed provided by traditional range extenders. They connect to each other wirelessly over dedicated channels, or can be connected via wire, distributing Wi-Fi radios and Ethernet ports around your home where you need them.
 

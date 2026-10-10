@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2026-08-20"
 tags: post
 description: You can run out of gas trying to attend to every detail. But which details matter? That's up to your brand.
-ogImage: /assets/images/og/2026-08-20-not-every-touchpoint-deserves-the-best.png
+ogImage: /assets/images/og/v2/2026-08-20-not-every-touchpoint-deserves-the-best.png
 ---
 [Care has to show up in the product](https://jonplummer.com/2026/08/12/care-has-to-show-up-in-the-product/), I argued last time. But showing up everywhere, equally, isn't tenable. Your effort will be spread thin until it reads as barely competent instead of anything anyone remembers. If you want people to learn something specific about you from their experience, you have to choose that on purpose, then decide exactly where to prove it.
 

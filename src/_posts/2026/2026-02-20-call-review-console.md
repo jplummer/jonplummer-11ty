@@ -7,7 +7,7 @@ coverImage: 2026/02/New_Calls_List.png
 coverPosition: 72% 30%
 coverZoom: 1.1
 description: Call center quality managers couldn't find the right calls to use to coach their agents. We fixed that.
-ogImage: /assets/images/og/portfolio.png
+ogImage: /assets/images/og/v2/2026-02-20-call-review-console.png
 ---
 ## The situation
 

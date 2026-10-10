@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2023-06-09T12:00:00-08:00"
 tags: post
 description: We heroically snuck up to Seattle by car late at night and then back the following night, thoroughly wearing ourselves out in the process. The traveling was
-ogImage: /assets/images/og/2023-06-09-weekly-wins-for-the-week-of-2023-06-05.png
+ogImage: /assets/images/og/v2/2023-06-09-weekly-wins-for-the-week-of-2023-06-05.png
 ---
 We heroically snuck up to Seattle by car late at night and then back the following night, thoroughly wearing ourselves out in the process. The traveling was exhausting and not fun, but…
 

@@ -63,8 +63,9 @@ const TESTS = [
   { id: '404-suggest', script: '404-suggest.js', groups: ['unit'] },
   { id: 'site-branding', script: 'site-branding.js', groups: ['unit'] },
   { id: 'preview-site-lockup', script: 'preview-site-lockup.js', groups: ['unit'] },
-  { id: 'light-theme-colors', script: 'light-theme-colors.js', groups: ['unit'] },
   { id: 'og-image-filename', script: 'og-image-filename.js', groups: ['unit'] },
+  // OG card labels, mark geometry, and a real render of the title fit.
+  { id: 'og-card', script: 'og-card.js', groups: ['unit'] },
   { id: 'date-utils', script: 'date-utils.js', groups: ['unit'] },
   { id: 'og-shared-fingerprint', script: 'og-shared-fingerprint.js', groups: ['unit'] },
   { id: 'changelog-format', script: 'changelog-format.js', groups: ['unit'] },

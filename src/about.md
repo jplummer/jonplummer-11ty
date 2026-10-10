@@ -1,15 +1,17 @@
 ---
 title: About Jon Plummer
-description: Jon Plummer is a UX design leader and mentor with experience at Invoca, Cayuse, Belkin, and Medtronic. Learn about his design leadership philosophy and career.
-date: "2026-10-02"
+description: Jon Plummer is a product design and UX leader in enterprise SaaS, AI, IoT, and medical devices. He has led design teams at Invoca, Cayuse, and Belkin.
+date: "2026-10-09"
 layout: base.njk
 tags: page
 permalink: /about/
-ogImage: /assets/images/og/about.png
+ogImage: /assets/images/og/v2/about.png
 ---
 (updated {{ date | postDate }})
 
 Most companies say they care about customers. Their products rarely show it. I build ones that do – thoughtful enough that people notice, trust, and recommend them.
+
+I'm looking for my next role – design leadership where the work is deciding what to build, and making sure the reasoning survives all the way to what ships. That means Director, Senior Director, or VP of product design or UX, or an innovation lead at that level, with room to keep building prototypes myself. I'm remote from Eugene, Oregon, and [my resume](https://misc.jonplummer.com/Jon-Plummer-resume.pdf) has the details.
 
 I speak the languages of design, engineering, and business. That's been useful everywhere I've worked, but it matters most right now, when the most common mistake in AI product development is assuming that powerful models reduce the need for clear, coordinated, carefully constructed interfaces. They don't. Agentic AI means less direct manipulation, not none. Trust still comes from inspection and correction – from being able to poke around in the system and believe it, not just take its word for it. That demands interfaces that are simpler, not more elaborate, and experiences that work without training. The hardest part of a design is proving the vision is sound, then making sure that reasoning survives all the way to what ships; real customer discovery is what makes both possible.
 
@@ -19,15 +21,13 @@ That focus on discovery isn't theoretical. I trained as a social worker and an a
 
 Most recently I was Director of User Experience at Invoca, where I led a design team through an AI product transformation. Before that: Cayuse, Concentric Sky, and eleven years at Belkin, where I rose from Senior Designer to Senior Director and built the centralized UX team behind Linksys and [Wemo](/2018/12/10/wemo-smart-home-accessories-and-app/). Along the way I picked up [18 patent families](https://patents.google.com/?inventor=Jon+Robertsen+Plummer,Jon+Plummer,Jon+R+Plummer&assignee=Medtronic+Minimed%2c+Inc,Medtronic+MiniMed%2c+Inc.%2c+Northridge,Belkin+International%2c+Inc,Belkin+Corporation,Belkin+Components&num=100&sort=old), a handful of IDSA and CES awards, and a lot of hard-won opinions about how design actually earns trust in engineering- and product-led organizations.
 
-I'm looking for my next role – design leadership where the work is deciding what to build, and making sure the reasoning survives all the way to what ships.
-
 I don't just have *opinions* about AI. At Invoca, that transformation included SMS and voice-based virtual agents, as well as the [Call Review Console](/2026/02/20/call-review-console/) and AI Scorecard. These tools were put to work inside real customer conversations, cutting Customer Success Manager caseload by a fifth and helping open Contact Centers as a new customer segment. And outside of work I ship what I build – [side projects](/sides/), source included.
 
 I develop designers who can hold a point of view and defend it, not just execute one. I get there by asking them the questions they should be asking, helping them find their own way to an answer. But I'm not hands-off: when the situation calls for a direct read, I give one. I interpret, I instruct, I push back. The goal is people who can think well under pressure and make good calls without being managed through every decision.
 
 Outside of work: jazz piano, 3d printing and amateur industrial design, home improvement, cooking. The common threads are making ideas tangible and improving what's before me. I keep my hands in the tools at work and at home so I can show people the ropes and learn along with them. I design hobby software projects, specify them closely, steer agents through building them, and read everything before it ships – then publish them on GitHub. The ones with something to show are at [side projects](/sides/); a running account of what I'm building is at [/now](/now/).
 
-I mentor at [Designed.org](https://designed.org/mentors/jplummer) and [tupu.io](https://www.tupu.io/bios/jon/). See more via [my LinkedIn profile](https://linkedin.com/in/jplummer) and message me there if you have something to say, or reach me at [jon@jonplummer.com](mailto:jon@jonplummer.com?subject=I%20visited%20jonplummer.com%2Fabout%20and%20have%20this%20to%20say%3A).
+I mentor at [Designed.org](https://designed.org/mentors/jplummer) and [tupu.io](https://www.tupu.io/bios/jon/). See more via [my LinkedIn profile](https://www.linkedin.com/in/jplummer/) and message me there if you have something to say, or reach me at [jon@jonplummer.com](mailto:jon@jonplummer.com?subject=I%20visited%20jonplummer.com%2Fabout%20and%20have%20this%20to%20say%3A).
 
 * * *
 

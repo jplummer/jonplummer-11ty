@@ -5,7 +5,7 @@ date: "2026-08-27"
 tags:
   - post
 description: AI can help us prototype quickly and more completely than ever before. And this is helpful in regulated environments where a fully-documented product is essential.
-ogImage: /assets/images/og/2026-08-27-prototyping-in-a-regulated-environment.png
+ogImage: /assets/images/og/v2/2026-08-27-prototyping-in-a-regulated-environment.png
 ---
 When people worry about applying AI to regulated product development, they're usually worried about the wrong phase.
 

@@ -5,7 +5,7 @@ date: "2025-11-15"
 layout: base.njk
 tags: page
 permalink: /technologies/
-ogImage: /assets/images/og/technologies.png
+ogImage: /assets/images/og/v2/technologies.png
 ---
 - **[Eleventy (11ty)](https://www.11ty.dev/)**
   - Static site generator using Node.js

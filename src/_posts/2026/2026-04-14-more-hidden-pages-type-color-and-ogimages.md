@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2026-04-14T12:00:00-07:00"
 tags: post
 description: "A follow-up to the hidden-pages tour: three lab-style URLs for font stacks, OKLCH color themes, and Open Graph previews – public, not in the main nav, built with Eleventy."
-ogImage: /assets/images/og/2026-04-14-more-hidden-pages-type-color-and-ogimages.png
+ogImage: /assets/images/og/v2/2026-04-14-more-hidden-pages-type-color-and-ogimages.png
 ---
 Last year I wrote about [a first batch of "hidden" pages](/2025/11/20/the-hidden-pages-of-this-site/) on this site – RSS feeds, a technologies list, the changelog, etc. Those are mostly about *consuming* or *documenting* the project. Here are three more URLs in the same spirit: they are not in the main navigation, but they are not secret. They are small labs for *playing with* how the site looks when shared or read, still in the "everything is inspectable" vein.
 

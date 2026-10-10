@@ -9,7 +9,7 @@ coverImage: 2026/08/pointer-ar.png
 coverPosition: center 40%
 status: In development
 githubUrl: https://github.com/jplummer/pointer-ar
-ogImage: /assets/images/og/sides.png
+ogImage: /assets/images/og/v2/sides-pointer-ar.png
 ---
 ![A virtual arrow, overlaid on real life, pointing at a thing](/assets/images/2026/08/pointer-ar.png)
 

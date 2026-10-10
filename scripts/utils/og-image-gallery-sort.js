@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { findMarkdownFiles, findFilesByExtension } = require('./file-utils');
 const { parseFrontMatter } = require('./frontmatter-utils');
-const { isPost } = require('./content-utils');
+const { ogCardKind } = require('./og-card');
 const { generateOgImageFilename } = require('./og-image-filename');
 
 /** Same discovery set as `generateOgImages()` (posts + root md + njk, no drafts). */
@@ -46,22 +46,9 @@ function listOgImageSourceFiles() {
   return [...postFiles, ...rootFiles, ...njkFiles];
 }
 
-/** Mirrors `processFile` eligibility for OG generation (mapping filename → sort time only). */
+/** Same eligibility as `processFile` (scripts/utils/og-card.js). */
 function includeSourceForOgMap(filePath, frontMatter) {
-  if (!frontMatter) return false;
-  if (
-    frontMatter.tags &&
-    frontMatter.tags.includes('portfolio') &&
-    !filePath.endsWith('portfolio.njk') &&
-    !filePath.endsWith('portfolio.md')
-  ) {
-    return false;
-  }
-  const isPage = frontMatter.tags && frontMatter.tags.includes('page');
-  const isPortfolioPage = filePath.endsWith('portfolio.njk') || filePath.endsWith('portfolio.md');
-  if (!isPost(frontMatter) && !isPage && !isPortfolioPage) return false;
-  if (frontMatter.pagination) return false;
-  return true;
+  return ogCardKind(frontMatter) !== null;
 }
 
 function publicationSortMs(frontMatter, filePath) {

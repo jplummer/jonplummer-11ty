@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2026-09-09"
 tags: post
 description: The 404 page now reads the address that failed, compares it against every real page on the site, and offers the closest few – or says plainly that nothing is close.
-ogImage: /assets/images/og/2026-09-09-the-404-page-guesses-now.png
+ogImage: /assets/images/og/v2/2026-09-09-the-404-page-guesses-now.png
 ---
 Almost every 404 here is a near miss. Someone pastes a URL out of a chat client and it arrives truncated, or types a page name from memory and transposes two letters. The address is wrong, but not very wrong – can we figure out what they wanted?
 

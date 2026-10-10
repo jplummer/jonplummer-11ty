@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2026-06-15T12:00:00-07:00"
 tags: post
 description: There's a story going around that AI is squeezing designers out, but UX can emerge from this moment more connected to customers, their teams, and the product.
-ogImage: /assets/images/og/2026-06-15-this-is-what-we-were-waiting-for.png
+ogImage: /assets/images/og/v2/2026-06-15-this-is-what-we-were-waiting-for.png
 ---
 There's scuttlebutt that AI is squeezing designers out. That faster build cycles mean less room for design process. That when anyone can generate a working UI in an afternoon, the UX role shrinks to quality control at best.
 

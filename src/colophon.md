@@ -5,7 +5,7 @@ date: "2026-08-10"
 layout: base.njk
 tags: page
 permalink: /colophon/
-ogImage: /assets/images/og/colophon.png
+ogImage: /assets/images/og/v2/colophon.png
 ---
 (updated {{ date | postDate }})
 

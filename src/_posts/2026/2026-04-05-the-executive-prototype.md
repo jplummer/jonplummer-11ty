@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2026-04-05T12:00:00-07:00"
 tags: post
 description: What do you do when an executive brings you a prototype they vibe-coded that they are super-excited about?
-ogImage: /assets/images/og/2026-04-05-the-executive-prototype.png
+ogImage: /assets/images/og/v2/2026-04-05-the-executive-prototype.png
 ---
 > What do you do when an executive brings you a prototype they vibe-coded that they are super-excited about?
 

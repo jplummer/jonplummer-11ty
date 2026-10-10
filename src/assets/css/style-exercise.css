@@ -35,7 +35,7 @@
   position: relative;
 }
 
-.style-exercise-page .og-image-html-preview .og-image-rendered {
+.style-exercise-page .og-image-html-preview-scaled {
   transform: scale(0.5);
   transform-origin: top left;
   width: 1200px;

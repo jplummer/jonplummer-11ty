@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2024-11-02T12:00:00-08:00"
 tags: post
 description: "So many things went right in October: home progress with landscaping done, trees planted, storm drains cleaned, network providing 1200Mbps, and more."
-ogImage: /assets/images/og/2024-11-02-what-went-right-in-october.png
+ogImage: /assets/images/og/v2/2024-11-02-what-went-right-in-october.png
 ---
 So many things, in retrospect:
 

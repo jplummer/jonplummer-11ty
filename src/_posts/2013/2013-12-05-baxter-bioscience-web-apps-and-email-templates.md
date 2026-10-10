@@ -6,7 +6,7 @@ tags: portfolio
 coverImage: 2022/12/advoy_flags.png
 coverPosition: center top
 description: "Web applications and email templates for Baxter BioScience, including the Advoy app with country selection, bilingual interfaces, and dashboard designs."
-ogImage: /assets/images/og/portfolio.png
+ogImage: /assets/images/og/v2/2013-12-05-baxter-bioscience-web-apps-and-email-templates.png
 ---
 ![Baxter BioScience Advoy web application with country flag selection](/assets/images/2022/12/advoy_flags.png)
 *Advoy web application interface showing country flag selection, allowing users to choose their region for localized content and services.*

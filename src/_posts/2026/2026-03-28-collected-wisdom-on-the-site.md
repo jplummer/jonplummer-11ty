@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2026-03-28T12:00:00-07:00"
 tags: post
 description: A new section for brief notes, browsed at /wisdom/, filtered by tag, and available via a separate RSS feed.
-ogImage: /assets/images/og/2026-03-28-collected-wisdom-on-the-site.png
+ogImage: /assets/images/og/v2/2026-03-28-collected-wisdom-on-the-site.png
 ---
 I have been capturing links on this site for a bit, and I still write longer posts when something needs room to breathe. In between, I also accumulate short notes: a paragraph or two, a quote with context, a reminder to myself that does not warrant a full article.
 

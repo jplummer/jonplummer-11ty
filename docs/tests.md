@@ -36,7 +36,7 @@ _Derived from [`scripts/test-manifest.js`](../scripts/test-manifest.js) — see 
 
 **Fast Tests:** `html`, `links`, `wisdom`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `deploy-assets`, `error-document-assets`, `favicon-rasters`, `trailing-slash-links`, `critical-css`, `design-docs-location`, `portfolio-cover-crop`
 
-**Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `indexnow`, `manifest-cursors`, `figure-lightbox`, `site-branding`, `preview-site-lockup`, `light-theme-colors`, `og-image-filename`, `date-utils`, `og-shared-fingerprint`, `changelog-format`, `source-file-utils`, `test-json-pipe` — see [Unit Tests](#unit-tests) below
+**Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `indexnow`, `manifest-cursors`, `figure-lightbox`, `site-branding`, `preview-site-lockup`, `og-card`, `og-image-filename`, `date-utils`, `og-shared-fingerprint`, `changelog-format`, `source-file-utils`, `test-json-pipe` — see [Unit Tests](#unit-tests) below
 
 **Slow Tests:** `a11y` (launches browser)
 
@@ -150,7 +150,7 @@ Validates RSS/XML feed files for proper structure, required elements, and feed h
 
 ### seo.js
 
-Validates SEO metadata: title tags (10-200 chars), meta descriptions (20-300 chars), Open Graph tags, heading hierarchy (H1 required, no skipped levels), duplicate titles, canonical URL, language attribute. Skips redirects, blog pagination URLs, and error pages (404/500). Also reads `src/_includes/schema/person.njk` against `src/about.md`. `worksFor` is a current employer, so the schema may include it. The test fails only when the schema names one while the about page still says "I'm looking for my next role." Take that sentence off the page in the same change that adds the employer.
+Validates SEO metadata: title tags (10-200 chars), meta descriptions (20-300 chars), Open Graph tags, heading hierarchy (H1 required, no skipped levels), duplicate titles, canonical URL, language attribute. Skips redirects, blog pagination URLs, and error pages (404/500). Also reads `src/_includes/schema/person.njk` against `src/about.md`. `worksFor` is a current employer, so the schema may include it. The test fails only when the schema names one while the about page still says "I'm looking for my next role." Take that sentence off the page in the same change that adds the employer. Every `application/ld+json` block in the built HTML must also parse as JSON; the schema includes are hand-written JSON inside Nunjucks, where a trailing comma breaks them with no build error. With `--changed` that check covers only pages whose markdown changed, so run the full `seo` test after editing a schema include.
 
 **Note:** With `--changed`, runs when markdown or `src/_includes/schema/` changed (skips if only links.yaml changed). The person-schema check still runs in that mode, including when the only change is the schema include.
 
@@ -194,13 +194,13 @@ Four properties: both cursors record the *identical* `generatedAt` (two hash wal
 
 Unit checks for `scripts/utils/preview-site-lockup.js`: build-time `.site-lockup` HTML for `/color/` and `/type/` mini-page previews (mark SVG geometry, author link, optional tagline, HTML escaping). No `_site/` dependency.
 
-### light-theme-colors.js
+### og-card.js
 
-Unit checks for `extractLightThemeColorOverrides()` in `eleventy/utils/css-utils.js`: OG screenshots need forced-light `:root` colors. Asserts all required tokens extract (lived `light-dark()` colors plus `var()` aliases for hover/visited/active). No `_site/` dependency.
+Unit checks for the OG card ([spec](designs/specs/2026-10-09-og-dark-card-design.md)). Labels: `Post`, `Portfolio`, `Side project`, or a page's nav-style path (`/about`); paginated and untagged templates get no card of their own. The inline mark in `og-image-body.njk` must match `jp-mark.svg`. Then a real Puppeteer render: the title font is Big Shoulders, not the fallback (the generator guards every image the same way); a short title fits at the 168px maximum with its cap height on the hang line; the longest title bottoms out at 96px, truncates at a word with an ellipsis, and stays inside its box. Needs Puppeteer's browser; no `_site/` dependency.
 
 ### og-image-filename.js
 
-Unit checks for `generateOgImageFilename()` in `scripts/utils/og-image-filename.js`: date-only front matter (`YYYY-MM-DD`) must use calendar parts so local timezone does not shift the day (and double-prefix the slug). No `_site/` dependency.
+Unit checks for `generateOgImageFilename()` in `scripts/utils/og-image-filename.js`: date-only front matter (`YYYY-MM-DD`) must use calendar parts so local timezone does not shift the day (and double-prefix the slug). Also checks that the URL and disk path share the versioned directory (`/assets/images/og/v2/`) and that side projects name their card after the permalink. No `_site/` dependency.
 
 ### date-utils.js
 
@@ -208,7 +208,7 @@ Unit checks for `formatPostDate` / `formatPostDateAttr` in `eleventy/utils/date-
 
 ### og-shared-fingerprint.js
 
-Unit checks for the OG shared fingerprint in `scripts/utils/og-shared-fingerprint.js`, run against a temp copy of the real inputs. The fingerprint is stable across runs; it ignores CSS rules outside `:root`, so a lightbox or layout edit doesn't re-render every card; it changes when a design token or the card template changes; and the stored value round-trips, with a missing file reading as null. No `_site/` dependency.
+Unit checks for the OG shared fingerprint in `scripts/utils/og-shared-fingerprint.js`, run against a temp copy of the real inputs. The fingerprint is stable across runs; it ignores CSS rules outside `:root`, so a lightbox or layout edit doesn't re-render every card; it changes when a design token, the card template, the card styles, or the fit script changes; and the stored value round-trips, with a missing file reading as null. No `_site/` dependency.
 
 ### changelog-format.js
 

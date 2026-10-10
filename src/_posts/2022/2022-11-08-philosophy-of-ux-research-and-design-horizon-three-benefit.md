@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2022-11-08T12:00:00-08:00"
 tags: post
 description: I think of UX research and design practice in three horizons. Horizon three (benefit) is where we figure out what benefits to offer users and what new behaviors to enable.
-ogImage: /assets/images/og/2022-11-08-philosophy-of-ux-research-and-design-horizon-three-benefit.png
+ogImage: /assets/images/og/v2/2022-11-08-philosophy-of-ux-research-and-design-horizon-three-benefit.png
 ---
 I mentioned earlier that I think of UX research and design practice in three horizons:
 

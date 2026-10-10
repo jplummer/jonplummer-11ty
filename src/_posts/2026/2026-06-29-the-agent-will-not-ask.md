@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2026-06-29T12:00:00-07:00"
 tags: post
 description: When a developer doesn't know which button variant to use for a destructive action, they can ask. An agent won't.
-ogImage: /assets/images/og/2026-06-29-the-agent-will-not-ask.png
+ogImage: /assets/images/og/v2/2026-06-29-the-agent-will-not-ask.png
 ---
 When a developer isn't sure which button variant to use for a destructive action, they can ask. They can search Slack, check [Storybook](https://storybook.js.org), peek into the codebase, or ask someone nearby.
 

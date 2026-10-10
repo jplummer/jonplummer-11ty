@@ -4,7 +4,7 @@
   "@type": "WebSite",
   "name": "{{ site.title }}",
   "url": "{{ site.url }}",
-  "description": "UX design leader sharing insights on design, leadership, and product development. Experience at Invoca, Belkin, and Medtronic.",
+  "description": {{ computedDescriptionValue | dump | safe }},
   "publisher": {
     "@type": "Person",
     "name": "{{ site.author }}",

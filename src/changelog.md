@@ -5,6 +5,6 @@ date: "2025-11-15"
 layout: base.njk
 tags: page
 permalink: /changelog/
-ogImage: /assets/images/og/changelog.png
+ogImage: /assets/images/og/v2/changelog.png
 ---
 {% renderFile "./CHANGELOG.md" %}

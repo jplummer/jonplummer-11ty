@@ -5,7 +5,7 @@ date: "2026-10-02"
 layout: base.njk
 tags: page
 permalink: /now/
-ogImage: /assets/images/og/now.png
+ogImage: /assets/images/og/v2/now.png
 ---
 (Updated {{ date | postDate }}. This is a [now](https://nownownow.com/about) page, and if you have your own site [you might consider making one](https://nownownow.com/about), too.)
 

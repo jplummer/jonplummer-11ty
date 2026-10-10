@@ -8,7 +8,7 @@ permalink: /sides/wcag-audit/
 status: In development
 coverImage: 2026/09/wcag-audit-cover.jpg
 githubUrl: https://github.com/jplummer/wcag-audit
-ogImage: /assets/images/og/sides.png
+ogImage: /assets/images/og/v2/sides-wcag-audit.png
 ---
 ![My site with a rule violation overlay](/assets/images/2026/09/wcag-audit-cover.jpg)
 *Caught red-handed, on my own site, by my own tool.*

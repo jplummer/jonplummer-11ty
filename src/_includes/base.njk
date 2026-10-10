@@ -18,7 +18,7 @@
     {%- endif %}
     {%- set isPaginatedPage = pagination and pagination.pageNumber > 0 %}
     {%- if isPaginatedPage %}
-        {%- set computedDescriptionValue = "Page " + pagination.pageNumber + " of " + site.author + "'s UX leadership blog. Insights on design leadership, product development, and team management." %}
+        {%- set computedDescriptionValue = "Page " + pagination.pageNumber + " of " + site.author + "'s product design and UX leadership blog. Insights on design leadership, product development, and team management." %}
         {%- set ogImageAltValue = "Page " + pagination.pageNumber + " of " + site.author + "'s UX design blog" %}
     {%- else %}
         {%- if description %}
@@ -35,7 +35,7 @@
     {%- if ogImage and ogImage != 'auto' %}
         {%- set ogImageUrl = ogImage %}
     {%- else %}
-        {%- set ogImageUrl = '/assets/images/og/index.png' %}
+        {%- set ogImageUrl = ogDefaults.image %}
     {%- endif %}
     {%- include "head/meta_basic.njk" %}
     {%- include "head/links.njk" %}

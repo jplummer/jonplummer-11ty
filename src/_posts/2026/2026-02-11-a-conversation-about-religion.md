@@ -5,7 +5,7 @@ date: "2026-02-11T12:00:00-08:00"
 tags: post
 description: A conversation with Claude about religion, faith, and meaning.
 contentWarning: I had an interesting conversation about religion, with Claude of all things. This post is a departure from my usual content – a lengthy conversation about religion, with an AI chatbot, and deeply personal. Click to read.
-ogImage: /assets/images/og/2026-02-11-a-conversation-about-religion.png
+ogImage: /assets/images/og/v2/2026-02-11-a-conversation-about-religion.png
 ---
 <details>
 <summary>I had an interesting conversation about religion, with Claude of all things. This post is a departure from my usual content – a lengthy conversation about religion, with an AI chatbot, and deeply personal.</summary>

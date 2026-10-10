@@ -6,7 +6,7 @@ tags: portfolio
 coverImage: 2022/12/wemo-nest-device-list.png
 coverPosition: center top
 description: "Belkin's home automation line – switches, sensors, and the app that ran them. Setup as the moment of truth, rules people could say out loud, and what it took to be one system among several."
-ogImage: /assets/images/og/portfolio.png
+ogImage: /assets/images/og/v2/2018-12-10-wemo-smart-home-accessories-and-app.png
 ---
 2013 UX Award Silver, Best Consumer Device. 2015 IDSA IDEA Bronze, Wemo Insight Switch. 2019 CES Innovation Award, Wemo 3-Way Light Switch.
 

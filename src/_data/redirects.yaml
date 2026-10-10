@@ -4,6 +4,13 @@
 # These will generate Apache Redirect 301 rules in .htaccess
 
 redirects:
+  # Short public resume URL for print and email. The PDF on misc is overwritten in place, so this never changes.
+  - from: /resume/
+    to: https://misc.jonplummer.com/Jon-Plummer-resume.pdf
+  # Same, without the slash. Must stay after /resume/ – mod_alias takes the first match, and /resume alone would turn /resume/ into the PDF URL plus a slash.
+  - from: /resume
+    to: https://misc.jonplummer.com/Jon-Plummer-resume.pdf
+
   # Utility page URL updates
   - from: /style-exercise/
     to: /color/

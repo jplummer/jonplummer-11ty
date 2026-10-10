@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2020-12-15T12:00:00-08:00"
 tags: post
 description: You'd be forgiven for thinking my employer doesn't have a blog. It hasn't been updated in a while, and while the content is interesting, it's a little wooden and sparse.
-ogImage: /assets/images/og/2020-12-15-free-to-be-the-company-blog.png
+ogImage: /assets/images/og/v2/2020-12-15-free-to-be-the-company-blog.png
 ---
 You'd be forgiven for thinking my employer doesn't have a blog. It (and the website it's a part of) haven't been updated in a while, and while the content is interesting, it's a little wooden and sparsely published, to the tune of an article or two per year in past years, and none this year.
 

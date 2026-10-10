@@ -1,5 +1,7 @@
 # OG image lockup (mark + Semibold wordmark)
 
+> Superseded 2026-10-09 by [the OG dark card](2026-10-09-og-dark-card-design.md).
+
 **Date:** 2026-08-06
 
 ## Goal

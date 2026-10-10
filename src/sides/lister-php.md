@@ -8,7 +8,7 @@ permalink: /sides/lister-php/
 coverImage: 2026/08/lister.png
 status: Self-hosted
 githubUrl: https://github.com/jplummer/lister-php
-ogImage: /assets/images/og/sides.png
+ogImage: /assets/images/og/v2/sides-lister-php.png
 ---
 ![Drop this into a folder of files on your web server to provide easy access to them.](/assets/images/2026/08/lister.png)
 

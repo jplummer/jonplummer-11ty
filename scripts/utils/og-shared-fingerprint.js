@@ -1,7 +1,7 @@
 /**
- * One fingerprint for everything OG images share: the design tokens and
- * light-theme colors pulled from jonplummer.css, the inlined font faces, the
- * card templates, the JP mark, the site data the card uses, and the render
+ * One fingerprint for everything OG images share: the design tokens pulled
+ * from jonplummer.css, the inlined font faces, the card templates, styles,
+ * and fit script, the JP mark, the site data the cards use, and the render
  * code itself. If it changes, every OG image is regenerated; if not, each
  * image is regenerated only when its own source file changes.
  *
@@ -18,7 +18,6 @@ const fs = require('fs');
 const path = require('path');
 const {
   extractCssCustomProperties,
-  extractLightThemeColorOverrides,
   extractProductionFontFacesForInline,
 } = require('../../eleventy/utils/css-utils');
 
@@ -26,16 +25,19 @@ const {
 const SHARED_CONTENT_FILES = [
   'src/_includes/og-image.njk',
   'src/_includes/og-image-body.njk',
+  'src/assets/css/og-card.css',
+  'src/assets/js/og-card-fit.js',
   'src/assets/images/jp-mark.svg',
 ];
 
-// The site.js fields the card reads. Add a field here when a card template
-// starts using it.
-const OG_SITE_FIELDS = ['author'];
+// The site.js fields the cards read. Add a field here when a card template
+// starts using it. tagline is the default card's title (generateDefaultCard).
+const OG_SITE_FIELDS = ['author', 'tagline'];
 
-// The render code. Editing either one regenerates every image.
+// The render code. Editing any of these regenerates every image.
 const RENDER_CODE_FILES = [
   path.join(__dirname, '..', 'content', 'generate-og-images.js'),
+  path.join(__dirname, 'og-card.js'),
   path.join(__dirname, '..', '..', 'eleventy', 'utils', 'css-utils.js'),
 ];
 
@@ -50,7 +52,6 @@ function collectOgSharedInputs(cwd = process.cwd()) {
   try {
     const parts = [
       ['css:root', extractCssCustomProperties()],
-      ['css:light-theme', extractLightThemeColorOverrides()],
       ['css:font-faces', extractProductionFontFacesForInline()],
     ];
 

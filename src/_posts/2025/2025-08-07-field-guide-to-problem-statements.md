@@ -5,7 +5,7 @@ date: "2025-08-07"
 tags: portfolio
 coverImage: 2025/08/field-guide-to-problem-statements-page-1.png
 description: "Presentation to the product team about what a problem statement is and is not"
-ogImage: /assets/images/og/portfolio.png
+ogImage: /assets/images/og/v2/2025-08-07-field-guide-to-problem-statements.png
 ---
 Most product teams write problem statements. Often, those statements aren't really about problems – they're solutions in disguise, capability gaps, or vague assertions about what customers want or don't understand.
 

@@ -7,7 +7,7 @@ coverImage: 2022/11/datto-led-behavior.png
 coverPosition: center center
 coverZoom: 1
 description: A work-from-home network gateway with two lights and two audiences – the homeowner who plugged it in and the IT department responsible for keeping it running.
-ogImage: /assets/images/og/portfolio.png
+ogImage: /assets/images/og/v2/2022-11-30-datto-secure-edge.png
 ---
 ## The situation
 

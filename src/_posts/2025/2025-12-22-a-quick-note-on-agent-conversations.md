@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2025-12-22"
 tags: post
 description: When setting up your agent to converse with a user, think about what would speed the conversation to a happy conclusion most naturally.
-ogImage: /assets/images/og/2025-12-22-a-quick-note-on-agent-conversations.png
+ogImage: /assets/images/og/v2/2025-12-22-a-quick-note-on-agent-conversations.png
 ---
 Conversational design has become an important topic of late, and at work we've been chewing on this for a few different conversation channels and purposes. Familiar old principles from [consumer electronics setup](/2016/03/21/belkin-router-out-of-box/) and other experiences are coming up anew, such as
 

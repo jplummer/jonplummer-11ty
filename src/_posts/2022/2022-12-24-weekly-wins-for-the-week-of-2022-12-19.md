@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2022-12-24T12:00:00-08:00"
 tags: post
 description: Things are quieting down at work as people prepare for the holidays and tack a little more break onto the company's end-of-year break next week. Even so I
-ogImage: /assets/images/og/2022-12-24-weekly-wins-for-the-week-of-2022-12-19.png
+ogImage: /assets/images/og/v2/2022-12-24-weekly-wins-for-the-week-of-2022-12-19.png
 ---
 Things are quieting down at work as people prepare for the holidays and tack a little more break onto the company's end-of-year break next week. Even so
 

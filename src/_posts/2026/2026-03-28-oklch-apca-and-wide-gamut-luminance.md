@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2026-03-28T12:00:00-07:00"
 tags: post
 description: Designing in OKLCH but computing APCA via sRGB gamut maps the color before you measure Y. A practical split is Display P3 for wide-gamut readers and sRGB for everyone else.
-ogImage: /assets/images/og/2026-03-28-oklch-apca-and-wide-gamut-luminance.png
+ogImage: /assets/images/og/v2/2026-03-28-oklch-apca-and-wide-gamut-luminance.png
 ---
 When you author colors in [`OKLCH`](https://www.w3.org/TR/css-color-4/#specifying-oklch-lch-ok), you are using a space with a [larger gamut](https://www.w3.org/TR/css-color-4/#gamut-mapping) than `sRGB`. [APCA](https://readtech.org/ACCESSIBILITY/APCA/) (the Accessible Perceptual Contrast Algorithm) does not read OKLCH directly; it needs estimated screen luminance (the [APCA-W3 docs](https://apcaw3.myndex.com/docs/APCA-W3_FunctionsOverview.html) often call this `Ys`). The reference path goes from `encoded RGB` to `Ys`, then to `Lc`.
 

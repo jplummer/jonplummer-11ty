@@ -4,10 +4,11 @@ const {
   buildFilenameToPublicationSortMs,
   resolvePngSortMs
 } = require('../../scripts/utils/og-image-gallery-sort');
+const { ogImageDiskDir, ogImageUrl } = require('../../scripts/utils/og-image-filename');
 
 /** PNG listing for `/ogimages/`: newest first by content `date` when present, else fallbacks (see util). */
 module.exports = function () {
-  const ogDir = path.join(__dirname, '..', 'assets', 'images', 'og');
+  const ogDir = ogImageDiskDir(path.join(__dirname, '..', '..'));
   if (!fs.existsSync(ogDir)) {
     return [];
   }
@@ -22,7 +23,7 @@ module.exports = function () {
       const sortMs = resolvePngSortMs(filename, filenameToMs, fullPath);
       return {
         filename,
-        url: `/assets/images/og/${filename}`,
+        url: ogImageUrl(filename),
         sortMs
       };
     })

@@ -8,7 +8,7 @@ permalink: /sides/jonplummer-11ty/
 status: Self-hosted
 coverImage: 2026/09/jonplummer-11ty-cover.jpg
 githubUrl: https://github.com/jplummer/jonplummer-11ty
-ogImage: /assets/images/og/sides.png
+ogImage: /assets/images/og/v2/sides-jonplummer-11ty.png
 ---
 ![The post “Care has to show up in the product” at desktop width in light mode, with the same post on a phone in dark mode laid over it. One page, two widths, two themes, and not one media query that knows what a phone is.](/assets/images/2026/09/jonplummer-11ty-cover.jpg)
 

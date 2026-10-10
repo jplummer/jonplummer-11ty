@@ -5,7 +5,7 @@ date: "2016-03-21T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/12/Screenshot2017-06-0321.17.37.png
 description: "At any moment setup ran through three things at once – the box, the printed guide, and whichever software was current. The software kept changing. The other two had to hold."
-ogImage: /assets/images/og/portfolio.png
+ogImage: /assets/images/og/v2/2016-03-21-belkin-router-out-of-box.png
 ---
 An in-home study asking people to replace their existing router with one of three Belkin routers showed us how much work we had to do. People surprised us at every turn – losing the instructions, getting turned around inside them, not knowing which cable was which, plugging things into the wrong places. One nice lady plugged the power supply into the headphone jack on her computer, because it sort of looked like it belonged there and she had missed the step where she was supposed to give the router power.
 

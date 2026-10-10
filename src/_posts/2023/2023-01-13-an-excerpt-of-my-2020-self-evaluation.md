@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2023-01-13T12:00:00-08:00"
 tags: post
 description: "An excerpt of my 2020 self-evaluation, including suggestions for the management team: If you make a decision, tell us. Better yet, tell us right away and tell us why."
-ogImage: /assets/images/og/2023-01-13-an-excerpt-of-my-2020-self-evaluation.png
+ogImage: /assets/images/og/v2/2023-01-13-an-excerpt-of-my-2020-self-evaluation.png
 ---
 ## Do you have any suggestions for the management team?
 

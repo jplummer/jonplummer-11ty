@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2026-03-29T12:00:00-07:00"
 tags: post
 description: John Perry Barlow wrote 25 principles of adult behavior that are worth remembering now.
-ogImage: /assets/images/og/2026-03-29-barlow-principles.png
+ogImage: /assets/images/og/v2/2026-03-29-barlow-principles.png
 ---
 I recently rediscovered John Perry Barlow's [*Principles of Adult Behavior*](https://www.openculture.com/2018/02/the-25-principles-for-adult-behavior.html). The Silicon Valley visionary and founder of the [EFF](https://www.eff.org) died in 2018. In 1977 he wrote this list of principles for himself and asked his friends to hold him to them:
 

@@ -5,7 +5,7 @@ date: "2025-02-14T12:00:00-08:00"
 tags: portfolio
 coverImage: 2025/02/invoca-design-system-page-1.png
 description: "Orienting the cross-functional team to a new method of design system governance."
-ogImage: /assets/images/og/portfolio.png
+ogImage: /assets/images/og/v2/2025-02-14-invoca-design-system.png
 ---
 Nowadays this presentation would be similar, but emphasize changes to the design system and pattern library that were meant to improve its intelligibility to both humans and AI agents for AI-assisted coding and design purposes.
 

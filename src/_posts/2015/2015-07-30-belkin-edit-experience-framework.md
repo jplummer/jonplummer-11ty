@@ -6,7 +6,7 @@ tags: portfolio
 coverImage: 2026/09/edit-qualities.jpg
 coverPosition: center center
 description: "Belkin's brand statements couldn't tell a designer what to do. EDIT turned four experience qualities into behaviors at each stage of a person's time with a product, with a scorecard to grade against."
-ogImage: /assets/images/og/portfolio.png
+ogImage: /assets/images/og/v2/2015-07-30-belkin-edit-experience-framework.png
 ---
 ## The situation
 

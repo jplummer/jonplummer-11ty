@@ -5,6 +5,6 @@ date: "2025-01-27"
 layout: base.njk
 tags: page
 permalink: /readme/
-ogImage: /assets/images/og/readme.png
+ogImage: /assets/images/og/v2/readme.png
 ---
 {% renderFile "./README.md" %}

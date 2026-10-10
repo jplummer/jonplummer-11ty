@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2026-04-04T12:00:00-07:00"
 tags: post
 description: Sometimes you have to spend the time.
-ogImage: /assets/images/og/2026-04-04-sometimes-you-take-over.png
+ogImage: /assets/images/og/v2/2026-04-04-sometimes-you-take-over.png
 ---
 Sometimes you have to spend the time. Sometimes the agent won't converge on your idea. Sometimes it's the wrong tool for the job.
 

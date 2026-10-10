@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2026-06-19T12:00:00-07:00"
 tags: post
 description: With AI-assisted development, rework is cheap, so we can build quality in through prototypes, customer involvement, and iteration after launch.
-ogImage: /assets/images/og/2026-06-19-quality-moves.png
+ogImage: /assets/images/og/v2/2026-06-19-quality-moves.png
 ---
 In the old system, quality required specification and inspection. We wrote down what "good" looked like: every state, every edge case, every pixel. Or at least every state and edge case we could think of; engineering would find more, of course. Then we built, adapting to the difficulties of development and handling the "new" problems as they arose. Then we checked whether the thing matched our specs, and were disappointed.
 

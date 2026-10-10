@@ -5,7 +5,7 @@ date: "2026-05-24"
 tags:
   - post
 description: Why Monotasker skips the lobby and drops you straight into the work.
-ogImage: /assets/images/og/2026-05-24-dont-show-me-the-lobby.png
+ogImage: /assets/images/og/v2/2026-05-24-dont-show-me-the-lobby.png
 ---
 I built Monotasker to solve a specific problem: I have too many home and side projects, and it's easy to get bogged down in the list. Staring at 30 items can be as bad as having no list at all. The app picks one reminder at random and shows it to me, persistently, until I decide I'm done with it or want a new one. That's it. But the interesting part is what happens before we have tasks loaded in the app.
 

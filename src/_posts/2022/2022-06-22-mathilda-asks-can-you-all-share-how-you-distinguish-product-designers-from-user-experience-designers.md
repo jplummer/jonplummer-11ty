@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2022-06-22T12:00:00-08:00"
 tags: post
 description: Mathilda asks how to distinguish product designers from user experience designers. The differentiation matters for hiring, team structure, and role clarity.
-ogImage: /assets/images/og/2022-06-22-mathilda-asks-can-you-all-share-how-you-distinguish-product-designers-from-user-experience-designers.png
+ogImage: /assets/images/og/v2/2022-06-22-mathilda-asks-can-you-all-share-how-you-distinguish-product-designers-from-user-experience-designers.png
 ---
 Mathilda asks:
 

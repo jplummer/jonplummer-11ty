@@ -41,7 +41,7 @@ Run `pnpm run test wisdom` after editing. Unexpected fields are rejected.
 ### Optional
 
 - **`description`** - Meta description (20-300 chars recommended, warnings only if outside range). Defaults to title if omitted.
-- **`ogImage`** - OG image path. Use `auto` or omit to auto-generate. Format: `/assets/images/og/YYYY-MM-DD-post-slug.png`
+- **`ogImage`** - OG image path. Use `auto` or omit to auto-generate. Format: `/assets/images/og/v2/YYYY-MM-DD-post-slug.png`
 - **`coverImage`** - Portfolio grid thumbnail path relative to `src/assets/images/` (e.g. `2026/06/onboarding.png`). Used only by `portfolio_list_item.njk`.
 - **`coverPosition`** - Portfolio grid crop focal point. CSS `object-position` syntax: one or two tokens from `center` / `top` / `bottom` / `left` / `right` and percentages (e.g. `center 20%`). Omit for center. Does not affect the detail-page figure.
 - **`coverZoom`** - Portfolio grid crop zoom. Unitless number from 1 to 3 (`1` = default cover scale, `1.25` = tighter crop). Omit for 1. Same 16:9 card size; detail page unchanged.
@@ -130,16 +130,18 @@ This checks all posts under `src/_posts/` and every top-level `src/*.md` templat
 
 ## Open Graph Images
 
-OG images are auto-generated for posts and for templates tagged `page` (or the portfolio page), including nested routes such as `src/wisdom/index.njk`. For a page, the PNG filename comes from `permalink` (for example `/wisdom/` → `wisdom.png`).
+OG cards are auto-generated for posts, portfolio pieces, side projects, and templates tagged `page`, including nested routes such as `src/wisdom/index.njk`. The card shows a label (`Post`, `Portfolio`, `Side project`, or a page's nav-style path like `/about`), the title sized to fit, and the byline. For a page, the PNG filename comes from `permalink` (for example `/wisdom/` → `wisdom.png`). Design: [OG dark card spec](designs/specs/2026-10-09-og-dark-card-design.md).
 
-Templates that use `pagination:` are skipped by the generator (one file builds many URLs, so a single PNG would be wrong). Point those at a shared image, typically `/assets/images/og/index.png`.
+Templates that use `pagination:` are skipped by the generator (one file builds many URLs, so a single PNG would be wrong). They fall back to the shared default card, `/assets/images/og/v2/index.png`, which the generator renders from `site.tagline`.
+
+Cards live in a versioned directory (`/assets/images/og/v2/`) because link-preview services cache images by URL. Bump `OG_IMAGE_VERSION` in `scripts/utils/og-image-filename.js` only when a redesign should refresh previews in new shares.
 
 ### Usage
 
 - **Auto-generate**: Set `ogImage: auto` or omit the field
 - **Manual**: Set `ogImage` to a custom path (e.g., `/assets/images/custom-og.png`)
 
-Posts use `/assets/images/og/YYYY-MM-DD-post-slug.png`. Pages use the permalink-derived slug as above.
+Posts use `/assets/images/og/v2/YYYY-MM-DD-post-slug.png`. Pages use the permalink-derived slug as above.
 
 ### Preview
 

@@ -7,7 +7,7 @@ coverImage: 2026/04/dd-list-view.png
 coverPosition: center 32%
 coverZoom: 1.1
 description: "A close reading of actual customer configuration data leads to new platform capabilities that are enabled by data we already have, and new patterns useful to customers platform-wide."
-ogImage: /assets/images/og/portfolio.png
+ogImage: /assets/images/og/v2/2026-04-20-data-dictionary-prototype.png
 ---
 ## The situation
 

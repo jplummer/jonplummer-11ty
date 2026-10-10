@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2026-06-08T12:00:00-07:00"
 tags: post
 description: Using AI to build many small prototypes, then selecting and iterating from there, beats trying to think your way to one right answer.
-ogImage: /assets/images/og/2026-06-08-quick-prototypes-beat-thinking.png
+ogImage: /assets/images/og/v2/2026-06-08-quick-prototypes-beat-thinking.png
 ---
 A product team needed to decide *if and how* to provide a little convenience around an `API Name` when their user enters a `Display Name`. Small interaction, lots of edge cases: when does auto-fill stop? What if the user clears the API field? What if they edit it once and change their mind? When do we stop trying to keep the two fields in sync?
 

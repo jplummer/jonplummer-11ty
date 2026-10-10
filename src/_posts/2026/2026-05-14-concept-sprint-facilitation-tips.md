@@ -5,7 +5,7 @@ date: "2026-05-14T12:00:00-07:00"
 tags:
   - post
 description: Facilitation principles, phase-by-phase tips, and common pitfalls for running a Concept Sprint – the harder-to-document stuff that makes it work.
-ogImage: /assets/images/og/2026-05-14-concept-sprint-facilitation-tips.png
+ogImage: /assets/images/og/v2/2026-05-14-concept-sprint-facilitation-tips.png
 ---
 These notes assume you've read the [process documentation](/2026/05/04/concept-sprint/). What follows is the harder-to-document stuff: the principles, the traps, and the moves.
 

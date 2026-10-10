@@ -6,7 +6,7 @@ tags: portfolio
 coverImage: 2026/06/onboarding.png
 coverPosition: center 20%
 description: "My first iOS app crushes the paradox of choice."
-ogImage: /assets/images/og/portfolio.png
+ogImage: /assets/images/og/v2/2026-06-05-monotasker.png
 ---
 My personal project list had become daunting: 30 active items, all legitimate, none obviously more important than the others. I'd open the list, see how long it is, and go do something else. The list was accurate but its length was demoralizing.
 

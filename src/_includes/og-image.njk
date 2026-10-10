@@ -1,144 +1,34 @@
 {#-
-  Open Graph Image Template
-  
-  This template generates HTML that is rendered into PNG images for Open Graph
-  social media previews. The HTML is processed by Puppeteer in generate-og-images.js
-  to create 1200x630px images.
-  
-  The template uses CSS custom properties from the main stylesheet (injected via
-  cssCustomProperties) but overrides color variables to force light theme, ensuring
-  consistent appearance across all OG images regardless of system preferences.
-  
-  Preview this template at: http://localhost:8080/ogimages/
-  
-  Structure:
-  - body: Fixed 1200x630px one-sheet soft field (no mat), top-aligned
-  - .og-content: Full-bleed content with padding
-  - .og-hgroup: Mark + Semibold logotype (live logotype × --og-type-scale; no tagline)
-  - .og-title: Post title (live h1 × --og-type-scale)
-  - .og-description: Optional post description
-  - .og-date: Optional post date (quiet size/ink/weight — same as site footer p / .posted-on)
-  
+  OG card document – rendered to a 1200×630 PNG by
+  scripts/content/generate-og-images.js (Puppeteer). Preview: /ogimages/
+
   Variables:
-  - title: Post title (required)
-  - description: Post description (optional)
-  - date: Post date in ISO format (optional)
-  - cssCustomProperties: Extracted :root CSS from main stylesheet
-  - productionFontFaces: @font-face rules with file:// URLs for Puppeteer
-  - lightThemeColorOverrides: Light halves of :root color tokens
+  - productionFontFaces: @font-face rules with file:// URLs
+  - cssCustomProperties: the site's :root tokens (light-dark() pairs;
+    the card resolves them dark)
+  - ogCardCss: src/assets/css/og-card.css
+  - ogFitScript: src/assets/js/og-card-fit.js
+  - plus the og-image-body.njk variables (title, label, labelIsPath, site)
 -#}
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    /* Production @font-face (file:// URLs for Puppeteer) */
     {{ productionFontFaces | safe }}
-
-    /* CSS custom properties from main stylesheet */
     {{ cssCustomProperties | safe }}
-    
-    /* Force light theme for OG images - light halves from jonplummer.css :root */
-    {{ lightThemeColorOverrides | safe }}
-    
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    
-    /* Reset all link styles to prevent browser defaults */
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-    
-    /* Fixed dimensions for Open Graph image standard (1200x630px) */
-    body {
-      --og-type-scale: 1.6; /* live rem tokens × scale; keeps logotype/title at 0.9 */
+    html, body {
       width: 1200px;
       height: 630px;
-      color-scheme: light;
-      font-family: var(--font-family);
-      font-size: calc(var(--font-size-base) * var(--og-type-scale));
-      line-height: var(--line-height);
-      letter-spacing: var(--letter-spacing-normal);
-      color: var(--text-color);
-      /* One sheet — no outer mat; same soft field as the live page */
-      background-color: var(--content-background-color);
-      display: flex;
-      justify-content: stretch;
-      align-items: flex-start;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
     }
-    
-    .og-content {
-      width: 100%;
-      padding: 4rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-    
-    /* Mark + Semibold logotype — live --font-size-logotype × scale */
-    .og-hgroup {
-      display: flex;
-      align-items: center;
-      gap: var(--spacing-sm);
-      flex-wrap: wrap;
-      /* Site-like air under lockup before the title (header → content) */
-      margin-bottom: var(--spacing-3xl);
-      font-family: var(--font-family-display);
-      font-size: calc(var(--font-size-logotype) * var(--og-type-scale));
-      line-height: 1;
-      font-weight: var(--font-weight-semibold);
-      letter-spacing: var(--letter-spacing-normal);
-      text-transform: uppercase;
-      color: var(--text-color);
-    }
-
-    .og-mark {
-      display: block;
-      flex-shrink: 0;
-      height: 1cap;
-      width: auto;
-      margin-top: -2px;
-    }
-
-    .og-logotype a {
-      color: var(--text-color) !important;
-      text-decoration: none;
-    }
-    
-    /* Title — live article h1 (--font-size-2xl) × scale */
-    .og-title {
-      font-family: var(--font-family-display);
-      font-size: calc(var(--font-size-2xl) * var(--og-type-scale));
-      line-height: var(--line-height-2xl);
-      font-weight: var(--font-weight-semibold);
-      letter-spacing: var(--letter-spacing-normal);
-      text-wrap: balance;
-      margin-bottom: var(--spacing-sm);
-    }
-    
-    .og-description {
-      font-size: calc(var(--font-size-base) * var(--og-type-scale));
-      line-height: var(--line-height-base);
-      max-width: 90%;
-      margin-bottom: var(--spacing-sm);
-      color: var(--text-color);
-    }
-    
-    .og-date {
-      /* Matches site `footer p` (article .posted-on inherits that rule) */
-      font-size: calc(var(--font-size-quiet) * var(--og-type-scale));
-      line-height: var(--line-height-quiet);
-      font-weight: var(--font-weight-light);
-      color: var(--text-color-light);
-    }
+    {{ ogCardCss | safe }}
   </style>
 </head>
 <body>
   {% include "og-image-body.njk" %}
+  <script>{{ ogFitScript | safe }}</script>
 </body>
 </html>

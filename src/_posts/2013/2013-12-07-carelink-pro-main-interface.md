@@ -7,7 +7,7 @@ coverImage: 2022/12/reports2.png
 coverPosition: center 26%
 coverZoom: 1.01
 description: "Main interface design for CareLink Pro, a diabetes management software for physicians featuring reports, device management, and patient profiles."
-ogImage: /assets/images/og/portfolio.png
+ogImage: /assets/images/og/v2/2013-12-07-carelink-pro-main-interface.png
 ---
 
 ![CareLink Pro report selection screen](/assets/images/2022/12/reports1.png)

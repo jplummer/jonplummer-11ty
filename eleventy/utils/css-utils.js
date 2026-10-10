@@ -80,56 +80,8 @@ function extractProductionFontFacesForInline() {
   return css.trim();
 }
 
-const LIGHT_THEME_COLOR_VARS = [
-  'text-color',
-  'text-color-light',
-  'border-color',
-  'background-color',
-  'content-background-color',
-  'link-color',
-  'link-hover-color',
-  'link-visited-color',
-  'link-active-color'
-];
-
-/**
- * Extracts light-scheme color values from :root for forced-light contexts (OG PNGs).
- * Accepts `light-dark(light, dark)` (emits the light value) or `var(--other)` aliases
- * onto those colors (three-color link model: hover/active → accent, visited → quiet).
- *
- * @returns {string} `:root { … }` block with light-only values
- */
-function extractLightThemeColorOverrides() {
-  const rootBlock = extractCssCustomProperties();
-  const lines = [];
-
-  for (const varName of LIGHT_THEME_COLOR_VARS) {
-    const lightDarkRe = new RegExp(
-      `--${varName}:\\s*light-dark\\(\\s*([^,]+?)\\s*,\\s*[^)]+\\)`
-    );
-    const lightDarkMatch = rootBlock.match(lightDarkRe);
-    if (lightDarkMatch) {
-      lines.push(`  --${varName}: ${lightDarkMatch[1].trim()};`);
-      continue;
-    }
-
-    const aliasRe = new RegExp(`--${varName}:\\s*(var\\(--[a-z0-9-]+\\))`);
-    const aliasMatch = rootBlock.match(aliasRe);
-    if (aliasMatch) {
-      lines.push(`  --${varName}: ${aliasMatch[1]};`);
-    }
-  }
-
-  if (lines.length !== LIGHT_THEME_COLOR_VARS.length) {
-    throw new Error('Could not extract all light theme color overrides from :root');
-  }
-
-  return `:root {\n${lines.join('\n')}\n}`;
-}
-
 module.exports = {
   extractCssCustomProperties,
-  extractProductionFontFacesForInline,
-  extractLightThemeColorOverrides
+  extractProductionFontFacesForInline
 };
 

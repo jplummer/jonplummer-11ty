@@ -5,7 +5,7 @@ date: "2022-05-13T12:00:00-08:00"
 tags: portfolio
 coverImage: 2022/05/discovery-interview-training-page-26.png
 description: "Two sessions teaching a product team to run discovery interviews – why, how to write a research question and topic list, and how to conduct and debrief the interview."
-ogImage: /assets/images/og/portfolio.png
+ogImage: /assets/images/og/v2/2022-05-13-discovery-interview-training.png
 ---
 Cayuse's leadership had told the product team it was to understand the markets we serve, understand why customers do what they do, focus on the challenges of real users, and actually talk to users to accomplish these. But the process the team actually followed had no step where any of that happened. Product managers, buried in feature commitments, took in requests and turned them into features. When leadership did a start/stop/continue exercise at a meeting in Portland, "train on customer interviewing" landed on the start list.
 

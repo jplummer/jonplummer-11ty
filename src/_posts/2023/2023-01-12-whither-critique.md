@@ -5,7 +5,7 @@ date: "2023-01-12T12:00:00-08:00"
 tags: portfolio
 coverImage: 2023/01/whither-critique-page-7.png
 description: "A healthy design team needs some form of group critique."
-ogImage: /assets/images/og/portfolio.png
+ogImage: /assets/images/og/v2/2023-01-12-whither-critique.png
 ---
 When I arrived at Invoca the design team was apprehensive about starting a regular group critique. But they were also not otherwise helping each other, not aware of each others' projects, not pulling in the same design direction. (This often happens when design leadership is insufficient.) So we fixed that; this presentation was the first step.
 

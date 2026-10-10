@@ -6,7 +6,7 @@ tags: portfolio
 coverImage: 2022/12/1_status.gif
 coverPosition: center top
 description: "Interaction design for a next-generation insulin pump interface, featuring enhanced LCD screens, bolus status tracking, and improved usability testing."
-ogImage: /assets/images/og/portfolio.png
+ogImage: /assets/images/og/v2/2013-12-06-minimed-next-gen-pump-interface.png
 ---
 Medtronic engaged IDEO to help design a next-generation pump to succeed the MiniMed 522, which combined insulin delivery with wireless continuous glucose measurement. IDEO proposed a more capable LCD screen and more buttons, among other things. Before the project was shelved in favor of a patch-pump concept I took over interaction design from IDEO.
 

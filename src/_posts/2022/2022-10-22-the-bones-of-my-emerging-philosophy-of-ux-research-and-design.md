@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2022-10-22T12:00:00-08:00"
 tags: post
 description: "There are two basic activities in UX: Learn and Make. You might call these \"understand\" and \"design,\" or \"investigate\" and \"generate.\" The bones of my UX philosophy."
-ogImage: /assets/images/og/2022-10-22-the-bones-of-my-emerging-philosophy-of-ux-research-and-design.png
+ogImage: /assets/images/og/v2/2022-10-22-the-bones-of-my-emerging-philosophy-of-ux-research-and-design.png
 ---
 ## Two basic activities
 

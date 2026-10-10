@@ -5,10 +5,12 @@ description: Full-site style rehearsal (tokens and typography on a fixed exercis
 # Build: omitted via root `.eleventyignore` until the route returns; `/style-exercise/` → `/color/` in redirects.
 permalink: /style-exercise/
 eleventyExcludeFromCollections: true
-ogImage: /assets/images/og/index.png
+ogImage: /assets/images/og/v2/index.png
 ---
 
 <link rel="stylesheet" href="/assets/css/style-exercise.css">
+<link rel="stylesheet" href="/assets/css/og-card.css">
+<script src="/assets/js/og-card-fit.js" defer></script>
 
 <script type="application/json" id="color-lab-schemes">{{ colorLabSchemes.presets | dump | safe }}</script>
 <script type="module" src="/assets/js/color-lab.js"></script>
@@ -80,7 +82,7 @@ ogImage: /assets/images/og/index.png
       <li>
         <article class="portfolio-item" id="ex-port-1">
           <a href="#ex-port-1" rel="bookmark">
-            <img src="/assets/images/og/portfolio.png" alt="Portfolio sample 1">
+            <img src="/assets/images/og/v2/portfolio.png" alt="Portfolio sample 1">
             <p>Portfolio item title</p>
           </a>
           <p class="portfolio-item-description">Short supporting line under the title.</p>
@@ -89,7 +91,7 @@ ogImage: /assets/images/og/index.png
       <li>
         <article class="portfolio-item" id="ex-port-2">
           <a href="#ex-port-2" rel="bookmark">
-            <img src="/assets/images/og/about.png" alt="Portfolio sample 2">
+            <img src="/assets/images/og/v2/about.png" alt="Portfolio sample 2">
             <p>Second item</p>
           </a>
         </article>
@@ -101,18 +103,10 @@ ogImage: /assets/images/og/index.png
 
   <section class="color-test-content">
     <h2>OG frame</h2>
-    <p>Scaled OG markup to see headline and description colors together.</p>
+    <p>The OG card at half size. It always renders dark, whatever the scheme here.</p>
     <div class="og-image-html-preview">
-      <div class="og-image-rendered">
-        <div class="og-content">
-          <hgroup class="og-hgroup">
-            <h1><a href="/">{{ site.author }}</a></h1>
-            <p>{{ page.url | taglineForPage }}</p>
-          </hgroup>
-          <h1 class="og-title">Sample OG title</h1>
-          <p class="og-description">Sample OG description for scheme checks.</p>
-          <p class="og-date">April 11, 2026</p>
-        </div>
+      <div class="og-image-html-preview-scaled">
+        {% renderFile "./src/_includes/og-image-body.njk", { title: "Sample OG title", label: "Post", site: site } %}
       </div>
     </div>
   </section>

@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2023-06-15T12:00:00-08:00"
 tags: post
 description: Someone mentioned "specialized enterprise users" as a reason to pay less attention to accessibility. This is based on a problematic assumption that needs to be dispelled.
-ogImage: /assets/images/og/2023-06-15-someone-mentions-specialized-enterprise-users-in-re-accessibility.png
+ogImage: /assets/images/og/v2/2023-06-15-someone-mentions-specialized-enterprise-users-in-re-accessibility.png
 ---
 During a discussion of accessibility and the level of attention a company ought to pay to it, someone said
 

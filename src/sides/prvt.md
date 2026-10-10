@@ -9,7 +9,7 @@ coverImage: 2026/08/prvt.png
 coverPosition: center 15%
 status: Self-hosted
 githubUrl: https://github.com/jplummer/prvt
-ogImage: /assets/images/og/sides.png
+ogImage: /assets/images/og/v2/sides-prvt.png
 ---
 ![Shorten a URL and make a QR code, with privacy in mind.](/assets/images/2026/08/prvt.png)
 

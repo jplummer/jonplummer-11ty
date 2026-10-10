@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2022-12-04T12:00:00-08:00"
 tags: post
 description: "Jaemi asks for advice for starting a new job. Quick advice for individual contributors: Now is the time to ask questions and make connections."
-ogImage: /assets/images/og/2022-12-04-quick-advice-for-the-individual-contributor-starting-a-new-job.png
+ogImage: /assets/images/og/v2/2022-12-04-quick-advice-for-the-individual-contributor-starting-a-new-job.png
 ---
 Jaemi asks:
 

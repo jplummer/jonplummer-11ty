@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2026-09-30"
 tags: post
 description: I like arguing with the agent; it reminds me of good things I already think.
-ogImage: /assets/images/og/2026-09-30-arguing-with-the-agent.png
+ogImage: /assets/images/og/v2/2026-09-30-arguing-with-the-agent.png
 ---
 I like arguing with the agent because it reminds me of good things I already think.
 

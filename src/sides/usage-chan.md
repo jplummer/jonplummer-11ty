@@ -8,7 +8,7 @@ permalink: /sides/usage-chan/
 status: In development
 coverImage: 2026/09/usage-chan-desk.jpg
 githubUrl: https://github.com/jplummer/usage-chan
-ogImage: /assets/images/og/sides.png
+ogImage: /assets/images/og/v2/sides-usage-chan.png
 ---
 ![Stack-Chan, you've changed!](/assets/images/2026/09/usage-chan-desk.jpg)
 *94% left, and OpenUsage on my Mac agrees.*

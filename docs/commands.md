@@ -260,12 +260,12 @@ pnpm run generate-og-images
 ```
 
 The script will:
-- Generate images for posts and pages that don't have them
+- Generate a card for every post, portfolio piece, side project, and page that doesn't have one, plus the shared default card (`index.png`) from site data. Design: [OG dark card spec](designs/specs/2026-10-09-og-dark-card-design.md)
 - Regenerate images if the source file (title, description, date) has changed
-- Regenerate **all** images when the shared fingerprint changes: design tokens (`:root`) or light-theme colors in `jonplummer.css`, font faces, the card templates, the JP mark, site data, or the render code itself (`generate-og-images.js`, `css-utils.js`). Other CSS rules don't count, so layout or lightbox edits no longer re-render every card. The fingerprint lives in `.cache/og-shared-fingerprint.json`; if it's missing, the first run records it and keeps the existing images. Code: `scripts/utils/og-shared-fingerprint.js`.
+- Regenerate **all** images when the shared fingerprint changes: design tokens (`:root`) in `jonplummer.css`, font faces, the card templates (`og-image.njk`, `og-image-body.njk`), styles (`og-card.css`), fit script (`og-card-fit.js`), the JP mark, site data, or the render code itself (`generate-og-images.js`, `og-card.js`, `css-utils.js`). Other CSS rules don't count, so layout or lightbox edits no longer re-render every card. The fingerprint lives in `.cache/og-shared-fingerprint.json`; if it's missing, the first run records it and keeps the existing images. Code: `scripts/utils/og-shared-fingerprint.js`.
 - Regenerate images if `ogImage` is set in frontmatter but the image file doesn't exist
 - Skip images that are up to date (incremental generation - typically <1 second if all up-to-date)
-- Skip portfolio items (individual portfolio pieces don't need OG images)
+- Render with one browser for the whole run, and fail any image whose fonts fell back (the site's `font-display: optional` faces are forced to `block` for screenshots)
 - Skip files with manually set `ogImage` values only if the image file exists
 
 **Force Regeneration**: To regenerate all images (useful after changing OG image styling):

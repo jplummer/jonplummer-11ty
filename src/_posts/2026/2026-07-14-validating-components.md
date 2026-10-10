@@ -4,7 +4,7 @@ layout: layouts/single_post.njk
 date: "2026-07-14T12:00:00-07:00"
 tags: post
 description: It's tempting to try to prove that your design system components are good. But you can't test a button out of context.
-ogImage: /assets/images/og/2026-07-14-validating-components.png
+ogImage: /assets/images/og/v2/2026-07-14-validating-components.png
 ---
 Danielle asks:
 

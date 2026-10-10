@@ -7,7 +7,7 @@ tags: sideproject
 permalink: /sides/plain-english-service/
 status: Paused
 githubUrl: https://github.com/jplummer/plain-english-service
-ogImage: /assets/images/og/sides.png
+ogImage: /assets/images/og/v2/sides-plain-english-service.png
 ---
 Select text anywhere on macOS, run "Find Uncommon Words" from the Services menu, and it checks every word against a combined dictionary of the 10,000 most common English words plus conversational vocabulary from TV and movie scripts. What's left over is the interesting part – jargon, names, technical terms, five-dollar words, anything outside of plain English. Inspired by Randall Munroe's [Thing Explainer](https://xkcd.com/thing-explainer/) and the [Up-Goer Five text editor](https://splasho.com/upgoer5/).
 

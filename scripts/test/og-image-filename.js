@@ -8,7 +8,12 @@
 
 const assert = require('assert');
 const path = require('path');
-const { generateOgImageFilename } = require('../utils/og-image-filename');
+const {
+  OG_IMAGE_VERSION,
+  generateOgImageFilename,
+  ogImageDiskDir,
+  ogImageUrl,
+} = require('../utils/og-image-filename');
 const { addFile, addIssue } = require('../utils/test-results');
 const { runTest } = require('../utils/test-runner-helper');
 
@@ -49,6 +54,20 @@ function runUnitAssertions(result) {
       POST
     );
     assert.strictEqual(name, '2026-08-12-care-has-to-show-up-in-the-product.png');
+  });
+
+  check('URL and disk path share the versioned directory', () => {
+    assert.strictEqual(ogImageUrl('about.png'), `/assets/images/og/${OG_IMAGE_VERSION}/about.png`);
+    const disk = ogImageDiskDir('/site');
+    assert.strictEqual(disk, path.join('/site', 'src', 'assets', 'images', 'og', OG_IMAGE_VERSION));
+  });
+
+  check('side projects name their card after the permalink', () => {
+    const name = generateOgImageFilename(
+      { tags: 'sideproject', permalink: '/sides/parker/' },
+      path.join('src', 'sides', 'parker.md')
+    );
+    assert.strictEqual(name, 'sides-parker.png');
   });
 }
 
