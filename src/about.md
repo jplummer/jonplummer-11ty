@@ -126,10 +126,7 @@ We worked in a highly technical industry, and while it was difficult at times to
 - **CES Innovation Award** Issued by the Consumer Technology Association, 2018 and 2019, for the Linksys and Belkin mesh routing portfolios
 - **TWICE Picks Award** Issued by TWICE, 2018 and 2019, for the Linksys and Belkin mesh routing portfolios
 - **Best of CES** Issued by CNET, 2011, for the Belkin router family
-- **TechAwards Circle: Gold** 2013 and 2014, for Belkin Tablet Stage
-- **Cool Tool Award Finalist** Issued by EdTech Digest, 2013 and 2014, for Belkin Tablet Stage
-- **Top 40 Ed-Tech Service** Issued by eSchool News, 2013 and 2014, for Belkin Tablet Stage
-- **20 Hottest EdTech Products** Issued by TCEA, 2013 and 2014, for Belkin Tablet Stage
+- **TechAwards Circle Gold, EdTech Digest Cool Tool Finalist, eSchool News Top 40 Ed-Tech Service, and TCEA 20 Hottest EdTech Products** for Belkin Tablet Stage, 2013 and 2014
 
 ## Patents
 
