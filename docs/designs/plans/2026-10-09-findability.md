@@ -12,7 +12,8 @@
 
 - 2026-10-09: Tasks 1–7 built and tested. They went into commit 589ac52e along with the dark OG cards, so that commit's message covers more than OG.
 - 2026-10-09 evening: Jon refreshed the resumes on misc. Decision 6 settled: the four Tablet Stage awards are stated as a group, "Belkin Tablet Stage, 2013 and 2014," matching the resume. About, the Person schema, `awards-canonical`, and `check_facts.py` were updated to match, and the build and tests pass.
-- **Left:** push, deploy, then Task 8's live checks. After deploy, `check_facts.py` should come back clean. Until then it flags the four per-award years still on the live About page.
+- 2026-10-09: Deployed and pushed (c8565196). Live checks passed: About shows the new paragraph and one Person block with valid JSON; `/resume/` and `/resume` both 301 to the PDF, which returns 200; robots.txt and the homepage description are live; the sketch image returns 200; `check_facts.py` reports facts consistent across 12 sources. The JSON was checked by parsing it, not in Google's Rich Results Test.
+- **Left:** Task 9's four-week Search Console comparison, around 2026-11-06, and the LinkedIn items once the headline test is read.
 
 ### What changed from the plan as written
 
@@ -168,10 +169,10 @@ Global constraints, from the repo's own rules:
 ### Task 8: Deploy and check the live site
 
 - [x] Refresh `Jon-Plummer-resume.pdf` on misc.jonplummer.com from the 2026-10 base (the live copy is from 9/24). `JonPlummer.pdf` there is an identical duplicate; refresh it too or retire it.
-- [ ] Deploy the usual way.
-- [ ] Paste https://jonplummer.com/about/ into Google's Rich Results Test or validator.schema.org. Expect one Person with no errors.
-- [ ] Open https://jonplummer.com/resume/ and confirm it lands on the current resume.
-- [ ] Fetch https://jonplummer.com/robots.txt and confirm it matches.
+- [x] Deploy the usual way.
+- [x] Paste https://jonplummer.com/about/ into Google's Rich Results Test or validator.schema.org. Expect one Person with no errors.
+- [x] Open https://jonplummer.com/resume/ and confirm it lands on the current resume.
+- [x] Fetch https://jonplummer.com/robots.txt and confirm it matches.
 
 ### Task 9: Measure it
 
