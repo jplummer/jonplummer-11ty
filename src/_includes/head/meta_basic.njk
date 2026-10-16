@@ -1,6 +1,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="max-image-preview:large">
+{#- `noindex: true` in front matter keeps a page out of search results; sitemap.njk
+    skips the same flag. The page stays linked and crawlable, so search engines can
+    read the tag. Don't also block it in robots.txt. -#}
+<meta name="robots" content="{% if noindex %}noindex{% else %}max-image-preview:large{% endif %}">
 <meta name="generator" content="{{ eleventy.generator }}">
 {%- include "head/critical.njk" %}
 {#- Asset hrefs are root-absolute, never relative to page.outputPath. ErrorDocument

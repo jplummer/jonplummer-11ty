@@ -12,49 +12,39 @@ eleventyExcludeFromCollections: true
     <priority>1.0</priority>
   </url>
 
-  {# Static pages (exclude error pages) #}
+  {# Index pages take lastmod from what they list, not from their own date. #}
+  {% set wisdomLastmod = wisdom.entries[0].added if wisdom.entries.length else (collections.post | getNewestCollectionItemDate) %}
+  {% set pageOverrides = {
+    "/wisdom/": { lastmod: wisdomLastmod, priority: "0.7" },
+    "/portfolio/": { lastmod: collections.portfolio | getNewestCollectionItemDate, priority: "0.8" },
+    "/sides/": { lastmod: collections.sideproject | getNewestCollectionItemDate, priority: "0.7" }
+  } %}
+
+  {# Pages tagged `page`: this loop is the only place they're written, so none is
+     listed twice (guarded by `pnpm run test seo`). Paginated templates are skipped
+     because only their first page lands in the collection; they get their own loop.
+     Pages with `noindex: true` are left out (guarded by the same test). #}
   {% for page in collections.page %}
-  {% if page.data.purpose != "404" and page.data.purpose != "500" %}
+  {% if page.data.purpose != "404" and page.data.purpose != "500" and not page.data.pagination and not page.data.noindex %}
+  {% set override = pageOverrides[page.url] %}
   <url>
     <loc>{{ site.url }}{{ page.url }}</loc>
-    <lastmod>{{ page.date | dateToRfc3339 }}</lastmod>
+    <lastmod>{{ (override.lastmod if override else page.date) | dateToRfc3339 }}</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>{{ override.priority if override else "0.8" }}</priority>
   </url>
   {% endif %}
   {% endfor %}
 
-  {# Collected wisdom #}
-  <url>
-    <loc>{{ site.url }}/wisdom/</loc>
-    <lastmod>{% if wisdom.entries.length %}{{ wisdom.entries[0].added | dateToRfc3339 }}{% else %}{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}{% endif %}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
+  {# Wisdom tag pages (paginated, so not in collections.page) #}
   {% for tag in wisdom.allTags %}
   <url>
     <loc>{{ site.url }}/wisdom/tags/{{ tag }}/</loc>
-    <lastmod>{% if wisdom.entries.length %}{{ wisdom.entries[0].added | dateToRfc3339 }}{% else %}{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}{% endif %}</lastmod>
+    <lastmod>{{ wisdomLastmod | dateToRfc3339 }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   {% endfor %}
-
-  {# Portfolio page #}
-  <url>
-    <loc>{{ site.url }}/portfolio/</loc>
-    <lastmod>{{ collections.portfolio | getNewestCollectionItemDate | dateToRfc3339 }}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  {# Side projects index #}
-  <url>
-    <loc>{{ site.url }}/sides/</loc>
-    <lastmod>{{ collections.sideproject | getNewestCollectionItemDate | dateToRfc3339 }}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
 
   {# All blog posts #}
   {% for post in collections.post %}

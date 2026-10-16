@@ -294,7 +294,7 @@ You can also preview generated images in other ways:
 2. **Dev Server**: Run `pnpm run dev` and visit individual images: `http://localhost:8080/assets/images/og/[filename].png`
 3. **Build Output**: Images are copied to `_site/assets/images/og/` during build
 
-**Note**: The preview page is excluded from deployment (it's for authoring only).
+**Note**: The preview page deploys and is linked from the footer, but it carries `noindex: true`, so it stays out of search results and the sitemap.
 
 #### Customization
 

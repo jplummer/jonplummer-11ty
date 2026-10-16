@@ -230,6 +230,57 @@ function checkPersonSchema(result) {
   });
 }
 
+// sitemap.njk writes URLs from several loops. A page that lands in two of them
+// gets listed twice, so every <loc> must be unique.
+function checkSitemapDuplicates(result) {
+  const sitemapPath = path.resolve(process.cwd(), '_site/sitemap.xml');
+  if (!fs.existsSync(sitemapPath)) {
+    return;
+  }
+  const locs = [...readFile(sitemapPath).matchAll(/<loc>([^<]*)<\/loc>/g)].map(m => m[1]);
+  const seen = new Set();
+  const duplicates = new Set();
+  for (const loc of locs) {
+    if (seen.has(loc)) {
+      duplicates.add(loc);
+    }
+    seen.add(loc);
+  }
+  for (const loc of duplicates) {
+    addGlobalIssue(result, {
+      type: 'sitemap-duplicate',
+      message: `sitemap.xml lists ${loc} more than once`,
+      files: ['sitemap.xml']
+    });
+  }
+}
+
+// A page marked noindex (front matter `noindex: true`) must stay out of the
+// sitemap. Both come from the one flag; this catches them drifting apart.
+function checkNoindexNotInSitemap(result) {
+  const sitemapPath = path.resolve(process.cwd(), '_site/sitemap.xml');
+  if (!fs.existsSync(sitemapPath)) {
+    return;
+  }
+  const locs = new Set(
+    [...readFile(sitemapPath).matchAll(/<loc>([^<]*)<\/loc>/g)].map(m => new URL(m[1]).pathname)
+  );
+  for (const file of getHtmlFiles()) {
+    if (!/<meta name="robots" content="[^"]*\bnoindex\b/.test(readFile(file))) {
+      continue;
+    }
+    const relativePath = getRelativePath(file);
+    const url = '/' + relativePath.replace(/(^|\/)index\.html$/, '$1');
+    if (locs.has(url)) {
+      addGlobalIssue(result, {
+        type: 'sitemap-noindex',
+        message: `${url} is marked noindex but sitemap.xml lists it`,
+        files: ['sitemap.xml', relativePath]
+      });
+    }
+  }
+}
+
 // Structured data is hand-written JSON inside Nunjucks templates, where one
 // trailing comma breaks it with no build error. Every JSON-LD block must parse.
 function checkJsonLd(content, fileObj) {
@@ -251,7 +302,9 @@ function validate(result, options) {
   const { useChanged } = options;
 
   checkPersonSchema(result);
-  
+  checkSitemapDuplicates(result);
+  checkNoindexNotInSitemap(result);
+
   let htmlFiles = getHtmlFiles();
   
   // Filter HTML files to only those whose source files changed (when using --changed flag)

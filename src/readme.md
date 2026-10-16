@@ -4,6 +4,7 @@ description: This is the source code for my personal website. It is designed to 
 date: "2025-01-27"
 layout: base.njk
 tags: page
+noindex: true
 permalink: /readme/
 ogImage: /assets/images/og/v2/readme.png
 ---

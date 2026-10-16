@@ -48,6 +48,7 @@ Run `pnpm run test wisdom` after editing. Unexpected fields are rejected.
 - **`status`** - Side projects only (`src/sides/*.md`). One of exactly four stage words: `In development`, `Paused`, `Self-hosted`, `Released`. Rendered as a quiet uppercase label on the card and the detail page, so it stays short enough to read as a set. `Self-hosted` means it runs but you would deploy it yourself; `Released` means you can just go get it. Which app store or which host belongs in the description and the `appStoreUrl` / `githubUrl` links, not in the status. Enforced by `pnpm run test frontmatter`; the list lives in `SIDE_STATUSES` in `scripts/utils/validation-utils.js`.
 - **`permalink`** - Custom URL structure
 - **`eleventyExcludeFromCollections`** - Set to `true` to exclude
+- **`noindex`** - Set to `true` to keep a page out of search results. It renders `<meta name="robots" content="noindex">` and leaves the page out of `sitemap.xml`. The page still builds, deploys, and works from every link to it. Used on `/ogimages/`, `/readme/`, and `/changelog/`. Don't also block the page in `robots.txt`: a blocked page can't be crawled, so search engines never see the tag.
 - **`draft`** - Set to `true` to mark as draft. Drafts are excluded from production builds but visible in dev mode.
 - **`contentWarning`** - Warning text displayed before gated content. When set, the RSS feed shows only this warning with a link instead of the full post content. Pair with `<details>/<summary>` in the markdown body to collapse content on-site.
 

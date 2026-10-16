@@ -4,6 +4,7 @@ description: All notable changes to this project are documented here. The format
 date: "2025-11-15"
 layout: base.njk
 tags: page
+noindex: true
 permalink: /changelog/
 ogImage: /assets/images/og/v2/changelog.png
 ---
