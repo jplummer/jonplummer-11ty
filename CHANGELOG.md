@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-10-16
+
+- Keep tool pages out of search with a noindex flag, fix duplicate sitemap entries, and add AI search reviews.
+
 ## 2026-10-09
 
 - Format post dates in America/Los_Angeles so date-only front matter matches the URL day.
@@ -7,6 +11,8 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Align engaging-in-critique front matter with its live Dec 30 URL.
 - Ship dark OG cards under /assets/images/og/v2/.
 - State the Tablet Stage awards as a group, and add the findability plan.
+- Findability plan: record the deploy and live checks.
+- Pin brace-expansion and ip-address via pnpm overrides for Dependabot alerts.
 
 ## 2026-10-08
 
@@ -947,4 +953,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-10-10
+Last deployed on 2026-10-16
