@@ -132,10 +132,16 @@ function runUnitAssertions(result) {
     );
   });
 
-  check(siteFile, 'pool includes new lockup lines', () => {
+  // Checks the pool's shape, not its wording, so revising taglines doesn't break it.
+  // (It used to name two lines; one was retired 2026-10-08 and the check failed unnoticed.)
+  check(siteFile, 'tagline pool is well formed and includes the canonical tagline', () => {
     const site = require(SITE_JS)();
-    assert.ok(site.taglines.includes('Care shows up in the product'));
-    assert.ok(site.taglines.includes('Evidence over ego'));
+    assert.ok(Array.isArray(site.taglines) && site.taglines.length > 1, 'pool needs more than one line to rotate');
+    for (const line of site.taglines) {
+      assert.ok(typeof line === 'string' && line.trim() === line && line.length > 0, `bad pool entry ${JSON.stringify(line)}`);
+    }
+    assert.strictEqual(new Set(site.taglines).size, site.taglines.length, 'pool has a duplicate line');
+    assert.ok(site.taglines.includes(site.tagline), 'pool should include the canonical tagline');
   });
 
   check(siteFile, 'getGitHeadSha returns a sha in this repo', () => {
