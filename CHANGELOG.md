@@ -3,6 +3,9 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 ## 2026-10-16
 
 - Keep tool pages out of search with a noindex flag, fix duplicate sitemap entries, and add AI search reviews.
+- Make the site-branding tagline check test the pool's shape, not its wording.
+- Add links for 2026-10-16 and fix the spelling of Ileana Marcut.
+- Pin sharp, source-map-js, smol-toml, and katex via pnpm overrides for Dependabot alerts.
 
 ## 2026-10-09
 
@@ -953,4 +956,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-10-16
+Last deployed on 2026-10-17
