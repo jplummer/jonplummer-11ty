@@ -6,7 +6,7 @@
   - **dotagents** — `github.com/jplummer/dotagents`, the agent protocol every project on this machine reads (`~/.agents/protocol.md`, `communication.md`, `writing-rules.md`, `code-style.md`); Claude Code loads it through `~/.claude/CLAUDE.md`, and Cursor through a User Rule pointer plus the generated `.agents/rules/voice.mdc`. Committed 2026-09-03, so it is live and current, unlike `~/Projects/project-template` (last commit 2026-06-18), whose own README says the global rules moved out to dotagents. **Give dotagents the page and mention the template inside it** as the scaffold that consumes it — a page for the staler half would document the wrong thing. Needs `src/sides/dotagents.md` with `status`, `githubUrl`, terms, and a `coverImage`.
     - **Check what dotagents actually publishes before linking it from [`src/about.md`](../src/about.md)** — the local tree includes `about-me.md` and `memory.md` alongside the protocol files. Career context and cross-tool notes are fine to keep private; confirm what the public repo contains before pointing recruiters at it from the professional page.
   - Once that page exists, `about.md` can carry one clause in the "I don't just have opinions about AI" paragraph — a design leader whose own agent configuration is public and current is a specific, checkable claim, and a better version of the "including a project template that packages agent configuration…" phrase that came out of the hobbies sentence.
-  - dotagents is already referenced in [`src/now.md`](../src/now.md) and [`src/about.md`](../src/about.md); link it from there once the page exists.
+  - Once the page exists, mention and link it from [`src/now.md`](../src/now.md) and [`src/about.md`](../src/about.md). Neither file has ever named dotagents (checked 2026-10-24), so these are new mentions, not links added to existing ones.
 
 - Craft/polish (demonstrate craft)
   - **Goal**: Make spareness read as intentional craft, not default blankness. Color is already pared-down; skip ornament (texture / alternate stylesheets stay in Future → Craft atmosphere). Vertical alignment is already in good shape — don’t chase “stronger grid” as a separate track unless something new looks off.
@@ -14,9 +14,9 @@
   - **Out of scope for this track**: overflow texture, outlandish alternate stylesheet (Future → Craft atmosphere).
 
 - Portfolio
-  - **Side projects** — The remaining portfolio gap. Covers exist for Lister PHP, Monotasker, Parker, Pointer-AR, and PRVT; **Menu Bar Death Clock** and **Plain English Service** still have no `coverImage` and no image in the body. Write-ups stay thin — roughly 230–310 words each apart from Parker — so the work is a stronger piece per project, not just one more image.
+  - **Side projects** — The remaining portfolio gap. Covers exist for Lister PHP, Monotasker, Parker, Pointer-AR, and PRVT; **Menu Bar Death Clock** and **Plain English Service** still have no `coverImage` and no image in the body. The write-ups were thickened 2026-09-17 and now run about 330–580 words, with Monotasker the short one at about 270 (it has its own blog post), so covers are what's left.
   - Look through /talks (current and old) for more talks, and evaluate for inclusion. Status per Jon, 2026-09-11:
-    - **Cayuse — basically done.** The two "discovery interview training" decks published as one portfolio piece (see DONE); Cayuse Connect 2022 conference slides (recovered in the project folder) are essentially covered too.
+    - **Cayuse – done.** The two "discovery interview training" decks published as one portfolio piece, and the two Cayuse Connect 2022 conference talks went up as portfolio items 2026-09-24 (see DONE).
     - **Invoca — swept.**
     - Talks from Belkin — partially swept, real work remains
     - Small artifacts from Belkin
@@ -66,7 +66,6 @@ Prioritized by **side-effect surface** — complexity that can produce a silentl
 
 ### Error pages (`/404`, `/500`)
 
-- **Duplicate `<loc>` entries in `sitemap.xml`** (2026-09-07) — `src/sitemap.njk` hardcodes `/portfolio/`, `/wisdom/` and `/sides/` and loops `wisdom.allTags`, but all of those are templates tagged `page`, so `collections.page` already carries them. The result is four duplicate URLs in the sitemap: those three plus `/wisdom/tags/clarity/` (a paginated template contributes only its first page to a collection, which is why exactly one tag page doubles). Harmless but untidy, and search engines dedupe it. `src/404-index.njk` builds the same destination list without the duplication and can serve as the model. Found while building the 404 suggester.
 - **Inform 404 handling with real logs (deferred 2026-09-04)** — Volume is too low to be worth wiring up. Revisit if misses grow enough to cluster. Ahrefs is connected and its site audit reports 404s; check `src/_data/redirects.yaml` first, since a repeated real miss is better solved by a redirect than by a guess.
 
 ### Side projects (`/sides/`)
@@ -148,7 +147,13 @@ Prioritized by **side-effect surface** — complexity that can produce a silentl
 
 ## DONE
 
+- **Duplicate sitemap entries and noindex for tool pages** (2026-10-16) – `src/sitemap.njk` now writes tagged pages from one loop and skips paginated templates, with an override map keeping `lastmod` for `/wisdom/`, `/portfolio/`, and `/sides/`. `noindex: true` in front matter adds a robots noindex and drops the page from the sitemap; applied to `/ogimages/`, `/readme/`, and `/changelog/`. `test seo-meta` fails on duplicate sitemap URLs and on noindex pages in the sitemap. Closes the Future → Error pages entry filed 2026-09-07.
+
 - **Permanent short links for QR / print** (2026-10-02) — `src/_data/shortlinks.yaml` → `.htaccess` `RewriteRule` 302s (`^XX/?$`, NC); CLI `pnpm run shortlink`; build test `shortlinks`; CF purge of short URLs when `.htaccess` changes; deploy live smoke. Canary `JP` → home. Plan: `docs/designs/plans/2026-10-02-shortlinks.md`.
+
+- **Cayuse Connect 2022 talks as portfolio items** (2026-09-24) – `2022-11-01-conference-talk-prioritizing-accessibility.md` and `2022-11-01-conference-talk-ux-philosophy.md` moved to the portfolio detail layout, each with a cover, a new intro, and slide figures captioned from the speaker notes. That finishes the Cayuse part of the talks sweep.
+
+- **Thicker `/sides/` write-ups** (2026-09-17 through 2026-09-22) – Why and status copy for the death clock, Plain English, Lister, and prvt pages; Pointer-AR expanded and named sources linked across the other sides; Usage-Chan expanded with UI screenshots and layout notes.
 
 - **Discovery interview training portfolio piece** (2026-09-11) — `src/_posts/2022/2022-05-13-discovery-interview-training.md` combines the two May 2022 Cayuse product-team training decks (session one: why discovery, the research question, and the topic list; session two: scheduling, structure, and running the interview) into one piece: 43 captioned slides, a merged PDF, three-paragraph intro. Cover `2022/05/discovery-interview-training-page-26.png`. Deployed live at /2022/05/13/discovery-interview-training/ (date is an ordering device, not the real authoring date). Site-only, not cross-posted to LinkedIn. First entry closed on the Selected → Portfolio "Look through /talks" item — Belkin, Invoca, CSky, and the Cayuse Connect 2022 conference slides (already recovered in `site/cayuse-connect-2022-talks/`) are still unevaluated.
 
