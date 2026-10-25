@@ -318,7 +318,8 @@ const TEST_EMOJIS = {
   'deploy': '🚀',
   'security': '🛡️',
   'indexnow': '📣',
-  'design-docs-location': '🗃️'
+  'design-docs-location': '🗃️',
+  'docs-links': '🔗'
 };
 
 /**
@@ -370,6 +371,7 @@ function getTestDisplayName(testType) {
     'portfolio-cover-crop': 'Portfolio cover crop',
     'test-json-pipe': 'Test JSON pipe',
     'design-docs-location': 'Design docs location',
+    'docs-links': 'Docs relative links',
     'deploy': 'Deploy',
     'security': 'Security Audit'
   };
@@ -415,6 +417,7 @@ function getTestDescription(testType) {
     'portfolio-cover-crop': 'Grid coverPosition/coverZoom allowlist, CSS vars, Monotasker HTML',
     'test-json-pipe': 'Large TEST_RUNNER JSON survives piped stdout (partial write + drain)',
     'design-docs-location': 'Plans/specs stay in docs/designs/ (superpowers skills hardcode docs/superpowers/)',
+    'docs-links': 'Relative links in docs/ point at files that exist',
     'deploy': 'Deployment connectivity',
     'indexnow': 'IndexNow configuration',
     'security': 'Security audit'

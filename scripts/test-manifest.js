@@ -85,6 +85,9 @@ const TESTS = [
   // hardcode docs/superpowers/ (their SKILL.md files live in a plugin cache we
   // can't durably edit — see docs/agent-memory.md).
   { id: 'design-docs-location', script: 'design-docs-location.js', groups: ['fast', 'pre'] },
+  // Relative links in docs/ must resolve. Dated plans/specs/archive are
+  // skipped because they name files as they were. No _site needed.
+  { id: 'docs-links', script: 'docs-links.js', groups: ['fast', 'pre'] },
   { id: 'portfolio-cover-crop', script: 'portfolio-cover-crop.js', groups: ['fast', 'post'] },
   { id: 'test-json-pipe', script: 'test-json-pipe.js', groups: ['unit'] },
   { id: 'security', script: { file: 'security-audit.js', dir: 'security' }, groups: [], nonJson: true },

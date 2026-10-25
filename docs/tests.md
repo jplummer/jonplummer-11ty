@@ -34,7 +34,7 @@ This project includes a suite of validation tests covering content structure, HT
 
 _Derived from [`scripts/test-manifest.js`](../scripts/test-manifest.js) — see [The test manifest](#the-test-manifest)._
 
-**Fast Tests:** `html`, `links`, `wisdom`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `deploy-assets`, `error-document-assets`, `favicon-rasters`, `trailing-slash-links`, `critical-css`, `design-docs-location`, `portfolio-cover-crop`
+**Fast Tests:** `html`, `links`, `wisdom`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `deploy-assets`, `error-document-assets`, `favicon-rasters`, `trailing-slash-links`, `critical-css`, `design-docs-location`, `docs-links`, `portfolio-cover-crop`
 
 **Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `indexnow`, `manifest-cursors`, `figure-lightbox`, `site-branding`, `preview-site-lockup`, `og-card`, `og-image-filename`, `date-utils`, `og-shared-fingerprint`, `changelog-format`, `source-file-utils`, `test-json-pipe` — see [Unit Tests](#unit-tests) below
 
@@ -133,6 +133,10 @@ Scans `src/**/*.{md,njk,html}` for root-absolute internal links that omit a trai
 ### design-docs-location.js
 
 Guards the `docs/designs/` structure. Fails if the retired `docs/superpowers/` directory exists (the superpowers `writing-plans` / `brainstorming` skills default to that path and defer to user preference for it — see `CLAUDE.md` § Design records), if anything under the gitignored `docs/designs/scratch/` is tracked, or if `docs/designs/specs/` or `plans/` goes missing. Does not check for the old path in prose — the files that document this override have to name it. Does not need `_site/`.
+
+### docs-links.js
+
+Checks that relative markdown links in `docs/` point at files that exist. Skips `docs/designs/plans/`, `specs/`, and `archive/`, which are dated records and name files as they were, and the gitignored `scratch/`. Ignores links inside code spans and fenced blocks, URLs with a scheme, root-absolute site paths, and bare `#anchors`. Does not check that an anchor exists in the target, and can't catch stale prose. Added 2026-10-24 after six links in `docs/designs/` were found pointing at `commands.md` and `tests.md` as siblings instead of one folder up. Does not need `_site/`.
 
 ### error-document-assets.js
 
