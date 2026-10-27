@@ -1,5 +1,10 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-10-25
+
+- Add a docs-links test and fix six broken links in docs/designs/. The color and font exploration docs linked `commands.md` and `tests.md` as siblings; they're one folder up. docs-links runs in the fast group and skips dated plans, specs, and archive docs.
+- Correct stale lines in `ideas.md` against the repo. dotagents was never mentioned in `now.md` or `about.md`; the sides write-ups were thickened 9/17; Cayuse talks are done. Moves the duplicate-sitemap fix to DONE and logs the Connect 2022 talks and thicker sides write-ups.
+
 ## 2026-10-16
 
 - Keep tool pages out of search with a noindex flag, fix duplicate sitemap entries, and add AI search reviews.
@@ -956,4 +961,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-10-17
+Last deployed on 2026-10-27
