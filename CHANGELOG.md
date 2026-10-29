@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-10-27
+
+- Soften the Contact Centers claim on the about page
+
 ## 2026-10-25
 
 - Add a docs-links test and fix six broken links in docs/designs/. The color and font exploration docs linked `commands.md` and `tests.md` as siblings; they're one folder up. docs-links runs in the fast group and skips dated plans, specs, and archive docs.
@@ -961,4 +965,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-10-27
+Last deployed on 2026-10-29
