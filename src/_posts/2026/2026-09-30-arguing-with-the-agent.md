@@ -5,6 +5,7 @@ date: "2026-09-30"
 tags: post
 description: I like arguing with the agent; it reminds me of good things I already think.
 ogImage: /assets/images/og/v2/2026-09-30-arguing-with-the-agent.png
+leadFigure: /assets/images/2026/09/device-spine.svg
 ---
 I like arguing with the agent because it reminds me of good things I already think.
 
@@ -25,6 +26,9 @@ In response to my complaint, Claude rewrote 32 labels. Several arrows came out e
 Then I reminded Claude that we weren't working with one set of screens, but two (device and phone) that needed to be kept in coordination with each other. Claude offered some options for how to lay out two screens in one diagram. One had three lanes: the device on one side, the phone on the other, and logic running down the middle between them. That didn't make sense to me at all! Logic doesn't float free of the two devices; each one makes choices based only on "what they have access to at a given moment" and neither can read the user's mind. Only the device knows whether a token is stored, and only the phone knows whether two PIN entries match; there's no third place for the system to evaluate things. So I put the device in the center instead:
 
 > The device is in charge, so the spine is the device experience, and there are natural points where the user's attention gets handed to the phone or back to the device. It's useful to make sure that the screen *not* in the user's attention is showing something sensible at every step, of course, which is why authoring them together is important.
+
+<!-- markdownlint-disable-next-line MD045 -- decorative: the quote and the paragraphs around it make every point the figure makes -->
+![](/assets/images/2026/09/device-spine.svg)
 
 I'd like other designers to think differently about the interfaces (screens, lights and buttons, etc.) that are *alongside* the user's attention. Often people spend their effort on designing the main screens, leaving the quiet screens unconsidered. But you're in danger of damaging user confidence by having part of the system seem to not know what's happening. You can direct user attention from place to place (which you should not do too many times) but that doesn't mean the other screen won't be looked at. They need to be coordinated.
 

@@ -77,6 +77,12 @@ Prioritized by **side-effect surface** — complexity that can produce a silentl
 - **AI skills/routines as a `/sides/` category** (2026-08-21) — Jon wants to eventually share personal AI skills and routines through the same `/sides/` scheme. These aren't apps: the legal page's per-project privacy framing (App Store data-practice disclosures) and the detail-page info block (App Store link, GitHub issues) are built around shippable software and probably don't fit skills/routines as-is. Needs its own short brainstorm before the first entry goes up — likely a lighter info block (source link, maybe a license) and no privacy-practice subsection unless the skill itself handles data.
 - ~~**Link `/now/` to `/sides/`**~~ (2026-08-21; done 2026-09-07) — Every project bullet in [`src/now.md`](../src/now.md) now points at its `/sides/<slug>/` page. The last two landed with the new pages: "this site" names [`/sides/jonplummer-11ty/`](../src/sides/jonplummer-11ty.md) with GitHub demoted to "(source)", and "New: Usage-Chan" links [`/sides/usage-chan/`](../src/sides/usage-chan.md). The book map tool was the last thing in that file without a page; it shipped 2026-09-10 (see DONE).
 
+### Lead figures (started 2026-10-29)
+
+- **Backfill essays with figures that carry the argument**, recent first: this year's long posts (16 over 700 words), then older long posts ranked by traffic. Style and rules: [lead figure spec](designs/specs/2026-10-29-lead-figure-style-design.md). First one: the three-horizons landscape in the 2026-10-28 discovery post.
+- **OG card with the lead figure (wait until several posts have one)** — keep the dark card's title-first layout and lay the figure's silhouette along the bottom in low contrast. A mock on 2026-10-29 read fine at LinkedIn's ~128×72, but a landscape is the easy case; check it against diagrams that aren't.
+- **Homepage** — revisit excerpts or fewer posts per page once five or six essays have figures.
+
 ### Craft atmosphere (deferred)
 
 - Outlandish alternative stylesheet?

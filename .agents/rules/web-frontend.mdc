@@ -12,6 +12,7 @@ alwaysApply: true
     - Before using hardcoded values for font sizes, line heights, spacing, colors, or other design values, check all CSS files for existing custom properties.
     - Use tokens (e.g., `--font-size-xxs`, `--spacing-sm`, `--text-color`) instead of magic numbers or hardcoded values.
 - Include alt text for all non-decorative images.
+    - Alt text is a substitute for the image, not a description of it: write what a reader needs, at that point in the page, to get the point the image makes. Read the surrounding text first; if it already makes the point, the image is decorative here even if it's an elaborate diagram.
     - If information would be lost by not displaying an image, it needs alt text.
     - If an image is purely decorative, use an empty alt attribute.
     - No image should lack an alt attribute.

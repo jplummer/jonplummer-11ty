@@ -136,6 +136,30 @@ function validateRequiredFields(frontMatter, filePath) {
   return { issues, warnings };
 }
 
+/**
+ * Optional `leadFigure` on posts: the site path of the figure image in the body that stands for
+ * the post. Nothing renders it yet (OG experiment later), so the check is that it points at a
+ * real file the post actually shows.
+ */
+function validateLeadFigure(frontMatter, body, srcRoot = './src') {
+  const issues = [];
+  const value = frontMatter.leadFigure;
+  if (value === undefined) {
+    return issues;
+  }
+  if (typeof value !== 'string' || !value.startsWith('/assets/images/')) {
+    issues.push('leadFigure: must be a site path under /assets/images/');
+    return issues;
+  }
+  if (!fs.existsSync(path.join(srcRoot, value))) {
+    issues.push(`leadFigure: ${value} does not exist under src/`);
+  }
+  if (!(body || '').includes(`(${value})`) && !(body || '').includes(`"${value}"`)) {
+    issues.push(`leadFigure: the post body doesn't show ${value}`);
+  }
+  return issues;
+}
+
 function validateCoverCropFields(frontMatter) {
   const issues = [];
   if (frontMatter.coverPosition !== undefined) {
@@ -412,6 +436,21 @@ function assertPostDateAuthoringRegressionGuard() {
       'frontmatter regression: portfolio date≠filename day must be allowed'
     );
   }
+
+  const figurePath = '/assets/images/og/v2/index.png'; // always generated, unlike any one post's figure
+  const figureBody = `![](${figurePath})`;
+  if (validateLeadFigure({ leadFigure: figurePath }, figureBody).length !== 0) {
+    throw new Error('frontmatter regression: leadFigure naming a figure the post shows must pass');
+  }
+  if (validateLeadFigure({ leadFigure: figurePath }, 'no image here').length === 0) {
+    throw new Error('frontmatter regression: leadFigure the body never shows must fail');
+  }
+  if (validateLeadFigure({ leadFigure: '/assets/images/missing.svg' }, '![](/assets/images/missing.svg)').length === 0) {
+    throw new Error('frontmatter regression: leadFigure naming a missing file must fail');
+  }
+  if (validateLeadFigure({ leadFigure: '#three-horizons' }, figureBody).length === 0) {
+    throw new Error('frontmatter regression: leadFigure that is not a site path must fail');
+  }
 }
 
 // Main validation function
@@ -499,7 +538,8 @@ function validate(result, options) {
     
     // Validate required fields
     const fieldValidation = validateRequiredFields(frontMatter, file);
-    
+    fieldValidation.issues.push(...validateLeadFigure(frontMatter, parseMarkdownFrontMatter(content).content));
+
     // Add issues
     fieldValidation.issues.forEach(issue => {
       addIssue(fileObj, {

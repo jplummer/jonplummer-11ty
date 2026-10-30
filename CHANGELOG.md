@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-10-28
+
+- Add post: Teaching a product team to do discovery
+
 ## 2026-10-27
 
 - Soften the Contact Centers claim on the about page
@@ -965,4 +969,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-10-29
+Last deployed on 2026-10-30

@@ -5,13 +5,17 @@ date: "2026-10-28"
 tags: post
 description: "At Cayuse I taught a product team to run discovery interviews. Customer contact went up and the roadmap barely moved. Here's what the training covered, and what it couldn't change."
 ogImage: /assets/images/og/v2/2026-10-28-teaching-a-product-team-to-do-discovery.png
+leadFigure: /assets/images/2026/10/three-horizons.svg
 ---
 Product teams have plenty of customer data within reach. Support tickets show where people get stuck, usability tests show whether a design works, and sales calls bring back what buyers ask for. Do teams use it well? Not always, and most of it answers questions about features that already exist. Discovery draws on the same inputs, plus interviews and direct observation, and asks what's worth building.
 
-When I taught about discovery at Cayuse, I split customer contact into three horizons:
+When I taught about discovery at Cayuse, I split customer contact into three horizons.
+
+<!-- markdownlint-disable-next-line MD045 -- decorative: the list below explains the horizons -->
+![](/assets/images/2026/10/three-horizons.svg)
 
 - Horizon one helps you ship. Is this usable? Did the release fix the problem?
-- Horizon two helps you choose among possible solutions. Which of these designs do people prefer, and why?
+- Horizon two helps you choose among possible solutions. Which of these designs do people recognize as a solution to their problem, and why?
 - Horizon three helps you find opportunities and decide what's worth building. What problems do people have? Which ones are common or painful enough to be worth solving? Is there a benefit we could offer that's exciting to them and worth it to us?
 
 The first two horizons come naturally once there's something to test. Discovery is horizon three, and coming up with the solution is a separate job. The third has to be scheduled on purpose, because there's nothing to show anyone yet.

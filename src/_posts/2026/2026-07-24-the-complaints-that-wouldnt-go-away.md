@@ -5,6 +5,7 @@ date: "2026-07-24T12:00:00-07:00"
 tags: post
 description: Invoca's design system compliance was rising, but complaints about people ignoring it didn't move. An audit and a controlled test showed why, and it matters twice as much now that agents write the UI.
 ogImage: /assets/images/og/v2/2026-07-24-the-complaints-that-wouldnt-go-away.png
+leadFigure: /assets/images/2026/07/two-systems.svg
 ---
 Building is easy, taste is hard. That line's been going around design and engineering circles for a while now, and it's true – for a team. A single designer with good instincts can make fast, sound "taste" calls all day. But a team can't run efficiently on one person's taste, and it can't run on group vibes; it needs a standard people can actually check their work against. I watched a design team, with an established design system, prove their compliance with it was real and rising, and still be dissatisfied by the results. Fixing that took an investigation.
 
@@ -21,6 +22,9 @@ And yet! Complaints about people not following the design system didn't go away.
 So we decided to find out what was actually happening instead of continuing to argue about it. I made the call to audit UX deliverables directly – not to defend the compliance numbers, but to make sure they were real. [Jake Rowe](https://jakerowedesigns.com), our design system product owner, made a gutsier call: watch the engineers work. He built a mockup he knew was 100% compliant with the design system and asked engineers to let him watch them build from it.
 
 What that revealed had nothing to do with designers slacking off or engineers ignoring instructions. Though they sometimes claimed otherwise, engineers weren't actually familiar with Figma or Dev Mode, where the components and variants were clearly pointed out; they'd never learned how to look there or understand what they were seeing. The difficulty went beyond this skills issue: some primitive values and other magic numbers persisted in the design system in Figma AND the design system in code, and not always the same ones. Some values were captured in tokens on one side, some on the other, some not at all, and there was drift between these two sets. Component naming didn't always match between the two. Variants didn't always exist in both places. Teams had built up their own private sense of which deviations were fine and which weren't, with no shared answer. Some components existed only in Figma, or only in code, never both. And underneath all of it, engineers described feeling such pressure to ship quickly that they were reluctant to stop and ask a question that might slow them down.
+
+<!-- markdownlint-disable-next-line MD045 -- decorative: the paragraph above names every mismatch the figure shows -->
+![](/assets/images/2026/07/two-systems.svg)
 
 Our problem was trust rather than compliance – trust between two systems that were supposed to be one system, and between two groups of people who didn't really know how the other actually worked.
 

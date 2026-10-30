@@ -5,6 +5,7 @@ date: "2026-07-30T12:00:00-07:00"
 tags: post
 description: Raising craft isn't one fix – diagnose where quality stalls, intervene sized to your confidence, and repeat as the bottlenecks move.
 ogImage: /assets/images/og/v2/2026-07-30-how-do-you-raise-the-level-of-craft.png
+leadFigure: /assets/images/2026/07/craft-bottleneck.svg
 ---
 I flubbed an interview question the other day. Not because I gave a wrong answer, exactly, but because I gave a truthful answer that was too narrow, possibly not suited to the company, and not representative of what I *would* do were I hired.
 
@@ -83,6 +84,9 @@ Some of these are useful in multiple failure modes; there's not a clean 1:1 mapp
 ## Repeat?
 
 Opening a bottleneck helps, and it [reveals the next bottleneck](https://en.wikipedia.org/wiki/Theory_of_constraints). You might have an overall low level of designer craft, but raising it doesn't get fully realized in the product; this tells you that there's another obstacle after the obvious one you went after. This is true for any process you might work on. Speeding up the slowest operation in an assembly line helps, and it reveals the next-slowest operation, the next focus of intervention.
+
+<!-- markdownlint-disable-next-line MD045 -- decorative: the surrounding paragraphs make every point the figure makes -->
+![](/assets/images/2026/07/craft-bottleneck.svg)
 
 Then repeat – not as a formality, but because as you work on the process, and as business conditions change, the diagnosis doesn't hold still. People turn over and take the tacit parts of the quality standard with them. Reorgs sever ownership. Growth outpaces whatever onboarding used to establish the bar. The causes recombine. Sometimes the same one comes back, sometimes a new one takes its place. Raising craft once is a project. Keeping it raised is the same discipline [I've written about before](/2026/07/09/vision-is-not-magic/) under a different name – goal maintenance.
 

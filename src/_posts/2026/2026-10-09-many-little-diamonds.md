@@ -5,6 +5,7 @@ date: "2026-10-09"
 tags: post
 description: The double diamond design process never quite worked. Real projects have single diamonds everywhere.
 ogImage: /assets/images/og/v2/2026-10-09-many-little-diamonds.png
+leadFigure: /assets/images/2026/10/many-little-diamonds.svg
 ---
 I've long felt that the double-diamond design process was poorly explained, and my attempts to explain it to engineering-led organizations were typically met with cries of "waterfall!" Never mind that "waterfall" specifically means big design up front, with a design lock gating implementation. "Waterfall" has become an easy epithet for any process with a sequence.
 
@@ -15,6 +16,9 @@ Patrick Neeman argues that [The UX Double Diamond is dead, and in AI only one su
 Real-world projects follow much more a "cafeteria model" than strict-process affairs. We pick and choose among the things a "complete" project might contain, skipping things we think we don't need or don't have time for. Yes, you should understand the customer problem before offering a solution. Sometimes that happens. Yes, you should think of multiple ways to do a thing before doing it. Sometimes that happens. Yes, you should consider the benefit your team wants to deliver before coming up with ways to deliver that benefit. Sometimes that happens. Not every project is going to follow every available step.
 
 If you look at the good projects, however slimmed-down they are, the generate-then-evaluate pattern persists. You will see single diamonds all over the place as needed. These diamonds can be large or small depending on appetite and importance.
+
+<!-- markdownlint-disable-next-line MD045 -- decorative: the surrounding paragraphs make every point the figure makes -->
+![](/assets/images/2026/10/many-little-diamonds.svg)
 
 Neeman's single diamond is one of these. In his version, you express a desired outcome as a brief, feed it to the agent, have it make possibilities (generate), choose among them (evaluate), and ship. But he's sort of hopping over how you got to that outcome in the first place – how you found the benefit you hope to deliver and how you selected it over others. That's a diamond!
 

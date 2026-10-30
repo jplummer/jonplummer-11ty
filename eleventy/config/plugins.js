@@ -26,7 +26,10 @@ async function configurePlugins(eleventyConfig) {
   // Image optimization plugin
   const { eleventyImageTransformPlugin } = require("@11ty/eleventy-img");
   eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
-    formats: ["webp", "jpeg"],
+    // svg + svgShortCircuit: SVG sources pass through untouched (generated figures carry their
+    // own dark-mode styles, which rasterizing would lose). Raster sources still get webp + jpeg.
+    formats: ["svg", "webp", "jpeg"],
+    svgShortCircuit: true,
     widths: [400, 800, 1200, 1600, "auto"],
     urlPath: "/img/",
     outputDir: "./_site/img/",

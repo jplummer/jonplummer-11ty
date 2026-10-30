@@ -81,6 +81,9 @@ const TESTS = [
   // (the stylesheet it covers for has not loaded). Drift shipped once, in Aug
   // 2026, and is invisible except on a cold first paint. No _site needed.
   { id: 'critical-css', script: 'critical-css.js', groups: ['fast', 'pre'] },
+  // Generated post figures (scripts/figures/) are <img> SVGs that copy site color tokens
+  // into their own <style>; each copy must match jonplummer.css :root. No _site needed.
+  { id: 'figure-tokens', script: 'figure-tokens.js', groups: ['fast', 'pre'] },
   // Guards the docs/designs/ structure against superpowers skills that still
   // hardcode docs/superpowers/ (their SKILL.md files live in a plugin cache we
   // can't durably edit — see docs/agent-memory.md).

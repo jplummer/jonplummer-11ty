@@ -6,6 +6,7 @@ tags:
   - post
 description: AI can help us prototype quickly and more completely than ever before. And this is helpful in regulated environments where a fully-documented product is essential.
 ogImage: /assets/images/og/v2/2026-08-27-prototyping-in-a-regulated-environment.png
+leadFigure: /assets/images/2026/08/benefit-concept-detail.svg
 ---
 When people worry about applying AI to regulated product development, they're usually worried about the wrong phase.
 
@@ -20,6 +21,9 @@ The old habit was strict waterfall. The FDA said "don't agile," so we didn't. Bu
 I think of product design in [three segments](/2022/10/22/the-bones-of-my-emerging-philosophy-of-ux-research-and-design/): benefit, concept, and detail. Benefit is the happy result of the customer’s problem actually being solved. Concept is the approach your product takes to deliver it – the interaction model, the general architecture of the experience. Detail is the specific implementation: exact flows, affordances, wording, and behavior. There are many possible benefits for any given problem and many possible concepts for any given benefit, and picking well at each step, with the customer’s help, is most of what design and product management should actually be doing.
 
 The regulatory agencies aren't particularly interested in benefit or concept iteration. [They become very interested](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/applying-human-factors-and-usability-engineering-medical-devices) when you nail down the concept and start working on the details.
+
+<!-- markdownlint-disable-next-line MD045 -- decorative: the surrounding paragraphs make every point the figure makes -->
+![](/assets/images/2026/08/benefit-concept-detail.svg)
 
 AI prototyping tools are most useful in the phases that don’t trigger that scrutiny. They make exploration cheap: more variations, more sessions, more edge cases than you could have spent time on before. Every cycle you run through benefit or concept before committing to detail is a better-informed commitment. You arrive at the detail phase with a tested concept and evidence for why you chose it over the alternatives.
 

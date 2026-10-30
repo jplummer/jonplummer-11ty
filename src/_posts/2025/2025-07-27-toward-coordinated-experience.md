@@ -5,10 +5,14 @@ date: "2025-07-27T12:00:00-08:00"
 tags: post
 description: We make workflow diagrams but don't distinguish between "system advances you to the next step" and "system offers you the next step." This distinction matters for coordinated experience.
 ogImage: /assets/images/og/v2/2025-07-27-toward-coordinated-experience.png
+leadFigure: /assets/images/2025/07/coordinated-experience.svg
 ---
 ## Background
 
 I realized the other day that we (UX and others) make workflow diagrams but don’t distinguish in them between “system advances you to the next step" or "offers you a link to a relevant thing” versus “user has to know to go somewhere else to do a necessary thing.” These are not at all equivalent; the arrows look the same, but those that denote “user has to know to go somewhere else to do a thing” should be maybe painfully ugly or broken or perhaps not exist at all to point out that a barrier exists.
+
+<!-- markdownlint-disable-next-line MD045 -- decorative: the surrounding paragraphs make every point the figure makes -->
+![](/assets/images/2025/07/coordinated-experience.svg)
 
 We should be anticipating and lowering those barriers, and we often are not. As we make new things, we’re tempted to squeeze scope down tight enough that we can launch quickly, but end up erecting these barriers in the process.
 
