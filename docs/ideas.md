@@ -100,6 +100,34 @@ Prioritized by **side-effect surface** — complexity that can produce a silentl
   - Fluid spacing with clamp() for gutter/spacing tokens
   - Container queries for portfolio grid (respond to container width instead of viewport)
   - color-mix() to derive hover/active colors from base colors (pairs with oklch)
+  - **CSS audit findings** (modern-css.com/tools/css-audit/, run 2026-11-03, source: `css-audit.json`) — **88% modern**; 8 findings across 102 hits, all in `jonplummer.css`; 6 of 8 checks ready for the declared target. Grouped by effort:
+    - **Quick/mechanical (drop in, no behavior change):**
+      - `-webkit-mask-*` vendor prefixes (21 hits, lines 394–1238) — unprefixed `mask-*` is already present alongside every one; just delete the `-webkit-` lines. `mask` is Baseline Widely Available.
+      - `page-break-after/inside/before` → `break-after/inside/before` (9 hits, all in print stylesheet, lines 1632–1781). Simple rename; both are supported everywhere.
+      - `100vh` → `dvh` (3 hits: `min-height: 100vh` line 162, two lightbox `max-height: calc(100vh …)` lines 1139 and 1247). `dvh` avoids the mobile-browser-chrome collapse issue; the lightbox ones are most worth fixing.
+    - **Targeted rewrites (a few selectors each):**
+      - Repeated selector lists → `:is()` (4 hits). The notable one: `h1 a, h1 a:link, h1 a:visited, h1 a:hover, h1 a:active, h1 a:focus` (line 1696, print) collapses to `h1 :is(a, a:any-link)`. Also: `body > header, body > main, body > footer` (line 1785) and the lightbox trigger/media list (line 1057).
+      - Physical `left`/`right`/`padding-left`/`border-left`/`text-align: left` → logical equivalents (15 hits scattered through screen and print; in target since Jul 2022). Most are low-risk swaps (`padding-inline-start`, `inset-inline-start`, `text-align: start`). Two skip-link uses of `left: -10000rem` and `left: 0` are intentional screen-reader patterns — keep or convert to a clip approach separately.
+    - **Cascade architecture (`@layer` in target since Sept 2024 — tackle together):**
+      - `!important` (22 hits, all in print stylesheet lines 1578–1794) — The print block fights screen styles with `!important` throughout. `@layer` would let print override without `!important`, but needs a whole-cascade plan rather than a spot fix.
+      - High-specificity selectors (15 hits) — `a:any-link:is(:hover, :focus-visible)` with contextual prefixes like `body > header nav` and `.post-demo-popout` pushes specificity to (0,4,x). Wrapping context in `:where()` brings it down. Same `@layer` refactor makes this easier.
+      - `body > header / main / footer` specificity ballast (13 hits) — used in screen and print rules to outweigh base styles. Addressed naturally by an `@layer` structure.
+    - **Already clean — no findings:** floats, negative-margin gutters, translate centering, dark-mode duplicates (using `light-dark()` correctly), RTL overrides, ID selectors, z-index stacking, Sass remnants, JS-driven CSS hacks. Already using: custom properties (215), `:is()`/`:where()` (26), `focus-visible` (17), logical props (17 partial), `oklch` colors (19), `gap` (20), `text-wrap` (3), `:has()` (2), nesting (14), view transitions (2).
+  - **CSS audit — browser support panel** (same run, 2026-11-03) — 214 CSS features found; 22 not yet Widely Available, all without a fallback. Most are intentional progressive enhancements or print-only. The ones worth a decision:
+    - `box-decoration-break: clone` (1 use, no Safari support) — Chrome 130/Edge 130/Firefox 32, **Safari never**. Used for inline decoration that spans line breaks (probably inline code or highlighted spans). Safari skips it silently — check whether the fallback appearance is acceptable or whether a `@supports` guard makes sense.
+    - `@view-transition` (2 uses, Firefox No, Safari 18.2 only) — already in and working as a progressive enhancement; Firefox just doesn't animate. No action needed, but good to know that ~30% of desktop browsers are skipping it.
+    - `::selection` (1 use, not in iOS Safari) — cosmetic gap only; fine.
+    - `orphans` (1 use, Firefox No) — print stylesheet; not critical.
+    - `page-break-*` properties (flagged here too) — same as the "old names" finding above; fix is `break-after/inside/before`.
+  - **CSS audit — design tokens panel** (same run, 2026-11-03) — 58 custom properties; color tokenization is strong (87%), spacing is leakier (68%), font sizes in between (74%). Specific gaps:
+    - **Token substitutions (value already has a token, written out anyway):**
+      - `1rem` × 7 — already `var(--font-size-base)`; check each use: some may intend a spacing token instead if they're not setting font size
+      - `0.5rem` × 6 — already `var(--baseline-unit)`
+      - `light-dark(oklch(98% 0 0deg), oklch(22% 0 0deg))` × 1 — already `var(--content-background-color)`
+      - `light-dark(oklch(29.6% 0.01 260.71deg), oklch(93% 0.01 260.71deg))` × 1 — already `var(--text-color)`
+      - `1.5rem` × 1 — already `var(--font-size-lg)`
+    - **Missing token candidate:** `0.75rem` used 5+ times with no token — likely `--spacing-xs` or a half-baseline; worth adding if it's a consistent spacing use
+    - **8 hardcoded color declarations** (13% of all color uses): `oklch(0% 0 0deg)` × 3 (pure black, probably print styles), `oklch(46.8% 0 0deg)` × 2 (a gray without a token — candidate for `--text-color-light` or a new token), plus the `--content-background-color` and `--text-color` duplicates already listed above. Tool note: `transparent`, `currentColor`, and `inherit` don't count toward this.
 - **Alternate color schemes** and how to trigger them
   - According to build/deploy day?
   - Day of view regardless of when built?
