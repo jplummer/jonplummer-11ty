@@ -13,7 +13,7 @@
 - 2026-10-09: Tasks 1–7 built and tested. They went into commit 589ac52e along with the dark OG cards, so that commit's message covers more than OG.
 - 2026-10-09 evening: Jon refreshed the resumes on misc. Decision 6 settled: the four Tablet Stage awards are stated as a group, "Belkin Tablet Stage, 2013 and 2014," matching the resume. About, the Person schema, `awards-canonical`, and `check_facts.py` were updated to match, and the build and tests pass.
 - 2026-10-09: Deployed and pushed (c8565196). Live checks passed: About shows the new paragraph and one Person block with valid JSON; `/resume/` and `/resume` both 301 to the PDF, which returns 200; robots.txt and the homepage description are live; the sketch image returns 200; `check_facts.py` reports facts consistent across 12 sources. The JSON was checked by parsing it, not in Google's Rich Results Test.
-- **Left:** Task 9's four-week Search Console comparison, around 2026-11-06, and the LinkedIn items once the headline test is read.
+- **Left:** the LinkedIn items, now that the headline test is read (2026-11-06), and the site-analytics watch in Task 9. The four-week Search Console read is done (Task 9).
 
 ### What changed from the plan as written
 
@@ -180,7 +180,9 @@ The site's part can only be measured through name searches, since recruiters don
 
 - [x] **Before deploying**, record a baseline from Google Search Console (Performance, last 28 days, query contains "plummer"): impressions, clicks, average position, and the top pages for those queries. Put it in the NotePlan headline-test note or a sibling note, dated.
   - Recorded 2026-10-09 from the URL-prefix property `https://jonplummer.com/` (the domain property isn't shared with this account). Last 28 days, ending 10/6, queries containing "plummer": one query, "jon plummer", with 40 impressions, 2 clicks, 5% CTR, and an average position of 2.4. So the site already ranks near the top for his name. The 10/6 note that a name search didn't turn up the site came from a non-Google engine and doesn't hold for Google. What's left to win is the snippet text (Tasks 1 and 2) and searches with a role word attached.
-- [ ] Four weeks after deploy, pull the same numbers. Also check whether /about/ or the homepage now shows for "jon plummer design" and "jon plummer ux."
+- [x] Four weeks after deploy, pull the same numbers. Also check whether /about/ or the homepage now shows for "jon plummer design" and "jon plummer ux."
+  - Read 2026-11-06, same property and filter, 28 days Oct 8–Nov 4 (deploy was the evening of 10/9). "jon plummer": 38 impressions, 6 clicks, 15.8% CTR, position 1.9, against 40, 2, 5%, and 2.4 before. Impressions held, so the same number of people searched; more of them clicked, and the site ranked a little higher. /about/ took all six clicks (39 impressions, position 3.3); the homepage now shows for the name too (27 impressions, position 7.7). Two stray "john plummer" queries pull the property-wide average position to 3.1. Small numbers: four extra clicks in four weeks.
+  - "jon plummer design" and "jon plummer ux" had no impressions in Search Console, so nobody searched them, or too few for Google to report. A live Google search the same day (signed-in browser, personalization off) put /about/ first and the homepage second for "jon plummer design," and /about/ second behind LinkedIn for "jon plummer ux."
 - [ ] Watch site analytics for referrals from linkedin.com to /about/ and /resume/. Those are people checking him out.
 
 ## Later: LinkedIn, after the headline test reading
