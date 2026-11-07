@@ -1,3 +1,17 @@
+2026-10-29:
+  - url: "https://www.youtube.com/watch?v=GLvFTMtw4Jk"
+    title: "Video: How to scale intent, quality, and artistry with Al – Katie Dill"
+    description: "Rapid production of \"good enough\" designs with the help of agents tempts us to treat design as disposable and, in doing so, to accept substandard work that has an underwhelming sameness – zombie UI."
+  - url: "https://samueleast.co.uk/playground/laid-off-from-plex-60-days-in"
+    title: "Laid off 60 days in: what is the tech industry doing to developers? – Samuel East"
+    description: "Samuel East was laid off from Plex after a scant 60 days on the job. And that 60 days led him to ask the questions on everyone’s mind just now: what exactly is the plan now that AI is here? (And why is it resulting in a wave of employee mistreatment?)"
+  - url: "https://www.kaelig.fr/design-system-components-with-ai-agent-teams/"
+    title: Building design system components with agent teams – Kaelig Deloumeau-Prigent
+    description: It took two days to use and agent to code a complex component completely that would have taken a front-end-engineer three weeks to do by hand, and another three weeks to make an agent pipeline that could do it quickly and reliably. This might be the future of front-end, design systems, and at least part of UX practice.
+  - url: "https://hvpandya.com/llm-design-systems"
+    title: Expose your design system to LLMs – Hardik Pandya
+    description: "\"The method described here restructures your design system into a format LLMs can reliably consume: structured spec files, a closed token layer, and automated auditing that catches every violation.”"
+
 2026-10-16:
   - url: "https://sightlessscribbles.com/posts/disability-dongle/"
     title: "The \"Disability Dongle\": Why Silicon Valley Hates Me and You – Robert Kingett"
