@@ -5,6 +5,10 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Prune `ideas.md` against the repo
 - Drop redundant CSS prefixes and old print properties
 - Add three typography refinements from the CSS-Tricks reset
+- Use spacing tokens for hard-coded screen spacing
+- Tidy screen selectors: :is(), logical properties, clip-path sr-only
+- Record the text-box lockup experiment in `ideas.md`
+- Let body text follow the reader's default text size
 
 ## 2026-11-06
 
