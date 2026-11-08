@@ -2,12 +2,7 @@
 
 ## ☑️ Selected
 
-- Side project pages — one thing left that clears the `sides/` bar and has no page there (2026-09-04; **this site** shipped 2026-09-07, **Book Map** 2026-09-10, see DONE)
-  - **dotagents** — `github.com/jplummer/dotagents`, the agent protocol every project on this machine reads (`~/.agents/protocol.md`, `communication.md`, `writing-rules.md`, `code-style.md`); Claude Code loads it through `~/.claude/CLAUDE.md`, and Cursor through a User Rule pointer plus the generated `.agents/rules/voice.mdc`. Committed 2026-09-03, so it is live and current, unlike `~/Projects/project-template` (last commit 2026-06-18), whose own README says the global rules moved out to dotagents. **Give dotagents the page and mention the template inside it** as the scaffold that consumes it — a page for the staler half would document the wrong thing. Needs `src/sides/dotagents.md` with `status`, `githubUrl`, terms, and a `coverImage`.
-    - **Blocked on a decision (checked 2026-11-08): `github.com/jplummer/dotagents` is private.** The page and the `about.md` claim both assume a public repo. Either make it public, first moving `about-me.md` and `memory.md` (career context and cross-tool notes) out of it, or drop the page. Until then there's nothing to link from [`src/about.md`](../src/about.md).
-  - Once that page exists, `about.md` can carry one clause in the "I don't just have opinions about AI" paragraph — a design leader whose own agent configuration is public and current is a specific, checkable claim, and a better version of the "including a project template that packages agent configuration…" phrase that came out of the hobbies sentence.
-  - Once the page exists, mention and link it from [`src/now.md`](../src/now.md) and [`src/about.md`](../src/about.md). Neither file has ever named dotagents (checked 2026-10-24), so these are new mentions, not links added to existing ones.
-
+- **Lead figure for [Quality moves from specification to iteration](../src/_posts/2026/2026-06-19-quality-moves.md)** (parked 2026-11-08) — Six rounds of drafts (B–F) haven't produced a direction Jon is happy with, so it's set aside while other essays get figures. Pick it back up with a fresh approach rather than another variation on F1–F4. Jon's requirements so far, the history of each round, and where the drafts page lives are in the [lead figures plan](designs/plans/2026-10-29-lead-figures.md).
 - Portfolio
   - **Side projects** — The remaining portfolio gap. Covers exist for Lister PHP, Monotasker, Parker, Pointer-AR, and PRVT; **Menu Bar Death Clock** and **Plain English Service** still have no `coverImage` and no image in the body. The write-ups were thickened 2026-09-17 and now run about 330–580 words, with Monotasker the short one at about 270 (it has its own blog post), so covers are what's left.
   - Look through /talks (current and old) for more talks, and evaluate for inclusion. Status per Jon, 2026-09-11:
@@ -122,6 +117,7 @@ Prioritized by **side-effect surface** — complexity that can produce a silentl
 
 ## MAYBE LET'S DON'T DO THESE
 
+- A `/sides/` page for **dotagents** (the agent protocol repo) – dropped 2026-11-08. The repo is private and holds career context, so there's nothing public to link from the page or `about.md`.
 - Joining [aboutideasnow.com](https://aboutideasnow.com/) – dropped 2026-11-08, not much value for this site.
 - **Colophon accessibility stats** — Site contrast (`test color-contrast`) and axe markup pass (`test a11y`) already cover the colophon; a separate colophon-specific accessibility page or stats block isn't worth building (canceled 2026-08-24).
 - Performance/regressions — static text-first site; not worth a dedicated monitoring/regression stack for now

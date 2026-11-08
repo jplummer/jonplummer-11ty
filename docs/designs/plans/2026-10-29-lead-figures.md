@@ -4,6 +4,23 @@ Status file for adding figures to essays. The rules for making a figure are in t
 
 ## Current status
 
+**2026-11-08:** Quality-moves is parked. Jon wasn't happy with where it was going, and it's now the first item under Selected in `docs/ideas.md`. The record below stays as it was so the work can resume from it.
+
+The current post is [Agentic AI doesn't make human interfaces go away](../../../src/_posts/2026/2026-04-20-agentic-ai-doesnt-make-human-interfaces-go-away.md). Jon's framing: the figure isn't that build costs fell and the other costs didn't. It's what that implies. He wants two figures:
+
+- **Design moves down the stack**, placed with the MCP paragraph ("it moves upstream to the object model…").
+- **One foundation, two surfaces**, placed with the API-first paragraph. This one is the `leadFigure`.
+
+Drafts are in `docs/designs/scratch/lead-figures/agentic-drafts/index.html`, with `shot.cjs` for light and dark screenshots.
+
+- **A round (design moves down the stack):** Jon said neither A1 (layer thickness) nor A2 (paired bars) communicated well. Set aside, with no second figure for now.
+- **B round:** B2, the left-to-right version, was "pretty good." Jon's statement of the idea: both humans and agents use different tools to understand and manipulate the same objects, and those tools are the only way the humans can understand what the agents are doing and find it correct and comfortable.
+- **E round:** Jon prefers E1, the magnifying version. To improve it, the agent's line now splits outside the lens, with the junction at x 780 and the tools moved right, so both branches visibly enter the glass. Jon approved it ("It's good, make it so").
+- **Built 2026-11-08 (uncommitted):** `scripts/figures/same-objects.js` generates `src/assets/images/2026/04/same-objects.svg`. The post has `leadFigure` and the image after the API-first paragraph. Its alt text states the figure's point, that the interface is the only way to see what the agent did, because the prose doesn't quite say that. The spec's house-style paragraph and a magnifier rule are updated. `figure-tokens`, `frontmatter`, `markdown`, `spell`, and a full `pnpm run build` pass. `pnpm run flatten-figures same-objects` wrote the light and dark copies. The connecting line uses `mix/ink-45`, the catalog's shared token for connecting lines, rather than a one-off 50% mix. **Figma catalog row added** below two-systems (frames 7:7 Light and 7:45 Dark). The clip path imported as a mask group and the lens stays magnified. All 48 paints are bound to the Site and Figures variables. The six stroke widths are bound to new `same-objects/*` variables in Figure strokes, including `tie-magnified` (5.6) and `go-magnified` (11.2) for the copies under the lens.
+- **E round, first pass:** D2 was better. Jon then suggested a magnifying glass, someone looking at the objects. E1 makes the interface a magnifying glass over the changed objects, and everything under the lens is drawn 1.4× larger. E2 is the same glass with nothing enlarged. The handle runs down-left to the "Interface" label.
+- **D round:** Jon preferred C1 over C2. In C1, though, the interface's miniature column of objects mirrored the real one, which wrongly suggested a second set, and the empty tools box was misleading. D1 makes the interface a screen listing the objects as rows, and the tools three pills: the active one changes both objects, the other two are idle. D2 drops the interface box and draws the interface as a red window around the changed objects themselves.
+- **C round:** C1 draws the objects themselves. The agent's tools and the interface reach the same changed objects, and the interface shows them. C2 adds People and Agents, with a spec barrier ("?") on the direct route, so the interface is the only way to see what the agent did.
+
 Seven essays have lead figures, committed in a4d806c5. The eighth, [Quality moves from specification to iteration](../../../src/_posts/2026/2026-06-19-quality-moves.md), is in drafts. No direction has been picked yet.
 
 The latest round has four drafts, F1 to F4. Jon asked for "four of them, radically different!" and hasn't responded to them yet:
@@ -88,7 +105,8 @@ These are also in the spec unless noted.
   - `jscheck.cjs` runs the page script under Node to catch syntax errors.
   - On macOS there's no `timeout`, and `shot.cjs` has hung before. Run it as `(sleep 60; pkill -f shot.cjs) & node shot.cjs`.
 - **Figma catalog:** [file ailr6PhPXO0SHSuWdZx31S](https://www.figma.com/design/ailr6PhPXO0SHSuWdZx31S).
-  - Light/Dark frame IDs: three-horizons 1:8/1:9, many-little-diamonds 1:15/1:16, device-spine 1:22/1:23, benefit-concept-detail 1:29/1:30, craft-bottleneck 1:36/1:37, two-systems 1:43/1:44, coordinated-experience 1:50/1:51.
+  - Light/Dark frame IDs: three-horizons 1:8/1:9, many-little-diamonds 1:15/1:16, device-spine 1:22/1:23, benefit-concept-detail 1:29/1:30, craft-bottleneck 1:36/1:37, two-systems 1:43/1:44, same-objects 7:7/7:45, coordinated-experience 1:50/1:51.
+  - To add a row without the scratch scripts: clone an existing row, rename it, and empty its frames. Then `upload_assets` the flattened SVGs, move the imported layers into the frames, and bind each paint to the Site or Figures variable whose value matches in that frame's mode. The same-objects row was done this way in three `use_figma` calls.
   - Variable collections: Site 3:2, Figures 3:3, Figure strokes 3:4.
   - The first variable bindings came from two one-off scripts, now in `docs/designs/scratch/lead-figures/figma-binding/`. `tokens.js` reads every shape's resolved light and dark color with Puppeteer. `payload.js` names those colors and maps each layer to a variable and stroke width. They use absolute paths and are not part of the repo's tooling.
 - **Posts from 2026 over 700 words with no lead figure.** Counts are a raw `wc -w` of the body, so they're approximate:

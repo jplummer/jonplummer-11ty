@@ -5,6 +5,7 @@ date: "2026-04-20"
 tags: post
 description: "Why agentic systems still need clear human-facing design: responsibility, trust, and usability do not disappear when automation gets smarter."
 ogImage: /assets/images/og/v2/2026-04-20-agentic-ai-doesnt-make-human-interfaces-go-away.png
+leadFigure: /assets/images/2026/04/same-objects.svg
 ---
 The case for human interfaces becoming obsolete is getting more sophisticated. It used to be "AI will do everything" – easy to dismiss. Now it sounds like [Matt Webb's recent piece on headless architecture](https://interconnected.org/home/2026/04/18/headless): services need to expose their capabilities as CLI tools and APIs for AI agents, making the visual front-end "sacrificial" – encountered once or twice to get the vibe, then handed off to an agent who never needs to see it. That's a more interesting argument.
 
@@ -25,6 +26,8 @@ A company serving a market and actually learning about their customers and prosp
 There's an engineering-minded version of this worth acknowledging. APIs are a bit brittle compared to what an agent can do with a well-designed [MCP](https://modelcontextprotocol.io); the agent can reason about tools, compose them, and adapt to partial failures. That flexibility is valuable. But MCP tools still have schemas and the underlying objects still need to be coherently designed. A poorly conceived MCP tool or underlying model is just as brittle, or worse if the agent confidently does the wrong thing instead of throwing a clean error. The technical design work doesn't disappear: it moves upstream to the object model, the capability definitions, the semantic coherence of what you're exposing. That's more foundational design work, not less.
 
 None of this is an argument for forcing users through rigid prescribed workflows. The right response to the agentic era isn't to wall off capabilities or ignore the headless trend. It's to design both surfaces from the same foundation: the human-facing layer for initial trust, inspection, and correction; and the agent-compatible capabilities underneath. Same objects, same data model, two interaction methods. The front-end and the agent tools should be driving the same underlying model. This is, incidentally, what [API-first development](https://www.postman.com/api-first/) has been asking us to do for years.
+
+![The agent's tools change two objects, and a person looks at those same two objects through the interface. It's the only way they can see what the agent did.](/assets/images/2026/04/same-objects.svg)
 
 Interfaces are becoming harder to design well, not less necessary. The object model has to be right for both interaction types. The visible informational layer has to foster trust. The inspection and correction paths have to exist. Since users will operate the human interfaces less often, they need to rely less on training and recall, and rely more on recognition. And someone still has to understand the users well enough to know what value looks like and design toward it.
 
