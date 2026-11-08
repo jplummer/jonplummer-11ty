@@ -633,6 +633,15 @@ main > h1 {
 p {
   margin: var(--paragraph-spacing) 0;
   text-wrap: pretty;
+  /* Safari only; others ignore it. Opening and closing quotes hang outside
+     the text edge so the letters line up. */
+  hanging-punctuation: first last;
+}
+
+/* Tight markdown lists put text straight in the li, with no p to inherit
+   the paragraph rule from */
+li {
+  text-wrap: pretty;
 }
 
 /* Blockquotes */
@@ -641,6 +650,8 @@ blockquote {
   padding-left: var(--spacing-md);
   font-style: italic;
   border-left: 2px solid var(--border-color);
+  text-wrap: pretty;
+  hanging-punctuation: first last;
 }
 
 /* Content warnings (details/summary) — Show/Hide + disclosure caret */
@@ -892,6 +903,8 @@ pre code {
 /* Reading default */
 a {
   text-decoration: none;
+  /* Drop the hover underline a little lower than the browser default */
+  text-underline-offset: 0.15em;
   color: var(--text-color);
   transition: color 0.3s ease;
 }

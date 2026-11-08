@@ -109,10 +109,8 @@ Prioritized by **side-effect surface** — complexity that can produce a silentl
       - `1.5rem` × 1 — already `var(--font-size-lg)`
     - **Missing token candidate:** `0.75rem` used 5+ times with no token — likely `--spacing-xs` or a half-baseline; worth adding if it's a consistent spacing use
     - **8 hardcoded color declarations** (13% of all color uses): `oklch(0% 0 0deg)` × 3 (pure black, probably print styles), `oklch(46.8% 0 0deg)` × 2 (a gray without a token — candidate for `--text-color-light` or a new token), plus the `--content-background-color` and `--text-color` duplicates already listed above. Tool note: `transparent`, `currentColor`, and `inherit` don't count toward this.
-  - **Typography from [Taming Typography: Building a Modern CSS Reset](https://css-tricks.com/taming-typography-modern-css-reset/)** (CSS-Tricks, read 2026-11-07). Checked against `jonplummer.css`; none tried yet.
-    - `text-wrap: pretty` on `li` and `blockquote`. Paragraphs and figcaptions have it; these two don't.
-    - `text-underline-offset` (about `0.15em`) on links. Nothing sets it, so underlines sit at the browser default and cross descenders.
-    - `hanging-punctuation: first last` on `p` and `blockquote`. Safari only; other browsers ignore it.
+  - **Typography from [Taming Typography: Building a Modern CSS Reset](https://css-tricks.com/taming-typography-modern-css-reset/)** (CSS-Tricks, read 2026-11-07). Checked against `jonplummer.css`.
+    - ~~Three small ones~~ – done 2026-11-07: `text-wrap: pretty` on `li` and `blockquote`; `text-underline-offset: 0.15em` on links, which only shows on hover and focus since reading links have no underline at rest (`skip-ink` already kept underlines off descenders); and `hanging-punctuation: first last` on `p` and `blockquote`, which only Safari applies and which wasn't checked in Safari.
     - `text-box: trim-both cap alphabetic` for the header lockup, in place of the hand-tuned nudges such as `--site-lockup-cap-nudge`, which drift if the root font size changes. Firefox doesn't support it yet, so keep the nudges as the fallback or put the new rule behind `@supports`. Untested; it may not replace them cleanly.
     - Skip `font-synthesis: none`. The site loads only upright Libre Franklin, so italics in captions, blockquotes, and `em` are synthesized, and this rule would turn them upright.
 - **Alternate color schemes** and how to trigger them
