@@ -30,7 +30,6 @@
   /* Modular type scale based on 1rem (16px) base – see: https://webtypography.net/3.1.1 */
   --font-family: "Libre Franklin", sans-serif;
   --font-family-display: "Big Shoulders", sans-serif;
-  --text-size: 16px; /* legacy alias; prefer --font-size-base */
   --line-height: 1.5;
   --paragraph-spacing: calc(var(--line-height) * 1em);
   /* Lean type ladder (reading surface). Logotype is off-scale. */
@@ -163,7 +162,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: var(--font-family);
-  font-size: var(--text-size);
+  font-size: var(--font-size-base);
   line-height: var(--line-height);
   letter-spacing: var(--letter-spacing-normal);
   color: var(--text-color);

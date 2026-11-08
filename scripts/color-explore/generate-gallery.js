@@ -2756,7 +2756,6 @@ function renderHtml(visibleSections, meta, options = {}) {
       --spacing-xl: 0.85rem;
       --spacing-ex: 3ex;
       --paragraph-spacing: 0.55em;
-      --text-size: 13px;
       --line-height: 1.45;
     }
     /*

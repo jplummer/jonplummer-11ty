@@ -77,7 +77,7 @@ Prioritized by **side-effect surface** — complexity that can produce a silentl
 
 ### 🖍 Also…
 
-- **Body text ignores the reader's default text size** (found 2026-11-07) — `body { font-size: var(--text-size) }`, and `--text-size` is a "legacy alias" fixed at `16px`. Headings, the lockup, and anything sized with a `rem` token follow a reader who raised the browser's default text size; paragraphs and everything else that inherits from `body` stay at 16px. Browser zoom still scales everything, so it only affects readers who change the default size. Likely fix: `--font-size-base` (`1rem`) on `body` and retire `--text-size`, then check that the critical shell and the OG card don't depend on it. The `/color/` gallery previews override `--text-size: 13px` (`generate-gallery.js`), so they need the same change.
+- ~~**Body text ignores the reader's default text size**~~ – fixed 2026-11-07. `body` used `--text-size`, a "legacy alias" fixed at `16px`, so paragraphs and everything else that inherits from `body` stayed at 16px for a reader who raised the browser's default text size, while headings, nav, and the footer grew. `body` now uses `--font-size-base` (`1rem`) and `--text-size` is gone, including a dead `13px` override in the `/color/` gallery previews. At the default size, pages render byte-identical. Browser zoom was never affected.
 
 - Consider whether to participate in [https://aboutideasnow.com/](https://aboutideasnow.com/) (2026-08-21).
 - **Modern CSS techniques to consider**
