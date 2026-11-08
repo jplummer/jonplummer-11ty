@@ -180,6 +180,9 @@ function checkDuplicateGuids(doc) {
   return issues;
 }
 
+// Feeds that never warn about age
+const FRESHNESS_EXEMPT = new Set(['wisdom-feed.xml']);
+
 // Check feed freshness
 function checkFeedFreshness(doc) {
   const issues = [];
@@ -250,9 +253,11 @@ function validateRSSFeed(filePath) {
     const duplicateIssues = checkDuplicateGuids(doc);
     issues.push(...duplicateIssues);
     
-    // Check freshness
-    const freshnessIssues = checkFeedFreshness(doc);
-    issues.push(...freshnessIssues);
+    // Check freshness. The posts and links feeds should move every month;
+    // collected wisdom grows when it grows, so its age isn't a problem.
+    if (!FRESHNESS_EXEMPT.has(fileBaseName)) {
+      issues.push(...checkFeedFreshness(doc));
+    }
   }
   
   // Check feed size

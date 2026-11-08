@@ -154,7 +154,7 @@ Validates that all HTML pages have appropriate Open Graph images. Missing `og:im
 
 ### rss.js
 
-Validates RSS/XML feed files for proper structure, required elements, and feed health. Checks RSS structure, item validity, duplicate GUIDs (ERROR), feed freshness (>30 days = WARNING), feed size (>500KB = WARNING).
+Validates RSS/XML feed files for proper structure, required elements, and feed health. Checks RSS structure, item validity, duplicate GUIDs (ERROR), feed freshness (>30 days = WARNING, except `wisdom-feed.xml`, which grows when it grows), feed size (>500KB = WARNING).
 
 ### seo.js
 
