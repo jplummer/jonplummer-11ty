@@ -64,7 +64,7 @@
     "luxon": "^3.7.2",
     "markdownlint-cli2": "^0.22.1",
     "nunjucks": "^3.2.4",
-    "puppeteer": "^24.43.1",
+    "puppeteer": "^25.16.0",
     "qrcode": "^1.5.4",
     "stylelint": "^17.15.0",
     "stylelint-config-standard": "^40.0.0"
