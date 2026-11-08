@@ -2,8 +2,9 @@
  * One fingerprint for everything OG images share: the design tokens pulled
  * from jonplummer.css, the inlined font faces, the card templates, styles,
  * and fit script, the JP mark, the site data the cards use, and the render
- * code itself. If it changes, every OG image is regenerated; if not, each
- * image is regenerated only when its own source file changes.
+ * code itself. It goes into every card's digest (og-card-digest.js), so if it
+ * changes, every OG image is regenerated; if not, each image is regenerated
+ * only when its own title or label changes.
  *
  * The CSS goes in as the extractors' output, not as the whole file, so rules
  * the card never sees (layout, lightbox, grids) don't trigger a full rerender.
@@ -91,35 +92,9 @@ function computeOgSharedFingerprint(cwd = process.cwd()) {
   return hash.digest('hex');
 }
 
-function defaultFingerprintPath(cwd = process.cwd()) {
-  return path.join(cwd, '.cache', 'og-shared-fingerprint.json');
-}
-
-/** @returns {string | null} null if the file is missing or unreadable */
-function readStoredFingerprint(filePath) {
-  try {
-    const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-    return typeof data.fingerprint === 'string' ? data.fingerprint : null;
-  } catch {
-    return null;
-  }
-}
-
-function writeStoredFingerprint(filePath, fingerprint) {
-  fs.mkdirSync(path.dirname(filePath), { recursive: true });
-  fs.writeFileSync(
-    filePath,
-    JSON.stringify({ version: 1, fingerprint, updatedAt: new Date().toISOString() }, null, 2) + '\n',
-    'utf8'
-  );
-}
-
 module.exports = {
   OG_SITE_FIELDS,
   SHARED_CONTENT_FILES,
   collectOgSharedInputs,
   computeOgSharedFingerprint,
-  defaultFingerprintPath,
-  readStoredFingerprint,
-  writeStoredFingerprint,
 };

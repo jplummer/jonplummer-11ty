@@ -68,6 +68,8 @@ const TESTS = [
   { id: 'og-card', script: 'og-card.js', groups: ['unit'] },
   { id: 'date-utils', script: 'date-utils.js', groups: ['unit'] },
   { id: 'og-shared-fingerprint', script: 'og-shared-fingerprint.js', groups: ['unit'] },
+  // OG card digest in the PNG, and the generator's render / keep / stamp decision.
+  { id: 'og-card-digest', script: 'og-card-digest.js', groups: ['unit'] },
   { id: 'changelog-format', script: 'changelog-format.js', groups: ['unit'] },
   { id: 'source-file-utils', script: 'source-file-utils.js', groups: ['unit'] },
   // fast-only: not part of either build.js phase (build's own output isn't

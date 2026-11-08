@@ -15,12 +15,8 @@ const {
   ogImageUrl,
 } = require('../utils/og-image-filename');
 const { ogCardKind, ogCardLabel } = require('../utils/og-card');
-const {
-  computeOgSharedFingerprint,
-  defaultFingerprintPath,
-  readStoredFingerprint,
-  writeStoredFingerprint,
-} = require('../utils/og-shared-fingerprint');
+const { computeOgSharedFingerprint } = require('../utils/og-shared-fingerprint');
+const { computeCardDigest, readPngDigest, writePngDigest } = require('../utils/og-card-digest');
 
 // Configure Nunjucks environment
 const nunjucksEnv = new nunjucks.Environment(
@@ -37,33 +33,14 @@ nunjucksEnv.addFilter('postDate', formatPostDate);
 
 // Front matter parsing and reconstruction now use shared utilities
 
-// Per-image check only. Changes to what every image shares (tokens, fonts,
-// templates, render code) are caught once per run by the shared fingerprint
-// in generateOgImages(), which forces a full regeneration.
-function needsRegeneration(ogImagePath, pageData, filePath) {
-  // If OG image doesn't exist, need to generate
-  if (!fs.existsSync(ogImagePath)) {
-    return true;
-  }
-  
-  // Check if source data has changed by comparing file modification times
-  const ogImageStat = fs.statSync(ogImagePath);
-  const sourceFileStat = fs.statSync(filePath);
-  
-  // If source file is newer than OG image, regenerate
-  if (sourceFileStat.mtime > ogImageStat.mtime) {
-    return true;
-  }
-
-  // Also check if frontmatter has ogImage but it doesn't match expected path
-  if (pageData.ogImage && pageData.ogImage !== 'auto') {
-    const expectedPath = ogImageUrl(generateOgImageFilename(pageData, filePath));
-    if (pageData.ogImage !== expectedPath) {
-      return true;
-    }
-  }
-  
-  return false;
+// What to do with one card, given the digest of what it would render now
+// (see og-card-digest.js): 'render' when the PNG is missing, forced, or out
+// of date; 'stamp' to record the digest without rendering (--stamp); 'keep'
+// when the PNG already carries this digest.
+function cardAction(pngPath, digest, { force = false, stamp = false } = {}) {
+  if (force || !fs.existsSync(pngPath)) return 'render';
+  if (readPngDigest(pngPath) === digest) return 'keep';
+  return stamp ? 'stamp' : 'render';
 }
 
 // Render the card document for one image.
@@ -111,9 +88,10 @@ function launchBrowser() {
   return puppeteer.launch(launchOptions);
 }
 
-// Screenshot one card. Pass a browser to reuse it across a run; without one,
-// a browser is launched and closed for this image (dev watch does that).
-async function generateOgImage(html, outputPath, sharedBrowser = null) {
+// Screenshot one card and record its digest in the PNG. Pass a browser to
+// reuse it across a run; without one, a browser is launched and closed for
+// this image (dev watch does that).
+async function generateOgImage(html, outputPath, sharedBrowser = null, digest = null) {
   const browser = sharedBrowser || (await launchBrowser());
   const page = await browser.newPage();
 
@@ -171,6 +149,7 @@ async function generateOgImage(html, outputPath, sharedBrowser = null) {
         height: 630
       }
     });
+    if (digest) writePngDigest(outputPath, digest);
     // Deployed files must be world-readable
     fs.chmodSync(outputPath, 0o644);
   } finally {
@@ -180,8 +159,11 @@ async function generateOgImage(html, outputPath, sharedBrowser = null) {
 }
 
 // Process a single file
+// options.sharedFingerprint is computed once per run by generateOgImages();
+// dev watch calls this per saved file without it.
 async function processFile(filePath, options = {}) {
-  const { force = false, browser = null } = options;
+  const { force = false, stamp = false, browser = null } = options;
+  const sharedFingerprint = options.sharedFingerprint || computeOgSharedFingerprint();
   const content = fs.readFileSync(filePath, 'utf8');
   const { frontMatter, content: body, error } = parseFrontMatter(content);
   
@@ -216,7 +198,7 @@ async function processFile(filePath, options = {}) {
   // Skip only a genuine manual override: an ogImage pointing somewhere other than
   // the path we derive for this file. A value equal to ogImageUrlPath is one we wrote
   // ourselves on a previous run (see the frontmatter write below), so it must fall
-  // through to needsRegeneration() or nothing would ever be refreshed after its
+  // through to the digest check or nothing would ever be refreshed after its
   // first generation. If force is true, regenerate regardless. If the override's
   // file doesn't exist, generate it below.
   const isManualOverride =
@@ -235,8 +217,19 @@ async function processFile(filePath, options = {}) {
     fs.mkdirSync(ogImageDir, { recursive: true });
   }
   
-  // Check if regeneration is needed (force if image doesn't exist or force flag is set)
-  if (!force && !needsRegeneration(ogImagePath, frontMatter, filePath) && fs.existsSync(ogImagePath)) {
+  // Everything the card shows from this page
+  const label = ogCardLabel(frontMatter, filePath);
+  const card = {
+    title: frontMatter.title,
+    label: label && label.text,
+    labelIsPath: label && label.isPath
+  };
+  const digest = computeCardDigest(sharedFingerprint, card);
+  const action = cardAction(ogImagePath, digest, { force, stamp });
+
+  if (action !== 'render') {
+    const stamped = action === 'stamp';
+    if (stamped) writePngDigest(ogImagePath, digest);
     // Still update frontmatter if ogImage is missing
     if (!frontMatter.ogImage) {
       frontMatter.ogImage = ogImageUrlPath;
@@ -245,26 +238,23 @@ async function processFile(filePath, options = {}) {
       return {
         updated: true,
         imageGenerated: false,
+        stamped,
         frontmatterUpdated: true,
         frontmatterOgImageSynced: hadMissingOgImageKey,
         filePath: filePath
       };
     }
-    return { updated: false, skipped: true, reason: 'OG image up to date', filePath: filePath };
+    return stamped
+      ? { updated: false, skipped: true, stamped: true, reason: 'Digest recorded (--stamp)', filePath: filePath }
+      : { updated: false, skipped: true, reason: 'OG image up to date', filePath: filePath };
   }
-  
-  // Render HTML
-  const label = ogCardLabel(frontMatter, filePath);
-  const html = await renderOgImageHtml({
-    title: frontMatter.title,
-    label: label && label.text,
-    labelIsPath: label && label.isPath
-  });
+
+  const html = await renderOgImageHtml(card);
 
   // Generate image
   // options.browser may be a shared browser or a function that returns one
   const sharedBrowser = typeof browser === 'function' ? await browser() : browser;
-  await generateOgImage(html, ogImagePath, sharedBrowser);
+  await generateOgImage(html, ogImagePath, sharedBrowser, digest);
   
   // Update frontmatter only when ogImage path changes (avoids dev watch full rebuilds on PNG-only regen)
   const needsFrontmatterWrite =
@@ -288,19 +278,26 @@ async function processFile(filePath, options = {}) {
 // The shared fallback card – home page, paginated indexes, wisdom tag pages,
 // and base.njk's default. Those templates emit many URLs, so the card is
 // rendered from site data rather than from one page's front matter.
-async function generateDefaultCard({ force = false, browser = null } = {}) {
+// Returns what it did: 'render', 'stamp', or 'keep'.
+async function generateDefaultCard({ force = false, stamp = false, browser = null, sharedFingerprint = null } = {}) {
   const outputPath = path.join(ogImageDiskDir(), OG_DEFAULT_IMAGE_FILENAME);
-  if (!force && fs.existsSync(outputPath)) return false;
-  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
   const site = require('../../src/_data/site.js')();
-  const html = await renderOgImageHtml({ title: site.tagline, label: '/', labelIsPath: true });
-  await generateOgImage(html, outputPath, browser);
-  return true;
+  const card = { title: site.tagline, label: '/', labelIsPath: true };
+  const digest = computeCardDigest(sharedFingerprint || computeOgSharedFingerprint(), card);
+  const action = cardAction(outputPath, digest, { force, stamp });
+  if (action === 'stamp') writePngDigest(outputPath, digest);
+  if (action !== 'render') return action;
+  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+  const html = await renderOgImageHtml(card);
+  // browser may be a shared browser or a function that returns one
+  const sharedBrowser = typeof browser === 'function' ? await browser() : browser;
+  await generateOgImage(html, outputPath, sharedBrowser, digest);
+  return 'render';
 }
 
 // Main function - can be called programmatically or from CLI
 async function generateOgImages(options = {}) {
-  const { quiet = false, force = false } = options;
+  const { quiet = false, force = false, stamp = false } = options;
   
   // Don't print header in quiet mode - caller will announce it
   
@@ -351,6 +348,7 @@ async function generateOgImages(options = {}) {
     skipped: 0,
     errors: 0,
     imagesGenerated: 0,
+    stamped: 0,
     frontmatterOnlyUpdates: 0,
     frontmatterOgImageSynced: 0,
     generatedFiles: [],
@@ -358,17 +356,8 @@ async function generateOgImages(options = {}) {
   };
   
   // Shared fingerprint: tokens, fonts, templates, mark, site data, render code.
-  // Missing (first run, fresh machine): record it and keep the existing PNGs,
-  // which were rendered from the inputs committed alongside them.
-  const fingerprintPath = defaultFingerprintPath();
-  const currentFingerprint = computeOgSharedFingerprint();
-  const storedFingerprint = readStoredFingerprint(fingerprintPath);
-  const sharedChanged = storedFingerprint !== null && storedFingerprint !== currentFingerprint;
-  if (storedFingerprint === null) {
-    console.log('  ℹ️  OG shared fingerprint recorded for the first time; existing images kept');
-  } else if (sharedChanged) {
-    console.log('  ℹ️  OG tokens, fonts, templates, or render code changed; regenerating all OG images');
-  }
+  // It goes into every card's digest, so a change here re-renders every card.
+  const sharedFingerprint = computeOgSharedFingerprint();
 
   // One browser for the whole run, launched only if something needs rendering
   let browser = null;
@@ -376,19 +365,19 @@ async function generateOgImages(options = {}) {
     if (!browser) browser = await launchBrowser();
     return browser;
   };
-  const runForce = force || sharedChanged;
 
-  const defaultCardPath = path.join(ogImageDiskDir(), OG_DEFAULT_IMAGE_FILENAME);
-  if (runForce || !fs.existsSync(defaultCardPath)) {
-    try {
-      await generateDefaultCard({ force: true, browser: await getBrowser() });
+  try {
+    const action = await generateDefaultCard({ force, stamp, browser: getBrowser, sharedFingerprint });
+    if (action === 'render') {
       console.log(`  ✅ Generated: default card (${OG_DEFAULT_IMAGE_FILENAME})`);
       results.imagesGenerated++;
       results.generatedFiles.push(OG_DEFAULT_IMAGE_FILENAME);
-    } catch (error) {
-      console.error(`  ❌ Error (default card): ${error.message}`);
-      results.errors++;
+    } else if (action === 'stamp') {
+      results.stamped++;
     }
+  } catch (error) {
+    console.error(`  ❌ Error (default card): ${error.message}`);
+    results.errors++;
   }
 
   for (const file of markdownFiles) {
@@ -399,8 +388,9 @@ async function generateOgImages(options = {}) {
     }
 
     try {
-      const result = await processFile(file, { force: runForce, browser: getBrowser });
-      
+      const result = await processFile(file, { force, stamp, browser: getBrowser, sharedFingerprint });
+      if (result.stamped) results.stamped++;
+
       if (result.updated) {
         if (result.imageGenerated) {
           if (!quiet) {
@@ -441,6 +431,10 @@ async function generateOgImages(options = {}) {
 
   const filesChecked = markdownFiles.length;
 
+  if (results.stamped > 0) {
+    console.log(`  ℹ️  Recorded the current digest in ${results.stamped} existing image(s) without re-rendering (--stamp)`);
+  }
+
   if (quiet) {
     if (results.frontmatterOgImageSyncedFiles.length > 0) {
       results.frontmatterOgImageSyncedFiles.forEach((file) => {
@@ -456,12 +450,6 @@ async function generateOgImages(options = {}) {
     console.log(`   Errors: ${results.errors}`);
   }
   
-  // Only record the fingerprint after a clean run, so a partial failure
-  // retries the full regeneration next time.
-  if (results.errors === 0) {
-    writeStoredFingerprint(fingerprintPath, currentFingerprint);
-  }
-
   if (results.errors > 0) {
     if (quiet) {
       process.exit(1);
@@ -487,7 +475,11 @@ async function generateOgImages(options = {}) {
 async function main() {
   const force = process.argv.includes('--force');
   const quiet = process.argv.includes('--quiet');
-  await generateOgImages({ quiet, force });
+  // --stamp: record the current digest in existing PNGs without re-rendering.
+  // For when the PNGs are known to be right but their digests are out of date,
+  // such as after a render-code edit that doesn't change how cards look.
+  const stamp = process.argv.includes('--stamp');
+  await generateOgImages({ quiet, force, stamp });
 }
 
 // Run if called directly
@@ -498,5 +490,5 @@ if (require.main === module) {
   });
 }
 
-module.exports = { generateOgImages, generateDefaultCard, processFile, generateOgImage, renderOgImageHtml };
+module.exports = { generateOgImages, generateDefaultCard, processFile, generateOgImage, renderOgImageHtml, cardAction };
 

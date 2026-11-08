@@ -263,8 +263,8 @@ pnpm run generate-og-images
 
 The script will:
 - Generate a card for every post, portfolio piece, side project, and page that doesn't have one, plus the shared default card (`index.png`) from site data. Design: [OG dark card spec](designs/specs/2026-10-09-og-dark-card-design.md)
-- Regenerate images if the source file (title, description, date) has changed
-- Regenerate **all** images when the shared fingerprint changes: design tokens (`:root`) in `jonplummer.css`, font faces, the card templates (`og-image.njk`, `og-image-body.njk`), styles (`og-card.css`), fit script (`og-card-fit.js`), the JP mark, site data, or the render code itself (`generate-og-images.js`, `og-card.js`, `css-utils.js`). Other CSS rules don't count, so layout or lightbox edits no longer re-render every card. The fingerprint lives in `.cache/og-shared-fingerprint.json`; if it's missing, the first run records it and keeps the existing images. Code: `scripts/utils/og-shared-fingerprint.js`.
+- Regenerate a card only when what it shows changes. Each PNG carries a digest of what it was rendered from, in a PNG text chunk: the page's title and label, plus the shared fingerprint. The generator re-renders a card when that digest no longer matches, so editing a post's body, saving it again, or a fresh clone's file times never re-issue a card. A PNG with no digest, such as one replaced by hand, is re-rendered. Code: `scripts/utils/og-card-digest.js`.
+- Regenerate **all** images when the shared fingerprint changes: design tokens (`:root`) in `jonplummer.css`, font faces, the card templates (`og-image.njk`, `og-image-body.njk`), styles (`og-card.css`), fit script (`og-card-fit.js`), the JP mark, site data, or the render code itself (`generate-og-images.js`, `og-card.js`, `css-utils.js`). Other CSS rules don't count, so layout or lightbox edits don't re-render every card. Code: `scripts/utils/og-shared-fingerprint.js`.
 - Regenerate images if `ogImage` is set in frontmatter but the image file doesn't exist
 - Skip images that are up to date (incremental generation - typically <1 second if all up-to-date)
 - Render with one browser for the whole run, and fail any image whose fonts fell back (the site's `font-display: optional` faces are forced to `block` for screenshots)
@@ -280,6 +280,14 @@ The `--force` flag will:
 - Regenerate all images, even if they exist and are up to date
 - Override the skip logic for manually set `ogImage` values
 - Rarely needed now that template, token, and render-code changes are caught automatically; the main remaining case is a Puppeteer/Chromium upgrade that changes how cards render
+
+**Record digests without re-rendering**: an edit to the render code that doesn't change how cards look (a log message, a refactor) still changes every card's digest. Run this before the next build, and the existing cards keep their bytes:
+
+```bash
+pnpm run generate-og-images -- --stamp
+```
+
+The `--stamp` flag writes the current digest into every existing PNG whose digest is out of date, without rendering it. Cards with no PNG are still rendered. Use it only when you know the cards are right; a card whose title changed would keep its old image.
 
 #### Previewing Images
 

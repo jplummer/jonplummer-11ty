@@ -2,9 +2,9 @@
 
 /**
  * Guards the OG shared fingerprint (scripts/utils/og-shared-fingerprint.js):
- * CSS rules the card never sees must not change it; design tokens, the card
- * template, and the stored-value round trip must behave. Runs against a temp
- * copy of the real inputs, so the site's own files are never touched.
+ * CSS rules the card never sees must not change it; design tokens and the
+ * card template must. Runs against a temp copy of the real inputs, so the
+ * site's own files are never touched.
  */
 
 const assert = require('assert');
@@ -15,8 +15,6 @@ const {
   OG_SITE_FIELDS,
   SHARED_CONTENT_FILES,
   computeOgSharedFingerprint,
-  readStoredFingerprint,
-  writeStoredFingerprint,
 } = require('../utils/og-shared-fingerprint');
 const { addFile, addIssue } = require('../utils/test-results');
 const { runTest } = require('../utils/test-runner-helper');
@@ -132,13 +130,6 @@ function runUnitAssertions(result) {
     }
     const missing = [...used].filter((key) => !OG_SITE_FIELDS.includes(key));
     assert.deepStrictEqual(missing, [], `add to OG_SITE_FIELDS: ${missing.join(', ')}`);
-  });
-
-  check('stored value round-trips; missing file reads as null', (dir) => {
-    const storePath = path.join(dir, '.cache', 'og-shared-fingerprint.json');
-    assert.strictEqual(readStoredFingerprint(storePath), null);
-    writeStoredFingerprint(storePath, 'abc123');
-    assert.strictEqual(readStoredFingerprint(storePath), 'abc123');
   });
 }
 

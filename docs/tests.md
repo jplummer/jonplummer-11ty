@@ -36,7 +36,7 @@ _Derived from [`scripts/test-manifest.js`](../scripts/test-manifest.js) — see 
 
 **Fast Tests:** `html`, `links`, `wisdom`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `deploy-assets`, `error-document-assets`, `favicon-rasters`, `trailing-slash-links`, `critical-css`, `figure-tokens`, `design-docs-location`, `docs-links`, `portfolio-cover-crop`
 
-**Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `indexnow`, `manifest-cursors`, `figure-lightbox`, `site-branding`, `preview-site-lockup`, `og-card`, `og-image-filename`, `date-utils`, `og-shared-fingerprint`, `changelog-format`, `source-file-utils`, `test-json-pipe` — see [Unit Tests](#unit-tests) below
+**Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `indexnow`, `manifest-cursors`, `figure-lightbox`, `site-branding`, `preview-site-lockup`, `og-card`, `og-image-filename`, `date-utils`, `og-shared-fingerprint`, `og-card-digest`, `changelog-format`, `source-file-utils`, `test-json-pipe` — see [Unit Tests](#unit-tests) below
 
 **Slow Tests:** `a11y` (launches browser)
 
@@ -219,7 +219,11 @@ Unit checks for `formatPostDate` / `formatPostDateAttr` in `eleventy/utils/date-
 
 ### og-shared-fingerprint.js
 
-Unit checks for the OG shared fingerprint in `scripts/utils/og-shared-fingerprint.js`, run against a temp copy of the real inputs. The fingerprint is stable across runs; it ignores CSS rules outside `:root`, so a lightbox or layout edit doesn't re-render every card; it changes when a design token, the card template, the card styles, or the fit script changes; and the stored value round-trips, with a missing file reading as null. No `_site/` dependency.
+Unit checks for the OG shared fingerprint in `scripts/utils/og-shared-fingerprint.js`, run against a temp copy of the real inputs. The fingerprint is stable across runs; it ignores CSS rules outside `:root`, so a lightbox or layout edit doesn't re-render every card; and it changes when a design token, the card template, the card styles, or the fit script changes. No `_site/` dependency.
+
+### og-card-digest.js
+
+Unit checks for the OG card digest in `scripts/utils/og-card-digest.js`, which each PNG carries in a text chunk, and for the generator's choice to render, keep, or stamp a card (`cardAction` in `generate-og-images.js`). The digest changes with the title, the label, whether the label is a path, and the shared fingerprint, and with nothing else. Writing it leaves every other PNG chunk byte-identical, replaces an earlier digest instead of adding a second, and keeps every chunk's CRC valid. A missing file or a non-PNG reads as no digest. A card is rendered when its PNG is missing, its digest differs, or `--force` is passed, stamped when it differs and `--stamp` is passed, and kept otherwise, including after its file time changes. Works on temp copies of a real card. No `_site/` dependency.
 
 ### changelog-format.js
 
