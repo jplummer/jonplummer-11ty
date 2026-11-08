@@ -100,15 +100,10 @@ Prioritized by **side-effect surface** — complexity that can produce a silentl
     - `::selection` (1 use, not in iOS Safari) — cosmetic gap only; fine.
     - `orphans` (1 use, Firefox No) — print stylesheet; not critical.
     - ~~`page-break-*` properties~~ – renamed 2026-11-07 (see above).
-  - **CSS audit — design tokens panel** (same run, 2026-11-03) — 58 custom properties; color tokenization is strong (87%), spacing is leakier (68%), font sizes in between (74%). Specific gaps:
-    - **Token substitutions (value already has a token, written out anyway):**
-      - `1rem` × 7 — already `var(--font-size-base)`; check each use: some may intend a spacing token instead if they're not setting font size
-      - `0.5rem` × 6 — already `var(--baseline-unit)`
-      - `light-dark(oklch(98% 0 0deg), oklch(22% 0 0deg))` × 1 — already `var(--content-background-color)`
-      - `light-dark(oklch(29.6% 0.01 260.71deg), oklch(93% 0.01 260.71deg))` × 1 — already `var(--text-color)`
-      - `1.5rem` × 1 — already `var(--font-size-lg)`
-    - **Missing token candidate:** `0.75rem` used 5+ times with no token — likely `--spacing-xs` or a half-baseline; worth adding if it's a consistent spacing use
-    - **8 hardcoded color declarations** (13% of all color uses): `oklch(0% 0 0deg)` × 3 (pure black, probably print styles), `oklch(46.8% 0 0deg)` × 2 (a gray without a token — candidate for `--text-color-light` or a new token), plus the `--content-background-color` and `--text-color` duplicates already listed above. Tool note: `transparent`, `currentColor`, and `inherit` don't count toward this.
+  - **CSS audit — design tokens panel** (same run, 2026-11-03) — 58 custom properties; color tokenization is strong (87%), spacing is leakier (68%), font sizes in between (74%).
+    - ~~Screen spacing~~ – done 2026-11-07. The audit matched values, not meanings: it suggested `--font-size-base` for `1rem` and `--font-size-lg` for `1.5rem`, but nearly every use is a margin or padding. On screen, the lightbox and lab code-panel `0.5rem`s are now `--spacing-xs`, the lightbox's `100vw/100dvh - 1rem` sizes use `--spacing-sm`, and the lab disclosure's off-grid `0.75rem` gap snapped up to `--spacing-sm`. No new token: the other screen `0.75rem` is the pop-out icon's size, not spacing.
+    - **Left on purpose:** the two `light-dark()` color duplicates are the inline first-paint shell in `critical.njk`, which has to hard-code token values and is guarded by `test critical-css`. The lightbox backdrop and the OG preview's white field are fixed colors on purpose.
+    - **Print, still open:** every remaining `1rem` / `0.5rem` / `0.75rem` / `1.5rem`, and the black and `oklch(46.8% 0 0deg)` gray, are in `@media print`. The colors stay fixed (`light-dark()` tokens could print dark-mode values); the spacing gets tokens when the `@layer` restructure rewrites that block.
   - **Typography from [Taming Typography: Building a Modern CSS Reset](https://css-tricks.com/taming-typography-modern-css-reset/)** (CSS-Tricks, read 2026-11-07). Checked against `jonplummer.css`.
     - ~~Three small ones~~ – done 2026-11-07: `text-wrap: pretty` on `li` and `blockquote`; `text-underline-offset: 0.15em` on links, which only shows on hover and focus since reading links have no underline at rest (`skip-ink` already kept underlines off descenders); and `hanging-punctuation: first last` on `p` and `blockquote`, which only Safari applies and which wasn't checked in Safari.
     - `text-box: trim-both cap alphabetic` for the header lockup, in place of the hand-tuned nudges such as `--site-lockup-cap-nudge`, which drift if the root font size changes. Firefox doesn't support it yet, so keep the nudges as the fallback or put the new rule behind `@supports`. Untested; it may not replace them cleanly.

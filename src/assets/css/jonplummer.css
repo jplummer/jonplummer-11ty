@@ -720,7 +720,7 @@ article details > summary:is(:hover, :focus-visible)::before {
   panel sizing on /color/ and /type/. Markup: details.site-disclosure
 */
 .site-disclosure {
-  margin-top: 0.75rem;
+  margin-top: var(--spacing-sm);
 }
 
 .site-disclosure > summary {
@@ -778,11 +778,11 @@ article details > summary:is(:hover, :focus-visible)::before {
   overflow: auto;
   max-height: 12rem;
   background: var(--gallery-code-bg, var(--background-color));
-  padding: 0.5rem;
+  padding: var(--spacing-xs);
   border-radius: 4px;
   color: var(--text-color);
   border: 1px solid var(--border-color);
-  margin: 0.5rem 0 0;
+  margin: var(--spacing-xs) 0 0;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
   word-break: normal;
@@ -1128,12 +1128,12 @@ article.portfolio-detail {
   position: fixed;
   inset: 0;
   margin: auto;
-  padding: 0.5rem;
+  padding: var(--spacing-xs);
   border: 1px solid var(--border-color);
   background-color: var(--background-color);
   color: var(--text-color);
-  max-width: calc(100vw - 1rem);
-  max-height: calc(100dvh - 1rem);
+  max-width: calc(100vw - var(--spacing-sm));
+  max-height: calc(100dvh - var(--spacing-sm));
   overflow: auto;
 }
 
@@ -1149,8 +1149,8 @@ article.portfolio-detail {
 
 .figure-lightbox-chrome {
   position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
+  top: var(--spacing-xs);
+  right: var(--spacing-xs);
   z-index: 1;
   margin: 0;
 }
@@ -1201,11 +1201,11 @@ article.portfolio-detail {
 }
 
 .figure-lightbox-prev {
-  left: 0.5rem;
+  left: var(--spacing-xs);
 }
 
 .figure-lightbox-next {
-  right: 0.5rem;
+  right: var(--spacing-xs);
 }
 
 .figure-lightbox-icon {
