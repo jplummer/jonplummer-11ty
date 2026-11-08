@@ -74,9 +74,10 @@ Prioritized by **side-effect surface** — complexity that can produce a silentl
 
 - Outlandish alternative stylesheet?
 - Subtle texture in overflow background (light mode)?
-- **Header lockup optical tokens → rem** (low priority, 2026-08-11) — Left as eye-tuned `px`; browser zoom is fine. Revisit rem conversion only if root-font-size / text-only zoom alignment becomes worth re-tuning. Notes in `jonplummer.css` + `2026-08-06-header-lockup-design.md`.
 
 ### 🖍 Also…
+
+- **Body text ignores the reader's default text size** (found 2026-11-07) — `body { font-size: var(--text-size) }`, and `--text-size` is a "legacy alias" fixed at `16px`. Headings, the lockup, and anything sized with a `rem` token follow a reader who raised the browser's default text size; paragraphs and everything else that inherits from `body` stay at 16px. Browser zoom still scales everything, so it only affects readers who change the default size. Likely fix: `--font-size-base` (`1rem`) on `body` and retire `--text-size`, then check that the critical shell and the OG card don't depend on it. The `/color/` gallery previews override `--text-size: 13px` (`generate-gallery.js`), so they need the same change.
 
 - Consider whether to participate in [https://aboutideasnow.com/](https://aboutideasnow.com/) (2026-08-21).
 - **Modern CSS techniques to consider**
@@ -106,7 +107,7 @@ Prioritized by **side-effect surface** — complexity that can produce a silentl
     - **Print, still open:** every remaining `1rem` / `0.5rem` / `0.75rem` / `1.5rem`, and the black and `oklch(46.8% 0 0deg)` gray, are in `@media print`. The colors stay fixed (`light-dark()` tokens could print dark-mode values); the spacing gets tokens when the `@layer` restructure rewrites that block.
   - **Typography from [Taming Typography: Building a Modern CSS Reset](https://css-tricks.com/taming-typography-modern-css-reset/)** (CSS-Tricks, read 2026-11-07). Checked against `jonplummer.css`.
     - ~~Three small ones~~ – done 2026-11-07: `text-wrap: pretty` on `li` and `blockquote`; `text-underline-offset: 0.15em` on links, which only shows on hover and focus since reading links have no underline at rest (`skip-ink` already kept underlines off descenders); and `hanging-punctuation: first last` on `p` and `blockquote`, which only Safari applies and which wasn't checked in Safari.
-    - `text-box: trim-both cap alphabetic` for the header lockup, in place of the hand-tuned nudges such as `--site-lockup-cap-nudge`, which drift if the root font size changes. Firefox doesn't support it yet, so keep the nudges as the fallback or put the new rule behind `@supports`. Untested; it may not replace them cleanly.
+    - ~~`text-box` for the header lockup~~ – tried 2026-11-07, not adopted. Measured in headless Chrome: today's eye-tuned px tokens put the logotype's cap top and the tagline's baseline within 0.02px of the mark's edges at the default root size with the real fonts. They drift at a 20px root (top 0.8px) and with the `sans-serif` fallback a cold `font-display: optional` load can get (top 1.9–3.4px). `text-box: trim-both cap alphabetic` on the logotype and tagline, with the mark sized in `cap` units (the tagline's cap height carried over by a registered `@property`), was exact in all four cases. It wasn't worth it: Firefox has no `text-box`, so it would add about 15 lines behind `@supports` on top of the tokens rather than replace them, and `main` would start 2.2px higher. Converting the tokens to rem doesn't fix the drift either: at a 20px root the top improves to 0.25px but the bottom worsens to 0.7px. The tokens stay as they are.
     - Skip `font-synthesis: none`. The site loads only upright Libre Franklin, so italics in captions, blockquotes, and `em` are synthesized, and this rule would turn them upright.
 - **Alternate color schemes** and how to trigger them
   - According to build/deploy day?
