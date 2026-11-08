@@ -159,7 +159,7 @@ ul[role='list'], ol[role='list'] {
 body {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100svh;
   margin: 0;
   padding: 0;
   font-family: var(--font-family);
@@ -391,10 +391,6 @@ article figure figcaption {
   vertical-align: -0.075em;
   background-color: currentColor;
   transition: background-color 0.3s ease;
-  -webkit-mask-image: var(--icon-new-tab-mask);
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  -webkit-mask-size: contain;
   mask-image: var(--icon-new-tab-mask);
   mask-repeat: no-repeat;
   mask-position: center;
@@ -546,10 +542,6 @@ nav.pagination a.next::after {
   width: 10px;
   height: 10px;
   background-color: currentColor;
-  -webkit-mask-image: var(--icon-nav-caret-mask);
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  -webkit-mask-size: contain;
   mask-image: var(--icon-nav-caret-mask);
   mask-repeat: no-repeat;
   mask-position: center;
@@ -679,10 +671,6 @@ article details > summary::before {
   display: inline-block;
   vertical-align: baseline;
   background-color: var(--text-color);
-  -webkit-mask-image: var(--icon-disclosure-caret-mask);
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  -webkit-mask-size: contain;
   mask-image: var(--icon-disclosure-caret-mask);
   mask-repeat: no-repeat;
   mask-position: center;
@@ -753,10 +741,6 @@ article details > summary:is(:hover, :focus-visible)::before {
   height: 10px;
   display: block;
   background-color: color-mix(in oklch, var(--text-color-light) 85%, var(--content-background-color));
-  -webkit-mask-image: var(--icon-disclosure-caret-mask);
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  -webkit-mask-size: contain;
   mask-image: var(--icon-disclosure-caret-mask);
   mask-repeat: no-repeat;
   mask-position: center;
@@ -1136,7 +1120,7 @@ article.portfolio-detail {
   background-color: var(--background-color);
   color: var(--text-color);
   max-width: calc(100vw - 1rem);
-  max-height: calc(100vh - 1rem);
+  max-height: calc(100dvh - 1rem);
   overflow: auto;
 }
 
@@ -1216,9 +1200,6 @@ article.portfolio-detail {
   inline-size: var(--spacing-sm);
   block-size: var(--spacing-sm);
   background-color: currentColor;
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  -webkit-mask-size: contain;
   mask-repeat: no-repeat;
   mask-position: center;
   mask-size: contain;
@@ -1226,7 +1207,6 @@ article.portfolio-detail {
 
 .figure-lightbox-icon-next,
 .figure-lightbox-icon-prev {
-  -webkit-mask-image: var(--icon-nav-caret-mask);
   mask-image: var(--icon-nav-caret-mask);
 }
 
@@ -1235,7 +1215,6 @@ article.portfolio-detail {
 }
 
 .figure-lightbox-icon-close {
-  -webkit-mask-image: var(--icon-close-mask);
   mask-image: var(--icon-close-mask);
 }
 
@@ -1244,7 +1223,7 @@ article.portfolio-detail {
   width: auto;
   height: auto;
   max-width: 100%;
-  max-height: calc(100vh - 4rem);
+  max-height: calc(100dvh - 4rem);
   margin-inline: auto;
 }
 
@@ -1629,7 +1608,7 @@ header a.skip:focus {
     font-size: 18pt;
     line-height: 1.2;
     margin: 0 0 0.5rem 0;
-    page-break-after: avoid;
+    break-after: avoid;
   }
 
   /* Article footer (date) */
@@ -1647,8 +1626,8 @@ header a.skip:focus {
 
   /* Typography adjustments for print */
   h1, h2, h3 {
-    page-break-after: avoid;
-    page-break-inside: avoid;
+    break-after: avoid;
+    break-inside: avoid;
   }
 
   h1 {
@@ -1678,7 +1657,7 @@ header a.skip:focus {
   code,
   figure,
   img {
-    page-break-inside: avoid;
+    break-inside: avoid;
   }
 
   /* Links - show URLs - override all link states */
@@ -1719,8 +1698,8 @@ header a.skip:focus {
   img {
     max-width: 100% !important;
     height: auto !important;
-    page-break-inside: avoid;
-    page-break-after: avoid;
+    break-inside: avoid;
+    break-after: avoid;
   }
 
   /* Code blocks */
@@ -1728,7 +1707,7 @@ header a.skip:focus {
     border: 1pt solid oklch(0% 0 0deg);
     padding: 0.5rem;
     background: oklch(97% 0 0deg) !important;
-    page-break-inside: avoid;
+    break-inside: avoid;
   }
 
   code {
@@ -1750,7 +1729,7 @@ header a.skip:focus {
     border-left: 2pt solid oklch(0% 0 0deg);
     padding-left: 1rem;
     margin: 1rem 0;
-    page-break-inside: avoid;
+    break-inside: avoid;
   }
 
   /* Horizontal rules */
@@ -1774,11 +1753,6 @@ header a.skip:focus {
   main[data-tags*="page"]::after,
   .post-demo-popout a::after {
     display: none !important;
-  }
-
-  /* Page breaks */
-  .page-break {
-    page-break-before: always;
   }
 
   /* Ensure main content area has no background */

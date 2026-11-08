@@ -3,8 +3,16 @@
   "ignoreFiles": ["scripts/color-explore/output/**"],
   "rules": {
     "no-descending-specificity": null,
-    "property-no-vendor-prefix": null,
-    "property-no-deprecated": null,
+    "property-no-vendor-prefix": [
+      true,
+      {
+        "ignoreProperties": [
+          "-moz-text-size-adjust",
+          "-webkit-text-size-adjust",
+          "-webkit-box-decoration-break"
+        ]
+      }
+    ],
     "value-keyword-case": [
       "lower",
       { "ignoreKeywords": ["currentColor", "A4"] }
