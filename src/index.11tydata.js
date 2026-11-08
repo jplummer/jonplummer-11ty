@@ -3,50 +3,37 @@ const { formatDateRange } = require("../eleventy/utils/date-utils");
 
 module.exports = {
   eleventyComputed: {
+    // This page's posts with the links that fall among them, merged once for
+    // both the list (index.njk) and the paginated <title>.
+    pageItems: function(data) {
+      const pagination = data.pagination;
+      if (!pagination) return [];
+
+      // Links older than this page's last post belong here down to the next
+      // page's first post. On the last page there's no boundary, so every
+      // older link follows its last post.
+      const nextPage = pagination.pages && pagination.pages[pagination.pageNumber + 1];
+      const boundaryDate = nextPage && nextPage[0] ? nextPage[0].data.date : null;
+
+      return mergePostsAndLinks(pagination.items, data.links, pagination.pageNumber, boundaryDate);
+    },
+
+    // "Oldest – newest – Site" for /page/N/; the homepage keeps its own title
     computedTitle: function(data) {
-      // Only compute for paginated pages (not homepage)
       if (!data.pagination || data.pagination.pageNumber === 0) {
         return null;
       }
 
-      // Get pagination items (posts on this page)
-      const paginationItems = data.pagination.items || [];
-      if (paginationItems.length === 0) {
+      const items = data.pageItems || [];
+      if (items.length === 0) {
         return null;
       }
 
-      // Calculate next page's oldest post date if there's a next page
-      let nextPageOldestDate = null;
-      if (data.pagination.href && data.pagination.href.next) {
-        const nextPageLastPostIndex = (data.pagination.pageNumber + 1) * 5 - 1;
-        const allPostsSorted = [...data.collections.post].reverse();
-        if (nextPageLastPostIndex < allPostsSorted.length) {
-          const nextPageLastPost = allPostsSorted[nextPageLastPostIndex];
-          nextPageOldestDate = nextPageLastPost.data.date;
-        }
-      }
+      // Merged items are sorted newest first
+      const newestDate = items[0].date;
+      const oldestDate = items[items.length - 1].date;
 
-      // Get merged items (posts + links)
-      const mergedItems = mergePostsAndLinks(
-        paginationItems,
-        data.links,
-        data.pagination.pageNumber,
-        nextPageOldestDate
-      );
-
-      if (mergedItems.length === 0) {
-        return null;
-      }
-
-      // Get newest and oldest dates (merged items are sorted newest first)
-      const newestDate = mergedItems[0].date;
-      const oldestDate = mergedItems[mergedItems.length - 1].date;
-
-      // Format date range
-      const dateRange = formatDateRange(oldestDate, newestDate);
-      
-      return `${dateRange} – ${data.site.title}`;
+      return `${formatDateRange(oldestDate, newestDate)} – ${data.site.title}`;
     }
   }
 };
-

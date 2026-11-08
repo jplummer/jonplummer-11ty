@@ -5,10 +5,10 @@
  * @param {Array} posts - Array of post objects
  * @param {Object} links - Object with date keys and link arrays as values
  * @param {number} pageNumber - Current page number (0-indexed)
- * @param {Date|string|null} nextPageOldestDate - Date of oldest post on next page
+ * @param {Date|string|null} boundaryDate - Date of the next page's first (newest) post: links after this page's last post stop there. Null on the last page.
  * @returns {Array} Chronologically sorted array of items with type ('post' or 'link')
  */
-function mergePostsAndLinks(posts, links, pageNumber, nextPageOldestDate) {
+function mergePostsAndLinks(posts, links, pageNumber, boundaryDate) {
   if (!posts) return [];
   if (!links) {
     return posts.map(post => ({ type: 'post', data: post, date: new Date(post.data.date) }));
@@ -54,8 +54,8 @@ function mergePostsAndLinks(posts, links, pageNumber, nextPageOldestDate) {
     let nextPostDate = null;
     if (i < sortedPosts.length - 1) {
       nextPostDate = sortedPosts[i + 1].date;
-    } else if (nextPageOldestDate !== null && nextPageOldestDate !== undefined) {
-      nextPostDate = new Date(nextPageOldestDate);
+    } else if (boundaryDate !== null && boundaryDate !== undefined) {
+      nextPostDate = new Date(boundaryDate);
     }
 
     for (const [date, linkList] of Object.entries(links)) {
