@@ -20,11 +20,11 @@
  *   changed. Failures and rsync warnings print either way.
  */
 
-const { execSync, spawn } = require('child_process');
+const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const { loadDotenvSilently } = require('../utils/env-utils');
-const { SPINNER_FRAMES } = require('../utils/spinner-utils');
+const { runWithSpinner } = require('../utils/spinner-utils');
 const { buildRsyncArgs } = require('../utils/deploy-rsync');
 const { formatRunFinishedLine } = require('../utils/run-timing');
 const {
@@ -136,98 +136,8 @@ function checkRsync() {
   }
 }
 
-// Run a command with a spinner
-function runWithSpinner(command, message, options = {}) {
-  return new Promise((resolve, reject) => {
-    const { showOutput = false, shell = false } = options;
-    let spinnerInterval = null;
-    let spinnerFrame = 0;
-    let stdoutData = '';
-    let stderrData = '';
-    
-    // Start spinner (write to stderr so it doesn't interfere with stdout)
-    spinnerInterval = setInterval(() => {
-      const spinner = SPINNER_FRAMES[spinnerFrame];
-      process.stderr.write(`\r${spinner} ${message}`);
-      spinnerFrame = (spinnerFrame + 1) % SPINNER_FRAMES.length;
-    }, 100);
-    
-    // Spawn process
-    let child;
-    if (shell) {
-      // Pass full command string unsplit to avoid DEP0190 warning
-      const cmd = Array.isArray(command) ? command.join(' ') : command;
-      child = spawn(cmd, [], { stdio: ['inherit', 'pipe', 'pipe'], shell: true });
-    } else {
-      const commandParts = Array.isArray(command) ? command : command.split(' ');
-      child = spawn(commandParts[0], commandParts.slice(1), { stdio: ['inherit', 'pipe', 'pipe'] });
-    }
-    
-    // Handle output
-    child.stdout.on('data', (data) => {
-      const text = data.toString();
-      stdoutData += text;
-      
-      if (showOutput) {
-        // Stop spinner when output arrives
-        if (spinnerInterval) {
-          clearInterval(spinnerInterval);
-          spinnerInterval = null;
-          // Clear spinner line
-          process.stderr.write('\r' + ' '.repeat(message.length + 3) + '\r');
-        }
-        process.stdout.write(text);
-      }
-    });
-    
-    child.stderr.on('data', (data) => {
-      const text = data.toString();
-      stderrData += text;
-      
-      if (showOutput) {
-        // Stop spinner when output arrives
-        if (spinnerInterval) {
-          clearInterval(spinnerInterval);
-          spinnerInterval = null;
-          // Clear spinner line
-          process.stderr.write('\r' + ' '.repeat(message.length + 3) + '\r');
-        }
-        process.stderr.write(text);
-      }
-    });
-    
-    // Handle completion
-    child.on('close', (code) => {
-      // Stop spinner
-      if (spinnerInterval) {
-        clearInterval(spinnerInterval);
-        spinnerInterval = null;
-      }
-      
-      // Clear spinner line
-      process.stderr.write('\r' + ' '.repeat(message.length + 3) + '\r');
-      
-      if (code === 0) {
-        resolve({ stdout: stdoutData, stderr: stderrData });
-      } else {
-        reject(new Error(`Command failed with exit code ${code}`));
-      }
-    });
-    
-    // Handle spawn errors
-    child.on('error', (error) => {
-      // Stop spinner
-      if (spinnerInterval) {
-        clearInterval(spinnerInterval);
-        spinnerInterval = null;
-      }
-      process.stderr.write('\r' + ' '.repeat(message.length + 3) + '\r');
-      reject(error);
-    });
-  });
-}
-
 async function deploy(config, siteDomain, dryRun, verbose = false) {
+  let rsyncCommand;
   try {
     // Check prerequisites
     if (!checkRsync()) {
@@ -240,7 +150,7 @@ async function deploy(config, siteDomain, dryRun, verbose = false) {
     }
 
     // Build rsync command (SSH key authentication is automatic)
-    const rsyncCommand = buildRsyncArgs({
+    rsyncCommand = buildRsyncArgs({
       localPath: config.localPath,
       username: config.username,
       host: config.host,
@@ -255,106 +165,59 @@ async function deploy(config, siteDomain, dryRun, verbose = false) {
       console.error('   This should never happen. Aborting to prevent accidental deployment.');
       process.exit(1);
     }
-
-    // Execute rsync with spinner and buffered output
-    return new Promise((resolve, reject) => {
-      let spinnerInterval = null;
-      let spinnerFrame = 0;
-      let stdoutData = '';
-      let stderrData = '';
-      
-      // Start spinner
-      const spinnerMessage = dryRun ? 'Deploying (dry-run)...' : 'Deploying via rsync...';
-      spinnerInterval = setInterval(() => {
-        const spinner = SPINNER_FRAMES[spinnerFrame];
-        process.stdout.write(`\r${spinner} ${spinnerMessage}`);
-        spinnerFrame = (spinnerFrame + 1) % SPINNER_FRAMES.length;
-      }, 100);
-      
-      // Spawn rsync process
-      const rsyncProcess = spawn(rsyncCommand[0], rsyncCommand.slice(1), {
-        stdio: ['inherit', 'pipe', 'pipe'],
-        shell: false
-      });
-      
-      // Buffer stdout
-      rsyncProcess.stdout.on('data', (data) => {
-        stdoutData += data.toString();
-      });
-      
-      // Buffer stderr
-      rsyncProcess.stderr.on('data', (data) => {
-        stderrData += data.toString();
-      });
-      
-      // Handle completion
-      rsyncProcess.on('close', (code) => {
-        // Stop spinner
-        if (spinnerInterval) {
-          clearInterval(spinnerInterval);
-          spinnerInterval = null;
-        }
-        
-        // Clear spinner line
-        process.stdout.write('\r' + ' '.repeat(50) + '\r');
-        
-        // Display buffered output. A quiet deploy withholds rsync's listing —
-        // it's thousands of mtime-only lines — but a failure shows everything,
-        // and rsync's warnings on stderr always print.
-        const showListing = dryRun || verbose || code !== 0;
-
-        if (dryRun) {
-          console.log('📋 rsync dry-run output (no files will be transferred):');
-          console.log('─'.repeat(60));
-        }
-
-        if (stdoutData && showListing) {
-          process.stdout.write(stdoutData);
-        }
-        if (stderrData) {
-          process.stderr.write(stderrData);
-        }
-
-        if (dryRun) {
-          console.log('─'.repeat(60));
-        }
-        
-        // Handle result
-        if (code === 0) {
-          if (dryRun) {
-            console.log('✅ 🚀 Deploy: dry run completed (no files deployed)');
-            console.log('   This was a test run only - no changes were made to the server.');
-          } else {
-            console.log(`\n✅ 🚀 Deploy: completed`);
-            console.log(`   🌐 Site live at: https://${siteDomain}`);
-          }
-          resolve({ stdout: stdoutData, stderr: stderrData });
-        } else {
-          console.error('\n❌ Deployment failed:');
-          console.error(`   Exit code: ${code}`);
-          reject(new Error(`rsync exited with code ${code}`));
-        }
-      });
-      
-      // Handle spawn errors
-      rsyncProcess.on('error', (error) => {
-        // Stop spinner
-        if (spinnerInterval) {
-          clearInterval(spinnerInterval);
-          spinnerInterval = null;
-        }
-        process.stdout.write('\r' + ' '.repeat(50) + '\r');
-        console.error('\n❌ Deployment failed:');
-        console.error(`   ${error.message}`);
-        reject(error);
-      });
-    });
-
   } catch (error) {
     console.error('\n❌ Deployment failed:');
     console.error(`   ${error.message}`);
     process.exit(1);
   }
+
+  // Run rsync with a spinner, holding its output until it finishes
+  const spinnerMessage = dryRun ? 'Deploying (dry-run)...' : 'Deploying via rsync...';
+  let run;
+  try {
+    run = await runWithSpinner(rsyncCommand, spinnerMessage, { stream: process.stdout });
+  } catch (error) {
+    console.error('\n❌ Deployment failed:');
+    console.error(`   ${error.message}`);
+    throw error;
+  }
+  const { code, stdout: stdoutData, stderr: stderrData } = run;
+
+  // Display buffered output. A quiet deploy withholds rsync's listing —
+  // it's thousands of mtime-only lines — but a failure shows everything,
+  // and rsync's warnings on stderr always print.
+  const showListing = dryRun || verbose || code !== 0;
+
+  if (dryRun) {
+    console.log('📋 rsync dry-run output (no files will be transferred):');
+    console.log('─'.repeat(60));
+  }
+
+  if (stdoutData && showListing) {
+    process.stdout.write(stdoutData);
+  }
+  if (stderrData) {
+    process.stderr.write(stderrData);
+  }
+
+  if (dryRun) {
+    console.log('─'.repeat(60));
+  }
+
+  if (code !== 0) {
+    console.error('\n❌ Deployment failed:');
+    console.error(`   Exit code: ${code}`);
+    throw new Error(`rsync exited with code ${code}`);
+  }
+
+  if (dryRun) {
+    console.log('✅ 🚀 Deploy: dry run completed (no files deployed)');
+    console.log('   This was a test run only - no changes were made to the server.');
+  } else {
+    console.log(`\n✅ 🚀 Deploy: completed`);
+    console.log(`   🌐 Site live at: https://${siteDomain}`);
+  }
+  return { stdout: stdoutData, stderr: stderrData };
 }
 
 function logCloudflarePurgeResult(purgeResult, { dryRun }) {
@@ -465,7 +328,13 @@ async function purgeCloudflareAfterDeploy(siteDomain, dryRun, localPath, current
       oldContent = fs.readFileSync(changelogPath, 'utf8');
     }
     
-    await runWithSpinner('node scripts/content/generate-changelog.js --deploy', 'Regenerating CHANGELOG.md...');
+    const changelogRun = await runWithSpinner(
+      ['node', 'scripts/content/generate-changelog.js', '--deploy'],
+      'Regenerating CHANGELOG.md...'
+    );
+    if (changelogRun.code !== 0) {
+      throw new Error(`Command failed with exit code ${changelogRun.code}`);
+    }
     
     // Check if content actually changed
     if (oldContent !== null) {

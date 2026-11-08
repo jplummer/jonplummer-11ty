@@ -10,6 +10,8 @@ const path = require('path');
 const { addFile, addIssue } = require('../utils/test-results');
 const { runTest } = require('../utils/test-runner-helper');
 const { buildRsyncArgs } = require('../utils/deploy-rsync');
+const { runWithSpinner } = require('../utils/spinner-utils');
+const { PassThrough } = require('stream');
 
 const DEPLOY_SCRIPT_PATH = path.join(__dirname, '..', 'deploy', 'deploy.js');
 
@@ -77,7 +79,39 @@ function checkRsyncVerbosity(result) {
   }
 }
 
+/**
+ * deploy.js runs the changelog and rsync through runWithSpinner. It must hand
+ * back the exit code and both buffered streams so rsync's failure output can
+ * print, reject only when the command can't start, and clear its spinner line.
+ * Runs a throwaway node child; the spinner draws into a sink, not the terminal.
+ */
+async function checkRunWithSpinner(result) {
+  const fileObj = addFile(result, 'scripts/utils/spinner-utils.js');
+  const fail = (message) => addIssue(fileObj, { severity: 'error', type: 'deploy-guards', message });
+
+  let drawn = '';
+  const sink = new PassThrough();
+  sink.on('data', (chunk) => { drawn += chunk; });
+
+  const script = 'process.stdout.write("out"); process.stderr.write("err"); process.exit(3)';
+  const run = await runWithSpinner([process.execPath, '-e', script], 'testing', { stream: sink });
+  if (run.code !== 3 || run.stdout !== 'out' || run.stderr !== 'err') {
+    fail(`runWithSpinner must resolve the exit code and both streams; got ${JSON.stringify(run)}`);
+  }
+  if (!drawn.endsWith('\r\x1b[K')) {
+    fail('runWithSpinner must clear its spinner line when the command finishes');
+  }
+
+  try {
+    await runWithSpinner(['definitely-not-a-command-jp11ty'], 'testing', { stream: sink });
+    fail('runWithSpinner must reject when the command cannot start');
+  } catch (error) {
+    if (error.code !== 'ENOENT') fail(`runWithSpinner rejected with ${error.code || error.message}, expected ENOENT`);
+  }
+}
+
 async function validate(result) {
+  await checkRunWithSpinner(result);
   const fileObj = addFile(result, 'scripts/deploy/deploy.js');
 
   if (!fs.existsSync(DEPLOY_SCRIPT_PATH)) {
@@ -156,6 +190,16 @@ async function validate(result) {
       severity: 'error',
       type: 'deploy-guards',
       message: 'Deploy script must pass currentManifest to both purgeChangedDeployContent and processIndexNow',
+    });
+  }
+
+  // Child processes go through runWithSpinner. A hand-rolled spawn and
+  // spinner beside it is the ~90-line duplicate removed 2026-11-08.
+  if (/\bspawn\(/.test(deployContent) || deployContent.includes('setInterval(')) {
+    addIssue(fileObj, {
+      severity: 'error',
+      type: 'deploy-guards',
+      message: 'Deploy script must run child processes through runWithSpinner (spinner-utils), not its own spawn and spinner',
     });
   }
 
