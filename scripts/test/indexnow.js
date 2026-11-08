@@ -18,6 +18,7 @@ const {
   selectAllIndexNowUrls,
   isIndexableHtmlPath,
   processIndexNow,
+  readSitemapUrls,
 } = require('../utils/indexnow');
 const { addFile, addIssue } = require('../utils/test-results');
 const { runTest } = require('../utils/test-runner-helper');
@@ -71,6 +72,11 @@ runTest({
       }
     }
 
+    // The sitemap bounds every selection below
+    const U = (p) => `https://jonplummer.com${p}`;
+    const sitemap = [U('/'), U('/about/'), U('/2026/01/10/some-post/'), U('/page/2/')];
+    const withSitemap = (m, urls = sitemap) => ({ ...m, sitemapUrls: urls });
+
     // --- selectIndexNowUrls: no baseline ---
 
     const current = manifest({
@@ -82,7 +88,7 @@ runTest({
     assertUrlsEqual(
       fileObj,
       'no baseline',
-      selectIndexNowUrls({ previousManifest: null, currentManifest: current, siteDomain }),
+      selectIndexNowUrls({ previousManifest: null, currentManifest: current, siteDomain, sitemapUrls: sitemap }),
       []
     );
 
@@ -92,8 +98,8 @@ runTest({
     assertUrlsEqual(
       fileObj,
       'added-only',
-      selectIndexNowUrls({ previousManifest: previousEmpty, currentManifest: current, siteDomain }),
-      ['https://jonplummer.com/', 'https://jonplummer.com/about/']
+      selectIndexNowUrls({ previousManifest: previousEmpty, currentManifest: current, siteDomain, sitemapUrls: sitemap }),
+      [U('/'), U('/about/')]
       // assets/css/jonplummer.css is added too, but not HTML, so excluded
     );
 
@@ -107,8 +113,8 @@ runTest({
     assertUrlsEqual(
       fileObj,
       'changed-only',
-      selectIndexNowUrls({ previousManifest: previousSamePaths, currentManifest: current, siteDomain }),
-      ['https://jonplummer.com/']
+      selectIndexNowUrls({ previousManifest: previousSamePaths, currentManifest: current, siteDomain, sitemapUrls: sitemap }),
+      [U('/')]
     );
 
     // --- selectIndexNowUrls: added + changed together ---
@@ -131,35 +137,101 @@ runTest({
         previousManifest: previousBeforePost,
         currentManifest: currentWithNewPost,
         siteDomain,
+        sitemapUrls: sitemap,
       }),
-      ['https://jonplummer.com/', 'https://jonplummer.com/2026/01/10/some-post/']
+      [U('/'), U('/2026/01/10/some-post/')]
     );
 
-    // --- selectIndexNowUrls: deleted excluded ---
+    // --- selectIndexNowUrls: changed pages outside the sitemap are not submitted ---
+    // /changelog/ is noindex and changes on every deploy; demos and the
+    // Google verification file aren't pages to index either.
 
-    const previousWithExtraPost = manifest({
+    assertUrlsEqual(
+      fileObj,
+      'outside the sitemap excluded',
+      selectIndexNowUrls({
+        previousManifest: manifest({ 'index.html': '1', 'changelog/index.html': '1', 'assets/demos/x/index.html': '1' }),
+        currentManifest: manifest({
+          'index.html': '2',
+          'changelog/index.html': '2',
+          'assets/demos/x/index.html': '2',
+          'google123.html': 'new',
+        }),
+        siteDomain,
+        sitemapUrls: sitemap,
+      }),
+      [U('/')]
+    );
+
+    // --- selectIndexNowUrls: a deleted page that was in the sitemap is submitted ---
+
+    const previousWithExtraPost = withSitemap(manifest({
       'index.html': '1',
       'about/index.html': '2',
       '2020/01/01/old-post/index.html': 'gone',
-    });
+    }), [...sitemap, U('/2020/01/01/old-post/')]);
     const currentAfterDelete = manifest({
       'index.html': '1',
       'about/index.html': '2',
     });
     assertUrlsEqual(
       fileObj,
-      'deleted excluded',
+      'deleted page submitted',
       selectIndexNowUrls({
         previousManifest: previousWithExtraPost,
         currentManifest: currentAfterDelete,
         siteDomain,
+        sitemapUrls: sitemap,
+      }),
+      [U('/2020/01/01/old-post/')]
+    );
+
+    // --- selectIndexNowUrls: a page newly marked noindex leaves the sitemap and is submitted ---
+
+    assertUrlsEqual(
+      fileObj,
+      'newly noindexed page submitted',
+      selectIndexNowUrls({
+        previousManifest: withSitemap(manifest({ 'index.html': '1', 'about/index.html': '2' })),
+        currentManifest: manifest({ 'index.html': '1', 'about/index.html': '2-noindex' }),
+        siteDomain,
+        sitemapUrls: sitemap.filter((u) => u !== U('/about/')),
+      }),
+      [U('/about/')]
+    );
+
+    // --- selectIndexNowUrls: a page that joins the sitemap unchanged is submitted ---
+
+    assertUrlsEqual(
+      fileObj,
+      'joined the sitemap',
+      selectIndexNowUrls({
+        previousManifest: withSitemap(manifest({ 'index.html': '1' }), [U('/')]),
+        currentManifest: manifest({ 'index.html': '1' }),
+        siteDomain,
+        sitemapUrls: [U('/'), U('/about/')],
+      }),
+      [U('/about/')]
+    );
+
+    // --- selectIndexNowUrls: state without a recorded sitemap (written before
+    // 2026-11-08) can't tell what left, so it submits only changed pages ---
+
+    assertUrlsEqual(
+      fileObj,
+      'no recorded sitemap: no deletions guessed',
+      selectIndexNowUrls({
+        previousManifest: previousWithExtraPost.files && manifest(previousWithExtraPost.files),
+        currentManifest: currentAfterDelete,
+        siteDomain,
+        sitemapUrls: sitemap,
       }),
       []
     );
 
     // --- selectIndexNowUrls: non-HTML, 404/500, and paginated pages excluded ---
 
-    const previousBase = manifest({ 'index.html': '1' });
+    const previousBase = withSitemap(manifest({ 'index.html': '1' }), [U('/')]);
     const currentWithNoise = manifest({
       'index.html': '1-changed',
       '404.html': 'new',
@@ -171,8 +243,9 @@ runTest({
     assertUrlsEqual(
       fileObj,
       'noise excluded',
-      selectIndexNowUrls({ previousManifest: previousBase, currentManifest: currentWithNoise, siteDomain }),
-      ['https://jonplummer.com/']
+      // /page/2/ joined the sitemap here, and is still left out
+      selectIndexNowUrls({ previousManifest: previousBase, currentManifest: currentWithNoise, siteDomain, sitemapUrls: [U('/'), U('/page/2/')] }),
+      [U('/')]
     );
 
     // --- URL mapping: index.html -> / and nested about/index.html -> /about/ ---
@@ -181,15 +254,16 @@ runTest({
       previousManifest: previousEmpty,
       currentManifest: current,
       siteDomain,
+      sitemapUrls: sitemap,
     });
-    if (!mappingUrls.includes('https://jonplummer.com/')) {
+    if (!mappingUrls.includes(U('/'))) {
       addIssue(fileObj, {
         severity: 'error',
         type: 'indexnow-url-mapping',
         message: `index.html did not map to site root: ${JSON.stringify(mappingUrls)}`,
       });
     }
-    if (!mappingUrls.includes('https://jonplummer.com/about/')) {
+    if (!mappingUrls.includes(U('/about/'))) {
       addIssue(fileObj, {
         severity: 'error',
         type: 'indexnow-url-mapping',
@@ -197,14 +271,24 @@ runTest({
       });
     }
 
-    // --- selectAllIndexNowUrls: catch-up ignores manifest history ---
+    // --- selectAllIndexNowUrls: catch-up submits the sitemap, minus pagination ---
 
     assertUrlsEqual(
       fileObj,
       'catch-up (no baseline needed)',
-      selectAllIndexNowUrls({ currentManifest: current, siteDomain }),
-      ['https://jonplummer.com/', 'https://jonplummer.com/about/']
+      selectAllIndexNowUrls({ sitemapUrls: sitemap }),
+      [U('/'), U('/about/'), U('/2026/01/10/some-post/')]
     );
+
+    // --- readSitemapUrls: every <loc>, entities decoded ---
+
+    const sitemapDir = fs.mkdtempSync(path.join(os.tmpdir(), 'indexnow-sitemap-'));
+    fs.writeFileSync(
+      path.join(sitemapDir, 'sitemap.xml'),
+      '<?xml version="1.0"?><urlset><url><loc>https://jonplummer.com/</loc></url>\n<url>\n  <loc>\n    https://jonplummer.com/a?b=1&amp;c=2\n  </loc>\n</url></urlset>'
+    );
+    assertUrlsEqual(fileObj, 'readSitemapUrls', readSitemapUrls(sitemapDir), [U('/'), U('/a?b=1&c=2')]);
+    fs.rmSync(sitemapDir, { recursive: true, force: true });
 
     // --- processIndexNow: injected manifest, separate state file ---
 
@@ -226,6 +310,7 @@ runTest({
         siteDomain,
         dryRun: true,
         currentManifest: manifest({ 'index.html': 'new', 'about/index.html': 'added' }),
+        sitemapUrls: sitemap,
         manifestPath: statePath,
       });
     } finally {

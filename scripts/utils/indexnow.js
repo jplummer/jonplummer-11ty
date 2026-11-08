@@ -20,6 +20,13 @@
  *
  * The `_site` hash walk is shared even though the state is not — deploy.js
  * builds one manifest and passes it to both consumers.
+ *
+ * What gets submitted is bounded by sitemap.xml, which already states what the
+ * site wants indexed (test seo keeps noindex pages out of it): changed pages
+ * that are in the sitemap, plus pages that joined or left it since the last
+ * submission. "Left" covers deleted and renamed pages and newly noindexed
+ * ones, which the IndexNow spec asks to be submitted too. The state file keeps
+ * the sitemap list it was submitted against, so the next deploy can tell.
  */
 
 const fs = require('fs');
@@ -57,32 +64,56 @@ function isIndexableHtmlPath(relativePath) {
   return true;
 }
 
+// Paginated index URLs (/page/N/) are in the sitemap but churn on every post
+function isPaginationUrl(url) {
+  return /\/page\/\d+\/$/.test(url);
+}
+
+/** Every <loc> in the built sitemap. Throws if the sitemap is missing. */
+function readSitemapUrls(siteRoot) {
+  const xml = fs.readFileSync(path.join(siteRoot, 'sitemap.xml'), 'utf8');
+  return [...xml.matchAll(/<loc>\s*([^<\s]+)\s*<\/loc>/g)].map((m) => m[1].replace(/&amp;/g, '&'));
+}
+
 /**
- * Pure selection: which URLs changed since the previous manifest.
+ * Pure selection: which URLs to submit since the previous manifest.
+ * - changed or added pages that are in the current sitemap
+ * - pages that joined or left the sitemap, when the previous submission
+ *   recorded its sitemap (state written before 2026-11-08 didn't)
  * Returns [] when there is no previous manifest — a missing baseline means
  * "establish one," not "everything is new" (diffing against an empty
  * manifest would otherwise report every current file as added).
  */
-function selectIndexNowUrls({ previousManifest, currentManifest, siteDomain }) {
+function selectIndexNowUrls({ previousManifest, currentManifest, siteDomain, sitemapUrls }) {
   if (!previousManifest) {
     return [];
   }
+  const inSitemap = new Set(sitemapUrls);
+  const urls = new Set();
+
   const { added, changed } = diffContentManifests(previousManifest, currentManifest);
-  return [...added, ...changed]
-    .filter(isIndexableHtmlPath)
-    .map((p) => deployPathToUrl(p, siteDomain));
+  for (const p of [...added, ...changed]) {
+    if (!isIndexableHtmlPath(p)) continue;
+    const url = deployPathToUrl(p, siteDomain);
+    if (inSitemap.has(url)) urls.add(url);
+  }
+
+  if (Array.isArray(previousManifest.sitemapUrls)) {
+    const wasInSitemap = new Set(previousManifest.sitemapUrls);
+    for (const url of inSitemap) if (!wasInSitemap.has(url)) urls.add(url);
+    for (const url of wasInSitemap) if (!inSitemap.has(url)) urls.add(url);
+  }
+
+  return [...urls].filter((url) => !isPaginationUrl(url));
 }
 
 /**
- * Pure selection for catch-up submission: every indexable page currently
- * live, regardless of manifest history. Used to clear a backlog once —
- * normal deploys always use selectIndexNowUrls (delta only).
+ * Pure selection for catch-up submission: every page in the sitemap,
+ * regardless of manifest history. Used to clear a backlog once — normal
+ * deploys always use selectIndexNowUrls (delta only).
  */
-function selectAllIndexNowUrls({ currentManifest, siteDomain }) {
-  const files = (currentManifest && currentManifest.files) || {};
-  return Object.keys(files)
-    .filter(isIndexableHtmlPath)
-    .map((p) => deployPathToUrl(p, siteDomain));
+function selectAllIndexNowUrls({ sitemapUrls }) {
+  return [...new Set(sitemapUrls)].filter((url) => !isPaginationUrl(url));
 }
 
 async function submitToIndexNow({ urls, siteDomain, apiKey }) {
@@ -115,6 +146,8 @@ async function submitToIndexNow({ urls, siteDomain, apiKey }) {
  *   ignoring manifest history (one-off backlog submission, not a normal deploy path)
  * @param {object} [options.currentManifest] - pre-built manifest of `siteRoot`, so a
  *   caller that already hashed the tree (deploy.js) doesn't pay for a second walk
+ * @param {string[]} [options.sitemapUrls] - the sitemap's URLs; read from
+ *   `siteRoot/sitemap.xml` when omitted
  * @param {string} [options.manifestPath] - override the state file location (tests)
  */
 async function processIndexNow({
@@ -123,6 +156,7 @@ async function processIndexNow({
   dryRun = false,
   catchUp = false,
   currentManifest: injectedManifest = null,
+  sitemapUrls: injectedSitemapUrls = null,
   manifestPath: manifestPathOverride = null,
 } = {}) {
   const apiKey = process.env.INDEXNOW_API_KEY;
@@ -133,12 +167,16 @@ async function processIndexNow({
 
   const manifestPath = manifestPathOverride || defaultIndexNowManifestPath();
   const currentManifest = injectedManifest || buildContentManifest(siteRoot);
+  const sitemapUrls = injectedSitemapUrls || readSitemapUrls(siteRoot);
   const previousManifest = loadContentManifest(manifestPath);
   const isBaselineRun = !catchUp && !previousManifest;
+  // The state records the sitemap it was submitted against, so the next run
+  // can tell which pages joined or left it
+  const nextState = { ...currentManifest, sitemapUrls: [...sitemapUrls].sort() };
 
   const urls = catchUp
-    ? selectAllIndexNowUrls({ currentManifest, siteDomain })
-    : selectIndexNowUrls({ previousManifest, currentManifest, siteDomain });
+    ? selectAllIndexNowUrls({ sitemapUrls })
+    : selectIndexNowUrls({ previousManifest, currentManifest, siteDomain, sitemapUrls });
 
   if (dryRun) {
     if (catchUp) {
@@ -155,19 +193,19 @@ async function processIndexNow({
   }
 
   if (isBaselineRun) {
-    saveContentManifest(manifestPath, currentManifest);
+    saveContentManifest(manifestPath, nextState);
     console.log('✅ 🔍 IndexNow: no previous manifest — baseline established, submitted nothing');
     return { baseline: true, submitted: 0 };
   }
 
   if (urls.length === 0) {
-    saveContentManifest(manifestPath, currentManifest);
+    saveContentManifest(manifestPath, nextState);
     console.log('✅ 🔍 IndexNow: nothing to submit');
     return { submitted: 0 };
   }
 
   const status = await submitToIndexNow({ urls, siteDomain, apiKey });
-  saveContentManifest(manifestPath, currentManifest);
+  saveContentManifest(manifestPath, nextState);
   console.log(`✅ 🔍 IndexNow: submitted ${urls.length} URL${urls.length === 1 ? '' : 's'} (HTTP ${status})`);
   if (urls.length <= 5) {
     urls.forEach((url) => console.log(`   ${url}`));
@@ -203,5 +241,7 @@ module.exports = {
   selectIndexNowUrls,
   selectAllIndexNowUrls,
   isIndexableHtmlPath,
+  isPaginationUrl,
+  readSitemapUrls,
   defaultIndexNowManifestPath,
 };

@@ -117,6 +117,11 @@ runTest({
     fs.mkdirSync(path.join(siteRoot, 'about'), { recursive: true });
     fs.writeFileSync(path.join(siteRoot, 'index.html'), '<html>one</html>\n');
     fs.writeFileSync(path.join(siteRoot, 'about/index.html'), '<html>about</html>\n');
+    // IndexNow submits only pages the built sitemap lists, as a real build has
+    fs.writeFileSync(
+      path.join(siteRoot, 'sitemap.xml'),
+      '<urlset><url><loc>https://jonplummer.com/</loc></url><url><loc>https://jonplummer.com/about/</loc></url></urlset>\n'
+    );
 
     // Both cursors start from the same older snapshot, as they would after a
     // healthy deploy. `baseline` is what "not advanced" looks like below.
