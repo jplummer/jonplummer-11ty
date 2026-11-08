@@ -3,6 +3,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 ## 2026-11-07
 
 - Prune `ideas.md` against the repo
+- Drop redundant CSS prefixes and old print properties
 
 ## 2026-11-06
 
