@@ -372,15 +372,6 @@ article figure figcaption {
   text-align: start;
 }
 
-.post-demo-popout a:any-link {
-  color: var(--text-color);
-  transition: color 0.3s ease;
-}
-
-.post-demo-popout a:any-link:is(:hover, :focus-visible) {
-  color: var(--link-color);
-}
-
 .post-demo-popout a::after {
   content: "";
   display: inline-block;
@@ -473,26 +464,10 @@ nav li {
   margin: 0;
 }
 
-/* Navigation — accent at rest; hover → ink; no visited treatment */
-body > header nav a:any-link,
-nav.pagination a:any-link,
-nav.post-navigation a:any-link {
+/* Navigation links (colors: the nav bucket under LINKS) */
+:is(body > header nav, nav.pagination, nav.post-navigation) a {
   font-size: var(--font-size-base);
   line-height: var(--line-height-base);
-  text-decoration: none;
-  color: var(--link-color);
-  transition: color 0.3s ease;
-}
-
-body > header nav a:any-link:is(:hover, :focus-visible),
-nav.pagination a:any-link:is(:hover, :focus-visible),
-nav.post-navigation a:any-link:is(:hover, :focus-visible) {
-  color: var(--text-color);
-  text-decoration: underline;
-}
-
-body > header nav a[aria-current="page"] {
-  color: var(--link-color);
 }
 
 /* Post navigation and pagination layout */
@@ -808,20 +783,6 @@ footer p,
   color: var(--text-color-light);
 }
 
-/* Quiet links (colophon, footer nav): quiet → ink; no visited treatment */
-.license a:any-link,
-footer p a:any-link,
-.footer-nav a:any-link {
-  color: var(--text-color-light);
-  text-decoration: underline;
-}
-
-.license a:any-link:is(:hover, :focus-visible),
-footer p a:any-link:is(:hover, :focus-visible),
-.footer-nav a:any-link:is(:hover, :focus-visible) {
-  color: var(--text-color);
-}
-
 .license {
   text-align: start;
   margin: 0 auto;
@@ -895,11 +856,14 @@ pre code {
 
 /* === LINKS ===
    Three lived colors: ink (--text-color), quiet (--text-color-light), accent (--link-color).
-   Buckets: nav (accent→ink); reading (ink→accent, visited quiet); controls (ink→accent);
-   quiet chrome (quiet→ink). Export aliases --link-hover/visited/active map onto these three.
-*/
+   Every link follows the one set of state rules below. Where a link sits picks
+   its bucket: the container sets these properties and the links inside inherit
+   them. Anything a bucket leaves unset falls back to reading.
+     --link-rest, --link-visited, --link-hover   colors
+     --link-rest-line, --link-hover-line         text-decoration
+   They're separate from the :root color tokens (--link-color, --link-hover-color,
+   and so on), which print overrides and test color-contrast reads. */
 
-/* Reading default */
 a {
   text-decoration: none;
   /* Drop the hover underline a little lower than the browser default */
@@ -908,13 +872,19 @@ a {
   transition: color 0.3s ease;
 }
 
+a:any-link {
+  /* currentColor here means inherit, like the first-paint shell's a:any-link */
+  color: var(--link-rest, currentColor);
+  text-decoration: var(--link-rest-line, none);
+}
+
 a:visited {
-  color: var(--text-color-light);
+  color: var(--link-visited, var(--text-color-light));
 }
 
 a:any-link:is(:hover, :focus-visible, :active) {
-  color: var(--link-color);
-  text-decoration: underline;
+  color: var(--link-hover, var(--link-color));
+  text-decoration: var(--link-hover-line, underline);
 }
 
 /* Links already signal focus via accent + underline; kill the UA ring so it
@@ -928,57 +898,63 @@ a:not([class]) {
   text-decoration-skip-ink: auto;
 }
 
-/* Logotype — ink → accent (same motion as reading; no visited quiet on the wordmark) */
-hgroup h1 a:any-link {
-  color: var(--text-color);
+/* Reading (the defaults above): the surrounding text color (ink in body text,
+   quiet in a quiet caption), quiet once visited, accent on hover.
+   In articles and full-width pages, underlined at rest too. */
+article,
+main[data-tags*="page"] {
+  --link-rest-line: underline;
 }
 
-hgroup h1 a:any-link:is(:hover, :focus-visible) {
-  color: var(--link-color);
+/* Titles: the logotype and post titles. Ink, still ink once visited, accent
+   on hover; underlined only on hover. */
+hgroup h1,
+article h1 {
+  --link-rest: var(--text-color);
+  --link-visited: var(--text-color);
+  --link-hover: var(--link-color);
+  --link-rest-line: none;
+  --link-hover-line: underline;
 }
 
-/* Reading underlines in articles + full-width pages */
-article a,
-main[data-tags*="page"] a {
-  text-decoration: underline;
+/* Remaindered links: the row is quiet but the link itself is ink; quiet once
+   visited and accent on hover, as in reading */
+article.link-item section a {
+  --link-rest: var(--text-color);
 }
 
-/* Article title — underline only on hover */
-article h1 a {
-  text-decoration: none;
+/* Demo pop-out: title colors, keeping its article's underline */
+.post-demo-popout a {
+  --link-rest: var(--text-color);
+  --link-visited: var(--text-color);
+  --link-hover: var(--link-color);
 }
 
-article h1 a:any-link:is(:hover, :focus-visible) {
-  text-decoration: underline;
+/* Nav: site nav, pagination, post navigation. Accent, still accent once
+   visited; ink and underlined on hover. */
+body > header nav,
+nav.pagination,
+nav.post-navigation {
+  --link-rest: var(--link-color);
+  --link-visited: var(--link-color);
+  --link-hover: var(--text-color);
+  --link-rest-line: none;
+  --link-hover-line: underline;
 }
 
-/* Title links: no visited quiet (stay ink like logotype); hover accent */
-article:not(.link-item) h1 a:any-link {
-  color: var(--text-color);
-}
-
-article:not(.link-item) h1 a:visited {
-  color: var(--text-color);
-}
-
-article:not(.link-item) h1 a:any-link:is(:hover, :focus-visible) {
-  color: var(--link-color);
+/* Quiet chrome: colophon, footer text, footer nav. Quiet and underlined,
+   still quiet once visited; ink on hover. */
+.license,
+footer p,
+.footer-nav {
+  --link-rest: var(--text-color-light);
+  --link-visited: var(--text-color-light);
+  --link-hover: var(--text-color);
+  --link-rest-line: underline;
+  --link-hover-line: underline;
 }
 
 /* === COMPONENTS === */
-
-/* Remaindered links — reading bucket (row mute; title ink → accent; visited quiet) */
-article.link-item section a:link {
-  color: var(--text-color);
-}
-
-article.link-item section a:visited {
-  color: var(--text-color-light);
-}
-
-article.link-item section a:any-link:is(:hover, :focus-visible) {
-  color: var(--link-color);
-}
 
 article.link-item section,
 article.link-item p {
