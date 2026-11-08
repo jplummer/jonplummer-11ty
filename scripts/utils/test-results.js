@@ -532,35 +532,44 @@ function printOverallSummary(results) {
 function buildSummaryLine(result) {
   const emoji = getTestEmoji(result.testType);
   const displayName = getTestDisplayName(result.testType);
-  const summary = result.summary;
-  
-  const resultIcon = summary.issues > 0 ? '❌' : '✅';
-  const files = summary.files;
-  const passing = summary.passed;
-  const issues = summary.issues;
-  const warnings = summary.warnings;
-  
-  // Design: Reassure first (what's good), then direct attention (what needs fixing)
-  let summaryParts = [];
-  if (files > 0) {
-    // For security, skip "checked" line (redundant with "passing" line)
-    // For other tests, show "files checked"
-    if (result.testType !== 'security') {
-      const itemName = files === 1 ? 'file' : 'files';
-      summaryParts.push(`📄 ${files} ${itemName} checked`);
-    }
+  const resultIcon = result.summary.issues > 0 ? '❌' : '✅';
+  return `${resultIcon} ${emoji} ${displayName}: ${formatSummaryParts(result.summary, result.testType)}`;
+}
+
+/**
+ * The counts after a test's name, e.g. "📄 22 files checked, ✅ 22 passing,
+ * ⚠️  3 warnings". The one copy for both single runs (buildSummaryLine) and
+ * group runs (test-runner.js). Reassure first (what's good), then direct
+ * attention (what needs fixing). Zero counts are left out, so a test that
+ * passed with warnings doesn't read "✅ 0 passing".
+ *
+ * @param {Object} summary - result.summary (files, passed, issues, warnings)
+ * @param {string} [testType] - security skips "files checked", which repeats its passing count
+ * @returns {string}
+ */
+function formatSummaryParts(summary, testType) {
+  const files = summary.files || 0;
+  const issues = summary.issues || 0;
+  const warnings = summary.warnings || 0;
+  const passing = summary.passed !== undefined
+    ? summary.passed
+    : Math.max(0, files - (summary.filesWithIssues || 0));
+
+  const parts = [];
+  if (files > 0 && testType !== 'security') {
+    parts.push(`📄 ${files} ${files === 1 ? 'file' : 'files'} checked`);
   }
-  // Show passing count prominently (reassuring)
-  summaryParts.push(`✅ ${passing} passing`);
-  // Show issues (critical) before warnings (less critical)
+  if (passing > 0) {
+    parts.push(`✅ ${passing} passing`);
+  }
+  // Issues (critical) before warnings (less critical)
   if (issues > 0) {
-    summaryParts.push(`❌ ${issues} issue${issues === 1 ? '' : 's'}`);
+    parts.push(`❌ ${issues} issue${issues === 1 ? '' : 's'}`);
   }
   if (warnings > 0) {
-    summaryParts.push(`⚠️  ${warnings} warning${warnings === 1 ? '' : 's'}`);
+    parts.push(`⚠️  ${warnings} warning${warnings === 1 ? '' : 's'}`);
   }
-  
-  return `${resultIcon} ${emoji} ${displayName}: ${summaryParts.join(', ')}`;
+  return parts.join(', ');
 }
 
 /**
@@ -962,6 +971,7 @@ module.exports = {
   
   // Formatting
   formatVerbose,
-  formatBuild
+  formatBuild,
+  formatSummaryParts
 };
 

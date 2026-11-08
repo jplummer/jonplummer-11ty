@@ -2,7 +2,7 @@
 
 const { spawn } = require('child_process');
 const path = require('path');
-const { printOverallSummary, getTestEmoji, getTestDisplayName, formatVerbose, formatBuild } = require('./utils/test-results');
+const { printOverallSummary, getTestEmoji, getTestDisplayName, formatVerbose, formatBuild, formatSummaryParts } = require('./utils/test-results');
 const { SPINNER_FRAMES } = require('./utils/spinner-utils');
 const manifest = require('./test-manifest');
 
@@ -171,32 +171,6 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
         process.stdout.write(stdoutData);
       }
       
-      // Build summary string with only relevant parts
-      function buildSummaryString(summary) {
-        const files = summary.files || 0;
-        const issues = summary.issues || 0;
-        const warnings = summary.warnings || 0;
-        // Use passed field if available, otherwise calculate
-        const passing = summary.passed !== undefined ? summary.passed : Math.max(0, files - (summary.filesWithIssues || 0));
-        
-        let summaryParts = [];
-        if (files > 0) {
-          const itemName = files === 1 ? 'file' : 'files';
-          summaryParts.push(`📄 ${files} ${itemName} checked`);
-        }
-        if (passing > 0) {
-          summaryParts.push(`✅ ${passing} passing`);
-        }
-        if (issues > 0) {
-          summaryParts.push(`❌ ${issues} issue${issues === 1 ? '' : 's'}`);
-        }
-        if (warnings > 0) {
-          summaryParts.push(`⚠️  ${warnings} warning${warnings === 1 ? '' : 's'}`);
-        }
-        
-        return summaryParts.join(', ');
-      }
-      
       // Use summary from JSON result (already finalized by outputResult())
       let finalSummary = summary;
       if (isJsonFormat && jsonResult) {
@@ -224,7 +198,7 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
               process.stdout.write(`\r\x1b[K${formattedOutput}\n`);
             } else if (showStatus) {
               // Group runs: update same line with result icon and summary
-              const summaryString = buildSummaryString(finalSummary);
+              const summaryString = formatSummaryParts(finalSummary, testType);
               const finalLine = `${resultIcon} ${emoji} ${displayName}: ${summaryString}`;
               // Clear spinner line and write final result on same line
               // Use ANSI escape code to clear from cursor to end of line, then write new content
@@ -238,7 +212,7 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
                 process.stdout.write(`\r\x1b[K${formattedOutput}\n`);
               } else {
                 // Fallback if formatting returns empty - always show at least the summary
-                const summaryString = buildSummaryString(finalSummary);
+                const summaryString = formatSummaryParts(finalSummary, testType);
                 process.stdout.write(`\r\x1b[K${resultIcon} ${emoji} ${displayName}: ${summaryString}\n`);
               }
             }
@@ -246,13 +220,13 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
             // Formatting failed - show error and summary
             console.error(`\nError formatting test output: ${e.message}`);
             console.error(e.stack);
-            const summaryString = buildSummaryString(finalSummary);
+            const summaryString = formatSummaryParts(finalSummary, testType);
             process.stdout.write(`\r\x1b[K${resultIcon} ${emoji} ${displayName}: ${summaryString}\n`);
           }
         } else {
           // JSON detected but parsing failed - show summary only
           // This should not happen, but ensure we always show something
-          const summaryString = buildSummaryString(finalSummary);
+          const summaryString = formatSummaryParts(finalSummary, testType);
           process.stdout.write(`\r\x1b[K${resultIcon} ${emoji} ${displayName}: ${summaryString}\n`);
           // Also log the issue for debugging
           if (stdoutData && stdoutData.length > 0) {
@@ -265,14 +239,14 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
         // No complete JSON format detected — never dump partial/raw IPC payloads
         if (hasStartMarker) {
           process.stdout.write(`\r\x1b[K`);
-          const summaryString = buildSummaryString(finalSummary);
+          const summaryString = formatSummaryParts(finalSummary, testType);
           process.stdout.write(`${resultIcon} ${emoji} ${displayName}: ${summaryString || 'failed to parse results'}\n`);
         } else if (!showStatus && stdoutData && stdoutData.trim().length > 0) {
           // Individual run with non-JSON output - pass it through (buffered)
           process.stdout.write(`\r\x1b[K${stdoutData}`);
         } else if (!showStatus && !useInheritStdout) {
           // Individual run but no output at all - show at least a summary (skip when stdout was inherited - test already printed)
-          const summaryString = buildSummaryString(finalSummary);
+          const summaryString = formatSummaryParts(finalSummary, testType);
           process.stdout.write(`\r\x1b[K${resultIcon} ${emoji} ${displayName}: ${summaryString}\n`);
         } else {
           // Group run, or inherited stdout (output already shown) - just clear spinner
