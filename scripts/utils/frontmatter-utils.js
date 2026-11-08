@@ -10,20 +10,26 @@ const yaml = require('js-yaml');
 const matter = require('gray-matter');
 
 /**
- * Parse markdown front matter the same way Eleventy does (gray-matter).
- * Use for `src/_posts/*.md` so tests match the build; catches malformed YAML
- * and mistakes like `## title:` without a closing `---` delimiter.
+ * Parse front matter the same way Eleventy does (gray-matter), so scripts and
+ * tests see what the build sees. Catches malformed YAML and mistakes like
+ * `## title:` without a closing `---` delimiter. The body comes back exactly
+ * as written, blank lines after the closing `---` included, so writing it
+ * back through reconstructFile() changes only the front matter.
  *
- * @param {string} content - Full markdown file content
+ * The front matter is a copy: gray-matter caches results by input text and
+ * returns the same object each time, so a caller that edits it (the OG
+ * generator sets ogImage) would otherwise change what later parses return.
+ *
+ * @param {string} content - Full file content
  * @returns {Object} { frontMatter: object|null, content: string, error?: string }
  */
-function parseMarkdownFrontMatter(content) {
+function parseFrontMatter(content) {
   try {
     const result = matter(content);
     const data = result.data;
     const hasKeys = data && typeof data === 'object' && Object.keys(data).length > 0;
     return {
-      frontMatter: hasKeys ? data : null,
+      frontMatter: hasKeys ? structuredClone(data) : null,
       content: result.content,
     };
   } catch (error) {
@@ -32,27 +38,6 @@ function parseMarkdownFrontMatter(content) {
       content,
       error: error.message,
     };
-  }
-}
-
-/**
- * Parse front matter from markdown file content
- * @param {string} content - Full markdown file content
- * @returns {Object} { frontMatter: object|null, content: string, error?: string }
- */
-function parseFrontMatter(content) {
-  const frontMatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
-  const match = content.match(frontMatterRegex);
-  
-  if (!match) {
-    return { frontMatter: null, content: content };
-  }
-  
-  try {
-    const frontMatter = yaml.load(match[1]);
-    return { frontMatter, content: match[2] };
-  } catch (error) {
-    return { frontMatter: null, content: content, error: error.message };
   }
 }
 
@@ -67,9 +52,7 @@ function parseFrontMatter(content) {
  */
 function reconstructFile(originalContent, frontMatter, body, options = {}) {
   const { quoteDescription = false } = options;
-  const frontMatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
-  const match = originalContent.match(frontMatterRegex);
-  
+
   // Dump YAML
   let yamlContent = yaml.dump(frontMatter, {
     lineWidth: -1,
@@ -99,7 +82,6 @@ function reconstructFile(originalContent, frontMatter, body, options = {}) {
   }
   
   // Reconstruct file with front matter and body
-  // Note: match check was removed as both branches returned the same value
   return `---\n${yamlContent}---\n${body}`;
 }
 
@@ -155,7 +137,6 @@ function formatYamlString(value) {
 
 module.exports = {
   parseFrontMatter,
-  parseMarkdownFrontMatter,
   reconstructFile,
   formatYamlString
 };

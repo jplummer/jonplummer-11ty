@@ -5,7 +5,7 @@ const path = require('path');
 const yaml = require('js-yaml');
 const { validateDate, validateSlug, validateCoverPosition, validateCoverZoom, validateSideStatus } = require('../utils/validation-utils');
 const { getChangedFilesSinceHead, getMarkdownFiles, readFile } = require('../utils/test-helpers');
-const { parseFrontMatter, parseMarkdownFrontMatter } = require('../utils/frontmatter-utils');
+const { parseFrontMatter, reconstructFile } = require('../utils/frontmatter-utils');
 const { addFile, addIssue, addWarning, addGlobalIssue } = require('../utils/test-results');
 const { runTest, checkChangedFlag } = require('../utils/test-runner-helper');
 
@@ -367,7 +367,7 @@ function assertPostFrontmatterParserRegressionGuard() {
     'Body',
     '',
   ].join('\n');
-  const brokenResult = parseMarkdownFrontMatter(broken);
+  const brokenResult = parseFrontMatter(broken);
   if (!brokenResult.error) {
     throw new Error(
       'frontmatter regression: expected parse failure for ## title: without closing --- (Eleventy would fail here)'
@@ -382,9 +382,31 @@ function assertPostFrontmatterParserRegressionGuard() {
     '---',
     'Hello',
   ].join('\n');
-  const okResult = parseMarkdownFrontMatter(ok);
+  const okResult = parseFrontMatter(ok);
   if (okResult.error || !okResult.frontMatter || okResult.frontMatter.title !== 'Ok') {
     throw new Error('frontmatter regression: expected successful parse for well-formed post front matter');
+  }
+
+  // gray-matter caches parses by input text and returns the same object, so
+  // parseFrontMatter() must hand back a copy: the OG generator sets ogImage on
+  // what it gets, and a later parse of the same text must not see that.
+  okResult.frontMatter.title = 'Edited by a caller';
+  if (parseFrontMatter(ok).frontMatter.title !== 'Ok') {
+    throw new Error('frontmatter regression: an edit to one parse result leaked into the next parse of the same text');
+  }
+
+  // Writing a file back (the OG generator adding ogImage) changes only the
+  // front matter: the body, blank lines after the closing --- included, stays
+  // byte for byte. The old regex parser swallowed those blank lines.
+  const withGap = ['---', 'title: Gap', 'tags: post', '---', '', '', 'First paragraph.', ''].join('\n');
+  const parsed = parseFrontMatter(withGap);
+  const rewritten = reconstructFile(withGap, { ...parsed.frontMatter, ogImage: '/x.png' }, parsed.content);
+  const reparsed = parseFrontMatter(rewritten);
+  if (reparsed.content !== parsed.content || !rewritten.endsWith('---\n\n\nFirst paragraph.\n')) {
+    throw new Error('frontmatter regression: writing front matter back changed the body');
+  }
+  if (reparsed.frontMatter.ogImage !== '/x.png' || reparsed.frontMatter.title !== 'Gap') {
+    throw new Error('frontmatter regression: writing front matter back lost or changed a field');
   }
 }
 
@@ -490,7 +512,7 @@ function validate(result, options) {
 
   const markdownFiles = postMarkdownFiles.filter(file => {
     const content = readFile(file);
-    const { frontMatter, error } = parseMarkdownFrontMatter(content);
+    const { frontMatter, error } = parseFrontMatter(content);
     // Keep parse failures in the list so the main loop reports Eleventy-aligned errors
     if (error) {
       return true;
@@ -506,7 +528,7 @@ function validate(result, options) {
   for (const file of markdownFiles) {
     const relativePath = path.relative('./src/_posts', file);
     const content = readFile(file);
-    const { frontMatter, error } = parseMarkdownFrontMatter(content);
+    const { frontMatter, error } = parseFrontMatter(content);
 
     // Add file to result
     const fileObj = addFile(result, file, relativePath);
@@ -538,7 +560,7 @@ function validate(result, options) {
     
     // Validate required fields
     const fieldValidation = validateRequiredFields(frontMatter, file);
-    fieldValidation.issues.push(...validateLeadFigure(frontMatter, parseMarkdownFrontMatter(content).content));
+    fieldValidation.issues.push(...validateLeadFigure(frontMatter, parseFrontMatter(content).content));
 
     // Add issues
     fieldValidation.issues.forEach(issue => {
@@ -573,7 +595,7 @@ function validate(result, options) {
 
   const filteredRootMarkdownFiles = rootMarkdownFiles.filter(file => {
     const content = readFile(file);
-    const { frontMatter, error } = parseMarkdownFrontMatter(content);
+    const { frontMatter, error } = parseFrontMatter(content);
     if (error) {
       return true;
     }
@@ -583,7 +605,7 @@ function validate(result, options) {
   for (const file of filteredRootMarkdownFiles) {
     const relativePath = path.relative('./src', file);
     const content = readFile(file);
-    const { frontMatter, error } = parseMarkdownFrontMatter(content);
+    const { frontMatter, error } = parseFrontMatter(content);
 
     const fileObj = addFile(result, file, relativePath);
 
@@ -623,7 +645,7 @@ function validate(result, options) {
   for (const file of sideMarkdownFiles) {
     const relativePath = path.relative('./src', file);
     const content = readFile(file);
-    const { frontMatter, error } = parseMarkdownFrontMatter(content);
+    const { frontMatter, error } = parseFrontMatter(content);
 
     const fileObj = addFile(result, file, relativePath);
 
