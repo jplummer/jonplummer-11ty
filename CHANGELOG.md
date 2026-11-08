@@ -1,5 +1,20 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-11-07
+
+- Prune `ideas.md` against the repo
+
+## 2026-11-06
+
+- Add flatten-figures for the Figma catalog
+- Record the four-week Search Console read for findability
+- Log CSS audit findings in ideas
+- Add links
+
+## 2026-10-30
+
+- Add lead figures to seven essays
+
 ## 2026-10-28
 
 - Add post: Teaching a product team to do discovery
@@ -969,4 +984,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-10-30
+Last deployed on 2026-11-08
