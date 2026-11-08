@@ -470,67 +470,58 @@ nav li {
   line-height: var(--line-height-base);
 }
 
-/* Post navigation and pagination layout */
-nav.post-navigation,
-nav.pagination {
+/* Post navigation and pagination: the previous or older link at the start,
+   the next or newer one at the end, each with an open caret pointing outward
+   (not the filled disclosure triangle) */
+nav:is(.post-navigation, .pagination) {
   display: flex;
   align-items: flex-start;
   gap: var(--spacing-md);
+
+  & a:is(.prev, .next) {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    max-width: calc((100% - var(--spacing-md)) / 2);
+  }
+
+  & a.prev {
+    margin-inline-end: auto;
+    padding-inline-start: calc(10px + 0.35em);
+  }
+
+  & a.next {
+    margin-inline-start: auto;
+    padding-inline-end: calc(10px + 0.35em);
+    text-align: end;
+  }
+
+  & a.prev::before,
+  & a.next::after {
+    content: '';
+    position: absolute;
+    top: calc((1lh - 10px) / 2);
+    width: 10px;
+    height: 10px;
+    background-color: currentColor;
+    mask-image: var(--icon-nav-caret-mask);
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+  }
+
+  & a.prev::before {
+    inset-inline-start: 0;
+    transform: scaleX(-1);
+  }
+
+  & a.next::after {
+    inset-inline-end: 0;
+  }
 }
 
 nav.post-navigation {
   justify-content: space-between;
-}
-
-/* Open nav carets (paging) — not the filled disclosure triangle */
-nav.post-navigation a.prev,
-nav.pagination a.prev,
-nav.post-navigation a.next,
-nav.pagination a.next {
-  position: relative;
-  display: block;
-  box-sizing: border-box;
-  max-width: calc((100% - var(--spacing-md)) / 2);
-}
-
-nav.post-navigation a.prev,
-nav.pagination a.prev {
-  margin-inline-end: auto;
-  padding-inline-start: calc(10px + 0.35em);
-}
-
-nav.post-navigation a.next,
-nav.pagination a.next {
-  margin-inline-start: auto;
-  padding-inline-end: calc(10px + 0.35em);
-  text-align: end;
-}
-
-nav.post-navigation a.prev::before,
-nav.pagination a.prev::before,
-nav.post-navigation a.next::after,
-nav.pagination a.next::after {
-  content: '';
-  position: absolute;
-  top: calc((1lh - 10px) / 2);
-  width: 10px;
-  height: 10px;
-  background-color: currentColor;
-  mask-image: var(--icon-nav-caret-mask);
-  mask-repeat: no-repeat;
-  mask-position: center;
-  mask-size: contain;
-}
-
-nav.post-navigation a.prev::before,
-nav.pagination a.prev::before {
-  inset-inline-start: 0;
-  transform: scaleX(-1);
-}
-
-nav.post-navigation a.next::after,
-nav.pagination a.next::after {
-  inset-inline-end: 0;
 }
 
 /* === TYPOGRAPHY === */
