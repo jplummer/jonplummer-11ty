@@ -7,13 +7,12 @@ const axeCore = require('axe-core');
 const { findHtmlFiles } = require('../utils/file-utils');
 const { createTestResult, addFile, addIssue, addWarning, addCustomSection, outputResult } = require('../utils/test-results');
 
-// Pages this sweep deliberately does not audit, each with its reason. These are
-// captured prototypes published alongside the posts that discuss them, not pages
-// the site's own templates produce — see docs/tests.md.
+// Pages this sweep deliberately does not audit, each with its reason — see
+// docs/tests.md. A path ending in / skips everything under that folder.
 const EXCLUDED_PATHS = [
   {
-    path: 'assets/demos/data-dictionary/data-dictionary.html',
-    reason: 'Captured React prototype: renders entirely from CDN scripts after DOMContentLoaded, so axe measures a half-mounted DOM and the count differs run to run.'
+    path: 'assets/demos/',
+    reason: 'Demos are artifacts of the work the posts discuss (captured prototypes, embedded maps), not pages the site\'s templates produce.'
   }
 ];
 
@@ -22,9 +21,13 @@ function siteRelativePath(file) {
   return path.relative('./_site', file).replace(/\\/g, '/');
 }
 
+function matchesExclusion(entry, relativePath) {
+  return entry.path.endsWith('/') ? relativePath.startsWith(entry.path) : relativePath === entry.path;
+}
+
 function isExcluded(file) {
   const relativePath = siteRelativePath(file);
-  return EXCLUDED_PATHS.some(entry => entry.path === relativePath);
+  return EXCLUDED_PATHS.some(entry => matchesExclusion(entry, relativePath));
 }
 
 // Format axe-core violations for display
@@ -344,7 +347,9 @@ async function validateAccessibility() {
     process.exit(1);
   }
   
-  const allHtmlFiles = findHtmlFiles(siteDir).filter(file => !isExcluded(file));
+  const foundHtmlFiles = findHtmlFiles(siteDir);
+  const allHtmlFiles = foundHtmlFiles.filter(file => !isExcluded(file));
+  const skippedPaths = foundHtmlFiles.filter(isExcluded).map(siteRelativePath).sort();
   
   // Get HTML files to test (all or filtered by --changed)
   const htmlFiles = getHtmlFilesToTest(useChanged, allHtmlFiles);
@@ -409,7 +414,11 @@ async function validateAccessibility() {
   // Name what was skipped, so an exclusion stays a decision rather than a silence
   if (EXCLUDED_PATHS.length > 0) {
     addCustomSection(result, '⏭️  Not audited', Object.fromEntries(
-      EXCLUDED_PATHS.map(entry => [entry.path, entry.reason])
+      EXCLUDED_PATHS.map(entry => {
+        const pages = skippedPaths.filter(p => matchesExclusion(entry, p));
+        const list = entry.path.endsWith('/') ? ` Skipped: ${pages.join(', ') || 'none'}.` : '';
+        return [entry.path, `${entry.reason}${list}`];
+      })
     ));
   }
   
