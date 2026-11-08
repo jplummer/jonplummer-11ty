@@ -1,5 +1,12 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-11-08
+
+- Tidy the print stylesheet and fix four print bugs
+- Clear Dependabot alerts: undici, fast-uri, markdown-it, minimatch
+- Upgrade Puppeteer to 25
+- Skip the demos folder in the a11y sweep
+
 ## 2026-11-07
 
 - Prune `ideas.md` against the repo
