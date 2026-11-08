@@ -6,6 +6,11 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Clear Dependabot alerts: undici, fast-uri, markdown-it, minimatch
 - Upgrade Puppeteer to 25
 - Skip the demos folder in the a11y sweep
+- Clear four small items from `ideas.md`
+- Stop warning that the wisdom feed is stale
+- Re-render an OG card only when what it shows changes
+- Merge the homepage feed once and show the links that fell between pages
+- Submit only sitemap pages to IndexNow, and pages that leave it
 
 ## 2026-11-07
 
