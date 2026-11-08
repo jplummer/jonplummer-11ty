@@ -1532,44 +1532,47 @@ header a.skip:focus {
 }
 
 /* === PRINT STYLES === */
-/* Print stylesheet for single blog posts - greyscale, optimized for letter/A4 */
-
+/* Print stylesheet for single blog posts – greyscale, on whatever paper the print dialog picks */
 @media print {
-  /* Force light mode colors for print (greyscale) */
+  /* Greyscale tokens. color-scheme keeps light-dark() on its light values for
+     readers in dark mode. Body text and links print black, quiet text gray. */
   :root {
-    --text-color: oklch(28.5% 0 0deg);
+    color-scheme: light;
+    --text-color: oklch(0% 0 0deg);
     --text-color-light: oklch(46.8% 0 0deg);
     --border-color: oklch(85.8% 0 0deg);
     --background-color: oklch(100% 0 0deg);
     --content-background-color: oklch(100% 0 0deg);
-    --link-color: oklch(28.5% 0 0deg);
+    --link-color: var(--text-color);
     --link-hover-color: var(--link-color);
-    --link-visited-color: var(--text-color-light);
+    --link-visited-color: var(--link-color);
     --link-active-color: var(--link-color);
   }
 
-  /* Page setup for letter/A4 */
+  /* The /color/ previews set each theme's tokens in an inline style, so a
+     dark theme would print pale text. Override the text and link colors;
+     !important is what beats an inline style. */
+  .theme-root {
+    --text-color: oklch(0% 0 0deg) !important;
+    --text-color-light: oklch(46.8% 0 0deg) !important;
+    --link-color: var(--text-color) !important;
+    --link-visited-color: var(--link-color) !important;
+  }
+
+  /* No size, so letter and A4 both work; 0.75in is 19mm */
   @page {
-    size: letter;
     margin: 0.75in;
   }
 
-  @page {
-    size: A4;
-    margin: 19mm;
-  }
-
-  /* Base print styles */
+  /* Clear screen backgrounds and shadows. It has to beat every screen rule,
+     so it's !important. */
   * {
     background: transparent !important;
-    color: oklch(0% 0 0deg) !important;
     box-shadow: none !important;
     text-shadow: none !important;
   }
 
   body {
-    background: oklch(100% 0 0deg);
-    color: oklch(0% 0 0deg);
     font-size: 12pt;
     line-height: 1.5;
     font-family: system-ui, sans-serif;
@@ -1579,28 +1582,26 @@ header a.skip:focus {
   body > header nav,
   nav.post-navigation,
   nav.pagination,
-  header a.skip,
   a.skip,
   .sr-only,
   body > footer {
-    display: none !important;
+    display: none;
   }
 
-  /* Simplify header - keep only the site title */
+  /* Simplify header – keep only the site title */
   body > header {
-    margin-bottom: 1rem;
+    margin-bottom: var(--spacing-sm);
   }
 
   body > header hgroup p {
     display: none;
   }
 
-  /* Single column layout for articles */
+  /* Single column layout for articles. !important because the screen's
+     article:not(.link-item), .portfolio-item, and .wisdom-entry rules are
+     more specific. */
   article {
     display: block !important;
-    grid-template-columns: none !important;
-    grid-template-areas: none !important;
-    gap: 0 !important;
     max-width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
@@ -1608,21 +1609,21 @@ header a.skip:focus {
 
   /* Article header */
   article header {
-    margin-bottom: 1rem;
+    margin-bottom: var(--spacing-sm);
   }
 
   article header h1 {
     font-size: 18pt;
     line-height: 1.2;
-    margin: 0 0 0.5rem 0;
+    margin: 0 0 var(--spacing-xs);
     break-after: avoid;
   }
 
   /* Article footer (date) */
   article footer {
-    margin: 0.5rem 0 1rem 0;
+    margin: var(--spacing-xs) 0 var(--spacing-sm);
     font-size: 10pt;
-    color: oklch(46.8% 0 0deg);
+    color: var(--text-color-light);
   }
 
   /* Article content */
@@ -1639,7 +1640,7 @@ header a.skip:focus {
 
   h1 {
     font-size: 16pt;
-    margin-top: 1rem;
+    margin-top: var(--spacing-sm);
   }
 
   h2 {
@@ -1667,54 +1668,39 @@ header a.skip:focus {
     break-inside: avoid;
   }
 
-  /* Links - show URLs - override all link states */
-  a,
-  a:link,
-  a:visited,
-  a:hover,
-  a:active,
-  a:focus {
-    color: oklch(0% 0 0deg) !important;
+  /* Links: underlined, with the URL after */
+  :is(a, a:any-link) {
     text-decoration: underline;
   }
 
-  /* Remove underline from h1 links */
-  h1 a,
-  h1 a:link,
-  h1 a:visited,
-  h1 a:hover,
-  h1 a:active,
-  h1 a:focus {
+  h1 :is(a, a:any-link) {
     text-decoration: none;
   }
 
-  /* Show URLs for all links with href (external and internal) */
-  a[href]:after {
+  a[href]::after {
     content: " (" attr(href) ")";
     font-size: 9pt;
-    color: oklch(46.8% 0 0deg);
+    color: var(--text-color-light);
     word-break: break-all;
   }
 
   /* Don't show URLs for anchor links */
-  a[href^="#"]:after {
+  a[href^="#"]::after {
     content: "";
   }
 
   /* Images */
   img {
-    max-width: 100% !important;
-    height: auto !important;
-    break-inside: avoid;
+    max-width: 100%;
+    height: auto;
     break-after: avoid;
   }
 
-  /* Code blocks */
+  /* Code blocks. The gray fields are !important to beat the * reset. */
   pre {
-    border: 1pt solid oklch(0% 0 0deg);
-    padding: 0.5rem;
+    border: 1pt solid var(--text-color);
+    padding: var(--spacing-xs);
     background: oklch(97% 0 0deg) !important;
-    break-inside: avoid;
   }
 
   code {
@@ -1722,56 +1708,55 @@ header a.skip:focus {
     padding: 0.1rem 0.2rem;
   }
 
-  /* Content warnings - expand for print */
-  details {
-    display: block;
+  /* Content warnings print open: the warning sentence as plain text, then
+     the content. Lab disclosures on /color/ and /type/ stay closed. */
+  article details::details-content {
+    content-visibility: visible;
   }
 
-  summary {
+  article details > summary::before,
+  article details > summary::after {
     display: none;
   }
 
   /* Blockquotes */
   blockquote {
-    border-left: 2pt solid oklch(0% 0 0deg);
-    padding-left: 1rem;
-    margin: 1rem 0;
-    break-inside: avoid;
+    border-inline-start: 2pt solid var(--text-color);
+    padding-inline-start: var(--spacing-sm);
+    margin: var(--spacing-sm) 0;
   }
 
   /* Horizontal rules */
   hr {
-    border-top: 1pt solid oklch(0% 0 0deg);
-    margin: 1rem 0;
+    border-top: 1pt solid var(--text-color);
+    margin: var(--spacing-sm) 0;
   }
 
   /* Lists */
   ul, ol {
     margin: 0.75rem 0;
-    padding-left: 1.5rem;
+    padding-inline-start: var(--spacing-md);
   }
 
   li {
     margin: 0.25rem 0;
   }
 
-  /* Remove decorative elements */
+  /* Remove decorative elements. !important because the screen rules that
+     draw them are more specific. */
   article section::after,
   main[data-tags*="page"]::after,
   .post-demo-popout a::after {
     display: none !important;
   }
 
-  /* Ensure main content area has no background */
-  body > header,
-  body > main,
-  body > footer {
-    background: oklch(100% 0 0deg) !important;
-    max-width: 100% !important;
-    padding: 0 !important;
+  /* Full width, no padding */
+  body > :is(header, main, footer) {
+    max-width: 100%;
+    padding: 0;
   }
 
   main {
-    margin: 0 !important;
+    margin: 0;
   }
 }
