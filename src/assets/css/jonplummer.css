@@ -370,7 +370,7 @@ article figure figcaption {
 /* Embedded interactive demo (iframe + pop-out link) — controls: ink → accent */
 .post-demo-popout {
   margin: 0 0 var(--spacing-xs);
-  text-align: left;
+  text-align: start;
 }
 
 .post-demo-popout a:any-link {
@@ -550,13 +550,13 @@ nav.pagination a.next::after {
 
 nav.post-navigation a.prev::before,
 nav.pagination a.prev::before {
-  left: 0;
+  inset-inline-start: 0;
   transform: scaleX(-1);
 }
 
 nav.post-navigation a.next::after,
 nav.pagination a.next::after {
-  right: 0;
+  inset-inline-end: 0;
 }
 
 /* === TYPOGRAPHY === */
@@ -647,9 +647,9 @@ li {
 /* Blockquotes */
 blockquote {
   margin: var(--spacing-lg) 0;
-  padding-left: var(--spacing-md);
+  padding-inline-start: var(--spacing-md);
   font-style: italic;
-  border-left: 2px solid var(--border-color);
+  border-inline-start: 2px solid var(--border-color);
   text-wrap: pretty;
   hanging-punctuation: first last;
 }
@@ -824,7 +824,7 @@ footer p a:any-link:is(:hover, :focus-visible),
 }
 
 .license {
-  text-align: left;
+  text-align: start;
   margin: 0 auto;
   max-width: var(--max-width);
   padding-inline: var(--gutter);
@@ -1051,10 +1051,7 @@ article.portfolio-detail {
       display: grid;
       grid-template-columns: subgrid;
 
-      & > a.figure-lightbox-trigger,
-      & > picture,
-      & > img,
-      & > video {
+      & > :is(a.figure-lightbox-trigger, picture, img, video) {
         grid-column: 1 / -1;
       }
 
@@ -1114,10 +1111,6 @@ article.portfolio-detail {
           height: auto;
           border: 1px solid var(--border-color);
         }
-
-        & figcaption {
-          padding-left: 0;
-        }
       }
     }
   }
@@ -1150,7 +1143,7 @@ article.portfolio-detail {
 .figure-lightbox-chrome {
   position: absolute;
   top: var(--spacing-xs);
-  right: var(--spacing-xs);
+  inset-inline-end: var(--spacing-xs);
   z-index: 1;
   margin: 0;
 }
@@ -1201,11 +1194,11 @@ article.portfolio-detail {
 }
 
 .figure-lightbox-prev {
-  left: var(--spacing-xs);
+  inset-inline-start: var(--spacing-xs);
 }
 
 .figure-lightbox-next {
-  right: var(--spacing-xs);
+  inset-inline-end: var(--spacing-xs);
 }
 
 .figure-lightbox-icon {
@@ -1405,23 +1398,25 @@ aside.side-links ul {
 
 /* === UTILITIES === */
 
-/* Screen reader only */
+/* Screen reader only. Clipped to nothing where it sits rather than moved off
+   the page, so a screen reader's cursor stays at the text's real position */
 .sr-only, header a.skip {
   position: absolute;
-  left: -10000rem;
-  top: auto;
   width: 1px;
   height: 1px;
   overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 /* Skip link focus state */
 header a.skip:focus {
   position: fixed;
-  left: 0;
+  inset-inline-start: 0;
   top: 0;
   width: auto;
   height: auto;
+  clip-path: none;
   background-color: var(--content-background-color);
   padding: var(--spacing-sm);
   z-index: 100;
