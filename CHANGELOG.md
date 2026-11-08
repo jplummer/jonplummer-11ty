@@ -4,6 +4,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 - Prune `ideas.md` against the repo
 - Drop redundant CSS prefixes and old print properties
+- Add three typography refinements from the CSS-Tricks reset
 
 ## 2026-11-06
 
