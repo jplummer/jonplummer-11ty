@@ -5,7 +5,8 @@ const path = require('path');
 const puppeteer = require('puppeteer');
 const axeCore = require('axe-core');
 const { findHtmlFiles } = require('../utils/file-utils');
-const { createTestResult, addFile, addIssue, addWarning, addCustomSection, outputResult } = require('../utils/test-results');
+const { createTestResult, addFile, addIssue, addWarning, addCustomSection } = require('../utils/test-results');
+const { outputAndExit } = require('../utils/test-runner-helper');
 
 // Pages this sweep deliberately does not audit, each with its reason — see
 // docs/tests.md. A path ending in / skips everything under that folder.
@@ -363,8 +364,7 @@ async function validateAccessibility() {
         message: 'No HTML files need testing based on changed source files'
       });
     }
-    outputResult(result);
-    process.exit(0);
+    outputAndExit(result);
     return;
   }
   
@@ -422,11 +422,8 @@ async function validateAccessibility() {
     ));
   }
   
-  // Output JSON result (formatter will handle display - compact for group runs, verbose for individual)
-  outputResult(result);
-  
-  // Exit with appropriate code (errors block, warnings don't)
-  process.exit(result.summary.issues > 0 ? 1 : 0);
+  // JSON for the test runner, formatted text when run by hand; exits 1 on errors
+  outputAndExit(result);
 }
 
 // Run validation

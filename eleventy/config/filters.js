@@ -42,22 +42,17 @@ function configureFilters(eleventyConfig, md) {
     });
   });
 
-  // Add inline markdown filter (no block-level elements like <p>)
-  eleventyConfig.addFilter("markdownInline", function (content) {
-    return md.renderInline(content);
-  });
-
   // Block markdown (for data-driven bodies, e.g. collected wisdom)
   eleventyConfig.addFilter("markdown", function (content) {
     if (!content) return "";
     return md.render(String(content));
   });
 
-  // Add smart quotes filter (applies typographer rules to plain text)
+  // Inline markdown with typographer rules: smart quotes and dashes, plus links
+  // and emphasis, but no block elements like <p>. Pipe through striptags where
+  // the context needs plain text (titles), or safe where markup is wanted.
   eleventyConfig.addFilter("smartquotes", function (content) {
     if (!content) return content;
-    // Use renderInline to apply typographer rules, then extract text content
-    // This converts straight quotes to smart quotes without other markdown processing
     return md.renderInline(String(content));
   });
 

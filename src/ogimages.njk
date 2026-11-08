@@ -18,102 +18,32 @@ ogImage: /assets/images/og/v2/ogimages.png
 
   <div class="preview-section">
     <h2>Card examples</h2>
+    {%- set examples = [
+      { heading: "Post", title: "Many little diamonds", label: "Post", labelIsPath: false },
+      { heading: "Portfolio piece", title: "Velop whole-home WiFi system", label: "Portfolio", labelIsPath: false },
+      { heading: "Side project", title: "Parker", label: "Side project", labelIsPath: false },
+      { heading: "Page (nav-style path)", title: "About Jon Plummer", label: "/about", labelIsPath: true },
+      { heading: "Default card (home, paginated indexes, wisdom tags)", title: site.tagline, label: "/", labelIsPath: true },
+      { heading: "Longest title – fits at the minimum size, then truncates", title: "Confusing terms: globalization, internationalization, translation, localization", label: "Post", labelIsPath: false }
+    ] %}
     <div class="og-preview-wrapper">
+      {%- asyncEach ex in examples %}
       <div class="og-preview-item">
-        <h3>Post</h3>
+        <h3>{{ ex.heading }}</h3>
         <div class="og-preview-pair">
           <div class="og-preview-container">
             <div class="og-preview-scaled">
-              {% renderFile "./src/_includes/og-image-body.njk", { title: "Many little diamonds", label: "Post", labelIsPath: false, site: site } %}
+              {% renderFile "./src/_includes/og-image-body.njk", { title: ex.title, label: ex.label, labelIsPath: ex.labelIsPath, site: site } %}
             </div>
           </div>
           <div class="og-preview-feed" aria-hidden="true">
             <div class="og-preview-feed-scaled">
-              {% renderFile "./src/_includes/og-image-body.njk", { title: "Many little diamonds", label: "Post", labelIsPath: false, site: site } %}
+              {% renderFile "./src/_includes/og-image-body.njk", { title: ex.title, label: ex.label, labelIsPath: ex.labelIsPath, site: site } %}
             </div>
           </div>
         </div>
       </div>
-
-      <div class="og-preview-item">
-        <h3>Portfolio piece</h3>
-        <div class="og-preview-pair">
-          <div class="og-preview-container">
-            <div class="og-preview-scaled">
-              {% renderFile "./src/_includes/og-image-body.njk", { title: "Velop whole-home WiFi system", label: "Portfolio", labelIsPath: false, site: site } %}
-            </div>
-          </div>
-          <div class="og-preview-feed" aria-hidden="true">
-            <div class="og-preview-feed-scaled">
-              {% renderFile "./src/_includes/og-image-body.njk", { title: "Velop whole-home WiFi system", label: "Portfolio", labelIsPath: false, site: site } %}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="og-preview-item">
-        <h3>Side project</h3>
-        <div class="og-preview-pair">
-          <div class="og-preview-container">
-            <div class="og-preview-scaled">
-              {% renderFile "./src/_includes/og-image-body.njk", { title: "Parker", label: "Side project", labelIsPath: false, site: site } %}
-            </div>
-          </div>
-          <div class="og-preview-feed" aria-hidden="true">
-            <div class="og-preview-feed-scaled">
-              {% renderFile "./src/_includes/og-image-body.njk", { title: "Parker", label: "Side project", labelIsPath: false, site: site } %}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="og-preview-item">
-        <h3>Page (nav-style path)</h3>
-        <div class="og-preview-pair">
-          <div class="og-preview-container">
-            <div class="og-preview-scaled">
-              {% renderFile "./src/_includes/og-image-body.njk", { title: "About Jon Plummer", label: "/about", labelIsPath: true, site: site } %}
-            </div>
-          </div>
-          <div class="og-preview-feed" aria-hidden="true">
-            <div class="og-preview-feed-scaled">
-              {% renderFile "./src/_includes/og-image-body.njk", { title: "About Jon Plummer", label: "/about", labelIsPath: true, site: site } %}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="og-preview-item">
-        <h3>Default card (home, paginated indexes, wisdom tags)</h3>
-        <div class="og-preview-pair">
-          <div class="og-preview-container">
-            <div class="og-preview-scaled">
-              {% renderFile "./src/_includes/og-image-body.njk", { title: site.tagline, label: "/", labelIsPath: true, site: site } %}
-            </div>
-          </div>
-          <div class="og-preview-feed" aria-hidden="true">
-            <div class="og-preview-feed-scaled">
-              {% renderFile "./src/_includes/og-image-body.njk", { title: site.tagline, label: "/", labelIsPath: true, site: site } %}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="og-preview-item">
-        <h3>Longest title – fits at the minimum size, then truncates</h3>
-        <div class="og-preview-pair">
-          <div class="og-preview-container">
-            <div class="og-preview-scaled">
-              {% renderFile "./src/_includes/og-image-body.njk", { title: "Confusing terms: globalization, internationalization, translation, localization", label: "Post", labelIsPath: false, site: site } %}
-            </div>
-          </div>
-          <div class="og-preview-feed" aria-hidden="true">
-            <div class="og-preview-feed-scaled">
-              {% renderFile "./src/_includes/og-image-body.njk", { title: "Confusing terms: globalization, internationalization, translation, localization", label: "Post", labelIsPath: false, site: site } %}
-            </div>
-          </div>
-        </div>
-      </div>
+      {%- endeach %}
     </div>
   </div>
 

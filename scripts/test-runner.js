@@ -231,7 +231,7 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
               process.stdout.write(`\r\x1b[K${finalLine}\n`);
             } else {
               // Individual runs: use verbose format (which includes compact at top)
-              formattedOutput = formatVerbose(jsonResult, formatOptions);
+              formattedOutput = formatVerbose(jsonResult);
               // Clear spinner line and write formatted output
               // Always ensure we write something - formatVerbose should never be empty, but be defensive
               if (formattedOutput && formattedOutput.trim().length > 0) {

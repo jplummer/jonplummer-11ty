@@ -1684,9 +1684,18 @@ header a.skip:focus {
     word-break: break-all;
   }
 
-  /* Don't show URLs for anchor links */
-  a[href^="#"]::after {
-    content: "";
+  /* No URL after anchor links, or after links to the site or the page itself:
+     the logo mark and site title (rel=home) and post titles (rel=bookmark) */
+  :is(a[href^="#"], a[rel~="home"], a[rel~="bookmark"])::after {
+    content: none;
+  }
+
+  /* The /color/ lab's badges are light text on a dark field, and the * reset
+     clears the field. Print them as dark text in an outline. The span beats
+     the gallery's .badge.ok, which loads later. */
+  .color-gallery-embed span.badge:is(.ok, .fail) {
+    color: var(--text-color);
+    border: 1pt solid currentColor;
   }
 
   /* Images */

@@ -672,10 +672,9 @@ function groupIssuesByType(result) {
  * Starts with summary for consistency, then shows detailed by-file results
  * 
  * @param {Object} result - Test result object from result builder
- * @param {Object} options - Formatting options (currently unused, kept for API compatibility)
  * @returns {string} Formatted output string
  */
-function formatVerbose(result, options = {}) {
+function formatVerbose(result) {
   // Always finalize to ensure summary is calculated correctly
   finalizeTestResult(result);
   
@@ -963,7 +962,6 @@ module.exports = {
   
   // Formatting
   formatVerbose,
-  formatBuild,
-  groupIssuesByType
+  formatBuild
 };
 

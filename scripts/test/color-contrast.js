@@ -4,7 +4,8 @@ const fs = require('fs');
 const path = require('path');
 const { parse, formatHex } = require('culori');
 const { absApcaLcSrgb, absApcaLcP3 } = require('../utils/apca-dual');
-const { createTestResult, addFile, addIssue, addWarning, addCustomSection, outputResult } = require('../utils/test-results');
+const { createTestResult, addFile, addIssue, addWarning, addCustomSection } = require('../utils/test-results');
+const { outputAndExit } = require('../utils/test-runner-helper');
 
 /** Warn when sRGB and Display P3 APCA Lc differ by at least this much. */
 const LC_DIVERGENCE_WARN = 4;
@@ -468,11 +469,8 @@ function checkColorContrast() {
     note: 'Each pair reports Lc after culori gamut mapping to sRGB (APCA-W3 sRGBtoY) and, in messages, Lc after mapping to Display P3 (displayP3toY). Pass/fail uses the sRGB path only. Warnings appear when P3 is below minimum while sRGB passes, or when the two Lc values diverge by ' + LC_DIVERGENCE_WARN + ' or more.'
   });
   
-  // Output result
-  outputResult(result);
-  
-  // Exit with appropriate code
-  process.exit(result.summary.issues > 0 ? 1 : 0);
+  // JSON for the test runner, formatted text when run by hand; exits 1 on errors
+  outputAndExit(result);
 }
 
 // Run validation

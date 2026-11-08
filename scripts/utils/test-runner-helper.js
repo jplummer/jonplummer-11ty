@@ -49,7 +49,7 @@ function outputAndExit(result) {
   
   if (isDirectRun) {
     // Direct run: show formatted output
-    const formatted = formatVerbose(result, {});
+    const formatted = formatVerbose(result);
     console.log(formatted);
   } else {
     // Test-runner: output JSON
