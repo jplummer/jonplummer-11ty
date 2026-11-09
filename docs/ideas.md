@@ -6,7 +6,7 @@
 
 The site now leads with Jon's position: leadership, discovery, design, and prototyping where hardware and software meet (2026-11-08). What that implies for each page: [position doc](designs/specs/2026-11-08-hardware-software-position-design.md).
 
-1. **Two-portfolio structure.** `/portfolio/` becomes the hardware-and-software portfolio. A second one for general UX Director roles is available but kept out of the nav. Write a short spec first covering front matter for which portfolio a piece belongs to, the two index pages and their hand-picked order, previous/next on pieces that are in both, the second portfolio's URL and shortlink, and `noindex` for it (undecided).
+1. **Two-portfolio structure.** `/portfolio/` becomes the hardware-and-software portfolio. A second one for general UX Director roles is available but kept out of the nav. Spec: [two portfolios](designs/specs/2026-11-08-two-portfolios-design.md). One data file lists each portfolio's pieces in order, and the open questions are the second portfolio's name and URL and whether it gets `noindex`.
 2. **Curate the hardware-and-software portfolio and write its intro.** Candidates and the framing MiniMed needs (important, but about 2013) are in the [position doc](designs/specs/2026-11-08-hardware-software-position-design.md#portfolio-and-the-second-portfolio).
 3. **Bring the hardware side projects forward.**
    - Photos and write-ups that show the physical build for Usage-Chan and Parker, and a decision on whether they appear in the portfolio itself.
