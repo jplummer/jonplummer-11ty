@@ -2,7 +2,7 @@
 <article class="side-item" id="{{ item.fileSlug }}"{% if item.data.coverPosition or item.data.coverZoom %} style="{% if item.data.coverPosition %}--cover-object-position: {{ item.data.coverPosition }};{% endif %}{% if item.data.coverPosition and item.data.coverZoom %} {% endif %}{% if item.data.coverZoom %}--cover-zoom: {{ item.data.coverZoom }};{% endif %}"{% endif %}>
     <a href="{{ item.url }}" rel="bookmark">
         {% if item.data.coverImage %}
-        <img src="/assets/images/{{ item.data.coverImage }}" alt="">
+        <span class="card-cover"><img src="/assets/images/{{ item.data.coverImage }}" alt=""></span>
         {% endif %}
         <p>{{ item.data.title | smartquotes | striptags }}</p>
     </a>

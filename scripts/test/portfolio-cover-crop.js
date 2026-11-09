@@ -85,10 +85,13 @@ function validateCssSource(result) {
     }
   }
 
-  if (!/article:is\(\.portfolio-item, \.side-item\) a > picture[\s\S]*overflow:\s*hidden/.test(css)) {
+  // The clip box is a span the card template owns. It used to be "a > picture, a > img",
+  // which clipped only when the image transform emitted <picture>: a bare <img> can't clip
+  // its own scale, so zoomed covers grew past their grid column (2026-11-08).
+  if (!/span\.card-cover\s*\{[^}]*overflow:\s*hidden/.test(css)) {
     addIssue(fileObj, {
       type: 'portfolio-cover-crop',
-      message: 'picture/img cover wrapper must set overflow: hidden',
+      message: 'span.card-cover must set overflow: hidden so it clips the zoomed cover',
       ruleId: 'portfolio-cover-crop',
     });
   }
@@ -151,11 +154,51 @@ function validateBuiltHtml(result) {
   }
 }
 
+// Every card image must sit inside span.card-cover, whatever markup the image transform
+// emits: <picture> for opaque sources, a bare webp <img> for PNGs with an alpha channel.
+function validateBuiltCoverWrappers(result) {
+  const pages = [
+    { file: '_site/portfolio/index.html', cls: 'portfolio-item' },
+    { file: '_site/sides/index.html', cls: 'side-item' },
+  ];
+  for (const { file, cls } of pages) {
+    const htmlPath = path.join(ROOT, file);
+    if (!fs.existsSync(htmlPath)) {
+      continue;
+    }
+    const html = fs.readFileSync(htmlPath, 'utf8');
+    const fileObj = addFile(result, htmlPath, file);
+    const cards = html.split(`<article class="${cls}"`).slice(1).map(chunk => chunk.split('</article>')[0]);
+    if (cards.length === 0) {
+      addIssue(fileObj, {
+        type: 'portfolio-cover-crop',
+        message: `No .${cls} cards found`,
+        ruleId: 'portfolio-cover-crop',
+      });
+      continue;
+    }
+    for (const card of cards) {
+      if (!card.includes('<img')) {
+        continue;
+      }
+      const id = (card.match(/id="([^"]+)"/) || [])[1] || '(no id)';
+      if (!/<span class="card-cover">\s*(<picture>[\s\S]*?<\/picture>|<img[^>]*>)\s*<\/span>/.test(card)) {
+        addIssue(fileObj, {
+          type: 'portfolio-cover-crop',
+          message: `${id}: cover image is not wrapped in span.card-cover`,
+          ruleId: 'portfolio-cover-crop',
+        });
+      }
+    }
+  }
+}
+
 function validate(result) {
   validateValidators(result);
   validateCssSource(result);
   validateTemplateAndPost(result);
   validateBuiltHtml(result);
+  validateBuiltCoverWrappers(result);
 }
 
 runTest({

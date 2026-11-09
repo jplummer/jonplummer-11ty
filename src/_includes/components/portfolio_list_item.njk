@@ -2,7 +2,9 @@
 <article class="portfolio-item" id="{{ post.fileSlug }}"{% if post.data.coverPosition or post.data.coverZoom %} style="{% if post.data.coverPosition %}--cover-object-position: {{ post.data.coverPosition }};{% endif %}{% if post.data.coverPosition and post.data.coverZoom %} {% endif %}{% if post.data.coverZoom %}--cover-zoom: {{ post.data.coverZoom }};{% endif %}"{% endif %}>
     <a href="{{ post.url }}" rel="bookmark">
         {# alt="" on purpose: the title paragraph below names the link, so alt text would repeat it #}
-        <img src="/assets/images/{{ post.data.coverImage }}" alt="">
+        {# span.card-cover is the crop box: the image transform emits <picture> or a bare <img>
+           depending on the source, and a bare <img> can't clip its own zoom #}
+        <span class="card-cover"><img src="/assets/images/{{ post.data.coverImage }}" alt=""></span>
         <p>{{ post.data.title | smartquotes | striptags }}</p>
     </a>
     {% if post.data.description %}

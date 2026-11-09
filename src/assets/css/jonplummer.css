@@ -1271,14 +1271,16 @@ article:is(.portfolio-item, .side-item) > a:is(:hover, :focus-visible) p {
   text-decoration: underline;
 }
 
-article:is(.portfolio-item, .side-item) a > picture,
-article:is(.portfolio-item, .side-item) a > img {
+/* Crop box for the cover. The template owns it because the image transform emits
+   <picture> for opaque sources but a bare webp <img> for PNGs with an alpha channel,
+   and a bare <img> can't clip its own scale. */
+article:is(.portfolio-item, .side-item) span.card-cover {
+  display: block;
   border: 1px solid var(--border-color);
-  box-sizing: border-box;
   overflow: hidden;
 }
 
-article:is(.portfolio-item, .side-item) img {
+article:is(.portfolio-item, .side-item) span.card-cover img {
   display: block;
   width: 100%;
   height: auto;

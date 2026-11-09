@@ -94,7 +94,7 @@ Runs [Stylelint](https://stylelint.io) on `src/**/*.css` using `.stylelintrc.jso
 
 ### portfolio-cover-crop.js
 
-Guards portfolio grid thumbnail crop authoring: `validateCoverPosition` / `validateCoverZoom` allowlists, `jonplummer.css` custom properties (no per-slug `object-position` rules), `portfolio_list_item.njk` wiring, Monotasker `coverPosition: center 20%`, and — when `_site/portfolio/index.html` exists — that card’s inline `--cover-object-position`. Included in `test fast` and in `scripts/build/build.js` post-build.
+Guards portfolio grid thumbnail crop authoring: `validateCoverPosition` / `validateCoverZoom` allowlists, `jonplummer.css` custom properties (no per-slug `object-position` rules), `portfolio_list_item.njk` wiring, Monotasker `coverPosition: center 20%`, and — when `_site/portfolio/index.html` exists — that card’s inline `--cover-object-position`. In the built `/portfolio/` and `/sides/` pages, every card image must sit inside `span.card-cover`, the crop box the card template owns. The image transform emits a `<picture>` for opaque sources but a bare webp `<img>` for PNGs with an alpha channel, and a bare `<img>` can’t clip its own `scale`. Until 2026-11-08 the crop box was whichever of the two the transform emitted, so five zoomed portfolio covers grew past their grid column. Included in `test fast` and in `scripts/build/build.js` post-build.
 
 ### favicon-rasters.js
 

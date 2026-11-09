@@ -27,7 +27,9 @@ async function configurePlugins(eleventyConfig) {
   const { eleventyImageTransformPlugin } = require("@11ty/eleventy-img");
   eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
     // svg + svgShortCircuit: SVG sources pass through untouched (generated figures carry their
-    // own dark-mode styles, which rasterizing would lose). Raster sources still get webp + jpeg.
+    // own dark-mode styles, which rasterizing would lose). Opaque raster sources get webp + jpeg
+    // in a <picture>. Listing svg also turns on eleventy-img's transparency filtering, so a PNG
+    // with an alpha channel gets webp only, as a bare <img>. Don't style on which one appears.
     formats: ["svg", "webp", "jpeg"],
     svgShortCircuit: true,
     widths: [400, 800, 1200, 1600, "auto"],
