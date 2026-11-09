@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2023 03 20
 layout: layouts/single_post.njk
 date: "2023-03-25T12:00:00-08:00"
 tags: post
-description: It's spring break, that awkward nearly month-long period when employees with kids start disappearing for a week at a time. Every year the challenge is to make
+description: "Spring break season: when I asked each person how to prepare their team for their absence, every answer started with what they'd already done."
 ogImage: /assets/images/og/v2/2023-03-25-weekly-wins-for-the-week-of-2023-03-20.png
 ---
 It's spring break, that awkward nearly month-long period when employees with kids start disappearing for a week at a time. Every year the challenge is to make sure that people have prepared their teams for their absence; that enough is done and questions answered (and backup help secured) that whoever remains can proceed without much trouble, and especially that the person's absence doesn't come as a surprise.

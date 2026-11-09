@@ -3,7 +3,7 @@ title: "How to sprint: Goals over rigid planning"
 layout: layouts/single_post.njk
 date: "2025-10-08T12:00:00-08:00"
 tags: post
-description: (Copied from a lengthy Slack message and edited for this medium) A thought came up in a team retro at our offsite meeting, and I think it is relevant to PM and
+description: Sprint planning that only estimates tickets and spreads them across sprints makes plans rigid. Use each sprint to deliver a slice of functionality instead.
 ogImage: /assets/images/og/v2/2025-10-08-how-to-sprint.png
 ---
 (Copied from a lengthy Slack message and edited for this medium)

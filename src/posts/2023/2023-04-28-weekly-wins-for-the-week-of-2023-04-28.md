@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2023 04 28
 layout: layouts/single_post.njk
 date: "2023-04-28T12:00:00-08:00"
 tags: post
-description: An oft-rescheduled and contentious meeting resulted in a resolution to work together more often and more closely, which is the right answer. I made progress on
+description: A contentious meeting ended in a plan to work together more closely, and talking openly about my work turned up people who want to help.
 ogImage: /assets/images/og/v2/2023-04-28-weekly-wins-for-the-week-of-2023-04-28.png
 ---
 - An oft-rescheduled and contentious meeting resulted in a resolution to work together more often and more closely, which is the right answer.

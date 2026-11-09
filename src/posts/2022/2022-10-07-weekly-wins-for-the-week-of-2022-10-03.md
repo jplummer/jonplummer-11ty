@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2022 10 03
 layout: layouts/single_post.njk
 date: "2022-10-07T12:00:00-08:00"
 tags: post
-description: My eight minute talk wherein I tried to explain/demo the accomplishments of my department over the prior year seemed to go fine. Folks in my department liked
+description: "An eight-minute talk on my department's year went fine, a run when the gym was closed was almost enjoyable, and a former coworker sent a kind note."
 ogImage: /assets/images/og/v2/2022-10-07-weekly-wins-for-the-week-of-2022-10-03.png
 ---
 - My eight minute talk wherein I tried to explain/demo the accomplishments of my department over the prior year seemed to go fine. Folks in my department liked it, anyhow.

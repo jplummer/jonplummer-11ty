@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2022 10 31
 layout: layouts/single_post.njk
 date: "2022-11-05T12:00:00-08:00"
 tags: post
-description: "Last week I pointed out that > The moment I announced I am #openToWork on LinkedIn there was an inrush of good wishes and referrals and recommendations. Over"
+description: A week after the layoff, the referrals and recommendations keep coming, and they keep naming the same traits, which helps with impostor syndrome.
 ogImage: /assets/images/og/v2/2022-11-05-weekly-wins-for-the-week-of-2022-10-31.png
 ---
 Last week I pointed out that

@@ -5,7 +5,7 @@ date: "2025-10-25"
 tags: portfolio
 coverImage: 2024/10/cko-sms-concept-video-8-still.png
 coverPosition: center top
-description: "Demo video of Invoca's SMS agent concept"
+description: A concept sprint at Invoca settled what our first AI SMS agent should do. This demo video showed customers the experience, and they asked when it would ship.
 ogImage: /assets/images/og/v2/2024-10-25-sms-concept-video.png
 ---
 Invoca had been discussing an AI-powered SMS agent for months. But what should it do? What use case would be appealing to our customers for our first foray into conversational agents?

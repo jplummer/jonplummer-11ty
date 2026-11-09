@@ -3,7 +3,7 @@ title: "Revamping my design leadership portfolio: research results"
 layout: layouts/single_post.njk
 date: "2021-05-15T12:00:00-08:00"
 tags: post
-description: I contacted seven recruiters I had recently communicated with by whatever means we had spoken before. Most of them wanted to take the discussion to phone or a
+description: Four of seven recruiters answered my questions about design leadership portfolios. They explained the three kinds of recruiters and told me what mine was missing.
 ogImage: /assets/images/og/v2/2021-05-15-revamping-my-design-leadership-portfolio-research-results.png
 ---
 I contacted seven recruiters I had recently communicated with by whatever means we had spoken before. Most of them wanted to take the discussion to phone or a video chat, but for scheduling reasons I had to steer the discussion to email. Two were confused, one didn't respond, and four said things that were helpful.

@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2022 11 07
 layout: layouts/single_post.njk
 date: "2022-11-12T12:00:00-08:00"
 tags: post
-description: My practice of doing at least one thing each day for the three topics of network cultivation, opportunities (warm and cold applications, reviewing job boards,
+description: "Job search wins: a daily routine across network, opportunities, and evidence that keeps me moving without frazzle, and finally starting on the portfolio."
 ogImage: /assets/images/og/v2/2022-11-12-weekly-wins-for-the-week-of-2022-11-07.png
 ---
 - My practice of doing at least one thing each day for the three topics of network cultivation, opportunities (warm and cold applications, reviewing job boards, targeted networking), and evidence (resume, portfolio, profile, articles) is keeping me moving forward and busy without frazzle.

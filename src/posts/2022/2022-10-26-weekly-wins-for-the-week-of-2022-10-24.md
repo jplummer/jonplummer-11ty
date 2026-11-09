@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2022 10 24
 layout: layouts/single_post.njk
 date: "2022-10-26T12:00:00-08:00"
 tags: post
-description: "I got laid off today. That's not a win, surely. But it set off a few: The moment I announced I am #openToWork on LinkedIn there was an inrush of good wishes"
+description: "I got laid off today. It still set off a few wins: good wishes pouring in on LinkedIn, a team that rallied around each other, and a new alumni Slack."
 ogImage: /assets/images/og/v2/2022-10-26-weekly-wins-for-the-week-of-2022-10-24.png
 ---
 I got laid off today. That's not a win, surely. But it set off a few:

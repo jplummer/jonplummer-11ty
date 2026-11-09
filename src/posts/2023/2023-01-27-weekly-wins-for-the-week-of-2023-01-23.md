@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2023 01 23
 layout: layouts/single_post.njk
 date: "2023-01-27T12:00:00-08:00"
 tags: post
-description: I installed a bluetooth kit behind the factory car stereo in the 2006 Matrix and it worked on the first try, it sounds great, pairing was easy and the
+description: "A Bluetooth kit behind the 2006 Matrix's stereo worked on the first try and fixed the clock, and a personnel issue at work has a bright side."
 ogImage: /assets/images/og/v2/2023-01-27-weekly-wins-for-the-week-of-2023-01-23.png
 ---
 - I installed a bluetooth kit behind the factory car stereo in the 2006 Matrix and

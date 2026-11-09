@@ -3,7 +3,7 @@ title: What went right since october 2024?
 layout: layouts/single_post.njk
 date: "2025-07-12T12:00:00-08:00"
 tags: post
-description: So many things! Work I promoted someone I failed to promote someone, but learned a lot and it was the right decision We've had a couple of leadership offsites
+description: What went right since October 2024, at work and at home, from guiding my team from AI-skeptic to AI-curious to designers in product trios at last.
 ogImage: /assets/images/og/v2/2025-07-12-what-went-right-since-october-2024.png
 ---
 So many things!

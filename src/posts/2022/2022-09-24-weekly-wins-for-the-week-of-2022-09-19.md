@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2022 09 19
 layout: layouts/single_post.njk
 date: "2022-09-24T12:00:00-08:00"
 tags: post
-description: I involved the team in figuring out how we would rearrange ourselves now that we have new product priorities, and they came up with what I expect is a good
+description: My team worked out how to reorganize around new product priorities with no teeth-gnashing, and both conference talks are coming along.
 ogImage: /assets/images/og/v2/2022-09-24-weekly-wins-for-the-week-of-2022-09-19.png
 ---
 - I involved the team in figuring out how we would rearrange ourselves now that we have new product priorities, and they came up with what I expect is a good solution without any teeth-gnashing at all.

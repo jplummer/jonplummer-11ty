@@ -3,7 +3,7 @@ title: "Our position on AI tools: Design team guidelines"
 layout: layouts/single_post.njk
 date: "2025-07-12T12:00:00-08:00"
 tags: post
-description: (This is a work in progress, but a pretty good start) Designing AI-powered product experiences User needs and customer problem first Solving a valuable
+description: "My design team's guidelines for AI: customer problems before any technology, transparency and trust in AI-powered features, and how we use AI tools ourselves."
 ogImage: /assets/images/og/v2/2025-07-12-our-position-on-ai-tools.png
 ---
 (This is a work in progress, but a pretty good start)

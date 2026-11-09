@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2022 07 25
 layout: layouts/single_post.njk
 date: "2022-07-30T12:00:00-08:00"
 tags: post
-description: "Three wins for this week: It was less tricky than I feared to come up with four reasonable UX-led programs for the Connect Conference this October. I'm feeling"
+description: Three wins, including four UX-led programs ready for the Connect Conference and a nutrition coach who explained why my workouts were getting harder.
 ogImage: /assets/images/og/v2/2022-07-30-weekly-wins-for-the-week-of-2022-07-25.png
 ---
 Three wins for this week:

@@ -46,6 +46,9 @@ function calendarDayFromDateString(dateValue) {
 }
 
 // Check for required fields
+// Sentence-ending punctuation, optionally followed by a closing quote or parenthesis.
+const DESCRIPTION_ENDS_SENTENCE = /[.!?…]["'”’)]?$/;
+
 function validateRequiredFields(frontMatter, filePath) {
   const issues = [];
   const warnings = [];
@@ -124,6 +127,12 @@ function validateRequiredFields(frontMatter, filePath) {
   }
 
   // Optional fields — SEO length is seo-meta.js; cover crop is below
+
+  // A description shows in search results, link previews, and portfolio cards.
+  // 86 WordPress-era excerpts stopped mid-sentence until 2026-11-08; warn on new ones.
+  if (typeof frontMatter.description === 'string' && !DESCRIPTION_ENDS_SENTENCE.test(frontMatter.description.trim())) {
+    warnings.push('Description: should end a sentence (it may have been cut off)');
+  }
 
   // Check for duplicate slugs
   if (frontMatter.slug) {

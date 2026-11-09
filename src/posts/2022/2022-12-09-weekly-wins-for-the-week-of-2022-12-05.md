@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2022 12 05
 layout: layouts/single_post.njk
 date: "2022-12-09T12:00:00-08:00"
 tags: post
-description: Pro leisure circuit is almost over; the new job begins on Monday. The new job begins on Monday! I have a new computer, it's not overly locked-down, and the
+description: The new job starts Monday, the tech onboarding was smooth, and I have a plan to merge my blog and portfolio a piece at a time.
 ogImage: /assets/images/og/v2/2022-12-09-weekly-wins-for-the-week-of-2022-12-05.png
 ---
 Pro leisure circuit is almost over; the new job begins on Monday.

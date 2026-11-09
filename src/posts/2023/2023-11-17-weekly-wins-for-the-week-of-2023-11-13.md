@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2023 11 13
 layout: layouts/single_post.njk
 date: "2023-11-17T12:00:00-08:00"
 tags: post
-description: "In spite of the organization's urges to snap back to old ways (ways that got us to where we are, so are not sufficient on their own to change our results): My"
+description: "While the organization pulls toward old habits, my team isn't overreacting, and the CEO is publicly praising its customer-centered work."
 ogImage: /assets/images/og/v2/2023-11-17-weekly-wins-for-the-week-of-2023-11-13.png
 ---
 In spite of the organization's urges to snap back to old ways (ways that got us to where we are, so are not sufficient on their own to change our results):

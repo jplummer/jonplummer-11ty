@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2022 07 18
 layout: layouts/single_post.njk
 date: "2022-07-22T12:00:00-08:00"
 tags: post
-description: "Three wins for this week: Never mind my thoughts about NPS, which I have not written up here but should (edit: See \"The trouble with NPS\"). Our company"
+description: "Three wins, starting with my team's employee NPS of 80 against the company's five, plus workouts that got harder and got done anyway."
 ogImage: /assets/images/og/v2/2022-07-22-weekly-wins-for-the-week-of-2022-07-18.png
 ---
 Three wins for this week:

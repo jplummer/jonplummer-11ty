@@ -3,7 +3,7 @@ title: How to convince leadership to care about UX research
 layout: layouts/single_post.njk
 date: "2023-09-15T12:00:00-08:00"
 tags: post
-description: A new mentee opened the session with (paraphrased) > How do I convince leadership to care about UX research? It's a broad question. A giant question. It's
+description: A mentee asks how to convince leadership to care about UX research. The question underneath turned out to be about a CTO overly focused on usability testing.
 ogImage: /assets/images/og/v2/2023-09-15-pt-asks-how-do-i-convince-leadership-to-care-about-ux-research.png
 ---
 A new mentee opened the session with (paraphrased)

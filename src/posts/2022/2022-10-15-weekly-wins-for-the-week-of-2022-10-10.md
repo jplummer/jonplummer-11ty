@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2022 10 10
 layout: layouts/single_post.njk
 date: "2022-10-15T12:00:00-08:00"
 tags: post
-description: My two conference talks went fine. It's not easy to gauge audience response when using some of these online conference platforms, so I'll reserve further
+description: Two conference talks and an online participatory design exercise went fine, and a pull-up on cannonball grips surprised me.
 ogImage: /assets/images/og/v2/2022-10-15-weekly-wins-for-the-week-of-2022-10-10.png
 ---
 - My two conference talks went fine. It's not easy to gauge audience response when using some of these online conference platforms, so I'll reserve further judgement until the survey results come in.

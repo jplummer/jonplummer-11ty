@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2022 08 08
 layout: layouts/single_post.njk
 date: "2022-08-11T12:00:00-08:00"
 tags: post
-description: "Three wins: While a respected and very productive design contractor gave notice, she had a lot of nice things to say about the team, company, and my management"
+description: Three wins, including kind words about the team from a departing contractor and a knee scare that cleared up in two days.
 ogImage: /assets/images/og/v2/2022-08-11-weekly-wins-for-the-week-of-2022-08-08.png
 ---
 Three wins:

@@ -3,7 +3,7 @@ title: A quick link re the Slackquisition
 layout: layouts/single_post.njk
 date: "2020-12-02T12:00:00-08:00"
 tags: post
-description: M.C.Seigler has a somewhat inspirational take on the Salesforce acquisition of Slack, namely that > I believe that much like with Apple 20-some years ago, the
+description: A link to a hopeful take on Salesforce buying Slack, and why enterprise software has been so slow to care about the people who use it every day.
 ogImage: /assets/images/og/v2/2020-12-02-a-quick-link-re-the-slackquisition.png
 ---
 <!-- cspell:ignore Slackquisition -->

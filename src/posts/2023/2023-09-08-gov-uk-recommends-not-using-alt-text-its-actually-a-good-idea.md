@@ -3,7 +3,7 @@ title: Why Gov.uk's alt text guidance is actually good advice
 layout: layouts/single_post.njk
 date: "2023-09-08T12:00:00-08:00"
 tags: post
-description: "\\[name redacted\\] writes: > UK Gov websites dropping support for alt text fields and giving odd advice about what screen reader users want is making the rounds"
+description: "Gov.uk's advice to put important image content in the page itself drew alarmed hot takes. I think it's good advice, and the alt attribute is only one way to do it."
 ogImage: /assets/images/og/v2/2023-09-08-gov-uk-recommends-not-using-alt-text-its-actually-a-good-idea.png
 ---
 \[name redacted\] writes:

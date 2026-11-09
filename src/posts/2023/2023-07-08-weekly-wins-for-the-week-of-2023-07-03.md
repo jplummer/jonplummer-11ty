@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2023 07 03
 layout: layouts/single_post.njk
 date: "2023-07-08T12:00:00-08:00"
 tags: post
-description: It was a short week, and that brings danger that people will try to cram five weeks of meetings and activity into three. This happened, alas. Even so, Giving
+description: A short week crammed with meetings anyway, eased by letting people skip critique or a one-on-one, and a plan to spread the work while people are out.
 ogImage: /assets/images/og/v2/2023-07-08-weekly-wins-for-the-week-of-2023-07-03.png
 ---
 It was a short week, and that brings danger that people will try to cram five weeks of meetings and activity into three. This happened, alas. Even so:

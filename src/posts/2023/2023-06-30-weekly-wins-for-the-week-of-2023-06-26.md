@@ -3,7 +3,7 @@ title: Weekly wins for the week of 2023 06 26
 layout: layouts/single_post.njk
 date: "2023-06-30T12:00:00-08:00"
 tags: post
-description: "Scattered wins this week: After three tries (all administrative or preparation missteps of one sort or another) the girl now has a learner's permit; a small"
+description: "Scattered wins: a learner's permit on the third try, and two teams moving from friction to collaboration with customer data and common goals."
 ogImage: /assets/images/og/v2/2023-06-30-weekly-wins-for-the-week-of-2023-06-26.png
 ---
 Scattered wins this week:

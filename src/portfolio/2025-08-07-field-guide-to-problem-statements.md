@@ -4,7 +4,7 @@ layout: layouts/portfolio_detail.njk
 date: "2025-08-07"
 tags: portfolio
 coverImage: 2025/08/field-guide-to-problem-statements-page-1.png
-description: "Presentation to the product team about what a problem statement is and is not"
+description: "A talk for Invoca's product team on telling a problem statement from a solution in disguise, so the team keeps its room to compare and choose solutions."
 ogImage: /assets/images/og/v2/2025-08-07-field-guide-to-problem-statements.png
 ---
 Most product teams write problem statements. Often, those statements aren't really about problems – they're solutions in disguise, capability gaps, or vague assertions about what customers want or don't understand.
