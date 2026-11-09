@@ -1,5 +1,5 @@
 ---
-title: WGA "acceptance criteria for patterns"
+title: WGU "acceptance criteria for patterns"
 layout: layouts/portfolio_detail.njk
 date: "2021-06-01T12:00:00-08:00"
 tags: portfolio
