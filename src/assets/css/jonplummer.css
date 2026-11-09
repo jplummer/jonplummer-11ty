@@ -227,8 +227,10 @@ textarea:not([rows]) {
    width: 100% is required here: as flex items of body (flex column), auto
    margins pre-empt cross-axis stretch per spec, so a width:auto item with
    bounded intrinsic content (header's logo+title+nav) would shrink to fit
-   instead of filling to max-width — explicit width sidesteps that. */
-body>header, body>main {
+   instead of filling to max-width — explicit width sidesteps that.
+   The body > prefix matters: pages also have article headers, and the /color/
+   and /type/ mock pages have headers of their own. */
+body > :is(header, main) {
   width: 100%;
   margin: 0 auto;
   padding-inline: var(--gutter);
