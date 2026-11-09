@@ -1,0 +1,58 @@
+---
+layout: base.njk
+title: Portfolio pieces and lists
+description: Every portfolio piece and side project, and the portfolio lists each one appears in. A working index for curating lists, not linked from the site.
+purpose: hidden index for curating src/_data/portfolios.yaml
+permalink: /portfolio/all/
+# Not tagged `page`: the OG generator would give it a card of its own, and that
+# card would show on the public /ogimages/ gallery. So the heading is in the body.
+eleventyExcludeFromCollections: true
+noindex: true
+ogImage: /assets/images/og/v2/portfolio.png
+---
+{#- Lists come from the raw `portfolios` data, so drafts and retired lists show here
+    in a production build too; only lists in `portfolioLists` are built and linked. -#}
+{%- set builtUrls = [] %}
+{%- for list in portfolioLists.lists %}{% set _ = builtUrls.push(list.url) %}{% endfor %}
+
+<h1>{{ title }}</h1>
+
+<p>Not linked from anywhere and kept out of search. Lists are defined in <code>src/_data/portfolios.yaml</code>; <code>main</code> is <code>/portfolio/</code>.</p>
+
+<h2>Lists</h2>
+<table>
+    <thead>
+        <tr><th scope="col">List</th><th scope="col">Status</th><th scope="col">Search</th><th scope="col">Pieces</th></tr>
+    </thead>
+    <tbody>
+    {%- for id, list in portfolios %}
+        {%- set url = "/portfolio/" if id == "main" else "/portfolio/" + id + "/" %}
+        <tr>
+            <td>{% if url in builtUrls or id == "main" %}<a href="{{ url }}">{{ url }}</a>{% else %}{{ url }}{% endif %}</td>
+            <td>{{ "live" if id == "main" else list.status }}</td>
+            <td>{{ "indexed" if (list.indexed or id == "main") else "hidden" }}</td>
+            <td>{{ list.pieces | length }}</td>
+        </tr>
+    {%- endfor %}
+    </tbody>
+</table>
+
+<h2>Pieces</h2>
+<table>
+    <thead>
+        <tr><th scope="col">Piece</th><th scope="col">Kind</th><th scope="col">In lists</th></tr>
+    </thead>
+    <tbody>
+    {%- for item in (collections.portfolio | reverse).concat(collections.sideproject | reverse) %}
+        <tr>
+            <td><a href="{{ item.url }}">{{ item.data.title | smartquotes | striptags }}</a></td>
+            <td>{{ "Side project" if "sideproject" in item.data.tags else "Portfolio piece" }}</td>
+            <td>
+            {%- set inLists = [] %}
+            {%- for id, list in portfolios %}{% if item.url in list.pieces %}{% set _ = inLists.push(id) %}{% endif %}{% endfor %}
+            {{- inLists | join(", ") if inLists | length else "–" -}}
+            </td>
+        </tr>
+    {%- endfor %}
+    </tbody>
+</table>

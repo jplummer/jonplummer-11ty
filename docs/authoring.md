@@ -159,6 +159,19 @@ To rename a piece's slug, rename the file and its OG card PNG under `src/assets/
 
 Pieces moved here from dated URLs on 2026-11-08; the redirects for the old URLs are at the end of `redirects.yaml`.
 
+### Portfolio lists
+
+Every portfolio is a list in `src/_data/portfolios.yaml`: `main` is `/portfolio/`, and every other key builds a page at `/portfolio/<key>/` (`/portfolio/saas/`, or one per opportunity like `/portfolio/microsoft/`). Cards show in the order listed. The file's header comment documents the fields.
+
+- **Curate `/portfolio/`:** reorder or trim `main`'s pieces. `main` takes only `intro` and `pieces`; the page's title and description are in `src/portfolio.njk`.
+
+- **New list:** add a key with `status`, `title`, `description`, optional `intro`, and `pieces` (`/portfolio/<slug>/` and `/sides/<slug>/` URLs). Start it as `status: draft` to see it under `pnpm run dev` only.
+- **Publish it:** set `status: live`. It stays hidden (`noindex`, out of the sitemap) unless it says `indexed: true`. Opportunity lists should always stay hidden.
+- **Retire it:** set `status: retired` the day the opportunity closes. The page stops building, and its URL 302s to `/portfolio/`. Keep the entry, so its pieces stay on record.
+- **Curating:** `/portfolio/all/` is a hidden index of every piece and the lists it's in.
+
+`pnpm run test portfolios` checks the file, and warns about any piece that's in no list. Spec: [portfolios from one list file](designs/specs/2026-11-08-two-portfolios-design.md).
+
 ## PDF Pages
 
 Portfolio items can display PDFs page-by-page as images with notes.

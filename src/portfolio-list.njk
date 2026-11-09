@@ -1,0 +1,14 @@
+---
+layout: base.njk
+purpose: portfolio list page, one per list in src/_data/portfolios.yaml
+tags: page
+# Kept out of collections.page so lists never reach the sitemap's page loop or the
+# 404 suggester. Indexed lists get their own sitemap loop.
+eleventyExcludeFromCollections: true
+pagination:
+  data: portfolioLists.lists
+  size: 1
+  alias: list
+permalink: "{{ list.url }}"
+---
+{% include "components/portfolio_list.njk" %}

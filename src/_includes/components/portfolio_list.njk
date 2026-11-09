@@ -1,0 +1,15 @@
+{#- purpose: a portfolio list's intro and card grid. Expects `list` with `intro` and `pieces`
+    (URLs, in display order). Used by /portfolio/ (src/portfolio.njk) and every list in
+    src/_data/portfolios.yaml (src/portfolio-list.njk). -#}
+{%- if list.intro %}
+<div class="portfolio-list-intro">
+{{ list.intro | markdown | safe }}
+</div>
+{%- endif %}
+<ul class="portfolio-grid">
+{% for post in collections.all | itemsByUrl(list.pieces) %}
+    <li>
+        {% include "components/portfolio_list_item.njk" %}
+    </li>
+{% endfor %}
+</ul>

@@ -1,0 +1,82 @@
+# Portfolio lists. Each key builds a page at /portfolio/<key>/ from
+# src/portfolio-list.njk, showing its pieces in the order given here.
+#
+# `main` is /portfolio/ itself. It takes only `intro` and `pieces`; the page's
+# title and description live in src/portfolio.njk, where the OG generator reads
+# them. Reorder or trim main's pieces to curate the public portfolio.
+#
+#   status:   draft   – builds only under `pnpm run dev`
+#             live    – builds everywhere
+#             retired – doesn't build; the URL 302s to /portfolio/.
+#                       Retire an opportunity's list the day they say no.
+#   indexed:  true puts the page in search and the sitemap. Leave it out for
+#             every opportunity-specific list; they stay hidden by default.
+#   title, description:  the page's <title>/<h1> and meta description.
+#   intro:    optional markdown above the grid.
+#   pieces:   /portfolio/<slug>/ and /sides/<slug>/ URLs, in display order.
+#
+# The hidden index at /portfolio/all/ shows every piece and the lists it's in.
+# `pnpm run test portfolios` checks this file.
+
+main:
+  # Every piece, newest first, as /portfolio/ showed them before this list existed (2026-11-09).
+  pieces:
+    - /portfolio/data-dictionary-prototype/
+    - /portfolio/invoca-ia-vision/
+    - /portfolio/coordinated-experience-prototype/
+    - /portfolio/call-review-console/
+    - /portfolio/sms-concept-video/
+    - /portfolio/field-guide-to-problem-statements/
+    - /portfolio/monotasker/
+    - /portfolio/invoca-design-system/
+    - /portfolio/what-even-is-a-concept-sprint/
+    - /portfolio/whither-critique/
+    - /portfolio/my-interview-with-invoca/
+    - /portfolio/datto-secure-edge/
+    - /portfolio/conference-talk-ux-philosophy/
+    - /portfolio/conference-talk-prioritizing-accessibility/
+    - /portfolio/cayuse-quick-yearly-accomplishments-presentation/
+    - /portfolio/super-service-blueprint/
+    - /portfolio/product-trio/
+    - /portfolio/discovery-interview-training/
+    - /portfolio/wgu-acceptance-criteria-for-patterns/
+    - /portfolio/velop-whole-home-wifi-system/
+    - /portfolio/linksys-app-revitalization/
+    - /portfolio/wemo-smart-home-accessories-and-app/
+    - /portfolio/belkin-router-out-of-box/
+    - /portfolio/belkin-hardware-behavior-samples/
+    - /portfolio/belkin-values/
+    - /portfolio/belkin-edit-experience-framework/
+    - /portfolio/minimed-watch-concepts/
+    - /portfolio/minimed-virtual-patient/
+    - /portfolio/carelink-pro-reports/
+    - /portfolio/carelink-pro-main-interface/
+    - /portfolio/minimed-next-gen-pump-interface/
+    - /portfolio/baxter-bioscience-web-apps-and-email-templates/
+    - /portfolio/mann-consulting-website-2001/
+    - /portfolio/mann-consulting-identity-2001/
+    - /portfolio/goal-manager-identity-2001/
+
+saas:
+  status: draft
+  title: Portfolio – design leadership for SaaS
+  description: Design leadership in enterprise software at Invoca, Cayuse, and Concentric Sky – discovery, prototyping, information architecture, design systems, and the teams behind them.
+  intro: |
+    Placeholder intro, to be written. This list is a starting point drawn from the software work; reorder or cut freely.
+  pieces:
+    - /portfolio/call-review-console/
+    - /portfolio/data-dictionary-prototype/
+    - /portfolio/invoca-ia-vision/
+    - /portfolio/coordinated-experience-prototype/
+    - /portfolio/sms-concept-video/
+    - /portfolio/what-even-is-a-concept-sprint/
+    - /portfolio/invoca-design-system/
+    - /portfolio/field-guide-to-problem-statements/
+    - /portfolio/product-trio/
+    - /portfolio/discovery-interview-training/
+    - /portfolio/super-service-blueprint/
+    - /portfolio/cayuse-quick-yearly-accomplishments-presentation/
+    - /portfolio/conference-talk-ux-philosophy/
+    - /portfolio/conference-talk-prioritizing-accessibility/
+    - /portfolio/wgu-acceptance-criteria-for-patterns/
+    - /portfolio/whither-critique/

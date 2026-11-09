@@ -292,6 +292,7 @@ const TEST_EMOJIS = {
   'links': '📌',
   'wisdom': '🦉',
   'shortlinks': '🔁',
+  'portfolios': '🗂️',
   'markdown': '✍️ ',
   'spell': '🧙',
   'og-images': '📸',

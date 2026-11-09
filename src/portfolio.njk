@@ -7,11 +7,7 @@ purpose: portfolio index page
 tags: page
 ogImage: /assets/images/og/v2/portfolio.png
 ---
-{# Display portfolio items #}
-<ul class="portfolio-grid">
-{% for post in collections.portfolio | reverse %}
-    <li>
-        {% include "components/portfolio_list_item.njk" %}
-    </li>
-{% endfor %}
-</ul>
+{#- The cards and their order come from the `main` list in src/_data/portfolios.yaml.
+    Title and description stay here, where the OG generator reads them. -#}
+{%- set list = portfolioLists.main -%}
+{%- include "components/portfolio_list.njk" -%}

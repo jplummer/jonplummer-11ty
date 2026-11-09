@@ -56,6 +56,18 @@ function configureFilters(eleventyConfig, md) {
     return md.renderInline(String(content));
   });
 
+  // Items from a collection in the order of a list of URLs (portfolio lists in
+  // src/_data/portfolios.yaml). A URL with no page fails the build, so a typo
+  // can't drop a card silently; `pnpm run test portfolios` catches it earlier.
+  eleventyConfig.addFilter("itemsByUrl", function (collection, urls) {
+    const byUrl = new Map(collection.map((item) => [item.url, item]));
+    return (urls || []).map((url) => {
+      const item = byUrl.get(url);
+      if (!item) throw new Error(`itemsByUrl: no page at ${url}`);
+      return item;
+    });
+  });
+
   // Add custom filter to merge posts and links chronologically
   eleventyConfig.addFilter("mergePostsAndLinks", mergePostsAndLinks);
 

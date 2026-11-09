@@ -33,6 +33,7 @@ const TESTS = [
   { id: 'links', script: 'links-yaml.js', groups: ['fast', 'pre', 'changed'] },
   { id: 'wisdom', script: 'wisdom-yaml.js', groups: ['fast', 'pre', 'changed'] },
   { id: 'shortlinks', script: 'shortlinks.js', groups: ['fast', 'pre', 'post'] },
+  { id: 'portfolios', script: 'portfolios.js', groups: ['fast', 'pre'] },
   { id: 'internal-links', script: 'internal-links.js', groups: ['fast', 'post'] },
   { id: 'frontmatter', script: 'frontmatter.js', groups: ['fast', 'pre', 'changed'] },
   { id: 'markdown', script: 'markdown.js', groups: ['fast', 'pre', 'changed'] },

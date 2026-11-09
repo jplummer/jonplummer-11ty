@@ -88,6 +88,12 @@ ErrorDocument 500 /500.html
 {% for redirect in redirects.redirects %}
 Redirect 301 {{ redirect.from }} {{ redirect.to }}
 {%- endfor %}
+# Retired portfolio lists (status: retired in src/_data/portfolios.yaml). 302, so a
+# list can come back. Slashed form first, then slashless, as with the 301s above.
+{%- for id, list in portfolios %}{% if list.status == "retired" %}
+Redirect 302 /portfolio/{{ id }}/ /portfolio/
+Redirect 302 /portfolio/{{ id }} /portfolio/
+{%- endif %}{% endfor %}
 # End redirects
 
 # Short links + wisdom (mod_rewrite)

@@ -66,6 +66,17 @@ eleventyExcludeFromCollections: true
   </url>
   {% endfor %}
 
+  {#- Portfolio lists with `indexed: true` (src/_data/portfolios.yaml). The rest
+     stay out of the sitemap, like every opportunity-specific list. -#}
+  {%- for list in portfolioLists.lists %}{% if list.indexed %}
+  <url>
+    <loc>{{ site.url }}{{ list.url }}</loc>
+    <lastmod>{{ collections.all | itemsByUrl(list.pieces) | getNewestCollectionItemDate | dateToRfc3339 }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  {%- endif %}{% endfor %}
+
   {# All side projects #}
   {% for item in collections.sideproject %}
   <url>

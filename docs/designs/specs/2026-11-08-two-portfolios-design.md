@@ -1,149 +1,113 @@
-# Two portfolios
+# Portfolios from one list file
 
-Status: proposed 2026-11-08, not built. Background: [the site for the hardware-and-software position](2026-11-08-hardware-software-position-design.md).
+Status: built 2026-11-09. `/portfolio/` renders from the `main` list and is byte-identical to before; curation is now an edit to the YAML. Background: [the site for the hardware-and-software position](2026-11-08-hardware-software-position-design.md). Earlier versions of this spec planned exactly two portfolios; see git history.
 
 ## Goal
 
-The site gets two portfolios built from one pool of pieces:
+The site builds any number of portfolios from one pool of pieces:
 
-- **The main portfolio** at `/portfolio/`, in the nav. It leads with the position: leadership, discovery, design, and prototyping where hardware and software meet.
-- **The UX leadership portfolio**, for general UX Director applications. It's linked from `/about/`, the resume, and a print shortlink, but not from the nav.
+- **The main portfolio** at `/portfolio/`, in the nav, from the `main` list. It will lead with the position: leadership, discovery, design, and prototyping where hardware and software meet. Today it lists every piece, newest first, as before.
+- **The SaaS portfolio** at `/portfolio/saas/`, for software design leadership roles. Linked from the resume and applications, not the nav. Draft for now.
+- **Opportunity-specific portfolios** such as `/portfolio/microsoft/`, named for the company on purpose. Always hidden, and retired the day the company says no.
 
-Each shows a hand-picked order instead of date order. A piece can be in one portfolio, both, or neither, and side projects can appear in either.
+Each shows a hand-picked order instead of date order. A piece can be in any number of lists, and side projects can appear in any of them.
 
-## How it works today
+Jon's model is Ben Kowalski's site (https://www.benkowalski.design/advising): a curated portfolio and a confident position, where this site has a long chronological record.
 
-- Pieces are posts under `src/_posts/` tagged `portfolio`, with date-based permalinks (`/2016/03/21/belkin-router-out-of-box/`) until the URL move below.
-- `src/portfolio.njk` loops over `collections.portfolio | reverse`, so the grid is newest first, and renders each card with `components/portfolio_list_item.njk` (cover, title, description).
-- `layouts/portfolio_detail.njk` sets `collection = collections.portfolio`, and `components/collection_navigation.njk` draws previous/next links with Eleventy's `getPreviousCollectionItem` / `getNextCollectionItem`. Those links run in date order.
-- Other consumers of `collections.portfolio`: `src/sitemap.njk` (the `/portfolio/` lastmod override and the loop over pieces), `src/404-index.njk` (the suggester's destination list), and the OG generator, which labels any `portfolio`-tagged page "Portfolio."
-- `pnpm run test portfolio-cover-crop` reads `_site/portfolio/index.html` and expects the Monotasker card there.
-- There are no custom collections; `.eleventy.js` only wires config modules from `eleventy/config/`.
+## How it works
 
-## Design
+### One data file
 
-### One data file holds both lists
-
-`src/_data/portfolios.yaml` lists each portfolio's pieces in display order, by URL:
+`src/_data/portfolios.yaml` holds every list. Each key is a list, built at `/portfolio/<key>/`, except `main`, which is `/portfolio/`:
 
 ```yaml
-main:
-  - /portfolio/belkin-router-out-of-box/
-  - /portfolio/wemo-smart-home-accessories-and-app/
-  - /sides/usage-chan/
-  # …
-leadership:
-  - /portfolio/call-review-console/
-  - /portfolio/invoca-ia-vision/
-  # …
+saas:
+  status: draft            # draft | live | retired
+  indexed: true            # optional; leave out to keep the page hidden
+  title: Portfolio – design leadership for SaaS
+  description: One or two sentences for the meta description.
+  intro: |
+    Optional markdown above the grid.
+  pieces:
+    - /portfolio/call-review-console/
+    - /sides/usage-chan/
 ```
 
-Why a data file instead of front matter on each piece:
+- **The order is the curation.** Reordering is moving a line, and membership is reviewable in one diff. Side projects join without touching their own front matter.
+- **URLs, not file slugs.** They're what Jon sees, and file slugs collide: `monotasker` is both a portfolio piece and a side project.
+- **`status`** decides whether a list builds:
+  - `draft` builds under `pnpm run dev` only.
+  - `live` builds everywhere.
+  - `retired` builds nothing, and its URL 302s to `/portfolio/` (both slashed and slashless, from `src/.htaccess.njk`). Retiring is a one-word edit, so the list stays on record and can come back. 302 rather than 301, because a browser caches a 301 for good.
+- **Hidden by default.** A list gets `noindex` and stays out of the sitemap and the 404 suggester unless it says `indexed: true`. Opportunity lists never should.
+- **Titles and descriptions** must meet the same lengths `test seo` enforces on built pages (10–200 and 20–300 characters). That way a draft list that never builds in production is still checked.
 
-- The order is the curation. Reordering is moving a line in one file, not renumbering fields across 35 posts.
-- Side projects can join a portfolio without changing their own front matter or tags.
-- Membership and order are reviewable in one diff.
+### One template
 
-Why URLs instead of file slugs: URLs are what Jon sees in the browser and on the page, and after the move they're short and stable. File slugs also collide: `monotasker` is both `src/_posts/2026/2026-06-05-monotasker.md` and `src/sides/monotasker.md`.
+`components/portfolio_list.njk` renders a list's intro and cards, and every portfolio page uses it:
 
-The `portfolio` tag stays as it is. It still means "this post uses the portfolio layout and gets a Portfolio OG card"; the data file decides where it's listed.
+- **`/portfolio/`** is still `src/portfolio.njk`, now a thin shell that renders `portfolioLists.main` through the include. It keeps its own title and description because the OG generator reads them from front matter. It also stays an ordinary page, which the nav highlight, the sitemap's `/portfolio/` entry, and the 404 suggester all depend on. So `main` takes only `intro` and `pieces`, and the test rejects any other field there.
+- **Every other list** comes from `src/portfolio-list.njk`, which paginates over `portfolioLists.lists` (`src/_data/portfolioLists.js`): the lists that build this run, worked out in `eleventy/utils/portfolios.js`.
 
-### Two custom collections
+- **Tagged `page`, excluded from collections.** It gets the `/portfolio/` layout and its `<h1>` from `base.njk`, and stays out of `collections.page`, which feeds the sitemap's page loop and the 404 suggester. Indexed lists get their own loop in `src/sitemap.njk`.
+- **Cards** come from `collections.all | itemsByUrl(list.pieces)`. The `itemsByUrl` filter throws on a URL with no page, so a typo fails the build instead of dropping a card. Each card renders with `components/portfolio_list_item.njk`, the same component `/portfolio/` uses.
+- **Computed fields.** `src/portfolio-list.11tydata.js` computes `title`, `description`, `noindex`, and `ogImage`. Computing `noindex` in JS keeps it a real boolean, where a Nunjucks string "false" would be truthy.
+- **OG card.** Every list uses the `/portfolio/` card. A card per opportunity would be another file per application, for pages nobody shares.
 
-A new `eleventy/config/collections.js` adds `portfolioMain` and `portfolioLeadership`. Each reads its list from `portfolios.yaml` and maps every URL to the matching item from `collectionApi.getAll()`, keeping the file's order. A URL that matches nothing throws, so a typo fails the build instead of dropping a card silently.
+### The hidden index
 
-Because these are ordinary Eleventy collections, the existing `getPreviousCollectionItem`, `getNextCollectionItem`, and `getCollectionItemIndex` filters work on them unchanged.
+`/portfolio/all/` (`src/portfolio-all.njk`) lists every list, with its status and visibility, and every piece and side project with the lists it's in. It's for curating. It's `noindex`, linked from nowhere, excluded from collections, and borrows the `/portfolio/` card. It isn't tagged `page`, so it renders its own `<h1>` and the narrower reading layout suits its tables. (Until 2026-11-09 the OG generator ignored a borrowed card and made a page its own, which would have shown on the public `/ogimages/` gallery. That's fixed in `generate-og-images.js`.) `all` is a reserved list id.
 
-### Index pages
+### Collisions
 
-- `src/portfolio.njk` loops over `collections.portfolioMain` instead of `collections.portfolio | reverse`. It gets a short intro above the grid that says what the position is, plus a new title and description. Jon writes the copy.
-- A new page for the UX leadership portfolio loops over `collections.portfolioLeadership`, with its own intro, title, and description. It's tagged `page`, so it gets an OG card labeled with its path, like every other page.
-- Both use `portfolio_list_item.njk`. Side project items already carry `coverImage`, `coverPosition`, `title`, and `description`, so their cards render the same and link to `/sides/<slug>/`. Cards gain one label line (below).
-- Each page links to the other in one line under the intro, so a visitor who wants the wider set can find it.
+A list id can't be a piece's slug, since both live under `/portfolio/`. The `portfolios` test catches a collision before the build. A live collision would also fail Eleventy's duplicate-permalink check, but a retired one would only add a redirect, which would capture the piece's URL.
 
-### Card labels
+## `/portfolio/` from the `main` list (done 2026-11-09)
 
-Each card gets one quiet line naming what kind of piece it is, then where it happened: "Case study · Belkin," "Talk · Cayuse." Side project cards end with their status instead of an organization: "Side project · In development."
-
-- **Kind:** one of `Case study`, `Talk`, `Prototype`, or `Side project`. Pieces set `kind` in front matter. Side project pages get `Side project` from their tag and need no field. With the label in place, titles can drop "(talk)" and "(conference talk)."
-- **Where:** `org` in front matter (Belkin, Medtronic MiniMed, Cayuse, Invoca, and so on). Side projects have none.
-- The allowed `kind` values live beside `SIDE_STATUSES` in `scripts/utils/validation-utils.js`, and `test frontmatter` checks them, so the set stays short and consistent.
-
-Domain labels ("Hardware," "SaaS") and role labels ("Led the team") are left out. In a portfolio built around one domain, a domain label would read the same on almost every card. A role is a claim, and claims belong in the piece's text, where they can be backed up.
-
-Cards show no year (decided 2026-11-08). Employment dates already have one owner, the job-search project's `employment-dates-canonical` file. A year on each card would add 35 more dates that must agree with it and with every resume, and many would be reconstructions. The organization already places the work in time for anyone holding the resume, "Invoca" reads as recent, and side project cards show their status. Where a piece needs a date, its text says so, and only where Jon is sure (MiniMed's framing works this way).
-
-### Piece URLs
-
-Pieces move from `/YYYY/MM/DD/<slug>/` to `/portfolio/<slug>/`, and `date` stops setting the URL. That's a separate change made first, with the site otherwise unchanged; see [move portfolio pieces](../plans/2026-11-08-move-portfolio-pieces.md). After it, `date` records when a piece went up on the site. It feeds the sitemap's `lastmod` and serves as a fallback order, so it never has to be right about the past.
-
-The leadership index page shares the `/portfolio/` path with the pieces. Eleventy fails the build if a piece's slug ever matches the page's URL segment, so a collision can't ship.
+`main` lists every piece, newest first, exactly as `/portfolio/` showed them, and the built page is byte-identical to the one before. Curating the public portfolio is now reordering or trimming `main`'s pieces, with no gate on finishing it first. Since `main` exists, the `portfolios` test warns about any piece that's in no list, so leaving one out everywhere is a visible choice.
 
 ### Previous and next on piece pages
 
-A static page can't know which portfolio the visitor came from, so each piece navigates within exactly one list:
+A static page can't know which list the visitor came from, so each piece should navigate within one list: if it's in `main`, previous/next follow the main order; otherwise there's no previous/next, only a link back to `/portfolio/`. Not built yet. Piece pages still follow date order across every piece, which matches `main` while `main` is newest first; switch them over when the curated order first departs from date order.
 
-1. If the piece is in `portfolioMain`, previous/next follow the main order.
-2. Otherwise, if it's in `portfolioLeadership`, they follow that order.
-3. Otherwise, there are no previous/next links, only a link back to `/portfolio/`.
+So a visitor who opens a piece from `/portfolio/saas/` or an opportunity list and clicks "Next" moves through the main portfolio. That's acceptable, since the main portfolio is the public face. The alternatives were worse:
+- **A query string plus JavaScript** to rewrite the links is custom JS for a small gain (CLAUDE.md asks to check before adding any).
+- **Copies of pieces under each list's URL** mean duplicate content.
+- **Dropping previous/next** loses the browsing that exists today.
 
-`portfolio_detail.njk` picks the collection with `getCollectionItemIndex` (it returns -1 when the page isn't in the list) and hands it to `collection_navigation.njk` as today.
+Each list's intro should say where the rest of the work is, and the main intro can point software readers to `/portfolio/saas/`, so wandering between them feels intended.
 
-So a visitor who opens a shared piece from the leadership page and clicks "Next" moves through the main portfolio. That's acceptable, since the main portfolio is the public face. The alternatives were worse:
+## Card labels (not built)
 
-- A query string plus JavaScript to rewrite the links is custom JS for a small gain (CLAUDE.md asks to check before adding any).
-- A second copy of each shared piece under the leadership URL means duplicate content and canonical tags.
-- Dropping previous/next everywhere loses the browsing Jon has now.
+Each card gets one quiet line naming what kind of piece it is, then where it happened: "Case study · Belkin," "Talk · Cayuse." Side project cards end with their status instead: "Side project · In development."
 
-Side project pages keep their own layout and get no portfolio navigation.
+- **Kind:** one of `Case study`, `Talk`, `Prototype`, or `Side project`, set as `kind` in front matter. Side projects get it from their tag. With the label, titles can drop "(talk)" and "(conference talk)."
+- **Where:** `org` in front matter (Belkin, Medtronic MiniMed, Cayuse, Invoca, and so on). Side projects have none.
+- **Checked:** the allowed `kind` values live beside `SIDE_STATUSES` in `scripts/utils/validation-utils.js`, and `test frontmatter` checks them.
+- **Left out on purpose:** domain labels ("Hardware") would read the same on almost every card in a portfolio built around one domain. Role labels ("Led the team") make claims that belong in the piece's text.
 
-### URL, nav, and shortlink
+Cards show no year (decided 2026-11-08). Employment dates already have one owner, the job-search project's `employment-dates-canonical` file. A year on each card would add 35 more dates that must agree with it and with every resume, and many would be reconstructions. Where a piece needs a date, its text says so, and only where Jon is sure.
 
-- Proposed URL: `/portfolio/leadership/`. Nesting it under `/portfolio/` says the two are related. The header and footer nav highlight `/portfolio` only on an exact match, so the nav stays unchanged and unhighlighted on the leadership page.
-- Add a two-character shortlink with `pnpm run shortlink add https://jonplummer.com/portfolio/leadership/ --note "leadership portfolio"` after the first deploy, for the resume and print.
-- Add the page to the sitemap's lastmod overrides beside `/portfolio/`, using its own collection's newest item.
+## Piece URLs (done 2026-11-08)
 
-### `noindex` on the leadership page (undecided)
-
-`noindex` would apply only to the index page. Every piece on it stays indexed at its own URL, as all pieces are today, so `noindex` hides the list, not the work.
-
-- **Indexed:** the page can show up when someone searches for Jon and UX leadership, next to `/portfolio/`. The two pages then compete in those results.
-- **`noindex`:** only people with the link see the page, which keeps search results on the position. The pieces are still findable one by one.
-
-The front matter flag already exists (`noindex: true` keeps the page out of the sitemap and adds the robots meta tag), so either answer is a one-line change and can flip later.
-
-### Pieces in neither portfolio
-
-Some pieces may drop out of both lists (the 2001 identity work, for example). They keep their URLs, stay in the sitemap and the 404 suggester, and lose previous/next as described above. Nothing redirects, since nothing moved.
+Pieces moved from `/YYYY/MM/DD/<slug>/` to `/portfolio/<slug>/`; see [move portfolio pieces](../plans/2026-11-08-move-portfolio-pieces.md). A piece's `date` now only records when it went up on the site.
 
 ## Tests
 
-- **New: `portfolios`** (fast group, pre-build, reads source only). It fails when:
-  - an entry doesn't resolve to a portfolio piece or side project page
-  - a URL appears twice in one list
-  - an unknown top-level key appears in `portfolios.yaml`
-
-  It also warns, without failing, for each `portfolio`-tagged piece that's in neither list, so dropping one is a visible choice. One manifest entry in `scripts/test-manifest.js` wires it in.
-- **Update: `frontmatter`** checks `kind` against the allowed list, and `org` for type, on portfolio pieces.
-- **Update: `portfolio-cover-crop`** looks for the Monotasker card in whichever built portfolio page lists it, and fails if no page lists it while the test still expects it.
-- `internal-links`, `seo`, `og-images`, and `html` cover the new page without changes. `seo` checks the sitemap for duplicates and for `noindex` pages.
-
-## Docs
-
-- `docs/authoring.md` gets a short "Portfolios" section: how to add a piece, move it, or drop it, and that the order in `portfolios.yaml` is the display order. Its front matter list gains `kind` and `org`.
-- `docs/tests.md` gets the `portfolios` test.
+- **`portfolios`** (fast, pre-build, source only). A `main` list is required and takes only `intro` and `pieces`. Every other list's fields, status, and id are checked. Every piece URL must name a real piece or side project, appear once per list, and not collide with a list id; `all` is reserved. Warns about pieces in no list. Fixture checks guard the rules themselves, including that drafts build only outside `build` mode and that lists are hidden unless indexed.
+- **Unchanged and covering the pages:** `internal-links`, `seo` (titles, descriptions, sitemap duplicates, `noindex` pages kept out of the sitemap), `og-images`, and `html`.
+- **When labels land:** `frontmatter` checks `kind` and `org`.
 
 ## Rollout
 
-0. Move piece URLs to `/portfolio/<slug>/` with redirects, deployed on its own.
-1. Build the mechanism with `main` listing every current piece in today's order (newest first) and `leadership` empty. The built `/portfolio/` should then match today's exactly. Check that before going further.
-2. Add `kind` and `org` to every piece and turn on the label line.
-3. Fill in both lists and write both intros. This is Jon's curation and copy, guided by the [position doc](2026-11-08-hardware-software-position-design.md#portfolio-and-the-second-portfolio).
-4. Deploy, then add the shortlink.
+1. Done (2026-11-08): move piece URLs, with redirects.
+2. Done (2026-11-09): the list file, the shared include, `/portfolio/` from `main`, the hidden index at `/portfolio/all/`, and retired redirects. `saas` is a draft seeded from the software work. Production output is unchanged apart from `/portfolio/all/`.
+3. Jon curates `main` and `saas` at his own pace, and sets `saas` live when its intro is written. Add a shortlink for the resume with `pnpm run shortlink add https://jonplummer.com/portfolio/saas/ --note "saas portfolio"`.
+4. Switch piece previous/next to the `main` order once it departs from date order.
+5. Add `kind` and `org` to every piece and turn on the label line.
 
 ## Open questions
 
-- The leadership portfolio's name and URL. "Leadership" is a placeholder.
-- `noindex` on the leadership page (above).
+- Whether `/portfolio/saas/` is `indexed`. Hidden keeps search results on the position, and its pieces stay findable one by one either way.
 - The `kind` vocabulary. Four words are proposed; the talks and readouts may want finer distinctions.
-- Whether `/about/` links both portfolios or only the main one, with the leadership portfolio left to the resume and direct links.
+- Whether `/about/` links both portfolios or only the main one.

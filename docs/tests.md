@@ -34,7 +34,7 @@ This project includes a suite of validation tests covering content structure, HT
 
 _Derived from [`scripts/test-manifest.js`](../scripts/test-manifest.js) — see [The test manifest](#the-test-manifest)._
 
-**Fast Tests:** `html`, `links`, `wisdom`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `deploy-assets`, `error-document-assets`, `favicon-rasters`, `trailing-slash-links`, `critical-css`, `figure-tokens`, `design-docs-location`, `docs-links`, `portfolio-cover-crop`
+**Fast Tests:** `html`, `links`, `wisdom`, `portfolios`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `deploy-assets`, `error-document-assets`, `favicon-rasters`, `trailing-slash-links`, `critical-css`, `figure-tokens`, `design-docs-location`, `docs-links`, `portfolio-cover-crop`
 
 **Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `indexnow`, `manifest-cursors`, `figure-lightbox`, `site-branding`, `preview-site-lockup`, `og-card`, `og-image-filename`, `date-utils`, `og-shared-fingerprint`, `og-card-digest`, `changelog-format`, `source-file-utils`, `test-json-pipe` — see [Unit Tests](#unit-tests) below
 
@@ -85,6 +85,10 @@ Validates `src/_data/wisdom-entries.yaml` for the Collected wisdom section (`/wi
 ### shortlinks.js
 
 Validates `src/_data/shortlinks.yaml` (slug alphabet, uniqueness, absolute https destinations, retired → home) and, when `_site/.htaccess` exists, checks that each RewriteRule is present and appears before the wisdom-tag rule. Warns on duplicate destinations. Included in `test fast` and in both pre-build and post-build phases. An `.htaccess` older than `shortlinks.yaml` is a stale build and only warns, because the pre-build phase runs before Eleventy rewrites `_site/`; the post-build phase checks the fresh file and errors on any missing rule. Live 302 checks run in **deploy**, not here.
+
+### portfolios.js
+
+Validates `src/_data/portfolios.yaml`, the curated portfolio lists. A `main` list (`/portfolio/`) is required and takes only `intro` and `pieces`. Every other list needs a valid id (lowercase, hyphens; not `all`, which is the hidden index, and not any piece's slug), a `status` of `draft`, `live`, or `retired`, a title of 10–200 characters, and a description of 20–300, the same lengths `seo` checks on built pages. Every `pieces` URL must name a real portfolio piece or side project, read from source, and appear once per list. Fixture checks at the top guard the rules themselves, including that drafts build only outside production and that lists are hidden unless `indexed: true`. Reads source only, so it checks draft lists a production build never renders. Warns about pieces that are in no list. Spec: [portfolios from one list file](designs/specs/2026-11-08-two-portfolios-design.md).
 
 ### css.js
 
