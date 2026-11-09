@@ -5,6 +5,7 @@ date: "2026-06-15T12:00:00-07:00"
 tags: post
 description: There's a story going around that AI is squeezing designers out, but UX can emerge from this moment more connected to customers, their teams, and the product.
 ogImage: /assets/images/og/v2/2026-06-15-this-is-what-we-were-waiting-for.png
+leadFigure: /assets/images/2026/06/handoff-to-hands-on.svg
 ---
 There's scuttlebutt that AI is squeezing designers out. That faster build cycles mean less room for design process. That when anyone can generate a working UI in an afternoon, the UX role shrinks to quality control at best.
 
@@ -43,6 +44,8 @@ Since building is fast, the defensive posture that the old model encouraged star
 What didn't change is just as important: we still need to understand customers and come up with ways of meeting their needs. We still need to involve customers in choosing the way forward, and we still need to exercise product judgment – to know that an idea is good, or when it needs to be tested before anyone commits to it. We still need to measure our work and revisit it according to how it performs.
 
 What is going away is the need for the handoff overhead: the detailed specs, the exhaustive documentation, the waiting, the re-explaining. UX effort gets reorganized around customer understanding, concept generation, judgment, and iterating on quality, and that reorganization is exactly what we UX people always said we wanted.
+
+![Then, UX's work ended at the spec: what we learned from customers was lost to negotiation, drift, and bugs on its way to the product, and much of it sat in the backlog. Now, UX carries it into a prototype, shares the building, and pulls from the backlog or fixes the product directly, so far more of it arrives.](/assets/images/2026/06/handoff-to-hands-on.svg)
 
 ## The job UX always wanted
 
