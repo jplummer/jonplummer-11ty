@@ -58,8 +58,28 @@ Because these are ordinary Eleventy collections, the existing `getPreviousCollec
 
 - `src/portfolio.njk` loops over `collections.portfolioMain` instead of `collections.portfolio | reverse`. It gets a short intro above the grid that says what the position is, plus a new title and description. Jon writes the copy.
 - A new page for the UX leadership portfolio loops over `collections.portfolioLeadership`, with its own intro, title, and description. It's tagged `page`, so it gets an OG card labeled with its path, like every other page.
-- Both use `portfolio_list_item.njk` as is. Side project items already carry `coverImage`, `coverPosition`, `title`, and `description`, so their cards render the same and link to `/sides/<slug>/`. A small "Side project" label on those cards is optional; leave it out of the first pass.
+- Both use `portfolio_list_item.njk`. Side project items already carry `coverImage`, `coverPosition`, `title`, and `description`, so their cards render the same and link to `/sides/<slug>/`. Cards gain one label line (below).
 - Each page links to the other in one line under the intro, so a visitor who wants the wider set can find it.
+
+### Card labels
+
+Each card gets one quiet line naming what kind of piece it is, then where and when it happened: "Case study · Belkin · 2016," "Talk · Cayuse · 2022," "Side project · 2026." Side project cards end with their status instead of an organization: "Side project · In development."
+
+- **Kind:** one of `Case study`, `Talk`, `Prototype`, or `Side project`. Pieces set `kind` in front matter. Side project pages get `Side project` from their tag and need no field. With the label in place, titles can drop "(talk)" and "(conference talk)."
+- **Where:** `org` in front matter (Belkin, Medtronic MiniMed, Cayuse, Invoca, and so on). Side projects have none.
+- **When:** see the next section.
+- The allowed `kind` values live beside `SIDE_STATUSES` in `scripts/utils/validation-utils.js`, and `test frontmatter` checks them, so the set stays short and consistent.
+
+Domain labels ("Hardware," "SaaS") and role labels ("Led the team") are left out. In a portfolio built around one domain, a domain label would read the same on almost every card. A role is a claim, and claims belong in the piece's text, where they can be backed up.
+
+#### Where the year comes from
+
+Today a piece's `date` partly sets its place in the date-ordered grid: the discovery training piece says its date is an ordering device, and the three 2001 pieces are dated on consecutive days in December 2001. Once `portfolios.yaml` sets the order, `date` doesn't have to do that job. There are two ways to get a year for the label:
+
+1. **A separate field,** such as `years: "2015–2016"`, with `date` left alone. No URL changes, and a range is easy to write.
+2. **Real dates on the pieces,** with the label reading the year from `date`. The date becomes truthful, but it also sets the permalink (`/YYYY/MM/DD/slug/`), so every corrected piece moves to a new URL. Each move needs a redirect in `src/_data/redirects.yaml`, and the links in `/about/`, `/now/`, and side project pages that point at moved pieces need updating (`internal-links` finds them). Links already shared on LinkedIn and in resumes keep working through the 301s. A single date also can't express a range. And the sitemap's `lastmod` for pieces reads `date`, so a 2013 work date would tell search engines the page last changed in 2013 unless the sitemap gets another source.
+
+Recommendation: option 1. Option 2 makes a field truthful that visitors never see, at the cost of about 35 URL changes and a sitemap fix.
 
 ### Previous and next on piece pages
 
@@ -106,23 +126,26 @@ Some pieces may drop out of both lists (the 2001 identity work, for example). Th
   - an unknown top-level key appears in `portfolios.yaml`
 
   It also warns, without failing, for each `portfolio`-tagged piece that's in neither list, so dropping one is a visible choice. One manifest entry in `scripts/test-manifest.js` wires it in.
+- **Update: `frontmatter`** checks `kind` against the allowed list, and `org` and `years` for type, on portfolio pieces.
 - **Update: `portfolio-cover-crop`** looks for the Monotasker card in whichever built portfolio page lists it, and fails if no page lists it while the test still expects it.
 - `internal-links`, `seo`, `og-images`, and `html` cover the new page without changes. `seo` checks the sitemap for duplicates and for `noindex` pages.
 
 ## Docs
 
-- `docs/authoring.md` gets a short "Portfolios" section: how to add a piece, move it, or drop it, and that the order in `portfolios.yaml` is the display order.
+- `docs/authoring.md` gets a short "Portfolios" section: how to add a piece, move it, or drop it, and that the order in `portfolios.yaml` is the display order. Its front matter list gains `kind`, `org`, and `years`.
 - `docs/tests.md` gets the `portfolios` test.
 
 ## Rollout
 
 1. Build the mechanism with `main` listing every current piece in today's order (newest first) and `leadership` empty. The built `/portfolio/` should then match today's exactly. Check that before going further.
-2. Fill in both lists and write both intros. This is Jon's curation and copy, guided by the [position doc](2026-11-08-hardware-software-position-design.md#portfolio-and-the-second-portfolio).
-3. Deploy, then add the shortlink.
+2. Add `kind`, `org`, and `years` to every piece and turn on the label line.
+3. Fill in both lists and write both intros. This is Jon's curation and copy, guided by the [position doc](2026-11-08-hardware-software-position-design.md#portfolio-and-the-second-portfolio).
+4. Deploy, then add the shortlink.
 
 ## Open questions
 
 - The leadership portfolio's name and URL. "Leadership" is a placeholder.
 - `noindex` on the leadership page (above).
-- Whether side project cards in a portfolio get a "Side project" label.
+- Where the label's year comes from: a `years` field (recommended) or real dates on the pieces.
+- The `kind` vocabulary. Four words are proposed; the talks and readouts may want finer distinctions.
 - Whether `/about/` links both portfolios or only the main one, with the leadership portfolio left to the resume and direct links.

@@ -6,7 +6,7 @@ This doc notes what the position implies for each key page. Most of it is copy J
 
 ## Site-wide
 
-- **Header nav** is `/home`, `/about`, `/now`, `/portfolio`. `/sides/` is only in the footer. Since side projects carry the recent hardware and AI evidence, `/sides` probably belongs in the header.
+- **Header nav** is `/home`, `/about`, `/now`, `/portfolio`, and `/sides/` is only in the footer. It stays there (decided 2026-11-08). Side projects that support the position appear as cards in the portfolio, which makes the portfolio their front door, and `/sides/` keeps the practical details (where to get each one, status, privacy and terms) for all of them.
 - **Person schema** (`src/_includes/schema/person.njk`) has `jobTitle` "Product design and UX leader" and a description that leads with enterprise SaaS. Both should lead with the position, and `knowsAbout` could name hardware-and-software product design outright instead of leaving it to "IoT and connected devices."
 - **Meta descriptions** on the home page, `/about/`, and `/portfolio/` all open with "product design and UX leader" and SaaS. Rewrite them with the page copy. OG cards show only title and label, so description changes don't re-render them.
 - **Tagline** "Making ideas tangible" already fits. The rotation pool in `src/_data/site.js` could take a line or two about hardware and software together.
