@@ -178,7 +178,7 @@ function validateCoverCropFields(frontMatter) {
 }
 
 /**
- * Top-level `src/*.md` templates (not under `_posts/`).
+ * Top-level `src/*.md` templates (not under `posts/`).
  * Error pages omit `date` (same pattern as optional slug on posts from path).
  */
 function validateRootSrcMarkdownFields(frontMatter, filePath) {
@@ -288,15 +288,15 @@ function getChangedRootSrcMarkdownPaths() {
 }
 
 // Dated content: blog posts in year folders, portfolio pieces flat.
-// Pieces moved out of _posts on 2026-11-08 so their URLs no longer carry a date.
-const POSTS_DIR = './src/_posts';
+// Pieces moved out of posts/ on 2026-11-08 so their URLs no longer carry a date.
+const POSTS_DIR = './src/posts';
 const PORTFOLIO_DIR = './src/portfolio';
 
 function isPortfolioPath(filePath) {
   return !path.relative(PORTFOLIO_DIR, filePath).startsWith('..');
 }
 
-// Display path for dated content: posts relative to _posts (as before), pieces as portfolio/<file>.
+// Display path for dated content: posts relative to posts/ (as before), pieces as portfolio/<file>.
 function contentRelativePath(filePath) {
   return isPortfolioPath(filePath) ? path.relative('./src', filePath) : path.relative(POSTS_DIR, filePath);
 }
@@ -305,7 +305,7 @@ function contentRelativePath(filePath) {
 function validateFileName(filePath) {
   const fileName = path.basename(filePath);
 
-  // Posts: YYYY/YYYY-MM-DD-slug.md under _posts. Pieces: YYYY-MM-DD-slug.md directly under portfolio.
+  // Posts: YYYY/YYYY-MM-DD-slug.md under posts/. Pieces: YYYY-MM-DD-slug.md directly under portfolio.
   const portfolio = isPortfolioPath(filePath);
   const expectedPattern = portfolio ? /^\d{4}-\d{2}-\d{2}-[^\/]+\.md$/ : /^\d{4}\/\d{4}-\d{2}-\d{2}-[^\/]+\.md$/;
   const relativePath = path.relative(portfolio ? PORTFOLIO_DIR : POSTS_DIR, filePath);
@@ -362,7 +362,7 @@ function validateYamlDataFiles(result) {
 
 function getChangedFiles() {
   return getChangedFilesSinceHead()
-    .filter(file => path.extname(file).toLowerCase() === '.md' && (file.startsWith('src/_posts/') || file.startsWith('src/portfolio/')))
+    .filter(file => path.extname(file).toLowerCase() === '.md' && (file.startsWith('src/posts/') || file.startsWith('src/portfolio/')))
     .filter(file => fs.existsSync(file));
 }
 
@@ -430,7 +430,7 @@ function assertPostFrontmatterParserRegressionGuard() {
  * Portfolio may keep filename day ≠ front-matter day (date not shown on that layout).
  */
 function assertPostDateAuthoringRegressionGuard() {
-  const samplePath = path.join('src', '_posts', '2025', '2025-11-20-example.md');
+  const samplePath = path.join('src', 'posts', '2025', '2025-11-20-example.md');
 
   const unquoted = validateRequiredFields(
     {
@@ -512,7 +512,7 @@ function validate(result, options) {
     }
   }
 
-  // Posts under `_posts/`, plus top-level `src/*.md` (same scope as IndexNow static pages + `500.md`)
+  // Posts under `posts/`, plus top-level `src/*.md` (same scope as IndexNow static pages + `500.md`)
   let postMarkdownFiles;
   let rootMarkdownFiles;
   let sideMarkdownFiles;

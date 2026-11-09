@@ -7,7 +7,7 @@ alwaysApply: true
 ## 11ty-specific
 
 - Prefer Nunjucks (.njk) for templates.
-- Follow the established _posts/YYYY/ directory structure for posts. Portfolio pieces live flat in src/portfolio/ and build at /portfolio/<slug>/.
+- Follow the established posts/YYYY/ directory structure for posts. Portfolio pieces live flat in src/portfolio/ and build at /portfolio/<slug>/.
 - Include required front matter: title, date, layout, tags (posts must include `post` in tags array).
 - Post `date`: quoted date-only `"YYYY-MM-DD"` matching the filename day (America/Los_Angeles). Never leave dates unquoted in YAML.
 

@@ -17,7 +17,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 CONTENT — Creative Commons Attribution-NonCommercial 4.0 International
 ---------------------------------------------------------------------
 
-Applies to the written and visual content: everything under src/_posts/, src/portfolio/, src/_data/, src/assets/images/, the markdown and Nunjucks page copy under src/ and src/sides/ and src/wisdom/, the documentation under docs/, and the site mark and favicons.
+Applies to the written and visual content: everything under src/posts/, src/portfolio/, src/_data/, src/assets/images/, the markdown and Nunjucks page copy under src/ and src/sides/ and src/wisdom/, the documentation under docs/, and the site mark and favicons.
 
 Copyright (c) 2025-2026 Jon Plummer
 

@@ -17,8 +17,8 @@ const {
 const { addFile, addIssue } = require('../utils/test-results');
 const { runTest } = require('../utils/test-runner-helper');
 
-const POST = path.join('src', '_posts', '2026', '2026-08-12-care-has-to-show-up-in-the-product.md');
-const CRITIQUE = path.join('src', '_posts', '2025', '2025-12-30-engaging-in-critique.md');
+const POST = path.join('src', 'posts', '2026', '2026-08-12-care-has-to-show-up-in-the-product.md');
+const CRITIQUE = path.join('src', 'posts', '2025', '2025-12-30-engaging-in-critique.md');
 
 function runUnitAssertions(result) {
   const file = addFile(result, 'scripts/utils/og-image-filename.js', 'og-image-filename');

@@ -86,10 +86,10 @@ function mapSourceToBuiltHtml(sourceFile) {
   const builtFiles = [];
   const normalizedPath = sourceFile.replace(/\\/g, '/');
   
-  // Posts: src/_posts/YYYY/YYYY-MM-DD-post-slug.md -> YYYY/MM/DD/post-slug/index.html
+  // Posts: src/posts/YYYY/YYYY-MM-DD-post-slug.md -> YYYY/MM/DD/post-slug/index.html
   // Posts are in year directories with date in filename
-  if (normalizedPath.startsWith('src/_posts/')) {
-    const postMatch = normalizedPath.match(/src\/_posts\/(\d{4})\/(\d{4})-(\d{2})-(\d{2})-([^/]+)\.md$/);
+  if (normalizedPath.startsWith('src/posts/')) {
+    const postMatch = normalizedPath.match(/src\/posts\/(\d{4})\/(\d{4})-(\d{2})-(\d{2})-([^/]+)\.md$/);
     if (postMatch) {
       const [, year, yearFromFilename, month, day, slug] = postMatch;
       // Use year from filename (should match directory, but filename is authoritative)
@@ -104,7 +104,7 @@ function mapSourceToBuiltHtml(sourceFile) {
   }
 
   // Other markdown files: src/about.md -> about/index.html
-  if (normalizedPath.startsWith('src/') && normalizedPath.endsWith('.md') && !normalizedPath.startsWith('src/_posts/') && !pieceMatch) {
+  if (normalizedPath.startsWith('src/') && normalizedPath.endsWith('.md') && !normalizedPath.startsWith('src/posts/') && !pieceMatch) {
     const relativePath = normalizedPath.replace(/^src\//, '').replace(/\.md$/, '');
     builtFiles.push(`${relativePath}/index.html`);
   }

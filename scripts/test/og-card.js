@@ -37,9 +37,9 @@ async function runAssertions(result) {
   }
 
   await check('type labels', () => {
-    assert.deepStrictEqual(ogCardLabel({ tags: 'post' }, 'src/_posts/2026/x.md', SRC), { text: 'Post', isPath: false });
-    assert.deepStrictEqual(ogCardLabel({ tags: ['post', 'ai'] }, 'src/_posts/2026/x.md', SRC), { text: 'Post', isPath: false });
-    assert.deepStrictEqual(ogCardLabel({ tags: 'portfolio' }, 'src/_posts/2013/x.md', SRC), { text: 'Portfolio', isPath: false });
+    assert.deepStrictEqual(ogCardLabel({ tags: 'post' }, 'src/posts/2026/x.md', SRC), { text: 'Post', isPath: false });
+    assert.deepStrictEqual(ogCardLabel({ tags: ['post', 'ai'] }, 'src/posts/2026/x.md', SRC), { text: 'Post', isPath: false });
+    assert.deepStrictEqual(ogCardLabel({ tags: 'portfolio' }, 'src/posts/2013/x.md', SRC), { text: 'Portfolio', isPath: false });
     assert.deepStrictEqual(
       ogCardLabel({ tags: 'sideproject', permalink: '/sides/parker/' }, 'src/sides/parker.md', SRC),
       { text: 'Side project', isPath: false }

@@ -27,7 +27,7 @@ function assertEqual(fileObj, actual, expected, label) {
 // Find a real post on disk so the permalink-resolution assertion doesn't pin a
 // slug that might get renamed/redirected later (see src/_data/redirects.yaml).
 function findAnyPost(srcDir) {
-  const postsDir = path.join(srcDir, '_posts');
+  const postsDir = path.join(srcDir, 'posts');
   for (const year of fs.readdirSync(postsDir)) {
     const yearDir = path.join(postsDir, year);
     if (!fs.statSync(yearDir).isDirectory()) continue;
@@ -76,13 +76,13 @@ async function validate(result) {
       fileObj,
       findSourceFile(`${post.year}/${post.month}/${post.day}/${post.slug}/index.html`),
       post.absolutePath,
-      'post permalink: YYYY/MM/DD/slug/index.html -> src/_posts/YYYY/YYYY-MM-DD-slug.md'
+      'post permalink: YYYY/MM/DD/slug/index.html -> src/posts/YYYY/YYYY-MM-DD-slug.md'
     );
   } else {
     addIssue(fileObj, {
       severity: 'error',
       type: 'source-file-utils-fixture',
-      message: 'No post found under src/_posts to test permalink resolution',
+      message: 'No post found under src/posts to test permalink resolution',
     });
   }
 

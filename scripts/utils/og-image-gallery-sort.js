@@ -8,7 +8,7 @@ const { generateOgImageFilename } = require('./og-image-filename');
 /** Same discovery set as `generateOgImages()` (posts + root md + njk, no drafts). */
 function listOgImageSourceFiles() {
   const srcDir = path.join(process.cwd(), 'src');
-  const postsDir = path.join(srcDir, '_posts');
+  const postsDir = path.join(srcDir, 'posts');
 
   const allPostFiles = findMarkdownFiles(postsDir);
   const postFiles = allPostFiles.filter((f) => {
@@ -19,7 +19,7 @@ function listOgImageSourceFiles() {
 
   const allRootFiles = findMarkdownFiles(srcDir).filter(
     (f) =>
-      !f.includes('_posts') &&
+      !f.startsWith(postsDir + path.sep) &&
       !f.includes('_includes') &&
       !f.includes('_data') &&
       !f.includes('assets')
@@ -32,7 +32,7 @@ function listOgImageSourceFiles() {
 
   const allNjkFiles = findFilesByExtension(srcDir, ['.njk']).filter(
     (f) =>
-      !f.includes('_posts') &&
+      !f.startsWith(postsDir + path.sep) &&
       !f.includes('_includes') &&
       !f.includes('_data') &&
       !f.includes('assets')

@@ -156,8 +156,8 @@ function configureEvents(eleventyConfig) {
       })
       .filter(file => {
         // Portfolio pieces (src/portfolio/) fall under isPage, which is enough: processFile reads the tags.
-        const isPost = file.includes('_posts/') && (file.endsWith('.md') || file.endsWith('.njk'));
-        const isPage = file.includes('src/') && !file.includes('_posts/') && !file.includes('_includes/') && !file.includes('_data/') && !file.includes('assets/') && (file.endsWith('.md') || file.endsWith('.njk'));
+        const isPost = file.includes(`${path.sep}src${path.sep}posts${path.sep}`) && (file.endsWith('.md') || file.endsWith('.njk'));
+        const isPage = file.includes('src/') && !isPost && !file.includes('_includes/') && !file.includes('_data/') && !file.includes('assets/') && (file.endsWith('.md') || file.endsWith('.njk'));
         return isPost || isPage;
       })
       .filter(file => {

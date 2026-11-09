@@ -302,7 +302,7 @@ async function generateOgImages(options = {}) {
   // Don't print header in quiet mode - caller will announce it
   
   const srcDir = path.join(process.cwd(), 'src');
-  const postsDir = path.join(srcDir, '_posts');
+  const postsDir = path.join(srcDir, 'posts');
   
   // Find all markdown files in posts directory, excluding drafts
   const allPostFiles = findMarkdownFiles(postsDir);
@@ -313,9 +313,9 @@ async function generateOgImages(options = {}) {
     return !(frontMatter && frontMatter.draft === true);
   });
   
-  // Find markdown and njk files in src root (excluding _posts, _includes, _data, assets, and drafts)
+  // Find markdown and njk files in src root (excluding posts/, _includes, _data, assets, and drafts)
   const allRootFiles = findMarkdownFiles(srcDir).filter(f => 
-    !f.includes('_posts') && 
+    !f.startsWith(postsDir + path.sep) && 
     !f.includes('_includes') &&
     !f.includes('_data') &&
     !f.includes('assets')
@@ -329,7 +329,7 @@ async function generateOgImages(options = {}) {
   
   // All .njk templates under src/ (e.g. src/wisdom/index.njk), excluding special dirs
   const allNjkFiles = findFilesByExtension(srcDir, ['.njk']).filter(f =>
-    !f.includes('_posts') &&
+    !f.startsWith(postsDir + path.sep) &&
     !f.includes('_includes') &&
     !f.includes('_data') &&
     !f.includes('assets')

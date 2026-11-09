@@ -1,6 +1,6 @@
 ---
 description: Content authoring guidelines and standards
-globs: ['src/_posts/**/*.md', 'src/**/*.md']
+globs: ['src/posts/**/*.md', 'src/**/*.md']
 alwaysApply: true
 ---
 

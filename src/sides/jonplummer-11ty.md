@@ -61,7 +61,7 @@ There are three breakpoints – 40rem, 54rem, and 60rem – and they're in rem r
 ## What's in the repo
 
 ```text
-src/            posts (_posts/), portfolio pieces (portfolio/), pages,
+src/            posts (posts/), portfolio pieces (portfolio/), pages,
                 side projects, wisdom, CSS, self-hosted fonts
 eleventy/       config and utils – filters, shortcodes, collections, image handling
 scripts/

@@ -1,6 +1,6 @@
 # Move portfolio pieces to `/portfolio/<slug>/`
 
-Status: phase A done 2026-11-08, not yet deployed. Step 0 of the [two-portfolio spec](../specs/2026-11-08-two-portfolios-design.md). Deployed on its own, before any portfolio curation.
+Status: phases A and B done 2026-11-08, not yet deployed. Step 0 of the [two-portfolio spec](../specs/2026-11-08-two-portfolios-design.md). Deployed on its own, before any portfolio curation.
 
 ## Goal
 
@@ -55,7 +55,7 @@ A second, optional phase renames `src/_posts/` to `src/posts/`, which changes no
 - **Spell check** flagged "minimed" and "carelink" in the new redirect paths. The `cspell.json` pattern that skips `key: /path` lines now also allows YAML's indentation and `- ` list marker.
 - **Resumes** link four pieces by their old URLs. Those links keep working through the redirects; update them at the next resume edit.
 
-## Phase B (optional): rename `src/_posts/` to `src/posts/`
+## Phase B: rename `src/_posts/` to `src/posts/`
 
 Eleventy gives the underscore no meaning here: `_includes` and `_data` are set in config, and `_posts` is just a name. After phase A, the directory holds only posts, and `posts/` matches `portfolio/`, `sides/`, and `wisdom/`.
 
@@ -63,3 +63,11 @@ Eleventy gives the underscore no meaning here: `_includes` and `_data` are set i
 - Update the code references in 11 files (`events.js`, `date-utils.js` comment, `generate-og-images.js`, `og-image-gallery-sort.js`, `source-file-utils.js`, and the `frontmatter`, `accessibility`, `og-card`, `og-image-filename`, `portfolio-cover-crop`, and `source-file-utils` tests), the agent rules, `LICENSE`, `src/sides/jonplummer-11ty.md`, `docs/authoring.md`, `docs/tests.md`, `docs/commands.md`, `docs/date-timezone-handling.md`, `docs/agent-memory.md`, and the relative links in `docs/ideas.md`. Dated plans and specs keep the old path, since they're records of their time.
 - **Verify:** `_site/` must be byte-identical to phase A's build, and `pnpm run test fast` and `pnpm run test unit` must pass.
 - Commit separately from phase A, so either can be reverted alone.
+
+### What phase B turned up
+
+- `generate-og-images.js` is part of the OG shared fingerprint, so changing its posts path made the build re-render all 256 cards. Restoring the PNGs and running `pnpm run generate-og-images -- --stamp` recorded the new fingerprint instead. The PNGs' pixel data is identical to before; only the digest chunk changed. The `/ogimages/` gallery's optimized thumbnails get new hashed filenames as a result.
+- The two OG discovery scripts now exclude posts by directory (`f.startsWith(postsDir + path.sep)`) instead of by the substring `'_posts'`, which would have matched nothing after the rename.
+- Against phase A's build, the only other differences are the home page tagline (it's salted with the commit) and the repo tree on `/sides/jonplummer-11ty/`.
+- Links into `src/_posts/` in two working docs (the lead-figures plan and the lead-figure style spec) were updated. Other dated plans and specs keep the old path as records.
+

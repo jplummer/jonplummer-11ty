@@ -20,4 +20,4 @@ Full ISO with offset (`"2025-10-08T12:00:00-07:00"`) still parses for older post
 
 ## Load-bearing build behavior
 
-Date handling preserves WordPress-era URLs: `eleventy/config/date-parsing.js` (`addDateParsing`) plus permalink generation in `src/_posts/_posts.11tydata.js`. Do not change date logic or existing post URLs without verifying every permalink remains unchanged. Portfolio pieces don't use it: since 2026-11-08 they live in `src/portfolio/` and build at `/portfolio/<slug>/` (`src/portfolio/portfolio.11tydata.js`), so their dates set nothing in the URL.
+Date handling preserves WordPress-era URLs: `eleventy/config/date-parsing.js` (`addDateParsing`) plus permalink generation in `src/posts/posts.11tydata.js`. Do not change date logic or existing post URLs without verifying every permalink remains unchanged. Portfolio pieces don't use it: since 2026-11-08 they live in `src/portfolio/` and build at `/portfolio/<slug>/` (`src/portfolio/portfolio.11tydata.js`), so their dates set nothing in the URL.

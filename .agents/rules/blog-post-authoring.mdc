@@ -1,14 +1,14 @@
 ---
-description: Conventions for Eleventy posts under src/_posts (paths, front matter, drafts).
-globs: ['src/_posts/**/*.md']
+description: Conventions for Eleventy posts under src/posts (paths, front matter, drafts).
+globs: ['src/posts/**/*.md']
 alwaysApply: false
 ---
 
 ## Paths and filenames
 
-- Location: `src/_posts/YYYY/YYYY-MM-DD-kebab-slug.md`
+- Location: `src/posts/YYYY/YYYY-MM-DD-kebab-slug.md`
 - The folder **`YYYY`** must match the calendar year in **`date`** and in the filename prefix.
-- Portfolio pieces don't go here. They live flat in `src/portfolio/YYYY-MM-DD-kebab-slug.md` and build at `/portfolio/<slug>/`; the date isn't in the URL. `pnpm run test frontmatter` fails if a `portfolio`-tagged file is under `_posts/`.
+- Portfolio pieces don't go here. They live flat in `src/portfolio/YYYY-MM-DD-kebab-slug.md` and build at `/portfolio/<slug>/`; the date isn't in the URL. `pnpm run test frontmatter` fails if a `portfolio`-tagged file is under `posts/`.
 
 ## Required front matter
 

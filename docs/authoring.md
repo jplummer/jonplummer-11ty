@@ -121,7 +121,7 @@ Run the frontmatter test to catch frontmatter parsing errors:
 pnpm run test frontmatter
 ```
 
-This checks all posts under `src/_posts/`, portfolio pieces under `src/portfolio/`, and every top-level `src/*.md` template (for example `about.md`, `now.md`, `changelog.md`, error pages). It will identify parsing errors before they cause build failures.
+This checks all posts under `src/posts/`, portfolio pieces under `src/portfolio/`, and every top-level `src/*.md` template (for example `about.md`, `now.md`, `changelog.md`, error pages). It will identify parsing errors before they cause build failures.
 
 ### Common Errors
 

@@ -12,18 +12,18 @@ function findSourceFile(relativePath) {
   // Try common patterns:
   // 1. Direct match: about.html -> src/about.md or src/about.njk
   // 2. Index files: page/1/index.html -> src/index.njk (paginated)
-  // 3. Post files: 2025/01/15/post-slug/index.html -> src/_posts/2025/2025-01-15-post-slug.md
+  // 3. Post files: 2025/01/15/post-slug/index.html -> src/posts/2025/2025-01-15-post-slug.md
   //    Portfolio pieces: portfolio/slug/index.html -> src/portfolio/YYYY-MM-DD-slug.md
   // 4. Permalink files: ogimages/index.html -> src/ogimages.njk
 
   // Remove index.html and trailing slash
   let searchPath = normalizedPath.replace(/\/index\.html$/, '').replace(/^\/+/, '');
 
-  // Post permalinks: 2026/05/24/slug/index.html -> src/_posts/2026/2026-05-24-slug.md
+  // Post permalinks: 2026/05/24/slug/index.html -> src/posts/2026/2026-05-24-slug.md
   const postMatch = searchPath.match(/^(\d{4})\/(\d{2})\/(\d{2})\/([^/]+)$/);
   if (postMatch) {
     const [, year, month, day, slug] = postMatch;
-    const postPath = path.join(srcDir, '_posts', year, `${year}-${month}-${day}-${slug}.md`);
+    const postPath = path.join(srcDir, 'posts', year, `${year}-${month}-${day}-${slug}.md`);
     if (fs.existsSync(postPath)) {
       return postPath;
     }

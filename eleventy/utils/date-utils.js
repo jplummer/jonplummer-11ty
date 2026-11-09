@@ -5,7 +5,7 @@
  * Provides date normalization and formatting functions using Luxon.
  *
  * Display and calendar-day extraction use America/Los_Angeles so they match
- * post permalinks (see src/_posts/_posts.11tydata.js), regardless of build TZ.
+ * post permalinks (see src/posts/posts.11tydata.js), regardless of build TZ.
  */
 
 const { DateTime } = require("luxon");
