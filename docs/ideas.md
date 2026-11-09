@@ -1,202 +1,173 @@
 # Ideas
 
-## ☑️ Selected
+**Next** is what to work on now; **Later** is grouped by area. **Decided** records ideas dropped or kept as they are, with the reason, so they don't come back around. **Done** is one line each, and commit messages and the linked docs hold the detail. An entry that outgrows a short paragraph moves to its own doc under `docs/designs/`, linked from here.
 
-- **Lead figure for [Quality moves from specification to iteration](../src/_posts/2026/2026-06-19-quality-moves.md)** (parked 2026-11-08) — Six rounds of drafts (B–F) haven't produced a direction Jon is happy with, so it's set aside while other essays get figures. Pick it back up with a fresh approach rather than another variation on F1–F4. Jon's requirements so far, the history of each round, and where the drafts page lives are in the [lead figures plan](designs/plans/2026-10-29-lead-figures.md).
-- Portfolio
-  - **Side projects** — The remaining portfolio gap. Covers exist for Lister PHP, Monotasker, Parker, Pointer-AR, and PRVT; **Menu Bar Death Clock** and **Plain English Service** still have no `coverImage` and no image in the body. The write-ups were thickened 2026-09-17 and now run about 330–580 words, with Monotasker the short one at about 270 (it has its own blog post), so covers are what's left.
-  - Look through /talks (current and old) for more talks, and evaluate for inclusion. Status per Jon, 2026-09-11:
-    - **Cayuse – done.** The two "discovery interview training" decks published as one portfolio piece, and the two Cayuse Connect 2022 conference talks went up as portfolio items 2026-09-24 (see DONE).
-    - **Invoca — swept.**
-    - Talks from Belkin — partially swept, real work remains
-    - Small artifacts from Belkin
-    - **Talks from CSky (Concentric Sky) — worth a look.** Genuinely thin in the portfolio already, but Jon doesn't retain many files from there and the company no longer exists, so source material is scattered; may take real digging to find anything usable.
+## ☑️ Next
 
-## 🔮 Future Consideration
+The site now leads with Jon's position: leadership, discovery, design, and prototyping where hardware and software meet (2026-11-08). What that implies for each page: [position doc](designs/specs/2026-11-08-hardware-software-position-design.md).
 
-### Portfolio (deferred)
+1. **Two-portfolio structure.** `/portfolio/` becomes the hardware-and-software portfolio. A second one for general UX Director roles is available but kept out of the nav. Write a short spec first covering front matter for which portfolio a piece belongs to, the two index pages and their hand-picked order, previous/next on pieces that are in both, the second portfolio's URL and shortlink, and `noindex` for it (undecided).
+2. **Curate the hardware-and-software portfolio and write its intro.** Candidates and the framing MiniMed needs (important, but about 2013) are in the [position doc](designs/specs/2026-11-08-hardware-software-position-design.md#portfolio-and-the-second-portfolio).
+3. **Bring the hardware side projects forward.**
+   - Photos and write-ups that show the physical build for Usage-Chan and Parker, and a decision on whether they appear in the portfolio itself.
+   - A hero image on project pages (2026-08-21). `side_detail.njk` has no image slot; `coverImage` only renders on the `/sides/` list card (`side_list_item.njk`). Adding one is layout work worth a short design pass: placement, crop behavior, and whether it borrows portfolio's subgrid (`article.portfolio-detail section { grid-template-columns: subgrid }`) or does something simpler, since `.side-detail` opted out of the generic article grid.
+   - The platform badge and icons (2026-08-21). A `platform` front matter field ("iOS app," "macOS app," "Hardware") shown as a small badge next to `status` on the card and detail page, with small per-platform icons beside or in place of the text. Ship the field with the icons rather than doing the text version first and redoing it. The icons need assets or a mask treatment like the disclosure caret (`--icon-disclosure-caret-mask`), so they're a visual decision too.
+   - `/sides` in the header nav. Today it's only in the footer.
+4. **A patents piece** for the hardware-and-software portfolio: 18 families across IoT, networking, and medical devices, now only a link on `/about/`.
+5. **Page copy for the position.** `/about/` first, with the reading-column change below, then `/now/`, the meta descriptions, and the person schema. Notes for each page are in the [position doc](designs/specs/2026-11-08-hardware-software-position-design.md).
+   - Reading column for full-width pages (decided 2026-11-08). `/about/`, `/now/`, and the other `tags: page` pages get the indented, blog-post-style column; `/color/` and `/type/` stay full-width because they don't work in it. Jon especially wants this if it simplifies the site code, so look for layout rules that exist only to keep `tags: page` pages full-width and remove them instead of adding overrides. The footer half was settled 2026-08-21 by making the footer full-bleed everywhere ([nav restructure spec](designs/specs/2026-08-21-nav-restructure-design.md), Styling section).
+6. **AI skills and routines as a `/sides/` category** (2026-08-21), for AI fluency that isn't app-shaped. These aren't apps: the legal page's per-project privacy framing (App Store data-practice disclosures) and the detail page's info block (App Store link, GitHub issues) assume shippable software. Brainstorm it briefly before the first entry goes up; it likely wants a lighter info block (source link, maybe a license) and no privacy subsection unless the skill handles data. Which skills can be shared is part of that, since the dotagents repo is private.
+7. **Belkin talks and small artifacts.** These are hardware-and-software work, so they feed the main portfolio. The Belkin talks were partly swept, with work remaining (status per Jon, 2026-09-11).
+8. **The general UX Director portfolio.** It's mostly today's set, plus the Invoca workflow builder and SDLC reinvention if Jon can show them. Concentric Sky talks belong here too: the portfolio has nothing from 2019–21, but Jon kept few files and the company no longer exists, so finding anything usable may take digging.
+9. **Lead figures.** Essays Jon sends people and posts about hardware and software together go first.
+   - **Keep backfilling essays with figures that carry the argument.** Seven essays have a `leadFigure` as of 2026-11-07. After those come the rest of this year's long posts (16 ran over 700 words) and popular long posts of any age. Style and rules: [lead figure spec](designs/specs/2026-10-29-lead-figure-style-design.md).
+   - **Lead figure style improvements** largely via manual edits
+   - **Whether and how OG cards use the lead figure** (low priority). One candidate keeps the dark card's title-first layout and lays the figure's silhouette along the bottom in low contrast. A mock on 2026-10-29 read fine at LinkedIn's ~128×72, but a landscape is the easy case; check it against diagrams that aren't.
+   - **Lead figure for [Quality moves from specification to iteration](../src/_posts/2026/2026-06-19-quality-moves.md)** (parked 2026-11-08). Six rounds of drafts (B–F) haven't produced a direction Jon likes, so it's set aside while other essays get figures. Pick it back up with a fresh approach rather than another variation on F1–F4. Jon's requirements, the history of each round, and where the drafts page lives are in the [lead figures plan](designs/plans/2026-10-29-lead-figures.md).
 
-- **Presentation-to-portfolio automation (deprioritized 2026-08-24)** — Local PDF + `.pptx` path is DONE. Cloud fetch (Google OAuth + export PDF/PPTX, Microsoft Graph download + Office PDF export, optional batch input file) and e2e on real decks can wait. Docs: [commands.md](commands.md#-pdf-page-conversion).
+## 🔮 Later
 
-### Utility / lab pages (color, type, OG) — “hidden in public”
+- **Homepage excerpts** (low priority). Revisit excerpts, or fewer posts per page, now that essays carry figures.
 
-- **One style-exploration capability** (2026-08-13) — Draw the separate labs into a single tool: **selectors + generators** for **type**, **spacing**, and **color scheme** (and whatever else earns a slot), feeding **one realistic preview** of the actual site rather than per-lab facsimiles. Today these are three unrelated pipelines: **`scripts/color-explore/generate-gallery.js`** (hue reference, DR presets, harmony lab with APCA nudge, B&W / wild / terminal combo cards) writing the **`/color/`** embed; **`scripts/font-explore/generate-font-gallery.js`** + **`/assets/js/font-lab-card.js`** behind **`/type/`**; and **`scripts/utils/preview-site-lockup.js`**, the shared build-time lockup facsimile both mini-previews use. **Spacing has no selector or generator at all yet** — that is new work, not consolidation. The "realistic preview" is the old full-page rehearsal idea: **`src/style-exercise.njk`** is the ancestor (still in **`.eleventyignore`**, **301** to **`/color/`**) and shows the shape — scoped tokens applied to a real page. **Hard constraint**: **`/color/`** and **`/type/`** must keep working in their current public form throughout; this is additive until the day it replaces them. **Sequencing consequence**: do **not** restructure **`generate-gallery.js`** (extracting its ~470-line runtime string literal, splitting modules) before this lands — that reorganizes something slated for redesign and pays twice. Fix the build/runtime **harmony recipe table** duplication (**`buildHarmonySchemes`** / **`pair()`** vs runtime **`linkDeltas`**) only if the drift actually bites first. **Kept on purpose (2026-09-04)**: **`src/style-exercise.njk`**, **`src/assets/css/style-exercise.css`**, and **`src/assets/js/color-lab.js`** are cruft today (the page is ignored, nothing else loads them, and the sibling nav they used is gone) but they are the closest thing to the realistic full-page preview this entry wants — reuse or delete them when the consolidation lands, not before. Open design questions: canonical **scheme IDs** shared across generators, exports, and preview URLs; whether selections are author-only or visitor-editable (see deferred bullet below). **Settled along the way** (folded in from older bullets, 2026-11-07): the preview is a dedicated exercise page that stresses the site's tokens and type, not one real post stretched to cover everything; browse thumbnails start as text plus swatches, with live mini-previews only if they stay cheap; paths stay top-level (`/color/`, `/type/`, `/ogimages/`) with no `/labs/` prefix; SEO expectations are relaxed, but an intentional visitor must never hit a 404, so the build makes sure the artifacts exist or the page says plainly what's missing. **Still open on the color side**: apply the three-color preview placement rules to every gallery card, not only Default site. Background: **`docs/designs/scratch/complexity-grok4.6.md`** (item 1), **`complexity-opus5.md`** (Tier 3), **`complexity-composer2.5.md`** (item 1).
-- **Deferred — authoring vs visitors “creating” schemes** (was interview Q5): Whether scheme tweaks are **author-only** (edit data, redeploy) vs **visitor-editable with persistence** is **out of scope until** this area stabilizes; revisit when the browse + popout story exists.
-- **Color gallery — custom pickers**: Bring back the former `/color/` **custom hex color controls** (apply / reset) **inside** the generated color gallery UI so ad-hoc experiments do not require leaving the one canonical `/color/` page.
+### Labs (`/color/`, `/type/`, `/ogimages/`)
 
-### Tooling simplification (complexity, not size)
+- **One style-exploration tool** (2026-08-13). Replace the separate color and type labs with one tool whose selectors for type, spacing, and color scheme feed one realistic preview of the site. `/color/` and `/type/` keep working until it replaces them, and `generate-gallery.js` shouldn't be restructured before then. What exists, the constraints, and the open questions: [style-exploration doc](designs/specs/2026-08-13-style-exploration-design.md).
+- **Custom color pickers in the gallery.** Bring back the former `/color/` custom hex controls (apply and reset) inside the generated gallery, so ad-hoc experiments don't need another page.
 
-Prioritized by **side-effect surface** — complexity that can produce a silently wrong result, not merely large files. Source audits: **`docs/designs/scratch/complexity-opus5.md`**, **`complexity-grok4.6.md`**, **`complexity-composer2.5.md`** (all 2026-08-13; all three flagged the first two items below).
+### Look and feel
 
-- ~~**Consolidate front-matter parsing on gray-matter**~~ – done 2026-11-08. **`parseFrontMatter()`** in **`scripts/utils/frontmatter-utils.js`** is now gray-matter, the parser Eleventy uses, and the regex parser beside it is gone, so the OG generator, the gallery sort, and the spell, markdown, og-images, og-card, and frontmatter tests all read files the way the build does. The feared fallout didn't come: all 293 source files gave the same front matter from both parsers. Two differences did turn up. The regex swallowed blank lines after the closing `---`, so an OG write-back would have deleted them (one post, `2013-12-07-carelink-pro-main-interface.md`, has them); gray-matter keeps the body byte for byte, and all 269 files with front matter survive a parse and write-back unchanged. And gray-matter caches parses and returns the same object, so the parser now returns a copy; `test frontmatter` guards both.
-- **Simplify and harden test result parsing + output** — **Worth doing (Jon, 2026-11-08):** cleaner designs are almost always worth it, so long as the result stays easy for a person to follow; the temp-file handoff below is the main remaining piece. — **`scripts/utils/test-results.js`** carries the result builder, **`formatVerbose`** / **`formatBuild`**, and the stdout marker protocol (**`__TEST_JSON_START__`** … **`__TEST_JSON_END__`**) that **`scripts/test-runner.js`** parses back. **Keep `writeSyncAll()`** — it fixes a real bug (a single `fs.writeSync` to a non-blocking pipe returns after ~64KB and drops the rest; internal-links hit it and aborted a deploy) and is guarded by `pnpm run test test-json-pipe`. **Candidates**: hand results to the parent via a **temp file** instead of stdout markers, which retires the truncation failure class rather than defending against it; and, done 2026-11-08, the runner's **`buildSummaryString`** and this file's **`buildSummaryLine`** share one **`formatSummaryParts`**, which leaves zero counts out (single runs had printed "✅ 0 passing" beside warnings) and keeps the security test's skipped file count; **`test/color-contrast.js`** and **`test/accessibility.js`** now call **`outputAndExit`**, so running them by hand prints the formatted report instead of raw `__TEST_JSON_*` markers, and **`formatVerbose`**'s unused `options` parameter and the unused **`groupIssuesByType`** export are gone. Dead **`printSummary`** / **`exitWithResults`** were removed separately (2026-08-13). **Explicit non-goal — do not re-propose**: replacing the runner with `node --test`, or deleting the aggregate JSON/formatting layer wholesale. That puts ~30 test scripts plus the deploy gate in the blast radius for no user-visible gain, and the IPC's complexity has a documented, test-guarded cause. Feature ideas for this area (streaming progress, JUnit output, `--filter`) were dropped 2026-11-07; this entry is about robustness only.
-- ~~**Homepage feed merge once**~~ – done 2026-11-08. **`index.11tydata.js`** merges each page's posts and links once (**`eleventyComputed.pageItems`**); **`index.njk`** loops over it and **`computedTitle`** reads it. The page boundary comes from Eleventy's **`pagination.pages`**, so the literal **`5`** and the re-sorted collection are gone. That turned up a bug: both copies passed the current page's own last post as the boundary instead of the next page's first post, so every link dated between two pages showed on neither. 41 of 204 links were missing from the homepage and **`/page/N/`**; all 204 now show, each once and on the right page, and four **`/page/N/`** titles widened to include them. The refactor alone built identical pages apart from blank lines.
-- ~~**Merge `smartquotes` / `markdownInline` filters**~~ – done 2026-11-08. The three `markdownInline` call sites (link descriptions in `links-feed.njk` and `link_item.njk`) use `smartquotes`, and the duplicate is gone. Its comment now says what it does: inline markdown with typographer rules, piped through `striptags` where a title needs plain text. Built output was byte-identical.
-- ~~**Deploy spinner dedupe**~~ – done 2026-11-08. **`runWithSpinner`** moved to **`scripts/utils/spinner-utils.js`**, takes an argv array and the stream to draw on, and resolves the exit code with both buffered streams, so the caller decides what a failure prints. The changelog step and rsync both use it, and **`deploy.js`** lost about 150 lines. A dry-run deploy showed both spinners and the itemized listing; one pointed at a nonexistent host printed rsync's errors, the exit code, and **Deploy failed**, as before. **`test deploy-guards`** now runs the helper and fails if **`deploy.js`** spawns a process itself.
-- ~~**Template micro-dedupe in `/ogimages/`**~~ – done 2026-11-08. The six examples are one list and one `asyncEach` loop (`renderFile` is async, so a plain `for` won't do). The page's markup was identical apart from blank lines. Editing the template re-rendered its own card through the per-page mtime check of the time, so the committed PNG was restored; the card digest (below) has since ended that.
-- ~~**OG regeneration on every save in dev**~~ – settled 2026-11-08: keep it. **`eleventy.beforeWatch`** in **`events.js`** still runs the generator for each saved post or page, but with the card digest (next entry) a save only re-renders a card whose title or label changed. The other half of this entry, the duplicated **`postDate`** filter, is fixed: the generator now uses the shared **`formatPostDate`**. **Out of scope**: replacing Puppeteer with static SVG, a large fidelity tradeoff.
-- ~~**OG freshness by content hash, not mtime**~~ – done 2026-11-08, without a stored digest file: each PNG carries the digest of what it was rendered from (title, label, whether the label is a path, and the shared fingerprint) in a PNG text chunk, written by **`scripts/utils/og-card-digest.js`**. The generator re-renders only when it no longer matches, so body edits, re-saves, and fresh clones never re-issue a card; **`.cache/og-shared-fingerprint.json`** is gone. **`--stamp`** records digests without rendering, for render-code edits that don't change how cards look; all 256 cards were stamped that way, after a forced re-render earlier the same day matched them within 1/255. Tested by **`pnpm run test og-card-digest`**. Its open question, whether `test og-images` should also assert that each card is current, is answered no: the build runs the generator before any output test, and the generator exits 1 on any failure, so a stale card can't reach a deploy.
-- ~~**IndexNow — simplify or remove**~~ – kept 2026-11-08. Bing's index feeds DuckDuckGo, Yahoo, ChatGPT search, and Copilot, the running cost is one request per deploy, and the alternative this entry offered, a sitemap ping, no longer exists: Bing announced the end of anonymous sitemap pings in May 2022 and switched them off that December, and Google announced its retirement in June 2023 and its endpoint stopped working by January 2024. Fixed the same day: submissions are bounded by the built **`sitemap.xml`**, so noindex pages stop going out (every deploy had been submitting **`/changelog/`**), and pages that join or leave the sitemap are submitted, which covers deleted and renamed posts as the IndexNow spec asks. The state file records the sitemap it was submitted against. Worth a one-time look: Bing Webmaster Tools' IndexNow report, the only place that shows whether submissions are acted on.
+- **Alternate color schemes**, and how to trigger them:
+  - by build or deploy day
+  - by the day of viewing, regardless of when the site was built
+  - a random pick from a handful, per 24-hour session
+  - a random pick from a handful, cookied, changing on reload
+  - an animated color cycle over a long time scale
+  - an animated color cycle triggered by `window.blur()`
+- **An outlandish alternate stylesheet?**
+- **Subtle texture in the overflow background (light mode)?**
 
-### Nav / footer
+### Layout and CSS
 
-- **Full-width `page` layouts vs. blog-post column alignment** (2026-08-21, footer portion resolved 2026-08-21) — Noticed while building the footer nav: `jonplummer.css`'s `.license` alignment rule (marked "Trial (easy revert)") indented the footer to match the article's 2fr column on blog index/post/portfolio pages, but stayed flush-left on full-width `tags: page` pages — always seemed a little odd. **Resolved for the footer**: rather than extending the indent to match, the footer is now always full-bleed and flush regardless of page type, and the old indent rule was deleted outright (see `docs/designs/specs/2026-08-21-nav-restructure-design.md`, Styling section). **Decided 2026-11-08, not done yet:** full-width pages (`/about/`, `/now/`, and the like) get the indented, blog-post-style reading column; `/color/` and `/type/` stay full-width, since they don't work in the column. Jon is especially keen if it simplifies the site code, so when this is done, look for layout rules that exist only to keep `tags: page` pages full-width and remove them rather than adding overrides on top.
+- **Modern CSS techniques to try**
+  - Fluid typography with `clamp()`, so type scales smoothly across breakpoints ([modern-css.com](https://modern-css.com/fluid-typography-without-media-queries/))
+  - Fluid spacing with `clamp()` for the gutter and spacing tokens
+  - Container queries for the portfolio grid, so it responds to its container instead of the viewport
+  - `color-mix()` to derive hover and active colors from the three base colors. `jonplummer.css` has none yet; the lab stylesheets use it for panel and border tints. Leaning no for now (2026-11-08): it's mainly a design question, whether links should show shades beyond the three lived colors, and the link buckets already state each hover color once. It would pay off with alternate color schemes, where a theme could set base colors and get the shades free; `test color-contrast` and the `/color/` exports would then need to evaluate `color-mix()`.
 
-### Error pages (`/404`, `/500`)
+The November 2026 CSS audit is worked through; findings and decisions are in the [CSS audit doc](designs/specs/2026-11-03-css-audit-design.md).
 
-- **Inform 404 handling with real logs (deferred 2026-09-04)** — Volume is too low to be worth wiring up. Revisit if misses grow enough to cluster. Ahrefs is connected and its site audit reports 404s; check `src/_data/redirects.yaml` first, since a repeated real miss is better solved by a redirect than by a guess.
+### Tooling
+
+- **Hand test results to the runner through a temp file** instead of stdout markers, which retires the truncation failure class. Worth doing (Jon, 2026-11-08) as long as the result stays easy to follow. What's done, what stays, and what's off the table: [test result handoff](designs/specs/2026-08-13-test-results-handoff-design.md).
+- **Look at Bing Webmaster Tools' IndexNow report once.** It's the only place that shows whether submissions are acted on.
 
 ### Side projects (`/sides/`)
 
-- **Build-time changelog fetch** (2026-08-21) — `/sides/<slug>/` links out to each project's GitHub `CHANGELOG.md`/Releases for now (zero build machinery). Once a project is in active-enough development that visitors would benefit from seeing recent changes without leaving the site, pull the repo's changelog at build time and render it on the page instead of just linking. Revisit when Pointer-AR or another project's pace makes the link-out feel thin.
-- **Platform/type badge** (2026-08-21) — A `platform` frontmatter field ("iOS app," "macOS app," "Hardware," etc.) shown as a small text badge next to `status` on the card and detail page. Cheap on its own (one field, one template line) — deliberately held so it lands together with the icon idea below rather than shipping the text version first and redoing it.
-- **Platform icon set** (2026-08-21) — Small icons per platform (iOS, macOS, hardware, web) next to or replacing the text badge above. Needs actual icon assets or a mask-icon treatment like the existing disclosure-caret icon (`--icon-disclosure-caret-mask`) — a visual decision, not just data. Do this together with the platform badge field, not before it.
-- **Hero/key image on individual project pages** (2026-08-21) — `side_detail.njk` has no image slot today; `coverImage` only renders on the `/sides/` list card (`side_list_item.njk`). Adding one to the detail page is real layout work — placement, crop behavior, whether it borrows portfolio's subgrid trick (`article.portfolio-detail section { grid-template-columns: subgrid }`) or does something simpler given `.side-detail` opted out of the generic article grid. Worth a short design pass, not a quick add.
-- **AI skills/routines as a `/sides/` category** (2026-08-21) — Jon wants to eventually share personal AI skills and routines through the same `/sides/` scheme. These aren't apps: the legal page's per-project privacy framing (App Store data-practice disclosures) and the detail-page info block (App Store link, GitHub issues) are built around shippable software and probably don't fit skills/routines as-is. Needs its own short brainstorm before the first entry goes up — likely a lighter info block (source link, maybe a license) and no privacy-practice subsection unless the skill itself handles data.
+- **Covers for Menu Bar Death Clock and Plain English Service.** Both have no `coverImage` and no image in the body. Every other `/sides/` page has a cover, and the write-ups were thickened 2026-09-17. Both are paused, software-only Mac utilities, so they do little for the position.
+- **Build-time changelog fetch** (2026-08-21). Each `/sides/<slug>/` page links out to the project's GitHub `CHANGELOG.md` or Releases. Once a project moves fast enough that visitors would want recent changes without leaving the site, pull its changelog at build time and render it on the page. Revisit when Pointer-AR or another project's pace makes the link-out feel thin.
 
-### Lead figures (started 2026-10-29)
+### Portfolio
 
-- **Keep backfilling essays with figures that carry the argument.** Seven essays have a `leadFigure` as of 2026-11-07. Next come the rest of this year's long posts (16 ran over 700 words) and popular long posts of any age, ranked by traffic. Style and rules: [lead figure spec](designs/specs/2026-10-29-lead-figure-style-design.md).
-- **Decide whether and how OG cards use the lead figure** (low priority) — One candidate keeps the dark card's title-first layout and lays the figure's silhouette along the bottom in low contrast. A mock on 2026-10-29 read fine at LinkedIn's ~128×72, but a landscape is the easy case; check it against diagrams that aren't.
-- **Homepage** (low priority) — Revisit excerpts or fewer posts per page now that essays carry figures.
+- **Link the capabilities deck from the site** once it exists: host the PDF with a two-character shortlink, and link it from `/about/`. Its cases should match portfolio pieces (problem, what Jon did, what changed).
+- **Cloud fetch for presentation-to-portfolio** (deprioritized 2026-08-24). The local PDF + `.pptx` path works. Cloud fetch can wait: Google OAuth with PDF and PPTX export, Microsoft Graph download with Office PDF export, an optional batch input file, and an end-to-end run on real decks. Docs: [commands.md](commands.md#-pdf-page-conversion).
 
-### Craft atmosphere (deferred)
+### Error pages
 
-- Outlandish alternative stylesheet?
-- Subtle texture in overflow background (light mode)?
+- **Use real logs to inform 404 handling** (deferred 2026-09-04). Volume is too low to be worth wiring up; revisit if misses grow enough to cluster. Ahrefs' site audit reports 404s. Check `src/_data/redirects.yaml` first, since a redirect solves a repeated real miss better than a guess.
 
-### 🖍 Also…
+### Reach and features
 
-- ~~**Body text ignores the reader's default text size**~~ – fixed 2026-11-07. `body` used `--text-size`, a "legacy alias" fixed at `16px`, so paragraphs and everything else that inherits from `body` stayed at 16px for a reader who raised the browser's default text size, while headings, nav, and the footer grew. `body` now uses `--font-size-base` (`1rem`) and `--text-size` is gone, including a dead `13px` override in the `/color/` gallery previews. At the default size, pages render byte-identical. Browser zoom was never affected.
-
-- **Modern CSS techniques to consider**
-  - Fluid typography with clamp() for smooth scaling across breakpoints (see [https://modern-css.com/fluid-typography-without-media-queries/](https://modern-css.com/fluid-typography-without-media-queries/))
-  - Fluid spacing with clamp() for gutter/spacing tokens
-  - Container queries for portfolio grid (respond to container width instead of viewport)
-  - `color-mix()` to derive hover/active colors from the base colors. Hover and active are `var()` aliases of the three base colors in `jonplummer.css`, which has no `color-mix()` yet; the `/color/` and `/type/` lab stylesheets use it for panel and border tints. Leaning no for now (2026-11-08): it's mainly a design question, whether links should show shades beyond the three lived colors, and the link buckets already state each hover color once. It earns its keep with alternate color schemes, where themes could set base colors and get the shades for free; `test color-contrast` and the `/color/` exports would then need to evaluate `color-mix()`.
-  - **CSS audit findings** (modern-css.com/tools/css-audit/, run 2026-11-03, source: `css-audit.json`) — **88% modern**; 8 findings across 102 hits, all in `jonplummer.css`; 6 of 8 checks ready for the declared target. Grouped by effort:
-    - ~~**Quick/mechanical**~~ – done 2026-11-07. The 21 `-webkit-mask-*` lines are gone, the print rules use `break-after` / `break-inside`, and the unused `.page-break` class is deleted. The lightbox `max-height`s use `dvh`; body `min-height` uses `svh` so the sticky footer doesn't move while mobile browser toolbars show and hide. Stylelint's `property-no-vendor-prefix` and `property-no-deprecated` are back on, so `pnpm run test css` fails if either kind of property returns. Three prefixes are exempt because the site needs them: `-webkit-box-decoration-break` (Safari only reads the prefixed form), and `-webkit-` / `-moz-text-size-adjust` (iOS Safari, Firefox Android).
-    - ~~**Targeted rewrites**~~ – done 2026-11-07. The figure subgrid's child list and the three print lists are `:is()`, and screen and print rules use logical properties (`inset-inline-*`, `padding-inline-start`, `border-inline-start`, `text-align: start`). `.sr-only` and the skip link now hide with `clip-path: inset(50%)` in place instead of `left: -10000rem`. A no-op `padding-left: 0` on portrait-grid captions is gone.
-    - ~~**Cascade architecture**~~ – done 2026-11-08 without `@layer`. Unlayered CSS beats every layer, so layering `jonplummer.css` would let the page-specific stylesheets, the inline first-paint shell in `critical.njk`, and the `/color/` previews' inline themes outrank all of it. Plan: [link buckets](designs/plans/2026-11-08-link-buckets-specificity.md).
-      - ~~`!important` in print~~ – tidied 2026-11-07 without `@layer`: nobody prints the site, so a whole-cascade restructure isn't worth the risk to screen pages. 14 remain, down from 22, each kept only after a print-mode computed-style diff showed it was needed and each under a comment saying what it beats: the `*` reset, the `article` reset, the code backgrounds, the decorative `::after`s, and four token overrides for the `/color/` previews' inline styles. The same pass fixed four print bugs: a second `@page` forced A4 on every printout (now the dialog's paper), the `*` rule forced quiet text black (print tokens now set black text and gray quiet text), closed content warnings printed blank (`::details-content` now opens them, with the warning sentence kept as plain text), and the print color tokens were mostly unused. The two leftovers were fixed 2026-11-08: links to the site or the page itself (the logo mark and site title, `rel="home"`, and post titles, `rel="bookmark"`) no longer print a root-relative path after them, which the logo mark did too, and the `/color/` lab's badges print as dark text in an outline instead of pale green on nothing.
-      - ~~High-specificity selectors~~ – done 2026-11-08. Links follow one set of state rules that read `--link-*` custom properties, and each bucket (reading, titles, demo pop-out, remaindered links, nav, quiet chrome) sets them once on its container. Link-state selectors went from 25 to 6, the highest from (0,3,3) to (0,2,1); the prev/next nav rules nest under one `nav:is(.post-navigation, .pagination)`. A computed-style comparison of every element across 19 pages, 3 widths, light and dark, at rest, hover, focus, active, and print, plus visited links by pixel, came out unchanged apart from the `/color/` and `/type/` preview titles, which lose an underline the real homepage never had, and two invisible differences (an image-only link, and print styles on nav links print hides). It also showed the real default link color was `inherit`, from the first-paint shell, not ink. The 11 selectors still above (0,2,1) describe specific states or structure (the lightbox's disabled buttons, the disclosure caret, the portfolio card hover) and don't fight anything.
-      - ~~`body >` specificity ballast~~ – reviewed 2026-11-08; they stay. `body > header` and `body > footer` keep the site's header and footer apart from article headers and footers (6 headers on the homepage), and `body > header nav` keeps the `/color/` and `/type/` mock pages' navs out of the site nav's rules (13 navs on `/color/`). `body > main` matches the same element as `main` on every page but stays, so the shell rules read as a set, now written `body > :is(header, main)`.
-    - **Already clean — no findings:** floats, negative-margin gutters, translate centering, dark-mode duplicates (using `light-dark()` correctly), RTL overrides, ID selectors, z-index stacking, Sass remnants, JS-driven CSS hacks. Already using: custom properties (215), `:is()`/`:where()` (26), `focus-visible` (17), logical props (17 partial), `oklch` colors (19), `gap` (20), `text-wrap` (3), `:has()` (2), nesting (14), view transitions (2).
-  - **CSS audit — browser support panel** (same run, 2026-11-03) — 214 CSS features found; 22 not yet Widely Available, all without a fallback. Most are intentional progressive enhancements or print-only. The ones worth a decision:
-    - ~~`box-decoration-break: clone`~~ – no action needed (checked 2026-11-07). The audit says Safari never supports it, but Safari reads the prefixed form, and `:not(pre) > code` already sets `-webkit-box-decoration-break: clone` beside the unprefixed line.
-    - `@view-transition` (2 uses, Firefox No, Safari 18.2 only) — already in and working as a progressive enhancement; Firefox just doesn't animate. No action needed, but good to know that ~30% of desktop browsers are skipping it.
-    - `::selection` (1 use, not in iOS Safari) — cosmetic gap only; fine.
-    - `orphans` (1 use, Firefox No) — print stylesheet; not critical.
-    - ~~`page-break-*` properties~~ – renamed 2026-11-07 (see above).
-  - **CSS audit — design tokens panel** (same run, 2026-11-03) — 58 custom properties; color tokenization is strong (87%), spacing is leakier (68%), font sizes in between (74%).
-    - ~~Screen spacing~~ – done 2026-11-07. The audit matched values, not meanings: it suggested `--font-size-base` for `1rem` and `--font-size-lg` for `1.5rem`, but nearly every use is a margin or padding. On screen, the lightbox and lab code-panel `0.5rem`s are now `--spacing-xs`, the lightbox's `100vw/100dvh - 1rem` sizes use `--spacing-sm`, and the lab disclosure's off-grid `0.75rem` gap snapped up to `--spacing-sm`. No new token: the other screen `0.75rem` is the pop-out icon's size, not spacing.
-    - **Left on purpose:** the two `light-dark()` color duplicates are the inline first-paint shell in `critical.njk`, which has to hard-code token values and is guarded by `test critical-css`. The lightbox backdrop and the OG preview's white field are fixed colors on purpose.
-    - ~~Print~~ – done 2026-11-07. `0.5rem`, `1rem`, and `1.5rem` are `--spacing-xs/sm/md`; the off-scale `0.75rem`, `0.25rem`, and `code` padding stay literal. Colors come from print overrides of the color tokens, with `color-scheme: light` so `light-dark()` can't print dark-mode values.
-  - **Typography from [Taming Typography: Building a Modern CSS Reset](https://css-tricks.com/taming-typography-modern-css-reset/)** (CSS-Tricks, read 2026-11-07). Checked against `jonplummer.css`.
-    - ~~Three small ones~~ – done 2026-11-07: `text-wrap: pretty` on `li` and `blockquote`; `text-underline-offset: 0.15em` on links, which only shows on hover and focus since reading links have no underline at rest (`skip-ink` already kept underlines off descenders); and `hanging-punctuation: first last` on `p` and `blockquote`, which only Safari applies and which wasn't checked in Safari.
-    - ~~`text-box` for the header lockup~~ – tried 2026-11-07, not adopted. Measured in headless Chrome: today's eye-tuned px tokens put the logotype's cap top and the tagline's baseline within 0.02px of the mark's edges at the default root size with the real fonts. They drift at a 20px root (top 0.8px) and with the `sans-serif` fallback a cold `font-display: optional` load can get (top 1.9–3.4px). `text-box: trim-both cap alphabetic` on the logotype and tagline, with the mark sized in `cap` units (the tagline's cap height carried over by a registered `@property`), was exact in all four cases. It wasn't worth it: Firefox has no `text-box`, so it would add about 15 lines behind `@supports` on top of the tokens rather than replace them, and `main` would start 2.2px higher. Converting the tokens to rem doesn't fix the drift either: at a 20px root the top improves to 0.25px but the bottom worsens to 0.7px. The tokens stay as they are.
-    - Skip `font-synthesis: none`. The site loads only upright Libre Franklin, so italics in captions, blockquotes, and `em` are synthesized, and this rule would turn them upright.
-- **Alternate color schemes** and how to trigger them
-  - According to build/deploy day?
-  - Day of view regardless of when built?
-  - Random selection from a handful of options, per 24h session?
-  - Random selection from a handful of options, cookied, change on reload?
-  - Animated color cycle over a long time scale?
-  - Animated color cycle triggered by window.blur()?
-- **Progressive enhancements**
-  - Preview external links
-  - ?
-- **POSSE** (more tags for different types of entries? [https://standard.site](https://standard.site)? BSky/AT bridging?)
+- **Preview external links**, as a progressive enhancement
+- **POSSE**: more tags for different kinds of entries? [standard.site](https://standard.site)? Bluesky/AT bridging?
 
 ---
 
-## MAYBE LET'S DON'T DO THESE
+## Decided
 
-- Limiting rsync uploads with the content-hash manifest – dropped 2026-11-08; transfer volume no longer bothers Jon (a full deploy runs about 32s end to end). Spec, if it comes back: `docs/designs/specs/2026-08-06-content-hash-cloudflare-purge-design.md`.
-- Decoupling the `/color/` gallery build from `eleventy.before` – dropped 2026-11-08. The step takes about 0.13s per build, the `--watch` loop it once caused is already prevented (`writeTextFileIfChanged`, the stable wild-theme RNG), and running it in the build keeps `/color/` in step with the live tokens, which a manual step would let drift. Revisit the wiring as part of the one style-exploration capability, which replaces this pipeline anyway.
-- A `/sides/` page for **dotagents** (the agent protocol repo) – dropped 2026-11-08. The repo is private and holds career context, so there's nothing public to link from the page or `about.md`.
-- Joining [aboutideasnow.com](https://aboutideasnow.com/) – dropped 2026-11-08, not much value for this site.
-- **Colophon accessibility stats** — Site contrast (`test color-contrast`) and axe markup pass (`test a11y`) already cover the colophon; a separate colophon-specific accessibility page or stats block isn't worth building (canceled 2026-08-24).
-- Performance/regressions — static text-first site; not worth a dedicated monitoring/regression stack for now
-  - Lighthouse CLI ?
-  - Automate/integrate ahrefs somehow ?
-  - DebugBear
-  - Screpy
-  - Auditzy
-  - webpagetest.org
-  - Core Web Vitals
-  - PageSpeed Insights
-- [https://llmstxt.org/](https://llmstxt.org/) ? – low payoff for a text-first blog (spec targets doc-heavy sites); skip `/llms.txt` and parallel `.md` URLs unless a concrete need appears
-- look into [https://github.com/ttscoff/md-fixup](https://github.com/ttscoff/md-fixup) ? – not needed, good authoring-oriented tests should be enough for now
-- Signal external links (maybe not, the assumption is that 99.9% of links are external, and already written about as such)
-- View transitions for smooth crossing of layout breakpoints (likely to be awkward and late when resize causes a breakpoint transition)
-- **GitHub Actions** (This is not how I'm using GitHub just yet)
-  - Automatic builds on push to main branch
-  - Run 11ty build process
-  - Validate generated HTML (using custom validation scripts)
-  - Upload to hosting provider
-- **Monitoring & Maintenance**
-  - Set up build notifications
-  - Monitor deployment success/failure
-  - Implement rollback procedures
-  - Regular backup of generated site
+### Keeping as is
+
+- **IndexNow** (2026-11-08). Bing's index feeds DuckDuckGo, Yahoo, ChatGPT search, and Copilot, and it costs one request per deploy. The alternative, a sitemap ping, is gone: Bing switched anonymous pings off in December 2022, and Google's endpoint stopped working by January 2024.
+- **OG card regeneration on save in dev** (2026-11-08). With the card digest, a save only re-renders a card whose title or label changed. Replacing Puppeteer with static SVG is out of scope, too large a loss of fidelity.
+- **No `test og-images` check that each card is current** (2026-11-08). The build runs the generator before any output test, and the generator exits 1 on any failure, so a stale card can't reach a deploy.
+- **The `/color/` gallery build stays in `eleventy.before`** (2026-11-08). It takes about 0.13s, the `--watch` loop it once caused is already prevented (`writeTextFileIfChanged`, the stable wild-theme RNG), and running it in the build keeps `/color/` in step with the live tokens. Revisit as part of the [style-exploration tool](designs/specs/2026-08-13-style-exploration-design.md).
+- **The test runner's JSON and formatting layer** (2026-11-07). No move to `node --test`, no wholesale deletion, and no new output features (streaming progress, JUnit, `--filter`). Reasons in [test result handoff](designs/specs/2026-08-13-test-results-handoff-design.md#not-doing).
+- **No `@layer`; the `body >` shell selectors stay** (2026-11-08). Unlayered CSS beats every layer, so layering `jonplummer.css` would let page stylesheets, the first-paint shell, and the `/color/` inline themes outrank it. Details in the [CSS audit doc](designs/specs/2026-11-03-css-audit-design.md#cascade-architecture--done-2026-11-08-without-layer).
+- **Header lockup px tokens instead of `text-box`** (2026-11-07). `text-box` was exact in every case measured, but Firefox lacks it, so it would add about 15 lines behind `@supports` on top of the tokens instead of replacing them. Measurements in the [CSS audit doc](designs/specs/2026-11-03-css-audit-design.md#text-box-for-the-header-lockup--tried-2026-11-07-not-adopted).
+- **No `font-synthesis: none`** (2026-11-07). The site loads only upright Libre Franklin, so italics are synthesized, and this rule would turn them upright.
+- **CSS audit leftovers** (2026-11-07). The browser-support gaps (view transitions in Firefox, `::selection` on iOS, `orphans` in Firefox) need no action, and the remaining hard-coded colors are deliberate. Both are listed in the [CSS audit doc](designs/specs/2026-11-03-css-audit-design.md).
+
+### Not doing
+
+- **Limiting rsync uploads with the content-hash manifest** (2026-11-08). Transfer volume doesn't bother Jon; a full deploy runs about 32s end to end. Spec, if it comes back: [content-hash purge](designs/specs/2026-08-06-content-hash-cloudflare-purge-design.md).
+- **A `/sides/` page for dotagents** (2026-11-08). The repo is private and holds career context, so there's nothing public to link.
+- **Joining [aboutideasnow.com](https://aboutideasnow.com/)** (2026-11-08). Not much value for this site.
+- **Colophon accessibility stats** (2026-08-24). `test color-contrast` and `test a11y` already cover the colophon.
+- **Performance monitoring** (Lighthouse CLI, Ahrefs automation, DebugBear, Screpy, Auditzy, WebPageTest, Core Web Vitals, PageSpeed Insights). The site is static and text-first, so a monitoring and regression stack isn't worth it for now.
+- **[llms.txt](https://llmstxt.org/)**. Low payoff for a text-first blog, since the spec targets doc-heavy sites. Skip `/llms.txt` and parallel `.md` URLs unless a concrete need appears.
+- **[md-fixup](https://github.com/ttscoff/md-fixup)**. Good authoring tests should be enough.
+- **Marking external links**. Nearly every link is external, and the text already treats them that way.
+- **View transitions across layout breakpoints**. They'd likely be awkward and late when a resize crosses a breakpoint.
+- **GitHub Actions** for building, validating, and uploading on push to main. That isn't how Jon uses GitHub yet.
+- **Build and deploy monitoring**: notifications, success and failure tracking, rollback procedures, and regular backups of the generated site.
 
 ---
 
-## DONE
+## Done
 
-- **Trim test runner presentation** (2026-08-13, b234f198; recorded here 2026-11-07) – `scripts/test-runner.js` runs `fast`, `all`, and `unit` through one `runTestGroup(label, ids)` loop, and `listTests()` reads the test manifest. Landed with the move to a single test manifest.
-
-- **Duplicate sitemap entries and noindex for tool pages** (2026-10-16) – `src/sitemap.njk` now writes tagged pages from one loop and skips paginated templates, with an override map keeping `lastmod` for `/wisdom/`, `/portfolio/`, and `/sides/`. `noindex: true` in front matter adds a robots noindex and drops the page from the sitemap; applied to `/ogimages/`, `/readme/`, and `/changelog/`. `test seo-meta` fails on duplicate sitemap URLs and on noindex pages in the sitemap. Closes the Future → Error pages entry filed 2026-09-07.
-
-- **Permanent short links for QR / print** (2026-10-02) — `src/_data/shortlinks.yaml` → `.htaccess` `RewriteRule` 302s (`^XX/?$`, NC); CLI `pnpm run shortlink`; build test `shortlinks`; CF purge of short URLs when `.htaccess` changes; deploy live smoke. Canary `JP` → home. Plan: `docs/designs/plans/2026-10-02-shortlinks.md`.
-
-- **Cayuse Connect 2022 talks as portfolio items** (2026-09-24) – `2022-11-01-conference-talk-prioritizing-accessibility.md` and `2022-11-01-conference-talk-ux-philosophy.md` moved to the portfolio detail layout, each with a cover, a new intro, and slide figures captioned from the speaker notes. That finishes the Cayuse part of the talks sweep.
-
-- **Thicker `/sides/` write-ups** (2026-09-17 through 2026-09-22) – Why and status copy for the death clock, Plain English, Lister, and prvt pages; Pointer-AR expanded and named sources linked across the other sides; Usage-Chan expanded with UI screenshots and layout notes.
-
-- **Discovery interview training portfolio piece** (2026-09-11) — `src/_posts/2022/2022-05-13-discovery-interview-training.md` combines the two May 2022 Cayuse product-team training decks (session one: why discovery, the research question, and the topic list; session two: scheduling, structure, and running the interview) into one piece: 43 captioned slides, a merged PDF, three-paragraph intro. Cover `2022/05/discovery-interview-training-page-26.png`. Deployed live at /2022/05/13/discovery-interview-training/ (date is an ordering device, not the real authoring date). Site-only, not cross-posted to LinkedIn. First entry closed on the Selected → Portfolio "Look through /talks" item.
-
-- **Book Map side project page** (2026-09-10) — `src/sides/book-map.md` covers the map built for Erin's book reviews: YAML in, one HTML file out, geocoding through Nominatim with a cache, covers from Open Library falling back to Google Books, Leaflet drawing it. The page carries the real map as a live embed plus an open-in-new-tab link (`src/assets/demos/erindouglass-bookmap/`), which is what the idea asked for instead of a screenshot. Tile licensing was rechecked before publishing: Stadia domain authentication rather than a shipped API key, and CARTO's Positron and Voyager styles dropped because they now stamp "API KEY REQUIRED" across otherwise-fine tiles. `status: Ready to deploy` (a new allowed value, 6436b6f1) says plainly that it is not yet in use on her site. Cover `2026/09/book-map.jpg`.
-
-- **Ideas list at the bottom of `/sides/`** (2026-09-09) — Eleven unstarted ideas now live under the `.sides-grid` in `src/sides/index.njk`, authored as markdown inside a `{% set %}` block and rendered through the existing `markdown` filter, so adding one is typing a `-`. No data file, no `sideproject` tag, nothing enters the grid. Dates were dropped by choice; the pruning condition survives as the closing line ("The ones that sit here too long get deleted") rather than as visible ages. `now.md`'s "Still just ideas" heading and paragraph are gone, replaced by one sentence pointing at the bottom of the same page. The ISS pointer stayed with `pointer-ar.md`.
-
-- "Did you mean" suggester on /404 (2026-09-07) — trigram + edit-distance matcher over a generated destination index; spec in `docs/designs/specs/2026-09-04-404-suggester-design.md`
-
-- **`/sides/` pages for this site and Usage-Chan** (2026-09-07) — `src/sides/jonplummer-11ty.md` covers the build as a side project: the tests that came from real failures (`color-contrast`'s dual-gamut split, `critical-css` shell drift, `error-document-assets`, `design-docs-location`), the two independent deploy cursors, the `/color/` and `/type/` labs, and rem breakpoints. Labor divided with [`/colophon/`](../src/colophon.md) as planned — practical material here, the why there. Cover is the "Care has to show up in the product" post at 1600px light with the same post on a phone in dark laid over it (`2026/09/jonplummer-11ty-cover.jpg`), shot with Puppeteer and composited with sharp. `src/sides/usage-chan.md` shipped alongside it. Cross-links from `now.md` landed the same day: every project bullet there now points at its `/sides/<slug>/` page.
-- **Split repo license** (2026-09-07) — `LICENSE` covers code under MIT (scripts, `eleventy/`, templates, CSS) and content under CC BY-NC 4.0 (posts, portfolio, page copy, images, the mark). Robert Ullman's colophon portrait is carved out of both: commissioned and paid for, published here, not licensed onward. Fonts defer to their own OFL terms. GitHub won't auto-detect a split file; accepted.
-- **Colophon accuracy pass** (2026-09-07) — Three claims corrected against the CSS. Big Shoulders is on `hgroup h1` / `article h1` / `main > h1` only, so "wordmark and headings" became "wordmark and the top-level titles," with h2-and-down named as Libre Franklin. APCA checking covers the eight text-on-background pairs the palette actually uses, not "every token" — `--border-color` and `--focus-ring-color` are never scored, and the hover/visited/active aliases collapse into the pairs they point at. The "modular scale from one base size and one ratio" claim was simply false (0.875/1/1.5/2/2.5rem gives ratios of 1.14, 1.5, 1.33, 1.25, plus an off-scale 2.25 logotype); replaced with a round-rem-sizes framing and a second bullet on the near-baseline grid — body at a 24px line box and h1 at 48px land on the eight-pixel grid, h2/h3 at 1.2 deliberately don't.
-
-- **Wemo portfolio piece** (2026-09-02) — Rewritten around setup, rules people could say out loud, and the partnership story, with visuals throughout and a `coverImage` (`2022/12/wemo-nest-device-list.png`, `coverPosition: center top`). Closes the "add visuals" item.
-- **Datto Secure Edge portfolio piece** (2026-08-31) — Rewritten, illustrated, and published; `draft: true` is gone and the piece carries a cover plus six figures. The unused LED responsibility figure was dropped rather than captioned.
-- **`/sides/` covers** (2026-08-31) — Cover images added for Lister PHP, Parker, Pointer-AR, and PRVT alongside Monotasker's. Menu Bar Death Clock and Plain English Service are still uncovered — tracked under Selected → Portfolio → Side projects.
-- **`/friends` page** (2026-08-22) — Blogroll-style page at `/friends/` (`src/friends.md`), shipped after the nav restructure reserved its footer slot; intro and list have since been tightened and the meta description and OG image regenerated. Credits slashfriends.org and Nick Gray.
-- **Focus and keyboard navigation audit** (2026-08-15 through 2026-08-24) — Portable Puppeteer audit: `pnpm run focus-audit`; spec `docs/designs/specs/2026-08-13-focus-keyboard-audit-design.md`, plan `docs/designs/plans/2026-08-14-focus-keyboard-audit.md`, usage in [commands.md](commands.md#-focus-and-keyboard-audit). First run (seed 1): 1422 assertions over 13 pages. Shipped fixes: `/type/` and `/color/` preview facsimiles `inert`; lightbox arrows `aria-disabled` instead of `disabled`; shared control focus ring (`--focus-ring-*` on button/select/input/textarea/summary + skip link). Accepted gaps: `/color/` and `/type/` stay `sanityOnly` (control count); hover-vs-focus affordance rule deferred. Deliberate audit tooling — not in `test fast`.
-- **Portfolio grid thumbs** (2026-08-13) — Optional `coverPosition` / `coverZoom` front matter; tuned on most existing posts (images unchanged except Goal Manager re-export to 16:9). More air above title (`--spacing-sm` thumb→title gap). One thumb+title link, hover underline, thumb stroke. Spec: `docs/designs/plans/2026-08-13-portfolio-cover-crop.md`. Guard: `pnpm run test portfolio-cover-crop`.
-- **Presentation-to-portfolio (local PDF + PPTX)** — `pnpm run convert-presentation`; python-pptx notes via `extract-pptx-notes.py`; parser in `portfolio-notes.js`. Cloud fetch deferred (Future → Portfolio).
-- **OG one-sheet cards + PNG basename rules** (2026-08-11) — OG HTML/PNGs match live one-sheet field and type scale (`--og-type-scale` from logotype/title/body tokens); soft content field; post PNG basenames from source `YYYY-MM-DD-*` filenames (not UTC-shifted front-matter dates). Light-theme extract accepts `var()` aliases. Guard: `pnpm run test og-image-filename`.
-- **Libre Franklin body** (2026-08-10) — Replaced Public Sans (en-dash/space kerning bug). `@font-face` in `jonplummer.css`; `fonts.css` kept for OG extract. Spec notes in `docs/designs/font-stack-exploration.md`.
-- **Three-color links + dark accent** (2026-08-11) — Lived ink / quiet / accent only: nav accent→ink; reading ink→accent + visited quiet; controls ink→accent; quiet chrome quiet→ink; logotype ink→accent; EOF square quiet. Dark accent `oklch(75.9% 0.1444 18deg)` (`#ff888e`) — cooler denser red vs pale brass; soft APCA ~Lc 56 (contrast test craft floor min 55 for that pair). `/color/` generate/APCA/paste aliases aligned; site default dark accent synced in gallery.
-- **Ink ladder quiet-merge** (2026-08-10) — One quiet ink (`--text-color-light`) for dim chrome + license/colophon; `--link-visited-color: var(--text-color-light)`; `hr`/OG borders use `--border-color`; `strong`/`b` semibold. Contrast parser resolves simple `var(--token)` aliases. Link buckets finished under three-color pass. Plan: `2026-08-10-ink-ladder-quiet-merge.md`.
-- **Lean type ladder** (2026-08-10) — Reading tokens: `--font-size-quiet` (light — license, credits, lab disclosures), `--font-size-base` (body + post `code`/`pre`), `--font-size-lg/xl/2xl` (h3/h2/h1), `--font-size-logotype`. Weights: light / semibold / bold only. Dropped h4–h6 rules and unused `xs`/`sm`/`md`/`2xs`/`3xl` / thin / black tokens. About recommender names plain `###`. Demo pop-out left-aligned.
-- **One-sheet layout + spacing ladder + license align** (2026-08-10) — Dropped outer mat (`html`/`body` `--content-background-color`; header/main/footer transparent). Light field `oklch(98% 0 0deg)` (`#f8f8f8`). Spacing `--xs`…`--4xl`; `--gutter` = `--spacing-lg` for **inline only**; shell `padding-block` uses `--spacing-lg`. Below-only craft: header `--4xl`, posts `--3xl`, link-cluster seam `--2xl`. License left-aligns to article `section` column except on `tags: page` (incl. `/portfolio/` index). Optional later: widen measure via gutter/max-width. Semantic spacing aliases deferred.
-- **MPA view transitions** (2026-08) — `@view-transition { navigation: auto }` in `jonplummer.css`; `navigation: none` under `prefers-reduced-motion` and on heavy `/color/` embed leave.
-- Per-page lockup tagline rotation (2026-08-10; home salt 2026-08-11) — Pool in `site.taglines`; header uses `page.url | taglineForPage` (deterministic hash). Home (`/`) only is salted with `git rev-parse HEAD` so the lockup can change per deploy commit; other URLs stay URL-only. Expanding or reordering the pool reshuffles lockups sitewide once (accepted). Canonical `site.tagline` / `site.title` unchanged for `<title>`, OG, feeds. Spec: `docs/designs/specs/2026-08-11-home-tagline-deploy-salt-design.md`.
-- Colophon sketch credit as quiet image credit (2026-08-10) — Under sketch; roman; `--font-size-quiet` / license-quiet color; not a peer label beside the portrait.
-- Drop needless chrome italics on tagline + footer license (2026-08-10) — Captions, blockquotes keep italic.
-- ~~Logo / logotype / tagline lockup~~ (2026-08-10) — Tagline baseline nudge vs mark bottom (`--site-lockup-tagline-baseline-nudge`).
-- **Icon system** (2026-08-10) — Solid/sharp/right-angle vocabulary across JP mark, EOF square, filled disclosure caret (disclose-in-place + Show/Hide + `.site-disclosure`), open nav caret (exact 90° tip; pagination/post-nav/lightbox), new-tab, lightbox close × (square caps). Color/type preview facsimiles drop unicode arrows so CSS carets aren’t doubled. Spec: `2026-08-10-lightbox-icon-system-design.md`.
-- Drop `/masthead/` Phase 3 lab with no redirect unless a 404 is needed later (2026-08-10)
-- **Content-hash Cloudflare purge** (2026-08-07) — Local `_site` SHA-256 vs `.cache/deploy-content-manifest.json`; purge **changed ∪ deleted** only (skip **added** — new URLs never cached; same-path OG regen still purges). Credentials in `.env`; apex host. Spec/plan under `docs/designs/`. Later: rsync volume via same manifest (Future → Deploy).
-- **JP mark header + OG lockup** (2026-08-06) — Mark + Semibold logotype; valid `.site-lockup` / `hgroup`; OG mark+wordmark (data-URI for Puppeteer). Favicons already use mark geometry. Specs: header-lockup + og-lockup.
-- **Safari-safe mark, 404 root-absolute assets, colophon sketch theming** (2026-08-06; sketch path revised) — Inline SVG `currentColor` for header mark; ErrorDocument-safe absolute asset hrefs. Colophon portrait: light/dark PNGs via `<picture>` (no CSS invert; dark from lab `soft-white-fill-dimmer`). Spec: `2026-08-06-mark-404-colophon-polish-design.md` (invert was the original 3A sketch; live approach supersedes that part).
+- Front matter read with gray-matter everywhere (2026-11-08) – one parser, the one Eleventy uses, for the OG generator, the gallery sort, and the tests. All 293 files parsed the same, and OG write-backs no longer drop blank lines after the front matter.
+- Homepage feed merged once (2026-11-08) – `index.11tydata.js` merges each page's posts and links for both the list and the `/page/N/` title. The old code had hidden 41 of 204 links from every page; all now show.
+- `markdownInline` merged into `smartquotes` (2026-11-08) – built output byte-identical.
+- One deploy spinner (2026-11-08) – `runWithSpinner` in `spinner-utils.js` runs the changelog step and rsync, and `deploy.js` lost about 150 lines.
+- `/ogimages/` examples from one list (2026-11-08) – six copies became one `asyncEach` loop.
+- OG cards re-render only when what they show changes (2026-11-08) – each PNG carries a digest of its title, label, and the shared fingerprint, and `--stamp` records digests without rendering.
+- IndexNow bounded by the sitemap (2026-11-08) – noindex pages like `/changelog/` stop going out, and deleted or renamed pages are submitted.
+- Link colors as buckets (2026-11-08) – link-state selectors went from 25 to six, with no visible change. [Plan](designs/plans/2026-11-08-link-buckets-specificity.md), [CSS audit doc](designs/specs/2026-11-03-css-audit-design.md).
+- Print stylesheet tidied (2026-11-07, leftovers 2026-11-08) – 14 `!important`s, down from 22, and six print bugs fixed, from forced A4 paper to URLs printed after self-links. [CSS audit doc](designs/specs/2026-11-03-css-audit-design.md).
+- Test summary lines share one builder (2026-11-08) – no more "0 passing" beside warnings, and hand-run tests print a report instead of raw JSON. [Test result handoff](designs/specs/2026-08-13-test-results-handoff-design.md).
+- Body text follows the reader's default text size (2026-11-07) – `body` used a 16px alias, so paragraphs ignored a raised browser default while headings grew. Pages are byte-identical at the default size.
+- CSS audit cleanup (2026-11-07) – prefixes, `break-*`, `dvh`/`svh`, `:is()`, logical properties, `clip-path` hiding, spacing tokens, and three typography refinements. Stylelint now fails on vendor prefixes and deprecated properties. [CSS audit doc](designs/specs/2026-11-03-css-audit-design.md).
+- Duplicate sitemap entries and noindex for tool pages (2026-10-16) – the sitemap writes tagged pages from one loop, and `noindex: true` keeps `/ogimages/`, `/readme/`, and `/changelog/` out of search and the sitemap. `test seo` fails on either regression.
+- Permanent short links for QR and print (2026-10-02) – two-character slugs in `src/_data/shortlinks.yaml` become `.htaccess` 302s, with a CLI, a build test, and a live check on deploy. [Plan](designs/plans/2026-10-02-shortlinks.md).
+- Cayuse Connect 2022 talks as portfolio items (2026-09-24) – both talks moved to the portfolio layout with covers, new intros, and slides captioned from the speaker notes.
+- Thicker `/sides/` write-ups (2026-09-17 to 2026-09-22) – why and status copy for the death clock, Plain English, Lister, and prvt; Pointer-AR and Usage-Chan expanded.
+- Discovery interview training portfolio piece (2026-09-11) – the two May 2022 Cayuse training decks as one piece of 43 captioned slides. Site only, not cross-posted.
+- Book Map side project page (2026-09-10) – `/sides/book-map/` with the live map embedded. Tile licensing was rechecked, and it added the `Ready to deploy` status.
+- Ideas list at the bottom of `/sides/` (2026-09-09) – unstarted ideas as markdown in `src/sides/index.njk`; `now.md` points there instead of keeping its own list.
+- "Did you mean" suggester on `/404` (2026-09-07) – [spec](designs/specs/2026-09-04-404-suggester-design.md).
+- `/sides/` pages for this site and Usage-Chan (2026-09-07) – the site's page covers the practical side of the build and leaves the why to `/colophon/`. Every project on `/now/` links to its `/sides/` page.
+- Split repo license (2026-09-07) – MIT for code and CC BY-NC 4.0 for content. Robert Ullman's colophon portrait is licensed under neither, and the fonts keep their OFL terms.
+- Colophon accuracy pass (2026-09-07) – three claims corrected against the CSS: where Big Shoulders is used, which color pairs APCA checks, and a "modular scale" that didn't exist.
+- Wemo portfolio piece (2026-09-02) – rewritten around setup, rules people could say out loud, and the partnership, with visuals and a cover.
+- Datto Secure Edge portfolio piece (2026-08-31) – rewritten, illustrated, and published.
+- `/sides/` covers (2026-08-31) – Lister PHP, Parker, Pointer-AR, and PRVT, alongside Monotasker.
+- Focus and keyboard audit (2026-08-15 to 2026-08-24) – `pnpm run focus-audit`. The first run made the lab previews `inert`, made the lightbox arrows `aria-disabled`, and gave controls a shared focus ring. [Spec](designs/specs/2026-08-13-focus-keyboard-audit-design.md).
+- `/friends` page (2026-08-22) – a blogroll at `/friends/`, crediting slashfriends.org and Nick Gray.
+- Portfolio grid thumbs (2026-08-13) – optional `coverPosition` and `coverZoom` front matter tune each card's crop. [Plan](designs/plans/2026-08-13-portfolio-cover-crop.md).
+- Test runner presentation trimmed (2026-08-13) – `fast`, `all`, and `unit` run through one loop, and the test list comes from the manifest.
+- Presentation to portfolio from a local PDF and `.pptx` – `pnpm run convert-presentation` captions slides from the deck's speaker notes.
+- OG one-sheet cards and PNG basenames (2026-08-11) – cards matched the live page's field and type scale, and post card filenames come from the source filename instead of a UTC-shifted date.
+- Three-color links and dark accent (2026-08-11) – links use only ink, quiet, and accent, and the dark accent became a cooler, denser red (`#ff888e`).
+- Per-page lockup tagline (2026-08-10, home salt 2026-08-11) – each URL gets a tagline from `site.taglines` by hash, and the home page's changes with each deploy commit. [Spec](designs/specs/2026-08-11-home-tagline-deploy-salt-design.md).
+- Libre Franklin body (2026-08-10) – replaced Public Sans, which had an en-dash kerning bug.
+- Ink ladder quiet merge (2026-08-10) – one quiet ink for dim chrome, license, colophon, and visited links. [Plan](designs/plans/2026-08-10-ink-ladder-quiet-merge.md).
+- Lean type ladder (2026-08-10) – six size tokens (quiet, base, lg, xl, 2xl, logotype) and three weights (light, semibold, bold).
+- One-sheet layout and spacing ladder (2026-08-10) – no outer mat, and spacing tokens from `--spacing-xs` to `--spacing-4xl`, with `--gutter` for inline framing only.
+- Colophon sketch credit as a quiet image credit (2026-08-10).
+- No italics on the tagline and footer license (2026-08-10) – captions and blockquotes stay italic.
+- Lockup tagline baseline nudge (2026-08-10) – `--site-lockup-tagline-baseline-nudge` lines the tagline up with the bottom of the mark.
+- Icon system (2026-08-10) – one solid, sharp, right-angle vocabulary across the mark, the end-of-file square, the carets, the new-tab icon, and the lightbox close. [Spec](designs/specs/2026-08-10-lightbox-icon-system-design.md).
+- Dropped the `/masthead/` lab, with no redirect (2026-08-10).
+- MPA view transitions (2026-08) – `@view-transition { navigation: auto }`, off under reduced motion and when leaving the heavy `/color/` page.
+- Content-hash Cloudflare purge (2026-08-07) – deploy purges only URLs whose built content changed or was deleted. [Spec](designs/specs/2026-08-06-content-hash-cloudflare-purge-design.md).
+- JP mark header and OG lockup (2026-08-06) – [header lockup spec](designs/specs/2026-08-06-header-lockup-design.md), [OG lockup spec](designs/specs/2026-08-06-og-lockup-design.md).
+- Safari-safe mark, root-absolute 404 assets, and colophon sketch theming (2026-08-06) – the header mark is inline SVG with `currentColor`, error pages use root-absolute asset URLs, and the colophon portrait has light and dark PNGs. [Spec](designs/specs/2026-08-06-mark-404-colophon-polish-design.md); its CSS invert approach was superseded.
 - Reinvestigate color scheme (2026-03-28)
-  - Live theme tokens use **OKLCH** in `src/assets/css/jonplummer.css` (`light-dark(oklch(...), ...)`). Gallery pipeline, `/color/`, `suggest-colors.js`, and contrast checking are documented in [color-theme-exploration.md](designs/color-theme-exploration.md) and the Maintenance bullets in [commands.md](commands.md).
-  - Archived intent: extra color inspiration (gallery, terminals, wild presets); OKLCH as the authoring space ([vivid colors / gamut](https://modern-css.com/vivid-colors-beyond-srgb/) as reference). **Canceled / deferred:** accessibility-test-script upgrades per [accessibility-test-limitations](archive/accessibility-test-limitations.md).
+  - Live theme tokens use OKLCH in `src/assets/css/jonplummer.css` (`light-dark(oklch(...), ...)`). Gallery pipeline, `/color/`, `suggest-colors.js`, and contrast checking are documented in [color-theme-exploration.md](designs/color-theme-exploration.md) and the Maintenance bullets in [commands.md](commands.md).
+  - Canceled or deferred: accessibility-test-script upgrades per [accessibility-test-limitations](archive/accessibility-test-limitations.md).
 - Collected Wisdom: `wisdom-entries.yaml`, `/wisdom/`, per-tag pages, `/wisdom-feed.xml`, `test wisdom`, nav + sitemap; one-shot YAML generator removed in favor of editing YAML only (2026-03-25)
 - Security, needlessly custom code, unused code, and bloat audit (2026-02-21)
   - Deduped extractCssCustomProperties, simplified dotenv loading, trimmed unused exports, added nunjucks as explicit dep
-- **REMINDER (2026-02-19)**: Is the stronger memory.mdc language working? — Yes, confirmed unprompted updates in recent sessions
+- REMINDER (2026-02-19): Is the stronger memory.mdc language working? – Yes, confirmed unprompted updates in recent sessions
 - "content warning" way to hide text of out-of-norm posts (2026-02-11)
   - Implemented `contentWarning` frontmatter field with expandable `<details>` wrapper
 - Verify `.cursor/rules/eleventy-debugging.mdc` is being used by Cursor (2026-02-10)
@@ -213,7 +184,7 @@ Prioritized by **side-effect surface** — complexity that can produce a silentl
   - Automatic YAML formatting and duplicate detection
   - See docs/noteplan-import.md
 - Reorganize legacy .cursorrules into Cursor's preferred user rules and Project-specific rules structure, commit to GitHub, and cache outside of project (2026-01-11)
-- Explore codebase for deadwood  (2026-01-11) 
+- Explore codebase for deadwood (2026-01-11)
 - Implement IndexNow support (2026-01-11)
 - Refactor markdown renderer configuration - replaced HTML blocks with `{% portraitGrid %}` paired shortcode, eliminating need for preprocessor entirely (2026-01-11)
 - Fix spellcheck and SEO test filtering - improved `--changed` flag behavior for spell and seo-meta tests (2026-01-11)
@@ -228,32 +199,23 @@ Prioritized by **side-effect surface** — complexity that can produce a silentl
 - Address `test seo-meta` warnings (2025-12-24)
   - Catalog allowable exceptions and make the test be fine with those
 - I make a lot of dumb spelling errors. Implement spell checking somehow (2025-12-23)
-- Typography improvements: modular scale, baseline grid, and print styles (2025-12-08)
-- Add spinners to deploy script for lengthy operations (2025-12-08)
-- Refactor redirects to use data-driven Apache 301 redirects (2025-12-06)
-- Improve test output formatting and UX (2025-12-06)
-- Fix npm audit vulnerabilities (2025-12-06)
 - Handle drafts (2025-12-22)
 - gzip css (2025-12-22)
 - handle "image too large" ahrefs feedback (2025-12-22)
   - Automate image optimization (see [https://www.aleksandrhovhannisyan.com/blog/eleventy-the-good-the-bad-and-the-possum/#5-it-has-an-excellent-image-plugin](https://www.aleksandrhovhannisyan.com/blog/eleventy-the-good-the-bad-and-the-possum/#5-it-has-an-excellent-image-plugin) and [https://bholmes.dev/blog/picture-perfect-image-optimization/](https://bholmes.dev/blog/picture-perfect-image-optimization/) )
-- Make portfolio layout not depend on embedded HTML
-  - markdown-it-attrs and markdown-it-container?
-  - Custom shortcodes
-- Portfolio image widths: full, 2/3, 1/3, smaller for mobile images
-- Make sure margins etc are good in portfolio items, using blog posts as the example
-- Fix timezone issues (reflect real authoring date as experienced; do not break incoming links by changing URLs for existing content) (2025-12-11; follow-up 2025-12-22)
 - Watch ahrefs this weekend for "URL changed" errors; site health should be at or near 100 (2025-12-22)
+- Fix timezone issues (reflect real authoring date as experienced; do not break incoming links by changing URLs for existing content) (2025-12-11; follow-up 2025-12-22)
+- Typography improvements: modular scale, baseline grid, and print styles (2025-12-08)
+- Add spinners to deploy script for lengthy operations (2025-12-08)
 - Optimize deploy output and eliminate redundant builds (2025-12-07)
 - Extract spinner frames to shared utility for easier experimentation (2025-12-07)
 - Convert links-yaml test to unified format and clean up old format code (2025-12-07)
 - Establish method for PDF-based portfolio post offering, to enable… (2025-12-07)
-- Expand Cayuse accomplishments portfolio piece
-- Expand product trio portfolio piece
-- Add Invoca interview presentation as portfolio piece
-- Put descriptions on the main portfolio page (from item frontmatter)
 - Improve generated ogImage styling (2025-12-07)
 - Improve ogImage index.png, which currently has redundant stuff in it (2025-12-07)
+- Refactor redirects to use data-driven Apache 301 redirects (2025-12-06)
+- Improve test output formatting and UX (2025-12-06)
+- Fix npm audit vulnerabilities (2025-12-06)
 - Refactor HEAD includes to eliminate redundancy and fix index page issues (2025-12-04)
 - Update favicon setup to modern minimal standard (2025-12-04)
 - Curly quotes (2025-12-04)
@@ -262,6 +224,15 @@ Prioritized by **side-effect surface** — complexity that can produce a silentl
 - Add date range titles to paginated pages (2025-12-03)
 - Fix horizontal scrollbar on narrow viewports for articles with code blocks (2025-12-03)
 - Unify exit handling and summary printing across all scripts (2025-12-03)
+- Expand Cayuse accomplishments portfolio piece
+- Expand product trio portfolio piece
+- Add Invoca interview presentation as portfolio piece
+- Put descriptions on the main portfolio page (from item frontmatter)
+- Make portfolio layout not depend on embedded HTML
+  - markdown-it-attrs and markdown-it-container?
+  - Custom shortcodes
+- Portfolio image widths: full, 2/3, 1/3, smaller for mobile images
+- Make sure margins etc are good in portfolio items, using blog posts as the example
 - Fix sitemap pagination to only include existing pages (2025-11-30)
 - Fix sitemap pagination, improve titles, and fix unescaped quotes (2025-11-30)
 - Improve SEO validation for redirect pages and unescaped quotes (2025-11-30)
