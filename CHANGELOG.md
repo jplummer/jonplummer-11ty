@@ -24,6 +24,10 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Add card labels to the two-portfolio spec, and keep /sides in the footer
 - Give portfolio and side-project covers a crop box the template owns
 - Correct WGA to WGU in the acceptance-criteria portfolio title
+- Regenerate the WGU portfolio OG card for its corrected title
+- Drop years from portfolio cards, and move piece URLs first
+- Move portfolio pieces to /portfolio/&lt;slug&gt;/
+- Rename src/_posts to src/posts
 
 ## 2026-11-07
 
