@@ -13,7 +13,7 @@ ogImage: /assets/images/og/v2/now.png
 
 I was let go from Invoca at the beginning of June. In a way it's a relief to trade that job for the new job of finding the next job. So I'm looking for work, and pursuing a handful of design and development projects to keep my hand in (though I'd likely do them anyway). More on the professional version of me at [/about](/about/).
 
-The last stretch of my time at Invoca ran along the same line as those projects: AI-powered design tools against our existing design system, prototyping in code, bringing AI workflow agent ideas to the platform, theming React pages, and a set of [information](/2026/03/06/invoca-ia-vision/) and [data architecture](/2026/04/20/data-dictionary-prototype/) challenges that deserved attention as the product moved from technology-led to customer-centered. The tooling half of that was surfing the chaos, a posture I don't generally favor. The architecture half is the work I'd most like more of.
+The last stretch of my time at Invoca ran along the same line as those projects: AI-powered design tools against our existing design system, prototyping in code, bringing AI workflow agent ideas to the platform, theming React pages, and a set of [information](/portfolio/invoca-ia-vision/) and [data architecture](/portfolio/data-dictionary-prototype/) challenges that deserved attention as the product moved from technology-led to customer-centered. The tooling half of that was surfing the chaos, a posture I don't generally favor. The architecture half is the work I'd most like more of.
 
 ## At home
 

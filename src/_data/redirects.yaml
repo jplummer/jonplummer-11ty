@@ -43,7 +43,150 @@ redirects:
     to: /2022/07/30/the-trouble-with-nps/
   
   - from: /2022/11/02/conference-talk-ux-philosophy/
-    to: /2022/11/01/conference-talk-ux-philosophy/
+    to: /portfolio/conference-talk-ux-philosophy/
   
   - from: /2022/11/09/philosophy-of-ux-research-and-design-horizon-three-benefit/
     to: /2022/11/08/philosophy-of-ux-research-and-design-horizon-three-benefit/
+
+  # Portfolio pieces moved from dated URLs to /portfolio/<slug>/ (2026-11-08).
+  # Slashed form first, then slashless; see /uses/ above for why the order matters.
+  - from: /2001/12/09/goal-manager-identity-2001/
+    to: /portfolio/goal-manager-identity-2001/
+  - from: /2001/12/09/goal-manager-identity-2001
+    to: /portfolio/goal-manager-identity-2001/
+  - from: /2001/12/10/mann-consulting-identity-2001/
+    to: /portfolio/mann-consulting-identity-2001/
+  - from: /2001/12/10/mann-consulting-identity-2001
+    to: /portfolio/mann-consulting-identity-2001/
+  - from: /2001/12/11/mann-consulting-website-2001/
+    to: /portfolio/mann-consulting-website-2001/
+  - from: /2001/12/11/mann-consulting-website-2001
+    to: /portfolio/mann-consulting-website-2001/
+  - from: /2013/12/05/baxter-bioscience-web-apps-and-email-templates/
+    to: /portfolio/baxter-bioscience-web-apps-and-email-templates/
+  - from: /2013/12/05/baxter-bioscience-web-apps-and-email-templates
+    to: /portfolio/baxter-bioscience-web-apps-and-email-templates/
+  - from: /2013/12/06/minimed-next-gen-pump-interface/
+    to: /portfolio/minimed-next-gen-pump-interface/
+  - from: /2013/12/06/minimed-next-gen-pump-interface
+    to: /portfolio/minimed-next-gen-pump-interface/
+  - from: /2013/12/07/carelink-pro-main-interface/
+    to: /portfolio/carelink-pro-main-interface/
+  - from: /2013/12/07/carelink-pro-main-interface
+    to: /portfolio/carelink-pro-main-interface/
+  - from: /2013/12/08/carelink-pro-reports/
+    to: /portfolio/carelink-pro-reports/
+  - from: /2013/12/08/carelink-pro-reports
+    to: /portfolio/carelink-pro-reports/
+  - from: /2013/12/10/minimed-virtual-patient/
+    to: /portfolio/minimed-virtual-patient/
+  - from: /2013/12/10/minimed-virtual-patient
+    to: /portfolio/minimed-virtual-patient/
+  - from: /2014/09/10/minimed-watch-concepts/
+    to: /portfolio/minimed-watch-concepts/
+  - from: /2014/09/10/minimed-watch-concepts
+    to: /portfolio/minimed-watch-concepts/
+  - from: /2015/07/30/belkin-edit-experience-framework/
+    to: /portfolio/belkin-edit-experience-framework/
+  - from: /2015/07/30/belkin-edit-experience-framework
+    to: /portfolio/belkin-edit-experience-framework/
+  - from: /2015/07/31/belkin-values/
+    to: /portfolio/belkin-values/
+  - from: /2015/07/31/belkin-values
+    to: /portfolio/belkin-values/
+  - from: /2015/08/01/belkin-hardware-behavior-samples/
+    to: /portfolio/belkin-hardware-behavior-samples/
+  - from: /2015/08/01/belkin-hardware-behavior-samples
+    to: /portfolio/belkin-hardware-behavior-samples/
+  - from: /2016/03/21/belkin-router-out-of-box/
+    to: /portfolio/belkin-router-out-of-box/
+  - from: /2016/03/21/belkin-router-out-of-box
+    to: /portfolio/belkin-router-out-of-box/
+  - from: /2018/12/10/wemo-smart-home-accessories-and-app/
+    to: /portfolio/wemo-smart-home-accessories-and-app/
+  - from: /2018/12/10/wemo-smart-home-accessories-and-app
+    to: /portfolio/wemo-smart-home-accessories-and-app/
+  - from: /2020/02/29/linksys-app-revitalization/
+    to: /portfolio/linksys-app-revitalization/
+  - from: /2020/02/29/linksys-app-revitalization
+    to: /portfolio/linksys-app-revitalization/
+  - from: /2020/07/03/velop-whole-home-wifi-system/
+    to: /portfolio/velop-whole-home-wifi-system/
+  - from: /2020/07/03/velop-whole-home-wifi-system
+    to: /portfolio/velop-whole-home-wifi-system/
+  - from: /2021/06/01/wga-acceptance-criteria-for-patterns/
+    to: /portfolio/wgu-acceptance-criteria-for-patterns/
+  - from: /2021/06/01/wga-acceptance-criteria-for-patterns
+    to: /portfolio/wgu-acceptance-criteria-for-patterns/
+  - from: /2022/05/13/discovery-interview-training/
+    to: /portfolio/discovery-interview-training/
+  - from: /2022/05/13/discovery-interview-training
+    to: /portfolio/discovery-interview-training/
+  - from: /2022/09/11/product-trio/
+    to: /portfolio/product-trio/
+  - from: /2022/09/11/product-trio
+    to: /portfolio/product-trio/
+  - from: /2022/09/30/super-service-blueprint/
+    to: /portfolio/super-service-blueprint/
+  - from: /2022/09/30/super-service-blueprint
+    to: /portfolio/super-service-blueprint/
+  - from: /2022/10/10/cayuse-quick-yearly-accomplishments-presentation/
+    to: /portfolio/cayuse-quick-yearly-accomplishments-presentation/
+  - from: /2022/10/10/cayuse-quick-yearly-accomplishments-presentation
+    to: /portfolio/cayuse-quick-yearly-accomplishments-presentation/
+  - from: /2022/11/01/conference-talk-prioritizing-accessibility/
+    to: /portfolio/conference-talk-prioritizing-accessibility/
+  - from: /2022/11/01/conference-talk-prioritizing-accessibility
+    to: /portfolio/conference-talk-prioritizing-accessibility/
+  - from: /2022/11/01/conference-talk-ux-philosophy/
+    to: /portfolio/conference-talk-ux-philosophy/
+  - from: /2022/11/01/conference-talk-ux-philosophy
+    to: /portfolio/conference-talk-ux-philosophy/
+  - from: /2022/11/30/datto-secure-edge/
+    to: /portfolio/datto-secure-edge/
+  - from: /2022/11/30/datto-secure-edge
+    to: /portfolio/datto-secure-edge/
+  - from: /2022/12/01/my-interview-with-invoca/
+    to: /portfolio/my-interview-with-invoca/
+  - from: /2022/12/01/my-interview-with-invoca
+    to: /portfolio/my-interview-with-invoca/
+  - from: /2023/01/12/whither-critique/
+    to: /portfolio/whither-critique/
+  - from: /2023/01/12/whither-critique
+    to: /portfolio/whither-critique/
+  - from: /2025/02/06/what-even-is-a-concept-sprint/
+    to: /portfolio/what-even-is-a-concept-sprint/
+  - from: /2025/02/06/what-even-is-a-concept-sprint
+    to: /portfolio/what-even-is-a-concept-sprint/
+  - from: /2025/02/14/invoca-design-system/
+    to: /portfolio/invoca-design-system/
+  - from: /2025/02/14/invoca-design-system
+    to: /portfolio/invoca-design-system/
+  - from: /2025/06/05/monotasker/
+    to: /portfolio/monotasker/
+  - from: /2025/06/05/monotasker
+    to: /portfolio/monotasker/
+  - from: /2025/08/07/field-guide-to-problem-statements/
+    to: /portfolio/field-guide-to-problem-statements/
+  - from: /2025/08/07/field-guide-to-problem-statements
+    to: /portfolio/field-guide-to-problem-statements/
+  - from: /2025/10/25/sms-concept-video/
+    to: /portfolio/sms-concept-video/
+  - from: /2025/10/25/sms-concept-video
+    to: /portfolio/sms-concept-video/
+  - from: /2026/02/20/call-review-console/
+    to: /portfolio/call-review-console/
+  - from: /2026/02/20/call-review-console
+    to: /portfolio/call-review-console/
+  - from: /2026/03/03/coordinated-experience-prototype/
+    to: /portfolio/coordinated-experience-prototype/
+  - from: /2026/03/03/coordinated-experience-prototype
+    to: /portfolio/coordinated-experience-prototype/
+  - from: /2026/03/06/invoca-ia-vision/
+    to: /portfolio/invoca-ia-vision/
+  - from: /2026/03/06/invoca-ia-vision
+    to: /portfolio/invoca-ia-vision/
+  - from: /2026/04/20/data-dictionary-prototype/
+    to: /portfolio/data-dictionary-prototype/
+  - from: /2026/04/20/data-dictionary-prototype
+    to: /portfolio/data-dictionary-prototype/

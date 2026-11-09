@@ -58,6 +58,8 @@ The November 2026 CSS audit is worked through; findings and decisions are in the
 ### Tooling
 
 - **Hand test results to the runner through a temp file** instead of stdout markers, which retires the truncation failure class. Worth doing (Jon, 2026-11-08) as long as the result stays easy to follow. What's done, what stays, and what's off the table: [test result handoff](designs/specs/2026-08-13-test-results-handoff-design.md).
+- **Clean `_site/` before production builds.** The build never removes output, so a moved or deleted page lingers in `_site/` and goes out with the next deploy. A clean build on 2026-11-08 dropped 5,375 stale files. `test seo` happened to catch the portfolio move through duplicate titles, but a deleted page with a unique title would ship silently. Running `pnpm run clean` at the start of `scripts/build/build.js` would end it, at the cost of re-optimizing images on every build unless the image cache survives the clean.
+- **Feed excerpts can end inside a link.** `feed.njk` cuts `templateContent` at 297 characters of HTML, so an excerpt can stop mid-tag and leave an unclosed `<a>` (seen 2026-11-08 in the Belkin EDIT post's entry). Strip tags before truncating, or truncate at a paragraph.
 - **Look at Bing Webmaster Tools' IndexNow report once.** It's the only place that shows whether submissions are acted on.
 
 ### Side projects (`/sides/`)

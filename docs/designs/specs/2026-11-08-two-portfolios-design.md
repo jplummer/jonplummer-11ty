@@ -75,7 +75,7 @@ Cards show no year (decided 2026-11-08). Employment dates already have one owner
 
 ### Piece URLs
 
-Pieces move from `/YYYY/MM/DD/<slug>/` to `/portfolio/<slug>/`, and `date` stops setting the URL. That's a separate change made first, with the site otherwise unchanged (plan to follow). After it, `date` records when a piece went up on the site. It feeds the sitemap's `lastmod` and serves as a fallback order, so it never has to be right about the past.
+Pieces move from `/YYYY/MM/DD/<slug>/` to `/portfolio/<slug>/`, and `date` stops setting the URL. That's a separate change made first, with the site otherwise unchanged; see [move portfolio pieces](../plans/2026-11-08-move-portfolio-pieces.md). After it, `date` records when a piece went up on the site. It feeds the sitemap's `lastmod` and serves as a fallback order, so it never has to be right about the past.
 
 The leadership index page shares the `/portfolio/` path with the pieces. Eleventy fails the build if a piece's slug ever matches the page's URL segment, so a collision can't ship.
 

@@ -287,17 +287,32 @@ function getChangedRootSrcMarkdownPaths() {
     .filter(file => fs.existsSync(file));
 }
 
+// Dated content: blog posts in year folders, portfolio pieces flat.
+// Pieces moved out of _posts on 2026-11-08 so their URLs no longer carry a date.
+const POSTS_DIR = './src/_posts';
+const PORTFOLIO_DIR = './src/portfolio';
+
+function isPortfolioPath(filePath) {
+  return !path.relative(PORTFOLIO_DIR, filePath).startsWith('..');
+}
+
+// Display path for dated content: posts relative to _posts (as before), pieces as portfolio/<file>.
+function contentRelativePath(filePath) {
+  return isPortfolioPath(filePath) ? path.relative('./src', filePath) : path.relative(POSTS_DIR, filePath);
+}
+
 // Check file naming convention
 function validateFileName(filePath) {
   const fileName = path.basename(filePath);
-  const dirName = path.dirname(filePath);
 
-  // Check if file is in expected directory structure (YYYY/YYYY-MM-DD-slug.md)
-  const expectedPattern = /^\d{4}\/\d{4}-\d{2}-\d{2}-[^\/]+\.md$/;
-  const relativePath = path.relative('./src/_posts', filePath);
+  // Posts: YYYY/YYYY-MM-DD-slug.md under _posts. Pieces: YYYY-MM-DD-slug.md directly under portfolio.
+  const portfolio = isPortfolioPath(filePath);
+  const expectedPattern = portfolio ? /^\d{4}-\d{2}-\d{2}-[^\/]+\.md$/ : /^\d{4}\/\d{4}-\d{2}-\d{2}-[^\/]+\.md$/;
+  const relativePath = path.relative(portfolio ? PORTFOLIO_DIR : POSTS_DIR, filePath);
 
   if (!expectedPattern.test(relativePath)) {
-    return { valid: false, error: 'File not in expected directory structure (YYYY/YYYY-MM-DD-slug.md)' };
+    const expected = portfolio ? 'portfolio/YYYY-MM-DD-slug.md' : 'YYYY/YYYY-MM-DD-slug.md';
+    return { valid: false, error: `File not in expected directory structure (${expected})` };
   }
 
   // Extract expected slug and calendar day from filename (remove .md extension)
@@ -347,7 +362,7 @@ function validateYamlDataFiles(result) {
 
 function getChangedFiles() {
   return getChangedFilesSinceHead()
-    .filter(file => path.extname(file).toLowerCase() === '.md' && file.startsWith('src/_posts/'))
+    .filter(file => path.extname(file).toLowerCase() === '.md' && (file.startsWith('src/_posts/') || file.startsWith('src/portfolio/')))
     .filter(file => fs.existsSync(file));
 }
 
@@ -490,10 +505,11 @@ function validate(result, options) {
     return;
   }
 
-  const postsDir = './src/_posts';
-  if (!fs.existsSync(postsDir)) {
-    console.log('❌ _posts directory not found');
-    process.exit(1);
+  for (const dir of [POSTS_DIR, PORTFOLIO_DIR]) {
+    if (!fs.existsSync(dir)) {
+      console.log(`❌ ${dir} directory not found`);
+      process.exit(1);
+    }
   }
 
   // Posts under `_posts/`, plus top-level `src/*.md` (same scope as IndexNow static pages + `500.md`)
@@ -505,7 +521,7 @@ function validate(result, options) {
     rootMarkdownFiles = getChangedRootSrcMarkdownPaths();
     sideMarkdownFiles = getChangedSideMarkdownPaths();
   } else {
-    postMarkdownFiles = getMarkdownFiles(postsDir);
+    postMarkdownFiles = [...getMarkdownFiles(POSTS_DIR), ...getMarkdownFiles(PORTFOLIO_DIR)];
     rootMarkdownFiles = getAllRootSrcMarkdownPaths();
     sideMarkdownFiles = getAllSideMarkdownPaths();
   }
@@ -526,7 +542,7 @@ function validate(result, options) {
 
   // First pass: validate individual files
   for (const file of markdownFiles) {
-    const relativePath = path.relative('./src/_posts', file);
+    const relativePath = contentRelativePath(file);
     const content = readFile(file);
     const { frontMatter, error } = parseFrontMatter(content);
 
@@ -547,6 +563,13 @@ function validate(result, options) {
         message: 'No front matter found'
       });
       continue;
+    }
+
+    // Pieces and posts each live in their own directory; the directory decides the URL.
+    if (isPortfolioPath(file) && !hasTag(frontMatter, 'portfolio')) {
+      addIssue(fileObj, { type: 'file-location', message: 'Files in src/portfolio/ must be tagged portfolio' });
+    } else if (!isPortfolioPath(file) && hasTag(frontMatter, 'portfolio')) {
+      addIssue(fileObj, { type: 'file-location', message: 'Portfolio pieces belong in src/portfolio/, which gives them /portfolio/<slug>/ URLs' });
     }
 
     // Validate file naming

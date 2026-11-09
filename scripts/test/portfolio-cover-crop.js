@@ -117,7 +117,7 @@ function validateTemplateAndPost(result) {
     });
   }
 
-  const postPath = path.join(ROOT, 'src/_posts/2026/2026-06-05-monotasker.md');
+  const postPath = path.join(ROOT, 'src/portfolio/2026-06-05-monotasker.md');
   const post = fs.readFileSync(postPath, 'utf8');
   const postObj = addFile(result, postPath, 'monotasker.md');
   if (!/^coverPosition:\s*center 20%\s*$/m.test(post)) {

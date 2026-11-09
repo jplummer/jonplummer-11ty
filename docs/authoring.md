@@ -121,7 +121,7 @@ Run the frontmatter test to catch frontmatter parsing errors:
 pnpm run test frontmatter
 ```
 
-This checks all posts under `src/_posts/` and every top-level `src/*.md` template (for example `about.md`, `now.md`, `changelog.md`, error pages). It will identify parsing errors before they cause build failures.
+This checks all posts under `src/_posts/`, portfolio pieces under `src/portfolio/`, and every top-level `src/*.md` template (for example `about.md`, `now.md`, `changelog.md`, error pages). It will identify parsing errors before they cause build failures.
 
 ### Common Errors
 
@@ -150,6 +150,14 @@ Posts use `/assets/images/og/v2/YYYY-MM-DD-post-slug.png`. Pages use the permali
 Preview at `http://localhost:8080/ogimages/` with `pnpm run dev` running. Opening the built file from disk does not work: asset URLs are root-absolute site-wide (see [commands.md](commands.md#-open-graph-image-generation)), so `file://` resolves them against your filesystem root.
 
 For technical details on generation, see [commands.md](commands.md#-open-graph-image-generation).
+
+## Portfolio pieces
+
+Pieces live flat in `src/portfolio/YYYY-MM-DD-slug.md` and build at `/portfolio/<slug>/` (`src/portfolio/portfolio.11tydata.js`). The date in the filename and front matter isn't in the URL; it records when the piece went up. Keep the filename's date prefix anyway, because a piece's OG card is named after its source file.
+
+To rename a piece's slug, rename the file and its OG card PNG under `src/assets/images/og/v2/` together, update `ogImage`, and add two redirects in `src/_data/redirects.yaml`: the old URL with its trailing slash first, then without. Point any existing redirects at the new URL, so nothing chains.
+
+Pieces moved here from dated URLs on 2026-11-08; the redirects for the old URLs are at the end of `redirects.yaml`.
 
 ## PDF Pages
 

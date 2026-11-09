@@ -10,7 +10,7 @@ coverImage: 2026/06/onboarding.png
 coverPosition: center 20%
 appStoreUrl: https://apps.apple.com/us/app/monotasker/id6770424713
 githubUrl: https://github.com/jplummer/monotasker
-portfolioPost: /2025/06/05/monotasker/
+portfolioPost: /portfolio/monotasker/
 ogImage: /assets/images/og/v2/sides-monotasker.png
 ---
 ![One task. That's it.](/assets/images/2026/06/taskFocus.png)

@@ -12,7 +12,8 @@ function findSourceFile(relativePath) {
   // Try common patterns:
   // 1. Direct match: about.html -> src/about.md or src/about.njk
   // 2. Index files: page/1/index.html -> src/index.njk (paginated)
-  // 3. Post files: 2025/01/15/post-slug/index.html -> src/_posts/2025/01/15/post-slug.md
+  // 3. Post files: 2025/01/15/post-slug/index.html -> src/_posts/2025/2025-01-15-post-slug.md
+  //    Portfolio pieces: portfolio/slug/index.html -> src/portfolio/YYYY-MM-DD-slug.md
   // 4. Permalink files: ogimages/index.html -> src/ogimages.njk
 
   // Remove index.html and trailing slash
@@ -25,6 +26,20 @@ function findSourceFile(relativePath) {
     const postPath = path.join(srcDir, '_posts', year, `${year}-${month}-${day}-${slug}.md`);
     if (fs.existsSync(postPath)) {
       return postPath;
+    }
+  }
+
+  // Portfolio pieces: portfolio/slug/index.html -> src/portfolio/YYYY-MM-DD-slug.md
+  // (the filename keeps its date prefix; the URL doesn't). Checked before the
+  // permalink-subdirectory fallback below, which would answer src/portfolio.njk.
+  const pieceMatch = searchPath.match(/^portfolio\/([^/]+)$/);
+  if (pieceMatch) {
+    const portfolioDir = path.join(srcDir, 'portfolio');
+    const suffix = `-${pieceMatch[1]}.md`;
+    const found = fs.existsSync(portfolioDir) && fs.readdirSync(portfolioDir)
+      .find((f) => /^\d{4}-\d{2}-\d{2}-/.test(f) && f.endsWith(suffix) && f.length === 10 + suffix.length);
+    if (found) {
+      return path.join(portfolioDir, found);
     }
   }
 

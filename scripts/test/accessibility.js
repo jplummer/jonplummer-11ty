@@ -97,8 +97,14 @@ function mapSourceToBuiltHtml(sourceFile) {
     }
   }
   
+  // Portfolio pieces: src/portfolio/YYYY-MM-DD-slug.md -> portfolio/slug/index.html
+  const pieceMatch = normalizedPath.match(/^src\/portfolio\/\d{4}-\d{2}-\d{2}-([^/]+)\.md$/);
+  if (pieceMatch) {
+    builtFiles.push(`portfolio/${pieceMatch[1]}/index.html`);
+  }
+
   // Other markdown files: src/about.md -> about/index.html
-  if (normalizedPath.startsWith('src/') && normalizedPath.endsWith('.md') && !normalizedPath.startsWith('src/_posts/')) {
+  if (normalizedPath.startsWith('src/') && normalizedPath.endsWith('.md') && !normalizedPath.startsWith('src/_posts/') && !pieceMatch) {
     const relativePath = normalizedPath.replace(/^src\//, '').replace(/\.md$/, '');
     builtFiles.push(`${relativePath}/index.html`);
   }

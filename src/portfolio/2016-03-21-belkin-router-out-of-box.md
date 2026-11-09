@@ -185,7 +185,7 @@ The router isn't silent while all this is going on. It has one LED, and that LED
 
 That middle column is worth explaining, because it is a piece of product thinking I still like. An integrated modem-router puts the DSL modem inside the router, which drags the whole product onto the modem's regulatory timeline – the router can only be revised as often as the modem's certification allows. A power modem moves the DSL modem into the power brick instead. One purchase, the same two functions, and two pieces that can be updated on their own schedules.
 
-Holding one LED language across all of it, so that blinking amber meant the same thing whichever generation of the family a person had bought, was its own body of work. Some of it is in the [hardware behavioral specifications](/2015/08/01/belkin-hardware-behavior-samples/) piece.
+Holding one LED language across all of it, so that blinking amber meant the same thing whichever generation of the family a person had bought, was its own body of work. Some of it is in the [hardware behavioral specifications](/portfolio/belkin-hardware-behavior-samples/) piece.
 
 ## What carried forward
 

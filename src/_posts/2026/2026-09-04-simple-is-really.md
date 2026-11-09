@@ -7,7 +7,7 @@ tags:
 description: One guideline in our Belkin framework wasn't adopted at first. Making "Keep It Simple" usable meant arguing that simplicity is a tactic, then showing how to submerge complexity rather than remove it.
 ogImage: /assets/images/og/v2/2026-09-04-simple-is-really.png
 ---
-In 2012 we published a design framework at Belkin. Sixteen guidelines, four each under Enticing, Delightful, Interactive, and Thoughtful, plus a scorecard so you could sit down with a product and grade it. [I've written up how it was built.](/2015/07/30/belkin-edit-experience-framework/)
+In 2012 we published a design framework at Belkin. Sixteen guidelines, four each under Enticing, Delightful, Interactive, and Thoughtful, plus a scorecard so you could sit down with a product and grade it. [I've written up how it was built.](/portfolio/belkin-edit-experience-framework/)
 
 Fifteen of them worked. The sixteenth was "Keep It Simple."
 
@@ -33,9 +33,9 @@ To make a complex system appear simple, put the complexity below the surface so 
 
 This is why *looks* is underlined on that board. Simple is as simple does, and what it does may well be complicated. The impression of simplicity is what you're trying to produce.
 
-The rest of the board explains how to deliver that impression: It moves quickly. It says what's happening in familiar words. It puts one thing in front of you at a time. It asks few questions, and never a technical one it could work out on its own. When something goes wrong it automates around the problem or guides the person through it, rather than telling them they did something wrong. It shows plainly that a thing worked. And it arranges the work so there are fewer chances to go wrong. (Example: [Belkin router setup](/2016/03/21/belkin-router-out-of-box/))
+The rest of the board explains how to deliver that impression: It moves quickly. It says what's happening in familiar words. It puts one thing in front of you at a time. It asks few questions, and never a technical one it could work out on its own. When something goes wrong it automates around the problem or guides the person through it, rather than telling them they did something wrong. It shows plainly that a thing worked. And it arranges the work so there are fewer chances to go wrong. (Example: [Belkin router setup](/portfolio/belkin-router-out-of-box/))
 
-Each of those was already in the framework. It began [as a grid](/2015/07/30/belkin-edit-experience-framework/), with the four qualities down the side, the stages of somebody's life with the product across the top, and in each cell what that quality looks like at that moment. "Minimize decisions" and "obvious first step" were Interactive at setup and first use. "Smart defaults" and "minimize pitfalls" were Thoughtful at the same stage. "Get out of the way" was Thoughtful at start up.
+Each of those was already in the framework. It began [as a grid](/portfolio/belkin-edit-experience-framework/), with the four qualities down the side, the stages of somebody's life with the product across the top, and in each cell what that quality looks like at that moment. "Minimize decisions" and "obvious first step" were Interactive at setup and first use. "Smart defaults" and "minimize pitfalls" were Thoughtful at the same stage. "Get out of the way" was Thoughtful at start up.
 
 So the November board didn't invent anything; it collected. Those lines lived in separate cells, each written about a stage of the experience rather than about simplicity, and pulling them together under "simple," the word we were arguing about, is what turned a disagreement into a list of things to do.
 

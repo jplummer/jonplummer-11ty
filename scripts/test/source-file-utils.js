@@ -86,6 +86,33 @@ async function validate(result) {
     });
   }
 
+  // Portfolio pieces moved to /portfolio/<slug>/ on 2026-11-08. Without this
+  // mapping, the permalink-subdirectory fallback answers src/portfolio.njk for
+  // every piece, so seo and og-images would check the index page instead.
+  const piece = fs.readdirSync(path.join(srcDir, 'portfolio')).find((f) => /^\d{4}-\d{2}-\d{2}-.+\.md$/.test(f));
+  if (piece) {
+    const slug = piece.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/\.md$/, '');
+    assertEqual(
+      fileObj,
+      findSourceFile(`portfolio/${slug}/index.html`),
+      path.join(srcDir, 'portfolio', piece),
+      'portfolio piece: portfolio/slug/index.html -> src/portfolio/YYYY-MM-DD-slug.md'
+    );
+  } else {
+    addIssue(fileObj, {
+      severity: 'error',
+      type: 'source-file-utils-fixture',
+      message: 'No piece found under src/portfolio to test permalink resolution',
+    });
+  }
+
+  assertEqual(
+    fileObj,
+    findSourceFile('portfolio/index.html'),
+    path.join(srcDir, 'portfolio.njk'),
+    'portfolio index: portfolio/index.html -> src/portfolio.njk'
+  );
+
   assertEqual(
     fileObj,
     findSourceFile('this/path/does-not/exist/index.html'),

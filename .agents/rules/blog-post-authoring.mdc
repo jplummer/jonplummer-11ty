@@ -8,6 +8,7 @@ alwaysApply: false
 
 - Location: `src/_posts/YYYY/YYYY-MM-DD-kebab-slug.md`
 - The folder **`YYYY`** must match the calendar year in **`date`** and in the filename prefix.
+- Portfolio pieces don't go here. They live flat in `src/portfolio/YYYY-MM-DD-kebab-slug.md` and build at `/portfolio/<slug>/`; the date isn't in the URL. `pnpm run test frontmatter` fails if a `portfolio`-tagged file is under `_posts/`.
 
 ## Required front matter
 
