@@ -268,7 +268,7 @@ The script will:
 - Regenerate images if `ogImage` is set in frontmatter but the image file doesn't exist
 - Skip images that are up to date (incremental generation - typically <1 second if all up-to-date)
 - Render with one browser for the whole run, and fail any image whose fonts fell back (the site's `font-display: optional` faces are forced to `block` for screenshots)
-- Skip files with manually set `ogImage` values only if the image file exists
+- Skip files with manually set `ogImage` values only if the image file exists. The check is on the file the value names (`/assets/…` → `src/assets/…`), so a page can borrow another page's card. If that file is missing, the page is treated as having no override and gets its own card
 
 **Force Regeneration**: To regenerate all images (useful after changing OG image styling):
 

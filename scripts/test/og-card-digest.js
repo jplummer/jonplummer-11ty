@@ -2,7 +2,8 @@
 
 /**
  * Guards the OG card digest (scripts/utils/og-card-digest.js) and the
- * generator's decision to render, keep, or stamp a card. The digest changes
+ * generator's decision to render, keep, or stamp a card, and to leave a
+ * manual ogImage alone when its own file exists. The digest changes
  * with what the card shows and with the shared fingerprint, and nothing else.
  * Writing it into a PNG leaves every other chunk byte-identical, replaces an
  * earlier digest instead of adding a second, and keeps every chunk's CRC
@@ -20,7 +21,7 @@ const {
   writePngDigest,
   readChunks,
 } = require('../utils/og-card-digest');
-const { cardAction } = require('../content/generate-og-images');
+const { cardAction, isKeptManualOgImage } = require('../content/generate-og-images');
 const { addFile, addIssue } = require('../utils/test-results');
 const { runTest } = require('../utils/test-runner-helper');
 
@@ -114,6 +115,22 @@ function runUnitAssertions(result) {
     assert.strictEqual(cardAction(png, changed), 'render', 'different digest');
     assert.strictEqual(cardAction(png, changed, { stamp: true }), 'stamp', 'different digest with --stamp');
     assert.strictEqual(cardAction(png, base, { force: true }), 'render', '--force');
+  });
+
+  check('generator leaves a manual ogImage alone only when its own file exists', () => {
+    const derived = '/assets/images/og/v2/portfolio-pieces.png';
+    const borrowed = '/assets/images/og/v2/portfolio.png';
+    const seen = [];
+    const exists = (p) => { seen.push(p); return p === borrowed; };
+    // Borrowing another page's card: checks the borrowed file, not the derived one
+    assert.strictEqual(isKeptManualOgImage(borrowed, derived, exists), true, 'borrowed card exists');
+    assert.deepStrictEqual(seen, [borrowed]);
+    assert.strictEqual(isKeptManualOgImage('/assets/images/custom-og.png', derived, exists), false, 'override file missing');
+    // Not overrides, whatever is on disk
+    const always = () => true;
+    assert.strictEqual(isKeptManualOgImage(derived, derived, always), false, 'derived path');
+    assert.strictEqual(isKeptManualOgImage('auto', derived, always), false, 'auto');
+    assert.strictEqual(isKeptManualOgImage(undefined, derived, always), false, 'absent');
   });
 }
 

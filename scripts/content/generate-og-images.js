@@ -43,6 +43,21 @@ function cardAction(pngPath, digest, { force = false, stamp = false } = {}) {
   return stamp ? 'stamp' : 'render';
 }
 
+// Whether a page's ogImage is a manual override to leave alone: a path other
+// than 'auto' or the one we derive for this file, whose own file exists.
+// A value equal to the derived path is one we wrote on an earlier run, so it
+// falls through to the digest check. An override whose file is missing gets a
+// card rendered at the derived path. exists(urlPath) checks the site path.
+function isKeptManualOgImage(ogImage, derivedUrl, exists) {
+  if (!ogImage || ogImage === 'auto' || ogImage === derivedUrl) return false;
+  return exists(ogImage);
+}
+
+// A site path such as /assets/images/og/v2/x.png, as a file under src/.
+function sitePathExists(urlPath) {
+  return fs.existsSync(path.join(process.cwd(), 'src', urlPath));
+}
+
 // Render the card document for one image.
 // card: { title, label?, labelIsPath? } – see og-image-body.njk
 async function renderOgImageHtml(card) {
@@ -195,21 +210,10 @@ async function processFile(filePath, options = {}) {
   // True only when front matter had no ogImage key (not `auto`, not a manual path)
   const hadMissingOgImageKey = !frontMatter.ogImage;
   
-  // Skip only a genuine manual override: an ogImage pointing somewhere other than
-  // the path we derive for this file. A value equal to ogImageUrlPath is one we wrote
-  // ourselves on a previous run (see the frontmatter write below), so it must fall
-  // through to the digest check or nothing would ever be refreshed after its
-  // first generation. If force is true, regenerate regardless. If the override's
-  // file doesn't exist, generate it below.
-  const isManualOverride =
-    frontMatter.ogImage && frontMatter.ogImage !== 'auto' && frontMatter.ogImage !== ogImageUrlPath;
-
-  if (!force && isManualOverride) {
-    // Check if the file actually exists - if not, we need to generate it
-    if (fs.existsSync(ogImagePath)) {
-      return { updated: false, skipped: true, reason: 'Manual ogImage set and file exists' };
-    }
-    // File doesn't exist, so we'll generate it below
+  // Skip a manual override whose own file exists (a page may borrow another
+  // page's card). --force regenerates regardless.
+  if (!force && isKeptManualOgImage(frontMatter.ogImage, ogImageUrlPath, sitePathExists)) {
+    return { updated: false, skipped: true, reason: 'Manual ogImage set and file exists' };
   }
   
   // Ensure og directory exists
@@ -490,5 +494,5 @@ if (require.main === module) {
   });
 }
 
-module.exports = { generateOgImages, generateDefaultCard, processFile, generateOgImage, renderOgImageHtml, cardAction };
+module.exports = { generateOgImages, generateDefaultCard, processFile, generateOgImage, renderOgImageHtml, cardAction, isKeptManualOgImage };
 
