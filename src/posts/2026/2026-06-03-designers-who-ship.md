@@ -6,6 +6,7 @@ tags:
   - post
 description: The job of the designer is in flux. So is the job of the design leader.
 ogImage: /assets/images/og/v2/2026-06-03-designers-who-ship.png
+leadFigure: /assets/images/2026/06/designer-range.svg
 ---
 Last month I shipped [an iOS app](https://apps.apple.com/app/monotasker/id6770424713). I designed it, wrote the code (with the help of Claude), got it through App Store review, and [published a blog post about what it taught me](/2026/05/24/dont-show-me-the-lobby/) about designing a solid onboarding experience. I'm a UX director by title. I did it because I could, and because it solved a problem I have in a novel way that I think will be useful.
 
@@ -36,6 +37,8 @@ Designers can no longer be a translation layer between PM and engineering. A des
 ## The new designer imperative
 
 The result is a demand for designers that have more depth in areas adjacent to their traditional role, with more fluency in front-end development, data structures, customer development, metrics. There's more pressure to have *range*. A designer with range understands enough about product strategy and code to collaborate without translation – to drive the conversation rather than draft behind it. That's different from being asked to do everyone's job.
+
+![A map with Design in the middle and Customers, Metrics, Data, Code, and Strategy around it. A designer's range used to reach a little into Strategy, Customers, and Metrics. Now it reaches further everywhere, a little more into Customers, and much further into Metrics, Data, and Code.](/assets/images/2026/06/designer-range.svg)
 
 The designers and design leaders who will matter most in the next few years are the ones who have range and can show that their concepts are useful, feasible, and convenient for users, not just assert that through good diagramming. Not decorators, not generalists who do a little of everything. People will thrive who know how to use AI tools to close the gap between intent and execution and who understand that the hardest design problem is finding and expressing a direction that is sound, not just generating options or polishing the chosen solution.
 
