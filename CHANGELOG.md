@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-11-09
+
+- Add the Concept Sprint path figure
+
 ## 2026-11-08
 
 - Tidy the print stylesheet and fix four print bugs
@@ -28,6 +32,8 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Drop years from portfolio cards, and move piece URLs first
 - Move portfolio pieces to /portfolio/&lt;slug&gt;/
 - Rename src/_posts to src/posts
+- Rewrite 86 descriptions that stopped mid-sentence
+- Add the designer range map to Designers who ship
 
 ## 2026-11-07
 
