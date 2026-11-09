@@ -11,6 +11,19 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Re-render an OG card only when what it shows changes
 - Merge the homepage feed once and show the links that fell between pages
 - Submit only sitemap pages to IndexNow, and pages that leave it
+- Share one summary-line builder between test runs, and tidy `ideas.md`
+- Read front matter with gray-matter everywhere
+- Add the same-objects lead figure to the agentic AI essay
+- Express link colors as buckets and lower link-state specificity
+- Record today's decisions in `ideas.md`
+- Nest the prev/next nav rules under one selector
+- Keep the body > shell selectors, and close the specificity plan
+- Add the handoff-to-hands-on lead figure to This is what we were waiting for
+- Reorder `ideas.md` around the hardware-and-software position
+- Spec two portfolios built from one data file
+- Add card labels to the two-portfolio spec, and keep /sides in the footer
+- Give portfolio and side-project covers a crop box the template owns
+- Correct WGA to WGU in the acceptance-criteria portfolio title
 
 ## 2026-11-07
 
@@ -1002,4 +1015,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-11-08
+Last deployed on 2026-11-09
