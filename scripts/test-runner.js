@@ -276,7 +276,35 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
   });
 }
 
-async function runTestGroup(label, ids) {
+/**
+ * Unit tests written for node:test run in one `node --test` call. The reporter
+ * (scripts/utils/unit-reporter.js) prints each file's line and, for several
+ * files, the closing summary. One file at a time: several unit tests write
+ * temp files and one launches a browser.
+ */
+function runNodeTests(ids, { verbose = false } = {}) {
+  const reporterPath = path.join(__dirname, 'utils', 'unit-reporter.js');
+  const env = { ...process.env };
+  if (verbose) env.UNIT_REPORT_VERBOSE = '1';
+  else delete env.UNIT_REPORT_VERBOSE;
+
+  return new Promise((resolve) => {
+    const child = spawn(process.execPath, [
+      '--test',
+      '--test-concurrency=1',
+      `--test-reporter=${reporterPath}`,
+      '--test-reporter-destination=stdout',
+      ...ids.map((id) => manifest.getTestScriptPath(id)),
+    ], { stdio: 'inherit', shell: false, env });
+    child.on('close', (code) => resolve(code === null ? 1 : code));
+    child.on('error', (error) => {
+      console.error(`❌ Could not start node --test: ${error.message}`);
+      resolve(1);
+    });
+  });
+}
+
+async function runTestGroup(label, ids, { extraFailure = false } = {}) {
   console.log(`Running ${label} tests...\n`);
 
   const results = [];
@@ -292,7 +320,7 @@ async function runTestGroup(label, ids) {
     }
   }
   const allPassed = printOverallSummary(results);
-  process.exit(allPassed ? 0 : 1);
+  process.exit(allPassed && !extraFailure ? 0 : 1);
 }
 
 function parseArgs() {
@@ -334,8 +362,15 @@ async function main() {
   }
 
   if (testType === 'unit') {
-    await runTestGroup('unit', manifest.getTestsByGroup('unit').map(t => t.id));
-    // runTestGroup handles its own exit
+    // Until every unit test is on node:test, run the converted ones first,
+    // then the rest through the old loop. Either failing fails the run.
+    const nodeTestIds = manifest.getNodeTestIds();
+    const legacyIds = manifest.getTestsByGroup('unit').map(t => t.id).filter(id => !nodeTestIds.includes(id));
+    console.log('Running unit tests...\n');
+    const nodeTestCode = nodeTestIds.length > 0 ? await runNodeTests(nodeTestIds) : 0;
+    if (legacyIds.length === 0) process.exit(nodeTestCode);
+    console.log('');
+    await runTestGroup('unit', legacyIds, { extraFailure: nodeTestCode !== 0 });
     return;
   }
 
@@ -359,6 +394,10 @@ async function main() {
     process.exit(1);
   }
   
+  if (manifest.getNodeTestIds().includes(testType)) {
+    process.exit(await runNodeTests([testType], { verbose: true }));
+  }
+
   const result = await runTest(testType, false, false, formatOptions); // compact = false for individual runs
   process.exit(result.passed ? 0 : 1);
 }

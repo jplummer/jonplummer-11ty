@@ -149,6 +149,8 @@ const TESTS = [
     name: 'Test JSON pipe', description: 'Large TEST_RUNNER JSON survives piped stdout (partial write + drain)', emoji: '🧪' },
   { id: 'live-smoke', script: 'live-smoke.js', groups: ['unit'],
     name: 'Live smoke checks', description: 'Live smoke check list and response evaluation', emoji: '🩺' },
+  { id: 'unit-reporter', script: 'unit-reporter.js', groups: ['unit'], nodeTest: true,
+    name: 'Unit test reporter', description: 'Result lines, counts, and failures for node:test unit tests', emoji: '📋' },
   { id: 'security', script: { file: 'security-audit.js', dir: 'security' }, groups: [], nonJson: true,
     name: 'Security Audit', description: 'Security audit', emoji: '🛡️' },
 ];
@@ -203,6 +205,17 @@ function getAllTestIds() {
 
 function getNonJsonTestIds() {
   return TESTS.filter((t) => t.nonJson).map((t) => t.id);
+}
+
+/** Unit tests written for node:test; `pnpm run test unit` runs them in one `node --test` call. */
+function getNodeTestIds() {
+  return TESTS.filter((t) => t.nodeTest).map((t) => t.id);
+}
+
+/** The id whose script is this absolute path, or null. The unit reporter uses it to label a file. */
+function getTestIdByScriptPath(absPath) {
+  const test = TESTS.find((t) => getTestScriptPath(t.id) === absPath);
+  return test ? test.id : null;
 }
 
 function getHelpListedTests() {
@@ -268,6 +281,20 @@ function validateManifest() {
     );
   }
 
+  // A nodeTest entry is a unit test that really is written for node:test.
+  for (const test of TESTS.filter((t) => t.nodeTest)) {
+    assertManifest(test.groups.includes('unit'), `'${test.id}' is marked nodeTest but is not in the unit group`);
+    const source = fs.readFileSync(getTestScriptPath(test.id), 'utf8');
+    assertManifest(
+      source.includes("require('node:test')"),
+      `'${test.id}' is marked nodeTest but does not require node:test`
+    );
+    assertManifest(
+      !source.includes('test-runner-helper'),
+      `'${test.id}' is marked nodeTest but still uses test-runner-helper`
+    );
+  }
+
   // Pre + post build lists contain no duplicates and no unknown ids.
   for (const group of ['pre', 'post']) {
     const groupIds = getTestsByGroup(group).map((t) => t.id);
@@ -289,6 +316,8 @@ module.exports = {
   getTestsByGroup,
   getAllTestIds,
   getNonJsonTestIds,
+  getNodeTestIds,
+  getTestIdByScriptPath,
   getHelpListedTests,
   validateManifest,
 };
