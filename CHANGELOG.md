@@ -6,6 +6,7 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - List the posts that still need lead figures
 - Let a page borrow another page's OG card
 - Build every portfolio from one list file
+- Empty _site/ before each build, except optimized images
 
 ## 2026-11-08
 
