@@ -18,6 +18,8 @@ const {
   parseLinksYaml,
   addLinksToData,
   formatLinksYaml,
+  readNote,
+  resolveTargetDate,
 } = require('../content/import-noteplan-links');
 
 const LINKS_YAML = path.join(__dirname, '..', '..', 'src', '_data', 'links.yaml');
@@ -141,4 +143,84 @@ test('the script reads the real links.yaml the same way a YAML parser does', () 
 test('rewriting the real links.yaml changes nothing', () => {
   const text = fs.readFileSync(LINKS_YAML, 'utf8');
   assert.strictEqual(formatLinksYaml(parseLinksYaml(text)), text);
+});
+
+// The cases below each lost or damaged a link until 2026-11-10.
+
+test('a URL with parentheses is read whole', () => {
+  assert.deepStrictEqual(
+    parseLink('* [Dongle – Wikipedia](https://en.wikipedia.org/wiki/Dongle_(disambiguation)) A note (with an aside).'),
+    {
+      url: 'https://en.wikipedia.org/wiki/Dongle_(disambiguation)',
+      title: 'Dongle – Wikipedia',
+      description: 'A note (with an aside).',
+    }
+  );
+});
+
+test('a title with square brackets is read whole', () => {
+  assert.deepStrictEqual(parseLink('* [Review: [REC] – Someone](https://example.com/rec) Scary.'), {
+    url: 'https://example.com/rec',
+    title: 'Review: [REC] – Someone',
+    description: 'Scary.',
+  });
+});
+
+test('bracketed text before the link is not taken for the link', () => {
+  const link = parseLink('* [sic] [The title](https://example.com/a) note');
+  assert.strictEqual(link.title, 'The title');
+  assert.strictEqual(link.url, 'https://example.com/a');
+});
+
+test('a line that holds a URL but was not imported is reported with its line number', () => {
+  const note = [
+    '# Links to import',
+    '',
+    '* [Fine](https://example.com/fine) imported',
+    '1. [Numbered](https://example.com/numbered)',
+    '[No bullet](https://example.com/bare)',
+    '* https://example.com/no-title just pasted',
+    '* [Never closed](https://example.com/open',
+    'A plain sentence with no address in it.',
+  ].join('\n');
+  const { links, unread } = readNote(note);
+  assert.deepStrictEqual(links.map((link) => link.url), ['https://example.com/fine']);
+  assert.deepStrictEqual(unread.map((line) => line.number), [4, 5, 6, 7]);
+  assert.strictEqual(unread[0].text, '1. [Numbered](https://example.com/numbered)');
+});
+
+test('a note that imports cleanly reports no unread lines', () => {
+  const { links, unread } = readNote('# Links to import\n\n* [A](https://example.com/a) note\n- [B](https://example.com/b)\n');
+  assert.strictEqual(links.length, 2);
+  assert.deepStrictEqual(unread, []);
+});
+
+test("today's date is the Pacific calendar day, not the UTC one", () => {
+  // 5:30 pm PST on Nov 10 is already Nov 11 in UTC.
+  assert.strictEqual(resolveTargetDate([], new Date('2026-11-11T01:30:00Z')), '2026-11-10');
+  // One minute either side of Pacific midnight in summer (PDT, UTC-7).
+  assert.strictEqual(resolveTargetDate([], new Date('2026-07-01T06:59:00Z')), '2026-06-30');
+  assert.strictEqual(resolveTargetDate([], new Date('2026-07-01T07:00:00Z')), '2026-07-01');
+});
+
+test('--date is read with an equals sign or a space', () => {
+  const now = new Date('2026-11-11T01:30:00Z');
+  assert.strictEqual(resolveTargetDate(['--date=2025-12-25'], now), '2025-12-25');
+  assert.strictEqual(resolveTargetDate(['--clear', '--date', '2025-12-25'], now), '2025-12-25');
+});
+
+test('a --date that is not a real YYYY-MM-DD day is refused', () => {
+  const now = new Date('2026-11-11T01:30:00Z');
+  for (const args of [['--date=tomorrow'], ['--date=2025-13-01'], ['--date=2025-02-30'], ['--date'], ['--date', '--clear']]) {
+    assert.throws(() => resolveTargetDate(args, now), /--date/, `expected ${JSON.stringify(args)} to be refused`);
+  }
+});
+
+test("two apostrophes in a row survive being read back from the file", () => {
+  const link = { url: 'https://example.com/a', title: "The ''scare quotes'' piece: part 2" };
+  assert.deepStrictEqual(parseLinksYaml(formatLinksYaml({ '2026-01-01': [link] }))['2026-01-01'], [link]);
+});
+
+test('a links file that is not valid YAML stops the import', () => {
+  assert.throws(() => parseLinksYaml('2026-01-01:\n  - url: "https://example.com/a\n    title: A\n'));
 });

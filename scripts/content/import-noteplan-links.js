@@ -6,14 +6,18 @@
  * Parses a NotePlan note containing links and adds them to links.yaml
  * 
  * Usage:
- *   npm run import-links
- *   npm run import-links -- --clear  (clears note after importing)
- *   npm run import-links -- --date 2025-01-21  (use specific date instead of today)
+ *   pnpm run import-links
+ *   pnpm run import-links --clear            (clears the note after importing)
+ *   pnpm run import-links --date=2025-01-21  (that date instead of today's)
+ *
+ * Unit test: scripts/test/noteplan-import.js
  */
 
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
+const yaml = require('js-yaml');
+const { DateTime } = require('luxon');
 const { formatYamlString } = require('../utils/frontmatter-utils');
 
 // NotePlan path (setapp version)
@@ -85,52 +89,93 @@ function sanitizeUrl(url) {
 }
 
 /**
- * Parse a NotePlan link entry
- * Format: * [Title – Author](URL) Description here
+ * Index of the bracket that closes the one at `open`, counting nested pairs.
+ * -1 when it never closes.
  */
-function parseLink(line) {
-  // Match markdown link: [text](url)
-  const linkMatch = line.match(/\[([^\]]+)\]\(([^)]+)\)/);
-  if (!linkMatch) {
-    return null;
+function matchingClose(text, open, openChar, closeChar) {
+  let depth = 0;
+  for (let i = open; i < text.length; i++) {
+    if (text[i] === openChar) depth++;
+    else if (text[i] === closeChar && --depth === 0) return i;
   }
-
-  const title = linkMatch[1].trim();
-  const url = sanitizeUrl(linkMatch[2]);
-
-  // Everything after the link is the description
-  const afterLink = line.substring(linkMatch.index + linkMatch[0].length).trim();
-  const description = afterLink || undefined;
-
-  return {
-    url,
-    title,
-    description
-  };
+  return -1;
 }
 
 /**
- * Parse NotePlan note content
+ * Parse a NotePlan link entry
+ * Format: * [Title – Author](URL) Description here
+ *
+ * Brackets in the title and parentheses in the URL are matched in pairs, so
+ * `[Review: [REC]](…)` and `(…/Dongle_(disambiguation))` are read whole. The
+ * first `[…]` that is followed at once by `(…)` is the link.
  */
-function parseNotePlanNote(content) {
-  const lines = content.split('\n');
+function parseLink(line) {
+  for (let open = line.indexOf('['); open !== -1; open = line.indexOf('[', open + 1)) {
+    const close = matchingClose(line, open, '[', ']');
+    if (close === -1 || line[close + 1] !== '(') continue;
+    const urlEnd = matchingClose(line, close + 1, '(', ')');
+    if (urlEnd === -1) continue;
+
+    const title = line.slice(open + 1, close).trim();
+    const url = sanitizeUrl(line.slice(close + 2, urlEnd));
+    if (!title || !url) continue;
+
+    // Everything after the link is the description
+    const description = line.slice(urlEnd + 1).trim() || undefined;
+    return { url, title, description };
+  }
+  return null;
+}
+
+/**
+ * Read a NotePlan note: the links on its bulleted lines, plus every other
+ * line that holds a web address and so looks like a link that was meant to be
+ * imported (no bullet, a numbered item, a bare URL, a link that never closes).
+ * main() prints those and won't clear the note while there are any.
+ * @returns {{ links: object[], unread: { number: number, text: string }[] }}
+ */
+function readNote(content) {
   const links = [];
+  const unread = [];
 
-  for (const line of lines) {
+  content.split('\n').forEach((line, index) => {
     const trimmed = line.trim();
-    
-    // Skip empty lines, headers, and non-bullet lines
-    if (!trimmed || trimmed.startsWith('#') || !trimmed.match(/^[*\-•]/)) {
-      continue;
-    }
+    // Skip empty lines and headers
+    if (!trimmed || trimmed.startsWith('#')) return;
 
-    const link = parseLink(trimmed);
+    const link = /^[*\-•]/.test(trimmed) ? parseLink(trimmed) : null;
     if (link) {
       links.push(link);
+    } else if (/https?:\/\//i.test(trimmed)) {
+      unread.push({ number: index + 1, text: trimmed });
     }
-  }
+  });
 
-  return links;
+  return { links, unread };
+}
+
+/**
+ * Parse NotePlan note content: the links only.
+ */
+function parseNotePlanNote(content) {
+  return readNote(content).links;
+}
+
+/**
+ * The date key new links are filed under: --date=YYYY-MM-DD (or --date
+ * YYYY-MM-DD), else today's calendar day in America/Los_Angeles. UTC would
+ * file an evening import under tomorrow. Throws on a --date it can't use.
+ */
+function resolveTargetDate(args, now = new Date()) {
+  const index = args.findIndex((arg) => arg === '--date' || arg.startsWith('--date='));
+  if (index === -1) {
+    return DateTime.fromJSDate(now, { zone: 'America/Los_Angeles' }).toISODate();
+  }
+  const value = args[index] === '--date' ? args[index + 1] : args[index].slice('--date='.length);
+  if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value) || !DateTime.fromISO(value).isValid) {
+    throw new Error(`--date needs a real day as YYYY-MM-DD, such as --date=2025-12-25; got "${value || ''}"`);
+  }
+  return value;
 }
 
 /**
@@ -147,96 +192,19 @@ function formatLinkYaml(link) {
 }
 
 /**
- * Parse existing links.yaml content
+ * Parse existing links.yaml content into { 'YYYY-MM-DD': [link, …] }.
+ * JSON_SCHEMA keeps the date keys as strings; the default schema makes them
+ * Dates. Throws on invalid YAML, which stops the import before it writes.
+ * A date with no links is left out, so it isn't written back.
  */
 function parseLinksYaml(content) {
+  const data = yaml.load(content, { schema: yaml.JSON_SCHEMA }) || {};
   const result = {};
-  const lines = content.split('\n');
-  let currentDate = null;
-  let currentLinks = [];
-  let i = 0;
-
-  while (i < lines.length) {
-    const line = lines[i].trim();
-    
-    // Date key (YYYY-MM-DD:)
-    if (/^\d{4}-\d{2}-\d{2}:$/.test(line)) {
-      if (currentDate && currentLinks.length > 0) {
-        result[currentDate] = currentLinks;
-      }
-      currentDate = line.replace(':', '');
-      currentLinks = [];
-      i++;
-    }
-    // Link entry start (- url:)
-    else if (line.startsWith('- url:')) {
-      const linkObj = {};
-      
-      // Extract URL
-      const urlMatch = line.match(/url:\s*(.+)$/);
-      if (urlMatch) {
-        let url = urlMatch[1].trim();
-        // Remove quotes
-        if ((url.startsWith('"') && url.endsWith('"')) || 
-            (url.startsWith("'") && url.endsWith("'"))) {
-          url = url.slice(1, -1);
-        }
-        // Unescape (handle both backslash escapes and doubled apostrophes)
-        url = url.replace(/\\"/g, '"').replace(/\\\\/g, '\\').replace(/''/g, "'");
-        linkObj.url = url;
-      }
-      
-      i++;
-      
-      // Look for title (next line, indented)
-      if (i < lines.length && lines[i].trim().startsWith('title:')) {
-        const titleMatch = lines[i].trim().match(/title:\s*(.+)$/);
-        if (titleMatch) {
-          let title = titleMatch[1].trim();
-          // Remove quotes
-          if ((title.startsWith('"') && title.endsWith('"')) || 
-              (title.startsWith("'") && title.endsWith("'"))) {
-            title = title.slice(1, -1);
-          }
-          // Unescape (handle both backslash escapes and doubled apostrophes)
-          title = title.replace(/\\"/g, '"').replace(/\\\\/g, '\\').replace(/''/g, "'");
-          linkObj.title = title;
-        }
-        i++;
-      }
-      
-      // Look for description (next line, indented, optional)
-      if (i < lines.length && lines[i].trim().startsWith('description:')) {
-        const descMatch = lines[i].trim().match(/description:\s*(.+)$/);
-        if (descMatch) {
-          let desc = descMatch[1].trim();
-          // Remove quotes
-          if ((desc.startsWith('"') && desc.endsWith('"')) || 
-              (desc.startsWith("'") && desc.endsWith("'"))) {
-            desc = desc.slice(1, -1);
-          }
-          // Unescape (handle both backslash escapes and doubled apostrophes)
-          desc = desc.replace(/\\"/g, '"').replace(/\\\\/g, '\\').replace(/''/g, "'");
-          linkObj.description = desc;
-        }
-        i++;
-      }
-      
-      if (linkObj.url && linkObj.title) {
-        currentLinks.push(linkObj);
-      }
-    }
-    // Empty line or other content - skip
-    else {
-      i++;
+  for (const [date, links] of Object.entries(data)) {
+    if (Array.isArray(links) && links.length > 0) {
+      result[date] = links;
     }
   }
-
-  // Add last date group
-  if (currentDate && currentLinks.length > 0) {
-    result[currentDate] = currentLinks;
-  }
-
   return result;
 }
 
@@ -321,8 +289,13 @@ function main() {
   // Parse command line arguments
   const args = process.argv.slice(2);
   const shouldClear = args.includes('--clear');
-  const dateArg = args.find(arg => arg.startsWith('--date='));
-  const targetDate = dateArg ? dateArg.split('=')[1] : new Date().toISOString().split('T')[0];
+  let targetDate;
+  try {
+    targetDate = resolveTargetDate(args);
+  } catch (error) {
+    console.error(`❌ ${error.message}`);
+    process.exit(1);
+  }
 
   console.log('🔍 Looking for NotePlan note: "' + NOTE_NAME + '"...\n');
 
@@ -337,9 +310,21 @@ function main() {
 
   // Read and parse NotePlan note
   const noteContent = fs.readFileSync(notePath, 'utf8');
-  const parsedLinks = parseNotePlanNote(noteContent);
+  const { links: parsedLinks, unread } = readNote(noteContent);
+
+  // Lines that hold a web address but weren't read as a link. Printed on
+  // every path out of here, so a skipped link is never silent.
+  const reportUnread = () => {
+    if (unread.length === 0) return;
+    console.log(`⚠️  ${unread.length} line(s) hold a web address but were not imported:`);
+    for (const { number, text } of unread) {
+      console.log(`   line ${number}: ${text}`);
+    }
+    console.log('   Each link needs a bullet and this shape: * [Title – Author](URL) Description\n');
+  };
 
   if (parsedLinks.length === 0) {
+    reportUnread();
     console.log('⚠️  No links found in note.');
     console.log('   Add links in format: * [Title – Author](URL) Description');
     process.exit(0);
@@ -354,7 +339,14 @@ function main() {
   }
 
   const yamlContent = fs.readFileSync(LINKS_YAML_PATH, 'utf8');
-  const linksData = parseLinksYaml(yamlContent);
+  let linksData;
+  try {
+    linksData = parseLinksYaml(yamlContent);
+  } catch (error) {
+    console.error(`❌ ${LINKS_YAML_PATH} is not valid YAML, so nothing was imported:`);
+    console.error(`   ${error.message.split('\n')[0]}`);
+    process.exit(1);
+  }
 
   // Add new links (skips duplicates)
   const results = addLinksToData(linksData, targetDate, parsedLinks);
@@ -374,9 +366,13 @@ function main() {
       console.log(`\n⚠️  Skipped ${results.skipped.length} duplicate(s).`);
     }
     console.log('');
+    reportUnread();
 
-    // Clear note if requested
-    if (shouldClear) {
+    // Clear note if requested, unless that would throw away a line we couldn't read
+    if (shouldClear && unread.length > 0) {
+      console.log('⚠️  Did not clear the NotePlan note, so those lines are kept. Fix them and import again;');
+      console.log('   the links imported just now will be skipped as duplicates.\n');
+    } else if (shouldClear) {
       clearNote(notePath);
       console.log('✅ Cleared NotePlan note\n');
     }
@@ -388,6 +384,7 @@ function main() {
     console.log('');
   } else {
     console.log(`ℹ️  No new links to import. Skipped ${results.skipped.length} duplicate(s).\n`);
+    reportUnread();
     process.exit(0);
   }
 }
@@ -400,6 +397,8 @@ module.exports = {
   sanitizeUrl,
   parseLink,
   parseNotePlanNote,
+  readNote,
+  resolveTargetDate,
   parseLinksYaml,
   urlExists,
   addLinksToData,

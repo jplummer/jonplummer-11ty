@@ -48,7 +48,7 @@ Importing before building lets you review and test links locally before they go 
 ```
 
 **Components:**
-- `*` or `-` bullet (required)
+- `*`, `-`, or `•` bullet (required)
 - `[Title]` markdown link text (required)
 - `(URL)` markdown link URL (required)
 - Description after the link (optional)
@@ -119,6 +119,8 @@ pnpm run import-links --clear
 
 Clears the NotePlan note after successful import (leaves just the heading).
 
+The note is not cleared when it holds a line with a web address that wasn't imported, such as a link with no bullet, a numbered item, or a bare URL. The import prints each such line with its line number and keeps the note, so nothing you captured is thrown away. Fix the lines and import again; the links already imported are skipped as duplicates.
+
 ### Use Specific Date
 
 ```bash
@@ -127,7 +129,7 @@ pnpm run import-links --date=2025-12-25
 
 Uses the specified date instead of today. Useful for backdating links.
 
-**Default:** Today's date (e.g., `2026-01-22`)
+**Default:** Today's date in Pacific time (e.g., `2026-01-22`). `--date 2025-12-25` with a space works too. A value that isn't a real `YYYY-MM-DD` day stops the import.
 
 ## Workflow
 
