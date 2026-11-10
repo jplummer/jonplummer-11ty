@@ -12,8 +12,8 @@
 const { spawn } = require('child_process');
 const path = require('path');
 const assert = require('assert');
-const { addFile, addIssue, resultIcon } = require('../utils/test-results');
-const { runTest } = require('../utils/test-runner-helper');
+const { test } = require('node:test');
+const { resultIcon } = require('../utils/test-results');
 
 const HELPER = path.join(__dirname, 'fixtures', 'emit-large-test-json.js');
 
@@ -35,54 +35,31 @@ function capturePipedJson() {
   });
 }
 
-async function validate(result) {
-  const fileObj = addFile(result, 'scripts/utils/test-results.js', 'test-json-pipe');
+test('large JSON survives a piped stdout', async () => {
+  const { code, stdoutData } = await capturePipedJson();
+  assert.strictEqual(code, 0, `helper exit code ${code}`);
+  assert.ok(
+    stdoutData.includes('__TEST_JSON_START__'),
+    'missing __TEST_JSON_START__'
+  );
+  assert.ok(
+    stdoutData.length > 65536,
+    `fixture must exceed pipe buffer (got ${stdoutData.length} bytes)`
+  );
+  assert.ok(
+    stdoutData.includes('__TEST_JSON_END__'),
+    `missing __TEST_JSON_END__ (got ${stdoutData.length} bytes — likely truncated)`
+  );
+  const start = stdoutData.indexOf('__TEST_JSON_START__') + '__TEST_JSON_START__'.length;
+  const end = stdoutData.indexOf('__TEST_JSON_END__');
+  const parsed = JSON.parse(stdoutData.slice(start, end).trim());
+  assert.ok(parsed.files && parsed.files.length >= 800, 'expected large files array');
+});
 
-  try {
-    const { code, stdoutData } = await capturePipedJson();
-    assert.strictEqual(code, 0, `helper exit code ${code}`);
-    assert.ok(
-      stdoutData.includes('__TEST_JSON_START__'),
-      'missing __TEST_JSON_START__'
-    );
-    assert.ok(
-      stdoutData.length > 65536,
-      `fixture must exceed pipe buffer (got ${stdoutData.length} bytes)`
-    );
-    assert.ok(
-      stdoutData.includes('__TEST_JSON_END__'),
-      `missing __TEST_JSON_END__ (got ${stdoutData.length} bytes — likely truncated)`
-    );
-    const start = stdoutData.indexOf('__TEST_JSON_START__') + '__TEST_JSON_START__'.length;
-    const end = stdoutData.indexOf('__TEST_JSON_END__');
-    const parsed = JSON.parse(stdoutData.slice(start, end).trim());
-    assert.ok(parsed.files && parsed.files.length >= 800, 'expected large files array');
-  } catch (err) {
-    addIssue(fileObj, {
-      type: 'test-json-pipe',
-      message: err.message,
-      ruleId: 'test-json-pipe-complete',
-    });
-  }
-
-  try {
-    assert.strictEqual(resultIcon({ issues: 0, warnings: 0 }, 0), '✅');
-    assert.strictEqual(resultIcon({ issues: 0, warnings: 2 }, 0).trim(), '⚠️');
-    assert.strictEqual(resultIcon({ issues: 1, warnings: 2 }, 1), '❌');
-    assert.strictEqual(resultIcon({ issues: 0, warnings: 0 }, 1), '❌', 'non-zero exit with no issues reported');
-    assert.strictEqual(resultIcon({ issues: 0, warnings: 0 }, null), '❌', 'killed by a signal');
-  } catch (err) {
-    addIssue(fileObj, {
-      type: 'test-json-pipe',
-      message: `result icon: ${err.message}`,
-      ruleId: 'test-result-icon',
-    });
-  }
-}
-
-runTest({
-  testType: 'test-json-pipe',
-  testName: 'Test JSON pipe completeness',
-  requiresSite: false,
-  validateFn: validate,
+test('result icon follows the exit code', () => {
+  assert.strictEqual(resultIcon({ issues: 0, warnings: 0 }, 0), '✅');
+  assert.strictEqual(resultIcon({ issues: 0, warnings: 2 }, 0).trim(), '⚠️');
+  assert.strictEqual(resultIcon({ issues: 1, warnings: 2 }, 1), '❌');
+  assert.strictEqual(resultIcon({ issues: 0, warnings: 0 }, 1), '❌', 'non-zero exit with no issues reported');
+  assert.strictEqual(resultIcon({ issues: 0, warnings: 0 }, null), '❌', 'killed by a signal');
 });

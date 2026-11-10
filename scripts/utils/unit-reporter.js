@@ -62,6 +62,12 @@ function errorMessage(details) {
   return String((error.cause && error.cause.message) || error.message || error).trim();
 }
 
+/** An assertion error puts the compared values on later lines; keep them in the short form. */
+function oneLine(message, max = 200) {
+  const joined = message.split('\n').map((line) => line.trim()).filter(Boolean).join(' ');
+  return joined.length > max ? `${joined.slice(0, max - 1)}…` : joined;
+}
+
 const indent = (text, spaces) => text.split('\n').map((line) => ' '.repeat(spaces) + line).join('\n');
 
 function renderFile(state, outcome, verbose) {
@@ -72,7 +78,7 @@ function renderFile(state, outcome, verbose) {
     if (t.status === 'fail') {
       lines.push(verbose
         ? `    ❌ ${t.name}\n${indent(t.message, 8)}`
-        : `    - ${t.name}: ${t.message.split('\n')[0]}`);
+        : `    - ${t.name}: ${oneLine(t.message)}`);
     } else if (verbose) {
       lines.push(`    ${t.status === 'skip' ? '⏭️ ' : '✅'} ${t.name}`);
     }

@@ -44,7 +44,8 @@ test('a failing file is marked, counted, and names the failed test', () => {
   const { status, stdout } = run(['fail.js']);
   assert.strictEqual(status, 1);
   assert.match(stdout, /❌ .*fail\.js: 🧪 2 tests, ✅ 1 passing, ❌ 1 failing/);
-  assert.match(stdout, /this one fails: one is not two/);
+  // The compared values are on later lines of the error; the short form must keep them.
+  assert.match(stdout, /this one fails: one is not two 1 !== 2/);
 });
 
 test('a file that crashes on load fails and shows its stack trace', () => {

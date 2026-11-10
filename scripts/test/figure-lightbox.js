@@ -8,61 +8,40 @@ const {
   largestUrlFromAttributes,
 } = require('../../eleventy/utils/largest-srcset-url');
 const { applyFigureLightboxLinks } = require('../../eleventy/utils/figure-lightbox-transform');
-const { addFile, addIssue } = require('../utils/test-results');
-const { runTest } = require('../utils/test-runner-helper');
+const { test } = require('node:test');
 
-function runUnitAssertions(result) {
-  const fileObj = addFile(result, 'eleventy/utils/largest-srcset-url.js', 'largest-srcset-url.js');
-  const transformFile = addFile(
-    result,
-    'eleventy/utils/figure-lightbox-transform.js',
-    'figure-lightbox-transform.js'
+test('picks largest w descriptor', () => {
+  assert.strictEqual(
+    largestUrlFromSrcset('/a-400.webp 400w, /a-1600.webp 1600w, /a-800.webp 800w'),
+    '/a-1600.webp'
   );
+});
 
-  function check(file, name, fn) {
-    try {
-      fn();
-    } catch (err) {
-      addIssue(file, {
-        type: 'figure-lightbox-unit',
-        message: `${name}: ${err.message}`,
-        ruleId: 'figure-lightbox-unit',
-      });
-    }
-  }
+test('returns null for empty srcset', () => {
+  assert.strictEqual(largestUrlFromSrcset(''), null);
+  assert.strictEqual(largestUrlFromSrcset(null), null);
+});
 
-  check(fileObj, 'picks largest w descriptor', () => {
-    assert.strictEqual(
-      largestUrlFromSrcset('/a-400.webp 400w, /a-1600.webp 1600w, /a-800.webp 800w'),
-      '/a-1600.webp'
-    );
-  });
+test('prefers widest source srcset over img src', () => {
+  assert.strictEqual(
+    largestUrlFromAttributes({
+      src: '/fallback.jpeg',
+      srcset: '/img-800.jpeg 800w',
+      sourceSrcsets: ['/img-400.webp 400w, /img-1600.webp 1600w'],
+    }),
+    '/img-1600.webp'
+  );
+});
 
-  check(fileObj, 'returns null for empty srcset', () => {
-    assert.strictEqual(largestUrlFromSrcset(''), null);
-    assert.strictEqual(largestUrlFromSrcset(null), null);
-  });
+test('falls back to src when no srcset', () => {
+  assert.strictEqual(
+    largestUrlFromAttributes({ src: '/only.jpeg', srcset: '', sourceSrcsets: [] }),
+    '/only.jpeg'
+  );
+});
 
-  check(fileObj, 'prefers widest source srcset over img src', () => {
-    assert.strictEqual(
-      largestUrlFromAttributes({
-        src: '/fallback.jpeg',
-        srcset: '/img-800.jpeg 800w',
-        sourceSrcsets: ['/img-400.webp 400w, /img-1600.webp 1600w'],
-      }),
-      '/img-1600.webp'
-    );
-  });
-
-  check(fileObj, 'falls back to src when no srcset', () => {
-    assert.strictEqual(
-      largestUrlFromAttributes({ src: '/only.jpeg', srcset: '', sourceSrcsets: [] }),
-      '/only.jpeg'
-    );
-  });
-
-  check(transformFile, 'wraps picture in main figure with largest href', () => {
-    const input = `
+test('wraps picture in main figure with largest href', () => {
+  const input = `
       <main>
         <figure>
           <picture>
@@ -72,79 +51,39 @@ function runUnitAssertions(result) {
           <figcaption>A diagram</figcaption>
         </figure>
       </main>`;
-    const out = applyFigureLightboxLinks(input);
-    assert.match(out, /class="figure-lightbox-trigger"/);
-    assert.match(out, /href="\/a-1600\.webp"/);
-    assert.match(out, /<a class="figure-lightbox-trigger"[^>]*>\s*<picture>/);
-  });
+  const out = applyFigureLightboxLinks(input);
+  assert.match(out, /class="figure-lightbox-trigger"/);
+  assert.match(out, /href="\/a-1600\.webp"/);
+  assert.match(out, /<a class="figure-lightbox-trigger"[^>]*>\s*<picture>/);
+});
 
-  check(transformFile, 'is idempotent', () => {
-    const input = `
+test('is idempotent', () => {
+  const input = `
       <main><figure>
         <picture><img src="/a.jpeg" srcset="/a-1600.jpeg 1600w" alt=""></picture>
       </figure></main>`;
-    const once = applyFigureLightboxLinks(input);
-    const twice = applyFigureLightboxLinks(once);
-    assert.strictEqual(once, twice);
-  });
-}
+  const once = applyFigureLightboxLinks(input);
+  const twice = applyFigureLightboxLinks(once);
+  assert.strictEqual(once, twice);
+});
 
-function runSmokeAssertions(result) {
-  const siteRoot = path.join(__dirname, '../../_site');
-  if (!fs.existsSync(siteRoot)) return;
+// When a build is on disk, also look at one built page that has figures.
+// Skipped without _site/, so this file still runs before a first build.
+// If _site/ is there and none of the samples are, that is a failure: until
+// 2026-11-09 this returned quietly, and it had checked nothing since the
+// portfolio pieces moved to /portfolio/<slug>/ the day before.
+const SITE_ROOT = path.join(__dirname, '../../_site');
+const SAMPLE_CANDIDATES = [
+  'portfolio/invoca-ia-vision/index.html',
+  'portfolio/call-review-console/index.html',
+  '2026/09/04/simple-is-really/index.html',
+];
 
-  const smokeFile = addFile(result, '_site', 'figure-lightbox-smoke');
-  const sampleCandidates = [
-    '2026/03/06/invoca-ia-vision/index.html',
-    '2026/02/20/call-review-console/index.html',
-    '2025/08/07/field-guide-to-problem-statements/index.html',
-  ];
-
-  let html = null;
-  let used = null;
-  for (const rel of sampleCandidates) {
-    const full = path.join(siteRoot, rel);
-    if (fs.existsSync(full)) {
-      html = fs.readFileSync(full, 'utf8');
-      used = rel;
-      break;
-    }
-  }
-
-  if (!html) return;
-
-  if (!html.includes('/assets/js/figure-lightbox.js')) {
-    addIssue(smokeFile, {
-      type: 'figure-lightbox-smoke',
-      message: `${used}: missing figure-lightbox.js script tag`,
-      ruleId: 'figure-lightbox-script',
-    });
-  }
-  if (!html.includes('id="figure-lightbox"')) {
-    addIssue(smokeFile, {
-      type: 'figure-lightbox-smoke',
-      message: `${used}: missing #figure-lightbox dialog`,
-      ruleId: 'figure-lightbox-dialog',
-    });
-  }
-  if (!html.includes('figure-lightbox-trigger')) {
-    addIssue(smokeFile, {
-      type: 'figure-lightbox-smoke',
-      message: `${used}: expected at least one figure-lightbox-trigger`,
-      ruleId: 'figure-lightbox-trigger',
-    });
-  }
-}
-
-runTest({
-  testType: 'figure-lightbox',
-  testName: 'Figure lightbox',
-  requiresSite: false,
-  validateFn: async (result) => {
-    runUnitAssertions(result);
-    runSmokeAssertions(result);
-  },
-}).catch((err) => {
-  console.error(err);
-  process.exit(1);
+test('a built page has the lightbox script, dialog, and a trigger', { skip: fs.existsSync(SITE_ROOT) ? false : 'no _site/ to look at' }, () => {
+  const used = SAMPLE_CANDIDATES.find((rel) => fs.existsSync(path.join(SITE_ROOT, rel)));
+  assert.ok(used, `none of the sample pages exist in _site/; update SAMPLE_CANDIDATES: ${SAMPLE_CANDIDATES.join(', ')}`);
+  const html = fs.readFileSync(path.join(SITE_ROOT, used), 'utf8');
+  assert.ok(html.includes('/assets/js/figure-lightbox.js'), `${used}: missing figure-lightbox.js script tag`);
+  assert.ok(html.includes('id="figure-lightbox"'), `${used}: missing #figure-lightbox dialog`);
+  assert.ok(html.includes('figure-lightbox-trigger'), `${used}: expected at least one figure-lightbox-trigger`);
 });

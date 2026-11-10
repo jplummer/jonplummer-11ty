@@ -16,8 +16,7 @@ const {
   SHARED_CONTENT_FILES,
   computeOgSharedFingerprint,
 } = require('../utils/og-shared-fingerprint');
-const { addFile, addIssue } = require('../utils/test-results');
-const { runTest } = require('../utils/test-runner-helper');
+const { test } = require('node:test');
 
 const ROOT = path.join(__dirname, '..', '..');
 const FIXTURE_FILES = [
@@ -45,102 +44,83 @@ function makeFixture() {
   return dir;
 }
 
-function runUnitAssertions(result) {
-  const file = addFile(result, 'scripts/utils/og-shared-fingerprint.js', 'og-shared-fingerprint');
-
-  function check(name, fn) {
+/** Runs a test body against a fresh temp copy of the real inputs, removed afterward. */
+function withFixture(fn) {
+  return () => {
     const dir = makeFixture();
     try {
-      fn(dir);
-    } catch (err) {
-      addIssue(file, {
-        type: 'og-shared-fingerprint',
-        message: `${name}: ${err.message}`,
-        ruleId: 'og-shared-fingerprint',
-      });
+      return fn(dir);
     } finally {
       fs.rmSync(dir, { recursive: true, force: true });
     }
-  }
-
-  function edit(dir, rel, fn) {
-    const abs = path.join(dir, rel);
-    fs.writeFileSync(abs, fn(fs.readFileSync(abs, 'utf8')), 'utf8');
-  }
-
-  check('is stable across runs', (dir) => {
-    assert.strictEqual(computeOgSharedFingerprint(dir), computeOgSharedFingerprint(dir));
-  });
-
-  check('ignores CSS rules outside :root', (dir) => {
-    const before = computeOgSharedFingerprint(dir);
-    edit(dir, 'src/assets/css/jonplummer.css', (css) =>
-      `${css}\n.figure-lightbox-test-only { color: red; }\n`
-    );
-    assert.strictEqual(computeOgSharedFingerprint(dir), before);
-  });
-
-  check('changes when a design token changes', (dir) => {
-    const before = computeOgSharedFingerprint(dir);
-    edit(dir, 'src/assets/css/jonplummer.css', (css) =>
-      css.replace(':root {', ':root {\n  --og-fingerprint-test: 1px;')
-    );
-    assert.notStrictEqual(computeOgSharedFingerprint(dir), before);
-  });
-
-  check('changes when the card template changes', (dir) => {
-    const before = computeOgSharedFingerprint(dir);
-    edit(dir, 'src/_includes/og-image.njk', (njk) => `${njk}\n<!-- test -->\n`);
-    assert.notStrictEqual(computeOgSharedFingerprint(dir), before);
-  });
-
-  check('changes when the card styles change', (dir) => {
-    const before = computeOgSharedFingerprint(dir);
-    edit(dir, 'src/assets/css/og-card.css', (css) => `${css}\n/* test */\n`);
-    assert.notStrictEqual(computeOgSharedFingerprint(dir), before);
-  });
-
-  check('changes when the fit script changes', (dir) => {
-    const before = computeOgSharedFingerprint(dir);
-    edit(dir, 'src/assets/js/og-card-fit.js', (js) => `${js}\n// test\n`);
-    assert.notStrictEqual(computeOgSharedFingerprint(dir), before);
-  });
-
-  check('ignores site.js fields the card never reads', (dir) => {
-    const before = computeOgSharedFingerprint(dir);
-    edit(dir, 'src/_data/site.js', (js) =>
-      js.replace('const taglines = [', "const taglines = [\n    'Fingerprint test tagline',")
-    );
-    assert.strictEqual(computeOgSharedFingerprint(dir), before);
-  });
-
-  check('changes when a site field the card reads changes', (dir) => {
-    const before = computeOgSharedFingerprint(dir);
-    edit(dir, 'src/_data/site.js', (js) =>
-      js.replace("const author = 'Jon Plummer';", "const author = 'Jon Plummer Test';")
-    );
-    assert.notStrictEqual(computeOgSharedFingerprint(dir), before);
-  });
-
-  check('every site field the card templates read is fingerprinted', () => {
-    const used = new Set();
-    for (const rel of SHARED_CONTENT_FILES.filter((f) => f.endsWith('.njk'))) {
-      const njk = fs.readFileSync(path.join(ROOT, rel), 'utf8');
-      for (const m of njk.matchAll(/\bsite\.(\w+)/g)) used.add(m[1]);
-    }
-    const missing = [...used].filter((key) => !OG_SITE_FIELDS.includes(key));
-    assert.deepStrictEqual(missing, [], `add to OG_SITE_FIELDS: ${missing.join(', ')}`);
-  });
+  };
 }
 
-runTest({
-  testType: 'og-shared-fingerprint',
-  testName: 'OG Shared Fingerprint',
-  requiresSite: false,
-  validateFn: async (result) => {
-    runUnitAssertions(result);
-  },
-}).catch((err) => {
-  console.error(err);
-  process.exit(1);
+function edit(dir, rel, fn) {
+  const abs = path.join(dir, rel);
+  fs.writeFileSync(abs, fn(fs.readFileSync(abs, 'utf8')), 'utf8');
+}
+
+test('is stable across runs', withFixture((dir) => {
+  assert.strictEqual(computeOgSharedFingerprint(dir), computeOgSharedFingerprint(dir));
+}));
+
+test('ignores CSS rules outside :root', withFixture((dir) => {
+  const before = computeOgSharedFingerprint(dir);
+  edit(dir, 'src/assets/css/jonplummer.css', (css) =>
+    `${css}\n.figure-lightbox-test-only { color: red; }\n`
+  );
+  assert.strictEqual(computeOgSharedFingerprint(dir), before);
+}));
+
+test('changes when a design token changes', withFixture((dir) => {
+  const before = computeOgSharedFingerprint(dir);
+  edit(dir, 'src/assets/css/jonplummer.css', (css) =>
+    css.replace(':root {', ':root {\n  --og-fingerprint-test: 1px;')
+  );
+  assert.notStrictEqual(computeOgSharedFingerprint(dir), before);
+}));
+
+test('changes when the card template changes', withFixture((dir) => {
+  const before = computeOgSharedFingerprint(dir);
+  edit(dir, 'src/_includes/og-image.njk', (njk) => `${njk}\n<!-- test -->\n`);
+  assert.notStrictEqual(computeOgSharedFingerprint(dir), before);
+}));
+
+test('changes when the card styles change', withFixture((dir) => {
+  const before = computeOgSharedFingerprint(dir);
+  edit(dir, 'src/assets/css/og-card.css', (css) => `${css}\n/* test */\n`);
+  assert.notStrictEqual(computeOgSharedFingerprint(dir), before);
+}));
+
+test('changes when the fit script changes', withFixture((dir) => {
+  const before = computeOgSharedFingerprint(dir);
+  edit(dir, 'src/assets/js/og-card-fit.js', (js) => `${js}\n// test\n`);
+  assert.notStrictEqual(computeOgSharedFingerprint(dir), before);
+}));
+
+test('ignores site.js fields the card never reads', withFixture((dir) => {
+  const before = computeOgSharedFingerprint(dir);
+  edit(dir, 'src/_data/site.js', (js) =>
+    js.replace('const taglines = [', "const taglines = [\n    'Fingerprint test tagline',")
+  );
+  assert.strictEqual(computeOgSharedFingerprint(dir), before);
+}));
+
+test('changes when a site field the card reads changes', withFixture((dir) => {
+  const before = computeOgSharedFingerprint(dir);
+  edit(dir, 'src/_data/site.js', (js) =>
+    js.replace("const author = 'Jon Plummer';", "const author = 'Jon Plummer Test';")
+  );
+  assert.notStrictEqual(computeOgSharedFingerprint(dir), before);
+}));
+
+test('every site field the card templates read is fingerprinted', () => {
+  const used = new Set();
+  for (const rel of SHARED_CONTENT_FILES.filter((f) => f.endsWith('.njk'))) {
+    const njk = fs.readFileSync(path.join(ROOT, rel), 'utf8');
+    for (const m of njk.matchAll(/\bsite\.(\w+)/g)) used.add(m[1]);
+  }
+  const missing = [...used].filter((key) => !OG_SITE_FIELDS.includes(key));
+  assert.deepStrictEqual(missing, [], `add to OG_SITE_FIELDS: ${missing.join(', ')}`);
 });
