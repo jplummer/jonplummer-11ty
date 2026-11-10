@@ -1,12 +1,13 @@
 /**
- * Eleventy configuration: Preprocessors and ignores
- * 
+ * Eleventy configuration: Preprocessors
+ *
  * Called from `.eleventy.js` during Eleventy initialization (typically called last).
- * Configures preprocessors (e.g., draft post exclusion) and files/directories to ignore.
+ * Configures preprocessors (draft post exclusion). Ignores live in `.eleventyignore`
+ * and, for demo HTML, in `passthrough.js`.
  */
 
 /**
- * Configures Eleventy preprocessors and ignores.
+ * Configures Eleventy preprocessors.
  * 
  * @param {object} eleventyConfig - Eleventy configuration object
  */
@@ -18,13 +19,6 @@ function configurePreprocessors(eleventyConfig) {
     }
   });
 
-  // Ignore the 'docs' folder
-  eleventyConfig.ignores.add("docs/");
-  
-  // Ignore backup files created by migration scripts
-  eleventyConfig.ignores.add("**/*.backup");
-  eleventyConfig.ignores.add("**/*.backup.md");
-  
   // Note: ogimages.njk is excluded from collections via front matter
   // but should still be built for local preview during development
 }

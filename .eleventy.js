@@ -41,7 +41,7 @@ module.exports = async function (eleventyConfig) {
   // Configure event handlers
   configureEvents(eleventyConfig);
   
-  // Configure preprocessors and ignores
+  // Configure preprocessors (drafts)
   configurePreprocessors(eleventyConfig);
 
   return {

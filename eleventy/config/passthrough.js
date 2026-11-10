@@ -23,9 +23,6 @@ function configurePassthrough(eleventyConfig) {
   // delivers them to _site/assets/demos/ as raw HTML.
   eleventyConfig.ignores.add("src/assets/demos/**/*.html");
 
-  // Copy .htaccess file for security
-  eleventyConfig.addPassthroughCopy({ "src/.htaccess": ".htaccess" });
-
   // Copy favicon.ico to root (required for legacy browsers and RSS readers)
   eleventyConfig.addPassthroughCopy({ "src/favicon.ico": "favicon.ico" });
 
