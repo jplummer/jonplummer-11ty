@@ -31,6 +31,20 @@
 4. A redirect expectation that is wrong about the live site as it is today: the smoke check must run green against the live site before any deploy, or each failure must be explained. Pinned in Task 4, step 6.
 5. `node --test` runs files in parallel by default, and the unit tests write temp files and launch a browser: pin `--test-concurrency=1`. Pinned in Task 6, step 3.
 
+## What shipped differently (added 2026-11-09)
+
+Tasks 0 to 5 shipped on 2026-11-09. The task text below is the plan as written; these are the places the result differs from it.
+
+- **Task 1 kept the test lists.** The plan says to delete the Fast and Unit id lists from `docs/tests.md` and point at `pnpm run test`. Jon found that sent a reader off to run a command to learn what the docs should say. The lists stayed, corrected from the manifest (`shortlinks` and `404-suggest` added), `docs/commands.md` links to them, and a comment at the top of `scripts/test-manifest.js` says to update them by hand. Nothing checks them.
+- **Task 3 chose different emoji** for five tests, on Jon's picks: 🤏 `shortlinks`, 🤷 `404-suggest`, 🫆 `og-shared-fingerprint`, 🪪 `og-card-digest`, 🪙 `figure-tokens`.
+- **Task 4, step 7:** the `blocked` group passes against `https://example.com`, because it asks only that four paths not return 200. The run fails 114 of 118, not every group.
+- **Task 4:** no list is retired today, so the `retired-lists` group has not run against the live site. Its unit test is its only cover.
+- **Task 4:** `pnpm run smoke` takes its flags with or without `--`.
+- **Not in the plan:** the runner showed a ✅ for a test file that crashed. Fixed in `a3fca4d6`.
+- **Found along the way,** recorded in `docs/ideas.md`: six year directories the deploy can't delete from the server, and a dry run that keeps the next deploy from committing the changelog.
+
+Tasks 6 and 7 have not started.
+
 ---
 
 ### Task 0: Capture the baseline
