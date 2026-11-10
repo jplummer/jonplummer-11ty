@@ -3,6 +3,9 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 ## 2026-11-09
 
 - Add the Concept Sprint path figure
+- List the posts that still need lead figures
+- Let a page borrow another page's OG card
+- Build every portfolio from one list file
 
 ## 2026-11-08
 
@@ -1025,4 +1028,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-11-09
+Last deployed on 2026-11-10
