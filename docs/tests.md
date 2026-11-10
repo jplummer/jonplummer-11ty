@@ -36,7 +36,7 @@ _Derived from [`scripts/test-manifest.js`](../scripts/test-manifest.js) — see 
 
 **Fast Tests:** `html`, `links`, `wisdom`, `shortlinks`, `portfolios`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `deploy-assets`, `error-document-assets`, `favicon-rasters`, `trailing-slash-links`, `critical-css`, `figure-tokens`, `design-docs-location`, `docs-links`, `portfolio-cover-crop`
 
-**Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `indexnow`, `manifest-cursors`, `figure-lightbox`, `404-suggest`, `site-branding`, `preview-site-lockup`, `og-image-filename`, `og-card`, `date-utils`, `og-shared-fingerprint`, `og-card-digest`, `changelog-format`, `source-file-utils`, `test-json-pipe`, `live-smoke`, `noteplan-import`, `unit-reporter`, `unit-wiring` — see [Unit Tests](#unit-tests) below
+**Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `indexnow`, `manifest-cursors`, `figure-lightbox`, `404-suggest`, `site-branding`, `preview-site-lockup`, `og-image-filename`, `og-card`, `date-utils`, `og-shared-fingerprint`, `og-card-digest`, `changelog-format`, `source-file-utils`, `test-json-pipe`, `live-smoke`, `merge-posts-links`, `noteplan-import`, `unit-reporter`, `unit-wiring` — see [Unit Tests](#unit-tests) below
 
 **Slow Tests:** `a11y` (launches browser)
 
@@ -260,6 +260,10 @@ Unit checks for `findSourceFile()` / `isRedirectPage()` in `scripts/utils/source
 ### live-smoke.js
 
 Unit checks for `scripts/utils/live-smoke.js`, which builds the list of requests `pnpm run smoke` makes against the live site and judges each answer. Covers one redirect check per `redirects.yaml` entry, retired lists checked with and without the slash, the random 404 path, root files and the page sample taken from the inputs, `Location` matching (relative against absolute, one trailing slash ignored, a different host rejected), and that a wrong status, `Location`, header, or body each produce their own failure. No network: the live run is `scripts/deploy/smoke-live.js`, described in [commands.md § Live smoke check](commands.md#live-smoke-check).
+
+### merge-posts-links.js
+
+Unit tests for `mergePostsAndLinks()` in `eleventy/utils/merge-posts-links.js`, which decides where each link from `links.yaml` lands among the posts on the home page and `/page/N/`, and which links reach `links-feed.xml`. The property that matters is that across all the pages every link is shown exactly once, newest first: a link shown on two pages, or on none, is a loss nobody would see. One test checks that for five page sizes, with links on post days, on page-boundary days, before the oldest post, and after the newest. Another puts a link at the very instant of a post, where the two comparisons that split links between pages must agree. The rest cover one page: a link between two posts, a link on a post's own day (it follows the post), links newer than the newest post (first page only, and not at all when no page number is passed, which is why `links-feed.njk` passes `0`), the cut-off at the next page's first post, the last page taking every older link, and the `isLastInGroup` flag. Dates are built as the site builds them: posts at midnight Pacific, links at midnight UTC. Added 2026-11-10; the function had no test before. An empty list of posts used to throw and now gives an empty page.
 
 ### noteplan-import.js
 

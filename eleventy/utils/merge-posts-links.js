@@ -9,7 +9,7 @@
  * @returns {Array} Chronologically sorted array of items with type ('post' or 'link')
  */
 function mergePostsAndLinks(posts, links, pageNumber, boundaryDate) {
-  if (!posts) return [];
+  if (!posts || posts.length === 0) return [];
   if (!links) {
     return posts.map(post => ({ type: 'post', data: post, date: new Date(post.data.date) }));
   }

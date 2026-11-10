@@ -149,6 +149,8 @@ const TESTS = [
     name: 'Test JSON pipe', description: 'Large TEST_RUNNER JSON survives piped stdout (partial write + drain)', emoji: '🧪' },
   { id: 'live-smoke', script: 'live-smoke.js', groups: ['unit'],
     name: 'Live smoke checks', description: 'Live smoke check list and response evaluation', emoji: '🩺' },
+  { id: 'merge-posts-links', script: 'merge-posts-links.js', groups: ['unit'],
+    name: 'Posts and links merge', description: 'Where each link lands among the posts, page by page', emoji: '🧵' },
   { id: 'noteplan-import', script: 'noteplan-import.js', groups: ['unit'],
     name: 'NotePlan link import', description: 'Reading the NotePlan note and rewriting links.yaml without loss', emoji: '🔗' },
   { id: 'unit-reporter', script: 'unit-reporter.js', groups: ['unit'],
