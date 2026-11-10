@@ -26,17 +26,6 @@ function log(message, color = 'reset') {
 }
 
 /**
- * Log a section header with emoji
- * @param {string} title - Section title
- * @param {string} emoji - Emoji for the section
- */
-function logSection(title, emoji) {
-  console.log('');
-  log(`${emoji} ${title}`, 'cyan');
-  console.log('');
-}
-
-/**
  * Log a check result
  * @param {string} name - Check name
  * @param {string} status - Status: 'pending', 'pass', 'warn', 'fail'
@@ -61,7 +50,6 @@ function logCheck(name, status, details = '') {
 
 module.exports = {
   log,
-  logSection,
   logCheck,
   colors
 };

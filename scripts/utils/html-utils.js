@@ -7,7 +7,6 @@
  * to replace fragile regex-based parsing.
  */
 
-const fs = require('fs');
 const cheerio = require('cheerio');
 
 /**
@@ -17,16 +16,6 @@ const cheerio = require('cheerio');
  */
 function parseHtml(htmlContent) {
   return cheerio.load(htmlContent);
-}
-
-/**
- * Parse HTML file and return cheerio root
- * @param {string} filePath - Path to HTML file
- * @returns {cheerio.Root} Cheerio root object
- */
-function parseHtmlFile(filePath) {
-  const content = fs.readFileSync(filePath, 'utf8');
-  return parseHtml(content);
 }
 
 /**
@@ -224,7 +213,6 @@ function getLineNumber(htmlContent, elementHtml) {
 
 module.exports = {
   parseHtml,
-  parseHtmlFile,
   extractLinks,
   extractMetaTags,
   extractHeadings,

@@ -12,10 +12,6 @@ node_modules/
 _site/
 .cache/
 
-# Generated files
-security-audit-report.md
-.indexnow-state.json
-
 # OS
 .DS_Store
 Thumbs.db
@@ -47,7 +43,6 @@ scripts/content/.venv/
 # Temporary files
 *.tmp
 *.orig
-.temp-eleventy-clone/
 
 # Understand Anything knowledge graph (local analysis artifact)
 .understand-anything/

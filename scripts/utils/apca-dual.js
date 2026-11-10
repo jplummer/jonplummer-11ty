@@ -79,16 +79,8 @@ function absApcaLcP3(fgInput, bgInput) {
   return Math.abs(APCAcontrast(displayP3toY(f), displayP3toY(b)));
 }
 
-function dualApcaLc(fgInput, bgInput) {
-  return {
-    srgb: absApcaLcSrgb(fgInput, bgInput),
-    p3: absApcaLcP3(fgInput, bgInput)
-  };
-}
-
 module.exports = {
   absApcaLcSrgb,
   absApcaLcP3,
-  dualApcaLc,
   toCuloriColor
 };
