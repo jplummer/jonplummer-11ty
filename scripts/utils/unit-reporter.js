@@ -8,11 +8,19 @@
  * come from scripts/test-manifest.js, looked up by the file being run.
  * Set UNIT_REPORT_VERBOSE=1 to list every test by name.
  *
- * Three things Node would let through are failures or warnings here
+ * Things Node would let through or hide are failures or warnings here
  * (observed on Node 26.4.0):
  *   - a file with no tests is reported by Node as a pass
- *   - a skipped or todo test arrives as a pass event
+ *   - a skipped or todo test arrives as a pass event, and a file whose tests
+ *     are all skipped ran nothing
  *   - a file that crashes on load sends no summary, only a failure and stderr
+ *   - a file that throws after its tests passed, or whose `after` hook
+ *     throws, keeps all-passing counts; only `success` or a failure event
+ *     named for the file says so, and that event can come before or after
+ *     the file's summary
+ *
+ * Because of that last one, a file's line is printed when the next file
+ * starts or the run ends, once everything about it has arrived.
  *
  * Tested by scripts/test/unit-reporter.js.
  */
@@ -21,29 +29,32 @@ const path = require('path');
 const manifest = require('../test-manifest');
 const { printOverallSummary } = require('./test-results');
 
+const FILE_EVENTS = new Set(['test:pass', 'test:fail', 'test:summary', 'test:stderr', 'test:stdout', 'test:diagnostic']);
 const FALLBACK_EMOJI = '🧪';
 const plural = (n, word) => `${n} ${word}${n === 1 ? '' : 's'}`;
 
 /**
  * Judge one finished file. `counts` is Node's per-file counts object, or null
- * when the file crashed on load or ran no tests.
+ * when the file sent none (it crashed on load, or held no tests). `fileFailed`
+ * is true when Node failed the file itself, whatever its tests did.
  */
-function fileOutcome({ counts, crashed = false, ranNothing = false }) {
-  if (crashed) {
-    return { icon: '❌', summary: 'stopped before reporting results', passed: false, warnings: 0 };
-  }
-  if (ranNothing || !counts || counts.tests === 0) {
-    return { icon: '❌', summary: 'no tests ran', passed: false, warnings: 0 };
-  }
+function fileOutcome({ counts = null, fileFailed = false }) {
+  const failed = (summary) => ({ icon: '❌', summary, passed: false, warnings: 0 });
+
+  if (!counts) return failed(fileFailed ? 'stopped before reporting results' : 'no tests ran');
+  if (counts.tests === 0) return failed('no tests ran');
 
   const failing = counts.failed + counts.cancelled;
   const notRun = counts.skipped + counts.todo;
+  if (failing === 0 && counts.passed === 0) return failed(`no tests ran (${notRun} skipped)`);
+
   const parts = [`🧪 ${plural(counts.tests, 'test')}`];
   if (counts.passed > 0) parts.push(`✅ ${counts.passed} passing`);
   if (failing > 0) parts.push(`❌ ${failing} failing`);
   if (notRun > 0) parts.push(`⏭️  ${notRun} skipped`);
+  if (fileFailed && failing === 0) parts.push('❌ failed outside its tests');
 
-  const passed = failing === 0;
+  const passed = failing === 0 && !fileFailed;
   const icon = !passed ? '❌' : notRun > 0 ? '⚠️ ' : '✅';
   return { icon, summary: parts.join(', '), passed, warnings: notRun };
 }
@@ -84,10 +95,15 @@ function renderFile(state, outcome, verbose) {
     }
   }
 
+  // What Node said about the file itself, such as an `after` hook's error.
+  if (state.fileError && state.fileError !== 'test failed') {
+    lines.push(`    - ${oneLine(state.fileError)}`);
+  }
+
   // A crash's stack trace is the only explanation there is. A test's own
   // console output is noise unless the file failed.
   if (!outcome.passed) {
-    const captured = (state.stderr + state.stdout).trimEnd();
+    const captured = (state.diagnostics + state.stderr + state.stdout).trimEnd();
     if (captured) lines.push(indent(captured, 4));
   }
   return lines.join('\n') + '\n';
@@ -108,56 +124,60 @@ function overallSummaryText(results) {
 
 module.exports = async function* unitReporter(source) {
   const verbose = process.env.UNIT_REPORT_VERBOSE === '1';
-  const files = new Map();
   const results = [];
+  // The file being collected. Files run one at a time, so an event for
+  // another file, or the run's own summary, means this one is complete.
+  let current = null;
 
-  const stateFor = (file) => {
-    if (!files.has(file)) files.set(file, { file, tests: [], stderr: '', stdout: '', done: false });
-    return files.get(file);
-  };
-
-  function finish(state, outcome) {
-    state.done = true;
+  function finish(state) {
+    const outcome = fileOutcome({ counts: state.counts, fileFailed: state.fileFailed });
     // Node exits 0 for a file with no tests; make the whole run fail.
     if (!outcome.passed) process.exitCode = 1;
     results.push({ testType: labelFor(state.file).id, passed: outcome.passed, warnings: outcome.warnings });
     return renderFile(state, outcome, verbose);
   }
 
-  // A file that crashed on load, waiting for the rest of its stderr.
-  let crashed = null;
-
   for await (const event of source) {
     const data = { ...(event.data || {}) };
-    if (!data.file && event.type !== 'test:summary') continue;
-    // Output events name the file as it was given on the command line; test
-    // events name it absolutely. Use one form, or a crash loses its stack trace.
-    if (data.file) data.file = path.resolve(data.file);
 
-    if (crashed && data.file !== crashed.file) {
-      yield finish(crashed, fileOutcome({ crashed: true }));
-      crashed = null;
-    }
-
-    if (event.type === 'test:stderr' || event.type === 'test:stdout') {
-      stateFor(data.file)[event.type === 'test:stderr' ? 'stderr' : 'stdout'] += data.message;
+    if (event.type === 'test:summary' && !data.file) {
+      if (current) yield finish(current);
+      current = null;
+      if (results.length > 1) yield overallSummaryText(results);
       continue;
     }
+    // Node announces a file (test:enqueue) before the one ahead of it has
+    // finished, so only these events may say which file is running.
+    if (!data.file || !FILE_EVENTS.has(event.type)) continue;
 
-    if (event.type === 'test:pass' || event.type === 'test:fail') {
-      const state = stateFor(data.file);
-      if (state.done) continue;
-      // An event named for the file itself, with no summary before it, is Node
-      // reporting on the file: a crash on load (fail) or no tests at all (pass).
-      // Node names that event with the file's path as given on the command line.
-      const isFileEvent = data.nesting === 0 && path.resolve(String(data.name)) === data.file;
+    // Output events name the file as it was given on the command line; test
+    // events name it absolutely. Use one form, or a crash loses its stack trace.
+    const file = path.resolve(data.file);
+    if (current && current.file !== file) {
+      yield finish(current);
+      current = null;
+    }
+    if (!current) {
+      current = { file, tests: [], stderr: '', stdout: '', diagnostics: '', counts: null, fileFailed: false, fileError: '' };
+    }
+    const state = current;
+
+    if (event.type === 'test:stderr' || event.type === 'test:stdout') {
+      state[event.type === 'test:stderr' ? 'stderr' : 'stdout'] += data.message;
+    } else if (event.type === 'test:diagnostic') {
+      // Where Node puts an error thrown after the tests finished.
+      state.diagnostics += `${data.message}\n`;
+    } else if (event.type === 'test:summary') {
+      state.counts = data.counts;
+      if (data.success === false) state.fileFailed = true;
+    } else if (event.type === 'test:pass' || event.type === 'test:fail') {
+      // An event named for the file itself is Node reporting on the file, not
+      // on a test. Node names it with the file's path as given on the command line.
+      const isFileEvent = data.nesting === 0 && path.resolve(String(data.name)) === file;
       if (isFileEvent) {
         if (event.type === 'test:fail') {
-          // Hold the line: the stack trace can arrive after this event.
-          state.done = true;
-          crashed = state;
-        } else {
-          yield finish(state, fileOutcome({ ranNothing: true }));
+          state.fileFailed = true;
+          state.fileError = errorMessage(data.details);
         }
         continue;
       }
@@ -168,18 +188,26 @@ module.exports = async function* unitReporter(source) {
         status: event.type === 'test:fail' ? 'fail' : skipped ? 'skip' : 'pass',
         message: event.type === 'test:fail' ? errorMessage(data.details) : '',
       });
-      continue;
-    }
-
-    if (event.type === 'test:summary') {
-      if (data.file) {
-        const state = stateFor(data.file);
-        if (!state.done) yield finish(state, fileOutcome({ counts: data.counts }));
-      } else if (results.length > 1) {
-        yield overallSummaryText(results);
-      }
     }
   }
 };
 
 module.exports.fileOutcome = fileOutcome;
+
+// A test that never settles would hold the run open with nothing printed.
+// The whole suite takes about five seconds, so two minutes is a hang.
+const TEST_TIMEOUT_MS = 120000;
+
+/** Arguments for one `node --test` run through this reporter. */
+function nodeTestArgs({ files, timeoutMs = TEST_TIMEOUT_MS }) {
+  return [
+    '--test',
+    '--test-concurrency=1',
+    `--test-timeout=${timeoutMs}`,
+    `--test-reporter=${__filename}`,
+    '--test-reporter-destination=stdout',
+    ...files,
+  ];
+}
+
+module.exports.nodeTestArgs = nodeTestArgs;

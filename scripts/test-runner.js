@@ -5,6 +5,7 @@ const path = require('path');
 const { printOverallSummary, getTestEmoji, getTestDisplayName, formatVerbose, formatBuild, formatSummaryParts, resultIcon } = require('./utils/test-results');
 const { SPINNER_FRAMES } = require('./utils/spinner-utils');
 const manifest = require('./test-manifest');
+const { nodeTestArgs } = require('./utils/unit-reporter');
 
 // Tests that don't use JSON output — use inherited stdout so output isn't buffered and re-written (avoids duplicate output)
 const nonJsonTests = manifest.getNonJsonTestIds();
@@ -283,19 +284,13 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
  * temp files and one launches a browser.
  */
 function runNodeTests(ids, { verbose = false } = {}) {
-  const reporterPath = path.join(__dirname, 'utils', 'unit-reporter.js');
   const env = { ...process.env };
   if (verbose) env.UNIT_REPORT_VERBOSE = '1';
   else delete env.UNIT_REPORT_VERBOSE;
+  const files = ids.map((id) => manifest.getTestScriptPath(id));
 
   return new Promise((resolve) => {
-    const child = spawn(process.execPath, [
-      '--test',
-      '--test-concurrency=1',
-      `--test-reporter=${reporterPath}`,
-      '--test-reporter-destination=stdout',
-      ...ids.map((id) => manifest.getTestScriptPath(id)),
-    ], { stdio: 'inherit', shell: false, env });
+    const child = spawn(process.execPath, nodeTestArgs({ files }), { stdio: 'inherit', shell: false, env });
     child.on('close', (code) => resolve(code === null ? 1 : code));
     child.on('error', (error) => {
       console.error(`❌ Could not start node --test: ${error.message}`);

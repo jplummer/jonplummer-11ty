@@ -7,30 +7,27 @@
  *
  * Each case is something Node's own rules would let through or hide: a file
  * with no tests counts as a pass, a skipped test is reported as a pass, and
- * a file that crashes on load sends no summary at all.
+ * a file that crashes on load sends no summary at all, and a file that
+ * throws after its tests passed still has all-passing counts.
  */
 
 const { test } = require('node:test');
 const assert = require('assert');
 const path = require('path');
 const { spawnSync } = require('child_process');
-const { fileOutcome } = require('../utils/unit-reporter');
+const { fileOutcome, nodeTestArgs } = require('../utils/unit-reporter');
 
-const REPORTER = path.join(__dirname, '..', 'utils', 'unit-reporter.js');
 const FIXTURES = path.join(__dirname, 'fixtures', 'unit-reporter');
 
-function run(fixtureNames, extraEnv = {}, { relative = false } = {}) {
+function run(fixtureNames, extraEnv = {}, { relative = false, timeoutMs } = {}) {
   const env = { ...process.env, ...extraEnv };
   // A nested `node --test` that inherits this prints nothing.
   delete env.NODE_TEST_CONTEXT;
   if (!('UNIT_REPORT_VERBOSE' in extraEnv)) delete env.UNIT_REPORT_VERBOSE;
-  const result = spawnSync(process.execPath, [
-    '--test',
-    '--test-concurrency=1',
-    `--test-reporter=${REPORTER}`,
-    '--test-reporter-destination=stdout',
-    ...fixtureNames.map((name) => (relative ? name : path.join(FIXTURES, name))),
-  ], { encoding: 'utf8', env, cwd: relative ? FIXTURES : undefined });
+  const files = fixtureNames.map((name) => (relative ? name : path.join(FIXTURES, name)));
+  const result = spawnSync(process.execPath, nodeTestArgs({ files, timeoutMs }), {
+    encoding: 'utf8', env, cwd: relative ? FIXTURES : undefined,
+  });
   return { status: result.status, stdout: result.stdout };
 }
 
@@ -94,6 +91,39 @@ test('verbose lists every test by name', () => {
 });
 
 test('fileOutcome treats missing counts as a failure', () => {
-  assert.strictEqual(fileOutcome({ counts: null, crashed: true }).passed, false);
-  assert.strictEqual(fileOutcome({ counts: null, ranNothing: true }).passed, false);
+  assert.strictEqual(fileOutcome({ counts: null, fileFailed: true }).passed, false);
+  assert.strictEqual(fileOutcome({ counts: null }).passed, false);
+});
+
+test('a file that throws after its tests passed fails', () => {
+  // Node fails the file, and its counts still say every test passed.
+  const { status, stdout } = run(['late-throw.js', 'pass.js']);
+  assert.strictEqual(status, 1);
+  assert.match(stdout, /❌ .*late-throw\.js: 🧪 1 test, ✅ 1 passing, ❌ failed outside its tests/);
+  assert.match(stdout, /thrown after the tests finished/);
+  assert.doesNotMatch(stdout, /All tests passed/);
+});
+
+test('a failing after hook fails the file, keeps its counts, and shows the error', () => {
+  const { status, stdout } = run(['after-fail.js']);
+  assert.strictEqual(status, 1);
+  assert.match(stdout, /❌ .*after-fail\.js: 🧪 1 test, ✅ 1 passing, ❌ failed outside its tests/);
+  assert.match(stdout, /cleanup blew up/);
+});
+
+test('a file whose tests are all skipped or todo fails: no test ran', () => {
+  const { status, stdout } = run(['all-skipped.js']);
+  assert.strictEqual(status, 1);
+  assert.match(stdout, /❌ .*all-skipped\.js: no tests ran \(2 skipped\)/);
+});
+
+test('a test that never settles is stopped by the timeout and named', () => {
+  const { status, stdout } = run(['hang.js'], {}, { timeoutMs: 300 });
+  assert.strictEqual(status, 1);
+  assert.match(stdout, /❌ .*hang\.js: 🧪 1 test, ❌ 1 failing/);
+  assert.match(stdout, /never settles: test timed out after 300ms/);
+});
+
+test('the node --test arguments carry a timeout by default', () => {
+  assert.ok(nodeTestArgs({ files: ['x.js'] }).includes('--test-timeout=120000'));
 });

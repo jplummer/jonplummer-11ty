@@ -181,7 +181,7 @@ A short `EXCLUDED_PATHS` list at the top of the script names pages the sweep doe
 
 Tests of our own tooling code (parsers, deploy helpers) — not authored content or build output. No network dependency, and no `_site/` needed, so they run fast and can run any time. One of them, `figure-lightbox`, also looks at a built page when `_site/` is there, and shows as skipped (⚠️) when it isn't. Not part of `build.js` or `deploy.js`; run them on demand with `pnpm run test unit` whenever you touch `scripts/utils/`, `scripts/deploy/`, or content parsers under `scripts/content/`.
 
-Every unit test is written for Node's built-in test runner: `const { test } = require('node:test')`, `assert` from `node:assert`, one `test('…', …)` per behavior. `pnpm run test unit` runs them all in one `node --test --test-concurrency=1` call, one file at a time, because several write temp files and one launches a browser. `scripts/utils/unit-reporter.js` prints each file's line with the number of tests it ran:
+Every unit test is written for Node's built-in test runner: `const { test } = require('node:test')`, `assert` from `node:assert`, one `test('…', …)` per behavior. `pnpm run test unit` runs them all in one `node --test --test-concurrency=1` call, one file at a time, because several write temp files and one launches a browser. A test that hasn't finished in two minutes is stopped and reported as failing, so a hung test can't hold the run open in silence. `scripts/utils/unit-reporter.js` prints each file's line with the number of tests it ran:
 
 ```text
 ✅ 🤷 404 suggestions: 🧪 25 tests, ✅ 25 passing
@@ -189,13 +189,13 @@ Every unit test is written for Node's built-in test runner: `const { test } = re
     - date-only string displays LA calendar day: Expected values to be strictly equal: '' !== 'Dec 30, 2025'
 ```
 
-`pnpm run test <id>` on one unit test also lists every test by name. To add one: write the file under `scripts/test/`, add a manifest entry in the `unit` group, and add its id to the Unit list above. Don't use `test-results.js` or `test-runner-helper.js` in a unit test; those belong to the site checks.
+`pnpm run test <id>` on one unit test also lists every test by name. To add one: write the file under `scripts/test/`, add a manifest entry in the `unit` group, and add its id to the Unit list above. Don't report through `test-results.js` or `test-runner-helper.js` in a unit test; those belong to the site checks. (`test-json-pipe` requires `test-results.js` because that is the code it tests.)
 
 Until 2026-11-09 unit tests reported through the site checks' results model, which counts files. A unit test handed it one made-up file, so 26 checks printed as `1 file checked, 1 passing`, and deleting 25 of them would have printed the same line. Plan: [unit tests on node:test](designs/plans/2026-11-09-unit-tests-on-node-test.md).
 
 ### unit-reporter.js
 
-Tests the reporter itself by running `node --test` against small fixture files in `scripts/test/fixtures/unit-reporter/` and reading what it printed. Each case is something Node's own rules would let through or hide: a file with no tests counts as a pass in Node and must fail here; a skipped or todo test arrives as a pass and must show in the line and turn the icon to ⚠️; a file that crashes on load sends no summary and must print `stopped before reporting results` with its stack trace, including when the file was named by a relative path; a `before` hook that throws must show its failures, never `0 tests`. Also covers the short failure line, the closing summary (printed for several files, not for one), and the verbose listing. A `node --test` started from inside a test prints nothing unless `NODE_TEST_CONTEXT` is removed from its environment; the test's `run()` helper does that.
+Tests the reporter itself by running `node --test` against small fixture files in `scripts/test/fixtures/unit-reporter/` and reading what it printed. Each case is something Node's own rules would let through or hide: a file with no tests counts as a pass in Node and must fail here; a skipped or todo test arrives as a pass and must show in the line and turn the icon to ⚠️; a file that crashes on load sends no summary and must print `stopped before reporting results` with its stack trace, including when the file was named by a relative path; a `before` hook that throws must show its failures, never `0 tests`; a file whose tests are all skipped ran nothing and must fail; a file that throws after its tests passed, or whose `after` hook throws, has all-passing counts and must fail with `failed outside its tests` and the error; a test that never settles must be stopped by the timeout and named. Also covers the short failure line, the closing summary (printed for several files, not for one), and the verbose listing. A `node --test` started from inside a test prints nothing unless `NODE_TEST_CONTEXT` is removed from its environment; the test's `run()` helper does that.
 
 ### portfolio-notes.js
 
@@ -275,7 +275,7 @@ Performs security and maintenance checks: `pnpm audit`, `pnpm outdated`, Node.js
 
 ### test-changed.js
 
-Runs content-authoring tests on files changed since last commit. Test list comes from the `changed` group in [`scripts/test-manifest.js`](#the-test-manifest) (currently `spell`, `frontmatter`, `markdown`, `links`, `wisdom`, `css`, `seo`). Unit tests like `portfolio-notes` are deliberately excluded — they detect whether *tooling code* changed, not authored content; run `pnpm run test unit` for those.
+Runs content-authoring tests on files changed since last commit. Test list comes from the `changed` group in [`scripts/test-manifest.js`](#the-test-manifest) (currently `spell`, `frontmatter`, `markdown`, `links`, `wisdom`, `css`, `seo`). Unit tests like `portfolio-notes` are deliberately excluded — they check tooling code, not authored content; run `pnpm run test unit` for those.
 
 ## Deployment Integration
 
