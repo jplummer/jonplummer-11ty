@@ -427,6 +427,16 @@ function buildSummaryLine(result) {
 }
 
 /**
+ * The icon for a finished test. A non-zero exit is a failure even when no
+ * issues were reported: a test file that crashes never gets to report any.
+ */
+function resultIcon(summary, exitCode = 0) {
+  if ((summary.issues || 0) > 0 || exitCode !== 0) return '❌';
+  if ((summary.warnings || 0) > 0) return '⚠️ ';
+  return '✅';
+}
+
+/**
  * The counts after a test's name, e.g. "📄 22 files checked, ✅ 22 passing,
  * ⚠️  3 warnings". The one copy for both single runs (buildSummaryLine) and
  * group runs (test-runner.js). Reassure first (what's good), then direct
@@ -861,6 +871,7 @@ module.exports = {
   // Formatting
   formatVerbose,
   formatBuild,
-  formatSummaryParts
+  formatSummaryParts,
+  resultIcon
 };
 

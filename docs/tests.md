@@ -270,6 +270,8 @@ All tests (except `deploy.js`) use a unified JSON output format automatically fo
 - **Verbose** (default): Detailed output with summary and file-by-file details
 - **Build** (`--format build`): Blocking issues only, suitable for CI/CD
 
+A test's icon comes from its exit code as well as its issue count (`resultIcon()` in `test-results.js`). A test file that crashes reports no issues, so the runner prints `❌ … stopped before reporting results (exit code 1)` under its stack trace. Until 2026-11-09 it printed a ✅ there, or nothing in a group run, though the exit code was right. `test-json-pipe.js` guards the icon.
+
 **Core Utilities:**
 - `test-results.js`: Building test results, formatting output
 - `test-helpers.js`: File operations and site directory checks

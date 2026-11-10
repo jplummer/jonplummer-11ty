@@ -5,12 +5,14 @@
  * Regressions covered:
  * - async stdout.write + process.exit() before drain (~64KB truncated)
  * - single fs.writeSync on non-blocking pipe (partial write, end marker dropped)
+ * Also guards the runner's result icon: a test file that crashes reports no
+ * issues, and until 2026-11-09 the runner showed it a ✅ over its stack trace.
  */
 
 const { spawn } = require('child_process');
 const path = require('path');
 const assert = require('assert');
-const { addFile, addIssue } = require('../utils/test-results');
+const { addFile, addIssue, resultIcon } = require('../utils/test-results');
 const { runTest } = require('../utils/test-runner-helper');
 
 const HELPER = path.join(__dirname, 'fixtures', 'emit-large-test-json.js');
@@ -60,6 +62,20 @@ async function validate(result) {
       type: 'test-json-pipe',
       message: err.message,
       ruleId: 'test-json-pipe-complete',
+    });
+  }
+
+  try {
+    assert.strictEqual(resultIcon({ issues: 0, warnings: 0 }, 0), '✅');
+    assert.strictEqual(resultIcon({ issues: 0, warnings: 2 }, 0).trim(), '⚠️');
+    assert.strictEqual(resultIcon({ issues: 1, warnings: 2 }, 1), '❌');
+    assert.strictEqual(resultIcon({ issues: 0, warnings: 0 }, 1), '❌', 'non-zero exit with no issues reported');
+    assert.strictEqual(resultIcon({ issues: 0, warnings: 0 }, null), '❌', 'killed by a signal');
+  } catch (err) {
+    addIssue(fileObj, {
+      type: 'test-json-pipe',
+      message: `result icon: ${err.message}`,
+      ruleId: 'test-result-icon',
     });
   }
 }
