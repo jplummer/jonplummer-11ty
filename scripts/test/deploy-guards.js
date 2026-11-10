@@ -128,9 +128,11 @@ test('rsync does not exclude color/ or assets/fonts/', () => {
     { needle: 'color', message: 'Deploy rsync must not exclude color/ (/color/ is a normal page)' },
     { needle: 'assets/fonts', message: 'Deploy rsync must not exclude assets/fonts/ (self-hosted WOFF2 required)' },
   ];
-  for (const { needle, message } of forbiddenExcludes) {
-    assert.ok(!rsyncExcludes.some((arg) => arg.includes(needle)), message);
-  }
+  // Every forbidden exclude found, not only the first.
+  const found = forbiddenExcludes
+    .filter(({ needle }) => rsyncExcludes.some((arg) => arg.includes(needle)))
+    .map(({ message }) => message);
+  assert.deepStrictEqual(found, []);
 });
 
 /**
@@ -141,22 +143,18 @@ test('rsync does not exclude color/ or assets/fonts/', () => {
  */
 test('default deploy passes neither --itemize-changes nor --stats', () => {
   const quiet = buildRsyncArgs(RSYNC_TARGET);
-  for (const flag of ['--itemize-changes', '--stats']) {
-    assert.ok(
-      !quiet.includes(flag),
-      `Default deploy must not pass ${flag} (thousands of mtime-only lines); gate it behind --verbose`
-    );
-  }
+  const passed = ['--itemize-changes', '--stats']
+    .filter((flag) => quiet.includes(flag))
+    .map((flag) => `Default deploy must not pass ${flag} (thousands of mtime-only lines); gate it behind --verbose`);
+  assert.deepStrictEqual(passed, []);
 });
 
 test('--verbose deploy passes --itemize-changes and --stats', () => {
   const verbose = buildRsyncArgs({ ...RSYNC_TARGET, verbose: true });
-  for (const flag of ['--itemize-changes', '--stats']) {
-    assert.ok(
-      verbose.includes(flag),
-      `--verbose deploy must pass ${flag} so the detail is still available for debugging`
-    );
-  }
+  const missing = ['--itemize-changes', '--stats']
+    .filter((flag) => !verbose.includes(flag))
+    .map((flag) => `--verbose deploy must pass ${flag} so the detail is still available for debugging`);
+  assert.deepStrictEqual(missing, []);
 });
 
 test("--dry-run carries rsync's own --dry-run", () => {

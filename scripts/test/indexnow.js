@@ -78,14 +78,11 @@ test('isIndexableHtmlPath keeps pages and drops error pages, pagination, and non
     ['sitemap.xml', false],
     ['assets/images/og/foo.png', false],
   ];
-  for (const [p, expected] of indexableCases) {
-    const actual = isIndexableHtmlPath(p);
-    assert.strictEqual(
-      actual,
-      expected,
-      `isIndexableHtmlPath(${JSON.stringify(p)}): expected ${expected}, got ${actual}`
-    );
-  }
+  // Every wrong answer, not only the first.
+  const wrong = indexableCases
+    .filter(([p, expected]) => isIndexableHtmlPath(p) !== expected)
+    .map(([p, expected]) => `isIndexableHtmlPath(${JSON.stringify(p)}): expected ${expected}, got ${!expected}`);
+  assert.deepStrictEqual(wrong, []);
 });
 
 // --- selectIndexNowUrls: no baseline ---

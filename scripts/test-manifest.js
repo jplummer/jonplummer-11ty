@@ -151,6 +151,8 @@ const TESTS = [
     name: 'Live smoke checks', description: 'Live smoke check list and response evaluation', emoji: '🩺' },
   { id: 'unit-reporter', script: 'unit-reporter.js', groups: ['unit'],
     name: 'Unit test reporter', description: 'Result lines, counts, and failures for node:test unit tests', emoji: '📋' },
+  { id: 'unit-wiring', script: 'unit-wiring.js', groups: ['unit'],
+    name: 'Unit test wiring', description: 'The manifest rule that unit tests are node:test files, and --format for one', emoji: '🔌' },
   { id: 'security', script: { file: 'security-audit.js', dir: 'security' }, groups: [], nonJson: true,
     name: 'Security Audit', description: 'Security audit', emoji: '🛡️' },
 ];
@@ -227,6 +229,17 @@ function assertManifest(condition, message) {
  * Runs once when this module loads (every `pnpm run test*` / `pnpm run build`
  * invocation requires it), so roster drift fails loudly instead of silently.
  */
+/**
+ * True when a test file's source loads node:test in a statement of its own
+ * and doesn't load test-runner-helper. A mention in a comment or a string
+ * counts for neither. Tested by scripts/test/unit-wiring.js.
+ */
+function isNodeTestSource(source) {
+  const loadsNodeTest = /^\s*(?:const|let|var)\s[^\n]*=\s*require\((['"])node:test\1\)/m.test(source);
+  const loadsHelper = /^\s*(?:const|let|var)\s[^\n]*=\s*require\((['"])[^'"\n]*test-runner-helper(?:\.js)?\1\)/m.test(source);
+  return loadsNodeTest && !loadsHelper;
+}
+
 function validateManifest() {
   const ids = TESTS.map((t) => t.id);
   assertManifest(new Set(ids).size === ids.length, 'duplicate test id in TESTS');
@@ -281,7 +294,7 @@ function validateManifest() {
   for (const test of getTestsByGroup('unit')) {
     const source = fs.readFileSync(getTestScriptPath(test.id), 'utf8');
     assertManifest(
-      source.includes("require('node:test')") && !source.includes('test-runner-helper'),
+      isNodeTestSource(source),
       `unit test '${test.id}' must be a node:test file (require('node:test'), no test-runner-helper)`
     );
   }
@@ -310,4 +323,5 @@ module.exports = {
   getTestIdByScriptPath,
   getHelpListedTests,
   validateManifest,
+  isNodeTestSource,
 };

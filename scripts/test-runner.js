@@ -383,7 +383,8 @@ async function main() {
   }
   
   if (unitIds.includes(testType)) {
-    process.exit(await runNodeTests([testType], { verbose: true }));
+    // One unit test lists every test by name; --format build keeps to its line.
+    process.exit(await runNodeTests([testType], { verbose: formatOptions.format !== 'build' }));
   }
 
   const result = await runTest(testType, false, false, formatOptions); // compact = false for individual runs

@@ -127,3 +127,18 @@ test('a test that never settles is stopped by the timeout and named', () => {
 test('the node --test arguments carry a timeout by default', () => {
   assert.ok(nodeTestArgs({ files: ['x.js'] }).includes('--test-timeout=120000'));
 });
+
+test('a failure nested in a group and a subtest fails the file and is named', () => {
+  const { status, stdout } = run(['nested.js']);
+  assert.strictEqual(status, 1);
+  assert.match(stdout, /❌ .*nested\.js: /);
+  assert.match(stdout, /inner fails: deep failure/);
+});
+
+test('two files with the same basename are reported as two files', () => {
+  const { status, stdout } = run(['pass.js', path.join('twin', 'pass.js')]);
+  assert.strictEqual(status, 0);
+  assert.match(stdout, /pass\.js: 🧪 2 tests, ✅ 2 passing/);
+  assert.match(stdout, /pass\.js: 🧪 1 test, ✅ 1 passing/);
+  assert.match(stdout, /Total tests: 2/);
+});

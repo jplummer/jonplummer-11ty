@@ -96,12 +96,7 @@ The November 2026 CSS audit is worked through; findings and decisions are in the
   - `cloudflare-purge`: the dry-run and injected-manifest cases pass an empty `env`, so a dry run with credentials present isn't covered.
   - `source-file-utils`: resolves `src/` from `process.cwd()`, so it passes only when run from the repo root.
   - Tooling with no test at all, most worth a look first because each changes content or the server: `scripts/content/import-noteplan-links.js`, `scripts/content/shortlink.js`, and `eleventy/utils/merge-posts-links.js`. Twenty-eight of 65 tooling modules are loaded by no test; most of the rest are Eleventy config that every build exercises.
-- **Small leftovers from the `node:test` move** (2026-11-09). Found by the closing review and left alone because none changes what a person sees today:
-  - The manifest's check that a unit test is a `node:test` file is a text match in `scripts/test-manifest.js`. A comment containing `require('node:test')` satisfies it, and `require("node:test")` with double quotes is rejected.
-  - `--format build` does nothing for unit tests and says nothing about it.
-  - Loop assertions in `indexnow` (the `isIndexableHtmlPath` cases) and `deploy-guards` stop at the first mismatch. The old files listed every one.
-  - The reporter's test has no fixture for a failure nested in a subtest or for two files with the same basename. Both were probed by hand and behave correctly.
-  - The reporter was probed on Node 26.4 only, and `package.json` allows 22.18 and up. It depends on per-file `test:summary` events; on a Node that doesn't send them it would report every file as `no tests ran`. Either test on 22 or raise `engines`.
+- **Try the unit test reporter on Node 22** (2026-11-10). It was probed on Node 26.4 only, and `package.json` allows 22.18 and up. It depends on per-file `test:summary` events; on a Node that doesn't send them it would report every file as `no tests ran`. Run the fixtures in `scripts/test/fixtures/unit-reporter/` through it on 22.18, then either fix what differs or raise `engines`. Needs a second Node installed; nothing on this machine manages versions.
 - **One output format for `deploy` and `security`** (2026-11-09). They are the two tests that print for themselves (`nonJson` in the manifest), so their lines don't match the rest of `pnpm run test`. Bring them into the common format, or decide they are tools and not tests and take them out of the test list.
 - **Clear out migration leftovers** (Jon, 2026-11-09). Files and code left behind by past moves, not yet surveyed. Known so far: loose review diffs and task briefs in the gitignored `.superpowers/sdd/` from earlier plans. Survey first, and list what each thing was for before deleting any of it.
 
