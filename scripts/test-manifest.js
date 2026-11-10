@@ -71,23 +71,23 @@ const TESTS = [
   // Supports --changed itself (detects whether its own parser code changed,
   // not authored content), but is deliberately excluded from the 'changed'
   // group — that group is for content-authoring checks run by test-changed.js.
-  { id: 'portfolio-notes', script: 'portfolio-notes.js', groups: ['unit'],
+  { id: 'portfolio-notes', script: 'portfolio-notes.js', groups: ['unit'], nodeTest: true,
     name: 'Portfolio notes parsing', description: 'Portfolio speaker-notes text parsing', emoji: '📎' },
   { id: 'deploy-assets', script: 'deploy-assets.js', groups: ['fast', 'post'],
     name: 'Deploy Assets', description: 'Fonts and deploy-critical _site/ assets', emoji: '📦' },
-  { id: 'cloudflare-purge', script: 'cloudflare-purge.js', groups: ['unit'],
+  { id: 'cloudflare-purge', script: 'cloudflare-purge.js', groups: ['unit'], nodeTest: true,
     name: 'Cloudflare Purge', description: 'Content-hash manifest diff → Cloudflare purge URL mapping', emoji: '☁️' },
-  { id: 'deploy-guards', script: 'deploy-guards.js', groups: ['unit'],
+  { id: 'deploy-guards', script: 'deploy-guards.js', groups: ['unit'], nodeTest: true,
     name: 'Deploy Guards', description: 'deploy.js regression guards (rsync excludes, changelog, purge wiring, one shared hash walk)', emoji: '🛟' },
   { id: 'deploy', script: 'deploy.js', groups: [], nonJson: true,
     name: 'Deploy', description: 'Deployment connectivity', emoji: '🚀' },
   // Not a build-output check: indexnow.js is a pure unit test of selection
   // logic (fixture manifests), no _site/ dependency.
-  { id: 'indexnow', script: 'indexnow.js', groups: ['unit'],
+  { id: 'indexnow', script: 'indexnow.js', groups: ['unit'], nodeTest: true,
     name: 'IndexNow', description: 'IndexNow URL selection from content-hash manifests', emoji: '📣' },
   // Guards the two .cache cursors against being merged or cross-contaminated:
   // runs deploy.js's composition (one shared hash walk) with stubbed fetch.
-  { id: 'manifest-cursors', script: 'manifest-cursors.js', groups: ['unit'],
+  { id: 'manifest-cursors', script: 'manifest-cursors.js', groups: ['unit'], nodeTest: true,
     name: 'Deploy manifest cursors', description: 'Cloudflare and IndexNow state files stay independent cursors', emoji: '🔖' },
   { id: 'figure-lightbox', script: 'figure-lightbox.js', groups: ['unit'], nodeTest: true, listInHelp: false,
     name: 'Figure lightbox', description: 'Lightbox trigger links on figures', emoji: '🔍' },
@@ -113,7 +113,7 @@ const TESTS = [
     name: 'OG card digest', description: 'OG card digest in the PNG and the render, keep, or stamp decision', emoji: '🪪' },
   { id: 'changelog-format', script: 'changelog-format.js', groups: ['unit'], nodeTest: true,
     name: 'Changelog format', description: 'Changelog wraps filenames as code', emoji: '🗒️' },
-  { id: 'source-file-utils', script: 'source-file-utils.js', groups: ['unit'],
+  { id: 'source-file-utils', script: 'source-file-utils.js', groups: ['unit'], nodeTest: true,
     name: 'Source File Utils', description: 'Built HTML path -> source file resolution and redirect-page detection', emoji: '🧭' },
   // fast-only: not part of either build.js phase (build's own output isn't
   // what this checks — it guards the static 404.html asset hrefs).

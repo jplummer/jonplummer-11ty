@@ -17,6 +17,8 @@
  * No network, and never touches the real `.cache/` files.
  */
 
+const { test, before, after, beforeEach, afterEach } = require('node:test');
+const assert = require('assert');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
@@ -26,8 +28,6 @@ const {
   saveContentManifest,
 } = require('../utils/cloudflare-purge');
 const { processIndexNow } = require('../utils/indexnow');
-const { addFile, addIssue } = require('../utils/test-results');
-const { runTest } = require('../utils/test-runner-helper');
 
 const CONFIGURED_CF_ENV = { CLOUDFLARE_ZONE_ID: 'zone', CLOUDFLARE_API_TOKEN: 'token' };
 
@@ -102,148 +102,145 @@ function readGeneratedAt(manifestPath) {
   return JSON.parse(fs.readFileSync(manifestPath, 'utf8')).generatedAt;
 }
 
-runTest({
-  testType: 'manifest-cursors',
-  testName: 'Deploy manifest cursors',
-  requiresSite: false,
-  validateFn: async (result) => {
-    const fileObj = addFile(result, 'scripts/deploy/deploy.js');
+// One temp site and one pair of temp cursor files for the whole file, built in
+// `before` and removed in `after`, which runs whether or not a test failed.
+let tmp;
+let siteRoot;
+let cfManifestPath;
+let indexNowManifestPath;
+let baseline;
 
-    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'manifest-cursors-'));
-    const siteRoot = path.join(tmp, 'site');
-    const cfManifestPath = path.join(tmp, 'deploy-content-manifest.json');
-    const indexNowManifestPath = path.join(tmp, 'indexnow-content-manifest.json');
+before(() => {
+  tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'manifest-cursors-'));
+  siteRoot = path.join(tmp, 'site');
+  cfManifestPath = path.join(tmp, 'deploy-content-manifest.json');
+  indexNowManifestPath = path.join(tmp, 'indexnow-content-manifest.json');
 
-    fs.mkdirSync(path.join(siteRoot, 'about'), { recursive: true });
-    fs.writeFileSync(path.join(siteRoot, 'index.html'), '<html>one</html>\n');
-    fs.writeFileSync(path.join(siteRoot, 'about/index.html'), '<html>about</html>\n');
-    // IndexNow submits only pages the built sitemap lists, as a real build has
-    fs.writeFileSync(
-      path.join(siteRoot, 'sitemap.xml'),
-      '<urlset><url><loc>https://jonplummer.com/</loc></url><url><loc>https://jonplummer.com/about/</loc></url></urlset>\n'
-    );
+  fs.mkdirSync(path.join(siteRoot, 'about'), { recursive: true });
+  fs.writeFileSync(path.join(siteRoot, 'index.html'), '<html>one</html>\n');
+  fs.writeFileSync(path.join(siteRoot, 'about/index.html'), '<html>about</html>\n');
+  // IndexNow submits only pages the built sitemap lists, as a real build has
+  fs.writeFileSync(
+    path.join(siteRoot, 'sitemap.xml'),
+    '<urlset><url><loc>https://jonplummer.com/</loc></url><url><loc>https://jonplummer.com/about/</loc></url></urlset>\n'
+  );
 
-    // Both cursors start from the same older snapshot, as they would after a
-    // healthy deploy. `baseline` is what "not advanced" looks like below.
-    const baseline = buildContentManifest(siteRoot);
-    const resetCursors = () => {
-      saveContentManifest(cfManifestPath, baseline);
-      saveContentManifest(indexNowManifestPath, baseline);
-    };
+  // Both cursors start from the same older snapshot, as they would after a
+  // healthy deploy. `baseline` is what "not advanced" looks like below.
+  baseline = buildContentManifest(siteRoot);
 
-    fs.writeFileSync(path.join(siteRoot, 'index.html'), '<html>two</html>\n');
+  fs.writeFileSync(path.join(siteRoot, 'index.html'), '<html>two</html>\n');
+});
 
-    const originalFetch = global.fetch;
-    const originalKey = process.env.INDEXNOW_API_KEY;
-    const originalLog = console.log;
-    process.env.INDEXNOW_API_KEY = 'test-key-never-sent';
-    console.log = () => {};
+after(() => {
+  if (tmp) fs.rmSync(tmp, { recursive: true, force: true });
+});
 
-    try {
-      // 1. One hash walk, shared. Two walks would produce two `generatedAt`
-      //    values milliseconds apart; identical strings can only come from one
-      //    manifest object reaching both consumers.
-      resetCursors();
-      const shared = buildContentManifest(siteRoot);
-      await runDeployTail({ siteRoot, cfManifestPath, indexNowManifestPath, currentManifest: shared });
+// Every test starts with both cursors at `baseline`, a fake IndexNow key, and
+// a silenced console.log. `afterEach` puts fetch, the key, and console.log
+// back even when an assertion threw, so no test hands a stub to the next.
+const originalFetch = global.fetch;
+const originalKey = process.env.INDEXNOW_API_KEY;
+const originalLog = console.log;
 
-      const cfStamp = readGeneratedAt(cfManifestPath);
-      const indexNowStamp = readGeneratedAt(indexNowManifestPath);
-      if (cfStamp !== shared.generatedAt || indexNowStamp !== shared.generatedAt) {
-        addIssue(fileObj, {
-          severity: 'error',
-          type: 'manifest-cursors-shared-walk',
-          message: `both cursors must record the shared manifest (${shared.generatedAt}), got cloudflare=${cfStamp} indexnow=${indexNowStamp}`,
-        });
-      }
+beforeEach(() => {
+  saveContentManifest(cfManifestPath, baseline);
+  saveContentManifest(indexNowManifestPath, baseline);
+  process.env.INDEXNOW_API_KEY = 'test-key-never-sent';
+  console.log = () => {};
+});
 
-      // 2. Independent enablement. With purging switched off (no credentials,
-      //    or CLOUDFLARE_PURGE=0), IndexNow must still advance its own cursor
-      //    while Cloudflare's stays put. A shared file could not do both.
-      resetCursors();
-      const purgeOff = buildContentManifest(siteRoot);
-      await runDeployTail({
-        siteRoot,
-        cfManifestPath,
-        indexNowManifestPath,
-        currentManifest: purgeOff,
-        cfEnv: {},
-      });
+afterEach(() => {
+  console.log = originalLog;
+  global.fetch = originalFetch;
+  if (originalKey === undefined) delete process.env.INDEXNOW_API_KEY;
+  else process.env.INDEXNOW_API_KEY = originalKey;
+});
 
-      if (readGeneratedAt(cfManifestPath) !== baseline.generatedAt) {
-        addIssue(fileObj, {
-          severity: 'error',
-          type: 'manifest-cursors-purge-disabled',
-          message: 'Cloudflare cursor must not advance when purging is not configured',
-        });
-      }
-      if (readGeneratedAt(indexNowManifestPath) !== purgeOff.generatedAt) {
-        addIssue(fileObj, {
-          severity: 'error',
-          type: 'manifest-cursors-purge-disabled',
-          message: 'IndexNow cursor must still advance when Cloudflare purging is off',
-        });
-      }
+// One hash walk, shared. Two walks would produce two `generatedAt` values
+// milliseconds apart; identical strings can only come from one manifest object
+// reaching both consumers.
+test('both cursors record the identical generatedAt of the one shared manifest', async () => {
+  const shared = buildContentManifest(siteRoot);
+  await runDeployTail({ siteRoot, cfManifestPath, indexNowManifestPath, currentManifest: shared });
 
-      // 3. Failure isolation, Cloudflare side. A failed purge must leave its
-      //    own cursor un-advanced so the next deploy retries those URLs, without
-      //    holding back IndexNow.
-      resetCursors();
-      const cfDown = buildContentManifest(siteRoot);
-      await runDeployTail({
-        siteRoot,
-        cfManifestPath,
-        indexNowManifestPath,
-        currentManifest: cfDown,
-        cfFails: true,
-      });
+  const cfStamp = readGeneratedAt(cfManifestPath);
+  const indexNowStamp = readGeneratedAt(indexNowManifestPath);
+  assert.ok(
+    !(cfStamp !== shared.generatedAt || indexNowStamp !== shared.generatedAt),
+    `both cursors must record the shared manifest (${shared.generatedAt}), got cloudflare=${cfStamp} indexnow=${indexNowStamp}`
+  );
+});
 
-      if (readGeneratedAt(cfManifestPath) !== baseline.generatedAt) {
-        addIssue(fileObj, {
-          severity: 'error',
-          type: 'manifest-cursors-purge-failed',
-          message: 'a failed purge must not advance the Cloudflare cursor (those URLs still need purging)',
-        });
-      }
-      if (readGeneratedAt(indexNowManifestPath) !== cfDown.generatedAt) {
-        addIssue(fileObj, {
-          severity: 'error',
-          type: 'manifest-cursors-purge-failed',
-          message: 'a failed purge must not hold back the IndexNow cursor',
-        });
-      }
+// Independent enablement. With purging switched off (no credentials, or
+// CLOUDFLARE_PURGE=0), IndexNow must still advance its own cursor while
+// Cloudflare's stays put. A shared file could not do both.
+test('IndexNow advances its cursor when Cloudflare purging is unconfigured', async () => {
+  const purgeOff = buildContentManifest(siteRoot);
+  await runDeployTail({
+    siteRoot,
+    cfManifestPath,
+    indexNowManifestPath,
+    currentManifest: purgeOff,
+    cfEnv: {},
+  });
 
-      // 4. Failure isolation, IndexNow side — the mirror image.
-      resetCursors();
-      const indexNowDown = buildContentManifest(siteRoot);
-      await runDeployTail({
-        siteRoot,
-        cfManifestPath,
-        indexNowManifestPath,
-        currentManifest: indexNowDown,
-        indexNowFails: true,
-      });
+  assert.strictEqual(
+    readGeneratedAt(cfManifestPath),
+    baseline.generatedAt,
+    'Cloudflare cursor must not advance when purging is not configured'
+  );
+  assert.strictEqual(
+    readGeneratedAt(indexNowManifestPath),
+    purgeOff.generatedAt,
+    'IndexNow cursor must still advance when Cloudflare purging is off'
+  );
+});
 
-      if (readGeneratedAt(indexNowManifestPath) !== baseline.generatedAt) {
-        addIssue(fileObj, {
-          severity: 'error',
-          type: 'manifest-cursors-indexnow-failed',
-          message: 'a failed IndexNow submission must not advance its cursor (those URLs were never submitted)',
-        });
-      }
-      if (readGeneratedAt(cfManifestPath) !== indexNowDown.generatedAt) {
-        addIssue(fileObj, {
-          severity: 'error',
-          type: 'manifest-cursors-indexnow-failed',
-          message: 'a failed IndexNow submission must not roll back the Cloudflare cursor',
-        });
-      }
-    } finally {
-      console.log = originalLog;
-      global.fetch = originalFetch;
-      if (originalKey === undefined) delete process.env.INDEXNOW_API_KEY;
-      else process.env.INDEXNOW_API_KEY = originalKey;
-      fs.rmSync(tmp, { recursive: true, force: true });
-    }
-  },
+// Failure isolation, Cloudflare side. A failed purge must leave its own cursor
+// un-advanced so the next deploy retries those URLs, without holding back
+// IndexNow.
+test('a failed purge leaves the Cloudflare cursor un-advanced without holding back IndexNow', async () => {
+  const cfDown = buildContentManifest(siteRoot);
+  await runDeployTail({
+    siteRoot,
+    cfManifestPath,
+    indexNowManifestPath,
+    currentManifest: cfDown,
+    cfFails: true,
+  });
+
+  assert.strictEqual(
+    readGeneratedAt(cfManifestPath),
+    baseline.generatedAt,
+    'a failed purge must not advance the Cloudflare cursor (those URLs still need purging)'
+  );
+  assert.strictEqual(
+    readGeneratedAt(indexNowManifestPath),
+    cfDown.generatedAt,
+    'a failed purge must not hold back the IndexNow cursor'
+  );
+});
+
+// Failure isolation, IndexNow side — the mirror image.
+test('a failed IndexNow submission leaves its own cursor un-advanced without rolling back Cloudflare', async () => {
+  const indexNowDown = buildContentManifest(siteRoot);
+  await runDeployTail({
+    siteRoot,
+    cfManifestPath,
+    indexNowManifestPath,
+    currentManifest: indexNowDown,
+    indexNowFails: true,
+  });
+
+  assert.strictEqual(
+    readGeneratedAt(indexNowManifestPath),
+    baseline.generatedAt,
+    'a failed IndexNow submission must not advance its cursor (those URLs were never submitted)'
+  );
+  assert.strictEqual(
+    readGeneratedAt(cfManifestPath),
+    indexNowDown.generatedAt,
+    'a failed IndexNow submission must not roll back the Cloudflare cursor'
+  );
 });

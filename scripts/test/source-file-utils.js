@@ -8,20 +8,17 @@
  * "exclude", not "include" — see docs/tests.md).
  */
 
+const { test } = require('node:test');
+const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
 const { findSourceFile, isRedirectPage } = require('../utils/source-file-utils');
-const { addFile, addIssue } = require('../utils/test-results');
-const { runTest } = require('../utils/test-runner-helper');
-
-function assertEqual(fileObj, actual, expected, label) {
-  if (actual !== expected) {
-    addIssue(fileObj, {
-      severity: 'error',
-      type: 'source-file-utils-mismatch',
-      message: `${label}: expected ${JSON.stringify(expected)}, got ${JSON.stringify(actual)}`,
-    });
-  }
+function assertEqual(actual, expected, label) {
+  assert.strictEqual(
+    actual,
+    expected,
+    `${label}: expected ${JSON.stringify(expected)}, got ${JSON.stringify(actual)}`
+  );
 }
 
 // Find a real post on disk so the permalink-resolution assertion doesn't pin a
@@ -42,109 +39,95 @@ function findAnyPost(srcDir) {
   return null;
 }
 
-async function validate(result) {
-  const fileObj = addFile(result, 'scripts/utils/source-file-utils.js (fixtures)');
-  const srcDir = path.join(process.cwd(), 'src');
+const srcDir = path.join(process.cwd(), 'src');
 
+test('a directory-style permalink resolves to its markdown page', () => {
   assertEqual(
-    fileObj,
     findSourceFile('about/index.html'),
     path.join(srcDir, 'about.md'),
     'directory-style permalink: about/index.html -> src/about.md'
   );
+});
 
+test('the root index resolves to src/index.njk', () => {
   assertEqual(
-    fileObj,
     findSourceFile('index.html'),
     path.join(srcDir, 'index.njk'),
     'root index: index.html -> src/index.njk'
   );
+});
 
+test('a permalink subdirectory resolves to its template', () => {
   assertEqual(
-    fileObj,
     findSourceFile('ogimages/index.html'),
     path.join(srcDir, 'ogimages.njk'),
     'permalink subdirectory: ogimages/index.html -> src/ogimages.njk'
   );
+});
 
-  // Regression case: post permalinks were only resolved by the OG copy of this
-  // function before the two were consolidated, so `test seo --changed` silently
-  // skipped every blog post.
+// Regression case: post permalinks were only resolved by the OG copy of this
+// function before the two were consolidated, so `test seo --changed` silently
+// skipped every blog post.
+test('a post permalink resolves to its dated post file', () => {
   const post = findAnyPost(srcDir);
-  if (post) {
-    assertEqual(
-      fileObj,
-      findSourceFile(`${post.year}/${post.month}/${post.day}/${post.slug}/index.html`),
-      post.absolutePath,
-      'post permalink: YYYY/MM/DD/slug/index.html -> src/posts/YYYY/YYYY-MM-DD-slug.md'
-    );
-  } else {
-    addIssue(fileObj, {
-      severity: 'error',
-      type: 'source-file-utils-fixture',
-      message: 'No post found under src/posts to test permalink resolution',
-    });
-  }
-
-  // Portfolio pieces moved to /portfolio/<slug>/ on 2026-11-08. Without this
-  // mapping, the permalink-subdirectory fallback answers src/portfolio.njk for
-  // every piece, so seo and og-images would check the index page instead.
-  const piece = fs.readdirSync(path.join(srcDir, 'portfolio')).find((f) => /^\d{4}-\d{2}-\d{2}-.+\.md$/.test(f));
-  if (piece) {
-    const slug = piece.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/\.md$/, '');
-    assertEqual(
-      fileObj,
-      findSourceFile(`portfolio/${slug}/index.html`),
-      path.join(srcDir, 'portfolio', piece),
-      'portfolio piece: portfolio/slug/index.html -> src/portfolio/YYYY-MM-DD-slug.md'
-    );
-  } else {
-    addIssue(fileObj, {
-      severity: 'error',
-      type: 'source-file-utils-fixture',
-      message: 'No piece found under src/portfolio to test permalink resolution',
-    });
-  }
-
+  assert.ok(post, 'No post found under src/posts to test permalink resolution');
   assertEqual(
-    fileObj,
+    findSourceFile(`${post.year}/${post.month}/${post.day}/${post.slug}/index.html`),
+    post.absolutePath,
+    'post permalink: YYYY/MM/DD/slug/index.html -> src/posts/YYYY/YYYY-MM-DD-slug.md'
+  );
+});
+
+// Portfolio pieces moved to /portfolio/<slug>/ on 2026-11-08. Without this
+// mapping, the permalink-subdirectory fallback answers src/portfolio.njk for
+// every piece, so seo and og-images would check the index page instead.
+test('a portfolio piece resolves to its own file, not the portfolio index', () => {
+  const piece = fs.readdirSync(path.join(srcDir, 'portfolio')).find((f) => /^\d{4}-\d{2}-\d{2}-.+\.md$/.test(f));
+  assert.ok(piece, 'No piece found under src/portfolio to test permalink resolution');
+  const slug = piece.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/\.md$/, '');
+  assertEqual(
+    findSourceFile(`portfolio/${slug}/index.html`),
+    path.join(srcDir, 'portfolio', piece),
+    'portfolio piece: portfolio/slug/index.html -> src/portfolio/YYYY-MM-DD-slug.md'
+  );
+});
+
+test('the portfolio index resolves to src/portfolio.njk', () => {
+  assertEqual(
     findSourceFile('portfolio/index.html'),
     path.join(srcDir, 'portfolio.njk'),
     'portfolio index: portfolio/index.html -> src/portfolio.njk'
   );
+});
 
+test('an unresolvable path returns null', () => {
   assertEqual(
-    fileObj,
     findSourceFile('this/path/does-not/exist/index.html'),
     null,
     'unresolvable path returns null'
   );
+});
 
+test('a data-redirect-url attribute marks a redirect page', () => {
   assertEqual(
-    fileObj,
     isRedirectPage('<html><body data-redirect-url="/new/"></body></html>'),
     true,
     'redirect detected via data-redirect-url attribute'
   );
+});
 
+test('a meta refresh marks a redirect page', () => {
   assertEqual(
-    fileObj,
     isRedirectPage('<html><head><meta http-equiv="refresh" content="0;url=/new/"></head></html>'),
     true,
     'redirect detected via meta refresh'
   );
+});
 
+test('an ordinary page is not a redirect', () => {
   assertEqual(
-    fileObj,
     isRedirectPage('<html><body><h1>Not a redirect</h1></body></html>'),
     false,
     'ordinary page is not a redirect'
   );
-}
-
-runTest({
-  testType: 'source-file-utils',
-  testName: 'Source File Utils',
-  requiresSite: false,
-  validateFn: validate,
 });
