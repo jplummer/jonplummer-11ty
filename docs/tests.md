@@ -10,7 +10,7 @@ This project includes a suite of validation tests covering content structure, HT
 
 ## The test manifest
 
-[`scripts/test-manifest.js`](../scripts/test-manifest.js) is the single source of truth for which tests exist, which script runs them, and which groups (`fast`, `pre`, `post`, `unit`, `changed`) and flags (`slow`, `nonJson`, `listInHelp`) they carry. `scripts/test-runner.js`, `scripts/build/build.js`, and `scripts/test-changed.js` all derive their lists from it instead of keeping separate copies — the category lists in this doc are a human-readable view of the manifest, not an independent source. To add a new test: add one entry to the `TESTS` array in `scripts/test-manifest.js` with the right `groups` and its `name`, `description`, and `emoji` (how the runner shows it; all three are required), and it's automatically wired into `pnpm run test <id>`, `test fast`/`all`/`unit`/`changed` (as applicable), and the build phases. The only other edit is the Fast or Unit list under [Test Categories](#test-categories) below, which nothing checks. The manifest self-checks its own consistency (unknown script paths, `unit`/`fast` overlap, `changed` tests without real `--changed` support, etc.) every time it's loaded, so a broken roster fails loudly instead of drifting silently.
+[`scripts/test-manifest.js`](../scripts/test-manifest.js) is the single source of truth for which tests exist, which script runs them, and which groups (`fast`, `pre`, `post`, `unit`, `changed`) and flags (`slow`, `nonJson`, `listInHelp`) they carry. `scripts/test-runner.js`, `scripts/build/build.js`, and `scripts/test-changed.js` all derive their lists from it instead of keeping separate copies — the category lists in this doc are a human-readable view of the manifest, not an independent source. To add a new test: add one entry to the `TESTS` array in `scripts/test-manifest.js` with the right `groups` and its `name`, `description`, and `emoji` (how the runner shows it; all three are required), and it's automatically wired into `pnpm run test <id>`, `test fast`/`all`/`unit`/`changed` (as applicable), and the build phases. A `unit` entry must be a `node:test` file (see [Unit Tests](#unit-tests)); the manifest refuses to load otherwise. The only other edit is the Fast or Unit list under [Test Categories](#test-categories) below, which nothing checks. The manifest self-checks its own consistency (unknown script paths, `unit`/`fast` overlap, `changed` tests without real `--changed` support, etc.) every time it's loaded, so a broken roster fails loudly instead of drifting silently.
 
 ## Test Execution
 
@@ -36,7 +36,7 @@ _Derived from [`scripts/test-manifest.js`](../scripts/test-manifest.js) — see 
 
 **Fast Tests:** `html`, `links`, `wisdom`, `shortlinks`, `portfolios`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `deploy-assets`, `error-document-assets`, `favicon-rasters`, `trailing-slash-links`, `critical-css`, `figure-tokens`, `design-docs-location`, `docs-links`, `portfolio-cover-crop`
 
-**Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `indexnow`, `manifest-cursors`, `figure-lightbox`, `404-suggest`, `site-branding`, `preview-site-lockup`, `og-image-filename`, `og-card`, `date-utils`, `og-shared-fingerprint`, `og-card-digest`, `changelog-format`, `source-file-utils`, `test-json-pipe`, `live-smoke` — see [Unit Tests](#unit-tests) below
+**Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `indexnow`, `manifest-cursors`, `figure-lightbox`, `404-suggest`, `site-branding`, `preview-site-lockup`, `og-image-filename`, `og-card`, `date-utils`, `og-shared-fingerprint`, `og-card-digest`, `changelog-format`, `source-file-utils`, `test-json-pipe`, `live-smoke`, `unit-reporter` — see [Unit Tests](#unit-tests) below
 
 **Slow Tests:** `a11y` (launches browser)
 
@@ -179,11 +179,27 @@ A short `EXCLUDED_PATHS` list at the top of the script names pages the sweep doe
 
 ## Unit Tests
 
-Tests of our own tooling code (parsers, deploy helpers) — not authored content or build output. No `_site/` or network dependency, so they run fast and can run any time. Not part of `build.js` or `deploy.js`; run them on demand with `pnpm run test unit` whenever you touch `scripts/utils/`, `scripts/deploy/`, or content parsers under `scripts/content/`.
+Tests of our own tooling code (parsers, deploy helpers) — not authored content or build output. No network dependency, and no `_site/` needed, so they run fast and can run any time. One of them, `figure-lightbox`, also looks at a built page when `_site/` is there, and shows as skipped (⚠️) when it isn't. Not part of `build.js` or `deploy.js`; run them on demand with `pnpm run test unit` whenever you touch `scripts/utils/`, `scripts/deploy/`, or content parsers under `scripts/content/`.
+
+Every unit test is written for Node's built-in test runner: `const { test } = require('node:test')`, `assert` from `node:assert`, one `test('…', …)` per behavior. `pnpm run test unit` runs them all in one `node --test --test-concurrency=1` call, one file at a time, because several write temp files and one launches a browser. `scripts/utils/unit-reporter.js` prints each file's line with the number of tests it ran:
+
+```text
+✅ 🤷 404 suggestions: 🧪 25 tests, ✅ 25 passing
+❌ 📅 Date Utils: 🧪 4 tests, ✅ 1 passing, ❌ 3 failing
+    - date-only string displays LA calendar day: Expected values to be strictly equal: '' !== 'Dec 30, 2025'
+```
+
+`pnpm run test <id>` on one unit test also lists every test by name. To add one: write the file under `scripts/test/`, add a manifest entry in the `unit` group, and add its id to the Unit list above. Don't use `test-results.js` or `test-runner-helper.js` in a unit test; those belong to the site checks.
+
+Until 2026-11-09 unit tests reported through the site checks' results model, which counts files. A unit test handed it one made-up file, so 26 checks printed as `1 file checked, 1 passing`, and deleting 25 of them would have printed the same line. Plan: [unit tests on node:test](designs/plans/2026-11-09-unit-tests-on-node-test.md).
+
+### unit-reporter.js
+
+Tests the reporter itself by running `node --test` against small fixture files in `scripts/test/fixtures/unit-reporter/` and reading what it printed. Each case is something Node's own rules would let through or hide: a file with no tests counts as a pass in Node and must fail here; a skipped or todo test arrives as a pass and must show in the line and turn the icon to ⚠️; a file that crashes on load sends no summary and must print `stopped before reporting results` with its stack trace, including when the file was named by a relative path; a `before` hook that throws must show its failures, never `0 tests`. Also covers the short failure line, the closing summary (printed for several files, not for one), and the verbose listing. A `node --test` started from inside a test prints nothing unless `NODE_TEST_CONTEXT` is removed from its environment; the test's `run()` helper does that.
 
 ### portfolio-notes.js
 
-Runs fixture assertions against `parseNotesContent()` in `scripts/utils/portfolio-notes.js` (numbered lines including empty slides, `Slide N:` / `N)` variants, blank-line blocks). Guards regression for `convert-pdf-pages-with-notes` and `convert-presentation-portfolio`. With `--changed`, skips if neither the parser nor this test file changed since the last commit — this checks whether the *parser code* changed, not authored content, which is why it lives here rather than in `pnpm run test changed`.
+Runs fixture assertions against `parseNotesContent()` in `scripts/utils/portfolio-notes.js` (numbered lines including empty slides, `Slide N:` / `N)` variants, blank-line blocks). Guards regression for `convert-pdf-pages-with-notes` and `convert-presentation-portfolio`.
 
 ### cloudflare-purge.js
 
@@ -269,7 +285,11 @@ Runs content-authoring tests on files changed since last commit. Test list comes
 
 ## Test Architecture
 
-All tests (except `deploy.js`) use a unified JSON output format automatically formatted by the test runner:
+There are two kinds of test, and each reports in the way that fits it.
+
+**Unit tests** run on `node:test` and report tests, through `scripts/utils/unit-reporter.js`. See [Unit Tests](#unit-tests).
+
+**Site checks** (everything in `fast`, plus `a11y`) walk many files and report issues per file. All of them except `deploy.js` and `security` use a unified JSON output format automatically formatted by the test runner:
 
 - **Verbose** (default): Detailed output with summary and file-by-file details
 - **Build** (`--format build`): Blocking issues only, suitable for CI/CD
@@ -279,7 +299,8 @@ A test's icon comes from its exit code as well as its issue count (`resultIcon()
 **Core Utilities:**
 - `test-results.js`: Building test results, formatting output
 - `test-helpers.js`: File operations and site directory checks
-- `test-runner.js`: Orchestrates execution and formats results
+- `test-runner.js`: Orchestrates execution and formats results; hands unit tests to `node --test`
+- `unit-reporter.js`: The `node:test` reporter for unit tests
 - `test-runner-helper.js`: Common patterns (--changed flag, output formatting, exit codes)
 - `html-utils.js`: HTML parsing
 - `validation-utils.js`: Common validation functions

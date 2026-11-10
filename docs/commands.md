@@ -35,6 +35,7 @@ Recommended process for deploying changes with an up-to-date changelog:
   - Which tests those are, and what each one checks: [tests.md § Test Categories](tests.md#test-categories)
 - `pnpm run test all` - Run all tests in sequence (includes slow tests)
   - Runs: everything in `test fast` → `a11y`
+- `pnpm run test unit` - Run the unit tests of our own tooling code (about five seconds). Each line shows how many tests the file ran; `pnpm run test [type]` on one of them lists every test by name. See [tests.md § Unit Tests](tests.md#unit-tests)
 - `pnpm run test [type]` - Run a specific test type
 - `pnpm run lint:css` - Lint `src/**/*.css` with [Stylelint](https://stylelint.io) (same rules as `pnpm run test css`)
 - `pnpm run fix:markdown` - Auto-fix whitespace/formatting issues in markdown files (trailing spaces, missing newlines, blank lines around headings, etc.) — run this before `pnpm run test markdown` to clear nuisance failures

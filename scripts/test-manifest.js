@@ -22,7 +22,10 @@
  *     'fast'    — content-authoring + build-output checks (`pnpm run test fast`)
  *     'pre'     — pre-build phase in scripts/build/build.js
  *     'post'    — post-build phase in scripts/build/build.js
- *     'unit'    — tooling unit tests (`pnpm run test unit`)
+ *     'unit'    — tooling unit tests (`pnpm run test unit`). Each is written
+ *                 for node:test and run by `node --test` through
+ *                 scripts/utils/unit-reporter.js; validateManifest() fails
+ *                 a unit entry written any other way.
  *     'changed' — content-authoring test with --changed support, run by
  *                 scripts/test-changed.js on files changed since last commit
  *
@@ -68,52 +71,49 @@ const TESTS = [
     name: 'CSS (Stylelint)', description: 'CSS lint (Stylelint)', emoji: '📐' },
   { id: 'rss', script: 'rss-feed.js', groups: ['fast', 'post'],
     name: 'RSS Feed', description: 'RSS feed validation', emoji: '📡' },
-  // Supports --changed itself (detects whether its own parser code changed,
-  // not authored content), but is deliberately excluded from the 'changed'
-  // group — that group is for content-authoring checks run by test-changed.js.
-  { id: 'portfolio-notes', script: 'portfolio-notes.js', groups: ['unit'], nodeTest: true,
+  { id: 'portfolio-notes', script: 'portfolio-notes.js', groups: ['unit'],
     name: 'Portfolio notes parsing', description: 'Portfolio speaker-notes text parsing', emoji: '📎' },
   { id: 'deploy-assets', script: 'deploy-assets.js', groups: ['fast', 'post'],
     name: 'Deploy Assets', description: 'Fonts and deploy-critical _site/ assets', emoji: '📦' },
-  { id: 'cloudflare-purge', script: 'cloudflare-purge.js', groups: ['unit'], nodeTest: true,
+  { id: 'cloudflare-purge', script: 'cloudflare-purge.js', groups: ['unit'],
     name: 'Cloudflare Purge', description: 'Content-hash manifest diff → Cloudflare purge URL mapping', emoji: '☁️' },
-  { id: 'deploy-guards', script: 'deploy-guards.js', groups: ['unit'], nodeTest: true,
+  { id: 'deploy-guards', script: 'deploy-guards.js', groups: ['unit'],
     name: 'Deploy Guards', description: 'deploy.js regression guards (rsync excludes, changelog, purge wiring, one shared hash walk)', emoji: '🛟' },
   { id: 'deploy', script: 'deploy.js', groups: [], nonJson: true,
     name: 'Deploy', description: 'Deployment connectivity', emoji: '🚀' },
   // Not a build-output check: indexnow.js is a pure unit test of selection
   // logic (fixture manifests), no _site/ dependency.
-  { id: 'indexnow', script: 'indexnow.js', groups: ['unit'], nodeTest: true,
+  { id: 'indexnow', script: 'indexnow.js', groups: ['unit'],
     name: 'IndexNow', description: 'IndexNow URL selection from content-hash manifests', emoji: '📣' },
   // Guards the two .cache cursors against being merged or cross-contaminated:
   // runs deploy.js's composition (one shared hash walk) with stubbed fetch.
-  { id: 'manifest-cursors', script: 'manifest-cursors.js', groups: ['unit'], nodeTest: true,
+  { id: 'manifest-cursors', script: 'manifest-cursors.js', groups: ['unit'],
     name: 'Deploy manifest cursors', description: 'Cloudflare and IndexNow state files stay independent cursors', emoji: '🔖' },
-  { id: 'figure-lightbox', script: 'figure-lightbox.js', groups: ['unit'], nodeTest: true, listInHelp: false,
+  { id: 'figure-lightbox', script: 'figure-lightbox.js', groups: ['unit'], listInHelp: false,
     name: 'Figure lightbox', description: 'Lightbox trigger links on figures', emoji: '🔍' },
   // Matcher behind the /404 "did you mean" list. Requires the browser file
   // directly, so there is no second copy of the scoring logic to drift.
-  { id: '404-suggest', script: '404-suggest.js', groups: ['unit'], nodeTest: true,
+  { id: '404-suggest', script: '404-suggest.js', groups: ['unit'],
     name: '404 suggestions', description: 'Matcher behind the 404 page suggestions', emoji: '🤷' },
-  { id: 'site-branding', script: 'site-branding.js', groups: ['unit'], nodeTest: true,
+  { id: 'site-branding', script: 'site-branding.js', groups: ['unit'],
     name: 'Site Branding', description: 'site.js author/tagline/title contract and no hardcoded tagline', emoji: '🏷️' },
-  { id: 'preview-site-lockup', script: 'preview-site-lockup.js', groups: ['unit'], nodeTest: true,
+  { id: 'preview-site-lockup', script: 'preview-site-lockup.js', groups: ['unit'],
     name: 'Preview Site Lockup', description: 'build-time facsimile .site-lockup HTML for color/type previews', emoji: '🖼️' },
-  { id: 'og-image-filename', script: 'og-image-filename.js', groups: ['unit'], nodeTest: true,
+  { id: 'og-image-filename', script: 'og-image-filename.js', groups: ['unit'],
     name: 'OG Image Filename', description: 'OG PNG basename from post date (date-only calendar-safe)', emoji: '🗂️' },
   // OG card labels, mark geometry, and a real render of the title fit.
-  { id: 'og-card', script: 'og-card.js', groups: ['unit'], nodeTest: true,
+  { id: 'og-card', script: 'og-card.js', groups: ['unit'],
     name: 'OG Card', description: 'OG card labels, mark geometry, and a real render of the title fit', emoji: '🃏' },
-  { id: 'date-utils', script: 'date-utils.js', groups: ['unit'], nodeTest: true,
+  { id: 'date-utils', script: 'date-utils.js', groups: ['unit'],
     name: 'Date Utils', description: 'postDate formats date-only strings in America/Los_Angeles', emoji: '📅' },
-  { id: 'og-shared-fingerprint', script: 'og-shared-fingerprint.js', groups: ['unit'], nodeTest: true,
+  { id: 'og-shared-fingerprint', script: 'og-shared-fingerprint.js', groups: ['unit'],
     name: 'OG shared fingerprint', description: 'OG shared fingerprint changes only when card inputs change', emoji: '🫆' },
   // OG card digest in the PNG, and the generator's render / keep / stamp decision.
-  { id: 'og-card-digest', script: 'og-card-digest.js', groups: ['unit'], nodeTest: true,
+  { id: 'og-card-digest', script: 'og-card-digest.js', groups: ['unit'],
     name: 'OG card digest', description: 'OG card digest in the PNG and the render, keep, or stamp decision', emoji: '🪪' },
-  { id: 'changelog-format', script: 'changelog-format.js', groups: ['unit'], nodeTest: true,
+  { id: 'changelog-format', script: 'changelog-format.js', groups: ['unit'],
     name: 'Changelog format', description: 'Changelog wraps filenames as code', emoji: '🗒️' },
-  { id: 'source-file-utils', script: 'source-file-utils.js', groups: ['unit'], nodeTest: true,
+  { id: 'source-file-utils', script: 'source-file-utils.js', groups: ['unit'],
     name: 'Source File Utils', description: 'Built HTML path -> source file resolution and redirect-page detection', emoji: '🧭' },
   // fast-only: not part of either build.js phase (build's own output isn't
   // what this checks — it guards the static 404.html asset hrefs).
@@ -145,11 +145,11 @@ const TESTS = [
     name: 'Docs relative links', description: 'Relative links in docs/ point at files that exist', emoji: '🔗' },
   { id: 'portfolio-cover-crop', script: 'portfolio-cover-crop.js', groups: ['fast', 'post'],
     name: 'Portfolio cover crop', description: 'Grid coverPosition/coverZoom allowlist, CSS vars, Monotasker HTML', emoji: '📐' },
-  { id: 'test-json-pipe', script: 'test-json-pipe.js', groups: ['unit'], nodeTest: true,
+  { id: 'test-json-pipe', script: 'test-json-pipe.js', groups: ['unit'],
     name: 'Test JSON pipe', description: 'Large TEST_RUNNER JSON survives piped stdout (partial write + drain)', emoji: '🧪' },
-  { id: 'live-smoke', script: 'live-smoke.js', groups: ['unit'], nodeTest: true,
+  { id: 'live-smoke', script: 'live-smoke.js', groups: ['unit'],
     name: 'Live smoke checks', description: 'Live smoke check list and response evaluation', emoji: '🩺' },
-  { id: 'unit-reporter', script: 'unit-reporter.js', groups: ['unit'], nodeTest: true,
+  { id: 'unit-reporter', script: 'unit-reporter.js', groups: ['unit'],
     name: 'Unit test reporter', description: 'Result lines, counts, and failures for node:test unit tests', emoji: '📋' },
   { id: 'security', script: { file: 'security-audit.js', dir: 'security' }, groups: [], nonJson: true,
     name: 'Security Audit', description: 'Security audit', emoji: '🛡️' },
@@ -205,11 +205,6 @@ function getAllTestIds() {
 
 function getNonJsonTestIds() {
   return TESTS.filter((t) => t.nonJson).map((t) => t.id);
-}
-
-/** Unit tests written for node:test; `pnpm run test unit` runs them in one `node --test` call. */
-function getNodeTestIds() {
-  return TESTS.filter((t) => t.nodeTest).map((t) => t.id);
 }
 
 /** The id whose script is this absolute path, or null. The unit reporter uses it to label a file. */
@@ -281,17 +276,13 @@ function validateManifest() {
     );
   }
 
-  // A nodeTest entry is a unit test that really is written for node:test.
-  for (const test of TESTS.filter((t) => t.nodeTest)) {
-    assertManifest(test.groups.includes('unit'), `'${test.id}' is marked nodeTest but is not in the unit group`);
+  // Every unit test is a node:test file, so each one reports its own test
+  // count and none can be written against the results model by habit.
+  for (const test of getTestsByGroup('unit')) {
     const source = fs.readFileSync(getTestScriptPath(test.id), 'utf8');
     assertManifest(
-      source.includes("require('node:test')"),
-      `'${test.id}' is marked nodeTest but does not require node:test`
-    );
-    assertManifest(
-      !source.includes('test-runner-helper'),
-      `'${test.id}' is marked nodeTest but still uses test-runner-helper`
+      source.includes("require('node:test')") && !source.includes('test-runner-helper'),
+      `unit test '${test.id}' must be a node:test file (require('node:test'), no test-runner-helper)`
     );
   }
 
@@ -316,7 +307,6 @@ module.exports = {
   getTestsByGroup,
   getAllTestIds,
   getNonJsonTestIds,
-  getNodeTestIds,
   getTestIdByScriptPath,
   getHelpListedTests,
   validateManifest,

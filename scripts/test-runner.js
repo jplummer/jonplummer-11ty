@@ -277,7 +277,7 @@ function runTest(testType, showStatus = false, compact = false, formatOptions = 
 }
 
 /**
- * Unit tests written for node:test run in one `node --test` call. The reporter
+ * Unit tests run in one `node --test` call; every one is a node:test file. The reporter
  * (scripts/utils/unit-reporter.js) prints each file's line and, for several
  * files, the closing summary. One file at a time: several unit tests write
  * temp files and one launches a browser.
@@ -304,7 +304,7 @@ function runNodeTests(ids, { verbose = false } = {}) {
   });
 }
 
-async function runTestGroup(label, ids, { extraFailure = false } = {}) {
+async function runTestGroup(label, ids) {
   console.log(`Running ${label} tests...\n`);
 
   const results = [];
@@ -320,7 +320,7 @@ async function runTestGroup(label, ids, { extraFailure = false } = {}) {
     }
   }
   const allPassed = printOverallSummary(results);
-  process.exit(allPassed && !extraFailure ? 0 : 1);
+  process.exit(allPassed ? 0 : 1);
 }
 
 function parseArgs() {
@@ -341,6 +341,7 @@ function parseArgs() {
 
 async function main() {
   const { testType, formatOptions } = parseArgs();
+  const unitIds = manifest.getTestsByGroup('unit').map(t => t.id);
   
   if (!testType) {
     listTests();
@@ -362,16 +363,8 @@ async function main() {
   }
 
   if (testType === 'unit') {
-    // Until every unit test is on node:test, run the converted ones first,
-    // then the rest through the old loop. Either failing fails the run.
-    const nodeTestIds = manifest.getNodeTestIds();
-    const legacyIds = manifest.getTestsByGroup('unit').map(t => t.id).filter(id => !nodeTestIds.includes(id));
     console.log('Running unit tests...\n');
-    const nodeTestCode = nodeTestIds.length > 0 ? await runNodeTests(nodeTestIds) : 0;
-    if (legacyIds.length === 0) process.exit(nodeTestCode);
-    console.log('');
-    await runTestGroup('unit', legacyIds, { extraFailure: nodeTestCode !== 0 });
-    return;
+    process.exit(await runNodeTests(unitIds));
   }
 
   if (testType === 'changed') {
@@ -394,7 +387,7 @@ async function main() {
     process.exit(1);
   }
   
-  if (manifest.getNodeTestIds().includes(testType)) {
+  if (unitIds.includes(testType)) {
     process.exit(await runNodeTests([testType], { verbose: true }));
   }
 
