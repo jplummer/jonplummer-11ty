@@ -278,50 +278,11 @@ function outputResult(result) {
 // ============================================================================
 
 /**
- * Test type emoji mapping
- * Provides unique emojis for each test type for easy terminal distinction
- * Trailing spaces are added to some emojis to work around rendering oddities of the MacOS terminal
+ * Labels live with each test in scripts/test-manifest.js (name, description,
+ * emoji). These getters keep a fallback because a result's testType isn't
+ * always a manifest id: fixtures and a few scripts pass their own string.
  */
-const TEST_EMOJIS = {
-  'a11y': '🌈',
-  'color-contrast': '🎨',
-  'css': '📐',
-  'frontmatter': '🗂️ ',
-  'html': '🧩',
-  'internal-links': '🔗',
-  'links': '📌',
-  'wisdom': '🦉',
-  'shortlinks': '🔁',
-  'portfolios': '🗂️',
-  'markdown': '✍️ ',
-  'spell': '🧙',
-  'og-images': '📸',
-  'rss': '📡',
-  'portfolio-notes': '📎',
-  '404-suggest': '🧭',
-  'deploy-assets': '📦',
-  'cloudflare-purge': '☁️',
-  'deploy-guards': '🛟',
-  'manifest-cursors': '🔖',
-  'site-branding': '🏷️',
-  'preview-site-lockup': '🖼️',
-  'og-card': '🃏',
-  'og-image-filename': '🗂️',
-  'date-utils': '📅',
-  'source-file-utils': '🧭',
-  'error-document-assets': '📄',
-  'favicon-rasters': '🟦',
-  'trailing-slash-links': '↪️',
-  'critical-css': '⚡',
-  'portfolio-cover-crop': '📐',
-  'test-json-pipe': '🧪',
-  'seo': '📈',
-  'deploy': '🚀',
-  'security': '🛡️',
-  'indexnow': '📣',
-  'design-docs-location': '🗃️',
-  'docs-links': '🔗'
-};
+const { getTestLabel } = require('../test-manifest');
 
 /**
  * Get emoji for a test type
@@ -330,7 +291,8 @@ const TEST_EMOJIS = {
  * Facepalm is the default to make undefined test types stand out
  */
 function getTestEmoji(testType) {
-  return TEST_EMOJIS[testType] || '🤦🏻‍♀️';
+  const label = getTestLabel(testType);
+  return (label && label.emoji) || '🤦🏻‍♀️';
 }
 
 /**
@@ -339,44 +301,8 @@ function getTestEmoji(testType) {
  * @returns {string} Display name
  */
 function getTestDisplayName(testType) {
-  const displayNames = {
-    'html': 'HTML Validation',
-    'links': 'Links YAML',
-    'wisdom': 'Wisdom YAML',
-    'internal-links': 'Internal Links',
-    'content': 'Content Structure',
-    'frontmatter': 'Frontmatter',
-    'markdown': 'Markdown',
-    'spell': 'Spell Check',
-    'seo': 'SEO Meta',
-    'a11y': 'Accessibility',
-    'color-contrast': 'Color Contrast',
-    'css': 'CSS (Stylelint)',
-    'rss': 'RSS Feed',
-    'portfolio-notes': 'Portfolio notes parsing',
-    'og-images': 'OG Images',
-    'deploy-assets': 'Deploy Assets',
-    'cloudflare-purge': 'Cloudflare Purge',
-    'deploy-guards': 'Deploy Guards',
-    'manifest-cursors': 'Deploy manifest cursors',
-    'site-branding': 'Site Branding',
-    'preview-site-lockup': 'Preview Site Lockup',
-    'og-card': 'OG Card',
-    'og-image-filename': 'OG Image Filename',
-    'date-utils': 'Date Utils',
-    'source-file-utils': 'Source File Utils',
-    'error-document-assets': 'ErrorDocument asset paths',
-    'favicon-rasters': 'Favicon scraper rasters',
-    'trailing-slash-links': 'Trailing-slash directory links',
-    'critical-css': 'Critical CSS shell sync',
-    'portfolio-cover-crop': 'Portfolio cover crop',
-    'test-json-pipe': 'Test JSON pipe',
-    'design-docs-location': 'Design docs location',
-    'docs-links': 'Docs relative links',
-    'deploy': 'Deploy',
-    'security': 'Security Audit'
-  };
-  return displayNames[testType] || testType;
+  const label = getTestLabel(testType);
+  return (label && label.name) || testType;
 }
 
 /**
@@ -385,45 +311,8 @@ function getTestDisplayName(testType) {
  * @returns {string} Description
  */
 function getTestDescription(testType) {
-  const descriptions = {
-    'html': 'HTML validity',
-    'links': 'Links YAML structure',
-    'wisdom': 'Collected wisdom YAML structure',
-    'internal-links': 'Internal link validity',
-    'frontmatter': 'Frontmatter validation',
-    'markdown': 'Markdown syntax',
-    'spell': 'Spell checking',
-    'seo': 'SEO and meta tags',
-    'og-images': 'Open Graph images',
-    'a11y': 'Accessibility (WCAG compliance)',
-    'color-contrast': 'Color contrast (APCA)',
-    'css': 'CSS lint (Stylelint)',
-    'rss': 'RSS feed validation',
-    'portfolio-notes': 'Portfolio speaker-notes text parsing',
-    'deploy-assets': 'Fonts and deploy-critical _site/ assets',
-    'critical-css': 'Inline first-paint shell matches jonplummer.css tokens',
-    'cloudflare-purge': 'Content-hash manifest diff → Cloudflare purge URL mapping',
-    'deploy-guards': 'deploy.js regression guards (rsync excludes, changelog, purge wiring, one shared hash walk)',
-    'manifest-cursors': 'Cloudflare and IndexNow state files stay independent cursors',
-    'site-branding': 'site.js author/tagline/title contract and no hardcoded tagline',
-    'preview-site-lockup': 'build-time facsimile .site-lockup HTML for color/type previews',
-    'og-card': 'OG card labels, mark geometry, and a real render of the title fit',
-    'og-image-filename': 'OG PNG basename from post date (date-only calendar-safe)',
-    'date-utils': 'postDate formats date-only strings in America/Los_Angeles',
-    'source-file-utils': 'Built HTML path -> source file resolution and redirect-page detection',
-    'error-document-assets': '404.html + 500.html root-absolute CSS/font/favicon hrefs',
-    'favicon-rasters': 'favicon.ico / apple-touch-icon.png use a light field; icon.svg stays themed',
-    'trailing-slash-links': 'Internal directory links must include trailing slash (avoid 301 noise)',
-    'critical-css': 'Inline first-paint shell must match jonplummer.css :root tokens',
-    'portfolio-cover-crop': 'Grid coverPosition/coverZoom allowlist, CSS vars, Monotasker HTML',
-    'test-json-pipe': 'Large TEST_RUNNER JSON survives piped stdout (partial write + drain)',
-    'design-docs-location': 'Plans/specs stay in docs/designs/ (superpowers skills hardcode docs/superpowers/)',
-    'docs-links': 'Relative links in docs/ point at files that exist',
-    'deploy': 'Deployment connectivity',
-    'indexnow': 'IndexNow configuration',
-    'security': 'Security audit'
-  };
-  return descriptions[testType] || '';
+  const label = getTestLabel(testType);
+  return (label && label.description) || '';
 }
 
 /**
@@ -968,7 +857,6 @@ module.exports = {
   getTestDisplayName,
   getTestDescription,
   printOverallSummary,
-  TEST_EMOJIS,
   
   // Formatting
   formatVerbose,
