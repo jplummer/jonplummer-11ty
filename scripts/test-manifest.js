@@ -153,6 +153,8 @@ const TESTS = [
     name: 'Posts and links merge', description: 'Where each link lands among the posts, page by page', emoji: '🧵' },
   { id: 'noteplan-import', script: 'noteplan-import.js', groups: ['unit'],
     name: 'NotePlan link import', description: 'Reading the NotePlan note and rewriting links.yaml without loss', emoji: '🔗' },
+  { id: 'shortlink-command', script: 'shortlink-command.js', groups: ['unit'],
+    name: 'Short link command', description: 'pnpm run shortlink, and the Apache rule each link gets', emoji: '🪝' },
   { id: 'unit-reporter', script: 'unit-reporter.js', groups: ['unit'],
     name: 'Unit test reporter', description: 'Result lines, counts, and failures for node:test unit tests', emoji: '📋' },
   { id: 'unit-wiring', script: 'unit-wiring.js', groups: ['unit'],

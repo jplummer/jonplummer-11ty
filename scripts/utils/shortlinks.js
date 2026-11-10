@@ -102,6 +102,12 @@ function validateShortlinks(entries, options = {}) {
       issues.push(`${label}: missing to`);
     } else if (!isAbsoluteHttps(to)) {
       issues.push(`${label}: to must be an absolute https URL (got "${to}")`);
+    } else if (!/^[\x21-\x7E]+$/.test(to)) {
+      // A raw space ends the Apache rule early, and Apache can't carry raw non-ASCII.
+      issues.push(
+        `${label}: to must be percent-encoded, with no spaces or non-ASCII characters (got "${to}"); ` +
+          `\`pnpm run shortlink add\` encodes it for you, as "${new URL(to).href}"`
+      );
     } else {
       const key = to.replace(/\/$/, '') || to;
       destCounts.set(key, (destCounts.get(key) || []).concat(slug || label));
@@ -158,34 +164,60 @@ function lookupBySlug(entries, slug) {
   return entries.find((e) => e.slug === needle) || null;
 }
 
+/**
+ * What makes two destinations the same: the whole address, except one trailing
+ * slash on the path. The query string and the fragment count, so two videos on
+ * one site, or a page and a section of it, are different destinations.
+ */
+function destinationKey(url) {
+  const u = new URL(url);
+  if (u.protocol !== 'https:') return null;
+  return `${u.origin}${u.pathname.replace(/\/$/, '')}${u.search}${u.hash}`;
+}
+
 function lookupByDestination(entries, url) {
   if (!url || typeof url !== 'string') return [];
   let normalized;
   try {
-    const u = new URL(url);
-    if (u.protocol !== 'https:') return [];
-    normalized = `${u.origin}${u.pathname}`.replace(/\/$/, '') || `${u.origin}/`;
+    normalized = destinationKey(url);
   } catch {
     return [];
   }
+  if (normalized === null) return [];
   return entries.filter((e) => {
     try {
-      const u = new URL(e.to);
-      const key = `${u.origin}${u.pathname}`.replace(/\/$/, '') || `${u.origin}/`;
-      return key === normalized;
+      return destinationKey(e.to) === normalized;
     } catch {
       return false;
     }
   });
 }
 
-/** Apache RewriteRule lines for .htaccess (exact slug, optional trailing slash, 302, NC). */
+/** Characters Apache passes through a redirect untouched (mod_rewrite's safe set). */
+const APACHE_SAFE = /^[A-Za-z0-9$\-_.+!*'(),:;@&=/~]*$/;
+
+/**
+ * The Apache RewriteRule for one short link: exact slug, optional trailing
+ * slash, 302, any case. Used by src/.htaccess.njk (the shortlinkRewriteRule
+ * filter) and by the checks, so there is one definition.
+ *
+ * In a rule's target, `%1` and `$1` are back-references, so `%`, `$`, and `\`
+ * are backslash-escaped. Apache also re-encodes a redirect's target (`#` to
+ * `%23`, `%` to `%25`) unless the rule carries NE. A destination made only of
+ * characters Apache leaves alone keeps the plain rule, so the links already
+ * printed on cards have the rules they always had. Proved against a real
+ * Apache in scripts/test/shortlink-command.js.
+ */
+function rewriteRuleFor(entry) {
+  const { slug, to } = entry;
+  const target = String(to).replace(/[\\%$]/g, '\\$&');
+  const flags = target === to && APACHE_SAFE.test(to) ? 'R=302,NC,L' : 'R=302,NC,NE,L';
+  return `RewriteRule ^${slug}/?$ ${target} [${flags}]`;
+}
+
+/** Apache RewriteRule lines for .htaccess, one per short link. */
 function htaccessRewriteLines(entries) {
-  return entries.map((e) => {
-    const slug = e.slug;
-    const to = e.to;
-    return `RewriteRule ^${slug}/?$ ${to} [R=302,NC,L]`;
-  });
+  return entries.map(rewriteRuleFor);
 }
 
 /**
@@ -237,21 +269,26 @@ function qrPayloadForSlug(slug, siteDomain = 'jonplummer.com') {
   return `HTTPS://${String(siteDomain).toUpperCase()}/${upper}`;
 }
 
-function dumpShortlinksYaml(entries) {
-  const header = `# Permanent short links for QR / print
-# Slugs: exactly two chars from A–Z and 2–9, excluding O and I (and digit 0/1).
-# Never delete a row; never reuse a slug. Retarget with a new \`to\`, or set
-# retired: true and point \`to\` at https://jonplummer.com/
-# Destinations must be absolute https URLs.
-#
-# Edit this file or use: pnpm run shortlink add|get|find|qr
+/**
+ * Add one entry to the end of the file, leaving every existing line as it is:
+ * comments, order, and quoting. Rewriting the file through a YAML dump lost
+ * the comment above the JP canary. The new text is read back before it is
+ * written, and nothing is written unless it gives the old entries plus this one.
+ */
+function appendShortlink(entry, filePath = SHORTLINKS_PATH) {
+  const before = fs.readFileSync(filePath, 'utf8');
+  const block = yaml
+    .dump([entry], { lineWidth: 100, noRefs: true, quotingType: '"' })
+    .replace(/^/gm, '  ')
+    .trimEnd();
+  const after = `${before.replace(/\n*$/, '\n')}${block}\n`;
 
-`;
-  return header + yaml.dump({ shortlinks: entries }, { lineWidth: 100, noRefs: true });
-}
-
-function saveShortlinks(entries, filePath = SHORTLINKS_PATH) {
-  fs.writeFileSync(filePath, dumpShortlinksYaml(entries), 'utf8');
+  const expected = yaml.load(before).shortlinks.concat(entry);
+  const readBack = yaml.load(after);
+  if (JSON.stringify(readBack && readBack.shortlinks) !== JSON.stringify(expected)) {
+    throw new Error(`could not add ${entry.slug} to ${filePath} without changing other entries; nothing was written`);
+  }
+  fs.writeFileSync(filePath, after, 'utf8');
 }
 
 module.exports = {
@@ -266,11 +303,11 @@ module.exports = {
   lookupBySlug,
   lookupByDestination,
   htaccessRewriteLines,
+  rewriteRuleFor,
   shortlinkPurgeUrls,
   pickUnusedSlug,
   qrPayloadForSlug,
   normalizeHomeUrl,
   isAbsoluteHttps,
-  dumpShortlinksYaml,
-  saveShortlinks,
+  appendShortlink,
 };

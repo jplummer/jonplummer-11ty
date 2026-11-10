@@ -8,6 +8,7 @@
 
 const { normalizeDate, formatPostDate, formatPostDateAttr } = require("../utils/date-utils");
 const { mergePostsAndLinks, newestLinks } = require("../utils/merge-posts-links");
+const { rewriteRuleFor } = require("../../scripts/utils/shortlinks");
 const { pickTaglineForUrl, getGitHeadSha } = require("../utils/tagline-for-url");
 const siteData = require("../../src/_data/site.js")();
 
@@ -70,6 +71,9 @@ function configureFilters(eleventyConfig, md) {
 
   // Add custom filter to merge posts and links chronologically
   eleventyConfig.addFilter("mergePostsAndLinks", mergePostsAndLinks);
+
+  // One short link's Apache rule for .htaccess.njk; use with | safe
+  eleventyConfig.addFilter("shortlinkRewriteRule", rewriteRuleFor);
 
   // The newest links for links-feed.xml, cut off at feedLimits.links
   eleventyConfig.addFilter("newestLinks", newestLinks);

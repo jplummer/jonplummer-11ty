@@ -157,8 +157,21 @@ function formatDateRange(startDate, endDate) {
   return `${startFormatted}–${endFormatted}`;
 }
 
+/**
+ * Today's calendar day in America/Los_Angeles, as YYYY-MM-DD. For anything
+ * that stamps "today" on content. `new Date().toISOString()` gives the UTC
+ * day, which is tomorrow from 4 pm Pacific (5 pm in summer).
+ *
+ * @param {Date} [now] - The instant to read; defaults to the present
+ * @returns {string} YYYY-MM-DD
+ */
+function todayIsoDate(now = new Date()) {
+  return DateTime.fromJSDate(now, { zone: TIME_ZONE }).toISODate();
+}
+
 module.exports = {
   TIME_ZONE,
+  todayIsoDate,
   normalizeDate,
   toDateTime,
   formatPostDate,

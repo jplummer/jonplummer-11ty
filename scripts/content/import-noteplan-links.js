@@ -19,6 +19,7 @@ const os = require('os');
 const yaml = require('js-yaml');
 const { DateTime } = require('luxon');
 const { formatYamlString } = require('../utils/frontmatter-utils');
+const { todayIsoDate } = require('../../eleventy/utils/date-utils');
 
 // NotePlan path (setapp version)
 const NOTEPLAN_NOTES_DIR = path.join(
@@ -169,7 +170,7 @@ function parseNotePlanNote(content) {
 function resolveTargetDate(args, now = new Date()) {
   const index = args.findIndex((arg) => arg === '--date' || arg.startsWith('--date='));
   if (index === -1) {
-    return DateTime.fromJSDate(now, { zone: 'America/Los_Angeles' }).toISODate();
+    return todayIsoDate(now);
   }
   const value = args[index] === '--date' ? args[index + 1] : args[index].slice('--date='.length);
   if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value) || !DateTime.fromISO(value).isValid) {

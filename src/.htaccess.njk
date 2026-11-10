@@ -104,7 +104,7 @@ RewriteEngine On
 RewriteBase /
 # Begin shortlinks
 {% for link in shortlinks.shortlinks %}
-RewriteRule ^{{ link.slug }}/?$ {{ link.to }} [R=302,NC,L]
+{{ link | shortlinkRewriteRule | safe }}
 {%- endfor %}
 # End shortlinks
 # Wisdom: requests for tag URLs with no built page → /wisdom/ (e.g. retired tags)

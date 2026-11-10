@@ -131,7 +131,7 @@ runTest({
 
     const lines = htaccessRewriteLines(entries);
     for (const line of lines) {
-      if (!/^RewriteRule \^[A-HJ-NP-Z2-9]{2}\/\?\$ https:\/\/\S+ \[R=302,NC,L\]$/.test(line)) {
+      if (!/^RewriteRule \^[A-HJ-NP-Z2-9]{2}\/\?\$ https:\/\/\S+ \[R=302,NC(,NE)?,L\]$/.test(line)) {
         addIssue(fileObj, {
           severity: 'error',
           type: 'shortlinks-rewrite-shape',

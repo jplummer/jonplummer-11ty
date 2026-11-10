@@ -343,7 +343,8 @@ Permanent two-character links at `HTTPS://JONPLUMMER.COM/XX` for printed matter 
 - Slug: exactly two characters from A–Z and 2–9, excluding O and I (and digits 0/1)
 - Redirects are **302** (retargetable; browsers do not cache them forever like 301s)
 - Never delete a row; never reuse a slug. Retarget `to`, or set `retired: true` and point at `https://jonplummer.com/`
-- Destinations must be absolute `https://` URLs (this site or elsewhere)
+- Destinations must be absolute `https://` URLs (this site or elsewhere). Any valid address works, including a query string, a fragment (`/about/#contact`), and percent-encoding. `shortlink add` encodes spaces and non-ASCII characters for you; in a hand edit, write them encoded (`%20`)
+- Two addresses that differ only in a trailing slash are the same destination. A different query string or fragment makes a different one, so two videos on one site get two slugs
 - Unlisted: no public index page
 
 ### Add or look up a link
@@ -355,6 +356,6 @@ pnpm run shortlink get AB
 pnpm run shortlink qr AB --out ./tmp-qr   # SVG + PNG, full uppercase URL
 ```
 
-Or edit `src/_data/shortlinks.yaml` directly. Rebuild, then deploy — `.htaccess` RewriteRules are generated at build time. Deploy purges shortlink URLs from Cloudflare when `.htaccess` changes, then smoke-checks live 302s.
+`add` puts the new link at the end of `src/_data/shortlinks.yaml` and leaves every other line as it is, comments included. Or edit the file directly. Rebuild, then deploy — `.htaccess` RewriteRules are generated at build time. Deploy purges shortlink URLs from Cloudflare when `.htaccess` changes, then smoke-checks live 302s.
 
 Canary slug **`JP`** → home is reserved for deploy smoke; do not retire it.

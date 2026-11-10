@@ -14,7 +14,7 @@ const path = require('path');
 const QRCode = require('qrcode');
 const {
   loadShortlinksFile,
-  saveShortlinks,
+  appendShortlink,
   validateShortlinks,
   lookupBySlug,
   lookupByDestination,
@@ -23,6 +23,7 @@ const {
   isAbsoluteHttps,
   SHORTLINKS_PATH,
 } = require('../utils/shortlinks');
+const { todayIsoDate } = require('../../eleventy/utils/date-utils');
 
 function usage(exitCode = 1) {
   console.log(`Usage:
@@ -41,7 +42,12 @@ function parseArgs(argv) {
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--slug' || a === '--note' || a === '--created' || a === '--out') {
-      args[a.slice(2)] = argv[++i];
+      const value = argv[++i];
+      if (value === undefined || value.startsWith('--')) {
+        console.error(`${a} needs a value`);
+        process.exit(1);
+      }
+      args[a.slice(2)] = value;
     } else if (a === '--help' || a === '-h') {
       args.help = true;
     } else if (a.startsWith('--')) {
@@ -87,11 +93,13 @@ async function cmdFind(url) {
   for (const entry of matches) printEntry(entry);
 }
 
-async function cmdAdd(url, opts) {
-  if (!isAbsoluteHttps(url)) {
+async function cmdAdd(givenUrl, opts) {
+  if (!isAbsoluteHttps(givenUrl)) {
     console.error('add requires an absolute https URL');
     process.exit(1);
   }
+  // The address as a browser would send it: spaces and non-ASCII percent-encoded.
+  const url = new URL(givenUrl).href;
   const entries = loadShortlinksFile();
   const existing = lookupByDestination(entries, url);
   if (existing.length > 0) {
@@ -108,7 +116,7 @@ async function cmdAdd(url, opts) {
     process.exit(1);
   }
 
-  const created = opts.created || new Date().toISOString().slice(0, 10);
+  const created = opts.created || todayIsoDate();
   const entry = {
     slug,
     to: url,
@@ -124,7 +132,7 @@ async function cmdAdd(url, opts) {
   }
   for (const m of warnings) console.warn(`Warning: ${m}`);
 
-  saveShortlinks(next);
+  appendShortlink(entry);
   console.log(`Added ${slug} → ${url}`);
   console.log(`Edit data: ${SHORTLINKS_PATH}`);
   console.log(`Rebuild to update .htaccess, then deploy.`);
