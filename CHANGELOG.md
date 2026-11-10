@@ -7,6 +7,12 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Let a page borrow another page's OG card
 - Build every portfolio from one list file
 - Empty _site/ before each build, except optimized images
+- Plan the low-impact cleanup; note post-deploy live test ideas
+- Fix stale test lists and comments in docs
+- Remove passthrough and ignore rules that match nothing
+- Keep test names, descriptions, and emoji in the manifest
+- Mark a crashed test as failed in the runner's output
+- Add a read-only smoke check for the live site
 
 ## 2026-11-08
 
