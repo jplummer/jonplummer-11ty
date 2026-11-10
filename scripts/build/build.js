@@ -3,6 +3,7 @@
 const { execSync } = require('child_process');
 const { getTestsByGroup } = require('../test-manifest');
 const { formatRunFinishedLine } = require('../utils/run-timing');
+const { cleanSiteExceptImages } = require('../utils/clean-site');
 
 const PRE_BUILD_TESTS = getTestsByGroup('pre').map((t) => t.id);
 const POST_BUILD_TESTS = getTestsByGroup('post').map((t) => t.id);
@@ -18,6 +19,10 @@ function run(command, errorLabel) {
     process.exit(1);
   }
 }
+
+// Phase 0: Empty _site/ except optimized images, so no moved or deleted page
+// lingers there and ships. See scripts/utils/clean-site.js.
+cleanSiteExceptImages();
 
 // Phase 1: Pre-build — source quality
 for (const test of PRE_BUILD_TESTS) {

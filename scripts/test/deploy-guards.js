@@ -11,9 +11,12 @@ const { addFile, addIssue } = require('../utils/test-results');
 const { runTest } = require('../utils/test-runner-helper');
 const { buildRsyncArgs } = require('../utils/deploy-rsync');
 const { runWithSpinner } = require('../utils/spinner-utils');
+const { cleanSiteExceptImages } = require('../utils/clean-site');
+const os = require('os');
 const { PassThrough } = require('stream');
 
 const DEPLOY_SCRIPT_PATH = path.join(__dirname, '..', 'deploy', 'deploy.js');
+const BUILD_SCRIPT_PATH = path.join(__dirname, '..', 'build', 'build.js');
 
 const RSYNC_TARGET = {
   localPath: './_site/',
@@ -110,7 +113,42 @@ async function checkRunWithSpinner(result) {
   }
 }
 
+/**
+ * rsync --delete makes the server mirror _site/, so anything stale in _site/
+ * ships. build.js must empty it (except optimized images) before anything else
+ * runs. Moving the portfolio pieces on 2026-11-08 left all 35 old pages in
+ * _site/; a deleted page with a unique title would have shipped unnoticed.
+ */
+function checkSiteCleaned(result) {
+  const fileObj = addFile(result, 'scripts/utils/clean-site.js');
+  const fail = (message) => addIssue(fileObj, { severity: 'error', type: 'deploy-guards', message });
+
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'jp11ty-clean-'));
+  try {
+    fs.mkdirSync(path.join(dir, 'img'));
+    fs.writeFileSync(path.join(dir, 'img', 'kept.webp'), 'x');
+    fs.mkdirSync(path.join(dir, 'portfolio', 'gone'), { recursive: true });
+    fs.writeFileSync(path.join(dir, 'portfolio', 'gone', 'index.html'), 'stale');
+    fs.writeFileSync(path.join(dir, '.htaccess'), 'stale');
+    cleanSiteExceptImages(dir);
+    const left = fs.readdirSync(dir);
+    if (left.length !== 1 || left[0] !== 'img' || !fs.existsSync(path.join(dir, 'img', 'kept.webp'))) {
+      fail(`cleanSiteExceptImages must leave only img/ and its contents; left ${JSON.stringify(left)}`);
+    }
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+
+  const build = fs.readFileSync(BUILD_SCRIPT_PATH, 'utf8');
+  const call = build.indexOf('cleanSiteExceptImages();');
+  const firstRun = build.indexOf('run(`');
+  if (call === -1 || firstRun === -1 || call > firstRun) {
+    fail('scripts/build/build.js must call cleanSiteExceptImages() before its first test or build step');
+  }
+}
+
 async function validate(result) {
+  checkSiteCleaned(result);
   await checkRunWithSpinner(result);
   const fileObj = addFile(result, 'scripts/deploy/deploy.js');
 

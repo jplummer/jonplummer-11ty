@@ -43,7 +43,7 @@ Recommended process for deploying changes with an up-to-date changelog:
 ### 🪂 Deployment
 
 - `pnpm run deploy` - Deploy site to host via rsync
-  - Runs: `changelog` → `build` (source checks + OG images + Eleventy + output checks) → rsync → Cloudflare purge (content-hash diff) → IndexNow
+  - Runs: `changelog` → `build` (empty `_site/` except `img/` + source checks + OG images + Eleventy + output checks) → rsync → Cloudflare purge (content-hash diff) → IndexNow
 - `pnpm run deploy --dry-run` - Test deployment without actually deploying (runs all checks and shows what would be synced)
 - `pnpm run deploy --verbose` - Same deploy, plus rsync's per-file listing and transfer statistics. Off by default: every build rewrites `_site/`, so rsync re-uploads nearly every file and the listing runs to thousands of lines. Failures and rsync warnings print without the flag.
 
@@ -105,7 +105,7 @@ Deploy has no `--skip-build` flag, and shouldn't get one: its inputs include the
 The deploy script performs these steps in order:
 
 1. **Regenerates changelog** from git history
-2. **Builds the site** via `pnpm run build` — runs all source checks, generates OG images, runs Eleventy, then runs all output checks
+2. **Builds the site** via `pnpm run build` — empties `_site/` except the optimized images in `_site/img/`, runs all source checks, generates OG images, runs Eleventy, then runs all output checks. rsync deletes on the server whatever `_site/` no longer has, so a moved or deleted page can't linger and ship. `pnpm run clean` empties `_site/` completely, images included, for an occasional full refresh
 3. **Deploys via rsync** - uses `--dry-run` flag when `--dry-run` option is used. Normal runs print only the result line; `--verbose` (or `--dry-run`) adds `--itemize-changes` and `--stats`, and a non-zero exit prints the full output regardless
 4. **Purges Cloudflare cache** for content-changed URLs only (SHA-256 diff vs local manifest; skipped if credentials unset; previewed on dry-run)
 5. **Submits IndexNow** notification for search engine indexing (content-hash diff vs local manifest, bounded by `sitemap.xml` so noindex pages like `/changelog/` aren't sent, plus pages that joined or left the sitemap, such as a deleted post; missing API key or nothing changed both print a message rather than staying silent) - computes and prints the URL list on `--dry-run` but does not submit or write state
