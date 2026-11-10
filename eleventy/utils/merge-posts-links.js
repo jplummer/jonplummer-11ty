@@ -79,4 +79,27 @@ function mergePostsAndLinks(posts, links, pageNumber, boundaryDate) {
   return items.sort((a, b) => b.date - a.date);
 }
 
-module.exports = { mergePostsAndLinks };
+/**
+ * The newest links for links-feed.xml: newest date first, links that share a
+ * date in file order, cut off at `limit`. Same item shape as
+ * mergePostsAndLinks. The limit is required, because a missing one would
+ * quietly mean every link.
+ *
+ * @param {Object} links - Object with date keys and link arrays as values
+ * @param {number} limit - How many links the feed carries (src/_data/feedLimits.js)
+ * @returns {Array} Items of { type: 'link', data, date }
+ */
+function newestLinks(links, limit) {
+  if (!Number.isInteger(limit) || limit < 1) {
+    throw new Error(`newestLinks needs a whole-number limit of 1 or more, got ${limit}`);
+  }
+  if (!links) return [];
+
+  return Object.entries(links)
+    .map(([date, linkList]) => ({ date: new Date(date), linkList }))
+    .sort((a, b) => b.date - a.date)
+    .flatMap(({ date, linkList }) => linkList.map((link) => ({ type: 'link', data: link, date })))
+    .slice(0, limit);
+}
+
+module.exports = { mergePostsAndLinks, newestLinks };

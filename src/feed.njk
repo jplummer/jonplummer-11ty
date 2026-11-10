@@ -13,7 +13,7 @@ eleventyExcludeFromCollections: true
         {% set newestPost = collections.post | reverse | first %}
         <lastBuildDate>{% if newestPost %}{{ newestPost.date | dateToRfc3339 }}{% else %}{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}{% endif %}</lastBuildDate>
 
-        {% for item in collections.post | reverse | limit(20) %}
+        {% for item in collections.post | reverse | limit(feedLimits.posts) %}
         <item>
             <title>{{ item.data.title | safe }}</title>
             <link>{{ item.url | absoluteUrl(site.url) }}</link>

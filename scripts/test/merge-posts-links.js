@@ -13,7 +13,7 @@
 const { test } = require('node:test');
 const assert = require('node:assert');
 const { DateTime } = require('luxon');
-const { mergePostsAndLinks } = require('../../eleventy/utils/merge-posts-links');
+const { mergePostsAndLinks, newestLinks } = require('../../eleventy/utils/merge-posts-links');
 
 const post = (day) => ({
   url: `/post/${day}/`,
@@ -182,4 +182,41 @@ test('a link at the same instant as a post is shown once, after that post', () =
       `page size ${size}`
     );
   }
+});
+
+// links-feed.xml: the newest links and no more, so a new subscriber gets a
+// recent handful and not every link since 2025.
+test('the feed takes the newest links, newest date first, up to its limit', () => {
+  const links = {
+    '2026-03-01': [link('old-1'), link('old-2')],
+    '2026-03-10': [link('new-1'), link('new-2')],
+    '2026-03-05': [link('mid-1')],
+  };
+  const feed = newestLinks(links, 4);
+  assert.deepStrictEqual(feed.map((item) => item.data.title), ['new-1', 'new-2', 'mid-1', 'old-1']);
+  assert.deepStrictEqual(feed.map((item) => item.type), ['link', 'link', 'link', 'link']);
+  assert.strictEqual(feed[0].date.toISOString(), '2026-03-10T00:00:00.000Z');
+});
+
+test('a limit larger than the file gives every link, and no links gives none', () => {
+  assert.strictEqual(newestLinks({ '2026-03-10': [link('a'), link('b')] }, 20).length, 2);
+  assert.deepStrictEqual(newestLinks(undefined, 20), []);
+  assert.deepStrictEqual(newestLinks({}, 20), []);
+});
+
+// Eleventy reads links.yaml with js-yaml's default schema, which turns each
+// date key into a Date and then into a long string such as
+// "Tue Mar 10 2026 …". The feed must read those as it reads YYYY-MM-DD.
+test('the feed reads date keys in the form Eleventy hands them over', () => {
+  const links = {
+    [String(new Date('2026-03-01'))]: [link('old')],
+    [String(new Date('2026-03-10'))]: [link('new')],
+  };
+  const feed = newestLinks(links, 1);
+  assert.deepStrictEqual(feed.map((item) => item.data.title), ['new']);
+  assert.strictEqual(feed[0].date.toISOString(), '2026-03-10T00:00:00.000Z');
+});
+
+test('the feed needs a whole number for its limit', () => {
+  assert.throws(() => newestLinks({ '2026-03-10': [link('a')] }, undefined), /limit/);
 });

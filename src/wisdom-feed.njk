@@ -10,7 +10,7 @@ eleventyExcludeFromCollections: true
         <description>Short notes and observations from {{ site.author }}</description>
         <language>en-US</language>
         <lastBuildDate>{% if wisdom.entries.length %}{{ wisdom.entries[0].added | dateToRfc3339 }}{% else %}{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}{% endif %}</lastBuildDate>
-        {% for entry in wisdom.entries %}
+        {% for entry in wisdom.entries | limit(feedLimits.wisdom) %}
             <item>
                 <title>{{ entry.body | markdown | striptags | truncate(120, true, '…') }}</title>
                 <link>{{ site.url }}/wisdom/#{{ entry.slug }}</link>

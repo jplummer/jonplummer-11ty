@@ -9,7 +9,7 @@ For capturing links to `links.yaml`, see [NotePlan Link Import](noteplan-import.
 2. Run `pnpm run deploy` - links are automatically imported, formatted, and validated
 3. Or run `pnpm run import-links` manually to preview locally first
 
-Imported links appear on the homepage (merged with posts by date, same ordering as page 1 of the index) and in the RSS feed at `/links-feed.xml`.
+Imported links appear on the homepage (merged with posts by date, same ordering as page 1 of the index) and in the RSS feed at `/links-feed.xml`, which carries the newest 20. Each feed is kept short so a new subscriber isn't handed a flood of old items: 5 posts, 20 links, and 5 wisdom entries, set in `src/_data/feedLimits.js`.
 
 ## Collected wisdom
 

@@ -9,11 +9,11 @@ eleventyExcludeFromCollections: true
         <link>{{ site.url }}</link>
         <description>Links from {{ site.author }}'s blog</description>
         <language>en-US</language>
-        {% set merged = collections.post | reverse | limit(20) | mergePostsAndLinks(links, 0) %}
-        {% set firstItem = merged | first %}
+        {# The newest links only (feedLimits.links), so a new subscriber isn't handed every link ever shared #}
+        {% set feedLinks = links | newestLinks(feedLimits.links) %}
+        {% set firstItem = feedLinks | first %}
         <lastBuildDate>{% if firstItem %}{{ firstItem.date | dateToRfc3339 }}{% else %}{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}{% endif %}</lastBuildDate>
-        {% for item in merged %}
-            {% if item.type == 'link' %}
+        {% for item in feedLinks %}
             <item>
                 <title>{{ item.data.title | smartquotes | striptags }}</title>
                 <link>{{ item.data.url }}</link>
@@ -24,7 +24,6 @@ eleventyExcludeFromCollections: true
                 {# Simple description (markdown processed, but no link since <link> provides URL) #}
                 <description><![CDATA[{{ item.data.title | smartquotes | striptags }}{% if item.data.description %} - {{ item.data.description | smartquotes | safe }}{% endif %}]]></description>
             </item>
-            {% endif %}
         {% endfor %}
     </channel>
 </rss>

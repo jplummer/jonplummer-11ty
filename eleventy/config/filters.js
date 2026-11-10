@@ -7,7 +7,7 @@
  */
 
 const { normalizeDate, formatPostDate, formatPostDateAttr } = require("../utils/date-utils");
-const { mergePostsAndLinks } = require("../utils/merge-posts-links");
+const { mergePostsAndLinks, newestLinks } = require("../utils/merge-posts-links");
 const { pickTaglineForUrl, getGitHeadSha } = require("../utils/tagline-for-url");
 const siteData = require("../../src/_data/site.js")();
 
@@ -70,6 +70,9 @@ function configureFilters(eleventyConfig, md) {
 
   // Add custom filter to merge posts and links chronologically
   eleventyConfig.addFilter("mergePostsAndLinks", mergePostsAndLinks);
+
+  // The newest links for links-feed.xml, cut off at feedLimits.links
+  eleventyConfig.addFilter("newestLinks", newestLinks);
 
   // Lockup tagline: deterministic per page.url; home salted with git HEAD
   const taglineSalt = getGitHeadSha();

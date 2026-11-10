@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const { DOMParser } = require('@xmldom/xmldom');
+const feedLimits = require('../../src/_data/feedLimits');
 const { addFile, addIssue, addWarning } = require('../utils/test-results');
 
 // Find RSS/XML files in _site
@@ -33,6 +34,13 @@ function parseXML(content) {
     return null;
   }
 }
+
+// The most items each feed may carry, by file name
+const FEED_LIMITS = {
+  'feed.xml': feedLimits.posts,
+  'links-feed.xml': feedLimits.links,
+  'wisdom-feed.xml': feedLimits.wisdom,
+};
 
 // Validate RSS structure
 function validateRSSStructure(doc, options = {}) {
@@ -81,6 +89,15 @@ function validateRSSStructure(doc, options = {}) {
   const items = channelElement.getElementsByTagName('item');
   if (items.length === 0 && fileBaseName !== 'wisdom-feed.xml') {
     issues.push('No items found in RSS feed');
+  }
+
+  // Each feed carries only its newest few items (src/_data/feedLimits.js).
+  // links-feed.xml had no limit until 2026-11-10 and carried all 204 links.
+  const limit = FEED_LIMITS[fileBaseName];
+  if (limit === undefined) {
+    issues.push(`No item limit for this feed: add it to FEED_LIMITS in scripts/test/rss-feed.js and src/_data/feedLimits.js`);
+  } else if (items.length > limit) {
+    issues.push(`Feed carries ${items.length} items; its limit is ${limit} (src/_data/feedLimits.js)`);
   }
   
   // Validate each item
