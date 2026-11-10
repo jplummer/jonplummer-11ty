@@ -25,12 +25,6 @@ const NOTEPLAN_NOTES_DIR = path.join(
 const LINKS_YAML_PATH = './src/_data/links.yaml';
 const NOTE_NAME = 'Links to import'; // Note title to look for
 
-// Parse command line arguments
-const args = process.argv.slice(2);
-const shouldClear = args.includes('--clear');
-const dateArg = args.find(arg => arg.startsWith('--date='));
-const targetDate = dateArg ? dateArg.split('=')[1] : new Date().toISOString().split('T')[0];
-
 const SKIP_NOTE_DIRS = new Set(['@Trash', '@Archive']);
 
 /**
@@ -321,70 +315,94 @@ function clearNote(notePath) {
   fs.writeFileSync(notePath, header, 'utf8');
 }
 
-// Main execution
-console.log('🔍 Looking for NotePlan note: "' + NOTE_NAME + '"...\n');
+// Runs only as a command. Requiring this file (scripts/test/noteplan-import.js
+// does) loads the functions above and touches neither NotePlan nor links.yaml.
+function main() {
+  // Parse command line arguments
+  const args = process.argv.slice(2);
+  const shouldClear = args.includes('--clear');
+  const dateArg = args.find(arg => arg.startsWith('--date='));
+  const targetDate = dateArg ? dateArg.split('=')[1] : new Date().toISOString().split('T')[0];
 
-const notePath = findNotePlanNote(NOTE_NAME);
-if (!notePath) {
-  console.error('❌ Note not found: "' + NOTE_NAME + '"');
-  console.error('   Create a note in NotePlan with that title and add links.');
-  process.exit(1);
-}
+  console.log('🔍 Looking for NotePlan note: "' + NOTE_NAME + '"...\n');
 
-console.log(`✅ Found note: ${path.basename(notePath)}\n`);
-
-// Read and parse NotePlan note
-const noteContent = fs.readFileSync(notePath, 'utf8');
-const parsedLinks = parseNotePlanNote(noteContent);
-
-if (parsedLinks.length === 0) {
-  console.log('⚠️  No links found in note.');
-  console.log('   Add links in format: * [Title – Author](URL) Description');
-  process.exit(0);
-}
-
-console.log(`📝 Found ${parsedLinks.length} link(s) to import\n`);
-
-// Read existing links.yaml
-if (!fs.existsSync(LINKS_YAML_PATH)) {
-  console.error(`❌ links.yaml not found at: ${LINKS_YAML_PATH}`);
-  process.exit(1);
-}
-
-const yamlContent = fs.readFileSync(LINKS_YAML_PATH, 'utf8');
-const linksData = parseLinksYaml(yamlContent);
-
-// Add new links (skips duplicates)
-const results = addLinksToData(linksData, targetDate, parsedLinks);
-
-// Only write if there are changes
-if (results.added.length > 0) {
-  // Format and write back
-  const newYamlContent = formatLinksYaml(linksData);
-  fs.writeFileSync(LINKS_YAML_PATH, newYamlContent, 'utf8');
-
-  console.log(`✅ Imported ${results.added.length} new link(s) (date: ${targetDate}):\n`);
-  for (const link of results.added) {
-    console.log(`   • ${link.title}`);
-    console.log(`     ${link.url}`);
-  }
-  if (results.skipped.length > 0) {
-    console.log(`\n⚠️  Skipped ${results.skipped.length} duplicate(s).`);
-  }
-  console.log('');
-
-  // Clear note if requested
-  if (shouldClear) {
-    clearNote(notePath);
-    console.log('✅ Cleared NotePlan note\n');
+  const notePath = findNotePlanNote(NOTE_NAME);
+  if (!notePath) {
+    console.error('❌ Note not found: "' + NOTE_NAME + '"');
+    console.error('   Create a note in NotePlan with that title and add links.');
+    process.exit(1);
   }
 
-  console.log('Next steps:');
-  console.log('  1. pnpm run test links  (validate)');
-  console.log('  2. pnpm run build  (build site)');
-  console.log('  3. pnpm run deploy  (deploy to live site)');
-  console.log('');
-} else {
-  console.log(`ℹ️  No new links to import. Skipped ${results.skipped.length} duplicate(s).\n`);
-  process.exit(0);
+  console.log(`✅ Found note: ${path.basename(notePath)}\n`);
+
+  // Read and parse NotePlan note
+  const noteContent = fs.readFileSync(notePath, 'utf8');
+  const parsedLinks = parseNotePlanNote(noteContent);
+
+  if (parsedLinks.length === 0) {
+    console.log('⚠️  No links found in note.');
+    console.log('   Add links in format: * [Title – Author](URL) Description');
+    process.exit(0);
+  }
+
+  console.log(`📝 Found ${parsedLinks.length} link(s) to import\n`);
+
+  // Read existing links.yaml
+  if (!fs.existsSync(LINKS_YAML_PATH)) {
+    console.error(`❌ links.yaml not found at: ${LINKS_YAML_PATH}`);
+    process.exit(1);
+  }
+
+  const yamlContent = fs.readFileSync(LINKS_YAML_PATH, 'utf8');
+  const linksData = parseLinksYaml(yamlContent);
+
+  // Add new links (skips duplicates)
+  const results = addLinksToData(linksData, targetDate, parsedLinks);
+
+  // Only write if there are changes
+  if (results.added.length > 0) {
+    // Format and write back
+    const newYamlContent = formatLinksYaml(linksData);
+    fs.writeFileSync(LINKS_YAML_PATH, newYamlContent, 'utf8');
+
+    console.log(`✅ Imported ${results.added.length} new link(s) (date: ${targetDate}):\n`);
+    for (const link of results.added) {
+      console.log(`   • ${link.title}`);
+      console.log(`     ${link.url}`);
+    }
+    if (results.skipped.length > 0) {
+      console.log(`\n⚠️  Skipped ${results.skipped.length} duplicate(s).`);
+    }
+    console.log('');
+
+    // Clear note if requested
+    if (shouldClear) {
+      clearNote(notePath);
+      console.log('✅ Cleared NotePlan note\n');
+    }
+
+    console.log('Next steps:');
+    console.log('  1. pnpm run test links  (validate)');
+    console.log('  2. pnpm run build  (build site)');
+    console.log('  3. pnpm run deploy  (deploy to live site)');
+    console.log('');
+  } else {
+    console.log(`ℹ️  No new links to import. Skipped ${results.skipped.length} duplicate(s).\n`);
+    process.exit(0);
+  }
 }
+
+if (require.main === module) {
+  main();
+}
+
+module.exports = {
+  sanitizeUrl,
+  parseLink,
+  parseNotePlanNote,
+  parseLinksYaml,
+  urlExists,
+  addLinksToData,
+  formatLinkYaml,
+  formatLinksYaml,
+};

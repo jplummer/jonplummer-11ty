@@ -36,7 +36,7 @@ _Derived from [`scripts/test-manifest.js`](../scripts/test-manifest.js) — see 
 
 **Fast Tests:** `html`, `links`, `wisdom`, `shortlinks`, `portfolios`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `deploy-assets`, `error-document-assets`, `favicon-rasters`, `trailing-slash-links`, `critical-css`, `figure-tokens`, `design-docs-location`, `docs-links`, `portfolio-cover-crop`
 
-**Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `indexnow`, `manifest-cursors`, `figure-lightbox`, `404-suggest`, `site-branding`, `preview-site-lockup`, `og-image-filename`, `og-card`, `date-utils`, `og-shared-fingerprint`, `og-card-digest`, `changelog-format`, `source-file-utils`, `test-json-pipe`, `live-smoke`, `unit-reporter`, `unit-wiring` — see [Unit Tests](#unit-tests) below
+**Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `indexnow`, `manifest-cursors`, `figure-lightbox`, `404-suggest`, `site-branding`, `preview-site-lockup`, `og-image-filename`, `og-card`, `date-utils`, `og-shared-fingerprint`, `og-card-digest`, `changelog-format`, `source-file-utils`, `test-json-pipe`, `live-smoke`, `noteplan-import`, `unit-reporter`, `unit-wiring` — see [Unit Tests](#unit-tests) below
 
 **Slow Tests:** `a11y` (launches browser)
 
@@ -260,6 +260,10 @@ Unit checks for `findSourceFile()` / `isRedirectPage()` in `scripts/utils/source
 ### live-smoke.js
 
 Unit checks for `scripts/utils/live-smoke.js`, which builds the list of requests `pnpm run smoke` makes against the live site and judges each answer. Covers one redirect check per `redirects.yaml` entry, retired lists checked with and without the slash, the random 404 path, root files and the page sample taken from the inputs, `Location` matching (relative against absolute, one trailing slash ignored, a different host rejected), and that a wrong status, `Location`, header, or body each produce their own failure. No network: the live run is `scripts/deploy/smoke-live.js`, described in [commands.md § Live smoke check](commands.md#live-smoke-check).
+
+### noteplan-import.js
+
+Unit tests for `scripts/content/import-noteplan-links.js`, which reads the "Links to import" note and rewrites `src/_data/links.yaml`. Every import rewrites the whole file through the script's own parser and formatter, so a fault there changes or drops links that are already published. Two tests use the real `links.yaml` as the fixture: the script must read it exactly as a YAML parser does, and writing it back must change nothing, byte for byte. The rest cover one line of the note (title, URL, optional description, a link inside the description, the invisible characters NotePlan pastes), the bullets a note may use, duplicate URLs across dates and within one note, and newest-date-first output. Reads `links.yaml`, never writes it, and doesn't touch NotePlan: the script runs only as a command, so requiring it loads its functions and nothing else. Added 2026-11-10; the script had no test before.
 
 ## Infrastructure Tests
 
