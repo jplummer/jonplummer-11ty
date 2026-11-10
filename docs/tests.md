@@ -36,7 +36,7 @@ _Derived from [`scripts/test-manifest.js`](../scripts/test-manifest.js) — see 
 
 **Fast Tests:** `html`, `links`, `wisdom`, `shortlinks`, `portfolios`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `deploy-assets`, `error-document-assets`, `favicon-rasters`, `trailing-slash-links`, `critical-css`, `figure-tokens`, `design-docs-location`, `docs-links`, `portfolio-cover-crop`
 
-**Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `indexnow`, `manifest-cursors`, `figure-lightbox`, `404-suggest`, `site-branding`, `preview-site-lockup`, `og-image-filename`, `og-card`, `date-utils`, `og-shared-fingerprint`, `og-card-digest`, `changelog-format`, `source-file-utils`, `test-json-pipe` — see [Unit Tests](#unit-tests) below
+**Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `indexnow`, `manifest-cursors`, `figure-lightbox`, `404-suggest`, `site-branding`, `preview-site-lockup`, `og-image-filename`, `og-card`, `date-utils`, `og-shared-fingerprint`, `og-card-digest`, `changelog-format`, `source-file-utils`, `test-json-pipe`, `live-smoke` — see [Unit Tests](#unit-tests) below
 
 **Slow Tests:** `a11y` (launches browser)
 
@@ -236,6 +236,10 @@ Unit checks for `wrapFilenames()` in `scripts/utils/changelog-format.js`, used b
 ### source-file-utils.js
 
 Unit checks for `findSourceFile()` / `isRedirectPage()` in `scripts/utils/source-file-utils.js`, shared by `og-images.js` and `seo-meta.js` to resolve a built HTML path back to its source file: direct matches (`about.html` → `src/about.md`), the root index, permalink subdirectories (`ogimages/index.html` → `src/ogimages.njk`), portfolio pieces (`portfolio/slug/index.html` → `src/portfolio/YYYY-MM-DD-slug.md`, checked before the subdirectory fallback that would otherwise answer `src/portfolio.njk`), post permalinks (`YYYY/MM/DD/slug/index.html` → `src/posts/YYYY/YYYY-MM-DD-slug.md`, picked dynamically from an existing post so the fixture doesn't pin a slug that might later be renamed), and redirect-page detection (`data-redirect-url` attribute, meta refresh). Guards a past regression: the two test scripts carried separate copies of this logic and had drifted — `seo-meta.js`'s copy lacked the post-permalink block, so `test seo --changed` silently skipped every blog post. No `_site/` dependency.
+
+### live-smoke.js
+
+Unit checks for `scripts/utils/live-smoke.js`, which builds the list of requests `pnpm run smoke` makes against the live site and judges each answer. Covers one redirect check per `redirects.yaml` entry, retired lists checked with and without the slash, the random 404 path, root files and the page sample taken from the inputs, `Location` matching (relative against absolute, one trailing slash ignored, a different host rejected), and that a wrong status, `Location`, header, or body each produce their own failure. No network: the live run is `scripts/deploy/smoke-live.js`, described in [commands.md § Live smoke check](commands.md#live-smoke-check).
 
 ## Infrastructure Tests
 

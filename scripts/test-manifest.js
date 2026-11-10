@@ -147,6 +147,8 @@ const TESTS = [
     name: 'Portfolio cover crop', description: 'Grid coverPosition/coverZoom allowlist, CSS vars, Monotasker HTML', emoji: '📐' },
   { id: 'test-json-pipe', script: 'test-json-pipe.js', groups: ['unit'],
     name: 'Test JSON pipe', description: 'Large TEST_RUNNER JSON survives piped stdout (partial write + drain)', emoji: '🧪' },
+  { id: 'live-smoke', script: 'live-smoke.js', groups: ['unit'],
+    name: 'Live smoke checks', description: 'Live smoke check list and response evaluation', emoji: '🩺' },
   { id: 'security', script: { file: 'security-audit.js', dir: 'security' }, groups: [], nonJson: true,
     name: 'Security Audit', description: 'Security audit', emoji: '🛡️' },
 ];

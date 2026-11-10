@@ -46,6 +46,7 @@ Recommended process for deploying changes with an up-to-date changelog:
   - Runs: `changelog` → `build` (empty `_site/` except `img/` + source checks + OG images + Eleventy + output checks) → rsync → Cloudflare purge (content-hash diff) → IndexNow
 - `pnpm run deploy --dry-run` - Test deployment without actually deploying (runs all checks and shows what would be synced)
 - `pnpm run deploy --verbose` - Same deploy, plus rsync's per-file listing and transfer statistics. Off by default: every build rewrites `_site/`, so rsync re-uploads nearly every file and the listing runs to thousands of lines. Failures and rsync warnings print without the flag.
+- `pnpm run smoke` - Check the live site against what the source says it should serve. Read-only, about 20 seconds. See [Live smoke check](#live-smoke-check)
 
 ### 🪶 Content Authoring
 
@@ -153,6 +154,32 @@ Create an API token with **Zone → Cache Purge → Purge** permission for the s
 `pnpm run deploy --dry-run` lists URLs that would be purged without calling the API and does not write the manifest.
 
 After purge, deploy **smoke-checks** every shortlink (and one lowercase variant): expects HTTP 302 with `Location` matching `src/_data/shortlinks.yaml`. Failure fails the deploy. Dry-run prints the checklist without fetching.
+
+#### Live smoke check
+
+`pnpm run smoke` asks the live site for about 120 URLs and compares each answer with what the source data says it should be. A local build can't see what the host does with `.htaccess`, so this is the check for a rule Apache ignores, a redirect that goes somewhere else, or a file that didn't arrive.
+
+It is read-only: GET requests one at a time, redirects not followed, nothing written. It needs a built `_site/` for the sitemap, and it exits 1 on any failure. Deploy doesn't run it. Run it by hand after a deploy that touched `.htaccess`, redirects, passthrough rules, or the build itself.
+
+What it asks for, by group:
+
+- `error-page` - a URL that has never existed must return the 404 page with its stylesheet link, plus the five security headers `.htaccess` sets. The URL is random each run, so Cloudflare can't answer from cache and the headers come from Apache.
+- `redirects` - every `from` in `src/_data/redirects.yaml` must 301 to its `to`.
+- `retired-lists` - every retired portfolio list must 302 to `/portfolio/`, with and without the trailing slash. The group is absent when no list is retired.
+- `shortlinks` - `/JP` and `/jp` must 302 to the canary's target. Deploy already checks every short link.
+- `wisdom-rewrite` - an unknown `/wisdom/tags/<tag>/` must 301 to `/wisdom/`.
+- `blocked` - `/.htaccess`, `/.env`, `/package.json`, and a directory listing must not return 200.
+- `root-files` - the Google verification file, the IndexNow key, `favicon.ico`, `robots.txt`, the sitemap, and the three feeds.
+- `assets` - the stylesheet, a script, a font, and the default OG card.
+- `pages` - ten fixed pages plus the newest sitemap URL from each template that builds many (a post, a portfolio piece, a side project, a wisdom tag, a pagination page).
+
+```bash
+pnpm run smoke
+pnpm run smoke --only redirects                  # one group
+pnpm run smoke --base-url https://example.com    # another host; expect failures
+```
+
+The closing tally of `cf-cache-status` values shows how many answers came from Cloudflare's cache, so a stale edge is visible. The list of checks lives in `scripts/utils/live-smoke.js`, and `pnpm run test live-smoke` covers it without touching the network.
 
 
 ### 🗃️ Changelog Generation

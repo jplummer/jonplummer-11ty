@@ -32,6 +32,7 @@
     "generate-favicon-rasters": "node scripts/content/generate-favicon-rasters.js",
     "focus-audit": "node scripts/focus-audit/cli.js",
     "shortlink": "node scripts/content/shortlink.js",
+    "smoke": "node scripts/deploy/smoke-live.js",
     "lint:css": "stylelint \"src/**/*.css\"",
     "fix:markdown": "markdownlint-cli2 --fix \"src/**/*.md\""
   },
