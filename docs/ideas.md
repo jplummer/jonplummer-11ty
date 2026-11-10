@@ -73,6 +73,12 @@ The November 2026 CSS audit is worked through; findings and decisions are in the
 - **Hand test results to the runner through a temp file** instead of stdout markers, which retires the truncation failure class. Worth doing (Jon, 2026-11-08) as long as the result stays easy to follow. What's done, what stays, and what's off the table: [test result handoff](designs/specs/2026-08-13-test-results-handoff-design.md).
 - **Feed excerpts can end inside a link.** `feed.njk` cuts `templateContent` at 297 characters of HTML, so an excerpt can stop mid-tag and leave an unclosed `<a>` (seen 2026-11-08 in the Belkin EDIT post's entry). Strip tags before truncating, or truncate at a paragraph.
 - **Look at Bing Webmaster Tools' IndexNow report once.** It's the only place that shows whether submissions are acted on.
+- **Check the live site after a deploy** (2026-11-09). Deploy checks the short links and otherwise trusts the host. `pnpm run smoke` was written for the cleanup in [the low-impact cleanup plan](designs/plans/2026-11-09-low-impact-cleanup.md) and is run by hand. Decide whether to keep it once that work ships. Ideas, cheapest first:
+  - Run a short subset on every deploy: the never-requested 404 URL (it can't come from Cloudflare's cache, and it carries the security headers), one redirect, and the three feeds. Keep the full list of about 120 requests for deploys that touch `.htaccess`, redirects, or the build.
+  - Watch for the failures local tests can't see. Every header, cache, and rewrite rule in `.htaccess` sits inside an `<IfModule>`, so if the host drops a module the rules vanish with no error. A bad directive would turn every page into a 500. rsync can stop partway. A failed purge leaves Cloudflare serving the old page.
+  - Compare live bytes with `_site/` for a sample of pages, by hash, to catch a partial upload or a stale edge copy.
+  - Check on a schedule as well as after deploys, since the host can change between them. That reopens part of "Build and deploy monitoring" under Not doing.
+  - `pnpm run security-audit` already reads live headers, the TLS certificate, and DNS. The two could share one list of live checks.
 
 ### Side projects (`/sides/`)
 
