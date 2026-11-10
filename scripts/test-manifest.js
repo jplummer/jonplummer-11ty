@@ -6,6 +6,10 @@
  * scripts/build/build.js, scripts/test-changed.js) derives its lists from
  * TESTS below instead of keeping a separate copy.
  *
+ * When you add, remove, or regroup a test, update the Fast and Unit lists in
+ * docs/tests.md § Test Categories to match. Nothing checks them, and they
+ * have gone stale before.
+ *
  * Each entry:
  *   id      — CLI name (`pnpm run test <id>`)
  *   script  — 'file.js' (shorthand for { file, dir: 'test' }) or { file, dir }

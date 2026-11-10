@@ -32,7 +32,7 @@ Recommended process for deploying changes with an up-to-date changelog:
 - `pnpm run test` - List available test types
 - `pnpm run validate` - Quick HTML validity check (shortcut for `pnpm run test html`)
 - `pnpm run test fast` - Run fast tests (excludes slow tests like a11y)
-  - Runs: `html` → `links` → `wisdom` → `shortlinks` → `portfolios` → `internal-links` → `frontmatter` → `markdown` → `spell` → `seo` → `og-images` → `color-contrast` → `css` → `rss` → `portfolio-notes` → `deploy-assets` → `cloudflare-purge` → `portfolio-cover-crop`
+  - Which tests those are, and what each one checks: [tests.md § Test Categories](tests.md#test-categories)
 - `pnpm run test all` - Run all tests in sequence (includes slow tests)
   - Runs: everything in `test fast` → `a11y`
 - `pnpm run test [type]` - Run a specific test type
@@ -88,7 +88,7 @@ See [tests.md](tests.md) for detailed test documentation.
 - `pnpm run deploy --dry-run` - Test deployment without actually deploying. Runs all checks and shows what would be synced via rsync's dry-run mode.
 - `pnpm run deploy --verbose` - Adds rsync's per-file listing and transfer statistics to a real deploy (see [Deployment](#-deployment) above for why that's opt-in).
 
-Prior complex deployment scripts were moved to `scripts/deploy/backup/`. rsync arguments are built in `scripts/utils/deploy-rsync.js` so `pnpm run test deploy-guards` can assert them; errors are handled simply and rsync's own messages pass through.
+rsync arguments are built in `scripts/utils/deploy-rsync.js` so `pnpm run test deploy-guards` can assert them; errors are handled simply and rsync's own messages pass through.
 
 #### Build first, or just deploy?
 

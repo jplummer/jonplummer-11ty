@@ -8,10 +8,8 @@ eleventyExcludeFromCollections: true
   Every reachable destination except the /page/N/ pagination routes, which
   nobody links to directly, and the two error pages themselves.
 
-  Unlike sitemap.njk this does not hardcode /portfolio/, /wisdom/ or /sides/:
-  all three are templates tagged `page`, so collections.page already has them.
-  (sitemap.njk hardcodes them anyway and emits four duplicate <loc> entries as
-  a result.) Wisdom tag pages come from wisdom.allTags rather than from
+  /portfolio/, /wisdom/ and /sides/ aren't listed by hand: all three are
+  templates tagged `page`, so collections.page already has them. Wisdom tag pages come from wisdom.allTags rather than from
   collections.page, which holds only the first page of a paginated template.
 
   Titles are raw front matter rather than `smartquotes | striptags` as in every
