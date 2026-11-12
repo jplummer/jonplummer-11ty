@@ -10,7 +10,7 @@ date: "2025-10-08"
 
 `addDateParsing` treats that as midnight in **America/Los_Angeles**. Permalinks and on-page dates use that calendar day. Do not leave the value unquoted (`date: 2025-10-08` or `date: 2025-10-08T20:00:00.000Z`) — js-yaml turns those into JS `Date`s, and evening UTC clock faces can show the next day when formatted outside Pacific.
 
-`pnpm run test frontmatter` rejects unquoted YAML dates sitewide, and for blog posts (`tags: post`) requires the front-matter calendar day to match the filename day. Portfolio items may keep a different front-matter date (those layouts do not show the date).
+`pnpm run test frontmatter` rejects unquoted YAML dates sitewide, and for blog posts (`tags: post`) requires the front-matter date's Pacific day, the day the URL carries, to match the filename day. Its message gives the exact rename and the exact date to set. Portfolio items may keep a different front-matter date (those layouts do not show the date).
 
 On-page `postDate` / `postDateAttr` always format in America/Los_Angeles (same zone as permalinks). Never rely on `new Date("YYYY-MM-DD")` — that is UTC midnight and shows the previous day in Pacific.
 

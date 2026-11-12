@@ -42,7 +42,7 @@ To publish, follow the comment the file carries:
 3. Write the `description`.
 4. Delete the comment and the `draft: true` line.
 
-`pnpm run test frontmatter` fails if the filename day and the `date` differ. Once a post is deployed its URL is out in the world: don't rename the file after that. The year folders are only filing; nothing reads them.
+`pnpm run test frontmatter` fails if the filename day and the `date` differ, and says exactly what to rename or what date to set. It also fails if the `description` is still empty. Once a post is deployed its URL is out in the world: don't rename the file after that. The year folders are only filing; nothing reads them.
 
 ## Front Matter Variables
 
@@ -61,7 +61,7 @@ To publish, follow the comment the file carries:
 
 ### Optional
 
-- **`description`** - Meta description (20-300 chars recommended, warnings only if outside range). Defaults to title if omitted.
+- **`description`** - Meta description (20-300 chars recommended, warnings only if outside range). Defaults to title if omitted. An empty one (`description: ""`) fails `pnpm run test frontmatter`.
 - **`ogImage`** - OG image path. Use `auto` or omit to auto-generate. Format: `/assets/images/og/v2/YYYY-MM-DD-post-slug.png`
 - **`leadFigure`** - Essays only. The site path of the figure image in the post body that stands for the post (e.g. `leadFigure: /assets/images/2026/10/three-horizons.svg`). Nothing renders it yet; it's there for later uses such as OG cards or index thumbnails. `pnpm run test frontmatter` checks that the file exists and that the post shows it. Making figures: [lead figure spec](designs/specs/2026-10-29-lead-figure-style-design.md).
 - **`coverImage`** - Portfolio grid thumbnail path relative to `src/assets/images/` (e.g. `2026/06/onboarding.png`). Used only by `portfolio_list_item.njk`.

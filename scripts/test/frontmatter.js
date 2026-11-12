@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
+const { DateTime } = require('luxon');
 const { validateDate, validateSlug, validateCoverPosition, validateCoverZoom, validateSideStatus } = require('../utils/validation-utils');
 const { getChangedFilesSinceHead, getMarkdownFiles, readFile } = require('../utils/test-helpers');
 const { parseFrontMatter, reconstructFile } = require('../utils/frontmatter-utils');
@@ -43,6 +44,26 @@ function calendarDayFromDateString(dateValue) {
   }
   const day = dateValue.includes('T') ? dateValue.split('T')[0] : dateValue;
   return /^\d{4}-\d{2}-\d{2}$/.test(day) ? day : null;
+}
+
+const SITE_TIME_ZONE = 'America/Los_Angeles';
+
+/**
+ * The calendar day a post's URL will carry: the front-matter date read the way
+ * eleventy/config/date-parsing.js reads it, then taken as a Pacific day (as
+ * src/posts/posts.11tydata.js does). For a date-only value that is the text
+ * itself. For a time with an offset it can differ from the text before the T:
+ * "2026-03-10T02:00:00Z" is still March 9 in Pacific time.
+ * @param {string} dateValue
+ * @returns {string|null} YYYY-MM-DD or null
+ */
+function urlDayFromDateString(dateValue) {
+  if (typeof dateValue !== 'string' || !dateValue) {
+    return null;
+  }
+  const hasTimezone = dateValue.includes('T') && (dateValue.includes('Z') || /[+-]\d{2}:\d{2}$/.test(dateValue));
+  const parsed = hasTimezone ? DateTime.fromISO(dateValue) : DateTime.fromISO(dateValue, { zone: SITE_TIME_ZONE });
+  return parsed.isValid ? parsed.setZone(SITE_TIME_ZONE).toISODate() : null;
 }
 
 // Check for required fields
@@ -94,17 +115,18 @@ function validateRequiredFields(frontMatter, filePath) {
         const dateCheck = validateDate(dateToValidate);
         if (!dateCheck.valid) {
           issues.push(`Date: ${dateCheck.error}`);
-        } else if (
-          hasTag(frontMatter, 'post') &&
-          fileNameCheck.valid &&
-          fileNameCheck.expectedDate &&
-          dateToValidate !== fileNameCheck.expectedDate
-        ) {
-          // Blog posts show the date next to a /YYYY/MM/DD/ URL. Portfolio and
-          // sides may intentionally diverge (date not shown on those layouts).
-          issues.push(
-            `Date: blog post front matter day (${dateToValidate}) must match filename day (${fileNameCheck.expectedDate})`
-          );
+        } else if (hasTag(frontMatter, 'post') && fileNameCheck.valid && fileNameCheck.expectedDate) {
+          // Blog posts show the date next to a /YYYY/MM/DD/ URL, and the URL
+          // takes its day from the front matter. Portfolio and sides may
+          // intentionally diverge (date not shown on those layouts).
+          const urlDay = urlDayFromDateString(frontMatter.date);
+          if (urlDay !== fileNameCheck.expectedDate) {
+            issues.push(
+              `Date: the front matter gives ${urlDay} and the filename says ${fileNameCheck.expectedDate}. ` +
+              `Rename the file to ${urlDay}-${fileNameCheck.expectedSlug}.md, or set date to "${fileNameCheck.expectedDate}". ` +
+              'If this post is already live, set the date and leave the filename, which matches its URL'
+            );
+          }
         }
       }
     } else {
@@ -130,7 +152,11 @@ function validateRequiredFields(frontMatter, filePath) {
 
   // A description shows in search results, link previews, and portfolio cards.
   // 86 WordPress-era excerpts stopped mid-sentence until 2026-11-08; warn on new ones.
-  if (typeof frontMatter.description === 'string' && !DESCRIPTION_ENDS_SENTENCE.test(frontMatter.description.trim())) {
+  // `pnpm run new-post` starts a draft with an empty description; it must be
+  // written, or the line deleted, before the draft line comes off.
+  if (typeof frontMatter.description === 'string' && frontMatter.description.trim() === '') {
+    issues.push('Description: is empty. Write one, or delete the line to use the title');
+  } else if (typeof frontMatter.description === 'string' && !DESCRIPTION_ENDS_SENTENCE.test(frontMatter.description.trim())) {
     warnings.push('Description: should end a sentence (it may have been cut off)');
   }
 
@@ -435,7 +461,8 @@ function assertPostFrontmatterParserRegressionGuard() {
 }
 
 /**
- * Unquoted YAML timestamps and blog filename/date drift must fail field checks.
+ * Unquoted YAML timestamps and blog filename/date drift must fail field checks,
+ * with the drift measured on the Pacific day the URL carries.
  * Portfolio may keep filename day ≠ front-matter day (date not shown on that layout).
  */
 function assertPostDateAuthoringRegressionGuard() {
@@ -463,10 +490,55 @@ function assertPostDateAuthoringRegressionGuard() {
     },
     samplePath
   );
-  if (!blogMismatch.issues.some((msg) => msg.includes('must match filename day'))) {
+  const mismatchMessage = blogMismatch.issues.find((msg) => msg.includes('the filename says'));
+  if (!mismatchMessage) {
     throw new Error(
       'frontmatter regression: expected blog post date≠filename day to fail'
     );
+  }
+  if (!mismatchMessage.includes('Rename the file to 2025-11-21-example.md') || !mismatchMessage.includes('set date to "2025-11-20"')) {
+    throw new Error(`frontmatter regression: the date mismatch message must give both exact fixes, got: ${mismatchMessage}`);
+  }
+
+  // The URL takes the Pacific day of the date. 02:00 UTC on Nov 21 is still
+  // Nov 20 in Pacific time, so this post builds at /2025/11/20/ and matches
+  // its filename, though the text before the T says the 21st.
+  const utcEvening = validateRequiredFields(
+    { title: 'UTC time', date: '2025-11-21T02:00:00Z', tags: 'post' },
+    samplePath
+  );
+  if (utcEvening.issues.some((msg) => msg.includes('the filename says'))) {
+    throw new Error('frontmatter regression: a date whose Pacific day matches the filename must pass');
+  }
+  // And the reverse: the text says the 20th, the URL would say the 19th.
+  const utcEarly = validateRequiredFields(
+    { title: 'UTC time', date: '2025-11-20T02:00:00Z', tags: 'post' },
+    samplePath
+  );
+  if (!utcEarly.issues.some((msg) => msg.includes('the front matter gives 2025-11-19'))) {
+    throw new Error('frontmatter regression: a date whose Pacific day differs from the filename must fail');
+  }
+  const pacificEvening = validateRequiredFields(
+    { title: 'Pacific time', date: '2025-11-20T23:30:00-08:00', tags: 'post' },
+    samplePath
+  );
+  if (pacificEvening.issues.some((msg) => msg.includes('the filename says'))) {
+    throw new Error('frontmatter regression: a late-evening Pacific time on the filename day must pass');
+  }
+
+  const emptyDescription = validateRequiredFields(
+    { title: 'No description yet', date: '2025-11-20', tags: 'post', description: '' },
+    samplePath
+  );
+  if (!emptyDescription.issues.some((msg) => msg.includes('Description: is empty'))) {
+    throw new Error('frontmatter regression: an empty description must fail');
+  }
+  const noDescription = validateRequiredFields(
+    { title: 'No description line', date: '2025-11-20', tags: 'post' },
+    samplePath
+  );
+  if (noDescription.issues.some((msg) => msg.includes('Description'))) {
+    throw new Error('frontmatter regression: a post with no description line must pass (the title is used)');
   }
 
   const portfolioMismatch = validateRequiredFields(
