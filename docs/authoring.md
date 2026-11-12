@@ -23,6 +23,27 @@ Short notes live in `src/_data/wisdom-entries.yaml` (same folder as `links.yaml`
 
 Run `pnpm run test wisdom` after editing. Unexpected fields are rejected.
 
+## Starting and publishing a post
+
+Start a post with the command, so you never type its date:
+
+```bash
+pnpm run new-post "Working title"
+```
+
+It writes `src/posts/<year>/<today>-<slug>.md` with the front matter a post needs and `draft: true`, and prints the path. Today is the Pacific calendar day, wherever the machine is. The title can be left out, and it won't write over a file that exists.
+
+Nothing in a draft is a commitment. It shows on the dev server and stays out of the live site, so the title, the slug in the filename, and the date can all change while you write.
+
+To publish, follow the comment the file carries:
+
+1. Set `date` to the publishing day.
+2. Rename the file to `YYYY-MM-DD-slug.md`, with the same day and a slug that fits the final title. The filename sets the URL: `/YYYY/MM/DD/slug/`.
+3. Write the `description`.
+4. Delete the comment and the `draft: true` line.
+
+`pnpm run test frontmatter` fails if the filename day and the `date` differ. Once a post is deployed its URL is out in the world: don't rename the file after that. The year folders are only filing; nothing reads them.
+
 ## Front Matter Variables
 
 ### Required

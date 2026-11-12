@@ -36,7 +36,7 @@ _Derived from [`scripts/test-manifest.js`](../scripts/test-manifest.js) — see 
 
 **Fast Tests:** `html`, `links`, `wisdom`, `shortlinks`, `portfolios`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `deploy-assets`, `error-document-assets`, `favicon-rasters`, `trailing-slash-links`, `critical-css`, `figure-tokens`, `design-docs-location`, `docs-links`, `portfolio-cover-crop`
 
-**Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `indexnow`, `manifest-cursors`, `figure-lightbox`, `404-suggest`, `site-branding`, `preview-site-lockup`, `og-image-filename`, `og-card`, `date-utils`, `og-shared-fingerprint`, `og-card-digest`, `changelog-format`, `source-file-utils`, `test-json-pipe`, `live-smoke`, `merge-posts-links`, `noteplan-import`, `post-urls`, `shortlink-command`, `unit-reporter`, `unit-wiring` — see [Unit Tests](#unit-tests) below
+**Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `indexnow`, `manifest-cursors`, `figure-lightbox`, `404-suggest`, `site-branding`, `preview-site-lockup`, `og-image-filename`, `og-card`, `date-utils`, `og-shared-fingerprint`, `og-card-digest`, `changelog-format`, `source-file-utils`, `test-json-pipe`, `live-smoke`, `merge-posts-links`, `noteplan-import`, `new-post`, `post-urls`, `shortlink-command`, `unit-reporter`, `unit-wiring` — see [Unit Tests](#unit-tests) below
 
 **Slow Tests:** `a11y` (launches browser)
 
@@ -264,6 +264,10 @@ Unit checks for `scripts/utils/live-smoke.js`, which builds the list of requests
 ### merge-posts-links.js
 
 Unit tests for `mergePostsAndLinks()` in `eleventy/utils/merge-posts-links.js`, which decides where each link from `links.yaml` lands among the posts on the home page and `/page/N/`, and for `newestLinks()` beside it, which picks the links for `links-feed.xml`. The property that matters is that across all the pages every link is shown exactly once, newest first: a link shown on two pages, or on none, is a loss nobody would see. One test checks that for five page sizes, with links on post days, on page-boundary days, before the oldest post, and after the newest. Another puts a link at the very instant of a post, where the two comparisons that split links between pages must agree. The rest cover one page: a link between two posts, a link on a post's own day (it follows the post), links newer than the newest post (first page only, and not at all when no page number is passed, which is why `links-feed.njk` passes `0`), the cut-off at the next page's first post, the last page taking every older link, and the `isLastInGroup` flag. Dates are built as the site builds them: posts at midnight Pacific, links at midnight UTC. Added 2026-11-10; the function had no test before. An empty list of posts used to throw and now gives an empty page. `newestLinks()` must give the newest links first, stop at its limit, read date keys in the long form Eleventy hands them over, and refuse a missing limit, which would otherwise mean every link.
+
+### new-post.js
+
+Unit tests for `pnpm run new-post` (`scripts/content/new-post.js`), which starts a post as a draft so its date is never typed by hand. The date must be today's Pacific day in all three places it appears (year folder, filename, front matter), checked at instants where the UTC day differs and either side of Pacific midnight at New Year. The front matter must read back exactly as written, with the date a quoted string and a title full of quotes, a colon, and a backslash intact. A title becomes a lowercase slug with accents removed, and a title with nothing usable gives `untitled`. The command never writes over a file, refuses a folder with no `src/posts`, and refuses a flag it doesn't know. Every file is written to a scratch folder. Added 2026-11-11.
 
 ### post-urls.js
 

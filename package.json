@@ -23,6 +23,7 @@
     "generate-og-images": "node scripts/content/generate-og-images.js",
     "generate-figures": "node scripts/figures/generate-figures.js",
     "flatten-figures": "node scripts/figures/flatten-for-figma.js",
+    "new-post": "node scripts/content/new-post.js",
     "import-links": "node scripts/content/import-noteplan-links.js",
     "security-audit": "node scripts/security/security-audit.js",
     "indexnow-catch-up": "node scripts/utils/indexnow.js --catch-up",

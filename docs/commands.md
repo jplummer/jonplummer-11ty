@@ -6,7 +6,7 @@
 
 Recommended process for deploying changes with an up-to-date changelog:
 
-1. Make changes (write posts, update content, add links to NotePlan, etc.)
+1. Make changes (write posts, update content, add links to NotePlan, etc.). Start a post with `pnpm run new-post "Working title"`
 2. `pnpm run import-links` - Import any pending links from NotePlan (if applicable)
 3. `pnpm run build` - Verify local build works
 4. `pnpm run test fast` - Run validation checks
@@ -51,6 +51,7 @@ Recommended process for deploying changes with an up-to-date changelog:
 
 ### 🪶 Content Authoring
 
+- `pnpm run new-post "Working title"` - Start a post as a draft in `src/posts/<year>/`, dated today (Pacific). See [authoring.md § Starting and publishing a post](authoring.md#starting-and-publishing-a-post)
 - `pnpm run import-links` - Import links from NotePlan to links.yaml (auto: `deploy`)
 - `pnpm run import-links --clear` - Import and clear NotePlan note
 - `pnpm run import-links --date=2025-12-25` - Import with specific date

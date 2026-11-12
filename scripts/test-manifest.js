@@ -153,6 +153,8 @@ const TESTS = [
     name: 'Posts and links merge', description: 'Where each link lands among the posts, page by page', emoji: '🧵' },
   { id: 'noteplan-import', script: 'noteplan-import.js', groups: ['unit'],
     name: 'NotePlan link import', description: 'Reading the NotePlan note and rewriting links.yaml without loss', emoji: '🔗' },
+  { id: 'new-post', script: 'new-post.js', groups: ['unit'],
+    name: 'New post command', description: 'pnpm run new-post: a dated draft in the right folder', emoji: '📝' },
   { id: 'post-urls', script: 'post-urls.js', groups: ['unit'],
     name: 'Post URLs', description: 'Every post builds at the URL its filename stands for, in any time zone', emoji: '📌' },
   { id: 'shortlink-command', script: 'shortlink-command.js', groups: ['unit'],
