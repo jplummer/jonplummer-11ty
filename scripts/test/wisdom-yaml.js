@@ -45,10 +45,14 @@ function validateEntry(entry, index, slugSet) {
     return issues;
   }
 
-  const allowed = ['slug', 'added', 'tags', 'body'];
+  const allowed = ['slug', 'added', 'tags', 'body', 'draft'];
   const extra = Object.keys(entry).filter((k) => !allowed.includes(k));
   if (extra.length) {
     issues.push(`${prefix}: Unexpected field(s): ${extra.join(', ')}`);
+  }
+
+  if (entry.draft !== undefined && typeof entry.draft !== 'boolean') {
+    issues.push(`${prefix}: draft must be true or false`);
   }
 
   const hasSlug =

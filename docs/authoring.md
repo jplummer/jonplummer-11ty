@@ -20,6 +20,7 @@ Short notes live in `src/_data/wisdom-entries.yaml` (same folder as `links.yaml`
 - Root key `entries`: array of objects.
 - Each object: `added` (`YYYY-MM-DD` string), `tags` (non-empty array of slug-style strings), `body` (multiline string; use `|` in YAML; markdown allowed).
 - `slug` (optional): unique, lowercase `a-z0-9-_`. If omitted, a stable id is derived from the body for fragment links and RSS.
+- `draft` (optional): `true` keeps the entry out of the live site and shows it on the dev server. Delete the line to publish.
 
 Run `pnpm run test wisdom` after editing. Unexpected fields are rejected.
 
@@ -37,12 +38,22 @@ Nothing in a draft is a commitment. It shows on the dev server and stays out of 
 
 To publish, follow the comment the file carries:
 
-1. Set `date` to the publishing day.
+1. Set `date` to the publishing day. A day after today holds the post: see below.
 2. Rename the file to `YYYY-MM-DD-slug.md`, with the same day and a slug that fits the final title. The filename sets the URL: `/YYYY/MM/DD/slug/`.
 3. Write the `description`.
 4. Delete the comment and the `draft: true` line.
 
 `pnpm run test frontmatter` fails if the filename day and the `date` differ, and says exactly what to rename or what date to set. It also fails if the `description` is still empty. Once a post is deployed its URL is out in the world: don't rename the file after that. The year folders are only filing; nothing reads them.
+
+### Dating a post ahead
+
+A post whose `date` is after today (Pacific) is held. It shows on the dev server and is left out of the live site, and it goes out on the first build on or after its day. Nothing publishes by itself: a held post needs a `pnpm run deploy` on that day or later. Every build prints a line for it:
+
+```text
+⏳ Held until 2026-11-20: My post (src/posts/2026/2026-11-20-my-post.md)
+```
+
+Only posts are held. Portfolio pieces, side projects, and pages build whatever their date says.
 
 ## Front Matter Variables
 
@@ -71,7 +82,7 @@ To publish, follow the comment the file carries:
 - **`permalink`** - Custom URL structure
 - **`eleventyExcludeFromCollections`** - Set to `true` to exclude
 - **`noindex`** - Set to `true` to keep a page out of search results. It renders `<meta name="robots" content="noindex">` and leaves the page out of `sitemap.xml`. The page still builds, deploys, and works from every link to it. Used on `/ogimages/`, `/readme/`, and `/changelog/`. Don't also block the page in `robots.txt`: a blocked page can't be crawled, so search engines never see the tag.
-- **`draft`** - Set to `true` to mark as draft. Drafts are excluded from production builds but visible in dev mode.
+- **`draft`** - Set to `true` to mark as draft. Drafts are excluded from production builds but visible in dev mode. Works on posts, portfolio pieces, side projects, pages, and wisdom entries. Every build and deploy prints a line for each draft it left out, so a forgotten one stays visible.
 - **`contentWarning`** - Warning text displayed before gated content. When set, the RSS feed shows only this warning with a link instead of the full post content. Pair with `<details>/<summary>` in the markdown body to collapse content on-site.
 
 ## Frontmatter Formatting

@@ -51,7 +51,7 @@ function buildPost(title, now = new Date()) {
     'description: ""',
     '# To publish: set date to the publishing day, rename this file to',
     '# YYYY-MM-DD-slug.md to match the date and the final title, write the',
-    '# description, then delete these lines.',
+    '# description, then delete these lines. A future date is held until that day.',
     'draft: true',
     '---',
     '',

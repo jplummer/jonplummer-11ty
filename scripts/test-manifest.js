@@ -157,6 +157,8 @@ const TESTS = [
     name: 'New post command', description: 'pnpm run new-post: a dated draft in the right folder', emoji: '📝' },
   { id: 'post-urls', script: 'post-urls.js', groups: ['unit'],
     name: 'Post URLs', description: 'Every post builds at the URL its filename stands for, in any time zone', emoji: '📌' },
+  { id: 'publish-state', script: 'publish-state.js', groups: ['unit'],
+    name: 'Drafts and held posts', description: 'What a production build leaves out, and the line it prints for each', emoji: '⏳' },
   { id: 'shortlink-command', script: 'shortlink-command.js', groups: ['unit'],
     name: 'Short link command', description: 'pnpm run shortlink, and the Apache rule each link gets', emoji: '🪝' },
   { id: 'unit-reporter', script: 'unit-reporter.js', groups: ['unit'],

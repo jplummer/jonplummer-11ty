@@ -4,6 +4,7 @@ const { execSync } = require('child_process');
 const { getTestsByGroup } = require('../test-manifest');
 const { formatRunFinishedLine } = require('../utils/run-timing');
 const { cleanSiteExceptImages } = require('../utils/clean-site');
+const { listUnpublished, formatUnpublished } = require('../utils/unpublished');
 
 const PRE_BUILD_TESTS = getTestsByGroup('pre').map((t) => t.id);
 const POST_BUILD_TESTS = getTestsByGroup('post').map((t) => t.id);
@@ -32,7 +33,12 @@ for (const test of PRE_BUILD_TESTS) {
 // Phase 2: Build
 run('node scripts/content/generate-og-images.js --quiet');
 run('eleventy --quiet', '🏗️  Build failed');
-console.log('✅ 🏗️  Build: completed\n');
+console.log('✅ 🏗️  Build: completed');
+// Name every draft and held post the build left out, so none is forgotten.
+for (const line of formatUnpublished(listUnpublished())) {
+  console.log(`   ${line}`);
+}
+console.log('');
 
 // Phase 3: Post-build — output quality
 for (const test of POST_BUILD_TESTS) {

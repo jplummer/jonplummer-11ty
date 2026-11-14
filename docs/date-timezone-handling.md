@@ -18,6 +18,10 @@ If an older unquoted UTC-midnight timestamp already published on the previous LA
 
 Full ISO with offset (`"2025-10-08T12:00:00-07:00"`) still parses for older posts. Do not use it for new work; it adds a DST offset to remember and is not needed for display or URLs.
 
+## Dating a post ahead
+
+A post dated after today's Pacific day is held: left out of production builds, shown on the dev server, and published by the first build on or after its day. The rule is `publishState()` in `eleventy/utils/publish-state.js`, used by the draft preprocessor and by the line the build prints for each item left out. It compares Pacific calendar days, so the machine's time zone doesn't matter. Guard: `pnpm run test publish-state`.
+
 ## Load-bearing build behavior
 
 Date handling preserves WordPress-era URLs: `eleventy/config/date-parsing.js` (`addDateParsing`) plus permalink generation in `src/posts/posts.11tydata.js`. Do not change date logic or existing post URLs without verifying every permalink remains unchanged. Portfolio pieces don't use it: since 2026-11-08 they live in `src/portfolio/` and build at `/portfolio/<slug>/` (`src/portfolio/portfolio.11tydata.js`), so their dates set nothing in the URL.

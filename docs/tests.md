@@ -36,7 +36,7 @@ _Derived from [`scripts/test-manifest.js`](../scripts/test-manifest.js) — see 
 
 **Fast Tests:** `html`, `links`, `wisdom`, `shortlinks`, `portfolios`, `internal-links`, `frontmatter`, `markdown`, `spell`, `seo`, `og-images`, `color-contrast`, `css`, `rss`, `deploy-assets`, `error-document-assets`, `favicon-rasters`, `trailing-slash-links`, `critical-css`, `figure-tokens`, `design-docs-location`, `docs-links`, `portfolio-cover-crop`
 
-**Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `indexnow`, `manifest-cursors`, `figure-lightbox`, `404-suggest`, `site-branding`, `preview-site-lockup`, `og-image-filename`, `og-card`, `date-utils`, `og-shared-fingerprint`, `og-card-digest`, `changelog-format`, `source-file-utils`, `test-json-pipe`, `live-smoke`, `merge-posts-links`, `noteplan-import`, `new-post`, `post-urls`, `shortlink-command`, `unit-reporter`, `unit-wiring` — see [Unit Tests](#unit-tests) below
+**Unit Tests:** `portfolio-notes`, `cloudflare-purge`, `deploy-guards`, `indexnow`, `manifest-cursors`, `figure-lightbox`, `404-suggest`, `site-branding`, `preview-site-lockup`, `og-image-filename`, `og-card`, `date-utils`, `og-shared-fingerprint`, `og-card-digest`, `changelog-format`, `source-file-utils`, `test-json-pipe`, `live-smoke`, `merge-posts-links`, `noteplan-import`, `new-post`, `post-urls`, `publish-state`, `shortlink-command`, `unit-reporter`, `unit-wiring` — see [Unit Tests](#unit-tests) below
 
 **Slow Tests:** `a11y` (launches browser)
 
@@ -78,7 +78,7 @@ Validates structure and format of `src/_data/links.yaml`: date keys (YYYY-MM-DD)
 
 ### wisdom-yaml.js
 
-Validates `src/_data/wisdom-entries.yaml` for the Collected wisdom section (`/wisdom/`): `entries` array, required fields (`slug`, `added`, `tags`, `body`), slug format and uniqueness, `added` as `YYYY-MM-DD`, at least one tag per entry (slug-style tags), no unexpected fields. After that passes, checks `eleventy/utils/wisdom-build.js` output (sort order, `allTags`, slug rules) and runs an Eleventy `getGlobalData()` smoke check so global `wisdom` matches `buildWisdom` of the file on disk.
+Validates `src/_data/wisdom-entries.yaml` for the Collected wisdom section (`/wisdom/`): `entries` array, required fields (`slug`, `added`, `tags`, `body`), optional `draft` (`true` or `false` only), slug format and uniqueness, `added` as `YYYY-MM-DD`, at least one tag per entry (slug-style tags), no unexpected fields. After that passes, checks `eleventy/utils/wisdom-build.js` output (sort order, `allTags`, slug rules) and runs an Eleventy `getGlobalData()` smoke check so global `wisdom` matches `buildWisdom` of the file on disk.
 
 **Note:** With `--changed`, skips if `src/_data/wisdom-entries.yaml`, `src/_data/wisdom.js`, `wisdom-build.js`, or `wisdom-entries-path.js` under the paths above hasn't changed.
 
@@ -272,6 +272,10 @@ Unit tests for `pnpm run new-post` (`scripts/content/new-post.js`), which starts
 ### post-urls.js
 
 Unit tests that pin every post's URL to its filename. A post's URL is `/YYYY/MM/DD/slug/`, built by the date parser in `eleventy/config/date-parsing.js` and the permalink function in `src/posts/posts.11tydata.js`. The filename (`YYYY-MM-DD-slug.md`) is the record of where a post lives, so the test runs every post's front matter date through that real code and requires the URL the filename stands for. It then starts itself again with `TZ` set to UTC, Tokyo, Honolulu, and Los Angeles, and requires the same URLs each time, so the answer can't depend on the build machine. Fixtures cover a date-only value, a time with a Pacific offset late in the evening, and the days daylight saving starts and ends. It reads the two files and changes neither. Added 2026-11-11 as the guard for a round of date fixes: links that are out in the world must stay put. It doesn't know which posts are published, so a post renamed by hand passes; the redirect for that is still a hand edit in `redirects.yaml`.
+
+### publish-state.js
+
+Unit tests for what a production build leaves out: drafts of any kind, and posts dated after today, which are held until their day. The rule is `publishState()` in `eleventy/utils/publish-state.js`. A post is held until Pacific midnight on its day, tested one minute either side and at an instant where the UTC day is already the next one; the date is read as the site reads it, as a date-only string, a time with an offset, or a `Date`. Only posts are held, and `draft: true` wins over a future date. A draft wisdom entry is left out of a production build, tag included, and kept in every other run mode. The lines `pnpm run build` prints (`scripts/utils/unpublished.js`) must name every draft and held post in a scratch site and nothing that is live. The last test runs Eleventy itself on a scratch site with the site's own preprocessor and date parser, without writing output: a production build must make only the live pages, and a dev build all of them. Added 2026-11-11.
 
 ### shortlink-command.js
 

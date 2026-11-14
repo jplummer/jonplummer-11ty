@@ -10,15 +10,20 @@ function slugFromBody(body) {
 }
 
 /**
+ * An entry with `draft: true` is left out of a production build and kept on the
+ * dev server, the same as a draft page (eleventy/config/preprocessors.js).
+ *
  * @param {{ entries?: object[] }} root - Parsed root of `wisdom-entries.yaml` (`entries` array)
+ * @param {string} [runMode] - Eleventy's run mode; "build" is a production build
  * @returns {{ entries: object[], allTags: string[] }}
  */
-function buildWisdom(root) {
+function buildWisdom(root, runMode = process.env.ELEVENTY_RUN_MODE) {
   if (!root || typeof root !== 'object') {
     throw new Error('buildWisdom: root must be an object');
   }
   const entries = (root.entries || [])
     .filter((e) => e != null && typeof e === 'object')
+    .filter((e) => !(e.draft && runMode === 'build'))
     .map((e) => {
       const slug = typeof e.slug === 'string' && e.slug.trim() ? e.slug.trim() : slugFromBody(e.body);
       return { ...e, slug };
