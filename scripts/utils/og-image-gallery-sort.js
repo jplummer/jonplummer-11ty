@@ -4,8 +4,9 @@ const { findMarkdownFiles, findFilesByExtension } = require('./file-utils');
 const { parseFrontMatter } = require('./frontmatter-utils');
 const { ogCardKind } = require('./og-card');
 const { generateOgImageFilename } = require('./og-image-filename');
+const { publishState } = require('../../eleventy/utils/publish-state');
 
-/** Same discovery set as `generateOgImages()` (posts + root md + njk, no drafts). */
+/** Same discovery set as `generateOgImages()` (posts + root md + njk, no drafts or held posts). */
 function listOgImageSourceFiles() {
   const srcDir = path.join(process.cwd(), 'src');
   const postsDir = path.join(srcDir, 'posts');
@@ -14,7 +15,7 @@ function listOgImageSourceFiles() {
   const postFiles = allPostFiles.filter((f) => {
     const content = fs.readFileSync(f, 'utf8');
     const { frontMatter } = parseFrontMatter(content);
-    return !(frontMatter && frontMatter.draft === true);
+    return publishState(frontMatter || {}).state === 'live';
   });
 
   const allRootFiles = findMarkdownFiles(srcDir).filter(
@@ -27,7 +28,7 @@ function listOgImageSourceFiles() {
   const rootFiles = allRootFiles.filter((f) => {
     const content = fs.readFileSync(f, 'utf8');
     const { frontMatter } = parseFrontMatter(content);
-    return !(frontMatter && frontMatter.draft === true);
+    return publishState(frontMatter || {}).state === 'live';
   });
 
   const allNjkFiles = findFilesByExtension(srcDir, ['.njk']).filter(
@@ -40,7 +41,7 @@ function listOgImageSourceFiles() {
   const njkFiles = allNjkFiles.filter((f) => {
     const content = fs.readFileSync(f, 'utf8');
     const { frontMatter } = parseFrontMatter(content);
-    return !(frontMatter && frontMatter.draft === true);
+    return publishState(frontMatter || {}).state === 'live';
   });
 
   return [...postFiles, ...rootFiles, ...njkFiles];
@@ -120,6 +121,7 @@ function resolvePngSortMs(filename, filenameToMs, pngFullPath) {
 }
 
 module.exports = {
+  listOgImageSourceFiles,
   buildFilenameToPublicationSortMs,
   resolvePngSortMs
 };

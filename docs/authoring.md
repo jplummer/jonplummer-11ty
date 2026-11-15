@@ -55,6 +55,8 @@ A post whose `date` is after today (Pacific) is held. It shows on the dev server
 
 Only posts are held. Portfolio pieces, side projects, and pages build whatever their date says.
 
+A held post gets no OG card until its day, as a draft gets none, so its title doesn't show early at `/ogimages/`. The first build on or after its day makes the card.
+
 ## Front Matter Variables
 
 ### Required

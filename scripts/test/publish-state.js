@@ -181,3 +181,35 @@ test('Eleventy leaves drafts and held posts out of a production build and shows 
   assert.deepStrictEqual(builtUrls(root, 'build'), ['/future-page/', '/live/']);
   assert.deepStrictEqual(builtUrls(root, 'serve'), ['/draft-page/', '/draft/', '/future-page/', '/held/', '/live/']);
 });
+
+// OG cards: a held post gets no card until its day, as a draft gets none.
+// The card gallery at /ogimages/ is public, and so is the PNG's address.
+test('the OG card source list leaves out drafts and held posts', (t) => {
+  const root = scratch(t, {
+    'src/posts/2020/2020-01-01-live.md': page(['title: Live', 'tags: post', 'date: "2020-01-01"']),
+    'src/posts/2999/2999-01-01-held.md': page(['title: Held', 'tags: post', 'date: "2999-01-01"']),
+    'src/posts/2020/2020-01-02-draft.md': page(['title: Draft', 'tags: post', 'date: "2020-01-02"', 'draft: true']),
+    'src/about.md': page(['title: About', 'tags: page', 'date: "2999-01-01"']),
+    'src/draft-page.md': page(['title: Draft page', 'tags: page', 'draft: true']),
+  });
+  const script = `
+    const { listOgImageSourceFiles } = require(${JSON.stringify(path.join(REPO, 'scripts/utils/og-image-gallery-sort.js'))});
+    process.stdout.write(JSON.stringify(listOgImageSourceFiles()));
+  `;
+  const env = { ...process.env };
+  delete env.NODE_TEST_CONTEXT;
+  // The list is read from src/ under the working directory.
+  const run = spawnSync(process.execPath, ['-e', script], { cwd: root, env, encoding: 'utf8' });
+  assert.strictEqual(run.status, 0, run.stderr);
+  const listed = JSON.parse(run.stdout).map((file) => path.basename(file)).sort();
+  assert.deepStrictEqual(listed, ['2020-01-01-live.md', 'about.md']);
+});
+
+test('the OG card generator and the gallery use the same rule as the build', () => {
+  for (const file of ['scripts/content/generate-og-images.js', 'scripts/utils/og-image-gallery-sort.js']) {
+    const source = fs.readFileSync(path.join(REPO, file), 'utf8');
+    // Three lists each: posts, other markdown, and .njk templates.
+    assert.strictEqual(source.split("publishState(frontMatter || {}).state === 'live'").length - 1, 3, file);
+    assert.ok(!source.includes('draft === true'), `${file} tests draft by itself, which misses held posts`);
+  }
+});

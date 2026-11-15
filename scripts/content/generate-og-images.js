@@ -8,6 +8,7 @@ const { findMarkdownFiles, findFilesByExtension } = require('../utils/file-utils
 const { parseFrontMatter, reconstructFile } = require('../utils/frontmatter-utils');
 const { extractCssCustomProperties, extractProductionFontFacesForInline } = require('../../eleventy/utils/css-utils');
 const { formatPostDate } = require('../../eleventy/utils/date-utils');
+const { publishState } = require('../../eleventy/utils/publish-state');
 const {
   OG_DEFAULT_IMAGE_FILENAME,
   generateOgImageFilename,
@@ -308,13 +309,13 @@ async function generateOgImages(options = {}) {
   const srcDir = path.join(process.cwd(), 'src');
   const postsDir = path.join(srcDir, 'posts');
   
-  // Find all markdown files in posts directory, excluding drafts
+  // Find all markdown files in posts directory, excluding drafts and held posts
   const allPostFiles = findMarkdownFiles(postsDir);
   const postFiles = allPostFiles.filter(f => {
     const content = fs.readFileSync(f, 'utf8');
     const { frontMatter } = parseFrontMatter(content);
-    // Exclude files with draft: true in frontmatter
-    return !(frontMatter && frontMatter.draft === true);
+    // Exclude drafts, and posts held for a later day
+    return publishState(frontMatter || {}).state === 'live';
   });
   
   // Find markdown and njk files in src root (excluding posts/, _includes, _data, assets, and drafts)
@@ -327,8 +328,8 @@ async function generateOgImages(options = {}) {
   const rootFiles = allRootFiles.filter(f => {
     const content = fs.readFileSync(f, 'utf8');
     const { frontMatter } = parseFrontMatter(content);
-    // Exclude files with draft: true in frontmatter
-    return !(frontMatter && frontMatter.draft === true);
+    // Exclude drafts, and posts held for a later day
+    return publishState(frontMatter || {}).state === 'live';
   });
   
   // All .njk templates under src/ (e.g. src/wisdom/index.njk), excluding special dirs
@@ -341,8 +342,8 @@ async function generateOgImages(options = {}) {
   const njkFiles = allNjkFiles.filter(f => {
     const content = fs.readFileSync(f, 'utf8');
     const { frontMatter } = parseFrontMatter(content);
-    // Exclude files with draft: true in frontmatter
-    return !(frontMatter && frontMatter.draft === true);
+    // Exclude drafts, and posts held for a later day
+    return publishState(frontMatter || {}).state === 'live';
   });
   
   const markdownFiles = [...postFiles, ...rootFiles, ...njkFiles];
