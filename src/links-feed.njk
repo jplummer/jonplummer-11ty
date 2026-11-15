@@ -12,13 +12,13 @@ eleventyExcludeFromCollections: true
         {# The newest links only (feedLimits.links), so a new subscriber isn't handed every link ever shared #}
         {% set feedLinks = links | newestLinks(feedLimits.links) %}
         {% set firstItem = feedLinks | first %}
-        <lastBuildDate>{% if firstItem %}{{ firstItem.date | dateToRfc3339 }}{% else %}{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}{% endif %}</lastBuildDate>
+        <lastBuildDate>{% if firstItem %}{{ firstItem.date | dateToRfc822("America/Los_Angeles") }}{% else %}{{ collections.post | getNewestCollectionItemDate | dateToRfc822("America/Los_Angeles") }}{% endif %}</lastBuildDate>
         {% for item in feedLinks %}
             <item>
                 <title>{{ item.data.title | smartquotes | striptags }}</title>
                 <link>{{ item.data.url }}</link>
                 <guid>{{ item.data.url }}</guid>
-                <pubDate>{{ item.date | dateToRfc3339 }}</pubDate>
+                <pubDate>{{ item.date | dateToRfc822("America/Los_Angeles") }}</pubDate>
                 {# Rich content with full HTML #}
                 <content:encoded><![CDATA[<p><a href="{{ item.data.url }}">{{ item.data.title | smartquotes | striptags }}</a>{% if item.data.description %}<br>{{ item.data.description | smartquotes | safe }}{% endif %}</p>{% if site.url %}<p><small>Shared on <a href="{{ site.url }}">jonplummer.com</a></small></p>{% endif %}]]></content:encoded>
                 {# Simple description (markdown processed, but no link since <link> provides URL) #}

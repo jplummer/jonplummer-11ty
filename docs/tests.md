@@ -158,7 +158,7 @@ Validates that all HTML pages have appropriate Open Graph images. Missing `og:im
 
 ### rss.js
 
-Validates RSS/XML feed files for proper structure, required elements, and feed health. Checks RSS structure, item validity, duplicate GUIDs (ERROR), feed freshness (>30 days = WARNING, except `wisdom-feed.xml`, which grows when it grows), feed size (>500KB = WARNING). Each feed must also carry no more items than its number in `src/_data/feedLimits.js` (5 posts, 20 links, 5 wisdom entries), and a feed with no number there fails. `links-feed.xml` had no limit until 2026-11-10 and carried all 204 links.
+Validates RSS/XML feed files for proper structure, required elements, and feed health. Checks RSS structure, item validity, duplicate GUIDs (ERROR), feed freshness (>30 days = WARNING, except `wisdom-feed.xml`, which grows when it grows), feed size (>500KB = WARNING). Each feed must also carry no more items than its number in `src/_data/feedLimits.js` (5 posts, 20 links, 5 wisdom entries), and a feed with no number there fails. `links-feed.xml` had no limit until 2026-11-10 and carried all 204 links. Every `pubDate` and `lastBuildDate` must be an RFC 822 date with a four-digit year and a numeric zone (`Wed, 28 Oct 2026 00:00:00 -0700`), which is what RSS 2.0 asks for; until 2026-11-15 the feeds carried ISO dates. The rule is checked against fixtures on every run before any feed is read.
 
 ### seo.js
 

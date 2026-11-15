@@ -9,13 +9,14 @@ eleventyExcludeFromCollections: true
         <link>{{ site.url }}/wisdom/</link>
         <description>Short notes and observations from {{ site.author }}</description>
         <language>en-US</language>
-        <lastBuildDate>{% if wisdom.entries.length %}{{ wisdom.entries[0].added | dateToRfc3339 }}{% else %}{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}{% endif %}</lastBuildDate>
+        {# `added` is text (YYYY-MM-DD). dateToRfc3339 reads it as midnight Pacific; dateToRfc822 then prints that instant in the form RSS asks for. -#}
+        <lastBuildDate>{% if wisdom.entries.length %}{{ wisdom.entries[0].added | dateToRfc3339 | dateToRfc822("America/Los_Angeles") }}{% else %}{{ collections.post | getNewestCollectionItemDate | dateToRfc822("America/Los_Angeles") }}{% endif %}</lastBuildDate>
         {% for entry in wisdom.entries | limit(feedLimits.wisdom) %}
             <item>
                 <title>{{ entry.body | markdown | striptags | truncate(120, true, '…') }}</title>
                 <link>{{ site.url }}/wisdom/#{{ entry.slug }}</link>
                 <guid isPermaLink="false">{{ site.url }}/wisdom/#{{ entry.slug }}</guid>
-                <pubDate>{{ entry.added | dateToRfc3339 }}</pubDate>
+                <pubDate>{{ entry.added | dateToRfc3339 | dateToRfc822("America/Los_Angeles") }}</pubDate>
                 <content:encoded><![CDATA[{{ entry.body | markdown | safe }}{% if site.url %}<p><small>From <a href="{{ site.url }}/wisdom/">Collected wisdom</a> on <a href="{{ site.url }}">jonplummer.com</a></small></p>{% endif %}]]></content:encoded>
                 <description><![CDATA[{{ entry.body | markdown | striptags | truncate(280, true, '…') }}]]></description>
             </item>

@@ -11,14 +11,14 @@ eleventyExcludeFromCollections: true
         <language>en-US</language>
         {# Use the newest post's publication date (not modification time) to avoid triggering RSS readers on metadata updates #}
         {% set newestPost = collections.post | reverse | first %}
-        <lastBuildDate>{% if newestPost %}{{ newestPost.date | dateToRfc3339 }}{% else %}{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}{% endif %}</lastBuildDate>
+        <lastBuildDate>{% if newestPost %}{{ newestPost.date | dateToRfc822("America/Los_Angeles") }}{% else %}{{ collections.post | getNewestCollectionItemDate | dateToRfc822("America/Los_Angeles") }}{% endif %}</lastBuildDate>
 
         {% for item in collections.post | reverse | limit(feedLimits.posts) %}
         <item>
             <title>{{ item.data.title | safe }}</title>
             <link>{{ item.url | absoluteUrl(site.url) }}</link>
             <guid>{{ item.url | absoluteUrl(site.url) }}</guid>
-            <pubDate>{{ item.date | dateToRfc3339 }}</pubDate>
+            <pubDate>{{ item.date | dateToRfc822("America/Los_Angeles") }}</pubDate>
 
             {# Full post content (or warning + link for content-warned posts) #}
             {% if item.data.contentWarning %}

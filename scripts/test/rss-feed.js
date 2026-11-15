@@ -6,6 +6,26 @@ const { DOMParser } = require('@xmldom/xmldom');
 const feedLimits = require('../../src/_data/feedLimits');
 const { addFile, addIssue, addWarning } = require('../utils/test-results');
 
+// RSS 2.0 dates are RFC 822 with a four-digit year: "Wed, 28 Oct 2026 00:00:00 -0700".
+// Until 2026-11-15 the feeds carried ISO dates ("2026-10-28T07:00:00.000Z"),
+// which many readers accept and the RSS spec does not.
+const RFC822_DATE = /^(Mon|Tue|Wed|Thu|Fri|Sat|Sun), \d{2} (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4} \d{2}:\d{2}:\d{2} ([+-]\d{4}|GMT|UT)$/;
+
+function isRfc822Date(text) {
+  return RFC822_DATE.test(String(text).trim()) && !isNaN(new Date(text).getTime());
+}
+
+// The rule itself, checked on every run before any feed is read.
+function assertRfc822Guard() {
+  const assert = require('assert');
+  for (const good of ['Wed, 28 Oct 2026 00:00:00 -0700', 'Thu, 01 Jan 2026 00:00:00 -0800', 'Wed, 28 Oct 2026 07:00:00 GMT']) {
+    assert.ok(isRfc822Date(good), `rss-feed guard: ${good} is RFC 822`);
+  }
+  for (const bad of ['2026-10-28T07:00:00.000Z', '2026-10-28', 'Wed, 28 Oct 26 00:00:00 -0700', 'Wed 28 Oct 2026 00:00:00 -0700', 'Wed, 28 Oct 2026 00:00:00', 'Wed, 28 Oct 2026 00:00:00 GMT-07:00', '']) {
+    assert.ok(!isRfc822Date(bad), `rss-feed guard: "${bad}" is not RFC 822`);
+  }
+}
+
 // Find RSS/XML files in _site
 function findRssFiles(dir) {
   const files = [];
@@ -85,6 +105,11 @@ function validateRSSStructure(doc, options = {}) {
     }
   }
   
+  const lastBuildDate = channelElement.getElementsByTagName('lastBuildDate')[0];
+  if (lastBuildDate && !isRfc822Date(lastBuildDate.textContent)) {
+    issues.push(`lastBuildDate is not an RFC 822 date: "${lastBuildDate.textContent}"`);
+  }
+
   // Check for items (wisdom feed may be empty without breaking the build)
   const items = channelElement.getElementsByTagName('item');
   if (items.length === 0 && fileBaseName !== 'wisdom-feed.xml') {
@@ -134,6 +159,8 @@ function validateRSSItem(item, itemNumber) {
     const pubDate = new Date(pubDateElement.textContent);
     if (isNaN(pubDate.getTime())) {
       issues.push(`Item ${itemNumber}: Invalid pubDate format`);
+    } else if (!isRfc822Date(pubDateElement.textContent)) {
+      issues.push(`Item ${itemNumber}: pubDate is not an RFC 822 date: "${pubDateElement.textContent}"`);
     }
   }
   
@@ -301,6 +328,7 @@ function validateWisdomFeedDiscovery(result) {
 
 // Main RSS validation
 function validate(result) {
+  assertRfc822Guard();
   const siteDir = './_site';
   const rssFiles = findRssFiles(siteDir);
   
