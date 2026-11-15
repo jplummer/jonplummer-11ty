@@ -10,7 +10,7 @@ const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
 const markdownIt = require('markdown-it');
-const { wrapFilenames } = require('../utils/changelog-format');
+const { wrapFilenames, deployedLine } = require('../utils/changelog-format');
 const { test } = require('node:test');
 
 const md = markdownIt({ html: true, linkify: true });
@@ -70,4 +70,20 @@ test('generate-changelog.js applies wrapFilenames to commit lines', () => {
     source.includes('wrapFilenames('),
     'generate-changelog.js must call wrapFilenames('
   );
+});
+
+// Until 2026-11-15 the day came from UTC, so a deploy after 4 pm Pacific
+// (5 pm in summer) was recorded as tomorrow's.
+test('the deploy line carries the Pacific day, not the UTC day', () => {
+  // 6 pm PST on Nov 10 is Nov 11 in UTC.
+  assert.strictEqual(deployedLine(new Date('2026-11-11T02:00:00Z')), 'Last deployed on 2026-11-10');
+  // One minute either side of Pacific midnight, in summer.
+  assert.strictEqual(deployedLine(new Date('2026-07-05T06:59:00Z')), 'Last deployed on 2026-07-04');
+  assert.strictEqual(deployedLine(new Date('2026-07-05T07:00:00Z')), 'Last deployed on 2026-07-05');
+});
+
+test('generate-changelog.js writes the deploy line with deployedLine()', () => {
+  const source = fs.readFileSync(GENERATOR, 'utf8');
+  assert.ok(source.includes('${deployedLine()}'), 'generate-changelog.js must call deployedLine()');
+  assert.ok(!source.includes('toISOString'), 'generate-changelog.js must not take a day from UTC');
 });

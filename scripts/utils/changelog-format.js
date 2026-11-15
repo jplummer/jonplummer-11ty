@@ -6,6 +6,8 @@
  * Inline code is not linkified.
  */
 
+const { todayIsoDate } = require('../../eleventy/utils/date-utils');
+
 const FILENAME_EXT = 'md|njk|js|mjs|cjs|css|json|ya?ml|txt|html|py|sh|rs|ai|io';
 const FILENAME_RE = new RegExp(
   String.raw`(?<![\`/])\b([\w.-]+\.(?:${FILENAME_EXT}))\b(?!\`)`,
@@ -19,6 +21,16 @@ function wrapFilenames(text) {
   return text.replace(FILENAME_RE, '`$1`');
 }
 
+/**
+ * The line a deploy adds to the end of the changelog. The day is the Pacific
+ * calendar day, as every other date on the site is.
+ * @param {Date} [now] - The instant of the deploy
+ */
+function deployedLine(now = new Date()) {
+  return `Last deployed on ${todayIsoDate(now)}`;
+}
+
 module.exports = {
   wrapFilenames,
+  deployedLine,
 };

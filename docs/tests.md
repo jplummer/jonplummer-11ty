@@ -251,7 +251,7 @@ Unit checks for the OG card digest in `scripts/utils/og-card-digest.js`, which e
 
 ### changelog-format.js
 
-Unit checks for `wrapFilenames()` in `scripts/utils/changelog-format.js`, used by `generate-changelog.js`. Bare filenames like `ideas.md` are wrapped in backticks so markdown-it's linkify does not treat `.md` as Moldova's TLD (`https://ideas.md`). Also wraps other source extensions as code, leaves slash-prefixed paths and URLs alone, and asserts the generator still calls the helper. No `_site/` dependency.
+Unit checks for `wrapFilenames()` in `scripts/utils/changelog-format.js`, used by `generate-changelog.js`. Bare filenames like `ideas.md` are wrapped in backticks so markdown-it's linkify does not treat `.md` as Moldova's TLD (`https://ideas.md`). Also wraps other source extensions as code, leaves slash-prefixed paths and URLs alone, and asserts the generator still calls the helper. `deployedLine()` writes the closing `Last deployed on YYYY-MM-DD` line with the Pacific day; until 2026-11-15 the day came from UTC, so a deploy after 4 pm Pacific was recorded as the next day's. The generator must call it and must not use `toISOString`. No `_site/` dependency.
 
 ### source-file-utils.js
 

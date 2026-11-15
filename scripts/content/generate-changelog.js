@@ -11,7 +11,7 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const { SPINNER_FRAMES } = require('../utils/spinner-utils');
-const { wrapFilenames } = require('../utils/changelog-format');
+const { wrapFilenames, deployedLine } = require('../utils/changelog-format');
 
 const CHANGELOG_PATH = path.join(__dirname, '../../CHANGELOG.md');
 
@@ -365,8 +365,7 @@ try {
   // Append deploy date if --deploy flag is set
   const isDeploy = process.argv.includes('--deploy');
   if (isDeploy) {
-    const deployDate = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
-    changelog += `\n\nLast deployed on ${deployDate}\n`;
+    changelog += `\n\n${deployedLine()}\n`;
   }
 
   // Write changelog file
