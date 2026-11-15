@@ -239,7 +239,7 @@ Unit checks for `generateOgImageFilename()` in `scripts/utils/og-image-filename.
 
 ### date-utils.js
 
-Unit checks for `formatPostDate` / `formatPostDateAttr` in `eleventy/utils/date-utils.js`: date-only strings format as the America/Los_Angeles calendar day (not UTC midnight → previous Pacific day). No `_site/` dependency.
+Unit checks for `formatPostDate` / `formatPostDateAttr` in `eleventy/utils/date-utils.js`: date-only strings format as the America/Los_Angeles calendar day (not UTC midnight → previous Pacific day). Also `formatDateRange`, which titles `/page/N/`: one year is named once (`Feb 15–Apr 4, 2026`), a range across years names both (`Nov 20, 2025–Feb 11, 2026`), the year is the Pacific year, and one day is that day. Until 2026-11-15 the start never carried a year, so six pages had titles such as `Jul 31–Jul 27, 2025`. No `_site/` dependency.
 
 ### og-shared-fingerprint.js
 

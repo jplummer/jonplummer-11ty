@@ -128,8 +128,8 @@ function formatPostDateAttr(dateObj) {
 }
 
 /**
- * Formats a date range minimally (e.g., "Jan 1–Jan 15, 2024" or "Jan 15, 2024").
- * If both dates are the same, returns just the single date.
+ * Formats a date range minimally: "Jan 1–Jan 15, 2024" within one year,
+ * "Nov 20, 2025–Feb 11, 2026" across years, or "Jan 15, 2024" for one day.
  * Uses en dash with no spaces when numbers are adjacent to the dash.
  *
  * @param {Date|string|DateTime} startDate - Start date
@@ -149,8 +149,10 @@ function formatDateRange(startDate, endDate) {
     return startDt.toLocaleString(DateTime.DATE_MED);
   }
 
-  // Format: "Jan 1–Jan 15, 2024" (en dash, no spaces)
-  const startFormatted = startDt.toFormat('LLL d');
+  // The start carries its year only when the end's year differs
+  const startFormatted = startDt.hasSame(endDt, 'year')
+    ? startDt.toFormat('LLL d')
+    : startDt.toLocaleString(DateTime.DATE_MED);
   const endFormatted = endDt.toLocaleString(DateTime.DATE_MED);
 
   // Use en dash (U+2013) with no spaces

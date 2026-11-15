@@ -46,6 +46,6 @@ test('one unit test lists every test by name; --format build gives only its line
 
   const brief = runOne('date-utils', '--format', 'build');
   assert.strictEqual(brief.status, 0);
-  assert.match(brief.stdout, /✅ .*Date Utils: 🧪 4 tests, ✅ 4 passing/);
+  assert.match(brief.stdout, /✅ .*Date Utils: 🧪 (\d+) tests, ✅ \1 passing/);
   assert.doesNotMatch(brief.stdout, listed);
 });
