@@ -5,17 +5,20 @@
  * link from links.yaml lands among the posts on the home page and /page/N/,
  * and which links reach links-feed.xml.
  *
- * Dates are built the way the site builds them: a post's date is midnight in
- * America/Los_Angeles (eleventy/config/date-parsing.js), and a link's date is
- * its YYYY-MM-DD key read by `new Date()`, which is midnight UTC.
+ * Dates arrive the way the site hands them over. A post's `data.date` is its
+ * front matter text, usually "YYYY-MM-DD", and a link's date is its links.yaml
+ * key. Both are read as midnight in America/Los_Angeles, so a post and a link
+ * on one day share an instant.
  */
 
 const { test } = require('node:test');
 const assert = require('node:assert');
 const { DateTime } = require('luxon');
-const { mergePostsAndLinks, newestLinks } = require('../../eleventy/utils/merge-posts-links');
+const { mergePostsAndLinks, newestLinks, linkDate } = require('../../eleventy/utils/merge-posts-links');
 
-const post = (day) => ({
+const post = (day) => ({ url: `/post/${day}/`, data: { date: day } });
+/** The same post with its date already a Date, as some callers pass it. */
+const parsedPost = (day) => ({
   url: `/post/${day}/`,
   data: { date: DateTime.fromISO(day, { zone: 'America/Los_Angeles' }).toJSDate() },
 });
@@ -24,6 +27,9 @@ const link = (name) => ({ url: `https://example.com/${name}`, title: name });
 /** What a page shows, top to bottom: 'post 2026-03-10' or 'link a'. */
 const shown = (items) =>
   items.map((item) => (item.type === 'post' ? `post ${item.data.url.slice(6, 16)}` : `link ${item.data.title}`));
+
+/** The instant the merge gives the first of these posts. */
+const pages0Date = (posts) => mergePostsAndLinks(posts, {}, 0, null)[0].date.getTime();
 
 /** Split posts into pages and merge each, the way src/index.11tydata.js does. */
 function paginate(posts, links, size) {
@@ -166,12 +172,12 @@ test('across every page, each link is shown exactly once and in date order', () 
   }
 });
 
-// A post whose front matter gives a time can land on the very instant of a
-// link's date (midnight UTC). The two comparisons that split links between
-// pages must agree there, or the link shows on two pages or on none.
+// A post with a date-only value and a link on the same day share one instant,
+// midnight Pacific. The two comparisons that split links between pages must
+// agree there, or the link shows on two pages or on none.
 test('a link at the same instant as a post is shown once, after that post', () => {
-  const utcPost = (day) => ({ url: `/post/${day}/`, data: { date: new Date(day) } });
-  const posts = [utcPost('2026-03-10'), utcPost('2026-03-05'), utcPost('2026-03-01')];
+  const posts = [post('2026-03-10'), post('2026-03-05'), post('2026-03-01')];
+  assert.strictEqual(pages0Date(posts), linkDate('2026-03-10').getTime());
   const links = { '2026-03-10': [link('ten')], '2026-03-05': [link('five')], '2026-03-01': [link('one')] };
 
   for (const size of [1, 2, 3]) {
@@ -195,7 +201,7 @@ test('the feed takes the newest links, newest date first, up to its limit', () =
   const feed = newestLinks(links, 4);
   assert.deepStrictEqual(feed.map((item) => item.data.title), ['new-1', 'new-2', 'mid-1', 'old-1']);
   assert.deepStrictEqual(feed.map((item) => item.type), ['link', 'link', 'link', 'link']);
-  assert.strictEqual(feed[0].date.toISOString(), '2026-03-10T00:00:00.000Z');
+  assert.strictEqual(feed[0].date.toISOString(), '2026-03-10T07:00:00.000Z'); // midnight PDT
 });
 
 test('a limit larger than the file gives every link, and no links gives none', () => {
@@ -214,7 +220,66 @@ test('the feed reads date keys in the form Eleventy hands them over', () => {
   };
   const feed = newestLinks(links, 1);
   assert.deepStrictEqual(feed.map((item) => item.data.title), ['new']);
-  assert.strictEqual(feed[0].date.toISOString(), '2026-03-10T00:00:00.000Z');
+  assert.strictEqual(feed[0].date.toISOString(), '2026-03-10T07:00:00.000Z'); // midnight PDT
+});
+
+// Until 2026-11-13 a link's date was midnight UTC, which is 4 or 5 pm the day
+// before in Pacific time. The links feed and the /page/N/ titles format dates
+// in Pacific time, so each link showed a day early.
+test('a link date key is midnight Pacific on its day, in either form', () => {
+  assert.strictEqual(linkDate('2026-03-10').toISOString(), '2026-03-10T07:00:00.000Z'); // PDT
+  assert.strictEqual(linkDate('2026-01-15').toISOString(), '2026-01-15T08:00:00.000Z'); // PST
+  // The long form names midnight UTC on the keyed day, printed in the build
+  // machine's zone: the same key on machines in Tokyo, Honolulu, and Denver.
+  for (const key of [
+    String(new Date('2026-03-10')),
+    'Tue Mar 10 2026 09:00:00 GMT+0900 (Japan Standard Time)',
+    'Mon Mar 09 2026 14:00:00 GMT-1000 (Hawaii-Aleutian Standard Time)',
+    'Mon Mar 09 2026 18:00:00 GMT-0600 (Mountain Daylight Time)',
+  ]) {
+    assert.strictEqual(linkDate(key).toISOString(), '2026-03-10T07:00:00.000Z', key);
+  }
+});
+
+test('a link date reads back as its own day in Pacific time, all year', () => {
+  const { formatPostDateAttr } = require('../../eleventy/utils/date-utils');
+  for (const day of ['2026-01-01', '2026-03-08', '2026-03-09', '2026-07-04', '2026-11-01', '2026-11-02', '2026-12-31']) {
+    assert.strictEqual(formatPostDateAttr(linkDate(day)), day);
+    assert.strictEqual(formatPostDateAttr(linkDate(String(new Date(day)))), day);
+  }
+});
+
+test('a key that is not a date is refused by name', () => {
+  assert.throws(() => linkDate('someday'), /"someday" is not a date/);
+  assert.throws(() => newestLinks({ '2026-13-45': [link('a')] }, 5), /2026-13-45/);
+});
+
+// A post written at 8:30 pm Pacific on the 9th is later than midnight UTC on
+// the 10th, so a link dated the 10th used to sit below it.
+test('a link sits above a post written the evening before', () => {
+  const evening = { url: '/post/2026-03-09/', data: { date: '2026-03-09T20:30:00-07:00' } };
+  const items = mergePostsAndLinks([evening, post('2026-03-01')], { '2026-03-10': [link('a')] }, 0, null);
+  assert.deepStrictEqual(shown(items), ['link a', 'post 2026-03-09', 'post 2026-03-01']);
+});
+
+// Until 2026-11-15 the merge read a date-only post as midnight UTC, the day
+// before in Pacific time, so a /page/N/ title that started or ended on such a
+// post was a day early.
+test('a post keeps its own Pacific day, as text or as a Date', () => {
+  const { formatPostDateAttr } = require('../../eleventy/utils/date-utils');
+  for (const make of [post, parsedPost]) {
+    const items = mergePostsAndLinks([make('2026-03-10'), make('2026-01-15')], {}, 1, null);
+    assert.deepStrictEqual(items.map((item) => formatPostDateAttr(item.date)), ['2026-03-10', '2026-01-15']);
+    assert.strictEqual(items[0].date.toISOString(), '2026-03-10T07:00:00.000Z');
+  }
+});
+
+test('a link on a post\'s day follows it, whichever form the post\'s date takes', () => {
+  const links = { '2026-03-10': [link('ten')], '2026-03-05': [link('five')] };
+  for (const make of [post, parsedPost]) {
+    const pages = paginate([make('2026-03-10'), make('2026-03-05')], links, 1);
+    assert.deepStrictEqual(pages.map(shown), [['post 2026-03-10', 'link ten'], ['post 2026-03-05', 'link five']]);
+  }
 });
 
 test('the feed needs a whole number for its limit', () => {
