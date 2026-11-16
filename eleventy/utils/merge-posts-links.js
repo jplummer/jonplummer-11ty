@@ -5,22 +5,16 @@ const { toDateTime } = require('./date-utils');
  * which is how a post's date is read, so a link and a post on one day compare
  * as the same day.
  *
- * A key arrives in one of two forms. Quoted in YAML it is "2026-03-10".
- * Unquoted, js-yaml reads it as a Date at midnight UTC, and as an object key
- * that becomes a long string such as "Tue Mar 10 2026 …"; the day it names is
- * that instant's UTC day, whatever zone the machine is in.
+ * A key is "YYYY-MM-DD" text, quoted in the file or not: Eleventy reads
+ * links.yaml through readYamlData() in eleventy/config/data-extensions.js,
+ * which never turns a key into a Date. Anything else is refused.
  *
  * @param {string} key - A date key from links.yaml
  * @returns {Date}
  */
 function linkDate(key) {
   const text = String(key);
-  let day = text;
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(text)) {
-    const parsed = new Date(text);
-    day = Number.isNaN(parsed.getTime()) ? '' : parsed.toISOString().slice(0, 10);
-  }
-  const dt = toDateTime(day);
+  const dt = /^\d{4}-\d{2}-\d{2}$/.test(text) ? toDateTime(text) : null;
   if (!dt) {
     throw new Error(`links.yaml: "${text}" is not a date. Keys are YYYY-MM-DD.`);
   }

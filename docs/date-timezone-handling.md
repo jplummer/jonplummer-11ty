@@ -16,7 +16,7 @@ On-page `postDate` / `postDateAttr` always format in America/Los_Angeles (same z
 
 The three feeds print dates with the RSS plugin's `dateToRfc822("America/Los_Angeles")`, so a post dated `2026-10-28` reads `Wed, 28 Oct 2026 00:00:00 -0700`. Always pass the zone: without it the plugin prints in the build machine's zone, and the feed's text would change with where it was built. A wisdom entry's `added` is text, so `wisdom-feed.njk` runs it through `dateToRfc3339` first, which reads it as midnight Pacific.
 
-The home page merge (`eleventy/utils/merge-posts-links.js`) follows the same rule. It is handed each post's `data.date` as front matter text and each link's date as a `links.yaml` key, and reads both as midnight Pacific on that day (`readPostDate`, `linkDate`). An unquoted key reaches it as a long string such as `Tue Mar 10 2026 …`, printed in the build machine's zone; the day it names is that instant's UTC day.
+The home page merge (`eleventy/utils/merge-posts-links.js`) follows the same rule. It is handed each post's `data.date` as front matter text and each link's date as a `links.yaml` key, and reads both as midnight Pacific on that day (`readPostDate`, `linkDate`). A key reaches it as `YYYY-MM-DD` text whether or not the file quotes it: Eleventy reads YAML data files with js-yaml's JSON schema (`readYamlData()` in `eleventy/config/data-extensions.js`), which never makes a Date.
 
 If an older unquoted UTC-midnight timestamp already published on the previous LA day, keep that live URL: rename the filename, `date`, and OG basename to the published day. Do not 301 away from it.
 

@@ -14,7 +14,10 @@
 const { test } = require('node:test');
 const assert = require('node:assert');
 const { DateTime } = require('luxon');
+const fs = require('fs');
+const path = require('path');
 const { mergePostsAndLinks, newestLinks, linkDate } = require('../../eleventy/utils/merge-posts-links');
+const { readYamlData } = require('../../eleventy/config/data-extensions');
 
 const post = (day) => ({ url: `/post/${day}/`, data: { date: day } });
 /** The same post with its date already a Date, as some callers pass it. */
@@ -210,48 +213,55 @@ test('a limit larger than the file gives every link, and no links gives none', (
   assert.deepStrictEqual(newestLinks({}, 20), []);
 });
 
-// Eleventy reads links.yaml with js-yaml's default schema, which turns each
-// date key into a Date and then into a long string such as
-// "Tue Mar 10 2026 …". The feed must read those as it reads YYYY-MM-DD.
-test('the feed reads date keys in the form Eleventy hands them over', () => {
-  const links = {
-    [String(new Date('2026-03-01'))]: [link('old')],
-    [String(new Date('2026-03-10'))]: [link('new')],
-  };
+// Eleventy reads links.yaml through readYamlData(). Until 2026-11-15 it used
+// js-yaml's default schema, which turned an unquoted date key into a Date and
+// then into a long string such as "Tue Mar 10 2026 …", printed in the build
+// machine's time zone. The key must stay the text the file has.
+test('Eleventy hands over an unquoted date key as YYYY-MM-DD text', () => {
+  const links = readYamlData('2026-03-01:\n  - url: https://example.com/old\n    title: old\n"2026-03-10":\n  - url: https://example.com/new\n    title: new\n');
+  assert.deepStrictEqual(Object.keys(links), ['2026-03-01', '2026-03-10']);
   const feed = newestLinks(links, 1);
   assert.deepStrictEqual(feed.map((item) => item.data.title), ['new']);
   assert.strictEqual(feed[0].date.toISOString(), '2026-03-10T07:00:00.000Z'); // midnight PDT
 });
 
+test('every key of the real links.yaml reaches the merge as a date it can read', () => {
+  const file = path.join(__dirname, '..', '..', 'src', '_data', 'links.yaml');
+  const keys = Object.keys(readYamlData(fs.readFileSync(file, 'utf8')));
+  assert.ok(keys.length > 50, `expected the real file's keys, got ${keys.length}`);
+  for (const key of keys) {
+    assert.match(key, /^\d{4}-\d{2}-\d{2}$/);
+    assert.strictEqual(linkDate(key).toISOString().slice(0, 4), key.slice(0, 4));
+  }
+});
+
+// A data file never gets a Date from YAML, whatever it holds.
+test('a YAML data file gives text for a date, never a Date', () => {
+  const data = readYamlData('when: 2026-03-10\nstamp: 2026-03-10T08:00:00Z\ncount: 3\non: true\n');
+  assert.deepStrictEqual(data, { when: '2026-03-10', stamp: '2026-03-10T08:00:00Z', count: 3, on: true });
+});
+
 // Until 2026-11-13 a link's date was midnight UTC, which is 4 or 5 pm the day
 // before in Pacific time. The links feed and the /page/N/ titles format dates
 // in Pacific time, so each link showed a day early.
-test('a link date key is midnight Pacific on its day, in either form', () => {
+test('a link date key is midnight Pacific on its day', () => {
   assert.strictEqual(linkDate('2026-03-10').toISOString(), '2026-03-10T07:00:00.000Z'); // PDT
   assert.strictEqual(linkDate('2026-01-15').toISOString(), '2026-01-15T08:00:00.000Z'); // PST
-  // The long form names midnight UTC on the keyed day, printed in the build
-  // machine's zone: the same key on machines in Tokyo, Honolulu, and Denver.
-  for (const key of [
-    String(new Date('2026-03-10')),
-    'Tue Mar 10 2026 09:00:00 GMT+0900 (Japan Standard Time)',
-    'Mon Mar 09 2026 14:00:00 GMT-1000 (Hawaii-Aleutian Standard Time)',
-    'Mon Mar 09 2026 18:00:00 GMT-0600 (Mountain Daylight Time)',
-  ]) {
-    assert.strictEqual(linkDate(key).toISOString(), '2026-03-10T07:00:00.000Z', key);
-  }
 });
 
 test('a link date reads back as its own day in Pacific time, all year', () => {
   const { formatPostDateAttr } = require('../../eleventy/utils/date-utils');
   for (const day of ['2026-01-01', '2026-03-08', '2026-03-09', '2026-07-04', '2026-11-01', '2026-11-02', '2026-12-31']) {
     assert.strictEqual(formatPostDateAttr(linkDate(day)), day);
-    assert.strictEqual(formatPostDateAttr(linkDate(String(new Date(day)))), day);
   }
 });
 
 test('a key that is not a date is refused by name', () => {
   assert.throws(() => linkDate('someday'), /"someday" is not a date/);
   assert.throws(() => newestLinks({ '2026-13-45': [link('a')] }, 5), /2026-13-45/);
+  // The long string a Date key turns into is refused too: its day depends on
+  // the zone of the machine that printed it.
+  assert.throws(() => linkDate(String(new Date('2026-03-10'))), /is not a date/);
 });
 
 // A post written at 8:30 pm Pacific on the 9th is later than midnight UTC on
