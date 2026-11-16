@@ -3,10 +3,11 @@
 /**
  * Unit tests for what a production build leaves out: drafts of any kind, and
  * posts dated after today (held). Covers the rule itself
- * (eleventy/utils/publish-state.js), the list the build prints
+ * (eleventy/utils/publish-state.js), the lines the build prints
  * (scripts/utils/unpublished.js), draft wisdom entries
  * (eleventy/utils/wisdom-build.js), and a real Eleventy build of a scratch
- * site with the site's own preprocessor, in production mode and in dev mode.
+ * site with the site's own preprocessor, in production mode and in dev mode:
+ * the pages it makes and the lines it prints for the ones it leaves out.
  */
 
 const { test } = require('node:test');
@@ -17,7 +18,7 @@ const path = require('path');
 const { spawnSync } = require('child_process');
 const { publishState } = require('../../eleventy/utils/publish-state');
 const { buildWisdom } = require('../../eleventy/utils/wisdom-build');
-const { listUnpublished, formatUnpublished } = require('../utils/unpublished');
+const { listWisdomDrafts, formatUnpublished } = require('../utils/unpublished');
 
 const REPO = path.join(__dirname, '..', '..');
 
@@ -94,18 +95,9 @@ test('a draft wisdom entry is left out of a production build and kept on the dev
   }
 });
 
-test('the build names every draft and held post, and nothing that is live', (t) => {
-  const src = scratch(t, {
-    'posts/2026/2026-11-01-live.md': page(['title: Live post', 'tags: post', 'date: "2026-11-01"']),
-    'posts/2026/2026-11-20-held.md': page(['title: Held post', 'tags: post', 'date: "2026-11-20"']),
-    'posts/2026/2026-12-25-later.md': page(['title: Later post', 'tags: post', 'date: "2026-12-25"']),
-    'posts/2026/2026-11-05-draft.md': page(['title: Draft post', 'tags: post', 'date: "2026-11-05"', 'draft: true']),
-    'portfolio/2026-11-02-piece.md': page(['title: Draft piece', 'tags: portfolio', 'date: "2030-01-01"', 'draft: true']),
-    'portfolio/2030-01-01-future-piece.md': page(['title: Future piece', 'tags: portfolio', 'date: "2030-01-01"']),
-    'sides/thing.md': page(['title: Draft side project', 'draft: true']),
-    'about.md': page(['title: About', 'date: "2020-01-01"']),
-    '_includes/partial.md': page(['title: Not a page', 'draft: true']),
-    '_data/wisdom-entries.yaml': [
+test('the lines name held posts first, by day, then drafts, and wisdom drafts by their first words', (t) => {
+  const root = scratch(t, {
+    'wisdom-entries.yaml': [
       'entries:',
       '  - added: "2026-11-01"',
       '    tags: [craft]',
@@ -118,30 +110,27 @@ test('the build names every draft and held post, and nothing that is live', (t) 
       '',
     ].join('\n'),
   });
-
-  const lines = formatUnpublished(listUnpublished({ srcDir: src, now: NOW }));
-  const rel = (name) => path.join(src, name);
-  assert.deepStrictEqual(lines, [
-    `⏳ Held until 2026-11-20: Held post (${rel('posts/2026/2026-11-20-held.md')})`,
-    `⏳ Held until 2026-12-25: Later post (${rel('posts/2026/2026-12-25-later.md')})`,
-    `✏️  Draft, not published: Draft piece (${rel('portfolio/2026-11-02-piece.md')})`,
-    `✏️  Draft, not published: Draft post (${rel('posts/2026/2026-11-05-draft.md')})`,
-    `✏️  Draft, not published: Draft side project (${rel('sides/thing.md')})`,
-    `✏️  Draft, not published: Wisdom: A draft thought that runs on for rather longer than sixty… (${rel('_data/wisdom-entries.yaml')})`,
+  const wisdomFile = path.join(root, 'wisdom-entries.yaml');
+  const lines = formatUnpublished([
+    { state: 'draft', title: 'Draft piece', file: 'src/portfolio/piece.md' },
+    { state: 'held', until: '2026-12-25', title: 'Later post', file: 'src/posts/later.md' },
+    { state: 'held', until: '2026-11-20', title: 'Held post', file: 'src/posts/held.md' },
+    ...listWisdomDrafts(wisdomFile),
   ]);
-});
-
-test('a site with nothing held or in draft prints no lines', (t) => {
-  const src = scratch(t, {
-    'posts/2026/2026-11-01-live.md': page(['title: Live post', 'tags: post', 'date: "2026-11-01"']),
-  });
-  assert.deepStrictEqual(formatUnpublished(listUnpublished({ srcDir: src, now: NOW })), []);
+  assert.deepStrictEqual(lines, [
+    '⏳ Held until 2026-11-20: Held post (src/posts/held.md)',
+    '⏳ Held until 2026-12-25: Later post (src/posts/later.md)',
+    '✏️  Draft, not published: Draft piece (src/portfolio/piece.md)',
+    `✏️  Draft, not published: Wisdom: A draft thought that runs on for rather longer than sixty… (${wisdomFile})`,
+  ]);
+  assert.deepStrictEqual(formatUnpublished([]), []);
+  assert.deepStrictEqual(listWisdomDrafts(path.join(root, 'no-such-file.yaml')), []);
 });
 
 // The rule above only matters if Eleventy obeys it. Build a scratch site with
 // the site's own preprocessor and date parsing, without writing any output,
-// and list the pages Eleventy would make.
-function builtUrls(root, runMode) {
+// and list the pages Eleventy would make and the lines it prints.
+function build(root, runMode) {
   const script = `
     const { default: Eleventy } = await import('@11ty/eleventy');
     const elev = new Eleventy(${JSON.stringify(path.join(root, 'src'))}, ${JSON.stringify(path.join(root, '_site'))}, {
@@ -150,14 +139,17 @@ function builtUrls(root, runMode) {
       quietMode: true,
     });
     const pages = await elev.toJSON();
-    process.stdout.write(JSON.stringify(pages.map((p) => p.url).sort()));
+    console.log('URLS ' + JSON.stringify(pages.map((p) => p.url).sort()));
   `;
   const env = { ...process.env };
   delete env.NODE_TEST_CONTEXT;
   delete env.ELEVENTY_RUN_MODE;
   const run = spawnSync(process.execPath, ['--input-type=module', '-e', script], { cwd: REPO, env, encoding: 'utf8' });
   assert.strictEqual(run.status, 0, run.stderr);
-  return JSON.parse(run.stdout);
+  const printed = run.stdout.split('\n').filter(Boolean);
+  const last = printed.pop();
+  assert.ok(last.startsWith('URLS '), run.stdout);
+  return { urls: JSON.parse(last.slice(5)), lines: printed };
 }
 
 test('Eleventy leaves drafts and held posts out of a production build and shows them in dev', (t) => {
@@ -176,10 +168,35 @@ test('Eleventy leaves drafts and held posts out of a production build and shows 
     'src/draft.md': page(['title: Draft', 'tags: post', 'date: "2020-01-02"', 'draft: true', 'permalink: /draft/']),
     'src/draft-page.md': page(['title: Draft page', 'draft: true', 'permalink: /draft-page/']),
     'src/future-page.md': page(['title: Future page', 'date: "2999-01-01"', 'permalink: /future-page/']),
+    // Drafts that aren't Markdown. Until 2026-11-15 the lines came from a
+    // separate walk of src/ that read only .md files, so these were left out
+    // of the build and named nowhere.
+    'src/draft-template.njk': page(['title: Draft template', 'draft: true', 'permalink: /draft-template/']),
+    'src/draft-html.html': page(['draft: true', 'permalink: /draft-html/']),
+    'src/_includes/partial.md': page(['title: Not a page', 'draft: true']),
+    'src/_data/wisdom-entries.yaml': 'entries:\n  - added: "2026-11-02"\n    tags: [craft]\n    draft: true\n    body: A draft thought.\n',
   });
 
-  assert.deepStrictEqual(builtUrls(root, 'build'), ['/future-page/', '/live/']);
-  assert.deepStrictEqual(builtUrls(root, 'serve'), ['/draft-page/', '/draft/', '/future-page/', '/held/', '/live/']);
+  const production = build(root, 'build');
+  assert.deepStrictEqual(production.urls, ['/future-page/', '/live/']);
+  // Every page left out is named, and nothing that is live. A page with no
+  // title is named by its file. Eleventy gives a page's path from the folder
+  // it was started in, which is the repo here.
+  const src = path.relative(REPO, path.join(root, 'src'));
+  assert.deepStrictEqual(production.lines, [
+    `⏳ Held until 2999-01-01: Held (${path.join(src, 'held.md')})`,
+    `✏️  Draft, not published: draft-html.html (${path.join(src, 'draft-html.html')})`,
+    `✏️  Draft, not published: Draft page (${path.join(src, 'draft-page.md')})`,
+    `✏️  Draft, not published: Draft template (${path.join(src, 'draft-template.njk')})`,
+    `✏️  Draft, not published: Draft (${path.join(src, 'draft.md')})`,
+    `✏️  Draft, not published: Wisdom: A draft thought. (${path.join(root, 'src', '_data', 'wisdom-entries.yaml')})`,
+  ]);
+
+  const dev = build(root, 'serve');
+  assert.deepStrictEqual(dev.urls, [
+    '/draft-html/', '/draft-page/', '/draft-template/', '/draft/', '/future-page/', '/held/', '/live/',
+  ]);
+  assert.deepStrictEqual(dev.lines, [], 'the dev server leaves nothing out, so it names nothing');
 });
 
 // OG cards: a held post gets no card until its day, as a draft gets none.

@@ -1,28 +1,17 @@
 /**
  * What a production build leaves out: drafts (posts, portfolio pieces, side
  * projects, pages, and wisdom entries) and posts held for a later day.
- * scripts/build/build.js prints one line for each, so a forgotten
- * `draft: true` or a mistyped year is seen at every build and deploy.
+ * The build prints one line for each, so a forgotten `draft: true` or a
+ * mistyped year is seen at every build and deploy.
+ *
+ * Pages come from Eleventy itself: the preprocessor in
+ * eleventy/config/preprocessors.js notes each template it leaves out, in any
+ * format, and prints these lines when the build ends. Wisdom entries aren't
+ * templates, so their drafts are read from the YAML file here.
  */
 
 const fs = require('fs');
-const path = require('path');
 const yaml = require('js-yaml');
-const { parseFrontMatter } = require('./frontmatter-utils');
-const { publishState } = require('../../eleventy/utils/publish-state');
-
-// Folders under src/ that hold no pages.
-const SKIPPED_FOLDERS = new Set(['_includes', '_data', 'assets']);
-
-function markdownFiles(dir) {
-  return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
-    const full = path.join(dir, entry.name);
-    if (entry.isDirectory()) {
-      return SKIPPED_FOLDERS.has(entry.name) ? [] : markdownFiles(full);
-    }
-    return entry.name.endsWith('.md') ? [full] : [];
-  });
-}
 
 /** The first few words of a wisdom entry, to name it by. */
 function wisdomLabel(entry) {
@@ -31,37 +20,24 @@ function wisdomLabel(entry) {
 }
 
 /**
- * @param {object} [options]
- * @param {string} [options.srcDir] - The site's source folder
- * @param {Date} [options.now] - The instant to take today from
- * @returns {{ state: 'draft'|'held', until?: string, title: string, file: string }[]}
+ * @param {string} wisdomFile - Path to wisdom-entries.yaml; a missing file gives none
+ * @returns {{ state: 'draft', title: string, file: string }[]}
  */
-function listUnpublished({ srcDir = 'src', now = new Date() } = {}) {
-  const items = [];
-
-  for (const file of markdownFiles(srcDir).sort()) {
-    const { frontMatter } = parseFrontMatter(fs.readFileSync(file, 'utf8'));
-    if (!frontMatter) continue;
-    const { state, until } = publishState(frontMatter, now);
-    if (state !== 'live') {
-      items.push({ state, until, title: String(frontMatter.title || path.basename(file)), file });
-    }
-  }
-
-  const wisdomFile = path.join(srcDir, '_data', 'wisdom-entries.yaml');
-  if (fs.existsSync(wisdomFile)) {
-    const root = yaml.load(fs.readFileSync(wisdomFile, 'utf8'));
-    for (const entry of (root && root.entries) || []) {
-      if (entry && entry.draft) {
-        items.push({ state: 'draft', title: `Wisdom: ${wisdomLabel(entry)}`, file: wisdomFile });
-      }
-    }
-  }
-
-  return items;
+function listWisdomDrafts(wisdomFile) {
+  if (!fs.existsSync(wisdomFile)) return [];
+  const root = yaml.load(fs.readFileSync(wisdomFile, 'utf8'));
+  return ((root && root.entries) || [])
+    .filter((entry) => entry && entry.draft)
+    .map((entry) => ({ state: 'draft', title: `Wisdom: ${wisdomLabel(entry)}`, file: wisdomFile }));
 }
 
-/** One line for each item, held posts first. An empty list gives no lines. */
+/**
+ * One line for each item: held posts first, by day, then drafts in the order
+ * given. An empty list gives no lines.
+ *
+ * @param {{ state: 'draft'|'held', until?: string, title: string, file: string }[]} items
+ * @returns {string[]}
+ */
 function formatUnpublished(items) {
   const held = items.filter((item) => item.state === 'held').sort((a, b) => a.until.localeCompare(b.until));
   const drafts = items.filter((item) => item.state === 'draft');
@@ -71,4 +47,4 @@ function formatUnpublished(items) {
   ];
 }
 
-module.exports = { listUnpublished, formatUnpublished };
+module.exports = { listWisdomDrafts, formatUnpublished };

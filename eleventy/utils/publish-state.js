@@ -1,9 +1,8 @@
 /**
  * Utility: is this page published, a draft, or held for a later day?
  *
- * One rule, used by the build (eleventy/config/preprocessors.js) and by the
- * line the build prints for each item it leaves out (scripts/utils/unpublished.js),
- * so the two cannot disagree.
+ * One rule, used by the build (eleventy/config/preprocessors.js), which also
+ * prints a line for each page it leaves out, and by the OG card generator.
  *
  * - draft: front matter has `draft: true`. Any page can be a draft.
  * - held: a post (`tags: post`) whose date is a later Pacific day than today.
