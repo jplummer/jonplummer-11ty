@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-11-17
+
+- Update jonplummer-11ty side page counts: 150 scripts, 52 tests, 838 commits
+
 ## 2026-11-15
 
 - Make no OG card for a post held for a later day
