@@ -1,5 +1,39 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-11-15
+
+- Make no OG card for a post held for a later day
+- Read post and link dates in the home page merge as Pacific days
+- Show both years in a date range that crosses a year
+- Write feed dates in the RFC 822 form RSS asks for
+- Record the dates work as done and keep its two leftovers
+- Read YAML data files without making Dates, and drop an unused filter
+- Name the pages a build leaves out from Eleventy's own preprocessor
+
+## 2026-11-14
+
+- Hold posts dated ahead, and name what each build leaves out
+
+## 2026-11-11
+
+- Pin every post's URL to its filename
+- Add pnpm run new-post to start a post as a dated draft
+- Compare a post's filename with the day its URL will carry
+
+## 2026-11-10
+
+- Require node:test for every unit test
+- Fail a unit test file that fails outside its tests
+- Bring `ideas.md` up to date after the node:test move
+- Tighten the unit test wiring after the review
+- Remove code and files that nothing uses
+- Remove .cursor-workspace, which the last commit left tracked
+- Make the NotePlan link import testable, and test it
+- Stop the NotePlan import from losing or damaging links
+- Test where each link lands among the posts
+- Keep each feed to its newest few items
+- Let a short link point at any valid address
+
 ## 2026-11-09
 
 - Add the Concept Sprint path figure
@@ -13,6 +47,12 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 - Keep test names, descriptions, and emoji in the manifest
 - Mark a crashed test as failed in the runner's output
 - Add a read-only smoke check for the live site
+- Note two deploy oddities for later cleanup
+- Record where the cleanup differed from its plan
+- Plan the move of unit tests to node:test
+- Report unit tests with real counts through a node:test reporter
+- Run assert-style unit tests with node:test
+- Move the remaining unit tests to node:test
 
 ## 2026-11-08
 
@@ -1035,4 +1075,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-11-10
+Last deployed on 2026-11-17
