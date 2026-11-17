@@ -14,7 +14,7 @@ ogImage: /assets/images/og/v2/sides-jonplummer-11ty.png
 
 This one is the site you're reading now. [Eleventy](https://www.11ty.dev/), [Nunjucks](https://mozilla.github.io/nunjucks/), markdown files in git, [`rsync`ed](https://rsync.samba.org/) to a plain host. Nothing renders on demand, and nearly nothing needs JavaScript to work, so it is lightning-fast.
 
-That part is unremarkable – there are thousands of Eleventy blogs. What makes this a project rather than a configuration is everything around the build: 95 scripts, 34 tests, and a deploy pipeline that regenerates a changelog, purges a CDN, and notifies search engines of what's new and changed. I've made six hundred-ish commits in the year since I started, against a corpus of 192 posts and 32 portfolio pieces. Yes, that means a lot of effort is going into things behind the scenes, but I think it's helping me make a more solid and consistent site and avoid dumb mistakes.
+That part is unremarkable – there are thousands of Eleventy blogs. What makes this a project rather than a configuration is everything around the build: 150 scripts, 52 tests, and a deploy pipeline that regenerates a changelog, purges a CDN, and notifies search engines of what's new and changed. I've made 838 commits since I started in August 2025, against a corpus of 194 posts and 35 portfolio pieces. Yes, that means a lot of effort is going into things behind the scenes, but I think it's helping me make a more solid and consistent site and avoid dumb mistakes.
 
 ## Why this, why now
 
@@ -22,9 +22,9 @@ The site was originally on [WordPress](https://wordpress.org/). Even with a stat
 
 ## A lot of the tests look at authoring
 
-Nineteen of the 34 tests check authored content and built output rather than program behavior. They catch things I regularly get wrong, such as: a description with unescaped characters that break the YAML; a link to `/colophon` without the trailing slash [Apache](https://httpd.apache.org/) would 301; a page with no `og:image`; a skipped heading level. Spelling is in there too, though [cspell](https://cspell.org/) only ever warns – it finds proper nouns it doesn't know far more often than it finds typos, so blocking the build on it would train me to ignore it.
+Twenty-three of the 52 tests check authored content and built output rather than program behavior. They catch things I regularly get wrong, such as: a description with unescaped characters that break the YAML; a link to `/colophon` without the trailing slash [Apache](https://httpd.apache.org/) would 301; a page with no `og:image`; a skipped heading level. Spelling is in there too, though [cspell](https://cspell.org/) only ever warns – it finds proper nouns it doesn't know far more often than it finds typos, so blocking the build on it would train me to ignore it.
 
-Another twelve are ordinary unit tests of the tooling itself. If I add functionality I add tests. The remaining three need a browser, a network, or credentials, and run on demand.
+Another 26 are ordinary unit tests of the tooling itself. If I add functionality I add tests. The remaining three need a browser, a network, or credentials, and run on demand.
 
 The tests also mean I don't have to remember to do things – if I slip up, it'll be caught. A few of the tests are worth pointing out because each came from a mistake I made more than once.
 
@@ -66,10 +66,10 @@ src/            posts (posts/), portfolio pieces (portfolio/), pages,
 eleventy/       config and utils – filters, shortcodes, collections, image handling
 scripts/
   build/        the ordered build: source checks, OG images, Eleventy, output checks
-  test/         33 of the 34 test scripts, wired up through a single manifest
+  test/         51 of the 52 test scripts, wired up through a single manifest
   deploy/       rsync, Cloudflare purge, IndexNow, changelog commit
   content/      OG image generation, PDF and deck conversion, NotePlan link import
-  security/     the audit, and the 34th test script
+  security/     the audit, and the 52nd test script
   color-explore/  the APCA gallery generator behind /color/
   font-explore/   the type lab generator behind /type/
   focus-audit/    keyboard and focus sweep, EARL output, run on demand
