@@ -374,7 +374,7 @@ function main() {
     process.exit(0);
   }
 
-  console.log(`📝 Found ${parsedLinks.length} link(s) to import\n`);
+  console.log(`📝 Found ${parsedLinks.length} link(s)\n`);
 
   // Read existing links.yaml
   if (!fs.existsSync(LINKS_YAML_PATH)) {
@@ -417,7 +417,7 @@ function main() {
       return;
     }
     fs.writeFileSync(notePath, tidy.content, 'utf8');
-    console.log(`✅ Took ${tidy.removed} published link(s) out of the NotePlan note; ${tidy.kept} line(s) left to do\n`);
+    console.log(`✅ Took ${tidy.removed} published link(s) out of the NotePlan note; ${tidy.kept} line(s) remain\n`);
   };
 
   // Only write if there are changes

@@ -275,7 +275,7 @@ $ pnpm run import-links
 
 ✅ Found note: Links to import.md
 
-📝 Found 3 link(s) to import
+📝 Found 3 link(s)
 
    1. Time's Up, Babycakes – Blair Enns
       URL: https://www.winwithoutpitching.com/times-up-babycakes/
