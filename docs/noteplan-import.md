@@ -119,9 +119,9 @@ These are automatically quoted:
 pnpm run import-links --clear
 ```
 
-Clears the NotePlan note after successful import (leaves just the heading).
+Takes every published link out of the NotePlan note: the ones just imported, and any older line whose address is already in `links.yaml`. `links.yaml` is the record of what was published, so the note only needs to hold what is left to do.
 
-The note is not cleared when it holds a line with a web address that wasn't imported, such as a link with no bullet, a numbered item, or a bare URL. The import prints each such line with its line number and keeps the note, so nothing you captured is thrown away. Fix the lines and import again; the links already imported are skipped as duplicates.
+Everything else stays where it is: the heading, a link still waiting for its description, a line with a web address that couldn't be read (a link with no bullet, a numbered item, a bare URL), and anything else you wrote there. Nothing you captured is thrown away. The note is tidied only after `links.yaml` has been written, and it is left alone if it changed while the import ran, as it can when NotePlan syncs a link from your phone.
 
 ### Use Specific Date
 

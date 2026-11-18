@@ -19,6 +19,7 @@ const {
   addLinksToData,
   hasDescription,
   formatLinksYaml,
+  noteWithoutPublished,
   readNote,
   resolveTargetDate,
 } = require('../content/import-noteplan-links');
@@ -148,6 +149,64 @@ test('a description needs a letter or a digit', () => {
 test('a bare line from the share sheet reads as a link with no description', () => {
   const { links } = readNote('# Links to import\n* [Shared page](https://example.com/shared)\n* [Shared page two](https://example.com/two) –\n');
   assert.deepStrictEqual(links.map(hasDescription), [false, false]);
+});
+
+// --clear. Until 2026-11-18 it emptied the whole note or, with one line it
+// couldn't read, did nothing. It now takes out what is published and keeps
+// what is left to do, so the note is an inbox and links.yaml is the record.
+test('--clear takes published links out of the note and keeps everything else', () => {
+  const note = [
+    '# Links to import',
+    '* [Published](https://example.com/published) Worth a read.',
+    '* [Waiting](https://example.com/waiting)',
+    '',
+    'A thought to come back to.',
+    '- [Published too](https://example.com/published-too)',
+    '[No bullet](https://example.com/no-bullet) not read, so kept',
+    '* [Never closed](https://example.com/published',
+    '',
+  ].join('\n');
+  const data = {
+    '2026-01-01': [
+      { url: 'https://example.com/published', title: 'Published' },
+      { url: 'https://example.com/published-too', title: 'Published too' },
+    ],
+  };
+  const tidy = noteWithoutPublished(note, data);
+  assert.strictEqual(tidy.content, [
+    '# Links to import',
+    '* [Waiting](https://example.com/waiting)',
+    '',
+    'A thought to come back to.',
+    '[No bullet](https://example.com/no-bullet) not read, so kept',
+    '* [Never closed](https://example.com/published',
+    '',
+  ].join('\n'));
+  assert.strictEqual(tidy.removed, 2);
+  assert.strictEqual(tidy.kept, 4);
+});
+
+test('--clear leaves a note of only published links with its heading and a line to type on', () => {
+  const data = { '2026-01-01': [{ url: 'https://example.com/a', title: 'A' }] };
+  const tidy = noteWithoutPublished('# Links to import\n* [A](https://example.com/a) note\n\n', data);
+  assert.deepStrictEqual(tidy, { content: '# Links to import\n\n', removed: 1, kept: 0 });
+});
+
+test('--clear changes nothing in a note with nothing published', () => {
+  const note = '# Links to import\n* [Waiting](https://example.com/waiting)\n';
+  assert.deepStrictEqual(noteWithoutPublished(note, {}), { content: note, removed: 0, kept: 1 });
+});
+
+// What an import does and what --clear removes must agree: after the import,
+// every link the note still holds is one that was held back.
+test('after an import, --clear leaves exactly the links that were held back', () => {
+  const note = '# Links to import\n* [Said](https://example.com/said) Worth a read.\n* [Bare](https://example.com/bare)\n* [Old](https://example.com/old)\n';
+  const data = { '2026-01-01': [{ url: 'https://example.com/old', title: 'Old' }] };
+  const { links } = readNote(note);
+  const results = addLinksToData(data, '2026-01-05', links);
+  const left = readNote(noteWithoutPublished(note, data).content).links;
+  assert.deepStrictEqual(left, results.waiting);
+  assert.deepStrictEqual(left.map((link) => link.url), ['https://example.com/bare']);
 });
 
 test('new links join the end of a date that already has links', () => {

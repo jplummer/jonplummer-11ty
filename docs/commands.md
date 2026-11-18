@@ -53,7 +53,7 @@ Recommended process for deploying changes with an up-to-date changelog:
 
 - `pnpm run new-post "Working title"` - Start a post as a draft in `src/posts/<year>/`, dated today (Pacific). See [authoring.md § Starting and publishing a post](authoring.md#starting-and-publishing-a-post)
 - `pnpm run import-links` - Import links from NotePlan to links.yaml (auto: `deploy`)
-- `pnpm run import-links --clear` - Import and clear NotePlan note
+- `pnpm run import-links --clear` - Import, then take every published link out of the NotePlan note. Links waiting for a description and lines it couldn't read stay
 - `pnpm run import-links --date=2025-12-25` - Import with specific date
 - `pnpm run shortlink get|find|add|qr` - Permanent QR/print short links (`src/_data/shortlinks.yaml` → `.htaccess` 302s). Prefer `find` before `add`. See [authoring.md § Short links](authoring.md#short-links-qr--print).
 

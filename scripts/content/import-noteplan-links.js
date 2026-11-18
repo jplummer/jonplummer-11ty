@@ -7,7 +7,7 @@
  * 
  * Usage:
  *   pnpm run import-links
- *   pnpm run import-links --clear            (clears the note after importing)
+ *   pnpm run import-links --clear            (takes published links out of the note)
  *   pnpm run import-links --date=2025-01-21  (that date instead of today's)
  *
  * A link with no description is not imported. It stays in the note and is
@@ -135,7 +135,7 @@ function parseLink(line) {
  * Read a NotePlan note: the links on its bulleted lines, plus every other
  * line that holds a web address and so looks like a link that was meant to be
  * imported (no bullet, a numbered item, a bare URL, a link that never closes).
- * main() prints those and won't clear the note while there are any.
+ * main() prints those, and --clear keeps them in the note.
  * @returns {{ links: object[], unread: { number: number, text: string }[] }}
  */
 function readNote(content) {
@@ -299,11 +299,32 @@ function formatLinksYaml(data) {
 }
 
 /**
- * Clear the NotePlan note content
+ * The note with every published link taken out, for --clear: a bulleted link
+ * whose URL is in links.yaml is dropped, and every other line is kept as it
+ * stands. So the heading stays, and so does a link still waiting for its
+ * description, a line that couldn't be read, and anything else written
+ * there. What is left is what there is still to do.
+ *
+ * @param {string} content - The note's text
+ * @param {object} data - links.yaml as data, after the import
+ * @returns {{ content: string, removed: number, kept: number }} `kept`
+ *   counts the lines left that aren't blank or a heading
  */
-function clearNote(notePath) {
-  const header = '# Links to import\n\n';
-  fs.writeFileSync(notePath, header, 'utf8');
+function noteWithoutPublished(content, data) {
+  let removed = 0;
+  const lines = content.split('\n').filter((line) => {
+    const trimmed = line.trim();
+    const link = /^[*\-•]/.test(trimmed) ? parseLink(trimmed) : null;
+    if (link && urlExists(data, link.url).exists) {
+      removed++;
+      return false;
+    }
+    return true;
+  });
+  const kept = lines.filter((line) => line.trim() && !line.trim().startsWith('#')).length;
+  // A note left with only its heading gets a blank line to type on.
+  const text = lines.join('\n').replace(/\n*$/, kept === 0 ? '\n\n' : '\n');
+  return { content: text, removed, kept };
 }
 
 // Runs only as a command. Requiring this file (scripts/test/noteplan-import.js
@@ -384,6 +405,21 @@ function main() {
     console.log('   Each stays in the note. Write its description after the link and import again.\n');
   };
 
+  // --clear: take every published link out of the note. Called only after
+  // links.yaml holds them. If the note changed while this ran (NotePlan
+  // syncing a link from the phone), it is left alone and the next run tidies.
+  const tidyNote = () => {
+    if (!shouldClear) return;
+    const tidy = noteWithoutPublished(noteContent, linksData);
+    if (tidy.removed === 0) return;
+    if (fs.readFileSync(notePath, 'utf8') !== noteContent) {
+      console.log('⚠️  The NotePlan note changed during the import, so it was not tidied. Run the import again.\n');
+      return;
+    }
+    fs.writeFileSync(notePath, tidy.content, 'utf8');
+    console.log(`✅ Took ${tidy.removed} published link(s) out of the NotePlan note; ${tidy.kept} line(s) left to do\n`);
+  };
+
   // Only write if there are changes
   if (results.added.length > 0) {
     // Format and write back
@@ -402,15 +438,7 @@ function main() {
     reportWaiting();
     reportUnread();
 
-    // Clear note if requested, unless that would throw away a line we couldn't
-    // read or a link still waiting for its description
-    if (shouldClear && (unread.length > 0 || results.waiting.length > 0)) {
-      console.log('⚠️  Did not clear the NotePlan note, so those lines are kept. Fix them and import again;');
-      console.log('   the links imported just now will be skipped as duplicates.\n');
-    } else if (shouldClear) {
-      clearNote(notePath);
-      console.log('✅ Cleared NotePlan note\n');
-    }
+    tidyNote();
 
     console.log('Next steps:');
     console.log('  1. pnpm run test links  (validate)');
@@ -421,6 +449,7 @@ function main() {
     console.log(`ℹ️  No new links to import. Skipped ${results.skipped.length} duplicate(s).\n`);
     reportWaiting();
     reportUnread();
+    tidyNote();
     process.exit(0);
   }
 }
@@ -441,4 +470,5 @@ module.exports = {
   addLinksToData,
   formatLinkYaml,
   formatLinksYaml,
+  noteWithoutPublished,
 };
