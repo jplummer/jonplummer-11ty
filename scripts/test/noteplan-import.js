@@ -17,6 +17,7 @@ const {
   parseNotePlanNote,
   parseLinksYaml,
   addLinksToData,
+  hasDescription,
   formatLinksYaml,
   readNote,
   resolveTargetDate,
@@ -73,7 +74,7 @@ test('a URL already in the file is skipped, under any date', () => {
   const data = { '2026-01-01': [{ url: 'https://example.com/old', title: 'Old' }] };
   const results = addLinksToData(data, '2026-01-05', [
     { url: 'https://example.com/old', title: 'Old again' },
-    { url: 'https://example.com/new', title: 'New' },
+    { url: 'https://example.com/new', title: 'New', description: 'Worth a read.' },
   ]);
   assert.deepStrictEqual(results.added.map((link) => link.url), ['https://example.com/new']);
   assert.deepStrictEqual(
@@ -86,17 +87,72 @@ test('a URL already in the file is skipped, under any date', () => {
 test('the same URL twice in one note is added once', () => {
   const data = {};
   const results = addLinksToData(data, '2026-01-05', [
-    { url: 'https://example.com/a', title: 'A' },
-    { url: 'https://example.com/a', title: 'A again' },
+    { url: 'https://example.com/a', title: 'A', description: 'Worth a read.' },
+    { url: 'https://example.com/a', title: 'A again', description: 'Still worth a read.' },
   ]);
   assert.strictEqual(results.added.length, 1);
   assert.strictEqual(results.skipped.length, 1);
   assert.strictEqual(data['2026-01-05'].length, 1);
 });
 
+// A link shared from the phone arrives as a bare `* [Title](URL)`. Until
+// 2026-11-18 it was imported as it stood, so a link could go out with nothing
+// said about it. It now waits in the note until it has a description.
+test('a new link with no description is left waiting and not added', () => {
+  const data = { '2026-01-01': [{ url: 'https://example.com/old', title: 'Old' }] };
+  const results = addLinksToData(data, '2026-01-05', [
+    { url: 'https://example.com/bare', title: 'Bare' },
+    { url: 'https://example.com/dash', title: 'Dash only', description: '–' },
+    { url: 'https://example.com/said', title: 'Said', description: 'Worth a read.' },
+    // Already published with no description: a duplicate, not a waiting link.
+    { url: 'https://example.com/old', title: 'Old' },
+  ]);
+  assert.deepStrictEqual(results.added.map((link) => link.url), ['https://example.com/said']);
+  assert.deepStrictEqual(results.waiting.map((link) => link.url), ['https://example.com/bare', 'https://example.com/dash']);
+  assert.deepStrictEqual(results.skipped.map(({ link }) => link.url), ['https://example.com/old']);
+  assert.deepStrictEqual(data['2026-01-05'].map((link) => link.url), ['https://example.com/said']);
+});
+
+test('a note of only waiting links adds no date to the file', () => {
+  const data = { '2026-01-01': [{ url: 'https://example.com/old', title: 'Old' }] };
+  const before = formatLinksYaml(data);
+  const results = addLinksToData(data, '2026-01-05', [{ url: 'https://example.com/bare', title: 'Bare' }]);
+  assert.strictEqual(results.added.length, 0);
+  assert.strictEqual(results.waiting.length, 1);
+  assert.strictEqual(formatLinksYaml(data), before);
+});
+
+test('a URL in the note twice, once with a description, is added and not left waiting', () => {
+  for (const order of [[0, 1], [1, 0]]) {
+    const copies = [
+      { url: 'https://example.com/a', title: 'A' },
+      { url: 'https://example.com/a', title: 'A', description: 'Worth a read.' },
+    ];
+    const data = {};
+    const results = addLinksToData(data, '2026-01-05', order.map((i) => copies[i]));
+    assert.deepStrictEqual(data['2026-01-05'], [copies[1]]);
+    assert.deepStrictEqual(results.waiting, []);
+  }
+});
+
+test('a description needs a letter or a digit', () => {
+  for (const description of ['Worth a read.', '"Quoted."', '5/5', 'é']) {
+    assert.strictEqual(hasDescription({ description }), true, description);
+  }
+  for (const description of [undefined, '', '   ', '–', '- ', '"…"']) {
+    assert.strictEqual(hasDescription({ description }), false, String(description));
+  }
+});
+
+// The real note lines as the phone and the desktop leave them.
+test('a bare line from the share sheet reads as a link with no description', () => {
+  const { links } = readNote('# Links to import\n* [Shared page](https://example.com/shared)\n* [Shared page two](https://example.com/two) –\n');
+  assert.deepStrictEqual(links.map(hasDescription), [false, false]);
+});
+
 test('new links join the end of a date that already has links', () => {
   const data = { '2026-01-05': [{ url: 'https://example.com/a', title: 'A' }] };
-  addLinksToData(data, '2026-01-05', [{ url: 'https://example.com/b', title: 'B' }]);
+  addLinksToData(data, '2026-01-05', [{ url: 'https://example.com/b', title: 'B', description: 'Worth a read.' }]);
   assert.deepStrictEqual(
     data['2026-01-05'].map((link) => link.url),
     ['https://example.com/a', 'https://example.com/b']
@@ -132,6 +188,27 @@ test('quotes, colons, and apostrophes survive being written and read back', () =
 // Every import rewrites the whole file through parseLinksYaml and
 // formatLinksYaml. Anything the hand-written parser misreads is lost or
 // changed for every link already published, so the real file is the fixture.
+// A title typed by hand as "[TMA] Roles…" was written back without quotes,
+// which YAML reads as the start of a list: the next import would have left a
+// links.yaml that won't parse. Each of these must survive a write and a read.
+test('a value that starts with a character YAML reads as syntax is quoted', () => {
+  const { formatYamlString } = require('../utils/frontmatter-utils');
+  const values = [
+    '[TMA] Roles Were Always Blurry – Peter Merholz', '{braces} first', '] stray', '} stray', ', comma first',
+    '? question first', '?', '~', '~ish', '.5', '.NET is fine', '+1', '- dash first', '2026 in review',
+    '\\[TMA\\] as NotePlan writes it', 'Plain title – Author',
+  ];
+  for (const value of values) {
+    const read = yaml.load(`title: ${formatYamlString(value)}\n`, { schema: yaml.JSON_SCHEMA });
+    assert.deepStrictEqual(read, { title: value }, value);
+  }
+  const data = { '2026-01-01': values.map((title, i) => ({ url: `https://example.com/${i}`, title, description: title })) };
+  assert.deepStrictEqual(parseLinksYaml(formatLinksYaml(data)), data);
+  // Values that were safe bare stay bare, so no published line is rewritten.
+  assert.strictEqual(formatYamlString('Plain title – Author'), 'Plain title – Author');
+  assert.strictEqual(formatYamlString('\\[TMA\\] as NotePlan writes it'), '\\[TMA\\] as NotePlan writes it');
+});
+
 test('the script reads the real links.yaml the same way a YAML parser does', () => {
   const text = fs.readFileSync(LINKS_YAML, 'utf8');
   const fromYaml = yaml.load(text, { schema: yaml.JSON_SCHEMA });

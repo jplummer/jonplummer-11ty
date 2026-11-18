@@ -14,6 +14,8 @@ Add links in this format:
 * [Another Title](URL) Another description
 ```
 
+Every link needs a description. A new link with nothing after its address is not imported: it stays in the note, and each import names it until you write one. So a link shared from the phone can't go out before you've said why it's there.
+
 **Example:**
 ```markdown
 # Links to import
@@ -138,7 +140,7 @@ Uses the specified date instead of today. Useful for backdating links.
 1. Find interesting article on phone
 2. Share → NotePlan
 3. NotePlan creates link in "Links to import" note
-4. Add description/quote if desired
+4. Add a description or quote, now or later. The link isn't imported until it has one
 5. Continue browsing
 
 ### Weekly/Batch Import (Desktop)
@@ -241,7 +243,7 @@ The import script automatically detects duplicate URLs:
 2. Choose "NotePlan"
 3. Select the "Links to import" note
 4. NotePlan adds: `* [Page Title](URL)`
-5. Optionally add description below
+5. Add the description after the link; the import holds the link back until it's there
 
 **Quick format:**
 - Title is auto-filled from page

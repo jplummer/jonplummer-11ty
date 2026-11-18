@@ -101,10 +101,14 @@ function formatYamlString(value) {
   // - Special YAML characters: :, #, |, >, &, *, !, %, @, `
   // - Quotes (single or double)
   // - Leading/trailing whitespace
-  // - Start with special characters that might be interpreted as YAML syntax
+  // - Start with a character YAML reads as syntax or as a number: a digit or
+  //   dash, a bracket or brace (a list or map), a comma, ? (a key), ~ (null),
+  //   or . and + (".5" and "+1" are numbers). Until 2026-11-18 a value that
+  //   began with [ or { was written bare, which made a file that won't parse.
   const needsQuoting = /[:#|>&*!%@`'"\n\r]/.test(value) || 
                        /^\s|\s$/.test(value) ||
                        /^[0-9-]/.test(value) ||
+                       /^[\[\]{},?~.+]/.test(value) ||
                        value.toLowerCase() === 'true' ||
                        value.toLowerCase() === 'false' ||
                        value.toLowerCase() === 'null' ||

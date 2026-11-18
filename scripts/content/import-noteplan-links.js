@@ -10,6 +10,9 @@
  *   pnpm run import-links --clear            (clears the note after importing)
  *   pnpm run import-links --date=2025-01-21  (that date instead of today's)
  *
+ * A link with no description is not imported. It stays in the note and is
+ * named on every run until it has one.
+ *
  * Unit test: scripts/test/noteplan-import.js
  */
 
@@ -227,28 +230,47 @@ function urlExists(data, url) {
 }
 
 /**
- * Add links to YAML data structure (skips duplicates)
+ * Does the link say anything after its address? A description of only
+ * punctuation, such as a dash typed ahead of a quote not yet pasted, is none.
+ */
+function hasDescription(link) {
+  return /[\p{L}\p{N}]/u.test(String(link.description || ''));
+}
+
+/**
+ * Add links to YAML data structure. A URL already in the file is skipped. A
+ * new link with no description is left waiting: it is not added, so a link
+ * captured on the phone can't go out before its note is written. A link
+ * already in the file is never waiting, whatever its description.
+ *
+ * @returns {{ added: object[], skipped: object[], waiting: object[] }}
  */
 function addLinksToData(data, date, newLinks) {
-  if (!data[date]) {
-    data[date] = [];
-  }
-  
   const results = {
     added: [],
-    skipped: []
+    skipped: [],
+    waiting: []
   };
-  
+
   for (const link of newLinks) {
     const duplicate = urlExists(data, link.url);
     if (duplicate.exists) {
       results.skipped.push({ link, existingDate: duplicate.date });
+    } else if (!hasDescription(link)) {
+      results.waiting.push(link);
     } else {
+      if (!data[date]) {
+        data[date] = [];
+      }
       data[date].push(link);
       results.added.push(link);
     }
   }
-  
+
+  // The same URL twice in a note, once with a description: that copy was
+  // added, so the bare one is not waiting.
+  results.waiting = results.waiting.filter((link) => !urlExists(data, link.url).exists);
+
   return results;
 }
 
@@ -349,8 +371,18 @@ function main() {
     process.exit(1);
   }
 
-  // Add new links (skips duplicates)
+  // Add new links (skips duplicates, leaves links with no description waiting)
   const results = addLinksToData(linksData, targetDate, parsedLinks);
+
+  const reportWaiting = () => {
+    if (results.waiting.length === 0) return;
+    console.log(`⏸️  ${results.waiting.length} link(s) have no description yet, so they were not imported:`);
+    for (const link of results.waiting) {
+      console.log(`   • ${link.title}`);
+      console.log(`     ${link.url}`);
+    }
+    console.log('   Each stays in the note. Write its description after the link and import again.\n');
+  };
 
   // Only write if there are changes
   if (results.added.length > 0) {
@@ -367,10 +399,12 @@ function main() {
       console.log(`\n⚠️  Skipped ${results.skipped.length} duplicate(s).`);
     }
     console.log('');
+    reportWaiting();
     reportUnread();
 
-    // Clear note if requested, unless that would throw away a line we couldn't read
-    if (shouldClear && unread.length > 0) {
+    // Clear note if requested, unless that would throw away a line we couldn't
+    // read or a link still waiting for its description
+    if (shouldClear && (unread.length > 0 || results.waiting.length > 0)) {
       console.log('⚠️  Did not clear the NotePlan note, so those lines are kept. Fix them and import again;');
       console.log('   the links imported just now will be skipped as duplicates.\n');
     } else if (shouldClear) {
@@ -385,6 +419,7 @@ function main() {
     console.log('');
   } else {
     console.log(`ℹ️  No new links to import. Skipped ${results.skipped.length} duplicate(s).\n`);
+    reportWaiting();
     reportUnread();
     process.exit(0);
   }
@@ -402,6 +437,7 @@ module.exports = {
   resolveTargetDate,
   parseLinksYaml,
   urlExists,
+  hasDescription,
   addLinksToData,
   formatLinkYaml,
   formatLinksYaml,
