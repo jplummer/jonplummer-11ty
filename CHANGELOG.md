@@ -1,5 +1,12 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-11-18
+
+- Add links for 2026-11-18
+- Hold back a link with no description, and quote YAML values that start with a bracket
+- Make --clear take published links out of the note and keep what's left to do
+- Reword two import messages
+
 ## 2026-11-17
 
 - Update jonplummer-11ty side page counts: 150 scripts, 52 tests, 838 commits
