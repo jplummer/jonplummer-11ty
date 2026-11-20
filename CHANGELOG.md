@@ -1,5 +1,9 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-11-19
+
+- Own the `robots.txt` rules; allow Google-Extended.
+
 ## 2026-11-18
 
 - Add links for 2026-11-18
@@ -1086,4 +1090,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-11-18
+Last deployed on 2026-11-20
