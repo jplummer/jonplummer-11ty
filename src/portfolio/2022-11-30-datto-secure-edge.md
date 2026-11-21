@@ -32,7 +32,7 @@ If we try to cram all of this startup information onto one light, whoever's look
 
 ## Where hardware meets a login screen
 
-The primary challenge is making an intelligible and straightforward setup workflow that people working from home can accomplish. The device's physical behavior, software experience, quick start guide, user knowledge, and MSP pre-work all need to mesh together to. And the physical and software behavior need to support each other to foster user confidence and understanding during the setup process. If they come apart, user confidence will be dashed, and they will never believe in the system.
+The primary challenge is making an intelligible and straightforward setup workflow that people working from home can accomplish. The device's physical behavior, software experience, quick start guide, user knowledge, and MSP pre-work all need to mesh together. And the physical and software behavior need to support each other to foster user confidence and understanding during the setup process. If they come apart, user confidence will be dashed, and they will never believe in the system.
 
 ![Setup and daily-use workflows, combined](/assets/images/2022/11/datto-workflow-intermediate.png)
 *Simple is often complicated under the hood. But this is because when we make something simple we are taking workload away from the user and putting it into the product. If done well this also reduces the level of knowledge required by the user and reduces opportunities to make mistakes.*
@@ -53,7 +53,7 @@ Later we learned that we couldn't trust the MSP to pre-configure all of the devi
 If the workflow takes decisions off of the user's plate, the underlying software experience can appear simple, but there are still plenty of states to define. In networking there are also plenty of wait states to handle. And, critically, the setup experience, ideally done once, needs to hand off smoothly into the day-to-day experience.
 
 ![Setup wireframes](/assets/images/2022/11/datto-wires-setup.png)
-*There are only a handful of user tasks in setup – if not wired, join a wireless network; authenticate to the corporate network; change to the corporate network and get to work. But each of these has a handful of failure modes. Making the happy path simple and speeds most people through the process. Demonstrating success at the end supports user confidence.*
+*There are only a handful of user tasks in setup – if not wired, join a wireless network; authenticate to the corporate network; change to the corporate network and get to work. But each of these has a handful of failure modes. Making the happy path simple speeds most people through the process. Demonstrating success at the end supports user confidence.*
 
 ![Daily use wireframes](/assets/images/2022/11/datto-wires-daily.png)
 *Visibly linking the hardware and software together reassures users that the system knows what is going on. Using a captive portal to ask for re-authentication prevents users from having to notice a problem and remember what to do about it.*

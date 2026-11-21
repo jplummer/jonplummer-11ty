@@ -33,7 +33,7 @@ Central to these reports is the idea that as a patient takes more fingersticks t
 
 New (and patented) at this time was a report detailing the adherence level of the patient, a key first glance that suggested to the physician how likely the later reports would be helpful.
 
-Patents (of the type we called "amateur endocrinologists" during our research) have also come to love these reports that are aimed at professionals: [https://rollinginthed.wordpress.com/2012/10/11/the-hook-brings-you-back/](https://rollinginthed.wordpress.com/2012/10/11/the-hook-brings-you-back/)
+Patients (of the type we called "amateur endocrinologists" during our research) have also come to love these reports that are aimed at professionals: [https://rollinginthed.wordpress.com/2012/10/11/the-hook-brings-you-back/](https://rollinginthed.wordpress.com/2012/10/11/the-hook-brings-you-back/)
 
 My role: research, collection of live patient data, iterative design and testing of report design alternatives with endocrinologists and other physicians, functional specifications
 

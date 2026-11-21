@@ -7,7 +7,7 @@ coverImage: 2022/10/quick-ux-accomplishments-2022-10-05-page-22.png
 description: Eight-to-ten-minute company-wide presentation summarizing UX team accomplishments for 2022, including demos and an invitation to a conference talk.
 ogImage: /assets/images/og/v2/2022-10-10-cayuse-quick-yearly-accomplishments-presentation.png
 ---
-In early October I was asked to give an eight-to-ten-minute presentation summing up the year for UX. A tall order, but I embraced blazing through the content to alight briefly on things I though the general company audience should know about UX and how we were trying to help.
+In early October I was asked to give an eight-to-ten-minute presentation summing up the year for UX. A tall order, but I embraced blazing through the content to alight briefly on things I thought the general company audience should know about UX and how we were trying to help.
 
 With most of our work going toward rewrites that had not yet launched there was little to say about outcomes, so I followed a rapid tour of our outputs with a couple of quick demos and an invitation to view my upcoming Cayuse Connect Conference talk about [UX philosophy and practice](/portfolio/conference-talk-ux-philosophy/).
 
@@ -18,7 +18,7 @@ With most of our work going toward rewrites that had not yet launched there was 
 *Page 2: The UX team charter holds that our job is to help understand the needs of our customers and users; improve intelligibility, usefulness, usability, and inclusiveness of our products; and to investigate and offer conceptual designs for new needs. Of course these are not solely the UX team’s responsibility; we must work in concert with product management and engineering to accomplish anything. And we’ve done a lot of that over the last year or so.*
 
 ![quick-ux-accomplishments-2022-10-05 page 3](/assets/images/2022/10/quick-ux-accomplishments-2022-10-05-page-3.png)
-*Page 3: In order to make what the charter asks for possible we’ve made a design system and put in place a strategy to recruit research participants. The design system in particular is interesting because it speeds up and makes more consisted the delivery of designs, should help speed up and make more consistent the engineering of those designs, and is a key tool in our fight to continuously improve accessibility.*
+*Page 3: In order to make what the charter asks for possible we’ve made a design system and put in place a strategy to recruit research participants. The design system in particular is interesting because it speeds up and makes more consistent the delivery of designs, should help speed up and make more consistent the engineering of those designs, and is a key tool in our fight to continuously improve accessibility.*
 
 ![quick-ux-accomplishments-2022-10-05 page 4](/assets/images/2022/10/quick-ux-accomplishments-2022-10-05-page-4.png)
 *Page 4: In order to make what the charter asks for possible we’ve effected a bunch of other process changes, in whole or in part. I won’t read all of these as there’s not time, but they have in general to do with incoming user data, measurement, accessibility, design quality, or team decision-making quality.*

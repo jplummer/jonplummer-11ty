@@ -9,7 +9,7 @@ coverZoom: 1.01
 description: "Windows application simulating diabetic patients for education and demonstration, allowing users to experience care from physician or patient perspectives."
 ogImage: /assets/images/og/v2/2013-12-10-minimed-virtual-patient.png
 ---
-As a demonstration and educational tool, and to preview to executives anticipated sensor data analysis capabilities, we made a Windows application that simulated three typical insulin-dependent diabetic patients. One could elect to be the physician, reviewing three days of the patient's recent history and making adjustments  to insulin pump settings to improve their care, or choose to be the patient, selecting meals and insulin dosages over a two day period and seeing how your blood glucose responded to your choices.
+As a demonstration and educational tool, and to preview to executives anticipated sensor data analysis capabilities, we made a Windows application that simulated three typical insulin-dependent diabetic patients. One could elect to be the physician, reviewing three days of the patient's recent history and making adjustments to insulin pump settings to improve their care, or choose to be the patient, selecting meals and insulin dosages over a two day period and seeing how your blood glucose responded to your choices.
 
 ![MiniMed virtual patient application physician mode patient selection](/assets/images/2022/12/choose_patient_hcp_options.png)
 *Physician mode patient selection screen allowing healthcare providers to choose from three simulated diabetic patients and review their care history.*
@@ -18,7 +18,7 @@ As a demonstration and educational tool, and to preview to executives anticipate
 *Physician interface overlay showing additional controls and information available when reviewing patient data in healthcare provider mode.*
 
 ![MiniMed virtual patient application physician view with patient data](/assets/images/2022/12/be_hcp.png)
-*Physician view displaying three days of patient glucose data, insulin doses, and meal markers, allowing adjustments to pump settings to improve care. The three panels – glucose curve, carbohydrates, insulin delivery – share one time axis, so a spike and the meal that caused it are readily understood together. The patient isn't abstract, either: "Meghan, 34," quoted at the bottom of the screen "I'll do anything for the health of my baby," Give the physician someone to empathize with.*
+*Physician view displaying three days of patient glucose data, insulin doses, and meal markers, allowing adjustments to pump settings to improve care. The three panels – glucose curve, carbohydrates, insulin delivery – share one time axis, so a spike and the meal that caused it are readily understood together. The patient isn't abstract, either: "Meghan, 34," quoted at the bottom of the screen: "I'll do anything for the health of my baby." Give the physician someone to empathize with.*
 
 ![MiniMed virtual patient application patient mode interface](/assets/images/2022/12/be_patient.png)
 *Patient mode interface allowing users to simulate being a diabetic patient, selecting meals and insulin dosages over two days to see blood glucose responses.*

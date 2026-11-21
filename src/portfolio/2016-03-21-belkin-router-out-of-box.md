@@ -109,7 +109,7 @@ The power modem got the same treatment.
 ![Whiteboard sketch of the packout showing the router with pre-connected cables, a fold-out guide, and a CD tucked behind](/assets/images/2016/03/router-setup-packout-whiteboard.jpg)
 *Working the power modem packout out with industrial design and packaging. Cables pre-connected to the router so there's one fewer connection to get wrong, a tag on the RJ11 cable, the power supply coiled loose, the fold-out guide above, and the CD tucked in behind.*
 
-Across the whole run of it, setup-related support calls fell by roughly 70%, and an entire class of wiring-related calls went nearly to zero. The second one is the measure I trust most, because it's the one the design was aimed at directly.
+Across the whole run of it, router support calls fell by roughly 70%, and an entire class of wiring-related calls went nearly to zero. The second one is the measure I trust most, because it's the one the design was aimed at directly.
 
 ## Half of setup came from a device that wasn't online yet
 
