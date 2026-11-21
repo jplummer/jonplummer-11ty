@@ -1,5 +1,12 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-11-20
+
+- Add the /hire/ page and put it in the header
+- Name one Person across the site's JSON-LD; add CreativeWork to portfolio
+- Fix typos in nine portfolio pieces
+- Tidy the Merholz link: drop the [TMA] prefix, fix nested quotes
+
 ## 2026-11-19
 
 - Own the `robots.txt` rules; allow Google-Extended.
