@@ -1,0 +1,24 @@
+{# Portfolio case studies. No date: portfolio front-matter dates set index
+   order and aren't claims about when the work happened. #}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": {{ title | dump | safe }},
+  "description": {{ description | default(title) | dump | safe }},
+  "url": "{{ site.url }}{{ page.url }}",
+  "image": "{{ site.url }}{{ ogImageUrl }}",
+  "author": {
+    "@type": "Person",
+    "@id": "{{ site.url }}/about/#person",
+    "name": "{{ site.author }}",
+    "url": "{{ site.url }}/about/"
+  },
+  "isPartOf": {
+    "@type": "CollectionPage",
+    "name": "Portfolio",
+    "url": "{{ site.url }}/portfolio/"
+  },
+  "inLanguage": "en-US"
+}
+</script>

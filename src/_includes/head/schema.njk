@@ -5,4 +5,6 @@
 {% include "schema/website.njk" %}
 {%- elif tags and "post" in tags and date and title and page.url != "/" %}
 {% include "schema/blogposting.njk" %}
+{%- elif tags and "portfolio" in tags and title %}
+{% include "schema/creativework.njk" %}
 {%- endif %}

@@ -7,13 +7,15 @@
   "dateModified": "{{ date | dateToRfc3339 }}",
   "author": {
     "@type": "Person",
+    "@id": "{{ site.url }}/about/#person",
     "name": "{{ site.author }}",
     "url": "{{ site.url }}/about/"
   },
   "publisher": {
     "@type": "Person",
+    "@id": "{{ site.url }}/about/#person",
     "name": "{{ site.author }}",
-    "url": "{{ site.url }}"
+    "url": "{{ site.url }}/about/"
   },
   "url": "{{ site.url }}{{ page.url }}",
   "description": {{ description | default(title) | dump | safe }},

@@ -297,6 +297,73 @@ function checkJsonLd(content, fileObj) {
   }
 }
 
+// Every Person node in the site's JSON-LD carries the @id of the Person block
+// on /about/, so search and AI engines read posts, case studies, and the
+// homepage as one author. Portfolio pages need a CreativeWork block: the
+// portfolio moved to /portfolio/<slug>/ on 2026-11-08 and went without
+// structured data until 2026-11-18, because no branch of head/schema.njk matched.
+function jsonLdBlocks(content) {
+  const out = [];
+  for (const [, body] of content.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
+    try { out.push(JSON.parse(body)); } catch { /* checkJsonLd reports it */ }
+  }
+  return out;
+}
+
+function personNodes(node, found = []) {
+  if (Array.isArray(node)) { node.forEach(n => personNodes(n, found)); return found; }
+  if (node && typeof node === 'object') {
+    if (node['@type'] === 'Person') found.push(node);
+    Object.values(node).forEach(v => personNodes(v, found));
+  }
+  return found;
+}
+
+function checkSchemaLinks(result) {
+  const files = getHtmlFiles();
+  const about = files.find(f => getRelativePath(f) === 'about/index.html');
+  if (!about) return;
+  const aboutPerson = personNodes(jsonLdBlocks(readFile(about)))[0];
+  const personId = aboutPerson && aboutPerson['@id'];
+  if (!personId) {
+    addGlobalIssue(result, {
+      type: 'json-ld-person-id',
+      message: 'The Person block on /about/ has no @id for other pages to point to',
+      files: ['about/index.html']
+    });
+    return;
+  }
+  const unlinked = [];
+  const noCreativeWork = [];
+  for (const file of files) {
+    const rel = getRelativePath(file);
+    if (rel.startsWith('assets/demos/')) continue;
+    const content = readFile(file);
+    const blocks = jsonLdBlocks(content);
+    if (personNodes(blocks).some(n => n['@id'] !== personId)) unlinked.push(rel);
+    // A portfolio piece is a page built from src/portfolio/, which leaves out
+    // listing pages such as /portfolio/all/.
+    const source = /^portfolio\/[^/]+\/index\.html$/.test(rel) && findSourceFile(rel);
+    if (source && source.includes(`${path.sep}src${path.sep}portfolio${path.sep}`) &&
+        !isRedirectPage(content) &&
+        !blocks.some(b => b['@type'] === 'CreativeWork')) noCreativeWork.push(rel);
+  }
+  if (unlinked.length) {
+    addGlobalIssue(result, {
+      type: 'json-ld-person-unlinked',
+      message: `Person node without "@id": "${personId}"`,
+      files: unlinked
+    });
+  }
+  if (noCreativeWork.length) {
+    addGlobalIssue(result, {
+      type: 'json-ld-portfolio-missing',
+      message: 'Portfolio page has no CreativeWork JSON-LD block',
+      files: noCreativeWork
+    });
+  }
+}
+
 // Main SEO validation
 function validate(result, options) {
   const { useChanged } = options;
@@ -304,6 +371,7 @@ function validate(result, options) {
   checkPersonSchema(result);
   checkSitemapDuplicates(result);
   checkNoindexNotInSitemap(result);
+  checkSchemaLinks(result);
 
   let htmlFiles = getHtmlFiles();
   
