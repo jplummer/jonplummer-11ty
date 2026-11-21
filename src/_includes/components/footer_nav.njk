@@ -5,13 +5,14 @@
         <ul>
             <li><a href="/"{% if page.url == "/" %} aria-current="page"{% endif %}>/home</a></li>
             <li><a href="/about/"{% if page.url == "/about/" %} aria-current="page"{% endif %}>/about</a></li>
-            <li><a href="/now/"{% if page.url == "/now/" %} aria-current="page"{% endif %}>/now</a></li>
             <li><a href="/portfolio/"{% if page.url == "/portfolio/" %} aria-current="page"{% endif %}>/portfolio</a></li>
+            <li><a href="/hire/"{% if page.url == "/hire/" %} aria-current="page"{% endif %}>/hire</a></li>
         </ul>
     </div>
     <div class="footer-nav-group">
         <h2>Also read</h2>
         <ul>
+            <li><a href="/now/"{% if page.url == "/now/" %} aria-current="page"{% endif %}>/now</a></li>
             <li><a href="/friends/"{% if page.url == "/friends/" %} aria-current="page"{% endif %}>/friends</a></li>
             <li><a href="/sides/"{% if page.url.indexOf('/sides') === 0 %} aria-current="page"{% endif %}>/sides</a></li>
             <li><a href="/wisdom/"{% if page.url.indexOf('/wisdom') === 0 %} aria-current="page"{% endif %}>/wisdom</a></li>

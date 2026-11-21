@@ -1272,8 +1272,8 @@ function renderHomePreview(cssVarsInline, schemeLabel, previewUid) {
             <nav aria-label="Preview ${lab} · ${uid} · primary navigation">
               <ul>
                 <li><a href="#">/about</a></li>
-                <li><a href="#">/now</a></li>
                 <li><a href="#">/portfolio</a></li>
+                <li><a href="#">/hire</a></li>
                 <li><a href="#" class="sim-visited">/wisdom</a></li>
               </ul>
             </nav>
