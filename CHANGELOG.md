@@ -1,5 +1,12 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-11-25
+
+- Content rule: compare a changed /sides/ page with its resume Recent Builds bullet
+- Rewrite /about/ for the hardware-meets-software position
+- Belkin hardware samples: WPS is a Wi-Fi Alliance standard, not IEEE
+- Record the 11/24-25 portfolio decisions in the position and portfolio specs
+
 ## 2026-11-20
 
 - Add the /hire/ page and put it in the header
@@ -1097,4 +1104,4 @@ This file shows all notable changes, formatted per [Keep a Changelog](https://ke
 
 
 
-Last deployed on 2026-11-20
+Last deployed on 2026-11-25
