@@ -15,3 +15,7 @@ alwaysApply: true
 
 - Voice, tone, and word choice follow `voice.mdc` in this directory. It is generated from `~/.agents/writing-rules.md` – edit the source, not the copy.
 - Don't shorten, flatten, or restructure prose to make it "scannable." Paragraph length, sentence length, asides, and hedges are the author's choices. Leave them.
+
+## /sides/ pages
+
+- A project's `src/sides/` page owns what that project is and its status. The resume repeats some of them in a Recent Builds section. When an edit changes a page's description or status, compare it with that project's bullet in `superset-resume.md` (the `supersets and claims/` folder in the newest dated folder under `~/Documents/EVA/resume/`) and say if they disagree. `tooling/check_facts.py` in the job-search project flags any page committed after its bullet was last checked.
