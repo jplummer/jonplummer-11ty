@@ -68,6 +68,8 @@ A list id can't be a piece's slug, since both live under `/portfolio/`. The `por
 
 ### Previous and next on piece pages
 
+**Superseded in part, 2026-11-24 (Jon):** every piece opened from `/portfolio/saas/` returns to `/portfolio/saas/`, pieces on both lists included, by whatever cheap means, duplication at build included. Proposed: `saas` copies at `/portfolio/saas/<slug>/`, `noindex` with a canonical link to the original, with `saas`-scoped previous/next. The tracked task is in NotePlan, "Portfolio rework," Step 2. What follows is the 11/8 reasoning for the `main` side, which still holds.
+
 A static page can't know which list the visitor came from, so each piece should navigate within one list: if it's in `main`, previous/next follow the main order; otherwise there's no previous/next, only a link back to `/portfolio/`. Not built yet. Piece pages still follow date order across every piece, which matches `main` while `main` is newest first; switch them over when the curated order first departs from date order.
 
 So a visitor who opens a piece from `/portfolio/saas/` or an opportunity list and clicks "Next" moves through the main portfolio. That's acceptable, since the main portfolio is the public face. The alternatives were worse:
@@ -102,12 +104,12 @@ Pieces moved from `/YYYY/MM/DD/<slug>/` to `/portfolio/<slug>/`; see [move portf
 
 1. Done (2026-11-08): move piece URLs, with redirects.
 2. Done (2026-11-09): the list file, the shared include, `/portfolio/` from `main`, the hidden index at `/portfolio/all/`, and retired redirects. `saas` is a draft seeded from the software work. Production output is unchanged apart from `/portfolio/all/`.
-3. Jon curates `main` and `saas` at his own pace, and sets `saas` live when its intro is written. Add a shortlink for the resume with `pnpm run shortlink add https://jonplummer.com/portfolio/saas/ --note "saas portfolio"`.
+3. Jon curates `main` and `saas` at his own pace, and sets `saas` live when its intro is written. No shortlink: the resume prints the full URL (Jon, 2026-11-24).
 4. Switch piece previous/next to the `main` order once it departs from date order.
 5. Add `kind` and `org` to every piece and turn on the label line.
 
 ## Open questions
 
-- Whether `/portfolio/saas/` is `indexed`. Hidden keeps search results on the position, and its pieces stay findable one by one either way.
+- ~~Whether `/portfolio/saas/` is `indexed`.~~ Decided 2026-11-24: hidden, and the URL stays `/portfolio/saas/`. Hidden keeps search results on the position, and its pieces stay findable one by one either way.
 - The `kind` vocabulary. Four words are proposed; the talks and readouts may want finer distinctions.
-- Whether `/about/` links both portfolios or only the main one.
+- ~~Whether `/about/` links both portfolios or only the main one.~~ Decided 2026-11-24: no internal page links `/portfolio/saas/` for now.
