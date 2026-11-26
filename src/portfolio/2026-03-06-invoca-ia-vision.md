@@ -19,7 +19,7 @@ The actual request was narrower: help customers choose classifiers to help with 
 
 I started by enumerating every kind of classifier and what each was actually used for. There was heavy overlap. The right answer for a given customer scenario wasn't necessarily obvious; it depended on what they were trying to accomplish, how quickly they needed to put it into practice, and on which package tier they'd bought. Two customers with the same goal could need different classifiers because of speed, access, or both.
 
-Working through that produced a working prototype of the interaction patterns Invoca needed to make classifier and report selection sensible: galleries organized by purpose instead of underlying technology, "copying in" a template rather than starting from scratch, drafts as privileged unfinished work, and links showing where an object was actually in use. I published that walkthrough on its own, with Figma Make screens, as [Coordinated Experience Prototype](/portfolio/coordinated-experience-prototype/) – no need to re-tell that story here.
+Working through that helped me with two other prototypes – both classifier selection and report selection could be served by galleries organized by purpose instead of underlying technology, "copying in" a template rather than starting from scratch, and drafts as privileged unfinished work. That and data provenance could be helped by links showing where an object was actually in use. I published a reporting-related expression of several of these patterns on its own, with Figma Make screens, as [Coordinated Experience Prototype](/portfolio/coordinated-experience-prototype/) – no need to re-tell that story here.
 
 ## What else the investigation turned up
 
@@ -85,4 +85,4 @@ This project produced value nobody asked for, twice, at two different scales. Sm
 
 The hard part of design leadership isn't generating the idea; design teams generate ideas constantly. Patient and specific investigation lets you prove a bigger vision is sound before you ask anyone to bet on it. This project is the clearest example I have of that happening at every scale of a single piece of work, from UI details to a platform's information architecture.
 
-Two things that came out of this investigation stand on their own: [Coordinated Experience Prototype](/portfolio/coordinated-experience-prototype/) and [Enhanced Data Dictionary](/portfolio/data-dictionary-prototype/). This piece connects them, proving that they were never really two separate projects, just two new goals pulled out of the same investigation at two different points.
+Two things that intersected with this investigation stand on their own: [Coordinated Experience Prototype](/portfolio/coordinated-experience-prototype/) and [Enhanced Data Dictionary](/portfolio/data-dictionary-prototype/). This piece shows how they connect, how the two strengthen each other's case. Enhanced Data Dictionary came out of this investigation without anyone planning it.
