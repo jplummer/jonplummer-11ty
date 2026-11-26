@@ -8,6 +8,10 @@ Personal blog built with Eleventy (11ty) and Nunjucks templates.
 - Testing is required for every change
 - Ask before implementing custom JavaScript workarounds
 
+## Side project status
+
+Status values on `/sides/` pages are a controlled list: `SIDE_STATUSES` in `scripts/utils/validation-utils.js`, enforced by `scripts/test/frontmatter.js`. Adding a status means editing that array and its rationale comment. Checks that run without a full build: `node scripts/test-runner.js frontmatter|markdown|spell`.
+
 ## Design records
 
 Write plans to `docs/designs/plans/YYYY-MM-DD-<feature>.md` and specs to `docs/designs/specs/YYYY-MM-DD-<topic>-design.md`. Ad-hoc reports and audits go in `docs/designs/scratch/`, which is gitignored.
