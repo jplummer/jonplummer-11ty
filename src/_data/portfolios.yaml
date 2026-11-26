@@ -58,25 +58,31 @@ main:
     - /portfolio/goal-manager-identity-2001/
 
 saas:
-  status: draft
+  status: live
   title: Portfolio – design leadership for SaaS
   description: Design leadership in enterprise software at Invoca, Cayuse, and Concentric Sky – discovery, prototyping, information architecture, design systems, and the teams behind them.
   intro: |
-    Placeholder intro, to be written. This list is a starting point drawn from the software work; reorder or cut freely.
+    Software work from Invoca, Cayuse, and Concentric Sky. The four at the top are a shipped fix for call center quality managers, an AI agent concept customers clamored for, an information architecture vision for an entire platform, and a hands-on prototype that introduced new patterns and ended up on the roadmap. Below them is how I coach product teams – critique for designers, problem statements for product managers, discovery interviews, and planning in trios – then talks and earlier work. For devices and the apps that run them, see [the main portfolio](/portfolio/).
   pieces:
+    # Featured (2026-11-25): the top four. The agentic-products case study takes
+    # the SMS slot once it exists; the Invoca team piece or the Cayuse case study
+    # takes the Data Dictionary's.
     - /portfolio/call-review-console/
-    - /portfolio/data-dictionary-prototype/
-    - /portfolio/invoca-ia-vision/
-    - /portfolio/coordinated-experience-prototype/
     - /portfolio/sms-concept-video/
+    - /portfolio/invoca-ia-vision/
+    - /portfolio/data-dictionary-prototype/
+    # Supporting, grouped by kind: prototype, methods, talks, Concentric Sky.
+    # The methods show changing how the product org works: critique for designers,
+    # problem statements for PMs, discovery, and trios (2026-11-25).
+    # Cut 2026-11-18, still on /portfolio/all/: cayuse-quick-yearly-accomplishments-presentation,
+    # conference-talk-ux-philosophy.
+    - /portfolio/coordinated-experience-prototype/
     - /portfolio/what-even-is-a-concept-sprint/
-    - /portfolio/invoca-design-system/
+    - /portfolio/whither-critique/
     - /portfolio/field-guide-to-problem-statements/
-    - /portfolio/product-trio/
     - /portfolio/discovery-interview-training/
+    - /portfolio/product-trio/
     - /portfolio/super-service-blueprint/
-    - /portfolio/cayuse-quick-yearly-accomplishments-presentation/
-    - /portfolio/conference-talk-ux-philosophy/
+    - /portfolio/invoca-design-system/
     - /portfolio/conference-talk-prioritizing-accessibility/
     - /portfolio/wgu-acceptance-criteria-for-patterns/
-    - /portfolio/whither-critique/
