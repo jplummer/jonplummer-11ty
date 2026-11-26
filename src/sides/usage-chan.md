@@ -36,16 +36,18 @@ Two bars on a landscape screen ordinarily want to lie down, and usually the shap
 
 Captions are short lines of text: wide, and hardly tall at all. Packing them around a horizontal bar is a puzzle because each caption takes up most of one side of the bar. Stand the bar up and the captions stop fighting. Since each is a dozen pixels tall, a 240-pixel-high column holds several with room left over. It also gives the captions room to change length – `3:40pm` isn't the same width as `in 2d 14h` – and even move along the bar if needed.
 
-So, there are two bottom-anchored columns now – a thin one for the seven-day window, a wide one for the five-hour, and we can shift emphasis according to which limit is going to stop you. The height of the bar is what's left. The bottom edge is where you hit your quota. I give up a little precision – a bar 320 pixels wide reads more finely than one 240 pixels tall – but I just need a sense of where I am against where I ought to be.
+So, there are two bottom-anchored columns now – a wide one for the five-hour window and a thin one for the seven-day. They stay put, and when the seven-day limit is the one that will stop you, its title lights up. The height of the bar is what's left. The bottom edge is where you hit your quota. I give up a little precision – a bar 320 pixels wide reads more finely than one 240 pixels tall – but I just need a sense of where I am against where I ought to be.
 
-A diamond marks where an even, steady burn would put you right now, and a word beside it says how far off you are – `well ahead` through `well behind`. You can tell if your burn rate is faster than your quota would allow (you're ahead), or if you can act a little more freely (you're behind).
+The columns used to trade places, with the wide one going to whichever limit was about to stop you. The first time the seven-day limit was the one about to stop me, the screen looked almost the same but a little…off and it took some doing to figure out why. That's a clear failure of design – my probably logically sound idea didn't work in practice. So now every element stays in one place and holds one kind of fact. The headline is always the amount left, and the reset time sits at the foot of its column.
+
+A diamond marks where an even, steady burn would put you right now, and a word beside it says how far off you are – `well ahead` through `well behind`. You can tell if your burn rate is faster than your quota would allow (you're ahead), or if you can act a little more freely (you're behind). A bar that's a bit ahead turns amber and one that's well ahead turns red. Its amount takes the same color, so colored text always means something is off.
 
 ## Extra usage
 
 ![Two screens. On the left a blue vessel with a dollar sign straddling the bar's end edge; on the right an empty vessel with a red X on the same edge.](/assets/images/2026/09/usage-chan-overage.png)
 *Paying for extra usage, or blocked due to hitting the cap. The mark sits on the edge when your quota is exhausted.*
 
-I especially wanted to know when I had run off the end and started consuming real dollars. When billing starts because you're past your quota, the bar becomes a vessel: an inner stroke around the track, a fill for whatever the extra allowance has left, and a `$` straddling the bar's end edge. Or a red X if you have hit the quota and don't have money to spend on more usage.
+I especially wanted to know when I had run off the end and started consuming real dollars. When billing starts because you're past your quota, the bar becomes a vessel: an inner stroke around the track, a fill for whatever the extra allowance has left, and a `$` inside the end of the bar. Or a red X if you have hit the quota and don't have money to spend on more usage. Either mark shows on the bar whose limit you hit.
 
 The blocked case works today. The paying case might not, because I haven't caused an overage to verify it. I don't fully understand the overage numbers yet, either. `overage-reset` reads 2026-10-01 00:00 UTC, so the allowance resets on the first of the month, which is not a visible place on either of the bars; the pace diamond on any bar might sit in the wrong place. I added logging to Usage-Chan and, paradoxically, hope to hit the limit someday!
 
