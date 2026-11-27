@@ -73,6 +73,8 @@ Project rules live in `.agents/rules/*.mdc`. The `.mdc` format is Cursor's, but 
 
 **Shared memory**: learnings from past sessions live in `docs/agent-memory.md`. Both agents are instructed to read the relevant section before working in an unfamiliar area and to append what they learn. `.agents/rules/memory.mdc` is a short pointer to that file, so the memory itself isn't loaded into every session.
 
+What to work on next, ideas for later, and what's been decided are in [docs/ideas.md](docs/ideas.md).
+
 ### When debugging unexpected behavior
 
 **Assume Eleventy is working correctly** and follow the debugging workflow:

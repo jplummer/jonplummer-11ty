@@ -1,5 +1,13 @@
 This file shows all notable changes, formatted per [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), newest first.
 
+## 2026-11-26
+
+- Set the saas portfolio live with its intro and a featured four
+- IA vision: say how the two prototypes relate to the investigation
+- Undated portfolio files, and featured and supporting cards
+- Add "tl;dr," held for 2026-11-27
+- `CLAUDE.md`: side project status is a controlled list
+
 ## 2026-11-25
 
 - Content rule: compare a changed /sides/ page with its resume Recent Builds bullet
